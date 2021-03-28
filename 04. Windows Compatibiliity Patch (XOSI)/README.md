@@ -135,16 +135,16 @@ When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems
 
   ACPI also defines `OSYS`, and the relationship between `OSYS` and the above parameters is as follows.
 
-  - `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`
-  - `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`
-  - `OSYS = 0x07DD`: Win8.1 system, i.e. `Windows 2013`
-  - `OSYS = 0x07DF`: Win10 system, i.e. `Windows 2015`
-  - `OSYS = 0x07E0`: Win10 1607, i.e. `Windows 2016`
-  - `OSYS = 0x07E1`: Win10 1703, i.e. `Windows 2017`
-  - `OSYS = 0x07E1`: Win10 1709, i.e. `Windows 2017.2`
-  - `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`
-  - `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`
-  - `OSYS = 0x???? `: Win10 1903, i.e. `Windows 2019`
+  - `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`</br>
+  - `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`</br>
+  - `OSYS = 0x07DD`: Win8.1 system, i.e. `Windows 2013`</br>
+  - `OSYS = 0x07DF`: Win10 system, i.e. `Windows 2015`</br>
+  - `OSYS = 0x07E0`: Win10 1607, i.e. `Windows 2016`</br>
+  - `OSYS = 0x07E1`: Win10 1703, i.e. `Windows 2017`</br>
+  - `OSYS = 0x07E1`: Win10 1709, i.e. `Windows 2017.2`</br>
+  - `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`</br>
+  - `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`</br>
+  - `OSYS = 0x???? `: Win10 1903, i.e. `Windows 2019`</br>
   - ...
 
 - When the loaded system is not recognized by ACPI, `OSYS` is given a default value, which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
