@@ -43,9 +43,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    
 6. **Add Missing Components**
  
- - `DMAC` ­­­­– DMA Controller 
+ - `DMAC` – DMA Controller 
  - `IMEI` – IMEI Device
- - `MCHC` ­­­­­­­­­­
+ - `MCHC` 
  - `MEM2`
  - `PMCR`
  - `PPMC` – Platform Powermanagement Controller
