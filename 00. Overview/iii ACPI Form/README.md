@@ -1,6 +1,6 @@
-## ACPI Form
+# ACPI Form
 
-### Brief description
+## Brief description
 
 ACPI (Advanced Configuration & Power Interface) is an advanced computer configuration and power interface, which is a power management standard developed by Intel, Microsoft and other manufacturers, namely [`ACPI specification`](https://www.acpica.org/documentation). Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and **may** vary with BIOS version. 
 
