@@ -26,7 +26,6 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 ## ASL Guidelines
 
 1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
-
 1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
 
    ```swift
@@ -43,10 +42,7 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
    This is called the `root Scope`.
 
 	`xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and`OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, in turn, the third parameter is`0x02`. Other parameters are free to fill in.
-
 2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompilation.
-
-   
 3. `Method` can be defined followed by `Device` or `Scope`. As such, `Method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
 
    ```swift
@@ -114,15 +110,10 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
       Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
 5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
-
 6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
-
 7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
-
 8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
-
 9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
-
 10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
 
 ## Common ASL Data Types
