@@ -44,12 +44,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 
-3. A `Method` always contains either a `Device` or `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore the example below is **invalid** because the Method is followed by a DefinitionBlock:
-=======
-	`xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and`OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, in turn, the third parameter is`0x02`. Other parameters are free to fill in.
-2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompilation.
-3. `Method` can be defined followed by `Device` or `Scope`. As such, `Method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
->>>>>>> 264cf9e4c95e2adbd444cdc0ae3e1d228fe1c3f0
+3. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore the example below is **invalid** because the Method is followed by a DefinitionBlock:
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -115,24 +110,12 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
       Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
-<<<<<<< HEAD
 5. `Device (xxxx)` also can be recognized as a scope, it contains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
-
-=======
-5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
->>>>>>> 264cf9e4c95e2adbd444cdc0ae3e1d228fe1c3f0
 6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
 7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
 8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
-<<<<<<< HEAD
-
 9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customized.
-
-10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialized, in other words, assignment is needed.
-=======
-9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
-10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
->>>>>>> 264cf9e4c95e2adbd444cdc0ae3e1d228fe1c3f0
+10. Local variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialized, in other words, assignment is needed.
 
 ## Common ASL Data Types
 
@@ -187,7 +170,6 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
   CreateQWordField (JJJJ, 0x14, KKKK)
   CreateField (LLLL, Local0, 0x38, MMMM)
   ```
-
 It is not necessary to announce its type when defining a variable.
 
 ## ASL Assignment
