@@ -35,10 +35,8 @@ Other Form Patches:
   - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
   - **Description**: [`ACPI Specification`](https://www.acpica.org/documentation) defines various static system information related to configuration and power management in terms of **FADT**, which appears as the **FACP.aml** form in the machine's ACPI form. The **FACP.aml** form characterizes information such as the RTC clock, power and sleep buttons, power management, etc. Currently related to Black Apple are the following.
  - If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try using this patch.
-
 **Note**: If `ACPI\Quirks\FadtEnableReset` = `true` still can't call out the "Restart, Sleep, Cancel, Shutdown" menu, try adding ***SSDT-PMCR***. ***SSDT-PMCR*** is located in OC-little's Adding Missing Parts.
-      
-    - The `Low Power S0 Idle`, `Hardware Reduced` of the **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, the machine is an `AOAC`. See About AOAC for more information on `AOAC`.
+ - The `Low Power S0 Idle`, `Hardware Reduced` of the **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, the machine is an `AOAC`. See About AOAC for more information on `AOAC`.
     
   - **FACS.aml** 
     - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true` 
@@ -53,7 +51,6 @@ Other Form Patches:
     - **Note**: The patch works the same as BIOS disable `VT-d` or Drop **DMAR.aml** 
     - **Note**: Only early Mac systems need this patch
   - **ECDT.aml** 
-    
     - **Patch Method**: Global rename to make the `EC` name, path and `Namepath` of all ACPI forms identical
     - **Note**: Individual machines (e.g. **Lenovo yoga-s740**) have `Namepath` in the **ECDT.aml** form that is inconsistent with the `EC` name of other ACPI forms, which can cause ACPI errors during the boot process. This patch is a good solution to the ACPI error problem.
     - **Note**: Not all machines have this form
