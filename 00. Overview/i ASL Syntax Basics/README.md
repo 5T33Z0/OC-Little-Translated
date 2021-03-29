@@ -25,14 +25,8 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
 ## ASL Guidelines
 
-<<<<<<< HEAD
-1. The variable listed in the `DefinitionBlock` must not exceed 4 characters and not begin with digits. Just check any DSDT/SSDT – no exceptions.
-
-1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, any DSDT begins with:
-=======
 1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
 1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
->>>>>>> 264cf9e4c95e2adbd444cdc0ae3e1d228fe1c3f0
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
@@ -46,8 +40,7 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
    This is called the `Root Scope`.
 
-<<<<<<< HEAD
-	The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, the third parameter must be `0x02`. Other parameters are free to fill in.
+The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, the third parameter must be `0x02`. Other parameters are free to fill in.
 
 2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 
@@ -177,13 +170,13 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
 - Define Buffer Field (6 available types in total):
 
-|     Create statement     |   size   |
-| :--------------: | :------: |
-|  CreateBitField  |  1-Bit   |
-| CreateByteField  |  8-Bit   |
-| CreateWordField  |  16-Bit  |
-| CreateDWordField |  32-Bit  |
-| CreateQWordField |  64-Bit  |
+| Create statement |   size    |
+| :--------------: | :-------: |
+|  CreateBitField  |  1-Bit    |
+| CreateByteField  |  8-Bit    |
+| CreateWordField  |  16-Bit   |
+| CreateDWordField |  32-Bit   |
+| CreateQWordField |  64-Bit   |
 |   CreateField    | any sizes |
 
   ```swift
@@ -216,7 +209,7 @@ Local1 = Local0
 
 ## ASL Calculation
 
-|  ASL+  |  Legacy ASL  |     Examples                                                         |
+|  ASL+  |  Legacy ASL|  Examples                                                         |
 | :----: | :--------: | :----------------------------------------------------------- |
 |   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                    |
 |   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`               |
