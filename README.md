@@ -33,11 +33,11 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    1. `I2C-GPIO` Patch
    2. `AWAC` Patch
 
-4. **Winddows Compatability Patch (`XOSI`)**
+4. **Windows Compatibility Patch (`XOSI`)**
 
 5. **Injecting Devices**
    
-   1. CPU Powermanagement (`SSDT-PLUG`)  
+   1. CPU Power Management (`SSDT-PLUG`)  
    2. Brightness Control (`PNLF`)
    3. Inject SMBus (`SSDT-SBUS(SMBU)`
    
@@ -48,9 +48,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
  - `MCHC` ­­­­­­­­­­
  - `MEM2`
  - `PMCR`
- - `PPMC` – Platform Powermanagement Controller
+ - `PPMC` – Platform Power Management Controller
  - `PWRB` – Power Button Device
- - `SBUS`/ `SMBU` – System Management Bus (see "Injectiong Devices")
+ - `SBUS`/ `SMBU` – System Management Bus (see "Injecting Devices")
  - `SLPB` – Sleep Button Device
 
 7. **Keyboard Mapping & Brightness Controls** (`RMCF`) 
@@ -109,13 +109,13 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    2. config-2-PS2 keyboard drives load lists
    3. config-3-BCM wireless and bluetooth drives load lists
    4. config-4-I2C+PS2 load lists
-   5. config-5-PS2Smart keyboard drvices load lists
+   5. config-5-PS2Smart keyboard devices load lists
    6. config-6-Intel wireless and bluetooth drives load lists
 
 ### Credits
 
 - Special credit to：
-  - @XianWu write these ACPI componet patches that useable to **[OpenCore](https://github.com/acidanthera/OpenCorePkg)** 
+  - @XianWu write these ACPI component patches that useable to **[OpenCore](https://github.com/acidanthera/OpenCorePkg)** 
   - @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
 
 - Credits and thanks to：

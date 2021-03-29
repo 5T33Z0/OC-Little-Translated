@@ -33,7 +33,7 @@
 - Choose better quality SSD: SLC>MLC>TLC>QLC (not sure)
 - Update SSD firmware if possible to improve power management performance
 - Enable APST for SSDs using NVMeFix.kext
-- Enable ASPM (BIOS advanced options to enable ASPM, patch enable L1)
+- Enable ASPM (if you can't enable it in the BIOS directly, see Chapter 16 to patch it in)
 
 ## AOAC Sleep, Wake Up
 

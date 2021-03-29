@@ -1,5 +1,5 @@
 # ACPI Source Language (ASL) Basics
-> The provided esxplanatins in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Turorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
+> The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Turorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
 > 
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
 > - Translated from chinese into english and edited by [5T33Z0](https://github.com/5T33Z0), 2021-03-24.
@@ -18,36 +18,34 @@ A common problem with Hackintoshes is missing ACPI functionality when trying to 
 
 These issues stems from DSDTs made with Windows support in mind on one hand and Apple not using standard ACPI for their hardware on the other. These issues can be addressed by dumping, patching and injecting the patched DSDT during boot, replacing the original. 
 
-Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS funktionalities. Therefore *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transpaent and elegant.
+Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant.
 
 ### ASL
-A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is calle `ASL` (ACPI Source Language), which is at the center of this article. After a ASL is compiled by a compiler, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its rules and guidelines. 
+A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After a ASL is compiled by a compiler, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its rules and guidelines. 
 
 ## ASL Guidelines
 
-1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
+1. The variable listed in the `DefinitionBlock` must not exceed 4 characters and not begin with digits. Just check any DSDT/SSDT – no exceptions.
 
-1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
+1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, any DSDT begins with:
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
    ```
-
    and is ended by
 
    ```swift
    }
    ```
 
-   This is called the `root Scope`.
+   This is called the `Root Scope`.
 
-	`xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and`OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, in turn, the third parameter is`0x02`. Other parameters are free to fill in.
+	The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, the third parameter must be `0x02`. Other parameters are free to fill in.
 
-2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompilation.
+2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 
-   
-3. `Method` can be defined followed by `Device` or `Scope`. As such, `Method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
+3. A `Method` always contains either a `Device` or `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore the example below is **invalid** because the Method is followed by a DefinitionBlock:
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -68,7 +66,7 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
    - `\_SI` --- System indicator
    - `\_TZ` --- Thermal zone
 
-	Components with different atrributes are place below/inside the corresponding Scope. For example:
+	Components with different attributes are place below/inside the corresponding Scope. For example:
 
    - `Device (PCI0)` is placed inside `Scope (\_SB)`
 
@@ -113,7 +111,7 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
       Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
-5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
+5. `Device (xxxx)` also can be recognized as a scope, it contains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 
 6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
 
@@ -121,18 +119,18 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
 8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
 
-9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
+9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customized.
 
-10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
+10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialized, in other words, assignment is needed.
 
 ## Common ASL Data Types
 
-|    ASL    |  
+|    ASL    | 
 | :-------: | 
-| `Integer` | 
-| `String`  |  
-|  `Event`  |  
-| `Buffer`  |  
+| `Integer` |
+| `String`  | 
+|  `Event`  | 
+| `Buffer`  | 
 | `Package` | 
 
 ## ASL Variables Definition
@@ -214,23 +212,23 @@ Local1 = Local0
 |   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`        |
 | &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`  |
 |   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
-|      |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
+|        |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
 
 Read `ACPI Specification` for more details
 
 ## ASL Logic
 
-|  ASL+  |   Legacy ASL  | Examples             |
-| :----: | :-----------: | :----------------------------------------------------------- |
-|   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`              |
-|   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                  |
-| &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`    |
-|   <    |     LLess     |  `Local0 = (1 < 2)`<br/>`Store (LLess(1, 2), Local0)`         |
-|   <=   |  LLessEqual   |  `Local0 = (1 <= 2)`<br/>`Store (LLessEqual(1, 2), Local0)`   |
-|   >    |   LGreater    |  `Local0 = (1 > 2)`<br/>`Store (LGreater(1, 2), Local0)`      |
-|   >=   | LGreaterEqual |  `Local0 = (1 >= 2)`<br/>`Store (LGreaterEqual(1, 2), Local0)` |
+|  ASL+  |   Legacy ASL  | Examples                                                         |
+| :----: | :-----------: | :----------------------------------------------------------------|
+|   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`                 |
+|   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                     |
+| &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`         |
+|   <    |     LLess     |  `Local0 = (1 < 2)`<br/>`Store (LLess(1, 2), Local0)`            |
+|   <=   |  LLessEqual   |  `Local0 = (1 <= 2)`<br/>`Store (LLessEqual(1, 2), Local0)`      |
+|   >    |   LGreater    |  `Local0 = (1 > 2)`<br/>`Store (LGreater(1, 2), Local0)`         |
+|   >=   | LGreaterEqual |  `Local0 = (1 >= 2)`<br/>`Store (LGreaterEqual(1, 2), Local0)`   |
 |   ==   |    LEqual     |  `Local0 = (Local0 == Local1)`<br/>`If (LEqual(Local0, Local1))` |
-|   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`    |
+|   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`       |
 
 Only two results from logical calculation - `0` or `1`
 
@@ -279,7 +277,7 @@ Only two results from logical calculation - `0` or `1`
    Store (MADD (1, 2), Local0)  /* Legacy ASL */
    ```
 
-4. Define serialised method:
+4. Define serialized method:
 
    If not define `Serialized` or `NotSerialized`, default as `NotSerialized`
 
@@ -293,12 +291,12 @@ Only two results from logical calculation - `0` or `1`
    }
    ```
 
-   It looks like `multi-thread synchronisation`. In other words, only one instance can be existed in the memory when the method is stated as `Serialized`. Normally the application create one object, for example:
+   It looks like `multi-thread synchronization`. In other words, only one instance can exist in the memory when the method is stated as `Serialized`. Normally the application creates one object, for example:
 
    ```swift
    Method (TEST, Serialized)
    {
-       Name (MSTR,"I will sucess")
+       Name (MSTR,"I will succeed")
    }
    ```
 
@@ -319,7 +317,7 @@ If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first 
    ```swift
    Method (TEST, NotSerialized)
    {
-       Name (MSTR, "I will sucess")
+       Name (MSTR, "I will succeed")
    }
    ```
 
@@ -335,15 +333,15 @@ It is easy to acquire the current operating system's name and version when apply
 
 |                 OS                  |      String      |
 | :---------------------------------: | :--------------: |
-|                   macOS                   |    `"Darwin"`    |
-| Linux<br/>(Including OS based on Linux kernel) |    `"Linux"`     |
-|                  FreeBSD                  |   `"FreeBSD"`    |
-|                  Windows                  | `"Windows 20XX"` |
+|                macOS                |    `"Darwin"`    |
+| Linux (other Linux-based OS)        |    `"Linux"`     |
+|                  FreeBSD            |   `"FreeBSD"`    |
+|                  Windows            | `"Windows 20XX"` |
 
 > Notably, different Windows versions requre a unique string, read:  
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
-When `_OSI`'s string matchs the current system, it returns `1`, `If` condition is valid.
+When `_OSI`'s string matches the current system, it returns `1`, `If` condition is valid.
 
 ```swift
 If (_OSI ("Darwin")) /* judge if the current system is macOS */
@@ -351,7 +349,7 @@ If (_OSI ("Darwin")) /* judge if the current system is macOS */
 
 ### `_STA` (Status)
 
-**⚠️ CAUTION: two types of `_STA` exist，do not mix up `_STA` from `PowerResource`!**
+**⚠️ CAUTION: two types of `_STA` exist，do not confuse with `_STA` from `PowerResource`!**
 
 5 types of bit can be return from `_STA` method, explanations are listed below:
 
@@ -363,16 +361,16 @@ If (_OSI ("Darwin")) /* judge if the current system is macOS */
 | Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).            |
 | Bit [4] | Set if the battery is present.             |
 
-We need to transfer these bits from hexadecimal to binary. `0x0F` transfered to `1111`, meaning enable it(the first four bits); while `Zero` means disable. 
+We need to transfer these bits from hexadecimal to binary. `0x0F` transferred to `1111`, meaning enable it(the first four bits); while `Zero` means disable. 
 
-We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the device is enabled and not is not allowed to decode its resources. `0X0B` often utilised in **`SSDT-PNLF`**. `0x1F` (`11111`)only appears to describe battery device from laptop, the last bit is utilised to inform Control Method Battery Device `PNP0C0A` that the battery is present.
+We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the device is enabled and not is not allowed to decode its resources. `0X0B` often utilized in ***`SSDT-PNLF`***. `0x1F` (`11111`)only appears to describe battery device from laptop, the last bit is utilized to inform Control Method Battery Device `PNP0C0A` that the battery is present.
 
 > In terms of `_STA` from `PowerResource`
 >
 > `_STA` from `PowerResource` only returns `One` or `Zero`. Please read `ACPI Specification` for detail.
 
 ### `_CRS` (Current Resource Settings)
-`_CRS` returns a `Buffer`, it is often utilised to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.
+`_CRS` returns a `Buffer`, it is often utilized to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.
 
 
 ## ASL flow Control
