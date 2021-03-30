@@ -2,19 +2,21 @@
 
 ## AOAC Technology
 
-- A new technology, AOAC, is introduced in new laptops, namely, *Always On/Always Connected*. AOAC was introduced by Intel and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones, never shut down and always online.
+A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones, never shut down and always online.
 
 ### How to determine if you have an `AOAC` Machine
 
-- Open `FACP.aml` of `ACPI` with MaciASL, search for `Low Power S0 Idle`, if it = 1, it is an `AOAC` machine. For example.
+- Open [MaciASL](https://github.com/acidanthera/MaciASL/releases)
+- Click on "File > New From ACPI" and select `FACP.aml`
+- Search for `Low Power S0 Idle`. If it is = `1`, it is an `AOAC` machine. For example:
 
   ```asl
   Low Power S0 Idle (V5) : 1
   ```
 
-- For more information about `AOAC`, please refer to Baidu `AOAC`, `Lenovo AOAC`, `AOAC NIC`, etc.
+- For more information about `AOAC`, please refer to the search option of your choice and look for `AOAC`, `Lenovo AOAC`, `AOAC NIC`, etc.
 
-## AOAC problems
+## AOAC Problems
 
 ### Sleep Issues
 
