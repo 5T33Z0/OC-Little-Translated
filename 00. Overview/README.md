@@ -2,16 +2,16 @@
 
 ## About ACPI Renames and Hotpatches
 
-Try to avoid ACPI renames and patches whenever possible. Such as: `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` and so on. Especially renaming of underlined `MethodObj`(such as _STA, _OSI, etc.) should be done with caution. 
+Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as _STA, _OSI, etc.) should be done with caution. 
 
 In general: 
 
-- No OS Patches are required. For parts that do not work properly due to system limitations, customize the patch to fit the ACPI. For special requirements on the operating system, use the `XOSI` Patch with caution.
+- No OS Patches are required. For parts that do not work properly due to system limitations, customize the patch to fit the ACPI. For special requirements on the operating system, use the `XOSI` Patch.
 - For Brightness Control Keys to work, some machines do not require extra patches. Use `PS2 Keyboard Mapping` instead to achieve the same effect.
-- For now, the vast majority of machines require the `0D6D Patch` to fix `Instant wake` issues.
-- Laptops require device-specific renames and patches for the battery percentage indicator to work.
+- For now, the vast majority of machines require the `0D6D Patch` to fix `Instant Wake` issues.
+- Laptops require device-specific renames and patches for the Battery Percentage Indicator to work.
 - Most ThinkPad Laptops require the `PTSWAK` patch to stop the Power Button LED from pulsing after waking up from sleep.
-- For machines with a dedicated Sleep Button: If pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep CorrFor ection Method` to fix it.
+- For machines with a dedicated Sleep Button: If pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep Correction Method` to fix it.
 
 You may need to disable or enable certain components in order to solve a specific problems. 
  
