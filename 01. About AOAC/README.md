@@ -40,8 +40,7 @@ For more information about `AOAC`, please refer to the search option of your cho
 ## AOAC Sleep, Wake
 
 - `AOAC` Sleep
-
-The above scheme can make the machine sleep, this sleep is called `AOAC` sleep . The essence of `AOAC` sleep is that the system and hardware have entered an idle state, not `S3` sleep in the traditional sense.
+- The above scheme can make the machine sleep, this sleep is called `AOAC` sleep . The essence of `AOAC` sleep is that the system and hardware have entered an idle state, not `S3` sleep in the traditional sense.
 
 - `AOAC` Wakeup
 
