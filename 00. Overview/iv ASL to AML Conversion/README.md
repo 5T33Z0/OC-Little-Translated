@@ -1,6 +1,6 @@
 # ASL to AML Conversion Table
 
-> ASL is an abbreviation for ACPI Source Language, which literally means `ACPI Source Code`.
+> `ASL` is an abbreviation for ACPI Source Language, i.e. `ACPI Source Code`. `AML` on the other hand is its binary counterpart, the `ACPI Machine Language Binary`– the language computers can understand.
 
 The following table can be regarded as the quasi dictionary for translating from ASL to AML. 
 
