@@ -2,7 +2,9 @@
 
 > ASL is an abbreviation for ACPI Source Language, which literally means `ACPI Source Code`.
 
-The following table can be regarded as the quasi dictionary for translating from ASL to AML. Here's an Example: the well-known "_DSM to XDSM" binary rename consists of the "Find" value: `5F44534D` (which literally means "_DSM" in binary) and a new value `5844534D` (whcih means "XDSM"). This all seems kind of random, but in fact it is not. If you take a look in the dictionary you can see that the underscore "_" has a value of "5F" (we omit the leading zeros), "D" has "44", "3S" and M corresponds to "4d" – which equals "_DSM" in binary. And binary "58" "44" "53" "4D" equals to "XDSM" in ASL.
+The following table can be regarded as the quasi dictionary for translating from ASL to AML. 
+
+Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of the "Find" value: `5F44534D` (which literally means "_DSM" in binary) and the "Replace" value `5844534D` (whcih means "XDSM"). This all seems kind of random, but in fact it is not. If you take a look in the binary colum you can see that the underscore "_" has a value of "5F" (we omit the leading zeros), "D" has "44", "3S" and M corresponds to "4d" – which equals "_DSM" in binary. And binary "58" "44" "53" "4D" equals to "XDSM" in ASL. And that's how you can read and translate from ASL to Binary and make your own renames, if necessary.
 
 
 |          ASL           |   Binary (AML) |
