@@ -27,7 +27,7 @@ For more information about `AOAC`, please refer to the search option of your cho
 
 - **Disabling `S3` sleep** solves the **sleep failure** problem, but the machine will no longer sleep. The problem that follows from the absence of sleep is that the machine standby time is much shorter in battery-powered mode. For example, in the case of "menu sleep", "auto sleep", "box cover sleep", etc., the battery power consumption is higher, about 5% - 10% per hour.
 
-## AOAC Solution
+## Fixing AOAC
 
 - Disable `S3` sleep
 - Turn off the power supply of the solo display
@@ -37,11 +37,11 @@ For more information about `AOAC`, please refer to the search option of your cho
 - Enable APST for SSDs using NVMeFix.kext
 - Enable ASPM (if you can't enable it in the BIOS directly, see Chapter 16 to patch it in)
 
-## AOAC Sleep, Wake Up
+## AOAC Sleep, Wake
 
 - `AOAC` Sleep
 
-	The above scheme can make the machine sleep, this sleep is called `AOAC` sleep . The essence of `AOAC` sleep is that the system and hardware have entered an idle state, not `S3` sleep in the traditional sense.
+The above scheme can make the machine sleep, this sleep is called `AOAC` sleep . The essence of `AOAC` sleep is that the system and hardware have entered an idle state, not `S3` sleep in the traditional sense.
 
 - `AOAC` Wakeup
 
