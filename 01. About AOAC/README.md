@@ -25,7 +25,7 @@ For more information about `AOAC`, please refer to the search option of your cho
 
 ### Standby Issues
 
-- **Disabling `S3` sleep** solves the **sleep failure** problem, but the machine will no longer sleep. The problem that follows from the absence of sleep is that the machine standby time is much shorter in battery-powered mode. For example, in the case of "menu sleep", "auto sleep", "box cover sleep", etc., the battery power consumption is higher, about 5% - 10% per hour.
+Although **Disabling `S3` sleep** solves the **sleep failure** problem, the machine will no longer sleep which produces another problem: the absence of sleep reduced the standby time in battery-powered mode. For example, in the case of "menu sleep", "auto sleep", "box cover sleep", etc., the battery power consumption is about 5% to 10% higher per hour.
 
 ## Fixing AOAC
 
