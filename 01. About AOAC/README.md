@@ -14,7 +14,7 @@ A new technology, namely *Always On/Always Connected* (AOAC) was introduced by I
   Low Power S0 Idle (V5) : 1
   ```
 
-- For more information about `AOAC`, please refer to the search option of your choice and look for `AOAC`, `Lenovo AOAC`, `AOAC NIC`, etc.
+For more information about `AOAC`, please refer to the search option of your choice and look for `AOAC`, `Lenovo AOAC`, `AOAC NIC`, etc.
 
 ## AOAC Problems
 
