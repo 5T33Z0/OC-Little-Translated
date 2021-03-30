@@ -4,10 +4,11 @@
 
 There are some components which create onflicts between their `_PRW` and macOS that cause the machine to wake up immediately after a successful sleep. In order to solve the problem, a patch must be applied to these components. In order to do so, we need to uderstand how `_PRW` works.
 
-`_PRW` defines the wakeup method of a component. Its `Return` is a packet of 2 or more bytes:
+`_PRW` defines the wakeup method of a component. Its `Return` value consits of a packet of 2 or more bytes:
 
 - The 1st byte of `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`. 
-- The 2nd byte of `_PRW` packet is either `03` or `04`, so fixing this byte to `0` completes the `0D/6D Patch`.  
+- The 2nd byte of `_PRW` packet is either `03` or `04`. Changing this byte to `0` completes the `0D/6D Patch`.  
+
 See the ACPI Specs for further details on `_PRW`.
 
 Different machines may define `_PRW` in different ways, and the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis. But we expect that subsequent releases of OpenCore will address the `0D/6D` issue.
@@ -22,12 +23,10 @@ Different machines may define `_PRW` in different ways, and the contents and for
   - `ADR` address: `0x00140003`, part name: `CNVW`.
 
 - Ethernet
-
   - Before Gen 6, `ADR` address: `0x00190000`, part name: `GLAN`, `IGBE`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0006`, part name: `GLAN`, `IGBE`, etc.
 
 - Sound Card
-
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, etc.
 
@@ -43,16 +42,15 @@ Different machines may define `_PRW` in different ways, and the contents and for
         ...
     })
   
+Depending on your search results, pick either or of the following two `0D/6D` rename patches and copy the renames to your config.plist unter the same section (ACPI > Patch):
 
-  This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. The documentation package provides.
-
-  - Name-0D rename .plist
+  1. Name-0D Rename.plist
     - `Name-0D-03` to `00`
     - `Name-0D-04` to `00`
     
-  - Name-6D change of name .plist
+  2. Name-6D rename.plist
     - `Name-6D-03` to `00`
-    - `Name6D-04` to `00`
+    - `Name-6D-04` to `00`
 
 - One of the `Method types`: `GPRW(UPRW)`
 
