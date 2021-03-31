@@ -50,7 +50,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 5. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
 
 7. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues)
-	- [06/0D Instant Wake Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/060D%20Instant%20Wake%20Fix)
+	- [**06/0D Instant Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/060D%20Instant%20Wake%20Fix)
 	- [**Fixing AOAC Machines**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/Fixing%20AOAC%20Machines)
 	- [**PNP0C0E Sleep Correction Method**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PNP0C0E%20Sleep%20Correction%20Method)
 	- [**PTSWAK Sleep and Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PTSWAK%20Sleep%20and%20Wake%20Fix)
