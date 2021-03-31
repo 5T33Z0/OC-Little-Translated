@@ -16,8 +16,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 1. **Adding Fake Devices**
    
-   1. [Ambient Light Sensor (`ALS0`)] (https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ambient%20Light%20Sensor%20(ALS0))
-   2. [Embedded Controller (`EC`] (https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Embedded%20Controller%20(EC))
+   1. [Ambient Light Sensor (`ALS0`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ambient%20Light%20Sensor%20(ALS0))
+   2. [Embedded Controller (`EC`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Embedded%20Controller%20(EC))
    3. Power management deep idle
    4. `AOAC` wake patch
    5. Auto power off bluetooth `WIFI` while sleep
