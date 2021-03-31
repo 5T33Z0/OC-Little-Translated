@@ -7,6 +7,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 ## Table of Contents
 
+{:toc}
+
 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
    
    1. [About the ACPI Form](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/i%20About%20the%20ACPI%20Form)
