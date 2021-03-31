@@ -3,16 +3,16 @@
 ## Description
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
-**DISCLAIMER**: This is my english translation of the [OC-Little Repo by daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them.
+**DISCLAIMER**: This is my english translation of the [OC-Little Repo by daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them.I just added some bits in pieces here and there edited and restructured it to be more readable and more unifor in terms of layout. Work in progress…
 
 ## Table of Contents
 
-0. **Overview**
+0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
    
-   1. ACPI Source Language (ASL) Basics
-   2. SSDT Loading Sequence
-   3. ACPI Form
-   4. ASL to AML Conversion
+   1. [About the ACPI Form](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/i%20About%20the%20ACPI%20Form)
+   2. [ACPI Source Language](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/ii%20ASL%20Syntax%20Basics)
+   3. [SSDT Loading Sequence](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iii%20SSDT%20Loading%20Sequence)
+   4. [ASL to AML Conversion](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iv%20ASL%20to%20AML%20Conversion)
 
 1. **About AOAC**
    
@@ -26,7 +26,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    
    1. Fake `EC`
    2. Fake `RTC0` 
-   3. Fake Ambient Light Sensor (`ALS0`) 
+   3. Fake Ambient Light Sensor (`ALS0`)
+   4. Sound Card IRQ Patch (HPET)
+   5. Fake Ethernet 
 
 2. **AWAC & GPIO Fixes**
    
