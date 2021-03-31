@@ -1,18 +1,17 @@
 # Fake Ambient Light Sensor
 
 ## Overview
-Starting with `macOS Catalina`, Laptops need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness setting. Otherwise the brightness returns to maximum after rebooting.
+Starting with `macOS Catalina`, Laptops need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness level. Otherwise the brightness returns to maximum after rebooting.
 
 ## Usage
 There are two possible scenarios/cases: 
 
 1. `ACPI` has an ambient light sensor. 
-2. `ACPI` does not have an ambient light. 
+2. `ACPI` doesn't ha have it
 
-First, look for `ACPI0008` in the original `DSDT`, if you can find the relevant device, usually `ALSD`, then the ambient light sensor device interface exists, otherwise it means that the ambient light sensor device interface does not exist.
+First, search for `ACPI0008` in the original `DSDT`. If you can find the associated device – usually named `ALSD` – then the ambient light sensor device interface exists, otherwise it means that the ambient light sensor device interface does not exist.
 
 ### Case 1: Ambient light sensor device interface exists
-
 
 ```swift
 Device (ALSD)
@@ -68,7 +67,7 @@ Device (ALSD)
 }
 ```
 
-In this case, `ALS0` can be enabled by using `_STA` method to return `0x0B` to enable the ambient sensor devices present in the original `ACPI`, as follows.
+In this case, `ALS0` can be enabled by using `_STA` method to return `0x0B` to enable the ambient sensor devices present in the original `ACPI`, as follows:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
@@ -90,7 +89,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 
 ### 2. No ambient light sensor device interface exists
 
-In this case we just need to impersonate an `ALS0` device, as follows:
+In this case we just need to impersonate an `ALS0` device, as follows and we're done.:
 
 ```
 DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
