@@ -1,7 +1,7 @@
 # Fake Ambient Light Sensor
 
 ## Overview
-Starting with `macOS Catalina`, laptop devices need a fake ambient light sensor `ALS0` for brightness saving and auto-brightness adjustment (where applicable).
+Starting with `macOS Catalina`, Laptops need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness setting. Otherwise the brightness returns to maximum after rebooting.
 
 ## Usage
 There are two possible scenarios/cases: 
