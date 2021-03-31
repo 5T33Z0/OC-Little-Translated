@@ -45,4 +45,4 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
   - Original device name: RTC
   - _HID: PNP0B00
   
-**Note** : The `LPCB` name should be the same as the original ACPI name.
+**Note** : The `LPC/LPCB` name should be the same as the original ACPI name.
