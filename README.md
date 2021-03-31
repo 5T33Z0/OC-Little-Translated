@@ -20,15 +20,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    2. [Embedded Controller (`EC`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Embedded%20Controller%20(EC))
    3. [Ethernet Controller (`NullEthernet`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ethernet%20Controller%20(LAN))
    4. [Soundcard IRQ & Timer Fixes (`HPET`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/IRQ%20and%20Timer%20Fix%20(HPET)) 
-   5. Auto power off bluetooth `WIFI` while sleep
-
-3. **Fake Devices**
-   
-   1. Fake `EC`
-   2. Fake `RTC0` 
-   3. Fake Ambient Light Sensor (`ALS0`)
-   4. Sound Card IRQ Patch (HPET)
-   5. Fake Ethernet 
+   5. [OCI2C-GPIO Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/OCI2C-GPIO%20Patch)
+   6. [System Clock (`AWAC`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(AWAC))
+   7. [System Clock (`RTC0`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(RTC0))
 
 2. **AWAC & GPIO Fixes**
    
