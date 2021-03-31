@@ -24,11 +24,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    6. [System Clock (`AWAC`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(AWAC))
    7. [System Clock (`RTC0`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(RTC0))
 
-2. **AWAC & GPIO Fixes**
+2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
    
-   1. `I2C-GPIO` Patch
-   2. `AWAC` Patch
-
 4. **Windows Compatibility Patch (`XOSI`)**
 
 5. **Injecting Devices**
