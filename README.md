@@ -69,12 +69,12 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 11. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
 
-   - config-1-Lilu-SMC-WEG-ALC load lists
-   - config-2-PS2 keyboard drives load lists
-   - config-3-BCM wireless and bluetooth drives load lists
-   - config-4-I2C+PS2 load lists
-   - config-5-PS2Smart keyboard devices load lists
-   - config-6-Intel wireless and bluetooth drives load lists
+ 	- config-1-Lilu-SMC-WEG-ALC load lists
+   	- config-2-PS2 keyboard drives load lists
+   	- config-3-BCM wireless and bluetooth drives load lists
+   	- config-4-I2C+PS2 load lists
+   	- config-5-PS2Smart keyboard devices load lists
+   	- config-6-Intel wireless and bluetooth drives load lists
 
 ## Credits
 
