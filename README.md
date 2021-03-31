@@ -85,16 +85,15 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
  
-**Special credit to**
+**DaOriginal special credit to**
 
-- @XianWu write these ACPI component patches that useable to **[OpenCore](https://github.com/acidanthera/OpenCorePkg)** 
-- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
-
-- Credits and thanks to：
-  - @冬瓜-X1C5th
-  - @OC-xlivans
-  - @Air 13 IWL-GZ-Big Orange (OC perfect)
-  - @子骏oc IWL
-  - @大勇-小新air13-OC-划水小白
-  - @xjn819
-  - Acidanthera for maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
+> - @XianWu write these ACPI component patches that useable to **[OpenCore](https://github.com/acidanthera/OpenCorePkg)** 
+> - @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
+> - Credits and thanks to：
+>   - @冬瓜-X1C5th
+>   - @OC-xlivans
+>   - @Air 13 IWL-GZ-Big Orange (OC perfect)
+>   - @子骏oc IWL
+>   - @大勇-小新air13-OC-划水小白
+>   - @xjn819
+>   - Acidanthera for maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
