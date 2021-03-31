@@ -84,7 +84,6 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
-- hackintosh-forum.de for showcasing ***how to NOT run a forum!***
  
 **Special credit to**
 
