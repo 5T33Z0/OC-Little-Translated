@@ -78,7 +78,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 ## Credits
 
-**5T33Z0's 5H0UT 0UT5:
+**5T33Z0's 5H0UT 0UT5**:
 
 - sascha_77 for Kext Upater, ANYmacOS and helping me in unbricking my Lenovo T530!
 - Apfelnico for introducing me to ASL/AML Basics
