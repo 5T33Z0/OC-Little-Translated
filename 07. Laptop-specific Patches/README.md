@@ -1,5 +1,5 @@
 # Laptop Patches
-Includes Patches for the following machines
+Includes brand-specific Patches for the following Laptop Models:
 
 - Dell Machine Special Patch
 - Xiaoxin PRO13 Special Patch
