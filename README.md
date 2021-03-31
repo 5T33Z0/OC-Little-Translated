@@ -78,6 +78,14 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 ## Credits
 
+**5T33Z0's 5H0UT 0UT5:
+
+- sascha_77 for Kext Upater, ANYmacOS and helping me in unbricking my Lenovo T530!
+- Apfelnico for introducing me to ASL/AML Basics
+- Bluebyte for having good conversations
+- insanelymac.com for being a really nice community with kind mods
+- hackintosh-forum.de for showcasing ***how to NOT run a forum!***
+ 
 **Special credit to**
 
 - @XianWu write these ACPI component patches that useable to **[OpenCore](https://github.com/acidanthera/OpenCorePkg)** 
