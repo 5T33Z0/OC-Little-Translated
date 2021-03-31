@@ -1,3 +1,4 @@
+```swift
 // battery
 // In config ACPI, _BIF renamed XBIF
 // Find:     5F 42 49 46
@@ -179,3 +180,4 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "BAT1", 0)
 }
 //EOF
 
+```
