@@ -39,15 +39,15 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 4. [**Adding Missing Components**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Adding%20missing%20components)
  
- - `DMAC` – DMA Controller 
- - `IMEI` – IMEI Device
- - `MCHC` 
- - `MEM2`
- - `PMCR`
- - `PPMC` – Platform Power Management Controller
- - `PWRB` – Power Button Device
- - `SBUS`/ `SMBU` – System Management Bus (see "Injecting Devices")
- - `SLPB` – Sleep Button Device
+	- `DMAC` – DMA Controller 
+	- `IMEI` – IMEI Device
+ 	- `MCHC` 
+ 	- `MEM2`
+ 	- `PMCR`
+ 	- `PPMC` – Platform Power Management Controller
+ 	- `PWRB` – Power Button Device
+ 	- `SBUS`/ `SMBU` – System Management Bus (see "Injecting Devices")
+ 	- `SLPB` – Sleep Button Device
 
 5. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
 
