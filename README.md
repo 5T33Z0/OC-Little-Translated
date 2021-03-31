@@ -14,7 +14,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
    3. [SSDT Loading Sequence](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iii%20SSDT%20Loading%20Sequence)
    4. [ASL to AML Conversion](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iv%20ASL%20to%20AML%20Conversion)
 
-1. **Adding Fake Devices**
+1. [**Adding Fake Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices)
    
    1. [Ambient Light Sensor (`ALS0`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ambient%20Light%20Sensor%20(ALS0))
    2. [Embedded Controller (`EC`)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Embedded%20Controller%20(EC))
