@@ -7,7 +7,7 @@ In **DSDT**, saerch for:
 
 - `PNP0200`, if missing, add ***SSDT-DMAC***. Adds Direct Memory Access [(DMA) Controller](https://binaryterms.com/direct-memory-access-dma.html).
 - `PNP0C01`, if missing, add ***SSDT-MEM2***.
-- `0x00160000`, if missing, add ***SSDT-IMEI***.
+- `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU Acceleratoration (Req for 6th-series mainboard only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
 - `MCHC`, if missing, add ***SSDT-MCHC***  
 	**NOTE**: Adding `MCHC` is no longer necessary. Use ***SSDT-SBUS-MCHC*** instead, which comes with the OpenCore package. Follow Instructions in "Chapter 05: Injecting Devices" to configure it correctly!
