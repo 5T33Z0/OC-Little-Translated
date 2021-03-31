@@ -5,6 +5,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 **DISCLAIMER**: This is my english translation of the [OC-Little Repo by daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them.I just added some bits in pieces here and there edited and restructured it to be more readable and more unifor in terms of layout. Work in progress…
 
+**NOTE**: Although this repo looks smaller than the original, beleive me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present! 
+
 ## Table of Contents
 
 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
