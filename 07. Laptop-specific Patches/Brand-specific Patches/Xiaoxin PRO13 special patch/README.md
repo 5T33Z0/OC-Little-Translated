@@ -41,7 +41,7 @@ Note: Please refer to "Fixing AOAC Machines" in chapter 06 for more info
 
 ## Annex: Merging Shared Patches
 
-- To simplify the operation as well as to reduce the number of patches, certain common patches are merged as:***SSDT-OCPublic-Merge*** .
+- To simplify the operation as well as to reduce the number of patches, certain common patches are merged as:***SSDT-OCPublic-Merge***.
 
 ### Merged Patches
 
