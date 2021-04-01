@@ -2,7 +2,7 @@
 
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
-**DISCLAIMER**: This is my english translation of the OC-Little Repo by daliansky. All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML coded remains untouched!
+**DISCLAIMER**: This is my english translation of the OC-Little Repo by [daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML coded remains untouched!
 
 **ABOUT THIS TRANSLATION:**
 
@@ -43,12 +43,12 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 4. [**Adding Missing Components**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Adding%20missing%20components)
 	- DMAC – DMA Controller
 	- IMEI – IMEI Device
-	- MCHC
-	- MEM2
-	- PMCR
+	- MCHC – Memory Controller
+	- MEM2 – ? mising explanation…
+	- PMCR - Fixes NVRAM on 300-series Mainboards
 	- PPMC – Platform Power Management Controller
 	- PWRB - Power Button Device
-	- SBUS/ SMBU – System Management Bus (see "Injecting Devices")
+	- SBUS/SMBU – System Management Bus (see "Injecting Devices")
 	- SLPB – Sleep Button Device
 
 5. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
@@ -57,7 +57,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 	- 06/0D Instant Wake Fix
 	- Fixing AOAC Machines
 	- PNP0C0E Sleep Correction Method
-	- PTSWAK Sleep and Wake Fix
+	- PTSWAKTTS Sleep and Wake Fix
 
 7. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches)
 	- Battery Patches
@@ -78,7 +78,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
 
-Dahliansky's original Shout Outs and Credits:
+Daliansky's original Shout Outs and Credits:
 
 > - Special credit to：
 > 	- @XianWu write these ACPI component patches that useable to OpenCore
