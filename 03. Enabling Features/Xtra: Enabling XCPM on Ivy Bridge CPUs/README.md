@@ -1,5 +1,5 @@
-# Enabling XCPM for Ivy Bridge CPUs
-> Compatibilitiy: macOS Catalina and Big Sur. By 5T33Z0
+# Enabling `XCPM` for Ivy Bridge CPUs
+> Compatibility: macOS Catalina and Big Sur. By 5T33Z0
 
 ## Background: 
 Apple deactivated the `X86PlatformPlugin` support for Ivy Bridge CPUs in macOS a few years back. Instead, the `ACPI_SMC_PlatformPlugin` is used for CPU power management, although `XCPM` is supported by Ivy Bridge CPUs natively. But there isn't much info about how to re-enable it in OpenCore's documentation:
@@ -8,17 +8,19 @@ Apple deactivated the `X86PlatformPlugin` support for Ivy Bridge CPUs in macOS a
 
 So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch and a modified Hotpatch (***SSDT-PM,aml*** or ***SSDT-PLUG.aml***) to use the `X86PlatformPlugin` (i.e. setting Plugin Type to `1`).
 
+**NOTE**: I developed and tested this guide using a Laptop. If you're on a desktop you have to use a different System Definition – iMac13,1 for Ivy Bridge and 14,1 for Haswell, I guess.
+
 ### Compatibility: macOS Catalina (10.15.5+) to Big Sur (11.3 beta)
 
 #### Requirements:
 
 * 3rd gen Intel CPU (codename **Ivy Bridge**)
 * Tools: Terminal, ssdtPRGEN, SSDTTime, Plist Editor, MaciASL (optional), IORegistryExplorer (optional), CPUFriendFriend (optional)
-* SMBIOS that supports Ivy Bridge CPUs (like MacBookPro9,x or 10,x)
+* SMBIOS that supports Ivy Bridge CPUs (like MacBookPro9,x or 10,x for Laptops and iMac13,1 for Desktops)
 
 #### How-To:
 
-1. Enable XCPM for Ivy Bridge:
+1. Enable `XCPM` for Ivy Bridge:
 	* Add the Kernel Patch inside of "XCPM_IvyBridge.plist" to your `config.plist`
 	* Enable `AppleXcpmExtraMsrs` under Kernel > Quirks.
 	* Save.
@@ -58,7 +60,7 @@ Since Big Sur requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate S
 - The CPU runs at lower clock speeds in idle since this SMBIOS was written for Ivy Bridge, while 11,x was written for Haswell CPUs. Therefore the CPU produces less heat and the machine runs quieter.
 - Another benefit of using `MacBookPro10,1` is that you get the correct P-States and C-States for your CPU from ssdtPRGen.
 
-**Disadvadtages** of using `MacBookPro10,1`: 
+**Disadvantages** of using `MacBookPro10,1` or equivalent iMac Board-ID supporting Ivy Bridge: 
 
 - You won't be able to install System Updates because you won't be notified about them. But there's a simple `workaround`:
 	

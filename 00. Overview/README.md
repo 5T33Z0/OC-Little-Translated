@@ -10,7 +10,7 @@ In general:
 - For Brightness Control Keys to work, some machines do not require extra patches. Use `PS2 Keyboard Mapping` instead to achieve the same effect.
 - For now, the vast majority of machines require the `0D6D Patch` to fix `Instant Wake` issues.
 - Laptops require device-specific renames and patches for the Battery Percentage Indicator to work.
-- Most ThinkPad Laptops require the `PTSWAK` patch to stop the Power Button LED from pulsing after waking up from sleep.
+- Most ThinkPad Laptops require the `PTSWAKTTS` patch to stop the Power Button LED from pulsing after waking up from sleep.
 - For machines with a dedicated Sleep Button: If pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep Correction Method` to fix it.
 
 You may need to disable or enable certain components in order to solve a specific problems. 
@@ -27,4 +27,4 @@ In general, use:
 	Some systems crash during startup due to the RTC [`PNP0B00`]  being disabled. Use SSDT-RTC0 to fix it.
 - ***SSDT-EC*** – Under`Fake EC`
 
-  From **MacOS 10.15** onwards, ***SSDT-EC*** is neccessary if the `Embedded Controller` is either not proesent or not named `EC`. Otherwise the OS may not boot. In Big Sur you get an error message (crossed-out stop sign) instead of the Apple Logo, saying that your system is not compatible with Big Sur, even though it is.
+  From **MacOS 10.15** onwards, ***SSDT-EC*** is necessary if the `Embedded Controller` is either not present or not named `EC`. Otherwise the OS may not boot. In Big Sur you get an error message (crossed-out stop sign) instead of the Apple Logo, saying that your system is not compatible with Big Sur, even though it is.
