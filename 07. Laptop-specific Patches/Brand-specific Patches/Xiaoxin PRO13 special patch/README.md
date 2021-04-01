@@ -22,20 +22,20 @@ Note: Please refer to "Fixing AOAC Machines" in chapter 06 for more info
 
 ## Other Patches (Reference)
 
-- ***SSDT-PLUG-_SB.PR00*** --see section 03. Enabling Features/How to enabe CPU Power Management (SSDT-PLUG)
-- ***SSDT-EC*** --see section 02 "Adding Fake Devices"
-- ***SSDT-PNLF-CFL*** --see section 03. Enabling Features/How to enable Brightness Controls (PNLF) 
-- ***SSDT-PMCR*** --see section "Adding Missing components"
-- ***SSDT-SBUS*** --see section "Adding Missing components"
-- ***SSDT-OCBAT1-lenovoPRO13*** --see section 07. Laptop-specific Patches/Battery Patches
-- ***SSDT-I2CxConf*** --see section 07. Laptop-specific Patches/I2C TrackPad Patches
-- ***SSDT-OCI2C-TPXX-lenovoPRO13*** --see same
-- ***SSDT-CB-01_XHC*** --see section 05. USB Fixes/ACPI Custom USB Port
-- ***SSDT-GPRW*** --see section 06. Fixing Sleep and Wake Issues/060D Instant Wake Fix
-- ***SSDT-RTC_Y-AWAC_N*** --see section 01. Adding Fake Devices/System Clock (AWAC)
-- ***SSDT-RMCF-PS2Map-LenovoPRO13*** --see section 07. Laptop-specific Patches/Fixing Keyboard Mappings and Brightness Keys
+- ***SSDT-PLUG-_SB.PR00*** -- see section 03. Enabling Features/How to enabe CPU Power Management (SSDT-PLUG)
+- ***SSDT-EC*** -- see section 02 "Adding Fake Devices"
+- ***SSDT-PNLF-CFL*** -- see section 03. Enabling Features/How to enable Brightness Controls (PNLF) 
+- ***SSDT-PMCR*** -- see section "Adding Missing components"
+- ***SSDT-SBUS*** -- see section "Adding Missing components"
+- ***SSDT-OCBAT1-lenovoPRO13*** -- see section 07. Laptop-specific Patches/Battery Patches
+- ***SSDT-I2CxConf*** -- see section 07. Laptop-specific Patches/I2C TrackPad Patches
+- ***SSDT-OCI2C-TPXX-lenovoPRO13*** -- see same section
+- ***SSDT-CB-01_XHC*** -- see section 05. USB Fixes/ACPI Custom USB Port
+- ***SSDT-GPRW*** -- see section 06. Fixing Sleep and Wake Issues/060D Instant Wake Fix
+- ***SSDT-RTC_Y-AWAC_N*** -- see section 01. Adding Fake Devices/System Clock (AWAC)
+- ***SSDT-RMCF-PS2Map-LenovoPRO13*** -- see section 07. Laptop-specific Patches/Fixing Keyboard Mappings and Brightness Keys
 - ***SSDT-OCPublic-Merge*** -- Patch for this chapter, see **Attachment** Description
-- ***SSDT-BATS-PRO13*** --see section 07. Laptop-specific Patches/Battery Patches
+- ***SSDT-BATS-PRO13*** -- see section 07. Laptop-specific Patches/Battery Patches
 
 **Note**: The name changes required for the above patches are in the comments of the corresponding source code patch files (.dsl).
 
