@@ -3,7 +3,16 @@
 ## Description
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
-**DISCLAIMER**: This is my english translation of the [OC-Little Repo by daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them.I just added some bits in pieces here and there edited and restructured it to be more readable and more unifor in terms of layout. Work in progress…
+**DISCLAIMER**: This is my english translation of the [OC-Little Repo by daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML coded remains untouched. Work in progress…
+
+**About the translation/edits**
+
+- I reorganized the Repo into more plausible categories and sub-categories based on types of issues, components, etc.
+- restructured most of the texts so that they are more logical and readable
+- re-wrote sections which were confusing/misleading
+- added further explanation where necessary
+- added new texts where there were missing (work in progress)
+- added contents which was not present (work in progess)
 
 **NOTE**: Although this repo looks smaller than the original, beleive me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present! 
 
