@@ -1,21 +1,19 @@
-# Binary Name Change
+# Binary Renames
 
-## Description
-
-The method described in this article is not about renaming a  `Device` or `Method` in the usual sense, but rather a technique for enabling or disabling devices.
+The method described in this section is not about enabling or disabling a `Device` or `Method` in the traditional sense, but rather using binary code to do so.
 
 ## Problems and Risks
 
-ACPI binary renaming may affect other systems when OpenCore is injecting them into other Operating Systems.
+Since OpenCore injects all patches into the ACPI on boot globally, it consequently affects *all* other Operating Systems installed, which may cause issues in other OS'es.
 
-## Example
+### Example
 
 Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA`.
 
-Binary renaming.
+**Binary renaming:**
 
-**Find**: `00 A0 08 48 50` "Note: `00` = `{`; `A0` = `If` ......  
-**Replace**: `00 A4 0A 0F A3` `Note: `00` = `{`; `A4 0A 0F` = `Return(0x0F)`; `A3` = `Noop` for completing the number of bytes`
+- **Find**: `00 A0 08 48 50` "Note: `00` = `{`; `A0` = `If` ......  
+- **Replace**: `00 A4 0A 0F A3` `Note: `00` = `{`; `A4 0A 0F` = `Return(0x0F)`; `A3` = `Noop` for completing the number of bytes`
 
 - Original Code:
 
@@ -157,7 +155,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 ### Example 1
 
-A device _STA Original.
+Orignal `_STA` Method:
 
 ```Swift
 Method (_STA, 0, NotSerialized)
