@@ -1,10 +1,6 @@
 # Fixing Sleep and Wake issues
 
-This section contains ACPI Hotpatches for resolving common issues related to Sleep and Wake, especially on but not limited to Laptops.
-
-## Patching Methods
-
-The following Patches/Methods are included:
+This section contains ACPI Hotpatches for resolving common issues related to Sleep and Wake, especially on but not limited to Laptops. The following Patches/Methods are covered:
 
 #### 1.`PTSWAKTTS` Sleep and Wake fix
 
