@@ -2,7 +2,7 @@
 
 ## Special renaming
 
-PNLF renamed XNLF
+Rename `PNLF` to `XNLF`
 
 ```text
 Find: 504E4C46
