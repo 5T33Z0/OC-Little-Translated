@@ -37,7 +37,7 @@ In addition, Rebhabman's VoodooPS2Controller is obsolete, and it is recommended 
 
 ----
 
-The following descriptions of the configurations in SSDT are provided by [@SukkaW](https://github.com/SukkaW) based on [README](https://github.com/RehabMan/OS-X-) by Rehabman, the original maintainer of VoodooPS2 Voodoo-PS2-Controller/blob/master/README.md) and the code comments in VoodooPS2.
+The following descriptions of the configurations in SSDT are provided by [@SukkaW](https://github.com/SukkaW) based on [README](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/README.md) by Rehabman, the original maintainer of VoodooPS2 Voodoo-PS2-Controller/blob/master/README.md) and the code comments in VoodooPS2.
 
 - DragLockTempMask: temporary drag lock shortcut. Note that these are the original relationships mapped on the physical keyboard and are not affected by the function key order set in System Preferences.
 - DynamicEWMode: Dynamic EW mode, where two-finger gestures (e.g. two-finger swipe) split the trackpad bandwidth equally. By enabling Dynamic EW mode, the trackpad will not be in EW mode all the time, thus improving the responsiveness of the ThinkPad ClickPad touchpad for two-finger scrolling (note: two-finger scrolling only requires two fingers to be on the trackpad at the same time, and then the trackpad only gives feedback on the direction and distance of one finger swipe, saving the bandwidth of the other finger). While dragging a file (note: one finger holds the trackpad and the other finger swipes) the ClickPad will be pressed down, and EW mode will still be enabled. This option has caused problems with a few trackpads, so it is disabled by default.
