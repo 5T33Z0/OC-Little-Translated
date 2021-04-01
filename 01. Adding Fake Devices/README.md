@@ -1,4 +1,4 @@
-# Fake Devices
+# About Fake Devices
 
 ## Overview
 
@@ -10,7 +10,7 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
 - A device is disabled for some reason, but macOS system needs it to work. See `this chapter` for an example.
 - In most cases, devices can also be enabled using the Binary Renaming and Preset Variables.
 
-## Counterfeit Devices
+## Properties of Fake ACPI Devices
 
 - Features:
   
@@ -39,10 +39,10 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
         }
     ```
   
-- Example:
+- Example: Realtime Clock Fix (RTC0)
   
   - ***SSDT-RTC0*** - Counterfeit RTC
   - Original device name: RTC
   - _HID: PNP0B00
   
-**Note** : The `LPC/LPCB` name should be the same as the original ACPI name.
+**Note**: The `LPC/LPCB` name used in the SSDT should be identical with the one used in ACPI.
