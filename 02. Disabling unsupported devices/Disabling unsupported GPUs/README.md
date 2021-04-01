@@ -1,5 +1,5 @@
 ## How to disable external GPU 
-There are two methods for disabling incompazinöe external GPUs:
+There are two methods for disabling incompatible external GPUs:
 
 **Method 1**: Modifying `DeviceProperties` for external GPU in config.plist:
 
