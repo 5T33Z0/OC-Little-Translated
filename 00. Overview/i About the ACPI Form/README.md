@@ -35,7 +35,7 @@ Other Form Patches:
   - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
   - **Description**: [`ACPI Specification`](https://www.acpica.org/documentation) defines various static system information related to configuration and power management in terms of **FADT**, which appears as the **FACP.aml** form in the machine's ACPI form. The **FACP.aml** form characterizes information such as the RTC clock, power and sleep buttons, power management, etc. Currently related to Black Apple are the following.
  - If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try using this patch.
-**Note**: If `ACPI\Quirks\FadtEnableReset` = `true` still can't call out the "Restart, Sleep, Cancel, Shutdown" menu, try adding ***SSDT-PMCR***. ***SSDT-PMCR*** is located in OC-little's Adding Missing Parts.
+**Note**: If `ACPI\Quirks\FadtEnableReset` = `true` still can't call out the "Restart, Sleep, Cancel, Shutdown" menu, try adding ***SSDT-PMCR***. It's located under  "Adding Missing Parts".
  - The `Low Power S0 Idle`, `Hardware Reduced` of the **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, the machine is an `AOAC`. See About AOAC for more information on `AOAC`.
     
   - **FACS.aml** 
