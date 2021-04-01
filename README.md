@@ -1,4 +1,4 @@
-#  OC-Little: ACPI Hotpatch Samples for OpenCore
+# OC-Little: ACPI Hotpatch Samples for OpenCore
 
 ## Description
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
