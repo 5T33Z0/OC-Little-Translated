@@ -11,7 +11,7 @@
 - Counterfeit three parts, i.e., **HPE0**, **RTC0**, **TIM0**.
 - Remove `IRQNoFlags (){8}` of **RTC0** and `IRQNoFlags (){0}` of **TIM0** and add them to **HPE0**.
 
-# Patch Method (NEW)
+# Patch Method (NEW): UsingSSDTTime
 
 The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
@@ -32,8 +32,10 @@ The old patch method described below is obsolete, because the patching process c
 7. Save your config
 8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
 9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. Audio should work now (assumig AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
+10. Save. Reboot. Done. Audio should work now (assuming AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
 
+<details>
+<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 ## Patch method
 
 - Disable **HPET**, **RTC**, **TIMR**
