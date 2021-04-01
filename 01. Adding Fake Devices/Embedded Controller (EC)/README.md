@@ -1,10 +1,8 @@
 # SSDT-EC Counterfeit patch
 
-## Description
-
 Although OpenCore does not require renaming of the Embedded Controller (EC), in order to load USB Power Management, it may be necessary to impersonate another EC.
 
-# Patch Method (NEW): Using SSDTTime
+## Patch Method (NEW): Using SSDTTime
 
 The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
@@ -26,6 +24,7 @@ The old patch method described below is obsolete, because the patching process c
 8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
 9. Open your config and create a new snapshot to get the new .aml files added to the list.
 10. Save. Reboot. Done. Audio should work now (assumig AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
+
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 
