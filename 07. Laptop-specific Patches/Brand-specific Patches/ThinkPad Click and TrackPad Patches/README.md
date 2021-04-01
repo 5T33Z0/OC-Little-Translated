@@ -19,13 +19,13 @@ ThinkPad's TouchPads and the TouchPoints Mouse pointer are ELAN type devices con
 
 If your TouchPad is one of the two shown below, then use this patch.
 
-! [](https://i.loli.net/2020/04/26/ceEyQfgikqzjapL.png)
+![](https://i.loli.net/2020/04/26/ceEyQfgikqzjapL.png) 
 
 **SSDT-ThinkPad_TouchPad**
 
 If your TouchPad is one of the two shown below, then use this patch.
 
-! [](https://i.loli.net/2020/04/26/FUxIp4nmAb2PSws.png)
+![](https://i.loli.net/2020/04/26/FUxIp4nmAb2PSws.png)
 
 ----
 
