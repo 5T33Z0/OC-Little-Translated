@@ -1,6 +1,4 @@
-# Description
-
-## About Fake Devices
+# About Fake Devices
 
 Among the many `SSDT` patches, a significant number of them can be categorized as patches for spoofing components. These include:
 
