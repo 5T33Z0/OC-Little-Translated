@@ -2,7 +2,7 @@
 
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
-**DISCLAIMER**: This is my english translation of the OC-Little Repo by [daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML coded remains untouched!
+**DISCLAIMER**: This is my english translation of the OC-Little Repo by [daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched! The chinese READMEs are included as references as well.
 
 **ABOUT THIS TRANSLATION:**
 
@@ -11,9 +11,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - re-wrote sections which were confusing/misleading
 - added further explanation where necessary
 - added new texts where there were missing (work in progress)
-- added contents which was not present (work in progess)
+- added contents which was not present (work in progress)
 
-**NOTE**: Although this repo looks smaller than the original, beleive me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present!
+**NOTE**: Although this repo looks smaller than the original, believe me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present!
 
 ## Table of Contents
 
@@ -38,18 +38,18 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 	- [Enabling CPU Power Management (SSDT-PLUG)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enabe%20CPU%20Power%20Management%20(SSDT-PLUG))
 	- [Enabling Brightness Controls (PNLF)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enable%20Brightness%20Controls%20(PNLF))
 	- [Adding System Management Bus (SMBus)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enabel%20System%20Management%20Bus%20(SMBus))
-	- [Windows Compatibiliity Patch (XOSI)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/Windows%20Compatibiliity%20Patch%20(XOSI))
+	- [Windows Compatibility Patch (XOSI)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/Windows%20Compatibiliity%20Patch%20(XOSI))
 
 4. [**Adding Missing Components**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Adding%20missing%20components)
 	- DMAC – DMA Controller
-	- IMEI – IMEI Device
+	- IMEI – Intel MEI
 	- MCHC – Memory Controller
-	- MEM2 – ? mising explanation…
+	- MEM2 – ? missing explanation…
 	- PMCR - Fixes NVRAM on 300-series Mainboards
 	- PPMC – Platform Power Management Controller
 	- PWRB - Power Button Device
-	- SBUS/SMBU – System Management Bus (see "Injecting Devices")
 	- SLPB – Sleep Button Device
+	- SBUS/SMBU – System Management Bus
 
 5. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
 
@@ -81,13 +81,13 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 Daliansky's original Shout Outs and Credits:
 
 > - Special credit to：
-> 	- @XianWu write these ACPI component patches that useable to OpenCore
-> 	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
-> - Credits and thanks to：
-> 	-  @冬瓜-X1C5th
-> 	- @OC-xlivans
-> 	- @Air 13 IWL-GZ-Big Orange (OC perfect)
-> 	- @子骏oc IWL
->    - @大勇-小新air13-OC-划水小白
->    - @xjn819
->    - Acidanthera for maintaining OpenCorePkg
+>	- @XianWu write these ACPI component patches that useable to OpenCore
+>	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
+>	- Credits and thanks to：
+>	-  @冬瓜-X1C5th
+>	- @OC-xlivans
+>	- @Air 13 IWL-GZ-Big Orange (OC perfect)
+>	- @子骏oc IWL
+>	- @大勇-小新air13-OC-划水小白
+>	- @xjn819
+>	- Acidanthera for maintaining OpenCorePkg

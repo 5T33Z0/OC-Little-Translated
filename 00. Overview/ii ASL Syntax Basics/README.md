@@ -1,5 +1,5 @@
 # ACPI Source Language (ASL) Basics
-> The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Turorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
+> The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Tutorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
 > 
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
 > - Translated from chinese into english and edited by [5T33Z0](https://github.com/5T33Z0), 2021-03-24.
@@ -522,7 +522,7 @@ Method (SSCN, 0, NotSerialized)
 }
 ```
 
-The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the orginal value.
+The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the original value.
 
 ## Conclusion
 Hopefully this article assists you when editing DSDTs/SSDTs.

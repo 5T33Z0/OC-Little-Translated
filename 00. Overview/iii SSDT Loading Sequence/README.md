@@ -2,7 +2,7 @@
 
 Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there is an exceptions to this rule…
     
-For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" to via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, the SSDT being "scoped" in has to be loaded prio to the ones "scoping".
+For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" to via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, the SSDT being "scoped" in has to be loaded prior to the ones "scoping".
 
 ## Examples
 
@@ -40,3 +40,4 @@ For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `de
   Item 2
             path    <SSDT-XXXX-2.aml>
   ```
+  

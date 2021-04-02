@@ -1,4 +1,4 @@
-# Sound Card IRQ Patches (`HPET`) 
+# Sound Card IRQ Patches (`SSDT-HPET`) 
 
 ## Description
 
@@ -16,7 +16,7 @@ In reality, almost all machines have **HPET** without any interrupts. Usually, i
 
 The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** – Context-Aware AWAC Disable and Fake RTC
+* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to 1 on `CPU0`/`PR00`
 * ***SSDT-HPET*** – Patches out IRQ Conflicts
@@ -33,7 +33,7 @@ The old patch method described below is obsolete, because the patching process c
 7. Save your config
 8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
 9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. Audio should work now (assumig AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
+10. Save. Reboot. Done. Audio should work now (assuming AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
 
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>

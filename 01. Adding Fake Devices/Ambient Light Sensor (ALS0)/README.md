@@ -1,7 +1,7 @@
 # Fake Ambient Light Sensor (`ALS0`)
 
 ## Overview
-Starting with `macOS Catalina`, Laptops need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness level. Otherwise the brightness returns to maximum after rebooting.
+Starting with `macOS Catalina`, Laptops now need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness level. Otherwise the brightness returns to maximum after rebooting.
 
 ## Usage
 There are two possible scenarios/cases: 
@@ -89,7 +89,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 
 ### 2. No ambient light sensor device interface exists
 
-In this case we just need to impersonate an `ALS0` device, as follows and we're done.:
+In this case we just need to impersonate an `ALS0` device, as follows and we're done:
 
 ```
 DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
@@ -127,7 +127,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 
 ## Caution
 
-- It's okay to add a fake `ALS0`, even if an Ambient light sensor exists in the original `ACPI`.
-- The corrected `Variable` may exist in multiple places, and correcting it may affect other components while achieving our desired effect.
-- When there is an ambient light sensor device in the original `ACPI`, the name may not be `ALSD`, although no other name has been found yet.
-- If there is an ambient light sensor device in the original `ACPI`, if you want to force it to be enabled by the preset variable method, you need to pay attention to the existence of `_SB.INI` in the original `ACPI`, and if it exists, please use the impersonation `ALS0` method.
+- It's okay to add a fake `ALS0`, even if an ambient light sensor exists in the original `ACPI`.
+- The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving our desired effect.
+- When there is an ambient light sensor device in the original `ACPI`, the name may not be `ALSD`, although no other name has been found yet. If so, adjust the path in the SSDT accordingly.
+- If there is an ambient light sensor device in the original `ACPI` and you want to force it to be enabled by the preset variable method, you need to pay attention to the existence of `_SB.INI` in the original `ACPI`. If it exists, please use method #2 to impersonate `ALS0`.
