@@ -1,14 +1,41 @@
-## Inject X86
+# Enabling CPU Power Management (SSDT-PLUG)
 
 ## Description
 
-Inject X86 to implement CPU power management.
+Enables X86PlatformPlugin to implement CPU Power Management.
+
+## Patch Method (NEW): Using SSDTTime
+
+The manual patch method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+
+* ***SSDT-AWAC*** – Context-Aware AWAC Disable and Fake RTC
+* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
+* ***SSDT-PLUG*** – Sets plugin-type to 1 on `CPU0`/`PR00`
+* ***SSDT-HPET*** – Patches out IRQ Conflicts
+* ***SSDT-PMC*** – Enables Native NVRAM on True 300-Series Boards
+
+**HOW TO:**
+
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Pres "D", drag in your system's DSDT and hit "ENTER"
+3. Generate all the SSDTs you need.
+4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
+5. Copy the generated `SSDTs` to EFI > OC > ACPI
+6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
+7. Save your config
+8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
+9. Open your config and create a new snapshot to get the new .aml files added to the list.
+10. Save. Reboot. Done. 
+
+<details>
+<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 
 ## Instructions for use
 
 - Search for ``Processor`` in DSDT, e.g.:
 
-```      Scope (_PR)
+```  swift
+        Scope (_PR)
       {
           Processor (CPU0, 0x01, 0x00001810, 0x06){}
           Processor (CPU1, 0x02, 0x00001810, 0x06){}
@@ -23,6 +50,7 @@ Inject X86 to implement CPU power management.
 
   Based on the query result, select the injection file ***SSDT-PLUG-_PR.CPU0***
 
+```swift
        Scope (_SB)
       {
           Processor (PR00, 0x01, 0x00001810, 0x06){}
@@ -42,11 +70,14 @@ Inject X86 to implement CPU power management.
           Processor (PR14, 0x0F, 0x00001810, 0x06){}
           Processor (PR15, 0x10, 0x00001810, 0x06){}
       }
+```
 
 According to the query result, select the injection file:***SSDT-PLUG-_SB.PR00***
 
 If the query result and the patch file name **do not correspond** , please select any file as a sample and modify the patch file related content by yourself.
 
+</details>
+
 ## Note
 
-The X86 injection is not required for 2nd and 3rd Gen Intel machines.
+The X86PlatformPlugin is not available for 2nd and 3rd Gen Intel machines. Use [ssdtPPRGen](https://github.com/Piker-Alpha/ssdtPRGen.sh) instead. 

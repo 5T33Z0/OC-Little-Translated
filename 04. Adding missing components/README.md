@@ -7,7 +7,7 @@ In **DSDT**, saerch for:
 
 - `PNP0200`, if missing, add ***SSDT-DMAC***. Adds Direct Memory Access [(DMA) Controller](https://binaryterms.com/direct-memory-access-dma.html).
 - `PNP0C01`, if missing, add ***SSDT-MEM2***.
-- `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU Acceleratoration (Req for 6th-series mainboard only)
+- `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU acceleration (Req for 6th-series mainboards only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
 - `MCHC`, if missing, add ***SSDT-MCHC***  
 	**NOTE**: Adding `MCHC` is no longer necessary. Use ***SSDT-SBUS-MCHC*** instead, which comes with the OpenCore package. Follow Instructions in "Chapter 05: Injecting Devices" to configure it correctly!
@@ -22,4 +22,4 @@ In **DSDT**, saerch for:
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 
-**CAUTION:** When using the any of the patches, note that `LPC`/`LPCB` name should be consitent with the name used in the original ACPI.
+**CAUTION:** When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.

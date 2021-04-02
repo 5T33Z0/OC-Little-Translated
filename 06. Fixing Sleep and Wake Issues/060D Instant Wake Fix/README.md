@@ -2,9 +2,9 @@
 
 ## Description
 
-There are some components which create onflicts between their `_PRW` and macOS that cause the machine to wake up immediately after a successful sleep. In order to solve the problem, a patch must be applied to these components. In order to do so, we need to uderstand how `_PRW` works.
+There are some components which create conflicts between their `_PRW` and macOS that cause the machine to wake up immediately after a successful sleep. In order to solve the problem, a patch must be applied to these components. In order to do so, we need to understand how `_PRW` works.
 
-`_PRW` defines the wakeup method of a component. Its `Return` is a packet of 2 or more bytes:
+`_PRW` defines the wake method of a component. Its `Return` is a packet of 2 or more bytes:
 
 - The 1st byte of `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`. 
 - The 2nd byte of `_PRW` packet is either `03` or `04`, so fixing this byte to `0` completes the `0D/6D Patch`.  

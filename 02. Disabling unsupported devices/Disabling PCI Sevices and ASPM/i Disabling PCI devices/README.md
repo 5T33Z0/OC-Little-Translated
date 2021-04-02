@@ -11,7 +11,7 @@
 ## Device name
 
 - The **child device** name of the newer machine is **`PXSX`**; **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**... etc.
-- Early Thinkpad machines **child device** with the name **`SLOT`** or **none**; **parent device** with the name **`EXP1`**, **`EXP2`**, **`EXP3`**... etc.
+- Early ThinkPad machines **child device** with the name **`SLOT`** or **none**; **parent device** with the name **`EXP1`**, **`EXP2`**, **`EXP3`**... etc.
 - Other machines may be other names.
 - The laptop's built-in wireless network card belongs to such a device.
 
@@ -19,7 +19,7 @@
 
 - The SD card of dell Latitude 5480 belongs to PCI device, device path: `_SB.PCI0.RP01.PXSX`
 
-- Patch file:***SSDT-RP01.PXSX-disbale***
+- Patch file:***SSDT-RP01.PXSX-disable***
 
   ```Swift
   External (_SB.PCI0.RP01, DeviceObj)

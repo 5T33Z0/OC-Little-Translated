@@ -7,7 +7,7 @@ The ThinkPad Battery system consists of 2 categories: `single` and `dual`  batte
 - A single battery system is a machine equipped with one battery and only one battery in defined in ACPI.
 - A dual battery system is a machine is equipped with up to two batteries. The second battery is optional and can be installed later. A dual battery system may have one battery or two batteries.
 
-For example, the T470/T470s belongs in the dual battery systems category wherea the T470P belongs in the single battery category. On the other hand the T430 series belongs to the dual battery systems, although the machine itself has only one battery, but a second battery can be installed through the optical drive bit.
+For example, the T470/T470s belongs in the dual battery systems category whereas the T470P belongs in the single battery category. On the other hand the T430 series belongs to the dual battery systems, although the machine itself has only one battery, but a second battery can be installed through the optical drive bit.
 
 ## Instructions
 In order to get your battery percentage indicator working correctly, you have to do the following: 
@@ -17,7 +17,7 @@ In order to get your battery percentage indicator working correctly, you have to
 	* Single battery systems only have `BAT0` in ACPI, no `BAT1`
 	* Dual battery systems have both `BAT0` and `BAT1` in ACPI
 
-2. Combine the correct name changes and Battery Patch(es) required for yoursystem. See the samples below for more details.
+2. Combine the correct name changes and Battery Patch(es) required for your system. See the samples below for more details.
 
 **CAUTION**: Make sure the `Battery Path` used in the SSDT patch matches the one used in the DSDT.  
 It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, ***never*** both!
@@ -27,7 +27,7 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
 - Required Name Changes:
   - TP Battery Basic Rename
   - TP Battery `Mutex` Place `0` Rename
-- Requirres SSDT Patch
+  - Requires SSDT Patch
   - `Main Battery` Patch  ***SSDT-OCBAT0-TP******
 
 ### Example 2: Dual battery system with one physical battery

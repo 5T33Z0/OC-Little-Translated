@@ -14,7 +14,7 @@
 
 ## Injecting ASPM operation Mode
 
-### `DeviceProperties` injection (prefered method)
+### `DeviceProperties` injection (preferred method)
 
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
 
