@@ -4,7 +4,7 @@ The method described in this section is not about enabling or disabling a `Devic
 
 ## Problems and Risks
 
-Since OpenCore injects all patches into the ACPI on boot globally, it consequently affects *all* other Operating Systems installed, which may cause issues in other OS'es.
+Since OpenCore injects all patches into the ACPI on boot globally, it consequently affects *all* other Operating Systems installed, which may cause issues when running them.
 
 ### Example
 
@@ -155,7 +155,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 ### Example 1
 
-Orignal `_STA` Method:
+Original `_STA` Method:
 
 ```Swift
 Method (_STA, 0, NotSerialized)
