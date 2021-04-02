@@ -1,7 +1,5 @@
 # About Fake Devices
 
-## Overview
-
 Among the many `SSDT` patches, a significant number of them can be categorized as patches for spoofing components. These include:
 
 - Devices which either do not exist in ACPI, or have a different name as required by macOS to function correctly. Patches that correctly rename these devices can load device drivers. For example, "05-2-PNLF Injection Method", "Adding Missing Parts", "Spoofing Ethernet", etc.
