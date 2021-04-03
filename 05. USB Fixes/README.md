@@ -16,5 +16,5 @@ To do so fFollow the officiial Guide by Dortani: [USB Port Mapping with Hackinto
 
 ## About the examples
 
-* Follow the **"Disabling EHCx"** if you cannot enable "XHCI" Mode in your BIOS
+* Follow **"Disabling EHCx"** if you cannot enable "XHCI" Mode in your BIOS
 * **"ACPI Custom USB Port"** is for mapping the USB Port manually (not recommended,for advanced users only)
