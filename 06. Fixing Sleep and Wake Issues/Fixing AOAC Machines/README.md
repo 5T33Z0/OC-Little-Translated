@@ -60,7 +60,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 
 - The `AOAC` solution is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
 - Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
-  - [PTSWAK Comprehensive Extension Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10.%20PTSWAK%20Sleep%20and%20Wake%20Fix)
-  - [PNP0C0E Sleep Correction Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11.%20PNP0C0E%20Sleep%20Correction%20Method)
+  - [PTSWAKTTS Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PTSWAK%20Sleep%20and%20Wake%20Fix)
+  - [PNP0C0E Sleep Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PNP0C0E%20Sleep%20Correction%20Method)
 - For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
 - You can also try this method for non-AOAC machines.
