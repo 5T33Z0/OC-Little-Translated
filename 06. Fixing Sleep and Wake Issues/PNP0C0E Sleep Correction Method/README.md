@@ -59,22 +59,22 @@ One of the following methods can fix this problem:
 
 The following are the main contents of ***SSDT-LIDpatch***:
 
-```
+```Swift
 Method (_LID, 0, NotSerialized)
 {
     if(\_SB.PCI9.FNOK==1)
     {
-        Return (0) /* Return Zero, one of the PNP0C0D sleep conditions is met */
+        Return (0) /* 返回 Zero, 满足 PNP0C0D 睡眠条件之一 */
     }
     Else
     {
-        Return (\_SB.LID0.XLID()) /* Return the original value */
+        Return (\_SB.LID0.XLID()) /* 返回原始值 */
     }
 }
 ```
 Here are the main contents of the ***Sleep Button Patch***:
 
-```
+```Swift
 If (\_SB.PCI9.MODE == 1) /* PNP0C0E sleep */
 {
     \_SB.PCI9.FNOK =1 /* Press sleep button */
