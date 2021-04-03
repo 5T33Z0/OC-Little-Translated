@@ -4,13 +4,13 @@ Path to force RTC to be enabled and disable AWAC at the same time.
 
 ## Patch Method (NEW): Using SSDTTime
 
-The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC Disable and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
-* ***SSDT-PLUG*** – Sets plugin-type to 1 on `CPU0`/`PR00`
-* ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PMC*** – Enables Native NVRAM on True 300-Series Boards
+* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
+* ***SSDT-PMC*** – Enables native NVRAM on True 300-Series Boards
 
 **HOW TO:**
 
