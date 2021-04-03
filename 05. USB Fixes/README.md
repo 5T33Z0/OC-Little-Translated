@@ -17,4 +17,4 @@ https://www.youtube.com/watch?v=uww6Cizil_g
 ## About the examples
 
 * Follow the instructions in **"Disabling EHCx"** if you cannot enable "XHCI Mode" in your BIOS.
-* **"ACPI Custom USB Port"** is for mapping the USB Port manually (AMD users must follow this method)
+* **"ACPI Custom USB Port"** is for mapping the USB Port manually (not recommended)
