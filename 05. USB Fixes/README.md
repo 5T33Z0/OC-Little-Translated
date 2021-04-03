@@ -10,7 +10,7 @@ Since one physical USB 3 port (the blue one's) actually supports 2 USB protocols
 
 The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice and export a custom `USBPorts.kext` and/or `SSDT` with port information. This method is for Intel Users only. AMD user have to do this manually
 
-To do so, follow the officiial Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html). Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports. There plenty of videos out there explaining how to do this. Here's one by TechNolli:
+To do so, follow the official Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html). Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports. There are plenty of videos out there explaining how to do this. Here's one by TechNolli:
 
 https://www.youtube.com/watch?v=uww6Cizil_g
 
