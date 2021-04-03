@@ -86,7 +86,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 10. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
 ___
 
-**5T33Z0's 5H0U7 0U75:**
+## 5T33Z0's 5H0U7 0U75:
 
 - sascha_77 for Kext Upater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
