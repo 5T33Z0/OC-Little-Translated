@@ -12,9 +12,7 @@ So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protoc
  
 The workaround is to lift the USB port limit, use Hackitool to map 15 ports of your choice and export a custom `USBPorts.kext` and/or `SSDT` with port information. 
 
-To do so fFollow the officiial Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html)
-
-Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports. There plenty of videos out there explaining how to do this. Here's one by TechNolli:
+To do so fFollow the officiial Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html). Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports. There plenty of videos out there explaining how to do this. Here's one by TechNolli:
 
 https://www.youtube.com/watch?v=uww6Cizil_g
 
