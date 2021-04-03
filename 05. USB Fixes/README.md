@@ -8,13 +8,13 @@ Since one physical USB 3 port (the blue one's) actually supports 2 protocols and
 
 So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protocols and that's about it – USB C is not even in the equation at this stage. So you have to decide which ports you are going to use.
 
-## Lifting the USB port limit and mapping USB ports with Hackintool (recommended)
+## Lifting the USB port limit and mapping USB ports with USBMap/Hackintool (recommended)
  
 The workaround is to lift the USB port limit, use Hackitool to map 15 ports of your choice and export a custom `USBPorts.kext` and/or `SSDT` with port information. 
 
-To do so fFollow the officiial Guide by Dortania: [USB Port Mapping with Hackintool](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html)
+To do so fFollow the officiial Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html)
 
-There are also plenty of video tutorials explaning this. Here's one by TechNolli:
+Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports. There plenty of videos out there explaining how to do this. Here's one by TechNolli:
 
 https://www.youtube.com/watch?v=uww6Cizil_g
 
