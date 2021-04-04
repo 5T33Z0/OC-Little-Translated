@@ -17,49 +17,43 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 ## Table of Contents
 
-0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
-   1. [About the ACPI Form](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/i%20About%20the%20ACPI%20Form)
-   2. [ACPI Source Language](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/ii%20ASL%20Syntax%20Basics)
-   3. [SSDT Loading Sequence](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iii%20SSDT%20Loading%20Sequence)
-   4. [ASL to AML Conversion](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview/iv%20ASL%20to%20AML%20Conversion)
+0. **Overview**
+   1. About the ACPI Form
+   2. ACPI Source Language
+   3. SSDT Loading Sequence
+   4. ASL to AML Conversion Table
 
-1. [**Adding Fake Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices)
-	* [Ambient Light Sensor (ALS0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ambient%20Light%20Sensor%20(ALS0))
-	* [Embedded Controller (EC)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices)
-	* [Ethernet Controller (NullEthernet)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/Ethernet%20Controller%20(LAN))
-	* [Soundcard IRQ & Timer Fixes (HPET)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/IRQ%20and%20Timer%20Fix%20(HPET))
-	* [OCI2C-GPIO Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/OCI2C-GPIO%20Patch)
-	* [System Clock (AWAC)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(AWAC))
-	* [System Clock (RTC0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20Fake%20Devices/System%20Clock%20(RTC0))
+1. **Adding Fake Devices and enabling Features**
+	- Ambient Light Sensor (SSDT-ALS0)
+	- Brightness Controls (SSDT-PNLF)
+	- CPU Power Management (SSDT-PLUG)
+	- DMA Controller (SSDT-DMAC)
+	- Embedded Controller (SSDT-EC)
+	- Fake Ethernet Controller
+	- Intel MEI (SSDT-IMEI)
+	- IRQ and Timer Fix (SSDT-HPET)
+	- MEM 2
+	- NVRAM Fix (SSDT-PMCR)
+	- OCI2C-GPIO Patch
+	- Platform Power Management (SSDT-PPMC)
+	- Power Button (SSDT-PWRB) & Sleep Button (SSDT-SLPB)
+	- System Clock (SSDT-AWAC)
+	- System Clock (SSDT-RTC0)
+	- System Management Bus (SMBus) & Memory Controller (MCHC)
+	- Windows Compatibility Patch (XOSI)
+	- Xtra: Enabling XCPM on Ivy Bridge CPUs
 
 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
 
-3. [**Enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features)
-	- [Enabling CPU Power Management (SSDT-PLUG)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enabe%20CPU%20Power%20Management%20(SSDT-PLUG))
-	- [Enabling Brightness Controls (PNLF)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enable%20Brightness%20Controls%20(PNLF))
-	- [Adding System Management Bus (SMBus)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/How%20to%20enabel%20System%20Management%20Bus%20(SMBus))
-	- [Windows Compatibility Patch (XOSI)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20Enabling%20Features/Windows%20Compatibiliity%20Patch%20(XOSI))
+3. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
 
-4. [**Adding Missing Components**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Adding%20missing%20components)
-	- DMAC – DMA Controller
-	- IMEI – Intel MEI
-	- MCHC – Memory Controller
-	- MEM2 – function unclear…
-	- PMCR - Fixes NVRAM on 300-series Mainboards
-	- PPMC – Platform Power Management Controller
-	- PWRB - Power Button Device
-	- SLPB – Sleep Button Device
-	- SBUS/SMBU – System Management Bus
-
-5. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
-
-6. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues)
+4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues)
 	- 06/0D Instant Wake Fix
 	- Fixing AOAC Machines
 	- PNP0C0E Sleep Correction Method
 	- PTSWAKTTS Sleep and Wake Fix
 
-7. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches)
+5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches)
 
 	- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Battery%20Patches)
 
@@ -79,11 +73,11 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 		- I2C TrackPad Patches
 		- ThinkPad Click and TrackPad Patches
 
-8. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20CMOS-related%20Fixes)
+6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20CMOS-related%20Fixes)
 
-9. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20ACPI%20Debugging)
+7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20ACPI%20Debugging)
 
-10. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
+8. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
 ___
 
 ## 5T33Z0's 5H0U7 0U75:
