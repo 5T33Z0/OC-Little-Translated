@@ -36,9 +36,10 @@ A look into the ssdt.aml file list a summary of all settings for the SSDT. If th
 
 > Debug = "machdep.xcpm.mode.....: 1"
 
-- Rename the newly generated "ssdt.aml" to "SSDT-PM.aml"
-- Copy it to EFI > OC > ACPI (backup or rename the original)
+- Rename the newly generated "ssdt.aml" to "SSDT-XCPM.aml"
+- Copy it to EFI > OC > ACPI
 - Update your config.plist
+- Disable `SSDT-PM.aml`
 - Reboot
 - Enter in terminal: `sysctl machdep.xcpm.mode`
 
