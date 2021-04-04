@@ -44,7 +44,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 	- DMAC – DMA Controller
 	- IMEI – Intel MEI
 	- MCHC – Memory Controller
-	- MEM2 – ? missing explanation…
+	- MEM2 – function unclear…
 	- PMCR - Fixes NVRAM on 300-series Mainboards
 	- PPMC – Platform Power Management Controller
 	- PWRB - Power Button Device
@@ -61,21 +61,21 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 7. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches)
 
-	- **Battery Patches**:
+	- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Battery%20Patches)
 
 		- Lenovo ThinkPads
     	- other brands
     	- Patches for Battery Status Information
 
-	- **Brand-specific Patches for the following Laptop Models**:
+	- [**Brand-specific Patches for the following Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Brand-specific%20Patches)
 
     	- Dell Machine Special Patch
     	- Xiaoxin PRO13 Special Patch
     	- Asus Machine Special Patch
 
-	- **Fixing Keyboard Mappings and Brightness Keys**
+	- [**Fixing Keyboard Mappings and Brightness Keys**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 
-	- **TrackPad Patches for various Models**
+	- [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Trackpad%20Patches)
 		- I2C TrackPad Patches
 		- ThinkPad Click and TrackPad Patches
 
