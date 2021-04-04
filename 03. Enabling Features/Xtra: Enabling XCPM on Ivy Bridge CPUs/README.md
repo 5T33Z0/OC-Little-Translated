@@ -28,10 +28,7 @@ So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch 
 
 Next, we need to set the plugin type of SSDT-PM.aml to "1". To do this, we generate a new SSDT-PM with ssdtPRGen. Since it generatea SSDTs without XCPM support by default, we have to modify the command line in terminal.
 
-Terminal command for ssdtPRGen: 
-
-– `sudo /Users/YOUR_USERNAME/ssdtPRGen.sh -x 1`
-- `-x 1` sets plugin type to 1
+Terminal command for ssdtPRGen: `sudo /Users/YOUR_USERNAME/ssdtPRGen.sh -x 1` (`-x 1` sets plugin type to 1)
 
 The finished ssdt.aml and ssdt.dsl are located in `/Users/YOUR_USERNAME/Library/ssdtPRGen`
 
