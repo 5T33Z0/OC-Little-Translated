@@ -91,7 +91,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 
 In this case we just need to impersonate an `ALS0` device, as follows and we're done:
 
-```
+```swift
 DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 {
     Scope (_SB)
