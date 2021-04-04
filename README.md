@@ -17,13 +17,13 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 ## Table of Contents
 
-0. **Overview**
+0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
    1. About the ACPI Form
    2. ACPI Source Language
    3. SSDT Loading Sequence
    4. ASL to AML Conversion Table
 
-1. **Adding Fake Devices and enabling Features**
+1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20missing%20Devices%20and%20enabling%20Features)
 	- Ambient Light Sensor (SSDT-ALS0)
 	- Brightness Controls (SSDT-PNLF)
 	- CPU Power Management (SSDT-PLUG)
@@ -45,37 +45,37 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
 
-3. [**USB Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20USB%20Fixes)
+3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20USB%20Fixes)
 
-4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues)
+4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Fixing%20Sleep%20and%20Wake%20Issues)
 	- 06/0D Instant Wake Fix
 	- Fixing AOAC Machines
 	- PNP0C0E Sleep Correction Method
 	- PTSWAKTTS Sleep and Wake Fix
 
-5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches)
+5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches)
 
-	- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Battery%20Patches)
+	- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Battery%20Patches)
 
 		- Lenovo ThinkPads
     	- other brands
     	- Patches for Battery Status Information
 
-	- [**Brand-specific Patches for the following Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Brand-specific%20Patches)
-
+	- [**Brand-specific Patches for various Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Brand-specific%20Patches)
+	
     	- Dell Machine Special Patch
     	- Xiaoxin PRO13 Special Patch
     	- Asus Machine Special Patch
 
 	- [**Fixing Keyboard Mappings and Brightness Keys**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 
-	- [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Trackpad%20Patches)
+	- [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 		- I2C TrackPad Patches
 		- ThinkPad Click and TrackPad Patches
 
-6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20CMOS-related%20Fixes)
+6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20CMOS-related%20Fixes)
 
-7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20ACPI%20Debugging)
+7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
 
 8. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
 ___
