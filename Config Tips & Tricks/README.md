@@ -145,3 +145,12 @@ Otherwise, check if there might be a BIOS update available that fixes general pr
 It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater and Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it.
 
 To do this, create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**, call it `opencore-version` and save the config. After restarting, the correct OC version should be displayed again.
+
+## VIII. Prohibit SMBIOS injection in other OSes:
+
+To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing issues with the registration, change the following settings:
+
+**Kernel > Quirks > CustomSMBIOSGuid >** `True` (standard: `False`)</br>
+**Platforminfo > UpdateSMBIOSMode >** `Custom` (standard: `Create`)
+
+[SOURCE](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
