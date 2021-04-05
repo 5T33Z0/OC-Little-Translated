@@ -1,5 +1,5 @@
-# OpenCore Config Tipps and Tricks (by 5T33Z0)
-A small collection of useful tipps and tricks for working with OpenCore's `config.plist`
+# OpenCore Config Tips and Tricks (by 5T33Z0)
+This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`.
 
 ## I. Checking config.plist for errors
 
@@ -13,7 +13,7 @@ While Sanity Checker focuses on correct settings for the selected system, OC Val
 
 **CAUTION**: Don't use OpenCore Configurator for editing your `config.pllist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed oder relocated in the config. This results in errors when rebooting.
 
-## II. Fixing Boot Problems
+## II. Quick fixes for Boot Problems
 
 If the system won't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
@@ -57,7 +57,7 @@ You should deactivate the single user mode for security reasons, because it can 
         NVRAM Protections: disabled
         BaseSystem Verification: disabled
 
-## IV. Adjust BootPicker Attributes, enable mouse support
+## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
 With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having it's own value/byte, which can be combined by simple adding them:
 
@@ -68,7 +68,7 @@ With **PickerAttributes**, you can assign different properties and functions to 
 
 **For Example:**
 
-**PickerAttributes** = `17` –– Enables Custom Icons and Mouse Cursor (New default setting since OpenCore 0.6.7)
+**PickerAttributes** = `17` –– Enables Custom Icons and Mouse Cursor (New default setting since OpenCore 0.6.7)</br>
 **PickerAttributes** = `19`–– Enables Custom Icons, Custom Titles and Mouse Cursor.
 
 ## V. Customizing Boot Options
@@ -77,7 +77,7 @@ With **PickerAttributes**, you can assign different properties and functions to 
 
 To be able to set the boot drive in the BootPicker, enable the following options in the config:
 
-**ShowPicker** = `Yes`  
+**ShowPicker** = `Yes`</br>
 **AllowSetDefault** = `Yes`
 
 In the BootPicker: Select drive/partition, hold [CTRL] and press [ENTER]. After that this volume is always preselected.
@@ -100,26 +100,26 @@ Change the following settings in the config to influence the boot process of Ope
 
 #### **Manual selection of the OS without GUI (default)**
 
-**PickerMode** = `Builtin`  
+**PickerMode** = `Builtin`</br>
 **ShowPicker** = `Yes`
 
 #### **Manual selection of the OS with GUI (requires OpenCanopy and [Resources folder](https://github.com/acidanthera/OcBinaryData))**
 
 Great for dual boot setups. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over your system.
 
-**PickerMode** = `External`  
+**PickerMode** = `External`</br>
 **ShowPicker** = `Yes`
 
 #### Boot the OS automatically from volume defined as "Default" (no GUI)
 
-**PickerMode** = `Default`  
+**PickerMode** = `Default`</br> 
 **ShowPicker** = `No`
 
 #### **Start macOS automatically (no GUI, fast)**
 
 The following settings will boot macOS from first APFS volume it finds. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over your system.
 
-**PickerMode** = `BootApple`  
+**PickerMode** = `BootApple`</br>
 **ShowPicker** = `No`
 
 This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WIndowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
@@ -135,7 +135,7 @@ Certain BIOS variants can be badly affected by the integrated NVRAM reset tool o
 
 Next, create a new snapshot of the config or add the tool manually to the config. If you want you can hide the entry in the BootPicker so that it only appears after pressing the space bar:
 
-* **HideAuxiliary** = Yes
+* **HideAuxiliary** = Yes</br>
 * Under **Misc > Tools** find `CleanNvram` and set `Auxiliary` to **`Yes`**.
 
 Otherwise, check if there might be a BIOS update available that fixes general problems. Especially ASUS boards with a Z79/Z99 chipset have problems with the NVRAM, which can only be fixed with a patched BIOS. 
