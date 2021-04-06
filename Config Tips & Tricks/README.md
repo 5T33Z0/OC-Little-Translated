@@ -1,6 +1,9 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`.
 
+<details>
+<summary><strong>Fixing Config Errors</strong></summary>
+  
 ## I. Checking config.plist for errors
 
 Currently there are two automated methods to check your config.plist for errors:
@@ -12,6 +15,9 @@ Currently there are two automated methods to check your config.plist for errors:
 While Sanity Checker focuses on correct settings for the selected system, OC Validate additionally checks the syntax for errors. Therefore it makes sense to check the config in two steps: first online and then offline.
 
 **CAUTION**: Don't use OpenCore Configurator for editing your `config.pllist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed oder relocated in the config. This results in errors when rebooting.
+</details>
+<details>
+<summary><strong>Fixing Boot Issues</strong></summary>
 
 ## II. Quick fixes for Boot Problems
 
@@ -20,7 +26,9 @@ If the system won't boot despite correct boot and kernel settings and hangs dire
 **Misc > Security > SecureBootModel** = `Disabled`. I always had problems with this when this feature was set to `Default`. As soon as you need `Whatevergreen.kext` you can't use this feature. So disable it if you have problems booting.  
 
 **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
-
+</details>
+<details>
+<summary><strong>Security Settings</strong></summary>
 ## III. Security Settings
 
 ### How to disable Single User Mode
@@ -56,6 +64,10 @@ You should deactivate the single user mode for security reasons, because it can 
         DTrace Restrictions: disabled
         NVRAM Protections: disabled
         BaseSystem Verification: disabled
+        
+</details>
+<details>
+<summary><strong>Adjusting Boot Picker Behavior</strong></summary>
 
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
@@ -70,7 +82,10 @@ With **PickerAttributes**, you can assign different properties and functions to 
 
 **PickerAttributes** = `17` –– Enables Custom Icons and Mouse Cursor (New default setting since OpenCore 0.6.7)</br>
 **PickerAttributes** = `19`–– Enables Custom Icons, Custom Titles and Mouse Cursor.
-
+</details>
+<details>
+<summary><strong>Customizing Boot Options</strong></summary>
+  
 ## V. Customizing Boot Options
 
 ### Set default boot drive in BootPicker
@@ -125,7 +140,10 @@ The following settings will boot macOS from first APFS volume it finds. Combine 
 This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WIndowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
 
 If you want to boot Windows *properly*, you should boot it via the BIOS Boot Menu to bypass all the SSDTs being injected anyway. Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
-
+</details>
+<details>
+<summary><strong>Handling NVRAM Issues</strong></summary>
+  
 ## VI. Resolving issues with NVRAM Reset
 
 Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. Therefore, the OpenCore package also contains `CleanNvram.efi` under `Tools`, which should work better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
@@ -138,13 +156,19 @@ Next, create a new snapshot of the config or add the tool manually to the config
 * **HideAuxiliary** = Yes</br>
 * Under **Misc > Tools** find `CleanNvram` and set `Auxiliary` to **`Yes`**.
 
-Otherwise, check if there might be a BIOS update available that fixes general problems. Especially ASUS boards with a Z79/Z99 chipset have problems with the NVRAM, which can only be fixed with a patched BIOS. 
+Otherwise, check if there might be a BIOS update available that fixes general problems. Especially ASUS boards with a Z79/Z99 chipset have problems with the NVRAM, which can only be fixed with a patched BIOS.
+</details>
+<details>
+<summary><strong>Fixing falsely reported OpenCore version </strong></summary>
 
 ## VII. **Correct falsely reported OpenCore version**.
 
 It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater and Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it.
 
 To do this, create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**, call it `opencore-version` and save the config. After restarting, the correct OC version should be displayed again.
+</details>
+<details>
+<summary><strong>Prohibit SMBIOS injection in other OSes</strong></summary>
 
 ## VIII. Prohibit SMBIOS injection in other OSes:
 
@@ -154,3 +178,4 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 **Platforminfo > UpdateSMBIOSMode >** `Custom` (standard: `Create`)
 
 [SOURCE](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
+</details>
