@@ -77,7 +77,9 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 
 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
 
-8. [**Config Tips: Kexts Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips:%20Kexts%20Loading%20Sequence%20Examples)
+8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips%20%26%20Tricks)
+	- Config.plist tipps
+	- Kext Loading Sequence Examples 	
 ___
 
 ## 5T33Z0's 5H0U7 0U75:
