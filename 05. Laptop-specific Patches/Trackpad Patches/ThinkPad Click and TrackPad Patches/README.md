@@ -5,6 +5,7 @@
 Like some Lenovo machines, the DSDT for ThinkPad machines may also contain the `PNLF` field. Search for `PNLF` in the DSDT, and if `PNLF` exists, you will need to add the following rename.
 
 ```text
+Comment: Rename PNLF to XNLF
 Find: 504E4C46
 Replace: 584E4C46
 ```
