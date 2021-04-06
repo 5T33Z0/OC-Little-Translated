@@ -28,8 +28,8 @@ After you've added the correct SSDT reboot your system. To find out if the Apple
 
 If the Termonal output contains the following 2 drivers, your SMBus is working correctly:
 
-- ==com.apple.driver.AppleSMBusPCI==
-- ==com.apple.driver.AppleSMBusController==
+- com.apple.driver.AppleSMBusPCI
+- com.apple.driver.AppleSMBusController
 
 ## Editorial Note:
 Addiional background information about `AppleSMBus` as well as the GREP Command for testing the functinality of SMBUs Driver was taken from Dortanias Post-Install Guide for OpenCore, since the original README by DahlianSky was lacking in this regard.
