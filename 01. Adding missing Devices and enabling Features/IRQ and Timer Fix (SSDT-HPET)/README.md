@@ -14,7 +14,7 @@ In reality, almost all machines have **HPET** without any interrupts. Usually, i
 
 ## Patch Method (NEW)
 
-The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+The old patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops

@@ -2,7 +2,7 @@
 
 ## `PNLF` Injection Methods
 
-To inject Brightness Control, there are several methods availabe. No matter which one you chose, all of them require a combination of a Driver and a corresponding ACPI Hotpatch to work.
+To inject Brightness Control, there are several methods available. No matter which one you chose, all of them require a combination of a Driver and a corresponding ACPI Hotpatch to work.
 
 1. Common injection method:
 

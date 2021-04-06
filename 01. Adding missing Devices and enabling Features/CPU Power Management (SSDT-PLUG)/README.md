@@ -8,11 +8,11 @@ Enables X86PlatformPlugin to implement CPU Power Management.
 
 The manual patch method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** – Context-Aware AWAC Disable and Fake RTC
+* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to 1 on `CPU0`/`PR00`
 * ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PMC*** – Enables Native NVRAM on True 300-Series Boards
+* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards
 
 **HOW TO:**
 
