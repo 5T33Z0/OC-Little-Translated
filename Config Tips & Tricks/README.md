@@ -201,7 +201,7 @@ Here's a table of the what is what in macSerial/GenSMBIOS, Clover and OpenCore
 
 **NOTE:**
  
- - *Hardware UUID: Thisis displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
+ - *Hardware UUID: This is displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
  -  **ROM: in Clover Configurator, select the option "from SMBIOS" and paste over your MAC Address
  
 You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMBIOS Infos listed in GenSMBIOS are still identical. Another indicator for successful transfer is that you don't have to re-enter the passwords of your E-Mail Accounts in the Mail App.
