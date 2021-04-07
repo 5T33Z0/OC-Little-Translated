@@ -4,9 +4,9 @@ This section contains ACPI Hotpatches for resolving common issues related to Sle
 
 #### 1.`PTSWAKTTS` Sleep and Wake fix
 
-This is the center piece for fixing most sleep and wake issues and is mostly used in conjunction with other patches. It consist of two parts: Renames and an SSDT.
+This is the center piece for fixing most sleep and wake issues and is mostly used in conjunction with other patches. It consist of two parts: binary renames and  ACPI Hotfixes (SSDTs).
 
-Basically, the `_PTS` (Prepare To Sleep), `_Wak`(Wake) and `_TSS` Methods are renamed to something else. And once these methods are triggered by entering sleep (either automatically or by pressing a sleep button or via the  Menu), the system fetches these request and the reroutes the to the associated ***SSDT-PTSWAKTTS*** which takes care of the rest. 
+Basically, the `_PTS` (Prepare To Sleep), `_Wak`(Wake) and `_TSS` Methods are renamed to something else. And once these methods are triggered by entering sleep (either automatically or by pressing a sleep button or via the  Menu), the system fetches these request and reroutes them to the associated Hotpatch, ***SSDT-PTSWAKTTS*** which takes care of the rest. 
 
 #### 2. Fixing `PNP0C0E` Sleep 
 
