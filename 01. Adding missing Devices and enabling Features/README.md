@@ -45,7 +45,7 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
   
 **Note**: The `LPC/LPCB` name used in the SSDT should be identical with the one used in ACPI.
 
-# Add missing parts
+# Adding missing parts
 
 Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
 
