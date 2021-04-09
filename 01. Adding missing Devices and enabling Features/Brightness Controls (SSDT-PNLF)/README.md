@@ -16,6 +16,8 @@ To inject Brightness Control, there are several methods available. No matter whi
 
 3. Other methods: Follow the driver + patch principle and try it yourself.
 
+**NOTE**: The official OpenCore package contains pre-made `SSDT-PNFL.aml` patches under "Docs" already. So in case you're not sure what to do you could also use these instead.
+
 ## Required Files
 **I. Drivers:**
 
