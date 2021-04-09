@@ -3,6 +3,8 @@
 ## Overview
 Starting with `macOS Catalina`, Laptops now need a fake ambient light sensor `ALS0` for storing the current brightness/auto-brightness level. Otherwise the brightness returns to maximum after rebooting.
 
+**NOTE**: The official OpenCore package contains a pre-made `SSDT-ALS0.aml` under "Docs". So in case you're not sure what to do you could also use that instead.
+
 ## Usage
 There are two possible scenarios/cases: 
 
