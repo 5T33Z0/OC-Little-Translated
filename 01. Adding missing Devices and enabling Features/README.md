@@ -49,7 +49,7 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
 
 Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
 
-**NOTE:** In order to add any of the components listed below, click on the entry for the device in the main menu to find the corresponding SSDT.
+**NOTE:** In order to add any of the components listed below, click on the name of the device listed in the menu above to find the corresponding SSDT.
 
 ## Instructions
 
