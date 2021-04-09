@@ -4,7 +4,7 @@ Although OpenCore does not require renaming of the Embedded Controller (EC), in 
 
 ## Patch Method (NEW): Using SSDTTime
 
-The old patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+The previous (old) patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
@@ -28,9 +28,9 @@ The old patch method described below is outdated, because the patching process c
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 
-## Instructions for use
+## Usage
 
-Search for `PNP0C09` in DSDT and check the name of the device it belongs to. If the name is not `EC`, use this patch; if it is `EC`, ignore this patch.
+Search for `PNP0C09` in the `DSDT` and check the name of the device it belongs to. If the name is not `EC`, use this patch; if it is `EC`, ignore this patch.
 
 ## Note
 
