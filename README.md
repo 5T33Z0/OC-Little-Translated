@@ -40,7 +40,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 	- System Clock (SSDT-AWAC)
 	- System Clock (SSDT-RTC0)
 	- System Management Bus (SMBus) & Memory Controller (MCHC)
-	- Windows Compatibility Patch (XOSI)
+	- OS Compatibility Patch (XOSI)
 	- Xtra: Enabling XCPM on Ivy Bridge CPUs
 
 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
