@@ -62,7 +62,7 @@ In **DSDT**, search for:
 - `MCHC`, if missing, add ***SSDT-MCHC***
 - `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and later). Find the name of the device it belongs to. It will either be called `SBUS`or `SMBU`. Select the corresponding SSDT (SBUS/SMBU) to fix System Management Bus.
 
-**NOTE**: `SSDT-MCHC`and `SSTD-SBUS/SMBU`have since been combined into one Patch. Use ***SSDT-SBUS-MCHC*** instead, which is included in the OpenCore package download from Acidanthera.
+  **NOTE**: `SSDT-MCHC`and `SSTD-SBUS/SMBU`have since been combined into one Patch. Use ***SSDT-SBUS-MCHC*** instead, which is included in the OpenCore package download from Acidanthera.
 
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
