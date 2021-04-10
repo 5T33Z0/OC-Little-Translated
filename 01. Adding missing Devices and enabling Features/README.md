@@ -59,8 +59,11 @@ In **DSDT**, search for:
 - `PNP0C01`, if missing, add ***SSDT-MEM2***. Seems to berelated to Laptop iGPU's only. Not very much is known about this device, [though](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/post-1277391)
 - `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI required for Intel GPU acceleration (for 6th-series mainboards only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
-- `MCHC`, if missing, add ***SSDT-MCHC*** </br>
-**NOTE**: Adding `MCHC` is no longer rquired. Use ***SSDT-SBUS-MCHC*** instead, which combines SMBUs and Memory Controller Fix. It's included in the OpenCore package.
+- `MCHC`, if missing, add ***SSDT-MCHC***
+- `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and later). Find the name of the device it belongs to. It will either be called `SBUS`or `SMBU`. Select the corresponding SSDT (SBUS/SMBU) to fix System Management Bus.
+
+**NOTE**: `SSDT-MCHC`and `SSTD-SBUS/SMBU`have since been combined into one Patch. Use ***SSDT-SBUS-MCHC*** instead, which is included in the OpenCore package download from Acidanthera.
+
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 - `PMCR` or `APP9876`, if missing, add ***SSDT-PMCR***. For 6th gen or later. Z390 Chipsets also require this.
