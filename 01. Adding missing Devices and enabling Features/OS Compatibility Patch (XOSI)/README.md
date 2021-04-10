@@ -8,6 +8,8 @@ But by patching the `DSDT` to simulate a certain version of `Windows` when runni
 
 The Patch consist of two Parts: binary renames and a SSDT Hotpatch.
 
+**NOTE**: File updated to support Windows 10, build 2004
+
 ## Part 1: Renames
 
 1. Search for `OSI` in the original `DSDT` 
