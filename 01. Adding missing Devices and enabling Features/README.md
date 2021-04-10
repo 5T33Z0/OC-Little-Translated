@@ -56,11 +56,13 @@ Although adding any of the missing parts listed below may improve performance, t
 In **DSDT**, search for:
 
 - `PNP0200`, if missing, add ***SSDT-DMAC***. Adds Direct Memory Access [(DMA) Controller](https://binaryterms.com/direct-memory-access-dma.html).
-- `PNP0C01`, if missing, add ***SSDT-MEM2***. Seems to related to Laptop iGPU's. Not very much is known about this device, [though](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/post-1277391)
-- `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU acceleration (Req for 6th-series mainboards only)
+- `PNP0C01`, if missing, add ***SSDT-MEM2***. Seems to berelated to Laptop iGPU's only. Not very much is known about this device, [though](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/post-1277391)
+- `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI required for Intel GPU acceleration (for 6th-series mainboards only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
-- `MCHC`, if missing, add ***SSDT-MCHC***  
-	**NOTE**: Adding `MCHC` is no longer necessary. Use ***SSDT-SBUS-MCHC*** instead, which comes with the OpenCore package.
+- `MCHC`, if missing, add ***SSDT-MCHC*** </br>
+**NOTE**: Adding `MCHC` is no longer rquired. Use ***SSDT-SBUS-MCHC*** instead, which combines SMBUs and Memory Controller Fix. It's included in the OpenCore package.
+- Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
+- Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 - `PMCR` or `APP9876`, if missing, add ***SSDT-PMCR***. For 6th gen or later. Z390 Chipsets also require this.
 
   **Note**: found by @Pleasecallmeofficial to provide the method, which has now become the official OpenCore SSDT example.
@@ -68,8 +70,5 @@ In **DSDT**, search for:
   > Platforms, including APTIO V, cannot read or write NVRAM until the PMC device is initialized (it is frozen in SMM mode).  
   > It is not known why this is the case, but it is worth noting that PMC and SPI are located in different memory regions, and PCHRESV maps both, but Apple's AppleIntelPCHPMC will only map the region where PMC is located.  
   > There is no relationship between the PMC device and the LPC bus, and this SSDT is purely to add the device under the LPC bus to speed up the initialization of the PMC. If it is added to the PCI0 bus, the PMC will only start after the PCI configuration is finished and it will be too late for operations that need to read NVRAM.
-
-- Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
-- Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 
 **CAUTION:** When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.
