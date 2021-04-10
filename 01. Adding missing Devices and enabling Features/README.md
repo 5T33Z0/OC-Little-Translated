@@ -56,7 +56,7 @@ Although adding any of the missing parts listed below may improve performance, t
 In **DSDT**, search for:
 
 - `PNP0200`, if missing, add ***SSDT-DMAC***. Adds Direct Memory Access [(DMA) Controller](https://binaryterms.com/direct-memory-access-dma.html).
-- `PNP0C01`, if missing, add ***SSDT-MEM2***.
+- `PNP0C01`, if missing, add ***SSDT-MEM2***. Seems to related to Laptop iGPU's. Not very much is known about this device, [though](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/post-1277391)
 - `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU acceleration (Req for 6th-series mainboards only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
 - `MCHC`, if missing, add ***SSDT-MCHC***  
