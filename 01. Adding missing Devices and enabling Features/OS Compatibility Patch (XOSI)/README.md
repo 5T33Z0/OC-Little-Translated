@@ -2,7 +2,7 @@
 
 ## Description
 
-`ACPI` code can use the `_OSI` method to check which `Windows` version it is currently running on. However, when running macOS on a Hackintosh, none of these checks for `_OSI ("Windows <version>")` will return `true` because it only responds to `Darwin` (the codename of macOS). 
+`ACPI` code can use the `_OSI` method (OSI = Operating System Interfaces) to check which `Windows` version it is currently running on. However, when running macOS on a Hackintosh, none of these checks for `_OSI ("Windows <version>")` will return `true` because it only responds to `Darwin` (the codename of macOS). 
 
 But by patching the `DSDT` to simulate a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally only happen when running `Windows`.
 
@@ -14,7 +14,7 @@ The Patch consist of two Parts: binary renames and a SSDT Hotpatch.
 
 1. Search for `OSI` in the original `DSDT` 
 2. If you find it, add the `_OSI to XOSI` rename listed below
-3. **IMPORTANT**: If you find other entries containing the letters `O-S-I` – like `OSID` (Dell) or `OSIF` (ThinkPads) – you must rename those fields first and then add `_OSI to XOSI`. If there are no fields containing `OSI` other than the `_OSI` function, just add `_OSI to XOSI`.
+3. **IMPORTANT**: If you find other entries containing the letters `O-S-I` – like `OSID` (Dell) or `OSIF` (ThinkPads) – you must rename those fields first and then add `_OSI to XOSI`. If there are no fields containing `OSI` other than the `_OSI` method, just add `_OSI to XOSI`.
 
 Add the following Renames (if applicable) to config.plist:
 
@@ -50,13 +50,15 @@ Method(XOSI, 1)
         If (Arg0 == //"Windows 2009" // = win7, Win Server 2008 R2
                     //"Windows 2012" // = Win8, Win Server 2012
                     //"Windows 2013" // = win8.1
-                    "Windows 2015" // = Win10
+                    //"Windows 2015" // = Win10
                     //"Windows 2016" // = Win10 version 1607
                     //"Windows 2017" // = Win10 version 1703
                     //"Windows 2017.2" // = Win10 version 1709
                     //"Windows 2018" // = Win10 version 1803
                     //"Windows 2018.2"// = Win10 version 1809
                     //"Windows 2018" // = Win10 version 1903
+                    //"Windows 2019"  //  = Win10 version 1903
+                      "Windows 2020"  //  = Win10 version 2004
             )
         {
             Return (0xFFFFFFFF)
@@ -77,17 +79,17 @@ Method(XOSI, 1)
 
 - **Maximum Value**
 
-  For a single system, you can set the operating system parameter to the maximum value allowed by DSDT. For example, if the maximum value of DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
+  For a single Windows installation, you can set the operating system parameter to the maximum value allowed by the DSDT. For example, if the maximum value of the DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
 
   **Note**: **OS Patches** are not recommended for single systems.
 
 - **Matching values**.  
 
-  For dual system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
+  For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
 
 ## Caution
 
-Some machines use `Method` with a name similar to `_OSI` (e.g. `OSID` for `dell`), when it is located in `_SB` (less than 4 characters) and appears in full path, its binary data is the same as `_OSI`, resulting in renaming by the operating system (`_OSI to XOSI`) with the renaming error. In this case, you need to rename it to something else (e.g. `OSID to XSID`) before `_OSI to XOSI` to avoid the error.
+Some machines use `Methods` (indicted by underscores `_`) with similar names to `_OSI` (e.g. some Dell machines use `_OSID`, some ThinkPads ues `_OSIF`). If these methods contain the letters "OSI" and are located in `_SB`, they will accidentally be renamed to `XOSI`by the binary rename part of the XOSI patch as well, which causes ACPI Errors in Windows. So therefore, you need to rename methods like "OSID and "OSIF" to something else (e.g. `OSID to XSID`) prior to applying the `_OSI to XOSI` rename to avoid ACPI errors. In other words, in the `config.plist`, renames like `OSID to XSID` or `OSIF to XSIF` have to be listed before `_OSI to XOSI`.
 
 ## Appendix: Origin of OS Patches
 
