@@ -22,7 +22,7 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
   - Patch content and original device main content **identical**.
   - The `_STA` section of the counterfeit patch should include the following to ensure that windows systems use the original ACPI.
 
-    ```Swift
+    ```swift
         Method (_STA, 0, NotSerialized)
         {
             If (_OSI ("Darwin"))

@@ -17,7 +17,7 @@ Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA
 
 - Original Code:
 
-  ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
         If (HPTE)
@@ -30,7 +30,7 @@ Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA
 
 - Code after name change:
 
-  ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
           Return (0x0F)
@@ -49,7 +49,7 @@ As a practical matter, we should ensure the integrity of the renamed syntax as m
   
   Complete `Replace` post-code:
   
-  ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     Return (0x0F)
         Return (0x0F)
@@ -88,7 +88,7 @@ Usually, you can open the same `ACPI` file with binary software (e.g. `010 Edito
 
 When `Find` is stated in the Requirements, [any rewriting of a piece of code to find confirmed binary data from it is highly implausible! However, `Replace` can do this. Following the example above, we write a piece of code.
 
-```Swift
+```swift
     DefinitionBlock ("", "SSDT", 2, "hack", "111", 0)
     {
         Method (_STA, 0, NotSerialized)
@@ -113,7 +113,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 - Original code
 
-  ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
           If (\H8DR)
@@ -126,7 +126,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 - Code after name change
 
-  ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
           Return (Zero)
@@ -157,7 +157,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 Original `_STA` Method:
 
-```Swift
+```swift
 Method (_STA, 0, NotSerialized)
 {
     ECTP (Zero)
@@ -171,7 +171,7 @@ Method (_STA, 0, NotSerialized)
 
 We need to disable this device for some reason, and for that purpose `_STA` should return `Zero`. From the original text, we can see that as long as `SDS1` is not equal to `0x07`. Using the **prefix variable method**, we can do the following.
 
-```Swift
+```swift
 Scope (\)
 {
     External (SDS1, FieldUnitObj)
@@ -190,7 +190,7 @@ Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Device
 
 Original article.
 
-``Swift
+```swift
 Device (RTC)
 {
     ...
@@ -229,7 +229,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
 - Official patch ***SSDT-AWAC***
 
-  ```Swift
+  ```swift
   External (STAS, IntObj)
   Scope (_SB)
   Scope (_SB) {
@@ -247,7 +247,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
 - Improved patch ***SSDT-RTC_Y-AWAC_N***
 
-  ```Swift
+  ```swift
   External (STAS, IntObj)
   Scope (\)
   {
@@ -264,7 +264,7 @@ When using the I2C patch, you may need to enable `GPIO`. See ***SSDT-OCGPI0-GPEN
 
 An original article.
 
-```Swift
+```swift
 Method (_STA, 0, NotSerialized)
 {
     If ((GPEN == Zero))
@@ -277,7 +277,7 @@ Method (_STA, 0, NotSerialized)
 
 As you can see from the original, `GPIO` can be enabled as long as `GPEN` is not equal to `0`. Using the **prefix variable method** as follows.
 
-```Swift
+```swift
 External(GPEN, FieldUnitObj)
 Scope (\)
 {
@@ -296,7 +296,7 @@ When the `variable` is a read-only type, the solution is as follows.
 
 E.g., an original
 
-```Swift
+```swift
 OperationRegion (PNVA, SystemMemory, PNVB, PNVL)
 Field (PNVA, AnyAcc, Lock, Preserve)
 {
@@ -322,7 +322,7 @@ Replace: 58 4D 30 31 08
 
 **Patch**:
 
-```Swift
+```swift
 Name (IM01, 0x02)
 If (_OSI ("Darwin"))
 {
@@ -339,7 +339,7 @@ Change the enable bit of the device state using the assignment of the device's o
 
 Example of how this method can be used
 
-```Swift
+```swift
 Method (_STA, 0, NotSerialized)
 {
     If ((XXXX == Zero))
@@ -361,7 +361,7 @@ It can be seen that the above example of `_STA` method contains only the enable 
 
 Example of operation to disable a device:
 
-```Swift
+```swift
 External (_SB_.PCI0.XXXX._STA, IntObj)
 
 \_SB.PCI0.XXXX._STA = Zero 
@@ -373,7 +373,7 @@ The main reason why this method works in practice is that in the ACPI specificat
 
 An example of an operation that does not use this method:
 
-```Swift
+```swift
 Method (_STA, 0, NotSerialized)
 {
     ECTP (Zero)
