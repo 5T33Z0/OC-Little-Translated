@@ -80,7 +80,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Config.plist tipps
 - Kext Loading Sequence Examples 	
 
-## 5T33Z0's 5H0U7 0U75:
+## 5T33Z0's 5H0UT 0UT5:
 
 - sascha_77 for Kext Upater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
