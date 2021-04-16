@@ -32,4 +32,4 @@ If the Termonal output contains the following 2 drivers, your SMBus is working c
 - com.apple.driver.AppleSMBusController
 
 ## Editorial Note:
-Addiional background information about `AppleSMBus` as well as the GREP Command for testing the functinality of SMBUs Driver was taken from Dortanias Post-Install Guide for OpenCore, since the original README by DahlianSky was lacking in this regard.
+Addiional background information about `AppleSMBus` as well as the GREP command for testing the functinality of the SMBUs Driver were taken from Dortania's Post-Install Guide for OpenCore, since the original README by DahlianSky was lacking in this regard. The official SSDT sample from Acidanthera included in the OpenCore package now combines SSDT-SMBUS and MCHC.aml into one file (SSDT-SBUS-MCHC), so I suggest you use this instead. 
