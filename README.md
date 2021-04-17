@@ -32,7 +32,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Fake Ethernet Controller
 - Intel MEI (SSDT-IMEI)
 - IRQ and Timer Fix (SSDT-HPET)
-- SSDT-MEM2
+- MEM2 - Laptop iGPU related (SSDT-MEM2)
 - NVRAM Fix (SSDT-PMCR)
 - OCI2C-GPIO Patch
 - Platform Power Management (SSDT-PPMC)
