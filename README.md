@@ -1,5 +1,7 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 
+![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Config%20Tips%20%26%20Tricks/maciasl.png)
+
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
 **DISCLAIMER**: This is my english translation of the OC-Little Repo by [daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched  except `SSDT-OC-XOSI` which I updated to support Windows 10, 2004! The chinese READMEs are included for reference as well.
