@@ -13,7 +13,7 @@
 
 ### Solution
 
-See "14-1-CMOS Reset Patch" for details.
+See "CMOS Reset Fix" for details.
 
 ## **CMOS** Memory and RTCMemoryFixup
 
@@ -31,4 +31,4 @@ See "14-1-CMOS Reset Patch" for details.
 
 ### Simulation **CMOS** memory method
 
-See "15-2-CMOS Memory and RTCMemoryFixup" for details.
+See "CMOS Memory and RTCMemoryFixup" for details.
