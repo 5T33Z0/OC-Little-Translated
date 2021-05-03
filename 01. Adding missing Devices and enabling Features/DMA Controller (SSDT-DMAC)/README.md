@@ -9,7 +9,8 @@ In **DSDT**, search for:
 - `PNP0C01`, if missing, add ***SSDT-MEM2***.
 - `0x00160000`, if missing, add ***SSDT-IMEI***. Adds Intel MEI. Required for Intel GPU acceleration (Req for 6th-series mainboards only)
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
-- `MCHC`, if missing, add ***SSDT-MCHC***  
+- `MCHC`, if missing, add ***SSDT-MCHC***</br>
+	
 	**NOTE**: Adding `MCHC` is no longer necessary. Use ***SSDT-SBUS-MCHC*** instead, which comes with the OpenCore package. Follow Instructions in "Chapter 05: Injecting Devices" to configure it correctly!
 - `PMCR` or `APP9876`, if missing, add ***SSDT-PMCR***. For 6th gen or later. Z390 Chipsets also require this.
 
