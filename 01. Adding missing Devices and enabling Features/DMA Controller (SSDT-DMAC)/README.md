@@ -11,7 +11,7 @@ In **DSDT**, search for:
 - `0x001F0002`, if missing, add ***SSDT-PPMC***. For 6th Gen machines or later. Adds Platform Power Management Controller 
 - `MCHC`, if missing, add ***SSDT-MCHC***</br>
 	
-	**NOTE**: Adding `MCHC` is no longer necessary. Use ***SSDT-SBUS-MCHC*** instead, which comes with the OpenCore package. Follow Instructions in "Chapter 05: Injecting Devices" to configure it correctly!
+	**NOTE**: `SSDT-MCHC`and `SSTD-SBUS/SMBU`have since been combined into one Patch. Use ***SSDT-SBUS-MCHC*** instead, which is included in the OpenCore package download from Acidanthera.
 - `PMCR` or `APP9876`, if missing, add ***SSDT-PMCR***. For 6th gen or later. Z390 Chipsets also require this.
 
   **Note**: found by @Pleasecallmeofficial to provide the method, which has now become the official OpenCore SSDT example.
