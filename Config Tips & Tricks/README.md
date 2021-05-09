@@ -8,7 +8,7 @@ This section contains a small collection of useful tips and tricks for working w
 
 Currently there are two automated methods to check your config.plist for errors:
 
-1. **Online**: [OpenCore Sanity Checker](https://opencore.slowgeek.com/) is a useful site where you can check your config. Errors are highlighted in red and you can copy the link to the sanity check result and put it in a post to point out config problems. Unfortunately, the site hasn't been updated for a while and only fully supports OpenCore to version 0.6.6.
+1. **Online**: [OpenCore Sanity Checker](https://opencore.slowgeek.com/) is a useful site where you can check your config. Errors are highlighted in red and you can copy the link to the sanity check result and put it in a post to point out config problems. Unfortunately, the site hasn't been updated for a while and only fully supports OpenCore to version 0.6.6. The source code can be found here if someone is interested in implemnting it in a new and updated site: [OCSanity](https://github.com/rlerdorf/OCSanity) 
 
 2. **Offline**: The OpenCore package also contains the folder `Utilities`. In it you will find `ocvalidate`. Drag this into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will show errors in the config and where they are. With the help of OCConfgCompare, Sample.plist and OpenCore Install Guide you can correct all errors quite fast. 
 
