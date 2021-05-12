@@ -93,7 +93,7 @@ Choose either of the following two mapping methods
 
 - The variable `RMCF` is used in the patch, if `RMCF` is also used in other **keyboard patches**, it must be merged and used. See ***SSDT-RMCF-PS2Map-dell***. `Note`: ***SSDT-RMCF-MouseAsTrackpad*** is used to force on the touchpad settings option.
 
-- In VoodooPS2, the PS2 scan code corresponding to the <kbd>PrtSc</kbd> button is `e037`, the switch for the touchpad (and the little red dot on ThinkPad machines). You can map this key to `F13` and bind `F13` to the screenshot function in System Preferences: ```Swift``.
+- In VoodooPS2, the PS2 scan code corresponding to the <kbd>PrtSc</kbd> button is `e037`, the switch for the touchpad (and the little red dot on ThinkPad machines). You can map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
 
 ```Swift
     ...
