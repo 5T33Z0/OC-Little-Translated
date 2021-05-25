@@ -27,6 +27,10 @@ chmod +x (drag file in terminal, hit enter)
 `sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`
 [Source](https://www.tonymacx86.com/threads/high-sierra-graphic-drivers-for-fermi-geforce-gfx-560-ti.234606/page-2#post-1749719)
 
+**Sidecar**:</br>
+`defaults write com.apple.sidecar.display AllowAllDevices -bool true`
+`defaults write com.apple.sidecar.display hasShownPref -bool true`
+
 ### Hackintosh specific:
 
 **Debug ACPI Hotpatches**:</br>
