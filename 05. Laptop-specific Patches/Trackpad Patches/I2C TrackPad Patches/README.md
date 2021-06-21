@@ -2,7 +2,7 @@
 
 ## Description
 
-This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, see.
+This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, see:
 
 - @penghubingzhou: [https://www.penghubingzhou.cn](https://www.penghubingzhou.cn)
 - @神楽小白(GZ小白):[https://blog.gzxiaobai.cn/](https://blog.gzxiaobai.cn/)
