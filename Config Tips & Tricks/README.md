@@ -1,5 +1,5 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
-This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`.
+This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. Last Update: July 19th, 2021
 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
@@ -26,9 +26,19 @@ If the system won't boot despite correct boot and kernel settings and hangs dire
 **Misc > Security > SecureBootModel** = `Disabled`. I always had problems with this when this feature was set to `Default`. As soon as you need `Whatevergreen.kext` you can't use this feature. So disable it if you have problems booting.  
 
 **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
+
+If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
+
+**UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verifictaion, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced). 
+
+**BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a varified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
+
+**IMPORTANT**: For security reason you should change these values according to the version of macOS you are using. A list with the correct values for `MinDate` and `MinVersion`can be found here: https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h
+
 </details>
 <details>
 <summary><strong>Security Settings</strong></summary>
+
 ## III. Security Settings
 
 ### How to disable Single User Mode
