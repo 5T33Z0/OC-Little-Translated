@@ -25,8 +25,7 @@ While Sanity Checker focuses on correct settings for the selected system, OC Val
 
 If the system won't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
-- **Misc > Security > SecureBootModel** = `Disabled`. I always had problems with this when this feature was set to `Default`. As soon as you need `Whatevergreen.kext` you can't use this feature. So disable it if you have problems booting.  
-
+- **Misc > Security > SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details. 
 - **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
 
 If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
