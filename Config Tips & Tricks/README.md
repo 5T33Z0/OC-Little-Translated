@@ -1,14 +1,16 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
-This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. Last Update: July 19th, 2021
+This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. 
+
+**Last Update**: July 20th, 2021
 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
-  
+
 ## I. Checking config.plist for errors
 
 Currently there are two automated methods to check your config.plist for errors:
 
-1. **Online**: [OpenCore Sanity Checker](https://opencore.slowgeek.com/) is a useful site where you can check your config. Errors are highlighted in red and you can copy the link to the sanity check result and put it in a post to point out config problems. Unfortunately, the site hasn't been updated for a while and only fully supports OpenCore to version 0.6.6. The source code can be found here if someone is interested in implemnting it in a new and updated site: [OCSanity](https://github.com/rlerdorf/OCSanity) 
+1. **Online**: ~~[OpenCore Sanity Checker](https://opencore.slowgeek.com/) is a useful site where you can check your config. Errors are highlighted in red and you can copy the link to the sanity check result and put it in a post to point out config problems. Unfortunately, the site hasn't been updated for a while and only fully supports OpenCore to version 0.6.6. The source code can be found here if someone is interested in implemnting it in a new and updated site: [OCSanity](https://github.com/rlerdorf/OCSanity)~~ Just too outdated o use now. Just stick to the offline method using OCValidate and/or OCConfigCompare for now.
 
 2. **Offline**: The OpenCore package also contains the folder `Utilities`. In it you will find `ocvalidate`. Drag this into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will show errors in the config and where they are. With the help of [OCConfgCompare](https://github.com/corpnewt/OCConfigCompare), Sample.plist and [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) you can correct all errors quite fast. 
 
@@ -23,13 +25,13 @@ While Sanity Checker focuses on correct settings for the selected system, OC Val
 
 If the system won't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
-**Misc > Security > SecureBootModel** = `Disabled`. I always had problems with this when this feature was set to `Default`. As soon as you need `Whatevergreen.kext` you can't use this feature. So disable it if you have problems booting.  
+- **Misc > Security > SecureBootModel** = `Disabled`. I always had problems with this when this feature was set to `Default`. As soon as you need `Whatevergreen.kext` you can't use this feature. So disable it if you have problems booting.  
 
-**Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
+- **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
 
 If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
 
-**UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verifictaion, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced). 
+- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verifictaion, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced). 
 
 **BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a varified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
 
@@ -67,14 +69,15 @@ You should deactivate the single user mode for security reasons, because it can 
    To test if the settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this:
 
     	Configuration:
-        Apple Internal: enabled
-        Kext Signing: disabled
-        Filesystem Protections: disabled
-        Debugging Restrictions: disabled
-        DTrace Restrictions: disabled
-        NVRAM Protections: disabled
-        BaseSystem Verification: disabled
-        
+    	 Apple Internal: enabled
+    	 Kext Signing: disabled
+    	 Filesystem Protections: disabled
+    	 Debugging Restrictions: disabled
+    	 DTrace Restrictions: disabled
+    	 NVRAM Protections: disabled
+    	 BaseSystem Verification: disabled
+   
+
 </details>
 <details>
 <summary><strong>Adjusting Boot Picker Behavior</strong></summary>
@@ -95,7 +98,7 @@ With **PickerAttributes**, you can assign different properties and functions to 
 </details>
 <details>
 <summary><strong>Customizing Boot Options</strong></summary>
-  
+
 ## V. Customizing Boot Options
 
 ### Set default boot drive in BootPicker
@@ -153,7 +156,7 @@ If you want to boot Windows *properly*, you should boot it via the BIOS Boot Men
 </details>
 <details>
 <summary><strong>Handling NVRAM Issues</strong></summary>
-  
+
 ## VI. Resolving issues with NVRAM Reset
 
 Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. Therefore, the OpenCore package also contains `CleanNvram.efi` under `Tools`, which should work better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
@@ -210,10 +213,10 @@ Here's a table of the what is what in macSerial/GenSMBIOS, Clover and OpenCore
 |  MLB | SMBIOS > Board Serial Number | PlatformInfo > Generic > MLB |
 
 **NOTE:**
- 
+
  - *Hardware UUID: This is displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
  -  **ROM: in Clover Configurator, select the option "from SMBIOS" and paste over your MAC Address
- 
+
 You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMBIOS Infos listed in GenSMBIOS are still identical. Another indicator for successful transfer is that you don't have to re-enter the passwords of your E-Mail Accounts in the Mail App.
 
 ## 1-Click-Solution for Clover Users
