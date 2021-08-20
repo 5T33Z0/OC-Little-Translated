@@ -17,7 +17,7 @@
 `chflags nohidden ~/Library`
 
 **Make .command files executable**:</br>
-chmod +x (drag file in terminal, hit enter)
+`chmod +x` (drag file in terminal, hit enter)
 
 **Check Hibernation Settings**:</br>
 `pmset -g`
