@@ -23,7 +23,7 @@
 `pmset -g`
 
 **Enable Sidecar**:</br>
-`defaults write com.apple.sidecar.display AllowAllDevices -bool true`
+`defaults write com.apple.sidecar.display AllowAllDevices -bool true`</br>
 `defaults write com.apple.sidecar.display hasShownPref -bool true`
 
 **Disable Logging:**</br>
