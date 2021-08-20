@@ -30,8 +30,8 @@
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
 **Disable Metal**:</br>
-`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no`
-`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`
+`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no`</br>
+`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`</br>
 [Source](https://www.tonymacx86.com/threads/high-sierra-graphic-drivers-for-fermi-geforce-gfx-560-ti.234606/page-2#post-1749719)
 
 ### Hackintosh specific:
