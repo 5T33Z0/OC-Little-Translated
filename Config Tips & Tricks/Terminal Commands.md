@@ -29,10 +29,16 @@
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
-**Disable Metal**:</br>
+**Disable/Delete Metal Support**:</br>
 `sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no`</br>
 `sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`</br>
-[Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases/tag/v1.2.4)
+
+or
+
+`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal`</br>
+`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`</br>
+
+[Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
 ### Hackintosh specific:
 
