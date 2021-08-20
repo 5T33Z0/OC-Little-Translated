@@ -1,6 +1,6 @@
 ## Terminal Commands
 
-### macOS specific:
+### macOS specific
 
 **Disable Gatekeeper:**</br>
 `sudo spctl --master-disable`
@@ -16,7 +16,7 @@
 `setfile -a v ~/Library`</br>
 `chflags nohidden ~/Library`
 
-**Rebuild Launch Services**
+**Rebuild Launch Services**:</br>
 `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
 
 **Make .command files executable**:</br>
@@ -43,7 +43,7 @@ or
 
 [Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
-### Hackintosh specific:
+### Hackintosh specific
 
 **Debug ACPI Hotpatches**:</br>
 `log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"`
