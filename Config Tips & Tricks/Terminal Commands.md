@@ -16,6 +16,9 @@
 `setfile -a v ~/Library`</br>
 `chflags nohidden ~/Library`
 
+**Rebuild Launch Services**
+`/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
+
 **Make .command files executable**:</br>
 `chmod +x` (drag file in terminal, hit enter)
 
@@ -31,12 +34,12 @@
 
 **Disable/Delete Metal Support**:</br>
 `sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no`</br>
-`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`</br>
+`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`
 
 or
 
 `sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal`</br>
-`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`</br>
+`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`
 
 [Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
