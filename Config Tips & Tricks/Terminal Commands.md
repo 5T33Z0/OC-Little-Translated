@@ -45,11 +45,15 @@ or
 
 ### Hackintosh specific
 
-**Debug ACPI Hotpatches**:</br>
-`log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"`
-
 **Finding USB Controller Renames**:</br>
 
 `ioreg -l -p IOService -w0 | grep -i XHC1`</br>
 `ioreg -l -p IOService -w0 | grep -i EHC1`</br>
-`ioreg -l -p IOService -w0 | grep -i EHC2`
+`ioreg -l -p IOService -w0 | grep -i EHC2`</br>
+
+**Verifying if SMBus is working**:</br>
+
+`kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
+
+**Debug ACPI Hotpatches**:</br>
+`log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"`
