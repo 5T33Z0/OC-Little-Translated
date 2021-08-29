@@ -47,9 +47,10 @@ or
 
 **Finding USB Controller Renames**:</br>
 
-`ioreg -l -p IOService -w0 | grep -i XHC1`</br>
 `ioreg -l -p IOService -w0 | grep -i EHC1`</br>
 `ioreg -l -p IOService -w0 | grep -i EHC2`</br>
+`ioreg -l -p IOService -w0 | grep -i XHC1`</br>
+`ioreg -l -p IOService -w0 | grep -i XHCI`</br>
 
 **Verifying if SMBus is working**:</br>
 
