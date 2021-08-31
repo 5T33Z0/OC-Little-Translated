@@ -8,6 +8,10 @@
 **Update PreBoot Volume**:</br>
 `sudo diskutil apfs updatePreboot /`
 
+**Disable/enable DMG Verification**:</br>
+`defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
+`defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
+
 **Show all Files in Finder**:</br>
 `defaults write com.apple.finder AppleShowAllFiles TRUE`</br>
 `killall Finder`
