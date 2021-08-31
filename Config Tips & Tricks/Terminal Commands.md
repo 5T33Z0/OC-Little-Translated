@@ -16,6 +16,10 @@
 `defaults write com.apple.finder AppleShowAllFiles TRUE`</br>
 `killall Finder`
 
+**Add "Quit" option to Finder**:</br>
+`defaults write com.apple.finder QuitMenuItem -bool YES`</br>
+`killall Finder`</br>
+
 **Show User Library in Big Sur**:</br>
 `setfile -a v ~/Library`</br>
 `chflags nohidden ~/Library`
