@@ -5,12 +5,12 @@
 **Disable Gatekeeper:**</br>
 `sudo spctl --master-disable`
 
-**Update PreBoot Volume**:</br>
-`sudo diskutil apfs updatePreboot /`
-
 **Disable/enable DMG Verification**:</br>
 `defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
 `defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
+
+**Update PreBoot Volume**:</br>
+`sudo diskutil apfs updatePreboot /`
 
 **Show all Files in Finder**:</br>
 `defaults write com.apple.finder AppleShowAllFiles TRUE`</br>
@@ -62,3 +62,8 @@ or
 
 **Debug ACPI Hotpatches**:</br>
 `log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"`
+
+**Display CPU Features**</br>
+`sysctl -a | grep machdep.cpu.features` </br>
+`sysctl -a | grep machdep.cpu.leaf7_features` </br>
+`sysctl machdep.cpu | grep AVX`
