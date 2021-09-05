@@ -53,6 +53,9 @@ or
 
 ### Hackintosh specific
 
+**Rebuilding Kext Cache**:</br>
+`sudo kextcache -i /`</br> 
+
 **Finding USB Controller Renames**:</br>
 
 `ioreg -l -p IOService -w0 | grep -i EHC1`</br>
