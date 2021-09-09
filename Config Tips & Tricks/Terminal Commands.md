@@ -54,17 +54,18 @@ or
 ### Hackintosh specific
 
 **Rebuilding Kext Cache**:</br>
-`sudo kextcache -i /`</br> 
+`sudo kextcache -i /`</br>
+
+**Show currently used Board-ID**:<br>
+`ioreg -l | grep -i board-id`
 
 **Finding USB Controller Renames**:</br>
-
 `ioreg -l -p IOService -w0 | grep -i EHC1`</br>
 `ioreg -l -p IOService -w0 | grep -i EHC2`</br>
 `ioreg -l -p IOService -w0 | grep -i XHC1`</br>
 `ioreg -l -p IOService -w0 | grep -i XHCI`</br>
 
 **Verifying if SMBus is working**:</br>
-
 `kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
 
 **Debug ACPI Hotpatches**:</br>
