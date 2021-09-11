@@ -78,10 +78,11 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 #### 6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20CMOS-related%20Fixes)
 
 #### 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
-#### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Config%20Tips%20%26%20Tricks)
+#### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20Config%20Tips%20%26%20Tricks)
 - Config.plist tipps
 - Kext Loading Sequence Examples 	
-- [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Config%20Tips%20%26%20Tricks/Terminal%20Commands.md)
+- [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08.%20Config%20Tips%20%26%20Tricks/Terminal%20Commands.md)
+
 ## 5T33Z0's 5H0UT 0UT5:
 
 - sascha_77 for Kext Upater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
