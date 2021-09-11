@@ -42,6 +42,9 @@
 **Update PreBoot Volume**:</br>
 `sudo diskutil apfs updatePreboot /`
 
+**Check Status of System Integrity Protection**:</br>
+`csrutil status`
+
 **Create a new shapshot** (after changing system files):
 `bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot` (x = name of your macOS Big Sur/Monterey Volume)
 
