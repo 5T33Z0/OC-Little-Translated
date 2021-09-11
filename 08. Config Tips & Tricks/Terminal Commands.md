@@ -48,6 +48,14 @@
 **Create a new shapshot** (after changing system files):
 `bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot` (x = name of your macOS Big Sur/Monterey Volume)
 
+**Check if used Hardware supports Apple Secure Boot**:</br>
+
+1. In Terminal, execute: `nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
+2. Check the Results:
+	-  if `%00` = No Security mode.
+	-  if `%01` = Medium Security mode
+	-  if `%02` = Full Security mode 
+
 **Show currently used Board-ID**:<br>
 `ioreg -l | grep -i board-id`
 
