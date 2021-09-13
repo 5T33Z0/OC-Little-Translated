@@ -56,6 +56,9 @@
 	-  if `%01` = Medium Security mode
 	-  if `%02` = Full Security mode 
 
+**Display CPU details**:</br>
+`ioreg -rxn "CPU0@0"`
+
 **Show currently used Board-ID**:<br>
 `ioreg -l | grep -i board-id`
 
