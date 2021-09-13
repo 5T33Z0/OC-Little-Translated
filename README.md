@@ -24,7 +24,6 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - ACPI Source Language
 - SSDT Loading Sequence
 - ASL to AML Conversion Table</br>
-
 #### 1. [Adding Fake Devices and enabling Features](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20missing%20Devices%20and%20enabling%20Features)
 - Ambient Light Sensor (SSDT-ALS0)
 - Brightness Controls (SSDT-PNLF)
@@ -44,11 +43,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - System Management Bus (SMBus) & Memory Controller (MCHC)
 - OS Compatibility Patch (XOSI)
 - Xtra: Enabling XCPM on Ivy Bridge CPUs
-
 #### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
-
 #### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20USB%20Fixes)
-
 #### 4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Fixing%20Sleep%20and%20Wake%20Issues)
 - 06/0D Instant Wake Fix
 - Fixing AOAC Machines
@@ -74,14 +70,12 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 	- I2C TrackPad Patches
 	- ThinkPad Click and TrackPad Patches
-
 #### 6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20CMOS-related%20Fixes)
-
 #### 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
 #### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20Config%20Tips%20%26%20Tricks)
 - Config.plist tipps
 - Kext Loading Sequence Examples 	
-- [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08.%20Config%20Tips%20%26%20Tricks/Terminal%20Commands.md)
+#### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20Terminal%20Commands)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
