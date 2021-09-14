@@ -57,7 +57,7 @@
 	-  if `%02` = Full Security mode 
 
 **Display CPU details**:</br>
-`ioreg -rxn "CPU0@0"`
+`ioreg -rxn "CPU0@0"` (The text in quotes = CPU name as defined in ACPI. On modern Intel it can be "PR00@0". Check `SSDT-PLUG.aml` for reference)
 
 **Show currently used Board-ID**:<br>
 `ioreg -l | grep -i board-id`
