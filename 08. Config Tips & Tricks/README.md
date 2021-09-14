@@ -1,7 +1,7 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. 
 
-**Last Update**: July 20th, 2021
+**Last Update**: September 14th, 2021
 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
@@ -222,4 +222,9 @@ You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMB
 
 If you've used GenSMBIOS prior to generate SMBIOS Infos and installed them into your system, you can select them in Clover Configurator to avoid SMBIOS Infos conflicts altogether. Under "Rt Variables" simply click on "from System" and you're good.
 </details>
+<details>
+<summary><strong>Scan Policy Calculator</strong></summary>
 
+## Online ScanPolicy Calculator
+https://oc-scanpolicy.vercel.app/
+</details>
