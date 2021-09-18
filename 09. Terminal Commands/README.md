@@ -5,6 +5,9 @@
 **Collection of defaults commands** (for modifying behavior, options, look and feel of macOS):</br>
 `https://macos-defaults.com/`
 
+**Show macOS Kernel Version**:</br>
+`uname -r`
+
 **Disable Gatekeeper:**</br>
 `sudo spctl --master-disable`
 
@@ -106,4 +109,3 @@ or
 `sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`
 
 [Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
-
