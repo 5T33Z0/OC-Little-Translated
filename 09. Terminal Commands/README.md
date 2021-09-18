@@ -45,6 +45,9 @@
 **Check Status of System Integrity Protection**:</br>
 `csrutil status`
 
+**Show boot log**:</br>
+`log show --last boot`
+
 **Check currently active csr-active-config set in NVRAM**:</br>
 `nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config`
 
