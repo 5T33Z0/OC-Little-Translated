@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 
-![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Config%20Tips%20%26%20Tricks/maciasl.png)
+![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08.%20Config%20Tips%20%26%20Tricks/maciasl.png)
 
 A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
 
