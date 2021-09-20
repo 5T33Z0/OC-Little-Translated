@@ -93,7 +93,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
 
-Daliansky's original Shout Outs and Credits:
+Daliansky's original Credits:
 
 > - Special credit to：
 >	- @XianWu write these ACPI component patches that useable to OpenCore
