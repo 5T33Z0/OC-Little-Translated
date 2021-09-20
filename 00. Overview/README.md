@@ -20,6 +20,7 @@ You may need to disable or enable certain components in order to solve specific 
 - `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems  these patches should be used with **Caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 
+The following Sections will help you to get a depper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files.
 <details>
 <summary><strong>ACPI Explained</strong></summary>
 
