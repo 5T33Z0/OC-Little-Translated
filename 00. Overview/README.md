@@ -22,6 +22,7 @@ You may need to disable or enable certain components in order to solve specific 
 
 <details>
 <summary><strong>ACPI Explained</strong></summary>
+
 ## ACPI – A Brief Introduction 
 
 ACPI (Advanced Configuration & Power Interface) is an advanced computer configuration and power interface, which is a power management standard developed by Intel, Microsoft and other manufacturers, namely [`ACPI specification`](https://www.acpica.org/documentation). Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and **may** vary between differen BIOS versions as well. 
@@ -42,6 +43,7 @@ For more details about ACPI, please refer to the official [`ACPI Specifications`
 </details>
 <details>
 <summary><strong>ACPI Patches in OpenCore</strong></summary>
+
 ### ACPI Patches in OpenCore
 The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
 
@@ -617,9 +619,6 @@ Method (SSCN, 0, NotSerialized)
 ```
 
 The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the original value.
-
-## Conclusion
-Hopefully, this article can help you when editing DSDTs/SSDTs.
 </details>
 <details>
 <summary><strong>ASL to AML Conversion Table</strong></summary>
@@ -792,6 +791,7 @@ Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of t
 </details>
 <details>
 <summary><strong>SSDT Loading Sequence</strong></summary>
+
 # SSDT Loading Sequence
 
 Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there is an exceptions to this rule…
@@ -837,6 +837,7 @@ For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `de
 </details>
 <details>
 <summary><strong>Important Patches</strong></summary>  
+
 ## Important Patches
 
 - ***SSDT-RTC0*** – located under`Fake Devices`_ Some systems crash during startup due to the RTC [`PNP0B00`]  being disabled. Use SSDT-RTC0 to fix it.</br>
