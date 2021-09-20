@@ -18,12 +18,12 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 **NOTE**: Although this repo looks smaller than the original, believe me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present!
 
 ## Table of Contents
-
 #### 0. [Overview](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
-- About the ACPI Form
-- ACPI Source Language
-- SSDT Loading Sequence
+- ACPI Explained
+- ACPI Patches in OpenCore
 - ASL to AML Conversion Table
+- SSDT Loading Sequence
+- Important Patches
 
 #### 1. [Adding Fake Devices and enabling Features](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20missing%20Devices%20and%20enabling%20Features)
 - Ambient Light Sensor (SSDT-ALS0)
