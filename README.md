@@ -13,7 +13,7 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - re-wrote sections which were confusing/misleading
 - added further explanation where necessary
 - added new description where there were missing
-- added new content (chpt. 8 and 9) which was not present before (work in progress)
+- added new content (chptrs. 8 to 10)
 
 **NOTE**: Although this repo looks smaller than the original, believe me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present!
 
