@@ -8,25 +8,25 @@
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a BIOS developer, it is possible that there could be mistakes in the provided ASL examples.
 
 ## Explanation 
-Did you ever wonder what a `DSDT` or `SSDT` is and what it does? Or how these rename patches that you have in your config.plist work? Well, after reading this, you will know for sure…
+Did you ever wonder what a `DSDT` or `SSDT` is and what it does? Or how these rename patches that you have in your `config.plist` work? Well, after reading this, you will know for sure!
 
 ### ACPI
-**`ACPI`** stands for `Advanced Configuration & Power Interface`. In ACPI, peripheral devices and system hardware features of the platform are described in the **`DSDT`** (Differentiated System Description Table), which is loaded at boot and in SSDTs (Secondary System Description Tables), which are loaded *dynamically* at run time. ACPI is literally just a set of tables of texts to provide operating systems with some basic information about the used hardware. **`DSDTs`** and **`SSDTs`** are just *two* of the many tables that make up an ACPI – but very important ones for us.
+**`ACPI`** stands for `Advanced Configuration & Power Interface`. In the ACPI, peripheral devices and system hardware features of the platform are described in (1) the **`DSDT`** (Differentiated System Description Table), which is loaded at boot and (2) in SSDTs (Secondary System Description Tables), which are loaded *dynamically* at run time. ACPI is literally just a set of tables of texts to provide operating systems with some basic information about the used hardware. **`DSDTs`** and **`SSDTs`** are just *two* of the many tables that make up a system's ACPI – but very important ones for us.
 
 ### Why to prefer SSDTs over a patched DSDT
-A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD PCs, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.
+A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.
 
-These issues stems from DSDTs made with Windows support in mind on one hand and Apple not using standard ACPI for their hardware on the other. These issues can be addressed by dumping, patching and injecting the patched DSDT during boot, replacing the original. 
+These issues stems from DSDTs made with Windows support in mind on one hand and Apple not using standard ACPI tables for their hardware on the other. These issues can be addressed by dumping, patching and injecting the patched DSDT during boot, replacing the original. 
 
 Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant.
 
 ### ASL
-A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After a ASL is compiled by a compiler, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its rules and guidelines. 
+A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines. 
 
 ## ASL Guidelines
 
 1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
-1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
+2. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
@@ -42,9 +42,9 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 
 The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, the third parameter must be `0x02`. Other parameters are free to fill in.
 
-2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
+1. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 
-3. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore the example below is **invalid** because the Method is followed by a DefinitionBlock:
+2. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore the example below is **invalid** because the Method is followed by a DefinitionBlock:
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -57,7 +57,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
    }
    ```
 
-4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
+3. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
    - `\_GPE`--- ACPI Event handlers
    - `\_PR` --- CPU
@@ -82,7 +82,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
    - CPU related information is placed in Scope (_PR)
 
-     > CPUs can have various scopes, for instance `_PR`,`_SB`,`SCK0`
+     > CPUs can have various scopes, for instance `_PR`,`_SB`,`_SCK0`
 
      ```swift
      Scope (_PR)
@@ -225,7 +225,7 @@ Read `ACPI Specification` for more details
 
 Only two results from logical calculation - `0` or `1`
 
-## ASL Definition of Method
+## Defining Methods in ASL
 
 1. Define a Method:
 
@@ -334,7 +334,7 @@ It is easy to acquire the current operating system's name and version when apply
 > Notably, different Windows versions requre a unique string, read:  
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
-When `_OSI`'s string matches the current system, it returns `1`, `If` condition is valid.
+When `_OSI`'s string matches the current system, it returns `1` since the `If` condition is valid.
 
 ```swift
 If (_OSI ("Darwin")) /* judge if the current system is macOS */
@@ -342,7 +342,7 @@ If (_OSI ("Darwin")) /* judge if the current system is macOS */
 
 ### `_STA` (Status)
 
-**⚠️ CAUTION: two types of `_STA` exist，do not confuse with `_STA` from `PowerResource`!**
+**⚠️ CAUTION: Two types of `_STA` exist! Do not confuse it with `_STA` from `PowerResource`!**
 
 5 types of bit can be return from `_STA` method, explanations are listed below:
 
@@ -439,7 +439,6 @@ ASL also has its method to control flow.
    }
    ```
 
-
 ### Loop control
 
 #### `While` & `Stall`
@@ -525,4 +524,4 @@ Method (SSCN, 0, NotSerialized)
 The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the original value.
 
 ## Conclusion
-Hopefully this article assists you when editing DSDTs/SSDTs.
+Hopefully, this article can help you when editing DSDTs/SSDTs.
