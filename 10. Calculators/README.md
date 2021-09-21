@@ -6,8 +6,6 @@ I plan to include a calculator for csr-active-config at some stage but I have to
 
 **Supported OC Version:** 0.7.4
 
-**Screenshots**:
+**Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes and ExposeSensitiveData
 
-![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/10.%20Calculators/PickerAttributes_Screenshot.png)
-
-![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/10.%20Calculators/ScanPolicy_Screenshot.png)
+![CSR_ACTIVE_CFG](https://user-images.githubusercontent.com/76865553/134222835-c2180fb5-e988-4740-8446-bf04530f7b60.png)
