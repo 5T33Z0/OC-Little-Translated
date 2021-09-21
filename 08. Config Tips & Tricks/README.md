@@ -229,8 +229,26 @@ You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMB
 If you've used GenSMBIOS prior to generate SMBIOS Infos and installed them into your system, you can select them in Clover Configurator to avoid SMBIOS Infos conflicts altogether. Under "Rt Variables" simply click on "from System" and you're good.
 </details>
 <details>
-<summary><strong>Scan Policy Calculator</strong></summary>
+<summary><strong>Online Scan Policy Calculator</strong></summary>
 
 ## Online ScanPolicy Calculator
 https://oc-scanpolicy.vercel.app/
 </details>
+<details>
+<summary><strong>Fixing macOS Monterey beta Updates</strong></summary>
+
+## Fixing macOS Monterey beta Updates
+If macOS Monterey beta Updates are not offered to you, you could try the following:
+
+- Enable Misc/Security/AllowToggleSip in `config.plist`
+- In Terminal, enter these 2 commands:</br>
+`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
+`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
+- Reboot 
+- In BootPicker, hit "Toggle SIP"
+- Boot macOS Monterey
+- Check for Updates
+
+**NOTE**: `SecureBootModel` may be required if the Update still isn't offered.
+</details>
+
