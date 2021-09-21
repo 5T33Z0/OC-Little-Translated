@@ -6,7 +6,7 @@ This section includes a spreadsheet in Number and Excel Format for calculating t
 
 **Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes and ExposeSensitiveData
 
-**Screenshot**
+**Screenshot**:
 ![CSR_ACTIVE_CFG](https://user-images.githubusercontent.com/76865553/134225757-e6190f24-7f81-4d2b-9fed-1d831fa298d7.png)
 
 **NOTE**: If you are looking for an actual tool to calculate these things (and more) instead, you should check out CorpNewt's [BitmaskDecode](https://github.com/corpnewt/BitmaskDecode) 
