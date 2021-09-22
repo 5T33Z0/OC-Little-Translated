@@ -244,14 +244,15 @@ https://oc-scanpolicy.vercel.app/
 ## Fixing macOS Monterey beta Updates
 If macOS Monterey beta Updates are not offered to you, you could try the following:
 
-- Enable Misc/Security/AllowToggleSip in `config.plist`
-- In Terminal, enter these 2 commands:</br>
+- Set the correct value for csr-active-config: `67080000`
+- Save, reboot, Clean NVRAM, reboot 
+- Go to "About the Mac…" > "Software Update" and see if you are being offered the latest update.
+- If not, leave the Software Update window open
+- Run Terminal and enter these 2 commands in Terminal:</br>
 `sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
 `sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
-- Reboot 
-- In BootPicker, hit "Toggle SIP"
-- Boot macOS Monterey
-- Check for Updates
+- Software Update should re-check automatically and offer the new update (if available).
+- Download and install your Update.
 
 **NOTE**: `SecureBootModel` may be required if the Update still isn't offered.
 </details>
