@@ -8,6 +8,17 @@ If you are looking for an actual tool to calculate these things (and more) inste
 
 **Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes and ExposeSensitiveData
 
-**Screenshot**:
+<details>
+<summary><strong>Screenshots</strong></summary>
 
-![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134306956-5c3af0fd-d23d-4d74-b89e-0c46dc95718b.png)
+![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134348900-39b8b39f-d270-4b60-9aed-9828df329b44.png)
+  
+![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134348928-ee19f359-c8fd-4e16-a99e-2cd652c9c64b.png)
+  
+![Bildschirmfoto 2](https://user-images.githubusercontent.com/76865553/134348939-d3eac5b2-02d3-4b98-9652-4ef52bde0c0d.png)
+  
+![Bildschirmfoto 3](https://user-images.githubusercontent.com/76865553/134348951-c113b897-74aa-4bd1-8b46-0973119ed5e2.png)
+  
+![Bildschirmfoto 4](https://user-images.githubusercontent.com/76865553/134348958-481e2632-d417-416f-ad0b-14158137149f.png)
+  
+</details>
