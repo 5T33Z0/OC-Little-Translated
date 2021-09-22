@@ -7,7 +7,7 @@ For updating OpenCore reliably and easily to the latest version, follow my [New 
 
 ## OpenCore Troubleshooting Workflow
 
-![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134320393-a0ea0feb-a7ad-4ef5-88dd-682e7d90372a.png)
+![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134321385-1d24e0a0-7f6d-436d-bcd6-15d9915a5b56.png)
 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
