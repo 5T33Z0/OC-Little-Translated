@@ -5,6 +5,10 @@ This section contains a small collection of useful tips and tricks for working w
 
 For updating OpenCore reliably and easily to the latest version, follow my [New OpenCore Update Guide](https://www.insanelymac.com/forum/topic/347035-guide-updating-and-maintaining-opencore-new-method/) on Insanelymac.com.
 
+## OpenCore Troubleshooting Workflow
+
+![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134320393-a0ea0feb-a7ad-4ef5-88dd-682e7d90372a.png)
+
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
 
