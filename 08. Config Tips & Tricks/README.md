@@ -255,5 +255,20 @@ If macOS Monterey beta Updates are not offered to you, you could try the followi
 - Download and install your Update.
 
 **NOTE**: `SecureBootModel` may be required if the Update still isn't offered.
-</details>
 
+## Fix macOS Monterey beta 7 Installer
+
+Something in the beta 7 Installer is broken, so that the SharedSupport.dmg is not copied to the Installer App so it is only 34 MB in size. To fix it you need to do the following:
+
+- Move `InstallAssistant.pkg` to the Desktop
+- Dobuble click `InstallAssistant.pkg` to install it. This creates the "Install macOS Monterey" App
+- Next, enter in Terninal:
+	- `cd ~/Desktop`
+	- `xar -xf InstallAssistant.pkg SharedSupport.dmg` (Mounts the SharedSupport.dmg)
+	- `sudo mkdir /Applications/Install\ macOS\ Monterey\ beta.app/Contents/SharedSupport` (creates the Folter "SharedSupport" in the Contents Folder of the Installer App) 
+	- `sudo cp ~/Desktop/SharedSupport.dmg /Applications/Install\ macOS\ Monterey\ beta.app/Contents/SharedSupport` (copies the SharedSupport.dmg into the Installer App)
+
+Now you can run the Installer App and it will work. If your want to create a USB Installer (name the drive "USB"), you can use this command:
+
+`sudo /Applications/Install\ macOS\ Monterey\ beta.app/Contents/Resources/createinstallmedia --nointeraction --downloadassets --volume /Volumes/USB`
+</details>
