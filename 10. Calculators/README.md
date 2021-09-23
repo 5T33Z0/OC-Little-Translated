@@ -11,8 +11,8 @@ If you are looking for an actual tool to calculate these things (and more), you 
 <details>
 <summary><strong>Screenshots</strong></summary>
 
-![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134348900-39b8b39f-d270-4b60-9aed-9828df329b44.png)
-  
+![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134508275-c1722956-6e02-4ff0-a241-f1faefa5fe5e.png)
+
 ![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134348928-ee19f359-c8fd-4e16-a99e-2cd652c9c64b.png)
   
 ![Bildschirmfoto 2](https://user-images.githubusercontent.com/76865553/134348939-d3eac5b2-02d3-4b98-9652-4ef52bde0c0d.png)
