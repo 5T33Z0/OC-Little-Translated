@@ -51,6 +51,10 @@ Although adding any of the missing parts listed below may improve performance, t
 
 **NOTE:** In order to add any of the components listed below, click on the name of the device listed in the menu above to find the corresponding SSDT.
 
+## Preparations
+
+In order to apply any of the following Devices/Patches, it is necessary to be able to search with your machine's ACPI and more specifically, in the `DSDT.
+
 ## Instructions
 
 In **DSDT**, search for:
