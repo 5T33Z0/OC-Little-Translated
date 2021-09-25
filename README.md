@@ -7,16 +7,17 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 <details>
 <summary><strong>About the Translation</strong></summary>
 
-## ABOUT THIS TRANSLATION:
+## About the Translation:
 
-- I reorganized the Repo into more plausible (sub-)categories based on types of issues, components, etc.
-- restructured most of the texts so that they are more logical and readable
-- re-wrote sections which were confusing/misleading
-- added further explanations where necessary
-- added new description where there were missing
-- added new content (chapters 8 to 10)
+- AI-based translation using deepL, google translator and manual copyediting.
+- Restructured the repository into more plausible sections and (sub-)categories based on types of issues, components, methods, etc.
+- Rearranged Text for better readability and comprehensibility
+- Rewrote sections which were confusing/misleading
+- Added missing descriptions
+- Added further explanations where necessary
+- Added new content (Chapters 8 to 10)
 
-**NOTE**: Although this repo might look smaller than the original, it is not! It's just re-organized and re-structured into more useful categories. All of the content of the original is present – and then some!
+**NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
 
 ## Table of Contents
