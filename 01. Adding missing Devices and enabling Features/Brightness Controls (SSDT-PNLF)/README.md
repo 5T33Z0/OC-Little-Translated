@@ -2,24 +2,24 @@
 
 ## `PNLF` Injection Methods
 
-To inject Brightness Control, there are several methods available. No matter which one you chose, all of them require a combination of a Driver and a corresponding ACPI Hotpatch to work.
+To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a Kext and a corresponding ACPI Hotpatch to work.
 
 1. Common injection method:
 
-	- **Driver**: WhateverGreen
+	- **Kext**: WhateverGreen
 	- **Patch**: Custom brightness patch or RehabMan brightness patch
 
 2. ACPI injection method:
 
-	- **Driver**: ACPIBacklight.kext (need to disable WhateverGreen.kext built-in brightness driver, see Disable method above)
+	- **Kext**: ACPIBacklight.kext (need to disable WhateverGreen.kext built-in brightness driver, see Disable method above)
 	- **Patch**: See "ACPI Brightness Patch" method
 
-3. Other methods: Follow the driver + patch principle and try it yourself.
+3. Other methods: Follow the Kext + patch principle and try for yourself.
 
 **NOTE**: The official OpenCore package contains pre-made `SSDT-PNFL.aml` patches under "Docs" already. So in case you're not sure what to do you could also use these instead.
 
 ## Required Files
-**I. Drivers:**
+**I. Kexts:**
 
 - [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver. Requires [Lilu](https://github.com/acidanthera/Lilu/releases)) or
 - [IntelBacklight.kext](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) or
