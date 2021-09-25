@@ -4,7 +4,7 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
 
 - Devices which either do not exist in ACPI, or have a different name as required by macOS to function correctly. Patches that correctly rename these devices can load device drivers. For example, "05-2-PNLF Injection Method", "Adding Missing Parts", "Spoofing Ethernet", etc.
 - Fake EC for fixing Embedded Controller issues
-- For some special devices, using a method that prohibits the original device from impersonating it again will make it easier for us to adjust the patch. Such as "OCI2C-TPXX Patching Method".
+- For some devices, using a method that prohibit the original device from being detected/used will make it easier for us to adjust the patch. Such as the "OCI2C-TPXX Patching Method".
 - A device is disabled for some reason, but macOS system needs it to work. See `this chapter` for an example.
 - In most cases, devices can also be enabled using the Binary Renaming and Preset Variables.
 
