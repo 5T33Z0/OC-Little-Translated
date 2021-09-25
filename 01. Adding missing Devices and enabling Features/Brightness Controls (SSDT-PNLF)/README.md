@@ -1,4 +1,4 @@
-# Injecting Brightness Control `PNLF` with OpenCore
+# Injecting Brightness Control (`PNLF`)
 
 ## `PNLF` Injection Methods
 
@@ -18,34 +18,35 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 **NOTE**: The official OpenCore package contains pre-made `SSDT-PNFL.aml` patches under "Docs" already. So in case you're not sure what to do you could also use these instead.
 
-## Required Files
-**I. Kexts:**
+## Required Kexts
 
-- [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver. Requires [Lilu](https://github.com/acidanthera/Lilu/releases)) or
-- [IntelBacklight.kext](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) or
-- [ACPIBacklight.kext](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/)
+**I. Kexts:** pick one of them, not all!
 
-By default, WhateverGreen.kext will load the brightness driver. If you use other brightness drivers you should disable their built-in brightness drivers. To disable it, do the following:
+- [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver. Requires [**Lilu**](https://github.com/acidanthera/Lilu/releases)) **or**
+- [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
+- [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/)
+
+By default, `WhateverGreen.kext` will load the brightness driver. If you want to use other brightness drivers you should disable their built-in brightness drivers. To disable it, do the following:
 
 - Add the boot-arg: `applbkl=0`
-- Modify the driver's settings: `Info.plist\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
+- Modify the driver's settings (right-click on the kext and select "show package contents"): `Info.plist\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
 
-**II. Patches:** (either or based on the chosen injection method)
+**II. Patches:** (either or, based on the chosen injection method)
 
   - Custom Brightness Patches:
 
     - ***SSDT-PNLF-SNB_IVY***: For 2nd and 3rd Gen Intel Machines
     - ***SSDT-PNLF-Haswell_Broadwell***: For 4th and 5th Gen
     - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
-    - ***SSDT-PNLF-CFL***: 8th+ gens
+    - ***SSDT-PNLF-CFL***: 8th gen and newer
 
     The above patches are inserted in `_SB`.
 
   - RehabMan Brightness Patches from his [RehabMan's Laptop Hotpach Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):
   
-    - [SSDT-PNLF.dsl](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl) 
-    - [SSDT-PNLFCFL.dsl](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
-    - [SSDT-RMCF.dsl](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl)
+    - [**SSDT-PNLF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl) 
+    - [**SSDT-PNLFCFL.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
+    - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl)
   
 	RehabMan luminance patch is inserted in `_SB.PCI0.IGPU`, rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. Rehabman's PNLF Patches require the following rename:
 
