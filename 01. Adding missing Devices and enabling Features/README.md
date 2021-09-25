@@ -53,9 +53,9 @@ In order to add/apply any of the following Devices/Patches, it is necessary to r
 
 ### Dumping the DSDT
 
-- Using **Clover** (easiest way): hit `F4` in the Boot Menu. You don't even need a working configuration to do this. The Dump will be located at: `EFI\CLOVER\ACPI\origin`
+- Using **Clover** (easiest way): hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a .zip file, extract it to an USB stick. The Dump will be located at: `EFI\CLOVER\ACPI\origin`
 - Using **SSDTTime** (in Windows): if you use SSDTTime under Windows, you can dump the DSDT, which is not possible if you use it under macOS.
-- Using **OpenCore** (requires Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The DSDT will be dumped during next boot. 
+- Using **OpenCore** (requires Debug version and working config): enable Misc > Debug > `SysReport` Quirk. The DSDT will be dumped during next boot.
 
 ### Looking for missing Devices/Features in the DSDT
 
