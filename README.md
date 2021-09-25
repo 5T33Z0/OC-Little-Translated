@@ -15,13 +15,14 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Rewrote sections which were confusing/misleading
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (Chapters 8 to 10)
+- Added new content (Chapters 8 to 11)
 
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
 
 ## Table of Contents
 #### 0. [Overview](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
+
 - ACPI Explained
 - ACPI Patches in OpenCore
 - ASL to AML Conversion Table
@@ -29,6 +30,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Important Patches
 
 #### 1. [Adding Fake Devices and enabling Features](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20missing%20Devices%20and%20enabling%20Features)
+
 - Ambient Light Sensor (SSDT-ALS0)
 - Brightness Controls (SSDT-PNLF)
 - CPU Power Management (SSDT-PLUG)
@@ -50,9 +52,10 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 #### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
 
-#### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03.%20USB%20Fixes)
+#### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/ain/03.%20USB%20Fixes)
 
 #### 4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Fixing%20Sleep%20and%20Wake%20Issues)
+
 - 06/0D Instant Wake Fix
 - Fixing AOAC Machines
 - PNP0C0E Sleep Correction Method
@@ -62,8 +65,8 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Battery%20Patches)
 
 	- Lenovo ThinkPads
-   	- other brands
-   	- Patches for Battery Status Information
+   	- Other brands
+   	- Patches for Battery Status
 
 - [**Brand-specific Patches for various Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Brand-specific%20Patches)
 	
@@ -88,6 +91,8 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 #### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20Terminal%20Commands)
 
 #### 10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10.%20Calculators)
+
+#### 11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11.%20Essential%20Tools%20and%20Apps)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
