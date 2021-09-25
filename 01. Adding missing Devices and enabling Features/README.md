@@ -11,17 +11,13 @@ Among the many `SSDT` patches, a significant number of them can be categorized a
 ## Properties of Fake ACPI Devices
 
 - Features:
-  
   - The fake device already exists in ACPI, and is relatively short, small and self-contained in code.  
   - The original device has a canonical `_HID` or `_CID` parameter.
   - Even if the original device is not disabled, patching with a counterfeit device will not harm ACPI.
-  
 - Requirements:
-
   - The counterfeit device name is **different** from the original device name of ACPI.
   - Patch content and original device main content **identical**.
   - The `_STA` section of the counterfeit patch should include the following to ensure that windows systems use the original ACPI.
-
     ```swift
         Method (_STA, 0, NotSerialized)
         {
