@@ -7,8 +7,10 @@ Incomplete list of useful Apps and Tools for hackintoshing.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator
 - [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
-- [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
+- [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Pyston Script   to generate a SSDT for Power Management (for older Intel CPUs) 
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based Bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAtrributes, etc.)
+- [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
+
 
 #### macOS
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP Partition
