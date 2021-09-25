@@ -5,7 +5,7 @@
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
 <details>
-<summary>**About the Translation**</summary>
+<summary><strong>About the Translation</strong></summary>
 
 **ABOUT THIS TRANSLATION:**
 
@@ -96,7 +96,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - insanelymac.com for being a really nice community with kind mods
 
 <details>
-<summary>**Daliansky's original Credits**</summary>
+<summary><strong>Daliansky's original Credits</strong></summary>
 
 > - Special credit to：
 >	- @XianWu write these ACPI component patches that useable to OpenCore
