@@ -6,10 +6,10 @@ Starting with `macOS Catalina`, Laptops now need a fake ambient light sensor `AL
 **NOTE**: The official OpenCore package contains a pre-made `SSDT-ALS0.aml` under "Docs". So in case you're not sure what to do you could also use that instead.
 
 ## Usage
-There are two possible scenarios/cases: 
+There are two possible cases: 
 
 1. `ACPI` has an ambient light sensor. 
-2. `ACPI` doesn't ha have it
+2. `ACPI` doesn't ha have one
 
 First, search for `ACPI0008` in the original `DSDT`. If you can find the associated device – usually named `ALSD` – then the ambient light sensor device interface exists, otherwise it means that the ambient light sensor device interface does not exist.
 
