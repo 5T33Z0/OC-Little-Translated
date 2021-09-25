@@ -1,21 +1,23 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 
-![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08.%20Config%20Tips%20%26%20Tricks/maciasl.png)
+![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/08.%20Config%20Tips%20%26%20Tricks/maciasl.png)
 
-A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader.
+Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
-**DISCLAIMER**: This is my english translation of the OC-Little Repo by [daliansky](https://github.com/daliansky/OC-little). All credits go to her/him/them. All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched  except `SSDT-OC-XOSI` which I updated to support Windows 10, 2004! The chinese READMEs are included for reference as well.
+<details>
+<summary>**About the Translation**</summary>
 
 **ABOUT THIS TRANSLATION:**
 
-- I reorganized the Repo into more plausible categories and sub-categories based on types of issues, components, etc.
+- I reorganized the Repo into more plausible (sub-)categories based on types of issues, components, etc.
 - restructured most of the texts so that they are more logical and readable
 - re-wrote sections which were confusing/misleading
-- added further explanation where necessary
+- added further explanations where necessary
 - added new description where there were missing
-- added new content (chptrs. 8 to 10)
+- added new content (chapters 8 to 10)
 
-**NOTE**: Although this repo looks smaller than the original, believe me it is not, it's just re-organized and re-structured into more useful categories. All of the content – and more – is present!
+**NOTE**: Although this repo might look smaller than the original, it is not! It's just re-organized and re-structured into more useful categories. All of the content of the original is present – and then some!
+</details>
 
 ## Table of Contents
 #### 0. [Overview](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
@@ -93,7 +95,8 @@ A compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boo
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
 
-Daliansky's original Credits:
+<details>
+<summary>**Daliansky's original Credits**</summary>
 
 > - Special credit to：
 >	- @XianWu write these ACPI component patches that useable to OpenCore
@@ -106,3 +109,4 @@ Daliansky's original Credits:
 >	- @大勇-小新air13-OC-划水小白
 >	- @xjn819
 >	- Acidanthera for maintaining OpenCorePkg
+</details>
