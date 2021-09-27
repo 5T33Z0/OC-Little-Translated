@@ -1,6 +1,12 @@
 ## Essential Hackintosh Tools
 Incomplete list of useful Apps and Tools for hackintoshing.
 
+#### Bootloaders
+- [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
+- [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
+- [**Clover Releases**](https://github.com/CloverHackyColor/CloverBootloader/releases)
+- [**Clover Suite Builder**](https://www.insanelymac.com/forum/topic/347872-introducing-clover-suite-builder/) (Tool for compiling Clover)
+
 #### Cross-Platform
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Plist Editor
