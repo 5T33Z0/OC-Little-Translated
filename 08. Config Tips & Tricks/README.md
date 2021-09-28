@@ -35,7 +35,7 @@ Currently there are three automated methods to check your `config.plist` for err
  
 While Sanity Checker focuses on correct settings for the selected system, OC Validate checks the structure as well as the syntax of the config for errors. OCAT can update the structure automatically and has OC Validtae built in. Therefore it makes sense to check the config in two steps: first online and then offline.
 
-**CAUTION**: Don't use OpenCore Configurator for editing your `config.pllist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed oder relocated in the config. This results in errors when rebooting.
+**CAUTION**: Don't use OpenCore Configurator for editing your `config.plist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed oder relocated in the config. This results in errors when rebooting.
 </details>
 <details>
 <summary><strong>Fixing Boot Issues</strong></summary>
