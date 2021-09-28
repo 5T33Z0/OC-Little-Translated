@@ -1,5 +1,5 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
-**Last Update**: September 20th, 2021
+**Last Update**: September 28th, 2021
 
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. 
 
