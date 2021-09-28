@@ -5,7 +5,16 @@ This section contains a small collection of useful tips and tricks for working w
 
 For updating OpenCore reliably and easily to the latest version, follow my [New OpenCore Update Guide](https://www.insanelymac.com/forum/topic/347035-guide-updating-and-maintaining-opencore-new-method/) on Insanelymac.com.
 
-## OpenCore Troubleshooting Workflow
+## OpenCore Troubleshooting Quicktips:
+
+Besides checcking the obvious (like Booter Settings and Quirks), check the following Settings:
+
+- `ConnectDrivers` = true
+- `SecureBootModel` = Disabled
+- `Vault` = Optional
+- `MinDate` = -1
+- `MinVersion` = -1
+- Compare Structor of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
 
 ![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134424805-bf3318b9-2aa8-4105-80b9-7038e49f7409.png)
 
