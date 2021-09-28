@@ -7,7 +7,7 @@ For updating OpenCore reliably and easily to the latest version, follow my [New 
 
 ## OpenCore Troubleshooting Quicktips:
 
-Besides checcking the obvious (like Booter Settings and Quirks), check the following Settings:
+Besides checking the obvious (like Booter Settings and Quirks), check the following Settings:
 
 - `ConnectDrivers` = true
 - `SecureBootModel` = Disabled
