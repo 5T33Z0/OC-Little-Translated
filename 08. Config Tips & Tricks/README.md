@@ -16,7 +16,7 @@ Besides checcking the obvious (like Booter Settings and Quirks), check the follo
 - `MinVersion` = -1
 - Compare Structor of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
 
-![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134424805-bf3318b9-2aa8-4105-80b9-7038e49f7409.png)
+**OC Troubleshooiting Workflow**:![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134424805-bf3318b9-2aa8-4105-80b9-7038e49f7409.png)
 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
