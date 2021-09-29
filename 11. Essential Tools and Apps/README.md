@@ -8,6 +8,7 @@ Incomplete list of useful Apps and Tools for hackintoshing.
 - [**Clover Suite Builder**](https://www.insanelymac.com/forum/topic/347872-introducing-clover-suite-builder/) (Tool for compiling Clover)
 
 #### Cross-Platform
+- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running alot of the python-scripts in this list
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Plist Editor
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator
