@@ -15,9 +15,7 @@ Besides checking the obvious (like Booter Settings and Quirks), check the follow
 - `MinDate` = -1
 - `MinVersion` = -1
 - Compare Structor of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
-
-**OC Troubleshooiting Workflow**:![Bildschirmfoto](https://user-images.githubusercontent.com/76865553/134424805-bf3318b9-2aa8-4105-80b9-7038e49f7409.png)
-
+- **OC Troubleshooiting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
 
