@@ -109,3 +109,8 @@ or
 `sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`
 
 [Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
+
+**Change Update Seed to Developer**</br>
+`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
+`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
+
