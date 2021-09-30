@@ -70,9 +70,9 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 - [**Brand-specific Patches for various Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Brand-specific%20Patches)
 	
-	- Dell Machine Special Patch
+	- Dell Laptop Special Patch
 	- Xiaoxin PRO13 Special Patch
-	- Asus Machine Special Patch
+	- Asus Laptop Special Patch
 
 - [**Fixing Keyboard Mappings and Brightness Keys**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 
@@ -85,7 +85,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 #### 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
 
 #### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20Config%20Tips%20%26%20Tricks)
-- Config.plist tipps
+- Config.plist tips
 - Kext Loading Sequence Examples 	
 
 #### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20Terminal%20Commands)
@@ -96,7 +96,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 ## 5T33Z0's 5H0UT 0UT5:
 
-- sascha_77 for Kext Upater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
+- sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
 - insanelymac.com for being a really nice community with kind mods
@@ -106,7 +106,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 > - Special credit to：
 >	- @XianWu write these ACPI component patches that useable to OpenCore
->	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
+>	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalization.
 >	- Credits and thanks to：
 >	-  @冬瓜-X1C5th
 >	- @OC-xlivans
