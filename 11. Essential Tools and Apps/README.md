@@ -25,7 +25,7 @@ Incomplete list of useful Apps and Tools for hackintoshing.
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
 - [**Hackintool**](https://github.com/headkaze/Hackintool) – Powerful post-install utility that everyone should have in their Hackintosh tool box
 - [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/) – Great App for checking and downloading Kext updates, Bootloader files, etc.
-- [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS and creating an USB Installer
+- [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS, creating an USB Installer and changing the Update Seed
 
 #### Windows
 Suggest some. Otherwise refer to "Cross-Platform" Section.
