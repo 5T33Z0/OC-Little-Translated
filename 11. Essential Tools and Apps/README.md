@@ -14,7 +14,6 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator. Migrates config.plist to the latest form when saving
 - [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
-- [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Pyston Script   to generate a SSDT for Power Management (for older Intel CPUs) 
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based Bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAtrributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
@@ -25,6 +24,7 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
 - [**Hackintool**](https://github.com/headkaze/Hackintool) – Powerful post-install utility that everyone should have in their Hackintosh tool box
+- [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Python Script to generate a SSDT for Power Management (for older Intel CPUs) 
 - [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/) – Great App for checking and downloading Kext updates, Bootloader files, etc.
 - [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS, creating an USB Installer and changing the Update Seed which can help resolving issues with system updates
 
