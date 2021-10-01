@@ -18,7 +18,7 @@ Incomplete list of useful Apps and Tools for hackintoshing.
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based Bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAtrributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
-- [**USBToolbox**](https://github.com/USBToolBox/tool) – USBPPort mapping tool. Makes port mapping under macOS 11.3+
+- [**USBToolbox**](https://github.com/USBToolBox/tool) – USBPPort mapping tool. Makes port mapping under macOS 11.3+ easier
 
 #### macOS
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP Partition
