@@ -1,5 +1,5 @@
 ## Essential Hackintosh Tools
-Incomplete list of useful Apps and Tools for hackintoshing.
+Incomplete list of useful freeware Apps and Tools for hackintoshing.
 
 #### Bootloaders
 - [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
