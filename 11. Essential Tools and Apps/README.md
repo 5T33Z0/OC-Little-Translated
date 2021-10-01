@@ -11,7 +11,7 @@ Incomplete list of useful Apps and Tools for hackintoshing.
 - [**Python Installer**](https://www.python.org/downloads/) – Necessary for running alot of the python-scripts in this list
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Plist Editor
-- [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator
+- [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator. Migrates config.plist to the latest form when saving
 - [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
 - [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Pyston Script   to generate a SSDT for Power Management (for older Intel CPUs) 
