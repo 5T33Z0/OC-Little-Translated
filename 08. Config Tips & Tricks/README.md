@@ -136,7 +136,9 @@ Enables the key combinations known from Macs to use boot modes like Verbose, Saf
 
 **ConnectDrivers** = `No`
 
-If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case.
+If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case. 
+
+**NOTE**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be unabled, otherwise you won't see the drive in the bootpicker.
 
 ## Boot variants (Selection)
 
@@ -161,10 +163,14 @@ Great for dual boot setups. Combine it with the`LauncherOption` `Full` or `Short
 
 #### **Start macOS automatically (no GUI, fast)**
 
-The following settings will boot macOS from first APFS volume it finds. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over your system.
+The following settings will boot macOS from first APFS volume it finds. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over the bootloader.
 
-**PickerMode** = `BootApple`</br>
+**Prerequisites**: enabled `PollAppleHotkeys` 
+
+**PickerMode** = `Apple`</br>
 **ShowPicker** = `No`
+
+**NOTE**: Hold `X` after turning on the system to directly boot into macOS
 
 This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WIndowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
 
