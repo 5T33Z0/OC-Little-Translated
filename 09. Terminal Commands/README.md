@@ -52,7 +52,7 @@
 `log show --last boot`
 
 **Search for terms in last boot log**:</br>
-show --last boot | grep your searchterm
+`show --last boot | grep` your searchterm
 
 log show --last boot | grep "VRMI"
 
@@ -64,8 +64,9 @@ log show --last boot | grep "VRMI"
 
 **Check if used Hardware supports Apple Secure Boot**:</br>
 
-1. In Terminal, execute: `nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
-2. Check the Results:
+1. In Terminal, execute:</br>
+`nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
+3. Check the Results:
 	-  if `%00` = No Security mode.
 	-  if `%01` = Medium Security mode
 	-  if `%02` = Full Security mode 
