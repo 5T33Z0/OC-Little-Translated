@@ -21,7 +21,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 </details>
 
 ## Table of Contents
-#### 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00.%20Overview)
+#### 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_Overview)
 
 - ACPI Explained
 - ACPI Patches in OpenCore
@@ -29,7 +29,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - SSDT Loading Sequence
 - Important Patches
 
-#### 1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01.%20Adding%20missing%20Devices%20and%20enabling%20Features)
+#### 1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features)
 
 - Ambient Light Sensor (SSDT-ALS0)
 - Brightness Controls (SSDT-PNLF)
@@ -50,7 +50,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - OS Compatibility Patch (XOSI)
 - Xtra: Enabling XCPM on Ivy Bridge CPUs
 
-#### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02.%20Disabling%20unsupported%20devices)
+#### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_unsupported_devices)
 
 #### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/ain/03.%20USB%20Fixes)
 
