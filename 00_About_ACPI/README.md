@@ -16,7 +16,7 @@ In order to create these Hotpatches, we need to extracht – or as we say, dump
 ### Important ACPI Tables for hackintoshing
 
 #### DSDT.aml 
-The DSDT or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt)) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS sees as an iMac mainboard.
+The DSDT or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt)) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS sees as an iMac mainboard, for example.
 
 #### SSDT-xxxx.aml
 SSDTs or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This include but are not limited to tables, such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
