@@ -21,7 +21,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 </details>
 
 ## Table of Contents
-#### 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_Overview)
+#### 0. [**About ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI)
 - ACPI Explained
 - ACPI Patches in OpenCore
 - ASL to AML Conversion Table
