@@ -2,9 +2,11 @@
 
 This section includes a spreadsheet for Apple Numbers and MS Excel for calculating correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided in the `Documentation.pdf` included in the OpenCore Package. 
 
-If you are looking for an actual tool to calculate these things (and more), you should check out CorpNewt's [BitmaskDecode](https://github.com/corpnewt/BitmaskDecode) 
+If you are looking for an actual tool to calculate these things (and more), you should check out CorpNewt's [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode)
 
-**Supported OC Version:** 0.7.4
+There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.app/)
+
+**Supported OC Version:** 0.7.4+
 
 **Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes and ExposeSensitiveData
 
