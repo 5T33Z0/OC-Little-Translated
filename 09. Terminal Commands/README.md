@@ -62,7 +62,8 @@ log show --last boot | grep "VRMI"
 **Check currently active csr-active-config set in NVRAM**:</br>
 `nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config`
 
-**Create a new shapshot** (after changing system files):
+**Create new shapshot** (macOS 11+ only) In Recovery, enter:
+`csrutil authenticated-root disable`
 `bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot` (x = name of your macOS Big Sur/Monterey Volume)
 
 **Check if used Hardware supports Apple Secure Boot**:</br>
