@@ -3,7 +3,7 @@
 
 "ACPI… the final frontier…". No, not really. But this is how overwhelming it feels to most Hackintosh users, when looking inside an .aml file for the very first time. Understanding what they see is an overwhelming undertaking of epochal proportions that seems impossible to grasp. And that's who this introduction is for. But first things first…
 
-Each mainboard ships with a set of binary files inside the BIOS, the ACPI Forms. Basically these links the hardware the operating system. The number and content of ACPI forms varies from machine to machine and ***may*** vary between different BIOS versions as well.
+Each mainboard ships with a set of binary files inside the BIOS, the ACPI Forms. Basically these link the hardware to the operating system. The number and content of ACPI forms varies from machine to machine and ***may*** vary between different BIOS versions as well.
 
 **ACPI** stands for Advanced Configuration & Power Interface. It is an open power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers which formed the ACPI special interest group. In October 2013, the assets of the ACPI Specifiction were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
 
