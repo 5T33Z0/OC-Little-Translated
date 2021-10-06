@@ -26,13 +26,13 @@ The following Sections will help you to get a depper understanding about ACPI, A
 
 ## ACPI – A Brief Introduction 
 
-ACPI (Advanced Configuration & Power Interface) is an advanced computer configuration and power interface, which is a power management standard developed by Intel, Microsoft and other manufacturers, namely [`ACPI specification`](https://www.acpica.org/documentation). Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and **may** vary between differen BIOS versions as well. 
+ACPI (Advanced Configuration & Power Interface) is an open power management standard originall developed by Intel, Microsoft, Toshiba and other manufacturers which formed ACPI special interest group. In October 2013, all assets were transfered to the UEFI Forum. The latest update of the ACPI Specification was released in Janury 2021 and can be found here: https://uefi.org/specifications. Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and ***may*** vary between differen BIOS versions as well.
 
 **ACPI Forms include:**
 
-* `DSDT.aml`
-* Multiple SSDT-xxxx.aml, such as: `SSDT-SataAhci.aml`, `SSDT-CpuSsdt.aml`, `SSDT-CB-01.aml`, etc.
-* Other .aml such as: `APIC.aml`, `BGRT.aml`, `DMAR.aml`, `ECDT.aml`, etc.
+* **DSDT.aml** ([Differetiated System Descripton Table](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt))
+* **SSDT-xxxx.aml** ([Secondary System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt)), such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
+* Other .aml such as: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`, etc.
 
 The ACPI Form describes the machine's hardware information in `.aml` format and does not have any driver capabilities of its own. However, the correct ACPI is required for a piece of hardware to work properly, and the wrong way of describing it can lead to boot failures or system crashes. For example, if the machine has a Broadcom NIC plugged in, but in the ACPI it's described as an Intel NIC, the system will load the Intel NIC driver, which is obviously wrong. Another example is that the machine does not provide `auto-adjust brightness` hardware, even if the ACPI adds `SSDT-ALS0`, the brightness can not be adjusted automatically.
 
@@ -40,13 +40,13 @@ Some Tools and Bootloaders can extract the machine's ACPI Form, like Aida64 unde
 
 Because the working principles of Windows and macOS are different, Hackintoshes require fixes for certain ACPI Tables. Having a correct ACPI is the foundation of stable working Hackintosh. **Hotpatching** is highly recommended to patch the ACPI. Hotpatches can be a good way to avoid the so-called `DSDT` errors.
 
-For more details about ACPI, please refer to the official [`ACPI Specifications`](https://www.acpica.org/documentation); for an introduction to the aml language, please refer to chapter "ASL Syntax Basics".
+For more details about ACPI in general, please refer to the official [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/index.html); for an introduction to the ASL language, please refer to chapter [ACPI Source Language Reference](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
 </details>
 <details>
 <summary><strong>ACPI Patches in OpenCore</strong></summary>
 
 ### ACPI Patches in OpenCore
-The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
+The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing. 
 
 OpenCore, applies ACPI changes applied globally to *every* operating system (unlike Clover) in the following order (as defined in the `config.plist`):
 
@@ -56,31 +56,38 @@ OpenCore, applies ACPI changes applied globally to *every* operating system (unl
 4. `Quirks` are processed
 
 #### Other ACPI Tables and Patching Methods
+For more info about each one of the mentioned ACPI Tables below, please refer to the List of available [ACPI System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
+
+![](/Users/kl45u5/Desktop/OC_ACPI_Patches.png)
+
+- **FACP.aml**
+  - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
+  - **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), the FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by an **FACP.aml** in the machine's ACPI Table, such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following fuctions:
+		- If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try setting `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding ***SSDT-PMCR*** instead. It's located under "Adding Missing Parts".
+		- `Low Power S0 Idle` state. Tthe **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the "About AOAC" section for more details on `AOAC`.
 
 - **Clear ACPI Header fields** 
 	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true` 
 	- **Note**: Only required on macOS 10.13
+
+- **BGRT.aml** 
+    - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true` 
+    - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
+    - **Note:** Not all machines have this form
 
 - **Relocate ACPI Memory Regions** 
     - **Patch method**: `ACPI\Quirks\RebaseRegions` = `true` 
     - **Description**: ACPI forms have memory regions with both dynamically allocated addresses and fixed addresses. 
     - **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
 
-- **FACP.aml** 
-  - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
-  - **Description**: [`ACPI Specification`](https://www.acpica.org/documentation) defines various system states related to configuration and power management in terms of **FADT** which is represented by an **FACP.aml** in the machine's ACPI Table. The **FACP.aml** implements features such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following fuctions:
-		- If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try setting `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding ***SSDT-PMCR*** instead. It's located under "Adding Missing Parts".
-		- `Low Power S0 Idle` state. Tthe **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the "About AOAC" section for more details on `AOAC`.
-
 - **FACS.aml** 
     - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true` 
     - **Decription**: The `Hardware Signature` item of the **FACS.aml** form is a 4-byte hardware signature, which is calculated after the system boots based on the hardware configuration. If this value is changed after the machine wakes up from a **Hibernate** state, the system will not recover correctly. The patch works by setting the `Hardware Signature` = `0` to resolve this issue.
     - **Note:** If the system has **Hibernation** disabled, you do not need to bother with this patch!
 
-- **BGRT.aml** 
-    - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true` 
-    - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
-    - **Note:** Not all machines have this form
+- **SLIC.aml**
+	- **Patch method**: `ACPI\Quirks\SyncTableIds` = `true`
+	- **Description**: Microsoft Software Licensing table. This works around patched tables becoming incompatible with the SLIC table causing licensing issues in older Windows operating systems.
 
 - **DMAR.aml** 
     - **Patch method**: `Kernel\Quirks\DisableIoMapper` = `true` 
