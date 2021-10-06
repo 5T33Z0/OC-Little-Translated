@@ -20,17 +20,17 @@ You may need to disable or enable certain components in order to solve specific 
 - `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems  these patches should be used with **Caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 
-The following Sections will help you to get a depper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
+The following Sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
 <details>
 <summary><strong>ACPI Explained</strong></summary>
 
 ## ACPI – A Brief Introduction 
 
-ACPI (Advanced Configuration & Power Interface) is an open power management standard originall developed by Intel, Microsoft, Toshiba and other manufacturers which formed ACPI special interest group. In October 2013, all assets were transfered to the UEFI Forum. The latest update of the ACPI Specification was released in Janury 2021 and can be found here: https://uefi.org/specifications. Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and ***may*** vary between differen BIOS versions as well.
+ACPI (Advanced Configuration & Power Interface) is an open power management standard originally developed by Intel, Microsoft, Toshiba and other manufacturers which formed ACPI special interest group. In October 2013, all assets were transferred to the UEFI Forum. The latest update of the ACPI Specification was released in January 2021 and can be found here: https://uefi.org/specifications. Each computer is shipped with a set of binary files that conform to the ACPI specification, which we call ACPI forms. The number and content of ACPI forms varies from machine to machine and ***may*** vary between different BIOS versions as well.
 
 **ACPI Forms include:**
 
-* **DSDT.aml** ([Differetiated System Descripton Table](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt))
+* **DSDT.aml** ([Differentiated System Description Table](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt))
 * **SSDT-xxxx.aml** ([Secondary System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt)), such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
 * Other .aml such as: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`, etc.
 
@@ -62,7 +62,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 	
 - **FACP.aml**
   - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
-  - **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), the FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by an **FACP.aml** in the machine's ACPI Table, such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following fuctions:
+  - **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), the FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by an **FACP.aml** in the machine's ACPI Table, such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following functions:
 		- If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try setting `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding ***SSDT-PMCR*** instead. It's located under "Adding Missing Parts".
 		- `Low Power S0 Idle` state. Tthe **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the "About AOAC" section for more details on `AOAC`.
 
@@ -95,7 +95,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
     - **Note**: Only early Mac systems need this patch
 
 - **ECDT.aml**:
-    - **Patch Method**: Binary rename to rename it to `EC`. Has to be appliad globally so all references to its Name and `Namepath` in all of the ACPI forms are identical. Otherwise the whole ACPI gets borked.
+    - **Patch Method**: Binary rename to rename it to `EC`. Has to be applied globally so all references to its Name and `Namepath` in all of the ACPI forms are identical. Otherwise the whole ACPI gets borked.
     - **Description**: Embedded Controller.
     - **Note**: Individual machines (e.g. **Lenovo yoga-s740**) have `Namepath` in the **ECDT.aml** form that is inconsistent with the `EC` name of other ACPI forms, which can cause ACPI errors during the boot process. This patch is a good solution to the ACPI error problem.
     - **Note**: Not all machines have this table. Use SSDTTime to generate a fake EC.
@@ -296,21 +296,21 @@ Local1 = Local0
 
 ## ASL Calculation
 
-|  ASL+  |  Legacy ASL|  Examples                                                         |
-| :----: | :--------: | :----------------------------------------------------------- |
-|   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                    |
-|   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`               |
-|   *    |  Multiply  |     `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`               |
-|   /    |   Divide   |    `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))` |
-|   %    |    Mod     |     `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                  |
-|   <<   | ShiftLeft  |      `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`           |
-|   >>   | ShiftRight |    `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)` |
-|   --   | Decrement  |   `Local0--`<br/>`Decrement (Local0)`                          |
-|   ++   | Increment  |   `Local0++`<br/>`Increment (Local0)`                          |
-|   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`        |
-| &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`  |
-|   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
-|        |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
+|  ASL+  |  Legacy ASL|  Examples                                                                 |
+| :----: | :--------: | :------------------------------------------------------------------------ |
+|   +    |    Add     | `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                                 |
+|   -    |  Subtract  | `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`                            |
+|   *    |  Multiply  | `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`                            |
+|   /    |   Divide   | `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))` |
+|   %    |    Mod     | `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                               |
+|   <<   | ShiftLeft  | `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`                        |
+|   >>   | ShiftRight | `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)`             |
+|   --   | Decrement  | `Local0--`<br/>`Decrement (Local0)`                                       |
+|   ++   | Increment  | `Local0++`<br/>`Increment (Local0)`                                       |
+|   &    |    And     | `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`                     |
+| &#124; |     Or     | `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`                 |
+|   ~    |    Not     | `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                                |
+|        |    Nor     | `Nor (0x11, 0x22, Local0)`                                                |
 
 Read `ACPI Specification` for more details
 
@@ -410,7 +410,7 @@ Only two results from logical calculation - `0` or `1`
         TEST ()
    }
    ```
-If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first one finalised. If we state:
+If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first one finalized. If we state:
 
    ```swift
    Method (TEST, NotSerialized)
@@ -469,7 +469,6 @@ We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the 
 
 ### `_CRS` (Current Resource Settings)
 `_CRS` returns a `Buffer`, it is often utilized to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.
-
 
 ## ASL flow Control
 
@@ -582,23 +581,23 @@ While (Local0 < 8)
 
 ## `External` Quote
 
-|    Quote Types    | External SSDT Quote| Quoted    |
-| :------------: | :------------ |  :------------------------------------ |
-|   UnknownObj    | `External (\_SB.EROR, UnknownObj`             | (avoid to use)                          |
-|     IntObj        | `External (TEST, IntObj`                      | `Name (TEST, 0)`                                                        |
-|     StrObj        | `External (\_PR.MSTR, StrObj`                 | `Name (MSTR,"ASL")`                                                     |
-|    BuffObj       | `External (\_SB.PCI0.I2C0.TPD0.SBFB, BuffObj` | `Name (SBFB, ResourceTemplate ()`<br/>`Name (BUF0, Buffer() {"abcde"})` |
-|     PkgObj      | `External (_SB.PCI0.RP01._PRW, PkgObj`        | `Name (_PRW, Package (0x02) { 0x0D, 0x03 })`                            |
-|  FieldUnitObj     | `External (OSYS, FieldUnitObj`                | `OSYS,   16,`                                                           |
-|   DeviceObj       | `External (\_SB.PCI0.I2C1.ETPD, DeviceObj`    | `Device (ETPD)`                                                         |
-|    EventObj       | `External (XXXX, EventObj`                    | `Event (XXXX)`                                                          |
-|   MethodObj        | `External (\_SB.PCI0.GPI0._STA, MethodObj`    | `Method (_STA, 0, NotSerialized)`                                       |
-|    MutexObj       | `External (_SB.PCI0.LPCB.EC0.BATM, MutexObj`  | `Mutex (BATM, 0x07)`                                                    |
-|  OpRegionObj      | `External (GNVS, OpRegionObj`                 | `OperationRegion (GNVS, SystemMemory, 0x7A4E7000, 0x0866)`              |
-|  PowerResObj     | `External (\_SB.PCI0.XDCI, PowerResObj`       | `PowerResource (USBC, 0, 0)`                                            |
-|  ProcessorObj      | `External (\_SB.PR00, ProcessorObj`           | `Processor (PR00, 0x01, 0x00001810, 0x06)`                              |
-| ThermalZoneObj    | `External (\_TZ.THRM, ThermalZoneObj`         | `ThermalZone (THRM)`                                                    |
-|  BuffFieldObj      | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`                                        |
+|  Quote Types   | External SSDT Quote| Quoted                   |
+| :------------: | :-------------------------------------------- | :---------------------------------------------------------------------- |
+|   UnknownObj   | `External (\_SB.EROR, UnknownObj`             | (avoid to use)                                                          |
+|     IntObj     | `External (TEST, IntObj`                      | `Name (TEST, 0)`                                                        |
+|     StrObj     | `External (\_PR.MSTR, StrObj`                 | `Name (MSTR,"ASL")`                                                     |
+|    BuffObj     | `External (\_SB.PCI0.I2C0.TPD0.SBFB, BuffObj` | `Name (SBFB, ResourceTemplate ()`<br/>`Name (BUF0, Buffer() {"abcde"})` |
+|     PkgObj     | `External (_SB.PCI0.RP01._PRW, PkgObj`        | `Name (_PRW, Package (0x02) { 0x0D, 0x03 })`                            |
+|  FieldUnitObj  | `External (OSYS, FieldUnitObj`                | `OSYS,   16,`                                                           |
+|   DeviceObj    | `External (\_SB.PCI0.I2C1.ETPD, DeviceObj`    | `Device (ETPD)`                                                         |
+|    EventObj    | `External (XXXX, EventObj`                    | `Event (XXXX)`                                                          |
+|   MethodObj    | `External (\_SB.PCI0.GPI0._STA, MethodObj`    | `Method (_STA, 0, NotSerialized)`                                       |
+|    MutexObj    | `External (_SB.PCI0.LPCB.EC0.BATM, MutexObj`  | `Mutex (BATM, 0x07)`                                                    |
+|  OpRegionObj   | `External (GNVS, OpRegionObj`                 | `OperationRegion (GNVS, SystemMemory, 0x7A4E7000, 0x0866)`              |
+|  PowerResObj   | `External (\_SB.PCI0.XDCI, PowerResObj`       | `PowerResource (USBC, 0, 0)`                                            |
+|  ProcessorObj  | `External (\_SB.PR00, ProcessorObj`           | `Processor (PR00, 0x01, 0x00001810, 0x06)`                              |
+| ThermalZoneObj | `External (\_TZ.THRM, ThermalZoneObj`         | `ThermalZone (THRM)`                                                    |
+|  BuffFieldObj  | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`                                        |
 
 > DDBHandleObj is rare, no discussion
 
