@@ -24,6 +24,8 @@ SSDTs or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6
 Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
 
 For more details about ACPI in general, please refer to the official [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/index.html); for an introduction to the ASL language, please refer to chapter [ACPI Source Language Reference](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
+
+The following Sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
 <details>
 <summary><strong>ACPI Renames and Hotpaches</strong></summary>
 
@@ -46,8 +48,6 @@ You may need to disable or enable certain components in order to solve specific 
 
 - `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems  these patches should be used with **Caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
-
-The following Sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
 </details>
 <details>
 <summary><strong>ACPI Patches in OpenCore</strong></summary>
