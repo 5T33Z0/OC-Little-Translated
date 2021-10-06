@@ -55,7 +55,7 @@ You may need to disable or enable certain components in order to solve specific 
 ### ACPI Patches in OpenCore
 The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing. 
 
-OpenCore, applies ACPI changes applied globally to *every* operating system (unlike Clover) in the following order (as defined in the `config.plist`):
+OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order (as defined in the `config.plist`):
 
 1. `Patch` is processed
 2. `Delete` is processed 
