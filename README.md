@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 
-![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/08.%20Config%20Tips%20%26%20Tricks/maciasl.png)
+![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/08_Config_Tips_and_Tricks/maciasl.png)
 
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
@@ -22,15 +22,12 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 ## Table of Contents
 #### 0. [**Overview**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_Overview)
-
 - ACPI Explained
 - ACPI Patches in OpenCore
 - ASL to AML Conversion Table
 - SSDT Loading Sequence
 - Important Patches
-
 #### 1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features)
-
 - Ambient Light Sensor (SSDT-ALS0)
 - Brightness Controls (SSDT-PNLF)
 - CPU Power Management (SSDT-PLUG)
@@ -49,18 +46,13 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - System Management Bus (SMBus) & Memory Controller (MCHC)
 - OS Compatibility Patch (XOSI)
 - Xtra: Enabling XCPM on Ivy Bridge CPUs
-
 #### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_unsupported_devices)
-
-#### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/ain/03.%20USB%20Fixes)
-
-#### 4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04.%20Fixing%20Sleep%20and%20Wake%20Issues)
-
+#### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
+#### 4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
 - 06/0D Instant Wake Fix
 - Fixing AOAC Machines
 - PNP0C0E Sleep Correction Method
 - PTSWAKTTS Sleep and Wake Fix
-
 #### 5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches)
 - [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Battery%20Patches)
 
@@ -79,19 +71,13 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05.%20Laptop-specific%20Patches/Fixing%20Keyboard%20Mappings%20and%20Brightness%20Keys)
 	- I2C TrackPad Patches
 	- ThinkPad Click and TrackPad Patches
-
 #### 6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20CMOS-related%20Fixes)
-
 #### 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07.%20ACPI%20Debugging)
-
 #### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08.%20Config%20Tips%20%26%20Tricks)
 - Config.plist tips
 - Kext Loading Sequence Examples 	
-
 #### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09.%20Terminal%20Commands)
-
 #### 10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10.%20Calculators)
-
 #### 11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11.%20Essential%20Tools%20and%20Apps)
 
 ## 5T33Z0's 5H0UT 0UT5:
