@@ -57,9 +57,9 @@ OpenCore, applies ACPI changes applied globally to *every* operating system (unl
 
 #### Other ACPI Tables and Patching Methods
 For more info about each one of the mentioned ACPI Tables below, please refer to the List of available [ACPI System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
-
-![](/Users/kl45u5/Desktop/OC_ACPI_Patches.png)
-
+	
+![OC_ACPI_Patches](https://user-images.githubusercontent.com/76865553/136164424-ad3c01a5-546c-4f05-bdba-2e2d7eb72bd3.png)
+	
 - **FACP.aml**
   - **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
   - **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), the FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by an **FACP.aml** in the machine's ACPI Table, such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following fuctions:
