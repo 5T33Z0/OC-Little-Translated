@@ -62,7 +62,7 @@ log show --last boot | grep "VRMI"
 **Check currently active csr-active-config set in NVRAM**:</br>
 `nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config`
 
-**Create new shapshot** (macOS 11+ only) In Recovery, enter:</br
+**Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
 `csrutil authenticated-root disable`</br>
 `bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot` (x = name of your macOS Big Sur/Monterey Volume)
 
