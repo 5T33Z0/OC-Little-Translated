@@ -1,4 +1,4 @@
-# Overview
+# ACPI Basics
 
 ## About ACPI Renames and Hotpatches
 
