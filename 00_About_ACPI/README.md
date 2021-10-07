@@ -1,7 +1,7 @@
 # ACPI Basics
 ## Brief Introduction to ACPI
 
-"ACPI… the final frontier…". No, not really. But this is how overwhelming it feels to most Hackintosh users, when looking inside an .aml file for the very first time. Understanding what they see is an overwhelming undertaking of epochal proportions that seems impossible to grasp. And that's who this introduction is for. But first things first…
+"ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and have a look inside. Understanding  what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
 
 Each mainboard ships with a set of binary files inside the BIOS, the ACPI Forms. Basically these link the hardware to the operating system. The number and content of ACPI forms varies from machine to machine and ***may*** vary between different BIOS versions as well.
 
