@@ -1,43 +1,45 @@
 # ACPI Basics
 ## Brief Introduction to ACPI
 
-"ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and have a look inside. Understanding  what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
+"ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding  what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
 
 ### What is ACPI?
-**ACPI** stands for Advanced Configuration & Power Interface. It is an open power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers which formed the ACPI special interest group. In October 2013, the assets of the ACPI Specifiction were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
+**ACPI** stands for Advanced Configuration & Power Interface. It is an architecture-independent power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers who formed the ACPI special interest group. In October 2013, the assets of the ACPI Specifiction were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
 
 The ACPI Form describes a machine's hardware information in `.aml` format and does not have any driver capabilities of its own. However, the correct ACPI is required for a piece of hardware to work properly, otherwise it can lead to boot failures or system crashes. 
 
-Each computer mainboard ships with a set of binary files inside the BIOS, the ACPI Forms. Basically these link the hardware to the operating system:
+Each computer mainboard ships with a set of binary files inside the BIOS, the ACPI Tables/Forms. ACPI serves as an interface layer between the operating system and system firmware, as shown below:
 
 ![](https://uefi.org/specs/ACPI/6.4/_images/acpi-overview.png)</br>
-**Source**: [**UEFI.org**](https://uefi.org/specs/ACPI/6.4/_images/acpi-overview.png)
+**Source**: [**UEFI.org**](https://uefi.org/specs/ACPI/6.4/Frontmatter/Overview/Overview.html)
 
-The number and content of ACPI forms varies from used mainboard and chipset - it even *can* vary between different BIOS versions as well.
+The number and content of ACPI tables varies from used mainboard and chipset - it even *can* vary between different BIOS versions as well.
 
 ### Introduction to ACPI Hotpatching
 
-Because unlike Windows, macOS has no hardware detection (besides the components defined in a Mac's ACPI), Hackintoshes require fixes for certain ACPI Tables so that macOS can "understand" them. Having the correct ACPI for macOS is the foundation of a stable Hackintosh. 
+Unlike Windows, macOS has no hardware detection capabilities because it doesn't need it, since Macs use a fixed set/range of hardware components. So therefore Hackintoshes require fixes for certain ACPI Tables so that macOS can "understand" them. Having the correct ACPI for macOS is the foundation of a stable Hackintosh. 
 
-Although `kexts` handle a lot of patching tasks these days, it may be nacessary to create additional patches to enable certain features (e.g. Thunderbolt or fixing Laptop issues, etc.). The preferred method to do so is **Hotpatching**.
+Although `kexts` handle a lot of patching tasks nowadays, it may be nacessary to create additional patches to enable certain features (like enabling Thunderbolt or fixing Sleep issues, etc.). The preferred method to do so is **Hotpatching**.
 
-Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are patched and then handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain paramters and 2) replacing or adding tables to existing ACPI tables.
+Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted and patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain character in the text of ACPI tables (binary renaming) and 2) replacing or adding tables to existing ACPI tables, usually SSDTs.
 
-In order to create Hotpatches, we need to extract – or as we say, dump – the original ACPI tables from the BIOS. Some Tools and Bootloaders can extract a machine's ACPI Form - like `Aida64` in Windows or `OpenCore` and `Clover` in macOS. Because ACPI forms are binary files, we also need a decompiler to help us to read and edit their contents, such as [MaciASL](https://github.com/acidanthera/MaciASL) for macOS or [QtiASL](https://github.com/ic005k/QtiASL) for Windows. When opening these forms, especially the `DSDT.aml`, many errors may occur. It is important to note that in most cases, these errors are generated by the decompiler – they are not present in the ACPI forms provided by the machine.
+In order to create Hotpatches, we need to extract – or as we say, dump – the original ACPI tables from the BIOS. Some Tools can extract a machine's ACPI Form - like `SSDTTime` in Windows or Bootloaders like `OpenCore` and `Clover`. 
+
+Since ACPI tables are binary files, we need a decompiler to read and edit them, such as: [MaciASL](https://github.com/acidanthera/MaciASL) for macOS or [QtiASL](https://github.com/ic005k/QtiASL) for Windows. When opening these files, especially the `DSDT.aml`, many errors may occur. It is important to note that in most cases, these errors are generated by the decompiler – they are not present in the ACPI forms provided by the machine.
 
 ### Important ACPI Tables for hackintoshing
 
 #### DSDT.aml 
-The DSDT or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt)) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS sees as an iMac mainboard, for example.
+As mentioned, the `DSDT` or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt)) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS sees as an iMac mainboard, for example.
 
 #### SSDT-xxxx.aml
-SSDTs or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This include but are not limited to tables, such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
+`SSDTs`or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This include but are not limited to tables, such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
 
 Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
 
-For more details about ACPI in general, please refer to the official [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/index.html); for an introduction to the ASL language, please refer to chapter [ACPI Source Language Reference](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
+For more details about ACPI in general, please refer to the official [**ACPI Specification**](https://uefi.org/specs/ACPI/6.4/index.html) For an introduction to the ASL language, please refer to chapter [**ACPI Source Language Reference**](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
 
-The following Sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
+The following sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
 <details>
 <summary><strong>ACPI Renames and Hotpaches</strong></summary>
 
