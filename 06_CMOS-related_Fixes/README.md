@@ -9,7 +9,6 @@
 - When using OpenCore, do the following:
   - Install **RTCMemoryFixup.kext**
   - In config, enable `Kernel > Patch` **__ZN11BCM5701Enet14getAdapterInfoEv**
-- Chapter 14-1 provides an SSDT patch method to solve the above problem. This SSDT patch is essentially an impersonation of the RTC, see the ``Prefix Variable Method'' and ``Impersonating Devices''.
 
 ### Solution
 
