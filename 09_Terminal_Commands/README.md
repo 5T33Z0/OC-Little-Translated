@@ -20,8 +20,8 @@
 `killall Finder`</br>
 
 **Show all Files in Finder**:</br>
-`defaults write com.apple.finder AppleShowAllFiles TRUE`</br>
-`killall Finder`
+`defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder`</br>
+`defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder` (to revert it)
 
 **Show the User Library in Big Sur**:</br>
 `setfile -a v ~/Library`</br>
