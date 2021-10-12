@@ -15,7 +15,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Rewrote sections which were confusing/misleading
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (Chapters 8 to 11)
+- Added new content (Chapters 8 to 12)
 
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
@@ -84,6 +84,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 #### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Terminal_Commands)
 #### 10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Calculators)
 #### 11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Essential_Tools_and_Apps)
+#### 12. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_PCI_BAR_Size)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
