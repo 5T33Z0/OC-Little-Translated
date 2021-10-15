@@ -8,7 +8,7 @@ There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.
 
 **Supported OC Version:** 0.7.4+
 
-**Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes and ExposeSensitiveData
+**Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes, ExposeSensitiveData and Darkwake
 
 **Screenshots**:
 
