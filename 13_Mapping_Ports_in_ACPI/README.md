@@ -46,7 +46,7 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 ## Finding the correct SSDT
 Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the SSDT-xxxx.aml files. Find the one which looks similar to this:
 
-![](/Users/kl45u5/Desktop/ACPI/SSDT_og.png)
+![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
 
 We can see the following:
 
@@ -63,9 +63,11 @@ In order to delete (or drop) the original table during boot and replace it with 
 1. Open your `config.plist` (I am using OpenCore Auxiliary Tools)
 2. Go to ACPI > Delete and add a new Rule (click on "+")
 3. In `TableSignature`, enter `53534454` which is HEX for `SSDT`:
-   ![](/Users/kl45u5/Desktop/ACPI/TableSig.png)
+	![TableSig](https://user-images.githubusercontent.com/76865553/137520564-10b44f45-778b-47ad-a3ae-318ce9334aac.png)
+
 4. In `OemTableID`, enter the name of the "OEM Table ID" (See first screenshot) stored in YOUR (NOT mine, YOUR!) SSDT-Whatever.aml without `""` as a HEX value. In OCAT, you can use ASCI to Hex converter at the bottom of the app:
-	![](/Users/kl45u5/Desktop/ACPI/OEMTableID.png)
+	![OEMTableID](https://user-images.githubusercontent.com/76865553/137520641-97a42e24-175b-4e3a-badb-23b57fa31ac8.png)
+
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
@@ -83,8 +85,8 @@ In general, for routing USB ports (not only) in macOS, two methods are relevant:
 #### Adding an additional `Arg1` to `GUPC`
 First, take a look at Method `GUPC`inside of the RHUB:
 
-![](/Users/kl45u5/Desktop/ACPI/GUPC.png)
-
+![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
+	
 In my case, it includes a Package (`PCKG`) with four values which are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package, which describes the availablity of a USB port. But we also need control over the 2nd value in the package which declares the USB port type.
 
 Therefore, we need to modify the method `GUPC`:
@@ -117,27 +119,27 @@ Method (GUPC, 2, Serialized)
 #### Deleting existing `_UPC` method
 After changing these values, you will get a lot of compiler errors:
 
-![](/Users/kl45u5/Desktop/ACPI/GUPC_errors.png)
+![GUPC_errors](https://user-images.githubusercontent.com/76865553/137520833-8f5ae018-aa7e-4e34-8b2f-73f0c8061d1a.png)
 
 That's because the 2nd value (Arg1) is not part of the corresponding method `_UPC` in each of the USB Port entries:
 
-![](/Users/kl45u5/Desktop/ACPI/_UPC_errors.png)
+![_UPC_errors](https://user-images.githubusercontent.com/76865553/137520865-0c51e4a2-a905-42f8-8805-f00c3276e98a.png)
 
 To fix this, we will delete the methods `_UPC` from all the Ports. Select the method:
 
-![](/Users/kl45u5/Desktop/ACPI/Highlight.png)
+![Highlight](https://user-images.githubusercontent.com/76865553/137520903-86832ac4-e60f-413b-84c5-e23887833897.png)
 
 And hit delete. The method should be gone from the ports
 
-![](/Users/kl45u5/Desktop/ACPI/Deleted.png)
+![Deleted](https://user-images.githubusercontent.com/76865553/137521280-012baf78-2d94-4be2-ba5e-c0aafc679e3b.png)
 
 Repeat this 23 more times. For `USR1` and `USR2` we can write this to deactivate them, since macOS doesn't support them:
 
-![](/Users/kl45u5/Desktop/ACPI/USR.png)
+![USR](https://user-images.githubusercontent.com/76865553/137521318-60b2a97f-8e7a-4489-80cb-fa040631a947.png)
 
 Once all `_UPC` Methods are deleted from all the ports are deleted (besides `USR1` and `USR2`), the errors are gone:
 
-![](/Users/kl45u5/Desktop/ACPI/No_errors.png)
+![No_errors](https://user-images.githubusercontent.com/76865553/137521582-8b901345-ade2-47eb-9388-321b7cc46df1.png)
 
 #### Adding new `_UPC` method
 
@@ -151,7 +153,8 @@ Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
 ```
 Which looks like this:
 
-![](/Users/kl45u5/Desktop/ACPI/New_UPC.png)
+![New_UPC](https://user-images.githubusercontent.com/76865553/137521717-b747a017-f9d1-4189-a6cd-0e77a7475d9d.png)
+
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
 </details>
 <details>
@@ -196,11 +199,11 @@ At this stage, there are two options for mapping your USB ports.
 #### Option A: Mapping ports based on a known configuration
 This is for people who alredy created a USBPorts.kext in Hackintool or similar and still have the mapping. In my case, I have a Spreadsheet, which looks like this:
 
-![](/Users/kl45u5/Desktop/ACPI/Ports_List.png)
-
+![Ports_List](https://user-images.githubusercontent.com/76865553/137521950-e354ec4f-aa9c-4a4e-a146-7d9204387c80.png)
+	
 As you can see, `HS01` is not used in my case, so we deactivate it. But to keep compatibilty with other Operating Systems, we turn it off for macOS only. To achieve this, we use a conditional rule with an "if/else" statement, the method `_OSI` (Operating System Interfaces): `If (_OSI ("Darwin"))`. It tells the system: "If the Darwin Kernel (aka macOS) is loaded, `HS01` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for other OSes. This is the codesnippet (adjust the scope accordingly):
 
-![](/Users/kl45u5/Desktop/ACPI/IFOSI.png)
+![IFOSI](https://user-images.githubusercontent.com/76865553/137521985-96a3620d-b6b3-40ee-b554-ce86078b05d7.png)
 
 This is the Codesnippet. As you can see, it is applies to `_UPC` and `_PLD` in this case
 
