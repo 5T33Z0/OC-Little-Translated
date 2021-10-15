@@ -64,10 +64,8 @@ In order to delete (or drop) the original table during boot and replace it with 
 2. Go to ACPI > Delete and add a new Rule (click on "+")
 3. In `TableSignature`, enter `53534454` which is HEX for `SSDT`:
 	![TableSig](https://user-images.githubusercontent.com/76865553/137520564-10b44f45-778b-47ad-a3ae-318ce9334aac.png)
-
 4. In `OemTableID`, enter the name of the "OEM Table ID" (See first screenshot) stored in YOUR (NOT mine, YOUR!) SSDT-Whatever.aml without `""` as a HEX value. In OCAT, you can use ASCI to Hex converter at the bottom of the app:
 	![OEMTableID](https://user-images.githubusercontent.com/76865553/137520641-97a42e24-175b-4e3a-badb-23b57fa31ac8.png)
-
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
@@ -80,16 +78,14 @@ You should have the correct rule for replacing the ACPI Table containing the USB
 Now that we have found the SSDT with the oroginal usb port declarations, we can start modifying them. Almost. We still need more details, though…
 
 ### Modifying the orginal USB SSDT
-In general, for routing USB ports (not only) in macOS, two methods are relevant: `_UPC` ([USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)) and `_PLD` ([Physical Location of Device](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)). `_UPC` defines the type of port and it's state (enabled/disabled) and `_PLD` defines the location of the pysical port and its properties. Both values are then send to the two sub-routines (GUPC and GPLD) of the RHUB Scope.
+In general, two methods are relevant for declaring USB ports: `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)) and `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)). `_UPC` defines the type of port and it's state (enabled/disabled) and `_PLD` defines the location of the pysical port and its properties. Both values are handed over to (GUPC and GPLD) inside the Root Hub (RHUB).
 
 #### Adding an additional `Arg1` to `GUPC`
-First, take a look at Method `GUPC`inside of the RHUB:
+First, take a look at the routine `GUPC`inside of the `RHUB` (Root Hub):
 
 ![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
 	
-In my case, it includes a Package (`PCKG`) with four values which are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package, which describes the availablity of a USB port. But we also need control over the 2nd value in the package which declares the USB port type.
-
-Therefore, we need to modify the method `GUPC`:
+In my case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
 
 - In the Header, we change the `GUPC, 1,` to `GUPC, 2,` (since we want to control 2 values of this package)
 - Next, we add `PCKG [One] = Arg1`, so it hands over the 2nd package value to `_UPC` as well.
