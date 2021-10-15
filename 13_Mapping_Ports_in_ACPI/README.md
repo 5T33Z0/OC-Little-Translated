@@ -288,6 +288,7 @@ Scope (USR1)
 </details>
 <details>
 <summary><strong>Wrapping up and testing</strong></summary>
+
 ## Wrapping up and testing
 Once you are done with your port mapping activities, do the following:
 
