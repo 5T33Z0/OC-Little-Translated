@@ -1,0 +1,305 @@
+# USB port mapping via ACPI (macOS 11.3+)
+**DISCLAIMER**: I am not a programmer. Therefore, my knowlage of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will fix your SSDTs!
+
+## Background
+Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). The best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
+
+In order to achieve this, we will do the following:
+
+- Dump the orginal ACPI tabled from the BIOS
+- Find the SSDT where USB ports are declared
+- Modify it so 15 ports are mapped for macOS without affecting other OSes
+- Inject this table during boot, replacing the original one.
+
+The method presented here is a slightly modified version of a guide by "apfelnico" and "N0b0dy" of the german [Hackintosh Forum](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415#post721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
+
+I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
+
+<details>
+<summary><strong>Preparations</strong></summary>
+
+## Preparations
+
+### Required Tools
+- [**Clover Bootmanager**](https://github.com/CloverHackyColor/CloverBootloader/releases) for dumping your System's ACPI tables.
+- [**maciASL**](https://github.com/acidanthera/MaciASL) for editing .aml files.
+- [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
+- [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
+- FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
+- Example Files
+- USB 2.0 Flash Drive (optional, also for probing Ports).
+- Your mainboard manual with a schematic listing all its ports and USB headers
+- Spreadsheed for making notes about Port names, Types and pysical Location (optional)
+- Patience and time (mandatory). Seriously, this is not for beginners! 
+
+### Dumping ACPI Tables
+1. Download the `.zip` version of Clover (CloverV2-51xx.zip) and extract it. The folder "CloverV2" will be created.
+2. Format a USB flash drive Drive in Disk Utility (**Format**: MS-DOS Filesystem; **Scheme**: Master Boot Record).
+3. Copy the "EFI" folder inside "CloverV2" to the root folder of your USB flash drive. (I forgot to rename the `sample-config.plist` and it still worked)
+4. Restart your computer from this USB drive
+5. Once the Bootmenu appears, press `F4`. This will dump the ACPI tables and save them to the flash drive. Check the activity LED on the USB stick. Wait until it's off.
+6. Pull out the USB stick, reset the computer and start macOS normally.
+7. Once macOS is loaded, put the USB stick back in and copy the folder `EFI\Clover\ACPI\origin` to the desktop (or wherever).
+</details>
+<details>
+<summary><strong>Dropping the original USB SSDT</strong></summary>
+
+## Finding the correct SSDT
+Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the SSDT-xxxx.aml files. Find the one which looks similar to this:
+
+![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
+
+We can see the following:
+
+- There are entries for `XHC` (eXtensible Host Controller) and for `XHC.RHUB` (USB Root Hub Device)
+- There's should also be a list of Ports, 26 in my case: `HS01` to `HS14`, `USR1` and `USR2`, and `SS01` to `SS10`. We will come back to the meaning of these names later. 
+- Take note of the "Table Signature" and the "OEM Table ID" – we will use them to create a delete rule in the OpenCore cofig.
+
+**NOTE**: Just because this SSDT includes 26 port entries, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+
+### Adding a delete rule to config.plist
+In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.</br>
+**CAUTION**: Don't use my value for the OEM Table ID, since yours probably has a differnt name!
+
+1. Open your `config.plist` (I am using OpenCore Auxiliary Tools)
+2. Go to ACPI > Delete and add a new Rule (click on "+")
+3. In `TableSignature`, enter `53534454` which is HEX for `SSDT`:
+	![TableSig](https://user-images.githubusercontent.com/76865553/137520564-10b44f45-778b-47ad-a3ae-318ce9334aac.png)
+4. In `OemTableID`, enter the name of the "OEM Table ID" (See first screenshot) stored in YOUR (NOT mine, YOUR!) SSDT-Whatever.aml without `""` as a HEX value. In OCAT, you can use ASCI to Hex converter at the bottom of the app:
+	![OEMTableID](https://user-images.githubusercontent.com/76865553/137520641-97a42e24-175b-4e3a-badb-23b57fa31ac8.png)
+5. Enable the rule and a comment so you know what it does.
+6. Save the config.
+
+You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
+</details>
+<details>
+<summary><strong>Preparing a replacement SSDT</strong></summary>
+
+## Preparing a replacement SSDT for USB Ports
+Now that we have found the SSDT with the oroginal usb port declarations, we can start modifying them. Almost. We still need more details, though…
+
+### Modifying the orginal USB SSDT
+In general, two methods are relevant for declaring USB ports: `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)) and `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)). `_UPC` defines the type of port and it's state (enabled/disabled) and `_PLD` defines the location of the pysical port and its properties. Both values are handed over to (GUPC and GPLD) inside the Root Hub (RHUB).
+
+#### Adding an additional `Arg1` to `GUPC`
+First, take a look at the routine `GUPC`inside of the `RHUB` (Root Hub):
+
+![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
+	
+In my case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
+
+- In the Header, we change the `GUPC, 1,` to `GUPC, 2,` (since we want to control 2 values of this package)
+- Next, we add `PCKG [One] = Arg1`, so it hands over the 2nd package value to `_UPC` as well.
+- In the Package, we change the first value of to `0xFF` to enable all ports 
+- Finally, we set the second package to `0x03`, which changes all ports to USB 2.0 and 3.0 with a Type A connector (the blue connetcors).
+
+Now we have control over a port's status (on/off or available/unavailabe) and what type it is. So we get this code snippet:
+
+```swift
+Method (GUPC, 2, Serialized)
+{
+	Name (PCKG, Package (0x04)
+   	{
+            0xFF,
+            0x03,
+            Zero, 
+            Zero
+   	})
+	PCKG [Zero] = Arg0
+	PCKG [One] = Arg1
+	Return (PCKG) /* \GUPC.PCKG */
+}
+```
+`Arg0`= represents the first value of the package. This sets the prot active (`0xff`) or inactive/disabled (`Zero`)</br>
+`Arg1`= declares the USB port type mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
+
+#### Deleting existing `_UPC` method
+After changing these values, you will get a lot of compiler errors:
+
+![GUPC_errors](https://user-images.githubusercontent.com/76865553/137520833-8f5ae018-aa7e-4e34-8b2f-73f0c8061d1a.png)
+
+That's because the 2nd value (Arg1) is not part of the corresponding method `_UPC` in each of the USB Port entries:
+
+![_UPC_errors](https://user-images.githubusercontent.com/76865553/137520865-0c51e4a2-a905-42f8-8805-f00c3276e98a.png)
+
+To fix this, we will delete the methods `_UPC` from all the Ports. Select the method:
+
+![Highlight](https://user-images.githubusercontent.com/76865553/137520903-86832ac4-e60f-413b-84c5-e23887833897.png)
+
+And hit delete. The method should be gone from the ports
+
+![Deleted](https://user-images.githubusercontent.com/76865553/137521280-012baf78-2d94-4be2-ba5e-c0aafc679e3b.png)
+
+Repeat this 23 more times. For `USR1` and `USR2` we can write this to deactivate them, since macOS doesn't support them:
+
+![USR](https://user-images.githubusercontent.com/76865553/137521318-60b2a97f-8e7a-4489-80cb-fa040631a947.png)
+
+Once all `_UPC` Methods are deleted from all the ports are deleted (besides `USR1` and `USR2`), the errors are gone:
+
+![No_errors](https://user-images.githubusercontent.com/76865553/137521582-8b901345-ade2-47eb-9388-321b7cc46df1.png)
+
+#### Adding new `_UPC` method
+
+In each Port (except for USR1 and USR2), add this method:
+
+```swift
+Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+	{
+		Return (GUPC (0xFF, 0x03))
+	}
+```
+Which looks like this:
+
+![New_UPC](https://user-images.githubusercontent.com/76865553/137521717-b747a017-f9d1-4189-a6cd-0e77a7475d9d.png)
+
+Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
+</details>
+<details>
+<summary><strong>Building a replacement USB SSDT</strong></summary>
+
+## Building a replacement USB SSDT
+Next, we need to find out which phsyscial ports actually map to which ports in the system.
+
+### USB Port Types
+According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
+
+| Type   | Info                           | Comment |
+|:------:|--------------------------------|---------|
+|**0x00**| Type-A connector, USB 2.0 only | This is what macOS will default all ports to when no map is present. The pysical connector is usually colored black|
+|**0x03**| Type-A connector, USB 2.0 and USB 3.0 combined | USB 3.0, 3.1 and 3.2 ports share the same Type. Usually colored blue (USB 2.0/3.0) or red (USB 3.2)|
+|**0x08**| Type C connector, USB 2.0 only | Mainly used in phones|
+|**0x09**| Type C connector, USB 2.0 and USB 3.0 with Switch | Flipping the device does not change the ACPI port |
+|**0x0A**| Type C connector, USB 2.0 and USB 3.0 w/o Switch |Flipping the device does change the ACPI port. generally seen on USB 3.1/3.2 mainboard headers|
+|**0xFF**| Proprietary Connector | For Internal USB 2.0 ports like Bluetooth|
+
+We will need use these "Type" bytes to declare the USB Port types.
+
+### USB Port Names
+As seen earlier, the ports listed in the SSDT have different names.
+
+| Name          | Description            | Protocol          | Speed            |
+|:-------------:|------------------------|:------------------|-----------------:|
+| **HS01…HS14** | HS = High Speed Ports  | USB 2.0 only      | 480 mbit/s       |
+| **SS01…SS10** | SS = Super Speed Ports | USB 3.0, 3.1, 3.2 | 5 to 20 Gbit/s   |
+| **USR1/2**    | Not supported by macOS. Deactivate them.   | Intel AMT        | 
+
+**IMPORTANT**: A physical USB 3.0 Connector (the blue one, you know?!) actually connects to 2 USB Ports: one for USB 2.0 and one for USB 3.0. So having 15 Ports available for mappoing doesn't mean that you can assign them to 15 physical connectors. Actually, you can only assign them to 7 USB 3.x and 1 USB 2.0-only coneectors.
+
+**EXAMPLE**: if you plug in a USB 3.0 flash drive, you can see in IORestryExplorer, that it connects to `SS07` for example. If you take it out and put a USB 2.0 drive in the same connector, it will most likely be connected to `HS07` now. So 1 Connector, 2 Ports with the same counter (usually) – in this example HS07 and SS07.
+
+### Port mapping Options
+At this stage, there are two options for mapping your USB ports.
+
+- Option A: you already know which ports connect to which physical connectors.
+- Option B: you don't know which Ports connect to which physical connector so you need to probe them
+
+#### Option A: Mapping ports based on a known configuration
+This is for people who alredy created a USBPorts.kext in Hackintool or similar and still have the mapping. In my case, I have a Spreadsheet, which looks like this:
+
+![Ports_List](https://user-images.githubusercontent.com/76865553/137521950-e354ec4f-aa9c-4a4e-a146-7d9204387c80.png)
+	
+As you can see, `HS01` is not used in my case, so we deactivate it. But to keep compatibilty with other Operating Systems, we turn it off for macOS only. To achieve this, we use a conditional rule with an "if/else" statement, the method `_OSI` (Operating System Interfaces): `If (_OSI ("Darwin"))`. It tells the system: "If the Darwin Kernel (aka macOS) is loaded, `HS01` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for other OSes. This is the codesnippet (adjust the scope accordingly):
+
+![IFOSI](https://user-images.githubusercontent.com/76865553/137521985-96a3620d-b6b3-40ee-b554-ce86078b05d7.png)
+
+This is the Codesnippet. As you can see, it is applies to `_UPC` and `_PLD` in this case
+
+```swift
+Scope (\_SB.PCI0.XHC.RHUB.HS01)
+{
+	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+	{
+		If (_OSI ("Darwin"))
+		{
+			Return (GUPC (Zero, Zero)) // ZERO = Port unavailable
+     	}
+     	Else
+     	{
+   			Return (GUPC (0xFF, 0x03))
+     	}
+ 	}
+ 	
+ 	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+   {
+   		If (_OSI ("Darwin"))
+   		{
+			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
+		}    
+		Else
+       {  		
+       	Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
+  		}
+	}   
+```
+**Example 3**: Port `HS03` deactivated for macOS Only. This utilizes the `If (_OSI ("Darwin"))` switch. This basically tells the system: "If the Darwin Kernel (aka macOS) is running, `HS03` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the portmapping for Windows.
+
+```swift
+Scope (HS03)
+{
+	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+  	{
+   		If (_OSI ("Darwin"))
+      	{
+         	Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+        }
+		 Else
+        {
+         	Return (GUPC (0xFF, 0x03))
+        }
+  	}
+
+   Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+   {
+		If (_OSI ("Darwin"))
+     	{
+			Return (GPLD (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+		}
+      	Else
+      	{
+			Return (GPLD (DerefOf (UHSD [0x02]), 0x03))
+       }
+	}
+}
+```
+Continue mapping your ports this way: for those which you do use, declare the port type in the packets. For those that you don't use, deactivate them but add an `If (_OSI ("Darwin"))` argument (as shown above). 
+
+**Remember**: This SSDT contains 26 ports in Toal, so you need to deactivate at least 11 in total to stay within the Port limit of 15 for macOS!
+
+Once you reach `USR1` and `USR2`, change `GUPC` to `Zero`, `Zero`. This to deactivates them (if you need these port in Windwos, add the `If (_OSI ("Darwin"))` switch.
+
+```swift
+Scope (USR1)
+{
+	Method (_UPC, 0, NotSerialized)	// _UPC: USB Port Capabilities
+	{
+   		Return (GUPC (Zero, Zero)	// Zero, Zero = Port disabled, Type not defined
+   	}
+		
+	Method (_PLD, 0, NotSerialized)	// _PLD: Physical Location of Device
+	{
+      	Return (GPLD (Zero, Zero))
+   	}
+}
+```
+#### OPTION B: TO BE CONTINUED…
+</details>
+<details>
+<summary><strong>Wrapping up and testing</strong></summary>
+
+## Wrapping up and testing
+Once you are done with your port mapping activities, do the following:
+
+- Save the SSDT as somepthing plausible like `SSDT-XHCI.aml` or `SSDT-PORTS.aml` (keep it short!)
+- Mount your EFI partitiom
+- Copy the EFI folder to a FAT32 formatted USB flash drive (for testing)
+- Open your OpenCore `config.plist` (the one on the flash drive)
+- Add the .aml file to the `EFI\OC\ACPI` folder on your flash driver.
+- Add the file to the `ACPI > Add` Section and enable it.
+- Save your `config.plist`
+- Reboot from USB flash drive. 
+- Test the ports with macOS and your oher operationg systems.
+- If it works, Congrats! 
+- Copy the .aml and your config.plist back to the EFI folder on the hard disk.
+</details>
+
+**ENJOY**. To be continued…
