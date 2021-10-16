@@ -11,7 +11,7 @@ In order to achieve this, we will do the following:
 - Modify it so 15 ports are mapped for macOS without affecting other OSes
 - Inject this table during boot, replacing the original one.
 
-The method presented here is a slightly modified version of a guide by "apfelnico" and "N0b0dy" of the german [Hackintosh Forum](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415#post721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
+The method presented here is a slightly modified version of a guide by "apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415#post721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
 I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
 
@@ -22,7 +22,7 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 
 ### Required Tools
 - [**Clover Bootmanager**](https://github.com/CloverHackyColor/CloverBootloader/releases) for dumping your System's ACPI tables.
-- [**maciASL**](https://github.com/acidanthera/MaciASL) for editing .aml files.
+- [**maciASL**](https://github.com/acidanthera/MaciASL) or [**QtiASL**](https://github.com/ic005k/QtiASL) for editing `.aml` files.
 - [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
 - FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
