@@ -1,10 +1,11 @@
 # USB port mapping via ACPI (macOS 11.3+)
-**DISCLAIMER**: I am not a programmer. Therefore, my knowlage of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will fix your SSDTs!
+>**DISCLAIMER**: I am not a programmer. Therefore, my knowlage of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will fix your SSDTs!
 
 ## Background
 Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). The best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
 
-In order to achieve this, we will do the following:
+## Approach
+In order to build our own USB Portmap SSDT, we will do the following:
 
 - Dump the orginal ACPI tabled from the BIOS
 - Find the SSDT where USB ports are declared
@@ -29,22 +30,22 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 - [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI/Example_Files) (for following along)
 - USB 2.0 Flash Drive (optional, also for probing Ports).
 - Your mainboard manual with a schematic listing all its ports and USB headers
-- Spreadsheed for making notes about Port names, Types and pysical Location (optional)
+- Spreadsheed for taking notes about Port names, Types and pysical Location (optional)
 - Patience and time (mandatory). Seriously, this is not for beginners! 
 
 ### Dumping ACPI Tables
 1. Download the `.zip` version of Clover (CloverV2-51xx.zip) and extract it. The folder "CloverV2" will be created.
 2. Format a USB flash drive Drive in Disk Utility (**Format**: MS-DOS Filesystem; **Scheme**: Master Boot Record).
 3. Copy the "EFI" folder inside "CloverV2" to the root folder of your USB flash drive. (I forgot to rename the `sample-config.plist` and it still worked)
-4. Restart your computer from this USB drive
+4. Restart your computer from the flash drive
 5. Once the Bootmenu appears, press `F4`. This will dump the ACPI tables and save them to the flash drive. Check the activity LED on the USB stick. Wait until it's off.
 6. Pull out the USB stick, reset the computer and start macOS normally.
 7. Once macOS is loaded, put the USB stick back in and copy the folder `EFI\Clover\ACPI\origin` to the desktop (or wherever).
 </details>
 <details>
-<summary><strong>Dropping the original USB SSDT</strong></summary>
+<summary><strong>Dropping the original USB Table</strong></summary>
 
-## Finding the correct SSDT
+## Finding the correct table
 Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the SSDT-xxxx.aml files. Find the one which looks similar to this:
 
 ![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
@@ -75,10 +76,10 @@ You should have the correct rule for replacing the ACPI Table containing the USB
 <details>
 <summary><strong>Preparing a replacement SSDT</strong></summary>
 
-## Preparing a replacement SSDT for USB Ports
+## Preparing a replacement SSDT
 Now that we have found the SSDT with the oroginal usb port declarations, we can start modifying them. Almost. We still need more details, though…
 
-### Modifying the orginal USB SSDT
+### Modifying the orginal USB Table
 In general, two methods are relevant for declaring USB ports: `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)) and `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)). `_UPC` defines the type of port and it's state (enabled/disabled) and `_PLD` defines the location of the pysical port and its properties. Both values are handed over to (GUPC and GPLD) inside the Root Hub (RHUB).
 
 #### Adding an additional `Arg1` to `GUPC`
@@ -155,9 +156,9 @@ Which looks like this:
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
 </details>
 <details>
-<summary><strong>Building a replacement USB SSDT</strong></summary>
+<summary><strong>Mapping the ports</strong></summary>
 
-## Building a replacement USB SSDT
+## Mapping the ports (finally)
 Next, we need to find out which phsyscial ports actually map to which ports in the system.
 
 ### USB Port Types
