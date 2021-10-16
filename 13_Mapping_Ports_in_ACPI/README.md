@@ -110,7 +110,7 @@ Method (GUPC, 2, Serialized)
 }
 ```
 `Arg0`= represents the first value of the package. This sets the prot active (`0xff`) or inactive/disabled (`Zero`)</br>
-`Arg1`= declares the USB port type mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
+`Arg1`= declares the USB port type mentioned earlier (`0x00` for USB2, `0x03` for USB3, etc.)
 
 #### Deleting existing `_UPC` method
 After changing these values, you will get a lot of compiler errors:
