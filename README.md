@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 [![OpenCore Version](https://img.shields.io/badge/OpenCore-0.7.5-cyan.svg)](https://github.com/CloverHackyColor/CloverBootloader/releases)
-![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.10.15-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.10.17-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/08_Config_Tips_and_Tricks/maciasl.png)
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
@@ -85,6 +85,8 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 #### 10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Calculators)
 #### 11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Essential_Tools_and_Apps)
 #### 12. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_PCI_BAR_Size)
+#### 13. [**USB Port Mapping via ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI)
+#### 14. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_Quirks)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
