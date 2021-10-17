@@ -3,7 +3,7 @@
 ## Description
 
 - This method customizes the USB port by modifying the ACPI file.
-- This method requires drop of an ACPI file. In general, OpenCore **does not recommend** doing this, and the ***Hackintool.app*** tool is generally used to customize USB ports.
+- It requires dropoing an ACPI file.
 - This method is aimed at hobbyists.
 
 ## Scope of Application
@@ -13,43 +13,43 @@
 
 ## `_UPC` Specification
 
-	_UPC, Package ()
+```swift
+_UPC, Package ()
+	
 	{
    		xxxx,
     	yyyy,
     	0x00,
     	0x00
 	}
-
+```
 
 ### Explanation
 
 1. **`xxxx`**
-   - `0x00` means the port does not exist
-   - Other values (usually `0x0F`) mean that the port exists
+   - if `0x00`: port does not exist
+   - if `0x0F`: port exists
 
-2. **`yyyy`**
+2. **`yyyy`**: defines the type of the port, refer to the following table
 
-   **`yyyy`** defines the type of the port, refer to the following table
+	According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
 
-   | **`yyyy`**   | Port Type | | |
-   | :----------: | -----------|-----------| ------|
-   | USB Type `A` |
-   | `0x01`       | USB `Mini-AB` |
-   | `0x02`       | USB Smart Card |
-   | `0x03`       | USB 3 Standard Type `A` |
-   | `0x04`       | USB 3 Standard Type `B` |
-   | `0x05`       | USB 3 `Micro-B` |
-   | `0x06`       | USB 3 `Micro-AB` |
-   | `0x07`       | USB 3 `Power-B` |
-   | `0x08`       | USB Type `C` **(USB 2 only)** |
-   | `0x09`       | USB Type `C` **(with steering)** | `0x09` | USB Type `C` **(with steering)**
-   | `0x0A` | USB Type `C` **(without steering)** | `0xFF` | USB Type `C` **(without steering)**
-   | `0xFF` | Built-in |
+	| yyyy   | Info                           | Comment |
+|:------:|--------------------------------|---------|
+|**0x00**| Type-A connector, USB 2.0-only | This is what macOS will default all ports to if no map is present. The pysical connector is usually colored black|
+|**0x01**| USB `Mini-AB` | Used on older smart phones. Kind of outdated.
+|**0x02**| USB Smart Card |
+|**0x03**| Type-A connector, USB 2.0 and USB 3.0 combined | USB 3.0, 3.1 and 3.2 ports share the same Type. Usually colored blue (USB 2.0/3.0) or red (USB 3.2)|
+| **0x04** | USB 3 Standard Type `B` |
+| **0x05** | USB 3 `Micro-B` |
+| **0x06** | USB 3 `Micro-AB` |
+| **0x07** | USB 3 `Power-B` |
+|**0x08**| Type C connector, USB 2.0 only | Mainly used in phones|
+|**0x09**| Type C connector, USB 2.0 and USB 3.0 with Switch | Flipping the device does not change the ACPI port |
+|**0x0A**| Type C connector, USB 2.0 and USB 3.0 w/o Switch |Flipping the device does change the ACPI port. generally seen on USB 3.1/3.2 mainboard headers|
+|**0xFF**| Proprietary Connector | For Internal USB 2.0 ports like Bluetooth|
 
-   > If both sides of the USB-C are plugged into the same port on Hackintool, it means that the port has a steering device.
-   >
-   > Conversely, if both sides of the port are occupied by two ports, it means there is no steering
+	We will need use these "Type" bytes to declare the USB Port types.
 
 ## USB Customization Process
 
@@ -74,7 +74,7 @@
     - Exclude errors.
     - Add the following code to the top of `_UPC` for all ports in the SSDT file.
 
-    ```Swift
+    ```swift
     Method (_UPC, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))

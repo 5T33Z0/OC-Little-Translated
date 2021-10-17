@@ -13,7 +13,7 @@
 
 ## `_UPC` 规范
 
-```Swift
+```swift
 _UPC, Package ()
 {
     xxxx,
@@ -28,6 +28,29 @@ _UPC, Package ()
 1. **`xxxx`**
    - `0x00` 代表这个端口不存在
    - 其他值 (通常为 `0x0F`) 代表这个端口存在
+
+2. **`yyyy`**
+
+   **`yyyy`** defines the type of a port. Refer to the following table:
+
+   | **`yyyy`** | port type |
+   | :------: | ----------------------------- |
+   | USB Type `A` |
+   | `0x01` | USB `Mini-AB` |
+   | `0x02` | USB Smart Card |
+   | `0x03` | USB 3 Standard Type `A` |
+   | `0x04` | USB 3 Standard Type `B` |
+   | `0x05` | USB 3 `Micro-B` |
+   | `0x06` | USB 3 `Micro-AB` |
+   | `0x07` | USB 3 `Power-B` |
+   | `0x08` | USB Type `C` **(USB 2 only)** |
+   | `0x09` | USB Type `C` **(with switch)** | `0x09` | USB Type `C` **(with steering)**
+   | `0x0A` | USB Type `C` **(without switch)** | `0xFF` | USB Type `C` **(without steering)**
+   | `0xFF` | Built-in |
+
+
+Translated with www.DeepL.com/Translator (free version)
+
 
 2. **`yyyy`**
 

@@ -7,10 +7,10 @@ Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port cou
 ## Approach
 In order to build our own USB Portmap SSDT, we will do the following:
 
-- Dump the orginal ACPI tabled from the BIOS
-- Find the SSDT where USB ports are declared
+- Dump the orginal ACPI tables from the BIOS
+- Find the SSDT where the USB ports are declared
 - Modify it so 15 ports are mapped for macOS without affecting other OSes
-- Inject this table during boot, replacing the original one.
+- Inject this table during boot, replacing the original one
 
 The method presented here is a slightly modified version of a guide by "apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415#post721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
@@ -34,13 +34,11 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 - Patience and time (mandatory). Seriously, this is not for beginners! 
 
 ### Dumping ACPI Tables
-1. Download the `.zip` version of Clover (CloverV2-51xx.zip) and extract it. The folder "CloverV2" will be created.
-2. Format a USB flash drive Drive in Disk Utility (**Format**: MS-DOS Filesystem; **Scheme**: Master Boot Record).
-3. Copy the "EFI" folder inside "CloverV2" to the root folder of your USB flash drive. (I forgot to rename the `sample-config.plist` and it still worked)
-4. Restart your computer from the flash drive
-5. Once the Bootmenu appears, press `F4`. This will dump the ACPI tables and save them to the flash drive. Check the activity LED on the USB stick. Wait until it's off.
-6. Pull out the USB stick, reset the computer and start macOS normally.
-7. Once macOS is loaded, put the USB stick back in and copy the folder `EFI\Clover\ACPI\origin` to the desktop (or wherever).
+There are various ways to dump ACPI Tables from youre BIOS: 
+
+- Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it to a USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
+- Using **SSDTTime** (in Windows): if you use SSDTTime in Windows, you have the option to dump the `DSDT`, which you don't have when using it in macOS.
+- Using **OpenCore** (requires Debug version and a working config): enable Misc\Debug\`SysReport` Quirk. The DSDT will be dumped during the next boot. Least favorite way.
 </details>
 <details>
 <summary><strong>Dropping the original USB Table</strong></summary>
@@ -304,3 +302,4 @@ Once you are done with your port mapping activities, do the following:
 </details>
 
 **ENJOY**. To be continued…
+# 
