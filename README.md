@@ -21,72 +21,21 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 </details>
 
 ## Table of Contents
-#### 0. [**About ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI)
-- ACPI Explained
-- ACPI Patches in OpenCore
-- ASL to AML Conversion Table
-- SSDT Loading Sequence
-- Important Patches
-
-#### 1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features)
-- Ambient Light Sensor (SSDT-ALS0)
-- Brightness Controls (SSDT-PNLF)
-- CPU Power Management (SSDT-PLUG)
-- DMA Controller (SSDT-DMAC)
-- Embedded Controller (SSDT-EC)
-- Fake Ethernet Controller
-- Intel MEI (SSDT-IMEI)
-- IRQ and Timer Fix (SSDT-HPET)
-- MEM2 - Laptop iGPU related (SSDT-MEM2)
-- NVRAM Fix (SSDT-PMCR)
-- OCI2C-GPIO Patch
-- Platform Power Management (SSDT-PPMC)
-- Power Button (SSDT-PWRB) & Sleep Button (SSDT-SLPB)
-- System Clock (SSDT-AWAC)
-- System Clock (SSDT-RTC0)
-- System Management Bus (SMBus) & Memory Controller (MCHC)
-- OS Compatibility Patch (XOSI)
-- Xtra: Enabling XCPM on Ivy Bridge CPUs
-
-#### 2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_unsupported_devices)
-#### 3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
-#### 4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
-- 06/0D Instant Wake Fix
-- Fixing AOAC Machines
-- PNP0C0E Sleep Correction Method
-- PTSWAKTTS Sleep and Wake Fix
-
-#### 5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
-- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Battery_Patches)
-
-	- Lenovo ThinkPads
-   	- Other brands
-   	- Patches for Battery Status
-
-- [**Brand-specific Patches for various Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches)
-	
-	- Dell Laptop Special Patch
-	- Xiaoxin PRO13 Special Patch
-	- Asus Laptop Special Patch
-
-- [**Fixing Keyboard Mappings and Brightness Keys**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys)
-
-- [**TrackPad Patches for various Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches)
-	- I2C TrackPad Patches
-	- ThinkPad Click and TrackPad Patches
-
-#### 6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
-#### 7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_ACPI_Debugging)
-#### 8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Config_Tips_and_Tricks)
-- Config.plist tips
-- Kext Loading Sequence Examples 	
-
-#### 9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Terminal_Commands)
-#### 10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Calculators)
-#### 11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Essential_Tools_and_Apps)
-#### 12. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_PCI_BAR_Size)
-#### 13. [**USB Port Mapping via ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI)
-#### 14. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_Quirks)
+0. [**About ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI)
+1. [**Adding Fake Devices and enabling Features**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features)
+2. [**Disabling unsupported Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_unsupported_devices)
+3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
+4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
+5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
+6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
+7. [**ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_ACPI_Debugging)
+8. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Config_Tips_and_Tricks)
+9. [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Terminal_Commands)
+10. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Calculators)
+11. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Essential_Tools_and_Apps)
+12. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_PCI_BAR_Size)
+13. [**USB Port Mapping via ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI)
+14. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_Quirks)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
