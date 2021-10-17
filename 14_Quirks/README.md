@@ -146,35 +146,35 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 | **Kernel Quirks** | Desktop     | Mobile        | Desktop    | Mobile  |
 |                   |             |               |            |         |
 |AppleCpuPmCfgLock||||
-|AppleXcpmCfgLock|x|||
+|AppleXcpmCfgLock|x|x|x|x
 |AppleXcpmExtraMsrs||||
 |AppleXcpmForceBoost||||
-|CustomSMBIOSGuid*|( )|||
-|DisableIoMapper|x||
-|DisableLinkeditJettison|x|||
+|CustomSMBIOSGuid*|( )|( )|( )|( )|
+|DisableIoMapper|x|x|x|x
+|DisableLinkeditJettison|x|x|x|x|
 |DisableRtcChecksum||||
 |ExtendBTFeatureFlags||||
 |ExternalDiskIcons||||
 |ForceSecureBootScheme||||
 |IncreasePciBarSize||||
-|LapicKernelPanic**|( )|||
+|LapicKernelPanic**|( )|( )|( )|( )|
 |LegacyCommpage||||
-|PanicNoKextDump|x|||
-|PowerTimeoutKernelPanic|x|||
+|PanicNoKextDump|x|x|x|x|
+|PowerTimeoutKernelPanic|x|x|x|x|
 |ProvideCurrentCpuInfo||||
 |SetApfsTrimTimeout|-1|-1|-1|-1|
 |ThirdPartyDrives||||
-|XhciPortLimit***|x|||
+|XhciPortLimit***|x|x|x|x
 
 `*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO Systems</br>
 `**` `LapicKernelPanic`: Enable for HP Systems</br>
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-|CPU Family       | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
-|:----------------|:-----------:|:-------------:|:----------:|:-------:|
-| **UEFI Quirks** | Desktop      | Mobile         | Desktop   | Mobile  |
-|				          |				    | 			   |            |            |
+|CPU Family       | Kabylake    | 7th Gen       | Skylake   | 6th Gen |
+|:----------------|:-----------:|:-------------:|:---------:|:-------:|
+| **UEFI Quirks** | Desktop     | Mobile        | Desktop   | Mobile  |
+|                 |             |               |           |         |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
 |EnableVectorAcceleration||||
@@ -187,7 +187,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |RequestBootVarRouting||||
 |ResizeGpuBars||||
 |TscSyncTimeout||||
-|UnblockFsConnect||||</details>
+|UnblockFsConnect||||
 </details>
 <details>
 <summary><strong>4th and 5th Gen Intel Quirks</strong> (Work in Progress)</summary>
