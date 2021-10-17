@@ -3,12 +3,13 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 
 **Applicable Version**: OpenCore 0.7.5+
 <details>
-  <summary>**8th to 10th Gen Intel Quirks** (Click to expand!)</summary>
+  <summary><strong>8th to 10th Gen Intel Quirks</strong> (Click to expand!)</summary
 
 ## 8th to 10th Gen Intel CPUs (Dektop/Mobile)
 ### ACPI Quirks    
 | CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen|
 |:----------------|:---------:|:--------:|:----------:|:----------:|
+|				     |				|			 |            |            |
 | **ACPI Quirks** | Dektop    | Mobile   | Desktop    | Mobile     |      
 |FadtEnableReset  |
 |NormalizeHeaders |
@@ -94,7 +95,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect||||
 </details>
 <details>
-  <summary>**6th and 7th Gen Intel Quirks** (Work in Progress)</summary>
+  <summary><strong>6th and 7th Gen Intel Quirks</strong> (Work in Progress)</summary>
 
 ## 6th and 7th Gen Intel CPUs (Desktop/Mobile)
 
@@ -181,7 +182,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect||||</details>
 </details>
 <details>
-  <summary>**4th and 5th Gen Intel Quirks** (Work in Progress)</summary>
+  <summary><strong>4th and 5th Gen Intel Quirks</strong> (Work in Progress)</summary>
 ## 4th and 5th Gen Intel CPUs (Desktop/Mobile)
 
 ### ACPI Quirks   
@@ -265,7 +266,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect||||
 </details>
 <details>
-  <summary>**2nd and 3rd Gen Intel Quirks** (Work in Progress)</summary>
+  <summary><strong>2nd and 3rd Gen Intel Quirks</strong> (Work in Progress)</summary>
 ## 2nd and 3rd Gen Intel CPUs (Desktop/Mobile)
 
 ### ACPI Quirks   
