@@ -1,17 +1,14 @@
 # OpenCore Quirks for Intel CPUs (Work in Progress)
-Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based on the information provide by the OpenCore Install Guide by Dortania. Presented in neatly sturctured tables.
+Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based on the information provide by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/)by Dortania. Presented in neatly sturctured tables.
 
-**Applicable Version**: OpenCore 0.7.5+
+**Applicable Version**: OpenCore ≥ 0.7.5
 
-<details>
-<summary><strong>8th to 10th Gen Intel Quirks</strong> (Click to expand!)</summary>
-
-## 8th to 10th Gen Intel CPUs (Dektop/Mobile)
+## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
 
 ### ACPI Quirks    
 | CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen|
 |:----------------|:---------:|:--------:|:----------:|:----------:|
-| **ACPI Quirks** | Dektop    | Mobile   | Desktop    | Mobile     |      
+| **ACPI Quirks** | Desktop    | Mobile   | Desktop    | Mobile     |      
 |				          |				    | 			   |            |            |
 |FadtEnableReset  |
 |NormalizeHeaders |
@@ -20,12 +17,12 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ResetLogoStatus* |(x)|(x)|(x)|(x)|
 |SyncTableIDs     |
 
-`*`Default in sample.plist
+`*`Default in `sample.plist`
 
 ### Boooter Quirks
 |CPU Family         |Cometlake    |10th Gen     |Coffeelake  | 8th/9th Gen |
 |:------------------|:-----------:|:-----------:|:----------:|:-----------:|
-| **Booter Quirks** | Dektop      | Mobile      | Desktop     | Mobile     |
+| **Booter Quirks** | Desktop      | Mobile      | Desktop     | Mobile     |
 |				          |				    | 			   |            |            |
 |AllowRelocationBlock|
 |AvoidRuntimeDefrag|x|x|x|x
@@ -53,7 +50,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Kernel Quirks
 |CPU Family         |Cometlake    |10th Gen       |Coffeelake  | 8th/9th Gen |
 |:------------------|:-----------:|:-------------:|:----------:|:-----------:|
-| **Kernel Quirks** | Dektop      | Mobile        | Desktop    | Mobile      |
+| **Kernel Quirks** | Desktop      | Mobile        | Desktop    | Mobile      |
 |				          |				    | 			   |            |            |
 |AppleCpuPmCfgLock||||
 |AppleXcpmCfgLock|x|x|x|x
@@ -77,14 +74,14 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |XhciPortLimit***|(x)|(x)|(x)|(x)
 
 `*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
-`**``LapicKernelPanic`: Enable for HP Systems</br>
-`***``XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+`**` `LapicKernelPanic`: Enable for HP Systems</br>
+`***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
 |CPU Family       |Cometlake    |10th Gen       |Coffeelake  | 8th/9th Gen |
 |:----------------|:-----------:|:-------------:|:----------:|:-----------:|
-|				          |				    | 			   |            |            |
-| **UEFI Quirks** | Dektop      |Mobile         |Desktop     |Mobile       |
+|			     |				    | 			   |            |            |
+| **UEFI Quirks** | Desktop      |Mobile         |Desktop     |Mobile       |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
 |EnableVectorAcceleration||||
@@ -98,81 +95,85 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ResizeGpuBars||||
 |TscSyncTimeout||||
 |UnblockFsConnect||||
-</details>
 <details>
-<summary><strong>6th and 7th Gen Intel Quirks</strong> (Work in Progress)</summary>
+<summary><strong>6th and 7th Gen Intel Quirks</strong> (Work in Progress)</summary
 
 ## 6th and 7th Gen Intel CPUs (Desktop/Mobile)
 
 ### ACPI Quirks   
-|CPU Family       |Kayblake     |7th Gen        |Skylake     |6th Gen |
+|CPU Family       |Kabylake     |7th Gen        |Skylake     |6th Gen |
 |:----------------|:-----------:|:-------------:|:----------:|:------:|
-| **ACPI Quirks** | Dektop      | Mobile        |Desktop     |Mobile  |    
-|				          |				    | 			   |            |            |
+| **ACPI Quirks** | Desktop      | Mobile        |Desktop     |Mobile  |    
+|				     |	 		     | 		        |            |        |
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
 |ResetHwSig| 
-|ResetLogoStatus*|x| x|x|x|
+|ResetLogoStatus* |(x)|(x)|(x)|(x)|
 |SyncTableIDs|
-`*`Default in sample.plist
+
+`*`Default in `sample.plist`
 
 ### Booter Quirks
-|CPU Family          |Kayblake     |7th Gen        |Skylake     |6th Gen |
+|CPU Family          |Kabylake     |7th Gen        |Skylake     |6th Gen |
 |:-------------------|:-----------:|:-------------:|:----------:|:------:|
-| **Booter Quirkss** | Dektop      | Mobile        |Desktop     |Mobile  |
-|				          |				    | 			   |            |            |
+| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
+|						 |			     |               |            |        |
 |AllowRelocationBlock||||
-|AvoidRuntimeDefrag||||
+|AvoidRuntimeDefrag|x|x|x|x|
 |DevirtualiseMmio||||
 |DisableSingleUser||||
 |DisableVariableWrite||||
 |DiscardHibernateMap||||
-|EnableSafeModeSlide|||||
-|EnableWriteUnprotector||||
+|EnableSafeModeSlide|x|x|x|x|
+|EnableWriteUnprotector|x|x|x|x|
 |ForceBooterSignature||||
 |ForceExitBootServices||||
 |ProtectMemoryRegions||||
 |ProtectSecureBoot||||
 |ProtectUefiServices||||
-|ProvideCustomSlide||||
+|ProvideCustomSlide|x|x|x|x|
 |ProvideMaxSlide||||
 |RebuildAppleMemoryMap||||
 |ResizeAppleGpuBars||||
-|SetupVirtualMap||||
+|SetupVirtualMap|x|x|x|x|
 |SignalAppleOS||||
 |SyncRuntimePermissions||||
 
 ### Kernel Quirks
-| CPU Family        | Kayblake    | 7th Gen       | Skylake    | 6th Gen |
+| CPU Family        | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
 |:------------------|:-----------:|:-------------:|:----------:|:-------:|
-| **Kernel Quirks** | Dektop      |Mobile         |Desktop     |Mobile  |
-|				          |				    | 			   |            |            |
+| **Kernel Quirks** | Desktop      | Mobile        | Desktop    | Mobile  |
+|                   |             |               |            |         |
 |AppleCpuPmCfgLock||||
-|AppleXcpmCfgLock||||
+|AppleXcpmCfgLock|x|||
 |AppleXcpmExtraMsrs||||
 |AppleXcpmForceBoost||||
-|CustomSMBIOSGuid||||
-|DisableIoMapper||||
-|DisableLinkeditJettison||||
+|CustomSMBIOSGuid*|( )|||
+|DisableIoMapper|x||
+|DisableLinkeditJettison|x|||
 |DisableRtcChecksum||||
 |ExtendBTFeatureFlags||||
 |ExternalDiskIcons||||
 |ForceSecureBootScheme||||
 |IncreasePciBarSize||||
-|LapicKernelPanic||||
+|LapicKernelPanic**|( )|||
 |LegacyCommpage||||
-|PanicNoKextDump||||
-|PowerTimeoutKernelPanic||||
+|PanicNoKextDump|x|||
+|PowerTimeoutKernelPanic|x|||
 |ProvideCurrentCpuInfo||||
-|SetApfsTrimTimeout||||
+|SetApfsTrimTimeout|-1|-1|-1|-1|
 |ThirdPartyDrives||||
-|XhciPortLimit||||
+|XhciPortLimit***|x|||
+
+`*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO Systems</br>
+`**` `LapicKernelPanic`: Enable for HP Systems</br>
+`***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-|CPU Family       | Kayblake    | 7th Gen       | Skylake    | 6th Gen |
+|CPU Family       | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
 |:----------------|:-----------:|:-------------:|:----------:|:-------:|
-| **UEFI Quirks** | Dektop      | Mobile         | Desktop   | Mobile  |
+| **UEFI Quirks** | Desktop      | Mobile         | Desktop   | Mobile  |
 |				          |				    | 			   |            |            |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
@@ -195,7 +196,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### ACPI Quirks   
 |CPU Family       | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:----------------|:---------:|:-------:|:-------:|:-------:|
-| **ACPI Quirks** | Dektop    | Mobile  | Desktop | Mobile  |    
+| **ACPI Quirks** | Desktop    | Mobile  | Desktop | Mobile  |    
 |				          |				    | 			   |            |            |
 |FadtEnableReset|
 |NormalizeHeaders|
@@ -208,7 +209,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family          | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:-------------------|:---------:|:-------:|:-------:|:-------:|
-| **Booter Quirkss** | Dektop    | Mobile  | Desktop | Mobile  |
+| **Booter Quirkss** | Desktop    | Mobile  | Desktop | Mobile  |
 |				          |				    | 			   |            |            |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||||
@@ -234,7 +235,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Kernel Quirks
 |CPU Family       |Broadwell |5th Gen |Haswell |4th Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **Kernel Quirks** | Dektop |Mobile  |Desktop |Mobile  |
+| **Kernel Quirks** | Desktop |Mobile  |Desktop |Mobile  |
 |				          |				    | 			   |            |            |
 |AppleCpuPmCfgLock||||
 |AppleXcpmCfgLock||||
@@ -260,7 +261,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### UEFI Quirks
 |CPU Family       |Broadwell |5th Gen |Haswell |4th Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **UEFI Quirks** |Dektop    |Mobile  |Desktop |Mobile  |
+| **UEFI Quirks** |Desktop    |Mobile  |Desktop |Mobile  |
 |				          |				    | 			   |            |            |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
@@ -285,7 +286,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
 |				          |				    | 			   |            |            |
-| **ACPI Quirks** | Dektop   | Mobile |Desktop |Mobile  |    
+| **ACPI Quirks** | Desktop   | Mobile |Desktop |Mobile  |    
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
@@ -298,7 +299,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
 |				          |				    | 			   |            |            |
-| **Booter Quirkss** | Dektop      | Mobile        |Desktop     |Mobile  |
+| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||||
 |DevirtualiseMmio||||
@@ -323,7 +324,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Kernel Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **Kernel Quirks** | Dektop      |Mobile         |Desktop     |Mobile  |
+| **Kernel Quirks** | Desktop      |Mobile         |Desktop     |Mobile  |
 |				          |				    | 			   |            |            |
 |AppleCpuPmCfgLock||||
 |AppleXcpmCfgLock||||
@@ -350,7 +351,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
 |				          |				    | 			   |            |            |
-| **UEFI Quirks** | Dektop      |Mobile         |Desktop     |Mobile  |
+| **UEFI Quirks** | Desktop      |Mobile         |Desktop     |Mobile  |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
 |EnableVectorAcceleration||||
@@ -374,7 +375,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       |Bloomfield |1st Gen |
 |:----------------|:--------:|:------:|
 |				          |				    | 			   |            |            |
-| **ACPI Quirks** | Dektop   | Mobile | 
+| **ACPI Quirks** | Desktop   | Mobile | 
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
@@ -386,7 +387,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **Booter Quirkss** | Dektop      | Mobile        |Desktop     |Mobile  |
+| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
 |				          |				    | 			   |            |            |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||||
@@ -412,7 +413,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Kernel Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **Kernel Quirks** | Dektop      |Mobile         |Desktop     |Mobile  |
+| **Kernel Quirks** | Desktop      |Mobile         |Desktop     |Mobile  |
 |				          |				    | 			   |            |            |
 |AppleCpuPmCfgLock||||
 |AppleXcpmCfgLock||||
@@ -438,7 +439,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### UEFI Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **UEFI Quirks** | Dektop      |Mobile         |Desktop     |Mobile  |
+| **UEFI Quirks** | Desktop      |Mobile         |Desktop     |Mobile  |
 |				          |				    | 			   |            |            |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
