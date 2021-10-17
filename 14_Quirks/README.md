@@ -103,8 +103,8 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### ACPI Quirks   
 |CPU Family       |Kabylake     |7th Gen        |Skylake     |6th Gen |
 |:----------------|:-----------:|:-------------:|:----------:|:------:|
-| **ACPI Quirks** | Desktop      | Mobile        |Desktop     |Mobile  |    
-|				     |	 		     | 		        |            |        |
+| **ACPI Quirks** | Desktop     | Mobile        | Desktop    | Mobile |    
+|                 |	 		     | 		        |            |        |
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
@@ -143,7 +143,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Kernel Quirks
 | CPU Family        | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
 |:------------------|:-----------:|:-------------:|:----------:|:-------:|
-| **Kernel Quirks** | Desktop      | Mobile        | Desktop    | Mobile  |
+| **Kernel Quirks** | Desktop     | Mobile        | Desktop    | Mobile  |
 |                   |             |               |            |         |
 |AppleCpuPmCfgLock||||
 |AppleXcpmCfgLock|x|||
