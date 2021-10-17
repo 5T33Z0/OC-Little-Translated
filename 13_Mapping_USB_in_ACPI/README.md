@@ -2,10 +2,10 @@
 >**DISCLAIMER**: I am not a programmer. Therefore, my knowlage of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will fix your SSDTs!
 
 ## Background
-Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). The best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
+Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
 
 ## Approach
-In order to build our own USB Portmap SSDT, we will do the following:
+In order to build our own USB Portmap as SSDT, we will do the following:
 
 - Dump the orginal ACPI tables from the BIOS
 - Find the SSDT where the USB ports are declared
@@ -17,7 +17,7 @@ The method presented here is a slightly modified version of a guide by "apfelnic
 I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
 
 <details>
-<summary><strong>Preparations</strong></summary>
+<summary><strong>Preparations</strong></summary>>
 
 ## Preparations
 
@@ -26,8 +26,8 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 - [**maciASL**](https://github.com/acidanthera/MaciASL) or [**QtiASL**](https://github.com/ic005k/QtiASL) for editing `.aml` files.
 - [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
-- FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
 - [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI/Example_Files) (for following along)
+- FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
 - USB 2.0 Flash Drive (optional, also for probing Ports).
 - Your mainboard manual with a schematic listing all its ports and USB headers
 - Spreadsheed for taking notes about Port names, Types and pysical Location (optional)
@@ -41,7 +41,7 @@ There are various ways to dump ACPI Tables from youre BIOS:
 - Using **OpenCore** (requires Debug version and a working config): enable Misc\Debug\`SysReport` Quirk. The DSDT will be dumped during the next boot. Least favorite way.
 </details>
 <details>
-<summary><strong>Dropping the original USB Table</strong></summary>
+<summary><strong>Dropping the original USB Table</strong></summary>>
 
 ## Finding the correct table
 Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the SSDT-xxxx.aml files. Find the one which looks similar to this:
@@ -75,17 +75,22 @@ You should have the correct rule for replacing the ACPI Table containing the USB
 <summary><strong>Preparing a replacement SSDT</strong></summary>
 
 ## Preparing a replacement SSDT
-Now that we have found the SSDT with the oroginal usb port declarations, we can start modifying them. Almost. We still need more details, though…
+Now that we have found the SSDT with the original usb port declarations, we can start modifying them. Almost. We still need more details, though…
 
 ### Modifying the orginal USB Table
-In general, two methods are relevant for declaring USB ports: `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)) and `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)). `_UPC` defines the type of port and it's state (enabled/disabled) and `_PLD` defines the location of the pysical port and its properties. Both values are handed over to (GUPC and GPLD) inside the Root Hub (RHUB).
+In general, two methods are relevant for declaring USB ports:
+ 
+1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)): defines the type of port and it's state (enabled/disabled)
+2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)): defines the location of the pysical port and its properties. 
+
+Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (RHUB).
 
 #### Adding an additional `Arg1` to `GUPC`
 First, take a look at the routine `GUPC`inside of the `RHUB` (Root Hub):
 
 ![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
 	
-In my case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
+In this case, it includes a Package (`PCKG`) with four values that are handed over to every USB ports in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
 
 - In the Header, we change the `GUPC, 1,` to `GUPC, 2,` (since we want to control 2 values of this package)
 - Next, we add `PCKG [One] = Arg1`, so it hands over the 2nd package value to `_UPC` as well.
@@ -154,7 +159,7 @@ Which looks like this:
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
 </details>
 <details>
-<summary><strong>Mapping the ports</strong></summary>
+<summary><strong>Mapping the ports</strong></summary>>
 
 ## Mapping the ports (finally)
 Next, we need to find out which phsyscial ports actually map to which ports in the system.
