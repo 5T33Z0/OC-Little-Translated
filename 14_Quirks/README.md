@@ -96,7 +96,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |TscSyncTimeout||||
 |UnblockFsConnect||||
 <details>
-<summary><strong>6th and 7th Gen Intel Quirks</strong> (Work in Progress)</summary
+<summary><strong>6th and 7th Gen Intel Quirks</strong> (Click to show content!)</summary>
 
 ## 6th and 7th Gen Intel CPUs (Desktop/Mobile)
 
@@ -117,7 +117,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family          |Kabylake     |7th Gen        |Skylake     |6th Gen |
 |:-------------------|:-----------:|:-------------:|:----------:|:------:|
-| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
+| **Booter Quirkss** | Desktop     | Mobile        | Desktop    | Mobile |
 |						 |			     |               |            |        |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag|x|x|x|x|
@@ -184,7 +184,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |IgnoreInvalidFlexRatio||||
 |ReleaseUsbOwnership||||
 |ReloadOptionRoms||||
-|RequestBootVarRouting||||
+|RequestBootVarRouting|x|x|x|x
 |ResizeGpuBars||||
 |TscSyncTimeout||||
 |UnblockFsConnect||||
