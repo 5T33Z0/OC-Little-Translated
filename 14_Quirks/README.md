@@ -73,7 +73,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ThirdPartyDrives||||
 |XhciPortLimit***|(x)|(x)|(x)|(x)
 
-`°` `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS
+`°` `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS</br>
 `*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
 `**` `LapicKernelPanic`: Enable for HP Systems</br>
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
