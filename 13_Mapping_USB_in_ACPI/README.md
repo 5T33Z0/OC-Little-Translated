@@ -7,7 +7,7 @@ Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port cou
 ## Approach
 In order to build our own USB Portmap as SSDT, we will do the following:
 
-- Dump the orginal ACPI tables from the BIOS
+- Dumping the orginal ACPI tables from BIOS
 - Find the SSDT where the USB ports are declared
 - Modify it so 15 ports are mapped for macOS without affecting other OSes
 - Inject this table during boot, replacing the original one
@@ -17,7 +17,7 @@ The method presented here is a slightly modified version of a guide by "apfelnic
 I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
 
 <details>
-<summary><strong>Preparations</strong></summary>>
+<summary><strong>1. Preparations</strong></summary>
 
 ## Preparations
 
@@ -36,15 +36,14 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 ### Dumping ACPI Tables
 There are various ways to dump ACPI Tables from youre BIOS: 
 
-- Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it to a USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
-- Using **SSDTTime** (in Windows): if you use SSDTTime in Windows, you have the option to dump the `DSDT`, which you don't have when using it in macOS.
-- Using **OpenCore** (requires Debug version and a working config): enable Misc\Debug\`SysReport` Quirk. The DSDT will be dumped during the next boot. Least favorite way.
+- Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
+- Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
 </details>
 <details>
-<summary><strong>Dropping the original USB Table</strong></summary>>
+<summary><strong>2. Dropping the original USB Table</strong></summary>
 
 ## Finding the correct table
-Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the SSDT-xxxx.aml files. Find the one which looks similar to this:
+Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the **SSDT-xxxx.aml** files. Find the one which looks similar to this:
 
 ![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
 
@@ -72,7 +71,7 @@ In order to delete (or drop) the original table during boot and replace it with 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 </details>
 <details>
-<summary><strong>Preparing a replacement SSDT</strong></summary>
+<summary><strong>3 Preparing a replacement SSDT</strong></summary>
 
 ## Preparing a replacement SSDT
 Now that we have found the SSDT with the original usb port declarations, we can start modifying them. Almost. We still need more details, though…
@@ -85,19 +84,19 @@ In general, two methods are relevant for declaring USB ports:
 
 Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (RHUB).
 
-#### Adding an additional `Arg1` to `GUPC`
+#### Adding `Arg1` to `GUPC`
 First, take a look at the routine `GUPC`inside of the `RHUB` (Root Hub):
 
 ![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
 	
-In this case, it includes a Package (`PCKG`) with four values that are handed over to every USB ports in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
+In this case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availablity of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
 
 - In the Header, we change the `GUPC, 1,` to `GUPC, 2,` (since we want to control 2 values of this package)
 - Next, we add `PCKG [One] = Arg1`, so it hands over the 2nd package value to `_UPC` as well.
-- In the Package, we change the first value of to `0xFF` to enable all ports 
-- Finally, we set the second package to `0x03`, which changes all ports to USB 2.0 and 3.0 with a Type A connector (the blue connetcors).
+- In the Package, we change the first value of to `0xFF` to set the port "enabled" 
+- Finally, we set the second package to `0x03`, which changes the port type to USB 2.0 and 3.0 with a Type A connector (the blue connectors).
 
-Now we have control over a port's status (on/off or available/unavailabe) and what type it is. So we get this code snippet:
+Now we have control over a port's status (on/off or available/unavailabe) and what type it is. We get this code snippet:
 
 ```swift
 Method (GUPC, 2, Serialized)
@@ -159,7 +158,7 @@ Which looks like this:
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
 </details>
 <details>
-<summary><strong>Mapping the ports</strong></summary>>
+<summary><strong>4 Mapping ports</strong></summary>
 
 ## Mapping the ports (finally)
 Next, we need to find out which phsyscial ports actually map to which ports in the system.
@@ -176,7 +175,7 @@ According to the ACPI Specifications about [USB Port Capabilities](https://uefi.
 |**0x0A**| Type C connector, USB 2.0 and USB 3.0 w/o Switch |Flipping the device does change the ACPI port. generally seen on USB 3.1/3.2 mainboard headers|
 |**0xFF**| Proprietary Connector | For Internal USB 2.0 ports like Bluetooth|
 
-We will need use these "Type" bytes to declare the USB Port types.
+We will use these "Type" bytes to declare the USB Port types.
 
 ### USB Port Names
 As seen earlier, the ports listed in the SSDT have different names.
@@ -288,7 +287,7 @@ Scope (USR1)
 #### OPTION B: TO BE CONTINUED…
 </details>
 <details>
-<summary><strong>Wrapping up and testing</strong></summary>
+<summary><strong>5. Wrapping up and testing</strong></summary>
 
 ## Wrapping up and testing
 Once you are done with your port mapping activities, do the following:
