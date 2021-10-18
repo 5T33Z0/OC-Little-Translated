@@ -1,6 +1,6 @@
-## Terminal Commands
+# Terminal Commands
 
-### macOS related
+## macOS related
 
 **Collection of defaults commands** (for modifying behavior, options, look and feel of macOS):</br>
 `https://macos-defaults.com/`
@@ -37,7 +37,7 @@
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
-### Hackintosh specific
+## Hackintosh specific
 
 **Find loaded Kexts** (excluding those from Apple)</br>
 `kextstat | grep -v com.apple`</br>
