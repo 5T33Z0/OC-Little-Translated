@@ -20,7 +20,7 @@ Device (ALSD)
 {
   Name (_HID, "ACPI0008" /* Ambient Light Sensor Device */) // _HID: Hardware ID
   Method (_STA, 0, NotSerialized) // _STA: Status
-  If
+  
     If ((ALSE == 0x02))
     {
       Return (0x0B)
