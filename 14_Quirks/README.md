@@ -88,7 +88,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       | Cometlake    | 10th Gen       | Coffeelake | 8th/9th Gen |
 |:----------------|:------------:|:--------------:|:----------:|:-----------:|
 | **UEFI Quirks** | Desktop      | Mobile         | Desktop    | Mobile      |
-|			        |	             |                |            |             |
+|		  |              |                |            |             |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
 |EnableVectorAcceleration|x|x||
@@ -118,10 +118,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 - 6th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html#platforminfo)
 
 ### ACPI Quirks   
-|CPU Family       |Kabylake     |7th Gen        |Skylake     |6th Gen |
-|:----------------|:-----------:|:-------------:|:----------:|:------:|
-| **ACPI Quirks** | Desktop     | Mobile        | Desktop    | Mobile |    
-|                 |             | 		        |            |        |
+| CPU Family      | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
+|:----------------|:-----------:|:-------------:|:----------:|:-------:|
+| **ACPI Quirks** | Desktop     | Mobile        | Desktop    | Mobile  |    
+|                 |             | 	        |            |         |
 |FadtEnableReset  |
 |NormalizeHeaders |
 |RebaseRegions    |
@@ -132,10 +132,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*`Default in `sample.plist`
 
 ### Booter Quirks
-|CPU Family         | Kabylake    | 7th Gen      | Skylake    | 6th Gen |
+| CPU Family        | Kabylake    | 7th Gen      | Skylake    | 6th Gen |
 |:------------------|:-----------:|:-------------:|:---------:|:-------:|
 | **Booter Quirks** | Desktop     | Mobile        | Desktop   | Mobile  |
-|						|			    |               |           |         |
+|	            |             |               |           |         |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag|x|x|x|x|
 |DevirtualiseMmio||||
@@ -188,7 +188,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-|CPU Family       | Kabylake    | 7th Gen       | Skylake   | 6th Gen |
+| CPU Family      | Kabylake    | 7th Gen       | Skylake   | 6th Gen |
 |:----------------|:-----------:|:-------------:|:---------:|:-------:|
 | **UEFI Quirks** | Desktop     | Mobile        | Desktop   | Mobile  |
 |                 |             |               |           |         |
@@ -220,10 +220,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 - 4th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/haswell.html#platforminfo)
 
 ### ACPI Quirks   
-|CPU Family       | Broadwell | 5th Gen | Haswell | 4th Gen |
-|:----------------|:---------:|:-------:|:-------:|:-------:|
-| **ACPI Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile |    
-|			        |           |         |         |         |
+| CPU Family      | Broadwell     | 5th Gen | Haswell | 4th Gen |
+|:----------------|:-------------:|:-------:|:-------:|:-------:|
+| **ACPI Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile  |    
+|                 |               |         |         |         |
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
@@ -234,10 +234,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*` Default in `sample.plist`
 
 ### Booter Quirks
-|CPU Family         | Broadwell | 5th Gen | Haswell | 4th Gen |
-|:------------------|:---------:|:-------:|:-------:|:-------:|
-| **Booter Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile |
-|			          |		     |  	     |         |         |
+| CPU Family        | Broadwell     | 5th Gen | Haswell | 4th Gen |
+|:------------------|:-------------:|:-------:|:-------:|:-------:|
+| **Booter Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile  |
+|		    |		    |  	      |         |         |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||x|x|x|
 |DevirtualiseMmio||||
@@ -262,7 +262,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*` `ProvideCustomSlide`: Used for Slide variable calculation. However, the necessity of this quirk is determined by "OCABC: Only N/256 slide values are usable!" message in the debug log. If the message "OCABC: All slides are usable! You can disable `ProvideCustomSlide`!" is present in your log, you can disable ProvideCustomSlide.
 
 ### Kernel Quirks
-|CPU Family         | Broadwell | 5th Gen | Haswell | 4th Gen |
+| CPU Family        | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:------------------|:---------:|:-------:|:-------:|:-------:|
 | **Kernel Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile |
 |                   |           |         |         |         |
@@ -293,7 +293,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-|CPU Family       | Broadwell | 5th Gen | Haswell | 4th Gen |
+| CPU Family      | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:----------------|:---------:|:-------:|:-------:|:-------:|
 | **UEFI Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile|
 |                 |           |         |         |         |
