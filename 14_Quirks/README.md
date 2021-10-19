@@ -304,7 +304,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
 |ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio|x|x|x|x
+|IgnoreInvalidFlexRatio||x|x|x
 |ReleaseUsbOwnership||x||x|
 |ReloadOptionRoms||||
 |RequestBootVarRouting||x||x
