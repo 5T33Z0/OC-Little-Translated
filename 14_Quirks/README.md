@@ -3,6 +3,113 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 
 **Applicable Version**: OpenCore ≥ 0.7.5
 
+## 11th Gen Intel
+Unofficial. Since Apple stoped using Intel CPU after 10th Gen no SMBIOS exists.
+
+### SMBIOS Requirements
+11th Gen Desktop: 
+
+- **MacPro7,1**. Requires Fake CPUID: </br>
+**Cpuid1Data**: `EB060900000000000000000000000000`</br>
+**Cpuid1Mask**: `FFFFFFFF000000000000000000000000`</br>
+
+### ACPI Quirks    
+| CPU Family      | Rocktelake  11th Gen | 
+|:----------------|:---------:|:---------:
+| **ACPI Quirks** | Desktop   | Mobile   |      
+|			        |           | 		    |  
+|FadtEnableReset  |
+|NormalizeHeaders |
+|RebaseRegions    |
+|ResetHwSig       | 
+|ResetLogoStatus* |(x)|()|()|()|
+|SyncTableIDs     |
+
+`*`Default in `sample.plist`
+
+### Boooter Quirks
+| CPU Family        | Rocktelake  11th Gen | 
+|:------------------|:---------:|:---------:|
+| **Booter Quirks** | Desktop   | Mobile   |
+|			          |			  | 		   |
+|AllowRelocationBlock|
+|AvoidRuntimeDefrag|x|x|x|x
+|DevirtualiseMmio|x|x|x
+|DisableSingleUser|
+|DisableVariableWrite|
+|DiscardHibernateMap|
+|EnableSafeModeSlide|x|x|x|x
+|EnableWriteUnprotector|x|
+|ForceBooterSignature
+|ForceExitBootServices
+|ProtectMemoryRegions|
+|ProtectSecureBoot
+|ProtectUefiServices*|x|x|(x)*|
+|ProvideCustomSlide|x|x|x|x
+|ProvideMaxSlide
+|RebuildAppleMemoryMap||
+|ResizeAppleGpuBars
+|SetupVirtualMap|||x|x
+|SignalAppleOS
+|SyncRuntimePermissions|x|x|x|x
+
+`*` Required for Z390 mainboards
+
+### Kernel Quirks
+| CPU Family      | Rocktelake  11th Gen   | 
+|:----------------|:---------:|:----------:|
+| **Kernel Quirks** | Desktop     | Mobile |      
+|                   |             |        |
+|AppleCpuPmCfgLock||||
+|AppleXcpmCfgLock°|(x)|(x)|(x)|(x)
+|AppleXcpmExtraMsrs||||
+|AppleXcpmForceBoost||||
+|CustomSMBIOSGuid*|( )|( )|( )|( )
+|DisableIoMapper|x|||
+|DisableLinkeditJettison|x|||
+|DisableRtcChecksum|x|||
+|ExtendBTFeatureFlags||||
+|ExternalDiskIcons||||
+|ForceSecureBootScheme||||
+|IncreasePciBarSize||||
+|LapicKernelPanic**|( )|( )|( )|( )
+|LegacyCommpage||||
+|PanicNoKextDump|x|x|x|x
+|PowerTimeoutKernelPanic|x|x|x|x
+|ProvideCurrentCpuInfo||||
+|SetApfsTrimTimeout|-1|-1|-1|-1
+|ThirdPartyDrives||||
+|XhciPortLimit***|( )|())|()|()
+
+`°` `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS</br>
+`*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
+`**` `LapicKernelPanic`: Enable for HP Systems</br>
+`***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+
+### UEFI Quirks
+| CPU Family      | Rocktelake 11th Gen | 
+|:----------------|:---------:|:---------:|
+| **UEFI Quirks** | Desktop      | Mobile         | Desktop    | Mobile      |
+|			        |	             |                |            |             |
+|ActivateHpetSupport||||
+|DisableSecurityPolicy||||
+|EnableVectorAcceleration|x|||
+|ExitBootServicesDelay||||
+|ForceOcWriteFlash||||
+|ForgeUefiSupport||||
+|IgnoreInvalidFlexRatio||||
+|ReleaseUsbOwnership|x|||
+|ReloadOptionRoms||||
+|RequestBootVarRouting|x|x|x|x
+|ResizeGpuBars||||
+|TscSyncTimeout||||
+|UnblockFsConnect*|( )|( )|( )|( )|
+
+`*` `UnblockFsConnect`: Enable on HP Machines
+</details>
+<details>
+<summary><strong>8th to 10th Gen Intel Quirks</strong> (Click to show content!)</summary>
+
 ## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
 
 ### SMBIOS Requirements
@@ -91,7 +198,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |			        |	             |                |            |             |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
-|EnableVectorAcceleration||||
+|EnableVectorAcceleration|x|x||
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
 |ForgeUefiSupport||||
@@ -210,7 +317,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*` `UnblockFsConnect`: Enable on HP Machines
 </details>
 <details>
-<summary><strong>4th and 5th Gen Intel Quirks</strong> (Work in Progress)</summary>
+<summary><strong>4th and 5th Gen Intel Quirks</strong> (Click to show content)</summary>
 
 ## 4th and 5th Gen Intel CPUs (Desktop/Mobile)
 
@@ -315,7 +422,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*` `UnblockFsConnect`: Enable on HP Machines
 </details>
 <details>
-<summary><strong>2nd and 3rd Gen Intel Quirks</strong> (Work in Progress)</summary>
+<summary><strong>2nd and 3rd Gen Intel Quirks</strong> (Click to show content)</summary>
 
 ## 2nd and 3rd Gen Intel CPUs (Desktop/Mobile)
 
