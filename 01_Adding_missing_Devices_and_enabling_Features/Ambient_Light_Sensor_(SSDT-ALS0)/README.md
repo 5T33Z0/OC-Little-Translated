@@ -126,7 +126,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 }
 ```
 
-## Caution
+## NOTES
 
 - It's okay to add a fake `ALS0`, even if an ambient light sensor exists in the original `ACPI`.
 - The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving our desired effect.
