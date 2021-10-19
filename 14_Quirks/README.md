@@ -232,7 +232,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ResetLogoStatus*||x|x|x|
 |SyncTableIDs|
 
-`*`Default in `sample.plist`
+`*` Default in `sample.plist`
 
 ### Booter Quirks
 |CPU Family         | Broadwell | 5th Gen | Haswell | 4th Gen |
@@ -304,10 +304,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
 |ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio||x||
+|IgnoreInvalidFlexRatio|x|x|x|x
 |ReleaseUsbOwnership||x||
 |ReloadOptionRoms||||
-|RequestBootVarRouting||x||
+|RequestBootVarRouting||x||x
 |ResizeGpuBars||-1|-1|-1
 |TscSyncTimeout||||
 |UnblockFsConnect*||( )|( )|( )
@@ -339,7 +339,8 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ResetHwSig| 
 |ResetLogoStatus*|x| x|x|x|
 |SyncTableIDs|
-`*`Default in sample.plist
+
+`*` Default in `sample.plist`
 
 ### Booter Quirks
 | CPU Family        | Ivy Bridge | 3rd Gen | Sandy Bridge | 2nd Gen |
@@ -347,51 +348,57 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 | **Booter Quirks** | Desktop    | Mobile   | Desktop     | Mobile  |
 |                   |            |          |             |         |
 |AllowRelocationBlock||||
-|AvoidRuntimeDefrag||||
+|AvoidRuntimeDefrag|x|x|x|x|
 |DevirtualiseMmio||||
 |DisableSingleUser||||
 |DisableVariableWrite||||
 |DiscardHibernateMap||||
-|EnableSafeModeSlide|||||
-|EnableWriteUnprotector||||
+|EnableSafeModeSlide|x|x|x|x|
+|EnableWriteUnprotector|x|x|x|x
 |ForceBooterSignature||||
 |ForceExitBootServices||||
 |ProtectMemoryRegions||||
 |ProtectSecureBoot||||
 |ProtectUefiServices||||
-|ProvideCustomSlide||||
+|ProvideCustomSlide*|x|x|x|x
 |ProvideMaxSlide||||
 |RebuildAppleMemoryMap||||
 |ResizeAppleGpuBars||||
-|SetupVirtualMap||||
+|SetupVirtualMap|x|x|x|x
 |SignalAppleOS||||
 |SyncRuntimePermissions||||
+
+`*` `ProvideCustomSlide`: Used for Slide variable calculation. However, the necessity of this quirk is determined by "OCABC: Only N/256 slide values are usable!" message in the debug log. If the message "OCABC: All slides are usable! You can disable `ProvideCustomSlide`!" is present in your log, you can disable ProvideCustomSlide.
 
 ### Kernel Quirks
 | CPU Family        | Ivy Bridge | 3rd Gen | Sandy Bridge | 2nd Gen |
 |:------------------|:----------:|:-------:|:------------:|:-------:|
 | **Kernel Quirks** | Desktop    | Mobile  | Desktop      | Mobile  |
 |                   |            |         |              |         |
-|AppleCpuPmCfgLock||||
+|AppleCpuPmCfgLock|x|x|x|x
 |AppleXcpmCfgLock||||
 |AppleXcpmExtraMsrs||||
 |AppleXcpmForceBoost||||
-|CustomSMBIOSGuid||||
-|DisableIoMapper||||
-|DisableLinkeditJettison||||
+|CustomSMBIOSGuid*||||
+|DisableIoMapper|x|x|x|x
+|DisableLinkeditJettison|x|x|x|x
 |DisableRtcChecksum||||
 |ExtendBTFeatureFlags||||
 |ExternalDiskIcons||||
 |ForceSecureBootScheme||||
 |IncreasePciBarSize||||
-|LapicKernelPanic||||
+|LapicKernelPanic**||||
 |LegacyCommpage||||
-|PanicNoKextDump||||
-|PowerTimeoutKernelPanic||||
+|PanicNoKextDump|x|x|x|x
+|PowerTimeoutKernelPanic|x|x|x|x
 |ProvideCurrentCpuInfo||||
 |SetApfsTrimTimeout||||
 |ThirdPartyDrives||||
-|XhciPortLimit||||
+|XhciPortLimit***|x|x|x|x|
+
+`*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO Systems</br>
+`**` `LapicKernelPanic`: Enable for HP Systems</br>
+`***` `XhciPortLimit`: Disable if your system doesn't have USB 3.0 ports And if you are running macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
 | CPU Family      | Ivy Bridge | 3rd Gen | Sandy Bridge | 2nd Gen |
@@ -404,13 +411,13 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
 |ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio||||
-|ReleaseUsbOwnership||||
+|IgnoreInvalidFlexRatio|x|x|x|x
+|ReleaseUsbOwnership||x||x
 |ReloadOptionRoms||||
 |RequestBootVarRouting||||
 |ResizeGpuBars||||
 |TscSyncTimeout||||
 |UnblockFsConnect*|( )|( )|( )|( )|
 
-`*` `UnblockFsConnect`: Enable on HP Machines|
+`*` `UnblockFsConnect`: Enable on HP Machines
 </details>
