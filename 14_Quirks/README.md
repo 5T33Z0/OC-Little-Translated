@@ -4,12 +4,19 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 **Applicable Version**: OpenCore ≥ 0.7.5
 
 ## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
+### SMBIOS Requirements
+- 10th Gen (Dektop): [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
+- 10th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#platforminfo)
+- 9th Gen (Desktop): [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
+- 9th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
+- 8th Gen (Desktop): [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (for systems with discrete GPU, using iGPU for computing taks only), [**iMac18,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,1) (for systems with using iGPU for display output).
+- 8th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake.html#platforminfo)
 
 ### ACPI Quirks    
 | CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen|
 |:----------------|:---------:|:--------:|:----------:|:----------:|
-| **ACPI Quirks** | Desktop    | Mobile   | Desktop    | Mobile     |      
-|				          |				    | 			   |            |            |
+| **ACPI Quirks** | Desktop   | Mobile   | Desktop    | Mobile     |      
+|			        |			    | 			 |            |            |
 |FadtEnableReset  |
 |NormalizeHeaders |
 |RebaseRegions    |
@@ -22,8 +29,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Boooter Quirks
 |CPU Family         |Cometlake    |10th Gen     |Coffeelake  | 8th/9th Gen |
 |:------------------|:-----------:|:-----------:|:----------:|:-----------:|
-| **Booter Quirks** | Desktop      | Mobile      | Desktop     | Mobile     |
-|				          |				    | 			   |            |            |
+| **Booter Quirks** | Desktop      | Mobile      | Desktop     | Mobile     |			          |			    | 		   |            |            |
 |AllowRelocationBlock|
 |AvoidRuntimeDefrag|x|x|x|x
 |DevirtualiseMmio|x|x|x
@@ -118,7 +124,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family          |Kabylake     |7th Gen        |Skylake     |6th Gen |
 |:-------------------|:-----------:|:-------------:|:----------:|:------:|
-| **Booter Quirkss** | Desktop     | Mobile        | Desktop    | Mobile |
+| **Booter Quirks** | Desktop     | Mobile        | Desktop    | Mobile |
 |						 |			     |               |            |        |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag|x|x|x|x|
@@ -198,7 +204,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:----------------|:---------:|:-------:|:-------:|:-------:|
 | **ACPI Quirks** | Desktop    | Mobile  | Desktop | Mobile  |    
-|				          |				    | 			   |            |            |
+|			       |			    | 		   |          |         |
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
@@ -210,28 +216,30 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family          | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:-------------------|:---------:|:-------:|:-------:|:-------:|
-| **Booter Quirkss** | Desktop    | Mobile  | Desktop | Mobile  |
-|				          |				    | 			   |            |            |
+| **Booter Quirks**  | Desktop (N/A) | Mobile  | Desktop | Mobile |
+|			           |		       |  	   |         |         |
 |AllowRelocationBlock||||
-|AvoidRuntimeDefrag||||
+|AvoidRuntimeDefrag||x|x|x|
 |DevirtualiseMmio||||
 |DisableSingleUser||||
 |DisableVariableWrite||||
 |DiscardHibernateMap||||
-|EnableSafeModeSlide|||||
-|EnableWriteUnprotector||||
+|EnableSafeModeSlide||x|x|x|
+|EnableWriteUnprotector||x|x|x|
 |ForceBooterSignature||||
 |ForceExitBootServices||||
 |ProtectMemoryRegions||||
 |ProtectSecureBoot||||
 |ProtectUefiServices||||
-|ProvideCustomSlide||||
+|ProvideCustomSlide*||x|x|x|
 |ProvideMaxSlide||||
 |RebuildAppleMemoryMap||||
 |ResizeAppleGpuBars||||
-|SetupVirtualMap||||
+|SetupVirtualMap||x|x|x|
 |SignalAppleOS||||
 |SyncRuntimePermissions||||
+
+`*` `ProvideCustomSlide`: Used for Slide variable calculation. However, the necessity of this quirk is determined by "OCABC: Only N/256 slide values are usable!" message in the debug log. If the message "OCABC: All slides are usable! You can disable `ProvideCustomSlide`!" is present in your log, you can disable ProvideCustomSlide.
 
 ### Kernel Quirks
 |CPU Family       |Broadwell |5th Gen |Haswell |4th Gen |
@@ -263,7 +271,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |CPU Family       |Broadwell |5th Gen |Haswell |4th Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
 | **UEFI Quirks** |Desktop    |Mobile  |Desktop |Mobile  |
-|				          |				    | 			   |            |            |
+|			   |	| 			   |            |            |
 |ActivateHpetSupport||||
 |DisableSecurityPolicy||||
 |EnableVectorAcceleration||||
@@ -286,7 +294,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### ACPI Quirks   
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-|				          |				    | 			   |            |            |
+|          |				    | 			   |            |            |
 | **ACPI Quirks** | Desktop   | Mobile |Desktop |Mobile  |    
 |FadtEnableReset|
 |NormalizeHeaders|
@@ -299,8 +307,8 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-|				          |				    | 			   |            |            |
-| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
+|	      |	|			   |            |            |
+| **Booter Quirks** | Desktop      | Mobile        |Desktop     |Mobile  |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||||
 |DevirtualiseMmio||||
@@ -388,7 +396,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### Booter Quirks
 |CPU Family       |Ivy Bridge |3rd Gen |Sandy Bridge |2nd Gen |
 |:----------------|:--------:|:------:|:------:|:------:|
-| **Booter Quirkss** | Desktop      | Mobile        |Desktop     |Mobile  |
+| **Booter Quirks** | Desktop      | Mobile        |Desktop     |Mobile  |
 |				          |				    | 			   |            |            |
 |AllowRelocationBlock||||
 |AvoidRuntimeDefrag||||
