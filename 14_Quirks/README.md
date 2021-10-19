@@ -492,7 +492,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |RequestBootVarRouting||||
 |ResizeGpuBars||||
 |TscSyncTimeout||||
-|UnblockFsConnect*|( )|( )|( )|( )|
+|UnblockFsConnect*|( )|( )|( )|( )
 
 `*` `UnblockFsConnect`: Enable on HP Machines
 </details>
