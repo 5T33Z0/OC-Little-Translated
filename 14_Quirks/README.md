@@ -6,10 +6,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
 
 ### SMBIOS Requirements
-- 10th Gen (Dektop): [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
-- 10th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#platforminfo)
-- 9th Gen (Desktop): [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
-- 9th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
+- 10th Gen Dektop: [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
+- 10th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#platforminfo)
+- 9th Gen Desktop: [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
+- 9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
 ### ACPI Quirks    
 | CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen |
@@ -111,12 +111,12 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ## 6th and 7th Gen Intel CPUs (Desktop/Mobile)
 
 ### SMBIOS Requirements
-- 7th Gen (Desktop): 
+- 7th Gen Desktop: 
 	- [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (for systems with discrete GPU, using iGPU for computing taks only)
 	- [**iMac18,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,1) (for systems with using iGPU for display output)
-- 7th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake.html#platforminfo)
-- 6th Gen (Desktop): [**iMac17,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac17,1) (macOS El Capitan)
-- 6th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html#platforminfo)
+- 7th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake.html#platforminfo)
+- 6th Gen Desktop: [**iMac17,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac17,1) (macOS El Capitan)
+- 6th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html#platforminfo)
 
 ### ACPI Quirks   
 |CPU Family       |Kabylake     |7th Gen        |Skylake     |6th Gen |
@@ -210,20 +210,20 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 `*` `UnblockFsConnect`: Enable on HP Machines
 </details>
 <details>
-<summary><strong>4th and 5th Gen Intel Quirks</strong> (Work in Progress)</summary
+<summary><strong>4th and 5th Gen Intel Quirks</strong> (Work in Progress)</summary>
 
 ## 4th and 5th Gen Intel CPUs (Desktop/Mobile)
 
 ### SMBIOS Requirements
-- 5th Gen (Desktop): N/A
-- 5th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell.html#platforminfo)
-- 4th Gen (Desktop): [**iMac14,4**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac14,1) (Haswell with iGPU only) or [**iMac15,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac15,1) (Haswell with dGPU)
-- 4th Gen (Mobile/NUC): [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/haswell.html#platforminfo)
+- 5th Gen Desktop: N/A
+- 5th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell.html#platforminfo)
+- 4th Gen Desktop: [**iMac14,4**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac14,1) (Haswell with iGPU only) or [**iMac15,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac15,1) (Haswell with dGPU)
+- 4th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/haswell.html#platforminfo)
 
 ### ACPI Quirks   
 |CPU Family       | Broadwell | 5th Gen | Haswell | 4th Gen |
 |:----------------|:---------:|:-------:|:-------:|:-------:|
-| **ACPI Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile  |    
+| **ACPI Quirks** | Desktop (N/A) | Mobile  | Desktop | Mobile |    
 |			        |           |         |         |         |
 |FadtEnableReset|
 |NormalizeHeaders|
@@ -319,6 +319,15 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 
 ## 2nd and 3rd Gen Intel CPUs (Desktop/Mobile)
 
+### SMBIOS Requirements
+- 3rd Gen Desktop: 
+	- [**iMac13,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac13,1).For system using the iGPU for driving a display.
+	- [**iMac13,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac13,1). For systems using a dGPU for displaying and the iGPU for computing tasks only.
+	- For Big Sur: **iMac14,4** (iGPU), **iMac15,1** (dGPU + iGPU)
+- 3rd Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#platforminfo)
+- 2nd Gen Desktop: [**iMac14,4**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac14,1) (Haswell with iGPU only) or [**iMac15,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac15,1) (Haswell with dGPU)
+- 2nd Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/haswell.html#platforminfo)
+
 ### ACPI Quirks   
 | CPU Family       | Ivy Bridge | 3rd Gen | Sandy Bridge | 2nd Gen |
 |:----------------|:----------:|:--------:|:------------:|:-------:|
@@ -405,97 +414,3 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 
 `*` `UnblockFsConnect`: Enable on HP Machines|
 </details>
-<details>
-<summary><strong>1st Gen Intel Quirks</strong> (Work in Progress)</summary>
-
-## 1st Gen Intel CPUs (Desktop/Mobile)
-
-### ACPI Quirks   
-| CPU Family       | Bloomfield | 1st Gen |
-|:-----------------|:---------:|:--------:|
-|                  |           |          |
-| **ACPI Quirks**  | Desktop   | Mobile   |  
-|FadtEnableReset|
-|NormalizeHeaders|
-|RebaseRegions|
-|ResetHwSig| 
-|ResetLogoStatus*|x| x|x|x|
-|SyncTableIDs|
-
-`*`Default in sample.plist
-
-### Booter Quirks
-| CPU Family        | Bloomfield | 1st Gen |
-|:------------------|:----------:|:-------:|
-| **Booter Quirks** | Desktop    | Mobile  |
-|                   |            |         |
-|AllowRelocationBlock||||
-|AvoidRuntimeDefrag||||
-|DevirtualiseMmio||||
-|DisableSingleUser||||
-|DisableVariableWrite||||
-|DiscardHibernateMap||||
-|EnableSafeModeSlide|||||
-|EnableWriteUnprotector||||
-|ForceBooterSignature||||
-|ForceExitBootServices||||
-|ProtectMemoryRegions||||
-|ProtectSecureBoot||||
-|ProtectUefiServices||||
-|ProvideCustomSlide||||
-|ProvideMaxSlide||||
-|RebuildAppleMemoryMap||||
-|ResizeAppleGpuBars||||
-|SetupVirtualMap||||
-|SignalAppleOS||||
-|SyncRuntimePermissions||||
-
-### Kernel Quirks
-| CPU Family        | Bloomfield | 1st Gen |
-|:------------------|:----------:|:-------:|
-| **Kernel Quirks** | Desktop    | Mobile  |
-|                   |            |         |
-|AppleCpuPmCfgLock||||
-|AppleXcpmCfgLock||||
-|AppleXcpmExtraMsrs||||
-|AppleXcpmForceBoost||||
-|CustomSMBIOSGuid||||
-|DisableIoMapper||||
-|DisableLinkeditJettison||||
-|DisableRtcChecksum||||
-|ExtendBTFeatureFlags||||
-|ExternalDiskIcons||||
-|ForceSecureBootScheme||||
-|IncreasePciBarSize||||
-|LapicKernelPanic||||
-|LegacyCommpage||||
-|PanicNoKextDump||||
-|PowerTimeoutKernelPanic||||
-|ProvideCurrentCpuInfo||||
-|SetApfsTrimTimeout||||
-|ThirdPartyDrives||||
-|XhciPortLimit||||
-
-### UEFI Quirks
-| CPU Family      | Bloomfield | 1st Gen |
-|:----------------|:----------:|:-------:|
-| **UEFI Quirks** | Desktop    | Mobile  |
-|				     | 			 |         |
-|ActivateHpetSupport||||
-|DisableSecurityPolicy||||
-|EnableVectorAcceleration||||
-|ExitBootServicesDelay||||
-|ForceOcWriteFlash||||
-|ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio||||
-|ReleaseUsbOwnership||||
-|ReloadOptionRoms||||
-|RequestBootVarRouting||||
-|ResizeGpuBars||||
-|TscSyncTimeout||||
-|UnblockFsConnect*|( )|( )|( )|( )
-
-`*` `UnblockFsConnect`: Enable on HP Machines
-</details>
-
-
