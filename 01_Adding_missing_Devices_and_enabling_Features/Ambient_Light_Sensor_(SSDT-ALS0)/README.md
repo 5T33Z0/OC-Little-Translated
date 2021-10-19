@@ -18,9 +18,9 @@ First, search for `ACPI0008` in the original `DSDT`. If you can find the associa
 ```swift
 Device (ALSD)
 {
-  Name (_HID, "ACPI0008" /* Ambient Light Sensor Device */) // _HID: Hardware ID
-  Method (_STA, 0, NotSerialized) // _STA: Status
-  
+  Name (_HID, "ACPI0008" /* Ambient Light Sensor Device */)  // _HID: Hardware ID
+  Method (_STA, 0, NotSerialized)  // _STA: Status
+  {
     If ((ALSE == 0x02))
     {
       Return (0x0B)
@@ -29,12 +29,12 @@ Device (ALSD)
     Return (Zero)
   }
 
-  Method (_ALI, 0, NotSerialized) // _ALI: Ambient Light Illuminance
+  Method (_ALI, 0, NotSerialized)  // _ALI: Ambient Light Illuminance
   {
     Return (((LHIH << 0x08) | LLOW))
-  Return ((LHIH << 0x08) | LLOW)) }
+  }
 
-  Name (_ALR, Package (0x05) // _ALR: Ambient Light Response
+  Name (_ALR, Package (0x05)  // _ALR: Ambient Light Response
   {
     Package (0x02)
     {
@@ -66,7 +66,6 @@ Device (ALSD)
       0x03E8
     }
   })
-}
 ```
 
 In this case, `ALS0` can be enabled by using `_STA` method to return `0x0B` to enable the ambient sensor devices present in the original `ACPI`, as follows:
