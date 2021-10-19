@@ -20,3 +20,4 @@ Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk removes the USB port limit n
 
 So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
 
+Follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via SSDT Table. 
