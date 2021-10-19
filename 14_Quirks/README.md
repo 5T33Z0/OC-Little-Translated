@@ -324,7 +324,6 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |:----------------|:----------:|:--------:|:------------:|:-------:|
 | **ACPI Quirks** | Desktop    | Mobile   | Desktop      | Mobile  |
 |                 |            |          |              |         |
-    
 |FadtEnableReset|
 |NormalizeHeaders|
 |RebaseRegions|
