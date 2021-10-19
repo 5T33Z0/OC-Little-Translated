@@ -4,7 +4,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 **Applicable Version**: OpenCore ≥ 0.7.5
 
 ## 11th Gen Intel
-Unofficial. Since Apple stoped using Intel CPU after 10th Gen no SMBIOS exists.
+Unofficial, unconfirmed. Since Apple stoped using Intel CPUs after 10th, Rocketlake CPUs are not supported and no SMBIOS exists. Therefore a **MacPro7,1** is emulated. 
 
 ### SMBIOS Requirements
 11th Gen Desktop: 
