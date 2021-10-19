@@ -421,6 +421,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ResetHwSig| 
 |ResetLogoStatus*|x| x|x|x|
 |SyncTableIDs|
+
 `*`Default in sample.plist
 
 ### Booter Quirks
