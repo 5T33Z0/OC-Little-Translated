@@ -8,14 +8,14 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 ### SMBIOS Requirements
 - 10th Gen Dektop: [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
 - 10th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#platforminfo)
-- 9th Gen Desktop: [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
-- 9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
+- 8/9th Gen Desktop: [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
+- 8/9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
 ### ACPI Quirks    
 | CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen |
 |:----------------|:---------:|:--------:|:----------:|:-----------:|
 | **ACPI Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |      
-|			        |           | 			 |            |             |
+|		  |           |		 |            |             |
 |FadtEnableReset  |
 |NormalizeHeaders |
 |RebaseRegions    |
@@ -29,7 +29,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 | CPU Family        | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen |
 |:------------------|:---------:|:--------:|:----------:|:-----------:|
 | **Booter Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |
-|			          |			  | 		   |            |             |
+|	            |		| 	   |            |             |
 |AllowRelocationBlock|
 |AvoidRuntimeDefrag|x|x|x|x
 |DevirtualiseMmio|x|x|x
