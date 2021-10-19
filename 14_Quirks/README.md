@@ -1,5 +1,5 @@
 # OpenCore Quirks for Intel CPUs
-Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based on the information provide by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/)by Dortania. Presented in neatly sturctured tables.
+Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based on the information provide by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/)by Dortania (except for 11th Gen). Presented in neatly sturctured tables.
 
 **Applicable Version**: OpenCore ≥ 0.7.5
 
