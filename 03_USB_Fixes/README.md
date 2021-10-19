@@ -1,18 +1,22 @@
-# Fixing USB Issues
+# Fixing USB issues
 
 ## Background
 
-In macOS, the number of available USB ports is limited to 15. But since modern mainboards can have a lot more I/O ports than what Apple provides to their customers this can become a problem when trying to get everything working. Because for a port to work, it has to be mapped. So if you're having issues with USB peripherals or Bluetooth (BT connects via USB Interface, too), this is probably the reason why.
+In macOS, the number of available USB ports is limited to 15. But since modern mainboards can have a lot more I/O ports than what Apple provides to their customers, this can become a problem when trying to get USB pots working proplerly so interal and external USB devices are detected and work at the correct speeds (otherwise they default to USB 2.0 speeds).
 
-Since one physical USB 3 port (the blue one's) actually supports 2 USB protocols it requires 2 ports: one called "HS" for high speed – which is USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protocols and that's about it – USB 3.2 is not even in the equation at this stage. So you have to decide which ports you are going to use and map them.
+Since one physical USB 3 port (the blue ones) actually supports 2 USB protocols it requires 2 ports: one called "HS" for high speed – which is USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protocols and that's about it – USB 3.2 is not even in the equation at this stage. So you have to decide which ports you are going to use and map them.
 
-## Lifting the USB port limit and mapping USB ports with USBMap/Hackintool (Intel only)
+## Lifting the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice and export a custom `USBPorts.kext` and/or `SSDT` with port information. This method is for Intel Users only. AMD user have to do this manually
+The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice. Before macOS Catalina you could use the XHCI portlimit quirk and you were fine. Sinc macOS Catalina you need to map USB ports so your peripherals work. There are two ways to achieve this:
 
-To do so, follow the official Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html). Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports.
+### Option 1: Mapping USB Ports via Custom Kext (macOS 10.15 to macOS 11.2)
 
-## About the examples
+Up until macOS 11.3, this was usually done using tools such Hackintool or USBMap. To do so, follow the official Guide by Dortania: [USB Port Mapping with USBMap](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html). Personally, I prefer [Hackintool](https://github.com/headkaze/Hackintool) for mapping USB Ports.
+This only works for Intel Systems 
 
-* Follow the instructions in **"Disabling EHCx"** if you cannot enable "XHCI Mode" in your BIOS.
-* **"ACPI Custom USB Port"** is for mapping the USB Port manually (not recommended)
+### Option 2: Mapping USB Ports via ACPI (os-independent)
+Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk removes the USB port limit no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap`. 
+
+So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
+
