@@ -336,7 +336,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |NormalizeHeaders|
 |RebaseRegions|
 |ResetHwSig| 
-|ResetLogoStatus*|x| x|x|x|
+|ResetLogoStatus*|(x)|(x)|(x)|(x)|
 |SyncTableIDs|
 
 `*` Default in `sample.plist`
@@ -363,7 +363,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |ProvideMaxSlide||||
 |RebuildAppleMemoryMap||||
 |ResizeAppleGpuBars||||
-|SetupVirtualMap|x|x|x|x
+|SetupVirtualMap|x|x|x|x|
 |SignalAppleOS||||
 |SyncRuntimePermissions||||
 
