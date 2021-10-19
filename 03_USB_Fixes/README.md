@@ -6,7 +6,7 @@ In macOS, the number of available USB ports is limited to 15. But since modern m
 
 Since one physical USB 3 port (the blue ones) actually supports 2 USB protocols it requires 2 ports: one called "HS" for high speed – which is USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protocols and that's about it – USB 3.2 is not even in the equation at this stage. So you have to decide which ports you are going to use and map them.
 
-## Lifting the USB port limit and mapping USB ports
+## Removing the USB port limit and mapping USB ports
 
 The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice. Before macOS Catalina you could use the XHCI portlimit quirk and you were fine. Sinc macOS Catalina you need to map USB ports so your peripherals work. There are two ways to achieve this:
 
