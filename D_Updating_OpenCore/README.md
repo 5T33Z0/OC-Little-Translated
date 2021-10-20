@@ -16,18 +16,21 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
 2. Mount your ESP (seletc Edit > MountESP) or ( M)
-3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon: </br>![](/Users/kl45u5/Desktop/OCAT_errors.png)
-4. Click on the warning symbol to see the errors:![](/Users/kl45u5/Desktop/OCAT_errors2.png)
+3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon: </br>![OCAT_errors](https://user-images.githubusercontent.com/76865553/138106690-c44543f3-fe82-4369-b07c-02fab777651a.png)
+4. Click on the warning symbol to see the errors: ![OCAT_errors2](https://user-images.githubusercontent.com/76865553/138106763-c84bfcdc-8813-46bd-9b2d-9537dc631aa2.png)
 5. Close the warnings
 6. Hit the Save Button (good Old Floppy Disk Icon)
-7. The error may be gone, if just some features were missing:![](/Users/kl45u5/Desktop/Save.png)
-8. After Saving, the icon should change and the errors should be gone: ![](/Users/kl45u5/Desktop/ConfigOK.png) (Any remaining erors, are actually configirattion errors which you need to fix)
-9. You're already done with updating your config. On to updating files…
+7. The error may be gone, if just some features were missing:</br>
+![Save](https://user-images.githubusercontent.com/76865553/138106803-0c118267-2f43-4ad6-802e-27efba7cd313.png)
+8. After Saving, the icon should change and the errors should be gone: </br>
+![ConfigOK](https://user-images.githubusercontent.com/76865553/138106894-a2a6de27-cc23-4203-85d0-7788e5eac6e2.png)</br>
+(Any remaining erors, are actually configurattion errors which you need to fix)
+10. You're already done with updating your config. On to updating files…
 
 ### Updating OpenCore Files, Drivers and Resourcse
-1. Still in OCAT, ckick on the icon which looks like a Recycle symbol: ![](/Users/kl45u5/Desktop/Update.png)
-2. In the next dialog window, you can see what will be updated: ![](/Users/kl45u5/Desktop/Sync.png)
-3. Once you hit the "Start Sync" Button the selected Files (including Resources) will be updatedt and you will be notified once it's done: ![](/Users/kl45u5/Desktop/Done.png)
+1. Still in OCAT, ckick on the icon which looks like a Recycle symbol: ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
+2. In the next dialog window, you can see what will be updated: ![Sync](https://user-images.githubusercontent.com/76865553/138107015-958c991d-8176-46ed-9d9f-7f63505b509b.png)
+3. Once you hit the "Start Sync" Button the selected Files (including Resources) will be updatedt and you will be notified once it's done:</br> ![Done](https://user-images.githubusercontent.com/76865553/138107072-9af89efb-2543-4f95-ab82-59748cf78306.png)
 4. Done. On to updating Kexts…
 
 ### Updating Kexts with Kext Updater
