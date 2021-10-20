@@ -40,6 +40,6 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 4. Copy and replace existing `.kext` files in the EFI > OC > Kexts Folder with those downloaded by Kext Updater
 5. Done
 
-Congratulation your EFI folder should now be up to date!
+Congratulations! Your EFI folder should now be up to date!
 
 **NOTE**: This will only check for update of kexts which are enabled in the config. If you wannt to upate everything, use the "Tools" function and click on "Choose Folder" instead and then perform the check.
