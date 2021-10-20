@@ -1,4 +1,4 @@
-# Disabling `S3` Sleep
+# Disabling S3 Sleep
 
 ## Description
 
@@ -6,17 +6,16 @@
 
 ## Patch method
 
-- Rename: `_S3 to XS3`
+- **Rename**: `_S3 to XS3`
 
-  ```text
-  Find 5F53335F
-  Replace 5853335F
+  ```swift
+  Find: 5F53335F
+  Replace: 5853335F
   ```
 
-- Patch
+- **Patch**
   - ***SSDT-NameS3-disable***: applies when `ACPI` defines `S3` sleep as a `Name` type. Most machines fall in this category.
   - ***SSDT-MethodS3-disable*** : applies when `ACPI` defines `S3` sleep as a `Method`.
 
 ## Caution
-
-- Choose the patch according to the machine's original `ACPI` description `S3` method.
+Adjust the `S3` method in the SSDT hotpatch according to the machine's original `ACPI` description `S3` method.

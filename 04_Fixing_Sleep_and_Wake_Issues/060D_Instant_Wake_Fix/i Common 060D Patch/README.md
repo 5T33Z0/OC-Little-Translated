@@ -15,18 +15,18 @@ Different machines may define `_PRW` in different ways, and the contents and for
 
 ### Components that may require a `0D/6D Patch`
 
-- USB class devices
+- **USB class devices**
   - `ADR` address: `0x001D0000`, part name: `EHC1`.
   - `ADR` address: `0x001A0000`, part name: `EHC2`.
   - `ADR` Address: `0x00140000`, Part Name: `XHC`, `XHCI`, `XHC1`, etc.
   - `ADR` address: `0x00140001`, part name: `XDCI`.
   - `ADR` address: `0x00140003`, part name: `CNVW`.
 
-- Ethernet
+- **Ethernet**
   - Before Gen 6, `ADR` address: `0x00190000`, part name: `GLAN`, `IGBE`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0006`, part name: `GLAN`, `IGBE`, etc.
 
-- Sound Card
+- **Sound Cards**
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, etc.
 
@@ -34,14 +34,14 @@ Different machines may define `_PRW` in different ways, and the contents and for
 **Note 2**: Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
-
-    Name (_PRW, Package (0x02)
+```swift
+Name (_PRW, Package (0x02)
     {
         0x0D, /* possibly 0x6D */
         0x03, /* possibly 0x04 */
         ...
     })
-  
+```  
 Depending on your search results, pick either or of the following two `0D/6D` rename patches and copy the renames to your config.plist unter the same section (ACPI > Patch):
 
   1. Name-0D Rename.plist
@@ -54,21 +54,21 @@ Depending on your search results, pick either or of the following two `0D/6D` re
 
 - One of the `Method types`: `GPRW(UPRW)`
 
-  ```Swift
+	```swift
     Method (_PRW, 0, NotSerialized)
     {
       Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
     }
-  ```
+```
 
   Most of the newer machines fall into this case. Just follow the usual method (rename-patch). The documentation package provides.
 
   - ***SSDT-GPRW*** (patch file with binary rename data inside)
   - ***SSDT-UPRW*** (binary renaming data inside the patch file)
 
-- ``Method type`` of two: ``Scope``
+- `Method type` of two: `Scope`
 
-  ```Swift
+  ```swift
     Scope (_SB.PCI0.XHC)
     {
         Method (_PRW, 0, NotSerialized)
@@ -105,7 +105,7 @@ Depending on your search results, pick either or of the following two `0D/6D` re
 
   For most TP machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
 
-### Caution
+## Caution
 
 - The method described in this article applies to Hotpatch.
 - Whenever a binary name change is used, the `System DSDT` file should be extracted and verified.

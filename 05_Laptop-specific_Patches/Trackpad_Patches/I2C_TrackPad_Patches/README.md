@@ -15,7 +15,7 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
 
-  ```
+  ```swift
   /*
    * GPI0 enable
    */
@@ -39,7 +39,7 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
 
-    ```Swift
+    ```swift
     Method (_STA, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -62,7 +62,7 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 
 - Disable ``TPD1`` using the Preset Variable Method.
 
-  ``Swift
+  ```swift
   Scope (\)
   {
       If (_OSI ("Darwin"))
@@ -71,10 +71,9 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
       }
   }
   ```
-
 - Create a new device `TPXX` and port all the contents of the original `TPD1` to `TPXX`.
 
-  ``` Swift
+  ```swift
   External(_SB.PCI0.I2C1, DeviceObj)
   Scope (_SB.PCI0.I2C1)
   {
@@ -86,10 +85,10 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
   ```
 
 - Amend `TPXX` content:
-  - All `TPD1` replaced with `TPXX`.
-  - Replace the `_STA` part of the patch with
+	- All `TPD1` replaced with `TPXX`.
+  	- Replace the `_STA` part of the patch with
   
-    ```Swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -102,18 +101,16 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
         }
     }
     ```
-  
   - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
   - Look up `OSYS` and remove (comment out) the following.
   
-    ``Swift
+    ```swift
     //If (LLess (OSYS, 0x07DC))
     //{
     // SRXO (GPDI, One)
     //}
     ```
-  
-    Note: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
-  
+  **Note**: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
+
 - Add external reference `External... ` to fix all errors.
 - I2C patch (omitted)

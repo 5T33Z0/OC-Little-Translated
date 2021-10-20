@@ -10,7 +10,7 @@ The patch method in this article only applies to machines with `AOAC` technology
 - Patch 2: ***SSDT-NDGP_PS3-AOAC***
   - Query the name and path of the Solo display and confirm the existence of `_PS0`, `_PS3` and `_DSM` methods.
   - Refer to the example and change the name and path to match the query result
-- **Note**
+- **Notes**
   - When querying for the name and path of the Solo display and `_ON`, `_OFF`, `_PS0`, `_PS3` and `_DSM`, all `ACPI` files should be searched, which may exist in the `DSDT` file or other `SSDT` files of `ACPI`.
   - The above 2 examples are custom patches for Xiaoxin PRO13, use one of the two options. The name and path of the Solo is: `_SB.PCI0.RP13.PXSX` .
 

@@ -7,13 +7,14 @@
   - `Method` : MSOS
 
 ## Special Rename
-
-**PNLF to XNLF**
-
- - Find: 504E4C46
- - 	Replace: 584E4C46
-
 Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict with the same name as the brightness patch, so use the above name change to avoid it.
+
+Rename **PNLF to XNLF**:
+
+```swift
+Find: 504E4C46
+Replace: 584E4C46
+```
 
 ## Special SSDT Patch
 
@@ -23,5 +24,5 @@ Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict wi
   - For example, the ACPI brightness shortcut method works only when ``MSOS`` >= ``0x0100``. In the default state, `MSOS` is locked to `OSME`. 
   - **This patch** changes ``MSOS`` by changing ``OSME``. See DSDT's `Method (MSOS...` for details on the `MSOS` method.
     - `MSOS` >= `0x0100``, win8 mode, brightness shortcut works
-  - `MSOS` return value depends on the OS itself, in black apple state you must use **OS patch** or use **this patch** to meet specific requirements.
+  	- `MSOS` return value depends on the OS itself, in black apple state you must use **OS patch** or use **this patch** to meet specific requirements.
   

@@ -4,9 +4,7 @@
 
 This project includes some of the OpenCore battery hotfixes for Notebooks (such as ThinkPad Series notebooks), for your reference.
 
-For more battery hotfixes, please refer to GZ White's github.
-
-Project page (chinese): <https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch>
+For more battery hotfixes, refer to [GZXiaoBai's Github (chinese)](https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch) 
 
 ## Battery Hotfix Tutorials
 

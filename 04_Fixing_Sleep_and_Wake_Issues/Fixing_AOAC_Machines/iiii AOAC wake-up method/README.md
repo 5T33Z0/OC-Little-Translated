@@ -2,7 +2,7 @@
 
 ## Description
 
-The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby extending the standby time. However, it also makes waking up the machine more difficult and requires a special method. See "Power Idle Management" for more information on ***SSDT-DeepIdle***. **This method** resets the wake-up state** via a custom patch.
+The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby extending the standby time. However, it also makes waking up the machine more difficult and requires a special method. See "Power Idle Management" for more information on ***SSDTDeep-Idle***. **This method** resets the wake-up state via a custom patch.
 
 ## Wake-up Method: Power button
 
@@ -15,7 +15,7 @@ The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby 
 
 - ***SSDT-PCI0.LPCB-Wake-AOAC*** 
 
-  ```Swift
+  ```swift
   ...
   Scope (_SB.PCI0.LPCB)
   {
