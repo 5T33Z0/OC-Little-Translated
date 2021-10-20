@@ -1,4 +1,5 @@
 # Battery hotfix inclusion and method guide
+Before applying any of these battery patches written here, yuo should relly try the new [ECEnabler](https://github.com/1Revenger1/ECEnabler) kext first, which "allows reading Embedded Controller fields over 1 byte long, vastly reducing the amount of ACPI modification needed (if any) for working battery status". It works on a lot of ThinkPads without additional renames and Battery SSDTs.
 
 ## Battery hotfixes included
 
