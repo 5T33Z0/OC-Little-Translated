@@ -17,21 +17,18 @@
 ### `DeviceProperties` injection (preferred method)
 
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
-
-	- **Parent Device**
-   	 - L0s/L1 Mode: `pci-aspm-default` = `03000000` [data]
-   	 - L1 Mode: `pci-aspm-default` = `02000000` [data]
-   	 - Disable ASPM: `pci-aspm-default` = `00000000` [data]
-  - **Subdevice**
-  	 - L0s/L1 mode: `pci-aspm-default` = `03010000` [data]
-   	 - L1 mode: `pci-aspm-default` = `02010000` [data]
-   	 - Disable ASPM: `pci-aspm-default` = `00000000` [data]
-
-	**Example**:
-
-  The default ASPM of Xiaoxin PRO13 wireless card is L0s/L1, and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Refer to the above method, change the ASPM to L1 by injecting `pci-aspm-default`.
+- **Parent Device**
+	- L0s/L1 Mode: `pci-aspm-default` = `03000000` [data]
+	- L1 Mode: `pci-aspm-default` = `02000000` [data]
+   	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
+- **Subdevice**
+	- L0s/L1 mode: `pci-aspm-default` = `03010000` [data]
+	- L1 mode: `pci-aspm-default` = `02010000` [data]
+	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
+- **Example**:
+	The default ASPM of Xiaoxin PRO13 wireless card is L0s/L1, and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Refer to the above method, change the ASPM to L1 by injecting `pci-aspm-default`:
   
-```swift
+	```swift
 PciRoot(0x0)/Pci(0x1C,0x0)
 pci-aspm-default = 02000000
 ......
@@ -39,14 +36,14 @@ PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)
 pci-aspm-default = 02010000
 ```
 
-#### SSDT Patch
+### SSDT Patch
 
 An SSDT patch can also set ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
 
 - The patch principle is the same as `Disable PCI Devices`, please refer to it.
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
 
-```swift
+	```swift
 External (_SB.PCI0.RP05, DeviceObj)
     Scope (_SB.PCI0.RP05)
     {
