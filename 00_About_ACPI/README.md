@@ -362,7 +362,7 @@ Only two results from logical calculation - `0` or `1`
    }
    ```
 
-2. Define a method contains 2 parameters, and applies local variables `Local0`~`Local7`
+2. Defines a method containing 2 parameters and applies local variables `Local0`~`Local7`
 
    Numbers of parameters are defaulted to `0`
 
@@ -371,7 +371,7 @@ Only two results from logical calculation - `0` or `1`
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 += Local1
+       Local0 += Local7
    }
    ```
 
