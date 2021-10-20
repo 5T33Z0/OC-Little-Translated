@@ -31,13 +31,13 @@
 
   The default ASPM of Xiaoxin PRO13 wireless card is L0s/L1, and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Refer to the above method, change the ASPM to L1 by injecting `pci-aspm-default`.
   
-  ```
-  PciRoot(0x0)/Pci(0x1C,0x0)
-  pci-aspm-default = 02000000
-  ......
-  PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)
-  pci-aspm-default = 02010000
-  ```
+```swift
+PciRoot(0x0)/Pci(0x1C,0x0)
+pci-aspm-default = 02000000
+......
+PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)
+pci-aspm-default = 02010000
+```
 
 #### SSDT Patch
 
@@ -46,7 +46,8 @@ An SSDT patch can also set ASPM working mode. For example, set a device ASPM to 
 - The patch principle is the same as `Disable PCI Devices`, please refer to it.
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
 
-  ```  External (_SB.PCI0.RP05, DeviceObj)
+```swift
+External (_SB.PCI0.RP05, DeviceObj)
     Scope (_SB.PCI0.RP05)
     {
         OperationRegion (LLLL, PCI_Config, 0x50, 1)
@@ -62,9 +63,10 @@ An SSDT patch can also set ASPM working mode. For example, set a device ASPM to 
         {
             \_SB.PCI0.RP05.L1 = Zero   //Set ASPM = L1
         }
-  ```             
-  **Note 1**: Xiaoxin PRO13 wireless card path is `_SB.PCI0.RP05`  
-  **Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
+```           
+  
+**Note 1**: Xiaoxin PRO13 wireless card path is `_SB.PCI0.RP05`  
+**Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
 
 ## Caution
 
