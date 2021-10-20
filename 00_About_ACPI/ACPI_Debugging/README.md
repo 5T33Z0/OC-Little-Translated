@@ -2,34 +2,32 @@
 
 ## Description
 
-By adding debug code to the ***SSDT-xxxx*** patch, it is possible to see the patch or ACPI working process on the console for debugging.
+By adding debug code to ***SSDT-xxxx*** Hotpatches, it is possible to see the patch or ACPI working process on the console for debugging.
 
 ## Requirements
+To use it you must install the two components:
 
-- **Driver**:
-  - Install ***ACPIDebug.kext*** to `OC\Kexts` and update the config.plist.
-- **Patches**:
-  - Add the main patch ***SSDT-RMDT*** to `OC\ACPI` and update the config.plist.
-  - Add ***Custom Patch*** to `OC\ACPI` and add the patch list.
-
-Reboot
+1. **Kext**:
+  - Install `ACPIDebug.kext` to `OC\Kexts` and update the config.plist.
+2. **Patches**:
+  - Add `SSDT-RMDT.aml` to `OC\ACPI` and update the config.plist. It adds the device `RMDT` (RehabMan Debug Trace) to your system.
+  - Add debugging code for paramters you want to check to your SSDT(s) (See `SSDT-BKeyQxx-Debug.dsl` for example).
+3. Reboot
 
 ## Debugging
 
-- Open **Console** and search for **`keyword`** (**`keyword`** from **custom patch***)
-- Observe the console output
+- Open **Console** and search for **`keyword`** (**`keyword`** as defined in the debug section of your SSDT(s), in this example `ABCD-`)
+- Check the console output
 
 ## Example
 
-- Purpose
+To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps and wakes up.
 
-  - To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps and wakes up.
+- Kext and Patches:
 
-- Drivers and patches
-
-  - ***ACPIDebug.kext*** - see previous article
-  - ***SSDT-RMDT*** -- see previous
-  - ***SSDT-PTSWAK*** -- The patch has built-in parameter passing variables `\_SB.PCI9.TPTS`, `\_SB.PCI9.TWAK`, which are convenient for other patches. See "PTSWAK Comprehensive Extension Patch"
+  - **ACPIDebug.kext***
+  - ***SSDT-RMDT***
+  - ***SSDT-PTSWAK*** -- The patch has built-in parameter passing variables `\_SB.PCI9.TPTS`, `\_SB.PCI9.TWAK`, which are convenient for other patches. See "PTSWAK Sleep and WakeFix"
   - ***SSDT-BKeyQxx-Debug*** - This patch is just an example. Debug code is added within the patch to be able to execute debug code after key response. You can specify the brightness shortcut key, or other keys when you actually use it.
 
     **Note**: The name change required by the above patch is in the comments of the corresponding patch file.
@@ -50,4 +48,4 @@ Reboot
 ## Remarks
 
 - Debug code can be diversified, such as `\RMDT.P1`, `\RMDT.P2`, `\RMDT.P3` and so on, see ***SSDT-RMDT.dsl*** for details
-- The above drivers, major patches are from [@RehabMan](https://github.com/rehabman)
+- The above drivers, major patches are from [RehabMan](https://github.com/RehabMan/OS-X-ACPI-Debug)
