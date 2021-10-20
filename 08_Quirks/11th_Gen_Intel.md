@@ -15,7 +15,7 @@ Therefore a **MacPro7,1** is emulated.
 	```
 
 ### ACPI Quirks    
-| CPU Family      | Rocktelake  11th Gen | 
+| CPU Family      | Rocktelake | 
 |:----------------|:---------:|
 | **ACPI Quirks** | Desktop   |      
 |			        |           |  
@@ -29,58 +29,58 @@ Therefore a **MacPro7,1** is emulated.
 `*`Default in `sample.plist`
 
 ### Boooter Quirks
-| CPU Family        | Rocktelake  11th Gen | 
-|:------------------|:---------:|:---------:|
-| **Booter Quirks** | Desktop   | Mobile   |
-|			          |			  | 		   |
+| CPU Family        | Rocktelake | 
+|:------------------|:----------:|
+| **Booter Quirks** | Desktop    |
+|			          |			   |
 |AllowRelocationBlock|
-|AvoidRuntimeDefrag|x|x|x|x
-|DevirtualiseMmio|x|x|x
+|AvoidRuntimeDefrag|x|
+|DevirtualiseMmio|x|
 |DisableSingleUser|
 |DisableVariableWrite|
 |DiscardHibernateMap|
-|EnableSafeModeSlide|x|x|x|x
+|EnableSafeModeSlide|x
 |EnableWriteUnprotector|x|
 |ForceBooterSignature
 |ForceExitBootServices
 |ProtectMemoryRegions|
 |ProtectSecureBoot
-|ProtectUefiServices*|x|x|(x)*|
-|ProvideCustomSlide|x|x|x|x
-|ProvideMaxSlide
+|ProtectUefiServices*|x|
+|ProvideCustomSlide|x|
+|ProvideMaxSlide|
 |RebuildAppleMemoryMap||
 |ResizeAppleGpuBars
-|SetupVirtualMap|||x|x
+|SetupVirtualMap||
 |SignalAppleOS
-|SyncRuntimePermissions|x|x|x|x
+|SyncRuntimePermissions|x|
 
 `*` Required for Z390 mainboards
 
 ### Kernel Quirks
-| CPU Family      | Rocktelake  11th Gen   | 
-|:----------------|:---------:|:----------:|
-| **Kernel Quirks** | Desktop     | Mobile |      
-|                   |             |        |
+| CPU Family      | Rocktelake |
+|:----------------|:----------:|
+| **Kernel Quirks** | Desktop  |      
+|                   |          |
 |AppleCpuPmCfgLock||||
-|AppleXcpmCfgLock°|(x)|(x)|(x)|(x)
-|AppleXcpmExtraMsrs||||
-|AppleXcpmForceBoost||||
-|CustomSMBIOSGuid*|( )|( )|( )|( )
-|DisableIoMapper|x|||
-|DisableLinkeditJettison|x|||
-|DisableRtcChecksum|x|||
-|ExtendBTFeatureFlags||||
-|ExternalDiskIcons||||
-|ForceSecureBootScheme||||
+|AppleXcpmCfgLock°|(x)|
+|AppleXcpmExtraMsrs||
+|AppleXcpmForceBoost||
+|CustomSMBIOSGuid*|( )|
+|DisableIoMapper|x|
+|DisableLinkeditJettison|x|
+|DisableRtcChecksum|x|
+|ExtendBTFeatureFlags||
+|ExternalDiskIcons||
+|ForceSecureBootScheme||
 |IncreasePciBarSize||||
-|LapicKernelPanic**|( )|( )|( )|( )
-|LegacyCommpage||||
-|PanicNoKextDump|x|x|x|x
-|PowerTimeoutKernelPanic|x|x|x|x
-|ProvideCurrentCpuInfo||||
-|SetApfsTrimTimeout|-1|-1|-1|-1
-|ThirdPartyDrives||||
-|XhciPortLimit***|( )|())|()|()
+|LapicKernelPanic**|( )|
+|LegacyCommpage||
+|PanicNoKextDump|x|
+|PowerTimeoutKernelPanic|x|
+|ProvideCurrentCpuInfo||
+|SetApfsTrimTimeout|-1|
+|ThirdPartyDrives||
+|XhciPortLimit***|( )|
 
 `°` `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS</br>
 `*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
@@ -88,23 +88,23 @@ Therefore a **MacPro7,1** is emulated.
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-| CPU Family      | Rocktelake 11th Gen | 
-|:----------------|:---------:|:---------:|
-| **UEFI Quirks** | Desktop      | Mobile         | Desktop    | Mobile      |
-|			        |	             |                |            |             |
-|ActivateHpetSupport||||
-|DisableSecurityPolicy||||
-|EnableVectorAcceleration|x|||
-|ExitBootServicesDelay||||
-|ForceOcWriteFlash||||
-|ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio||||
-|ReleaseUsbOwnership|x|||
-|ReloadOptionRoms||||
-|RequestBootVarRouting|x|x|x|x
-|ResizeGpuBars||||
-|TscSyncTimeout||||
-|UnblockFsConnect*|( )|( )|( )|( )|
+| CPU Family      | Rocktelake |
+|:----------------|:----------:|
+| **UEFI Quirks** | Desktop    |
+|			        |	           |
+|ActivateHpetSupport||
+|DisableSecurityPolicy||
+|EnableVectorAcceleration|x|
+|ExitBootServicesDelay||
+|ForceOcWriteFlash||
+|ForgeUefiSupport||
+|IgnoreInvalidFlexRatio||
+|ReleaseUsbOwnership|x|
+|ReloadOptionRoms||
+|RequestBootVarRouting|x|
+|ResizeGpuBars||
+|TscSyncTimeout||
+|UnblockFsConnect*|( )|
 
 `*` `UnblockFsConnect`: Enable on HP Machines
 </details>
