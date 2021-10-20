@@ -33,22 +33,22 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 - Get the keyboard scan code from the console (choose either or)
   - Terminal installation: `ioio`
 
-	   		ioio -s ApplePS2Keyboard LogScanCodes 1
+	ioio -s ApplePS2Keyboard LogScanCodes 1
     
 
   - Modify:`VoodooPS2Keyboard.kext\info\IOKitPersonalities\Platform Profile\Default\`**`LogScanCodes=1`**
 
-		Open the Console and search for `ApplePS2Keyboard`. In this examples, `A/a`and `Z/z` are pressed.
+	Open the Console and search for `ApplePS2Keyboard`. In this examples, `A/a`and `Z/z` are pressed.
 
- 	 ```swift
-    11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
-    11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
-  ```
+	 ```text
+   	 11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
+  	 11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
+ 	 ```
 
-  		**Meaning**:
-		
-		The `1e=0` in the first line `1e`is the PS2 Scan Code for the `A/a` key, and the `0` is the ADB Scan Code.
-		The `2c=6` in the second line `2c`is the PS2 Scan Code for the `Z/z` key, and `6` is the ADB Scan Code.
+	 **Meaning**:
+
+	- The `1e=0` in the first line `1e`is the PS2 Scan Code for the `A/a` key, and the `0` is the ADB Scan Code.
+	- The `2c=6` in the second line `2c`is the PS2 Scan Code for the `Z/z` key, and `6` is the ADB Scan Code.
 
 ### Mapping method
 
