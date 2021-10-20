@@ -8,7 +8,7 @@ For some 300-series motherboards, the `RTC` device is disabled by default and ca
 
 > Case
 
-```Swift
+```swift
 Device (RTC)
 {
   Name (_HID, EisaId ("PNP0B00"))
@@ -30,7 +30,7 @@ Device (RTC)
 }
 ```
 
-> The above is the case where the ``RTC`` device is disabled, and the counterfeit method is as follows.
+The above is the case where the `RTC` device is disabled, and the counterfeit method is as follows:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
@@ -69,8 +69,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
 }
 ```
 
-## Note
+## Notes
 
-- This part is only valid for 300 series motherboards.
-- This part is only used when ***`SSDT-AWAC`*** is not used and the return value of the `_STA` method of the `RTC` device in the original `ACPI` is `0`.
-- The device path of the sample patch is `LPCB`, please modify it with the actual situation.
+- This patch only applies for 300 series motherboards.
+- This is only needed when ***`SSDT-AWAC`*** is not used and the return value of the `_STA` method of the `RTC` device in the original `ACPI` is `0`.
+- The device path of the sample patch is `LPCB`, please modify if necessary (check if the name of the Low Pin COnfiguration os either `LPC` or `LPCB` in `DSDT` and adjust it in the patch accordingly).
