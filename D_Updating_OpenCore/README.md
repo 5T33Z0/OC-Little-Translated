@@ -24,7 +24,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 ![Save](https://user-images.githubusercontent.com/76865553/138106803-0c118267-2f43-4ad6-802e-27efba7cd313.png)
 8. After Saving, the icon should change and the errors should be gone: </br>
 ![ConfigOK](https://user-images.githubusercontent.com/76865553/138106894-a2a6de27-cc23-4203-85d0-7788e5eac6e2.png)</br>
-(Any remaining erors, are actually configurattion errors which you need to fix)
+(Any remaining erors are actually configurattion errors which you need to fix on your own.)
 10. You're already done with updating your config. On to updating files…
 
 ### Updating OpenCore Files, Drivers and Resourcse
