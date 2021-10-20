@@ -1,14 +1,14 @@
 ## Disable PCI devices
 
-## Description
+### Description
 
-- In some cases, we want to disable a PCI device. For example, SD cards with PCI bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
+- In some cases, we want to disable a PCI device. For example, the HDMI Audio device of dicrete graphics cards or SD cards with PCI bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
 - These devices have the following characteristics.
-  - It is a **child device** of some PCI **parent device**
-  - The **parent device** defines some variables of type `PCI_Config` ** or `SystemMemory` **, where bit `D4` of the data at offset 0x55 is the device operational property
+  - It is a **child device** of a **parent PCI device**
+  - The **parent device** defines some variables of type `PCI_Config`or `SystemMemory`, where bit `D4` of the data at offset 0x55 is the device operational property
   - **Subdevice** address: `Name (_ADR, Zero)`  
 
-## Device name
+### Device name
 
 - The **child device** name of the newer machine is **`PXSX`**; **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**... etc.
 - Early ThinkPad machines **child device** with the name **`SLOT`** or **none**; **parent device** with the name **`EXP1`**, **`EXP2`**, **`EXP3`**... etc.
@@ -56,7 +56,3 @@
 - When using it, replace `RP01` in the example with the name of the **parent** to which the disabled device belongs, as in the example.
 - If the disabled device already includes the `_STA` method, ignore the *possible start* to *possible end* content, see the comments section of the example.
 - This method does not release the device from the PCI channel.
-
-## Thanks to
-
-- @moo🌈
