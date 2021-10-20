@@ -8,7 +8,7 @@
 
 - **Rename**: `_S3 to XS3`
 
-  ```swift
+  ```text
   Find: 5F53335F
   Replace: 5853335F
   ```
