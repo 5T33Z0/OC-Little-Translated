@@ -10,9 +10,9 @@ Therefore a **MacPro7,1** is emulated.
 - Fake CPUID: In Kernel > Emulate, enter the following:
 
 	```text
-Cpuid1Data: EB060900000000000000000000000000
-Cpuid1Mask: FFFFFFFF000000000000000000000000
-```
+	Cpuid1Data: EB060900000000000000000000000000
+	Cpuid1Mask: FFFFFFFF000000000000000000000000
+	```
 
 ### ACPI Quirks    
 | CPU Family      | Rocktelake  11th Gen | 
