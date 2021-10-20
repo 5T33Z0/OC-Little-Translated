@@ -25,6 +25,9 @@ The previous (old) patch method described below is outdated, because the patchin
 9. Open your config and create a new snapshot to get the new .aml files added to the list.
 10. Save. Reboot. Done. 
 
+**NOTE**
+If you are editng your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
+
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 

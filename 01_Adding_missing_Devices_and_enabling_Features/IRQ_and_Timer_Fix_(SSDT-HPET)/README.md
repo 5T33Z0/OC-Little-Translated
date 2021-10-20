@@ -33,8 +33,10 @@ The old patch method described below is outdated, because the patching process c
 7. Save your config
 8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
 9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. Audio should work now (assuming AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
+10. Save. Reboot. Done. Audio should work now (assuming AppleALC.kext is present along wit the correct layout-id for your on-board audio card).
 
+**NOTE**
+If you are editng your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>
 

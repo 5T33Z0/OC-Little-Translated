@@ -10,7 +10,7 @@ The Patch consist of two Parts: binary renames and a SSDT Hotpatch.
 
 **NOTE**: File updated with added support for Windows 10, build 2004. More info here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems) 
 
-## Part 1: Renames
+## Part 1: Rename Method _OSI to XOSI
 
 1. Search for `OSI` in the original `DSDT` 
 2. If you find it, add the `_OSI to XOSI` rename listed below
@@ -18,23 +18,21 @@ The Patch consist of two Parts: binary renames and a SSDT Hotpatch.
 
 Add the following Renames (if applicable) to config.plist:
 
-- **OSID to XSID**
+- **OSID to XSID** (only necessary if present in `DSDT` to avoid match with _OSI to XOSI Rename)
  
-  ```
+  ```swift
   Find: 4F534944
   Replace: 58534944
   ```
+- **OSIF to XSIF** (only necessary if present in `DSDT` to avoid match with _OSI to XOSI Rename)
 
-- **OSIF to XSIF**
-
-  ```
+  ```swift
   Find: 4F534946
   Replace: 58534946
   ```
-
 - **_OSI to XOSI** (must be last in this Sequence)
 
-  ```
+  ```swift
   Find: 5F4F5349
   Replace: 584F5349
   ```
@@ -42,7 +40,7 @@ Add the following Renames (if applicable) to config.plist:
 
 ## Part 2: Hotpatch ***SSDT-OC-XOSI***
 
-```Swift
+```swift
 Method(XOSI, 1)
 {
     If (_OSI ("Darwin"))
@@ -95,8 +93,8 @@ Some machines use `Methods` (indicted by underscores `_`) with similar names to 
 
 When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems receive different parameters and ACPI executes different instructions. For example, if the system is **Win7**, this parameter is `Windows 2009`, and if the system is **Win8**, this parameter is `Windows 2012`. For example:
 
-  ```
-  If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
+```swift
+If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
   {
       OperationRegion (PCF0, SystemMemory, 0xF0100000, 0x0200)
       Field (PCF0, ByteAcc, NoLock, Preserve)
@@ -135,9 +133,9 @@ When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems
           ...
       }
   }
-  ```
-
-  ACPI also defines `OSYS`, and the relationship between `OSYS` and the above parameters is as follows.
+  
+```
+ACPI also defines `OSYS`, and the relationship between `OSYS` and the above parameters is as follows:
 
   - `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`</br>
   - `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`</br>
@@ -149,7 +147,7 @@ When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems
   - `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`</br>
   - `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`</br>
   - `OSYS = 0x7E3`: Win10 1903, i.e. `Windows 2019`</br>
-  - ...
+  - `OSYS = 0x7E5`: Win11, ie `Windows 2021`</br>
 
 - When the loaded system is not recognized by ACPI, `OSYS` is given a default value, which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
 
