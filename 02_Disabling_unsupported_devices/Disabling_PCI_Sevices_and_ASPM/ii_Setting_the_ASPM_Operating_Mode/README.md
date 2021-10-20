@@ -28,7 +28,7 @@
 - **Example**:
 	The default ASPM of Xiaoxin PRO13 wireless card is L0s/L1, and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Refer to the above method, change the ASPM to L1 by injecting `pci-aspm-default`:
   
-	```swift
+	```text
 	PciRoot(0x0)/Pci(0x1C,0x0)
 	pci-aspm-default = 02000000
 	......
