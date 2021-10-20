@@ -9,10 +9,10 @@
 - **Rename**: `_S3 to XS3`
 
   ```text
+  Comment: change _S3 to XS3
   Find: 5F53335F
   Replace: 5853335F
   ```
-
 - **Patch**
   - ***SSDT-NameS3-disable***: applies when `ACPI` defines `S3` sleep as a `Name` type. Most machines fall in this category.
   - ***SSDT-MethodS3-disable*** : applies when `ACPI` defines `S3` sleep as a `Method`.
