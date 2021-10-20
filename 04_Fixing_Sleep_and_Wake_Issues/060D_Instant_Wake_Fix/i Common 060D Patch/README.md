@@ -55,11 +55,11 @@ Depending on your search results, pick either or of the following two `0D/6D` re
 - One of the `Method types`: `GPRW(UPRW)`
 
 	```swift
-    Method (_PRW, 0, NotSerialized)
-    {
-      Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
-    }
-```
+	Method (_PRW, 0, NotSerialized)
+    	{
+      	Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
+    	}
+	```
 
   Most of the newer machines fall into this case. Just follow the usual method (rename-patch). The documentation package provides.
 
