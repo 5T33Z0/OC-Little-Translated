@@ -16,14 +16,14 @@ Therefore a **MacPro7,1** is emulated.
 
 ### ACPI Quirks    
 | CPU Family      | Rocktelake  11th Gen | 
-|:----------------|:---------:|:---------:
-| **ACPI Quirks** | Desktop   | Mobile   |      
-|			        |           | 		    |  
+|:----------------|:---------:|
+| **ACPI Quirks** | Desktop   |      
+|			        |           |  
 |FadtEnableReset  |
 |NormalizeHeaders |
 |RebaseRegions    |
 |ResetHwSig       | 
-|ResetLogoStatus* |(x)|()|()|()|
+|ResetLogoStatus* |(x)|
 |SyncTableIDs     |
 
 `*`Default in `sample.plist`
