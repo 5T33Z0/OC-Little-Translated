@@ -1,7 +1,18 @@
-# OpenCore Quirks for Intel CPUs
+# OpenCore Quirks for AMD and Intel CPUs
 Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based on the information provide by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/)by Dortania. Presented in neatly sturctured tables.
 
+**Keys**:
+
+- **x** = Quirk enabled
+- **( )** = Qurik disabled, but enabled for certain CPUs/Chipsets/Mainboards (read annotations for quirk in question)
+- **(x)** = Quirk enabled, but disabled for certain CPUs/Chipsets/Mainboards (read annotations for quirk in question)
+- **enpty** = Quirk disabled. And by disabled, I mean *disabled* and not leaving it as is!
+
 **Applicable Version**: OpenCore ≥ 0.7.5
+<details>
+<summary><strong>Intel Quirks</strong> (Click to show content!)</summary>
+<details>
+<summary><strong>8th to 10 Gen Intel Quirks</strong> (Click to show content!)</summary>
 
 ## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
 
@@ -104,6 +115,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect*|( )|( )|( )|( )|
 
 `*` `UnblockFsConnect`: Enable on HP Machines
+</details>
 <details>
 <summary><strong>6th and 7th Gen Intel Quirks</strong> (Click to show content!)</summary>
 
@@ -419,4 +431,212 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect*|( )|( )|( )|( )|
 
 `*` `UnblockFsConnect`: Enable on HP Machines
+</details>
+</details>
+<details>
+<summary><strong>AMD Quirks</strong> (Click to show content!)</summary>
+<details>
+<summary><strong>AMD Ryzen and Treadripper</strong> (Click to show content!)</summary>
+## AMD Ryzen and Threadripper (17h and 19h)
+
+### SMBIOS Requirements
+- **Dektop**: [**various**](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#platforminfo)
+
+### ACPI Quirks    
+| CPU Family      | Ryzen / Threadripper |
+|:----------------|:--------------------:|
+| **ACPI Quirks** | Desktop              |    
+|                 |                      |
+|FadtEnableReset  |
+|NormalizeHeaders |
+|RebaseRegions    |
+|ResetHwSig       | 
+|ResetLogoStatus* |(x)|
+|SyncTableIDs     |
+
+`*`Default in `sample.plist`
+
+### Boooter Quirks
+| CPU Family         | Ryzen / Threadripper |
+|:------------------ |:--------------------:|
+| **Booter Quirks**  | Desktop              |    
+|                    |                      |
+|AllowRelocationBlock|
+|AvoidRuntimeDefrag|x
+|DevirtualiseMmio*|( )*|
+|DisableSingleUser|
+|DisableVariableWrite|
+|DiscardHibernateMap|
+|EnableSafeModeSlide|x
+|EnableWriteUnprotector|
+|ForceBooterSignature
+|ForceExitBootServices
+|ProtectMemoryRegions|
+|ProtectSecureBoot
+|ProtectUefiServices|
+|ProvideCustomSlide|
+|ProvideMaxSlide
+|RebuildAppleMemoryMap|x|
+|ResizeAppleGpuBars
+|SetupVirtualMap**|(x)**|
+|SignalAppleOS
+|SyncRuntimePermissions|x|
+
+`*` `DevirtualiseMmio`: Enable for TRx 40</br>
+`**` `SetupVirtualMap`: Disable for X470, X570, B550, B450, A520 and TRx40 (install latest BIOS!)
+
+### Kernel Quirks
+- For AMD, enable `Kernel` > `Emulate`: `DummyPowerManagement`
+- AMD also requires a lot of [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to make macOS work.
+
+| CPU Family         | Ryzen / Threadripper |
+|:------------------ |:--------------------:|
+| **kernel Quirks**  | Desktop              |    
+|                    |                      |
+|AppleCpuPmCfgLock||
+|AppleXcpmCfgLock||
+|AppleXcpmExtraMsrs||
+|AppleXcpmForceBoost||
+|CustomSMBIOSGuid||
+|DisableIoMapper||
+|DisableLinkeditJettison||
+|DisableRtcChecksum||
+|ExtendBTFeatureFlags||
+|ExternalDiskIcons||
+|ForceSecureBootScheme||
+|IncreasePciBarSize||
+|LapicKernelPanic||
+|LegacyCommpage||
+|PanicNoKextDump|x|
+|PowerTimeoutKernelPanic|x|
+|ProvideCurrentCpuInfo|x|
+|SetApfsTrimTimeout||
+|ThirdPartyDrives||
+|XhciPortLimit*|x|
+
+`*` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+
+### UEFI Quirks
+| CPU Family       | Ryzen / Threadripper |
+|:---------------- |:--------------------:|
+| **UEFI Quirks**  | Desktop              |    
+|                  |                      |
+|ActivateHpetSupport||
+|DisableSecurityPolicy||
+|EnableVectorAcceleration|x|
+|ExitBootServicesDelay||
+|ForceOcWriteFlash||
+|ForgeUefiSupport||
+|IgnoreInvalidFlexRatio||
+|ReleaseUsbOwnership||
+|ReloadOptionRoms||
+|RequestBootVarRouting|x|
+|ResizeGpuBars||
+|TscSyncTimeout||
+|UnblockFsConnect*|( )|
+
+`*` `UnblockFsConnect`: Enable on HP Machines
+</details>
+<details>
+<summary><strong>AMD Bulldozer and Jaguar</strong> (Click to show content!)</summary>
+
+## AMD Bulldozer (15h) and Jaguar (16h)
+
+### SMBIOS Requirements
+- **Dektop**: [**various**](https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#platforminfo)
+
+### ACPI Quirks    
+| CPU Family      | Bullfozer / Jaguar |
+|:----------------|:------------------:|
+| **ACPI Quirks** | Desktop            |    
+|                 |                    |
+|FadtEnableReset  |
+|NormalizeHeaders |
+|RebaseRegions    |
+|ResetHwSig       | 
+|ResetLogoStatus* |(x)|
+|SyncTableIDs     |
+
+`*`Default in `sample.plist`
+
+### Boooter Quirks
+| CPU Family         | Bullfozer / Jaguar |
+|:------------------ |:------------------:|
+| **Booter Quirks**  | Desktop            |    
+|                    |                    |
+|AllowRelocationBlock|
+|AvoidRuntimeDefrag|x
+|DevirtualiseMmio||
+|DisableSingleUser|
+|DisableVariableWrite|
+|DiscardHibernateMap|
+|EnableSafeModeSlide|x
+|EnableWriteUnprotector|X
+|ForceBooterSignature
+|ForceExitBootServices
+|ProtectMemoryRegions|
+|ProtectSecureBoot
+|ProtectUefiServices|
+|ProvideCustomSlide*|X
+|ProvideMaxSlide
+|RebuildAppleMemoryMap|x|
+|ResizeAppleGpuBars
+|SetupVirtualMap|x|
+|SignalAppleOS
+|SyncRuntimePermissions||
+
+`*` `ProvideCustomSlide`: If the message "OCABC: All slides are usable!" appears in the log, you can disable ProvideCustomSlide.
+
+### Kernel Quirks
+- For AMD, enable `Kernel` > `Emulate`: `DummyPowerManagement`
+- AMD also requires a lot of [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to make macOS work.
+
+| CPU Family         | Bullfozer / Jaguar |
+|:------------------ |:------------------:|
+| **kernel Quirks**  | Desktop            |    
+|                    |                    |
+|AppleCpuPmCfgLock||
+|AppleXcpmCfgLock||
+|AppleXcpmExtraMsrs||
+|AppleXcpmForceBoost||
+|CustomSMBIOSGuid||
+|DisableIoMapper||
+|DisableLinkeditJettison||
+|DisableRtcChecksum||
+|ExtendBTFeatureFlags||
+|ExternalDiskIcons||
+|ForceSecureBootScheme||
+|IncreasePciBarSize||
+|LapicKernelPanic||
+|LegacyCommpage||
+|PanicNoKextDump|x|
+|PowerTimeoutKernelPanic|x|
+|ProvideCurrentCpuInfo|x|
+|SetApfsTrimTimeout||
+|ThirdPartyDrives||
+|XhciPortLimit*|x|
+
+`*` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+
+### UEFI Quirks
+| CPU Family       | Bullfozer / Jaguar |
+|:---------------- |:------------------:|
+| **UEFI Quirks**  | Desktop            |    
+|                  |                    |
+|ActivateHpetSupport||
+|DisableSecurityPolicy||
+|EnableVectorAcceleration|x|
+|ExitBootServicesDelay||
+|ForceOcWriteFlash||
+|ForgeUefiSupport||
+|IgnoreInvalidFlexRatio||
+|ReleaseUsbOwnership||
+|ReloadOptionRoms||
+|RequestBootVarRouting|x|
+|ResizeGpuBars||
+|TscSyncTimeout||
+|UnblockFsConnect*|( )|
+
+`*` `UnblockFsConnect`: Enable on HP Machines
+</details>
 </details>
