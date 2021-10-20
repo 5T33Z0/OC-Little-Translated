@@ -122,3 +122,4 @@
   - ......
 
 - **Thanks for [Acidanthera](https://github.com/acidanthera) maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
+∑∑«««»»»

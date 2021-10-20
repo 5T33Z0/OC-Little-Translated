@@ -38,6 +38,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 1. [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks)
 2. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
 3. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Essential_Tools_and_Apps)
+4. [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore)
 
 ## 5T33Z0's 5H0UT 0UT5:
 
