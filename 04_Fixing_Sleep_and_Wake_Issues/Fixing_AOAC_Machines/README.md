@@ -2,7 +2,7 @@
 
 ## AOAC Technology
 
-A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones, never shut down and always online.
+A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel in the 2000s and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones or Bluetooth Headsets.
 
 ### How to determine if you have an `AOAC` Machine
 
