@@ -2,12 +2,14 @@
 [![OpenCore Version](https://img.shields.io/badge/OpenCore-0.7.5-cyan.svg)](https://github.com/CloverHackyColor/CloverBootloader/releases)
 ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.10.20-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
+
+## About
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
 <details>
-<summary><strong>About the Translation</strong></summary>
+<summary><strong>About this Translation</strong></summary>
 
-## About the Translation:
+## About this Translation:
 
 - AI-based translation using deepL, google translator as well as manual copyediting.
 - Restructured the repository into more plausible (sub-)sections categories based on types of issues, components, methods, etc.
