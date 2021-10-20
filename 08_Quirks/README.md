@@ -437,6 +437,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 <summary><strong>AMD Quirks</strong> (Click to show content!)</summary>
 <details>
 <summary><strong>AMD Ryzen and Treadripper</strong> (Click to show content!)</summary>
+
 ## AMD Ryzen and Threadripper (17h and 19h)
 
 ### SMBIOS Requirements
