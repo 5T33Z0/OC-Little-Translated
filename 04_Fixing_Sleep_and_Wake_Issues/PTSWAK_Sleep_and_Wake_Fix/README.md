@@ -26,28 +26,28 @@ When pressing the brightness shortcut key, you can see the value of `Arg0` on th
 
 The `_PTS` and `_WAK` must be renamed in order to use the integrated patch. Choose the correct name change based on the original DSDT content, e.g.
 
-- `_PTS` to `ZPTS(1,N)`:
+- `_PTS` to `ZPTS(1,N)` for:
 
   ```swift
     Method (_PTS, 1, NotSerialized) /* _PTS: Prepare To Sleep */
     {
   ```
 
-- `_WAK` to `ZWAK(1,N)`:
+- `_WAK` to `ZWAK(1,N)` for:
 
   ```swift
     Method (_WAK, 1, NotSerialized) /* _WAK: Wake */
     {
   ```
 
-- `_PTS` to `ZPTS(1,S)`:
+- `_PTS` to `ZPTS(1,S)` for:
 
   ```swift
     Method (_PTS, 1, Serialized) /* _PTS: Prepare To Sleep */
     {
   ```
 
-- `_WAK` to `ZWAK(1,S)`:
+- `_WAK` to `ZWAK(1,S)` for:
 
   ```swift
     Method (_WAK, 1, Serialized) /* _WAK: Wake */
@@ -56,21 +56,19 @@ The `_PTS` and `_WAK` must be renamed in order to use the integrated patch. Choo
 
 If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don't need to rename it. Choose the correct renaming based on the original DSDT content, e.g.
 
-- `_TTS` to `ZTTS(1,N)`:
+- `_TTS` to `ZTTS(1,N)` for:
 
   ```swift
     Method (_TTS, 1, NotSerialized) /* _WAK: Wake */
     {
   ```
 
-- `_TTS` to `ZTTS(1,S)`:
+- `_TTS` to `ZTTS(1,S)` for:
 
   ```swift
     Method (_TTS, 1, Serialized) /* _WAK: Wake */
     {
   ```
-
-
 ## Patches
 
 - ***SSDT-PTSWAKTTS*** – Integrated patch.
