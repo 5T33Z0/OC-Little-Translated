@@ -9,13 +9,13 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 ## About the Translation:
 
-- AI-based translation using deepL, google translator and manual copyediting.
-- Restructured the repository into more plausible sections and (sub-)categories based on types of issues, components, methods, etc.
-- Rearranged Text for better readability and comprehensibility
-- Rewrote sections which were confusing/misleading
+- AI-based translation using deepL, google translator as well as manual copyediting.
+- Restructured the repository into more plausible (sub-)sections categories based on types of issues, components, methods, etc.
+- Restructured Texts for better readability and comprehensibility
+- Rewrote whole sections which were confusing/misleading (`ACPI` and `USB Port Mapping` for example)
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (Chapters 8 to 12)
+- Added new content (Chapter 8 and Appendix Section)
 
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
