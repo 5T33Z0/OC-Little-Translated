@@ -17,7 +17,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 1. Run OCAT, check for Updates (Globe Icon)
 2. Mount your ESP (seletc Edit > MountESP) or ( M)
 3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon: </br>![OCAT_errors](https://user-images.githubusercontent.com/76865553/138106690-c44543f3-fe82-4369-b07c-02fab777651a.png)
-4. Click on the warning symbol to see the errors: ![OCAT_errors2](https://user-images.githubusercontent.com/76865553/138106763-c84bfcdc-8813-46bd-9b2d-9537dc631aa2.png)
+4. Click on the warning symbol to see the errors: </br>![OCAT_errors2](https://user-images.githubusercontent.com/76865553/138106763-c84bfcdc-8813-46bd-9b2d-9537dc631aa2.png)
 5. Close the warnings
 6. Hit the Save Button (good Old Floppy Disk Icon)
 7. The error may be gone, if just some features were missing:</br>
