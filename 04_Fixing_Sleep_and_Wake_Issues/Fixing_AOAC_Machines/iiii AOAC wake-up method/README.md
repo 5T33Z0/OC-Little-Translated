@@ -33,8 +33,6 @@ The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby 
   }
   ...
   ```
-  
-
 ## Addendum
 
 - **Light up screen condition** 
