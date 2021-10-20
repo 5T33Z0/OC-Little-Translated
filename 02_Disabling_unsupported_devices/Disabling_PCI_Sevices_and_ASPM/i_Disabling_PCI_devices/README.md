@@ -21,10 +21,10 @@
 
 - Patch file: ***SSDT-RP01.PXSX-disable***:
 
-  ```swift
+```swift
   External (_SB.PCI0.RP01, DeviceObj)
   Scope (_SB.PCI0.RP01)
-{
+      {
       OperationRegion (DE01, PCI_Config, 0x50, 0x01)
       Field (DE01, AnyAcc, NoLock, Preserve)
       {
@@ -48,7 +48,7 @@
           \_SB.PCI0.RP01.DDDD = One
       }
   }
-  ```
+```
 
 ## Caution
 
