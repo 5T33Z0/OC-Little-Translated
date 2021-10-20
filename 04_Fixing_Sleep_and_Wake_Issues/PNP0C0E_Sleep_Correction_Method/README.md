@@ -59,7 +59,7 @@ One of the following methods can fix this problem:
 
 The following are the main contents of ***SSDT-LIDpatch***:
 
-```Swift
+```swift
 Method (_LID, 0, NotSerialized)
 {
     if(\_SB.PCI9.FNOK==1)
@@ -74,7 +74,7 @@ Method (_LID, 0, NotSerialized)
 ```
 Here are the main contents of the ***Sleep Button Patch***:
 
-```Swift
+```swift
 If (\_SB.PCI9.MODE == 1) /* PNP0C0E sleep */
 {
     \_SB.PCI9.FNOK =1 /* Press sleep button */

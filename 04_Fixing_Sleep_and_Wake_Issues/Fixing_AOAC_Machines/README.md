@@ -10,7 +10,7 @@ A new technology, namely *Always On/Always Connected* (AOAC) was introduced by I
 - Click on "File > New From ACPI" and select `FACP.aml`
 - Search for `Low Power S0 Idle`. If it is = `1`, it is an `AOAC` machine. For example:
 
-  ```asl
+  ```swift
   Low Power S0 Idle (V5) : 1
   ```
 
@@ -60,7 +60,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 
 - The `AOAC` solution is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
 - Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
-  - [PTSWAKTTS Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PTSWAK%20Sleep%20and%20Wake%20Fix)
-  - [PNP0C0E Sleep Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06.%20Fixing%20Sleep%20and%20Wake%20Issues/PNP0C0E%20Sleep%20Correction%20Method)
+  - [**PTSWAKTTS Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+  - [**PNP0C0E Sleep Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 - For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
 - You can also try this method for non-AOAC machines.

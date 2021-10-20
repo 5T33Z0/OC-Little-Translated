@@ -36,15 +36,15 @@ Different machines may define `_PRW` in different ways, and the contents and for
 
 ## Diversity of `_PRW` and the corresponding patch method
 
-    Name (_PRW, Package (0x02)
+```swift 
+ Name (_PRW, Package (0x02)
     {
         0x0D, /* possibly 0x6D */
         0x03, /* possibly 0x04 */
         ...
     })
-  
-
-  This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. The documentation package provides.
+```
+This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. The documentation package provides.
 
   - Name-0D rename .plist
     - `Name-0D-03` to `00`
@@ -56,13 +56,12 @@ Different machines may define `_PRW` in different ways, and the contents and for
 
 - One of the `Method types`: `GPRW(UPRW)`
 
-  ```Swift
+  ```swift
     Method (_PRW, 0, NotSerialized)
     {
       Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
     }
   ```
-
   Most of the newer machines fall into this case. Just follow the usual method (rename-patch). The documentation package provides.
 
   - ***SSDT-GPRW*** (patch file with binary rename data inside)
@@ -70,7 +69,7 @@ Different machines may define `_PRW` in different ways, and the contents and for
 
 - ``Method type`` of two: ``Scope``
 
-  ```Swift
+  ```swift
     Scope (_SB.PCI0.XHC)
     {
         Method (_PRW, 0, NotSerialized)
@@ -100,7 +99,6 @@ Different machines may define `_PRW` in different ways, and the contents and for
         }
     }
   ```
-
   This is not a common case. For the example case, using the binary rename ***Name6D-03 to 00*** will work. Try other forms of content on your own.
 
 - Mixed `Name type`, `Method type` approach
