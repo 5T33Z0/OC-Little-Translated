@@ -22,7 +22,6 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 
 ### Updating OpenCore Files, Drivers, Kexts and Resourcse
 1. Still in OCAT, ckick on the icon which looks like a Recycle symbol: ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
-2. In the next dialog window, you can see which files will be updated: ![Updates](https://user-images.githubusercontent.com/76865553/138300386-131df05f-fd57-404b-83b2-fa2386944362.png)
-
+2. In the next dialog window, you can see which files will be updated:![Updates](https://user-images.githubusercontent.com/76865553/138301168-2851388c-d7e7-4f08-bdc3-cdec5ced9d51.png)
 3. Once you hit the "Start Sync" Button the listed Files (including Resources) will be updated and you will be notified once it's done:</br> ![Done](https://user-images.githubusercontent.com/76865553/138107072-9af89efb-2543-4f95-ab82-59748cf78306.png)
-4. Done. 
+4. Done – Config OpenCore, Drivers and kexts are up to date now. 
