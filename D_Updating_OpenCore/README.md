@@ -1,16 +1,9 @@
 # Updating OpenCore and Kexts with OCAT and Kext Updater
-Currently, the easiest method to keep your OpenCore Files, Config and Kexts up to date is to use a combination of OpenCore Auxiliary Tools (OCAT) and Kext Updater. OCAT actually merges any changes made to the structure of the config-plist, thereby updating it to the latest version, without losing settings. This saves so much time and effort compared to older methods, where you had to do all of this manually.
+Currently, the easiest method to keep your OpenCore Files, Config and Kexts up to date is to use a OpenCore Auxiliary Tools (OCAT). OCAT actually merges any changes made to the structure of the config-plist and feature-set, thereby updating it to the latest version, without losing settings. This saves so much time and effort compared to older methods, where you had to do all of this manually. On top of that it updates OpenCore, Drivers and Kexts. So no more additional tools are needed.
 
 ## Tools and prerequisites
-- Disable System Integrity Protection, reboot and perform NVRAM Reset: 
-	- `FF030000` &rarr; for macOS 10.13
-	- `FF070000` &rarr; for macOS 10.14/10.15
-	- `67080000` &rarr; for macOS 11
-	- `EF0F0000` &rarr; for macOS 12
 - Working Internet Connection
 - Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
-- Download and install [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/)
-
 ## How-to
 
 ### Updating your `config.plist`
@@ -27,19 +20,9 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 (Any remaining erors are actually configurattion errors which you need to fix on your own.)
 10. You're already done with updating your config. On to updating files…
 
-### Updating OpenCore Files, Drivers and Resourcse
+### Updating OpenCore Files, Drivers, Kexts and Resourcse
 1. Still in OCAT, ckick on the icon which looks like a Recycle symbol: ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
-2. In the next dialog window, you can see what will be updated: ![Sync](https://user-images.githubusercontent.com/76865553/138107015-958c991d-8176-46ed-9d9f-7f63505b509b.png)
-3. Once you hit the "Start Sync" Button the selected Files (including Resources) will be updatedt and you will be notified once it's done:</br> ![Done](https://user-images.githubusercontent.com/76865553/138107072-9af89efb-2543-4f95-ab82-59748cf78306.png)
-4. Done. On to updating Kexts…
+2. In the next dialog window, you can see which files will be updated: ![Updates](https://user-images.githubusercontent.com/76865553/138300386-131df05f-fd57-404b-83b2-fa2386944362.png)
 
-### Updating Kexts with Kext Updater
-1. Run Kext Updater
-2. Click on "Check" button to check and download the latest Kexts for your EFI
-3. Downloaded kexts will be stored in Desktop > Kext-Updates by default
-4. Copy and replace existing `.kext` files in the EFI > OC > Kexts Folder with those downloaded by Kext Updater
-5. Done
-
-Congratulations! Your EFI folder should now be up to date!
-
-**NOTE**: This will only check for update of kexts which are enabled in the config. If you wannt to upate everything, use the "Tools" function and click on "Choose Folder" instead and then perform the check.
+3. Once you hit the "Start Sync" Button the listed Files (including Resources) will be updated and you will be notified once it's done:</br> ![Done](https://user-images.githubusercontent.com/76865553/138107072-9af89efb-2543-4f95-ab82-59748cf78306.png)
+4. Done. 
