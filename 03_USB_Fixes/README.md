@@ -8,7 +8,7 @@ Since one physical USB 3 port (the blue ones) actually supports 2 USB protocols 
 
 ## Removing the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice. Before macOS Catalina you could use the XHCI portlimit quirk and you were fine. Sinc macOS Catalina you need to map USB ports so your peripherals work. There are two ways to achieve this:
+The workaround is to lift the USB port limit and use Hackitool to map 15 ports of your choice. Before macOS Catalina you could use the XHCI portlimit quirk and you were fine. Since macOS Catalina, you need to map USB ports so your peripherals work correctly. There are two ways to achieve this:
 
 ### Option 1: Mapping USB Ports via Custom Kext (macOS 10.15 to macOS 11.2)
 
