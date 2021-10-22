@@ -18,7 +18,7 @@ With this EUFI Quirk you change the the GPU BAR Size of the system. This quirk s
 | 64 MB|6|
 | 128 MB|7|
 | 256 MB|8|
-| 512 MB*|9| 	Maximum for macOS IOPCIFamily.
+| 512 MB*|9*| 	Maximum for macOS IOPCIFamily.
 | 1 GB|10|
 | 2 GB|11|
 | 4 GB|12|
@@ -51,7 +51,7 @@ operating with the BAR sized to (2^Bit) MB.
 | 128 MB|7|
 | 256 MB|8|
 | 512 MB|9|
-| 1 GB*|10|
+| 1 GB*|10*|
 | 2 GB|11|
 | 4 GB|12|
 | 8 GB|13|
