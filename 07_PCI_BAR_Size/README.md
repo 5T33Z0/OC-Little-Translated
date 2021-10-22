@@ -2,7 +2,7 @@
 OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, namely `ResizeGPUBars` and `ResizeAppleGPUBars`.
 
 ### ResizeGPUBars
-With this EUFI Quirk you change the the GPU BAR Size of the system. This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB. `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
+With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB.*** `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
  
 **Formula**: 2^n = PCI BAR Size in MB
   
