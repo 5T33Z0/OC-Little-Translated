@@ -23,98 +23,98 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 - 8/9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
 ### ACPI Quirks    
-| CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen |
-|:----------------|:---------:|:--------:|:----------:|:-----------:|
-| **ACPI Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |      
-|		  |           |		 |            |             |
-|FadtEnableReset  |
-|NormalizeHeaders |
-|RebaseRegions    |
-|ResetHwSig       | 
-|ResetLogoStatus* |(x)|(x)|(x)|(x)|
-|SyncTableIDs     |
+| CPU Family      | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen | Description |
+|:----------------|:---------:|:--------:|:----------:|:-----------:|:------------|
+| **ACPI Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |Read Documentation for more details|
+|                 |           |          |            |             |             |
+|**FadtEnableReset**  |||||For legacy systems and a few newer laptops. Can fix pwr-button shortcuts. Not recommomended unless required.
+|**NormalizeHeaders** |||||Cleans up ACPI headers to avoid boot crashes in macOS 10.13. 
+|**RebaseRegions**    |||||Relocates ACPI memory regions. Not recommended!
+|**ResetHwSig**       |||||Resets FACS table Hardware Signature to 0. Fixes firware-based issues with waking from hibernation.|
+|**ResetLogoStatus**°|(x)|(x)|(x)|(x)|This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
+|**SyncTableIDs**     |||||Fixes tables for compatibilty with in older Windows versions
 
-`*`Default in `sample.plist`
+`°`Default in `sample.plist`
 
 ### Boooter Quirks
-| CPU Family        | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen |
-|:------------------|:---------:|:--------:|:----------:|:-----------:|
-| **Booter Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |
-|	            |		| 	   |            |             |
-|AllowRelocationBlock|
-|AvoidRuntimeDefrag|x|x|x|x
-|DevirtualiseMmio|x|x|x
-|DisableSingleUser|
-|DisableVariableWrite|
-|DiscardHibernateMap|
-|EnableSafeModeSlide|x|x|x|x
-|EnableWriteUnprotector
-|ForceBooterSignature
-|ForceExitBootServices
-|ProtectMemoryRegions|
-|ProtectSecureBoot
-|ProtectUefiServices*|x|x|(x)*|
-|ProvideCustomSlide|x|x|x|x
-|ProvideMaxSlide
-|RebuildAppleMemoryMap|x|x|x|x
-|ResizeAppleGpuBars
-|SetupVirtualMap|||x|x
-|SignalAppleOS
-|SyncRuntimePermissions|x|x|x|x
+| CPU Family        | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen | Description |
+|:------------------|:---------:|:--------:|:----------:|:-----------:|:------------|
+| **Booter Quirks** | Desktop   | Mobile   | Desktop    | Mobile      | Read Documentation for more details|
+|	                 |		     |   	       |            |             |            |
+|**AllowRelocationBlock**|||||Allows booting macOS through a relocation block. Req. ProvideCustomSlide and AvoidRuntimeDefrag.
+|**AvoidRuntimeDefrag**|x|x|x|x|Protects from boot.efi runtime memory. defragmentation.
+|**DevirtualiseMmio**|x|x|x||Removes runtime attribute from certain MMIO regions
+|**DisableSingleUser**|||||Disables single user mode which improves Security.
+|**DisableVariableWrite**|||||Restricts NVRAM access in macOS.
+|**DiscardHibernateMap**|||||Reuses original hibernate memory map.
+|**EnableSafeModeSlide**|x|x|x|x|Patches bootloader to have KASLR enabled in safe mode. Req. ProvideCustomSlide
+|**EnableWriteUnprotector**|||||Permits write access to UEFI runtime services code.
+|**ForceBooterSignature**|||||Sets macOS boot-signature to OpenCore launcher
+|**ForceExitBootServices**|||||Fixed early boot crashes of the firmware. Do not use if you don't know what you're doing!
+|**ProtectMemoryRegions**|||||Protects memory regions from incorrect acces.
+|**ProtectSecureBoot**|||||Protects UEFI Secure Boot variables from being written.
+|**ProtectUefiServices**°|x|x|(x)°||Protect UEFI services from being overridden by the firmware.
+|**ProvideCustomSlide**|x|x|x|x|Provides custom KASLR slide on low memory.
+|**ProvideMaxSlide**|||||Provide maximum KASLR slide when higher ones are unavail.
+|**RebuildAppleMemoryMap**|x|x|x|x|Generates macOS compatible Memory Map
+|**ResizeAppleGpuBars**|||||Reduce GPU PCI BAR sizes for compatibility with macOS.
+|**SetupVirtualMap**|||x|x|Setup virtual memory at SetVirtualAddresses
+|**SignalAppleOS**|||||Report macOS being loaded through OS Info for any OS
+|**SyncRuntimePermissions**|x|x|x|x|Updates memory permissions for the runtime environment|
 
-`*` Required for Z390 mainboards
+`°` Required for Z390 mainboards
 
 ### Kernel Quirks
-| CPU Family        | Cometlake   | 10th Gen      | Coffeelake | 8th/9th Gen |
-|:------------------|:-----------:|:-------------:|:----------:|:-----------:|
-| **Kernel Quirks** | Desktop     | Mobile        | Desktop    | Mobile      |
-|                   |             |               |            |             |
-|AppleCpuPmCfgLock||||
-|AppleXcpmCfgLock°|(x)|(x)|(x)|(x)
-|AppleXcpmExtraMsrs||||
-|AppleXcpmForceBoost||||
-|CustomSMBIOSGuid*|( )|( )|( )|( )
-|DisableIoMapper|x|x|x|x
-|DisableLinkeditJettison|x|x|x|x
-|DisableRtcChecksum||||
-|ExtendBTFeatureFlags||||
-|ExternalDiskIcons||||
-|ForceSecureBootScheme||||
-|IncreasePciBarSize||||
-|LapicKernelPanic**|( )|( )|( )|( )
-|LegacyCommpage||||
-|PanicNoKextDump|x|x|x|x
-|PowerTimeoutKernelPanic|x|x|x|x
-|ProvideCurrentCpuInfo||||
-|SetApfsTrimTimeout|-1|-1|-1|-1
-|ThirdPartyDrives||||
-|XhciPortLimit***|(x)|(x)|(x)|(x)
+| CPU Family        | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen | Description |
+|:------------------|:---------:|:--------:|:----------:|:-----------:|:------------|
+| **Kernel Quirks** | Desktop   | Mobile   | Desktop    | Mobile      | Read Documentation for more details|
+|                   |           |          |            |             |
+|**AppleCpuPmCfgLock**|||||Disables MSR modification in AppleIntelCPUPowerManage- ment.kext
+|**AppleXcpmCfgLock**°|(x)|(x)|(x)|(x)|Enables write access for XNU Kernel to enable XCPM power management.
+|**AppleXcpmExtraMsrs**|||||Disables multiple MSR access critical for certain CPUs, which have no native XCPM support.
+|**AppleXcpmForceBoost**|||||Forces maximum performance in XCPM mode. Nor recomm.
+|**CustomSMBIOSGuid**°°|( )|( )|( )|( )|Usually relevant for Dell laptops and when having issues with Windows License.
+|**DisableIoMapper**|x|x|x|x|Disables IOMapper support in XNU (VT-d).
+|**DisableLinkeditJettison**|x|x|x|x|Improves Lilu.kext performance in macOS Big Sur without `keepsyms=1` boot-arg.
+|**DisableRtcChecksum**|||||Disables primary checksum (0x58-0x59) writing in AppleRTC.
+|**ExtendBTFeatureFlags**|||||Sets FeatureFlags to `0x0F` for full functionality of Bluetooth, including Continuity.
+|**ExternalDiskIcons**|||||Forces internal disk icons for all AHCI disks. Avoid if possible!
+|**ForceSecureBootScheme**|||||Forces x86 scheme for IMG4 verification. Req. for VMs if SecureBootModel ≠ default
+|**IncreasePciBarSize**|||||Allows IOPCIFamily to boot with 2 GB PCI BARs. Avoid!
+|**LapicKernelPanic**°°°|( )|( )|( )|( )|Disables kernel panic on LAPIC interrupts.
+|**LegacyCommpage**|||||For legacy platforms without SSSE3 support.
+|**PanicNoKextDump**|x|x|x|x|Prevents kernel from printing kext dump in panic log. macOS 10.13 and above.
+|**PowerTimeoutKernelPanic**|x|x|x|x|Disables kernel panic on setPowerState timeout.
+|**ProvideCurrentCpuInfo**|||||Adresses issues with Microsoft Hyper-V.
+|**SetApfsTrimTimeout**|-1|-1|-1|-1|Sets trim timeout in ms for APFS filesystems on SSDs.
+|**ThirdPartyDrives**|||||Enables TRIM and hibernation Support for SSDs in macOS 10.15 and newer.
+|**XhciPortLimit**°°°°|(x)|(x)|(x)|(x)|Patches  various kexts to remove USB port limit of 15.|
 
 `°` `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS</br>
-`*` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
-`**` `LapicKernelPanic`: Enable for HP Systems</br>
-`***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+`°°` `CustomSMBIOSGuid`: Enable for Dell or Sony VAIO</br>
+`°°°` `LapicKernelPanic`: Enable for HP Systems</br>
+`°°°°` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-|CPU Family       | Cometlake    | 10th Gen       | Coffeelake | 8th/9th Gen |
-|:----------------|:------------:|:--------------:|:----------:|:-----------:|
-| **UEFI Quirks** | Desktop      | Mobile         | Desktop    | Mobile      |
-|		  |              |                |            |             |
-|ActivateHpetSupport||||
-|DisableSecurityPolicy||||
-|EnableVectorAcceleration|x|x||
-|ExitBootServicesDelay||||
-|ForceOcWriteFlash||||
-|ForgeUefiSupport||||
-|IgnoreInvalidFlexRatio||||
-|ReleaseUsbOwnership||x||x
-|ReloadOptionRoms||||
-|RequestBootVarRouting|x|x|x|x
-|ResizeGpuBars||||
-|TscSyncTimeout||||
-|UnblockFsConnect*|( )|( )|( )|( )|
+|CPU Family       | Cometlake | 10th Gen | Coffeelake | 8th/9th Gen | Description |
+|:----------------|:---------:|:--------:|:----------:|:-----------:|:------------|
+| **UEFI Quirks** | Desktop   | Mobile   | Desktop    | Mobile      | Read Documentation for more details|
+|		           |           |          |            |             |             |
+|**ActivateHpetSupport**|||||Force enables HPET, if there's no option for it in the BIOS.
+|**DisableSecurityPolicy**|||||Disables platform security policy. Do NOT enable if you're using UEFI Secure Boot.
+|**EnableVectorAcceleration**|x|x|||Enables AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+|**ExitBootServicesDelay**|||||Adds delay in microseconds after `EXIT_BOOT_SERVICES` event.
+|**ForceOcWriteFlash**|||||Enables writing to flash memory for all OpenCore system variables.
+|**ForgeUefiSupport**|||||Implements partial UEFI 2.x support on EFI 1.x firmware.
+|**IgnoreInvalidFlexRatio**|||||Fixes invalid values in the MSR_FLEX_RATIO (0x194) MSR register.
+|**ReleaseUsbOwnership**||x||x|Attempt to detach USB controller ownership from the firmware driver.
+|**ReloadOptionRoms**|||||Query PCI devices and reload their Option ROMs if available
+|**RequestBootVarRouting**|x|x|x|x|Required for Startup Disk PrefPane to work.
+|**ResizeGpuBars**|||||Configure GPU PCI BAR size
+|**TscSyncTimeout**|||||Experimental quirk for debugging TSC synchronisation.
+|**UnblockFsConnect**°|( )|( )|( )|( )|Useful if drive detection fails and results in an missing boot entries.
 
-`*` `UnblockFsConnect`: Enable on HP Machines
+`°` `UnblockFsConnect`: Enable on HP Machines
 </details>
 <details>
 <summary><strong>6th and 7th Gen Intel Quirks</strong> (Click to show content!)</summary>
