@@ -4,7 +4,7 @@ OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, 
 ### ResizeGPUBars
 With this EUFI Quirk you change the the GPU BAR Size of the system. This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB. `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
  
-**Formula**: 2^n in MB
+**Formula**: 2^n = PCI BAR Size in MB
   
 | PCI BAR Size | VALUE in OC|
 |-------------:|:----------:|
@@ -18,7 +18,7 @@ With this EUFI Quirk you change the the GPU BAR Size of the system. This quirk s
 | 64 MB|6|
 | 128 MB|7|
 | 256 MB|8|
-| 512 MB*|9*| 	Maximum for macOS IOPCIFamily.
+| 512 MB*|9*|
 | 1 GB|10|
 | 2 GB|11|
 | 4 GB|12|
@@ -30,13 +30,12 @@ With this EUFI Quirk you change the the GPU BAR Size of the system. This quirk s
 | 256 GB|18|
 | 512 GB|19|
 
-*Maximum for macOS IOPCIFamily.
+`*`Maximum for macOS IOPCIFamily.
 
 ### ResizeAppleGPUBars
-This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports
-operating with the BAR sized to (2^Bit) MB.
+This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB.
 
-**Formula**: 2^Bit
+**Formula**: 2^Bit = ApppleGPUBars Size in MB
 
 | PCI BAR Size | VALUE in OC|
 |-------------:|:----------:|
@@ -62,6 +61,6 @@ operating with the BAR sized to (2^Bit) MB.
 | 256 GB|18|
 | 512 GB|19|
 
-*Maximum for macOS.
+`*`Maximum for macOS.
 
 
