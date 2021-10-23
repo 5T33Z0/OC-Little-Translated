@@ -5,7 +5,7 @@ This section contains a small collection of useful tips and tricks for working w
 
 For updating OpenCore reliably and easily to the latest version, follow my [New OpenCore Update Guide](https://www.insanelymac.com/forum/topic/347035-guide-updating-and-maintaining-opencore-new-method/) on Insanelymac.com.
 
-## OpenCore Troubleshooting Quicktips:
+## OpenCore Troubleshooting Quick tips:
 
 Besides checking the obvious (like Booter Settings and Quirks), check the following Settings:
 
@@ -14,7 +14,7 @@ Besides checking the obvious (like Booter Settings and Quirks), check the follow
 - `Vault` = Optional
 - `MinDate` = -1
 - `MinVersion` = -1
-- Compare Structor of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
+- Compare the structure of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
 - **OC Troubleshooiting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
@@ -23,11 +23,11 @@ Besides checking the obvious (like Booter Settings and Quirks), check the follow
 
 Currently there are three automated methods to check your `config.plist` for errors:
 
-- **Online**: [**OpenCore Sanity Checker**](https://opencore.slowgeek.com/) ~~is~~ was a useful site to check your config for errors. It hasn't been updated a long time and only fully support OpenCore up to version 0.6.6 and shouldn't be relied on when using newer versions of OpenCore. It compares your config with the database of the OpenCore Installation Guide. Correct entries are highlited in green, errors are highlighted in red, so you can easily address a problem. You can also copy the link to the result of the sanity check to point out config issues in formums, etc.. The source code is availabe if someone would like to implement it in a new or updated site: [OCSanity](https://github.com/rlerdorf/OCSanity).
+- **Online**: [**OpenCore Sanity Checker**](https://opencore.slowgeek.com/) ~~is~~ was a useful site to check your config for errors. It hasn't been updated a long time and only fully support OpenCore up to version 0.6.6 and shouldn't be relied on when using newer versions of OpenCore. It compares your config with the database of the OpenCore Installation Guide. Correct entries are highlighted in green, errors are highlighted in red, so you can easily address a problem. You can also copy the link to the result of the sanity check to point out config issues in forums, etc.. The source code is available if someone would like to implement it in a new or updated site: [OCSanity](https://github.com/rlerdorf/OCSanity).
 
 - **Offline**: The OpenCore package comes with a `Utilities` folder. In it you will find `ocvalidate`. Drag it into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will point to section in the config they relate to. With the help of [OCConfgCompare](https://github.com/corpnewt/OCConfigCompare), Sample.plist and [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) you can correct all errors quite fast.
 
-- **Using OpenCore Auxiliary Tools** ([**OCAT**](https://github.com/ic005k/QtOpenCoreConfig)): Tool for editing and updating OpenCore files, Drivers and the config.plist. Its best feature is that it automatically updates any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before.<br> 
+- **Using OpenCore Auxiliary Tools** ([**OCAT**](https://github.com/ic005k/QtOpenCoreConfig)): Tool for editing and updating OpenCore files, Drivers, Kexts and the config.plist. Its best feature is that it automatically updates any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before.<br> 
 
 	But to be clear: OCAT does not fix configuration errors (apart from those caused by structural differences between an outdated and current config). In other words: if your config.plist was configured incorrectly before, it still will be afterwards!
  
@@ -49,7 +49,7 @@ If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (O
 
 - **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verifictaion, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced). 
 
-**BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a varified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
+**BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a verified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
 
 **IMPORTANT**: For security reason you should change these values according to the version of macOS you are using. A list with the correct values for `MinDate` and `MinVersion`can be found here: https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h
 
@@ -138,7 +138,7 @@ Enables the key combinations known from Macs to use boot modes like Verbose, Saf
 
 If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case. 
 
-**NOTE**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be unabled, otherwise you won't see the drive in the bootpicker.
+**NOTE**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
 ## Boot variants (Selection)
 
@@ -258,6 +258,7 @@ https://oc-scanpolicy.vercel.app/
 If macOS Monterey beta Updates are not offered to you, you could try the following:
 
 - Set the correct value for csr-active-config: `67080000`
+- Add latest build of [RestrictEvents.kext](https://dortania.github.io/builds/?product=RestrictEvents&viewall=true)
 - Save, reboot, Clean NVRAM, reboot 
 - Go to "About the Mac…" > "Software Update" and see if you are being offered the latest update.
 - If not, leave the Software Update window open
@@ -267,21 +268,5 @@ If macOS Monterey beta Updates are not offered to you, you could try the followi
 - Software Update should re-check automatically and offer the new update (if available).
 - Download and install your Update.
 
-**NOTE**: `SecureBootModel` may be required if the Update still isn't offered.
-
-## Fix macOS Monterey beta 7 Installer
-
-Something in the beta 7 Installer is broken, so that the SharedSupport.dmg is not copied to the Installer App so it is only 34 MB in size. To fix it you need to do the following:
-
-- Move `InstallAssistant.pkg` to the Desktop
-- Dobuble click `InstallAssistant.pkg` to install it. This creates the "Install macOS Monterey" App
-- Next, enter in Terninal:
-	- `cd ~/Desktop`
-	- `xar -xf InstallAssistant.pkg SharedSupport.dmg` (Mounts the SharedSupport.dmg)
-	- `sudo mkdir /Applications/Install\ macOS\ Monterey\ beta.app/Contents/SharedSupport` (creates the Folter "SharedSupport" in the Contents Folder of the Installer App) 
-	- `sudo cp ~/Desktop/SharedSupport.dmg /Applications/Install\ macOS\ Monterey\ beta.app/Contents/SharedSupport` (copies the SharedSupport.dmg into the Installer App)
-
-Now you can run the Installer App and it will work. If your want to create a USB Installer (name the drive "USB"), you can use this command:
-
-`sudo /Applications/Install\ macOS\ Monterey\ beta.app/Contents/Resources/createinstallmedia --nointeraction --downloadassets --volume /Volumes/USB`
+**NOTE**: `SecureBootModel` j160 may be required if the Update still isn't offered.
 </details>
