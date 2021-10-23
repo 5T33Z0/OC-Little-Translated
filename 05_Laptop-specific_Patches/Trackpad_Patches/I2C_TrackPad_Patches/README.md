@@ -1,4 +1,4 @@
-# OCI2C-TPXX Patch Method
+# I2C-TPXX Patch Method
 
 ## Description
 
@@ -11,11 +11,19 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 - VoodooI2C Official Support Post [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/](https://www.tonymacx86.com/threads/ voodooi2c-help-and-support.243378/)
 - Q-groups: `837538729` (1 group is full), `921143329` (2 groups)
 
+## New kexts for I2C Synaptic and ELAN Touchpads
+If your touchpad is controlled via SMBus you could try one of these kexts:
+
+- [**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI): Synaptic Trackpad driver over SMBus/I2C for macOS 
+- [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
+- [**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan): ELAN Touchpad/Trackpoint driver for macOS over SMBus 
+- [**VoodooTrackpoint**](https://github.com/VoodooSMBus/VoodooTrackpoint):  Generic Trackpoint/Pointer device handler kext for macOS  
+
+
 ## Patch principle and process
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
-
-  ```swift
+```swift
   /*
    * GPI0 enable
    */
@@ -32,14 +40,12 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
           }
       }
   }
-  ```
-
+```
 - Create a new I2C device `TPXX` and port all the contents of the original device to `TPXX`.
 - Fix `TPXX` related content.
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
-
-    ```swift
+  ```swift
     Method (_STA, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -51,14 +57,13 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
             Return (Zero)
         }
     }
-    ```
-
+```
   - **Corrected** the ``relevant content`` of the variables used when the original I2C device was disabled, so that they are logically related.
   - **Corrected** the ``relevant content'' of the operating system variable OSYS to make it logical.
 - Exclude errors
 - I2C patch
 
-### Example (Dell Latitude 5480, device path: \_SB.PCI0.I2C1.TPD1`)
+### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
 
 - Disable ``TPD1`` using the Preset Variable Method.
 
