@@ -27,7 +27,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |:----------------|:---------:|:--------:|:----------:|:-----------:|:------------|
 | **ACPI Quirks** | Desktop   | Mobile   | Desktop    | Mobile      |Read Documentation for more details|
 |                 |           |          |            |             |             |
-|**FadtEnableReset**  |||||For legacy systems and a few newer laptops. Can fix pwr-button shortcuts. Not recommomended unless required.
+|**FadtEnableReset**  |||||For legacy systems and a few newer laptops. Can fix pwr-button shortcuts. Not recommended unless required.
 |**NormalizeHeaders** |||||Cleans up ACPI headers to avoid boot crashes in macOS 10.13. 
 |**RebaseRegions**    |||||Relocates ACPI memory regions. Not recommended!
 |**ResetHwSig**       |||||Resets FACS table Hardware Signature to 0. Fixes firmware-based issues with waking from hibernation.|
@@ -69,7 +69,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |:------------------|:---------:|:--------:|:----------:|:-----------:|:------------|
 | **Kernel Quirks** | Desktop   | Mobile   | Desktop    | Mobile      | Read Documentation for more details|
 |                   |           |          |            |             |
-|**AppleCpuPmCfgLock**|||||Disables MSR modification in AppleIntelCPUPowerManage- ment.kext
+|**AppleCpuPmCfgLock**|||||Disables MSR modification in AppleIntelCPUPowerManagement.kext
 |**AppleXcpmCfgLock**°|(x)|(x)|(x)|(x)|Enables write access for XNU Kernel to enable XCPM power management.
 |**AppleXcpmExtraMsrs**|||||Disables multiple MSR access critical for certain CPUs, which have no native XCPM support.
 |**AppleXcpmForceBoost**|||||Forces maximum performance in XCPM mode. Not recomm.
