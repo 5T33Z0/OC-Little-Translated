@@ -43,7 +43,7 @@ To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps
     13:19:55.541826+0800 kernel ACPIDebug: { "ABCD-_WAK-Arg0=", 0x3, }
     ```
 
-	The result shown above is the value of `Arg0` after the last sleep and wakeup.
+	The result shown above is the value of `Arg0` after the last sleep and wake cycle.
 
 ## Remarks
 
