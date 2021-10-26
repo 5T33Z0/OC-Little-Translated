@@ -217,27 +217,27 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 <details>
 <summary><strong>Sharing SMBIOS Infos between Clover and OpenCore</strong></summary>
 
-## Sharing SMBIOS Infos between Clover and OpenCore
+## Sharing SMBIOS data between Clover and OpenCore
 
 When switching between OpenCore and Clover, copying over your existing SMBIOS Infos from one Bootoader to the other can be a bit confusing because of naming differences as well as the number of fields available in both configs. 
 
 So I had a look at my SMBIOS Infos using GenSMBIOS and found out which parameters belong to what in Clover and OpenCore.
 
-Here's a table of the what is what in macSerial/GenSMBIOS, Clover and OpenCore
+Here's a table of the what is what in macSerial/GenSMBIOS, Clover and OpenCore:
 
-| MacSerial/GenSMBIOS | Clover Config       | OpenCore Config               |
-|:--------------------|:--------------------|:------------------------------|
-| Hardware UUID* | System Parameters > Custom UUID | N/A in PlatformInfo > Generic |
-| Board ID | SMBIOS > Board-ID | N/A in PlatformInfo > Generic|
-| Serial Number | SMBIOS > Serial Number | PlatformInfo > Generic > SystemSerialNumber|
-| System ID | SMBIOS > Sm UUID | PlatformInfo > Generic > SystemUUID |
-| ROM** 	  | Rt Variables > ROM | PlatformInfo > Generic > ROM |
-|  MLB | SMBIOS > Board Serial Number | PlatformInfo > Generic > MLB |
+| MacSerial / GenSMBIOS | SMBIOS (Clover)     | PlatformInfo > Generic (OpenCore) |
+|:----------------------|:--------------------|:----------------------------------|
+| Model                 | Product Name        | SystemProductName                 |
+| Board ID              | Board-ID            | N/A in PlatformInfo > Generic     |
+| System ID             | Sm UUID             | SystemUUID                        |
+| ROM  	              | Rt Variables > ROM  | ROM                               |
+| Serial Number         | Serial Number       | SystemSerialNumber                |
+| MLB                   | 1. Board Serial Number </br> 2. Rt Variables > MLB |  MLB|                               
+| Hardware UUID°        | 1. System Parameters > Custom UUID (Get From System) or</br> 2. Under RtVariable "From System"| N/A in PlatformInfo > Generic |
 
 **NOTE:**
 
- - *Hardware UUID: This is displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
- -  **ROM: in Clover Configurator, select the option "from SMBIOS" and paste over your MAC Address
+- °Hardware UUID: This is displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
 
 You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMBIOS Infos listed in GenSMBIOS are still identical. Another indicator for successful transfer is that you don't have to re-enter the passwords of your E-Mail Accounts in the Mail App.
 
