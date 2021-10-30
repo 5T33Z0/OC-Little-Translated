@@ -5,7 +5,7 @@ A set of Booter and Kernel patches which allow installing, booting and updatimg 
 **Minimum macOS requirement**: Big Sur using XNU Kernel 20.4.0 or newer!
 
 ## How it works
-The latest version of [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
+The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
 
 These patches skip the Board ID check of the used hardware, redirecing it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches. 
 
@@ -44,8 +44,8 @@ In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable add
 - **Patches 0-2**: Enable board ID spoof via VMM in macOS 12.0.1 (active) >> Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 - **Patch 3:** seems to be related to Apple's SMC Controller in real Macs (disabled)
 - **Patch 4**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 5-6**:[ SurPlus fixes](https://github.com/reenigneorcim/SurPlus) for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIUIS MacPro5,1. (disabled)
-- **Patches 7-8**: Experimental [RDRAND Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c6b3aaaeb78d56f98a94d7991fd3019190b48dd3) to re-enable Sandy Bridge CPU support in Monterey 12.1 beta (disabled)
+- **Patches 5-6**: SurPlus patche for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIUIS MacPro5,1. (disabled)
+- **Patches 7-8**: Experimental RDRAND Patches to re-enable Sandy Bridge CPU support in Monterey 12.1 beta (disabled)
 
 <details>
 <summary><strong>Background Info: My test</strong> (Click to show content!)</summary>
@@ -73,6 +73,8 @@ Installation went smoothly and macOS 12.1 booted without issues:
 ![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
 </details>
 
-##Credits
-https://github.com/reenigneorcim/SurPlus
-https://github.com/dortania/OpenCore-Legacy-Patcher
+## Credits
+- Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
+- parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281) 
+- reenigneorcim for [**SurPlus**](https://github.com/reenigneorcim/SurPlus)
+- Khronokernel for [**RDRAND Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c6b3aaaeb78d56f98a94d7991fd3019190b48dd3)
