@@ -266,7 +266,7 @@
 				<key>Count</key>
 				<integer>1</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				AHQjSIs=
@@ -279,7 +279,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.1.0</string>
+				<string>21.2.0</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
@@ -302,7 +302,7 @@
 				<key>Count</key>
 				<integer>1</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>
 				ukgBAAAx9g==
@@ -315,7 +315,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.1.0</string>
+				<string>21.2.0</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
