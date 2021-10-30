@@ -13,8 +13,8 @@ This allows using the correct SMBIOS for a given CPU family even if it is not of
 
 > Parrotgeek1's VMM patch set would force kern.hv_vmm_present to always return True. With hv_vmm_present returning True, both OSInstallerSetupInternal and SoftwareUpdateCore will set the VMM-x86_64 board ID while the rest of the OS will continue with the original ID.
 > 
-- Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
-
+> - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
+>
 > **Source**: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543
 
 The patching consists of two stages:
@@ -54,24 +54,22 @@ In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable add
 
 I tested the patches on my Lenovo T530 Notebook, which uses and Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not supported by macOS Monterey. After rebooting, the system started without `-no_compat_check` boot-arg using, as you can see here:
 
-![](/Users/kl45u5/Desktop/BoardIDSkip/Proof01.png)
+![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
 
 Terminal shows the currnetly used Board-ID which belongs to SMBIOS of `MacBookPro10,1` as you can see in Clover Configurator. Usually, running macOS would require using MacBookPro11,4 which uses a different Board-ID as you can see in the Clover Configuratos snippet:
 
-![](/Users/kl45u5/Desktop/BoardIDSkip/Proof02.png)
-
+![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
+  
 Next, I checked for updates – I was offered macOS 12.1 beta:
 
-![](/Users/kl45u5/Desktop/BoardIDSkip/Proof03.png)
-
+![Proof03](https://user-images.githubusercontent.com/76865553/139529788-d8ca770e-f8c2-49a8-a44e-908137f5e45c.png)
+  
 Which I installed…
-
-![](/Users/kl45u5/Desktop/BoardIDSkip/Proof04.png)
+  
+![Proof04](https://user-images.githubusercontent.com/76865553/139529792-d92e52d3-5f91-4044-b788-730d603327b3.png)
 
 Installation went smoothly and macOS 12.1 booted without issues:
 
-![](/Users/kl45u5/Desktop/BoardIDSkip/About.png)
+![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
+
 </details>
-
-
-
