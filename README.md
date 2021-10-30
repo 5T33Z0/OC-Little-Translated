@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 [![OpenCore Version](https://img.shields.io/badge/OpenCore-0.7.5-cyan.svg)](https://github.com/CloverHackyColor/CloverBootloader/releases)
-![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.10.26-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.10.30-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## About
@@ -34,6 +34,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
 7. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_PCI_BAR_Size)
 8. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
+9. [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof%20)
 
 **APPENDIX**:
 
