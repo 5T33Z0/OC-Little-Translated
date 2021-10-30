@@ -71,5 +71,8 @@ Which I installed…
 Installation went smoothly and macOS 12.1 booted without issues:
 
 ![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
-
 </details>
+
+##Credits
+https://github.com/reenigneorcim/SurPlus
+https://github.com/dortania/OpenCore-Legacy-Patcher
