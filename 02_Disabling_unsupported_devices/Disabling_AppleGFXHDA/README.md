@@ -3,7 +3,7 @@
 ## About
 SSDT for disabling the audio output over HDMI/DisplayPort on AMD graphics cards.
 
-Unfortunately, macOS is not very clever when it comes to saving the last used audio output by default. After a restart (or waking up from sleep), the HDMI/DisplayPort device is usually selected again, even though you had set it to "Line-Out" for example, which can be annoying since you have to change it back manually every time.
+Unfortunately, macOS is not very clever when it comes to remmbering the last used audio output by default. After a restart (or waking up from sleep), the HDMI/DisplayPort audio device is usually selected again, even though you had set it to "Line-Out" before for example, which can be annoying since you have to change it back manually every time.
 
 This SSDT turns off the GFXHD audio device for macOS completely, so that it can no longer be selected.
 
