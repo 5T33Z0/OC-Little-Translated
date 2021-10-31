@@ -41,10 +41,10 @@ Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 ### About the Kernel Patches
 In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
-- **Patches 0-2**: Enables board ID spoof via VMM in macOS 12.0.1 (active) >> Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
+- **Patches 0-2**: Enable board ID spoof via VMM in macOS 12.0.1 (active) >> Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 - **Patch 3:** seems to be related to Apple's SMC Controller in real Macs (disabled)
 - **Patch 4**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 5-6**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIUIS MacPro5,1. (disabled)
+- **Patches 5-6**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1`. (disabled)
 - **Patches 7-8**: Experimental RDRAND Patches to re-enable Sandy Bridge CPU support in Monterey 12.1 beta (disabled)
 
 <details>
