@@ -41,10 +41,10 @@ Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 ### About the Kernel Patches
 In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
-- **Patches 0-2**: Enable board ID spoof via VMM in macOS 12.0.1 (active) >> Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
+- **Patches 0-2**: Enables board ID spoof via VMM in macOS 12.0.1 (active) >> Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 - **Patch 3:** seems to be related to Apple's SMC Controller in real Macs (disabled)
 - **Patch 4**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 5-6**: SurPlus patche for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIUIS MacPro5,1. (disabled)
+- **Patches 5-6**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIUIS MacPro5,1. (disabled)
 - **Patches 7-8**: Experimental RDRAND Patches to re-enable Sandy Bridge CPU support in Monterey 12.1 beta (disabled)
 
 <details>
@@ -52,15 +52,15 @@ In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable add
 
 ## Testing the Patches
 
-I tested the patches on my Lenovo T530 Notebook, which uses and Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not supported by macOS Monterey. After rebooting, the system started without `-no_compat_check` boot-arg using, as you can see here:
+I tested the patches on my Lenovo T530 Notebook, which uses an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
 ![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
 
-Terminal shows the currnetly used Board-ID which belongs to SMBIOS of `MacBookPro10,1` as you can see in Clover Configurator. Usually, running macOS would require using MacBookPro11,4 which uses a different Board-ID as you can see in the Clover Configuratos snippet:
+Terminal shows the currnetly used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configuratos snippet:
 
 ![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
   
-Next, I checked for updates – I was offered macOS 12.1 beta:
+Next, I checked for updates and was offered macOS 12.1 beta:
 
 ![Proof03](https://user-images.githubusercontent.com/76865553/139529788-d8ca770e-f8c2-49a8-a44e-908137f5e45c.png)
   
