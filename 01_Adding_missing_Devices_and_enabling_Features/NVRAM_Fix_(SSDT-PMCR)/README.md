@@ -6,6 +6,11 @@ In ACPI, you won't find `PMCR` or `APP9876`, because it is an EXCLUSIVE Apple de
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original ACPI.
 
+### Checking if the patch is working
+Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should find it:</br>
+
+![Bildschirmfoto 2021-11-01 um 16 37 33](https://user-images.githubusercontent.com/76865553/139699060-75fdc4b4-ff16-448e-9e19-96af3c392064.png)
+
 ## Background
 This patch was found by @Pleasecallmeofficial to provide the method, which has now become the official OpenCore SSDT example.
   > 300/400/500 chipsets PMC (D31:F2) can only be booted via MMIO. Since there is no PMC device in the ACPI specification, Apple has introduced its own named `APP9876` to access this device from the AppleIntelPCHPMC driver. In other operating systems, this device is generally accessed using `HID: PNP0C02`, `UID: PCHRESV`.  
