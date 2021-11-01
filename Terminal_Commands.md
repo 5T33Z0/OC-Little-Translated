@@ -117,3 +117,8 @@ or
 **Change Update Seed to Developer**</br>
 `sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
 `sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
+
+**Listing ACPI Errors**
+
+`sudo dmesg | grep "ACPI"` </br>
+`sudo dmesg | grep "ACPI" > $HOME/Desktop/acpi.txt` (creates a Log on Desktop)
