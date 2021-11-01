@@ -1,5 +1,5 @@
 # Using unsupported Board-IDs with macOS Monterey
-A set of Booter and Kernel patches which allow installing, booting and updatimg macOS Monterey on unsupported Board-IDs.
+A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on unsupported Board-IDs.
 
 ## System requirements
 **Minimum macOS requirement**: Big Sur using XNU Kernel 20.4.0 or newer!
@@ -7,7 +7,7 @@ A set of Booter and Kernel patches which allow installing, booting and updatimg 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
 
-These patches skip the Board ID check of the used hardware, redirecing it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches. 
+These patches skip the Board-ID check of the used hardware, redirecing it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches. 
 
 This allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS Monterey. This not only improves CPU Powermanagement - especially on Laptops – it also allows installing, booting and updating macOS Monterey with otherwise unsupported hardware:
 
@@ -52,7 +52,7 @@ In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable add
 
 ## Testing the Patches
 
-I tested the patches on my Lenovo T530 Notebook, which uses an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
+I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
 ![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
 
