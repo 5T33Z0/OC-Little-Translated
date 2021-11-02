@@ -40,7 +40,7 @@ After rebooting, do the following:
 - In this case, we delete the Reserved Memory Regions Sections:</br>
 	![Delmem](https://user-images.githubusercontent.com/76865553/139952931-70611f4e-0773-43a9-a1c7-90faef51703b.png)</br>
 - Save the file as `DMAR.aml`. It has a new table length now (104).
-- Put it in the ACPI Folder of OpenCore and it it to your config.plist.
+- Put it in the ACPI Folder of OpenCore and add it to your `config.plist`.
 - Save, reboot.
 
 ## Verifying that a Table has been replaced
