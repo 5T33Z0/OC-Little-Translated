@@ -19,7 +19,7 @@ If `AppleACPIACAdapter` is not loaded, you can use a SSDT hotpatch to connect it
 - Put it the ACPI Folder, add it to your config.plist and enable it.
 - Save and reboot.
 
-## Checking if the fix works
+## Verifying the patch
 After rebooting, open IORegestryExplorer again and check if `AppleACPIACAdapter` is present:
 ![fixed](https://user-images.githubusercontent.com/76865553/139687129-42f54d03-7f49-45f4-9eae-ae29f7a8d5ee.png)
 
