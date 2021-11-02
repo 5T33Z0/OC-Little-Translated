@@ -20,19 +20,19 @@ Add the following Renames (if applicable) to config.plist:
 
 - **OSID to XSID** (only necessary if present in `DSDT` to avoid match with _OSI to XOSI Rename)
  
-  ```swift
+  ```text
   Find: 4F534944
   Replace: 58534944
   ```
 - **OSIF to XSIF** (only necessary if present in `DSDT` to avoid match with _OSI to XOSI Rename)
 
-  ```swift
+  ```text
   Find: 4F534946
   Replace: 58534946
   ```
 - **_OSI to XOSI** (must be last in this Sequence)
 
-  ```swift
+  ```text
   Find: 5F4F5349
   Replace: 584F5349
   ```
