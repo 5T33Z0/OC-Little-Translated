@@ -50,4 +50,4 @@ After rebooting, do the following:
 	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
 
 ## NOTE
-You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F11.
+You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F4.
