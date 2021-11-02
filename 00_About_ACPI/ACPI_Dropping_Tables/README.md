@@ -12,7 +12,7 @@ Therefore, you might consider dropping the DMAR table completely and/or replace 
 - Open the DMAR Table in maciASL and scroll to the end
 - Copy the table length (in this case, `168`):</br>
 	![Tlength](https://user-images.githubusercontent.com/76865553/139952797-38e332bc-3fed-450e-83fb-afa4a955a932.png)</br>
-- Open your config and add new runle under ACPI > delete.
+- Open your config and add a new rule under ACPI > delete.
 - Enter `444D4152` (HEX for "DMAR") in `TableSignature`. If you use OCAT, you can use the  ASCII to HEX converter at the bottom of the app:</br>
 	![Drop](https://user-images.githubusercontent.com/76865553/139952827-a745cf27-a1f6-416e-ba0a-0ccab3c45884.png)</br>
 - In TableLength enther the Length listed in the DMAR Table. In this case `168`.
