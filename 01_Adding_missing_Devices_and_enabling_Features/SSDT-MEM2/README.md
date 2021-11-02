@@ -12,6 +12,4 @@ In **DSDT**, search for:
 
 - `MEM2` and/or `PNP0C01`, if missing, add ***SSDT-MEM2***. 
  
-
-
 **CAUTION:** When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.
