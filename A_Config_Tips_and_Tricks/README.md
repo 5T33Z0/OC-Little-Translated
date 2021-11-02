@@ -1,6 +1,4 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
-**Last Update**: September 28th, 2021
-
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. 
 
 For updating OpenCore reliably and easily to the latest version, follow my [New OpenCore Update Guide](https://www.insanelymac.com/forum/topic/347035-guide-updating-and-maintaining-opencore-new-method/) on Insanelymac.com.
