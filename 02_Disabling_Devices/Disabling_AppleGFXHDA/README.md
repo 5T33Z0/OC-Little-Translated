@@ -3,18 +3,18 @@
 ## About
 SSDT for disabling the audio output over HDMI/DisplayPort on AMD graphics cards.
 
-Unfortunately, macOS is not very clever when it comes to remmbering the last used audio output by default. After a restart (or waking up from sleep), the HDMI/DisplayPort audio device is usually selected again, even though you had set it to "Line-Out" before for example, which can be annoying since you have to change it back manually every time.
+Unfortunately, macOS is not very clever when it comes to remembering the last used audio output by default. After a restart (or waking up from sleep), the HDMI/DisplayPort audio device is usually selected again, even though you had set it to "Line-Out" before for example, which can be annoying since you have to change it back manually every time.
 
 This SSDT turns off the GFXHD audio device for macOS completely, so that it can no longer be selected.
 
 ## Methods
-There are 2 methods of doing this, one manual, one automated
+There are 2 methods to disable the GFXHD audio device, one manual, one automated.
 
 ### Method 1: Using AMD Mute
 - Download [**AMD Mute**](https://www.hackintosh-forum.de/forum/thread/55146-amd-mute-ssdt-zur-deaktivierung-von-gfx-hdmi-audio-erstellen/#post724320)
 - Open the app and click on "Generate SSDT"
-- Creates SSDT-MUTE-GENERIC-RADEON.aml on your Desktop
-- Add this to the ACPI Folder and config.plist
+- This creates `SSDT-MUTE-GENERIC-RADEON.aml` on your Desktop
+- Add this to the ACPI Folder and `config.plist`
 - Save and reboot
 
 ### Method 2: Modifying the attached SSDT

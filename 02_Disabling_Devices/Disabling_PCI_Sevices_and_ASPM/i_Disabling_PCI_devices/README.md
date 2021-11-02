@@ -1,16 +1,17 @@
-## Disable PCI devices
+## Disabling PCI devices
 
 ### Description
 
-- In some cases, we want to disable a PCI device. For example, the HDMI Audio device of dicrete graphics cards or SD cards with PCI bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
-- These devices have the following characteristics.
+Sometime we want to disable a PCI device. For example, the HDMI Audio device of dicrete graphics cards or SD Cards Expansions with PCI Bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
+
+- These devices have the following characteristics:
   - It is a **child device** of a **parent PCI device**
-  - The **parent device** defines some variables of type `PCI_Config`or `SystemMemory`, where bit `D4` of the data at offset 0x55 is the device operational property
+  - The **parent device** defines some variables of type `PCI_Config`or `SystemMemory`, where bit `D4` of the data at offset `0x55` is the device operational property
   - **Subdevice** address: `Name (_ADR, Zero)`  
 
 ### Device name
 
-- The **child device** name of the newer machine is **`PXSX`**; **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**... etc.
+- The **child device** name on newer machine is **`PXSX`**; **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**... etc.
 - Early ThinkPad machines **child device** with the name **`SLOT`** or **none**; **parent device** with the name **`EXP1`**, **`EXP2`**, **`EXP3`**... etc.
 - Other machines may be other names.
 - The laptop's built-in wireless network card belongs to such a device.
