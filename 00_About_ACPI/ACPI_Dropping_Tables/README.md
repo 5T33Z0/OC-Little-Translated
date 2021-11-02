@@ -36,7 +36,7 @@ After rebooting, do the following:
 3. Inject it with OpenCore
 
 ### Modifying a table
-- Opem the original DNAR Table
+- Open the original DMAR Table
 - In this case, we delete the Reserved Memory Regions Sections:</br>
 	![Delmem](https://user-images.githubusercontent.com/76865553/139952931-70611f4e-0773-43a9-a1c7-90faef51703b.png)</br>
 - Save the file as `DMAR.aml`. It has a new table length now (104).
