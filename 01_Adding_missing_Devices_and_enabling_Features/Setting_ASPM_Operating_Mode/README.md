@@ -5,10 +5,10 @@
 ASPM, **Active State Power Management**, is a power link management scheme supported at the system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle.
 
 - ASPM operates in several modes:
-  - **L0**-Normal mode.
-  - **L0s**-Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
-  - **L1**-low power standby mode. L1 further reduces power consumption compared to L0s. However, the time to enter or exit the idle state is longer than L0s.
-  - **L2**-Auxiliary power mode. Omitted.
+  - **`L0`**-Normal mode.
+  - **`L0s`**-Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
+  - **`L1`**-low power standby mode. L1 further reduces power consumption compared to L0s. However, the time to enter or exit the idle state is longer than L0s.
+  - **`L2`**-Auxiliary power mode. Omitted.
 - For machines with `AOAC` technology, try to change the ASPM mode of PCI devices such as `Wireless NIC`, `SSD`, etc. to reduce the power consumption of the machine.
 - Changing the ASPM mode of PCI devices may solve issues of some third-party devices not being driven correctly during boot. For example, the SD Card Reader of RTS525A model may not be recognized in `L0s` mode (default mode). After changing it to `L1`, it is recognized correctly.
 
