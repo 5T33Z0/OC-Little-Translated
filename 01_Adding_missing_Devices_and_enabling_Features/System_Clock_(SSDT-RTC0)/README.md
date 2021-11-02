@@ -69,8 +69,8 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
 }
 ```
 
-## Notes
+## NOTES
 
-- This patch only applies for 300 series motherboards.
-- This is only needed when ***`SSDT-AWAC`*** is not used and the return value of the `_STA` method of the `RTC` device in the original `ACPI` is `0`.
-- The device path of the sample patch is `LPCB`, please modify if necessary (check if the name of the Low Pin COnfiguration os either `LPC` or `LPCB` in `DSDT` and adjust it in the patch accordingly).
+- This patch only applies to 300 series chipsets.
+- This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in the original `DSDT` is `0`.
+- The device path used in the sample patch is `LPCB`, please adjusty it accordingl to the name used in your `DSDT` (either `LPC` or `LPCB`).
