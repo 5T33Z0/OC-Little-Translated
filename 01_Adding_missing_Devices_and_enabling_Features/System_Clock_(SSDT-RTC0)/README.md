@@ -72,5 +72,5 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
 ## NOTES
 
 - This patch only applies to 300 series chipsets.
-- This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in the original `DSDT` is `0`.
-- The device path used in the sample patch is `LPCB`, please adjusty it accordingl to the name used in your `DSDT` (either `LPC` or `LPCB`).
+- This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in your `DSDT` is `0`.
+- The device path used in the sample patch is `LPCB`, please adjusty it accordingly to the name used in your `DSDT` (either `LPC` or `LPCB`).
