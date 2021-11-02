@@ -19,4 +19,4 @@ In **DSDT**, search for:
 - Open IORegistry Explorer and serch for `DMAC`
 - If the Device is present, it should look like this. The arry "DeviceIOMemory" should contain further entries and data:
 
-![](/Users/kl45u5/Desktop/DMAC_present.png)
+![DMAC_present](https://user-images.githubusercontent.com/76865553/139804828-7a797e03-06c8-4abe-9216-c0627efbaafe.png)
