@@ -17,6 +17,6 @@ In **DSDT**, search for:
 - Incorporate SSDT-DMAC.aml in your EFI's ACPI folder and config.plist.
 - Restart your system 
 - Open IORegistry Explorer and serch for `DMAC`
-- If the Device is present, it should look like this. The arry "DeviceIOMemory" should contain further entries and data:
+- If the Device is present, it should look like this. The arry "IODeviceMemory" should contain further entries and data:
 
 ![DMAC_present](https://user-images.githubusercontent.com/76865553/139804828-7a797e03-06c8-4abe-9216-c0627efbaafe.png)
