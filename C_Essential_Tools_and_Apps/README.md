@@ -6,7 +6,9 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 - [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
 - [**Clover Releases**](https://github.com/CloverHackyColor/CloverBootloader/releases)
 - [**Clover Suite Builder**](https://www.insanelymac.com/forum/topic/347872-introducing-clover-suite-builder/) (Tool for compiling Clover)
+- [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser)
 
+___
 #### Cross-Platform
 - [**Python Installer**](https://www.python.org/downloads/) – Necessary for running alot of the python-scripts in this list
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
@@ -19,6 +21,7 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USBPPort mapping tool. Makes port mapping under macOS 11.3+ easier
 
+___
 #### macOS
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP Partition
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
@@ -28,8 +31,7 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 - [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/) – Great App for checking and downloading Kext updates, Bootloader files, etc.
 - [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS, creating an USB Installer and changing the Update Seed which can help resolving issues with system updates
 
+___
 #### Windows
 Suggest some. Otherwise refer to "Cross-Platform" Section.
-
-___
 
