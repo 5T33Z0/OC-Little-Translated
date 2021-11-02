@@ -6,7 +6,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 1. Common injection method:
 
-	- **Kext**: WhateverGreen
+	- **Kext**: WhateverGreen.kext
 	- **Patch**: Custom brightness patch or RehabMan brightness patch
 
 2. ACPI injection method:
@@ -16,7 +16,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 3. Other methods: Follow the Kext + patch principle and try for yourself.
 
-**NOTE**: The official OpenCore package contains pre-made `SSDT-PNFL.aml` patches under "Docs" already. So in case you're not sure what to do you could also use these instead.
+**NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
 
 ## Required Kexts
 
@@ -35,7 +35,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 
   - Custom Brightness Patches:
 
-    - ***SSDT-PNLF-SNB_IVY***: For 2nd and 3rd Gen Intel Machines
+    - ***SSDT-PNLF-SNB_IVY***: For 2nd and 3rd Gen Intel CPUs
     - ***SSDT-PNLF-Haswell_Broadwell***: For 4th and 5th Gen
     - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
     - ***SSDT-PNLF-CFL***: 8th gen and newer
@@ -46,13 +46,15 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
   
     - [**SSDT-PNLF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl) 
     - [**SSDT-PNLFCFL.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
-    - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl)
+    - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Cofiguration File)
   
-	RehabMan luminance patch is inserted in `_SB.PCI0.IGPU`, rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. Rehabman's PNLF Patches require the following rename:
+	Rehabman's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. Rehabman's PNLF Patches require the following rename:
 
-	**Name**: PNLF to XNLF  
-	**Find**: 504E4C46  
-	**Replace**: 584E4C46
+	```swift
+		Name: PNLF to XNLF  
+		Find: 504E4C46  
+		Replace: 584E4C46
+	```
 
 ## Caution
 
