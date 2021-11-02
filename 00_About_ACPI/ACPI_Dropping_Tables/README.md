@@ -1,5 +1,5 @@
 # Dropping ACPI Tables
-Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some macOS funcionality or devices to work properly. 
+Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some macOS functionality or devices to work properly. 
 
 For example on Z590 Boards, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled Vt-D and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller useless in macOS Monterey. In this case, DMAR has to be modified, Vt-Enabled and `DisableIOMapper` unselected.
 
@@ -15,7 +15,7 @@ Therefore, you might consider dropping the DMAR table completely and/or replace 
 - Open your config and add a new rule under ACPI > delete.
 - Enter `444D4152` (HEX for "DMAR") in `TableSignature`. If you use OCAT, you can use the  ASCII to HEX converter at the bottom of the app:</br>
 	![Drop](https://user-images.githubusercontent.com/76865553/139952827-a745cf27-a1f6-416e-ba0a-0ccab3c45884.png)</br>
-- In TableLength enther the Length listed in the DMAR Table. In this case `168`.
+- In TableLength, enter the Length listed in the DMAR Table. In this case `168`.
 - Save the Config.
 - Reboot.
 
@@ -24,7 +24,7 @@ After rebooting, do the following:
 
 - Open maciASL
 - Select "File" > "New from ACPI" 
-- If you dropped the table sucessfully, it shouldn't be listed. As you can see, it's not present:</br>
+- If you dropped the table successfully, it shouldn't be listed. As you can see, it's not present:</br>
 	![nodmar](https://user-images.githubusercontent.com/76865553/139952877-ef7d0f85-378d-4c6b-ac9a-efb7118ac4b6.png)</br>
 - The table has been dropped successfully.
 
@@ -50,4 +50,4 @@ After rebooting, do the following:
 	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
 
 ## NOTE
-You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the unpatched ACPI Tables from the Clover Bootmenu.
+You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F11.
