@@ -185,11 +185,11 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 3. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
-   - `\_GPE`--- ACPI Event handlers
-   - `\_PR` --- CPU
-   - `\_SB` --- Devices and Busses
-   - `\_SI` --- System indicator
-   - `\_TZ` --- Thermal zone
+   - `\_GPE` &rarr; ACPI Event handlers
+   - `\_PR` &rarr; CPU
+   - `\_SB` &rarr; Devices and Busses
+   - `\_SI` &rarr; System indicator
+   - `\_TZ` &rarr; Thermal zone
 
 	Components with different attributes are place below/inside the corresponding Scope. For example:
 
