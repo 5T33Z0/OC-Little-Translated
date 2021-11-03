@@ -10,11 +10,11 @@ There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most 
 ## Method 1: Dropping Tables based on OEM Tabled ID
 This method is used to drop tables such as SSDTs and others which have a distinct OEM Table ID in the header to describe them. In this example we drop `CpuPm`.
 
-- Open the Table you want to drop in maciASL and find it's Table Signature and OEM Table ID
-![](/Users/kl45u5/Desktop/Header.png)
+- Open the Table you want to drop in maciASL and find it's Table Signature and OEM Table ID:</br>
+![Header](https://user-images.githubusercontent.com/76865553/140036308-a1abcdd2-ae38-49e7-9135-612e64e86ddf.png)
 - Open your config.plist and a new rule under "ACPI" > "Delete"
 - Add the discovered `TableSignature` and `OEMTable` ID in HEX format in the corresponding fields. In OCAT, you can use the ASCII to HEX converter at the bottom of the app to do this:</br>
-![](/Users/kl45u5/Desktop/DropCpuPM.png)
+![DropCpuPM](https://user-images.githubusercontent.com/76865553/140036351-785f42b6-b0e6-43b3-9eb0-c6729c863a90.png)
 - Enable the rule and save your config.plist.
 - Reboot.
 
