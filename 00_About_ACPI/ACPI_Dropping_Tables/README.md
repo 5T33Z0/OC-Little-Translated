@@ -1,5 +1,5 @@
 # Dropping ACPI Tables
-Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some macOS functionality or devices to work properly in macOS. Bootmanagers like Clover an OpenCore provide means to prohibit certain tables from loaading or to replace them. In order to do so, you need to knwo the Tables Signatature, OEM Table ID and/or Table Length. Therefore you need to dump the existing ACPI files from your BIOS/Firmware to be able to look inside them.
+Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some macOS functionality or devices to work properly in macOS. Boot managers like Clover an OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore you need to dump the existing ACPI files from your BIOS/Firmware to be able to look inside them.
 
 ## Preparations: Dumping ACPI Tables
 There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore: 
@@ -76,4 +76,4 @@ After rebooting, do the following:
 	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
 
 ## Note
-You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F4.
+You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover boot menu using `F4`.
