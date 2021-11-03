@@ -3,9 +3,9 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 ## System requirements
 **Minimum macOS**: Big Sur using XNU Kernel 20.4.0 or newer!</br>
-**CPU**: Basically, every outdated SMBIOS that supports your CPU but is not supported by macOS Monterey any longer. For now, CPUs of the following families:
+**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families:
 
-- Sandy Bridge
+- Sandy Bridge (need additionl Sur Plus and RDRAND patches)
 - Ivy Bridge
 - Haswell (partially)
 
