@@ -13,7 +13,7 @@ This method is used to drop tables such as SSDTs and others which have a distinc
 - Open the Table you want to drop in maciASL and find it's Table Signature and OEM Table ID:</br>
 ![Header](https://user-images.githubusercontent.com/76865553/140036308-a1abcdd2-ae38-49e7-9135-612e64e86ddf.png)
 - Open your config.plist and a new rule under "ACPI" > "Delete"
-- Add the discovered `TableSignature` and `OEMTableID` in HEX format in the corresponding fields. In OCAT, you can use the ASCII to HEX converter at the bottom of the app to do this:</br>
+- Add the discovered `TableSignature` (here "53534454" = "SSDT" in HEX) and `OEMTableID` (here "437075506D000000" = "CpuPm" in HEX) int the corresponding fields in HEX format. In OCAT, you can use the ASCII to HEX converter at the bottom of the app to do this:</br>
 ![DropCpuPM](https://user-images.githubusercontent.com/76865553/140036351-785f42b6-b0e6-43b3-9eb0-c6729c863a90.png)
 - Enable the rule and save your config.plist.
 - Reboot.
