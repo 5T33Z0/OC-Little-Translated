@@ -2,7 +2,14 @@
 A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on unsupported Board-IDs.
 
 ## System requirements
-**Minimum macOS requirement**: Big Sur using XNU Kernel 20.4.0 or newer!
+**Minimum macOS**: Big Sur using XNU Kernel 20.4.0 or newer!</br>
+**CPU**: Basically, every outdated SMBIOS that supports your CPU but is not supported by macOS Monterey any longer. For now, CPUs of the following families:
+
+- Sandy Bridge
+- Ivy Bridge
+- Haswell (partially)
+
+Since this is a pretty new approach, I have to look into a bit more.
 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
