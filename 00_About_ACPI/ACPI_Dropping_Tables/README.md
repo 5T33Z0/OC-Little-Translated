@@ -1,11 +1,37 @@
 # Dropping ACPI Tables
 Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some macOS functionality or devices to work properly. 
 
-For example on Z590 Boards, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled Vt-D and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller useless in macOS Monterey. In this case, DMAR has to be modified, Vt-Enabled and `DisableIOMapper` unselected.
+## Preparations: Dumping ACPI Tables
+There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore: 
+
+- Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
+- Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
+
+## Method 1: Dropping Tables based on OEM Tabled ID
+This method is used to drop tables such as SSDTs and others which have a distinct OEM Table ID in the header to describe them. In this example we drop `CpuPm`.
+
+- Open the Table you want to drop in maciASL and find it's Table Signature and OEM Table ID
+![](/Users/kl45u5/Desktop/Header.png)
+- Open your config.plist and a new rule under "ACPI" > "Delete"
+- Add the discovered `TableSignature` and `OEMTable` ID in HEX format in the corresponding fields. In OCAT, you can use the ASCII to HEX converter at the bottom of the app to do this:</br>
+![](/Users/kl45u5/Desktop/DropCpuPM.png)
+- Enable the rule and save your config.plist.
+- Reboot.
+
+### Verifying that the table has been dropped
+- Open maciASL
+- Select "File" > "New from ACPI" 
+- If you dropped the table successfully, "SSDT (CpuPm)" shouldn't be listed, unless you replaced it with a new table with the same OEM Table ID. If you created your own `SSDT-PM.aml` which is injected by OpenCore, this would be present, since it has the same OEM Table ID.
+
+## Method 2: Dropping Tables based on Table Signature
+For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a reliable method to detect and drop a table because its OEM Table ID might contains a lot of blanks, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead.
+
+### Example 1: dropping the DMAR Table
+
+On Z590 Boards for example, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled Vt-D and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller useless in macOS Monterey. In this case, DMAR has to be modified, Vt-Enabled and `DisableIOMapper` unselected.
 
 Therefore, you might consider dropping the DMAR table completely and/or replace it with a modified version.
 
-## Example 1: dropping the DMAR Table
 - Open maciASL
 - Select "File" > "New from ACPI" 
 - Pick `DMAR`
@@ -19,7 +45,7 @@ Therefore, you might consider dropping the DMAR table completely and/or replace 
 - Save the Config.
 - Reboot.
 
-## Verifying that a Table is dropped/deleted
+### Verifying that the table has been dropped/deleted
 After rebooting, do the following:
 
 - Open maciASL
@@ -30,7 +56,7 @@ After rebooting, do the following:
 
 **NOTE**: If the table is still present, you either did something wrong or a table of the same name is present in ACPI folder and is injected by OpenCore.
 
-## Example 2: replacing a dropped DMAR with a modified one
+### Example 2: replacing a dropped DMAR with a modified one
 1. Drop the original table as explained in "Example 1"
 2. Modify the same Table
 3. Inject it with OpenCore
@@ -49,5 +75,10 @@ After rebooting, do the following:
 - Pick `DMAR`. The file Should be 104 in length and should no longer contain Reserved Memory Regions:</br>
 	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
 
+<<<<<<< Updated upstream
 ## NOTE
 You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F4.
+=======
+## Note
+You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover Bootmenu using F11.
+>>>>>>> Stashed changes
