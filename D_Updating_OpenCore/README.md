@@ -28,5 +28,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 5. You will be notified once it's done:</br> ![Done2](https://user-images.githubusercontent.com/76865553/140290803-3298dc72-d6cb-43c5-b65e-2d9b77c52ac5.png)
 6. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
 
-## NOTE
-As of now, OCAT will always use the latest OpenCore Build available under https://github.com/acidanthera/OpenCorePkg/actions.
+## NOTES
+
+- The lists shown in the Sync Window are scrollable. Whether or not the scrollbars are displayed,is based on the scrollbar behavior selected in "System Settings" > "General".
+- As of now, OCAT will always use the latest OpenCore Build available under https://github.com/acidanthera/OpenCorePkg/actions.
