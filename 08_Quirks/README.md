@@ -9,10 +9,6 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 - **enpty** = Quirk disabled. And by disabled, I mean *disabled* and not leaving it as is!
 
 **Applicable Version**: OpenCore ≥ 0.7.5
-<details>
-<summary><strong>Intel Quirks</strong> (Click to show content!)</summary>
-<details>
-<summary><strong>8th to 10 Gen Intel Quirks</strong> (Click to show content!)</summary>
 
 ## 8th to 10th Gen Intel CPUs (Desktop/Mobile)
 
@@ -115,7 +111,6 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |**UnblockFsConnect**°|( )|( )|( )|( )|Useful if drive detection fails and results in an missing boot entries.
 
 `°` `UnblockFsConnect`: Enable on HP Machines
-</details>
 <details>
 <summary><strong>6th and 7th Gen Intel Quirks</strong> (Click to show content!)</summary>
 
@@ -431,7 +426,6 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel CPUs. Based o
 |UnblockFsConnect*|( )|( )|( )|( )|
 
 `*` `UnblockFsConnect`: Enable on HP Machines
-</details>
 </details>
 <details>
 <summary><strong>AMD Quirks</strong> (Click to show content!)</summary>
