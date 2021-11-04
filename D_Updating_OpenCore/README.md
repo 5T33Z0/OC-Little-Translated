@@ -6,9 +6,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 - Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 
 ## How-to
-:Warning: 
-
-When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid CMOS issue:
+:warning: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid CMOS issue:
 
 - Disable `BootProtect` (set it to `None`)
 - Reboot
