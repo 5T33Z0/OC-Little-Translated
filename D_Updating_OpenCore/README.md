@@ -1,4 +1,4 @@
-# Updating OpenCore and Kexts with OCAT and Kext Updater
+# Updating OpenCore and Kexts with OCAT
 Currently, the easiest method to keep your OpenCore Files, Config and Kexts up to date is to use a OpenCore Auxiliary Tools (OCAT). OCAT actually merges any changes made to the structure of the config-plist and feature-set, thereby updating it to the latest version, without losing settings. This saves so much time and effort compared to older methods, where you had to do all of this manually. On top of that it updates OpenCore, Drivers and Kexts. So no more additional tools are needed.
 
 ## Tools and prerequisites
