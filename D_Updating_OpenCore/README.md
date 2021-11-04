@@ -4,7 +4,17 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 ## Tools and prerequisites
 - Working Internet Connection
 - Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
+
 ## How-to
+:Warning: 
+
+When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid CMOS issue:
+
+- Disable `BootProtect` (set it to `None`)
+- Reboot
+- Reset NVRAM and then update OpenCore. More details [**here**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6). 
+
+My suggestion: don't use Bootstrap unless you really have to (for example, if you have Windows and macOS installed on the same disk, like Laptops often do). 
 
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
