@@ -12,9 +12,9 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 - Disable `BootProtect` (set it to `None`)
 - Reboot
 - Reset NVRAM 
-- Boot into macOS and then update OpenCore. More details [**here**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6). 
+- Boot into macOS and then update OpenCore. 
 
-**Suggestion**: Avoid Bootstrap/LauncherOption unless you really rely on it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
+Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
