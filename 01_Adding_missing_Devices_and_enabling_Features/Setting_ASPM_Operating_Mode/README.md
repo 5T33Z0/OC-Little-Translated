@@ -42,7 +42,6 @@ An SSDT patch can also set ASPM working mode. For example, set a device ASPM to 
 
 - The patch principle is the same as `Disable PCI Devices`, please refer to it.
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
-
 	```swift
 	External (_SB.PCI0.RP05, DeviceObj)
     Scope (_SB.PCI0.RP05)
@@ -61,7 +60,6 @@ An SSDT patch can also set ASPM working mode. For example, set a device ASPM to 
             \_SB.PCI0.RP05.L1 = Zero   //Set ASPM = L1
         }
 	```           
-  
 **Note 1**: Xiaoxin PRO13 wireless card path is `_SB.PCI0.RP05`  
 **Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
 
