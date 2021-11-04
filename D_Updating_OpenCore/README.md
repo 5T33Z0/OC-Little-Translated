@@ -32,3 +32,4 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbars are visibly by default or not, is based on the selected scrollbar behavior in "System Settings" > "General".
 - As of now, OCAT will always use the latest OpenCore Build available under https://github.com/acidanthera/OpenCorePkg/actions.
+- If Downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
