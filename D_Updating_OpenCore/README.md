@@ -5,7 +5,6 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 - Working Internet Connection
 - Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 
-## How-to
 ### For users updating from OpenCore 0.6.5 or lower
 :warning: **ATTENTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherweise can only be resolved by a CMOS reset:
 
@@ -16,6 +15,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 
 Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
+## How-to
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
 2. Mount your ESP (seletc Edit > MountESP) or ( M)
