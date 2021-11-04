@@ -20,7 +20,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 (Any remaining erors are actually configurattion errors which you need to fix on your own.)
 10. You're already done with updating your config. On to updating files…
 
-### Updating OpenCore Files, Drivers, Kexts and Resourcse
+### Updating OpenCore Files, Drivers, Kexts and Resources
 1. Still in OCAT, ckick on the icon which looks like a Recycle symbol:</br> ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> ![sync_window](https://user-images.githubusercontent.com/76865553/140287867-5b730ec4-a0f9-40ae-a355-7b319ddc24ca.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Online Upgrade Kexts"
