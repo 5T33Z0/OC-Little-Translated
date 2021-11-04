@@ -22,11 +22,12 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 
 ### Updating OpenCore Files, Drivers, Kexts and Resources
 1. Still in OCAT, ckick on the icon which looks like a Recycle symbol:</br> ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
-2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> ![sync_window](https://user-images.githubusercontent.com/76865553/140287867-5b730ec4-a0f9-40ae-a355-7b319ddc24ca.png)
+2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Online Upgrade Kexts"
-4. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies.
-5. You will be notified once it's done:</br> ![Done](https://user-images.githubusercontent.com/76865553/138107072-9af89efb-2543-4f95-ab82-59748cf78306.png)
+4. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies:</br>![sync_nu](https://user-images.githubusercontent.com/76865553/140290881-670eb12d-9742-4350-8133-6bb33021ea28.png)
+5. You will be notified once it's done:</br> ![Done2](https://user-images.githubusercontent.com/76865553/140290803-3298dc72-d6cb-43c5-b65e-2d9b77c52ac5.png)
 6. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+
 
 ## NOTE: About the used OpenCore Version
 As of now, OCAT will always use the latest OpenCore Build available under https://github.com/acidanthera/OpenCorePkg/actions.
