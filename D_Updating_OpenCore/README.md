@@ -22,12 +22,11 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 
 ### Updating OpenCore Files, Drivers, Kexts and Resources
 1. Still in OCAT, ckick on the icon which looks like a Recycle symbol:</br> ![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
-2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
-3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Online Upgrade Kexts"
-4. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies:</br>![sync_nu](https://user-images.githubusercontent.com/76865553/140290881-670eb12d-9742-4350-8133-6bb33021ea28.png)
-5. You will be notified once it's done:</br> ![Done2](https://user-images.githubusercontent.com/76865553/140290803-3298dc72-d6cb-43c5-b65e-2d9b77c52ac5.png)
-6. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> ![sync_nu](https://user-images.githubusercontent.com/76865553/140290881-670eb12d-9742-4350-8133-6bb33021ea28.png)
+4. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Online Upgrade Kexts"
+5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
+6. You will be notified once it's done:</br> ![Done2](https://user-images.githubusercontent.com/76865553/140290803-3298dc72-d6cb-43c5-b65e-2d9b77c52ac5.png)
+7. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
 
-
-## NOTE: About the used OpenCore Version
+## NOTE
 As of now, OCAT will always use the latest OpenCore Build available under https://github.com/acidanthera/OpenCorePkg/actions.
