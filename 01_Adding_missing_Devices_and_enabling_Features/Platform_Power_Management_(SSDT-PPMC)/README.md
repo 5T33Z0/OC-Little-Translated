@@ -6,8 +6,8 @@ Although adding any of the missing parts listed below may improve performance, t
 - What it is: Adds Platform Power Management Controller Device
 - What it does: Improves Power Management (supposedly)
 - Supported CPU Families:
-  - Dektop: 7th Gen Intel and newer 
-  - Mobile/NUC: 6th Gen Intel and newer
+  - **Dektop**: 7th and 8th Gen Intel (100 and 200 Series Mainboards only)
+  - **Mobile/NUC**: 6th to 8th Gen Intel
 
 ## Instructions
 
