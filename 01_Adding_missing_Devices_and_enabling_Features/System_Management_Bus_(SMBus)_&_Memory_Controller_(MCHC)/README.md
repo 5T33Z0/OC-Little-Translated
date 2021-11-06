@@ -26,7 +26,7 @@ After you've added the correct SSDT reboot your system. To find out if the Apple
 
 `kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
 
-If the Termonal output contains the following 2 drivers, your SMBus is working correctly:
+If the Terminal output contains the following 2 drivers, your SMBus is working correctly:
 
 ![sbus_present](https://user-images.githubusercontent.com/76865553/140615883-3c8af435-b09a-4a3e-9746-28f8a05c9e37.png)
 
