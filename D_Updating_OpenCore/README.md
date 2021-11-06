@@ -24,7 +24,7 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 4. Click on the warning symbol to see the errors: </br>
 	![OCAT_errors2](https://user-images.githubusercontent.com/76865553/138106763-c84bfcdc-8813-46bd-9b2d-9537dc631aa2.png)
 5. Close the warnings
-6. Hit the Save Button (good Old Floppy Disk Icon)
+6. Hit the Save Button (good old :floppy_disk:)
 7. The error may be gone, if just some features were missing:</br>
 	![Save](https://user-images.githubusercontent.com/76865553/138106803-0c118267-2f43-4ad6-802e-27efba7cd313.png)
 8. After Saving, the icon should change and the errors should be gone: </br>
