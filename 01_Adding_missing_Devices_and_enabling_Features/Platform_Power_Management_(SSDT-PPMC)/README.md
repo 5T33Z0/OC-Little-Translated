@@ -5,7 +5,7 @@ Although adding any of the missing parts listed below may improve performance, t
 
 - What it is: Adds Platform Power Management Controller Device
 - What it does: Improves Power Management (supposedly)
-- Supported CPU Families: Intel 6th Gen and newer (Mobile and Desktop)
+- Supported CPU Families: Intel 7th Gen and newer (Mobile and Desktop)
 
 ## Instructions
 
