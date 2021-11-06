@@ -7,7 +7,7 @@ Although adding any of the missing parts listed below may improve performance, t
 - What it does: Improves Power Management (supposedly)
 - Supported CPU Families: 
   - Mobile/NUC: 6th Gen Intel and newer
-  - Dektop: 7th Gen and newer 
+  - Dektop: 7th Gen Intel and newer 
 
 ## Instructions
 
