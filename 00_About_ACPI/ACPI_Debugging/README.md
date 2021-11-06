@@ -2,7 +2,7 @@
 
 ## Description
 
-By adding debug code to ***SSDT-xxxx*** Hotpatches, it is possible to see the patch or ACPI working process on the console for debugging.
+By adding debug code to ***SSDT-xxxx*** Hotpatches, it is possible to check the working status of an ACPI table on the console for debugging.
 
 ## Requirements
 To use it you must install the two components:
