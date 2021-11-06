@@ -2,7 +2,8 @@
 Although adding missing devices/features may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which is a requirement for Z390 Chipsets.
 
 ## Instructions
-In ACPI, you won't find `PMCR` or `APP9876`, because it is an EXCLUSIVE Apple device. So add ***SSDT-PMCR.aml*** for 6th Gen Intel and later. For Z390 Boards this patch is mandatory.
+In ACPI, you won't find `PMCR` or `APP9876`, because it is an EXCLUSIVE Apple device. So add ***SSDT-PMCR.aml*** for 6th Gen Intel and newer.</br> 
+:warning: This patch is mandatory for Z390 Boards!
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original ACPI.
 
