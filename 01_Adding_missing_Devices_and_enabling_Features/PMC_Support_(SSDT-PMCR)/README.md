@@ -3,8 +3,11 @@ Although adding missing devices/features may improve performance, they can only 
 
 ## Instructions
 :warning: Mandatory for Z390 Boards!
+
 - In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used in DSDTs by Apple. 
-- Add ***SSDT-PMCR.aml*** for 6th Gen Intel and newer but it's not needed if NVRAM is working correctly!</br>
+- Add ***SSDT-PMCR.aml*** 
+
+For 300/400/500 Series Mainboards (100 and 200 Series use **SSDT-PPMC** instead)
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original ACPI.
 
