@@ -31,10 +31,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |**NormalizeHeaders** ||||||Cleans up ACPI headers to avoid boot crashes in macOS 10.13. 
 |**RebaseRegions**    ||||||Relocates ACPI memory regions. Not recommended!
 |**ResetHwSig**       ||||||Resets FACS table Hardware Signature to 0. Fixes firmware-based issues with waking from hibernation.|
-|**ResetLogoStatus**°|()|()|()|()|()|This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
+|**ResetLogoStatus**°|(x)|(x)|(x)|(x)|(x)|This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
 |**SyncTableIDs**     ||||||Fixes tables for compatibility with in older Windows versions
 
-`°`Enabled by fefault in `sample.plist`
+`°`Enabled by fefault in `sample.plist`. This Quirk didn't exist at the time the OpenCore Install Guide was written, so it's unknown if it's a requirement. Most likely it's not.
 
 ### Boooter Quirks
 | CPU Family | Cometlake | 10th Gen |Cascade Lake X| Coffeelake | 8th/9th Gen | Description |
