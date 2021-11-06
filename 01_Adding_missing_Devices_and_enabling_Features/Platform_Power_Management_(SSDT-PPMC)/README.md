@@ -19,4 +19,4 @@ Although adding any of the missing parts listed below may improve performance, t
 ### Verifying
 In IORegistryExplorer search for 'PPMC'. If present, it should look like this:
 
-![ppmc_present](https://user-images.githubusercontent.com/76865553/139706104-f00e641b-40d0-4012-931a-f89276c75949.png)
+![PPMC](https://user-images.githubusercontent.com/76865553/140606933-94dbfeda-386e-4885-b2a6-ea214b9f4f07.png)
