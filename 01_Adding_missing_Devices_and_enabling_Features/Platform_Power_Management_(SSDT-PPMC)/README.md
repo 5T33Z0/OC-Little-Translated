@@ -9,7 +9,7 @@ Although adding any of the missing parts listed below may improve performance, t
 
 ## Instructions
 
-- In **DSDT**, search for Address `0x001F0002`. Make sure it's associated wihh `Device (PPMC)` and not with a SATA Device!
+- In **DSDT**, search for Address `0x001F0002` or `Device (PPMC)`. Make sure it's the address is not associated with a SATA Device!
 - If missing, add `SSDT-PPMC.aml`
 
 **CAUTION**: When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.
