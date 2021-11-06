@@ -1,10 +1,10 @@
 # System Clock Fix (SSDT-AWAC)
 
-Path to force RTC to be enabled and disable AWAC at the same time.
+Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. 
 
 ## Patch Method (NEW): Using SSDTTime
 
-The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops

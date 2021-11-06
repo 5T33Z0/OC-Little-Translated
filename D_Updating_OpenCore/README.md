@@ -6,7 +6,7 @@ Currently, the easiest method to keep your OpenCore Files, Config and Kexts up t
 - Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 
 ### For users updating from OpenCore 0.6.5 or lower
-:warning: **ATTENTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherweise can only be resolved by a CMOS reset:
+:warning: **ATTENTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
 
 - Disable `BootProtect` (set it to `None`)
 - Reboot
@@ -18,7 +18,7 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 ## How-to
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
-2. Mount your ESP (seletc Edit > MountESP) or ( M)
+2. Mount your ESP (select Edit > MountESP) or ( M)
 3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
 	![OCAT_errors](https://user-images.githubusercontent.com/76865553/138106690-c44543f3-fe82-4369-b07c-02fab777651a.png)
 4. Click on the warning symbol to see the errors: </br>
@@ -31,10 +31,10 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 	![ConfigOK](https://user-images.githubusercontent.com/76865553/138106894-a2a6de27-cc23-4203-85d0-7788e5eac6e2.png)</br>
 9. You're already done with updating your config. On to updating files…
 
-**NOTE**: Remaining erors after saving the config.plist are most likely actual configurattion errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
+**NOTE**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ### Updating OpenCore Files, Drivers, Kexts and Resources
-1. Still in OCAT, ckick on the icon which looks like a Recycle symbol:</br> 
+1. Still in OCAT, click on the icon which looks like a Recycle symbol:</br> 
 	![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
 	![sync_nu3](https://user-images.githubusercontent.com/76865553/140295064-c9512999-4b47-4acb-bc61-b425cdb2caff.png)
