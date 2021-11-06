@@ -6,7 +6,7 @@ Although adding missing devices/features may improve performance, they can only 
 
 - In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used in DSDTs by Apple. 
 - Add ***SSDT-PMC.aml***
-- **For**: 300/400/500 Series Mainboards (100 and 200 Series use **SSDT-PPMC** instead!)
+- **For**: 300/400/500 Series Mainboards (100 and 200 Series Board require **SSDT-PPMC** instead!)
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original ACPI.
 
@@ -16,8 +16,17 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 ![Bildschirmfoto 2021-11-01 um 16 37 33](https://user-images.githubusercontent.com/76865553/139699060-75fdc4b4-ff16-448e-9e19-96af3c392064.png)
 
 ## Background
-This patch was found by @Pleasecallmeofficial to provide the method, which has now become the official OpenCore SSDT example.
-  > 300/400/500 chipsets PMC (D31:F2) can only be booted via MMIO. Since there is no PMC device in the ACPI specification, Apple has introduced its own named `APP9876` to access this device from the AppleIntelPCHPMC driver. In other operating systems, this device is generally accessed using `HID: PNP0C02`, `UID: PCHRESV`.  
-  > Platforms, including APTIO V, cannot read or write NVRAM until the PMC device is initialized (it is frozen in SMM mode).  
-  > It is not known why this is the case, but it is worth noting that PMC and SPI are located in different memory regions, and PCHRESV maps both, but Apple's AppleIntelPCHPMC will only map the region where PMC is located.  
-  > There is no relationship between the PMC device and the LPC bus, and this SSDT is purely to add the device under the LPC bus to speed up the initialization of the PMC. If it is added to the PCI0 bus, the PMC will only start after the PCI configuration is finished and it will be too late for operations that need to read NVRAM.
+> Starting from Z390 chipsets, PMC (D31:F2) is only available through MMIO. Since there is no standard device for PMC in ACPI, Apple introduced its own naming "APP9876" to access this device from AppleIntelPCHPMC driver. To avoid confusion we disable this device for all other operating systems, as they normally use another non-standard device with "PNP0C02" HID and "PCHRESV" UID.
+> 
+> On certain implementations, including APTIO V, PMC initialisation is required for NVRAM access. Otherwise it will freeze in SMM mode. The reason for this is rather unclear. Note, that PMC and SPI are located in separate memory regions and PCHRESV maps both, yet only PMC region is used by AppleIntelPCHPMC:
+> 
+> 0xFE000000~0xFE00FFFF - PMC MBAR</br>
+> 0xFE010000~0xFE010FFF - SPI BAR0</br>
+> 0xFE020000~0xFE035FFF - SerialIo BAR in ACPI mode</br>
+> 
+> PMC device has nothing to do to LPC bus, but is added to its scope for faster initialisation. If we add it to PCI0, where it normally exists, it will start in the end of PCI configuration, which is too late for NVRAM support.
+
+**CREDITS**:
+
+- Pleasecallmeofficial: who first found this patch
+- Acidathera for improving the SSDT sample.
