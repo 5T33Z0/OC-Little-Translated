@@ -8,9 +8,9 @@ Although adding any of the missing parts listed below may improve performance, t
 - Supported CPU Families: Intel 6th Gen and newer (Mobile and Desktop)
 
 ## Instructions
-In **DSDT**, search for:
 
-- `0x001F0002`, if missing, add `SSDT-PPMC.aml`
+- In **DSDT**, search for Address `0x001F0002`. Make sure it's not assigned with a SATA Device!
+- If missing, add `SSDT-PPMC.aml`
 
 **CAUTION**: When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.
 
