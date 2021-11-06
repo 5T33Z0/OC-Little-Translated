@@ -40,7 +40,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
     - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
     - ***SSDT-PNLF-CFL***: 8th gen and newer
 
-    The above patches are inserted in `_SB`.
+    The above patches are inserted in `_SB.PCI0.GFX0`(Fixes starting WIN from Opencore).
 
   - RehabMan Brightness Patches from his [RehabMan's Laptop Hotpach Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):
   
