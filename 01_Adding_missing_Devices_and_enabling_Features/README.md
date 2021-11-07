@@ -18,8 +18,7 @@ Among the many `SSDT` patches included in this repo, a significant number of the
   - The fake name is **different** from the original device name of ACPI.
   - Patch content and original device main content are **identical**.
   - The `_STA` section of the hotpatch should contain the [`_OSI`](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) method to ensure that the code changes only apply to macOS (Darwin Kernel):
-    
-    ```swift
+     ```swift
        Method (_STA, 0, NotSerialized)
        {
             If (_OSI ("Darwin"))
