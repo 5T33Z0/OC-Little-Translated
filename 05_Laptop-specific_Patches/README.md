@@ -17,3 +17,5 @@ This section contains a collection of laptop-specific patches for various brands
 - **TrackPad Patches for various Models**
     - I2C TrackPad Patches
     - ThinkPad Click and TrackPad Patches
+
+Click on the folders above in this section to select the corresponding catory/guide.
