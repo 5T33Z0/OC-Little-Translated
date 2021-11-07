@@ -24,7 +24,6 @@ Among the many `SSDT` patches included in this repo, a significant number of the
        {
             If (_OSI ("Darwin"))
             {
-                ...
                 Return (0x0F)
             }
             Else
