@@ -2,7 +2,7 @@
 
 ## Background
 
-In macOS, the number of available USB ports is limited to 15. But since modern mainboards can have a lot more I/O ports than what Apple provides to their customers, this can become a problem when trying to get USB pots working proplerly so interal and external USB devices are detected and work at the correct speeds (otherwise they default to USB 2.0 speeds).
+In macOS, the number of available USB ports is limited to 15. But since modern mainboards can have a lot more I/O ports than what Apple provides to their customers (up to 26 per controller), this can become a problem when trying to get USB pots working proplerly so interal and external USB devices are detected and work at the correct speeds (otherwise they default to USB 2.0 speeds).
 
 Since one physical USB 3 port (the blue ones) actually supports 2 USB protocols it requires 2 ports: one called "HS" for high speed – which is USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. So in reality, you can actually map 7 USB 3 Ports, supporting USB 2 and 3 protocols and that's about it – USB 3.2 is not even in the equation at this stage. So you have to decide which ports you are going to use and map them.
 
