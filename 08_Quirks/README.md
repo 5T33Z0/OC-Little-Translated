@@ -3,7 +3,7 @@
 
 Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs. Based on the information provide by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/) by Dortania. Presented in neatly structured tables.
 
-**Keys**:
+**Symbols**:
 
 - **x** = Quirk enabled
 - **( )** = Quirk disabled, but enabled for certain CPUs/Chipsets/Mainboards (read annotations for quirk in question)
