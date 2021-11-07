@@ -20,22 +20,21 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 1. Run OCAT, check for Updates (Globe Icon)
 2. Mount your ESP (select Edit > MountESP) or ( M)
 3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
-	![OCAT_errors](https://user-images.githubusercontent.com/76865553/138106690-c44543f3-fe82-4369-b07c-02fab777651a.png)
+	![Warning](https://user-images.githubusercontent.com/76865553/140640760-8cafb9bd-3b4a-4681-8471-47443dd49c6e.png)
 4. Click on the warning symbol to see the errors: </br>
-	![OCAT_errors2](https://user-images.githubusercontent.com/76865553/138106763-c84bfcdc-8813-46bd-9b2d-9537dc631aa2.png)
+	![Warning_details](https://user-images.githubusercontent.com/76865553/140640767-5e6de7f0-2309-42cf-9b42-099ddb3296d5.png)
 5. Close the warnings
-6. Hit the Save Button (good old :floppy_disk:)
-7. The error may be gone, if just some features were missing:</br>
-	![Save](https://user-images.githubusercontent.com/76865553/138106803-0c118267-2f43-4ad6-802e-27efba7cd313.png)
-8. After Saving, the icon should change and the errors should be gone: </br>
-	![ConfigOK](https://user-images.githubusercontent.com/76865553/138106894-a2a6de27-cc23-4203-85d0-7788e5eac6e2.png)</br>
-9. You're already done with updating your config. On to updating files…
+6. Hit the Save Button (good old :floppy_disk:):</br>
+	![Save1](https://user-images.githubusercontent.com/76865553/140640826-b6de2593-7cf7-4f6d-a295-9fbeb8337aca.png)
+7. After Saving, the icon should change and the errors should be gone: </br>
+	![Save_ok](https://user-images.githubusercontent.com/76865553/140640868-b76f0ca8-496f-42cb-9cb4-737ce03bca1a.png)
+8. You're already done with updating your config. On to updating files…
 
 **NOTE**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ### Updating OpenCore Files, Drivers, Kexts and Resources
-1. Still in OCAT, click on the icon which looks like a Recycle symbol:</br> 
-	![Update](https://user-images.githubusercontent.com/76865553/138106950-faeda539-632f-4083-b8cc-fba490428069.png)
+1. Still in OCAT, click on the Sync button (looks similar to a Recycle symbol):</br> 
+	![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
 	![sync_nu3](https://user-images.githubusercontent.com/76865553/140295064-c9512999-4b47-4acb-bc61-b425cdb2caff.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Online Upgrade Kexts"
