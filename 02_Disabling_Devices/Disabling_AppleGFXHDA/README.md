@@ -32,5 +32,5 @@ There are 2 methods to disable the GFXHD audio device, one manual, one automated
 - Save and reboot
 
 ## Credits:
-- Apfelnico for the [**eder**](https://www.hackintosh-forum.de/forum/thread/55014-hdmi-audio-mittels-ssdt-entfernen-radeon-vii/?postID=721986#post721986)
+- Apfelnico for the [**SSDT Sample**](https://www.hackintosh-forum.de/forum/thread/55014-hdmi-audio-mittels-ssdt-entfernen-radeon-vii/?postID=721986#post721986)
 - Sascha77 for the AMD Mute Tool
