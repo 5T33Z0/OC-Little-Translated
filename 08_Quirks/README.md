@@ -17,7 +17,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 ### SMBIOS Requirements
 - 10th Gen Desktop: [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
 - 10th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#platforminfo)
-- 10th Gen High End Desktop [**iMacPro1,1**](https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html#platforminfo) (≥ macOS High Sierra)
+- 8th/8th/10th Gen High End Desktop [**iMacPro1,1**](https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html#platforminfo) (≥ macOS High Sierra)
 - 8/9th Gen Desktop: [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) (macOS Mojave+), [**iMac18,3**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac18,3) (≤ macOS High Sierra)
 - 8/9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
