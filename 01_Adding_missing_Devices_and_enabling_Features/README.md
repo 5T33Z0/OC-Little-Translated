@@ -2,11 +2,11 @@
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling or spoofing devices. These include:
 
-- Devices which either do not exist in ACPI, or have a different names than expected by macOS to function properly. These patches rename these devices/methods for macOS only, so they can attach to the correct drivers and services in macOS, like CPU Power Management, Backlight Control, AC Power Adapter, ect.
-- Fake EC for fixing Embedded Controller issues
-- Patches which rename the original device to something else so it can be replaced by a SSDT which makes it easier to get it working, such as the Trackpads.
-- A device is disabled for some reason, but macOS system needs it to work. 
-- In a lot of cases, devices can also be enabled by using binary renames.
+- Devices which can be enabled simply by changing their name in binary code so macOS detects them. Not recommended since these byneary renames change apply system-wide when using OpenCore which can break other OSes.
+- Devices which either do not exist in ACPI, or have a different name than expected by macOS to function properly. SSDT patches rename these devices/methods for macOS only, so they can attach to the correct drivers and services in macOS, like CPU Power Management, Backlight Control, AC Power Adapter, ect. Recommended method.
+- Fake EC device for fixing Embedded Controller issues
+- Patches which rename the original device to something else so a replacement SSDT can be written which take its place, such as Trackpads for example.
+- Devices which are disabled for some reason, but macOS needs them to work. 
 
 ## Properties of Fake ACPI Devices
 
