@@ -1,23 +1,23 @@
-# About Fake Devices
+# Enabling Devices and Features
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling or spoofing devices. These include:
 
-- Devices which can be enabled simply by changing their name in binary code so macOS detects them. Not recommended since these byneary renames change apply system-wide when using OpenCore which can break other OSes.
-- Devices which either do not exist in ACPI, or have a different name than expected by macOS to function properly. SSDT patches rename these devices/methods for macOS only, so they can attach to the correct drivers and services in macOS, like CPU Power Management, Backlight Control, AC Power Adapter, ect. Recommended method.
-- Fake EC device for fixing Embedded Controller issues
-- Patches which rename the original device to something else so a replacement SSDT can be written which take its place, such as Trackpads for example.
+- Devices which can be enabled simply by changing their name in binary code so macOS detects them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
+- Devices which either do not exist in ACPI or have a different name than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services of macOS. Like CPU Power Management, Backlight Control, AC Power Adaptor, ect. Recommended method.
+- Fake EC device for fixing Embedded Controller issues.
+- Patches which rename the original device to something else so a replacement SSDT can be written which takes its place, such as Trackpads for example.
 - Devices which are disabled for some reason, but macOS needs them to work. 
 
 ## Properties of Fake ACPI Devices
 
 - **Features**:
-  - The fake device already exists in ACPI, and is relatively short, small and self-contained in code.  
+  - The device already exists in ACPI, is relatively short, small and self-contained in code.  
   - The original device has a canonical `_HID` or `_CID` parameter.
   - Even if the original device is not disabled, patching with a fake device will not harm ACPI.
 - **Requirements**:
   - The fake name is **different** from the original device name of ACPI.
-  - Patch content and original device main content **identical**.
-  - The `_STA` section of the counterfeit patch should include the following to ensure that windows systems use the original ACPI:
+  - Patch content and original device main content are **identical**.
+  - The `_STA` section of the hotpatch should contain the [`_OSI`](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) method to ensure that the code changes only apply to macOS (Darwin Kernel):
     
     	```swift
         Method (_STA, 0, NotSerialized)
@@ -38,7 +38,7 @@ Among the many `SSDT` patches included in this repo, a significant number of the
   
   - ***SSDT-RTC0*** - Counterfeit RTC
   - Original device name: RTC
-  - _HID: PNP0B00
+  - _HID: `PNP0B00`
   
 **Note**: The `LPC/LPCB` name used in the SSDT should be identical with the one used in ACPI.
 

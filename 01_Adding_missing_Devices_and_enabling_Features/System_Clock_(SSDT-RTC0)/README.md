@@ -1,12 +1,11 @@
-# Fake RTC (for 300-Series Only)
+# Fake RTC (for 300-Series only)
 
 ## Overview
 
 For some 300-series motherboards, the `RTC` device is disabled by default and cannot be enabled via the return value of the `STAS` variable `_STA`, which is shared with `AWAC`, resulting in ***`SSDT-AWAC`*** not taking effect. So in order to enable the `RTC` device, we need to to force the `RTC` device by impersonating an `RTC0`.
 
 ## Usage
-
-> Case
+In this example, `RTC` exists in the orginal `DSDT`but is disabled (return value for `_STA` is `0`):
 
 ```swift
 Device (RTC)
@@ -29,8 +28,7 @@ Device (RTC)
   }
 }
 ```
-
-The above is the case where the `RTC` device is disabled, and the counterfeit method is as follows:
+To enable `RTC` in macOS, a scope and the `_OSI` switch is added which sets the return value for `_STA` to `0x0F`:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
@@ -68,7 +66,6 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
     }
 }
 ```
-
 ## NOTES
 
 - This patch only applies to 300 series chipsets.
