@@ -8,7 +8,7 @@ Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port cou
 In order to build our own USB Port map as SSDT, we will do the following:
 
 - Dumping the original ACPI tables from BIOS
-- Find the SSDT where the USB ports are declared
+- Find the SSDT which declares USB ports
 - Modify it so 15 ports are mapped for macOS without affecting other OSes
 - Inject this table during boot, replacing the original one
 

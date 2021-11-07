@@ -41,9 +41,8 @@ There are two methods for disabling incompatible external GPUs:
 	- When querying the unique name and path, as well as `_ON`, `_OFF`, `_PS0`, `_PS3` and `_DSM`, all ACPI files should be searched. It may exist in the `DSDT` file or in other `SSDT` files.
 	- The unique name and path in the example are: _SB.PCI0.RP13.PXSX.
 
-## Caution
+## Notes
 
 - Both ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be used as per **patch combination** requirement
 - If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** will be used first.
-
-**Note** : The above method was developed by [@RehabMan](https://github.com/rehabman)
+- The above method was developed by [@RehabMan](https://github.com/rehabman)
