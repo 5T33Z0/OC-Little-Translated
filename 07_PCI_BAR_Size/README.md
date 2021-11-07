@@ -7,8 +7,8 @@
 OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, namely `ResizeGPUBars` and `ResizeAppleGPUBars`.
 
 ### ResizeGPUBars
-With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB.*** `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
-
+With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB.*** `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap. 
+  
  **Formula**: 2^n = PCI BAR Size in MB
   
 | PCI BAR Size | VALUE in OC|
@@ -38,7 +38,7 @@ With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quir
 `*`Maximum for macOS IOPCIFamily.
 
 ### ResizeAppleGPUBars
-This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB.
+This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB. `ResizeGpuBars` must be an integer value between `-1` to `19`.
 
 :warning: **WARNING**:
 > Do not set `ResizeAppleGpuBars` to anything but `0` if you have resize bar enabled in BIOS. `9` and `10` will cause sleep wake crashes, and 8 will cause excessive memory usage on some GPUs without any useful benefit. It shall always be `0`. It does not matter which GPU you have, they all support this feature since early 2010s, just give no performance gain.
