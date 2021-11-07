@@ -1,6 +1,6 @@
 # AOAC General Description
 
-## AOAC Technology
+## About AOAC Technology
 
 A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel in the 2000s and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones or Bluetooth Headsets.
 
@@ -46,21 +46,21 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 
   Waking up a machine after it enters `AOAC` sleep can be difficult and usually requires the power button to wake it up. Some machines may require the power button + `PNP0C0D` method to wake up the machine.
 
-## AOAC Patch
+## AOAC Patches
 
-- Disable `S3` sleep - see "Disabling S3 Sleep"
-- Disable Solo Patch - see "AOAC Disable Solo"
-- Power Idle Management patch - see "Power Idle Management"
-- AOAC Wakeup Patch - see "AOAC Wakeup Method"
-- Wake in Seconds Patch - see "060D Patch"
-- Enable Device LI - see "Setting ASPM Working Mode", thanks to @iStar丶Forever for the method
-- Control Bluetooth WIFI - see "Sleep automatically turn off Bluetooth WIFI", thanks to @i5 ex900 0.66%/h Huaxing OC Dreamn for the method
+- [Prevent S3 Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/i%20Prevent%20S3%20Sleep)
+- [Disabling Discrete GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/ii%20AOAC%20Disable%20Discrete%20GPU)
+- [Power Idle Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iii%20Power%20Management%20Deep%20Idle)
+- [AOAC Wakeup Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iiii%20AOAC%20wake-up%20method)
+- [Turning off Bluetooth and WIFI during Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv%20Sleep%20automatically%20turns%20off%20Bluetooth%20WIFI)
+- Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
+- Enabling Device LI &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Setting_ASPM_Operating_Mode)
 
 ## Caution
 
-- The `AOAC` solution is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
+- The `AOAC` fix is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
 - Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
   - [**PTSWAKTTS Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
   - [**PNP0C0E Sleep Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 - For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
-- You can also try this method for non-AOAC machines.
+- You can also try this method on non-AOAC machines.
