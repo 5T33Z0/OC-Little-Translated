@@ -166,13 +166,11 @@ Next, we need to find out which physical ports actually map to which ports in th
 ### How USB is structured in ACPI
 The following is an example of a port characteristics object implemented for a USB host controller’s root hub where:
 
+![](https://uefi.org/specs/ACPI/6.4/_images/ACPIdefined_Devices_and_DeviceSpecificObjects-5.png)
+
 - Three Ports are implemented; Port 1 is not user visible/not connectable and Ports 2 and 3 are user visible and connectable.
 - Port 2 is located on the back panel
-- Port 3 has an integrated 2 port hub. Note that because this port hosts an integrated hub, it is therefore not sharable with another host controller (e.g. If the integrated hub is a USB2.0 hub, the port can never be shared with a USB1.1 companion controller).
-
-    The ports available through the embedded hub are located on the front panel and are adjacent to one another.
-
-![](https://uefi.org/specs/ACPI/6.4/_images/ACPIdefined_Devices_and_DeviceSpecificObjects-5.png)
+- Port 3 has an integrated 2 port hub. Note that because this port hosts an integrated hub, it is therefore not sharable with another host controller (e.g. If the integrated hub is a USB2.0 hub, the port can never be shared with a USB1.1 companion controller). The ports available through the embedded hub are located on the front panel and are adjacent to one another.
 
 **SOURCE**: [UEFI.org](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)
 
