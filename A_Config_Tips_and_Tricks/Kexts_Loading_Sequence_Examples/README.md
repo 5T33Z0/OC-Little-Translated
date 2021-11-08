@@ -29,7 +29,7 @@ Explanation followig soon…
 ### Example 8: Intel WiFi and Bluetooth 
 ![config8](https://user-images.githubusercontent.com/76865553/140813902-8f5cedb0-4fd6-4736-ab69-c5e6f3a63fdb.png)
 ### Example 9a: Basic Kexts (Desktop)
-![](/Users/kl45u5/Desktop/config9.png)
+![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
 
 ## Notes
 - :warning: The configs included in this section ARE NOT configured for use with any system. It's only about the order of the Kexts listed in "Kernel > Add" section!
