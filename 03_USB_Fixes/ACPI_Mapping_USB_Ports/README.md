@@ -234,7 +234,7 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
  	}
  	
  	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-   {
+   	{
    		If (_OSI ("Darwin"))
    		{
 			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
