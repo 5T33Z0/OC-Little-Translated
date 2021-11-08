@@ -17,7 +17,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Rewrote whole sections which were confusing/misleading (`ACPI` and `USB Port Mapping` for example)
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (Added USB Port Mapping via ACPI to Chapter 3, added Chapters 7, 8, 9 and Appendix)
+- Added new content (Added USB Port Mapping via ACPI to Chapter 3, added Chapters 7 to 10 and the Appendix)
 
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
@@ -35,6 +35,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 7. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_PCI_BAR_Size)
 8. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 9. [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof%20)
+10. [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples)
 
 **APPENDIX**:
 
