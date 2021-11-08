@@ -1,5 +1,5 @@
 # USB port mapping via ACPI (macOS 11.3+)
->**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will fix your SSDTs!
+>**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
 
 ## Background
 Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
