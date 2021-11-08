@@ -286,9 +286,19 @@ Scope (USR1)
 }
 ```
 #### OPTION B: Mapping Ports of an unknown configuration
-This guide is for people who don't alread know which internal USB port belongs to which physical port on the front and back I/O panel of their computer. basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
+Option B is for user who don't alread know which internal USB ports connect to which physical port on the front and back I/O panel of their computer and internally. Basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
 
-*TO BE CONTINUED…*
+##### Gathering information about USB Ports
+The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks to them. Take notes of which physical USB port connect to which port internally. You can monitor the Ports use IORegistryExploer for this too, but [Hackintool](https://github.com/headkaze/Hackintool) or Corpnewt's [USBMap](https://github.com/corpnewt/USBMap) are a lot simpler to use:
+
+- Run the python script `USBMap.command` 
+- Press "d" on the Keyboard to detect ports:</br>
+	![](/Users/kl45u5/Desktop/Bildschirmfoto.png)
+In this example, the systenm (a Laptop) has more than one Controller. For the sake of the Example, focus on the `XHC` Controller ("HSXX" and "SSXX").
+- Leave the Window open and put in your USB 2 Stick into a port and check which entry turns blue in the list and take notes.
+- Next, put a USB 3.0 stick in the same port and see what turns blue next. Usually, if a physical USB port is blue, it supports USB 2 and 3 Ports. An as far as its routing is concerned, only the Prefix changes when switching between USB 2 and USB3. In other words: if a USB 2 stick is mapped to "HS01", the corresponding USB 3 Port will most likely be "SS01".
+- Continue probing all ports with USB 2/3/C flash drives or devices und you're done.
+- Once you collected all the neccessary data return to "Option A" of the guide to map the ports in ACPI.
 
 ### Assigning Physical Location of Device (`_PLD`) 
 This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
@@ -343,4 +353,4 @@ Once you are done with your port mapping activities, do the following:
 - If it works, Congrats! 
 - Copy the .aml and your config.plist back to the EFI folder on the hard disk.
 
-**ENJOY**. To be continued…
+**Good Luck!**
