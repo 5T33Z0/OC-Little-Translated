@@ -163,6 +163,19 @@ Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/US
 ## Mapping the ports (finally)
 Next, we need to find out which physical ports actually map to which ports in the system.
 
+### How USB is structured in ACPI
+The following is an example of a port characteristics object implemented for a USB host controller’s root hub where:
+
+- Three Ports are implemented; Port 1 is not user visible/not connectable and Ports 2 and 3 are user visible and connectable.
+- Port 2 is located on the back panel
+- Port 3 has an integrated 2 port hub. Note that because this port hosts an integrated hub, it is therefore not sharable with another host controller (e.g. If the integrated hub is a USB2.0 hub, the port can never be shared with a USB1.1 companion controller).
+
+    The ports available through the embedded hub are located on the front panel and are adjacent to one another.
+
+![](https://uefi.org/specs/ACPI/6.4/_images/ACPIdefined_Devices_and_DeviceSpecificObjects-5.png)
+
+**SOURCE**: [UEFI.org](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)
+
 ### USB Port Types
 According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
 
@@ -284,7 +297,46 @@ Scope (USR1)
    	}
 }
 ```
-#### OPTION B: TO BE CONTINUED…
+#### OPTION B: Mapping Ports of an unknown configuration
+This guide is for people who don't alread know which internal USB ports belongsto which physic port on the front and back I/O panel of their computer. *TO BE CONTINUED…*
+
+### Assigning Physical Location of Device (`_PLD`) 
+This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
+
+```swift
+Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
+{
+    ToPLD (
+        PLD_Revision           = 0x1,
+        PLD_IgnoreColor        = 0x1,
+        PLD_Red                = 0x0,
+        PLD_Green              = 0x0,
+        PLD_Blue               = 0x0,
+        PLD_Width              = 0x0,
+        PLD_Height             = 0x0,
+        PLD_UserVisible        = 0x1,
+        PLD_Dock               = 0x0,
+        PLD_Lid                = 0x0,
+        PLD_Panel              = "UNKNOWN",
+        PLD_VerticalPosition   = "UPPER",
+        PLD_HorizontalPosition = "LEFT",
+        PLD_Shape              = "UNKNOWN",
+        PLD_GroupOrientation   = 0x0,
+        PLD_GroupToken         = 0x0,
+        PLD_GroupPosition      = 0x0,
+        PLD_Bay                = 0x0,
+        PLD_Ejectable          = 0x0,
+        PLD_EjectRequired      = 0x0,
+        PLD_CabinetNumber      = 0x0,
+        PLD_CardCageNumber     = 0x0,
+        PLD_Reference          = 0x0,
+        PLD_Rotation           = 0x0,
+        PLD_Order              = 0x0,
+        PLD_VerticalOffset     = 0x0,
+        PLD_HorizontalOffset   = 0x0)
+})
+```
+Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
 </details>
 <details>
 <summary><strong>5. Wrapping up and testing</strong></summary>
@@ -306,4 +358,3 @@ Once you are done with your port mapping activities, do the following:
 </details>
 
 **ENJOY**. To be continued…
-# 
