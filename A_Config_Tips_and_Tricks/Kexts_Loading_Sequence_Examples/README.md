@@ -34,4 +34,4 @@ Explanation followig soon…
 ## Notes
 - :warning: The configs included in this section ARE NOT configured for use with any system. It's only about the order of the Kexts listed in "Kernel > Add" section!
 - Ignore the red dots in the screenshots. 
-- The kexts listed in Config 2 and 6 are both for PS2 Controllers (Keyboards, Mice, Trackpads). Don't use both at the same time. We recommend to use `config-2-PS2-Controller`list as a starting point.
+- The kexts listed in Config 2 to 6 are for PS2 Controllers (Keyboards, Mice, Trackpads). We recommend to use `config-2-PS2-Controller`list as a starting point.
