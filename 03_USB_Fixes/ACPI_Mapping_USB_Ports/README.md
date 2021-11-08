@@ -286,7 +286,9 @@ Scope (USR1)
 }
 ```
 #### OPTION B: Mapping Ports of an unknown configuration
-This guide is for people who don't alread know which internal USB ports belongsto which physic port on the front and back I/O panel of their computer. *TO BE CONTINUED…*
+This guide is for people who don't alread know which internal USB port belongs to which physical port on the front and back I/O panel of their computer. basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
+
+*TO BE CONTINUED…*
 
 ### Assigning Physical Location of Device (`_PLD`) 
 This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
