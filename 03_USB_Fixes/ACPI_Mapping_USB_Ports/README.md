@@ -289,7 +289,7 @@ Scope (USR1)
 Option B is for user who don't alread know which internal USB ports connect to which physical port on the front and back I/O panel of their computer and internally. Basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
 
 ##### Gathering information about USB Ports
-The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks to them. Take notes of which physical USB port connect to which port internally. You can monitor the Ports use IORegistryExploer for this too, but Corpnewts [USBMap](https://github.com/corpnewt/USBMap) is a lot simpler to use:
+The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks to them. Take notes of which physical USB port connect to which port internally. You can monitor the Ports use IORegistryExploer for this too, but [Hackintool](https://github.com/headkaze/Hackintool) or Corpnewt's [USBMap](https://github.com/corpnewt/USBMap) are a lot simpler to use:
 
 - Run the python script `USBMap.command` 
 - Press "d" on the Keyboard to detect ports:</br>
