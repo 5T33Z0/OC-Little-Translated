@@ -45,6 +45,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 
 ## 5T33Z0's 5H0UT 0UT5:
 
+- Thanks to [Baio1977](https://github.com/Baio1977) for his contributions to improve and expand this repo.
 - sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
