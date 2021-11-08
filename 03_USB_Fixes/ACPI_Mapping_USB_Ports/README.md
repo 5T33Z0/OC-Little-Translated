@@ -299,7 +299,7 @@ Scope (USR1)
 This guide is for people who don't alread know which internal USB ports belongsto which physic port on the front and back I/O panel of their computer. *TO BE CONTINUED…*
 
 ### Assigning Physical Location of Device (`_PLD`) 
-This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
+This method provides a lot of details about the pysical location of the USB ports themselves. These includ: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
 
 ```swift
 Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
@@ -334,7 +334,7 @@ Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
         PLD_HorizontalOffset   = 0x0)
 })
 ```
-Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
+Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system to get it working agaib. Since modifying `_PLD` isn't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
 </details>
 <details>
 <summary><strong>5. Wrapping up and testing</strong></summary>
