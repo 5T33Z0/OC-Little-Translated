@@ -12,24 +12,24 @@ The rest of the config examples show the loading sequences for `Bluetooth`, `Wif
 
 ## Screenshots
 ### Example 1: Essential Kexts
-![](/Users/5t33z0/Desktop/config1.png)
+![config1](https://user-images.githubusercontent.com/76865553/140813724-08801e20-01db-497f-945b-acd33168e814.png)
 ### Example 2: VooodoPS2 + TouchPad (Laptop)
-![](/Users/5t33z0/Desktop/Config2.png)
+![Config2](https://user-images.githubusercontent.com/76865553/140813746-3d3ab6aa-949a-4b91-8c9b-c3dcd0fef77d.png)
 ### Example 3: VoodooPS2 + TrackPad (Laptop)
-![](/Users/5t33z0/Desktop/config3.png)
+![config3](https://user-images.githubusercontent.com/76865553/140813775-eb6ff60f-9ec3-4c9b-a768-f5e5a9e6868e.png)
 ### Example 4: VoodooPS2 + I2C (Laptop)
-![](/Users/5t33z0/Desktop/config4.png)
+![config4](https://user-images.githubusercontent.com/76865553/140813798-a403f299-e85d-4fed-90f7-bea045384db5.png)
 ### Example 5: VoodooPS2 + VoodooRMI (Laptop)
-![](/Users/5t33z0/Desktop/Config 5.png)
+![Config 5](https://user-images.githubusercontent.com/76865553/140813835-d9cd3e9c-ee55-43f1-b33f-2ae292b53b17.png)
 ### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
-![](/Users/5t33z0/Desktop/Config6.png)
+![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
 ### Example 7: Broadcom WiFi and Bluetooth 
-![](/Users/5t33z0/Desktop/config7.png)
+![config7](https://user-images.githubusercontent.com/76865553/140813883-d497ae3c-88a4-4a79-8c98-68909d0b40a3.png)
 Explanation followig soon…
 ### Example 8: Intel WiFi and Bluetooth 
-![](/Users/5t33z0/Desktop/config8.png)
+![config8](https://user-images.githubusercontent.com/76865553/140813902-8f5cedb0-4fd6-4736-ab69-c5e6f3a63fdb.png)
 
 ## Notes
-- :warning: The configs included in this section ARE NOT configured for us with any system. It's only about the order of the Kexts listed in "Kernel > Add" section.
+- :warning: The configs included in this section ARE NOT configured for use with any system. It's only about the order of the Kexts listed in "Kernel > Add" section!
 - Ignore the red dots in the screenshots. 
-- The kexts listed in Config 2 and 5 are both for PS2 Controllers (Keyboards, Mice, Trackpads). Don't use both at the same time. We recommend to use `config-2-PS2-Controller`list.
+- The kexts listed in Config 2 and 6 are both for PS2 Controllers (Keyboards, Mice, Trackpads). Don't use both at the same time. We recommend to use `config-2-PS2-Controller`list as a starting point.
