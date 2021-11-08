@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples for OpenCore
 [![OpenCore Version](https://img.shields.io/badge/OpenCore-0.7.5-cyan.svg)](https://github.com/CloverHackyColor/CloverBootloader/releases)
-![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.11.07-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.11.08-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## About
@@ -17,7 +17,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Rewrote whole sections which were confusing/misleading (`ACPI` and `USB Port Mapping` for example)
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (Chapters 7 to 9 and the Appendix)
+- Added new content (Added USB Port Mapping via ACPI to Chapter 3, added Chapters 7, 8, 9 and Appendix)
 
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
