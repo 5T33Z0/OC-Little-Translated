@@ -10,7 +10,7 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 
 ___
 #### Cross-Platform
-- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running alot of the python-scripts in this list
+- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running a lot of the python-scripts in this list
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Plist Editor
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator. Migrates config.plist to the latest form when saving
@@ -19,7 +19,7 @@ ___
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based Bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAtrributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
-- [**USBToolbox**](https://github.com/USBToolBox/tool) – USBPPort mapping tool. Makes port mapping under macOS 11.3+ easier
+- [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier
 
 ___
 #### macOS

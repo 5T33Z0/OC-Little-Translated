@@ -26,7 +26,7 @@ The previous (old) patch method described below is outdated, because the patchin
 10. Save. Reboot. Done. 
 
 **NOTE**
-If you are editng your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
+If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
 
 <details>
 <summary><strong>Old Method (kept for documentary purposes)</strong></summary>

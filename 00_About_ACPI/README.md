@@ -4,7 +4,7 @@
 "ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding  what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
 
 ### What is ACPI?
-**ACPI** stands for Advanced Configuration & Power Interface. It is an architecture-independent power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers who formed the ACPI special interest group. In October 2013, the assets of the ACPI Specifiction were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
+**ACPI** stands for Advanced Configuration & Power Interface. It is an architecture-independent power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers who formed the ACPI special interest group. In October 2013, the assets of the ACPI specifications were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
 
 The ACPI Form describes a machine's hardware information in `.aml` format and does not have any driver capabilities of its own. However, the correct ACPI is required for a piece of hardware to work properly, otherwise it can lead to boot failures or system crashes. 
 
@@ -19,7 +19,7 @@ The number and content of ACPI tables varies from used mainboard and chipset - i
 
 Unlike Windows, macOS has no hardware detection capabilities because it doesn't need it, since Macs use a fixed set/range of hardware components. So therefore Hackintoshes require fixes for certain ACPI Tables so that macOS can "understand" them. Having the correct ACPI for macOS is the foundation of a stable Hackintosh. 
 
-Although `kexts` handle a lot of patching tasks nowadays, it may be nacessary to create additional patches to enable certain features (like enabling Thunderbolt or fixing Sleep issues, etc.). The preferred method to do so is **Hotpatching**.
+Although `kexts` handle a lot of patching tasks nowadays, it may be necessary to create additional patches to enable certain features (like enabling Thunderbolt or fixing Sleep issues, etc.). The preferred method to do so is **Hotpatching**.
 
 Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted and patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain character in the text of ACPI tables (binary renaming) and 2) replacing or adding tables to existing ACPI tables, usually SSDTs.
 
