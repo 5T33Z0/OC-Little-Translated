@@ -26,11 +26,11 @@ For additional information about available Kexts the [**Kext documentation**](ht
 ### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
 ![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
 ### Example 7: Broadcom WiFi and Bluetooth 
-![config7](https://user-images.githubusercontent.com/76865553/140813883-d497ae3c-88a4-4a79-8c98-68909d0b40a3.png)
+![brcmwifibt](https://user-images.githubusercontent.com/76865553/141024708-f43cf1d4-df80-40c8-af08-28e0714d094a.png)
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
 - Kexts have to loaded in the correct order/sequence (otherwise boot crashes)
-- You have to make use of `MinKernel` and `MaxKernel` sections to control which kexts are loaded for differen versions of macOS 
+- You have to make use of `MinKernel` and `MaxKernel` sections to control which kexts are loaded for different versions of macOS 
 - `AirportBrcomFixup`:
 	- Is for enabling WiFi
 	- Contains 2 additional Kexts as Plugins (only one of them should be enabled at any time):
