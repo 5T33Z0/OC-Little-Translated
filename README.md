@@ -44,6 +44,10 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 3. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Essential_Tools_and_Apps)
 4. [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore)
 
+## Contributions
+If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
+
+
 ## 5T33Z0's 5H0UT 0UT5:
 
 - Thanks to [Baio1977](https://github.com/Baio1977) for his contributions to improve and expand this repo.
