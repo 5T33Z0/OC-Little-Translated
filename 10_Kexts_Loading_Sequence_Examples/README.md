@@ -26,7 +26,8 @@ For additional information about available Kexts the [**Kext documentation**](ht
 ### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
 ![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
 ### Example 7: Broadcom WiFi and Bluetooth 
-![brcmwifibt](https://user-images.githubusercontent.com/76865553/141024708-f43cf1d4-df80-40c8-af08-28e0714d094a.png)
+![broadcomwfbt](https://user-images.githubusercontent.com/76865553/141025489-dfa23892-bae0-4e4f-8dba-7d8bde49878a.png)
+
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
 - Kexts have to loaded in the correct order/sequence (otherwise boot crashes)
@@ -37,8 +38,8 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 		- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 to 12.1)
 		- `AirPortBrcm4360_Injector.kext` (compatible with macOS 10.8 to 10.15)
 - For Bluetooth, various kexts and combinations are necessery:
-	- `BlueToolFixup.kext`: is for macOS 12.x Monterey (Kernel 21.x and newer only)
-	- `BrcmFirmwareData.kext`: contains necessary firmware. Required for all macOS Versions.
+	- `BlueToolFixup.kext`: is for macOS 12.x Monterey. Contains Firmware Data (MinKernel 21.x and newer only).
+	- `BrcmFirmwareData.kext`: contains necessary firmware. Required for macOS up to 11.6.x (MaxKernel 20.9.9)
 	- `BrcmPatchRAM.kext`: For 10.10 or earlier.
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.6.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
