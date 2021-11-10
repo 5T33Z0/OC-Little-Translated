@@ -12,7 +12,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 
 **Applicable Version**: OpenCore ≥ 0.7.5
 
-## 8th to 10th Gen Intel CPUs (Desktop, Mobile/NUC, High End)
+## 8th to 10th Gen Intel CPUs (Desktop, High End, Mobile/NUC)
 
 ### SMBIOS Requirements
 - 10th Gen Desktop: [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
