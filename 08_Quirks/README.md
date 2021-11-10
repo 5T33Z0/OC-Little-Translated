@@ -12,7 +12,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 
 **Applicable Version**: OpenCore ≥ 0.7.5
 
-## 8th to 10th Gen Intel CPUs (Desktop, Mobile/NUC, High End)
+## 8th to 10th Gen Intel CPUs (Desktop, High End, Mobile/NUC)
 
 ### SMBIOS Requirements
 - 10th Gen Desktop: [**iMac20,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,1) and [**iMac20,2**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac20,2). (≥ macOS Catalina)
@@ -22,10 +22,10 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - 8/9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
 ### ACPI Quirks
-| CPU Family | [Cometlake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html) | 10th Gen |Cascade Lake-[X](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Desktop)/[W](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Workstation), Skylake-X/W| Coffeelake | 8th/9th Gen | Description |
+| CPU Family | [Cometlake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html) | 10th Gen |Cascade Lake-[X](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Desktop)/[W](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Workstation), Skylake-[X](https://ark.intel.com/content/www/us/en/ark/products/126699/intel-core-i97980xe-extreme-edition-processor-24-75m-cache-up-to-4-20-ghz.html)/[W](https://ark.intel.com/content/www/us/en/ark/products/126793/intel-xeon-w2195-processor-24-75m-cache-2-30-ghz.html)| [Coffeelake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html) | 8th/9th Gen | Description |
 |:-----------|:---------:|:--------:|:------------:|:----------:|:-----------:|:-----------------|
-|**Platform**|[Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html#starting-point)|[Mobile/NUC](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#laptop-coffee-lake-plus-and-comet-lake)|High End|Desktop|Mobile/NUC|
-| **SMBIOS** |iMac20,X|MacBookPro16,X / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,1 / Macmini8,1|System Management BIOS
+|**Platform**|[Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html)|[Mobile/NUC](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#laptop-coffee-lake-plus-and-comet-lake)|[High End](https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html)|[Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html)|Mobile/NUC [8th Gen](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html) / [9thGen](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html)|Corresponding Config Guide
+| **SMBIOS** |iMac20,x|MacBookPro16,x / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,x/16,x / Macmini8,1|PlatformInfo
 |                 |           |          ||           |             |             |
 |**FadtEnableReset**  ||||||For legacy systems and a few newer laptops. Can fix pwr-button shortcuts. Not recommended unless required.
 |**NormalizeHeaders** ||||||Cleans up ACPI headers to avoid boot crashes in macOS 10.13. 
@@ -434,8 +434,6 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 </details>
 <details>
 <summary><strong>AMD Quirks</strong> (Click to show content!)</summary>
-<details>
-<summary><strong>AMD Ryzen and Threadripper</strong> (Click to show content!)</summary>
 
 ## AMD Ryzen and Threadripper (17h and 19h)
 
@@ -443,7 +441,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - **Dektop**: [**various**](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#platforminfo)
 
 ### ACPI Quirks    
-| CPU Family      | Ryzen / Threadripper |
+| CPU Family      | Ryzen and Threadripper |
 |:----------------|:--------------------:|
 | **ACPI Quirks** | Desktop              |    
 |                 |                      |
@@ -457,13 +455,13 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `*`Default in `sample.plist`
 
 ### Boooter Quirks
-| CPU Family         | Ryzen / Threadripper |
+| CPU Family         | Ryzen and Threadripper |
 |:------------------ |:--------------------:|
 | **Booter Quirks**  | Desktop              |    
 |                    |                      |
 |AllowRelocationBlock|
 |AvoidRuntimeDefrag|x
-|DevirtualiseMmio*|( )*|
+|DevirtualiseMmio°|( )°|
 |DisableSingleUser|
 |DisableVariableWrite|
 |DiscardHibernateMap|
@@ -478,18 +476,17 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |ProvideMaxSlide
 |RebuildAppleMemoryMap|x|
 |ResizeAppleGpuBars
-|SetupVirtualMap**|(x)**|
+|SetupVirtualMap|x|x
 |SignalAppleOS
 |SyncRuntimePermissions|x|
 
-`*` `DevirtualiseMmio`: Enable for TRx 40</br>
-`**` `SetupVirtualMap`: Disable for X470, X570, B550, B450, A520 and TRx40 (install latest BIOS!)
+`°` `DevirtualiseMmio`: Enable for TRx 40</br>
 
 ### Kernel Quirks
 - For AMD, enable `Kernel` > `Emulate`: `DummyPowerManagement`
 - AMD also requires a lot of [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to make macOS work.
 
-| CPU Family         | Ryzen / Threadripper |
+| CPU Family         | Ryzen and Threadripper |
 |:------------------ |:--------------------:|
 | **kernel Quirks**  | Desktop              |    
 |                    |                      |
@@ -512,12 +509,12 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |ProvideCurrentCpuInfo|x|
 |SetApfsTrimTimeout||
 |ThirdPartyDrives||
-|XhciPortLimit*|x|
+|XhciPortLimit°||
 
-`*` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+`°` `XhciPortLimit`: Not required on AMD systems, since these boards usually have 2 or more USB controllers with 10 Ports max.
 
 ### UEFI Quirks
-| CPU Family       | Ryzen / Threadripper |
+| CPU Family       | Ryzen and Threadripper |
 |:---------------- |:--------------------:|
 | **UEFI Quirks**  | Desktop              |    
 |                  |                      |
@@ -533,12 +530,9 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |RequestBootVarRouting|x|
 |ResizeGpuBars||
 |TscSyncTimeout||
-|UnblockFsConnect*|( )|
+|UnblockFsConnect°|( )|
 
-`*` `UnblockFsConnect`: Enable on HP Machines
-</details>
-<details>
-<summary><strong>AMD Bulldozer and Jaguar</strong> (Click to show content!)</summary>
+`°` `UnblockFsConnect`: Enable on HP Machines
 
 ## AMD Bulldozer (15h) and Jaguar (16h)
 
@@ -546,7 +540,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - **Dektop**: [**various**](https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html#platforminfo)
 
 ### ACPI Quirks    
-| CPU Family      | Bulldozer / Jaguar |
+| CPU Family      | Bulldozer and Jaguar |
 |:----------------|:------------------:|
 | **ACPI Quirks** | Desktop            |    
 |                 |                    |
@@ -554,13 +548,13 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |NormalizeHeaders |
 |RebaseRegions    |
 |ResetHwSig       | 
-|ResetLogoStatus* |(x)|
+|ResetLogoStatus° |(x)|
 |SyncTableIDs     |
 
-`*`Default in `sample.plist`
+`°`Default in `sample.plist`
 
 ### Boooter Quirks
-| CPU Family         | Bulldozer / Jaguar |
+| CPU Family         | Bulldozer and Jaguar |
 |:------------------ |:------------------:|
 | **Booter Quirks**  | Desktop            |    
 |                    |                    |
@@ -577,7 +571,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |ProtectMemoryRegions|
 |ProtectSecureBoot
 |ProtectUefiServices|
-|ProvideCustomSlide*|X
+|ProvideCustomSlide°|X
 |ProvideMaxSlide
 |RebuildAppleMemoryMap|x|
 |ResizeAppleGpuBars
@@ -585,13 +579,13 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |SignalAppleOS
 |SyncRuntimePermissions||
 
-`*` `ProvideCustomSlide`: If the message "OCABC: All slides are usable!" appears in the log, you can disable ProvideCustomSlide.
+`°` `ProvideCustomSlide`: If the message "OCABC: All slides are usable!" appears in the log, you can disable ProvideCustomSlide.
 
 ### Kernel Quirks
 - For AMD, enable `Kernel` > `Emulate`: `DummyPowerManagement`
 - AMD also requires a lot of [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to make macOS work.
 
-| CPU Family         | Bulldozer / Jaguar |
+| CPU Family         | Bulldozer and Jaguar |
 |:------------------ |:------------------:|
 | **kernel Quirks**  | Desktop            |    
 |                    |                    |
@@ -614,12 +608,12 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |ProvideCurrentCpuInfo|x|
 |SetApfsTrimTimeout||
 |ThirdPartyDrives||
-|XhciPortLimit*|x|
+|XhciPortLimit°||
 
-`*` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
+`°` `XhciPortLimit`: Not required on AMD systems, since these boards usually have 2 or more USB controllers with 10 Ports max.
 
 ### UEFI Quirks
-| CPU Family       | Bulldozer / Jaguar |
+| CPU Family       | Bulldozer and Jaguar |
 |:---------------- |:------------------:|
 | **UEFI Quirks**  | Desktop            |    
 |                  |                    |
@@ -635,8 +629,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |RequestBootVarRouting|x|
 |ResizeGpuBars||
 |TscSyncTimeout||
-|UnblockFsConnect*|( )|
+|UnblockFsConnect°|( )|
 
-`*` `UnblockFsConnect`: Enable on HP Machines
-</details>
+`°` `UnblockFsConnect`: Enable on HP Machines
 </details>
