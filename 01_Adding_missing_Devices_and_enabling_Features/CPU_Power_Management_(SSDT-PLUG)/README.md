@@ -83,4 +83,4 @@ If the query result and the patch file name **do not correspond**, please select
 </details>
 
 ## Note
-The `X86PlatformPlugin` is not available for 2nd and 3rd Gen Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. Use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate an `SSDT-PM` for these CPUs instead.
+The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. You can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate an `SSDT-PM` for these CPUs.
