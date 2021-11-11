@@ -8,8 +8,9 @@ Adds Direct Memory Access Controller [**(DMA) Controller**](https://binaryterms.
 
 In **DSDT**, search for:
 
-- `PNP0200`
--  If missing, add ***SSDT-DMAC*** (export as `.aml`) 
+- `PNP0200` or `DMAC`
+-  If missing, add ***SSDT-DMAC*** (export as `.aml`)
+-  Supported CPU Family: any
 
 **CAUTION:** When using this patch, make sure that the name `LPC`/`LPCB` is consistent with the name used in the original `DSDT`. Otherwise it won't work.
 
@@ -18,5 +19,5 @@ In **DSDT**, search for:
 - Restart your system 
 - Open IORegistry Explorer and search for `DMAC`
 - If the Device is present, it should look like this. The array "IODeviceMemory" should contain further entries and data:
-
-![DMAC_present](https://user-images.githubusercontent.com/76865553/139804828-7a797e03-06c8-4abe-9216-c0627efbaafe.png)
+  
+  ![DMAC](https://user-images.githubusercontent.com/76865553/141217597-78d7dcbb-2a7a-4910-a607-b1ec7e780d35.png)
