@@ -18,8 +18,9 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 ## How-to
 ### Updating your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
-2. Mount your ESP (select Edit > MountESP) or ( M)
-3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
+2. Mount your ESP (select Edit > MountESP) or (⌘+M)
+3. Highlight your `config.plist` and create a duplicate as a backup (⌘+D)
+4. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
 	![Warning](https://user-images.githubusercontent.com/76865553/140640760-8cafb9bd-3b4a-4681-8471-47443dd49c6e.png)
 4. Click on the warning symbol to see the errors: </br>
 	![Warning_details](https://user-images.githubusercontent.com/76865553/140640767-5e6de7f0-2309-42cf-9b42-099ddb3296d5.png)
