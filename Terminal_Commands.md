@@ -127,3 +127,5 @@ or
 `sudo dmesg | grep "ACPI"` </br>
 `sudo dmesg | grep "ACPI" > $HOME/Desktop/acpi.txt` (creates a Log on Desktop)
 
+**Checking for out Wake Reasons**
+`log show | grep -i "wake reason"`
