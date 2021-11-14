@@ -115,3 +115,57 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 	
 	- Add external reference `External…` to fix all errors.
 	- I2C patch (omitted)
+
+## Other I2C Hotpatches
+In the file list above you will also find `SSDT-USTP.dsl` (in 2 variants), which are widely used in hackintosh laptops for enabling Trackpads. Use either or. 
+
+**Applicable to**: Laptops (6th to 10th Gen Intel Core CPUs)
+
+### Adding SSDT-USTP
+#### Patch Method
+- In `DSDT`, search for `USTP`
+- If present, check which I2C device is used in the scope it is related to. 
+- If the scope points to device `I2C0`, add `SSDT-I2C0_USTP.aml`.
+- If the scope points to device `I2C1`, add `SSDT-I2C1_USTP.aml`.
+
+In this example, it is related to `I2C1`:
+
+```swift
+If (USTP)
+  {
+      Scope (_SB.PCI0.I2C1)
+      {
+          Method (SSCN, 0, NotSerialized)
+          {
+              Return (PKG3 (SSHI, SSLI, SSDI))
+          }
+
+          Method (FMCN, 0, NotSerialized)
+          {
+              Return (PKG3 (FMHI, FMLI, FMDI))
+          }
+
+          Method (FPCN, 0, NotSerialized)
+          {
+              Return (PKG3 (FPHI, FPLI, FPDI))
+          }
+
+          Method (M0D3, 0, NotSerialized)
+          {
+              Return (PKG1 (M0CI))
+          }
+
+          Method (M1D3, 0, NotSerialized)
+          {
+              Return (PKG1 (M1CI))
+          }
+      }
+  }
+```
+
+To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI > Patch`, add the following rename rule: "Change USTP to XSTP":
+
+```swift
+Find: 5553545008
+Replace: 5853545008
+```
