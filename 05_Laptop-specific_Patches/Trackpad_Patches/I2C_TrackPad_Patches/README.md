@@ -20,8 +20,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 ## Patch principle and process
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
-
-```swift
+	```swift
   /*
    * GPI0 enable
    */
@@ -38,12 +37,11 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
           }
       }
   }
-```
+	```
 - Create a new I2C device `TPXX` and port all the contents of the original device to `TPXX`.
 - Fix `TPXX` related content.
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
-	
 	```swift
     Method (_STA, 0, NotSerialized)
     {
@@ -64,8 +62,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 
 ### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
 - Disable ``TPD1`` using the Preset Variable Method.
-
- ```swift
+	```swift
   Scope (\)
   {
       If (_OSI ("Darwin"))
@@ -73,7 +70,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
           SDS1 = 0
       }
   }
-  ```
+  	```
 - Create a new device `TPXX` and port all the contents of the original `TPD1` to `TPXX`.
 	```swift
   External(_SB.PCI0.I2C1, DeviceObj)
@@ -88,8 +85,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Amend `TPXX` content:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
- 
-```swift
+	 ```swift
 	Method (_STA, 0, NotSerialized)
     	{
    		If (_OSI ("Darwin"))
@@ -101,7 +97,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
           		Return (Zero)
         	}
     	}
-```
+	```
  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
  - Look up `OSYS` and remove (comment out) the following.
 	
@@ -162,9 +158,7 @@ If (USTP)
       }
   }
 ```
-
 To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI > Patch`, add the following rename rule:
-
 ```text
 Comment: Change USTP to XSTP
 Find: 5553545008
