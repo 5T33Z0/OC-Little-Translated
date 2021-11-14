@@ -2,7 +2,7 @@
 
 ## Description
 
-This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, see:
+This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, check:
 
 - [VoodooI2C official documentation](https://voodooi2c.github.io/)
 - GZXiaoBai's [TouchPad-Hotfix Example Library](https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch)
@@ -20,7 +20,8 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 ## Patch principle and process
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
-```swift
+
+	```swift
   /*
    * GPI0 enable
    */
@@ -42,17 +43,18 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Fix `TPXX` related content.
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
-	```swift
+	
+		```swift
     Method (_STA, 0, NotSerialized)
     {
-        If (_OSI ("Darwin"))
-        {
-            Return (0x0F)
-        }
-        Else
-        {
-            Return (Zero)
-        }
+        	If (_OSI ("Darwin"))
+    	   	{
+          		Return (0x0F)
+          	}
+        	Else
+        	{
+        		Return (Zero)
+        	}
     }
 	```
 - **Corrected** the ``relevant content`` of the variables used when the original I2C device was disabled, so that they are logically related.
@@ -63,7 +65,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 ### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
 - Disable ``TPD1`` using the Preset Variable Method.
 
-  ```swift
+ ```swift
   Scope (\)
   {
       If (_OSI ("Darwin"))
@@ -86,22 +88,24 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Amend `TPXX` content:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
-  ```swift
+ 
+ 	 ```swift
     Method (_STA, 0, NotSerialized)
     {
-        If (_OSI ("Darwin"))
-        {
-            Return (0x0F)
-        }
-        Else
-        {
-            Return (Zero)
-        }
+   			If (_OSI ("Darwin"))
+        	{
+           		Return (0x0F)
+        	}
+        	Else
+        	{
+          		Return (Zero)
+        	}
     }
     ```
  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
  - Look up `OSYS` and remove (comment out) the following.
-	```swift
+	
+		```swift
     //If (LLess (OSYS, 0x07DC))
     //{
     // SRXO (GPDI, One)
@@ -109,5 +113,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 	```
   **Note**: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
 
-- Add external reference `External... ` to fix all errors.
+- Add external reference `External…` to fix all errors.
 - I2C patch (omitted)
+
+
