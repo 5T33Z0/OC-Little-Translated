@@ -13,7 +13,7 @@ So getting these Human Interface Devices working can be a tedious task. The wron
 
 ## Resources
 ### Documentation
-* Official voodooi2c documentation https://voodooi2c.github.io/
+* Official VoodooI2C Documentation: https://voodooi2c.github.io/
 * VoodooI2C Official Forum Post: https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/
 
 ### Kexts for Synaptic, I2C and ELAN Touchpads
