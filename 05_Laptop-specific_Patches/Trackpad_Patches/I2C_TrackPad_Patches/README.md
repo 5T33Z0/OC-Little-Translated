@@ -4,12 +4,9 @@
 
 This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, see:
 
-- @penghubingzhou: [https://www.penghubingzhou.cn](https://www.penghubingzhou.cn)
-- @神楽小白(GZ小白):[https://blog.gzxiaobai.cn/](https://blog.gzxiaobai.cn/)
-- @神楽小白(GZ小白)'s TouchPad-Hotfix Example Library:[https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch](https://github.com/GZXiaoBai/Hackintosh- TouchPad-Hotpatch)
-- VoodooI2C official documentation: [https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning](https://voodooi2c.github.io/#GPIO%20Pinning/GPIO% 20Pinning)
-- VoodooI2C Official Support Post [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/](https://www.tonymacx86.com/threads/ voodooi2c-help-and-support.243378/)
-- Q-groups: `837538729` (1 group is full), `921143329` (2 groups)
+- [VoodooI2C official documentation](https://voodooi2c.github.io/)
+- GZXiaoBai's [TouchPad-Hotfix Example Library](https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch)
+- [VoodooI2C Official Forum Post](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
 
 ## New kexts for I2C Synaptic and ELAN Touchpads
 If your touchpad is controlled via SMBus you could try one of these kexts:
