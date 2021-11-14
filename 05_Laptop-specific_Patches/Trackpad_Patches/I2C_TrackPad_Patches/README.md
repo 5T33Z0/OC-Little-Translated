@@ -42,7 +42,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Fix `TPXX` related content.
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
-  ```swift
+	```swift
     Method (_STA, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -54,14 +54,13 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
             Return (Zero)
         }
     }
-```
-  - **Corrected** the ``relevant content`` of the variables used when the original I2C device was disabled, so that they are logically related.
-  - **Corrected** the ``relevant content'' of the operating system variable OSYS to make it logical.
+	```
+- **Corrected** the ``relevant content`` of the variables used when the original I2C device was disabled, so that they are logically related.
+- **Corrected** the ``relevant content'' of the operating system variable OSYS to make it logical.
 - Exclude errors
 - I2C patch
 
 ### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
-
 - Disable ``TPD1`` using the Preset Variable Method.
 
   ```swift
@@ -74,8 +73,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
   }
   ```
 - Create a new device `TPXX` and port all the contents of the original `TPD1` to `TPXX`.
-
-  ```swift
+	```swift
   External(_SB.PCI0.I2C1, DeviceObj)
   Scope (_SB.PCI0.I2C1)
   {
@@ -84,12 +82,10 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
          Original TPD1 content
       }
   }
-  ```
-
+	  ```
 - Amend `TPXX` content:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
-  
   ```swift
     Method (_STA, 0, NotSerialized)
     {
@@ -103,15 +99,14 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
         }
     }
     ```
-  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
-  - Look up `OSYS` and remove (comment out) the following.
-  
-    ```swift
+ - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
+ - Look up `OSYS` and remove (comment out) the following.
+	```swift
     //If (LLess (OSYS, 0x07DC))
     //{
     // SRXO (GPDI, One)
     //}
-    ```
+	```
   **Note**: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
 
 - Add external reference `External... ` to fix all errors.
