@@ -21,7 +21,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
 
-	```swift
+```swift
   /*
    * GPI0 enable
    */
@@ -44,7 +44,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
 	
-		```swift
+	```swift
     Method (_STA, 0, NotSerialized)
     {
         	If (_OSI ("Darwin"))
@@ -89,10 +89,10 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
  
- 	 ```swift
-    Method (_STA, 0, NotSerialized)
-    {
-   			If (_OSI ("Darwin"))
+```swift
+	Method (_STA, 0, NotSerialized)
+    	{
+   		If (_OSI ("Darwin"))
         	{
            		Return (0x0F)
         	}
@@ -100,20 +100,18 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
         	{
           		Return (Zero)
         	}
-    }
-    ```
+    	}
+```
  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
  - Look up `OSYS` and remove (comment out) the following.
 	
-		```swift
+	```swift
     //If (LLess (OSYS, 0x07DC))
     //{
     // SRXO (GPDI, One)
     //}
 	```
-  **Note**: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
-
-- Add external reference `External…` to fix all errors.
-- I2C patch (omitted)
-
-
+	**Note**: I2C devices do not work when `OSYS` is less than `0x07DC` (`0x07DC` stands for Windows 8).
+	
+	- Add external reference `External…` to fix all errors.
+	- I2C patch (omitted)
