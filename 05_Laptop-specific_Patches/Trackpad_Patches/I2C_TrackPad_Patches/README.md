@@ -163,9 +163,10 @@ If (USTP)
   }
 ```
 
-To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI > Patch`, add the following rename rule: "Change USTP to XSTP":
+To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI > Patch`, add the following rename rule:
 
-```swift
+```text
+Comment: Change USTP to XSTP
 Find: 5553545008
 Replace: 5853545008
 ```
