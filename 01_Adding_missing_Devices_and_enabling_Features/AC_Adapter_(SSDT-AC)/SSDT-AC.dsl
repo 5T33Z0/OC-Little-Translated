@@ -10,7 +10,7 @@ DefinitionBlock ("", "SSDT", 2, "hack", "AC__", 0x00000000)
         {
             Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
             {
-                0x6F, 
+                0x1B, 
                 0x03
             })
         }
