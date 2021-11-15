@@ -1,7 +1,7 @@
 /*
  * Intel 300-series PMC support for macOS
  *
- * Starting from Z390 chipsets PMC (D31:F2) is only available through MMIO.
+ * Starting from Z390-400-500-600 chipsets PMC (D31:F2) is only available through MMIO.
  * Since there is no standard device for PMC in ACPI, Apple introduced its
  * own naming "APP9876" to access this device from AppleIntelPCHPMC driver.
  * To avoid confusion we disable this device for all other operating systems,
