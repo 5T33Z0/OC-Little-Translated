@@ -1,4 +1,6 @@
-//
+/*
+ * SMBus compatibility table.
+ */
 DefinitionBlock ("", "SSDT", 2, "OCLT", "SMBU", 0)
 {
     External (_SB_.PCI0.SMBU, DeviceObj)
