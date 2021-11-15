@@ -3,7 +3,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 ## System requirements
 **Minimum macOS**: Big Sur using XNU Kernel 20.4.0 or newer!</br>
-**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families:
+**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
 - Sandy Bridge (need additionl Sur Plus and RDRAND patches)
 - Ivy Bridge
@@ -39,8 +39,9 @@ Before you do the following make sure you have a working backup of your EFI stor
 - Download the attached .plist
 - Open it with a plist editor
 - Copy the patches located under Booter > Patch into clipboard and paste them into your OpenCore config at the same location
-- Do the same for the Kernel Patches. Enable additional patches if requires (for Sandy Brige for example)
-- Save config 
+- Do the same for the Kernel Patches. Enable additional patches if required (for Sandy Brige for example)
+- Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable Content Caching.
+- Save config
 - Reboot.
 
 Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
