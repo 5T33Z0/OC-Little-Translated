@@ -14,7 +14,7 @@ Besides checking the obvious (like Booter Settings and Quirks), check the follow
 - **OC Troubleshooting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 
 ### Settings for `MinDate`/`MinVersion`
-OpenCore introduced a new security feature in version 0.7.4. which prohibits the APFS driver from loading if it doesn't comply to a specific `MinDate` and `MinVersion`. The new "Default" value is based on macOS Big Sur. So if you're using macOS Catalina you won't see your drives. To disable this feature, enter `-1` and the APFS driver will load for any macOS version.
+OpenCore introduced a new security feature in version 0.7.2 which prohibits the APFS driver from loading if it doesn't comply to a specific `MinDate` and `MinVersion`. The new "Default" value is based on macOS Big Sur. So if you're using macOS Catalina you won't see your drives. To disable this feature, enter `-1` and the APFS driver will load for any macOS version.
 
 **Here's a list of supported Values:**
 
