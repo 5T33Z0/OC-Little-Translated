@@ -164,3 +164,6 @@ Comment: Change USTP to XSTP
 Find: 5553545008
 Replace: 5853545008
 ```
+### Adding SSDT-I2C_SPED
+#### Patch Method 
+  - SSCN and FMCN methods must be under the trackpad I2C controller we need to activate.
