@@ -47,6 +47,7 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 
 ## NOTES
 
+- If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI > APFS > `MinDate` and `MinVersion` to `-1` if you are using macOS Monterey and older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
 - As of now, OCAT does not support online updates of OpenCore, so you will not get the latest available version. To find out which version of OpenCore and Resources are used, click on the newly added "Source" links in the Sync window.
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbars are visible by default or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If Downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
