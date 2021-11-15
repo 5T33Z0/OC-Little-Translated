@@ -36,8 +36,8 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 ### Updating OpenCore Files, Drivers, Kexts and Resources
 1. Still in OCAT, click on the Sync button (looks similar to a Recycle symbol):</br> 
 	![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
-2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
-	![Sync_explained](https://user-images.githubusercontent.com/76865553/140642162-fd3ec6e3-b462-4404-9d60-468a102df4b5.png)
+2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = not found. Besides the displayed file version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
+	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updaates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
