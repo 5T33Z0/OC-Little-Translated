@@ -47,6 +47,6 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 
 ## NOTES
 
-- As of now, OCAT does not support online updates of OpenCore and Drivers, so you will never get the latest version. Instead, OCAT uses a version chosen by the Developer which is stored in the Database (version info is displayed in the pop-up window displayed when updating OCAT). My suggestions to incorporate online updates for OpenCore and making use of the latest nightly builds by Dortania were dismissed.
+- As of now, OCAT does not support online updates of OpenCore and Drivers. Although you will get a recent version, you will not get the latest version. Instead, OCAT uses a files stored in the Database (version info is displayed in a pop-up window displayed when updating OCAT). My suggestions to incorporate online updates for OpenCore making use of the latest nightly builds by Dortania were dismissed.
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbars are visible by default or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If Downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
