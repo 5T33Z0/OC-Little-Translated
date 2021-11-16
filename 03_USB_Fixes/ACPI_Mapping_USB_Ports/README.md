@@ -247,7 +247,7 @@ Scope (HS03)
       	}
 		Else
       	{
-       	Return (GUPC (0xFF, 0x03))
+       		Return (GUPC (0xFF, 0x03))
       	}
   	}
 	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
@@ -292,7 +292,7 @@ The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks 
 
 - Run the python script `USBMap.command` 
 - Press "d" on the Keyboard to detect ports:</br>
-![](/Users/kl45u5/Desktop/USBmap.png)</br>
+![USBmap](https://user-images.githubusercontent.com/76865553/142078666-1a96ee4e-dc82-4658-91d6-ac370614b2a8.png)</br>
 In this example, the system has more than one USB Controller. For the sake of the Example, we focus on the `XHC` Controller ("HSXX" and "SSXX").
 - Leave the Window open and put in your USB 2 Stick into a port and check which entry turns blue in the list and take notes.
 - Next, put a USB 3.0 stick in the same port and see what turns blue next. Usually, if a physical USB port is blue, it supports USB 2 and 3 Ports. An as far as its routing is concerned, only the Prefix changes when switching between USB 2 and USB3. In other words: if a USB 2 stick is mapped to "HS01", the corresponding USB 3 Port will most likely be "SS01".
