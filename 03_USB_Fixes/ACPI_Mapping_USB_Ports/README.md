@@ -216,55 +216,56 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 		If (_OSI ("Darwin"))
 		{
 			Return (GUPC (Zero, Zero)) // ZERO = Port unavailable
-     	}
-     	Else
-     	{
+     		}
+     		Else
+     		{
    			Return (GUPC (0xFF, 0x03))
-     	}
+     		}
  	}
  	
  	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-   {
+   	{
    		If (_OSI ("Darwin"))
    		{
 			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
 		}    
 		Else
-       {  		
-       	Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
+       		{  		
+       			Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
   		}
 	}   
 ```
 **Example 3**: Port `HS03` deactivated for macOS Only. This utilizes the `If (_OSI ("Darwin"))` switch. This basically tells the system: "If the Darwin Kernel (aka macOS) is running, `HS03` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for Windows.
 
 ```swift
+
 Scope (HS03)
 {
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
   	{
    		If (_OSI ("Darwin"))
-      	{
-         	Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
-        }
-		 Else
-        {
-         	Return (GUPC (0xFF, 0x03))
-        }
+      		{
+         		Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+       		}
+		Else
+       		{
+         		Return (GUPC (0xFF, 0x03))
+        	}
   	}
-
-   Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-   {
+	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+   	{
 		If (_OSI ("Darwin"))
-     	{
+     		{
 			Return (GPLD (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
 		}
-      	Else
-      	{
+      		Else
+      		{
 			Return (GPLD (DerefOf (UHSD [0x02]), 0x03))
-       }
+        	}
 	}
 }
 ```
+
 Continue mapping your ports this way: for those which you do use, declare the port type in the packets. For those that you don't use, deactivate them but add an `If (_OSI ("Darwin"))` argument (as shown above). 
 
 **Remember**: This SSDT contains 26 ports in total, so you need to deactivate at least 11 in total to stay within the Port limit of 15 for macOS!
