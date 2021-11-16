@@ -214,15 +214,14 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
 	{
 		If (_OSI ("Darwin"))
-		{
+		{	
 			Return (GUPC (Zero, Zero)) // ZERO = Port unavailable
-     		}
-     		Else
-     		{
+		}
+     	Else
+     	{
    			Return (GUPC (0xFF, 0x03))
-     		}
+     	}
  	}
- 	
  	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
    	{
    		If (_OSI ("Darwin"))
@@ -230,38 +229,37 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
 		}    
 		Else
-       		{  		
-       			Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
+      	{  		
+      		Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
   		}
 	}   
 ```
 **Example 3**: Port `HS03` deactivated for macOS Only. This utilizes the `If (_OSI ("Darwin"))` switch. This basically tells the system: "If the Darwin Kernel (aka macOS) is running, `HS03` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for Windows.
 
 ```swift
-
 Scope (HS03)
 {
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
   	{
    		If (_OSI ("Darwin"))
-      		{
-         		Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
-       		}
+      	{
+      		Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+      	}
 		Else
-       		{
-         		Return (GUPC (0xFF, 0x03))
-        	}
+      	{
+       	Return (GUPC (0xFF, 0x03))
+      	}
   	}
 	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
    	{
 		If (_OSI ("Darwin"))
-     		{
+     	{
 			Return (GPLD (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
 		}
-      		Else
-      		{
+      	Else
+      	{
 			Return (GPLD (DerefOf (UHSD [0x02]), 0x03))
-        	}
+		}
 	}
 }
 ```
@@ -294,8 +292,8 @@ The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks 
 
 - Run the python script `USBMap.command` 
 - Press "d" on the Keyboard to detect ports:</br>
-	![](/Users/kl45u5/Desktop/Bildschirmfoto.png)
-In this example, the systenm (a Laptop) has more than one Controller. For the sake of the Example, focus on the `XHC` Controller ("HSXX" and "SSXX").
+![](/Users/kl45u5/Desktop/USBmap.png)</br>
+In this example, the system has more than one USB Controller. For the sake of the Example, we focus on the `XHC` Controller ("HSXX" and "SSXX").
 - Leave the Window open and put in your USB 2 Stick into a port and check which entry turns blue in the list and take notes.
 - Next, put a USB 3.0 stick in the same port and see what turns blue next. Usually, if a physical USB port is blue, it supports USB 2 and 3 Ports. An as far as its routing is concerned, only the Prefix changes when switching between USB 2 and USB3. In other words: if a USB 2 stick is mapped to "HS01", the corresponding USB 3 Port will most likely be "SS01".
 - Continue probing all ports with USB 2/3/C flash drives or devices und you're done.
