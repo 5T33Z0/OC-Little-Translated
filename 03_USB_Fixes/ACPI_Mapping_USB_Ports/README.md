@@ -279,7 +279,7 @@ Scope (USR1)
 	{
    		Return (GUPC (Zero, Zero)	// Zero, Zero = Port disabled, Type not defined
    	}
-		
+	
 	Method (_PLD, 0, NotSerialized)	// _PLD: Physical Location of Device
 	{
       	Return (GPLD (Zero, Zero))
