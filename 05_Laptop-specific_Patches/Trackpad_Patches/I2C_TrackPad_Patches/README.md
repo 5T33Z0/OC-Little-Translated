@@ -164,3 +164,7 @@ Comment: Change USTP to XSTP
 Find: 5553545008
 Replace: 5853545008
 ```
+### Adding SSDT-I2C_SPED
+#### Patch Method 
+  - These methods are essential for trackpads to work properly on Macos. When no matches are found in ACPI we have to insert these corrections through dedicated     SSDT.
+  - SSCN and FMCN methods must be under the trackpad I2C controller we need to activate.

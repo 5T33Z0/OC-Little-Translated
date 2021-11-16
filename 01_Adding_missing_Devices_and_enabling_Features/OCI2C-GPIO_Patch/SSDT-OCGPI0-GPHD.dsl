@@ -7,7 +7,7 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
     {
         If (_OSI ("Darwin"))
         {
-            GPHD = 2
+            GPHD = 0
         }
     }
 }
