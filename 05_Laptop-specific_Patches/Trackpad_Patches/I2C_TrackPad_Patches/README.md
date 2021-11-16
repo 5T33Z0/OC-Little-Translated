@@ -165,6 +165,9 @@ Find: 5553545008
 Replace: 5853545008
 ```
 ### Adding SSDT-I2C_SPED
-#### Patch Method 
-  - These methods are essential for trackpads to work properly on Macos. When no matches are found in ACPI we have to insert these corrections through dedicated     SSDT.
-  - SSCN and FMCN methods must be under the trackpad I2C controller we need to activate.
+#### Patch Method
+- In `DSDT`, search for the `I2C0` or `I2C1` Controller
+- If present, check if it contains the methods `SSCN` and `FMCN`. They are essential for Trackpads to work properly in macOS. 
+- When no matches are found add `SSDT-I2C_SPED` 
+
+**NOTE**: Make sure the PCI path used in the SSDT matches the one used in the DSDT to make the whol construct work.
