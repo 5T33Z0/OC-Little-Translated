@@ -1,11 +1,11 @@
 # Enabling Trackpad Support on Laptops
 
 ## Introduction
-PC-based Notebook Trackpads are not supported natively by macOS, so you have to inject additional kexts and/or SSDTs to get them working correctly.
+PC-based Notebook Trackpads are not supported natively by macOS, so you have to inject additional kexts and/or SSDTs to get them working properly.
 
-Depending on the type of Laptop and TrackPad/TouchPad you are using, you might need to incorporate a combinations of various kexts, additional SSDT-Hotpacthes and/or binary renames to get it working.
+Depending on the type of Laptop and TrackPad/TouchPad you are using, you might need to incorporate a combinations of various kexts, additional SSDT-Hotpacthes and/or binary renames to enables it in macOS.
 
-Getting trackpads working smoothly can be a tedious task. The wrong combination of kexts, renames and SSDTs can cause Kernel Panics if kexts are not loaded in the correct sequence or the renames or device paths in the SSDT samples are incorrect. You can check examples of possible combination of kexts in Chapter 10 of this repo.
+Getting trackpads working smoothly can be a tedious task. The wrong combination of kexts, renames and SSDTs can cause Kernel Panics if they are not loaded in the correct order or if binary renames or device paths in SSDT samples are incorrect. You can check examples of possible combination of kexts in Chapter 10 of this repo.
 
 ## Trackpad Types and Protocols
 There are two main protocols used to communicate with the trackpad: PS/2 and I2C. Some trackpads even support both I2C and PS2 (mostly Synaptics), in this case you should switch to I2C. There should be an option to do this in the BIOS. 
