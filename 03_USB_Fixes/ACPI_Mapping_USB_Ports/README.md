@@ -1,5 +1,5 @@
 # USB port mapping via ACPI (macOS 11.3+)
->**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is very limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
+>**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
 
 ## Background
 Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
@@ -93,11 +93,11 @@ Now we have control over a port's status (on/off or available/unavailable) and w
 Method (GUPC, 2, Serialized)
 {
 	Name (PCKG, Package (0x04)
-   	{
-        0xFF,
-        0x03,
-        Zero, 
-    	Zero
+	{
+        	0xFF,
+        	0x03,
+        	Zero, 
+    		Zero
    	})
 	PCKG [Zero] = Arg0
 	PCKG [One] = Arg1
@@ -217,10 +217,10 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 		{	
 			Return (GUPC (Zero, Zero)) // ZERO = Port unavailable
 		}
-     	Else
-     	{
-   			Return (GUPC (0xFF, 0x03))
-     	}
+     		Else
+		{
+			Return (GUPC (0xFF, 0x03))
+     		}
  	}
  	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
    	{
@@ -229,8 +229,8 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
 		}    
 		Else
-      	{  		
-      		Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
+		{
+			Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
   		}
 	}   
 ```
@@ -242,22 +242,22 @@ Scope (HS03)
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
   	{
    		If (_OSI ("Darwin"))
-      	{
-      		Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
-      	}
+		{
+      			Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+		}
 		Else
-      	{
-       		Return (GUPC (0xFF, 0x03))
-      	}
+		{
+       			Return (GUPC (0xFF, 0x03))
+		}
   	}
 	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-   	{
+	{
 		If (_OSI ("Darwin"))
-     	{
+		{
 			Return (GPLD (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
 		}
-      	Else
-      	{
+		Else
+		{
 			Return (GPLD (DerefOf (UHSD [0x02]), 0x03))
 		}
 	}
@@ -280,7 +280,7 @@ Scope (USR1)
 	
 	Method (_PLD, 0, NotSerialized)	// _PLD: Physical Location of Device
 	{
-      	Return (GPLD (Zero, Zero))
+		Return (GPLD (Zero, Zero))
    	}
 }
 ```
