@@ -242,22 +242,22 @@ Scope (HS03)
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
   	{
    		If (_OSI ("Darwin"))
-      	{
-      		Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
-      	}
+		{
+      			Return (GUPC (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
+		}
 		Else
-      	{
-       		Return (GUPC (0xFF, 0x03))
-      	}
+		{
+       			Return (GUPC (0xFF, 0x03))
+		}
   	}
 	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
-   	{
+	{
 		If (_OSI ("Darwin"))
-     	{
+		{
 			Return (GPLD (Zero, Zero)) // If macOS is running, HS03 doesn't exist, for every other OS it does
 		}
-      	Else
-      	{
+		Else
+		{
 			Return (GPLD (DerefOf (UHSD [0x02]), 0x03))
 		}
 	}
@@ -280,7 +280,7 @@ Scope (USR1)
 	
 	Method (_PLD, 0, NotSerialized)	// _PLD: Physical Location of Device
 	{
-      	Return (GPLD (Zero, Zero))
+		Return (GPLD (Zero, Zero))
    	}
 }
 ```
