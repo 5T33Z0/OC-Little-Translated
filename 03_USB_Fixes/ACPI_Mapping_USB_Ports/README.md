@@ -90,15 +90,14 @@ In this case, it includes a Package (`PCKG`) with four values that are handed ov
 Now we have control over a port's status (on/off or available/unavailable) and what type it is. We get this code snippet:
 
 ```swift
-
 Method (GUPC, 2, Serialized)
 {
 	Name (PCKG, Package (0x04)
 	{
-        0xFF,
-        0x03,
-        Zero, 
-    	Zero
+        	0xFF,
+        	0x03,
+        	Zero, 
+    		Zero
    	})
 	PCKG [Zero] = Arg0
 	PCKG [One] = Arg1
