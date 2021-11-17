@@ -93,7 +93,7 @@ Now we have control over a port's status (on/off or available/unavailable) and w
 Method (GUPC, 2, Serialized)
 {
 	Name (PCKG, Package (0x04)
-   	{
+	{
         0xFF,
         0x03,
         Zero, 
