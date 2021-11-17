@@ -217,10 +217,10 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 		{	
 			Return (GUPC (Zero, Zero)) // ZERO = Port unavailable
 		}
-     	Else
-     	{
-   			Return (GUPC (0xFF, 0x03))
-     	}
+     		Else
+		{
+			Return (GUPC (0xFF, 0x03))
+     		}
  	}
  	Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
    	{
@@ -229,8 +229,8 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 			Return (GPLD (Zero, Zero)) // ZERO = Port unavailable
 		}    
 		Else
-      	{  		
-      		Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
+		{
+			Return // For `Else`, use whatever is already declared in your ACPI for `GPLD`
   		}
 	}   
 ```
