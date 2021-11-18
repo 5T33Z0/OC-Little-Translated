@@ -1,6 +1,6 @@
 ## SMBIOS Compatibility Table
 
-Check the following spreadsheet to find out which SMBIOS is natively supported by macOS:
+Check the following spreadsheet to find out which SMBIOS is natively supported by which versions of macOS:
 
 https://docs.google.com/spreadsheets/d/1yLZeRFeONwDj1zMoONQAQ4rlodAnME1q5jFXE-q5H8s/edit#gid=0
 
