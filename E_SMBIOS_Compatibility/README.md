@@ -5,7 +5,7 @@ Check the following spreadsheet to find out which SMBIOS is natively supported b
 https://docs.google.com/spreadsheets/d/1yLZeRFeONwDj1zMoONQAQ4rlodAnME1q5jFXE-q5H8s/edit#gid=0
 
 **NOTES**
-This list, although helpful and informative is not definite for hackintoshing because of the following reasons:
+This list, although helpful and informative is not definitive for hackintoshing than it is for real Macs due of the following reasons:
 
 - On Hackintoshes, you can make use of different SMBIOSes to run newer versions of macOS on officially unsupported CPUs.
 - You can also run older versions of OSX/macOS for newer CPUs which are not supported by the chosen OSX/macOS version by making use of a Fake CPU-ID.
