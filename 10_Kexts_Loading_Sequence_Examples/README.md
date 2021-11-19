@@ -13,7 +13,7 @@ The rest of the config examples show the loading sequences for `Bluetooth`, `Wif
 For additional information about available Kexts the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Screenshots
-### Example 1: Mandatory Kexts
+### Example 1: Mandatory Kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)
 ### Example 2: VooodoPS2 + TouchPad (Laptop)
 ![Config2](https://user-images.githubusercontent.com/76865553/140813746-3d3ab6aa-949a-4b91-8c9b-c3dcd0fef77d.png)
