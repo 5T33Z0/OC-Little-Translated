@@ -25,7 +25,7 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 ## Possible workflow
 1. Find out which TrackPad/TouchPad you are using (Vendor, Technology, etc.) You can do this in Windows by using the Device Manager. It can display the vendor, it's PCI device patch, the controller protocol, etc.
 2. Find out how which method is used for controlling it. If it is cotrolled by the PS2 Controller you need a different combination of kexts than when it's controlled via I2C or  SMBus. This can be evaluated in Windows Device Manager as well.
-3. Check the included Folders for TrackPads in this repo
+3. Check the included Folders ("I2C_TrackPad_Patches" and "ThinkPad_Click_and_TrackPad_Patches") listed above
 4. Check other resources like existing EFI folders for your device or Dortania's OpenCore Install Guide or Forums.
 
 ## Resources
