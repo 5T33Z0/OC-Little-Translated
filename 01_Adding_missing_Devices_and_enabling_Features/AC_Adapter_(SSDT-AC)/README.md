@@ -10,7 +10,7 @@ The included SSDTs add an AC Adapter device to your Notebook, if missing.
 - If `AppleACPIACAdapter` is missing, you need a fix: ![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
 
 ## Applying the patch
-If `AppleACPIACAdapter` is not loaded, you can use a SSDT hotpatch to connect it to the AC Adapter device. Do the following, to figure out which SSDT is applicable:
+If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to connect it to the AC Adapter device. Do the following, to figure out which SSDT is applicable:
 
 - Open the SSDT corresponding to your AC device in maciASL and adjust the PCI path according to the device path in your `DSDT`.
 - In this example, SSDT-AC.dsl is used and modified, so it looks like this: ![SSDT_mod](https://user-images.githubusercontent.com/76865553/139687058-6fad207b-019a-4253-a91e-c87011f17922.png)
