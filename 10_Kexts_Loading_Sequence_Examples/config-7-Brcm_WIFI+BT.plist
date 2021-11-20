@@ -147,7 +147,7 @@
                     <key>BundlePath</key>
                     <string>BlueToolFixup.kext</string>
                     <key>Comment</key>
-                    <string>V2.6.1 |  BT Enabler for macOS 12.x</string>
+                    <string>V2.6.1 | BT Enabler for macOS 12.x</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -165,7 +165,7 @@
                     <key>BundlePath</key>
                     <string>BrcmBluetoothInjector.kext</string>
                     <key>Comment</key>
-                    <string>V2.6.1 |  Req. for macO 10.15 to 11.x</string>
+                    <string>V2.6.1 | Req. for macO 10.15 to 11.x</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -201,7 +201,7 @@
                     <key>BundlePath</key>
                     <string>BrcmPatchRAM.kext</string>
                     <key>Comment</key>
-                    <string>V2.6.1 | For macOS up to 10.10</string>
+                    <string>V2.6.1 | For macOS 10.8 to 10.10</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -209,7 +209,7 @@
                     <key>MaxKernel</key>
                     <string>14.99</string>
                     <key>MinKernel</key>
-                    <string></string>
+                    <string>12.0.0</string>
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
