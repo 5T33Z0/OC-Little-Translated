@@ -26,7 +26,7 @@ For additional information about available Kexts the [**Kext documentation**](ht
 ### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
 ![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
 ### Example 7: Broadcom WiFi and Bluetooth 
-![broadcomwfbt](https://user-images.githubusercontent.com/76865553/141025489-dfa23892-bae0-4e4f-8dba-7d8bde49878a.png)
+![brcmwifibt](https://user-images.githubusercontent.com/76865553/142741082-598db376-cff1-48c4-8cce-c1a06312f85b.png)
 
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
