@@ -15,3 +15,7 @@ This list, although helpful and informative, is not as binding for hackintoshes 
 Check the following link to find out which wireless card are supported on macOS Sierra to Monterey:
 
 https://osxlatitude.com/forums/topic/11138-inventory-of-supportedunsupported-wireless-cards-2-sierra-monterey/
+
+And for older Versions of OSX (Snow Leopard to El Capitan), check this list:
+
+https://osxlatitude.com/forums/topic/2120-inventory-of-supportedunsupported-wireless-cards-1-snow-leopard-el-capitan/
