@@ -1,4 +1,4 @@
-# Enabling Brightness Shortcut Keys
+# Enabling Brightness Key Shortcuts
 
 SSDT Hotpatches to enable Brightness Shortcut Keys for various Laptop models (Asus, Lenovo, Xiaoxin, Dell, et al.). They have to be paired with the binary renames mentioned in the .dsl files.
 
