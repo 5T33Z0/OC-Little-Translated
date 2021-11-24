@@ -1,4 +1,4 @@
-# Enabling Trackpad Support on Laptops
+# Enabling Trackpad/Touchpad Support on Laptops
 
 ## Introduction
 PC-based Notebook Trackpads are not supported natively by macOS, so you have to inject additional kexts and/or SSDTs to get them working properly.
@@ -23,15 +23,20 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 - Necessary base kext: [**VoodooI2C**](https://github.com/VoodooI2C)
 
 ## Possible workflow
-1. Find out which TrackPad/TouchPad you are using (Vendor, Technology, etc.) You can do this in Windows by using the Device Manager. It can display the vendor, it's PCI device patch, the controller protocol, etc.
-2. Find out how which method is used for controlling it. If it is cotrolled by the PS2 Controller you need a different combination of kexts than when it's controlled via I2C or  SMBus. This can be evaluated in Windows Device Manager as well.
-3. Check the included Folders ("I2C_TrackPad_Patches" and "ThinkPad_Click_and_TrackPad_Patches") listed above
-4. Check other resources like existing EFI folders for your device or Dortania's OpenCore Install Guide or Forums.
+1. Boot into Windows
+2. Run Device Manager 
+3. Check for Humand Interface Devices (HID)
+4. Check which method/protocol is used for controlling your Touchpad. If it is cotrolled by the PS2 Controller you need a different combination of kexts than if it's controlled via I2C or SMBus. This can be evaluated in Windows Device Manager as well.
+5. Check the BIOS Device Path.
+6. Determine the APIC Pin (you can also do this in macOS using IO Registry Explorer enterimg the device name mentioned in the BIOS device path)
+7. Check the included Folders ("I2C TrackPad Patches" and "ThinkPad ClickPad and TrackPad Patches") listed above
+8. Check other resources like existing EFI folders for your device or Dortania's OpenCore Install Guide or Forums.
 
 ## Resources
 ### Documentation
 * Official VoodooI2C Documentation: **https://voodooi2c.github.io/**
 * VoodooI2C Official Forum Post: **https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/**
+* Additional TouchPad Patches: **https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch**
 
 ### Kexts for PS/2, I2C and ELAN Touchpads
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2): Magic Trackpad II emulation
