@@ -2,7 +2,7 @@
 
 SSDT Hotpatches to enable Brightness Shortcut Keys for various Laptop models (Asus, Lenovo, Xiaoxin, Dell, et al.). They have to be paired with the binary renames mentioned in the .dsl files.
 
-The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I added `OSI` switches required for OpenCore so the patches are restricted to macOS and don't affect other operating systems such as Windows. This change is important because OpenCore injects ACPI tables system-wide whereas Clover only injects them into macOS.
+The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I added `If (_OSI ("Darwin")` switches required for OpenCore so the patches are restricted to macOS and don't affect other operating systems such as Windows. This change is important because otherwise OpenCore injects ACPI tables system-wide whereas Clover only injects them into macOS.
 
 ## Patching Method
 Enabling Brightness Hotkeys consists of two stages:
