@@ -7,7 +7,7 @@ The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I a
 ## Patching Method
 Enabling Brightness Hotkeys consists of two stages:
 
-1. Chose the correct SSDT for your Laptop model
+1. Choose the correct SSDT for your Laptop model
 2. Rename existing methods for brightness keys to disable them (renames are listed in the`.dsl` files)
 
 ## I. Select the appropriate Hotpatch
