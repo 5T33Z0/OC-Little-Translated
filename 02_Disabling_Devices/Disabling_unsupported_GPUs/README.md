@@ -8,7 +8,7 @@ There are two main methods for disabling incompatible external GPUs:
   - Add Key `disable-external-gpu`: `01000000`, Class: `DATA` 
   - Add boot-arg `-wegnoegpu` to `NVRAM\Add\7C436110-AB2A-4BBB-A880-FE41995C9F82`
     
-## Method 2: Disabling dicrete GPUs with SSDT Hotpatches
+## Method 2: with SSDT Hotpatches
 
 - Disables the dGPU during initialization phase.
 - Enables dGPU during sleep to prevent the system from crashing when it enters `S3` state.
