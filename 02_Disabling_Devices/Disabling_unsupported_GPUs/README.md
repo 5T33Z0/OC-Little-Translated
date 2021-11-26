@@ -12,25 +12,25 @@ There are two main methods for disabling incompatible external GPUs:
 
 ### Patch principle
 - Disables the dGPU during initialization phase.
-- Enables dGPU during sleep to prevent the system from crashing when it enters `S3` state.
+- Enables dGPU during sleep to prevent the system from crashing when it enters `S3` powerstate.
 - Disables dGPU again after the machine wakes up.
 
-### Patch Combinations
+### Patch Requirements
 
+- Modified Preparte to Sleep/Wake Patch (***SSDT-PTSWAK***)
 - GPU blocking patch: ***SSDT-NDGP_OFF*** or ***SSDT-NDGP_PS3***
-- Modiefied Sleep/Wake mehods (***SSDT-PTSWAK***)
 
 #### Example
 
-- Add ***SSDT-PTSWAK***. See [**Comprehensive Sleep and Wake Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+- Add ***SSDT-PTSWAK***. See [**Comprehensive Sleep and Wake Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details
 - Add eiher/or:
 	- ***SSDT-NDGP_OFF***
-		- In DSDT, query the name and path of `DGPU` and confirm the existence of the `_ON` and `_OFF` methods
+		- In `DSDT`, query the name and path of `DGPU` and confirm the existence of the `_ON` and `_OFF` methods
 		- Refer to the example and change the name and path to match the device name and patch useed in the `DSDT`
   	- ***SSDT-NDGP_PS3***
 		- Query the name and path of `DGPU` and confirm the existence of `_PS0`, `_PS3` and `_DSM` methods
 		- Refer to the example and change the name and path to match the query result
-  
+ 
 ## Notes
 
 - For Method 2, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be combined to make the whole construct work.
