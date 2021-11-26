@@ -33,7 +33,7 @@ There are two main methods for disabling incompatible external GPUs:
   
 ## Notes
 
-- Both ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be used as per **patch combination** requirement
-- If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** will be used first.
-- The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`. Adjust the name and path according to your ACPI tables.
+- For Method 2, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be combined to make the whole construct work.
+- If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** is preferred.
+- The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`. Correct the name and path according to your ACPI tables if necessary.
 - The above method was developed by [@RehabMan](https://github.com/rehabman)
