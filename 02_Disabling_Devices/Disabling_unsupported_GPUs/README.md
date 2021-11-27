@@ -10,37 +10,30 @@ There are two main methods for disabling incompatible external GPUs:
     
 ## Method 2: with SSDT Hotpatches
 
+### Patch principle
 - Disables the dGPU during initialization phase.
-- Enables dGPU during sleep to prevent the system from crashing when it enters `S3` state.
+- Enables dGPU during sleep to prevent the system from crashing when it enters `S3` powerstate.
 - Disables dGPU again after the machine wakes up.
 
-### Patch Combinations
+### Patch Requirements
 
-- See [**Comprehensive Sleep and Wake Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+- Modified Preparte to Sleep/Wake Patch (***SSDT-PTSWAK***)
 - GPU blocking patch: ***SSDT-NDGP_OFF*** or ***SSDT-NDGP_PS3***
 
 #### Example
 
-- ***SSDT-PTSWAK***
-
- See "PTSWAK Comprehensive Extension Patch" for details.
-  
-- ***SSDT-NDGP_OFF***
-
-  - Query the name and path of the solo display to confirm the existence of the `_ON` and `_OFF` methods
-  - Refer to the example and change the name and path to match the query result
-  
-- ***SSDT-NDGP_PS3***
-
-  - Query the name and path of the Solo display and confirm the existence of `_PS0`, `_PS3` and `_DSM` methods
-  - Refer to the example and change the name and path to match the query result
-  
-- **NOTES**
-	- When querying the name and path of the GPU, as well as `_ON`, `_OFF`, `_PS0`, `_PS3` and `_DSM`, all ACPI files should be searched. It may exist in the `DSDT` file or in other `SSDT` files.
-	- The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`.
-
+- Add ***SSDT-PTSWAK***. See [**Comprehensive Sleep and Wake Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details
+- Add eiher/or:
+	- ***SSDT-NDGP_OFF***
+		- In `DSDT`, query the name and path of `DGPU` and confirm the existence of the `_ON` and `_OFF` methods
+		- Refer to the example and change the name and path to match the device name and patch useed in the `DSDT`
+  	- ***SSDT-NDGP_PS3***
+		- Query the name and path of `DGPU` and confirm the existence of `_PS0`, `_PS3` and `_DSM` methods
+		- Refer to the example and change the name and path to match the query result
+ 
 ## Notes
 
-- Both ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be used as per **patch combination** requirement
-- If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** will be used first.
+- For Method 2, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be combined to make the whole construct work.
+- If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** is preferred.
+- The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`. Correct the name and path according to your ACPI tables if necessary.
 - The above method was developed by [@RehabMan](https://github.com/rehabman)
