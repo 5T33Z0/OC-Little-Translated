@@ -8,7 +8,8 @@ In **DSDT**, search for:
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 - In some cases the SLPB device may be present in DSDT Origin, but the same may be turned off
-```Scope (_SB)
+```
+Scope (_SB)
     {
         Device (SLPB)
         {
