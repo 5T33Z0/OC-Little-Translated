@@ -84,8 +84,8 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 - **FACP.aml**
 	- **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true` 
 	- **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), the FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by an **FACP.aml** in the machine's ACPI Table, such as the RTC Clock, Power and Sleep buttons, Power Management, etc. In Hackintoshland this affects the following functions:
-	- If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try setting `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding ***SSDT-PMCR*** instead. It's located under "Adding Missing Parts".
-	- `Low Power S0 Idle` state. Tthe **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the "About AOAC" section for more details on `AOAC`.
+		- If you press the **Power Button** and cannot call out the "Restart, Sleep, Cancel, Shutdown" menu, try setting `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding ***SSDT-PMC*** instead. It's located under "Adding Missing Features".
+		- `Low Power S0 Idle` state. Tthe **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the "About AOAC" section for more details on `AOAC`.
 
 - **Clear ACPI Header fields** 
 	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true` 
