@@ -8,4 +8,4 @@ In **DSDT**, search for:
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 
-**CAUTION:** When using the any of the patches, note that `SB` name should be consistent with the name used in the original ACPI.
+**CAUTION:** When using the any of the patches, note that `\SB` name should be consistent with the name used in the original ACPI.
