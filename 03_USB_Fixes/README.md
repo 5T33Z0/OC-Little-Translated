@@ -2,9 +2,9 @@
 
 ## Background
 
-In macOS, the number of available USB ports is limited to 15. But since modern mainboards provide up to 26 ports per Controller, this can become a problem when trying to get USB pots working proplerly. If the ports are not assigned correctly, interal and external USB devices will default to USB 2.0 speesd or won't work at all.
+In macOS, the number of available USB ports is limited to 15. But since modern mainboards provide up to 26 ports per Controller, this can become a problem when trying to get USB pots working properly. If the ports are not assigned correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all.
 
-Since one physical USB 3 connector (the blue ones) actually supports 2 USB protocols, it requires 2 ports: one called "HS" for "high speed" – which is actually USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. In other words: you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols – and that's about it. USB 3.2 is not even in the equasion at this point as far as Apple is concerned. So you have to decide which ports you are going to use and map them manually.
+Since one physical USB 3 connector (the blue ones) actually supports 2 USB protocols, it requires 2 ports: one called "HS" for "high speed" – which is actually USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. In other words: you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols – and that's about it. USB 3.2 is not even in the equation at this point as far as Apple is concerned. So you have to decide which ports you are going to use and map them manually.
 
 ## Removing the USB port limit and mapping USB ports
 
@@ -19,7 +19,7 @@ Up to macOS 11.3, you can use tools to create a USBPorts.kext. To do so, follow 
 Personally, I prefer [**Hackintool**](https://github.com/headkaze/Hackintool) for mapping. This method only works for Intel systems, though. But on AMD systems it's not really an issue, since these boards usually only have about 10 USB ports per controller which stay well within macOS'es limit of 15 ports per controller.
 
 #### Mapping USB ports in macOS 11.3+ or Windows
-Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer working past macOS 11.2, you need to take a different approch. The easiest method is to use Windows using **USBToolBox**.
+Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer working past macOS 11.2, you need to take a different approach. The easiest method is to use Windows using **USBToolBox**.
 
 ##### Mapping USB Ports in Windows:
 - Boot Into Windows from the BIOS bootmenu (to bypass OpenCore injections)
