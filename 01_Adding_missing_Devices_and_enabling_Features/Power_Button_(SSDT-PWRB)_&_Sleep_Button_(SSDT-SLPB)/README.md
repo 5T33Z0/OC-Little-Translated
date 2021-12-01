@@ -30,4 +30,4 @@ Scope (\)
         }
     }
 ```
-**CAUTION:** When using the any of the patches, note that `\SB` name should be consistent with the name used in the original ACPI.
+**CAUTION:** When using the any of the patches, note that `\` `SB` name should be consistent with the name used in the original ACPI.
