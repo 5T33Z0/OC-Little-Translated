@@ -4,12 +4,10 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 
     Scope (\)
     {
-        Method (_INI, 0, NotSerialized)
+        If (_OSI ("Darwin"))
         {
-            If (_OSI ("Darwin"))
-            {
-                ALSE = 2
-            }
+            ALSE = 2
         }
     }
 }
+
