@@ -2,9 +2,9 @@
 //This SSDT activates it on macOS.
 DefinitionBlock ("", "SSDT", 2, "HACK", "PNP0C0E", 0x00000000)
 {
-    External (_SB_.SLPB._STA, UnknownObj)
+    External (_SB_.SLPB._STA, IntObj)
 
-    Scope (\_SB)
+    Scope (\)
     {
         If (_OSI ("Darwin"))
         {
