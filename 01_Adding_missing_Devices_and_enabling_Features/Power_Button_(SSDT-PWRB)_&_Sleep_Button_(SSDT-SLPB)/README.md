@@ -20,6 +20,14 @@ Scope (_SB)
         }
     }
 ```
-This is resolved with SSDT-SLPB_STA0B
-
+This is resolved with SSDT-SLPB_STA0B :
+```
+Scope (\)
+    {
+        If (_OSI ("Darwin"))
+        {
+            _SB.SLPB._STA = 0x0B
+        }
+    }
+```
 **CAUTION:** When using the any of the patches, note that `\SB` name should be consistent with the name used in the original ACPI.
