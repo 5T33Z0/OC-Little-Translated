@@ -46,14 +46,17 @@ Before you do the following make sure you have a working backup of your EFI stor
 
 Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 
+### About the Booter Patches
+- **Patch 0**: Skips Hardware Board ID Check (enabled)
+- **Patch 1**: Reroutes Hardware Board-ID check to OpenCore (enabled)
+
 ### About the Kernel Patches
 In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
-- **Patches 0-2**: Enable board ID spoof via VMM in macOS 12.0.1 (active) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
-- **Patch 3:** seems to be related to Apple's SMC Controller in real Macs (disabled)
-- **Patch 4**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 5-6**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1`. (disabled)
-- **Patches 7-8**: Experimental RDRAND Patches to re-enable Sandy Bridge CPU support in Monterey 12.1 beta (disabled)
+- **Patch 0**: Force enables Filevault on broken seal (disabled). Required if you still want to use Filevault after the Sytsem Partition has been modified which breaks the security seal.
+- **Patch 1**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
+- **Patches 2-3**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1`. (disabled) 
+- **Patches 4-6**: Enable board ID spoof via VMM in macOS 12.0.1 (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 
 <details>
 <summary><strong>Background Info: My test</strong> (Click to show content!)</summary>
