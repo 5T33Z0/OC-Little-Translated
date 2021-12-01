@@ -2,7 +2,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 {
     External (ALSE, IntObj)
 
-    Scope (_SB)
+    Scope (\)
     {
         Method (_INI, 0, NotSerialized)
         {
