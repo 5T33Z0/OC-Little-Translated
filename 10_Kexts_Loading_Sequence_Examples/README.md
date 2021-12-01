@@ -5,7 +5,7 @@ This Chapter contains a collection of `config.plist` examples to demonstrate the
 Basically, Kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the most essential Kexts that are required by almost every Hackintosh to boot. These are:
 
 1. **Lilu.kext**
-2. **VirtualSMC.kext** (+ Sensor Plugins)
+2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ Sensor Plugins)
 3. **Whatevergreen.kext**
 
 The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because theses contain additional kexts nested inside of them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. So does having a Kext in the list which isn't present in the "OC > Kexts" Folder but is enabled in the config.plist. So it's of utmost importance that the Kexts are loaded in the correct order and that the content of the config.plist reflects what's inside the OC Folder 1:1. The examples provided should provide you a good guideline.
