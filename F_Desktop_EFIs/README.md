@@ -32,4 +32,4 @@ The configs cover most Desktop systems, look very well created, documented and m
 ## AMD
 
 - [**AMD Ryzen and Threadripper**](https://github.com/luchina-gabriel/BASE-EFI-AMD-RYZEN-THREADRIPPER)
-- [**Bulldoze and A-Series**](https://github.com/luchina-gabriel/BASE-EFI-AMD-BULLDOZER-FX-PROCESSORS) 
+- [**AMD Bulldozer and A-Series**](https://github.com/luchina-gabriel/BASE-EFI-AMD-BULLDOZER-FX-PROCESSORS) 
