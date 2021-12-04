@@ -1,4 +1,4 @@
-//Enable ALSD if present in ACPI Origin. Native ambient light sensor.
+//Enables native Ambient Light Sensor, if ALSD exists in DSDT. 
 
 DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 {
@@ -12,4 +12,3 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
         }
     }
 }
-
