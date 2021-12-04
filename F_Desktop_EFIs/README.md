@@ -9,7 +9,8 @@ I changed the following:
 - Added required SSDT Hotpatches for the selected CPU Family
 - Added a base-set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC) 
 - Added Device Properties containing additional Framebuffer Patches. 
-- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions work. I did this because this is the #1 reason why people request help because they can't see their drives any more in the boot picker if they don't run macOS Big Sur or newer. Finally, I created variations of configs for Dell/Sony, HP and other Board/Chipset variants.
+- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions work. I did this because this is the #1 reason why people request help because they can't see their drives any more in the boot picker if they don't run macOS Big Sur or newer. 
+- Created variations of configs for Dell, Sony, HP and other Board/Chipset variants.
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
 - Download the BaseConfigs.zip File contained in this Repo
@@ -32,6 +33,7 @@ Enjoy your base OpenCore EFI Folder
 - Open the config.plist in a Plist Editor to find additional info.
 - View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
 - Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add more SSDT Hotpatches and/or Kexts.
+- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings.
 
 ## Included Configs
 
