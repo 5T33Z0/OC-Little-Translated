@@ -1,4 +1,7 @@
 # Preconfigured OpenCore Desktop EFI Folders
+This section includes configs based on the work of Gabriel Luchina who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs but modified them so they work out of the box (hopefully). 
+
+First of all, I removed the Linux support since most users don't use Linux. And those that do are tech-savvy enough to enable it themselves. Next, I added mandatory Quirks required to boot the system (if you cannot disable CFGLock in BIOS), SSDT Hotpatches, a base set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC) and Device Properties containing additional Framebuffer Patches. I also changed the `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions work. I did this because this is the #1 reason why people request help because they can't see their drives any more in the boot picker if they don't run macOS Big Sur or newer. Finally, I created variations of configs for Dell/Sony, HP and other Board/Chipset variations.
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
 - Download the .zip File contained in this Repo
