@@ -7,7 +7,7 @@
 	<key>#SMBIOS: MacPro7,1</key>
 	<string>For Bulldozer and Jaguar CPUs using AMD RX Polaris and newer GPUs. </string>
 	<key>#macOS Compatibility</key>
-	<string>macOS High Sierra and newer</string>
+	<string>macOS Catalina and newer</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>
