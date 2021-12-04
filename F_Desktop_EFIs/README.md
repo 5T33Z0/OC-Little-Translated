@@ -12,9 +12,9 @@ I changed the following:
 - Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions work. I did this because this is the #1 reason why people request help because they can't see their drives any more in the boot picker if they don't run macOS Big Sur or newer. Finally, I created variations of configs for Dell/Sony, HP and other Board/Chipset variants.
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
-- Download the .zip File contained in this Repo
+- Download the BaseConfigs.zip File contained in this Repo
 - Extract it
-- Copy the .plists to the root folder of OCATs Database:
+- Copy the .plists to the root folder of OCATs Database: (no longer necessary since it is icluded in OCAT now)
 	- Righ-click OCAuxiliaryTools App
 	- Select "Show Package Contents"
 	- Browse to Contents > MacOS > Database and paste the files there
