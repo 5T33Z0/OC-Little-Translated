@@ -20,7 +20,20 @@ PS/2 trackpads are obsolete. They may support multitouch, but not as good as I2C
 ### About I2C Trackpads (new)
 I2C trackpads are found on newer laptops, since they have better multitouch gesture support. I2C Trackpads support multitouch gestures pretty well and will improve in the future, thanks to spoofing Apple's Magic Trackpad 2 to enable native multitouch support under macOS.
 
-- Necessary base kext: [**VoodooI2C**](https://github.com/VoodooI2C)
+- Neccessary base kext: [**VoodooI2C**](https://github.com/VoodooI2C)
+- VoodooI2C Plugins:
+
+	|Connection type|Plugin|Notes|
+	|---------------|------|-----|
+	|Atmel Multitouch Protocol|VoodooI2CAtmelMXT|Included in VoodooI2C Package.|
+	|ELAN Proprietary|VoodooI2CElan|ELAN1200+ require VoodooI2CHID instead. Both Included in VoodooI2C Package.|
+	|FTE1001 touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
+	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Trackpads. Included in VoodooI2C Package.|
+	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode)|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases)|Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops|
+	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
+
+
 
 ## Possible workflow
 1. Boot into Windows
