@@ -75,11 +75,14 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 {
     External (ALSE, IntObj)
 
-    Scope (\)
+    Scope (_SB)
     {
-        If (_OSI ("Darwin"))
+        Method (_INI, 0, NotSerialized)
         {
-             ALSE = 2
+            If (_OSI ("Darwin"))
+            {
+                ALSE = 2
+            }
         }
     }
 }
