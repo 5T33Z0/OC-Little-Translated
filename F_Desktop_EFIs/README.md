@@ -4,13 +4,13 @@
 - Download the .zip File contained in this Repo
 - Extract it
 - Copy the .plists to the root folder of OCATs Database:
-	- righ-click OCAuxiliaryTools App
-	- Sellect "Show Package Contents"
+	- Righ-click OCAuxiliaryTools App
+	- Select "Show Package Contents"
 	- Browse to Contents > MacOS > Database and paste the files there
 - Restart OCAT
 - Open the Database
 - Double-click on a config of your choise
-- EFI Folder is Generated an placed on your desktop
+- An EFI Folder is Generated and placed on your Desktop
 - Open the config.plist and generate SMBIOS data for the selected model
 - Save
 
@@ -19,8 +19,8 @@ Enjoy your base OpenCore EFI Folder
 **NOTES**:
 
 - Open the config.plist in a Plist Editor to find additional info.
-- View Device Properties to check the included Framebuffer-Patches and select another one if it fits your setup better. Usually, 2 versions are included: one für using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
-- Depending in your hardware configuration (CPU, Mainboard, Peripherals) you may have to add more SSDT Hotpatches and/or Kexts.
+- View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
+- Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add more SSDT Hotpatches and/or Kexts.
 
 ## Included Configs
 
