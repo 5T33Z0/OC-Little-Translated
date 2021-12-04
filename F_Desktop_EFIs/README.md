@@ -95,7 +95,7 @@ Enjoy your base OpenCore EFI Folder
 	- AMD_Ryzen_iMacPro1,1_RX_Polaris
 	- AMD_Ryzen_MacPro6,1_R5/R7R9
 	- AMD_Ryzen_MacPro7,1_RX_Polaris
-	- AMD_Threadripper_iMac14,2_Kepler+_A520+B550plist
+	- AMD_Threadripper_iMac14,2_Kepler+_A520+B550
 	- AMD_Threadripper_iMac14,2_Kepler+
 	- AMD_Threadripper_iMacPro1,1_RX_Polaris_A520+B550
 	- AMD_Threadripper_iMacPro1,1_RX_Polaris
