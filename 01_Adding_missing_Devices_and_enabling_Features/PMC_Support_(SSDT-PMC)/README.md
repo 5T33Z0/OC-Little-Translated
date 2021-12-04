@@ -2,11 +2,11 @@
 Although adding missing devices/features may improve performance, they can only be regarded as a refinement.
 
 ## Instructions
-:warning: Mandatory for Z390 Boards!
+:warning: Mandatory for Chipset series 300/400/500/600!
 
 - In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used in DSDTs by Apple. 
 - Add ***SSDT-PMC.aml***
-- **For**: 300/400/500 Series Mainboards (100 and 200 Series Board require **SSDT-PPMC** instead!)
+- **For**: 300/400/500/600 Series Mainboards (100 and 200 Series Board require **SSDT-PPMC** instead!)
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original ACPI.
 

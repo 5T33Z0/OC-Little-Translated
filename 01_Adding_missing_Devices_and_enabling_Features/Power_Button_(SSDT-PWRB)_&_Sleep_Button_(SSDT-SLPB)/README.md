@@ -1,5 +1,5 @@
 # Add missing parts
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
+Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for 300/400/500/600 series Chipsets.
 
 ## Instructions
 
@@ -26,7 +26,7 @@ Scope (\)
     {
         If (_OSI ("Darwin"))
         {
-            _SB.SLPB._STA = 0x0B
+            \_SB.SLPB._STA = 0x0B
         }
     }
 ```
