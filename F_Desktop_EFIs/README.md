@@ -119,7 +119,7 @@ Althogh these configs are included in OCAT now, they are maintained and updated 
 
 To manually update the config plists, do the following:
 
-- Download [**_BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/_BaseConfigs.zip) and extract it
+- Download [**_BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/_BaseConfigs.zip?raw=true) and extract it
 - Copy the Files to the Database Folder inside of the **OCAuxiliaryTools** App:
 	- right-click the app and select "Show package contents"
 	- browse to `/Contents/MacOS/Database/BaseConfigs/`
