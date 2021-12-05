@@ -3,7 +3,7 @@ This section includes configs based on the work of Gabriel Luchina who took a lo
 
 I changed the following:
 
-- Removed Linux support since most users don't use Linux
+- Removed Linux support since most users don't use Linux. You can follow this [guide](https://www.insanelymac.com/forum/topic/349838-guide-using-openlinuxboot-to-easily-boot-linux-from-opencore/) if you want to enable it.
 - Removed Bootchime support
 - Added mandatory Kernel Quirks required to boot macOS
 - Added required SSDT Hotpatches for each platform (some are disabled – check before deployment)
