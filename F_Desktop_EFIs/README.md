@@ -109,10 +109,10 @@ Enjoy your base OpenCore EFI Folder
 	- AMD_Threadripper_MacPro7,1_RX_Polaris
  	- AMD_Threadripper_MacPro7,1_RX_Polaris_A520+B550
 - **AMD Bulldozer and A-Series**
-	- AMD_Bulldoze+Jaguar_iMacPro1,1_Polaris
-	- AMD_Bulldoze+Jaguar_MacPro6,1_R5R7R9
-	- AMD_Bulldoze+Jaguar_MacPro7,1_Polaris
-	- AMD_Bulldoze+Jaguar_MacPro14,2_Kepler+
+	- AMD_Bulldozer+Jaguar_iMacPro1,1_Polaris
+	- AMD_Bulldozer+Jaguar_MacPro6,1_R5R7R9
+	- AMD_Bulldozer+Jaguar_MacPro7,1_Polaris
+	- AMD_Bulldozer+Jaguar_MacPro14,2_Kepler+
 
 ## Manual Update
 Althogh these configs are included in OCAT now, they are maintained and updated by me, so the latest versions will always be present in my [**repo**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
