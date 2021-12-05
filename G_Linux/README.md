@@ -1,6 +1,5 @@
 # Booting Linux from OpenCore Bootpicker (OC 0.7.3+)
 
-
 Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore 0.7.3 introduced a new dedicated driver for Linux called `OpenLinuxBoot.efi`.
 
 ## Enabling Linux support
