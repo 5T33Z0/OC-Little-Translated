@@ -222,7 +222,7 @@
                 </dict>
                 <dict>
                     <key>Arch</key>
-                    <string>x86_64</string>
+                    <string>Any</string>
                     <key>BundlePath</key>
                     <string>AppleALC.kext</string>
                     <key>Comment</key>
