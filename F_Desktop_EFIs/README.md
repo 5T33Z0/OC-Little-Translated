@@ -3,32 +3,32 @@ This section includes configs based on the work of Gabriel Luchina who took a lo
 
 I changed the following:
 
-- Removed Linux support since most users don't use Linux. 
-- Removed Bootchime support. 
-- Added mandatory Kernel Quirks required to boot macOS 
+- Removed Linux support since most users don't use Linux
+- Removed Bootchime support
+- Added mandatory Kernel Quirks required to boot macOS
 - Added required SSDT Hotpatches for each platform (some are disabled – check before deployment)
-- Added a base-set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC) 
-- Added Device Properties containing additional Framebuffer Patches. 
-- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions are supported. This is the #1 reason why users request help because they can't see their drives in the boot picker if they don't run macOS Big Sur or newer. 
-- Created variations of configs for Dell, Sony, HP and other Board/Chipset variants.
+- Added a base-set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC)
+- Added Device Properties containing additional Framebuffer Patches
+- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions are supported. This is the #1 reason why users request help because they can't see their drives in the boot picker if they don't run macOS Big Sur or newer
+- Created variations of configs for Dell, Sony, HP and other Board/Chipset variants
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
-- Start OCAT.
-- Open the Database.
-- Double-click on a config of your choice.
-- An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes.
-- Open the included config.plist and generate SMBIOS data for the selected model.
-- Add addtional SSDTs, Kexts or Device Properties for your hardware-setup (if neccessary).
-- Save.
+- Start OCAT
+- Open the Database
+- Double-click on a config of your choice
+- An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes
+- Open the included config.plist and generate SMBIOS data for the selected model
+- Add addtional SSDTs, Kexts or Device Properties for your hardware-setup (if neccessary)
+- Save
 
 Enjoy your base OpenCore EFI Folder
 
 **NOTES**:
 
-- Open the config.plist in a Plist Editor to find additional info.
+- Open the config.plist in a Plist Editor to find additional info
 - View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
 - Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add additional SSDT Hotpatches, DeviceProperties and/or Kexts – check before deployment!
-- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings.
+- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings
 
 ## Included Configs
 
