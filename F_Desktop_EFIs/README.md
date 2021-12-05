@@ -127,5 +127,7 @@ To manually update the config plists, do the following:
 	- restart OCAT
 
 ## References
+- **OpenCore Auxiliary Tools**: https://github.com/ic005k/QtOpenCoreConfig
 - **Base Configs**: https://github.com/luchina-gabriel?tab=repositories
-- **OpenCore Install Guide:** https://dortania.github.io/OpenCore-Install-Guide
+- **OpenCore Install Guide**: https://dortania.github.io/OpenCore-Install-Guide
+- **OpenCore Bootloader**: https://github.com/acidanthera/OpenCorePkg
