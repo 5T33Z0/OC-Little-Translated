@@ -127,5 +127,5 @@ To manually update the config plists, do the following:
 	- restart OCAT
 
 ## References
-- **OpenCore Install Guide:** https://dortania.github.io/OpenCore-Install-Guide
 - **Base Configs**: https://github.com/luchina-gabriel?tab=repositories
+- **OpenCore Install Guide:** https://dortania.github.io/OpenCore-Install-Guide
