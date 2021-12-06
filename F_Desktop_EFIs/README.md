@@ -111,6 +111,7 @@ You can follow this [**guide**]( https://dortania.github.io/OpenCore-Post-Instal
 - View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
 - Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add additional SSDT Hotpatches, boot-args, DeviceProperties and/or Kexts – check before deployment!
 - Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings
+- For enabling Linux support, you can follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux).
 
 ## Included Configs
 
