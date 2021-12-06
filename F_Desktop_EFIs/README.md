@@ -1,6 +1,6 @@
 # Pre-configured OpenCore Desktop EFI Folders
 ## About
-This section includes OpenCore configs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs but modified them so they work out of the box (hopefully).
+This section includes OpenCore configs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools (OCAT) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
