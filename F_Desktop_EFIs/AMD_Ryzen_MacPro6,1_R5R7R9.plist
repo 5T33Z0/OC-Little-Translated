@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>#By 5T33Z0</key>
+	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
+	<string></string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

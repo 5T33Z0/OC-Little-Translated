@@ -5,6 +5,8 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
+<string>Read Instructions.md in the BaseConfig Folder of the App!</string>
+	<key>#ConfigComment 2</key>
 	<string>CPU: AMD 15h/16h, GPU: AMD R5/R7/R9 and older GPUs, SMBIOS: MacPro6,1, macOS: High Sierra+</string>
 	<key>ACPI</key>
 	<dict>

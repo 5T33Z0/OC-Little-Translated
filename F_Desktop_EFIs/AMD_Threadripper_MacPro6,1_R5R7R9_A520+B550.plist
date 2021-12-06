@@ -5,7 +5,7 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
+	<string></string>
 	<key>#Notes</key>
 	<string>For the following Chipsets: A520, B450, B550,, X470, X570. Update to the latest BIOS.</string>
 	<key>#SMBIOS: MacPro6,1</key>

@@ -5,13 +5,9 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
-	<key>#Notes</key>
-	<string>iMac14,2 is only supported to macOS 10.8-10.15. For macOS 11, Big Sur and newer please use MacPro7,1</string>
-	<key>#SMBIOS: iMac14,2</key>
-	<string>For AMD Ryzen using Nvidia Kepler and newer GPUs.</string>
-	<key>#macOS Compatibility</key>
-	<string>macOS High Sierra to macOS Catalina.</string>
+	<string></string>
+	<key>#ConfigComment 2</key>
+	<string>CPU: AMD Ryzen, GPU: NVIDIA Kepler, SMBIOS:  iMac14,2, macOS: 10.8 to 10.15, Big Sur+: use MacPro7,1</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

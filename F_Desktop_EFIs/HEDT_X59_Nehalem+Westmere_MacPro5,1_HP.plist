@@ -5,7 +5,7 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
+	<string></string>
 	<key>#SMBIOS: MacPro5,1</key>
 	<string>For macOS Mojave and older running on HP Systems</string>
 	<key>ACPI</key>

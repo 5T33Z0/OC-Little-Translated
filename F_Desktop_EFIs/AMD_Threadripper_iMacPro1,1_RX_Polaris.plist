@@ -5,7 +5,7 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
+	<string></string>
 	<key>#SMBIOS: iMacPro1,1</key>
 	<string>For AMD Threadripper using AMD RX Polaris and newer GPUs.</string>
 	<key>#macOS Compatibility</key>

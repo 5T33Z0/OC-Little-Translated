@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
+	<string></string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

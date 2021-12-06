@@ -53,7 +53,7 @@ After the base EFI has been generated, the `config.plist` *maybe* has to be modi
 - Go to the Desktop
 - Open the `config.plist` included in `\EFI\OC\` with **OCAT**
 - Check the following Settings:
-	- **ACPI > Add**: add additional ACPI Tabels if your hardware configuration requires them
+	- **ACPI > Add**: add additional ACPI Tabels if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
 	- **DeviceProperties**:
 		- Check if the correct Framebuffer Patch is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
 		- Add additional PCI paths (if required for your hardware)
@@ -77,7 +77,7 @@ Parameter|Description
 :----|:----
 **npci=0x2000** or **npci=0x3000**| Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`.<br>Required when getting stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
 
-#### AMD: adjusting CPU Core Count 
+#### AMD-specific settings: adjusting CPU Core Count 
 - In config.plist, search for `algrey - Force cpuid_cores_per_package` 
 - There should be 3 Patches with the same name (for various versions of macOS)
 - In the `Replace` field, find:
@@ -99,6 +99,11 @@ Parameter|Description
 		- B8 **06** 0000 0000 (for macOS 10.13, 10.14)
 		- BA **06** 0000 0000 (for macOS 10.15, 11)
 		- BA **06** 0000 0090 (for macOS 12)
+
+### Intel-specific settings: Fixing CPU Power Management on Sandy and Ivy Bridge CPUs
+2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
+
+You can follow this [**guide**]( https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) to do so.
 
 **NOTES**:
 

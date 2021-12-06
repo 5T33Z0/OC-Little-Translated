@@ -5,11 +5,9 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: ;GPU: ;SMBIOS: ;macOS: </string>
-	<key>#SMBIOS: MacPro7,1</key>
-	<string>For Bulldozer and Jaguar CPUs using AMD RX Polaris and newer GPUs. </string>
-	<key>#macOS Compatibility</key>
-	<string>macOS Catalina and newer</string>
+<string>Right-Click OCAT > Show package contents > MacOS > Database > BaseConfig</string>
+	<key>#ConfigComment 2</key>
+	<string>CPU: AMD 15h/16h GPU: AMD RX Polaris and newer. SMBIOS: MacPro7,1, macOS: 10.15+</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

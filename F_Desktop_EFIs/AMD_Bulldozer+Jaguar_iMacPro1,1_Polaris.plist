@@ -5,6 +5,8 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
+	<string></string>
+	<key>#ConfigComment 2</key>
 	<string>CPU: AMD 15h/16h; GPU: RX Polaris and newer ; SMBIOS: iMacPro1,1; macOS: High Sierra+</string>
 	<key>ACPI</key>
 	<dict>

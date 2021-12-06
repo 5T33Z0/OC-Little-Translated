@@ -5,7 +5,7 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#ConfigComment</key>
-	<string>CPU: AMD 15h/16h, GPU:  Nvidia Kepler SMBIOS: iMac14,2  only supported on macOS 10.8  to 10.15. For macOS 11, Big Sur and newer please use MacPro7,1</string>
+	<string></string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>
