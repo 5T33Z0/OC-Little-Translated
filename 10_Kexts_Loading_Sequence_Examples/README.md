@@ -12,6 +12,28 @@ The rest of the config examples show the loading sequences for `Bluetooth`, `Wif
 
 For additional information about available Kexts the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
+## Kernel Support Table
+Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for Kexts is very useful to set-up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kexts are loaded for which macOS by specifying the kernel range. 
+
+This is especially useful for Bluetooth and WiFi Kexts where certain macOS versions require different sets of kexts than others. This way, you can leave them all enabled but control which Kexts will be loaded for the specified Kernel range (aka the chosen macOS version). See "Example 7" which makes use of this feature extensively.
+
+|macOS|MinKernel|MaxKernel
+|-----:|---------:|--------:|
+10.4 	|8.0.0| 	8.99.99
+10.5 	|9.0.0| 	9.99.99
+10.6 	|10.0.0| 	10.99.99
+10.7 	|11.0.0| 	11.99.99
+10.8 	|12.0.0|	12.99.99
+10.9 	|13.0.0| 	13.99.99
+10.10 	|14.0.0|	14.99.99
+10.11 	|15.0.0|	15.99.99
+10.12 	|16.0.0|	16.99.99
+10.13 	|17.0.0|	17.99.99
+10.14 	|18.0.0|	18.99.99
+10.15 	|19.0.0|	19.99.99
+11 		|20.0.0| 	20.99.99
+12		|21.0.0|	21.99.99
+
 ## Screenshots
 ### Example 1: Mandatory Kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)</br>
