@@ -13,7 +13,7 @@ The rest of the config examples show the loading sequences for `Bluetooth`, `Wif
 For additional information about available Kexts the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Kernel Support Table
-Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for Kexts is very useful to set-up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kexts are loaded for which macOS by specifying the kernel range. 
+Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for Kexts is very useful to set-up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kexts are loaded for which macOS by specifying the kernel range. It's basically the same feature Clover provides. But instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.) you specify the lower and upper limit. This is a lot smarte because this way you don't create duplicate kexts (which you maybe forget to update).
 
 This is especially useful for Bluetooth and WiFi Kexts where certain macOS versions require different sets of kexts than others. This way, you can leave them all enabled but control which Kexts will be loaded for the specified Kernel range (aka the chosen macOS version). See "Example 7" which makes use of this feature extensively.
 
