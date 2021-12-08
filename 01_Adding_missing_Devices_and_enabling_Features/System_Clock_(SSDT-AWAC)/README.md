@@ -7,6 +7,98 @@ Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time.
 The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
+* ### Example 2
+
+Official patch ***SSDT-AWAC*** for some 300+ tethered machines to force RTC to be enabled and disable AWAC at the same time.
+
+Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Devices.
+
+Original article.
+
+```Swift
+Device (RTC)
+{
+    ...
+    Method (_STA, 0, NotSerialized)
+    {
+            If ((STAS == One))
+            {
+                Return (0x0F)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+    }
+    ...
+}
+Device (AWAC)
+{
+    ...
+    Method (_STA, 0, NotSerialized)
+    {
+            If ((STAS == Zero))
+            {
+                Return (0x0F)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+    }
+    ...
+}
+```
+
+As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
+	
+- Best patch ***SSDT-AWAC_N_RTC_Y-***
+
+  ```Swift
+  External (STAS, IntObj)
+  Scope (\)
+  {
+      If (_OSI ("Darwin"))
+      {
+          STAS = One
+      }
+  }
+	
+- Old patch ***SSDT-AWAC***
+
+  ```Swift
+  External (STAS, IntObj)
+  Scope (\)
+  {
+      Method (_INI, 0, NotSerialized) /* _INI: Initialize */
+      {
+          If (_OSI ("Darwin"))
+          {
+              STAS = One
+          }
+      }
+  }
+  ```
+
+  Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
+
+- Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
+
+  ```Swift
+    DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
+    {
+    External (_SB_.AWAC._STA, IntObj)
+
+    Scope (\)
+    {
+
+        If (_OSI ("Darwin"))
+        {
+            \_SB.AWAC._STA = Zero
+            
+        }
+    }
+  ```
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
 * ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
