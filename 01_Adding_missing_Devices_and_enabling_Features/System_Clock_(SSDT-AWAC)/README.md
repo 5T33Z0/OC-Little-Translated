@@ -2,7 +2,7 @@
 
 Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. 
 
-## Patch Method (NEW): Using SSDTTime
+## Patch Method :
 
 The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
 
