@@ -32,6 +32,8 @@ Device (RTC)
 To enable `RTC` in macOS, which sets the return value for `_STA` to `0x0F`, avoid adding fake devices:
 
 ```swift
+DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
+{
     External (_SB_.PCI0.LPCB.RTC_._STA, UnknownObj)
 
     Scope (\)
