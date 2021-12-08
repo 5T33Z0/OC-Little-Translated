@@ -308,8 +308,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
             
         }
     }
-}
-```
+  ```
   
 ### Example 3
 
