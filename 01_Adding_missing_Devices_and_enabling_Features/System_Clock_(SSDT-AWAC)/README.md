@@ -7,7 +7,7 @@ Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time.
 The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
-* <details>
+<details>
 <summary><strong>ACPI Patches in OpenCore</strong></summary>
 <details>
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
