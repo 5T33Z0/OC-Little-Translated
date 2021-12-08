@@ -261,8 +261,20 @@ Device (AWAC)
 ```
 
 As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
+	
+- Best patch ***SSDT-AWAC_N_RTC_Y-***
 
-- Official patch ***SSDT-AWAC***
+  ```Swift
+  External (STAS, IntObj)
+  Scope (\)
+  {
+      If (_OSI ("Darwin"))
+      {
+          STAS = One
+      }
+  }
+	
+- Old patch ***SSDT-AWAC***
 
   ```Swift
   External (STAS, IntObj)
@@ -280,18 +292,6 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
   Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
 
-- Improved patch ***SSDT-RTC_Y-AWAC_N***
-
-  ```Swift
-  External (STAS, IntObj)
-  Scope (\)
-  {
-      If (_OSI ("Darwin"))
-      {
-          STAS = One
-      }
-  }
-  ```
 - Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
 
   ```Swift
