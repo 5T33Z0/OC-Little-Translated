@@ -292,7 +292,25 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
       }
   }
   ```
+- Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present.
 
+  ```Swift
+    DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
+    {
+    External (_SB_.AWAC._STA, IntObj)
+
+    Scope (\)
+    {
+
+        If (_OSI ("Darwin"))
+        {
+            \_SB.AWAC._STA = Zero
+            
+        }
+    }
+}
+```
+  
 ### Example 3
 
 When using the I2C patch, you may need to enable `GPIO`. See ***SSDT-OCGPI0-GPEN*** of the OCI2C-GPIO Patch.
