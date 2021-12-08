@@ -9,7 +9,7 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
 * ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
-* ***SSDT-PMC*** – Enables native NVRAM on True 300-Series Boards
+* ***SSDT-PMC*** – Enables native NVRAM on True 300/400/500/600-Series Mainboards
 
 **HOW TO:**
 
@@ -443,4 +443,5 @@ Using this method will result in an error (non-ACPI Error) by invalidating other
 
 ## Credits
 - **Acidanthera** for `SSDT-AWAC-Disable.dsl`
-- **Baio1977** for `SSDT-AWAC_N_RTC_Y.dsl` and `SSDT-AWAC_STA0.dsl`
+- **daliansky** for `SSDT-AWAC_N_RTC_Y.dsl`
+- **Baio1977** for `SSDT-AWAC_STA0.dsl`
