@@ -83,7 +83,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
   Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
 
-- Disable AWAC where SSDT-AWAC has no effect ***SSDT-AWAC_STA0*** , check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
+- Disable AWAC where SSDT-AWAC has no effect trial ***SSDT-AWAC_STA0*** , check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
 
   ```Swift
     DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
