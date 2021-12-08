@@ -314,7 +314,7 @@ Scope (\)
 }
 ```
  
-### Example 3
+### Example 2
 
 When using the I2C patch, you may need to enable `GPIO`. See ***SSDT-OCGPI0-GPEN*** of the OCI2C-GPIO Patch.
 
@@ -343,7 +343,7 @@ Scope (\)
     }
 }
 ```
-### Example 4
+### Example 3
 
 When the `variable` is a read-only type, the solution is as follows.
 
@@ -389,7 +389,7 @@ Else
       IM01 = XM01 /* Same path as the original ACPI variable */
 }
 ```
-### Example 5
+### Example 4
 
 Change the enable bit of the device state using the assignment of the device's original `_STA` method (Method) referenced as `IntObj` to it.
 
