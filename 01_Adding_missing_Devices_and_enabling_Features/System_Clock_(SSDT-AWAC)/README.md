@@ -292,7 +292,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
       }
   }
   ```
-- Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present.
+- Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
 
   ```Swift
     DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
@@ -308,7 +308,8 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
             
         }
     }
-  ```
+}
+```
   
 ### Example 3
 
