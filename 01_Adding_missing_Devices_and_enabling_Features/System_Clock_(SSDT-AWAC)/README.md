@@ -2,9 +2,106 @@
 
 Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. 
 
-## Patch Method (NEW): Using SSDTTime
+## Patch Method :
 
 The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
+
+* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
+
+### Example
+
+Official patch ***SSDT-AWAC*** for some 300+ tethered machines to force RTC to be enabled and disable AWAC at the same time.
+
+Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Devices.
+
+Original article.
+
+```Swift
+Device (RTC)
+{
+    ...
+    Method (_STA, 0, NotSerialized)
+    {
+            If ((STAS == One))
+            {
+                Return (0x0F)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+    }
+    ...
+}
+Device (AWAC)
+{
+    ...
+    Method (_STA, 0, NotSerialized)
+    {
+            If ((STAS == Zero))
+            {
+                Return (0x0F)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+    }
+    ...
+}
+```
+
+As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
+	
+- Best patch ***SSDT-AWAC_N_RTC_Y***
+
+  ```Swift
+  External (STAS, IntObj)
+  Scope (\)
+  {
+      If (_OSI ("Darwin"))
+      {
+          STAS = One
+      }
+  }
+	
+- Old patch ***SSDT-AWAC***
+
+  ```Swift
+  External (STAS, IntObj)
+  Scope (\)
+  {
+      Method (_INI, 0, NotSerialized) /* _INI: Initialize */
+      {
+          If (_OSI ("Darwin"))
+          {
+              STAS = One
+          }
+      }
+  }
+  ```
+
+  Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
+
+- Disable AWAC where SSDT-AWAC has no effect trial ***SSDT-AWAC_STA0*** , check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
+
+  ```Swift
+    DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
+    {
+    External (_SB_.AWAC._STA, IntObj)
+
+    Scope (\)
+    {
+
+        If (_OSI ("Darwin"))
+        {
+            \_SB.AWAC._STA = Zero
+            
+        }
+    }
+  ```
+  
+# Patch using SSDTTime:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
@@ -216,84 +313,8 @@ Scope (\)
     }
 }
 ```
-
+ 
 ### Example 2
-
-Official patch ***SSDT-AWAC*** for some 300+ tethered machines to force RTC to be enabled and disable AWAC at the same time.
-
-Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Devices.
-
-Original article.
-
-``Swift
-Device (RTC)
-{
-    ...
-    Method (_STA, 0, NotSerialized)
-    {
-            If ((STAS == One))
-            {
-                Return (0x0F)
-            }
-            Else
-            {
-                Return (Zero)
-            }
-    }
-    ...
-}
-Device (AWAC)
-{
-    ...
-    Method (_STA, 0, NotSerialized)
-    {
-            If ((STAS == Zero))
-            {
-                Return (0x0F)
-            }
-            Else
-            {
-                Return (Zero)
-            }
-    }
-    ...
-}
-```
-
-As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
-
-- Official patch ***SSDT-AWAC***
-
-  ```Swift
-  External (STAS, IntObj)
-  Scope (\)
-  {
-      Method (_INI, 0, NotSerialized) /* _INI: Initialize */
-      {
-          If (_OSI ("Darwin"))
-          {
-              STAS = One
-          }
-      }
-  }
-  ```
-
-  Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
-
-- Improved patch ***SSDT-RTC_Y-AWAC_N***
-
-  ```Swift
-  External (STAS, IntObj)
-  Scope (\)
-  {
-      If (_OSI ("Darwin"))
-      {
-          STAS = One
-      }
-  }
-  ```
-
-### Example 3
 
 When using the I2C patch, you may need to enable `GPIO`. See ***SSDT-OCGPI0-GPEN*** of the OCI2C-GPIO Patch.
 
@@ -322,7 +343,7 @@ Scope (\)
     }
 }
 ```
-### Example 4
+### Example 3
 
 When the `variable` is a read-only type, the solution is as follows.
 
@@ -368,7 +389,7 @@ Else
       IM01 = XM01 /* Same path as the original ACPI variable */
 }
 ```
-### Example 5
+### Example 4
 
 Change the enable bit of the device state using the assignment of the device's original `_STA` method (Method) referenced as `IntObj` to it.
 
