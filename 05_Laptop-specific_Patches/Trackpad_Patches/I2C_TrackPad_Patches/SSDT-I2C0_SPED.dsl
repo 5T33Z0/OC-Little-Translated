@@ -2,9 +2,6 @@
 DefinitionBlock ("", "SSDT", 2, "Hack", "I2C0SPED", 0x00000000)
 {
     External (_SB_.PCI0.I2C0, DeviceObj)
-    External (FMD0, IntObj)
-    External (FMH0, IntObj)
-    External (FML0, IntObj)
     External (SSD0, IntObj)
     External (SSH0, IntObj)
     External (SSL0, IntObj)

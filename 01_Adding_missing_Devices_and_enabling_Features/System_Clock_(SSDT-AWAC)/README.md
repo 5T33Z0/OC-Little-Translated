@@ -266,8 +266,8 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
   ```Swift
   External (STAS, IntObj)
-  Scope (_SB)
-  Scope (_SB) {
+  Scope (\)
+  {
       Method (_INI, 0, NotSerialized) /* _INI: Initialize */
       {
           If (_OSI ("Darwin"))

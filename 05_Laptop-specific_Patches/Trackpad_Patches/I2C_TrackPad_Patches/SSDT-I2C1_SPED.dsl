@@ -2,12 +2,9 @@
 DefinitionBlock ("", "SSDT", 2, "Hack", "I2C1SPED", 0x00000000)
 {
     External (_SB_.PCI0.I2C1, DeviceObj)
-    External (FMD0, IntObj)
-    External (FMH0, IntObj)
-    External (FML0, IntObj)
-    External (SSD0, IntObj)
-    External (SSH0, IntObj)
-    External (SSL0, IntObj)
+    External (SSD1, IntObj)
+    External (SSH1, IntObj)
+    External (SSL1, IntObj)
 
     Scope (_SB.PCI0.I2C1)
     {
@@ -32,7 +29,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "I2C1SPED", 0x00000000)
         {
             Method (SSCN, 0, NotSerialized)
             {
-                Return (PKGX (SSH0, SSL0, SSD0))
+                Return (PKGX (SSH1, SSL1, SSD1))
             }
         }
 
