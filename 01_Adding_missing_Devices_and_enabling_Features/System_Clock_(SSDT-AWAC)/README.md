@@ -6,7 +6,10 @@ Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time.
 
 The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC	
+* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
+* <details>
+<summary><strong>ACPI Patches in OpenCore</strong></summary>
+<details>
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
 * ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
