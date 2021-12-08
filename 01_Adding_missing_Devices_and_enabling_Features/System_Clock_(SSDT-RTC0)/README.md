@@ -2,7 +2,7 @@
 
 ## Overview
 
-For some 300-series motherboards, the `RTC` device is disabled by default and cannot be enabled via the return value of the `STAS` variable `_STA`, which is shared with `AWAC`, resulting in ***`SSDT-AWAC`*** not taking effect. So in order to enable the `RTC` device, we need to to force the `RTC` device by impersonating an `RTC0`.
+For some 300-series motherboards, the `RTC` device is disabled by default and cannot be enabled via the return value of the `STAS` variable `_STA`, which is shared with `AWAC`, resulting in ***`SSDT-AWAC`*** not taking effect. So in order to enable the `RTC` device, we need to to force the `RTC` device by ading a fake `RTC0`.
 
 ## Usage
 In this example, `RTC` exists in the orginal `DSDT`but is disabled (return value for `_STA` is `0`):
