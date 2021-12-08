@@ -225,7 +225,7 @@ Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Device
 
 Original article.
 
-``Swift
+```Swift
 Device (RTC)
 {
     ...
