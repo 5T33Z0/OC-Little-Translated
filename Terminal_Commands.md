@@ -129,3 +129,8 @@ or
 
 **Checking for Wake Reasons**</br>
 `log show | grep -i "wake reason"`
+
+**List of PMSET Commands**<br>
+https://www.dssw.co.uk/reference/pmset.html
+
+- **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
