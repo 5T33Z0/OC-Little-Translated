@@ -53,7 +53,7 @@ Device (AWAC)
 
 As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
 	
-- Best patch ***SSDT-AWAC_N_RTC_Y-***
+- Best patch ***SSDT-AWAC_N_RTC_Y***
 
   ```Swift
   External (STAS, IntObj)
@@ -83,7 +83,7 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
 
   Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
 
-- Disable AWAC where SSDT-AWAC has no effect, check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
+- Disable AWAC where SSDT-AWAC has no effect ***SSDT-AWAC_STA0*** , check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
 
   ```Swift
     DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
@@ -100,6 +100,10 @@ As you can see from the original text, you can enable RTC and disable `AWAC` at 
         }
     }
   ```
+  
+# Patch using SSDTTime:
+
+* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
 * ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
