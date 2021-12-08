@@ -1,22 +1,38 @@
-# System Clock Fix (SSDT-AWAC)
+# Fixing the System Clock (SSDT-AWAC)
 
-Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. 
+Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
 
-## Patch Method :
-
-The previous patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs from analyzing your system's `DSDT`:
+## Automated SSDT generation: using SSDTTime
+With the python script **SSDTTime**, you can generate the following SSDTs from analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
+* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
+* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
+* ***SSDT-PMC*** – Enables native NVRAM on True 300-Series Boards
 
-### Example
+**HOW TO:**
 
-Official patch ***SSDT-AWAC*** for some 300+ tethered machines to force RTC to be enabled and disable AWAC at the same time.
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Pres "D", drag in your system's DSDT and hit "ENTER"
+3. Generate all the SSDTs you need.
+4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
+5. Copy the generated `SSDTs` to EFI > OC > ACPI
+6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
+7. Save your config
+8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
+9. Open your config and create a new snapshot to get the new .aml files added to the list.
+10. Save. Reboot. Done. 
 
-Note: Enabling RTC can also be done with ***SSDT-RTC0***, see Counterfeit Devices.
+**NOTE**
+If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
 
-Original article.
+## Manual patching methods
+Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT you can use different methods. Here are some examples.
 
-```Swift
+Original Code in `DSDT` for "Device (RTC)" and "Device (AWAC)":
+
+```swift
 Device (RTC)
 {
     ...
@@ -50,83 +66,55 @@ Device (AWAC)
     ...
 }
 ```
+As you can see, you can enable RTC and disable AWAC at the same time as long as STAS=1. Using the preset variables method as follows.
 
-As you can see from the original text, you can enable RTC and disable `AWAC` at the same time as long as `STAS`=`1`. Using the **preset variables method** as follows.
-	
-- Best patch ***SSDT-AWAC_N_RTC_Y***
+### Method 1: using `SSCT-AWAC_N_RTC_Y` (new, recommended)
+New patch. Disables AWAC and enables RTC: 
 
-  ```Swift
-  External (STAS, IntObj)
-  Scope (\)
+```swift
+External (STAS, IntObj)
+Scope (\)
+{
+    If (_OSI ("Darwin"))
+    {
+        STAS = One
+    }
+}
+``` 
+### Method 2: using `SSDT-AWAC-DISABLE` (official)
+You can also use `SSDT-AWAC-DISABLE.aml` included in the "AcpiSamples" folder of the OpenCore Package:
+
+```swift
+External (STAS, IntObj)
+Scope (\)
+{
+    Method (_INI, 0, NotSerialized) /* _INI: Initialize */
+    {
+        If (_OSI ("Darwin"))
+        {
+            STAS = One
+        }
+    }
+}
+```
+The official hotpatch uses `_SB_._INI` as path, so you should ensure sure that `_SB_._INI` doesn't exist in `DSDT` and other patches when using it.
+
+### Method 3: using `SSDT-AWAC_STA0` (if method 2 fails)
+Disables AWAC where `SSDT-AWAC-DISABLE` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
+
+```swift
+External (_SB_.AWAC._STA, IntObj)
+Scope (\)
   {
       If (_OSI ("Darwin"))
       {
-          STAS = One
+          \_SB.AWAC._STA = Zero
+          
       }
   }
-	
-- Old patch ***SSDT-AWAC***
-
-  ```Swift
-  External (STAS, IntObj)
-  Scope (\)
-  {
-      Method (_INI, 0, NotSerialized) /* _INI: Initialize */
-      {
-          If (_OSI ("Darwin"))
-          {
-              STAS = One
-          }
-      }
-  }
-  ```
-
-  Note: The official patch introduces the path `_SB._INI`, you should make sure that `_SB._INI` does not exist in DSDT and other patches when using it.
-
-- Disable AWAC where SSDT-AWAC has no effect trial ***SSDT-AWAC_STA0*** , check ioreg, AWAC must not be present .Example on some HP with 8th gen CPU or higher.
-
-  ```Swift
-    DefinitionBlock ("", "SSDT", 2, "ACDT", "AWAC", 0x00000000)
-    {
-    External (_SB_.AWAC._STA, IntObj)
-
-    Scope (\)
-    {
-
-        If (_OSI ("Darwin"))
-        {
-            \_SB.AWAC._STA = Zero
-            
-        }
-    }
-  ```
-  
-# Patch using SSDTTime:
-
-* ***SSDT-AWAC*** – Context-Aware AWAC and Fake RTC
-* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
-* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
-* ***SSDT-HPET*** – Patches out IRQ and Timer conflicts to enable on-board Sound Cards
-* ***SSDT-PMC*** – Enables native NVRAM on True 300-Series Boards
-
-**HOW TO:**
-
-1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Pres "D", drag in your system's DSDT and hit "ENTER"
-3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI > OC > ACPI
-6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
-7. Save your config
-8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
-9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. 
-
-**NOTE**
-If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
-
+```
 <details>
-<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
+<summary><strong>Old Methods (kept for documentary purposes)</strong></summary>
 
 # Binary Name Change
 
@@ -451,3 +439,8 @@ From the above example, we can see that the original `_STA` method contains othe
 Using this method will result in an error (non-ACPI Error) by invalidating other references and operations in the original `_STA` method
 
 **Risk**: `XM01` may not be recovered when OC boots other systems.
+</details>
+
+## Credits
+- **Acidanthera** for `SSDT-AWAC-Disable.dsl`
+- **Baio1977** for `SSDT-AWAC_N_RTC_Y.dsl` and `SSDT-AWAC_STA0.dsl`
