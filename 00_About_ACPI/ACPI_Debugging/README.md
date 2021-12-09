@@ -26,10 +26,10 @@ To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps
 - Kext and Patches:
   - ***ACPIDebug.kext***
   - ***SSDT-RMDT***
-  - ***SSDT-PTSWAK*** -- The patch has built-in parameter passing variables `\_SB.PCI9.TPTS`, `\_SB.PCI9.TWAK`, which are convenient for other patches. See "PTSWAK Sleep and WakeFix"
+  - ***SSDT-PTSWAK*** &rarr; This patch has built-in parameter passing variables `\_SB.PCI9.TPTS`, `\_SB.PCI9.TWAK`, which are convenient for other patches. See [**PTSWAK Sleep and WakeFix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix).
   - ***SSDT-BKeyQxx-Debug*** - This patch is just an example. Debug code is added within the patch to be able to execute debug code after key response. You can specify the brightness shortcut key, or other keys when you actually use it.</br>
     **Note**: The name change required by the above patch is in the comments of the corresponding patch file.
-- Observe the console output results
+- Observe the console output
   - Open the console and search for `ABCD-`
   - Complete the sleep and wake up process once
   - Press the key specified by ***SSDT-BKeyQxx-Debug*** and observe the console output results. In general, the following results are displayed:
