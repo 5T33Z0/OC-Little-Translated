@@ -23,7 +23,7 @@ With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quir
 | 64 MB|6|
 | 128 MB|7|
 | 256 MB|8|
-| 512 MB*|9*|
+| 512 MB°|9°|
 | 1 GB|10|
 | 2 GB|11|
 | 4 GB|12|
@@ -35,7 +35,7 @@ With this UEFI Quirk you change the the GPU BAR Size of the system. ***This quir
 | 256 GB|18|
 | 512 GB|19|
 
-`*`Maximum for macOS IOPCIFamily.
+`°`Maximum for macOS IOPCIFamily.
 
 ### ResizeAppleGPUBars
 This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB. `ResizeGpuBars` must be an integer value between `-1` to `19`.
@@ -60,7 +60,7 @@ This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or l
 | 128 MB|7|
 | 256 MB|8|
 | 512 MB|9|
-| 1 GB*|10*|
+| 1 GB°|10°|
 | 2 GB|11|
 | 4 GB|12|
 | 8 GB|13|
@@ -71,7 +71,7 @@ This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or l
 | 256 GB|18|
 | 512 GB|19|
 
-`*`Maximum for macOS.
+`°`Maximum for macOS.
 
 ## Note
-Before you change any of these values, research if your GPU supports BAR Resize and check the supportedt size with tools like HWiNFO on PC.
+Before changing any of these values, research if your GPU supports BAR Resize and check the supported size with tools like HWiNFO in Windows.
