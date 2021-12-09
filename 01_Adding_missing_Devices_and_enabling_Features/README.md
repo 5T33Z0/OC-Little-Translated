@@ -60,7 +60,7 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpach.
 
 |SSDT-…|Description|Search term(s) in DSDT 
-|----|-------------|:-------------------:|
+|:----:|-------------|:-------------------:|
 [**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Adds an AC Adaptor Device (for Laptops)|`ACPI0003` or `Device (AC)` 
 |[**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables and existing one in macOS (SSDT-ALSD)|`ACPI0008`
 |[**SSDT-PNLF**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control (for Laptop Screens)|–
