@@ -14,19 +14,19 @@ Different machines may define `_PRW` in different ways, and the contents and for
 
 ### Components that may require a `0D/6D Patch`
 
-- USB class devices
+- **USB class devices**
   - `ADR` address: `0x001D0000`, part name: `EHC1`.
   - `ADR` address: `0x001A0000`, part name: `EHC2`.
   - `ADR` Address: `0x00140000`, Part Name: `XHC`, `XHCI`, `XHC1`, etc.
   - `ADR` address: `0x00140001`, part name: `XDCI`.
   - `ADR` address: `0x00140003`, part name: `CNVW`.
 
-- Ethernet
+- **Ethernet**
 
   - Before Gen 6, `ADR` address: `0x00190000`, part name: `GLAN`, `IGBE`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0006`, part name: `GLAN`, `IGBE`, etc.
 
-- Sound Card
+- **Sound Card**
 
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, etc.
@@ -103,7 +103,7 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 
 - Mixed `Name type`, `Method type` approach
 
-  For most TP machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
+  For most ThinkPad machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
 
 ### Caution
 
