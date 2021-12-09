@@ -17,8 +17,8 @@ The patch may need to be modified to work for you. Modification method:
 
 - `ACPIBacklight.kext`
 
-### Screenshot
-![](/Users/kl45u5/Documents/GitHub/OC-Little-Translated/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch/Example.jpg)
+### Example
+![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch/Example.jpg?raw=true.jpg)
 
 ## Notes and Credits
 - This method is pretty much depricated now. You may use the SSDT-PNLF sample in the OpenCore package instead. But maybe the old method does work better on some legacy notebooks.
