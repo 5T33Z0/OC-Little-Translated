@@ -2,7 +2,7 @@
 
 ## Description
 
-Enables `X86PlatformPlugin` to implement CPU Power Management.
+Enables `X86PlatformPlugin` to implement CPU Power Management on 4th Gen Intel Core CPUs (Haswell and newer). AMD CPUs require [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) instead.
 
 ## Patching method 1: automated, using SSDTTime
 
@@ -73,6 +73,7 @@ According to the query result, select the injection file: ***SSDT-PLUG-_SB.PR00*
 
 If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
-## Notes
+## Notes and Credits
 - The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. 
 - You can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
+- Dortania for `SSDT-CPUR.aml` 
