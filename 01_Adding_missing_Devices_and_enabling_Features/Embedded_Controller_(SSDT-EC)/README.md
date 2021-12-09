@@ -28,10 +28,7 @@ The previous (old) patch method described below is outdated, because the patchin
 **NOTE**
 If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
 
-<details>
-<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
-
-## Usage
+## Manual method
 
 Search for `PNP0C09` in the `DSDT` and check the name of the device it belongs to. If the name is not `EC`, use this patch; if it is `EC`, ignore this patch.
 
