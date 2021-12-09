@@ -2,7 +2,7 @@
 Although adding missing devices/features may improve performance, they can only be regarded as a refinement.
 
 ## Instructions
-:warning: Mandatory for Chipset series 300/400/500/600!
+:warning: Mandatory for 300/400/500/600-series chipsets!
 
 - In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used in DSDTs by Apple. 
 - Add ***SSDT-PMC.aml***
