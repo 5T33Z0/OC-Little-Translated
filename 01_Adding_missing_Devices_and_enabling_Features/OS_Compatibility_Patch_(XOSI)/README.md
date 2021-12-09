@@ -135,8 +135,7 @@ If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
   }
   
 ```
-ACPI also defines `OSYS`, and the relationship between `OSYS` and the above parameters is as follows:
-
+ACPI also defines `OSYS` which describes the used Windows Version in HEX code based on the year. The relationship between `OSYS` and the used Windows version is as follows:
   - `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`</br>
   - `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`</br>
   - `OSYS = 0x07DD`: Win8.1 system, i.e. `Windows 2013`</br>
@@ -147,12 +146,10 @@ ACPI also defines `OSYS`, and the relationship between `OSYS` and the above para
   - `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`</br>
   - `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`</br>
   - `OSYS = 0x7E3`: Win10 1903, i.e. `Windows 2019`</br>
-  - `OSYS = 0x7E5`: Win11, ie `Windows 2021`</br>
+  - `OSYS = 0x7E5`: Win11 21H2, ie `Windows 2021`</br>
 
-- When the loaded system is not recognized by ACPI, `OSYS` is given a default value, which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
-
+**NOTES**:
+- When the loaded OS is not recognized by ACPI, `OSYS` is given a default value which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
 - Different operating systems support different hardware, for example, I2C devices are only supported from `Win8` onwards.
-
 - When loading macOS, `_OSI` accepts parameters that are not recognized by ACPI, and `OSYS` is given a default value. This default value is usually smaller than the value required by Win8, and obviously I2C does not work. This requires a patch to correct this error, and OS patches are derived from this.
-
 - Some other components may also be related to `OSYS`.
