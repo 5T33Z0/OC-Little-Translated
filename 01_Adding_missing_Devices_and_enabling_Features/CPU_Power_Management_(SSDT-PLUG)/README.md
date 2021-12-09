@@ -4,7 +4,7 @@
 
 Enables `X86PlatformPlugin` to implement CPU Power Management.
 
-## Patch Method: automated, using SSDTTime
+## Patching method 1: automated, using SSDTTime
 
 The manual patch method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
@@ -12,7 +12,7 @@ The manual patch method described below is outdated, since the patching process 
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
 * ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00`
 * ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards
+* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
 * ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
 
 **NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
@@ -22,22 +22,14 @@ The manual patch method described below is outdated, since the patching process 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Pres "D", drag in your system's DSDT and hit "ENTER"
 3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
+4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated `SSDTs` to EFI > OC > ACPI
-6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
-7. Save your config
-8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
-9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. 
+6. Open `patches_OC.plist` and copy the the included patches and files listes under ACPI > Add to your `config.plist` (to the same section, of course).
+7. Save. Reboot. Done. 
 
-**NOTE**
-If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
-<details>
-<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
+## Patching method 2: manual
 
-## Instructions for use
-
-- Search for ``Processor`` in DSDT, e.g.:
+- In `DSDT`, search for `Processor`, e.g.:
 
 ```  swift
         Scope (_PR)
@@ -77,10 +69,10 @@ If you are editing your config using [**OpenCore Auxiliary Tools**](https://gith
       }
 ```
 
-According to the query result, select the injection file:***SSDT-PLUG-_SB.PR00***
+According to the query result, select the injection file: ***SSDT-PLUG-_SB.PR00***
 
-If the query result and the patch file name **do not correspond**, please select any file as a sample and modify the patch file related content by yourself.
-</details>
+If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
-## Note
-The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. You can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate an `SSDT-PM` for these CPUs.
+## Notes
+- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. 
+- You can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
