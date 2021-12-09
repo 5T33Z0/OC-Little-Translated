@@ -37,10 +37,10 @@ To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps
   - Complete the sleep and wake up process once
   - Press the key specified by ***SSDT-BKeyQxx-Debug*** and observe the console output results. In general, the following results are displayed:
 
-		```
+	```
 	13:19:50.542733+0800 kernel ACPIDebug: { "ABCD-_PTS-Arg0=", 0x3, }
 	13:19:55.541826+0800 kernel ACPIDebug: { "ABCD-_WAK-Arg0=", 0x3, }
-		```
+	```
     The result shown above is the value of `Arg0` after the last sleep and wake cycle.
 
 ## Notes
