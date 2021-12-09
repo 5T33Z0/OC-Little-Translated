@@ -22,6 +22,6 @@ The patch may need to be modified to work. Modification method:
 ![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch/Example.jpg?raw=true.jpg)
 
 ## Notes and Credits
-- If `ACPIBacklight.kext` is used, you need to disable the built-in brightness driver of whatever green by adding `applbkl=0` as boot-arg.
+- If `ACPIBacklight.kext` is used, you need to disable the built-in brightness driver of `Whatevergreen.kext` by adding `applbkl=0` to boot-args.
 - This method is pretty much depricated now. You may use the SSDT-PNLF sample included in the OpenCore package instead. But maybe this does work better on some legacy notebooks.
 - `ACPIBacklight.kext` by Rehabman: https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/
