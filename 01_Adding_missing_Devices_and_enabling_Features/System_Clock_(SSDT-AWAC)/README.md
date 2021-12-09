@@ -38,13 +38,13 @@ Device (RTC)
     ...
     Method (_STA, 0, NotSerialized)
     {
-            If ((STAS == One))
+            If ((STAS == One)) // If STAS = 1
             {
-                Return (0x0F)
+                Return (0x0F) // Turn RTC ON
             }
-            Else
+            Else 			  // if STAS ≠ 1
             {
-                Return (Zero)
+                Return (Zero) // Turn RTC OFF
             }
     }
     ...
@@ -54,13 +54,13 @@ Device (AWAC)
     ...
     Method (_STA, 0, NotSerialized)
     {
-            If ((STAS == Zero))
+            If ((STAS == Zero))	// If STAS = 0
             {
-                Return (0x0F)
+                Return (0x0F) 	// enable AWAC
             }
-            Else
+            Else				// if STAS ≠ 0
             {
-                Return (Zero)
+                Return (Zero)	// disable AWAC
             }
     }
     ...
