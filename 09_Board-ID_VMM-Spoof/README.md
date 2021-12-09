@@ -9,14 +9,14 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 - Ivy Bridge
 - Haswell (partially)
 
-Since this is a pretty new approach, I have to look into a bit more.
+Since this is a pretty new approach, I have to look into a bit more but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore).
 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
 
 These patches skip the Board-ID check of the used hardware, redirecing it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches. 
 
-This allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS Monterey. This not only improves CPU Powermanagement - especially on Laptops – it also allows installing, booting and updating macOS Monterey with otherwise unsupported hardware:
+This allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS Monterey. This not only improves CPU Power Management - especially on Laptops – it also allows installing, booting and updating macOS Monterey with otherwise unsupported hardware:
 
 > Parrotgeek1's VMM patch set would force kern.hv_vmm_present to always return True. With hv_vmm_present returning True, both OSInstallerSetupInternal and SoftwareUpdateCore will set the VMM-x86_64 board ID while the rest of the OS will continue with the original ID.
 > 
