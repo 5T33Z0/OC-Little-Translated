@@ -66,7 +66,7 @@ Device (AWAC)
     ...
 }
 ```
-As you can see, you can enable RTC and disable AWAC at the same time as long as STAS=1. Using the preset variables method as follows.
+As you can see, you can enable RTC and disable AWAC at the same time if `STAS=1`, using one of the following methods/hotpatches.
 
 ### Method 1: using `SSCT-AWAC_N_RTC_Y` (recommended)
 This is the same method SSDTTime uses. It will disable AWAC but leaves RTC enabled for the case shown above. This is the code sippet:
@@ -81,8 +81,7 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This will set `STAS` to `One` for macOS. This won't have any effect on  
-Device RTC, since its condition for `STAS` is already set to `One` which results in the device being enabled (set to `0x0F`). But changing `STAS` to `One` for Device AWAC will have the opposite effect: since `STAS` is *not* `Zero` the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn AWAC off for macOS.
+**Explanation**: This will set `STAS` to `One` for macOS. This will enable Device RTC, since the conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One`, will have the opposite effect on AWAC. Since `STAS` is *not* `Zero` the Else condition met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn AWAC off.
 
 ### Method 2: using `SSDT-AWAC-DISABLE` (official)
 You can also use `SSDT-AWAC-DISABLE.aml` included in the "AcpiSamples" folder of the OpenCore Package:
