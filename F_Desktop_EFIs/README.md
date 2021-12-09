@@ -85,7 +85,6 @@ Parameter|Description
 	- B8 **00** 0000 0000 (for macOS 10.15, 11)
 	- BA **00** 0000 0090 (for macOS 12)
 	- Replace the **3rd** and **4th** digit with the correct Hex value from the table below:
-
 		|Core Count |Hex Value|
 		|:--------:|:-------:|
 		| 4 Cores  | `04` |
