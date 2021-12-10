@@ -1,6 +1,6 @@
-# Pre-configured OpenCore Desktop EFI Folders (Intel only)
+# Pre-configured OpenCore Desktop EFI Folders
 ## About
-This section includes OpenCore configs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
+This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
 **No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are neccessary. So based on this [discussion](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
 
@@ -12,7 +12,7 @@ Included are about 60 configs for AMD and Intels CPUs, covering a wide range of 
 ### Included Files and Settings
 - Base configs for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
 - Required SSDT Hotpatches for each CPU family (some are disabled – check before deployment!)
-- Neccessary Quirks for each CPU Family
+- Neccessary Quirks for each CPU Family (also available as Presets inside of OCAT)
 - Necessary Device Properties for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
 - Base-set of Kexts (see chart below)
 - `MinDate` and `MinVersion` for the APFS Driver set to `-1`, so all macOS versions are supported.
@@ -55,24 +55,33 @@ After the base EFI has been generated, the `config.plist` *maybe* has to be modi
 	- **NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82**: add additional boot-args if your hardware requires them (see next section)
 - Save and deploy the EFI folder (put it on a FAT32 formatted USB flash drive and try booting from it)
 
-### Additional `boot-args`
-Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, additional `boot-args` may be required. These are not included in the configs and need to be added manually before deploying the EFI folder!
-
-#### GPU-Specific `boot-args`
-Parameter|Description
-:----|:----
-**agdpmod=pikera**|Disables Board-ID checks on Navi GPUs (**RX 5000 Series**). Without it, you'll get a black screen. **Don't use if you don't have a Navi GPU** (ie. Polaris or Vega).
-**nvda_drv_vrl=1**|For enabling Nvidia Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra.
-
-#### General purpose `boot-args`
-Parameter|Description
-:----|:----
-**npci=0x2000** or **npci=0x3000**| Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`.<br>Required when getting stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-
-### Intel-specific settings: Fixing CPU Power Management on Sandy and Ivy Bridge CPUs
+### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
 
 You can follow this [**guide**]( https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) to do so.
+
+## Additional `boot-args`
+Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, additional `boot-args` may be required. These are not included in the configs and need to be added manually before deploying the EFI folder!
+
+### GPU-specific boot-args
+|Boot-arg|Description|
+|:------:|-----------|
+**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this you'll get a black screen. Don't use on Navi Cards (i.e. Polaris and Vega).
+**`-igfxvesa`**|Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
+**`-wegnoegpu`**|Disables all GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
+**`nvda_drv=1`**|Enable Web Drivers for NVIDIA Graphics Cards (supported up to macOS High Sierra only).
+**`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
+
+### Debugging
+|Boot-arg|Description|
+|:------:|-----------|
+**`-v`**|_V_erbose Mode. Replaces the progress bar with a terminal output with a bootlog which helps resolving issues. Combine with `debug=0x100` and `keepsyms=1`
+**`debug=0x100`**|Disables macOS'es watchdog. Prevents the machine from restarting on a kernel panic. That way you can hopefully glean some useful info and follow the breadcrumbs to get past the issues.
+**`keepsyms=1`**|Companion setting to `debug=0x100` that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+**`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
+**`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
+**`npci=0x2000`**/**`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
+**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing andd booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
 
 **NOTES**:
 
