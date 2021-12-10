@@ -2,17 +2,17 @@
 ## About
 This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
-**No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are neccessary. So based on this [discussion](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
+**No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are necessary. So based on this [discussion](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
 
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools (OCAT) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
 
-Included are about 60 configs for AMD and Intels CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets.
+Included are about 40 configs for Intel CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets.
 
 ### Included Files and Settings
 - Base configs for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
 - Required SSDT Hotpatches for each CPU family (some are disabled – check before deployment!)
-- Neccessary Quirks for each CPU Family (also available as Presets inside of OCAT)
+- Necessary Quirks for each CPU Family (also available as Presets inside of OCAT)
 - Necessary Device Properties for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
 - Base-set of Kexts (see chart below)
 - `MinDate` and `MinVersion` for the APFS Driver set to `-1`, so all macOS versions are supported.
@@ -66,7 +66,7 @@ Kext|Description
 :----|:----
 [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)|Used for fixing power management and initialization on non-Apple NVMe.
 [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS.<br>We recommend testing without this first.
-[AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs.<br>Recommended for dual-socket systems (ie. Intel Xeons).
+[AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs.<br>Recommended for dual-socket systems (ie. Intel Xeon).
 [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, Disable MacPro7,1 memory warnings and provide upgrade to macOS Monterey via Software Updates when available.
 </details>
 
@@ -84,11 +84,11 @@ After the base EFI has been generated, the `config.plist` *maybe* has to be modi
 - Go to the Desktop
 - Open the `config.plist` included in `\EFI\OC\` with **OCAT**
 - Check the following Settings:
-	- **ACPI > Add**: add additional ACPI Tabels if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
+	- **ACPI > Add**: add additional ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
 	- **DeviceProperties**:
 		- Check if the correct Framebuffer Patch is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
 		- Add additional PCI paths (if required for your hardware)
-	- **Kernel > Add**: Add additional kexts rquired for your hardware and features (a base-set required for the selected system is already included)
+	- **Kernel > Add**: Add additional kexts required for your hardware and features (a base-set required for the selected system is already included)
 	- **PlatformInfo > Generic**: Generate `SMBIOS` Data for the selected Mac model
 	- **NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82**: add additional boot-args if your hardware requires them (see next section)
 - Save and deploy the EFI folder (put it on a FAT32 formatted USB flash drive and try booting from it)
