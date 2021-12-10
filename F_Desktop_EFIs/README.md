@@ -28,6 +28,7 @@ Kext|Description
 
 <details>
 <summary><strong>Optional Kexts (click to reveal)</strong></summary>
+
 ### Optional Kexts
 Listed below, you'll find optional kexts for various features and hardware. Add as needed.
 
