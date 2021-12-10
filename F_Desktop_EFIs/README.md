@@ -10,11 +10,10 @@ Instead of downloading pre-configured and possibly outdated OpenCore EFI folders
 Included are about 60 configs for AMD and Intels CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets.
 
 ### Included Files and Settings
-- Base configs for AMD and Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
+- Base configs for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
 - Required SSDT Hotpatches for each CPU family (some are disabled – check before deployment!)
 - Neccessary Quirks for each CPU Family
-- Necessary Kernel Patches for AMD CPUs
-- Necessary Device Properties for each platform (mostly Framebuffer Patches)
+- Necessary Device Properties for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
 - Base-set of Kexts (see chart below)
 - `MinDate` and `MinVersion` for the APFS Driver set to `-1`, so all macOS versions are supported.
 
