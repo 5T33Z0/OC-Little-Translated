@@ -24,7 +24,7 @@ Kext|Description
 [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases)|Emulates the System Management Controller (SMC) found on real Macs. Without it macOS won't boot boot.
 [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases)|Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
 |[AppleALC](https://github.com/acidanthera/AppleALC/releases)|Kext for enabling native macOS HD audio for unsupported Audio CODECs without filesystem modifications.
-[CpuTscSync.kext]([https://github.com/acidanthera/CpuTscSync/releases](https://github.com/acidanthera/CpuTscSync/releases))|For syncing TSC on Intel HEDT and Server mainboards. Without it, macOS may run extremely slow or won't boot at all.
+[CpuTscSync.kext](https://github.com/acidanthera/CpuTscSync/releases)|For syncing TSC on Intel HEDT and Server mainboards. Without it, macOS may run extremely slow or won't boot at all.
 
 <details>
 <summary><strong>Optional Kexts (click to reveal)</strong></summary>
