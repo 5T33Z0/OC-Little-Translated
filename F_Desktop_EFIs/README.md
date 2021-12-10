@@ -1,6 +1,8 @@
-# Pre-configured OpenCore Desktop EFI Folders
+# Pre-configured OpenCore Desktop EFI Folders (Intel only)
 ## About
 This section includes OpenCore configs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
+
+**No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are neccessary. So based on this [discussion](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
 
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools (OCAT) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
@@ -23,15 +25,6 @@ Kext|Description
 [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases)|Emulates the System Management Controller (SMC) found on real Macs. Without it macOS won't boot boot.
 [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases)|Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
 |[AppleALC](https://github.com/acidanthera/AppleALC/releases)|Kext for enabling native macOS HD audio for unsupported Audio CODECs without filesystem modifications.
-
-
-#### AMD-specific Kexts
-Kext|Description
-:----|:----
-[AMDRyzenCPUPowerManagement.kext](https://github.com/trulyspinach/SMCAMDProcessor/releases)|For [AMD Power Gadget](https://github.com/trulyspinach/SMCAMDProcessor).
-[SMCAMDProcessor.kext](https://github.com/trulyspinach/SMCAMDProcessor/releases)|For [AMD Power Gadget](https://github.com/trulyspinach/SMCAMDProcessor).
-[AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems.
-[XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)|Fixes USB in AMD FX Processors.
 
 #### Intel-specific Kexts
 Kext|Description
@@ -76,28 +69,6 @@ Parameter|Description
 Parameter|Description
 :----|:----
 **npci=0x2000** or **npci=0x3000**| Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`.<br>Required when getting stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-
-#### AMD-specific settings: adjusting CPU Core Count 
-- In config.plist, search for `algrey - Force cpuid_cores_per_package` 
-- There should be 3 Patches with the same name (for various versions of macOS)
-- In the `Replace` field, find:
-	- B8 **00** 0000 0000 (for macOS 10.13, 10.14)
-	- B8 **00** 0000 0000 (for macOS 10.15, 11)
-	- BA **00** 0000 0090 (for macOS 12)
-	- Replace the **3rd** and **4th** digit with the correct Hex value from the table below:
-		|Core Count |Hex Value|
-		|:--------:|:-------:|
-		| 4 Cores  | `04` |
-		| 6 Cores  | `06` |
-		| 8 Cores  | `08` |
-		| 12 Cores | `0C` |
-		| 16 Cores | `10` |
-		| 24 Cores | `18` |
-		| 32 Cores | `20` |
-	- Example: for a 6-Core AMD Ryzen 5600X, the resulting `Replace` value for the 3 patches would be:
-		- B8 **06** 0000 0000 (for macOS 10.13, 10.14)
-		- BA **06** 0000 0000 (for macOS 10.15, 11)
-		- BA **06** 0000 0090 (for macOS 12)
 
 ### Intel-specific settings: Fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
