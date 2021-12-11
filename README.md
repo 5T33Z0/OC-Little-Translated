@@ -3,7 +3,7 @@
 ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.12.10-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
-## About
+## ABOUT
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little). All Binary Renames, ACPI Hotpatches and everything else related to ASL/AML code remains untouched except where indicated. The chinese READMEs are included for reference as well.
 
 <details>
@@ -22,7 +22,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 **NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
 </details>
 
-## Table of Contents
+## TABLE of CONTENTS
 **MAIN**
 
 * [**About ACPI and ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI)
@@ -47,7 +47,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 * [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 * [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux)
 
-## Contributions
+## CONTRIBUTIONS
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
 
 ## 5T33Z0's 5H0UT 0UT5:
