@@ -16,6 +16,8 @@ The method presented here is a slightly modified version of a guide by "Apfelnic
 
 I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
 
+<details><summary><strong>Preparations</strong> (click to reveal)</summary>
+
 ## Preparations
 
 ### Required Tools
@@ -35,6 +37,8 @@ There are various ways to dump ACPI Tables from your BIOS:
 
 - Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
 - Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
+</details>
+<details><summary><strong>Dropping the original USB table</strong> (click to reveal)</summary>
 
 ## Finding the correct table
 Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the **SSDT-xxxx.aml** files. Find the one which looks similar to this:
@@ -63,6 +67,8 @@ In order to delete (or drop) the original table during boot and replace it with 
 6. Save the config.
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
+</details>
+<details><summary><strong>Preparation a replacement SSDT</strong> (click to reveal)</summary>
 
 ## Preparing a replacement SSDT
 Now that we have found the SSDT with the original usb port declarations, we can start modifying them. Almost. We still need more details, though…
@@ -147,6 +153,8 @@ Which looks like this:
 ![New_UPC](https://user-images.githubusercontent.com/76865553/137521717-b747a017-f9d1-4189-a6cd-0e77a7475d9d.png)
 
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
+</details>
+<details><summary><strong>Mapping the Ports</strong> (click to reveal)</summary>
 
 ## Mapping the ports (finally)
 Next, we need to find out which physical ports actually map to which ports in the system.
@@ -336,6 +344,8 @@ Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
 })
 ```
 Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
+</details>
+<details><summary><strong>Wrapping up and testing</strong> (click to reveal)</summary>
 
 ## Wrapping up and testing
 Once you are done with your port mapping activities, do the following:
@@ -351,5 +361,6 @@ Once you are done with your port mapping activities, do the following:
 - Test the ports with macOS and your other Operating systems.
 - If it works, Congrats! 
 - Copy the .aml and your config.plist back to the EFI folder on the hard disk.
+</details>
 
 **Good Luck!**
