@@ -1,4 +1,4 @@
-# OC-Little: ACPI Hotpatch Samples for OpenCore
+# OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 [![OpenCore Version](https://img.shields.io/badge/OpenCore-0.7.5-cyan.svg)](https://github.com/CloverHackyColor/CloverBootloader/releases)
 ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-21.12.10-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
@@ -23,29 +23,29 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 </details>
 
 ## Table of Contents
-**MAIN**:
+**MAIN**
 
 * [**About ACPI and ACPI Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI)
 * [**Adding Fake Devices and enabling Features with SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features)
-2. [**Disabling Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices)
-3. [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
-4. [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
-5. [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
-6. [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
-7. [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_PCI_BAR_Size)
-8. [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
-9. [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof%20)
-10. [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples)
+* [**Disabling Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices)
+* [**USB Port Mapping**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
+* [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
+* [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
+* [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
+* [**PCI BAR Size** (≥ OC 0.7.5)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_PCI_BAR_Size)
+* [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
+* [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof%20)
+* [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples)
 
-**APPENDIX**:
+**APPENDIX**
 
 * [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks)
-2. [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
-3. [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Essential_Tools_and_Apps)
-4. [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore)
-5. [**SMBIOS Compatibility**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_SMBIOS_Compatibility)
-6. [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
-7. [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux)
+* [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
+* [**Essential Apps and Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Essential_Tools_and_Apps)
+* [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore)
+* [**SMBIOS Compatibility**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_SMBIOS_Compatibility)
+* [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux)
 
 ## Contributions
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
@@ -62,14 +62,14 @@ If you would like to contribute to the information provided in this repo in orde
 <summary><strong>Daliansky's original Credits</strong></summary>
 
 > - Special credit to：
->	- @XianWu write these ACPI component patches that useable to OpenCore
->	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalization.
->	- Credits and thanks to：
->	-  @冬瓜-X1C5th
->	- @OC-xlivans
->	- @Air 13 IWL-GZ-Big Orange (OC perfect)
->	- @子骏oc IWL
->	- @大勇-小新air13-OC-划水小白
->	- @xjn819
->	- Acidanthera for maintaining OpenCorePkg
+> 	- @XianWu write these ACPI component patches that useable to OpenCore
+> 	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalization.
+> - Credits and thanks to：
+> 	-  @冬瓜-X1C5th
+> 	- @OC-xlivans
+> 	- @Air 13 IWL-GZ-Big Orange (OC perfect)
+> 	- @子骏oc IWL
+> 	- @大勇-小新air13-OC-划水小白
+> 	- @xjn819
+> 	- Acidanthera for maintaining OpenCorePkg
 </details>
