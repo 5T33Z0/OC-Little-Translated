@@ -112,7 +112,7 @@ or
 `sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal`</br>
 `sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`
 
-[Source](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
+[**Source**](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
 **Change Update Seed to Developer**</br>
 `sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
@@ -128,7 +128,7 @@ or
 `sudo dmesg | grep "ACPI" > $HOME/Desktop/acpi.txt` (creates a Log on Desktop)
 
 **Checking for Wake Reasons**</br>
-`log show | grep -i "wake reason"`
+`pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
 
 **List of PMSET Commands**<br>
 https://www.dssw.co.uk/reference/pmset.html

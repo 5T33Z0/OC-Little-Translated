@@ -5,8 +5,9 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 ## Enabling Linux support
 
 1. Add the following Drivers to `/EFI/OC/Drivers` and your config.plist:
-	- `OpenLinuxBoot.efi` (included in the [OpenCore Package](https://github.com/acidanthera/OpenCorePkg))
-	- `btrfs_x64.efi` and/or `ext4_x64.efi` based on the file system your Linux Distro uses (included in [OpenCore Binary Data](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
+	- `OpenLinuxBoot.efi` (included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg))
+	- `btrfs_x64.efi` and/or 
+	- `ext4_x64.efi` based on the file system your Linux Distro uses (included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
 2. Enable UEFI > Quirks > `RequestBootVarRouting` 
 3. Enable Misc > Boot > `LauncherOption` to prevent Linux bootloader from setting itself as the first boot option. Choose either/or:
 	- `Full`: For AMI, Phoenix, and any other modern UEFI BIOS.

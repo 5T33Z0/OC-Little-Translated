@@ -16,3 +16,6 @@ This section contains a collection of laptop-specific patches for various brands
     - ThinkPad Click and TrackPad Patches
 
 Click on the folders above in this section to select the corresponding catory/guide.
+
+## Further Resources
+- https://github.com/dortania/clover-laptop-guide
