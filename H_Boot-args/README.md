@@ -87,7 +87,7 @@ Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affe
 `alcid=layout`| To select a layout-id, for example alcid=1
 `-alcoff` | Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
 `-alcbeta` | Enables AppleALC on unsupported systems (usually unreleased or old ones)
-`alcverbs=1` | Enables alc-verb support (also alc-verbs device property)
+`alcverbs=1`| Enables alc-verb support (also alc-verbs device property)
 
 To be continued…
 
