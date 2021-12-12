@@ -40,7 +40,8 @@ There are various ways to dump ACPI Tables from your BIOS:
 </details>
 <details><summary><strong>Dropping the original USB table</strong> (click to reveal)</summary>
 
-## Finding the correct table
+## Finding the ports
+### For Skylake and newer
 Have a look inside the "origin" Folder. In there you will find a lot of tables. We are interested in the **SSDT-xxxx.aml** files. Find the one which looks similar to this:
 
 ![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
@@ -51,7 +52,16 @@ We can see the following:
 - There's should also be a list of Ports, 26 in my case: `HS01` to `HS14`, `USR1` and `USR2`, and `SS01` to `SS10`. We will come back to the meaning of these names later. 
 - Take note of the "Table Signature" and the "OEM Table ID" – we will use them to create a delete rule in the OpenCore config.
 
-**NOTE**: Just because this SSDT includes 26 port entries, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+### Broadwell and older
+ACPI tables for Broadwell and older CPUs don't use seperate SSDTs for mapping USB ports – it's all handled with in the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and UBS 3 (`XHCI`) contained in the `DSDT` itself. You don't have to manually map these ports either since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
+
+![](/Users/kl45u5/Desktop/legacyports.png)
+
+As you can see, the `XHCI` device only contains 7 Ports: `HPS1` to `HSP3` and `SSP0` to `SSP3`. And the `EHC0` contains 8 Ports (`PRT0` to `PRT7`). `EHC1` contains 6 Ports (`PRT8` to `PRTD`) (not in picture). 
+
+If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not beeing detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
+
+**NOTE**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
 
 ### Adding a delete rule to config.plist
 In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.</br>
