@@ -12,7 +12,7 @@ Appllicable to **SMBIOS**:
 ## Screenshot
 Here's a screenshot when applied to an **iMac20,2** Hackintosh:
 
-![](/Users/kl45u5/Desktop/PCH.png)
+![PCH](https://user-images.githubusercontent.com/76865553/145789067-966c9a2b-39f1-4233-9f4a-a19b3d39c1e0.png)
 
 ## Credits
 - Baio1977 for providing the SSDT
