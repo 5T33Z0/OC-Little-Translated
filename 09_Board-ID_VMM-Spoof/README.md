@@ -9,7 +9,9 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 - Ivy Bridge
 - Haswell (partially)
 
-Since this is a pretty new approach, I have to look into a bit more but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore).
+Since this is a pretty new approach, I have to look into a bit more but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
+
+You can also implent this patch if you ar enot getting System Update Notifications. Since OC spoofs a correct Board-ID to Apple Update servers. It works, I tested it on my Z490 Board with iMac20,2 SMBIOS.
 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
