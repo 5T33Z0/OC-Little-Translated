@@ -78,9 +78,13 @@ Scope (\)
 ``` 
 **Explanation**: This will set `STAS` to `One` for macOS. This will enable Device RTC, since the conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One`, will have the opposite effect on AWAC. Since `STAS` is *not* `Zero` the Else condition met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn AWAC off.
 
-### Method 2: using `SSDT-AWAC-DISABLE` (official)
-This is the same method SSDTTime uses. It will disable AWAC but leaves RTC enabled for the case shown above. This is the code sippet:
-You can also use `SSDT-AWAC-DISABLE.aml` included in the "AcpiSamples" folder of the OpenCore Package:
+### Method 2: using `SSDT-AWAC2ARTC` (new)
+**Applicable to**: Systems with an active AWAC Clock using SMBIOS iMac19,x and/or iMac20,x 
+
+This SSDT actually makes use of AWAC and connects it to the ARTC (Apple Realtime Clock). So if AWAC is active in your DSDT (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`.
+
+### Method 3: using `SSDT-AWAC-DISABLE` (official)
+You can also use `SSDT-AWAC-DISABLE.aml` included in the "AcpiSamples" folder of the OpenCore Package. This uses the same method as SSDTTime. It will disable AWAC but leaves RTC enabled for the case shown above. This is the code sippet:
 
 ```swift
 External (STAS, IntObj)
@@ -97,7 +101,7 @@ Scope (\)
 ```
 The official hotpatch uses `_SB_._INI` as path, so you should ensure sure that `_SB_._INI` doesn't exist in `DSDT` and other patches when using it.
 
-### Method 3: using `SSDT-AWAC_STA0` (if method 2 fails)
+### Method 4: using `SSDT-AWAC_STA0` (if method 3 fails)
 Disables AWAC where `SSDT-AWAC-DISABLE` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
 
 ```swift
@@ -444,4 +448,4 @@ Using this method will result in an error (non-ACPI Error) by invalidating other
 ## Credits
 - **Acidanthera** for `SSDT-AWAC-Disable.dsl`
 - **daliansky** for `SSDT-AWAC_N_RTC_Y.dsl`
-- **Baio1977** for `SSDT-AWAC_STA0.dsl`
+- **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC2ARTC`
