@@ -79,7 +79,7 @@ Scope (\)
 **Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Becaus `STAS` is *not* `Zero`, the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
 ### Method 2: using `SSDT-AWAC2ARTC` (new)
-**Applicable to**: Systems with an active AWAC Clock using SMBIOS iMac19,x and/or iMac20,x</br>
+**Applicable to**: Systems with an active AWAC Clock using SMBIOS `imac19,x`, `iMac20,x` and `iMacPro1,1`</br>
 **Procedure**: 
 
 - In `DSDT`, search for `ACPI000E`. 
