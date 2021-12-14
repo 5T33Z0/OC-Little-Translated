@@ -29,7 +29,7 @@ Device (RTC)
 }
 ```
 
-To enable `RTC` for macOS, you can add an `SSDT-RTC_STA0F.aml` which changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC used instead of having to add a fake one:
+To enable an existing but otherwise disabled `RTC` for macOS only, you can add an `SSDT-RTC_STA0F.aml` which changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC used, so you don't have to use fake one:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
