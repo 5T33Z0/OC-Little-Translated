@@ -19,7 +19,6 @@ Among the many `SSDT` patches included in this repo, a significant number of the
   - The fake name **differs** from the original device name used in ACPI.
   - Patch content and original device main content are **identical**.
   - The `_STA` section of the hotpatch should contain the [`_OSI`](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) method to ensure that the code changes only apply to macOS (Darwin Kernel):
-	
 	```swift
 	Method (_STA, 0, NotSerialized)
        {
@@ -33,7 +32,6 @@ Among the many `SSDT` patches included in this repo, a significant number of the
             }
         }
 	```
-
 - **Example**: [**Adding a fake Realtime Clock (RTC0)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))
   
   - ***SSDT-RTC0*** - Fake RTC
