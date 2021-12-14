@@ -59,25 +59,31 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 ### Included Hotpatches
 Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpach.
 
-|SSDT-…|Description|Search term(s) in DSDT 
+#### Functional SSDTs (adding or enanabling features)
+|Table|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
-[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Adds an AC Adaptor Device (for Laptops)|`ACPI0003` or `Device (AC)` 
+[**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer.|`Device (AWAC)` or `ACPI000E` 
 |[**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables and existing one in macOS (SSDT-ALSD)|`ACPI0008`
 |[**SSDT-PNLF**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control (for Laptop Screens)|–
 [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG))| Enables XCPM CPU Power Management for Intel CPUS|–
-[**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds DMA Crontroller|`PNP0200` or `DMAC` 
 [**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX).|`PNP0C09`
 [**SSDT-LAN**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-HPET**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))|Fixes IRQ conflicts. Required for on-board sound to work|–
-[**SSTD-IMEI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration.|`0x00160000`
+[**SSTD-IMEI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms.|`0x00160000`
 [**SSTD-GPIO**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch)|Enables GPIO device|–
 [**SSTD-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
-[**SSDT-PMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMC_Support_(SSDT-PMC))|Adds Apple exclusice `PCMR` Device to ACPI (required for 300- to 600-series chipsets)|`PMCR` or `APP9876` 
-[**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds Platform Power Management Controller (for 100- and 200-series chipsets only)|`0x001F0002` or `Device (PPMC)` 
+[**SSDT-PMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMC_Support_(SSDT-PMC))|Adds Apple exclusice `PCMR` Device to ACPI (required for 300-series, optional on 400-series chipsets and newer)|`PMCR` or `APP9876` 
 [**SSDT-PWRB/SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_Button_(SSDT-PWRB)_%26_Sleep_Button_(SSDT-SLPB))|Adds Power and Sleep Button Devices (for Laptops)|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
-[**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds Mem Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
-[**SSDT-ASPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Setting_ASPM_Operating_Mode)|For setting the Active State Power Management (ASPM) to fix/prohibit wake issues caused by device like Bluetooth peripherals or others which can interrupt sleep.|–
-[**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer.|–
 [**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))|Adds a fake RTC. Required for 300-series chipsets only.|–
 [**SSDT-SBUS-MCHC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_(SMBus)_%26_Memory_Controller_(MCHC))|Fixes System Management Bus and Memory Controller in macOS|`0x001F0003` or `0x001F0004`
-[**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs)|Kernel Patches and SSDT to force-enable XCPM Power Management for Ivy Bridge CPUs|–
+[**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs|–
+
+
+#### Cosmetic SSDTs (not adding/enabling features besides being present in IOReg)
+|Table|Description|Search term(s) in DSDT 
+|:----:|-------------|:-------------------:|
+[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Adds an AC Adaptor Device (for Laptops) to IOReg|`ACPI0003` or `Device (AC)`
+[**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds DMA Controller to IOReg|`PNP0200` or `DMAC`
+[**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds Platform Power Management Controller to IOReg (for 100- and 200-series chipsets only). Possibly cosmetic only.|`0x001F0002` or `Device (PPMC)`
+[**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds Mem Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
+[**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds Intel PCH SPI Controller to IOReg. Probably cosmetic only|`0x001F0005` 
