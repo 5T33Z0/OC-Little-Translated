@@ -5,7 +5,7 @@
 For some 300-series motherboards, the `RTC` device is disabled by default and cannot be enabled via the return value of the `STAS` variable `_STA`, which is shared with `AWAC`, resulting in ***`SSDT-AWAC`*** not taking effect. So in order to enable the `RTC` device, we need to to force the `RTC` device by ading a fake `RTC0`.
 
 ## Usage
-In this example, `RTC` exists in the orginal `DSDT`but is disabled (return value for `_STA` is `0`):
+In this example, `RTC` exists in the orginal `DSDT` but is disabled (return value for `_STA` is `0`):
 
 ```swift
 Device (RTC)
@@ -29,7 +29,7 @@ Device (RTC)
 }
 ```
 
-To enable `RTC` in macOS, we add an SSDT which sets the return value for `_STA` to `0x0F`, so the existing RTC used instead of having to use a fake one:
+To enable `RTC` for macOS, you can add an `SSDT-RTC_STA0F.aml` which changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC used instead of having to add a fake one:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
@@ -45,8 +45,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
     }  
 }
 ```
-
-To enable `RTC` in macOS, a scope and the `_OSI` switch is added which sets the return value for `_STA` to `0x0F`:
+Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
