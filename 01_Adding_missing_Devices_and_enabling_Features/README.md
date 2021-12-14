@@ -1,13 +1,13 @@
 # Enabling Devices and Features for macOS
 ## About
 
-Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling or spoofing devices for macOS. These include:
+Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
 
-- Devices which can be enabled simply by changing their name in binary code so macOS detects them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
-- Devices which either do not exist in ACPI or have a different name than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services of macOS. Like CPU Power Management, Backlight Control, AC Power Adaptor, ect. Recommended method.
-- Fake EC Device for fixing Embedded Controller issues.
-- Patches which rename the original device to something else so a replacement SSDT can be written which takes its place, such as Trackpads for example.
-- Devices which are disabled for some reason, but macOS needs them to work. 
+- Devices which can simply be enabled by renaming them so macOS can detect and use them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
+- Devices which either do not exist in ACPI or have different names than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect. 
+- Fake Devices like Embedded Controllers or Ambient Light Sensors so macOS is happy.
+- Patches which rename the original device or controlling method to something else so a replacement SSDT can be written which takes its place and redefines the device or method, to address Sleep and Wake issues or Touchpads working incorrectly.
+- Devices which are disabled for some reason, but macOS needs them to be present in order to boot, like legacy Realtime Clocks (RTC) in newer ACPI variants (300-series chipsets and newer)
 
 ## Properties of Fake ACPI Devices
 
@@ -18,7 +18,7 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 - **Requirements**:
   - The fake name **differs** from the original device name used in ACPI.
   - Patch content and original device main content are **identical**.
-  - The `_STA` section of the hotpatch should contain the [`_OSI`](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) method to ensure that the code changes only apply to macOS (Darwin Kernel):
+  - The `_STA` section of the hotpatch should contain the [`_OSI`](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) method to ensure that the code changes only apply to macOS (Darwin Kernel) only:
 	```swift
 	Method (_STA, 0, NotSerialized)
        {
@@ -60,8 +60,8 @@ Listed below are all SSDTs contained in this chapter. Search for the listed term
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
 [**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer.|`Device (AWAC)` or `ACPI000E` 
-|[**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD).|`ACPI0008`
-|[**SSDT-PNLF**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control for Laptop Screens.|–
+[**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD).|`ACPI0008`
+[**SSDT-PNLF**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control for Laptop Screens.|–
 [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG))| Enables XCPM CPU Power Management for Intel CPUS|–
 [**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX).|`PNP0C09`
 [**SSDT-LAN**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
