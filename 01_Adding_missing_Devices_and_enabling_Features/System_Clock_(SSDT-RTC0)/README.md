@@ -29,7 +29,7 @@ Device (RTC)
 }
 ```
 
-To enable `RTC` in macOS, which sets the return value for `_STA` to `0x0F`, avoid adding fake devices:
+To enable `RTC` in macOS, we add an SSDT which sets the return value for `_STA` to `0x0F`, so the existing RTC used instead of having to use a fake one:
 
 ```swift
 DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
