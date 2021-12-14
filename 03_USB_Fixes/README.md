@@ -24,12 +24,17 @@ Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer 
 
 ##### Mapping USB Ports in macOS 11.3+
 - Download the macOS version of [**USBToolBox**](https://github.com/USBToolBox/tool/releases)
-- Download this additional [package](https://github.com/USBToolBox/kext/releases)
-- Unpack the zip package and add the 2 included kexts to your kext folder and config
-- Run USBToolBox and follow the [**instructions**](https://github.com/USBToolBox/kext#usage) to map your USB ports.
-- Generate your `UTBMap.kext` and add it to your `EFI\OC\Kexts` folder and config.
+- Download this additional [**USBToolBox.kext**](https://github.com/USBToolBox/kext/releases)
+- Unpack the zip package and add the 2 included kexts to your kext folder and config.
+- Save and reboot
+- Next, Run USBToolBox
+- Now you have to decide which method to use for mapping ports There are 2 options avaialble which lead to 2 different kexts being generated:
+	- **Option 1** (default): Generates `UTBMap.kext` which has to be used in tandem with `USBToolBox.kext` to make the whole construct work. It has the advantage that the mapping is SMBIOS-independent so it can be used with any SMBIOS.
+	- **Option 2** (uses native Apple classes): Hit "C" to enter the settings and then "N" to enable native Apple classes (AppleUSBHostMergeProperties).
+- Follow the [**instructions**](https://github.com/USBToolBox/kext#usage) to map your USB ports.
+- Generate eithet `UTBMap.kext` (option 1, requires `USBToolBox.kext` as well to work) or `USBMap.kext` (option 2, no additional kext necessary) and add it to your `EFI\OC\Kexts` folder and config.
 - Remove `UTBDefault.kext` from Kexts folder and config.
-- Reboot.
+- Save and Reboot.
 
 Enjoy your properly working USB ports!
 
