@@ -57,7 +57,7 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
     - `Name-6D-03` to `00`
     - `Name-6D-04` to `00`
 
-- One of the `Method types`: `GPRW` or `UPRW)`:
+- One of the `Method types`: `GPRW` or `UPRW`:
 
   ```swift
     Method (_PRW, 0, NotSerialized)
