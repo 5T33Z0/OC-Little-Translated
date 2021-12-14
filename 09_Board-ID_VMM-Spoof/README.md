@@ -1,7 +1,11 @@
 # Using unsupported Board-IDs with macOS Monterey
-A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on unsupported Board-IDs.
+A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
 
-## System requirements
+## Use Cases
+1.  Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
+2. As a side-effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a correct Board-ID to Apple Update servers which fixes the issue. While a lot of OpenCore users face this issue it's not a problem in Clover, though since you can enter a HardwareTarget.
+
+## System Requirements
 **Minimum macOS**: Big Sur using XNU Kernel 20.4.0 or newer!</br>
 **CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
@@ -11,7 +15,6 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 Since this is a pretty new approach, I have to look into a bit more but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
 
-You can also implent this patch if you ar enot getting System Update Notifications. Since OC spoofs a correct Board-ID to Apple Update servers. It works, I tested it on my Z490 Board with iMac20,2 SMBIOS.
 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
@@ -28,7 +31,7 @@ This allows using the correct SMBIOS for a given CPU family even if it is not of
 
 The patching consists of two stages:
 
-1. Skipping the Board-ID check and rerouting the Hardware Board-ID to OpenCore (Booter Patches)
+1. Skipping the Board-ID checks and rerouting the Hardware Board-ID to OpenCore (Booter Patches)
 2. In the 2nd stage, Kernel patches are used to make Update Servers believe that macOS Monterey is running as a Virtual Machine with a supported Board-ID
 
 I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them.
