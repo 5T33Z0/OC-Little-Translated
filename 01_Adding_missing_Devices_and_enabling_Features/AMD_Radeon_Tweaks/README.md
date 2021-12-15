@@ -18,6 +18,14 @@ This Chapter contains a few SSDTs and a Kext which improve the performance with 
 	- `DAGPM.kext` (dummy kext which will help with power management for the GPU)
 	- `Whatevergreen.kext`
 
+3. Add the following binary rename to ACPI > Patch:
+	
+	```swift
+	Find: 50454750
+	Replace: 45475030
+	Comment: Rename PEGP to EGP0
+	```
+
 3. Add Boot-arg `agdpmod=pikera` to config.plist &rarr; Fixes black screen issues on some GPUS)
 
 ## Credits
