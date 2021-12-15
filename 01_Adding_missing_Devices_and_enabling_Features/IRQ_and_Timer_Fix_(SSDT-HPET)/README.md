@@ -100,7 +100,7 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen HPET can be bloc
     }
     ```
   
-**TIMR**
+- Disable **TIMR**
   
    Same as **RTC**
   
