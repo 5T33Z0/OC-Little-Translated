@@ -1,6 +1,6 @@
 # AMD Radeon Performance Tweaks
 ## About
-This chapter contains a few SSDTs and a Kext which improve the performance with OpenCL and Metal applications and lowers the power consumption as well. This method tries to mimic a real working mac.
+This chapter contains a few SSDTs and a Kext which improve the performance of AMD Radeon GPUs in OpenCL and Metal applications and lowers the power consumption as well. This method tries to mimic a real working mac.
 
 ### Disclaimer
 - Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed. 
