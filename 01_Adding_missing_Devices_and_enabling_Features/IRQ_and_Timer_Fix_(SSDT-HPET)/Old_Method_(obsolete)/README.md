@@ -64,7 +64,7 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen HPET can be bloc
   
 - Patch file: ***SSDT-HPET_RTC_TIMR-fix***
     
-## :WARNING: CAUTION
+## CAUTION
 
 - This patch cannot be used in conjunction with the following patches:
   - ***SSDT-RTC_Y-AWAC_N*** of Binary Renaming and Preset Variables
