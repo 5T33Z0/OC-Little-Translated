@@ -86,7 +86,7 @@ The SSDTs listed below will most likely not add or enable any features besides b
 [**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds Mem Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
 [**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 [**SSDT-ARTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC))|Adds ARTC Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses same HID as AWAC.| `ACPI000E` 
-SSDT-FWHD|Adds FWHD (Firmware Hub Device) to IOReg|`INT0800`
+[**SSDT-FWHD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD))|Adds FWHD (Firmware Hub Device) to IOReg. Used by a lot of Macs.|`INT0800`
 
 ## Resources
 [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) by khronokernel
