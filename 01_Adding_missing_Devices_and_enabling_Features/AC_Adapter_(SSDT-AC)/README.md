@@ -24,6 +24,6 @@ After rebooting, open IORegestryExplorer again and check if `AppleACPIACAdapter`
 If it's not present, then you did something wrong, so start over.
 
 ## Notes and Credits
-- Original Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/edit/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC)/README.md))
+- Original Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))
 - When using this patch, make sure that the name ot the Low Pin Connector Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
 - Rehabman's old `ACPIBatteryManager.kext` integrates this fix, so if you use this kext you don't need this SSDT.
