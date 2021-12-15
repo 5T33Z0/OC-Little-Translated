@@ -31,7 +31,7 @@ There are two possible method of setting the correct ASPM mode: via DeviceProper
 
 	|PCI Path|Device Property [DATA]|
 	|--------|----------------------|
-	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000 (defaul)|
+	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000 (default)|
 	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000 (changed)|
 
 ### Method 2: Using SSDT Patches
@@ -39,8 +39,11 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
 
 - The patch principle is the same as `Disable PCI Devices`, please refer to it.
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
-	```swift
-	External (_SB.PCI0.RP05, DeviceObj)
+
+```swift
+DefinitionBlock ("", "SSDT", 2, "OCLT", "ASPM", 0)
+{
+    External (_SB.PCI0.RP05, DeviceObj)
     Scope (_SB.PCI0.RP05)
     {
         OperationRegion (LLLL, PCI_Config, 0x50, 1)
@@ -56,7 +59,9 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
         {
             \_SB.PCI0.RP05.L1 = Zero   //Set ASPM = L1
         }
-	```           
+    }
+}	```           
+```
 **Note 1**: Xiaoxin PRO13 wireless card path is `_SB.PCI0.RP05`  
 **Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
 
