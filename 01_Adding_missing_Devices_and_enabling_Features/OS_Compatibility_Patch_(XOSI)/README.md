@@ -1,20 +1,22 @@
 # Operating System Patch (`_OSI to XOSI`) 
 
-## Description
+## About
 
-`ACPI` code can use the `_OSI` method (OSI = Operating System Interfaces) to check which `Windows` version it is currently running on. However, when running macOS on a Hackintosh, none of these checks for `_OSI ("Windows <version>")` will return `true` because it only responds to `Darwin` (the codename of macOS). 
+`ACPI` can use the `_OSI` (=Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS Kernels) is running.
 
-But by patching the `DSDT` to simulate a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally only happen when running `Windows`.
+But by simulating a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally are limited to windows `Windows`. This is useful to better support certain devices like touchpads, etc.
 
-The Patch consist of two Parts: binary renames and a SSDT Hotpatch.
+**The Patch consist of two elements**: 
 
-**NOTE**: File updated with added support for Windows 10, build 2004. More info here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems) 
+1. Binary renames and a
+2. SSDT Hotpatch
 
-## Part 1: Rename Method _OSI to XOSI
+**NOTE**: More info about to included more windows versions can be found here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems) 
+
+## Part 1: Rename Method `_OSI` to `XOSI` 
 
 1. Search for `OSI` in the original `DSDT` 
-2. If you find it, add the `_OSI to XOSI` rename listed below
-3. **IMPORTANT**: If you find other entries containing the letters `O-S-I` – like `OSID` (Dell) or `OSIF` (ThinkPads) – you must rename those fields first and then add `_OSI to XOSI`. If there are no fields containing `OSI` other than the `_OSI` method, just add `_OSI to XOSI`.
+2. If you find it, add the `_OSI to XOSI` rename listed below.
 
 Add the following Renames (if applicable) to config.plist:
 
@@ -36,13 +38,12 @@ Add the following Renames (if applicable) to config.plist:
   Find: 5F4F5349
   Replace: 584F5349
   ```
-
-
+  
 ## Part 2: Hotpatch ***SSDT-OC-XOSI***
 
 ```swift
 Method(XOSI, 1)
-{
+	{
     If (_OSI ("Darwin"))
     {
         If (Arg0 == //"Windows 2009" // = win7, Win Server 2008 R2
@@ -75,27 +76,21 @@ Method(XOSI, 1)
 
 ### Usage
 
-- **Maximum Value**
-
-  For a single Windows installation, you can set the operating system parameter to the maximum value allowed by the DSDT. For example, if the maximum value of the DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
+- **Maximum Value**: For a single Windows installation, you can set the operating system parameter to the maximum value allowed by the DSDT. For example, if the maximum value of the DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
 
   **Note**: **OS Patches** are not recommended for single systems.
 
-- **Matching values**.  
+- **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
 
-  For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
-
-## Caution
-
-Some machines use `Methods` (indicted by underscores `_`) with similar names to `_OSI` (e.g. some Dell machines use `_OSID`, some ThinkPads ues `_OSIF`). If these methods contain the letters "OSI" and are located in `_SB`, they will accidentally be renamed to `XOSI`by the binary rename part of the XOSI patch as well, which causes ACPI Errors in Windows. So therefore, you need to rename methods like "OSID and "OSIF" to something else (e.g. `OSID to XSID`) prior to applying the `_OSI to XOSI` rename to avoid ACPI errors. In other words, in the `config.plist`, renames like `OSID to XSID` or `OSIF to XSIF` have to be listed before `_OSI to XOSI`.
+## :Waring: Important
+Some machines use methods indicated by underscores `_` with similar names to `_OSI` (e.g. some Dell machines use `_OSID`, some ThinkPads ues `_OSIF`). If these methods contain the letters "O-S-I" and are located on the `_SB` level, they will accidentally be renamed to `XOSI` by binary renames, which causes ACPI Errors in Windows. So therefore, you need to rename methods like `OSID` and `OSIF` to something else (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) prior to applying the `_OSI to XOSI` rename to avoid ACPI errors. In other words, renames like `OSID to XSID` or `OSIF to XSIF` have to be listed before `_OSI to XOSI` in the `config.plist`.
 
 ## Appendix: Origin of OS Patches
-
 When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems receive different parameters and ACPI executes different instructions. For example, if the system is **Win7**, this parameter is `Windows 2009`, and if the system is **Win8**, this parameter is `Windows 2012`. For example:
 
 ```swift
 If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
-  {
+{
       OperationRegion (PCF0, SystemMemory, 0xF0100000, 0x0200)
       Field (PCF0, ByteAcc, NoLock, Preserve)
       {
@@ -149,6 +144,7 @@ ACPI also defines `OSYS` which describes the used Windows Version in HEX code ba
   - `OSYS = 0x7E5`: Win11 21H2, ie `Windows 2021`</br>
 
 **NOTES**:
+
 - When the loaded OS is not recognized by ACPI, `OSYS` is given a default value which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
 - Different operating systems support different hardware, for example, I2C devices are only supported from `Win8` onwards.
 - When loading macOS, `_OSI` accepts parameters that are not recognized by ACPI, and `OSYS` is given a default value. This default value is usually smaller than the value required by Win8, and obviously I2C does not work. This requires a patch to correct this error, and OS patches are derived from this.

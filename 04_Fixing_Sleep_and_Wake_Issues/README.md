@@ -1,6 +1,6 @@
 # Fixing Sleep and Wake issues
 
-This section contains ACPI Hotpatches for resolving common issues related to Sleep and Wake, especially on but not limited to Laptops. The following Patches/Methods are covered:
+This section contains Guides, Hotpatches and Settings for resolving common issues related to Sleep and Wake, especially on but not limited to Laptops. The following areas are covered (open the corresponding folder for the guide):
 
 ## 1.`PTSWAKTTS` Sleep and Wake fix
 
@@ -16,9 +16,13 @@ This patch is required if pressing the Power or Sleep button causes an instant r
 
 This patch is for fixing instant wake issues, where the system instantly wakes up which is usually caused by some device prohibiting the system to enter sleep/hibernation mode.
 
-## 4.Fixing `AOAC` Sleep
+## 4. Fixing `AOAC` Sleep
 
 These patches are used for fixing sleep and standby issues on more recent Laptops using the Alway on always connected (`AOAC`) Technology.
+
+## 5. Configuring `ASPM` (Active State Power Management)
+
+ASPM (**Active State Power Management**), is a power link management scheme supported at system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle. You can modify the Active Power State of peripherals like Bluetooth/WiFi or other devices if they interrupt sleep.
 
 ## Notes
 
