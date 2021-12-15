@@ -27,12 +27,12 @@ There are two possible method of setting the correct ASPM mode: via DeviceProper
 	- L1 mode: `pci-aspm-default` = `02010000` [data]
 	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
 - **Example**:
-	The default ASPM mode of Xiaoxin PRO13 wireless card is L0s/L1 and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Accpording to manual above, changing the ASPM from L0s/L1 to L1 by injecting `pci-aspm-default` would results in:
+	The default ASPM mode of Xiaoxin PRO13 wireless card is L0s/L1 and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. According to the manual above, changing the ASPM from L0s/L1 to L1 by injecting `pci-aspm-default` would results in:
 
 	|PCI Path|Device Property [DATA]|
 	|--------|----------------------|
 	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000 (defaul)|
-	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000 (modified)|
+	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000 (changed)|
 
 ### Method 2: Using SSDT Patches
 An SSDT patch can also set the ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
