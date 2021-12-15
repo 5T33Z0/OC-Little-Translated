@@ -24,7 +24,7 @@ This Chapter contains a few SSDTs and a Kext which improve the performance with 
 	Find: 50454750
 	Replace: 45475030
 	Comment: Rename PEGP to EGP0
-
+	```
 3. Add Boot-arg `agdpmod=pikera` to config.plist &rarr; Fixes black screen issues on some GPUS)
 
 ## Credits
