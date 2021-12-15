@@ -1,47 +1,31 @@
-# Sound Card IRQ Patch
+# Sound Card IRQ Patch (manual method, old)
 
 ## Description
+Below you will find the guide for fixing IRQ issues manually if you don't want to use SSDTTime which can genereate the necessary SSDT-HPET and and patches for you automatically.
 
 - The sound card on earlier machines required part **HPET** **`PNP0103`** to provide interrupt numbers `0` & `8`, otherwise the sound card would not work properly. In reality almost all machines have **HPET** without any interrupt number provided. Usually, interrupt numbers `0` & `8` are occupied by **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`** respectively
 - To solve the above problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
-## Patch principle
+### Technical Background
+Although mostly older platforms (mobile Ivy Bridge for example) are affected by `IRQ` issues which cause the on-board sound not to work since `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is), the problem can occur on recent platforms as well. 
+
+This is due to the fact that `HPET` is a legacy device from Intel's 6th Gen platform and is only present for backward compatibility with oder Windows versions. if you use 7th Gen Intel Core CPU or newer with Windows 8.1+, HPET (High Precision Event Timer) is no longer present in Device Manager (the Driver is unloaded).
+	
+For macOS 10.12 and newer, if the problem occurs on the 6th Gen HPET can be blocked directly to solve the problem. Consult the original DSDT's HPET `_STA` method for specific settings.
+
+## Patching principle
 
 - Disable **HPET**, **RTC**, **TIMR** three parts.
 - Counterfeit three parts, i.e., **HPE0**, **RTC0**, **TIM0**.
 - Remove `IRQNoFlags (){8}` of **RTC0** and `IRQNoFlags (){0}` of **TIM0** and add them to **HPE0**.
 
-# Patch Method (NEW): UsingSSDTTime
+## Patching method
 
-The old patch method described below is obsolete, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+### Disable **HPET**, **RTC** and **TIMR**
 
-* ***SSDT-AWAC*** – Context-Aware AWAC Disable and Fake RTC
-* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
-* ***SSDT-PLUG*** – Sets plugin-type to 1 on `CPU0`/`PR00`
-* ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PMC*** – Enables Native NVRAM on True 300-Series Boards
-
-**HOW TO:**
-
-1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Pres "D", drag in your system's DSDT and hit "ENTER"
-3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI > OC > ACPI
-6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
-7. Save your config
-8. Download and run [**ProperTree**](https://github.com/corpnewt/ProperTree)
-9. Open your config and create a new snapshot to get the new .aml files added to the list.
-10. Save. Reboot. Done. Audio should work now (assuming AppleALC.kext is present along wit the correct layout-id for your on-board audio card). 
-
-<details>
-<summary><strong>Old Method (kept for documentary purposes)</strong></summary>
-## Patch method
-
-- Disable **HPET**, **RTC**, **TIMR**
-  - **HPET**
+- Disbale **HPET**
   
-    Normally `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method. For example
+    Normally `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method. For example:
   
     ```swift
     External (HPAE, IntObj) /* or External (HPTE, IntObj) */
@@ -54,13 +38,13 @@ The old patch method described below is obsolete, because the patching process c
     }
     ```
   
-    Note: The `HPAE` variable within `_STA` may vary from machine to machine.
+    **NOTE**: The `HPAE` variable within `_STA` may vary from machine to machine.
   
-  - **RTC**  
+- Disable **RTC**  
   
-    Earlier machines have RTCs without `_STA`, disable RTCs by pressing the `Method (_STA,` method. e.g.
+    Earlier machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
   
-    ```Swift
+    ```swift
     Method (_STA, 0, NotSerialized)
     {
         If (_OSI ("Darwin"))
@@ -74,22 +58,15 @@ The old patch method described below is obsolete, because the patching process c
     }
     ```
   
-  - **TIMR**
+**TIMR**
   
-    Same as **RTC**
+   Same as **RTC**
   
-- Patch file:***SSDT-HPET_RTC_TIMR-fix***
-
-  See **Patch Principle** above for reference examples.
-  
-  **Topcharge**
-  
-  Although early platforms (Intel 3 Ivy Bridge generation mobile is the most common) commonly have `IRQ` problems that cause the on-board sound card can not be driven, as shown by `AppleHDA.kext` can not be loaded, only `AppleHDAController.kext` but in today's new platforms there are some machines also still exist This problem is due to the fact that HPET is already an obsolete device from Intel 6 generation platform and is only reserved as compatible with earlier versions of the system, if you use 6 generation platform or above and the system version Windows 8.1 + HPET (High Precision Event Timer) in Device Manager is already in the unloaded driver state
-  macOS 10.12 + version, if the problem occurs in the 6th generation + hardware platform can be directly blocked HPET to solve the problem specific method to consult the original DSDT HPET `_STA` method of specific settings.
+- Patch file: ***SSDT-HPET_RTC_TIMR-fix***
     
-## Caution
+## :WARNING: CAUTION
 
-- This patch cannot be used in conjunction with the following patches.
+- This patch cannot be used in conjunction with the following patches:
   - ***SSDT-RTC_Y-AWAC_N*** of Binary Renaming and Preset Variables
   - OC Official ***SSDT-AWAC***
   - Counterfeit Devices" or OC's official ***SSDT-RTC0***
