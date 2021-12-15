@@ -76,7 +76,7 @@ Listed below are all SSDTs contained in this chapter. Search for the listed term
 [**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs|–
 
 #### Cosmetic SSDTs 
-The SSDTs listed below will most likely not add or enable any features besides being present in the IORegestry as a device or service, so it looks like a genuine Mac model as defined in the SMBIOS. 
+The SSDTs listed below will most likely not add or enable any features besides being present in the IORegestry as a device or service, so it looks like a genuine Mac model as defined by the SMBIOS. 
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
