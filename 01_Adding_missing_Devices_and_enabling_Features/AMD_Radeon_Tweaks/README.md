@@ -4,13 +4,12 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
 
 ### Disclaimer
 - Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed. 
-- Don't use on RX 6800XT – it won't work.
 
 ## Partching Principle
 
-1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only).
+1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only , whit Opencore Bootloader).
 
-2. Add the correct SSDT for your GPU
+2. Add the correct SSDT for your GPU (Clover Bootloader)
 
 	- For **RX 580**: Use `SSDT-RX580.aml`
 	- For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
