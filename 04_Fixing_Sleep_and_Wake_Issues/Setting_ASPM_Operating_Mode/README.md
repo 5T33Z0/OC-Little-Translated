@@ -13,8 +13,9 @@ ASPM, **Active State Power Management**, is a power link management scheme suppo
 - Changing the ASPM mode of PCI devices may solve issues of some third-party devices not being driven correctly during boot. For example, the SD Card Reader of RTS525A model may not be recognized in `L0s` mode (default mode). After changing it to `L1`, it is recognized correctly.
 
 ## Injecting ASPM operation Mode
+There are two possible method of setting the correct ASPM mode: via DeviceProperties or with SSDTs.
 
-### `DeviceProperties` injection (preferred method)
+### Method 1: Injection via `DeviceProperties` (preferred method):
 
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
 - **Parent Device**
@@ -26,19 +27,15 @@ ASPM, **Active State Power Management**, is a power link management scheme suppo
 	- L1 mode: `pci-aspm-default` = `02010000` [data]
 	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
 - **Example**:
-	The default ASPM of Xiaoxin PRO13 wireless card is L0s/L1, and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Refer to the above method, change the ASPM to L1 by injecting `pci-aspm-default`:
-  
-	```text
-	PciRoot(0x0)/Pci(0x1C,0x0)
-	pci-aspm-default = 02000000
-	......
-	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)
-	pci-aspm-default = 02010000
-	```
+	The default ASPM mode of Xiaoxin PRO13 wireless card is L0s/L1 and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. Accpording to manual above, changing the ASPM from L0s/L1 to L1 by injecting `pci-aspm-default` would results in:
 
-### SSDT Patch
+	|PCI Path|Device Property [DATA]|
+	|--------|----------------------|
+	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000 (defaul)|
+	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000 (modified)|
 
-An SSDT patch can also set ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
+### Method 2: Using SSDT Patches
+An SSDT patch can also set the ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
 
 - The patch principle is the same as `Disable PCI Devices`, please refer to it.
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
