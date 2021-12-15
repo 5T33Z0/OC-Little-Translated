@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>14A100</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Copyright © 2014 Apple All rights reserved.</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.driver.toledaAGPM</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>toledaAGPM</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0.0-toledaAGPM</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2014 Apple. All rights reserved.</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>AGPM</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AGPM</string>
+			<key>IOClass</key>
+			<string>AGPMController</string>
+			<key>IONameMatch</key>
+			<string>AGPMEnabler</string>
+			<key>IOProviderClass</key>
+			<string>IOPlatformPluginDevice</string>
+			<key>Machines</key>
+			<dict>
+				<key>Mac-7BA5B2D9E42DDD94</key>
+				<dict>
+					<key>GFX0</key>
+					<string></string>
+					<key>Vendor1002Device67DF</key>
+					<string></string>
+					<key>Vendor1002Device731F</key>
+					<string></string>
+					<key>Vendor1002Device7340</key>
+					<string></string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>OSBundleRequired</key>
+	<string>Local-Root</string>
+</dict>
+</plist>

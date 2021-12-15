@@ -1,6 +1,5 @@
 # AC Adapter Fix for Laptops
-The included SSDTs add an AC Adapter device to your Notebook, if missing.
->Credits: Original Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC%20Adapter%20FIX%20(SSDT-AC%5CAC0%5CADP0%5CADP1%5CACAD))
+The included SSDTs add an AC Adapter device to IOReg if missing. Primarily used on Laptops.
 
 ## Checking if you need this fix
 - In `DSDT`, search for `ACPI0003` or `Device (AC)` and its location. In this case it's present and located under `\SB.PCI0.LPC.EC.AC`: 
@@ -22,8 +21,9 @@ If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to
 After rebooting, open IORegestryExplorer again and check if `AppleACPIACAdapter` is present:
 ![fixed](https://user-images.githubusercontent.com/76865553/139687129-42f54d03-7f49-45f4-9eae-ae29f7a8d5ee.png)
 
-If it's not present, then you did something wrong so start over.
+If it's not present, then you did something wrong, so start over.
 
-## Notes
+## Notes and Credits
+- Original Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC%20Adapter%20FIX%20(SSDT-AC%5CAC0%5CADP0%5CADP1%5CACAD))
 - When using this patch, make sure that the name ot the Low Pin Connector Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
 - Rehabman's old `ACPIBatteryManager.kext` integrates this fix, so if you use this kext you don't need this SSDT.
