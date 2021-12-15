@@ -21,5 +21,7 @@ This Chapter contains a few SSDTs and a Kext which improve the performance with 
 3. Add Boot-arg `agdpmod=pikera` to config.plist &rarr; Fixes black screen issues on some GPUS)
 
 ## Credits
-mattystonie for the files and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+- mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+- Toleda for `DAGPM.kext`
+- Acidanthera for `WhateverGreen.kext` 
  
