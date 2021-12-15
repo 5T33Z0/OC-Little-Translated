@@ -1,7 +1,7 @@
 # Fake Apple Realtime Clock (`SSDT-ARTC`) 
-Adds ARTC device to IORegistry in macOS – nothing more. My research showed that `ARTC` is present in the IORegistries of Macs with Coffee Lake, Comet Lake, Ice Lake and Xeon W CPUs. When added,x it is listed in IOreg as "ARTC" (Apple Realtime Clock) while the actual clock in use is "RTC".
+Adds `ARTC` device to IORegistry in macOS – nothing more. My research showed that `ARTC` is present in the IORegistries of Macs with Coffee Lake, Comet Lake, Ice Lake and Xeon W CPUs. When added, it is listed in IOreg as "ARTC" (Apple Realtime Clock) while the actual clock in use is "RTC".
 
-It uses `ACPI000E` as Hardware ID (HID), which is identical to the `AWAC` Clock found in DSTDs of modern systems (300-series and newer).
+It has `ACPI000E` as Hardware ID (HID), which is identical to the `AWAC` Clock found in DSTDs of modern systems (300-series and newer).
 
 Appllicable to **SMBIOS**:
 
