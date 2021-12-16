@@ -13,7 +13,7 @@ The fix presented in this chapter link an AC Adapter existing in a system's `DSD
 There are 2 options for applying this patch: via kext or via SSDT.
 
 ### Method 1: Kext (easy, recommended)
-- Add `ACPIBatteryManager.kext` by [Rehabman](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) to your kext folder and config. It includes the necessary fix to link the AC Adapter to the `AppleACPIACAdapter` Service in IOReg and also applies some settings related to power managemnt. 
+- Add `ACPIBatteryManager.kext` by [Rehabman](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) to your kext folder and config. It includes the necessary fix to link the AC Adapter to the `AppleACPIACAdapter`, applies some settings related to power managemnt and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg 
 - Disable `SMCBatteryManager.kext` (if present).
 
 ### Method 2: Use a SSDT (for advanced users)
