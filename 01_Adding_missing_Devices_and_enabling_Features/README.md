@@ -81,7 +81,7 @@ The SSDTs listed below will most likely not add or enable any features besides b
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
-[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Adds an AC Adapter Device for Laptops.|`ACPI0003`
+[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Attaches AC Adapter Device to AppleACPIACAdapter Service in IOReg|`ACPI0003`
 [**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds DMA Controller to IOReg|`PNP0200` or `DMAC`
 [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds Platform Power Management Controller to IOReg (for 100- and 200-series chipsets only). Possibly cosmetic only.|`0x001F0002` or `Device (PPMC)`
 [**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds Mem Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
