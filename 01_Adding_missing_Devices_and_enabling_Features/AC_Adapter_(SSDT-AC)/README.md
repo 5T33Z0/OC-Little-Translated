@@ -1,5 +1,5 @@
 # AC Adapter (for Laptops)
-This patch attaches an AC Adapter Device existing in a system's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. So if you use **VirtualSMC** with the **SMCBatteryManger** plugin already, you don't need to add this patch at all! See CPIBatteryManager vs. SMCBatteryManager for details.
+This patch attaches an AC Adapter Device existing in a system's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. So if you use **VirtualSMC** with the **SMCBatteryManger** plugin already, you don't need to add this patch at all! Read the note about  **ACPIBatteryManager** vs. **SMCBatteryManager** below for more details.
 
 **Applicable to** all Laptop SMBIOSes (MacBook, MacBookAir and MacBookPro). 
 
