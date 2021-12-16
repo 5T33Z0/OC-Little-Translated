@@ -27,7 +27,12 @@ If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to
 
 ## Verifying the patch
 After rebooting, open IORegestryExplorer again and check if `AppleACPIACAdapter` is present:
-![fixed](https://user-images.githubusercontent.com/76865553/139687129-42f54d03-7f49-45f4-9eae-ae29f7a8d5ee.png)
+
+![ACAdaptr](https://user-images.githubusercontent.com/76865553/146288651-24a88e8a-fc8e-4354-b54f-7e96de2e6cfd.png)
+
+If you use the kext, it also links the battery to AppleSmartBatteryManager:
+
+![Bat0](https://user-images.githubusercontent.com/76865553/146288737-8284846d-8fc1-489b-96f6-bb5b804828ab.png)
 
 If it's not present, then you did something wrong, so start over.
 
