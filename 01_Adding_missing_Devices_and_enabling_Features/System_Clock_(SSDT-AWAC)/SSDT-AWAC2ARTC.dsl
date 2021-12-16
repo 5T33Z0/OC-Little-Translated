@@ -1,23 +1,7 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLoWjcnY.aml, Tue Dec 14 14:48:00 2021
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x000000A3 (163)
- *     Revision         0x02
- *     Checksum         0x65
- *     OEM ID           "STZO"
- *     OEM Table ID     "ARTC"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
- */
+// Fake ARTC Device. Disables AWAC and HPET. Enables RTC and attachs it to ARTC in IOReag
+// For: 300/400/500/600 Series Chipsets
+// Experimental! Use one of the SSDT-AWAC variants first if you don't know how this works.
+
 DefinitionBlock ("", "SSDT", 2, "STZO", "ARTC", 0x00000000)
 {
     External (_SB_, DeviceObj)
