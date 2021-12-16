@@ -1,5 +1,5 @@
 # AC Adapter Fix for Laptops
-The included SSDTs add an AC Adapter device to IOReg if missing. Applicable to all Laptop SMBIOSes (MacBook, MacBookAir, MacBookPro).
+The included SSDTs links an AC Adapter existing in a system's `DSDT` to the AppleACPIACAdapter Service in IOReg of macOS. Applicable to all Laptop SMBIOSes (MacBook, MacBookAir and MacBookPro).
 
 ## Checking if you need this fix
 - In `DSDT`, search for `ACPI0003` and the device it belongs to (either `AC`, `AC0`, `ADP1`, `ADP` or `ACAD`). In this case it's present and located under `\SB.PCI0.LPC.EC.AC`: 
