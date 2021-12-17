@@ -1,7 +1,7 @@
 # AC Adapter (for Laptops)
-This patch attaches an AC Adapter Device existing in a system's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. So if you use **VirtualSMC** with the **SMCBatteryManger** plugin already, you don't need to add this patch at all! Read the note about  **ACPIBatteryManager** vs. **SMCBatteryManager** below for more details.
+This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. So if you use **VirtualSMC** with the **SMCBatteryManager** plugin already, you don't need to add this patch at all! Read the note below about **ACPIBatteryManager** vs. **SMCBatteryManager** for more details.
 
-**Applicable to** all Laptop SMBIOSes (MacBook, MacBookAir and MacBookPro). 
+**Applicable to**: MacBook, MacBookAir and MacBookPro SMBIOS. 
 
 ## Preparations
 - In `DSDT`, search for `ACPI0003` and the device it belongs to (either AC, AC0, ADP, ADP1 or ACAD`). 
@@ -12,10 +12,10 @@ This patch attaches an AC Adapter Device existing in a system's `DSDT` to the `A
 - If `AppleACPIACAdapter` is missing, you need a fix: ![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
 
 ## Applying the patch
-There are 2 possible methods for applying this patch: via kext or via SSDT. Use only one of them, not both!
+There are 2 methods of applying this patch: either via kext or via SSDT. 
 
 ### Method 1: Using a Kext (easy)
-- Add `ACPIBatteryManager.kext` by [Rehabman](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) to your EFI's kext folder and config. It includes the necessary fix to attach the AC Adapter to the `AppleACPIACAdapter` service. Additionally it also applies some settings related to power managemnt and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg
+- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power managemnt and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg.
 - Disable `SMCBatteryManager.kext` (if present).
 - Save and reboot
 
@@ -44,9 +44,10 @@ If it's not present, then you did something wrong, so start over.
 
 ## Notes
 - When using the SSDT patches, make sure that the name ot the Low Pin Connector Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
-- In Clover you can use `FixADP1` instead to attach the AC device in IOReg.
+- In Clover, you can use `FixADP1` instead to attach the AC device in IOReg.
 
 ## Credits
 - SSDT Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC%20Adapter%20FIX%20(SSDT-AC%5CAC0%5CADP0%5CADP1%5CACAD))
 - `ACPIBatteryManager.kext` by [**Rehabman**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/).
+- `VirtualSMC` and `SMCBatteryManager` by [**Acidanthera**](https://github.com/acidanthera/VirtualSMC)
 
