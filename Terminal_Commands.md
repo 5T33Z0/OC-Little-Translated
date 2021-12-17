@@ -38,6 +38,8 @@ https://macos-defaults.com/
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
 ## Hackintosh specific
+**Currently used SMBIOS**</br>
+`system_profiler SPHardwareDataType | grep 'Model Identifier'` 
 
 **Find loaded Kexts** (excluding those from Apple)</br>
 `kextstat | grep -v com.apple`</br>
