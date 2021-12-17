@@ -15,7 +15,7 @@ This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `A
 There are 2 methods of applying this patch: either via kext or via SSDT. 
 
 ### Method 1: Using a Kext (easy)
-- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power managemnt and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg.
+- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg.
 - Disable `SMCBatteryManager.kext` (if present).
 - Save and reboot
 
