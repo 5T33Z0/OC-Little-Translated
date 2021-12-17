@@ -2,9 +2,11 @@
 ## About
 This chapter contains a few SSDTs and a Kext which improve the performance of AMD Radeon GPUs in OpenCL and Metal applications and lowers the power consumption as well. This method tries to mimic a real working mac.
 
+- SSDT-Navi = indispensable for all Navi 5000-6000 series GPUs.
+- SSDT-Matty = as these SSDTs are very invasive and don't always guarantee decent performance.
+
 ### Disclaimer
 - Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed. 
-- Don't use on RX 6800XT – it won't work.
 
 ## Partching Principle
 
