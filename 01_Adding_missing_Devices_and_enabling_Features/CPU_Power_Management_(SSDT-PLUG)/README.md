@@ -44,7 +44,7 @@ The manual patch method described below is outdated, since the patching process 
           Processor (CPU7, 0x08, 0x00001810, 0x06){}
       }
 	```
-- Based on the search result, the `Processor` object is loctaed in the Scope `_PR` and the name of the first core is `CPU0`, so select the injection file: ***SSDT-PLUG-_PR.CPU0***
+- Based on the search result, the `Processor` object is located in the Scope `_PR` and the name of the first core is `CPU0`, so select the injection file: ***SSDT-PLUG-_PR.CPU0***
 
 ### Example 2
 - In `DSDT`, search for `Processor`, e.g.:
@@ -70,7 +70,7 @@ The manual patch method described below is outdated, since the patching process 
           Processor (PR15, 0x10, 0x00001810, 0x06){}
       }
 	```
-- Based on the search result, the `Processor` object is loctaed under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
+- Based on the search result, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
 
 **IMPORTANT**: If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
