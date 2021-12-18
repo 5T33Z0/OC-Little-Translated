@@ -1,8 +1,7 @@
 # Enabling CPU Power Management (`SSDT-PLUG`)
 
 ## Description
-
-Enables `X86PlatformPlugin` to implement CPU Power Management on 4th Gen Intel Core CPUs (Haswell and newer). AMD CPUs require [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) instead.
+Enables `X86PlatformPlugin` to implement XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. AMD CPUs require [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) instead.
 
 ## Patching method 1: automated, using SSDTTime
 
@@ -29,10 +28,11 @@ The manual patch method described below is outdated, since the patching process 
 
 ## Patching method 2: manual
 
+### Example 1
 - In `DSDT`, search for `Processor`, e.g.:
 
-```  swift
-        Scope (_PR)
+	```	swift 
+      Scope (_PR)
       {
           Processor (CPU0, 0x01, 0x00001810, 0x06){}
           Processor (CPU1, 0x02, 0x00001810, 0x06){}
@@ -43,12 +43,14 @@ The manual patch method described below is outdated, since the patching process 
           Processor (CPU6, 0x07, 0x00001810, 0x06){}
           Processor (CPU7, 0x08, 0x00001810, 0x06){}
       }
-```
+	```
+- Based on the search result, the `Processor` object is located in the Scope `_PR` and the name of the first core is `CPU0`, so select the injection file: ***SSDT-PLUG-_PR.CPU0***
 
-  Based on the query result, select the injection file ***SSDT-PLUG-_PR.CPU0***
+### Example 2
+- In `DSDT`, search for `Processor`, e.g.:
 
-```swift
-       Scope (_SB)
+	```swift
+      Scope (_SB)
       {
           Processor (PR00, 0x01, 0x00001810, 0x06){}
           Processor (PR01, 0x02, 0x00001810, 0x06){}
@@ -67,13 +69,12 @@ The manual patch method described below is outdated, since the patching process 
           Processor (PR14, 0x0F, 0x00001810, 0x06){}
           Processor (PR15, 0x10, 0x00001810, 0x06){}
       }
-```
+	```
+- Based on the search result, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
 
-According to the query result, select the injection file: ***SSDT-PLUG-_SB.PR00***
-
-If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
+**IMPORTANT**: If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
 ## Notes and Credits
-- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. 
-- You can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
+- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
 - Dortania for `SSDT-CPUR.aml` 
+- For Intel Xeon CPUs, a different approch is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
