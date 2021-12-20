@@ -1,23 +1,4 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20210331 (64-bit version)
- * Copyright (c) 2000 - 2021 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLORqyiL.aml, Thu Dec 16 12:53:43 2021
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x000002CB (715)
- *     Revision         0x01
- *     Checksum         0x27
- *     OEM ID           "hack"
- *     OEM Table ID     "Matty"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200110 (538968336)
- */
+//
 DefinitionBlock ("", "SSDT", 1, "hack", "Matty", 0x00000000)
 {
     External (_SB_.PCI0.PEG0, DeviceObj)
