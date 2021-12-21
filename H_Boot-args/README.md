@@ -61,7 +61,7 @@ Listed below you'll find a snall but usefuk assortion of whatevergreen's boot ar
 `-wegswitchgpu`|Disables th iGPU if a discrete GPU is detected (or use `switch-to-external-gpu` property to iGPU)
 `-wegnoegpu`|Disables all discrete GPUs (or add `disable-gpu` property to each GFX0).
 `-wegnoigpu`|Disables internal GPU (or add `disable-gpu` property to iGPU)
-`agdpmod=pikera` | Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this, you’ll get a black screen. Don’t use on Navi Cards (i.e. Polaris and Vega).
+`agdpmod=pikera` | Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this, you’ll get a black screen. Don’t use on Polaris or Vega cards.
 `agdpmod=vit9696`|Disables check for `board-id` (or add `agdpmod` property to external GPU).
 `applbkl=0`| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for IGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
 `gfxrst=1`|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
