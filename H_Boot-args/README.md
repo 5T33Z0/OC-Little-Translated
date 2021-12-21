@@ -40,7 +40,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 ## Boot-args and device properties provided by kexts
 
 ### Lilu.kext
-Assorted Lilu boot-args. Remember that Lilu is a Patch engines providing functionality for almost(?) any other kext in the hackintosh universe, so you got to be aware of that if you use any of these commands!
+Assorted Lilu boot-args. Remember that Lilu acts as a patch engine providing functionality for other kexts in the hackintosh universe, so you got to be aware of that if you use any of these commands!
 
 |Boot-arg|Description|
 |:-------:|-----------|
