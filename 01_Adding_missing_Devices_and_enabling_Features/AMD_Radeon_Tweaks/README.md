@@ -4,7 +4,6 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
 
 ### Disclaimer
 - Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed. 
-- Don't use on RX 6800XT – it won't work.
 
 ## Partching Principle
 
