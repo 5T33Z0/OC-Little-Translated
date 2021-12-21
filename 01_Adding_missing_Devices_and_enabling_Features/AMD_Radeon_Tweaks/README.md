@@ -21,12 +21,12 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
   - For **RX 5600/5700/5700XT**: Use `SSDT-RX5700XT.aml`
   - For **RX Vega 64**: Use `SSDT-RXVega64.aml`
 	
-3. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist
+2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist
 
-	- `DAGPM.kext` (dummy kext which will help with power management for the GPU)
-	- `Whatevergreen.kext`
+  - `DAGPM.kext` (dummy kext which will help with power management for the GPU)
+  - `Whatevergreen.kext`
 
-4. Only GPU Navi add Boot-arg `agdpmod=pikera` to config.plist &rarr; Fixes black screen issues on some GPUS)
+3. Only GPU Navi add Boot-arg `agdpmod=pikera` to config.plist &rarr; Fixes black screen issues on some GPUS)
 
 ## Credits
 - mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
