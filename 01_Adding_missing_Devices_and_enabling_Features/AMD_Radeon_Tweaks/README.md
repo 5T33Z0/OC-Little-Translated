@@ -16,10 +16,10 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
 
 1.Choose SSDT based on the appropriate GPU model
 
-        - For **RX 580**: Use `SSDT-RX580.aml`
-	- For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
-	- For **RX 5600/5700/5700XT**: Use `SSDT-RX5700XT.aml`
-	- For **RX Vega 64**: Use `SSDT-RXVega64.aml`
+  - For **RX 580**: Use `SSDT-RX580.aml
+  - For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
+  - For **RX 5600/5700/5700XT**: Use `SSDT-RX5700XT.aml`
+  - For **RX Vega 64**: Use `SSDT-RXVega64.aml`
 	
 3. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist
 
