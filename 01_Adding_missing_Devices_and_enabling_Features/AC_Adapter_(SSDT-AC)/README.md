@@ -27,12 +27,12 @@ If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to
 
 - Open the SSDT corresponding to your AC device's name in maciASL and adjust the PCI path according to the path used in your `DSDT`.
 - In this example, `SSDT-AC.dsl` is used and modified, so it looks like this: ![SSDT_mod](https://user-images.githubusercontent.com/76865553/139687058-6fad207b-019a-4253-a91e-c87011f17922.png)</br>
-- Export the file as an `.aml` file (.aml = ACPI Machine Language Binary)
+- Export the file as an `.aml` file (ACPI Machine Language Binary)
 - Put it the ACPI Folder, add it to your config.plist and enable it.
 - Save and reboot.
 
 ## Verifying the patch
-After rebooting, open IORegestryExplorer again and check if `AppleACPIACAdapter` is present:
+After rebooting, open IORegistryExplorer again and check if `AppleACPIACAdapter` is present:
 
 ![ACAdaptr](https://user-images.githubusercontent.com/76865553/146288651-24a88e8a-fc8e-4354-b54f-7e96de2e6cfd.png)
 
