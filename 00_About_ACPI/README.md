@@ -281,7 +281,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 | Create statement |   size    |
 | :--------------: | :-------: |
-|  CreateBitField  |  1-Bit    |
+| CreateBitField   |  1-Bit    |
 | CreateByteField  |  8-Bit    |
 | CreateWordField  |  16-Bit   |
 | CreateDWordField |  32-Bit   |
