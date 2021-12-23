@@ -7,7 +7,7 @@ This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `A
 - In `DSDT`, search for `ACPI0003` and the device it belongs to (either AC, AC0, ADP, ADP1 or ACAD`). 
 - In this example, it's present and located under `\SB.PCI0.LPC.EC.AC`: 
 	![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/139686755-00929243-000b-459d-9d02-5ab9b0f720c6.png)
-- Next, run **IORegistryExplorer** and find either of this devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top ofthe list)
+- Next, run **IORegistryExplorer** and find either of this devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top of the list)
 - Check if `AppleACPIACAdapter` is loaded. If it's present (as in this example) you don't need the fix: ![AppleACPIACAdapter_present](https://user-images.githubusercontent.com/76865553/139686991-d0104672-31f1-4ccf-949b-cd44ff9a4537.png)
 - If `AppleACPIACAdapter` is missing, you need a fix: ![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
 
