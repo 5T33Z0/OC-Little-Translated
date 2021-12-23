@@ -21,7 +21,7 @@ Unlike Windows, macOS has no hardware detection capabilities because it doesn't 
 
 Although `kexts` handle a lot of patching tasks nowadays, it may be necessary to create additional patches to enable certain features (like enabling Thunderbolt or fixing Sleep issues, etc.). The preferred method to do so is **Hotpatching**.
 
-Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted and patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain character in the text of ACPI tables (binary renaming) and 2) replacing or adding tables to existing ACPI tables, usually SSDTs.
+Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted, then patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain character in the text of ACPI tables (binary renaming) and 2) replacing or adding tables to existing ACPI tables, usually SSDTs.
 
 In order to create Hotpatches, we need to extract – or as we say, dump – the original ACPI tables from the BIOS. Some Tools can extract a machine's ACPI Form - like `SSDTTime` in Windows or Bootloaders like `OpenCore` and `Clover`. 
 
