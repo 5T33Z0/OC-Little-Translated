@@ -65,7 +65,7 @@ Device (AWAC)
 ```
 As you can see, you can enable RTC and disable AWAC at the same time if `STAS=1`, using one of the following methods/hotpatches.
 
-### Method 1: using `SSCT-AWAC`
+### Method 1: using `SSDT-AWAC`
 ```swift
 External (STAS, IntObj)
 Scope (\)
