@@ -133,8 +133,8 @@ Scope (\)
 
 **Explanation**: This SSDT actually makes use of AWAC Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
 
-### Method 3: using `SSDT-AWAC_STA0` (if method 3 fails)
-Disables AWAC where `SSDT-AWAC-DISABLE` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
+### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
+Disables AWAC where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
 
 ```swift
 External (_SB_.AWAC._STA, IntObj)
