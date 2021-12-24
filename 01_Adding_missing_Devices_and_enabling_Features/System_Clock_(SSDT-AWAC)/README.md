@@ -78,14 +78,14 @@ Scope (\)
 ``` 
 **Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Becaus `STAS` is *not* `Zero`, the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
-### Method 2: using `SSDT-AWAC2ARTC` (new)
+### Method 2: using `SSDT-AWAC2_ARTC` ('new' Disable RTC + Disable Awac + Disable HPET + Add ARTC Device) 
 **Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,1`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
 **Procedure**: 
 
 - In `DSDT`, search for `ACPI000E`. 
 - If present, check if it belongs to `Device (AWAC)`. 
 - If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
-- If all above condistions are met, you can add `SSDT-AWAC2ART.aml`
+- If all above condistions are met, you can add `SSDT-AWAC2_ART.dsl`
 
 **Explanation**: This SSDT actually makes use of AWAC Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
 
