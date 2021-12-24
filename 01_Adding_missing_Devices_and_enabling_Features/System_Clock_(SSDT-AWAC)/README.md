@@ -79,6 +79,50 @@ Scope (\)
 **Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Becaus `STAS` is *not* `Zero`, the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
 ### Method 2: using `SSDT-AWAC2_ARTC` ('new' Disable RTC + Disable Awac + Disable HPET + Add ARTC Device) 
+
+```swift
+    External (_SB_.PCI0.LPCB, DeviceObj)
+    External (HPTE, IntObj)
+    External (STAS, IntObj)
+
+    Scope (\)
+    {
+        If (_OSI ("Darwin"))
+        {
+            STAS = 0x02
+            HPTE = Zero
+        }
+    }
+
+    Scope (\_SB.PCI0.LPCB)
+    {
+        Device (ARTC)
+        {
+            Name (_HID, EisaId ("PNP0B00") /* AT Real-Time Clock */)  // _HID: Hardware ID
+            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+            {
+                IO (Decode16,
+                    0x0070,             // Range Minimum
+                    0x0070,             // Range Maximum
+                    0x01,               // Alignment
+                    0x02,               // Length
+                    )
+            })
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Return (0x0F)
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+        }
+    }
+``` 
+
 **Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,1`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
 **Procedure**: 
 
