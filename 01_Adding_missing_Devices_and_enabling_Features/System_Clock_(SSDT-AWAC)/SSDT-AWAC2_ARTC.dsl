@@ -4,7 +4,7 @@
 
 DefinitionBlock ("", "SSDT", 2, "STZO", "ARTC", 0x00000000)
 {
-    External (_SB_, DeviceObj)
+    External (_SB_.PCI0.LPCB, DeviceObj)
     External (HPTE, IntObj)
     External (STAS, FieldUnitObj)
 
@@ -17,7 +17,7 @@ DefinitionBlock ("", "SSDT", 2, "STZO", "ARTC", 0x00000000)
         }
     }
 
-    Scope (\)
+    Scope (\_SB.PCI0.LPCB)
     {
         Device (ARTC)
         {
