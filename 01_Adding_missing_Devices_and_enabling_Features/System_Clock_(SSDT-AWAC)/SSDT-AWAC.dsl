@@ -1,6 +1,6 @@
 //enable RTC
 //disable AWAC
-DefinitionBlock ("", "SSDT", 2, "OCLT", "RTCAWAC", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "OCLT", "AWAC", 0x00000000)
 {
     External (STAS, FieldUnitObj)
 

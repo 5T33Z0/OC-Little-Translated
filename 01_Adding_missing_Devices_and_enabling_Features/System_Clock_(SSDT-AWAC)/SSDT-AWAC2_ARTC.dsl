@@ -1,8 +1,8 @@
-// Fake ARTC Device. Disables AWAC and HPET. Enables RTC and attachs it to ARTC in IOReag
+// Add ARTC new Device fake RTC and Disables AWAC ,RTC and HPET.
 // For: 300/400/500/600 Series Chipsets
 // Experimental! Use one of the SSDT-AWAC variants first if you don't know how this works.
 
-DefinitionBlock ("", "SSDT", 2, "STZO", "ARTC", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
     External (HPTE, IntObj)
