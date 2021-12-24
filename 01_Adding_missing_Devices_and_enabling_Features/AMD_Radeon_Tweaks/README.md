@@ -7,10 +7,14 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
 - Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed. 
 
 ## Patching GPU Navi (Recommended)
+1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only).
+2. Add Boot-arg agdpmod=pikera to config.plist → Fixes black screen issues on some GPUS).
+
+```swift
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.PEG0, DeviceObj)
     External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
-```swift
+
     Scope (\_SB)
     {
         Scope (PCI0)
@@ -120,10 +124,6 @@ This chapter contains a few SSDTs and a Kext which improve the performance of AM
         }
     }
 ```
-
-1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only).
-2. Add Boot-arg agdpmod=pikera to config.plist → Fixes black screen issues on some GPUS).
-
 
 ## Patching GPU by Matty
 
