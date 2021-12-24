@@ -123,7 +123,7 @@ Scope (\)
     }
 ``` 
 
-**Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,1`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
+**Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,x/MacBookPro16,x`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
 **Procedure**: 
 
 - In `DSDT`, search for `ACPI000E`. 
