@@ -56,7 +56,7 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 ### Included Hotpatches
 Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpach.
 
-#### Functional SSDTs (which add or enanable features)
+#### Functional SSDTs (which add or enable features)
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
 [**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer.|`Device (AWAC)` or `ACPI000E` 
