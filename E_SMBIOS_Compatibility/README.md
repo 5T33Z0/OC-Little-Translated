@@ -19,3 +19,12 @@ https://osxlatitude.com/forums/topic/11138-inventory-of-supportedunsupported-wir
 And for older Versions of OSX (Snow Leopard to El Capitan), check this list:
 
 https://osxlatitude.com/forums/topic/2120-inventory-of-supportedunsupported-wireless-cards-1-snow-leopard-el-capitan/
+
+## Picking the right SMBIOS
+Choosing the correct SMBIOS for your Hackintosh is crucial to get a great working system. Chose your SMBIOS based on the following aspects:
+
+- CPU Family (Intel? AMD? Mobile? Desktop? With or without iGPU support?) 
+- Discrete GPU Vendor and Model (AMD? NVIDIA?)
+- macOS Version (the optimal SMBIOS is decided by the used CPU but the latest macOS version is most likely only supported by newer SMBIOS.)
+
+For an in-depth guide on choosing the best SMBIOS for your System, please refer to Dortani's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/SMBIOS-SUPPORT.HTML)
