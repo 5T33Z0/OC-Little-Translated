@@ -65,7 +65,7 @@ Device (AWAC)
 ```
 As you can see, you can enable RTC and disable AWAC at the same time if `STAS=1`, using one of the following methods/hotpatches.
 
-### Method 1: using `SSCT-AWAC_N_RTC_Y` (recommended)
+### Method 1: using `SSDT-AWAC`
 ```swift
 External (STAS, IntObj)
 Scope (\)
@@ -78,37 +78,63 @@ Scope (\)
 ``` 
 **Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Becaus `STAS` is *not* `Zero`, the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
-### Method 2: using `SSDT-AWAC2ARTC` (new)
-**Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,1`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
+### Method 2: using `SSDT-AWAC2_ARTC` (Disable RTC+Disable AWAC+Disable HPET+Add ARTC Device) 
+
+```swift
+    External (_SB_.PCI0.LPCB, DeviceObj)
+    External (HPTE, IntObj)
+    External (STAS, IntObj)
+
+    Scope (\)
+    {
+        If (_OSI ("Darwin"))
+        {
+            STAS = 0x02
+            HPTE = Zero
+        }
+    }
+
+    Scope (\_SB.PCI0.LPCB)
+    {
+        Device (ARTC)
+        {
+            Name (_HID, EisaId ("PNP0B00") /* AT Real-Time Clock */)  // _HID: Hardware ID
+            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
+            {
+                IO (Decode16,
+                    0x0070,             // Range Minimum
+                    0x0070,             // Range Maximum
+                    0x01,               // Alignment
+                    0x02,               // Length
+                    )
+            })
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Return (0x0F)
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+        }
+    }
+``` 
+
+**Applicable to**: Systems with an active AWAC Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,x/MacBookPro16,x`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`</br>
 **Procedure**: 
 
 - In `DSDT`, search for `ACPI000E`. 
 - If present, check if it belongs to `Device (AWAC)`. 
 - If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
-- If all above condistions are met, you can add `SSDT-AWAC2ART.aml`
+- If all above condistions are met, you can add `SSDT-AWAC2_ART.dsl`
 
 **Explanation**: This SSDT actually makes use of AWAC Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
 
-### Method 3: using `SSDT-AWAC-DISABLE` (official)
-You can also use `SSDT-AWAC-DISABLE.aml` included in the "AcpiSamples" folder of the OpenCore Package. This uses the same method as SSDTTime. It will disable AWAC but leaves RTC enabled for the case shown above. This is the code sippet:
-
-```swift
-External (STAS, IntObj)
-Scope (\)
-{
-    Method (_INI, 0, NotSerialized) /* _INI: Initialize */
-    {
-        If (_OSI ("Darwin"))
-        {
-            STAS = One
-        }
-    }
-}
-```
-The official hotpatch uses `_SB_._INI` as path, so you should ensure sure that `_SB_._INI` doesn't exist in `DSDT` and other patches when using it.
-
-### Method 4: using `SSDT-AWAC_STA0` (if method 3 fails)
-Disables AWAC where `SSDT-AWAC-DISABLE` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
+### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
+Disables AWAC where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
 
 ```swift
 External (_SB_.AWAC._STA, IntObj)
@@ -452,6 +478,6 @@ Using this method will result in an error (non-ACPI Error) by invalidating other
 </details>
 
 ## Credits
-- **Acidanthera** for `SSDT-AWAC-Disable.dsl`
-- **daliansky** for `SSDT-AWAC_N_RTC_Y.dsl`
-- **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC2ARTC`
+- **Acidanthera**
+- **daliansky** for `SSDT-AWAC.dsl`
+- **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC2_ARTC`
