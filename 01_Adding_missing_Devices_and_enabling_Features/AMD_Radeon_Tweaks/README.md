@@ -4,7 +4,7 @@
 This chapter contains two approaches for improving the performance of AMD Radeon Cards when running macOS. The first method is pretty much standard to get the card running under macOS. The 2nd method has to be regarded as experimental. It makes use of modified SSDTs and a Kext which improve the performance of AMD Radeon GPUs in OpenCL and Metal applications and lowers the power consumption as well. This method tries to mimic how the card would operate on a real Mac. Choose either method 1 or 2, not both! 
 
 ## Method 1: For Navi GPUs (Recommended)
-1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only!).
+1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only). Also adds `HDAU` device for audio over HDMI.
 2. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
 
 Contents of `SSDT-NAVI.aml`:
