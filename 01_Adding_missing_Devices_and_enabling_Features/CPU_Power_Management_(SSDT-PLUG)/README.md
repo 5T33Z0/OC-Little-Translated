@@ -22,8 +22,8 @@ The manual patch method described below is outdated, since the patching process 
 2. Pres "D", drag in your system's DSDT and hit "ENTER"
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master` Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI > OC > ACPI
-6. Open `patches_OC.plist` and copy the the included patches and files listes under ACPI > Add to your `config.plist` (to the same section, of course).
+5. Copy the generated `SSDTs` to EFI/OC/ACPI
+6. Open `patches_OC.plist` and copy the the included patches and files listes under "ACPI > Add" to your `config.plist` (to the same section, of course).
 7. Save. Reboot. Done. 
 
 ## Patching method 2: manual
