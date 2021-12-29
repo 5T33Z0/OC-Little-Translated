@@ -29,7 +29,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - Save and Reboot.
 
 #### Additional Steps (Desktop PCs only)
-To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver make sure to check the following after rebooting:
+To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver, do the following after rebooting:
 
 - Run IORegistryExlorer
 - Search for the name of your real EC controller (`EC0`, `H_EC`, etc.)  If the devie is not present, you're done!
