@@ -58,7 +58,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - If it's not present, you're done.
 
 ### Method 2: automated SSDT generation using SSDTTime
-**SSDTTime** is a the python script which can generate various SSDTs from analyzing your system's `DSDT`. Unfortunately, SSDTTime does not generate a Fake EC with an included `USBX` Device. So if you are using a system with a Skylake or newer CPU, you either have to add an addtional SSDT containing thee USBX device or add it the to the existing SSDT-EC or use the manual method instead!
+**SSDTTime** is a the python script which can generate various SSDTs from analyzing your system's `DSDT`. Unfortunately, SSDTTime does not generate a Fake EC with an included `USBX` Device. So if you are using a system with a Skylake or newer CPU, you either have to add an addtional SSDT containing the USBX device or add it the to the existing SSDT-EC or use the manual method instead!
 
 **HOW TO:**
 
