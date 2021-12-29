@@ -35,6 +35,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 - Search for the name of your real EC controller (`EC0`, `H_EC`, etc.)  If the devie is not present, you're done!
 - If the device is present (exact match!), you have to disable it. 
 - Open the previously used .dsl file and remove the comments `/*` and `*/ `from the following section, so it's no longer displayed in green in MaciASL:
+
 	```swift
     External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 
@@ -52,14 +53,10 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
             }
         }
     }
-<<<<<<< Updated upstream
     ```
 - Export the file as .aml 
-=======
-    
 - Adjust the device name and PCI path accordingly to what's used in you `DSDT` 
 - Export the file as .aml
->>>>>>> Stashed changes
 - Replace the existing file in EFI > OC > ACPI
 - Reboot
 - Check IORegistryExplorer again for `EC0`, `H_EC` or whatever the device is called in your `DSDT`.
