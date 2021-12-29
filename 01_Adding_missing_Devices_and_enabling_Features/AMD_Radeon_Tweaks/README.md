@@ -127,7 +127,7 @@ Contents of `SSDT-NAVI.aml`:
 ## Method 2: Using AMD Radeon Patches by mattystonie
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed.
  
-1. Choose the SSDT matching your GPU model
+1. Choose the SSDT matching your GPU model contained in the "mattystonie" Folder and export it as `.aml`.
 
     - For **RX 580**: Use `SSDT-RX580.aml`
     - For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
