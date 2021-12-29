@@ -2,7 +2,21 @@
 
 Although OpenCore does not require renaming of the Embedded Controller (EC), in order to load USB Power Management, it may be necessary to impersonate another EC.
 
-## Patch Method (NEW): Using SSDTTime
+# Add Device USBX (SSDT-EC_USBX_Laptop\Desktop)
+
+On desktops, the EC(or better known as the embedded controller) isn't compatible with AppleACPIEC driver, to get around this we disable this device when running macOS
+AppleBusPowerController will look for a device named EC, so we will want to create a fake device for this kext to load onto
+AppleBusPowerController also requires a USBX device to supply USB power properties for Haswell and newer, so we will bundle this device in with the EC fix
+On laptops, the EC is used for hotkeys and battery so disabling this isn't all too ideal. Problem is our EC's name isn't compatible, so we will create a simple "fake" EC device that will satisfy Apple.
+
+So:
+
+EC is embedded controller
+Desktops will want real EC off, and a fake EC created
+Laptops will just want an additional fake EC present
+Haswell and newer devices will want USBX as well
+
+## Patch Method: Using SSDTTime
 
 The previous (old) patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
