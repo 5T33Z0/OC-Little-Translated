@@ -34,6 +34,7 @@ Search for `PNP0C09` in the `DSDT` and check the name of the device it belongs t
 
 ## Note
 
+- Desktop PC only: search in ioreg IOService EC0, if you have this device you have to add the part between them slesh in SSDT_EC_USBX_Desktop.This operation deactivates the EC0 device.`DO NOT USE THIS PROCEDURE ON A PC LAPTOP WILL INTERRUPT SOME FUNCTIONS`
 - If multiple `PNP0C09`s are searched, you should confirm the real and valid `PNP0C09` device.
 - The patch uses `LPCB`, if it is not `LPCB`, please modify the patch content by yourself.
 
