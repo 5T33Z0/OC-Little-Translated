@@ -1,4 +1,4 @@
-//
+//Add this SSDT if you have a Skylake Laptop or later
 DefinitionBlock ("", "SSDT", 2, "ACDT", "SsdtEC", 0x00001000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
