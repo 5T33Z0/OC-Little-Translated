@@ -19,7 +19,6 @@ Sometime we want to disable a PCI device. For example, the HDMI Audio device of 
 ## SSDT Disable Patch Example
 
 - The SD card of dell Latitude 5480 belongs to PCI device, device path: `_SB.PCI0.RP01.PXSX`
-
 - Patch file: ***SSDT-RP01.PXSX-disable***:
 
 ```swift
