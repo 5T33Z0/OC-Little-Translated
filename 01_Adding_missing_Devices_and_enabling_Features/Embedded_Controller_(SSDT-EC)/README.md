@@ -17,6 +17,7 @@ Laptops will just want an additional fake EC present
 Haswell and newer devices will want USBX as well.
 
 ```
+Desktop:
         Device (USBX)
         {
             Name (_ADR, Zero)  // _ADR: Address
