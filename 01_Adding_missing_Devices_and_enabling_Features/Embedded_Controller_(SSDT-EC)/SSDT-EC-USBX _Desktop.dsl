@@ -1,4 +1,5 @@
-/*
+/Add this SSDT to Skylake Desktop PC or later
+
 * Example ASUS Motherboards:
 * Uncomment replacing EC0 with your own value in case your
 * motherboard has an existing embedded controller of PNP0C09 type.
