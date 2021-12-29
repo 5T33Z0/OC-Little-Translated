@@ -18,7 +18,7 @@ So, in general:
 - Skylake and newer CPUs require `SSDT-EC-USBX`.
 
 ## Adding a fake EC
-There are 2 methods for adding a fake EC: either by manually by adding the required `SSDT-EC `or `SSDT-EC-USBX` (depending on the used Intel CPU Family). Use either one method or the other, not both!
+There are 2 methods for adding a fake EC: either by manually by adding the required `SSDT-EC `or `SSDT-EC-USBX` (depending on the used Intel CPU Family). Use either one method or the other, not both! Try NOT to rename `EC0`, `H_EC`, etc. to `EC`. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
 
 ### Method 1: Manual patching method (recommended)
 - In the `DSDT`, search for `PNP0C09` 
@@ -29,9 +29,11 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - Save and Reboot.
 
 #### Additional Steps (Desktop PCs only)
-- After rebooting, run IORegistryExlorer
-- Search for `EC0`. If the devie is not present, you're done!
-- If the `EC0` is present (exact match!), you have to disable it. 
+To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver make sure to check the following after rebooting:
+
+- Run IORegistryExlorer
+- Search for the name of your real EC controller (`EC0`, `H_EC`, etc.)  If the devie is not present, you're done!
+- If the device is present (exact match!), you have to disable it. 
 - Open the previously used .dsl file and remove the comments `/*` and `*/ `from the following section, so it's no longer displayed in green in MaciASL:
 	```swift
     External (_SB_.PCI0.LPCB.EC0, DeviceObj)
@@ -50,11 +52,17 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
             }
         }
     }
+<<<<<<< Updated upstream
     ```
 - Export the file as .aml 
+=======
+    
+- Adjust the device name and PCI path accordingly to what's used in you `DSDT` 
+- Export the file as .aml
+>>>>>>> Stashed changes
 - Replace the existing file in EFI > OC > ACPI
 - Reboot
-- Check IORegistryExplorer again for `EC0`
+- Check IORegistryExplorer again for `EC0`, `H_EC` or whatever the device is called in your `DSDT`.
 - If it's not present, you're done.
 
 ### Method 2: automated SSDT generation using SSDTTime
