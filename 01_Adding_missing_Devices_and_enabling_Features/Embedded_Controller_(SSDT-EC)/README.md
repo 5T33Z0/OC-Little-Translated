@@ -14,7 +14,7 @@ So:
 EC is embedded controller
 Desktops will want real EC off, and a fake EC created
 Laptops will just want an additional fake EC present
-Haswell and newer devices will want USBX as well.
+Skylake and newer devices will want USBX as well.
 
 ```
 Desktop:
