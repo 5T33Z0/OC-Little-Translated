@@ -14,7 +14,59 @@ So:
 EC is embedded controller
 Desktops will want real EC off, and a fake EC created
 Laptops will just want an additional fake EC present
-Haswell and newer devices will want USBX as well
+Haswell and newer devices will want USBX as well.
+
+```
+Desktop:
+
+        Device (USBX)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                If ((Arg2 == Zero))
+                {
+                    Return (Buffer (One)
+                    {
+                         0x03                                             // .
+                    })
+                }
+
+                Return (Package (0x08)
+                {
+                    "kUSBSleepPowerSupply", 
+                    0x13EC, 
+                    "kUSBSleepPortCurrentLimit", 
+                    0x0834, 
+                    "kUSBWakePowerSupply", 
+                    0x13EC, 
+                    "kUSBWakePortCurrentLimit", 
+                    0x0834
+                })
+            }
+Laptop:
+        Device (USBX)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+            {
+                If ((Arg2 == Zero))
+                {
+                    Return (Buffer (One)
+                    {
+                         0x03                                             // .
+                    })
+                }
+
+                Return (Package (0x04)
+                {
+                    "kUSBSleepPortCurrentLimit", 
+                    0x0BB8, 
+                    "kUSBWakePortCurrentLimit", 
+                    0x0BB8
+                })
+            }
+```
 
 ## Patch Method: Using SSDTTime
 
