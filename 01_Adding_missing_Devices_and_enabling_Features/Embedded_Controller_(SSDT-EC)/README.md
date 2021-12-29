@@ -17,8 +17,6 @@ Laptops will just want an additional fake EC present
 Haswell and newer devices will want USBX as well.
 
 ```
-Desktop:
-
         Device (USBX)
         {
             Name (_ADR, Zero)  // _ADR: Address
@@ -66,8 +64,9 @@ Laptop:
                     0x0BB8
                 })
             }
-```
 
+Source: Real Mac ioreg analysis
+```
 ## Patch Method: Using SSDTTime
 
 The previous (old) patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
