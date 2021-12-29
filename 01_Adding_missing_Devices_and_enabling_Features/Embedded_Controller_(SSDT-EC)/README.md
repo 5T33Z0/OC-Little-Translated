@@ -4,10 +4,10 @@
 An embedded controller (or `EC`) is a hardware micro controller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurments, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc, etc.
 
 ### Why do I need a fake EC?
-On Desktop PCs, the `EC` device usually isn't named correctly for what macOS expects so it can be attached to `AppleACPIEC` driver – which is a good thing in this case since since EC devices from PCs are incompatible with macOS and may break at any time so `AppleACPIEC` kext must NOT load on desktops. To work around this issue, we disable the device included in the system's `DSDT` when running macOS and add a fake `EC` device for macOS to play with intead.
+On Desktop PCs, the `EC` device usually isn't named correctly for what macOS expects so it can be attached to `AppleACPIEC` driver – which is a good thing in this case since EC devices from PCs are incompatible with macOS and may break at any time so `AppleACPIEC` kext must NOT load on desktops. To work around this issue, we disable the device included in the system's `DSDT` when and add a fake `EC` for macOS to play with intead.
 
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
-In order to get USB Power Management working properly on **Skylake and newer** Intel CPUs, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties because macOS requires it to attach its `AppleBusPowerController` service to it. Both devices are integrated in the `SSDT-EC-USBX`. For older system `SSDT-EC` alone is sufficient (if required at all).
+In order to get USB Power Management working properly on **Skylake and newer**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in the `SSDT-EC-USBX` file. For older system `SSDT-EC` alone is sufficient (if required at all).
 
 On Laptops, the `EC` micro controller actually really exist but may be incompatibile because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
@@ -17,7 +17,7 @@ So, to put it in a nutshell:
 - On Laptops, we just need an additional fake EC to be present (not always required).
 - Skylake and newer CPUs require `SSDT-EC-USBX`, older CPUs only nee `SSDT-EC`.
 
-## Adding a fake EC
+## Adding a fake EC Device
 There are 2 methods for adding a fake EC: either by manually by adding the required `SSDT-EC `or `SSDT-EC-USBX` (depending on the used Intel CPU Family). Use either one method or the other, not both! Try NOT to rename `EC0`, `H_EC`, etc. to `EC`. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
 
 ### Method 1: Manual patching method (recommended)
