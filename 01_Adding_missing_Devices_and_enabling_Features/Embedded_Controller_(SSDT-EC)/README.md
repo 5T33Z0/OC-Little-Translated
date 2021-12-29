@@ -33,7 +33,6 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - Search for `EC0`. If the devie is not present, you're done!
 - If the `EC0` is present (exact match!), you have to disable it. 
 - Open the previously used .dsl file and remove the comments `/*` and `*/ `from the following section, so it's no longer displayed in green in MaciASL:
-
 	```swift
     External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 
@@ -51,7 +50,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
             }
         }
     }
-    
+    ```
 - Export the file as .aml 
 - Replace the existing file in EFI > OC > ACPI
 - Reboot
