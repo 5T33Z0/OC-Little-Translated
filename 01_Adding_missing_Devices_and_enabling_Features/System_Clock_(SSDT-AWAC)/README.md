@@ -76,7 +76,7 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Becaus `STAS` is *not* `Zero`, the Else condition is met: *"if the value in `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
+**Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
 ### Method 2: using `SSDT-AWAC2_ARTC` (Disable RTC+Disable AWAC+Disable HPET+Add ARTC Device) 
 
