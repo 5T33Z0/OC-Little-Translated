@@ -1,6 +1,6 @@
 # Fixing the System Clock (SSDT-AWAC)
 
-Hotpatch to force-enable `RTC` and disabling `AWAC` at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
+Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
 
 ## Automated SSDT generation: using SSDTTime
 With the python script **SSDTTime**, you can generate the following SSDTs from analyzing your system's `DSDT`:
@@ -25,9 +25,9 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
-Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT you can use different methods. Here are some examples.
+Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
 
-Original Code in `DSDT` for "Device (RTC)" and "Device (AWAC)":
+Below you'll find a code snippet of how "Device (RTC)" and "Device (AWAC)" might be defined in your `DSDT`:
 
 ```swift
 Device (RTC)
