@@ -1,4 +1,5 @@
-// Add ARTC new Device fake RTC and Disables AWAC ,RTC and HPET.
+// Adds ARTC Device with a fake RTC.
+// Disables existing AWAC, RTC and HPET Devices
 // For: 300/400/500/600 Series Chipsets
 // Experimental! Use one of the SSDT-AWAC variants first if you don't know how this works.
 
