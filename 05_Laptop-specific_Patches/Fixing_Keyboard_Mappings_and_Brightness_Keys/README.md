@@ -1,8 +1,8 @@
-# PS2 Keyboard mappings for brightness control
+# PS2 Keyboard mappings and brightness keys
 
 ## Description
 
-Keyboard Keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example, etc. *Only* keys that can capture `PS2 Scan Code` under macOS can be re-mapped!
+Keyboard keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture `PS2 Scan Code` under macOS can be re-mapped!
 
 ### **Update** [September 30, 2020]:
 
@@ -19,17 +19,17 @@ Keyboard Keys can be re-mapped for triggering different keys than the one that's
 - Clear the key mapping contents of previous, other methods.
 - Plist Editor
 
-### PS2 Scan Codes and ABD Scan Codes
+### About PS2 and ABD Scan Codes
 
-A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**. For example, the PS2 scan code for the `Z/z` key is `2c` and the ABD scan code is `6`. Because of the difference in scan codes, two mapping methods correspond to
+A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**. For example, the PS2 scan code for the `Z/z` key is `2c` but the ABD scan code is `6`. Because of the difference in scan codes, two mapping methods correspond to
 
 - `PS2 Scan Code -> PS2 Scan Code`
 - `PS2 Scan Code -> ADB Scan Code`
 
-### Enabling keyboard scan code
+### Enabling keyboard scan codes
 
 - Check the header file [ApplePS2ToADBMap.h](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/VoodooPS2Keyboard/ApplePS2ToADBMap.h), which lists the scan codes for most of the keys.
-- Get the keyboard scan code from the console (use either or). There are 2 methods of enabling keyboard scan code (use either or)
+- Get the keyboard scan codes from the console (use either or). There are 2 methods for enabling them (use either or).
 
 #### Method 1: Using Terminal. 
 - Download `ioio` 
@@ -38,11 +38,13 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
     
 #### Method 2: Enabling Log Scan Codes in VoodooPS2Keyboard.kext
 - Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
-- Open `VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/Info.plist` with a plist Editor
-- Search for **`LogScanCodes`** and change it to `1`
+- Next, browse Contents > Plugins 
+- Right-click on `VoodooPS2Keyboard.kext` and select "Show Package Contents" 
+- Browse to `Contents/Info.plist` and open it with a plist Editor
+- Search for **`LogScanCodes`** and change it to `1` (once you're done with mapping, change it back to `0` again)
 - Save the file
-- Reboot.
-- Open the Console and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed. 
+- Reboot
+- Open the `Console` App and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed. 
 	```text
 	11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
 	11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
