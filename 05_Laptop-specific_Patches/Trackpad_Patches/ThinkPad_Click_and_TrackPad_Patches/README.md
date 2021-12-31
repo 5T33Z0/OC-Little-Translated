@@ -1,16 +1,19 @@
-# Special patch for ThinkPads
+# Special patches for ThinkPads
 
 ## Special Name Change
 
-Like some Lenovo machines, the DSDT for ThinkPad machines may also contain the `PNLF` field. Search for `PNLF` in the DSDT, and if `PNLF` exists, you will need to add the following rename:
+The `DSDT` of ThinkPad models may contain a `PNLF` field. Search for `PNLF` in the `DSDT`, and if it exists, you need to add the following rename to avoid conflicts:
 
 ```text
-Comment: Rename PNLF to XNLF
 Find: 504E4C46
 Replace: 584E4C46
+Comment: Rename PNLF to XNLF
 ```
 
 ## Special Patches
+### Brightness shortcut key fix: `SSDT-OCWork-TP` 
+
+On older ThinkPads models (3rd, 4th and 5th generation), the brightness shortcut keys (`_Q14` and `_Q15`) may not work due to `NBCF` set to `0` (`NBCF=0`). This patch changes its value to `1`so the brightness shortcut keys work properly when using ACPI methods or the new **BrightnessKeys.kext** (which is recommended). In `DSDT` search for `NBCF`. If it is set to `Zero` or `0x00`, you need this patch!
 
 ### ThinkPad TouchPad property injection and TouchPoint anti-drift patch
 
@@ -36,14 +39,11 @@ Both patches involve changes to the keyboard device's `RMCF` variable. If you al
 
 In addition, Rebhabman's VoodooPS2Controller is obsolete, and it is recommended to use acidanthera's [VoodooPS2](https://github.com/acidanthera/VoodooPS2) with [VoodooInput]( https://github.com/acidanthera/VoodooInput) to enable all TrackPad gestures on ThinkPads.
 
-----
-
+### Parameter Explanations
 The following descriptions of the configurations in SSDT are provided by [@SukkaW](https://github.com/SukkaW) based on [README](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/README.md) by Rehabman, the original maintainer of VoodooPS2Controller and its components.
 
 - `DragLockTempMask`: temporary drag lock shortcut. Note that these are the original relationships mapped on the physical keyboard and are not affected by the function key order set in System Preferences.
-- `DynamicEWMode`: Dynamic EW mode, where two-finger gestures (e.g. two-finger swipe) split the trackpad bandwidth equally. By enabling Dynamic EW mode, the trackpad will not be in EW mode all the time, thus improving the responsiveness of the ThinkPad ClickPad touchpad for two-finger scrolling.
-
-	**Note**: two-finger scrolling only requires two fingers to be on the trackpad at the same time, and then the trackpad only gives feedback on the direction and distance of one finger swipe, saving the bandwidth of the other finger). While dragging a file (note: one finger holds the trackpad and the other finger swipes) the ClickPad will be pressed down, and EW mode will still be enabled. This option has caused problems with a few trackpads, so it is disabled by default.
+- `DynamicEWMode`: Dynamic EW mode, where two-finger gestures (e.g. two-finger swipe) split the trackpad bandwidth equally. By enabling Dynamic EW mode, the trackpad will not be in EW mode all the time, thus improving the responsiveness of the ThinkPad ClickPad touchpad for two-finger scrolling.</br>**Note**: two-finger scrolling only requires two fingers to be on the trackpad at the same time, and then the trackpad only gives feedback on the direction and distance of one finger swipe, saving the bandwidth of the other finger). While dragging a file (note: one finger holds the trackpad and the other finger swipes) the ClickPad will be pressed down, and EW mode will still be enabled. This option has caused problems with a few trackpads, so it is disabled by default.
 - `FakeMiddleButton`: Simulates a middle button click when tapping the trackpad with three fingers at the same time.
 - `HWResetOnStart`: Some trackpad devices (especially the ThinkPad's trackpad and the little red dot) require this option to be enabled to work properly.
 - `ForcePassThrough` and `SkipPassThrough`: PS2 input devices can send a special type of 6-byte packet called "Pass Through", which allows interleaved transmission of signals from the trackpad and the pointing stick (e.g. ThinkPad's Little Red Dot). VoodooPS2 has implemented automatic recognition of PS2 device type "Pass Through" packets, these two options are for debugging purposes only.
