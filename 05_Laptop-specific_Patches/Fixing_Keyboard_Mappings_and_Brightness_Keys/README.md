@@ -2,11 +2,11 @@
 
 ## Description
 
-Keyboard Keys can be re-mapped for triggering different keys than the one that's actual pressed. For example, Function keys like `F2` can be re-mapped to triggering `F10`, etc.
+Keyboard Keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example, etc.
 
 ### **Update** [September 30, 2020]:
 
-**VoodooPS2Controller.kext** now separates the brightness shortcut part from the standalone driver **BrightnessKeys.kext** and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. The legacy brightness shortcut patch is no longer needed. If the new driver is invalid please refer to this chapter to assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness.
+**`VoodooPS2Controller.kext`** now separates the brightness shortcut keys part from the standalone driver **`BrightnessKeys.kext`** and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. The legacy brightness shortcut patch is no longer needed. If the new driver is invalid please refer to this chapter to assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness.
 
   - **VoodooPS2Controller.kext**: [https://github.com/acidanthera/VoodooPS2](https://github.com/acidanthera/VoodooPS2)
   - **BrightnessKeys.kext**: [https://github.com/acidanthera/BrightnessKeys](https://github.com/acidanthera/BrightnessKeys)
@@ -35,7 +35,6 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 
 	ioio -s ApplePS2Keyboard LogScanCodes 1
     
-
   - Modify:`VoodooPS2Keyboard.kext\info\IOKitPersonalities\Platform Profile\Default\`**`LogScanCodes=1`**
 
 	Open the Console and search for `ApplePS2Keyboard`. In this examples, `A/a`and `Z/z` are pressed.
@@ -44,7 +43,6 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
    	 11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
   	 11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
  	 ```
-
 	 **Meaning**:
 
 	- The `1e=0` in the first line `1e`is the PS2 Scan Code for the `A/a` key, and the `0` is the ADB Scan Code.
