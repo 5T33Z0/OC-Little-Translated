@@ -88,7 +88,6 @@ Choose either of the following two mapping methods
 - The keyboard path in the example is `\_SB.PCI0.LPCB.PS2K`, you should make sure it is the same as the ACPI keyboard path. Most Thinkpad machines have a keyboard path of \_SB.PCI0.LPC.KBD` or \_SB.PCI0.LPCB.KBD`.
 - The variable `RMCF` is used in the patch, if `RMCF` is also used in other **keyboard patches**, it must be merged and used. See ***SSDT-RMCF-PS2Map-dell***. `Note`: ***SSDT-RMCF-MouseAsTrackpad*** is used to force on the touchpad settings option.
 - In VoodooPS2, the PS2 scan code corresponding to the <kbd>PrtSc</kbd> button is `e037`, the switch for the touchpad (and the little red dot on ThinkPad machines). You can map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
-
 	```swift
     ...
     "Custom ADB Map", Package()
@@ -98,7 +97,8 @@ Choose either of the following two mapping methods
     }
     ...
 	```
-![](https://i.loli.net/2020/04/01/gQqVC2YKFweSARZ.png)
+	This result in F13 being used for Screenshots:
+	![](https://i.loli.net/2020/04/01/gQqVC2YKFweSARZ.png)
 
 ## Credits and Resources
 Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping)
