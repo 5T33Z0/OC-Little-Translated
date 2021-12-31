@@ -1,4 +1,4 @@
-# Modifying PS2 Keyboard mappings and brightness keys
+# Modifying PS2 Keyboard mappings and brightness shortcut keys
 
 ## Description
 
