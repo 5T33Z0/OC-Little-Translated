@@ -102,7 +102,7 @@ You can use either of the following mapping methods:
     ...
 	```
 	This result in F13 being used for Screenshots:
-	![](https://i.loli.net/2020/04/01/gQqVC2YKFweSARZ.png)
+	![f13](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)
 
 ## Credits and Resources
 Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping)
