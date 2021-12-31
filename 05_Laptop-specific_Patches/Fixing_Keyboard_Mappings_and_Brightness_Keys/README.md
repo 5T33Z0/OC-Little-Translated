@@ -4,7 +4,7 @@
 
 Keyboard keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture `PS2 Scan Code` under macOS can be re-mapped!
 
-### **Update** [September 30, 2020]:
+### Update [September 30, 2020]:
 
 **`VoodooPS2Controller.kext`** now separates the brightness shortcut keys part from the standalone driver **`BrightnessKeys.kext`** and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. The legacy brightness shortcut patch is no longer needed. If the new driver is invalid please refer to this chapter to assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness.
 
@@ -23,8 +23,8 @@ Keyboard keys can be re-mapped for triggering different keys than the one that's
 
 A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**. For example, the PS2 scan code for the `Z/z` key is `2c` but the ABD scan code is `6`. Because of the difference in scan codes, two mapping methods correspond to
 
-- `PS2 Scan Code -> PS2 Scan Code`
-- `PS2 Scan Code -> ADB Scan Code`
+- `PS2 Scan Code` &rarr; `PS2 Scan Code`
+- `PS2 Scan Code` &rarr; `ADB Scan Code`
 
 ### Enabling keyboard scan codes
 
