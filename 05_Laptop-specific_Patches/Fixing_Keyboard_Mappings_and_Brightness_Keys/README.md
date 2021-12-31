@@ -31,41 +31,41 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 - Check the header file [ApplePS2ToADBMap.h](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/VoodooPS2Keyboard/ApplePS2ToADBMap.h), which lists the scan codes for most of the keys.
 - Get the keyboard scan codes from the console (use either or). There are 2 methods for enabling them (use either or).
 
-#### Method 1: Using Terminal. 
+#### Method 1: Using Terminal
 - Download `ioio` 
-- Make it excutable (if it isn't). In terminal, enter `chmod +x`, drag in `ioio` and hit `Enter`
+- Make it excutable (if it isn't already). In terminal, enter `chmod +x`, drag in `ioio` and hit `Enter`
 - Next, enter `ioio -s ApplePS2Keyboard LogScanCodes 1` to enable log scan codes (set to `0` to disable the logging again).
     
-#### Method 2: Enabling Log Scan Codes in VoodooPS2Keyboard.kext
+#### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
 - Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
 - Next, browse Contents > Plugins 
-- Right-click on `VoodooPS2Keyboard.kext` and select "Show Package Contents" 
-- Browse to `Contents/Info.plist` and open it with a plist Editor
-- Search for **`LogScanCodes`** and change it to `1` (once you're done with mapping, change it back to `0` again)
+- Right-click on `VoodooPS2Keyboard.kext` and select "Show Package Contents"
+- Browse `Contents` and open `Info.plist` with a plist Editor
+- Search for **`LogScanCodes`** and change it to **`1`** (once you're done, change it back to **`0`** again!)
 - Save the file
 - Reboot
-- Open the `Console` App and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed. 
+- Open the **Console App** and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed. 
 	```text
 	11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
 	11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
  	```
 	 **Meaning**:
-	- The `1e=0` in the first line `1e`is the PS2 Scan Code for the `A/a` key, and the `0` is the ADB Scan Code.
-	- The `2c=6` in the second line `2c`is the PS2 Scan Code for the `Z/z` key, and `6` is the ADB Scan Code.
+	- `1e=0`: `1e`is the PS2 Scan Code for the `A/a` key, whereas `0` is the ADB Scan Code.
+	- `2c=6`: `2c`is the PS2 Scan Code for the `Z/z` key, whereas `6` is the ADB Scan Code.
 
-### Mapping method
+## Key mapping principle
 
-Keyboard mapping can be achieved by modifying the `VoodooPS2Keyboard.kext\info.plist` file and adding a third-party patch file. The recommended method is to use a third-party patch file.
+Keyboard (re-)mappings can be realized by modifying the `info.plist` file inside of  VoodooPS2Keyboard kext or by adding a custom SSDT Hotpatch instead. The latter is prefered so you don't loose the mapping if you update `VoodooPS2Controller.kext`!
 
-Example: ***SSDT-RMCF-PS2Map-AtoZ***. `A/a` mapping `Z/z`.
+**Example**: Remapping `A/a` to trigger `Z/z` via ***SSDT-RMCF-PS2Map-AtoZ.dsl***. 
 
 - `A/a` PS2 scan code:`1e`
 - `Z/z` PS2 scan code:`2c`
 - `Z/z` ADB scan code:`06`
 
-Choose either of the following two mapping methods
+You can use either of the following mapping methods:
 
-#### PS2 Scan Code -> PS2 Scan Code
+#### PS2 Scan Code to PS2 Scan Code
 ```swift
     ...
       "Custom PS2 Map", Package()
@@ -75,7 +75,7 @@ Choose either of the following two mapping methods
       },
     ...
 ```
-#### PS2 Scan Code -> ADB Scan Code
+#### PS2 Scan Code to ADB Scan Code
 ```swift
     ...
     "Custom ADB Map", Package()
@@ -86,10 +86,12 @@ Choose either of the following two mapping methods
     ...
 ```
 
-### Caution
-- The keyboard path in the example is `\_SB.PCI0.LPCB.PS2K`, you should make sure it is the same as the ACPI keyboard path. Most Thinkpad machines have a keyboard path of \_SB.PCI0.LPC.KBD` or \_SB.PCI0.LPCB.KBD`.
-- The variable `RMCF` is used in the patch, if `RMCF` is also used in other **keyboard patches**, it must be merged and used. See ***SSDT-RMCF-PS2Map-dell***. `Note`: ***SSDT-RMCF-MouseAsTrackpad*** is used to force on the touchpad settings option.
-- In VoodooPS2, the PS2 scan code corresponding to the <kbd>PrtSc</kbd> button is `e037`, the switch for the touchpad (and the little red dot on ThinkPad machines). You can map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
+### NOTES
+- The keyboard path in the example file is `\_SB.PCI0.LPCB.PS2K`. Make sure the path used in the SSDT is identical to the path in your `DSDT`. 
+- Most ThinkPads use either `\_SB.PCI0.LPC.KBD` or `\_SB.PCI0.LPCB.KBD`.
+- The variable `RMCF` is used in the patch. If `RMCF` is also used for other **keyboard patches**, both must be merged. See ***SSDT-RMCF-PS2Map-dell***. 
+- ***SSDT-RMCF-MouseAsTrackpad*** is used to force-enable the touchpad settings option.
+- In **VoodooPS2Controller**, the PS2 Scan Code corresponding to the `<kbd>PrtSc</kbd>` button is `e037`. You could map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
 	```swift
     ...
     "Custom ADB Map", Package()
