@@ -28,7 +28,7 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 
 ### Enabling keyboard scan code
 
-- Check the header file `ApplePS2ToADBMap.h`, which lists the scan codes for most of the keys.
+- Check the header file [ApplePS2ToADBMap.h](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/VoodooPS2Keyboard/ApplePS2ToADBMap.h), which lists the scan codes for most of the keys.
 - Get the keyboard scan code from the console (use either or). There are 2 methods of enabling keyboard scan code (use either or)
 
 #### Method 1: Using Terminal. 
@@ -85,11 +85,8 @@ Choose either of the following two mapping methods
 ```
 
 ### Caution
-
 - The keyboard path in the example is `\_SB.PCI0.LPCB.PS2K`, you should make sure it is the same as the ACPI keyboard path. Most Thinkpad machines have a keyboard path of \_SB.PCI0.LPC.KBD` or \_SB.PCI0.LPCB.KBD`.
-
 - The variable `RMCF` is used in the patch, if `RMCF` is also used in other **keyboard patches**, it must be merged and used. See ***SSDT-RMCF-PS2Map-dell***. `Note`: ***SSDT-RMCF-MouseAsTrackpad*** is used to force on the touchpad settings option.
-
 - In VoodooPS2, the PS2 scan code corresponding to the <kbd>PrtSc</kbd> button is `e037`, the switch for the touchpad (and the little red dot on ThinkPad machines). You can map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
 
 	```swift
