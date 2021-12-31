@@ -44,7 +44,11 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 - Search for **`LogScanCodes`** and change it to **`1`** (once you're done, change it back to **`0`** again!)
 - Save the file
 - Reboot
+<<<<<<< HEAD
 - Open the **Console App** and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed. 
+=======
+- Open the `Console` App and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed:
+>>>>>>> ca76360f04289d4523c08577f7e170f199a0eba6
 	```text
 	11:58:51.255023 +0800 kernel ApplePS2Keyboard: sending key 1e=0 down
 	11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
