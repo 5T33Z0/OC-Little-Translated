@@ -13,3 +13,4 @@ ARTC
 kexts
 DSDTs
 SSDTs
+Configurtaion

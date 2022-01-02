@@ -1,10 +1,10 @@
-# AC Adapter (for Laptops)
-This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. So if you use **VirtualSMC** with the **SMCBatteryManager** plugin already, you don't need to add this patch at all! Read the note below about **ACPIBatteryManager** vs. **SMCBatteryManager** for more details.
+# AC Adapter (`SSDT-AC`) (for Laptops)
+This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality. If you use **VirtualSMC** with the **SMCBatteryManager** plugin already, you don't need to add this patch at all! Read the note below about **ACPIBatteryManager** vs. **SMCBatteryManager** for more details.
 
 **Applicable to**: MacBook, MacBookAir and MacBookPro SMBIOS. 
 
 ## Preparations
-- In `DSDT`, search for `ACPI0003` and the device it belongs to (either AC, AC0, ADP, ADP1 or ACAD`). 
+- In `DSDT`, search for `ACPI0003` and the device it belongs to (either `AC`, `AC0`, `ADP`, `ADP1` or `ACAD`). 
 - In this example, it's present and located under `\SB.PCI0.LPC.EC.AC`: 
 	![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/139686755-00929243-000b-459d-9d02-5ab9b0f720c6.png)
 - Next, run **IORegistryExplorer** and find either of these devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top of the list)
@@ -43,11 +43,11 @@ If you use the kext, it also links the battery to `AppleSmartBatteryManager`:
 If it's not present, then you did something wrong, so start over.
 
 ## Notes
-- When using the SSDT patches, make sure that the name ot the Low Pin Connector Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
-- In Clover, you can use `FixADP1` instead to attach the AC device in IOReg.
+- When using the SSDT patches, make sure that the name of the LPC Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
+- In Clover, you can use the `FixADP1` instead to attach the AC device in IOReg.
 
 ## Credits
 - SSDT Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC%20Adapter%20FIX%20(SSDT-AC%5CAC0%5CADP0%5CADP1%5CACAD))
-- `ACPIBatteryManager.kext` by [**Rehabman**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/).
+- `ACPIBatteryManager.kext` by [**RehabMan**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/).
 - `VirtualSMC` and `SMCBatteryManager` by [**Acidanthera**](https://github.com/acidanthera/VirtualSMC)
 
