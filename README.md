@@ -9,7 +9,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 <details>
 <summary><strong>About this Translation</strong></summary>
 
-## About this Translation:
+## About this Translation
 
 - AI-based translation using deepL, google translator as well as manual copyediting.
 - Restructured the repository into more plausible (sub-)sections and categories based on types of issues, components, methods, etc.
@@ -19,7 +19,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 - Added further explanations where necessary
 - Added new content (Added USB Port Mapping via ACPI to Chapter 3, added Chapters 7 to 10 and the Appendix)
 
-**NOTE**: Due to the fact that I don't speak chinese some of the translation might not be 100% accurate.
+**NOTE**: Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
 </details>
 
 ## TABLE of CONTENTS
@@ -51,7 +51,7 @@ Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootl
 ## CONTRIBUTIONS
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
 
-## 5T33Z0's 5H0UT 0UT5:
+## 5T33Z0's 5H0UT 0UT5
 
 - Thanks to [Baio1977](https://github.com/Baio1977) for his contributions to improve and expand this repo.
 - sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
@@ -62,7 +62,7 @@ If you would like to contribute to the information provided in this repo in orde
 <details>
 <summary><strong>Daliansky's original Credits</strong></summary>
 
-> - Special credit to：
+> - Special credit to:
 > 	- @XianWu write these ACPI component patches that useable to OpenCore
 > 	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalization.
 > - Credits and thanks to：

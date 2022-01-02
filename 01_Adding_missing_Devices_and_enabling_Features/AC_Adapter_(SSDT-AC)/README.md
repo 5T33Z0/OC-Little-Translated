@@ -7,7 +7,7 @@ This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `A
 - In `DSDT`, search for `ACPI0003` and the device it belongs to (either AC, AC0, ADP, ADP1 or ACAD`). 
 - In this example, it's present and located under `\SB.PCI0.LPC.EC.AC`: 
 	![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/139686755-00929243-000b-459d-9d02-5ab9b0f720c6.png)
-- Next, run **IORegistryExplorer** and find either of this devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top of the list)
+- Next, run **IORegistryExplorer** and find either of these devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top of the list)
 - Check if `AppleACPIACAdapter` is loaded. If it's present (as in this example) you don't need the fix: ![AppleACPIACAdapter_present](https://user-images.githubusercontent.com/76865553/139686991-d0104672-31f1-4ccf-949b-cd44ff9a4537.png)
 - If `AppleACPIACAdapter` is missing, you need a fix: ![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
 
@@ -15,12 +15,12 @@ This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `A
 There are 2 methods of applying this patch: either via kext or via SSDT. 
 
 ### Method 1: Using a Kext (easy)
-- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in IOReg.
+- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in IORegistryExplorer.
 - Disable `SMCBatteryManager.kext` (if present).
 - Save and reboot
 
 #### Note: ACPIBatteryManager vs. SMCBatteryManager
-`SMCBatteryManager` acts as a fake controller, which implements a complete emulation layer of `AppleSmartBattery` of SMC and SMBus protocols. Although it is able to find all the AC Aapters and Batteries just fine, it just doesn't attach to them in IOReg like `ACPIBatteryManager` does. So basically, this is all just cosmetics. If you want to be on the safe side, just stay with SMCBatteryManager since it is in active development, whereas ACPIBatteryManager is from 2018 and pretty much depricated.
+`SMCBatteryManager` acts as a fake controller, which implements a complete emulation layer of `AppleSmartBattery` of SMC and SMBus protocols. Although it is able to find all the AC Adapters and Batteries just fine, it just doesn't attach to them in IOReg like `ACPIBatteryManager` does. So basically, this is all just cosmetics. If you want to be on the safe side, just stay with SMCBatteryManager since it is in active development, whereas ACPIBatteryManager is from 2018 and pretty much deprecated.
 
 ### Method 2: Use a SSDT (for advanced users)
 If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to connect it to the AC Adapter device. Do the following, to figure out which SSDT is applicable:
@@ -28,11 +28,11 @@ If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to
 - Open the SSDT corresponding to your AC device's name in maciASL and adjust the PCI path according to the path used in your `DSDT`.
 - In this example, `SSDT-AC.dsl` is used and modified, so it looks like this: ![SSDT_mod](https://user-images.githubusercontent.com/76865553/139687058-6fad207b-019a-4253-a91e-c87011f17922.png)</br>
 - Export the file as an `.aml` file (ACPI Machine Language Binary)
-- Put it the ACPI Folder, add it to your config.plist and enable it.
+- Put it the ACPI Folder, add it to your `config.plist` and enable it.
 - Save and reboot.
 
 ## Verifying the patch
-After rebooting, open IORegistryExplorer again and check if `AppleACPIACAdapter` is present:
+After rebooting, check if `AppleACPIACAdapter` is present in IORegistryExplorer:
 
 ![ACAdaptr](https://user-images.githubusercontent.com/76865553/146288651-24a88e8a-fc8e-4354-b54f-7e96de2e6cfd.png)
 

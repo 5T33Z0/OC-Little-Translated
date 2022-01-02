@@ -1,0 +1,5 @@
+Hotpatches
+OpenCore
+mainboard
+Hackintoshes
+IORegistryExplorer

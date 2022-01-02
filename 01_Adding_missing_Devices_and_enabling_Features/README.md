@@ -3,9 +3,9 @@
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
 
-- Devices which can simply be enabled by renaming them so macOS can detect and use them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
-- Devices which either do not exist in ACPI or have different names than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect. 
-- Fake Devices like Embedded Controllers or Ambient Light Sensors so macOS is happy.
+- Devices which can simply be enabled by renaming them, so macOS can detect and use them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
+- Devices which either do not exist in ACPI or have different names than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect.
+- Fake Devices like Embedded Controllers or Ambient Light Sensors, so macOS is happy.
 - Patches which rename the original device or controlling method to something else so a replacement SSDT can be written which takes its place and redefines the device or method, to address Sleep and Wake issues or Touchpads working incorrectly.
 - Devices which are disabled for some reason, but macOS needs them to be present in order to boot, like legacy Realtime Clocks (RTC) in newer ACPI variants (300-series chipsets and newer)
 
@@ -42,19 +42,19 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 
 ## Adding missing Devices and Features
 
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse throught the folders above to find out which you may need.
+Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse through the folders above to find out which you may need.
 
 ### Preparations
 In order to add/apply any of the Devices/Patches, it is necessary to research your machine's ACPI - more specifically, the `DSDT`. To obtain a copy of the DSDT, it is necessary to dump it from your system's ACPI Table. There are a few options to do this.
 
 #### Dumping the DSDT
 
-- Using **Clover** (easiest way): hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a .zip file, extract it to an USB stick. The Dump will be located at: `EFI\CLOVER\ACPI\origin`
+- Using **Clover** (easiest way): hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a .zip file, extract it to a USB stick. The Dump will be located at: `EFI\CLOVER\ACPI\origin`
 - Using **SSDTTime** (in Windows): if you use SSDTTime under Windows, you can dump the DSDT, which is not possible if you use it under macOS.
 - Using **OpenCore** (requires Debug version and working config): enable Misc > Debug > `SysReport` Quirk. The DSDT will be dumped during next boot.
 
 ### Included Hotpatches
-Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpach.
+Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.
 
 #### Functional SSDTs (which add or enable features)
 |SSDT|Description|Search term(s) in DSDT 
@@ -78,9 +78,9 @@ Listed below are all SSDTs contained in this chapter. Search for the listed term
 [**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs|–
 
 #### Cosmetic SSDTs 
-The SSDTs listed below will most likely not add or enable any features besides being present in the IORegestry as a device or service, so it _looks_ more like a genuine Mac model as defined by the SMBIOS.
+The SSDTs listed below will most likely not add or enable any features besides being present in the IO Registry as a device or service, so it _looks_ more like a genuine Mac model as defined by the SMBIOS.
 
-|SSDT|Description|Search term(s) in DSDT 
+|SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
 [**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Attaches AC Adapter Device to AppleACPIACAdapter Service in IOReg|`ACPI0003`
 [**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds DMA Controller to IOReg|`PNP0200` or `DMAC`

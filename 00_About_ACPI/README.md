@@ -1,7 +1,7 @@
 # ACPI Basics
 ## Brief Introduction to ACPI
 
-"ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding  what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
+"ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
 
 ### What is ACPI?
 **ACPI** stands for Advanced Configuration & Power Interface. It is an architecture-independent power management and configuration standard originally developed by Intel, Microsoft, Toshiba and other manufacturers who formed the ACPI special interest group. In October 2013, the assets of the ACPI specifications were transferred to the UEFI Forum. The latest version of the ACPI Specification was released in January 2021. 
@@ -30,37 +30,37 @@ Since ACPI tables are binary files, we need a decompiler to read and edit them, 
 ### Important ACPI Tables for hackintoshing
 
 #### DSDT.aml 
-As mentioned, the `DSDT` or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS recognizes as an iMac Mainboard, for example.
+As mentioned, the `DSDT` or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt) is a very important ACPI Table for Hackintoshers because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS recognizes as an iMac mainboard, for example.
 
 #### SSDT-xxxx.aml
-`SSDTs`or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This include but are not limited to tables, such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
+`SSDTs`or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This includes tables such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
 
 Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
 
 For more details about ACPI in general, please refer to the official [**ACPI Specification**](https://uefi.org/specs/ACPI/6.4/index.html) For an introduction to the ASL language, please refer to chapter [**ACPI Source Language Reference**](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
 
-The following sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames so you can edit SSDT files. Click on a triangle to unfold its content.
+The following sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames, so you can edit SSDT files. Click on a triangle to unfold its content.
 <details>
 <summary><strong>ACPI Renames and Hotpaches</strong></summary>
 
 ## ACPI Renames and Hotpatches
 
-Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as `_STA`, `_OSI`, etc.) should be done with caution. Nowadays, a lot of them are handled by Kexts like **AppleALC** and **Whatevergreen** anyway.
+Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as `_STA`, `_OSI`, etc.) should be done with caution. Nowadays, a lot of them are handled by kexts like **AppleALC** and **Whatevergreen** anyway.
 
-**General Guidelines**: 
+**General Guidelines**
 
-- No OS Patches are required. For parts that do not work properly use customized patches to make them work. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
+- No OS patches are required. For parts that do not work properly use customized SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
 - For Brightness Control Keys to work, some machines do not require extra patches. Use `PS2 Keyboard Mapping` instead to achieve the same effect.
 - For now, the vast majority of machines require the `0D6D Patch` to fix `Instant Wake` issues.
-- Mostly all Laptops require additional device-specific renames and patches for the Battery Percentage Indicator to work. Recently, a new Kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was introduced which enables macOS to read the battery status provided the Embedded Controller, so no patching is required. It doesn't work in all cases but it's a good idea to give it a try first.
+- Almost all Laptops require additional device-specific renames and patches for the Battery Percentage Indicator to work. But recently, a new kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was introduced which enables macOS to read the battery status provided the Embedded Controller, so no patching is required. It doesn't work in all cases, but it's a good idea to give it a try first.
 - Most ThinkPad Laptops require the `PTSWAKTTS` patch to stop the Power Button LED from pulsing after waking up from sleep.
 - For machines with a dedicated Sleep Button: if pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep Correction Method` to fix it.
 
-You may need to disable or enable certain components in order to solve specific problems. 
- 
+You may need to disable or enable certain components in order to solve specific problems.
+
 **In general, use:**
 
-- `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems  these patches should be used with **Caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
+- `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems these patches should be used with **caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 </details>
 <details>
@@ -108,7 +108,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 
 - **SLIC.aml**
 	- **Patch method**: `ACPI\Quirks\SyncTableIds` = `true`
-	- **Description**: Microsoft Software Licensing table. This works around patched tables becoming incompatible with the SLIC table causing licensing issues in older Windows operating systems.
+	- **Description**: Microsoft Software Licensing table. This works around patched tables becoming incompatible with the `SLIC` table causing licensing issues in older Windows operating systems.
 
 - **DMAR.aml** 
     - **Patch method**: `Kernel\Quirks\DisableIoMapper` = `true` 
@@ -116,7 +116,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
     - **Note**: Only early Mac systems need this patch
 
 - **ECDT.aml**:
-    - **Patch Method**: Binary rename to rename it to `EC`. Has to be applied globally so all references to its Name and `Namepath` in all of the ACPI forms are identical. Otherwise the whole ACPI gets borked.
+    - **Patch Method**: Binary rename to rename it to `EC`. Has to be applied globally so all references to its Name and `Namepath` in all the ACPI forms are identical. Otherwise, the whole ACPI gets borked and the system won't boot.
     - **Description**: Embedded Controller.
     - **Note**: Individual machines (e.g. **Lenovo yoga-s740**) have `Namepath` in the **ECDT.aml** form that is inconsistent with the `EC` name of other ACPI forms, which can cause ACPI errors during the boot process. This patch is a good solution to the ACPI error problem.
     - **Note**: Not all machines have this table. Use SSDTTime to generate a fake EC.
@@ -126,9 +126,9 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 
 # ACPI Source Language (ASL) Basics
 > The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Tutorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
-> 
+>
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
-> - Translated from chinese into english and edited by [5T33Z0](https://github.com/5T33Z0), 2021-03-24.
+> - Translated from Chinese into English and edited by [5T33Z0](https://github.com/5T33Z0), 2021-03-24.
 
 ## Preface
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a BIOS developer, it is possible that there could be mistakes in the provided ASL examples.
@@ -142,12 +142,12 @@ Did you ever wonder what a `DSDT` or `SSDT` is and what it does? Or how these re
 ### Why to prefer SSDTs over a patched DSDT
 A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.
 
-These issues stems from DSDTs made with Windows support in mind on one hand and Apple not using standard ACPI tables for their hardware on the other. These issues can be addressed by dumping, patching and injecting the patched DSDT during boot, replacing the original. 
+These issues stem from DSDTs made with Windows support in mind on one hand and Apple not sticking to ACPI tables which conform to the ACPI specs 100 % for their hardware on the other. These issues can be addressed by dumping, patching and injecting a patched DSDT during boot, replacing the original.
 
-Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant.
+Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore, *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that's why you should avoid patched DSDTs – especially those from MaLDon/Olarilla!
 
 ### ASL
-A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines. 
+A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines.
 
 ## ASL Guidelines
 
@@ -241,17 +241,17 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
 8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
 9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customized.
-10. Local variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialized, in other words, assignment is needed.
+10. Local variables in ASL can accept up to 8 arguments represented by `Local0`~`Local7`. Definitions are not necessary, but should be initialized, in other words, assignment is needed.
 
 ## Common ASL Data Types
 
-|    ASL    | 
-| :-------: | 
+|    ASL    |
+| :-------: |
 | `Integer` |
-| `String`  | 
-|  `Event`  | 
-| `Buffer`  | 
-| `Package` | 
+| `String`  |
+|  `Event`  |
+| `Buffer`  |
+| `Package` |
 
 ## ASL Variables Definition
 
@@ -286,7 +286,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 | CreateWordField  |  16-Bit   |
 | CreateDWordField |  32-Bit   |
 | CreateQWordField |  64-Bit   |
-|   CreateField    | any sizes |
+| CreateField      | any sizes |
 
   ```swift
   CreateBitField (AAAA, Zero, CCCC)
@@ -375,7 +375,6 @@ Only two results from logical calculation - `0` or `1`
    }
    ```
 
-
 3. Define a method contains a return value:
   
    ```swift
@@ -388,8 +387,6 @@ Only two results from logical calculation - `0` or `1`
        Return (Local0) /* return here */
    }
    ```
-
-   
 
    ```swift
    Local0 = 1 + 2            /* ASL+ */
@@ -419,7 +416,7 @@ Only two results from logical calculation - `0` or `1`
    }
    ```
 
-   If we state `TEST` shown above，and call it from two different methods:
+   If we state `TEST` as shown above and call it from two different methods:
 
    ```swift
    Device (Dev1)
@@ -444,7 +441,7 @@ If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first 
 
 ## ACPI Preset Function
 
-### `_OSI`  (Operating System Interfaces)
+### `_OSI` (Operating System Interfaces)
 
 It is easy to acquire the current operating system's name and version when applying `_OSI`. For example, we could apply a patch that is specific to Windows or MacOS.
 
@@ -457,7 +454,7 @@ It is easy to acquire the current operating system's name and version when apply
 |                  FreeBSD            |   `"FreeBSD"`    |
 |                  Windows            | `"Windows 20XX"` |
 
-> Notably, different Windows versions requre a unique string, read:  
+> Notably, different Windows versions require a unique string, read:  
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
 When `_OSI`'s string matches the current system, it returns `1` since the `If` condition is valid.
@@ -822,9 +819,7 @@ Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of t
 
 # SSDT Loading Sequence
 
-Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there is an exceptions to this rule…
-    
-For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
+Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
 
 ## Example
 

@@ -1,7 +1,5 @@
 # ACPI Debugging
-
 ## Description
-
 By adding debug code to ***SSDT-xxxx*** Hotpatches, it is possible to check the working status of an ACPI table on the console for debugging.
 
 ## Requirements
@@ -15,12 +13,10 @@ To enable ACPI Debugging, you must install a kext and a SSDT:
 3. **Reboot**
 
 ## Debugging
-
 - Open **Console** and search for **`keyword`** (**`keyword`** as defined in the debug section of your SSDT(s), in this example `ABCD-`)
 - Check the console output
 
 ## Example
-
 To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps and wakes up.
 
 - Kext and Patches:
@@ -40,6 +36,5 @@ To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps
     The result shown above is the value of `Arg0` after the last sleep and wake cycle.
 
 ## Notes
-
 - Debug code can be diversified, such as `\RMDT.P1`, `\RMDT.P2`, `\RMDT.P3` and so on, see ***SSDT-RMDT.dsl*** for details
 - The debugging kext and SSDT were developed by [**RehabMan**](https://github.com/RehabMan/OS-X-ACPI-Debug)
