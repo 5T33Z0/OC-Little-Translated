@@ -3,28 +3,28 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 ## Use Cases
 1.  Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
-2. As a side-effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a correct Board-ID to Apple Update servers which fixes the issue. While a lot of OpenCore users face this issue it's not a problem in Clover, though since you can enter a HardwareTarget.
+2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a correct Board-ID to Apple Update servers which fixes the issue. While a lot of OpenCore users face this issue it's not a problem in Clover, though since you can enter a HardwareTarget.
 
 ## System Requirements
 **Minimum macOS**: Big Sur using XNU Kernel 20.4.0 or newer!</br>
 **CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
-- Sandy Bridge (need additionl Sur Plus and RDRAND patches)
+- Sandy Bridge (need additional Sur Plus and RDRAND patches)
 - Ivy Bridge
 - Haswell (partially)
 
-Since this is a pretty new approach, I have to look into a bit more but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
+Since this is a pretty new approach, I have to look into a bit more, but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
 
 
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
 
-These patches skip the Board-ID check of the used hardware, redirecing it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches. 
+These patches skip the Board-ID check of the used hardware, redirecting it to OpenCore which then spoofs a supported Board ID via VMM to the Update Servers via Kernel patches.
 
 This allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS Monterey. This not only improves CPU Power Management - especially on Laptops – it also allows installing, booting and updating macOS Monterey with otherwise unsupported hardware:
 
 > Parrotgeek1's VMM patch set would force kern.hv_vmm_present to always return True. With hv_vmm_present returning True, both OSInstallerSetupInternal and SoftwareUpdateCore will set the VMM-x86_64 board ID while the rest of the OS will continue with the original ID.
-> 
+>
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
 >
 > **Source**: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543
@@ -44,7 +44,7 @@ Before you do the following make sure you have a working backup of your EFI stor
 - Download the attached .plist
 - Open it with a plist editor
 - Copy the patches located under Booter > Patch into clipboard and paste them into your OpenCore config at the same location
-- Do the same for the Kernel Patches. Enable additional patches if required (for Sandy Brige for example)
+- Do the same for the Kernel Patches. Enable additional patches if required (for Sandy Bridge for example)
 - Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable Content Caching.
 - Save config
 - Reboot.
@@ -58,9 +58,9 @@ Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 ### About the Kernel Patches
 In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
-- **Patch 0**: Force enables Filevault on broken seal (disabled). Required if you still want to use Filevault after the Sytsem Partition has been modified which breaks the security seal.
+- **Patch 0**: Force enables Filevault on broken seal (disabled). Required if you still want to use Filevault after the System Partition has been modified which breaks the security seal.
 - **Patch 1**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 2-3**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1`. (disabled) 
+- **Patches 2-3**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1` (disabled).
 - **Patches 4-6**: Enable board ID spoof via VMM in macOS 12.0.1 (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 
 <details>
@@ -68,11 +68,11 @@ In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable add
 
 ## Testing the Patches
 
-I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officialy not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
+I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
 ![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
 
-Terminal shows the currnetly used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configuratos snippet:
+Terminal shows the currently used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configurator snippet:
 
 ![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
   
@@ -91,6 +91,6 @@ Installation went smoothly and macOS 12.1 booted without issues:
 
 ## Credits
 - Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
-- parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281) 
+- parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281)
 - reenigneorcim for [**SurPlus**](https://github.com/reenigneorcim/SurPlus)
 - Khronokernel for [**RDRAND Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c6b3aaaeb78d56f98a94d7991fd3019190b48dd3)

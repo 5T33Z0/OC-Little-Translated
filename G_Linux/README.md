@@ -6,12 +6,12 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 
 1. Add the following Drivers to `/EFI/OC/Drivers` and your config.plist:
 	- `OpenLinuxBoot.efi` (included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg))
-	- `btrfs_x64.efi` and/or 
+	- `btrfs_x64.efi` and/or
 	- `ext4_x64.efi` based on the file system your Linux Distro uses (both included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
-2. Enable UEFI > Quirks > `RequestBootVarRouting` 
+2. Enable UEFI > Quirks > `RequestBootVarRouting`
 3. Enable Misc > Boot > `LauncherOption` to prevent Linux bootloader from taking over the first slot of the boot entries. Choose either/or:
 	- `Full`: For AMI, Phoenix, and any other modern UEFI BIOS.
-	- `Short`: For older types of firmware, typically from Insyde, that are unable to manage full device paths. 
+	- `Short`: For older types of firmware, typically from Insyde, that are unable to manage full device paths.
 4. If you are using Misc > Entries or Misc > `BlessOverride` to boot Linux, delete the entries.
 5. Save the config and reboot.
 6. Reset NVRAM.
@@ -20,7 +20,7 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 ### Troubleshooting
 If it doesn't work, do the following:
 
-- Check your kernel configuration. Set `CONFIG_EFI_STUB=y`. If there's no `CONFIG_EFI_STUB`, it is probably commented-out (with a `#` before it). If the value is `n`, the kernel has to be recompiled. However, almost all modern distros set it to `y`. 
+- Check your kernel configuration. Set `CONFIG_EFI_STUB=y`. If there's no `CONFIG_EFI_STUB`, it is probably commented-out (with a `#` before it). If the value is `n`, the kernel has to be recompiled. However, almost all modern distros set it to `y`.
 - Check if the required file system drivers are installed in `/EFI/OC/Drivers` and listed in your config under UEFI > Drivers. If so, try changing the order (File system drivers first, then OpenLinuxBoot).
 
 ## Notes
