@@ -1,16 +1,16 @@
 # Dropping ACPI Tables
-Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover an OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore you need to dump the existing ACPI files from your BIOS/Firmware to be able to look inside them.
+Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover an OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to dump the existing ACPI files from your BIOS/Firmware to be able to look inside them.
 
 ## Preparations: Dumping ACPI Tables
-There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore: 
+There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore:
 
-- Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
+- Using **Clover** (the easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
 - Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
 
 ## Method 1: Dropping Tables based on OEM Tabled ID
 This method is used to drop tables such as SSDTs and others which have a distinct OEM Table ID in the header to describe them. In this example we drop `CpuPm`.
 
-- Open the Table you want to drop in maciASL and find it's Table Signature and OEM Table ID:</br>
+- Open the Table you want to drop in maciASL and find its Table Signature and OEM Table ID:</br>
 ![Header](https://user-images.githubusercontent.com/76865553/140036308-a1abcdd2-ae38-49e7-9135-612e64e86ddf.png)
 - Open your config.plist and a new rule under "ACPI" > "Delete"
 - Add the discovered `TableSignature` (here "53534454" = "SSDT" in HEX) and `OEMTableID` (here "437075506D000000" = "CpuPm" in HEX) int the corresponding fields in HEX format. In OCAT, you can use the ASCII to HEX converter at the bottom of the app to do this:</br>
@@ -24,7 +24,7 @@ This method is used to drop tables such as SSDTs and others which have a distinc
 - If you dropped the table successfully, "SSDT (CpuPm)" shouldn't be listed, unless you replaced it with a new table with the same OEM Table ID. If you created your own `SSDT-PM.aml` which is injected by OpenCore, this would be present, since it has the same OEM Table ID.
 
 ## Method 2: Dropping Tables based on Table Signature
-For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a reliable method to detect and drop a table because its OEM Table ID might contains a lot of blanks, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead.
+For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a reliable method to detect and drop a table because its OEM Table ID might contain a lot of blanks, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead.
 
 ### Example 1: dropping the DMAR Table
 
@@ -39,9 +39,9 @@ Therefore, you might consider dropping the DMAR table completely and/or replace 
 - Copy the table length (in this case, `168`):</br>
 	![Tlength](https://user-images.githubusercontent.com/76865553/139952797-38e332bc-3fed-450e-83fb-afa4a955a932.png)</br>
 - Open your config and add a new rule under ACPI > delete.
-- Enter `444D4152` (HEX for "DMAR") in `TableSignature`. If you use OCAT, you can use the  ASCII to HEX converter at the bottom of the app:</br>
+- Enter `444D4152` (HEX for "DMAR") in `TableSignature`. If you use OCAT, you can use the ASCII to HEX converter at the bottom of the app:</br>
 	![Drop](https://user-images.githubusercontent.com/76865553/139952827-a745cf27-a1f6-416e-ba0a-0ccab3c45884.png)</br>
-- In TableLength, enter the Length listed in the DMAR Table. In this case `168`.
+- In `TableLength`, enter the Length listed in the DMAR Table. In this case `168`.
 - Save the Config.
 - Reboot.
 
@@ -49,7 +49,7 @@ Therefore, you might consider dropping the DMAR table completely and/or replace 
 After rebooting, do the following:
 
 - Open maciASL
-- Select "File" > "New from ACPI" 
+- Select "File" > "New from ACPI"
 - If you dropped the table successfully, it shouldn't be listed. As you can see, it's not present:</br>
 	![nodmar](https://user-images.githubusercontent.com/76865553/139952877-ef7d0f85-378d-4c6b-ac9a-efb7118ac4b6.png)</br>
 - The table has been dropped successfully.

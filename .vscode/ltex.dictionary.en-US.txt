@@ -11,3 +11,5 @@ mainboards
 AWAC
 ARTC
 kexts
+DSDTs
+SSDTs
