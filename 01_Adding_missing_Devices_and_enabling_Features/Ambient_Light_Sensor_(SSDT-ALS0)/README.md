@@ -124,4 +124,4 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 - It's okay to add a fake `ALS0`, even if an ambient light sensor exists in the original `ACPI`.
 - The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving our desired effect.
 - When there is an ambient light sensor device in the original `ACPI`, the name may not be `ALSD`, although no other name has been found yet. If so, adjust the path in the SSDT accordingly.
-- If an ambient light sensor device exist in the original `ACPI` that you want to force-enable it with preset variable method, you need to pay attention to `_SB.INI` in the original `ACPI`. If it exists, please use method 2 to impersonate `ALS0`.
+- If an ambient light sensor device exist in the original `DSDT` that you want to force-enable, you need to pay attention to `_SB.INI`. If it exists, please use method 2 to add a fake `ALS0`.
