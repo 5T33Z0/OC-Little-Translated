@@ -1,5 +1,5 @@
 ## Essential Hackintosh Tools
-Incomplete list of useful freeware Apps and Tools for hackintoshing.
+Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 
 #### Bootloaders
 - [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
@@ -10,20 +10,20 @@ Incomplete list of useful freeware Apps and Tools for hackintoshing.
 
 ___
 #### Cross-Platform
-- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running a lot of the python-scripts in this list
-- [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
-- [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Plist Editor
-- [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) – OpenCore Configurator. Migrates config.plist to the latest form when saving
+- [**OpenCore Auxiliary Tools (OCAT)**](https://github.com/ic005k/QtOpenCoreConfig) – Recommended Configurator for editing the OpenCore `config.plist`. Migrates config.plist to the latest form when saving. So no more tedious manual updating of the config is required. Can update kexts and OpenCore files to the latest version. Basically, it's the only editor you need.
+- [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware Plist Editor
 - [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
+- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running a lot of the python-based tools in this list
+- [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based Bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAtrributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
-- [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier
+- [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
 
 ___
 #### macOS
-- [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP Partition
+- [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP partition
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
 - [**Hackintool**](https://github.com/headkaze/Hackintool) – Powerful post-install utility that everyone should have in their Hackintosh tool box
