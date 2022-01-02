@@ -139,7 +139,7 @@ Contents of `SSDT-NAVI.aml`:
     - `DAGPM.kext` (dummy kext which will help with power management for the GPU)
     - `Whatevergreen.kext`
 
-3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs. 
+3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 
 ## Credits
 - mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)

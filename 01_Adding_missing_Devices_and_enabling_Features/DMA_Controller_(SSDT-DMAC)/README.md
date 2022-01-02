@@ -12,11 +12,11 @@ In **DSDT**, search for:
 -  If missing, add ***SSDT-DMAC*** (export as `.aml`)
 -  Supported CPU Family: any
 
-**CAUTION:** When using this patch, make sure that the name `LPC`/`LPCB` is consistent with the name used in the original `DSDT`. Otherwise it won't work.
+**CAUTION:** When using this patch, make sure that the name of the Low Pin Configuration Bus (`LPC` or `LPCB`) is consistent with the name used in the original `DSDT`.
 
 ## Verifying that the patch is working
 - Incorporate SSDT-DMAC.aml in your EFI's ACPI folder and config.plist.
 - Restart your system 
-- Open IORegistry Explorer and search for `DMAC`
+- Open IORegistryExplorer and search for `DMAC`
 - If the Device is present, it should look like this. The array "IODeviceMemory" should contain further entries and data:
   ![DMAC](https://user-images.githubusercontent.com/76865553/141217597-78d7dcbb-2a7a-4910-a607-b1ec7e780d35.png)

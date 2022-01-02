@@ -2,7 +2,7 @@
 
 ## `PNLF` Injection Methods
 
-To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a Kext and a corresponding ACPI Hotpatch to work.
+To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding ACPI hotpatch to work.
 
 1. Common injection method:
 
@@ -40,7 +40,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
     - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
     - ***SSDT-PNLF-CFL***: 8th gen and newer
 
-    The above patches are inserted in `_SB.PCI0.GFX0`(Fixes starting WIN from Opencore).
+    The above patches are inserted in `_SB.PCI0.GFX0`(Fixes starting WIN from OpenCore).
 
   - RehabMan Brightness Patches from his [RehabMan's Laptop Hotpach Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):
   
@@ -48,7 +48,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
     - [**SSDT-PNLFCFL.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
     - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Cofiguration File)
   
-	Rehabman's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. Rehabman's PNLF Patches require the following rename:
+	Rehabman's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following rename:
 
 	```swift
 		Name: PNLF to XNLF  
@@ -57,6 +57,6 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 	```
 
 ## Caution
-
 - When choosing a certain injection method, you should clear the driver, patch, and settings related to other methods.
-- When using custom brightness patch, you need to pay attention that the patches are all `PNLF` devices injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect `Windows` boot. You can also use [RehabMan's Laptop Hotpach Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch). 
+- When using custom brightness patches, make sure that the `PNLF` device is injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect `Windows` boot. 
+- You can also use the SSDT-PNLF variants included in [RehabMan's Laptop Hotpach Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch).

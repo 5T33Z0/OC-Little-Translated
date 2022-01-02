@@ -5,7 +5,7 @@ Enables `X86PlatformPlugin` to implement XCPM CPU Power Management on 4th Gen In
 
 ## Patching method 1: automated, using SSDTTime
 
-The manual patch method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
+The manual patchinf method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
 * ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
 * ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
@@ -21,10 +21,10 @@ The manual patch method described below is outdated, since the patching process 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Pres "D", drag in your system's DSDT and hit "ENTER"
 3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master` Folder along with `patches_OC.plist`.
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated `SSDTs` to EFI/OC/ACPI
-6. Open `patches_OC.plist` and copy the the included patches and files listes under "ACPI > Add" to your `config.plist` (to the same section, of course).
-7. Save. Reboot. Done. 
+6. Open `patches_OC.plist` and copy the included patches and files listed under "ACPI > Add" to your `config.plist` (to the same section, of course).
+7. Save. Reboot. Done.
 
 ## Patching method 2: manual
 
@@ -74,7 +74,12 @@ The manual patch method described below is outdated, since the patching process 
 
 **IMPORTANT**: If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
+## Testing
+To check if Speedstep and turbo work correctly, run Intel Power Gadget and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency as defined by the product specs.
+
+Additionally, you could use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
+
 ## Notes and Credits
-- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin`instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
+- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
 - Dortania for `SSDT-CPUR.aml` 
-- For Intel Xeon CPUs, a different approch is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
+- For Intel Xeon CPUs, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
