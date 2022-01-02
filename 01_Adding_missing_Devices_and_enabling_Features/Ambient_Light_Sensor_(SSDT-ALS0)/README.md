@@ -1,7 +1,7 @@
 # Enabling an Ambient Light Sensor (`ALSD`) or adding a fake one (`ALS0`)
 
 ## Overview
-Starting with macOS Catalina, Laptops either require a fake ambient light sensor device (`ALS0`) or if the Laptop has one, `ALSD` needs to be enabled for macOS for storing the current brightness/auto-brightness level. Otherwise the brightness returns to maximum after each reboot.
+Starting with macOS Catalina, Laptops either require a fake ambient light sensor device (`ALS0`) or if the Laptop has one, `ALSD` needs to be enabled for macOS for storing the current brightness/auto-brightness level. Otherwise, the brightness returns to maximum after each reboot.
 
 **NOTE**: The official OpenCore package contains a pre-compiled `SSDT-ALS0.aml` under "Docs". So in case you're not sure what to do you could also use it instead.
 
@@ -124,4 +124,4 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 - It's okay to add a fake `ALS0`, even if an ambient light sensor exists in the original `ACPI`.
 - The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving our desired effect.
 - When there is an ambient light sensor device in the original `ACPI`, the name may not be `ALSD`, although no other name has been found yet. If so, adjust the path in the SSDT accordingly.
-- If there is an ambient light sensor device in the original `ACPI` and you want to force it to be enabled by the preset variable method, you need to pay attention to the existence of `_SB.INI` in the original `ACPI`. If it exists, please use method 2 to impersonate `ALS0`.
+- If an ambient light sensor device exist in the original `ACPI` that you want to force-enable it with preset variable method, you need to pay attention to `_SB.INI` in the original `ACPI`. If it exists, please use method 2 to impersonate `ALS0`.
