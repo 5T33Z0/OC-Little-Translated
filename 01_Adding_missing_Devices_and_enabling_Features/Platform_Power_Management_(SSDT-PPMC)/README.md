@@ -1,12 +1,12 @@
 # Add missing parts
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
+Although adding any of the missing parts listed in this section may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
 
 ## About `SSDT-PPMC`
 
 - What it is: Adds Platform Power Management Controller Device
 - What it does: Improves Power Management (supposedly)
 - Supported CPU Families:
-  - **Desktop**: 7th and 8th Gen Intel (100 and 200 Series Mainboards only)
+  - **Desktop**: 7th and 8th Gen Intel (100 and 200-series mainboards only)
   - **Mobile/NUC**: 6th to 8th Gen Intel
 
 ## Instructions

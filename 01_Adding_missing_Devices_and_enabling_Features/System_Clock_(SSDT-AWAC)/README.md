@@ -16,13 +16,13 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Pres "D", drag in your system's DSDT and hit "ENTER"
 3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside of the `SSDTTime-master`Folder along with `patches_OC.plist`.
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master`Folder along with `patches_OC.plist`.
 5. Copy the generated `SSDTs` to EFI > OC > ACPI and your Config using OpenCore Auxiliary Tools
-6. Open `patches_OC.plist` and copy the the included patches to your `config.plist` (to the same section, of course).
+6. Open `patches_OC.plist` and copy the included patches to your `config.plist` (to the same section, of course).
 7. Save and Reboot. Done. 
 
 **NOTE**
-If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of .kexts and .aml files automatically, since it monitors the EFI folder.
+If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
 Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
@@ -79,7 +79,7 @@ Scope (\)
 **Explanation**: This will set `STAS` to `One` for macOS, which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 
 ### Method 2: using `SSDT-AWAC2_ARTC` 
-This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of an `RTC` instead:
+This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of a `RTC` instead:
 
 ```Swift
     External (_SB_.PCI0.LPCB, DeviceObj)
@@ -131,7 +131,7 @@ This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using Ei
 - In `DSDT`, search for `ACPI000E`. 
 - If present, check if it belongs to `Device (AWAC)`. 
 - If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
-- If all above condistions are met, you can add `SSDT-AWAC2_ART.dsl`
+- If all above conditions are met, you can add `SSDT-AWAC2_ART.dsl`
 
 **Explanation**: This SSDT actually makes use of `AWAC` Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
 
@@ -244,7 +244,7 @@ Usually, you can open the same `ACPI` file with binary software (e.g. `010 Edito
 
 ## `Replace` content
 
-When `Find` is stated in the Requirements, [any rewriting of a piece of code to find confirmed binary data from it is highly implausible! However, `Replace` can do this. Following the example above, we write a piece of code.
+When `Find` is stated in the Requirements, (any rewriting of a piece of code to find confirmed binary data from it is highly implausible)! However, `Replace` can do this. Following the example above, we write a piece of code.
 
 ```Swift
     DefinitionBlock ("", "SSDT", 2, "hack", "111", 0)
@@ -439,7 +439,7 @@ Method (_STA, 0, NotSerialized)
 Name (_STA, 0x0F)
 
 ```
-It can be seen that the above example of `_STA` method contains only the enable bit to return the device state and the enable bit returned according to the conditions, if you want to not use the rename and change the conditions of the preset variables in the custom SSDT can be directly referenced to `_STA` method as `IntObj`
+It can be seen that the above example of `_STA` method only contains  the enable bit to return the device state and the enable bit returned according to the conditions, if you want to not use the rename and change the conditions of the preset variables in the custom SSDT can be directly referenced to `_STA` method as `IntObj`
 
 Example of operation to disable a device:
 
@@ -451,7 +451,7 @@ External (_SB_.PCI0.XXXX._STA, IntObj)
 ```
 Please refer to **ASL Language Fundamentals** for the details of the `_STA` method's enable bit setting. 
 
-The main reason why this method works in practice is that in the ACPI specification the `_STA` method has a higher priority than `_INI _ADR _HID` in the OS OSPM module for device state evaluation and initialization and the return value of `_STA` itself is an integer `Integer`.
+The main reason why this method works in practice is that in the ACPI specification the `_STA` method has a higher priority than `_INI _ADR _HID` in the OSPM module for device state evaluation and initialization and the return value of `_STA` itself is an integer `Integer`.
 
 An example of an operation that does not use this method:
 

@@ -1,5 +1,5 @@
 # Fake Firmware Hub Device (`SSDT-FWHD`) 
-Adds `FWHD` device to IORegistry in macOS – nothing more. My research showed that `FWHD` is present in the IORegistries of a wide range of Mac models. It is listed in IOreg as "FWHD" (Firmware Hub Device) with the HID `INT0800`.
+Adds `FWHD` device to IO Registry in macOS – nothing more. My research showed that `FWHD` is present in the IORegistries of a wide range of Mac models. It is listed in IORegistryExplorer as "FWHD" (Firmware Hub Device) with the HID `INT0800`.
 
 Used in the following **SMBIOS**:
 

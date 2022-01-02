@@ -4,3 +4,9 @@ mainboard
 Hackintoshes
 IORegistryExplorer
 RehabMan
+Skylake
+EisaID
+IORegistryExlorer
+mainboards
+AWAC
+ARTC

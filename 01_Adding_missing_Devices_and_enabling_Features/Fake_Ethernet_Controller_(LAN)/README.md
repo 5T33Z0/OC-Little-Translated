@@ -2,7 +2,7 @@
 
 ## Description
 
-Some machines don't have native Ethernet, but you can spoof Ethernet with a SSDT and a Kext. 
+Some machines don't have native Ethernet, but you can spoof Ethernet with a SSDT and a kext. 
 
 ## Instructions
 
@@ -12,7 +12,7 @@ Some machines don't have native Ethernet, but you can spoof Ethernet with a SSDT
 
 ## Reset Ethernet `BSD Name` to `en0`
 
-- Open **Network** in **System Preferences** .
+- Open **Network** in **System Preferences**.
 - Delete all non-working LAN connections and hit "Apply" afterwards.
 - Delete `\Library\Preferences\SystemConfiguration\NetworkInterfaces.plist`.
 - Reboot.

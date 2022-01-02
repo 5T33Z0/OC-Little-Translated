@@ -1,7 +1,7 @@
 # Enabling `XCPM` for Ivy Bridge CPUs
 > By 5T33Z0. Compatibility: macOS Catalina (10.15.5+) to Big Sur (11.3+)
 
-## Background: 
+## Background
 Apple deactivated the `X86PlatformPlugin` support for Ivy Bridge CPUs in macOS a few years back. Instead, the `ACPI_SMC_PlatformPlugin` is used for CPU power management, although `XCPM` is supported by Ivy Bridge CPUs natively. But there isn't much info about how to re-enable it in OpenCore's documentation:
 
 >Note that the following configurations are unsupported by XCPM (at least out of the box): Consumer Ivy Bridge (0x0306A9) as Apple disabled XCPM for Ivy Bridge and recommends legacy power management for these CPUs. `_xcpm_bootstrap` should manually be patched to enforce XCPM on these CPUs […].
@@ -10,17 +10,17 @@ So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch 
 
 **NOTE**: I developed and tested this guide using a Laptop. If you're on a desktop you have to use a different System Definition – iMac13,1 for Ivy Bridge and 14,1 for Haswell, I guess.
 
-## Requirements:
+## Requirements
 
 * 3rd gen Intel CPU (Codename **Ivy Bridge**)
 * Tools: Terminal, ssdtPRGEN, SSDTTime, Plist Editor, MaciASL (optional), IORegistryExplorer (optional), CPUFriendFriend (optional)
 * SMBIOS supporting Ivy Bridge CPUs (like MacBookPro9,x or 10,x for Laptops and iMac13,1 for Desktops)
 
-## How-To:
+## How-To
 
 ### 1. Enable `XCPM` for Ivy Bridge:
 
-* Add the Kernel Patch inside of "XCPM_IvyBridge.plist" to your `config.plist`
+* Add the Kernel Patch inside "XCPM_IvyBridge.plist" to your `config.plist`
 * Enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs` under Kernel > Quirks.
 * Save.
 
@@ -45,11 +45,11 @@ A look into the ssdt.aml file list a summary of all settings for the SSDT. If th
 
 If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
 
-## NOTE for mac Big Sur/Monterey Users:
+## NOTE for mac Big Sur/Monterey Users
 Since Big Sur requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate SSDT-PM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you can either:
 
-- use `SSDTTime` to generate a `SSDT-PLUG.aml` **or** 
-- stay on `MacBookPro10,1` but add `-no_compat_check` to `boot-args`.
+* Use `SSDTTime` to generate a `SSDT-PLUG.aml` **or** 
+* Stay on `MacBookPro10,1` but add `-no_compat_check` to `boot-args`.
 
 **Advantages** of using `MacBookPro10,1` with `-no_compat_check` are:
 
