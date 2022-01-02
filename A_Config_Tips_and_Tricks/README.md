@@ -1,7 +1,7 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
-## OpenCore Troubleshooting Quick tips:
+## OpenCore Troubleshooting Quick Tips
 
 Besides checking the obvious (like Booter Settings and Quirks), check the following Settings:
 
@@ -37,29 +37,29 @@ Currently there are three automated methods to check your `config.plist` for err
 
 - **Online**: [**OpenCore Sanity Checker**](https://opencore.slowgeek.com/) ~~is~~ was a useful site to check your config for errors. It hasn't been updated a long time and only fully support OpenCore up to version 0.6.6 and shouldn't be relied on when using newer versions of OpenCore. It compares your config with the database of the OpenCore Installation Guide. Correct entries are highlighted in green, errors are highlighted in red, so you can easily address a problem. You can also copy the link to the result of the sanity check to point out config issues in forums, etc.. The source code is available if someone would like to implement it in a new or updated site: [OCSanity](https://github.com/rlerdorf/OCSanity).
 
-- **Offline**: The OpenCore package comes with a `Utilities` folder. In it you will find `ocvalidate`. Drag it into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will point to section in the config they relate to. With the help of [OCConfgCompare](https://github.com/corpnewt/OCConfigCompare), Sample.plist and [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) you can correct all errors quite fast.
+- **Offline**: The OpenCore package comes with a `Utilities` folder. In it, you will find `ocvalidate`. Drag it into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will point to section in the config they relate to. With the help of [OCConfgCompare](https://github.com/corpnewt/OCConfigCompare), Sample.plist and [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) you can correct all errors quite fast.
 
-- **Using OpenCore Auxiliary Tools** ([**OCAT**](https://github.com/ic005k/QtOpenCoreConfig)): Tool for editing and updating OpenCore files, Drivers, Kexts and the config.plist. Its best feature is that it automatically updates any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before.<br> 
+- **Using OpenCore Auxiliary Tools** ([**OCAT**](https://github.com/ic005k/QtOpenCoreConfig)): Tool for editing and updating OpenCore files, drivers, kexts and the config.plist. Its best feature is that it automatically updates any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before.<br> 
 
 	But to be clear: OCAT does not fix configuration errors (apart from those caused by structural differences between an outdated and current config). In other words: if your config.plist was configured incorrectly before, it still will be afterwards!
  
-While Sanity Checker focuses on correct settings for the selected system, OC Validate checks the structure as well as the syntax of the config for errors. OCAT can update the structure automatically and has OC Validate built in. Therefore it makes sense to check the config in two steps: first online and then offline.
+While Sanity Checker focuses on correct settings for the selected system, OC Validate checks the structure as well as the syntax of the config for errors. OCAT can update the structure automatically and has OC Validate built in. Therefore, it makes sense to check the config in two steps: first online and then offline.
 
-**CAUTION**: Don't use OpenCore Configurator for editing your `config.plist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed oder relocated in the config. This results in errors when rebooting.
+**CAUTION**: Don't use OpenCore Configurator for editing your `config.plist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed or relocated in the config. This results in errors when rebooting.
 </details>
 <details>
 <summary><strong>Fixing Boot Issues</strong></summary>
 
 ## II. Quick fixes for Boot Problems
 
-If the system won't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
+If the system doesn't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
-- **Misc > Security > SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details. 
+- **Misc > Security > SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details.
 - **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
 
 If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
 
-- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced). 
+- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
 
 **BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a verified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
 
@@ -112,7 +112,7 @@ You should deactivate the single user mode for security reasons, because it can 
 
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
-With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having it's own value/byte, which can be combined by simple adding them:
+With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having its own value/byte, which can be combined by simple adding them:
 
 `1` = Custom Icons for Boot Entries </br>
 `2` = Custom Titles for Boot Entries </br>
@@ -208,9 +208,9 @@ Otherwise, check if there might be a BIOS update available that fixes general pr
 <details>
 <summary><strong>Fixing falsely reported OpenCore version </strong></summary>
 
-## VII. **Correct falsely reported OpenCore version**.
+## VII. **Correct falsely reported OpenCore version**
 
-It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater and Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it.
+It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater or Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it.
 
 To do this, create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**, call it `opencore-version` and save the config. After restarting, the correct OC version should be displayed again.
 </details>
@@ -231,7 +231,7 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 
 ## Sharing SMBIOS data between Clover and OpenCore
 
-When switching between OpenCore and Clover, copying over your existing SMBIOS Infos from one Bootloader to the other can be a bit confusing because of naming differences as well as the number of fields available in both configs. 
+When switching between OpenCore and Clover, copying over your existing SMBIOS infos from one Bootloader to the other can be a bit confusing because of naming differences as well as the number of fields available in both configs.
 
 So I had a look at my SMBIOS Infos using GenSMBIOS and found out which parameters belong to what in Clover and OpenCore.
 

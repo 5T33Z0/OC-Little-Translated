@@ -10,3 +10,4 @@ IORegistryExlorer
 mainboards
 AWAC
 ARTC
+kexts
