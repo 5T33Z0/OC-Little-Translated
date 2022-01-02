@@ -1,8 +1,8 @@
-# Injecting Brightness Control (`PNLF`)
+# Injecting Brightness Control (`SSDT-PNLF`)
 
 ## `PNLF` Injection Methods
 
-To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding ACPI hotpatch to work.
+To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding `SSDT-PNLF` to work.
 
 1. Common injection method:
 
@@ -11,7 +11,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 2. ACPI injection method:
 
-	- **Kext**: ACPIBacklight.kext (need to disable WhateverGreen.kext built-in brightness driver, see Disable method above)
+	- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
 	- **Patch**: See "ACPI Brightness Patch" method
 
 3. Other methods: Follow the Kext + patch principle and try for yourself.
@@ -24,7 +24,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 - [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver. Requires [**Lilu**](https://github.com/acidanthera/Lilu/releases)) **or**
 - [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
-- [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/)
+- [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/) (Deprecated. Predecessor of IntelBacklight.kext.)
 
 By default, `WhateverGreen.kext` will load the brightness driver. If you want to use other brightness drivers you should disable Whatevergreen's built-in backlight control. To disable it, do the following:
 
