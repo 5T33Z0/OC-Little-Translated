@@ -14,7 +14,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 	- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
 	- **Patch**: See "ACPI Brightness Patch" method
 
-3. Other methods: Follow the Kext + patch principle and try for yourself.
+3. Other methods: Follow the kext + patch principle and try for yourself.
 
 **NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
 
