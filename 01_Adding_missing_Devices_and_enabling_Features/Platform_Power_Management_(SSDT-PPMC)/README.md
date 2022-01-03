@@ -1,7 +1,4 @@
-# Add missing parts
-Although adding any of the missing parts listed in this section may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
-
-## About `SSDT-PPMC`
+# Platform Power Management Controller (`SSDT-PPMC`)
 
 - What it is: Adds Platform Power Management Controller Device
 - What it does: Improves Power Management (supposedly)

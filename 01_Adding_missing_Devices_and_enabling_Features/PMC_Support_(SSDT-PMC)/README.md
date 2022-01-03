@@ -9,7 +9,7 @@
 
 **CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original DSDT.
 
-### Checking if the patch is working
+### Verifying that the patch is working
 Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should find it:</br>
 
 ![Bildschirmfoto 2021-11-01 um 16 37 33](https://user-images.githubusercontent.com/76865553/139699060-75fdc4b4-ff16-448e-9e19-96af3c392064.png)

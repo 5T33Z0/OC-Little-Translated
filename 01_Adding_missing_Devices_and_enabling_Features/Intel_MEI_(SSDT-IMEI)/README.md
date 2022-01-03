@@ -1,11 +1,10 @@
-# Add missing parts
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets.
-
-## About `SSDT-IMEI`
-Adds the Intel Management Engine (IMEI) device to the device tree, if it does not exist in the `DSDT`. IMEI is required for proper hardware video decoding on Intel iGPUs. Adding IMEI is only required in two cases:
+# Add Intel Management Engine (`SSDT-IMEI`)
+Adds Intel Management Engine (IMEI) to the device tree, if it does not exist in your system's `DSDT`. IMEI is required for proper hardware video decoding on Intel iGPUs. Adding IMEI is only required in two cases:
 
 - Sandy Bridge CPUs running on 7-series mainboards or
 - Ivy Bridge CPUs running on 6-series mainboards
+
+In other words: adding this device is only necessary if you combine a 2nd Gen Intel Core CPU with a 3rd Gen mainboard or 3rd Gen CPU with a 2nd Gen mainboard!
 
 ## Instructions
 

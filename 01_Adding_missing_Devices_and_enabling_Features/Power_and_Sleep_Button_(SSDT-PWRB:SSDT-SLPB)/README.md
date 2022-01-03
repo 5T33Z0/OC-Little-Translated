@@ -1,5 +1,4 @@
-# Adding Power and Sleep Button devices
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for 300/400/500/600 series Chipsets.
+# Adding Power and Sleep Button devices (`SSDT-PWRB/SLPB`)
 
 ## Instructions
 
@@ -7,7 +6,7 @@ In **DSDT**, search for:
 
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
-- In some cases (HP, Lenovo) the `SLPB` device may be present in the `DSDT`, but may be disabled/off:
+- In some cases (like HP or Lenovo), the `SLPB` is present in the `DSDT`, but may be disabled:
     ```
     Scope (_SB)
     {
@@ -28,4 +27,5 @@ In **DSDT**, search for:
         }
     }
     ```
-**CAUTION:** When using the any of the included SSDTs, ensure that the PCI path should be consistent with the name used in the original DSDT.
+
+**CAUTION:** When using the any of the included SSDTs, ensure that the PCI paths are consistent with the ones used in the original DSDT!
