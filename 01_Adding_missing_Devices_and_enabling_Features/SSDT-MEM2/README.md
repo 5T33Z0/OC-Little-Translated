@@ -10,4 +10,3 @@ In **DSDT**, search for `MEM2` or `PNP0C01`. If missing you can add ***SSDT-MEM2
 
 ## Notes
 The general applicability and necessity of this patch is questionable. In my test, adding `SSDT-MEM2` did not result in IOAccelMemoryInfoUserClient being present. So this has to be tested on a case-by-case basis. If you are uncertain, don't use this patch.
-
