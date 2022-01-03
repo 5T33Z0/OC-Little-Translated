@@ -1,8 +1,8 @@
-# Fake Ethernet (NullEthernet)
+# Fake Ethernet (Null Ethernet)
 
 ## Description
 
-Some machines don't have native Ethernet, but you can spoof Ethernet with a SSDT and a kext. 
+Some machines don't have native Ethernet, but you can spoof it with this SSDT and a kext. The purpose of this driver is to enable internet access even if your device doesn't have a built-in Ethernet port with supporting drivers, so you still can get access to the Mac App Store.
 
 ## Instructions
 
@@ -18,3 +18,6 @@ Some machines don't have native Ethernet, but you can spoof Ethernet with a SSDT
 - Reboot.
 - Once in the system again, open **Networks** in **System Preferences** again.
 - Add **Ethernet** and the other required networks in order, and click **Apply**.
+
+## Credits and Resources
+RehabMan for [NullEthernet.kext](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/README.md)
