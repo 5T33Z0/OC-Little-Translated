@@ -4,16 +4,16 @@
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.
 
 ### Why do I need a fake EC?
-On Desktop PCs, the `EC` device usually isn't named correctly for what macOS expects, so it can be attached to `AppleACPIEC` driver – which is a good thing in this case since EC devices from PCs are incompatible with macOS and may break at any time so `AppleACPIEC` kext must NOT load on desktops. To work around this issue, we disable the device included in the system's `DSDT` when and add a fake `EC` for macOS to play with instead.
+On Desktop PCs, the `EC` device usually isn't named correctly for what macOS expects, so it can be attached to `AppleACPIEC` driver – which is a good thing in this case since EC devices from PCs are incompatible with macOS and may break at any time so `AppleACPIEC` kext must NOT load on desktops. To work around this issue, we disable the device included in the system's `DSDT` and add a fake `EC` for macOS to play with instead.
 
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
-In order to get USB Power Management working properly on **Skylake and newer**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in the `SSDT-EC-USBX` file. For older system `SSDT-EC` alone is sufficient (if required at all).
+In order to get USB Power Management working properly on **Skylake and newer CPUs**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient (if required at all).
 
 On Laptops, the `EC` microcontroller actually really exist but may be incompatible because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
 So, to put it in a nutshell:
 
-- On Desktop PC, an existing `EC` has to be disabled and a fake EC has to be added.
+- On Desktop PCs, an existing `EC` has to be disabled and a fake EC has to be added.
 - On Laptops, we just need an additional fake EC to be present (not always required).
 - Skylake and newer CPUs require `SSDT-EC-USBX`, older CPUs only need `SSDT-EC`.
 
