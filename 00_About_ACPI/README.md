@@ -87,22 +87,22 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 		- If holding the **Power Button** does not invoke the "Restart, Sleep, Cancel, Shutdown" menu, set `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding **SSDT-PMC.aml** instead. It's located under ["Adding Missing Devices/Features"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features).
 		- `Low Power S0 Idle` state. The **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) system. See the [About AOAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) section for more details.
 
-- **Clear ACPI Header fields** 
-	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true` 
+- **Clear ACPI Header fields**
+	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true`
 	- **Note**: Only required on macOS 10.13
 
 - **BGRT.aml**
-    - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true` 
+    - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true`
     - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
     - **Note:** Not all machines have this form
 
-- **Relocate ACPI Memory Regions** 
-    - **Patch method**: `ACPI\Quirks\RebaseRegions` = `true` 
-    - **Description**: ACPI forms have memory regions with both dynamically allocated addresses and fixed addresses. 
+- **Relocate ACPI Memory Regions**
+    - **Patch method**: `ACPI\Quirks\RebaseRegions` = `true`
+    - **Description**: ACPI forms have memory regions with both dynamically allocated addresses and fixed addresses.
     - **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
 
-- **FACS.aml** 
-    - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true` 
+- **FACS.aml**
+    - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true`
     - **Decription**: The `Hardware Signature` item of the **FACS.aml** form is a 4-byte hardware signature, which is calculated after the system boots based on the hardware configuration. If this value is changed after the machine wakes up from a **Hibernate** state, the system will not recover correctly. The patch works by setting the `Hardware Signature` = `0` to resolve this issue.
     - **Note:** If the system has **Hibernation** disabled, you do not need to bother with this patch!
 
@@ -128,7 +128,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 > The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Tutorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
 >
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
-> - Translated from Chinese into English and edited by [5T33Z0](https://github.com/5T33Z0), 2021-03-24.
+> - Translated from Chinese into English and edited by [5T33Z0](https://github.com/5T33Z0).
 
 ## Preface
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a BIOS developer, it is possible that there could be mistakes in the provided ASL examples.
@@ -237,7 +237,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
       Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
 5. `Device (xxxx)` also can be recognized as a scope, it contains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
-6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
+6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly, `^` is superior to `^^`.
 7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
 8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
 9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customized.
@@ -443,16 +443,16 @@ If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first 
 
 ### `_OSI` (Operating System Interfaces)
 
-It is easy to acquire the current operating system's name and version when applying `_OSI`. For example, we could apply a patch that is specific to Windows or MacOS.
+It is easy to acquire the current operating system's name and version when applying `_OSI`. For example, we could apply a patch that is specific to Windows or macOS.
 
 `_OSI` requires a string, the string must be picked from the table below.
 
-|                 OS                  |      String      |
-| :---------------------------------: | :--------------: |
-|                macOS                |    `"Darwin"`    |
-| Linux (other Linux-based OS)        |    `"Linux"`     |
-|                  FreeBSD            |   `"FreeBSD"`    |
-|                  Windows            | `"Windows 20XX"` |
+|   OS                         |      String     |
+| :--------------------------: | :-------------: |
+| macOS                        | `"Darwin"`      |
+| Linux (other Linux-based OS) | `"Linux"`       |
+| FreeBSD                      | `"FreeBSD"`     |
+| Windows                      | `"Windows 20XX"`|
 
 > Notably, different Windows versions require a unique string, read:  
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
