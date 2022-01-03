@@ -11,7 +11,7 @@ Appllicable to **SMBIOS**:
 - iMacPro1,1 (Xeon W)
 - macPro7,1 (Xeon W)
 
-:warning: Don't use this SSDT for fixing your System Clock! This is just a cosmetic device. If you need to fix your Clock, look into SSDT-AWAC oder SSDT-RTC0 instead!
+:warning: Don't use this SSDT for fixing your System Clock! This is just a cosmetic device. If you need to fix your Clock, look into [SSDT-AWAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)) or [SSDT-RTC0](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead!
 
 ## Credits
 - Baio1977 for providing the SSDT
