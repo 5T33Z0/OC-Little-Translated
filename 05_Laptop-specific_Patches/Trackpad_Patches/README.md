@@ -30,7 +30,7 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 	|FTE1001 touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
 	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Trackpads. Included in VoodooI2C Package.|
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode)|
-	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) [**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Mostly seen on Dell laptops|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br>[**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Mostly seen on Dell laptops|
 	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
 
 
