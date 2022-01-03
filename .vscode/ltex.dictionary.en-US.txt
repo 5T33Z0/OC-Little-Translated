@@ -14,3 +14,9 @@ kexts
 DSDTs
 SSDTs
 Configurtaion
+SSDT
+OCAT
+maciASL
+DMAR
+ECEnabler
+FADT

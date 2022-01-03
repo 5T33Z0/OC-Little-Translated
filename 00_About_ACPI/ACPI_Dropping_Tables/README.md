@@ -33,7 +33,7 @@ On Z590 Boards for example, the presence of Reserved Memory Region(s) in the DMA
 Therefore, you might consider dropping the DMAR table completely and/or replace it with a modified version.
 
 - Open maciASL
-- Select "File" > "New from ACPI" 
+- Select "File" > "New from ACPI"
 - Pick `DMAR`
 - Open the DMAR Table in maciASL and scroll to the end
 - Copy the table length (in this case, `168`):</br>
@@ -71,9 +71,9 @@ After rebooting, do the following:
 
 ## Verifying that a Table has been replaced
 - Open maciASL
-- Select "File" > "New from ACPI" 
+- Select "File" > "New from ACPI"
 - Pick `DMAR`. The file Should be 104 in length and should no longer contain Reserved Memory Regions:</br>
 	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
 
 ## Note
-You should only import tables with maciASL if you know these are not patched ones. Otherwise dump the ACPI Tables from the Clover boot menu using `F4`.
+You should only import tables with maciASL if you know these are not patched ones. Otherwise, dump the ACPI Tables from the Clover boot menu using `F4`.

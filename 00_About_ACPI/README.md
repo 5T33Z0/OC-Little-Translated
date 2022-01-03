@@ -45,9 +45,9 @@ The following sections will help you to get a deeper understanding about ACPI, A
 
 ## ACPI Renames and Hotpatches
 
-Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as `_STA`, `_OSI`, etc.) should be done with caution. Nowadays, a lot of them are handled by kexts like **AppleALC** and **Whatevergreen** anyway.
+Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as `_STA`, `_OSI`, etc.) should be done with caution. Nowadays, a lot of them are handled by kexts like **AppleALC** and **WhateverGreen** anyway.
 
-**General Guidelines**
+### General Guidelines**
 
 - No OS patches are required. For parts that do not work properly use customized SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
 - For Brightness Control Keys to work, some machines do not require extra patches. Use `PS2 Keyboard Mapping` instead to achieve the same effect.
@@ -58,7 +58,7 @@ Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to 
 
 You may need to disable or enable certain components in order to solve specific problems.
 
-**In general, use:**
+### In general, use:**
 
 - `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems these patches should be used with **caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
@@ -67,31 +67,31 @@ You may need to disable or enable certain components in order to solve specific 
 <summary><strong>ACPI Patches in OpenCore</strong></summary>
 
 ### ACPI Patches in OpenCore
-The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing. 
+The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
 
 OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order (as defined in the `config.plist`):
 
 1. `Patch` is processed
-2. `Delete` is processed 
+2. `Delete` is processed
 3. `Add` is processed
 4. `Quirks` are processed
 
 #### Other ACPI Tables and Patching Methods
 For more info about each one of the mentioned ACPI Tables below, please refer to the List of available [ACPI System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
-	
+
 ![OC_ACPI_Patches](https://user-images.githubusercontent.com/76865553/136164424-ad3c01a5-546c-4f05-bdba-2e2d7eb72bd3.png)
-	
+
 - **FACP.aml**
 	- **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true`
 	- **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by **FACP.aml**. These include the Realtime Clock, Power and Sleep Buttons, Power Management, etc. In Hackintoshland this affects the following functions:
 		- If holding the **Power Button** does not invoke the "Restart, Sleep, Cancel, Shutdown" menu, set `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding **SSDT-PMC.aml** instead. It's located under ["Adding Missing Devices/Features"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features).
-		- `Low Power S0 Idle` state. The **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) type of computer. See the [About AOAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) section for more details.
+		- `Low Power S0 Idle` state. The **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) system. See the [About AOAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) section for more details.
 
 - **Clear ACPI Header fields** 
 	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true` 
 	- **Note**: Only required on macOS 10.13
 
-- **BGRT.aml** 
+- **BGRT.aml**
     - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true` 
     - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
     - **Note:** Not all machines have this form
