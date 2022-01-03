@@ -2,7 +2,7 @@
 
 ## Description
 
-Some machines don't have native Ethernet, but you can spoof it with this SSDT and a kext. The purpose of this driver is to enable internet access even if your device doesn't have a built-in Ethernet port with supporting drivers, so you still can get access to the Mac App Store.
+Some machines don't have native Ethernet, but you can spoof it with this SSDT and a kext. The purpose of this driver is to enable internet access via USB Wifi even if your device doesn't have a built-in Ethernet port with supporting drivers, so you still can access the Mac App Store.
 
 ## Instructions
 
