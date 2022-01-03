@@ -11,7 +11,7 @@
 - In **DSDT**, search for Address `0x001F0002` or `Device (PPMC)`. Make sure it's the address is not associated with a SATA Device!
 - If missing, add `SSDT-PPMC.aml`
 
-**CAUTION**: When using the any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI.
+**CAUTION**: When using any of the patches, note that `LPC`/`LPCB` name should be consistent with the name used in the original ACPI table.
 
 ### Verifying
 In IORegistryExplorer search for 'PPMC'. If present, it should look like this:
