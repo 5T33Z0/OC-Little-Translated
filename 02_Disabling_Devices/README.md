@@ -1,5 +1,7 @@
-# Table of Contents
+# Disabling devices
+This section contains guides to disable the following devices and features via SSDT Hotpatches:
 
 - [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Sevices)
+- [Disabling EHCx USB Controllers](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_EHCx)
 - [Disabling Unsupported GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_unsupported_GPUs)
 - [Disabling HDMI Audio on AMD GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_AppleGFXHDA)
