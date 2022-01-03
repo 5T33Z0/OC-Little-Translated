@@ -3,7 +3,7 @@
 - What it is: Adds Platform Power Management Controller Device
 - What it does: Improves Power Management (supposedly)
 - Supported CPU Families:
-  - **Desktop**: 7th and 8th Gen Intel (100 and 200-series mainboards only)
+  - **Desktop**: 6th to 8th Gen Intel (100 and 200-series mainboards only)
   - **Mobile/NUC**: 6th to 8th Gen Intel
 
 ## Instructions
