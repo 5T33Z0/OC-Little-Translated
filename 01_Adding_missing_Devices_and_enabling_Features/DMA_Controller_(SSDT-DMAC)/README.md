@@ -1,7 +1,4 @@
-# Add missing parts
-Although adding any of the missing parts listed in this chapter may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which is mandatory for Z390 Chipsets.
-
-## About `SSTD-DMAC`
+# DMA Controller (`SSTD-DMAC`)
 Adds Direct Memory Access Controller [**(DMA) Controller**](https://binaryterms.com/direct-memory-access-dma.html) device. Applicable to every SMBIOS, although necessity is questionable.
 
 ## Instructions
