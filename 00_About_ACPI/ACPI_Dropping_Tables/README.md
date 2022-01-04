@@ -28,7 +28,7 @@ For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a rel
 
 ### Example 1: dropping the DMAR Table
 
-On Z590 Boards for example, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled Vt-D and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller useless in macOS Monterey. In this case, DMAR has to be modified, Vt-Enabled and `DisableIOMapper` unselected.
+On some Z490/Z590 boards (usually Gigabyte) for example, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled VT-d and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller and PCIe Ethernet cards useless in macOS Monterey. In this case, DMAR has to be modified, VT-d enabled and `DisableIOMapper` disabled.
 
 Therefore, you might consider dropping the DMAR table completely and/or replace it with a modified version.
 
