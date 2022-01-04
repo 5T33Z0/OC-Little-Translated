@@ -6,13 +6,13 @@ Sound cards of earlier systems require High Precision Event Timer **HPET** **`PN
 
 In most cased, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **`PNP0B00`** or **TIMR** **`PNP0100`** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
-## Patch Principle
+## Patching Principle
 
 - Disable **HPET**, **RTC**, **TIMR**.
 - Create fake **HPE0**, **RTC0**, **TIM0**.
-- Remove `IRQNoFlags (){8}` of **RTC0** and `IRQNoFlags (){0}` of **TIM0** and add them to **HPE0**.
+- Remove `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and add them to **HPE0**.
 
-## Patch Method (NEW)
+## Patching Method (NEW)
 
 The old patch method described below is outdated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
@@ -39,11 +39,11 @@ Audio should work now (assuming AppleALC.kext is present along with the correct 
 If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 <details>
-<summary><strong>Old Method </strong>(kept for documentary purposes)</summary>
+<summary><strong>Old Method </strong>(kept for documentary purposes)</summary
 
-# Sound Card IRQ Patch (manual method, old)
+# Sound Card IRQ Patch (manual method)
 ## About
-Below you will find a guide for fixing IRQ issues manually if you don't want to use SSDTTime.
+Below you will find the guide for fixing IRQ issues manually if you don't want to use SSDTTime.
 
 ### Technical Background 
 Although mostly older platforms (mobile Ivy Bridge for example) are affected by `IRQ` issues which cause the on-board sound not to work since `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is), the problem can occur on recent platforms as well. 
@@ -56,62 +56,56 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen HPET can be bloc
 - To solve the above problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
 ## Patching principle
+To fix this issue, we use ***SSDT-HPET_RTC_TIMR-fix***, which does the following things:
 
-- Disable **HPET**, **RTC**, **TIMR** three parts.
-- Counterfeit three parts, i.e., **HPE0**, **RTC0**, **TIM0**.
-- Remove `IRQNoFlags (){8}` of **RTC0** and `IRQNoFlags (){0}` of **TIM0** and add them to **HPE0**.
+- Disables original **HPET**, **RTC**, **TIMR** devices,
+- Creates fake **HPE0**, **RTC0**, **TIM0** and finally,
+- Remove `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and adds them to **HPE0**.
 
 ## Patching method
+Use ***SSDT-HPET_RTC_TIMR-fix*** to disable **HPET**, **RTC** and **TIMR**
 
-### Disable **HPET**, **RTC** and **TIMR**
+### Disable **`HPET`**
+Usually, `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method by changing `HPAE`/`HPTE` to `0`:
 
-- Disbale **HPET**
-  
-    Normally `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method. For example:
-  
-    ```swift
-    External (HPAE, IntObj) /* or External (HPTE, IntObj) */
-    Scope (\)
+```swift
+External (HPAE, IntObj) /* or External (HPTE, IntObj) */
+Scope (\)
     {
-        If (_OSI ("Darwin"))
-        {
-            HPAE =0 /* or HPTE =0 */
-        }
+    	If (_OSI ("Darwin"))
+    	{
+    	HPAE =0 /* or HPTE =0 */
+    	}
     }
-    ```
+```
+**NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
-    **NOTE**: The `HPAE` variable within `_STA` may vary from machine to machine.
-  
-- Disable **RTC**  
-  
-    Earlier machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
-  
-    ```swift
-    Method (_STA, 0, NotSerialized)
-    {
-        If (_OSI ("Darwin"))
-        {
-            Return (0)
-        }
-        Else
-        {
-            Return (0x0F)
-        }
-    }
-    ```
-  
-- Disable **TIMR**
-  
-   Same as **RTC**
-  
-- Patch file: ***SSDT-HPET_RTC_TIMR-fix***
-  
+### Disable **`RTC`**
+Older machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
+
+```swift
+Method (_STA, 0, NotSerialized)
+{
+	If (_OSI ("Darwin"))
+	{
+		Return (0)
+	}
+		Else
+	{
+		Return (0x0F)
+	}
+}
+```
+### Disable **`TIMR`**
+(same as **RTC**)
+
+### Disable **`IPIC`**/ **`PIC`** (optional)
+Use ***SSDT-IPIC***. 
+
+If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device, adds a fake one instead and removes `IRQNoFlags{2}`. Adjust the scopes, device names and pci paths according to your `DSDT`.
+
 ## Caution
-
-- This patch cannot be used in conjunction with the following patches:
-  - ***SSDT-RTC_Y-AWAC_N*** of Binary Renaming and Preset Variables
-  - OC Official ***SSDT-AWAC***
-  - Counterfeit Devices" or OC's official ***SSDT-RTC0***
-  - ***SSDT-RTC0-NoFlags*** of `CMOS Reset Patch
-- The `LPC/LPCB` bus and `IPIC` name should be the same as the original `ACPI` part name.
-- If the three-in-one patch does not resolve the issue, try ***SSDT-IPIC*** with the three-in-one patch in place. Disable the ***IPIC*** device as described above for ***HPET***, ***RTC*** and ***TIMR***, then impersonate an ***IPI0*** device with the ***IPIC*** or ***PIC*** device contents in the original `DSDT`, and finally Remove `IRQNoFlags{2}`, refer to the example.
+- The names and paths of the `LPC/LPCB`bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in the original `DSDT`.
+- These patches cannot be used in conjunction with the following SSDTs:
+  - ***SSDT-RTC_Y-AWAC_N*** and OC's Official ***SSDT-AWAC***
+  - ***SSDT-RTC0*** and ***SSDT-RTC0-NoFlags***
