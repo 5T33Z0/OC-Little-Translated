@@ -32,7 +32,7 @@ Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer 
 	- **Option 1** (default): Generates `UTBMap.kext` which has to be used in tandem with `USBToolBox.kext` to make the whole construct work. It has the advantage that the mapping is SMBIOS-independent so it can be used with any SMBIOS.
 	- **Option 2** (uses native Apple classes): Hit "C" to enter the settings and then "N" to enable native Apple classes (AppleUSBHostMergeProperties).
 - Follow the [**instructions**](https://github.com/USBToolBox/kext#usage) to map your USB ports.
-- Generate eithet `UTBMap.kext` (option 1, requires `USBToolBox.kext` as well to work) or `USBMap.kext` (option 2, no additional kext necessary) and add it to your `EFI\OC\Kexts` folder and config.
+- Generate either `UTBMap.kext` (option 1, requires `USBToolBox.kext` as well to work) or `USBMap.kext` (option 2, no additional kext necessary) and add it to your `EFI\OC\Kexts` folder and config.
 - Remove `UTBDefault.kext` from Kexts folder and config.
 - Save and Reboot.
 
