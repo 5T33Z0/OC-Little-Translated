@@ -8,7 +8,7 @@ Since one physical USB 3 connector (the blue ones) actually supports 2 USB proto
 
 ## Removing the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable 26 Ports and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
+The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable 26 Ports and injet them and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
 
 ## Method 1: Mapping USB Ports with Tools (Intel only)
 
@@ -52,5 +52,5 @@ So the best way to declare USB ports is via ACPI since this method is OS-agnosti
 Follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via SSDT Table.
 
 ## Other Resources
-- Updated version of [USBInjectAll.kext](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky with 400 to 600-series mainboard support. Still only works up to macOS ≤ 11.2!
+- Updated version of [USBInjectAll.kext](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky with IOKit Personalities for the latest SMBIOSes and USB Controllers, includiong 400 to 600-series mainboards. But beware: this still only works up to macOS ≤ 11.2!
 - Kext and SSDT for fixing USB Wake issues: https://github.com/osy/USBWakeFixup.
