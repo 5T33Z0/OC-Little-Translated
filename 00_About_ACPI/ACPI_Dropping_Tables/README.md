@@ -72,8 +72,8 @@ After rebooting, do the following:
 ## Verifying that a Table has been replaced
 - Open maciASL
 - Select "File" > "New from ACPI"
-- Pick `DMAR`. The file Should be 104 in length and should no longer contain Reserved Memory Regions:</br>
-	![DMAR_nu](https://user-images.githubusercontent.com/76865553/139952980-a4d5d68e-5809-4c15-9fc1-eae88ac29d5f.png)</br>
+- Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions:</br>
+	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
 ## Note
 You should only import tables with maciASL if you know these are not patched ones. Otherwise, dump the ACPI Tables from the Clover boot menu using `F4`.
