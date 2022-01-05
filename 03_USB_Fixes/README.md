@@ -52,5 +52,5 @@ So the best way to declare USB ports is via ACPI since this method is OS-agnosti
 Follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via SSDT Table.
 
 ## Other Resources
-- Updated version of [USBInjectAll.kext](https://github.com/daliansky/OS-X-USB-Inject-All/releases) with 400 to 600-series mainboard support.
+- Updated version of [USBInjectAll.kext](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky with 400 to 600-series mainboard support.
 - Kext and SSDT for fixing USB Wake issues: https://github.com/osy/USBWakeFixup.
