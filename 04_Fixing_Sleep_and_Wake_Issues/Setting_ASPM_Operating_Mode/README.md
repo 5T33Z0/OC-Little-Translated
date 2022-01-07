@@ -31,7 +31,8 @@ You can manuall set the ASPM mode of 3rd party SATA and NVMe drives if it's not 
 
 - Open Hackintool
 - Click on the `PCIe` Tab
-- In the "ASPM" column, check the current state of your NVMe Disk – if it's "Disabled", you may change it.
+- check for NVMe disks (listed in thw sub-class column as "Non-Volatile Memory controller")
+- In the "ASPM" column, check the current state of the disk. If it's "Disabled", you may change it.
 - Right-click on the entry for the device and select "Copy Device Path"
 - Open your `config.plist` with OCAT or a Plist Editor.
 - Click on `DeviceProperties` and add an Entry to the "PCIList"
