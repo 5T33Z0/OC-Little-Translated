@@ -15,7 +15,6 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 Since this is a pretty new approach, I have to look into a bit more, but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
 
-
 ## How it works
 The latest version of **OpenCore Legacy Patcher** (OCLP) introduced a new set of booter and kernel patches which make use of macOS Monterey's virtualization capabilities (VMM) to spoof a supported Board-ID reported to Software Update.
 
@@ -48,8 +47,9 @@ Before you do the following make sure you have a working backup of your EFI stor
 - Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable Content Caching.
 - Save config
 - Reboot.
+- Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
-Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
+  Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 
 ### About the Booter Patches
 - **Patch 0**: Skips Hardware Board ID Check (enabled)
