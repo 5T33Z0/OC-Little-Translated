@@ -49,7 +49,7 @@ Before you do the following make sure you have a working backup of your EFI stor
 - Reboot
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
-Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
+Enjoy macOS Big Sur/Monterey with the correct SMBIOS for your CPU and Updates!
 
 ### About the Booter Patches
 - **Patch 0**: Skips Hardware Board ID Check (enabled)
