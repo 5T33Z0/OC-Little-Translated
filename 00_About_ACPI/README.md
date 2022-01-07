@@ -45,14 +45,14 @@ The following sections will help you to get a deeper understanding about ACPI, A
 
 ## ACPI Renames and Hotpatches
 
-Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI` etc., whenever possible. Especially renaming of underlined `MethodObj`(such as `_STA`, `_OSI`, etc.) should be done with caution. Nowadays, a lot of them are handled by kexts like **AppleALC** and **WhateverGreen** anyway.
+Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI`, etc. whenever possible. Especially renaming of methods (`MethodObj`) such as `_STA`, `_OSI`, etc. should be performed with caution. Nowadays, a lot of renames are handled by kexts like **AppleALC** and **WhateverGreen** anyway.
 
 ### General Guidelines**
 
-- No OS patches are required. For parts that do not work properly use customized SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
-- For Brightness Control Keys to work, some machines do not require extra patches. Use `PS2 Keyboard Mapping` instead to achieve the same effect.
-- For now, the vast majority of machines require the `0D6D Patch` to fix `Instant Wake` issues.
-- Almost all Laptops require additional device-specific renames and patches for the Battery Percentage Indicator to work. But recently, a new kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was introduced which enables macOS to read the battery status provided the Embedded Controller, so no patching is required. It doesn't work in all cases, but it's a good idea to give it a try first.
+- No OS patches are required. For parts that do not work properly use custom SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
+- For Brightness Control Keys to work, some machines do not require extra patches. You can use `PS2 Keyboard Mapping` instead to achieve the same.
+- For now, the vast majority of Notebooks require the `0D6D Patch` to fix `Instant Wake` issues.
+- Almost all Laptops require additional, device-specific renames and patches for the Battery Percentage Indicator to work. But recently, a new kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was introduced which enables macOS to read the battery status provided the Embedded Controller, so no more patching is required. It doesn't work in all cases, but it's a good idea to give it a try first.
 - Most ThinkPad Laptops require the `PTSWAKTTS` patch to stop the Power Button LED from pulsing after waking up from sleep.
 - For machines with a dedicated Sleep Button: if pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep Correction Method` to fix it.
 
