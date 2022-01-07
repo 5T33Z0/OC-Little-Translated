@@ -7,9 +7,9 @@
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
 
 <details>
-<summary><strong>About this Translation</strong> (click to reveal content)</summary>
+<summary><strong>About the translation</strong> (click to reveal content)</summary>
 
-## About this Translation
+## About the translation
 
 - AI-based translation using deepL, google translator as well as manual copyediting.
 - Restructured the repository into more plausible (sub-)sections and categories based on types of issues, components, methods, etc.
