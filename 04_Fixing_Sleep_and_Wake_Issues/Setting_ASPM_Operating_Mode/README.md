@@ -80,7 +80,7 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
       }
   }
   ```
-:bulb:**Note1**: `_SB.PCI0.RP05` = path of the Xiaoxin PRO13 wireless card.
+:bulb:**Note1**: `_SB.PCI0.RP05` = path of the Xiaoxin PRO13 wireless card.</br>
 :bulb:**Note2**: L1 = 1 in `\_SB.PCI0.RP05.L1 = 1` actually sets ASPM to `L0s/L1`, whereas L1 = 0 in `\_SB.PCI0.RP05.L1 = 0` sets ASPM to `L1`.
 
 ## :warning: Caution
