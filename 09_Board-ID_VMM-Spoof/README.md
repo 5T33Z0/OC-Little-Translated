@@ -1,4 +1,4 @@
-# Using unsupported Board-IDs with macOS Monterey
+# Using unsupported Board-IDs with macOS BigSur/Monterey
 A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
 
 ## Use Cases
