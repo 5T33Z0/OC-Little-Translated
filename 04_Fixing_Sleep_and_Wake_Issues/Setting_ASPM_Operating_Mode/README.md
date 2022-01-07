@@ -37,7 +37,7 @@ There are two possible method of setting the correct ASPM mode: via DeviceProper
 ### Method 2: Using SSDT Patches
 An SSDT patch can also set the ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
 
-- The patch principle is the same as for `Disabling PCI Devices`, so please refer to [it](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
+- The patch principle is the same as for [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
 
 ```swift
