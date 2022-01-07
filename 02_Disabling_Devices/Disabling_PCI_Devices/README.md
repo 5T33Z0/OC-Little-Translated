@@ -2,12 +2,12 @@
 
 ### Description
 
-Sometime we want to disable a PCI device. For example, the HDMI Audio device of dicrete graphics cards or SD Cards Expansions with PCI Bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
+Sometimes we want to disable a PCI device. For example, the HDMI Audio device of dicrete graphics cards or SD Card Expansion Slot with PCI Bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
 
 - These devices have the following characteristics:
   - It is a **child device** of a **parent PCI device**
   - The **parent device** defines some variables of type `PCI_Config`or `SystemMemory`, where bit `D4` of the data at offset `0x55` is the device operational property
-  - **Subdevice** address: `Name (_ADR, Zero)`  
+  - It has a **Subdevice** address: `Name (_ADR, Zero)`  
 
 ### Device name
 
