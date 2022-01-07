@@ -44,12 +44,12 @@ Before you do the following make sure you have a working backup of your EFI stor
 - Open it with a plist editor
 - Copy the patches located under Booter > Patch into clipboard and paste them into your OpenCore config at the same location
 - Do the same for the Kernel Patches. Enable additional patches if required (for Sandy Bridge for example)
-- Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable Content Caching.
-- Save config
-- Reboot.
+- Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+- Save the config
+- Reboot
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
-  Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
+Enjoy macOS Monterey with the correct SMBIOS for your CPU and Updates!
 
 ### About the Booter Patches
 - **Patch 0**: Skips Hardware Board ID Check (enabled)
