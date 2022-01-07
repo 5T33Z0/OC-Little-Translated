@@ -6,7 +6,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a correct Board-ID to Apple Update servers which fixes the issue. While a lot of OpenCore users face this issue it's not a problem in Clover, though since you can enter a HardwareTarget.
 
 ## System Requirements
-**Minimum macOS**: Big Sur 11.3 or newer (`MinKernel` 20.4+)</br>
+**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
 **CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
 - Sandy Bridge (need additional Sur Plus and RDRAND patches)
