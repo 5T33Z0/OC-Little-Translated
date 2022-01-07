@@ -4,18 +4,18 @@
 
 ASPM, **Active State Power Management**, is a power link management scheme supported at the system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle.
 
-- ASPM operates in several modes:
-  - **`L0`** – Normal mode.
+- ASPM operates in several modes or states:
+  - **`L0`** – Active state: All PCIe transactions and operations are enabled.
   - **`L0s`** – Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
-  - **`L1`** – Low power standby mode. L1 further reduces power consumption compared to L0s. However, the time to enter or exit the idle state is longer than L0s.
-  - **`L2`** – Auxiliary power mode. Omitted.
+  - **`L1`** – Higher latency, lower power standby state. L1 further reduces power consumption compared to `L0s`. However, the time to enter and exit this state takes longer than in L0s.
+  - **`L2`** – Auxiliary-powered link, deep-energy-saving state: In `L2`, the component’s main power supply inputs and reference clock inputs are shut off. Not covered here.
 - For machines with `AOAC` technology, try to change the ASPM mode of PCI devices such as `Wireless NIC`, `SSD`, etc. to reduce the power consumption of the machine.
 - Changing the ASPM mode of PCI devices may solve issues of some third-party devices not being driven correctly during boot. For example, the SD Card Reader of RTS525A model may not be recognized in `L0s` mode (default mode). After changing it to `L1`, it is recognized correctly.
 
 ## Injecting ASPM operation Mode
 There are two possible method of setting the correct ASPM mode: via DeviceProperties or with SSDTs.
 
-### Method 1: Injection via `DeviceProperties` (preferred method):
+### Method 1: Injecting ASPM mode via `DeviceProperties` (recommended):
 
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
 - **Parent Device**
@@ -26,15 +26,36 @@ There are two possible method of setting the correct ASPM mode: via DeviceProper
 	- L0s/L1 mode: `pci-aspm-default` = `03010000` [data]
 	- L1 mode: `pci-aspm-default` = `02010000` [data]
 	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
-- **Example**:
-	The default ASPM mode of Xiaoxin PRO13 wireless card is L0s/L1 and the device path is: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)`. According to the manual above, changing the ASPM from L0s/L1 to L1 by injecting `pci-aspm-default` would result in:
 
-	|PCI Path|Device Property [DATA]|Description
-	|--------|----------------------|----------
-	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000|L0s/L1 (default)
-	PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000|L1 (modified)
+#### Example 1: Changing the ASPM mode of an NVMe Disk
+- Open Hackintool
+- Click on the `PCIe` Tab
+- In the "ASPM" column, check the current state of your NVMe Disk – if it's "Disabled", you may change it.
+- Right-click on the entry for the device and select "Copy Device Path"
+- Open your `config.plist` with OCAT or a Plist Editor.
+- Click on `DeviceProperties` and add an Entry to the "PCIList"
+- Paste in the Device path, in this example: `PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)`
+- Next, add the following Properties:
+	|Key|Class|Value|
+	|---|-----|-----|
+	built-in|Data|`01000000` 
+	pci-aspm-default|Data |`03010000` (for L0s/L1 mode) or `02010000` (for L1)
+	device_type|String|Non-Volatile memory controller (optional key)
+	model|String|Name of the Drive (optional key)
+- Save the config, reboot
+- In hackintool, check the if the ASPM state for the NVMe Disk has changed.
 
-### Method 2: Using SSDT Patches
+**NOTE**: if you are uncertain which ASPM states are supported by your NVMe Disk, you could use Acidanthera's [NVMeFix kext](https://github.com/acidanthera/NVMeFix) instead, which provides "Autonomous Power State Transition to reduce idle power consumption of the controller".
+
+#### Example 2: Changing the ASPM mode of a WiFi Card
+The default ASPM mode of Xiaoxin PRO13 wireless card is `L0s/L1`. Folowing the instructions above, changing the ASPM from `L0s/L1` to `L1` by injecting `pci-aspm-default` would result in:
+
+|PCI Path|Device Property [DATA]|Description
+|--------|----------------------|----------
+PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02000000|L0s/L1 (default)
+PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000|L1 (modified)
+
+### Method 2: Injecting ASPM via SSDT
 An SSDT patch can also set the ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
 
 - The patch principle is the same as for [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
