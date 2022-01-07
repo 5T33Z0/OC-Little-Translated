@@ -61,31 +61,27 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
 
 - The patch principle is the same as for [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
-
-	```swift
-DefinitionBlock ("", "SSDT", 2, "OCLT", "ASPM", 0)
-{
-    External (_SB.PCI0.RP05, DeviceObj)
-    Scope (_SB.PCI0.RP05)
-    {
-        OperationRegion (LLLL, PCI_Config, 0x50, 1)
-        Field (LLLL, AnyAcc, NoLock, Preserve)
-        {
-            L1,   1
-        }
-    }
-    
-    Scope (\)
-    {
-        If (_OSI ("Darwin"))
-        {
-            \_SB.PCI0.RP05.L1 = Zero   //Set ASPM = L1
-        }
-    }
-}	```           
-	```
+  ```swift
+  External (_SB.PCI0.RP05, DeviceObj)
+  Scope (_SB.PCI0.RP05)
+  {
+      OperationRegion (LLLL, PCI_Config, 0x50, 0x01)
+      Field (LLLL, AnyAcc, NoLock, Preserve)
+      {
+          L1,   1
+      }
+  }
+  
+  Scope (\)
+  {
+      If (_OSI ("Darwin"))
+      {
+          \_SB.PCI0.RP05.L1 = Zero  /* Set ASPM = L1 */
+      }
+  }
+  ```
 **Note 1**: `_SB.PCI0.RP05` = path of the Xiaoxin PRO13 wireless card is   
-**Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
+**:bulb:Note 2**: L1=1 in `\_SB.PCI0.RP05.L1 = 1` actually sets ASPM to `L0s/L1`, whereas L1=0 in `\_SB.PCI0.RP05.L1 = 0` sets ASPM to `L1`.
 
 ## :warning: Caution
 If you notice abnormal behavior of the system after changing the ASPM mode of a device, please restore the original ASPM mode and reboot the system.
