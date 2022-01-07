@@ -167,7 +167,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>21.1.0</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
@@ -203,7 +203,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>21.1.0</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
