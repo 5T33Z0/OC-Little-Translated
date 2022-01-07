@@ -2,19 +2,20 @@
 
 ## Description
 
-Sometimes we want to disable a PCI device. For example, the HDMI Audio Device of a discrete GPU or SD Card Readers attached via PCIe Bus are usually not driven, and even if they are driven, they hardly work. In this case, we can disable this device with a custom SSDT patch.
+In some cases you may want to disable a PCI device. For example, the HDMI Audio Device of a discrete GPU or a SD Card Reader attached via PCIe which is not working under macOS. You can disable PCI devices with a custom SSDT patch.
 
-- These devices have the following characteristics:
-  - It is a **child device** of a **parent PCI device**
-  - The **parent device** defines some variables of type `PCI_Config`or `SystemMemory`, where bit `D4` of the data at offset `0x55` is the device operational property
-  - It has a **Subdevice** address: `Name (_ADR, Zero)`  
+These devices have the following characteristics:
+
+- It is a **child device** of a **parent PCI device**
+- The **parent device** defines some variables, such as `PCI_Config` or `SystemMemory`, where bit `D4` of the data at offset `0x55` is the device operational property
+- It has a **Subdevice** address: `Name (_ADR, Zero)`  
 
 ## Device name
 
-- The **child device** name on newer machine is **`PXSX`**; **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**, etc.
-- Early ThinkPad machines use **child devices** with the name **`SLOT`** or **none**; **parent device** with the name **`EXP1`**, **`EXP2`**, **`EXP3`**, etc.
-- The Laptop's built-in wireless network card belongs to such a device.
+- The **child device** name on newer machines usually is **`PXSX`**; whereas the **parent device** name is **`RP01`**, **`RP02`**, **`RP03`**, etc.
+- Early ThinkPad machines use **child devices** with the name **`SLOT`** or **none** instead; the **parent device** name is **`EXP1`**, **`EXP2`**, **`EXP3`**, etc.
 - Other machines may use other names.
+- A Laptop's built-in wireless network card belongs to such a device.
 
 ## SSDT Disable Patch Example
 
@@ -53,6 +54,6 @@ Sometimes we want to disable a PCI device. For example, the HDMI Audio Device of
 ## Caution
 
 - If there are multiple **child devices** to a **parent device**, please **use this method with caution**.
-- When using it, replace `RP01` in the example with the name of the **parent** to which the disabled device belongs, as in the example.
-- If the disabled device already includes the `_STA` method, ignore the *possible start* to *possible end* content, refer to the comments of the example.
-- This method does not disconnect the device from the PCI Bus.
+- When using the SSDT, replace `RP01` in the example with the name of the **parent** device to which the disabled child device belongs to, as shown in the example.
+- If the disabled device already includes the `_STA` method, ignore the content between the *possible start* to *possible end* markers of the example.
+- This method does not release the device from the PCI Bus.
