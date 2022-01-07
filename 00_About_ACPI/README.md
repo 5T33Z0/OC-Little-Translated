@@ -47,7 +47,7 @@ The following sections will help you to get a deeper understanding about ACPI, A
 
 Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI`, etc. whenever possible. Especially renaming of methods (`MethodObj`) such as `_STA`, `_OSI`, etc. should be performed with caution. Nowadays, a lot of renames are handled by kexts like **AppleALC** and **WhateverGreen** anyway.
 
-### General Guidelines**
+### General Guidelines
 
 - No OS patches are required. For parts that do not work properly use custom SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
 - For Brightness Control Keys to work, some machines do not require extra patches. You can use `PS2 Keyboard Mapping` instead to achieve the same.
@@ -58,7 +58,7 @@ Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to 
 
 You may need to disable or enable certain components in order to solve specific problems.
 
-### In general, use:**
+### In general, use:
 
 - `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems these patches should be used with **caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
 - `Fake Devices` since this method is very reliable. **Recommended**. 
