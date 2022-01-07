@@ -16,7 +16,6 @@ ASPM, **Active State Power Management**, is a power link management scheme suppo
 There are two possible method of setting the correct ASPM mode: via DeviceProperties or with SSDTs.
 
 ### Method 1: Injecting ASPM mode via `DeviceProperties` (recommended):
-
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
 - **Parent Device**
 	- L0s/L1 Mode: `pci-aspm-default` = `03000000` [data]
@@ -28,6 +27,8 @@ There are two possible method of setting the correct ASPM mode: via DeviceProper
 	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
 
 #### Example 1: Changing the ASPM mode of an NVMe Disk
+You can manuall set the ASPM mode of 3rd party SATA and NVMe drives if it's not detected corretly by macOS:
+
 - Open Hackintool
 - Click on the `PCIe` Tab
 - In the "ASPM" column, check the current state of your NVMe Disk – if it's "Disabled", you may change it.
@@ -61,7 +62,7 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
 - The patch principle is the same as for [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
 
-```swift
+	```swift
 DefinitionBlock ("", "SSDT", 2, "OCLT", "ASPM", 0)
 {
     External (_SB.PCI0.RP05, DeviceObj)
@@ -82,11 +83,10 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ASPM", 0)
         }
     }
 }	```           
-```
-**Note 1**: Xiaoxin PRO13 wireless card path is `_SB.PCI0.RP05`  
+	```
+**Note 1**: `_SB.PCI0.RP05` = path of the Xiaoxin PRO13 wireless card is   
 **Note 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
 
-## Caution
+## :warning: Caution
+If you notice abnormal behavior of the system after changing the ASPM mode of a device, please restore the original ASPM mode and reboot the system.
 
-- ***Hackintool*** allows you to view the device ASPM operating mode.
-- After changing ASPM, please restore ASPM if an abnormal condition occurs.
