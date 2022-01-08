@@ -21,9 +21,7 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 6. Open `patches_OC.plist` and copy the included patches to your `config.plist` (to the same section, of course).
 7. Save and Reboot. Done. 
 
-**NOTE**
-
-If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
+**NOTE**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
 Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
