@@ -1,13 +1,8 @@
-## Essential Hackintosh Tools
+# Utilities and Resources
 Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 
-### Resources
-- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
-- [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101) – Includes explanations about the I/O Registry.
-
-___
-### Apps and Tools
-#### Bootloaders
+## Apps and Tools
+### Bootloaders
 - [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
 - [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
 - [**Clover Releases**](https://github.com/CloverHackyColor/CloverBootloader/releases)
@@ -15,7 +10,7 @@ ___
 - [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser)
 
 ___
-#### Cross-Platform
+### Cross-Platform
 - [**OpenCore Auxiliary Tools (OCAT)**](https://github.com/ic005k/QtOpenCoreConfig) – Recommended Configurator for editing the OpenCore `config.plist`. Migrates config.plist to the latest form when saving. So no more tedious manual updating of the config is required. Can update kexts and OpenCore files to the latest version. Basically, it's the only editor you need.
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware Plist Editor
 - [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
@@ -28,7 +23,7 @@ ___
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
 
 ___
-#### macOS
+### macOS
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP partition
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
@@ -38,6 +33,9 @@ ___
 - [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS, creating an USB Installer and changing the Update Seed which can help resolving issues with system updates
 
 ___
-#### Windows
+### Windows
 Suggest some. Otherwise refer to "Cross-Platform" Section.
 
+## Resources
+- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
+- [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101) – Includes explanations about the I/O Registry.
