@@ -22,7 +22,7 @@ These patches skip the Board-ID check of the used hardware, redirecting it to Op
 
 This allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS Monterey. This not only improves CPU Power Management - especially on Laptops – it also allows installing, booting and updating macOS Monterey with otherwise unsupported hardware:
 
-> Parrotgeek1's VMM patch set would force kern.hv_vmm_present to always return True. With hv_vmm_present returning True, both OSInstallerSetupInternal and SoftwareUpdateCore will set the VMM-x86_64 board ID while the rest of the OS will continue with the original ID.
+> Parrotgeek1's VMM patch set would force kern.hv_vmm_present to always return True. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the VMM-x86_64 board ID while the rest of the OS will continue with the original ID.
 >
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
 >
