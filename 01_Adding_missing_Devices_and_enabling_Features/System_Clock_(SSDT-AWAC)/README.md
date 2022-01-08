@@ -124,12 +124,12 @@ This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using Ei
     }
 ``` 
 
-**Applicable to**: Systems with an active `AWAC` Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,x/MacBookPro16,x`, `iMac19,x`, `iMac20,x` and `iMacPro1,1`
+**Applicable to**: Systems with an active `AWAC` Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,x/MacBookPro16,x`, `iMac19,x`, `iMac20,x`, `iMacPro1,1` and `MacPro7,1`. In general, every system with an Intel Kaby Lake or newer CPU, since `HPET` or `AppleHPET` (PNP0103) is an optional legacy device kept for backward compatibility. It might improve multithread performance, though. I suggest you perform some CPU Benchmark comparison tests in Geekbench.
 
 **Procedure**: 
 
 - In `DSDT`, search for `ACPI000E`. 
-- If present, check if it belongs to `Device (AWAC)`. 
+- If present, check if it belongs to `Device (AWAC)`.
 - If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
 - If all above conditions are met, you can add `SSDT-AWAC2_ART.dsl`
 
