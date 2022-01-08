@@ -130,7 +130,11 @@ This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using Ei
 - In `DSDT`, search for `ACPI000E`. 
 - If present, check if it belongs to `Device (AWAC)`.
 - If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
-- If all above conditions are met, you can add `SSDT-AWAC2_ART.dsl`
+- If all above conditions are met, you can add `SSDT-AWAC2_ARTC.aml` to your ACPI Folder and config.plist.
+- Save and reboot. 
+- Open IORegistryEdit and check for the presence of:
+	-  `ARTC`: should be present
+	-  `HPET`: should not be present
 
 **Explanation**: This SSDT actually makes use of `AWAC` Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
 
