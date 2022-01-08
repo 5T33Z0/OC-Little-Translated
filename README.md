@@ -6,6 +6,8 @@
 ## ABOUT
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
 
+This repo provides additional ACPI hotpatches and guides complementary to the ones provided by the OpenCore Package and Dortania's OpenCore Install Guide. It covers all angles of modern hackintoshing. From adding and enabling devices and features, fixing USB and Sleep issues, laptop-specific fixes, GPU optimizations and more (check the TOC for details). Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques can be apllied using the Clover Bootloader as well.
+
 <details>
 <summary><strong>About the translation</strong> (click to reveal content)</summary>
 
