@@ -22,6 +22,7 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 7. Save and Reboot. Done. 
 
 **NOTE**
+
 If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
