@@ -26,7 +26,7 @@ This allows using the correct SMBIOS for a given CPU family even if it is not of
 >
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
 >
-> **Source**: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543
+> **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
 The patching consists of two stages:
 
