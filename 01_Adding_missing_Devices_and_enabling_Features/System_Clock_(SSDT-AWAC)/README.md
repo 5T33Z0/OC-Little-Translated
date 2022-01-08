@@ -1,4 +1,4 @@
-# Fixing the System Clock (SSDT-AWAC)
+# Fixing the System Clock (`SSDT-AWAC`)
 
 Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
 
