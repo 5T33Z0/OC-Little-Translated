@@ -148,7 +148,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 	-  `ARTC`: should be present
 	-  `HPET`: should not be present
 
-#### HPET or no HPET? 
+#### To HPET, or not to HPET?
 Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
 ___
 
