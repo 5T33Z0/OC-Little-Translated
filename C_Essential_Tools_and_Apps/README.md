@@ -3,7 +3,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 
 ### Resources
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
-- [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101)
+- [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101). Includes explanations about the I/O Registry.
 
 ___
 ### Apps and Tools
