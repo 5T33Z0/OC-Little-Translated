@@ -26,7 +26,7 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 ## Manual patching methods
 Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
 
-Below you'll find a code snippet of how "Device (RTC)" and "Device (AWAC)" might be defined in your `DSDT`:
+Below you'll find a code snippet of how `Device (RTC)` and `Device (AWAC)` might be defined in your `DSDT`:
 
 ```swift
 Device (RTC)
@@ -76,14 +76,26 @@ Scope (\)
 }
 ``` 
 **Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
+___
 
-### Method 2: using `SSDT-AWAC2_ARTC` 
+### Method 2: using `SSDT-AWAC-ARTC`
+
+For Intel Kaby Lake and newer.
+
+- **Seen on SMBIOS**: 
+	- `MacBookAir8,1` and `MacBookAir9,1`, 
+	- `MacBookPro15,x` and `MacBookPro16,x`,
+	- `iMac19,x` and `iMac20,x`, 
+	- `iMacPro1,1` and `MacPro7,1`. 
+
 This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of a `RTC` instead:
 
 ```Swift
+DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
+{
     External (_SB_.PCI0.LPCB, DeviceObj)
     External (HPTE, IntObj)
-    External (STAS, IntObj)
+    External (STAS, FieldUnitObj)
 
     Scope (\)
     {
@@ -121,22 +133,24 @@ This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using Ei
             }
         }
     }
+}
 ``` 
-
-**Applicable to**: Systems with an active `AWAC` Clock using SMBIOS `MacBookAir8,1/MacBookAir9,1`, `MacBookPro15,x/MacBookPro16,x`, `iMac19,x`, `iMac20,x`, `iMacPro1,1` and `MacPro7,1`. In general, every system with an Intel Kaby Lake or newer CPU, since `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multithread performance, though. I suggest you perform some CPU Benchmark comparison tests in Geekbench.
+**Explanation**: This SSDT makes use of `AWAC` clock by attaching it to `ARTC` (Apple Realtime Clock, EisaID `PNP0B00`) in I/O Registry. If `HPET` is present and `AWAC` is active (while RTC is disabled), you can use this SSDT. Although the PCI paths should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the operating system is not macOS, method `_STA` returns zero which enables the `AWAC`.
 
 **Procedure**: 
 
-- In `DSDT`, search for `ACPI000E`. 
-- If present, check if it belongs to `Device (AWAC)`.
-- If so, check if the `STAS` == `Zero` (refer to the code example from the beginning).
-- If all above conditions are met, you can add `SSDT-AWAC2_ARTC.aml` to your ACPI Folder and config.plist.
+- In `DSDT`, check if `Device HPET` or `PNP0103` is present. If not, you don't need this patch!
+- Next, search for `Device (AWAC)` or `ACPI000E`. 
+- If present, check if `STAS` == `Zero` (refer to the code example from the beginning).
+- If all of the above conditions are met, you can add `SSDT-AWAC-ARTC.aml` to your ACPI Folder and `config.plist`.
 - Save and reboot. 
-- Open IORegistryEdit and check for the presence of:
+- In IORegistryExplorer, verify the following:
 	-  `ARTC`: should be present
 	-  `HPET`: should not be present
 
-**Explanation**: This SSDT actually makes use of `AWAC` Device by attaching it to the ARTC (Apple Realtime Clock) with EisaID `PNP0B00`. So if AWAC is active in your `DSDT` (and RTC is disabled), you can use this. Although the PCI Paths used in the file should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the OS is not macOS Method `_STA` returns zero which enables the AWAC clock again.
+#### HPET or no HPET? 
+Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multithread performance, though. On the other hand, there are reports about it reducing frame rate while gaming. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
+___
 
 ### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
 Disables AWAC where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
