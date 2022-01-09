@@ -44,7 +44,7 @@ The attached plist contains these patches to make this work and a few more.
 - Open it with a plist editor
 - Copy the patches located under Booter > Patch over to your OpenCore config to the same section.
 - Do the same for the Kernel Patches. Enable additional patches if required (SurPlus patches for Sandy Bridge for example).
-- Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+- Optional: add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
 - Save the config
 - Reboot
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
