@@ -1,4 +1,4 @@
-//Enable RTC when "_STA=Zero" is disabled in DSDT Bios.
+//Enable RTC when "_STA=Zero" is disabled in system DSDT.
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTCSTA0F", 0)
 {
     External (_SB_.PCI0.LPCB.RTC_._STA, UnknownObj)
