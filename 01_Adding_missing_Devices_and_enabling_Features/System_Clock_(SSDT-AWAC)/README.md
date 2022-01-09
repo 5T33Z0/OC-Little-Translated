@@ -75,7 +75,7 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
+**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`. This hotpatch is identical to SSDT-AWAC-DISABLE included in the OpenCorePkg.
 ___
 
 ### Method 2: using `SSDT-AWAC-ARTC`
@@ -89,7 +89,7 @@ Appllicable to SMBIOS:
 - iMacPro1,1 (Xeon W)
 - macPro7,1 (Xeon W)
 
-This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of a `RTC` instead:
+This method disables `AWAC` and `HPET` and adds `RTC` with EisaId ("PNP0B00") "disguised" as `ARTC` so to speak:
 
 ```Swift
 DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
