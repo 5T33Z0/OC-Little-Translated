@@ -38,7 +38,7 @@ I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Lega
 The attached plist contains these patches to make this work and a few more.
 
 ## Applying the Patches
-:warning:Before applying these pathces, make sure you have a working backup of your EFI stored on a FAT32 formatted USB stick to boot your PC from just in case something goes wrong!
+:warning: Before applying these pathces, make sure you have a working backup of your EFI stored on a FAT32 formatted USB stick to boot your PC from just in case something goes wrong!
 
 - Download the attached .plist
 - Open it with a plist editor
