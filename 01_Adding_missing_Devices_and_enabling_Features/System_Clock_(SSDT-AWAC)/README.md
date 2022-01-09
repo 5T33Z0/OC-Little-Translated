@@ -38,7 +38,7 @@ Device (RTC)
             {
                 Return (0x0F) // Turn RTC ON
             }
-            Else 			  // if STAS ≠ 1
+            Else 	      // if STAS ≠ 1
             {
                 Return (Zero) // Turn RTC OFF
             }
@@ -54,7 +54,7 @@ Device (AWAC)
             {
                 Return (0x0F) 	// enable AWAC
             }
-            Else				// if STAS ≠ 0
+            Else		// if STAS ≠ 0
             {
                 Return (Zero)	// disable AWAC
             }
@@ -82,11 +82,12 @@ ___
 
 For Intel Kaby Lake and newer.
 
-- **Seen on SMBIOS**: 
-	- `MacBookAir8,1` and `MacBookAir9,1`, 
-	- `MacBookPro15,x` and `MacBookPro16,x`,
-	- `iMac19,x` and `iMac20,x`, 
-	- `iMacPro1,1` and `MacPro7,1`. 
+Appllicable to SMBIOS:
+- macBookAir9,x (10th Gen Ice Lake)
+- macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
+- iMac19,1 iMac20,x (10th Gen)
+- iMacPro1,1 (Xeon W)
+- macPro7,1 (Xeon W)
 
 This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of a `RTC` instead:
 
@@ -135,8 +136,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
     }
 }
 ``` 
-**Explanation**: This SSDT makes use of `AWAC` clock by attaching it to `ARTC` (Apple Realtime Clock, EisaID `PNP0B00`) in I/O Registry. If `HPET` is present and `AWAC` is active (while RTC is disabled), you can use this SSDT. Although the PCI paths should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the operating system is not macOS, method `_STA` returns zero which enables the `AWAC`.
-
 **Procedure**: 
 
 - In `DSDT`, check if `Device HPET` or `PNP0103` is present. If not, you don't need this patch!
