@@ -1,4 +1,4 @@
-# Enabling General-purpose I/O (`SSDT-GPIO`)
+# Enabling general-purpose I/O devices (`SSDT-GPIO`)
 The presence of a `GPIO` device is usually required for a I2C TrackPads to function properly.
 
 ##Patching Principle
