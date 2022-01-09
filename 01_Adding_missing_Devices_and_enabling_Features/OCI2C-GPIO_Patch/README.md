@@ -1,5 +1,4 @@
-# GPI0 patch
-
+# Enabling General-purpose I/O (`SSDT-GPIO`)
 ## Description
 
 - If `GPI0` should be enabled, its `_STA` must `Return (0x0F)`.
