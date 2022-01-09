@@ -1,4 +1,4 @@
-# Fake RTC (for 300-Series only)
+# Fake RTC (for 300-series mainboards only)
 
 ## Overview
 
