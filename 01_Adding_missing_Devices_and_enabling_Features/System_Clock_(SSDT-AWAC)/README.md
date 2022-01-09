@@ -165,7 +165,7 @@ Scope (\)
       }
   }
 ```
-**NOTE**: These methods only works if RTC is enabled in the original DSDT. A lot of 300-series chipsets like Z390 have RTC disabled though, so you have to add a fake RTC first –see chapter "System_Clock_(SSDT-RTC0)".
+**NOTE**: These methods only works if RTC is enabled in the original DSDT. A lot of 300-series chipsets like Z390 have RTC disabled though, so you have to add a fake RTC first – see chapter [System_Clock_(SSDT-RTC0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)).
 
 <details>
 <summary><strong>Old Methods (kept for documentary purposes)</strong></summary>
