@@ -32,7 +32,7 @@ Device (RTC)
 To enable an existing but otherwise disabled `RTC` for macOS only, you can add `SSDT-RTC_STA0F.aml`. It changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC is enabled. This way you don't have to add a fake RTC:
 
 ```swift
-DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "HACK", "RTCSTA0F", 0)
 {
     External (_SB_.PCI0.LPCB.RTC_._STA, UnknownObj)
 
@@ -83,8 +83,10 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
     }
 }
 ```
-## NOTES
+## NOTES and CREDITS
 
 - This patch only applies to 300-series chipsets.
 - This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in your `DSDT` is `0`.
 - The device path used in the sample patch is `LPCB`, please adjust it accordingly to the name used in your `DSDT` (either `LPC` or `LPCB`).
+- ***SSDT-RTC0*** by Acidanthera (included in OpenCorePkg)
+- ***SSDT-RTC_STA0F*** by Baio1977
