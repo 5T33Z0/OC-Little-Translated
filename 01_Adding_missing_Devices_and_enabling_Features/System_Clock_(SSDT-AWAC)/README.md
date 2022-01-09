@@ -496,6 +496,5 @@ Using this method will result in an error (non-ACPI Error) by invalidating other
 </details>
 
 ## Credits
-- **Acidanthera**
 - **daliansky** for `SSDT-AWAC.dsl`
 - **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC-ARTC`
