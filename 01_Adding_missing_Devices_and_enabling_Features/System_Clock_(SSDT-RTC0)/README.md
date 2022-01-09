@@ -48,7 +48,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
 Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
 
 ```swift
-DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
+DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
 
