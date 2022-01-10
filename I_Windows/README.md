@@ -1,8 +1,7 @@
-# Adding Windows entry to OpenCore Bootmenu
-This guide is for adding a Windows boot menu entry so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example, which excludes a lot of unnecessary file systems and interfaces from scanning:
+# Adding a Windows entry to OpenCore boot menu
+This guide is for adding a Windows boot menu entry so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example, which excludes a lot of  file systems and interfaces from scanning:
 
 ![scanpol](https://user-images.githubusercontent.com/76865553/148823944-b4573389-520f-4816-a639-dc8a9a4ce962.png)
-
 **Source**: https://oc-scanpolicy.vercel.app/
 
 ## Prerequisites
@@ -11,23 +10,23 @@ In order to add the Microsoft Bootloader to OpenCore's boot menu, we need to fin
 ### Finding the PCI path of the Windows Bootloader
 1. Add `OpenShell.efi` to EFI/OC/Tools folder and `config.plist`.
 2. Reboot the system
-3. In OC Menu, run `OpenSheel.efi`: </br>![01](https://user-images.githubusercontent.com/76865553/148824001-ba1d1cc2-3f10-4fdb-b9eb-53240c1abec5.png)
-4. Once OpenShell is up, we need to find the EFI folder containing a "Microsoft" folder. </br>Enter `ls fs1:EFI`
-5. If it returns `ls: File not Found - 'fs1'`, we continue searching
-6. Enter `ls fs2:EFI`, `ls fs3:EFI`, etc., until you find it.
-7. In my case it was found when looking for `ls fs8:EFI`:</br>![found](https://user-images.githubusercontent.com/76865553/148824053-5987d044-1081-46f9-bc46-77efaf55bd00.png)
-8. Type `fs8` and hit `Enter` to select the filesystem
-9. Next, type `map > map.txt `and hit `Enter` &rarr; This saves a list of the PCI devices as a .txt file on the selected EFI Partition (of the Windows Disk, in this case)
-10. Type Exit.
-11. Boot back into macOS
+3. From the OC boot menu, select `OpenSheel.efi`: </br>![01](https://user-images.githubusercontent.com/76865553/148824001-ba1d1cc2-3f10-4fdb-b9eb-53240c1abec5.png)
+4. Once OpenShell is up, we need to find the EFI folder containing the "Microsoft" folder.
+5. Enter `ls fs1:EFI`
+6. If it returns `ls: File not Found - 'fs1'`, continue searching. Enter `ls fs2:EFI`, `ls fs3:EFI`, etc., until you find it.
+7. In my case it was found when at `ls fs8:EFI`:</br>![found](https://user-images.githubusercontent.com/76865553/148824053-5987d044-1081-46f9-bc46-77efaf55bd00.png)
+9. Type `fs8` and hit `Enter` to select the filesystem
+10. Next, type `map > map.txt `and hit `Enter` &rarr; This saves a list of the PCI devices as a text file on the selected EFI Partition of the Windows Disk.
+11. Type `exit` and hit `Enter`. You will return to the bootpicker.
+12. Boot back into macOS.
 
 ## Adding the PCI path to the Windows bootloader
 Once you return back to macOS, do the following:
 
 1. Mount the EFI Partion of the Windows Disk
-2. Copy the `map.txt` file included in the root folder of the EFI partition to your Desktop
+2. Copy the `map.txt` file located in the root folder of the EFI partition to your Desktop
 3. Unmount the EFI partition
-4. Mount your regular EFI partition which holds your OC EFI
+4. Mount your regular EFI partition which holds your OpenCore files.
 5. Open your `config.plist` with OCAT or a Plist Editor.
 6. Go to Misc > Entries
 7. Create a new entry:</br>![Entry](https://user-images.githubusercontent.com/76865553/148824089-a50c2167-3396-4e25-85f7-e2d49389bab2.png)
