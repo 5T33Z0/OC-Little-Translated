@@ -9,7 +9,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
 **CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
-- Sandy Bridge (need additional Sur Plus and RDRAND patches)
+- Sandy Bridge (need additional SurPlus patches)
 - Ivy Bridge
 - Haswell (partially)
 
@@ -30,21 +30,21 @@ This allows using the correct SMBIOS for a given CPU family even if it is not of
 
 The patching consists of two stages:
 
-1. Skipping the Board-ID checks and rerouting the Hardware Board-ID to OpenCore (Booter Patches)
-2. In the 2nd stage, Kernel patches are used to make Update Servers believe that macOS Monterey is running as a Virtual Machine with a supported Board-ID
+1. Skipping the Board-ID checks and rerouting the Hardware Board-ID to OpenCore (Booter Patches).
+2. In the 2nd stage, Kernel patches are used to make Update Servers believe that macOS Monterey is running as a Virtual Machine with a supported Board-ID.
 
 I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them.
 
 The attached plist contains these patches to make this work and a few more.
 
 ## Applying the Patches
-Before you do the following make sure you have a working backup of your EFI stored on a FAT32 formatted USB stick to boot your PC from just in case something goes wrong!
+:warning: Before applying these pathces, make sure you have a working backup of your EFI stored on a FAT32 formatted USB stick to boot your PC from just in case something goes wrong!
 
 - Download the attached .plist
 - Open it with a plist editor
-- Copy the patches located under Booter > Patch into clipboard and paste them into your OpenCore config at the same location
-- Do the same for the Kernel Patches. Enable additional patches if required (for Sandy Bridge for example)
-- Add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+- Copy the patches located under Booter > Patch over to your OpenCore config to the same section.
+- Do the same for the Kernel Patches. Enable additional patches if required (SurPlus patches for Sandy Bridge for example).
+- Optional: add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
 - Save the config
 - Reboot
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
@@ -56,11 +56,11 @@ Enjoy macOS Big Sur/Monterey with the correct SMBIOS for your CPU and Updates!
 - **Patch 1**: Reroutes Hardware Board-ID check to OpenCore (enabled)
 
 ### About the Kernel Patches
-In the .plist, only 3 of the 9 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
+In the .plist, only 3 of the 7 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
 - **Patch 0**: Force enables Filevault on broken seal (disabled). Required if you still want to use Filevault after the System Partition has been modified which breaks the security seal.
 - **Patch 1**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 2-3**: SurPlus patches for Race Condition Fix on Sandy Bridge and older CPUs. Fixes issues for macOS 11.3 onward, where newer Big Sur builds often wouldn't boot with SMBIOS `MacPro5,1` (disabled).
+- **Patches 2-3**: SurPlus patches for Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
 - **Patches 4-6**: Enable board ID spoof via VMM in macOS 12.0.1 (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
 
 <details>
@@ -93,4 +93,3 @@ Installation went smoothly and macOS 12.1 booted without issues:
 - Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
 - parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281)
 - reenigneorcim for [**SurPlus**](https://github.com/reenigneorcim/SurPlus)
-- Khronokernel for [**RDRAND Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c6b3aaaeb78d56f98a94d7991fd3019190b48dd3)

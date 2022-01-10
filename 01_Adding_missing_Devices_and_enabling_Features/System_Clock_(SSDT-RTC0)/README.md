@@ -1,4 +1,4 @@
-# Fake RTC (for 300-Series only)
+# Fake RTC (for 300-series mainboards only)
 
 ## Overview
 
@@ -29,10 +29,10 @@ Device (RTC)
 }
 ```
 
-To enable an existing but otherwise disabled `RTC` for macOS only, you can add `SSDT-RTC_STA0F.aml` which changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC used, so you don't have to use fake one:
+To enable an existing but otherwise disabled `RTC` for macOS only, you can add `SSDT-RTC_STA0F.aml`. It changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC is enabled. This way you don't have to add a fake RTC:
 
 ```swift
-DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "HACK", "RTCSTA0F", 0)
 {
     External (_SB_.PCI0.LPCB.RTC_._STA, UnknownObj)
 
@@ -48,7 +48,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
 Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
 
 ```swift
-DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
+DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
 
@@ -83,8 +83,10 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0)
     }
 }
 ```
-## NOTES
+## NOTES and CREDITS
 
 - This patch only applies to 300-series chipsets.
 - This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in your `DSDT` is `0`.
 - The device path used in the sample patch is `LPCB`, please adjust it accordingly to the name used in your `DSDT` (either `LPC` or `LPCB`).
+- ***SSDT-RTC0*** by Acidanthera (included in OpenCorePkg)
+- ***SSDT-RTC_STA0F*** by Baio1977

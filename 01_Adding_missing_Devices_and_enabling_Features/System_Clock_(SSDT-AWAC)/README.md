@@ -24,7 +24,7 @@ With the python script **SSDTTime**, you can generate the following SSDTs from a
 **NOTE**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
-Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
+Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the search results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
 
 Below you'll find a code snippet of how `Device (RTC)` and `Device (AWAC)` might be defined in your `DSDT`:
 
@@ -36,11 +36,11 @@ Device (RTC)
     {
             If ((STAS == One)) // If STAS = 1
             {
-                Return (0x0F) // Turn RTC ON
+                Return (0x0F)  // Turn RTC ON
             }
-            Else 			  // if STAS ≠ 1
+            Else 			   // if STAS ≠ 1
             {
-                Return (Zero) // Turn RTC OFF
+                Return (Zero)  // Turn RTC OFF
             }
     }
     ...
@@ -75,20 +75,22 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
+**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`. This hotpatch is identical to SSDT-AWAC-DISABLE included in the OpenCorePkg.
 ___
 
 ### Method 2: using `SSDT-AWAC-ARTC`
 
-For Intel Kaby Lake and newer.
+For Intel Kaby Lake and newer. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `AWAC` or `RTC`.
 
-- **Seen on SMBIOS**: 
-	- `MacBookAir8,1` and `MacBookAir9,1`, 
-	- `MacBookPro15,x` and `MacBookPro16,x`,
-	- `iMac19,x` and `iMac20,x`, 
-	- `iMacPro1,1` and `MacPro7,1`. 
+Appllicable to SMBIOS:
 
-This method disables `RTC`, `AWAC` and `HPET` and adds an `ARTC` device using EisaId ("PNP0B00") of a `RTC` instead:
+- macBookAir9,x (10th Gen Ice Lake)
+- macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
+- iMac19,1 iMac20,x (10th Gen)
+- iMacPro1,1 (Xeon W)
+- macPro7,1 (Xeon W)
+
+This SSDT disables `AWAC` and `HPET` and adds a `RTC` device ("PNP0B00") "disguised" as `ARTC` so to speak:
 
 ```Swift
 DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
@@ -135,8 +137,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
     }
 }
 ``` 
-**Explanation**: This SSDT makes use of `AWAC` clock by attaching it to `ARTC` (Apple Realtime Clock, EisaID `PNP0B00`) in I/O Registry. If `HPET` is present and `AWAC` is active (while RTC is disabled), you can use this SSDT. Although the PCI paths should work universally, better check if they work for you by comparing it with the location of `AWAC` in your `DSDT`. If the operating system is not macOS, method `_STA` returns zero which enables the `AWAC`.
-
 **Procedure**: 
 
 - In `DSDT`, check if `Device HPET` or `PNP0103` is present. If not, you don't need this patch!
@@ -148,12 +148,12 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 	-  `ARTC`: should be present
 	-  `HPET`: should not be present
 
-#### HPET or no HPET? 
-Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multithread performance, though. On the other hand, there are reports about it reducing frame rate while gaming. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
+#### To HPET, or not to HPET?
+Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
 ___
 
 ### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
-Disables AWAC where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for AWAC in [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
+Disables `AWAC` where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for `AWAC` in [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
 
 ```Swift
 External (_SB_.AWAC._STA, IntObj)
@@ -166,7 +166,7 @@ Scope (\)
       }
   }
 ```
-**NOTE**: These methods only works if RTC is enabled in the original DSDT. A lot of 300-series chipsets like Z390 have RTC disabled though, so you have to add a fake RTC first –see chapter "System_Clock_(SSDT-RTC0)".
+**NOTE**: Methods 1 and 2 only work if RTC can be enabled in the original DSDT via the `STA` variable. A lot of 300-series chipsets like Z390 don't have an RTC device which can be enabled via `STAS`. In this case you have to add a fake RTC first – see chapter [System_Clock_(SSDT-RTC0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)).
 
 <details>
 <summary><strong>Old Methods (kept for documentary purposes)</strong></summary>
@@ -497,6 +497,5 @@ Using this method will result in an error (non-ACPI Error) by invalidating other
 </details>
 
 ## Credits
-- **Acidanthera**
 - **daliansky** for `SSDT-AWAC.dsl`
-- **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC2_ARTC`
+- **Baio1977** for `SSDT-AWAC_STA0.dsl` and `SSDT-AWAC-ARTC`
