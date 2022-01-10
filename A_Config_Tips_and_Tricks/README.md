@@ -33,19 +33,9 @@ OpenCore introduced a new security feature in version 0.7.2 which prohibits the 
 
 ## I. Checking config.plist for errors
 
-Currently there are three automated methods to check your `config.plist` for errors:
-
-- **Online**: [**OpenCore Sanity Checker**](https://opencore.slowgeek.com/) ~~is~~ was a useful site to check your config for errors. It hasn't been updated a long time and only fully support OpenCore up to version 0.6.6 and shouldn't be relied on when using newer versions of OpenCore. It compares your config with the database of the OpenCore Installation Guide. Correct entries are highlighted in green, errors are highlighted in red, so you can easily address a problem. You can also copy the link to the result of the sanity check to point out config issues in forums, etc.. The source code is available if someone would like to implement it in a new or updated site: [OCSanity](https://github.com/rlerdorf/OCSanity).
-
-- **Offline**: The OpenCore package comes with a `Utilities` folder. In it, you will find `ocvalidate`. Drag it into Terminal, leave a blank space, drag in your config.plist next and press [ENTER]. It will point to section in the config they relate to. With the help of [OCConfgCompare](https://github.com/corpnewt/OCConfigCompare), Sample.plist and [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) you can correct all errors quite fast.
-
-- **Using OpenCore Auxiliary Tools** ([**OCAT**](https://github.com/ic005k/QtOpenCoreConfig)): Tool for editing and updating OpenCore files, drivers, kexts and the config.plist. Its best feature is that it automatically updates any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before.<br> 
-
-	But to be clear: OCAT does not fix configuration errors (apart from those caused by structural differences between an outdated and current config). In other words: if your config.plist was configured incorrectly before, it still will be afterwards!
- 
-While Sanity Checker focuses on correct settings for the selected system, OC Validate checks the structure as well as the syntax of the config for errors. OCAT can update the structure automatically and has OC Validate built in. Therefore, it makes sense to check the config in two steps: first online and then offline.
-
-**CAUTION**: Don't use OpenCore Configurator for editing your `config.plist` when using nightly builds of OpenCore. Because it automatically adds entries to the config which may have been removed or relocated in the config. This results in errors when rebooting.
+Use [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig): Configurator App for editing and updating OpenCore files, drivers, kexts and the config.plist. Its best feature is that it can automatically update/migrate any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before. It has OC Validate integrated which points at possible configuration errors. 
+	
+But to be clear: OCAT does not fix configuration errors (apart from those caused by structural differences between an outdated and current config). In other words: if your config.plist was configured incorrectly before, it still will be afterwards!
 </details>
 <details>
 <summary><strong>Fixing Boot Issues</strong></summary>
