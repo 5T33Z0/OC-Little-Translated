@@ -45,6 +45,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 * [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore)
 * [**SMBIOS Compatibility**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_SMBIOS_Compatibility)
 * [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* [**Adding Windows to the boot menu GUI**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/README.md)
 * [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux)
 * [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args)
 * [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
