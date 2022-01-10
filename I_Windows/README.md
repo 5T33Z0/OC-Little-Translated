@@ -5,7 +5,7 @@ This guide is for adding a Windows boot menu entry so you don't have to use `0` 
 **Source**: https://oc-scanpolicy.vercel.app/
 
 ## Prerequisites
-In order to add the Microsoft Bootloader to OpenCore's boot menu, we need to find the location of the ESP and EFI Folder that contains the Microsoft Bootmanager (inside the "Microsoft" folder). If you only use one HDD, it's located inside the same EFI folder as your OpenCore files. But on systems which have Windows on a separte disk, we need to find out its PCI path first via Open Sheel. 
+In order to add the Microsoft Bootloader to OpenCore's boot menu, we need to find the location of the ESP and EFI Folder that contains the Microsoft Bootmanager (inside the "Microsoft" folder). If you only use one HDD, it's located inside the same EFI folder as your OpenCore files. But on systems which have Windows on a separte disk, we need to find out its PCI path first via the Open Shell command line tool before we can add the path to the config. 
 
 ### Finding the PCI path of the Windows Bootloader
 1. Add `OpenShell.efi` to EFI/OC/Tools folder and `config.plist`.
