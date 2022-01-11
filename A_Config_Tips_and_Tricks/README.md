@@ -31,11 +31,13 @@ OpenCore introduced a new security feature in version 0.7.2 which prohibits the 
 <details>
 <summary><strong>Fixing Config Errors</strong></summary>
 
-## I. Checking config.plist for errors
+## I. Updating config.plist and fixing errors
 
-Use [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig): Configurator App for editing and updating OpenCore files, drivers, kexts and the config.plist. Its best feature is that it can automatically update/migrate any outdated config.plist to the latest structure and feature-set without changing your settings: like adding, renaming, removing or relocating entries. So no more manual editing of the config structure is required to bring it up to date, which was a tremendous p.i.t.a before. It has OC Validate integrated which points at possible configuration errors. 
-	
-But to be clear: OCAT does not fix configuration errors (apart from those caused by structural differences between an outdated and current config). In other words: if your config.plist was configured incorrectly before, it still will be afterwards!
+### Automated config upgrade (recommended)
+Eversince OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
+
+### Manual upgrade and error correction (old)
+Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare with the latest sample.plist and upodate files. These included: OCConfigCompare (to compare config differences), KextUpdater (for downloading Kexts, Drivers, etc.), ProperTree (for creating snapshots editing the config) and OCValidate (for checking the config). This was a really time consuming process and I am glad, I don't have to do this any more.
 </details>
 <details>
 <summary><strong>Fixing Boot Issues</strong></summary>
