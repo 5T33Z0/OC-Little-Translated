@@ -47,6 +47,6 @@ Once you're back in macOS, do the following:
 
 ## :warning: Caution
 
-- Remember that the PCI root path to the Microsoft Boot Manager may change if you format the HHD containing the Windows Installation!
+- Remember that the PCI root path to the Microsoft Boot Manager may change if you format the HDD containing the Windows installation!
 - Revert `ScanPolicy` to `0` if other drives are missing from the bootloader GUI.
 - If macOS partitions are not shown in the bootloader GUI, change `MinDate` and `MinVersion` to `-1` for macOS versions older than macOS 11.
