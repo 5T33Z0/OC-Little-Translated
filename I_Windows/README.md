@@ -35,10 +35,10 @@ Once you're back in macOS, do the following:
 - Open the `config.plist` with OCAT or a Plist Editor.
 - Go to `Misc\Entries` and create a new entry:</br>![Entry](https://user-images.githubusercontent.com/76865553/148824089-a50c2167-3396-4e25-85f7-e2d49389bab2.png)
 - Now, open the `map.txt` file and search for `fsX` (X = number of `fs` which contains the Microsoft Bootloader found using Open Shell; in my case `fs8`):</br>![PCIpth](https://user-images.githubusercontent.com/76865553/148824135-43e63b09-905f-46df-8e85-6fa8707580ce.png)
-- Copy the PCI Path and paste to a text editor because we need to modify it. In my case: `PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(1,GPT,2B711BAD-3092-49DB-871F-5D4C8EA06A66,0x800,0x32000)`
+- Copy the PCI Path and paste to a text editor because we need to modify it.
 - Append the following line to the PCI path: `/\EFI\Microsoft\Boot\bootmgfw.efi`
-- The final path has this form: `YOUR_PciRoot_Path/\EFI\Microsoft\Boot\bootmgfw.efi`
-- Back in OCAT, copy the whole path into the `Path` field. In my case: `PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(1,GPT,2B711BAD-3092-49DB-871F-5D4C8EA06A66,0x800,0x32000)/\EFI\Microsoft\Boot\bootmgfw.efi`.
+- The final path should have this form: `YOUR_PciRoot_Path/\EFI\Microsoft\Boot\bootmgfw.efi`
+- Back in OCAT, copy the whole path into the `Path` field. In this example: `PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(1,GPT,2B711BAD-3092-49DB-871F-5D4C8EA06A66,0x800,0x32000)/\EFI\Microsoft\Boot\bootmgfw.efi`.
 - Change the `ScanPolicy` to your liking. I use `2687747`.
 - Save your config and reboot. The Windows Entry should now be present in the OC boot menu:</br>
 ![win10flav](https://user-images.githubusercontent.com/76865553/148958994-60379e98-4b84-4e4b-b0d0-e2484813d06b.png)
