@@ -1,8 +1,6 @@
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Build-≤0.7.8-success.svg)](https://github.com/acidanthera/OpenCorePkg)
-![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.01.15-blueviolet.svg)
-
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
-
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Build-≤0.7.8-lime.svg)](https://github.com/acidanthera/OpenCorePkg)
+![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.01.15-blueviolet.svg)
 ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## ABOUT
