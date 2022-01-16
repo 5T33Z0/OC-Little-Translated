@@ -3,7 +3,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 
 ## Use Cases
 1.  Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
-2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a correct Board-ID to Apple Update servers which fixes the issue – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
+2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers which fixes the issue – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
 
 	- MacBookPro15,1 to 15,4
 	- MacBookPro16,1 to 16,4
