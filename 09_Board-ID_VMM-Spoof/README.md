@@ -2,7 +2,7 @@
 A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
 
 ## Use Cases
-1.  Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
+1. Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
 2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
 
 	- MacBookPro15,1 to 15,4
@@ -14,7 +14,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 	- iMacPro1,1
 	- MacPro7,1
 
-While a lot of OpenCore users face this issue it's not a problem in Clover, since you can enter a `HardwareTarget`.
+	While a lot of OpenCore users face this issue it's not a problem in Clover, since you can enter a `HardwareTarget`.
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
