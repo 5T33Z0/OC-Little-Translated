@@ -14,7 +14,7 @@ A set of Booter and Kernel patches which allow installing, booting and updating 
 	- iMacPro1,1
 	- MacPro7,1
 
-	This problem occurs when using one of the SMBIOSes listed above in combination with `SecureBootModel` set to `Disabled` instead of using the recommended value for the seletcted SMBIOS. While a lot of OpenCore users face this issue, it's not a problem in Clover, since you can enter a `HardwareTarget` under `RtVariables`.
+	This problem occurs when using one of the SMBIOSes listed above in combination with `SecureBootModel` set to `Disabled` instead of using the recommended value for the selected SMBIOS. While a lot of OpenCore users face this issue, it's not a problem in Clover, since you can enter a `HardwareTarget` under `RtVariables`.
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
