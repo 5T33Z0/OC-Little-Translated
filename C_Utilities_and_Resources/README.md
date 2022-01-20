@@ -45,4 +45,5 @@ Suggest some. Otherwise refer to "Cross-Platform" Section.
 
 ## Resources
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
+- [**Acidanthera Documents**](https://github.com/acidanthera/bugtracker/blob/master/DOCUMENTS.md)
 - [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101) – Includes explanations about the I/O Registry.
