@@ -9,7 +9,7 @@ In ACPI, there are GPE (General Purpose Events) which can be triggered by all so
 The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
 
 - The 1st byte of the `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`.
-- The 2nd byte of `_PRW` packet is either `03` or `04`. But macOS expects a `0` here in order to not wake. And that's what this patch does: it set's packet 2 to `0`if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
+- The 2nd byte of `_PRW` packet is either `03` or `04`. But macOS expects a `0` here in order to not wake. And that's what this patch does: it set's packet 2 to `0` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`. But I ~~expect~~ hope that subsequent releases of OpenCore will address this issue.
 
