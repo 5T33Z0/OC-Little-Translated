@@ -38,6 +38,11 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 ### Windows
 Suggest some. Otherwise refer to "Cross-Platform" Section.
 
+### Web-based applications
+- [**Cloud Clover Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Online tool for generating and editing Clover, OpenCore, Ozmosis and Chameleon configs (templates included).
+- [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
+- [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/)
+
 ## Resources
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
 - [**I/O Kit Fundamentals**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011-CH204-TPXREF101) – Includes explanations about the I/O Registry.
