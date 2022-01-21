@@ -1,6 +1,6 @@
 # Fixing Sleep and Wake issues
 
-This section contains Guides, Hotpatches and Settings for resolving common issues related to Sleep and Wake, especially on but not limited to Laptops. The following areas are covered (open the corresponding folder for the guide):
+This section contains Guides, Hotpatches and Settings for resolving common issues related to Sleep and Wake, occuring especially on but not limited to Laptops. The following areas are covered (open the corresponding folder for the guide):
 
 ## 1.`PTSWAKTTS` Sleep and Wake fix
 
@@ -25,6 +25,6 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 ASPM (**Active State Power Management**), is a power link management scheme supported at system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle. You can modify the Active Power State of peripherals like Bluetooth/WiFi or other devices if they interrupt sleep.
 
 ## Notes
-
+- Before you apply any of these patches you should make sure you don't just use generic ACPI tables from Dortania or the OpenCore Package but rather modify them to fit your system requirements or generate custom ones for your system using SSDTTime. Doing this can already prevent the occurance of sleep and wake issues altogether. 
 - Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.
