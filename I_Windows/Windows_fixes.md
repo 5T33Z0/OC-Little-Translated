@@ -7,11 +7,11 @@ If the time displayed in the Windows clock is always an hour earlier or later th
 
 1. Run Hackintool
 2. Click on "Utilies"
-3. Click on this icon to Generate Windows UTC Registry Files:</br>![](/Users/5t33z0/Desktop/UTC.png)</br>This will create 2 .reg files, `WinUTCOn.reg` and `WinUTCOff.reg` on your desktop.
-4. Copy these files to a location which you can access from within Windows.
-5. Reboot into Windows
-6. Double-click `WinUTCOn.reg` to import it into your registry.
-7. Reboot.
+3. Click on this icon to Generate Windows UTC Registry Files:</br>![UTC](https://user-images.githubusercontent.com/76865553/150509659-a2837405-2f9a-4aed-a1c3-134b62efeb83.png)</br>This will create 2 .reg files, `WinUTCOn.reg` and `WinUTCOff.reg` on your desktop.
+5. Copy these files to a location which you can access from within Windows.
+6. Reboot into Windows
+7. Double-click `WinUTCOn.reg` to import it into your registry.
+8. Reboot.
 
 The displayled time should bow be correct.
 
