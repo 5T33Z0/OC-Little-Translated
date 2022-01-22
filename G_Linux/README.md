@@ -13,9 +13,10 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 	- `Full`: For AMI, Phoenix, and any other modern UEFI BIOS.
 	- `Short`: For older types of firmware, typically from Insyde, that are unable to manage full device paths.
 4. If you are using Misc > Entries or Misc > `BlessOverride` to boot Linux, delete the entries.
-5. Save the config and reboot.
-6. Reset NVRAM.
-7. Linux should be available in the Bootpicker now.
+5. :warning: Check the EFI > BOOT folder. Make sure there are no other files besides OpenCore's `BOOTx64.efi` in there to prevent GRUB from taking over your boot menu.
+6. Save the config and reboot.
+7. Reset NVRAM.
+8. Linux should be available in the Bootpicker now.
 
 ### Troubleshooting
 If it doesn't work, do the following:
