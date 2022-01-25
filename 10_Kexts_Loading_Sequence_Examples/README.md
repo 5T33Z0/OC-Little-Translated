@@ -38,7 +38,7 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 ### Example 1: Mandatory kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)</br>
 Any additional kexts must be placed after the mandatory kexts.
-### Example 2: VooodoPS2 + TouchPad (Laptop)
+### Example 2: ApplePS2SmartTouchPad + Plugins (Laptop)
 ![Config2](https://user-images.githubusercontent.com/76865553/140813746-3d3ab6aa-949a-4b91-8c9b-c3dcd0fef77d.png)
 ### Example 3: VoodooPS2 + TrackPad (Laptop)
 ![config3](https://user-images.githubusercontent.com/76865553/140813775-eb6ff60f-9ec3-4c9b-a768-f5e5a9e6868e.png)
