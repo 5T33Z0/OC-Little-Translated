@@ -16,7 +16,7 @@ Mac Models containing `FWHD`:
 - Add **SSDT-FWHD.aml** to your EFI's ACPI folder and config.plist.
 - Restart your system 
 - Open IORegistryExplorer and search for `FWHD`
-- If the Device is present, it should look like this:
+- If the Device is present, it should look like this:</br>![fwhd](https://user-images.githubusercontent.com/76865553/152636354-76767c7b-5517-47da-a85d-5c9f35211488.png)
   
 ## Notes and Credits
 - Make sure the name of the LPC bus is consistent with the name uses in your `DSDT` (either `LPCB` or `LPC`) 
