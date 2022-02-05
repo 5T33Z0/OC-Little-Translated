@@ -20,4 +20,4 @@ Mac Models containing `FWHD`:
   
 ## Notes and Credits
 - Make sure the name of the LPC bus is consistent with the name uses in your `DSDT` (either `LPCB` or `LPC`) 
-- Baio1977 for providing the SSDT
+- Thanks to Baio1977 for providing the SSDT
