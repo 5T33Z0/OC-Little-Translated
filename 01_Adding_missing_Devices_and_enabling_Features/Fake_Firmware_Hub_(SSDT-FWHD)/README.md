@@ -12,5 +12,12 @@ Mac Models containing `FWHD`:
 - **MacPro**: 1,1 to 7,1
 - **Xserve**: 1,1 to 3,1
 
-## Credits
+## Verifying that the patch is working
+- Add **SSDT-FWHD.aml** to your EFI's ACPI folder and config.plist.
+- Restart your system 
+- Open IORegistryExplorer and search for `FWHD`
+- If the Device is present, it should look like this:
+  
+## Notes and Credits
+- Make sure the name of the LPC bus is consistent with the name uses in your `DSDT` (either `LPCB` or `LPC`) 
 - Baio1977 for providing the SSDT
