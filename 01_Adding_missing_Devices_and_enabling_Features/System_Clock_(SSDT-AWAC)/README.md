@@ -79,18 +79,17 @@ Scope (\)
 ___
 
 ### Method 2: using `SSDT-AWAC-ARTC`
-
-For Intel Kaby Lake and newer. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `AWAC` or `RTC`.
+This SSDT is for systems using 7th Gen Intel Core (Kaby Lake) and newer. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `AWAC` or `RTC`. It disables `AWAC` and `HPET` (High Precision Event Timer, which is now a legacy device) and adds `RTC` ("PNP0B00") "disguised" as `ARTC` so to speak.
 
 Appllicable to SMBIOS:
 
-- macBookAir9,x (10th Gen Ice Lake)
-- macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
 - iMac19,1 iMac20,x (10th Gen)
 - iMacPro1,1 (Xeon W)
-- macPro7,1 (Xeon W)
+- MacPro7,1 (Xeon W)
+- macBookAir9,x (10th Gen Ice Lake)
+- macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
 
-This SSDT disables `AWAC` and `HPET` and adds a `RTC` device ("PNP0B00") "disguised" as `ARTC` so to speak:
+Here's the code:
 
 ```Swift
 DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
@@ -149,7 +148,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 	-  `HPET`: should not be present
 
 #### To HPET, or not to HPET?
-Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
+Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
 ___
 
 ### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
