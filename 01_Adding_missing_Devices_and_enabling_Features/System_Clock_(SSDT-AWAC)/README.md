@@ -75,13 +75,13 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`. This hotpatch is identical to SSDT-AWAC-DISABLE included in the OpenCorePkg.
+**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`. This hotpatch is identical to `SSDT-AWAC-DISABLE.aml` included in the OpenCorePkg.
 ___
 
 ### Method 2: using `SSDT-AWAC-ARTC`
-This SSDT is for systems using 7th Gen Intel Core (Kaby Lake) and newer. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `AWAC` or `RTC`. It disables `AWAC` and `HPET` (High Precision Event Timer, which is now a legacy device) and adds `RTC` ("PNP0B00") "disguised" as `ARTC` so to speak.
+This SSDT is for systems with a 7th Gen Intel Core (Kaby Lake) and newer CPUs. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `AWAC` or `RTC`. The SSDT disables `AWAC` and `HPET` (High Precision Event Timer, which is now a legacy device) and adds `RTC` ("PNP0B00") "disguised" as `ARTC`, so to speak.
 
-Appllicable to SMBIOS:
+Appllicable to **SMBIOS**:
 
 - iMac19,1 iMac20,x (10th Gen)
 - iMacPro1,1 (Xeon W)
