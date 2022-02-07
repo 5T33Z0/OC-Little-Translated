@@ -56,6 +56,14 @@
                     <key>Path</key>
                     <string>SSDT-SBUS-MCHC.aml</string>
                 </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>Only required for ASUS (and possibly) MSI Boards</string>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>Path</key>
+                    <string>SSDT-RHUB.aml</string>
+                </dict>
             </array>
             <key>Delete</key>
             <array/>
