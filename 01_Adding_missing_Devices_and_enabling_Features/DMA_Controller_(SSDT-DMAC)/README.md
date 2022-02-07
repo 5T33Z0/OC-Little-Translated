@@ -1,5 +1,5 @@
 # DMA Controller (`SSTD-DMAC`)
-Adds Direct Memory Access Controller [**(DMA) Controller**](https://binaryterms.com/direct-memory-access-dma.html) device. Applicable to every SMBIOS, although necessity is questionable.
+Adds Direct Memory Access Controller [**(DMAC)**](https://binaryterms.com/direct-memory-access-dma.html) device. Applicable to every SMBIOS, although necessity is questionable.
 
 ## Instructions
 
