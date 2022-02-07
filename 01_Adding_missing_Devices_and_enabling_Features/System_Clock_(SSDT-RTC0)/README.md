@@ -28,7 +28,6 @@ Device (RTC)
   }
 }
 ```
-
 To enable an existing but otherwise disabled `RTC` for macOS only, you can add `SSDT-RTC_STA0F.aml`. It changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC is enabled. This way you don't have to add a fake RTC:
 
 ```swift
