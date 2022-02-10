@@ -115,31 +115,31 @@ Depending on the SMBIOS you are using, you may have to adjust these values accor
 |SMBIOS|kUSBSleepPowerSupply|kUSBSleepPortCurrentLimit|kUSBWakePowerSupply|kUSBWakePortCurrentLimit|
 |-------|:----:|:----:|:----:|:----:|
 **iMacPro1,1**|0x13EC|0x0834|0x13EC|0x0834
-|
+||||||
 **iMac20,x**|0x13EC|0x0834|0x13EC|0x0834
 iMac19,1|"|"|"|"
 iMac18,3|"|"|"|"
 iMac17,1|"|"|"|"
 iMac16,x|"|"|"|"
 iMac15,1 and older|N/A|N/A|N/A|N/A
-|
+||||||
 **MacBook9,1**|0x05DC|0x05DC|0x05DC|0x05DC
 MacBook8,1 and older|N/A|N/A|N/A|N/A
-|
+||||||
 **MacBookAir9,1**|-|0x0BB8|-|0x0BB8
 MacBookAir8,1|-|"|-|"
 MacBookAir7,1 and older|N/A|N/A|N/A|N/A
-|
+||||||
 **MacBookPro16,1**|-|0x0BB8|-|0x0BB8
 MacBookPro15,x|-|0x0BB8|-|0x0BB8
 MacBookPro14,1|-|0x0BB8|-|0x0BB8
 MacBookPro13,x|-|0x0BB8|-|0x0BB8
 MacBookPro12,x and older|N/A|N/A|N/A|N/A
-|
+||||||
 **MacMini9,1**|?|?|?|?
 MacMini8,1|0x0C80|0x0834|0x0C80|0x0834
 MacMini7,1 and older|N/A|N/A|N/A|N/A
-|
+||||||
 **MacPro7,1**|0x13EC|0x0834|0x13EC|0x0834|
 MacPro6,1 and older|N/A|N/A|N/A|N/A
 
