@@ -86,7 +86,7 @@ Below you'll find the default USB power properties used in the SSDT-EC-USBX file
 ...
 Return (Package (0x08)
 {	
-	"kUSBSleepPowerSupply", 
+    "kUSBSleepPowerSupply", 
     0x13EC,
     "kUSBSleepPortCurrentLimit", 
     0x0834,
