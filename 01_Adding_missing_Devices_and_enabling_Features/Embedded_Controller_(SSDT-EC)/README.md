@@ -76,7 +76,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 **Tip**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Adding the correct current values to `USBX` device
-Inside the **SSDT-EC-USBX.aml** tables, you'll also find the `USBX` device which is present in DSDTs of real Macs with Intel Skylake and newer CPUs. It contains electrical current values in hex. Older models and versions of macOS don't have an `USBX` device but rather use values stored in the [IOUSBHostFamily.kext](https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/)
+Inside the **SSDT-EC-USBX.aml** tables, you'll also find the `USBX` device which is present in DSDTs of real Macs with Intel Skylake and newer CPUs. It contains electrical current values in hex. Older models and versions of macOS don't have an `USBX` device but rather use values stored in the [IOUSBHostFamily.kext](https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/), in other words, it's handled by macOS (up to 10.12).
 
 Below you'll find the default USB power properties used in the SSDT-EC-USBX files.
 
