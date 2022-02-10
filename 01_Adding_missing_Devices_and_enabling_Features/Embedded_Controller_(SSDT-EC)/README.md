@@ -74,3 +74,73 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 7. Save and Reboot. Done.
 
 **Tip**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
+
+## Adding the correct current values to `USBX` device
+Inside the **SSDT-EC-USBX.aml** tables, you'll also find the `USBX` device which is present in DSDTs of real Macs with Intel Skylake and newer CPUs. It contains electrical current values in hex. Older models and versions of macOS don't have an `USBX` device but rather use values stored in the [IOUSBHostFamily.kext](https://www.tonymacx86.com/threads/guide-usb-power-property-injection-for-sierra-and-later.222266/)
+
+Below you'll find the default USB power properties used in the SSDT-EC-USBX files.
+
+**For PCs**:
+
+```swift
+...
+Return (Package (0x08)
+{	
+	"kUSBSleepPowerSupply", 
+    0x13EC,
+    "kUSBSleepPortCurrentLimit", 
+    0x0834,
+    "kUSBWakePowerSupply",
+    0x13EC, 
+    "kUSBWakePortCurrentLimit", 
+    0x0834
+})
+...
+```
+**For Noetbooks/NUCs**:
+
+```swift
+...
+Return (Package (0x08)
+{	
+    "kUSBSleepPortCurrentLimit", 
+    0x0BB8,
+    "kUSBWakePortCurrentLimit", 
+    0x0BB8
+})
+...
+```
+Depending on the SMBIOS you are using, you may have to adjust these values accordingly. You find the values used in the real Macs in the following table.
+
+|SMBIOS|kUSBSleepPowerSupply|kUSBSleepPortCurrentLimit|kUSBWakePowerSupply|kUSBWakePortCurrentLimit|
+|-------|:----:|:----:|:----:|:----:|
+**iMacPro1,1**|0x13EC|0x0834|0x13EC|0x0834
+|
+**iMac20,x**|0x13EC|0x0834|0x13EC|0x0834
+iMac19,1|"|"|"|"
+iMac18,3|"|"|"|"
+iMac17,1|"|"|"|"
+iMac16,x|"|"|"|"
+iMac15,1 and older|N/A|N/A|N/A|N/A
+|
+**MacBook9,1**|0x05DC|0x05DC|0x05DC|0x05DC
+MacBook8,1 and older|N/A|N/A|N/A|N/A
+|
+**MacBookAir9,1**|-|0x0BB8|-|0x0BB8
+MacBookAir8,1|-|"|-|"
+MacBookAir7,1 and older|N/A|N/A|N/A|N/A
+|
+**MacBookPro16,1**|-|0x0BB8|-|0x0BB8
+MacBookPro15,x|-|0x0BB8|-|0x0BB8
+MacBookPro14,1|-|0x0BB8|-|0x0BB8
+MacBookPro13,x|-|0x0BB8|-|0x0BB8
+MacBookPro12,x and older|N/A|N/A|N/A|N/A
+|
+**MacMini9,1**|?|?|?|?
+MacMini8,1|0x0C80|0x0834|0x0C80|0x0834
+MacMini7,1 and older|N/A|N/A|N/A|N/A
+|
+**MacPro7,1**|0x13EC|0x0834|0x13EC|0x0834|
+MacPro6,1 and older|N/A|N/A|N/A|N/A
+
+
