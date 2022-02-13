@@ -67,12 +67,13 @@ Enjoy macOS Big Sur/Monterey with the correct SMBIOS for your CPU and Updates!
 - **Patch 1**: Reroutes Hardware Board-ID check to OpenCore (enabled)
 
 ### About the Kernel Patches
-In the .plist, only 3 of the 7 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
+In the .plist, only 3 of the 6 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
-- **Patch 0**: Force enables Filevault on broken seal (disabled). Required if you still want to use Filevault after the System Partition has been modified which breaks the security seal.
-- **Patch 1**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 2-3**: SurPlus patches for Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
-- **Patches 4-6**: Enable board ID spoof via VMM in macOS 12.0.1 (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
+- **Patch 0**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
+- **Patches 1 and 2**: SurPlus patches for Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
+- **Patch 3 to 5**: Enable Board-ID spoof via VMM in macOS 12.0.1+ (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
+
+**NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 <details>
 <summary><strong>Background Info: My test</strong> (Click to show content!)</summary>
