@@ -31,7 +31,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 #### Additional Steps (Desktop PCs only)
 To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver, do the following after rebooting:
 
-- Run IORegistryExlorer
+- Run IORegistryExplorer
 - Search for the name of your real EC controller (`EC0`, `H_EC`, etc.)  If the device is not present, you're done!
 - If the device is present (exact match!), you have to disable it. 
 - Open the previously used .dsl file and remove the comments `/*` and `*/ `from the following section, so it's no longer displayed in green in MaciASL:
