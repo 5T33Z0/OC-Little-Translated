@@ -79,6 +79,8 @@ If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don'
 
 - ***SSDT-EXT5-TP-LED*** – `EXT5` extension patch. Fixes an issue on ThinkPads where the breathing light of the Power Button LED will not return to normal after waking up. Also fixes an issue where the <kbd>F4</kbd> microphone indicator status is not normal after waking up on older ThinkPad models.
 
+- ***SSDT-ASUS-Shutdown*** – Shutdown Fix for ASUS systems. Combine with `_PTS` to `ZPTS` rename.
+
 ## Caution
 
 Patches with the same extension name cannot be used at the same time. If there is a requirement to use them at the same time, they must be combined.
