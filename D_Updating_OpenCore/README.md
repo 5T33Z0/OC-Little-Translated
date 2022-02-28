@@ -52,7 +52,7 @@ To update OpenCore files and Kexts, do the following:
 	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)</br>
 **Addendum**: The sync window is object to change during app development. Currently, depending on the OC variant you chose in the "View" menu, the sync dialog window will look different. For the release version, you can select the OpenCore version you want to install from a dropdown menu:</br>
 ![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)</br>
-For Dev versions, you need to add a link to a repo to get the OC files from. Alternatively you can click on "Import" to open a downloaded zip containing OpenCore files:</br>
+For Dev versions, you need to add a link to a repo to download the OC files from. Alternativelym you can click on "Import" to open a downloaded zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)):</br>
 ![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)</br>
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updaates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
