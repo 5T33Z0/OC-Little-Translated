@@ -51,9 +51,9 @@ To update OpenCore files and Kexts, do the following:
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = link to repo is missing (add it to "Database" > "Kext Update URL"). Besides the displayed version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
 	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)</br>
 **Addendum**: The sync window is object to change during app development. Currently, depending on the OC variant you chose in the "View" menu, the sync dialog window will look different. For the release version, you can select the OpenCore version you want to install from a dropdown menu:</br>
-![Sync_release](https://user-images.githubusercontent.com/76865553/155941665-d553161c-8ee1-4230-a9f7-5555afcbf15d.png)</br>
+![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)</br>
 For Dev versions, you need to add a link to a repo to get the OC files from. Alternatively you can click on "Import" to open a downloaded zip containing OpenCore files:</br>
-![NIGHTLY](https://user-images.githubusercontent.com/76865553/155941712-3fc27c4a-7d37-4018-9a95-d2bf88e76c68.png)
+![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)</br>
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updaates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
