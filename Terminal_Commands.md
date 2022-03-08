@@ -30,6 +30,12 @@ https://macos-defaults.com/
 **Rebuild Launch Services**:</br>
 `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
 
+**Rebuild DYLD and XPC caches**
+```
+sudo update_dyld_shared_cache -force
+sudo /usr/libexec/xpchelper --rebuild-cache
+```
+
 **Enable Sidecar**:</br>
 `defaults write com.apple.sidecar.display AllowAllDevices -bool true`</br>
 `defaults write com.apple.sidecar.display hasShownPref -bool true`
