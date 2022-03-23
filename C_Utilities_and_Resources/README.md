@@ -1,7 +1,7 @@
 # Utilities and Resources
 Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 
-## Bootloaders
+## Boot Managers
 - [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
 - [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
 - [**Clover Bootloader**](https://github.com/CloverHackyColor/CloverBootloader/releases)
@@ -9,7 +9,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser) – A pre-bootloader which lets you pick the actual Bootloader you want to run. This way you can have multiple "Clover" and/or "OC" folders with different configs.
 
 ## Apps and Tools
-### macOS (general)
+### macOS (General)
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP partition
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
@@ -18,6 +18,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/) – Great App for checking and downloading Kext updates, Bootloader files, etc.
 - [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading current macOS, creating an USB Installer and changing the Update Seed which can help resolving issues with system updates
 - [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/) – App for dumping ACPI tables, I/O Registry and more from real Macs.
+- [**MacCPUID**](https://www.intel.com/content/www/us/en/download/674424/maccpuid.html) –  Shows detailed information of Intel CPUs (Model, Features, Cache, etc.)
 
 ### macOS Monterey
 - [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Tool for bringing back NVIDIA GeForce Drivers for GPUs of the Kepler family which have been removed from macOS 12.
