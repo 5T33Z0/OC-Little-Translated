@@ -142,7 +142,7 @@ Contents of `SSDT-NAVI.aml`:
 
 2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
 
-    - `DAGPM.kext` (dummy kext which will help with power management for the GPU)
+    - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards.
     - `Lilu.kext`
     - `Whatevergreen.kext`
 
@@ -151,5 +151,5 @@ Contents of `SSDT-NAVI.aml`:
 ## Credits
 - mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 - Toleda for `DAGPM.kext`
-- Acidanthera for `WhateverGreen.kext`
+- Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - Baio1977 for `SSDT-NAVI.aml`
