@@ -7,7 +7,11 @@ This chapter contains two approaches for improving the performance of AMD Radeon
 
 ## Method 1: For Navi GPUs (Recommended)
 1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only). Also adds `HDAU` device for audio over HDMI.
-2. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
+
+2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
+    - `Lilu.kext`
+    - `Whatevergreen.kext`
+3. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
 
 Contents of `SSDT-NAVI.aml`:
 
@@ -139,6 +143,7 @@ Contents of `SSDT-NAVI.aml`:
 2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
 
     - `DAGPM.kext` (dummy kext which will help with power management for the GPU)
+    - `Lilu.kext`
     - `Whatevergreen.kext`
 
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
