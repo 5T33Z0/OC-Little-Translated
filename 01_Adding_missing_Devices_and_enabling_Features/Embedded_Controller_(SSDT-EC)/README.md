@@ -11,11 +11,11 @@ In order to get USB Power Management working properly on **Skylake and newer CPU
 
 On Laptops, the `EC` microcontroller actually really exist but may be incompatible because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
-So, to put it in a nutshell:
+#### SSDT-EC vs SSDT-EC-USBX in a nutshell
 
-- On Desktop PCs, an existing `EC` has to be disabled and a fake EC has to be added.
-- On Laptops, we just need an additional fake EC to be present (not always required).
-- Skylake and newer CPUs require `SSDT-EC-USBX`, older CPUs only need `SSDT-EC`.
+- On **Desktops**, an existing `EC` has to be disabled and a fake EC has to be added.
+- On **Laptops**, we just need an additional fake EC to be present (not always required).
+- **Skylake** and newer Intel CPUs require `SSDT-EC-USBX`, older CPUs only require `SSDT-EC`.
 
 ## Adding a fake EC Device
 There are 2 methods for adding a fake EC: either by manually by adding the required `SSDT-EC `or `SSDT-EC-USBX` (depending on the used Intel CPU Family). Use either one method or the other, not both! Try NOT to rename `EC0`, `H_EC`, etc. to `EC`. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
