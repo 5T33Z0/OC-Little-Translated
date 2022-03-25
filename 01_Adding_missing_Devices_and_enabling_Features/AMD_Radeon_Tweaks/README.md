@@ -148,8 +148,13 @@ Contents of `SSDT-NAVI.aml`:
 
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 
+## PowerPlay Table Property Generator for Radeon VII Cards
+
+If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a special device property using an Excel spreadheet allowing you to modify all sorts of parameters to optimize the performance of you card.
+
 ## Credits
 - mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 - Toleda for `DAGPM.kext`
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - Baio1977 for `SSDT-NAVI.aml`
+- CMMMChris for his Radeon VII PowerPlay Table Generator
