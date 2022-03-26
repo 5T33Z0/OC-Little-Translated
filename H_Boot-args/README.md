@@ -1,5 +1,5 @@
 # Boot arguments explained
-Listed below you find commonly used as well as rather uncommon boot-args which can be applied to OpenCore and Clover.
+Listed below you find an incomplete list of commonly used as well as rather uncommon boot-args which can be injected by OpenCore and Clover.
 
 ### Debugging
 |Boot-arg|Description|
@@ -37,6 +37,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 |:------:|-----------|
 **`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 **`amfi_get_out_of_my_way=1`**|Combines wit disabled SIP, this disables Apple Mobile File Integrity. AMFI is a macOS kernel module enforcing code-signing validation and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every app that is run and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
+**`-force_uni_control`**|Force-enables the Universal Control service in macOS Monteray 12.3+.
 
 ## Boot-args and device properties provided by kexts
 
@@ -45,51 +46,51 @@ Assorted Lilu boot-args. Remember that Lilu acts as a patch engine providing fun
 
 |Boot-arg|Description|
 |:-------:|-----------|
-`-liluoff`| Disables Lilu.
-`-lilubeta`| Enables Lilu on unsupported macOS versions (macOS 12 and below are supported by default).
-`-lilubetaall`| Enables Lilu and *all* loaded plugins on unsupported macOS (use _very_ carefully).
-`-liluforce`| Enables Lilu regardless of the mode, OS, installer, or recovery.
-`liludelay=1000` | Adds a 1 second (1000 ms) delay after each print for troubleshooting.
-`lilucpu=N` |to let Lilu and plugins assume Nth CPUInfo::CpuGeneration.
+**`-liluoff`**| Disables Lilu.
+**`-lilubeta`**| Enables Lilu on unsupported macOS versions (macOS 12 and below are supported by default).
+**`-lilubetaall`**| Enables Lilu and *all* loaded plugins on unsupported macOS (use _very_ carefully).
+**`-liluforce`**| Enables Lilu regardless of the mode, OS, installer, or recovery.
+**`liludelay=1000`**| Adds a 1 second (1000 ms) delay after each print for troubleshooting.
+**`lilucpu=N`**|to let Lilu and plugins assume Nth CPUInfo::CpuGeneration.
 
 ### Whatevergreen.kext 
-Listed below you'll find a snall but usefuk assortion of whatevergreen's boot args for everythong graphics-related. Check the [complete list ](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
+Listed below you'll find a snall but useful assortion of WEG's boot args for everything graphics-related. Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
 
 |Boot-arg|Description|
 |:------:|-----------|
-`-wegoff`| Disables WhateverGreen.
-`-wegbeta`| Enables WhateverGreen on unsupported OS versions.
-`-wegswitchgpu`|Disables th iGPU if a discrete GPU is detected (or use `switch-to-external-gpu` property to iGPU)
-`-wegnoegpu`|Disables all discrete GPUs (or add `disable-gpu` property to each GFX0).
-`-wegnoigpu`|Disables internal GPU (or add `disable-gpu` property to iGPU)
-`agdpmod=pikera` | Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this, you’ll get a black screen. Don’t use on Polaris or Vega cards.
-`agdpmod=vit9696`|Disables check for `board-id` (or add `agdpmod` property to external GPU).
-`applbkl=0`| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for IGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
-`gfxrst=1`|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
-`ngfxgl=1`|Disables Metal support on NVIDIA cards (or use `disable-metal` property)
-`igfxgl=1`|boot argument (and `disable-metal` property) to disable Metal support on Intel.
-`igfxmetal=1`|boot argument (and `enable-metal` property) to force enable Metal support on Intel for offline rendering.
-`-igfxvesa`|Disable Intel Graphics acceleration in favor of software rendering (aka VESA mode). Useful when installing never macOS lacking graphics drivers for legacy hardware.
-`-igfxnohdmi` | boot argument (and `disable-hdmi-patches` property) to disable DP to HDMI conversion patches for digital sound.
-`-cdfon` | Boot-arg (and `enable-hdmi20` property) to enable HDMI 2.0 patches.
-`-igfxhdmidivs` | boot argument (and `enable-hdmi-dividers-fix` property) to fix the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on SKL, KBL and CFL platforms.
-`-igfxlspcon` |boot argument (and `enable-lspcon-support` property) to enable the driver support for onboard LSPCON chips. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
-`igfxonln=1` | boot argument (and `force-online` device property) to force online status on all displays.
-`-igfxdvmt` | boot argument (and `enable-dvmt-calc-fix` property) to fix the kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel ICL platforms.
-`-igfxblr` | boot argument (and `enable-backlight-registers-fix` property) to fix backlight registers on KBL, CFL and ICL platforms.
-`-igfxbls`| boot argument (and `enable-backlight-smoother` property) to make brightness transitions smoother on IVB+ platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
-`applbkl=3` | boot argument (and `applbkl` property) to enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
-`-igfxblr` | Boot argument (and enable-backlight-registers-fix property) to fix backlight registers on KBL, CFL and ICL platforms.
+**`-wegoff`**| Disables WhateverGreen.
+**`-wegbeta`**| Enables WhateverGreen on unsupported OS versions.
+**`-wegswitchgpu`**|Disables th iGPU if a discrete GPU is detected (or use `switch-to-external-gpu` property to iGPU)
+**`-wegnoegpu`**|Disables all discrete GPUs (or add `disable-gpu` property to each GFX0).
+**`-wegnoigpu`**|Disables internal GPU (or add `disable-gpu` property to iGPU)
+**`agdpmod=pikera`**| Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this, you’ll get a black screen. Don’t use on Polaris or Vega cards.
+**`agdpmod=vit9696`**|Disables check for `board-id` (or add `agdpmod` property to external GPU).
+**`applbkl=0`**| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for IGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
+**`gfxrst=1`**|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
+**`ngfxgl=1`**|Disables Metal support on NVIDIA cards (or use `disable-metal` property)
+**`igfxgl=1`**|boot argument (and `disable-metal` property) to disable Metal support on Intel.
+**`igfxmetal=1`**|boot argument (and `enable-metal` property) to force enable Metal support on Intel for offline rendering.
+**`-igfxvesa`**|Disable Intel Graphics acceleration in favor of software rendering (aka VESA mode). Useful when installing never macOS lacking graphics drivers for legacy hardware.
+**`-igfxnohdmi`**| boot argument (and `disable-hdmi-patches` property) to disable DP to HDMI conversion patches for digital sound.
+**`-cdfon`**| Boot-arg (and `enable-hdmi20` property) to enable HDMI 2.0 patches.
+**`-igfxhdmidivs`**| boot argument (and `enable-hdmi-dividers-fix` property) to fix the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on SKL, KBL and CFL platforms.
+**`-igfxlspcon`**|boot argument (and `enable-lspcon-support` property) to enable the driver support for onboard LSPCON chips. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
+**`igfxonln=1`**| boot argument (and `force-online` device property) to force online status on all displays.
+**`-igfxdvmt`**| boot argument (and `enable-dvmt-calc-fix` property) to fix the kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel ICL platforms.
+**`-igfxblr`**| boot argument (and `enable-backlight-registers-fix` property) to fix backlight registers on KBL, CFL and ICL platforms.
+**`-igfxbls`**| boot argument (and `enable-backlight-smoother` property) to make brightness transitions smoother on IVB+ platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
+**`applbkl=3`**| boot argument (and `applbkl` property) to enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
+**`-igfxblr`**| Boot argument (and enable-backlight-registers-fix property) to fix backlight registers on KBL, CFL and ICL platforms.
 
 ### AppleALC
 Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affect AppleALC as well.
 
 |Boot-arg|Description|
 |:------:|-----------|
-`alcid=layout`| To select a layout-id, for example alcid=1
-`-alcoff` | Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
-`-alcbeta` | Enables AppleALC on unsupported systems (usually unreleased or old ones)
-`alcverbs=1`| Enables alc-verb support (also alc-verbs device property)
+**`alcid=layout`**| To select a layout-id, for example alcid=1
+**`-alcoff`**| Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
+**`-alcbeta`**| Enables AppleALC on unsupported systems (usually unreleased or old ones)
+**`alcverbs=1`**| Enables alc-verb support (also alc-verbs device property)
 
 To be continued…
 
