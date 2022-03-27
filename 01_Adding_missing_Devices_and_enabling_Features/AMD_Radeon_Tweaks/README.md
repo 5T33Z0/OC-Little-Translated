@@ -152,7 +152,8 @@ Contents of `SSDT-NAVI.aml`:
 
 If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a special device property using an Excel spreadheet allowing you to modify all sorts of parameters to optimize the performance of you card.
 
-## Credits
+## Credits & Resources
+- Using Radeon RX6600 XT Cards with [macOS Monterey](https://github.com/perez987/rx6600xt-on-macos-monterey)
 - mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 - Toleda for `DAGPM.kext`
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
