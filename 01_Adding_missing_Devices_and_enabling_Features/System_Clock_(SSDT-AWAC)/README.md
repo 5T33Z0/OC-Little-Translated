@@ -138,15 +138,16 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 ``` 
 **Procedure**: 
 
-- In `DSDT`, check if `Device HPET` or `PNP0103` is present. If not, you don't need this patch!
-- Next, search for `Device (AWAC)` or `ACPI000E`. 
-- If present, check if `STAS` == `Zero` (refer to the code example from the beginning).
-- If all of the above conditions are met, you can add `SSDT-AWAC-ARTC.aml` to your ACPI Folder and `config.plist`.
-- Save and reboot. 
-- In IORegistryExplorer, verify the following:
+1. In `DSDT`, check if `Device HPET` or `PNP0103` is present. If not, you don't need this patch!
+2. Next, search for `Device (AWAC)` or `ACPI000E`.
+3. If present, check if `STAS` == `Zero` (refer to the code example from the beginning).
+4. If all of the above conditions are met, you can add `SSDT-AWAC-ARTC.aml` to your ACPI Folder and `config.plist`.
+5. Open maciASL. Under "File" → "New from ACPI", check if `HPET` is listed. If not, continie with step 6. But if it is present, you should drop it. In order to do so, open your `config.plist`, go to `ACPI` &rarr; `Delete`. Create a new rule. Under `TableSignature`, enter `48504554` (HEX for "HPET"). Check the guide for [Dropping ACPI Tables in OpenCore](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables) if you need further assistance.
+6. Save and reboot.
+7. In IORegistryExplorer, verify the following:
 	-  `ARTC`: should be present
 	-  `HPET`: should not be present
-- Drop `SSDT-HPET` table (if present). You can follow my guide for [Dropping ACPI Tables in OpenCore](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables) to do so,
+8. In maciASL the `HPET` should also not be present.
 
 #### To HPET, or not to HPET?
 Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
