@@ -38,7 +38,7 @@ Once you're back in macOS, do the following:
 - Copy the PCI Path and paste to a text editor because we need to modify it.
 - Append the following line to the PCI path: `/\EFI\Microsoft\Boot\bootmgfw.efi`
 - The final path should have this form: `YOUR_PciRoot_Path/\EFI\Microsoft\Boot\bootmgfw.efi`
-- Back in OCAT, copy the whole path into the `Path` field. In this example: `PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(1,GPT,2B711BAD-3092-49DB-871F-5D4C8EA06A66,0x800,0x32000)/\EFI\Microsoft\Boot\bootmgfw.efi`.
+- Back in OCAT, copy the whole path into the `Path` field. In this example:</br>`PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(1,GPT,2B711BAD-3092-49DB-871F-5D4C8EA06A66,0x800,0x32000)/\EFI\Microsoft\Boot\bootmgfw.efi`.
 - Change the `ScanPolicy` to your liking. I use `2687747`.
 - Save your config and reboot. The Windows Entry should now be present in the OC boot menu:</br>
 ![win10flav](https://user-images.githubusercontent.com/76865553/148958994-60379e98-4b84-4e4b-b0d0-e2484813d06b.png)
