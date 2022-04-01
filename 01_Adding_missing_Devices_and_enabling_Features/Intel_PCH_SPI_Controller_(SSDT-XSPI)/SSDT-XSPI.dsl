@@ -1,5 +1,5 @@
 // Add XSPI device
-DefinitionBlock ("", "SSDT", 2, "HACK", "HACKLIFE", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "HACK", "XSPI", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
 
