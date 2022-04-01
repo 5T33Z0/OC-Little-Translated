@@ -18,7 +18,7 @@ In order to add the Windows Boot Manager to OpenCore's boot menu, we need to fin
 - Once Open Shell is running, we need to find the EFI partition containing the "Microsoft" folder:
 	- Type `ls fs1:EFI` and hit `Enter`.
 	- If it returns `ls: File not Found - 'fs1'`, continue searching.
-	- Enter `ls fs2:EFI`, `ls fs3:EFI`, etc., until you find it. In my case it is located in `ls fs8:EFI`:</br>![found](https://user-images.githubusercontent.com/76865553/148824053-5987d044-1081-46f9-bc46-77efaf55bd00.png)
+	- Enter `ls fs2:EFI`, `ls fs3:EFI`, etc., until you find it. In my case it is located in `ls fs8:EFI`:</br>![shell](https://user-images.githubusercontent.com/76865553/161344509-3f4fe025-c9dc-4a72-acda-a577cf1ec9d4.png)
 	- Enter `fsX:` (`X` = number of the EFI file system where the "Microsoft" folder is located – in my case `fs8:`).
 	- Type `map > map.txt` and hit `Enter` &rarr; saves a list of the PCI devices as a text file on the selected EFI Partition of the Windows Disk.
 	- Type `exit` and hit `Enter`. You will return to the boot picker.
