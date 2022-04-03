@@ -49,7 +49,7 @@ Any additional kexts must be placed after the mandatory kexts.
 ### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
 ![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
 ### Example 7: Broadcom WiFi and Bluetooth 
-![brcmwifibt](https://user-images.githubusercontent.com/76865553/142741082-598db376-cff1-48c4-8cce-c1a06312f85b.png)
+![Brcmkexts](https://user-images.githubusercontent.com/76865553/161415791-dbe0356d-a5d5-4bb5-9cad-98efbbaf782a.png)
 
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
