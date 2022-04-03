@@ -10,7 +10,7 @@ Basically, kexts which provide additional functionality for other kexts have to 
 
 The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because theses contain additional kexts nested inside them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. Same goes for having kexts in the list which aren't present in the "OC > kexts" Folder. So it's of utmost importance that the kexts are loaded in the correct order and that the content of the config.plist reflects what's inside the OC Folder 1:1. The examples listed below should provide you a good guideline on how to organize and combine kexts.
 
-For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/kext.md) on the OpenCore Github.
+For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Kernel Support Table
 Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for kext is very useful to set up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kext are loaded for which macOS by specifying the kernel range. It's basically the same feature Clover provides. But instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.) you specify the lower and upper limit which is a lot smarter because this way you don't create duplicate kexts (which you maybe forget to update later).
