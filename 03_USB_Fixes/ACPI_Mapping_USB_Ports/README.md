@@ -53,11 +53,11 @@ We can see the following:
 - Take note of the "Table Signature" and the "OEM Table ID" – we will use them to create a delete rule in the OpenCore config.
 
 ### Broadwell and older
-ACPI tables for Broadwell and older CPUs don't use seperate SSDTs for mapping USB ports – it's all handled with in the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and UBS 3 (`XHCI`) contained in the `DSDT` itself. You don't have to manually map these ports either since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
+ACPI tables for Broadwell and older CPUs don't use seperate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
 
 ![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png)
 	
-As you can see, the `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. And the `EHC1` contains 8 Ports (`PRT0` to `PRT7`). `EHC2` contains 6 Ports (`PRT8` to `PRTD`). 
+As you can see, the `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. So does the `EHC1` device (ports `PRT0` to `PRT7`). `EHC2` only contains 6 Ports (`PRT8` to `PRTD`). 
 
 If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not beeing detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
