@@ -1,6 +1,6 @@
 # Add PMCR Device (`SSDT-PMC`)
 ## About
-:warning: Mandatory for 390 mainboards and recommended for 400/500/600-series chipsets! In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used by Apple in their DSDTs.
+:warning: Mandatory for 390-series mainboards (recommended for 400/500/600-series chipsets)! In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used by Apple in their DSDTs.
 
 **Instructions**:
 
