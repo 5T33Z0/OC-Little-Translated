@@ -49,7 +49,8 @@ If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
 Since Big Sur requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate SSDT-PM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you can either:
 
 * Use `SSDTTime` to generate a `SSDT-PLUG.aml` **or** 
-* Stay on `MacBookPro10,1` but add `-no_compat_check` to `boot-args`.
+* Stay on an SMBIOS with Ivy Bridge support, but add `-no_compat_check` to `boot-args`.
+* Additionally, add these Booter and Kernel [Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to your config to be able to run Monterey on unsupported SMBIOSes.
 
 **Advantages** of using `MacBookPro10,1` with `-no_compat_check` are:
 
