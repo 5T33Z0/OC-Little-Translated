@@ -82,7 +82,7 @@ Method(XOSI, 1)
 
 - **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
 
-## :Waring: Important
+## ⚠️ Important
 Some machines use methods indicated by underscores `_` with similar names to `_OSI` (e.g. some Dell machines use `_OSID`, some ThinkPads use `_OSIF`). If these methods contain the letters "O-S-I" and are located on the `_SB` level, they will accidentally be renamed to `XOSI` by binary renames, which causes ACPI Errors in Windows. Therefore, you need to rename methods like `OSID` and `OSIF` to something else (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) prior to applying the `_OSI to XOSI` rename to avoid ACPI errors. In other words, renames like `OSID to XSID` or `OSIF to XSIF` have to be listed before `_OSI to XOSI` in the `config.plist`.
 
 ## Appendix: Origin of OS Patches
