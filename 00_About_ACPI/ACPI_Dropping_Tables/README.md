@@ -26,7 +26,7 @@ This method is used to drop tables such as SSDTs and others which have a distinc
 ## Method 2: Dropping Tables based on Table Signature
 For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a reliable method to detect and drop a table because its OEM Table ID might contain a lot of blanks, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead.
 
-### Example 1: dropping the DMAR Table
+### Example 1: dropping the `DMAR` Table
 
 On some Z490/Z590 boards (usually Gigabyte) for example, the presence of Reserved Memory Region(s) in the DMA Remapping Table (DMAR) in combination with disabled VT-d and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller and PCIe Ethernet cards useless in macOS Monterey. In this case, DMAR has to be modified, VT-d enabled and `DisableIOMapper` disabled.
 
