@@ -28,6 +28,9 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - Export the file as .aml (ACPI Machine Language Binary) and add it to EFI > OC > ACPI and your Config
 - Save and Reboot.
 
+**Example**: existing EC device in a Laptop DSDT </br>
+![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
+
 #### Additional Steps (Desktop PCs only)
 To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver, do the following after rebooting:
 
