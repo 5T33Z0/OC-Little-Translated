@@ -30,7 +30,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 ### Network-specific boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
-**`dk.e1000=0`**|Prohibits `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from attaching to the Intel I225-V Ethernet controller used on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead. This boot argument is optional on most boards as they are compatible with the DEXT driver. However, it may be required on Gigabyte and several other boards, which can only use the kext driver, as the DEXT driver causes hangs. You don't need this if your board didn't ship with the I225-V NIC.
+**`e1000=0`**|Prohibits `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from attaching to the Intel I225-V Ethernet controller used on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead. This boot argument is optional on most boards as they are compatible with the DEXT driver. However, it may be required on Gigabyte and several other boards, which can only use the kext driver, as the DEXT driver causes hangs. You don't need this if your board didn't ship with the I225-V NIC.
 
 ### Other useful boot arguments
 |Boot-arg|Description|
