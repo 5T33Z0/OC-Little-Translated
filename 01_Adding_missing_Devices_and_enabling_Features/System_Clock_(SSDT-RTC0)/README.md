@@ -28,22 +28,6 @@ Device (RTC)
   }
 }
 ```
-To enable an existing but otherwise disabled `RTC` for macOS only, you can add `SSDT-RTC_STA0F.aml`. It changes the return value for `_STA` from `0` to `0x0F`, so the existing RTC is enabled. This way you don't have to add a fake RTC:
-
-```swift
-DefinitionBlock ("", "SSDT", 2, "HACK", "RTCSTA0F", 0)
-{
-    External (_SB_.PCI0.LPCB.RTC_._STA, UnknownObj)
-
-    Scope (\)
-    {
-        If (_OSI ("Darwin"))
-        {
-            \_SB.PCI0.LPCB.RTC._STA = 0x0F
-        }
-    }  
-}
-```
 Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
 
 ```swift

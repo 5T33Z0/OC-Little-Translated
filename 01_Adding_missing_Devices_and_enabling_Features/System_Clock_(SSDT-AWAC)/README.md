@@ -151,23 +151,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 
 #### To HPET, or not to HPET?
 Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
-___
-
-### Method 3: using `SSDT-AWAC_STA0` (if method 1 fails)
-Disables `AWAC` where `SSDT-AWAC` has no effect. Add `SSDT-AWAC_STA0` to ACPI folder and config, then reboot. Check for `AWAC` in [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) and make sure it is not present. Example for disabling AWAC on systems with 8th Gen Intel Core CPU or newer:
-
-```Swift
-External (_SB_.AWAC._STA, IntObj)
-Scope (\)
-  {
-      If (_OSI ("Darwin"))
-      {
-          \_SB.AWAC._STA = Zero
-          
-      }
-  }
-```
-**NOTE**: Methods 1 and 2 only work if RTC can be enabled in the original DSDT via the `STA` variable. A lot of 300-series chipsets like Z390 don't have an RTC device which can be enabled via `STAS`. In this case you have to add a fake RTC first – see chapter [System_Clock_(SSDT-RTC0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)).
 
 <details>
 <summary><strong>Old Methods (kept for documentary purposes)</strong></summary>
