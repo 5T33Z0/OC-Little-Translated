@@ -14,7 +14,7 @@ Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedi
 ### 1. Find the device name of your system's SMBus
 Search for `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and later) in `DSDT` to find the name of the device it belongs to. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:
 
-![SMBU](https://user-images.githubusercontent.com/76865553/164177963-8f90978d-490f-4d17-9c8a-ca48d988b8ae.png)
+![SMBUS](https://user-images.githubusercontent.com/76865553/164179008-9f0e467c-41c2-4569-a186-0ab3f9a435a7.png)
 
 **NOTE**: On ThinkPads it's mostly called `SMBU`.
 
