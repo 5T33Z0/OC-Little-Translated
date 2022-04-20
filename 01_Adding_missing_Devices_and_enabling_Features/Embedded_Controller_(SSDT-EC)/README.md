@@ -4,7 +4,7 @@
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.
 
 ### Why do I need a fake EC?
-On Desktop PCs, the `EC` device usually isn't named correctly for what macOS expects, so it can be attached to `AppleACPIEC` driver – which is a good thing in this case since EC devices from PCs are incompatible with macOS and may break at any time so `AppleACPIEC` kext must NOT load on desktops. To work around this issue, we disable the device included in the system's `DSDT` and add a fake `EC` for macOS to play with instead.
+On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is good, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from loading. To work around this issue, we disable the device in the system's `DSDT` and add a fake `EC` for macOS to play with instead.
 
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
 In order to get USB Power Management working properly on **Skylake and newer CPUs**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient (if required at all).
@@ -53,7 +53,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
         }
     }
     ```
-- Adjust the device name and PCI path accordingly to what's used in you `DSDT` 
+- Adjust the device name and PCI path accordingly to what's used in you `DSDT`
 - Export the file as .aml
 - Replace the existing file in EFI > OC > ACPI
 - Reboot
