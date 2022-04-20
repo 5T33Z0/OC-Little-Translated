@@ -16,8 +16,6 @@ Search for `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and 
 
 ![SMBUS](https://user-images.githubusercontent.com/76865553/164179008-9f0e467c-41c2-4569-a186-0ab3f9a435a7.png)
 
-**NOTE**: On ThinkPads it's mostly called `SMBU`.
-
 ### 2. Pick the corresponding SSDT
 Depending on the results of your search, add the corresponding SSDT to your ACPI Folder and config.plist:
 
