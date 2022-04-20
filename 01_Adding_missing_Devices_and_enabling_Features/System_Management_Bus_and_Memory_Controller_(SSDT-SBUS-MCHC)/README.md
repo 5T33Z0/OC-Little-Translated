@@ -12,7 +12,11 @@ Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedi
 ## Patch Instructions
 
 ### 1. Find the device name of your system's SMBus
-Search for `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and later) in `DSDT` to find the name of the device it belongs to. It will either be called `SBUS` or `SMBU`. **NOTE**: In ThinkPads it's mostly called `SMBU`.
+Search for `0x001F0003` (before generation 6) or `0x001F0004` (generation 6 and later) in `DSDT` to find the name of the device it belongs to. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:
+
+![SMBU](https://user-images.githubusercontent.com/76865553/164177963-8f90978d-490f-4d17-9c8a-ca48d988b8ae.png)
+
+**NOTE**: On ThinkPads it's mostly called `SMBU`.
 
 ### 2. Pick the corresponding SSDT
 Depending on the results of your search, add the corresponding SSDT to your ACPI Folder and config.plist:
