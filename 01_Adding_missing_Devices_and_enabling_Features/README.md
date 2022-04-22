@@ -61,6 +61,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
+[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Attaches AC Adapter Device to AppleACPIACAdapter Service in I/O Registry.|`ACPI0003`
 [**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD).|`ACPI0008`
 [**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer.|`Device (AWAC)` or `ACPI000E`
 [**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX).|`PNP0C09`
@@ -80,17 +81,16 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
 #### Cosmetic SSDTs 
-The SSDTs listed below will most likely not add or enable any features besides being present in the IO Registry as a device or service, so it _looks_ more like a genuine Mac model as defined by the SMBIOS.
+The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered fake or virtual devices. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them.
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
-[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Attaches AC Adapter Device to AppleACPIACAdapter Service in I/O Registry.|`ACPI0003`
-[**SSDT-ARTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC))|Adds ARTC Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses same HID as AWAC.| `ACPI000E` 
-[**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds DMA Controller to device tree.|`PNP0200` or `DMAC`
-[**SSDT-FWHD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD))|Adds Firmware Hub Device (FWHD) to IOReg. Used by almost every intel-based Mac.|`INT0800`
+[**SSDT-ARTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC))|Adds fake ARTC Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses same HID as AWAC.| `ACPI000E` 
+[**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds fake DMA Controller to device tree.|`PNP0200` or `DMAC`
+[**SSDT-FWHD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD))|Adds fake Firmware Hub Device (FWHD) to IOReg. Used by almost every intel-based Mac.|`INT0800`
 [**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds MEM2 Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
-[**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or `Device (PPMC)`
-[**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
+[**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or `Device (PPMC)`
+[**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 
 ## Resources
 [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) by khronokernel
