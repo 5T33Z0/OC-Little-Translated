@@ -54,7 +54,7 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 - Using **OpenCore** (requires Debug version and working config): enable Misc > Debug > `SysReport` Quirk. The DSDT will be dumped during next boot.
 
 ### Included Hotpatches
-Listed below are all SSDTs contained in this chapter. Search for the listed terms in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.
+Listed below are all SSDTs contained in this chapter. Use the listed search terms to check your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.
 
 #### Functional SSDTs
 Listed below are SSDTs which add or enable devices and features in macOS.
@@ -81,7 +81,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
 #### Cosmetic SSDTs 
-The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered fake or virtual devices. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them.
+The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered fake or virtual devices. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them because there's no data available for them.
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
