@@ -1,7 +1,7 @@
 # AC Adapter (`SSDT-AC`) (for Laptops)
-This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the I/O Registry of macOS. This is optional and purely cosmetic – it doesn't make any difference in terms of functionality whatsoever as explained [here](https://github.com/acidanthera/bugtracker/issues/1808).
+This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the I/O Registry of macOS. This is optional and mostly cosmetic – it doesn't make any difference in terms of functionality as explained [here](https://github.com/acidanthera/bugtracker/issues/1808).
 
-If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't need to add this patch at all! Read the note below about **ACPIBatteryManager** vs. **SMCBatteryManager** for more details.
+If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't need to add this SSDT. Read the notes about **ACPIBatteryManager** vs. **SMCBatteryManager** below for more details.
 
 **Applicable to**: MacBook, MacBookAir and MacBookPro SMBIOS. 
 
@@ -17,15 +17,17 @@ If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't
 There are 2 methods of applying this patch: either via kext or via SSDT. 
 
 ### Method 1: Using a Kext (easy but outdated)
-- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. It attaches the AC Adapter to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in IORegistryExplorer.
+- Add `ACPIBatteryManager.kext` to your EFI's kext folder and config. 
 - Disable `SMCBatteryManager.kext` (if present).
 - Save and reboot
 
-#### Note: ACPIBatteryManager vs. SMCBatteryManager
-`SMCBatteryManager` acts as a fake controller, which implements a complete emulation layer of `AppleSmartBattery` of SMC and SMBus protocols. Although it is able to find all the AC Adapters and Batteries just fine, it just doesn't attach to them in IOReg like `ACPIBatteryManager` does. So basically, this is all just cosmetics. If you want to be on the safe side, just stay with SMCBatteryManager since it is in active development, whereas ACPIBatteryManager is from 2018 and pretty much deprecated.
+`ACPIBatteryManager.kext` attaches the AC Adapter device to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in **IORegistryExplorer**.
+
+#### ACPIBatteryManager vs. SMCBatteryManager
+`SMCBatteryManager` acts as a fake controller, which implements a complete emulation layer of `AppleSmartBattery` of SMC and SMBus protocols. Although it is able to find all the AC Adapters and Batteries just fine, it just doesn't attach to them in I/O Registry like `ACPIBatteryManager` does. Basically, this is all just cosmetics. If you want to be on the safe side, just stay with SMCBatteryManager since it is in active development, whereas ACPIBatteryManager is from 2018 and pretty much deprecated.
 
 ### Method 2: Use a SSDT (for advanced users)
-If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to connect it to the AC Adapter device. Do the following, to figure out which SSDT is applicable:
+If `AppleACPIACAdapter` is not loaded, you can use one of the included SSDT hotpatches to attach it to the AC Adapter. Do the following, to figure out which SSDT is applicable:
 
 - In your `DSDT`, search for `ACPI0003`. 
 - Open the SSDT corresponding to your AC device's name in maciASL and adjust the PCI path according to the path used in your `DSDT`.
