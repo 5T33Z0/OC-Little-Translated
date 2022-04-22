@@ -6,12 +6,12 @@ If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't
 **Applicable to**: MacBook, MacBookAir and MacBookPro SMBIOS. 
 
 ## Preparations
-- In `DSDT`, search for `ACPI0003` and the device it belongs to (either `AC`, `AC0`, `ADP`, `ADP1` or `ACAD`). 
+- In `DSDT`, search for `ACPI0003` and the device it belongs to: either `AC`, `AC0`, `ADP`, `ADP1` or `ACAD`. 
 - In this example, it's present and located under `\SB.PCI0.LPC.EC.AC`: 
 	![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/139686755-00929243-000b-459d-9d02-5ab9b0f720c6.png)
 - Next, run **IORegistryExplorer** and find either of these devices: `AC`, `AC0`, `ADP0`, `ADP1` or `ACAD` (it should be located near the top of the list)
-- Check if `AppleACPIACAdapter` is loaded. If it's present (as in this example) you don't need the fix: ![AppleACPIACAdapter_present](https://user-images.githubusercontent.com/76865553/139686991-d0104672-31f1-4ccf-949b-cd44ff9a4537.png)
-- If `AppleACPIACAdapter` is missing, you need a fix: ![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
+- Check if `AppleACPIACAdapter` is loaded. If it's present (as in this example) you don't need the fix:</br> ![AppleACPIACAdapter_present](https://user-images.githubusercontent.com/76865553/139686991-d0104672-31f1-4ccf-949b-cd44ff9a4537.png)
+- If `AppleACPIACAdapter` is missing, you can add a variant of `SSDT-AC` to fix it: </br>![AppleACPIACAdapter_missing](https://user-images.githubusercontent.com/76865553/139687029-acdd7853-6d7c-43fc-b421-f2c718af45c2.png)
 
 ## Applying the patch
 There are 2 methods of applying this patch: either via kext or via SSDT. 
@@ -27,6 +27,7 @@ There are 2 methods of applying this patch: either via kext or via SSDT.
 ### Method 2: Use a SSDT (for advanced users)
 If `AppleACPIACAdapter` is not loaded, you can use the included SSDT hotpatch to connect it to the AC Adapter device. Do the following, to figure out which SSDT is applicable:
 
+- In your `DSDT`, search for `ACPI0003`. 
 - Open the SSDT corresponding to your AC device's name in maciASL and adjust the PCI path according to the path used in your `DSDT`.
 - In this example, `SSDT-AC.dsl` is used and modified, so it looks like this: ![SSDT_mod](https://user-images.githubusercontent.com/76865553/139687058-6fad207b-019a-4253-a91e-c87011f17922.png)</br>
 - Export the file as an `.aml` file (ACPI Machine Language Binary)
@@ -46,7 +47,7 @@ If it's not present, then you did something wrong, so start over.
 
 ## Notes
 - When using the SSDT patches, make sure that the name of the LPC Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
-- In Clover, you can use the `FixADP1` instead to attach the AC device in IOReg.
+- In Clover, you can use the DSDT patch `FixADP1` instead to attach the AC device in IOReg.
 
 ## Credits
 - SSDT Patches by [**Baio 1977**](https://github.com/Baio1977/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC%20Adapter%20FIX%20(SSDT-AC%5CAC0%5CADP0%5CADP1%5CACAD))
