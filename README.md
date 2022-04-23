@@ -39,6 +39,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 * [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 * [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 * [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples)
+* [**NVRAM Variables**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_NVRAM_Variables)
 
 **APPENDIX**
 
