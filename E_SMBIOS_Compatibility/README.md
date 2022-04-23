@@ -1,7 +1,7 @@
-## SMBIOS Compatibility Table
+# SMBIOS and Hardware Compatibility
 
-Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1yLZeRFeONwDj1zMoONQAQ4rlodAnME1q5jFXE-q5H8s/edit#gid=0
-) to find out which SMBIOS is natively supported by which versions of macOS.
+## SMBIOS Compatibility Chart
+Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1yLZeRFeONwDj1zMoONQAQ4rlodAnME1q5jFXE-q5H8s/edit#gid=0) to find out which SMBIOS is natively supported by which versions of macOS.
 
 **NOTES**
 
@@ -11,14 +11,17 @@ This list, although helpful and informative, is not as binding for hackintoshes 
 - …you can run older versions of OSX/macOS on newer CPUs which are not supported by the chosen OSX/macOS by utilizing Fake CPU-IDs.
 - …you can make use of macOS Monterey's virtualization capabilities to spoof a supported SMBIOS but let the hardware run on the intended SMBIOS for your CPU! Check my [**Boad-ID VMM spoof guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to find out how it works.
 
-## WiFi/BT Compatibility
+## Picking the right SMBIOS
+Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smooth running and efficiant system. You should chose your SMBIOS based on the following aspects:
+
+- **CPU Vendor and product Family**: Intel? AMD? Mobile? Desktop? NUC? With or without iGPU support?
+- **Discrete GPU**: Vendor and Model (ATI/AMD?, NVIDIA?)
+- **macOS Version**: the used CPU family determines the optimal SMBIOS. But the latest macOS version is most likely only supported by more recent SMBIOSes.
+
+For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
+
+## WiFi/BT Compatibility Chart
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) to find out which wireless card are supported on macOS Lion to Monterey.
 
-## Picking the right SMBIOS
-Choosing the correct SMBIOS for your Hackintosh is crucial to get a great working system. Chose your SMBIOS based on the following aspects:
-
-- CPU Family (Intel? AMD? Mobile? Desktop? With or without iGPU support?) 
-- Discrete GPU Vendor and Model (AMD? NVIDIA?)
-- macOS Version (the optimal SMBIOS is decided by the used CPU but the latest macOS version is most likely only supported by newer SMBIOS.)
-
-For an in-depth guide on choosing the best SMBIOS for your System, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
+## SSD Compatibility Chart
+Chech this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.

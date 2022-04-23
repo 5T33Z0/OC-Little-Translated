@@ -72,4 +72,3 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
 - This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in your `DSDT` is `0`.
 - The device path used in the sample patch is `LPCB`, please adjust it accordingly to the name used in your `DSDT` (either `LPC` or `LPCB`).
 - ***SSDT-RTC0*** by Acidanthera (included in OpenCorePkg)
-- ***SSDT-RTC_STA0F*** by Baio1977
