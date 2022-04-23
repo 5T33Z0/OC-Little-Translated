@@ -80,7 +80,7 @@ Listed below you'll find a snall but useful assortion of WEG's boot args for eve
 **`-igfxblr`**| boot argument (and `enable-backlight-registers-fix` property) to fix backlight registers on KBL, CFL and ICL platforms.
 **`-igfxbls`**| boot argument (and `enable-backlight-smoother` property) to make brightness transitions smoother on IVB+ platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
 **`applbkl=3`**| boot argument (and `applbkl` property) to enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
-**`-igfxblr`**| Boot argument (and enable-backlight-registers-fix property) to fix backlight registers on KBL, CFL and ICL platforms.
+**`-igfxblr`**| Boot argument (and `enable-backlight-registers-fix` property) to fix backlight registers on KBL, CFL and ICL platforms.
 
 ### AppleALC
 Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affect AppleALC as well.
@@ -93,4 +93,3 @@ Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affe
 **`alcverbs=1`**| Enables alc-verb support (also alc-verbs device property)
 
 To be continued…
-
