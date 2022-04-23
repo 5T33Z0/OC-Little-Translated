@@ -376,4 +376,4 @@ Once you are done with your port mapping activities, do the following:
 **Good Luck!**
 
 ## Additional Resources
-A similar approach to mapping USB ports in ACPI utilizing the patching capabilitis of maciASL can be found [here](https://github.com/dreamwhite/dell-inspiron-5370-hackintosh/blob/master/Docs/ACPI/SSDT-3-xh_OEMBD.md)
+A different approach to mapping USB ports via ACPI utilizing the patching capabilitis of maciASL can be found [here](https://github.com/dreamwhite/dell-inspiron-5370-hackintosh/blob/master/Docs/ACPI/SSDT-3-xh_OEMBD.md)
