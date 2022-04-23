@@ -217,7 +217,7 @@ At this stage, there are two options for mapping your USB ports.
 - Option B: you don't know which Ports connect to which physical connector so you need to probe them.
 
 #### Option A: Mapping ports based on a known configuration
-This is for people who already created a USBPorts.kext in Hackintool or similar and still have the mapping. In my case, I have a Spreadsheet, which looks like this:
+This is for people who already created a `USBPorts.kext` in Hackintool or similar and still have the mapping. In my case, I have a Spreadsheet, which looks like this:
 
 ![Ports_List](https://user-images.githubusercontent.com/76865553/137521950-e354ec4f-aa9c-4a4e-a146-7d9204387c80.png)
 	
