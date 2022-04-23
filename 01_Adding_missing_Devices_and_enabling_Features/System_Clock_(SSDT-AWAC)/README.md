@@ -62,7 +62,7 @@ Device (AWAC)
     ...
 }
 ```
-As you can see, you can enable RTC and disable AWAC at the same time if `STAS=1`, using one of the following methods/hotpatches.
+As you can see, you can enable `RTC` and disable `AWAC` at the same time if `STAS=1`, using one of the following methods/hotpatches.
 
 ### Method 1: using `SSDT-AWAC`
 ```Swift
@@ -153,23 +153,18 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
 
 <details>
-<summary><strong>Old Methods (kept for documentary purposes)</strong></summary>
+<summary><strong>Other Methods</strong> (kept for documentary purposes)</summary>
 
 # Binary Name Change
 
 ## Description
-
 The method described in this article is not a renaming of `Device` or `Method` in the usual sense, but a binary renaming to enable or disable a device.
 
 ## Risks
-
-ACPI binary renaming may affect other systems when OC is introduced to other systems.
+ACPI binary renaming may affect other Operation Systems when booting via OpenCore since it injects ACPI tables system-wide.
 
 ## Example
-
-Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA`.
-
-Binary renaming.
+Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA` by using binary renames:
 
 **Find**: `00 A0 08 48 50` "Note: `00` = `{`; `A0` = `If` ......  
 **Replace**: `00 A4 0A 0F A3` `Note: `00` = `{`; `A4 0A 0F` = `Return(0x0F)`; `A3` = `Noop` for completing the number of bytes`
@@ -198,7 +193,6 @@ Binary renaming.
           Return (Zero)
     }
   ```
-
 	**Explanation**: There is an obvious error after renaming, but this error is not harmful. First, the contents after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content.
 
 	As a practical matter, we should ensure the integrity of the renamed syntax as much as possible. Here is the complete `Find`, `Replace` data:
@@ -304,8 +298,8 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 ## Description
 
-- The **preset variables method** is to preassign values to some variables of ACPI (type `Name` and type `FieldUnitObj`) for the purpose of initialization. [Although these variables are assigned at the time of definition, they are not changed until `Method` calls them.
-- Fixing these variables within `Scope (\)` through a third-party patch file can achieve the patching effect we expect.
+- The **preset variables method** is used to pre-assign values to some variables of ACPI (type `Name` and type `FieldUnitObj`) for the purpose of initialization. Although these variables are assigned at the time of definition, they are not changed until a `Method` calls them.
+- Fixing these variables within a `Scope (\)` through a third-party patch file can achieve the patching effect we expect.
 
 ## Risks
 
@@ -474,13 +468,12 @@ Method (_STA, 0, NotSerialized)
     Return (Zero)
 }
 ```
-From the above example, we can see that the original `_STA` method contains other operations `Method call ECTP (Zero)` and `Assignment operation ^^^GFX0.CLKF = 0x03`, in addition to setting the conditional device state enable bit.
-Using this method will result in an error (non-ACPI Error) by invalidating other references and operations in the original `_STA` method
+From the above example, we can see that the original `_STA` method contains other operations `Method call ECTP (Zero)` and `Assignment operation ^^^GFX0.CLKF = 0x03`, in addition to setting the conditional device state enable bit. Using this method will result in an error (non-ACPI Error) by invalidating other references and operations in the original `_STA` method.
 
 **Risk**: `XM01` may not be recovered when OC boots other systems.
 </details>
 
-**NOTES**
+## Notes
 
 On some X299 boards, the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, booting macOS still fails. In this case, leaving AWAC enabled (so RTC won't be available) and adding a fake [**`RTC0`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) is the solution.
 
