@@ -22,3 +22,6 @@
 TBC…
 
 **Source**: https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0
+
+## Credits
+Dreamwhite for NVRAM Variables spreadsheet
