@@ -18,4 +18,5 @@ This section contains a collection of laptop-specific patches for various brands
 Click on the folders above in this section to select the corresponding category/guide.
 
 ## Further Resources
-- https://github.com/dortania/clover-laptop-guide
+- Laptop Guide by Dortania: https://github.com/dortania/clover-laptop-guide
+- Updated Battery Patching Guide by Dreamwhite: https://github.com/dreamwhite/acpi-battery-patching-guide
