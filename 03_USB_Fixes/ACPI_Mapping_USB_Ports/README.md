@@ -7,10 +7,10 @@ Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port cou
 ## Approach
 In order to build our own USB Port map as SSDT, we will do the following:
 
-- Dump the original ACPI tables from BIOS
-- Find the SSDT which declares USB ports
-- Modify it so 15 ports are mapped for macOS without affecting other OSes
-- Inject this table during boot, replacing the original one
+1. Dump the original ACPI tables from BIOS
+2. Find the SSDT which declares USB ports
+3. Modify it so 15 ports are mapped for macOS without affecting other OSes
+4. Inject this table during boot, replacing the original one
 
 The method presented here is a slightly modified version of a guide by "Apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
@@ -374,6 +374,3 @@ Once you are done with your port mapping activities, do the following:
 </details>
 
 **Good Luck!**
-
-## Additional Resources
-A different approach to mapping USB ports via ACPI utilizing the patching capabilitis of maciASL can be found [here](https://github.com/dreamwhite/dell-inspiron-5370-hackintosh/blob/master/Docs/ACPI/SSDT-3-xh_OEMBD.md)
