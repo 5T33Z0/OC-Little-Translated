@@ -46,14 +46,14 @@ Have a look into Clover's "ACPI/origin" folder. In there you will find a lot of 
 
 ![SSDT_og](https://user-images.githubusercontent.com/76865553/137520366-c3c75933-ab97-4d60-b627-cc4673e4b643.png)
 
-We can see the following:
+**We can see the following**:
 
-- There are entries for `XHC` (eXtensible Host Controller) and for `XHC.RHUB` (USB Root Hub Device)
-- There's should also be a list of Ports, 26 in my case: `HS01` to `HS14`, `USR1` and `USR2`, and `SS01` to `SS10`. We will come back to the meaning of these names later. 
-- Take note of the "Table Signature" and the "OEM Table ID" – we will use them to create a delete rule in the OpenCore config.
+- There's ab `XHC` (eXtensible Host Controller) and for `XHC.RHUB` (USB Root Hub) device
+- There's a list of Ports, 26 in this case: `HS01` to `HS14`, `USR1` and `USR2`, and `SS01` to `SS10`. We will come back to the meaning of these names later. 
+- Take note of the "Table Signature" and the "OEM Table ID". We will need them later to create a drop rule in the `ACPI/Delete` section of the OpenCore config, so it can be replaced by our modified table we are going to create.
 
 ### Intel Broadwell and older CPUs
-ACPI tables for Broadwell and older CPUs don't use seperate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
+ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
 
 ![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png)
 	
@@ -64,24 +64,25 @@ If you have sleep and wake issues due to an internally connected WiFi/Bluetooth 
 **NOTE**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
 
 ### Adding a delete rule to config.plist
-In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.</br>
+In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.
+
 **CAUTION**: Don't use my value for the OEM Table ID, since yours probably has a different name!
 
 1. Open your `config.plist` (I am using OpenCore Auxiliary Tools)
 2. Go to ACPI > Delete and add a new Rule (click on "+")
-3. In `TableSignature`, enter `53534454` which is HEX for `SSDT`:
+3. In `TableSignature`, enter `53534454` which is HEX for `SSDT`:</br>
 	![TableSig](https://user-images.githubusercontent.com/76865553/137520564-10b44f45-778b-47ad-a3ae-318ce9334aac.png)
-4. In `OemTableID`, enter the name of the "OEM Table ID" (See first screenshot) stored in YOUR (NOT mine, YOUR!) SSDT-Whatever.aml without `""` as a HEX value. In OCAT, you can use ASCI to Hex converter at the bottom of the app:
+4. In `OemTableID`, enter the name of the "OEM Table ID" (See first screenshot) stored in YOUR (NOT mine, YOUR!) SSDT-Whatever.aml without `""` as a HEX value. In OCAT, you can use ASCI to Hex converter at the bottom of the app:</br>
 	![OEMTableID](https://user-images.githubusercontent.com/76865553/137520641-97a42e24-175b-4e3a-badb-23b57fa31ac8.png)
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 </details>
-<details><summary><strong>Preparation a replacement SSDT</strong> (click to reveal)</summary>
+<details><summary><strong>Preparing the replacement SSDT</strong> (click to reveal)</summary>
 
-## Preparing a replacement SSDT
-Now that we have found the SSDT with the original usb port declarations, we can start modifying them. Almost. We still need more details, though…
+## Preparing the replacement SSDT
+Now that we have found the SSDT with the original USB port declarations, we can start modifying them. Almost. We still need more details, though…
 
 ### Modifying the orginal USB Table
 In general, two methods are relevant for declaring USB ports:
@@ -89,21 +90,21 @@ In general, two methods are relevant for declaring USB ports:
 1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)): defines the type of port and it's state (enabled/disabled)
 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)): defines the location of the pysical port and its properties. 
 
-Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (RHUB).
+Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (`RHUB`).
 
 #### Adding `Arg1` to `GUPC`
-First, take a look at the routine `GUPC`inside of the `RHUB` (Root Hub):
+First, take a look at the routine `GUPC` inside of the `RHUB`:
 
 ![GUPC](https://user-images.githubusercontent.com/76865553/137520755-8406844d-b16a-4f58-8e84-95e5122d5c06.png)
 	
-In this case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availability of the port. But we also need control over the 2nd value in the package which declares the USB port type. Therefore, we need to modify the method `GUPC`:
+In this case, it includes a Package (`PCKG`) with four values that are handed over to every USB port in the method `_UPC`. But as is, we currently only have control over the first value of the package (via `Arg0`), which describes the availability of the port. But we also need control over the 2nd value in the package which declares the USB port type or personality. Therefore, we need to modify the method `GUPC`:
 
 - In the Header, we change the `GUPC, 1,` to `GUPC, 2,` (since we want to control 2 values of this package)
 - Next, we add `PCKG [One] = Arg1`, so it hands over the 2nd package value to `_UPC` as well.
-- In the Package, we change the first value of to `0xFF` to set the port "enabled" 
-- Finally, we set the second package to `0x03`, which changes the port type to USB 2.0 and 3.0 with a Type A connector (the blue connectors).
+- In this package, we change the first value to `0xFF` to set the port "enabled" 
+- Finally, we set the second package to `0x03`, which changes the port type to USB 2.0 and 3.0 with a Type A connector (the blue ones).
 
-Now we have control over a port's status (on/off or available/unavailable) and what type it is. We get this code snippet:
+Now we have control over a port's status (on/off or available/unavailable) and what type it is. As a result, we get the following code snippet:
 
 ```swift
 Method (GUPC, 2, Serialized)
@@ -123,34 +124,34 @@ Method (GUPC, 2, Serialized)
 `Arg0`= represents the first value of the package. This sets the prot active (`0xff`) or inactive/disabled (`Zero`)</br>
 `Arg1`= declares the USB port type mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
 
-#### Deleting existing `_UPC` method
+#### Deleting the existing `_UPC` method
 After changing these values, you will get a lot of compiler errors:
 
 ![GUPC_errors](https://user-images.githubusercontent.com/76865553/137520833-8f5ae018-aa7e-4e34-8b2f-73f0c8061d1a.png)
 
-That's because the 2nd value (Arg1) is not part of the corresponding method `_UPC` in each of the USB Port entries:
+That's because the 2nd variable (`Arg1`) is not part of the corresponding method `_UPC` in each of the USB Port entries:
 
 ![_UPC_errors](https://user-images.githubusercontent.com/76865553/137520865-0c51e4a2-a905-42f8-8805-f00c3276e98a.png)
 
-To fix this, we will delete the methods `_UPC` from all the Ports. Select the method:
+To fix this, we will delete the methods `_UPC` from all the Ports. Select the method…
 
 ![Highlight](https://user-images.githubusercontent.com/76865553/137520903-86832ac4-e60f-413b-84c5-e23887833897.png)
 
-And hit delete. The method should be gone from the ports
+…and hit delete. The method should be gone from the table:
 
 ![Deleted](https://user-images.githubusercontent.com/76865553/137521280-012baf78-2d94-4be2-ba5e-c0aafc679e3b.png)
 
-Repeat this 23 more times. For `USR1` and `USR2` we can write this to deactivate them, since macOS doesn't support them:
+Repeat this step 23 more times. For `USR1` and `USR2` we can set `GUPC` to `(Zero, Zero)`, since macOS doesn't support them:
 
 ![USR](https://user-images.githubusercontent.com/76865553/137521318-60b2a97f-8e7a-4489-80cb-fa040631a947.png)
 
-Once all `_UPC` Methods are deleted from all the ports are deleted (besides `USR1` and `USR2`), the errors are gone:
+Once all `_UPC` methods are deleted from the rest of the ports, there should be no more compilation errors:
 
 ![No_errors](https://user-images.githubusercontent.com/76865553/137521582-8b901345-ade2-47eb-9388-321b7cc46df1.png)
 
-#### Adding new `_UPC` method
+#### Adding the new `_UPC` method
 
-In each Port (except for USR1 and USR2), add this method:
+Next, we hav to add the new`_UPC` method to each port (except for `USR1` and `USR2`):
 
 ```swift
 Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
@@ -167,7 +168,7 @@ Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/US
 <details><summary><strong>Mapping the Ports</strong> (click to reveal)</summary>
 
 ## Mapping the ports (finally)
-Next, we need to find out which physical ports actually map to which ports in the system.
+Next, we need to figure out how the ports are attached to actualy physical USB connectors.
 
 ### How USB is structured in ACPI
 When it comes to USB, there is a Root Hub (RHUB) which defines ports. But a port can also function as Hub itself (Integrated Hub), as you can see in this illustration:
@@ -209,11 +210,11 @@ As seen earlier, the ports listed in the SSDT have different names.
 
 **EXAMPLE**: if you plug in a USB 3.0 flash drive, you can see in IORestryExplorer, that it connects to `SS07` for example. If you take it out and put a USB 2.0 drive in the same connector, it will most likely be connected to `HS07` now. So 1 Connector, 2 Ports with the same counter (usually) – in this example HS07 and SS07.
 
-### Port mapping Options
+### Port mapping options
 At this stage, there are two options for mapping your USB ports.
 
 - Option A: you already know which ports connect to which physical connectors.
-- Option B: you don't know which Ports connect to which physical connector so you need to probe them
+- Option B: you don't know which Ports connect to which physical connector so you need to probe them.
 
 #### Option A: Mapping ports based on a known configuration
 This is for people who already created a USBPorts.kext in Hackintool or similar and still have the mapping. In my case, I have a Spreadsheet, which looks like this:
