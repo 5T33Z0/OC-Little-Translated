@@ -25,3 +25,6 @@ Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y
 
 ## SSD Compatibility Chart
 Chech this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.
+
+## Credits
+Dreamwhite for Wifi/BT and SATA compatibility lists
