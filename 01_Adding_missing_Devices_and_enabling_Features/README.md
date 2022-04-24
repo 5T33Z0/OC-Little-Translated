@@ -80,8 +80,14 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs|–
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
-#### Cosmetic SSDTs 
-The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them because there's no data available for them.
+#### Cosmetic SSDTs (optional)
+The SSDTs listed below are cosmetic and non-essential. They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides _mimicking the look_ of the I/O registy of the Mac model selected in the SMBIOS/PlatformInfo section:
+
+> It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
+> 
+> [**– vit9696**](https://github.com/acidanthera/OpenCorePkg/pull/121#issuecomment-696825376)
+
+Basically, any SSDTs which define devices that are not already present in the system's DSDT have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O Registry: if the device in questions contains collapsed sections, they will snap close again as soon as you click on them because no data can be gathered for it.
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
