@@ -81,7 +81,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
 #### Cosmetic SSDTs 
-The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered fake or virtual devices. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them because there's no data available for them.
+The SSDTs listed below are considered cosmetic because they do not add or enable any features besides being present in the IO Registry as a device or service, so the system _looks_ more like a genuine Mac as defined by the SMBIOS. Basically, if you add SSDTs which define devices that are not already present in the system's DSDT, they have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O registry: if it contains collapsed fields, they will snap close again as soon as you click on them because there's no data available for them.
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
