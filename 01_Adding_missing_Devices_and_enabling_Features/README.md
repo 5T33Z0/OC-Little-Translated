@@ -89,6 +89,11 @@ The SSDTs listed below are cosmetic and non-essential. They add devices which ar
 
 Basically, any SSDTs which define devices that are not already present in the system's DSDT have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O Registry: if the device in questions contains collapsed sections, they will snap close again as soon as you click on them because no data can be gathered for it.
 
+Nonetheless I included them here for two reasons:
+
+1. It's your choice to use them or not
+2. For documentary purposes. Sometimes it can be streunous to find out what a device listed in an `.ioreg` file actually is and does. 
+
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
 [**SSDT-ARTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC))|Adds fake ARTC Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses same HID as AWAC.| `ACPI000E` 
