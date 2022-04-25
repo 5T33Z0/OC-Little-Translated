@@ -1,4 +1,5 @@
-# SMBIOS and Hardware Compatibility
+# Compatibility charts
+Listed below, you find some charts containing useful information about SMBIOS, Harware and DRM compatibility as well as NVRAM variables.
 
 ## SMBIOS Compatibility Chart
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1yLZeRFeONwDj1zMoONQAQ4rlodAnME1q5jFXE-q5H8s/edit#gid=0) to find out which SMBIOS is natively supported by which versions of macOS.
@@ -29,5 +30,10 @@ Chech this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj
 ## DRM Compatibilty (macOS 10.15+)
 https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md
 
+## NVRAM Variables
+https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0
+
 ## Credits
-Dreamwhite for Wifi/BT and SATA compatibility lists
+- Dreamwhite for Wifi/BT, SATA and NVRAM variables spreadsheets
+- Acidanthera for Whatevergreen FAQs
+- Dortania for SMBIOS Support Guide
