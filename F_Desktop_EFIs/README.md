@@ -1,4 +1,4 @@
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.7.8+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.8.0+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 
 # Pre-configured OpenCore Desktop Configs
 ## About
