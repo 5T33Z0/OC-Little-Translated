@@ -25,7 +25,7 @@ For an in-depth guide on choosing the best SMBIOS for your system, please refer 
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) to find out which wireless card are supported on macOS Lion to Monterey.
 
 ## SSD Compatibility Chart
-Chech this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.
+Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.
 
 ## DRM Compatibilty (macOS 10.15+)
 https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md
