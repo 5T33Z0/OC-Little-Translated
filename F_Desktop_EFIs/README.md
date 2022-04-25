@@ -1,6 +1,6 @@
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.7.8+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 
-# Pre-configured OpenCore Desktop EFI Folders
+# Pre-configured OpenCore Desktop Configs
 ## About
 This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
