@@ -21,6 +21,9 @@ Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smoo
 
 For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
 
+## Intel CPUs used in real Macs
+Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0)
+
 ## WiFi/BT Compatibility Chart
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) to find out which wireless card are supported on macOS Lion to Monterey.
 
