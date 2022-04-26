@@ -1,5 +1,5 @@
 # About PCI BAR Size
-> Resizable BAR is a PCI specification feature which allows control of the amount of video memory visible from the CPU. While macOS does support this feature, it limits the supported BAR sizes by 1 GB and seems to be unstable with BARs above 256 MB. If both your GPU and your firmware support Resizable BAR, setting ResizeAppleGpuBars to 0 will update GPU registers to their defaults when booting macOS and fix the hangs on newer boards.
+> Resizable BAR is a PCI specification feature which allows control of the amount of video memory visible from the CPU. While macOS does support this feature, it limits the supported BAR sizes by 1 GB and seems to be unstable with BARs above 256 MB. If both your GPU and your firmware support Resizable BAR, setting `ResizeAppleGpuBars` to `0` will update GPU registers to their defaults when booting macOS and fix the hangs on newer boards.
 > 
 > **Source**: [Dortania](https://dortania.github.io/hackintosh/updates/2021/11/01/acidanthera-november.html)
 
