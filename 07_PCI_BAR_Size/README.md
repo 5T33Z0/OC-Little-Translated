@@ -3,6 +3,14 @@
 > 
 > **Source**: [Dortania](https://dortania.github.io/hackintosh/updates/2021/11/01/acidanthera-november.html)
 
+## How to enable Resizable BAR Support in OpenCore
+
+- In config.plist, set `ResizeAppleGpuBars` to `0` &rarr; Allows macOS to boot with Resizable BAR enabled in BIOS
+- Set `ResizeGpuBars` to `-1` &rarr; Prevents OpenCore from injecting its ReBAR settings into Windows
+- Save config and reboot into BIOS
+- Enanble Resizable BAR in BIOS
+- Save and reboot into macOS
+
 ## Valid PCI BAR Sizes for PCI 2.0
 OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, namely `ResizeGPUBars` and `ResizeAppleGPUBars`.
 
@@ -73,5 +81,6 @@ This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or l
 
 `°`Maximum for macOS.
 
-## Note
-Before changing any of these values, research if your GPU supports BAR Resize and check the supported size with tools like HWiNFO in Windows.
+## ⚠️ Attention
+- Before changing any of these settings, check if your GPU supports BAR Resize with tools like HWiNFO in Windows. 
+- Make sure you have a working backup of your EFI on a flash drive – just in case the system won't boot after changing any of these settings.
