@@ -20,7 +20,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 
 |Boot-arg|Description|
 |:------:|-----------|
-**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without its you'll get a black screen. Although not necessary for Polaris or Vega Cards it can help with black screen issues when multiple monitors are attached.
+**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without it you'll get a black screen. Although not necessary for Polaris or Vega Cards it can be used to fix black screen issues in multi-monitor setups.
 **`igfxonln=1`**|Forces all displays online. Resolves screen wake issues after quitting sleep mode in macOS 10.15.4 and newer when using Coffee and Comet Lake's Intel UHD 630.
 **`-igfxvesa`** |Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
 **`-wegnoegpu`**|Disables all GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
@@ -63,7 +63,7 @@ Listed below you'll find a snall but useful assortion of WEG's boot args for eve
 **`-wegswitchgpu`**|Disables th iGPU if a discrete GPU is detected (or use `switch-to-external-gpu` property to iGPU)
 **`-wegnoegpu`**|Disables all discrete GPUs (or add `disable-gpu` property to each GFX0).
 **`-wegnoigpu`**|Disables internal GPU (or add `disable-gpu` property to iGPU)
-**`agdpmod=pikera`**| Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this, you’ll get a black screen. Don’t use on Polaris or Vega cards.
+**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without it you'll get a black screen. Although not necessary for Polaris or Vega Cards it can be used to fix black screen issues in multi-monitor setups.
 **`agdpmod=vit9696`**|Disables check for `board-id` (or add `agdpmod` property to external GPU).
 **`applbkl=0`**| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for IGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
 **`gfxrst=1`**|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
