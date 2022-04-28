@@ -2,7 +2,7 @@
 
 ## Description
 
-If a system immeditely wakes after trying to go to sleep, macOS probably has an issue with the way the `_PRW` method is used in the system's DSDT. In order to fix this, a patch must be applied. PWR stands for Power Resources for Wake and defines the wakeup capability of a device. Its `Return` value consits of a packet with 2 or more bytes:
+If a system immeditely wakes after trying to enter sleep, macOS probably has an issue with the way the `_PRW` method is used in the system's DSDT. In order to fix this, a patch must be applied. PWR stands for Power Resources for Wake and defines the wakeup capability of a device. Its `Return` value consits of a packet with 2 or more bytes:
 
 - The 1st byte of the `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`. 
 - The 2nd byte of the `_PRW` packet is either `03` or `04`. Changing this byte to `0` completes the `0D/6D Patch`.  
