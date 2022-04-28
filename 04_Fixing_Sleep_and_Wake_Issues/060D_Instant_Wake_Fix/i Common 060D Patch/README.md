@@ -2,16 +2,16 @@
 
 ## Description
 
-There are some components which create onflicts between their `_PRW` and macOS that cause the machine to wake up immediately after a successful sleep. In order to solve the problem, a patch must be applied to these components. In order to do so, we need to uderstand how `_PRW` works.
+There are some components which cause conflicts between their `_PRW` and macOS that cause the machine to wake up immediately after a entering sleep. In order to solve the problem, a patch must be applied to these components. But in order to do so, we need to uderstand how `_PRW` works.
 
 `_PRW` defines the wakeup method of a component. Its `Return` value consits of a packet of 2 or more bytes:
 
 - The 1st byte of `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`. 
 - The 2nd byte of `_PRW` packet is either `03` or `04`. Changing this byte to `0` completes the `0D/6D Patch`.  
 
-See the ACPI Specs for further details on `_PRW`.
+Refer to the ACPI specs for further details about `_PRW`.
 
-Different machines may define `_PRW` in different ways, and the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis. But we expect that subsequent releases of OpenCore will address the `0D/6D` issue.
+Different machines may define `_PRW` in different ways, and the contents and forms of their packets may also vary. The actual `0D/6D Patch` should be determined on a case-by-case basis. But we expect that subsequent releases of OpenCore will address the `0D/6D` issue.
 
 ### Components that may require a `0D/6D Patch`
 
