@@ -11,6 +11,11 @@
 - Enanble Resizable BAR in BIOS
 - Save and reboot into macOS
 
+**⚠️ WARNING**
+
+1. Before enabling this feature, ensure that your GPU supports Resizable BARs with tools like [**HWiNFO**](https://metager.de/meta/meta.ger3?eingabe=HWiNFO) in Windows. 
+2. Make sure you have a working backup of your EFI folder on a flash drive. Because if this is not working, the graphics output will get stuck at the progress bar while the system will be booting fine in the background. In this scenario you have to perform a hard reset, revert the changes in BIOS, boot from your EFI backup and then revert the changes in the main config as well!
+
 ## Valid PCI BAR Sizes for PCI 2.0
 OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, namely `ResizeGPUBars` and `ResizeAppleGPUBars`.
 
@@ -48,7 +53,7 @@ With this UEFI Quirk you change the GPU BAR Size of the system. ***This quirk sh
 ### ResizeAppleGPUBars
 This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB. `ResizeGpuBars` must be an integer value between `-1` to `19`.
 
-:warning: **WARNING**:
+ ⚠️ **WARNING**
 > Do not set `ResizeAppleGpuBars` to anything but `0` if you have resize bar enabled in BIOS. `9` and `10` will cause sleep wake crashes, and 8 will cause excessive memory usage on some GPUs without any useful benefit. It shall always be `0`. It does not matter which GPU you have, they all support this feature since early 2010s, just give no performance gain.
 > 
 > **Source**: [Vit9696](https://www.insanelymac.com/forum/topic/349485-how-to-opencore-074-075-differences/?do=findComment&comment=2770810)
@@ -80,7 +85,3 @@ This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or l
 | 512 GB|19|
 
 `°`Maximum for macOS.
-
-## ⚠️ Attention
-- Before changing any of these settings, check if your GPU supports BAR Resize with tools like HWiNFO in Windows. 
-- Make sure you have a working backup of your EFI on a flash drive – just in case the system won't boot after changing any of these settings.
