@@ -25,7 +25,7 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 ## Slimming `itlwm.kext`
 **Kext**: [**itlwm.kext**](https://github.com/OpenIntelWireless/itlwm)</br>
 **For**: Intel WiFi (Firmware)</br>
-**Filesize reduction**: From approxy. 15 MB to 2 MB </br>
+**Filesize reduction**: From approx. 15 MB to 2 MB </br>
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
 ## Slimming `AppleALC.kext`
