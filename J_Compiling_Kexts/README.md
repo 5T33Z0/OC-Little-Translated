@@ -1,7 +1,7 @@
 # Compiling custom Kexts for reduced filesize
 
 ## About
-There are a couple of essential kexts which enable non-Apple devices like on-board Audio (AppleALC), Wifi and Bluetooth (OpenIntelWireless), BrcmFirmwareData, etc.) in macOS that contain hundreds of different configurations and firmware varians to cover all sorts of device variants. Therefore, the size of these kexts grows bigger and bigger over time. But with a bit of knowledge you can compile custom variants of these kexts tailor-made for your hardware setup.
+There are a couple of essential kexts which enable non-Apple devices like on-board Audio (AppleALC), Wifi and Bluetooth (OpenIntelWireless, IntelBluetoothFirmwar, BrcmFirmwareData, etc.) in macOS that contain hundreds of different configurations and firmware varians to cover all sorts of device variants. Therefore, the size of these kexts grows bigger and bigger over time. But with a bit of knowledge you can compile custom variants of these kexts tailor-made for your hardware setup.
 
 Below you will find links to guides to compile slimmed-down versions of kext which are known to be notoriously large in size by default.
 
