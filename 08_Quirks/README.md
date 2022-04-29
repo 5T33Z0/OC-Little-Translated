@@ -1,7 +1,7 @@
 # OpenCore Quirks for Intel and AMD CPUs 
-Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs. Based on the information provided by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/) by Dortania. Presented in neatly structured tables.
+Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs. Based on the information provided by the [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/) by Dortania. Presented in neatly structured tables. But it's also available as a [**list**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08_Quirks/Quirks_List.md) which might be easier to read.
 
-:bulb: **TIP**: All of these settings (and more) are now included in OpenCore Auxiliary Tools as presets in the corresponding Quirks section!
+:bulb: **TIP**: All of these settings (and more) are now included in [**OpenCore Auxiliary Tools**](https://github.com/ic005k/OCAuxiliaryTools) as presets in the corresponding Quirks sections!
 
 **Legend**:
 
