@@ -1,7 +1,6 @@
 # Special patches for ThinkPads
 
 ## Special Name Change
-
 The `DSDT` of ThinkPad models may contain a `PNLF` field. Search for `PNLF` in the `DSDT`, and if it exists, you need to add the following rename to avoid conflicts:
 
 ```text
@@ -11,12 +10,11 @@ Comment: Rename PNLF to XNLF
 ```
 
 ## Special Patches
-### Brightness shortcut key fix: `SSDT-OCWork-TP` 
 
+### Brightness shortcut key fix: `SSDT-NBCF` 
 On older ThinkPads models (3rd, 4th and 5th generation), the brightness shortcut keys (`_Q14` and `_Q15`) may not work due to `NBCF` set to `0` (`NBCF=0`). This patch changes its value to `1`so the brightness shortcut keys work properly when using ACPI methods or the new **BrightnessKeys.kext** (which is recommended). In `DSDT` search for `NBCF`. If it is set to `Zero` or `0x00`, you need this patch!
 
 ### ThinkPad TouchPad property injection and TouchPoint anti-drift patch
-
 ThinkPad's TouchPads and the TouchPoints Mouse pointer are ELAN type devices connected via SMBus using the `Synaptics` protocol. Since there is no stable SMBus driver for macOS, you can only use VoodooPS2, and to enable the ThinkPad optimization built into VoodooPS2, you need to inject properties via SSDT.
 
 **SSDT-ThinkPad_ClickPad**
