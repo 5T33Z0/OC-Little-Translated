@@ -221,31 +221,53 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 [SOURCE](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
 </details>
 <details>
-<summary><strong>Sharing SMBIOS Infos between Clover and OpenCore</strong></summary>
+<summary><strong>Exchanging SMBIOS Data between OpenCore and Clover</strong></summary>
 
-## Sharing SMBIOS data between Clover and OpenCore
+## Exchanging SMBIOS Data between OpenCore and Clover
+### Manual method
+Exchanging existing SMBIOS data back and forth between an OpenCore and a Clover config can be a bit confusing since both use different names and locations for data fields. 
 
-When switching between OpenCore and Clover, copying over your existing SMBIOS infos from one Bootloader to the other can be a bit confusing because of naming differences as well as the number of fields available in both configs.
+Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. On top of that you have to re-enter and 2-way-authenticate the system every single time you switch betweeen OpenCore and Clover, which is incredibly annowying. So in order to prevent this, you have to do the following:
 
-So I had a look at my SMBIOS Infos using GenSMBIOS and found out which parameters belong to what in Clover and OpenCore.
+1. Copy the Data from the following fields to Clover Configurator's "SMBIOS" and "RtVariables" sections:
 
-Here's a table of the what is what in macSerial/GenSMBIOS, Clover and OpenCore:
+PlatformInfo/Generic (OpenCore)| SMBIOS (Clover)      |
+|------------------------------|----------------------|
+| SystemProductName            | ProductName          |
+| SystemUUID                   | SmUUID               |
+| ROM                          | ROM (under `RtVariables`). Select "from SMBIOS" and paste the ROM address|
+| N/A in "Generic"             | Board-ID             |
+| SystemSerialNumber           | Serial Number        |
+| MLB                          | 1. Board Serial Number (under `SMBIOS`)</br>2. MLB (under `RtVariables`)|
 
-| MacSerial / GenSMBIOS | SMBIOS (Clover)     | PlatformInfo > Generic (OpenCore) |
-|:----------------------|:--------------------|:----------------------------------|
-| Model                 | Product Name        | SystemProductName                 |
-| Board ID              | Board-ID            | N/A in PlatformInfo > Generic     |
-| System ID             | Sm UUID             | SystemUUID                        |
-| ROM  	              | Rt Variables > ROM  | ROM                               |
-| Serial Number         | Serial Number       | SystemSerialNumber                |
-| MLB                   | 1. Board Serial Number </br> 2. Rt Variables > MLB |  MLB|                               
-| Hardware UUID°        | 1. System Parameters > Custom UUID (Get From System) or</br> 2. Under RtVariable "From System"| N/A in PlatformInfo > Generic |
+2. Next, tick the "Update Firmware Only" box.
+3. From the Dropdown Menu next to it to, select the Mac model you used for "ProductName". This updates other fields like BIOS and Firmware.
+4. Save config and reboot with Clover.
 
-**NOTE:**
+You know that the SMBIOS data has bee transferred correctly, if you don't have to re-enter your Apple-ID and password.
 
-- °Hardware UUID: This is displayed under "About this Mac… > System report > Hardware" and should be identical to the information in GenSMBIOS if everything has been copied over correctly.
+#### Troubleshooting
+If you have to re-enter your Appple ID Password after changing from OpenCore to Clover or vice versa, the used SMBIOS Data is not oidentical, so you have to figure out where the mismmatch is. You can use Hackintool to do so:
 
-You know that the SMBIOS Infos are correct if you switch Bootloaders and the SMBIOS Infos listed in GenSMBIOS are still identical. Another indicator for successful transfer is that you don't have to re-enter the passwords of your E-Mail Accounts in the Mail App.
+- Mount the EFI
+- Open the config for the currently used Bootmanger
+- Run Hackintool. The "System" section shows the currently used SMBIOS Data: </br>![](/Users/5t33z0/Desktop/SYSINFO.png)
+- Check if the framed parameters match the ones in your config.
+- If they don't, correct them and use the ones from Hackintool 
+- If they do mach the values used in your config, open the config from your other Boot Manager and compare the data from Hackintool again and adjust the data accordingly.
+- Save the config and reboot
+- Change to the other Boot Manager and start macOS
+- If the data is correct you won't have to enter your Apple ID Password again (double-check in Hackintool to verify).
+
+### SMBIOS Data Import/Export with OCAT
+Besides manually copying over SMBIOS data from your OpenCore to your Clover config and vice versa, you could use [**OpenCore Auxiliary Tools**](https://github.com/ic005k/OCAuxiliaryTools/releases) instead, which has a built-in import/export function to import SMBIOS Data from Clover as well as exporting function SMBIOS data into a Clover config:
+
+![ocat](https://user-images.githubusercontent.com/76865553/162971063-cbab15fa-4c83-4013-a732-5486d4f00e31.png)
+
+**IMPORTANT**
+
+- If you did everything correct, you won't have to enter your AppleID Password after switching bootloaders and macOS will let you know, that "This AppleID is now used with this device" or something like that.
+- But if macOS asks for your AppleID Password and Mail passwords etc. after switching bootloaders, you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
 
 ## 1-Click-Solution for Clover Users
 
