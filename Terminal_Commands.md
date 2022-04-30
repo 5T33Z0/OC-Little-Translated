@@ -15,7 +15,7 @@ https://macos-defaults.com/
 `defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
 `defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
 
-**List MAC Addresses**
+**List MAC Addresses**</br>
 `networksetup -listallhardwareports`
 
 **Add "Quit" option to Finder**:</br>
