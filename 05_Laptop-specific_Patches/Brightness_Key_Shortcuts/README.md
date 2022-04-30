@@ -4,7 +4,21 @@ SSDT Hotpatches to enable Brightness Key Shortcuts for various Laptop models (As
 
 The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I added `If (_OSI ("Darwin")` switches. This modification is important to ristrict the patches to macOS only because otherwise OpenCore injects these ACPI tables system-wide whereas Clover only injects them into macOS.
 
-## Patching Method
+## New method: using [`BrightnessKeys.kext`](https://github.com/acidanthera/BrightnessKeys) 
+In late 2020, Acidanthera introduced a new kext to handle Brightness Key Shortcuts which replaces the previous patching method.
+
+Since the Brightness Control is part of the Embedded Controller (EC) defined in the DSDT, applying binary renames to its components is sub-optimal and might affect other OSes. 
+
+Therefore, using a kext is a much cleaner approach since it limits any changes to macOS.
+
+1. If present, disable any Binary Renames and corresponding SSDT Bkeys hotfix which handled Brightness Keys previously.
+2. Add `BrightnessKeys.kext` to your OC/Kexts folder and `config.plist`
+3. Save and reboot
+4. Check if the Brightness Shortcut Keys are still working. If not, you can always revert the changes.
+
+**NOTE**: If you have an older ThinkPad (3rd to 5th gen), read the Spoiler in the "Special Cases" section of the Brightness Keys repo to find out if you need to change `NBCF` form `Zero` to `One` resp. `0x01`. In this case, add `SSDT-NBCF.aml` instead of using a binary rename since using ACPI is cleaner and limited to macOS only.
+
+## Old method: SSDT + Binary Renames
 Enabling Brightness Hotkeys consists of two stages:
 
 1. Choosing the correct SSDT for your Laptop model
@@ -26,7 +40,7 @@ Pick the corresponding SSDT for your Laptop model, export it as `SSDT-Bkey.aml` 
 - Embedded Controller (`EC`/`EC0`)
 
 ## II. Binary Renames
-In ACPI > Patch, add the corresponding renames listed in the `.dsl` file.
+Add the corresponding renames listed in the `.dsl` file to your config.plist under `ACPI/Patch`.
 
 - **Asus A580UR**:
 	
