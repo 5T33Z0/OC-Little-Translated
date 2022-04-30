@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20200925 (538970405)
  */
-DefinitionBlock ("", "SSDT", 2, "OCLT", "NBCF", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "STZO", "NBCF", 0x00000000)
 {
     External (NBCF, IntObj)
 
