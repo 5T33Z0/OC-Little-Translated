@@ -12,7 +12,9 @@ Comment: Rename PNLF to XNLF
 ## Special Patches
 
 ### Brightness shortcut key fix: `SSDT-NBCF` 
-On older ThinkPads models (3rd, 4th and 5th generation), the brightness shortcut keys (`_Q14` and `_Q15`) may not work due to `NBCF` set to `0` (`NBCF=0`). This patch changes its value to `1`so the brightness shortcut keys work properly when using ACPI methods or the new **BrightnessKeys.kext** (which is recommended). In `DSDT` search for `NBCF`. If it is set to `Zero` or `0x00`, you need this patch!
+On older ThinkPad models (3rd to 5th generation), the brightness shortcut keys (`_Q14` and `_Q15`) don't work due to `NBCF` being set to `0`. In the `DSDT`, search for `Name (NBCF,`. If it is set to `Zero` or `0x00` respectively, you need this Hotpatch!
+
+It changes `NBCF` to `1` for macOS so the brightness shortcut keys work properly when using ACPI methods or the new [**BrightnessKeys.kext**](https://github.com/acidanthera/BrightnessKeys) (which is recommended).
 
 ### ThinkPad TouchPad property injection and TouchPoint anti-drift patch
 ThinkPad's TouchPads and the TouchPoints Mouse pointer are ELAN type devices connected via SMBus using the `Synaptics` protocol. Since there is no stable SMBus driver for macOS, you can only use VoodooPS2, and to enable the ThinkPad optimization built into VoodooPS2, you need to inject properties via SSDT.
