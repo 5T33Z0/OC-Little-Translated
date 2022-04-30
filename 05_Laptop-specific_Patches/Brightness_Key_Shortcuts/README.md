@@ -7,9 +7,7 @@ The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I a
 ## New method: using [`BrightnessKeys.kext`](https://github.com/acidanthera/BrightnessKeys) 
 In late 2020, Acidanthera introduced a new kext to handle Brightness Key Shortcuts which replaces the previous patching method.
 
-Since the Brightness Control is part of the Embedded Controller (EC) defined in the DSDT, applying binary renames to its components is sub-optimal and might affect other OSes. 
-
-Therefore, using a kext is a much cleaner approach since it limits any changes to macOS.
+Since the Brightness Control is part of the Embedded Controller (EC) defined in the DSDT, applying binary renames to its components is sub-optimal and might affect other OSes. Therefore, using a kext is a much cleaner approach since it limits any changes to macOS.
 
 1. If present, disable any Binary Renames and corresponding SSDT Bkeys hotfix which handled Brightness Keys previously.
 2. Add `BrightnessKeys.kext` to your OC/Kexts folder and `config.plist`
