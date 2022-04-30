@@ -269,9 +269,9 @@ Besides manually copying over SMBIOS data from your OpenCore to your Clover conf
 - If you did everything correct, you won't have to enter your AppleID Password after switching bootloaders and macOS will let you know, that "This AppleID is now used with this device" or something like that.
 - But if macOS asks for your AppleID Password and Mail passwords etc. after switching bootloaders, you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
 
-## 1-Click-Solution for Clover Users
+### 1-Click-Solution for Clover Users
 
-If you've used GenSMBIOS prior to generate SMBIOS Infos and installed them into your system, you can select them in Clover Configurator to avoid SMBIOS Infos conflicts altogether. Under "Rt Variables" simply click on "from System" and you're good.
+If you've used the real MAC Address of your Ethernet Controller ("ROM") when generating your SMBIOS Data for your OpenCore config, you can avoid possible SMBIOS conflicts altogether. In the "Rt Variables" section, click on "from System" and you should be fine!
 </details>
 <details>
 <summary><strong>Online Scan Policy Calculator</strong></summary>
