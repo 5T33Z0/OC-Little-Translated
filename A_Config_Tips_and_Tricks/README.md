@@ -251,7 +251,7 @@ If you have to re-enter your Appple ID Password after changing from OpenCore to 
 
 - Mount the EFI
 - Open the config for the currently used Bootmanger
-- Run Hackintool. The "System" section shows the currently used SMBIOS Data: </br>![](/Users/5t33z0/Desktop/SYSINFO.png)
+- Run Hackintool. The "System" section shows the currently used SMBIOS Data: </br> ![SYSINFO](https://user-images.githubusercontent.com/76865553/166119425-8970d155-b546-4c91-8daf-ec308d16916f.png)
 - Check if the framed parameters match the ones in your config.
 - If they don't, correct them and use the ones from Hackintool 
 - If they do mach the values used in your config, open the config from your other Boot Manager and compare the data from Hackintool again and adjust the data accordingly.
