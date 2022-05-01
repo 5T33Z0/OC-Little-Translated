@@ -159,7 +159,7 @@ If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.
 
 ## Credits & Resources
 - Using Radeon RX6600 XT Cards with [macOS Monterey](https://github.com/perez987/rx6600xt-on-macos-monterey)
-- mattystonie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+- mattystonnie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 - Toleda for `DAGPM.kext`
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - Baio1977 for `SSDT-NAVI.aml`
