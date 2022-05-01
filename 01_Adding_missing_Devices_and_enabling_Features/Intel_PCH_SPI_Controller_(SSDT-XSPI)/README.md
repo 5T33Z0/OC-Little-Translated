@@ -10,7 +10,7 @@ Appllicable to **SMBIOS**:
 ## Checking if you need `SSDT-XSPI` 
 If your system has an existimg PCH SPI Controller, it will be listed in Hackintool:
 
-![](/Users/steezonics/Desktop/Hackintool.png)
+![Hackintool](https://user-images.githubusercontent.com/76865553/166139767-1a21a57b-9ea8-419d-82e6-5d1fabdefed5.png)
 
 If the PCH SPI Controller not present, you don't need this SSDT!
 
@@ -21,11 +21,11 @@ In macOS It's located at the following Addresses:
 
 Before adding `SSDT-XSPI`, it will look like this in IO Registry Explorer:
 
-![](/Users/steezonics/Desktop/IO_Reg_before.png) 
+![IO_Reg_before](https://user-images.githubusercontent.com/76865553/166139773-b954babc-d26f-42bb-8c1c-1ba5dab1359d.png)
 
 After adding `SSDT-XSPI` to my system (iMac20,2) it is still located at the address, but will now be called `XSPI` – just like on a real iMac20,X: 
 
-![](/Users/steezonics/Desktop/IO_Reag_after.png)
+![IO_Reag_after](https://user-images.githubusercontent.com/76865553/166139780-554d5c20-6d92-4003-87fb-3bcc609b6128.png)
 
 As you can see, the only difference seems to be that there's now a name assigned to the location.  Are there any benefits to it in performance? In don't know. Probably not.
 
