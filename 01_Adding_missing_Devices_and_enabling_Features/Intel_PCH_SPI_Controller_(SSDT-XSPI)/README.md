@@ -14,7 +14,7 @@ If your system has an existimg PCH SPI Controller, it will be listed in Hackinto
 
 If the PCH SPI Controller not present, you don't need this SSDT!
 
-In macOS It's located at the following Addresses:
+It's located at the following Addresses:
 
 - **PCI Path**: `PciRoot(0x0)/Pci(0x1F,0x5)`
 - **IOReg Path**: `IOService:/AppleACPIPlatformExpert/PCI0@0/AppleACPIPCI/pci8086,6a4@1F,5` 
