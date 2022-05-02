@@ -44,6 +44,8 @@ Suggest some. Otherwise refer to "Cross-Platform" Section.
 - [**Cloud Clover Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Online tool for generating and editing Clover, OpenCore, Ozmosis and Chameleon configs (templates included).
 - [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
 - [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/)
+- [**Big <> Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html)
+- [**Base64 Decoder/Encoder**](https://www.base64decode.org/)
 
 ## Resources
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
