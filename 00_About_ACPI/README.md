@@ -64,7 +64,7 @@ You may need to disable or enable certain components in order to solve specific 
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 </details>
 <details>
-<summary><strong>ACPI Patches in OpenCore</strong></summary
+<summary><strong>ACPI Patches in OpenCore</strong></summary>
 
 ### ACPI Patches in OpenCore
 The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
@@ -112,7 +112,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 
 - **`DMAR.aml`**
     - **Patch method**: `Kernel\Quirks\DisableIoMapper` = `true` 
-    - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a rule to delete/drop the table
+    - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a rule to [delete/drop the table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table)
     - **Note**: Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
 
 - **`ECDT.aml`**

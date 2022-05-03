@@ -34,6 +34,6 @@ To observe `_PTS` and `_WAK` of `ACPI` receiving `Arg0` after the machine sleeps
 	```
     The result shown above is the value of `Arg0` after the last sleep and wake cycle.
 
-## Notes
+## Notes and Credits
 - Debug code can be diversified, such as `\RMDT.P1`, `\RMDT.P2`, `\RMDT.P3` and so on, see ***SSDT-RMDT.dsl*** for details
 - The debugging kext and SSDT were developed by [**RehabMan**](https://github.com/RehabMan/OS-X-ACPI-Debug)
