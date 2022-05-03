@@ -5,7 +5,7 @@
 //
 DefinitionBlock ("", "SSDT", 2, "OCLT", "GPRW", 0)
 {
-    External(XPRW, MethodObj)
+    External (XPRW, MethodObj)
     Method (GPRW, 2, NotSerialized)
     {
         If (_OSI ("Darwin"))
