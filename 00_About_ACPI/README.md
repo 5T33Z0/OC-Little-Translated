@@ -77,7 +77,7 @@ OpenCore applies ACPI changes globally to *every* operating system (unlike Clove
 #### ACPI Quirks in OpenCore
 The following section refers to patching other ACPI tables (apart from `DSDT.aml`) in OpenCore with integrated Patches or "Quirks", as shown here:
 
-![OC_ACPI_Patches](https://user-images.githubusercontent.com/76865553/136164424-ad3c01a5-546c-4f05-bdba-2e2d7eb72bd3.png)
+![ACPI_quirks](https://user-images.githubusercontent.com/76865553/166452836-80cf06a7-3337-4a32-88b1-ac822c5fb43d.png)
 
 - **`FACP.aml`**
 	- **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true`
