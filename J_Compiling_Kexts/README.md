@@ -8,13 +8,18 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **NOTE**: Since I have almost no experience with coding besides following instruction, please don't ask me for support – I simply cannot provide it. Ask the respective author of the guide instead.
 
 ## Requirements
-
 - Knowledge of working with Terminal and Source Code
 - [**XCode**](https://developer.apple.com/xcode/)
 - [**MacKernelSDK**](https://github.com/acidanthera/MacKernelSDK)
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer)
 - Source code of the Kext(s) you want to compile
-- Additional requirements as mentioned in the respecitive guide(s)
+- Additional requirements as mentioned in the respecitive guide
+
+## Slimming `AppleALC.kext`
+**Kext**: [**AppleALC.kext**](https://github.com/acidanthera/AppleALC/releases)</br>
+**For**: On-board Audio</br>
+**Filesize reduction**: From approx. 3 MB to 600 KB</br>
+**Guide**: https://github.com/dreamwhite/ChonkyAppleALC-Build
 
 ## Slimming `IntelBluetoothFirmware.kext` 
 **Kext**: [**IntelBluetoothFirmware**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware)</br>
@@ -28,8 +33,5 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Filesize reduction**: From approx. 15 MB to 2 MB </br>
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
-## Slimming `AppleALC.kext`
-Work in Progress…
-
 ## Credits
-Dreamwhite for the Guides and terminal wizardry
+Dreamwhite for the guides and terminal wizardry
