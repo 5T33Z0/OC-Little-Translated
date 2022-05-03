@@ -29,10 +29,10 @@ Since ACPI tables are binary files, we need a decompiler to read and edit them, 
 
 ### Important ACPI Tables for hackintoshing
 
-#### DSDT.aml 
+#### `DSDT.aml`
 As mentioned, the `DSDT` or [**Differentiated System Description Table**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#differentiated-system-description-table-dsdt) is the most important ACPI Table because it includes most of the devices of a mainboard, its features and the way they are powered. This is the primary source for researching possible fixes to turn a PC mainboard into what macOS recognizes as an iMac mainboard, for example.
 
-#### SSDT-xxxx.aml
+#### `SSDT-xxxx.aml`
 `SSDTs`or [**Secondary System Description Tables**](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html?highlight=ssdt#secondary-system-description-table-ssdt) are tables which can be added to, modify or replace specific parts or sections of the DSDT. This is another important category of ACPI Tables because these can be completely written by user and thereby fix issues, add fake devices which macOS wants to see or improve CPU Power Management. This includes tables such as: `SSDT-PLUG.aml`, `SSDT-PM`, `SSDT-AWAC.aml`, etc.
 
 Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
@@ -64,12 +64,12 @@ You may need to disable or enable certain components in order to solve specific 
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 </details>
 <details>
-<summary><strong>ACPI Patches in OpenCore</strong></summary>
+<summary><strong>ACPI Patches in OpenCore</strong></summary
 
 ### ACPI Patches in OpenCore
 The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
 
-OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order (as defined in the `config.plist`):
+OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
 
 1. `Patch` is processed
 2. `Delete` is processed
@@ -81,7 +81,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 
 ![OC_ACPI_Patches](https://user-images.githubusercontent.com/76865553/136164424-ad3c01a5-546c-4f05-bdba-2e2d7eb72bd3.png)
 
-- **FACP.aml**
+- **`FACP.aml`**
 	- **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true`
 	- **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by **FACP.aml**. These include the Realtime Clock, Power and Sleep Buttons, Power Management, etc. In Hackintoshland this affects the following functions:
 		- If holding the **Power Button** does not invoke the "Restart, Sleep, Cancel, Shutdown" menu, set `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding **SSDT-PMC.aml** instead. It's located under ["Adding Missing Devices/Features"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features).
@@ -91,7 +91,7 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
 	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true`
 	- **Note**: Only required on macOS 10.13
 
-- **BGRT.aml**
+- **`BGRT.aml`**
     - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true`
     - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
     - **Note:** Not all machines have this form
@@ -101,23 +101,23 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
     - **Description**: ACPI forms have memory regions with both dynamically allocated addresses and fixed addresses.
     - **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
 
-- **FACS.aml**
+- **`FACS.aml`**
     - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true`
     - **Decription**: The `Hardware Signature` item of the **FACS.aml** form is a 4-byte hardware signature, which is calculated after the system boots based on the hardware configuration. If this value is changed after the machine wakes up from a **Hibernate** state, the system will not recover correctly. The patch works by setting the `Hardware Signature` = `0` to resolve this issue.
     - **Note:** If the system has **Hibernation** disabled, you do not need to bother with this patch!
 
-- **SLIC.aml**
+- **`SLIC.aml`**
 	- **Patch method**: `ACPI\Quirks\SyncTableIds` = `true`
 	- **Description**: Microsoft Software Licensing table. This works around patched tables becoming incompatible with the `SLIC` table causing licensing issues in older Windows operating systems.
 
-- **DMAR.aml**
+- **`DMAR.aml`**
     - **Patch method**: `Kernel\Quirks\DisableIoMapper` = `true` 
-    - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a `DropDMAR.aml`
-    - **Note**: Only early Mac systems need this patch
+    - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a rule to delete/drop the table
+    - **Note**: Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
 
-- **ECDT.aml**:
+- **`ECDT.aml`**
     - **Patch Method**: Binary rename to rename it to `EC`. Has to be applied globally so all references to its Name and `Namepath` in all the ACPI forms are identical. Otherwise, the whole ACPI gets borked and the system won't boot.
-    - **Description**: Embedded Controller.
+    - **Description**: Embedded Controller Descrpition Table.
     - **Note**: Individual machines (e.g. **Lenovo yoga-s740**) have `Namepath` in the **ECDT.aml** form that is inconsistent with the `EC` name of other ACPI forms, which can cause ACPI errors during the boot process. This patch is a good solution to the ACPI error problem.
     - **Note**: Not all machines have this table. Use SSDTTime to generate a fake EC.
 </details>
