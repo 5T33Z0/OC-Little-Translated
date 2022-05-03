@@ -64,11 +64,9 @@ You may need to disable or enable certain components in order to solve specific 
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 </details>
 <details>
-<summary><strong>ACPI Patches in OpenCore</strong></summary>
+<summary><strong>ACPI Patches in OpenCore</strong></summary
 
-### ACPI Patches in OpenCore
-The following section refers to patching other ACPI Tables apart from the `DSDT.aml`, which most SSDT Hotpatches in the OC Little Repository are addressing.
-
+### ACPI patching in OpenCore 
 OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
 
 1. `Patch` is processed
@@ -76,8 +74,8 @@ OpenCore applies ACPI changes globally to *every* operating system (unlike Clove
 3. `Add` is processed
 4. `Quirks` are processed
 
-#### Other ACPI Tables and Patching Methods
-For more info about each one of the mentioned ACPI Tables below, please refer to the List of available [ACPI System Description Tables](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
+#### ACPI Quirks in OpenCore
+The following section refers to patching other ACPI tables (apart from `DSDT.aml`) in OpenCore with integrated Patches or "Quirks", as shown here:
 
 ![OC_ACPI_Patches](https://user-images.githubusercontent.com/76865553/136164424-ad3c01a5-546c-4f05-bdba-2e2d7eb72bd3.png)
 
@@ -115,11 +113,8 @@ For more info about each one of the mentioned ACPI Tables below, please refer to
     - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a rule to [delete/drop the table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table)
     - **Note**: Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
 
-- **`ECDT.aml`**
-    - **Patch Method**: Binary rename to rename it to `EC`. Has to be applied globally so all references to its Name and `Namepath` in all the ACPI forms are identical. Otherwise, the whole ACPI gets borked and the system won't boot.
-    - **Description**: Embedded Controller Descrpition Table.
-    - **Note**: Individual machines (e.g. **Lenovo yoga-s740**) have `Namepath` in the **ECDT.aml** form that is inconsistent with the `EC` name of other ACPI forms, which can cause ACPI errors during the boot process. This patch is a good solution to the ACPI error problem.
-    - **Note**: Not all machines have this table. Use SSDTTime to generate a fake EC.
+**NOTE**: For more info about ACPI Tables in general, please refer to the official [ACPI Specs](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
+
 </details>
 <details>
 <summary><strong>ACPI Source Language (ASL) Basics</strong></summary>
