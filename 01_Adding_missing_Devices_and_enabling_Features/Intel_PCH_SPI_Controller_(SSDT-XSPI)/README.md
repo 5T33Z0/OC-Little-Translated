@@ -8,7 +8,7 @@ Appllicable to **SMBIOS**:
 - iMac20,x (10th Gen)
 
 ## Checking if you need `SSDT-XSPI` 
-If your system has an existimg PCH SPI Controller, it will be listed in Hackintool:
+If your system has an existing PCH SPI Controller, it will be listed in Hackintool:
 
 ![Hackintool](https://user-images.githubusercontent.com/76865553/166139767-1a21a57b-9ea8-419d-82e6-5d1fabdefed5.png)
 
