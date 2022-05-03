@@ -64,7 +64,7 @@ You may need to disable or enable certain components in order to solve specific 
 - `Fake Devices` since this method is very reliable. **Recommended**. 
 </details>
 <details>
-<summary><strong>ACPI Patches in OpenCore</strong></summary
+<summary><strong>ACPI Patches in OpenCore</strong></summary>
 
 ### ACPI patching in OpenCore 
 OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
