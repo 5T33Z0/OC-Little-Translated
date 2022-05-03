@@ -23,7 +23,7 @@ Before adding `SSDT-XSPI`, it will look like this in IO Registry Explorer:
 
 ![IO_Reg_before](https://user-images.githubusercontent.com/76865553/166139773-b954babc-d26f-42bb-8c1c-1ba5dab1359d.png)
 
-After adding `SSDT-XSPI` to my system (iMac20,2) it is still located at the address, but will now be called `XSPI` – just like on a real iMac20,X: 
+After adding `SSDT-XSPI` to my system (iMac20,2) it is still located at the same address, but will now be called `XSPI` – just like on a real iMac20,X: 
 
 ![IO_Reag_after](https://user-images.githubusercontent.com/76865553/166139780-554d5c20-6d92-4003-87fb-3bcc609b6128.png)
 
