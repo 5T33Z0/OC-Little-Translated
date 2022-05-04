@@ -145,7 +145,7 @@ Contents of `SSDT-NAVI.aml`:
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 4. Add the following rename to `ACPI/Patch` (not required for Vega 56/64 and RX 580):
 	
-	```text
+	```swift
 	Find: 50454750
 	Replace: 45475030
 	Comment: Change PEGP to EGP0
