@@ -135,8 +135,8 @@ or
 
 **Listing ACPI Errors**
 
-`sudo dmesg | grep "ACPI"` </br>
-`sudo dmesg | grep "ACPI" > $HOME/Desktop/acpi.txt` (creates a Log on Desktop)
+`log show --last boot | grep AppleACPIPlatform` </br>
+`log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log (creates a Log on Desktop)
 
 **Checking for Wake Reasons**</br>
 `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
