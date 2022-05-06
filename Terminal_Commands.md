@@ -134,7 +134,6 @@ or
 `sudo rm /Library/Preferences/SystemConfiguration/preferences.plist`</br>
 
 **Listing ACPI Errors**
-
 `log show --last boot | grep AppleACPIPlatform` </br>
 `log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log (creates a Log on Desktop)
 
