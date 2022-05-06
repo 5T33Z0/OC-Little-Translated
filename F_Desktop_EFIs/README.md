@@ -7,16 +7,16 @@ This section includes OpenCore configs for Intel CPUs based on the work of **Gab
 **No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are necessary. So based on this [**discussion**](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
 
 ## New approach: generating EFIs from `config.plist`
-Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools (OCAT) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
+Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
 
 Included are about 40 configs for Intel CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets.
 
 ### Included Files and Settings
-- Base configs for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
-- Required SSDT Hotpatches for each CPU family (some are disabled – check before deployment!)
-- Necessary Quirks for each CPU Family (also available as Presets inside of OCAT)
-- Necessary Device Properties for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
-- Base-set of Kexts (see chart below)
+- **Base configs** for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets
+- **Required SSDT** Hotpatches for each CPU family (some are disabled – check before deployment!)
+- **Necessary Quirks** for each CPU Family (also available as Presets inside of OCAT)
+- **Device Properties** for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
+- Base-set of **Kexts** (see chart below)
 - `MinDate` and `MinVersion` for the APFS Driver set to `-1`, so all macOS versions are supported.
 
 ### Included Kexts (universal, config-based)
@@ -108,7 +108,7 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 |:------:|-----------|
 **`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this you'll get a black screen. Don't use on Navi Cards (i.e. Polaris and Vega).
 **`-igfxvesa`**|Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
-**`-wegnoegpu`**|Disables all GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
+**`-wegnoegpu`**|Disables all external/discrete GPUs except integrated graphics. Use if your GPU is incompatible with macOS. Doesn't work all the time.
 **`nvda_drv=1`**|Enable Web Drivers for NVIDIA Graphics Cards (supported up to macOS High Sierra only).
 **`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
 
@@ -121,9 +121,9 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/**`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing andd booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
+**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
 
-**NOTES**:
+**NOTES**
 
 - Open the config.plist in a Plist Editor to find additional info
 - View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
