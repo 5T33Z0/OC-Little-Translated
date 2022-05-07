@@ -1,3 +1,9 @@
+<Details>
+<summary><strong>Table of Contents</strong> (click to reveal)</summary>
+
+[TOC]
+
+</Details>
 # ACPI Basics
 ## Brief Introduction to ACPI
 
