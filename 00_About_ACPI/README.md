@@ -1,5 +1,3 @@
-[TOC]
-
 # ACPI Basics
 
 ## Brief Introduction to ACPI
