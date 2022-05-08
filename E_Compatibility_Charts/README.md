@@ -46,3 +46,4 @@ https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/
 - Dreamwhite for Wifi/BT, SATA and NVRAM variables spreadsheets
 - Acidanthera for Whatevergreen FAQs
 - Dortania for SMBIOS Support Guide
+- Slice for SMC Keys Database
