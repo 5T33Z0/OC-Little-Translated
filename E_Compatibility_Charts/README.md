@@ -39,6 +39,9 @@ https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md
 ## NVRAM Variables
 https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0
 
+## SMC Keys Database
+https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/
+
 ## Credits
 - Dreamwhite for Wifi/BT, SATA and NVRAM variables spreadsheets
 - Acidanthera for Whatevergreen FAQs
