@@ -265,23 +265,3 @@ Besides manually copying over SMBIOS data from your OpenCore to your Clover conf
 
 ### 1-Click-Solution for Clover Users
 If you've used the real MAC Address of your Ethernet Controller ("ROM") when generating your SMBIOS Data for your OpenCore config, you can avoid possible SMBIOS conflicts altogether. In the "Rt Variables" section, click on "from System" and you should be fine!
-
-## Online ScanPolicy Calculator
-https://oc-scanpolicy.vercel.app/
-
-## Fixing macOS Monterey beta Updates
-If macOS Monterey beta Updates are not offered to you, you could try the following:
-
-- Set the correct value for csr-active-config: `67080000`
-- Add latest build of [RestrictEvents.kext](https://dortania.github.io/builds/?product=RestrictEvents&viewall=true) (no longer required)
-- Save, reboot, Clean NVRAM, boot macOS.
-- Go to "About the Mac…" > "Software Update" and see if you are being offered the latest system updates.
-- If not, leave the Software Update window open
-- Run Terminal and enter these 2 commands in Terminal:</br>
-`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
-`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
-- Software Update should re-check automatically and offer the new update (if available).
-- Download and install system updates.
-- If this doesn't work, you can try [this](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) as a workaround.
-
-**NOTE**: `SecureBootModel` j160 may be required if the Update still isn't offered.
