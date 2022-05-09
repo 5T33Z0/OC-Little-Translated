@@ -1,6 +1,31 @@
 # OpenCore Config Tips and Tricks (by 5T33Z0)
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
+## TABLE of CONTENTS
+- [OpenCore Troubleshooting Workflow](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#opencore-troubleshooting-quick-tips)</br>
+	- [MinDate / MinVersion settings explained](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver)</br>
+- I. [Updating config.plist and fixing errors](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#i-updating-configplist-and-fixing-errors)</br>
+- II. [Fixing Boot Issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#ii-quick-fixes-for-boot-problems)</br>
+- III. [Security Settings](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#iii-security-settings)</br>
+	- [How to disable Single User Mode](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#how-to-disable-single-user-mode)
+	- [How to disable System Integrity Protection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#how-to-disable-system-integrity-protection-sip)
+- IV. [Adjusting Boot Picker Attributes](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#iv-adjust-boot-picker-attributes-enable-mouse-support)
+- V. [Customizing Boot Options](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#v-customizing-boot-options)
+	- [Defining the default Volume in Boot Picker](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#set-default-boot-drive-in-bootpicker)
+	- [Enabling Apple Hotkeys Support](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#enable-apple-hotkey-functions)
+	- [Accelerate Boot](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#accelerate-boot-result-will-vary)
+	- [Boot Variants](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-variants-selection)
+		- [GUI disabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-without-gui-default)
+		- [GUI enabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
+		- [No GUI, automatic boot from default volume](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-the-os-automatically-from-volume-defined-as-default-no-gui)
+- VI. [Resolving NVRAM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vi-resolving-issues-with-nvram)
+	- [Fixing falsely reported OpenCore Version ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-correct-falsely-reported-opencore-version)
+- VII. [Prohibit SMBIOS Injection into other Operating Systems](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-prohibit-smbios-injection-in-other-oses)
+- VIII. [Exchanging SMBIOS Data between OpenCore and CLover](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#viii-exchanging-smbios-data-between-opencore-and-clover)
+	- [Manual method ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-method)
+	- [Automated method, using OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#smbios-data-importexport-with-ocat)
+
+
 ## OpenCore Troubleshooting Quick Tips
 
 Besides checking the obvious (like Booter Settings and Quirks), check the following Settings:
@@ -30,8 +55,6 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 | 20190820 | 9452750070000000 | req. macOS ≥ Mojave (10.14)                  |
 | 20180621 | 7480770080000000 | req. macOS ≥ High Sierra (10.13)             |
 
-<details>
-<summary><strong>Fixing Config Errors</strong></summary>
 
 ## I. Updating config.plist and fixing errors
 
@@ -40,9 +63,6 @@ Eversince OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCo
 
 ### Manual upgrade and error correction (old)
 Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare with the latest sample.plist and upodate files. These included: OCConfigCompare (to compare config differences), KextUpdater (for downloading Kexts, Drivers, etc.), ProperTree (for creating snapshots editing the config) and OCValidate (for checking the config). This was a really time consuming process and I am glad, I don't have to do this any more.
-</details>
-<details>
-<summary><strong>Fixing Boot Issues</strong></summary>
 
 ## II. Quick fixes for Boot Problems
 
@@ -59,10 +79,6 @@ If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (O
 
 **IMPORTANT**: For security reason you should change these values according to the version of macOS you are using. A list with the correct values for `MinDate` and `MinVersion`can be found here: https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h
 
-</details>
-<details>
-<summary><strong>Security Settings</strong></summary>
-
 ## III. Security Settings
 
 ### How to disable Single User Mode
@@ -71,7 +87,6 @@ You should deactivate the single user mode for security reasons, because it can 
 **Misc > Security > DisableSingleUser** = `Yes`
 
 ### How to disable System Integrity Protection (SIP)
-
 1. To disable System Integrity Protection, add one of the following values to the config:
 
    **NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82** > change `csr-active-config` from `00000000`(SIP enabled) to:
@@ -99,11 +114,6 @@ You should deactivate the single user mode for security reasons, because it can 
     	 NVRAM Protections: disabled
     	 BaseSystem Verification: disabled
    
-
-</details>
-<details>
-<summary><strong>Adjusting Boot Picker Behavior</strong></summary>
-
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
 With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having its own value/byte, which can be combined by simple adding them:
@@ -117,12 +127,8 @@ With **PickerAttributes**, you can assign different properties and functions to 
 
 **PickerAttributes** = `17` –– Enables Custom Icons and Mouse Cursor (New default setting since OpenCore 0.6.7)</br>
 **PickerAttributes** = `19`–– Enables Custom Icons, Custom Titles and Mouse Cursor.
-</details>
-<details>
-<summary><strong>Customizing Boot Options</strong></summary>
 
 ## V. Customizing Boot Options
-
 ### Set default boot drive in BootPicker
 
 To be able to set the boot drive in the BootPicker, enable the following options in the config:
@@ -146,7 +152,7 @@ If it takes a long time (8 seconds or longer) until the BootPicker appears after
 
 **NOTE**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
-## Boot variants (Selection)
+### Boot variants (Selection)
 
 Change the following settings in the config to influence the boot process of OpenCore. There are certainly more options, but these seem to me to be the most common/useful.
 
@@ -181,11 +187,8 @@ The following settings will boot macOS from first APFS volume it finds. Combine 
 This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WIndowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
 
 If you want to boot Windows *properly*, you should boot it via the BIOS Boot Menu to bypass all the SSDTs being injected anyway. Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
-</details>
-<details>
-<summary><strong>Handling NVRAM Issues</strong></summary>
 
-## VI. Resolving issues with NVRAM Reset
+## VI. Resolving issues with NVRAM
 
 Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. Therefore, the OpenCore package also contains `CleanNvram.efi` under `Tools`, which should work better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
 
@@ -198,20 +201,14 @@ Next, create a new snapshot of the config or add the tool manually to the config
 * Under **Misc > Tools** find `CleanNvram` and set `Auxiliary` to **`Yes`**.
 
 Otherwise, check if there might be a BIOS update available that fixes general problems. Especially ASUS boards with a Z79/Z99 chipset have problems with the NVRAM, which can only be fixed with a patched BIOS.
-</details>
-<details>
-<summary><strong>Fixing falsely reported OpenCore version </strong></summary>
 
-## VII. **Correct falsely reported OpenCore version**
+### Fixing falsely reported OpenCore version
 
 It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater or Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it.
 
 To do this, create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**, call it `opencore-version` and save the config. After restarting, the correct OC version should be displayed again.
-</details>
-<details>
-<summary><strong>Prohibit SMBIOS injection in other OSes</strong></summary>
 
-## VIII. Prohibit SMBIOS injection in other OSes:
+## VII. Prohibit SMBIOS injection in other OSes:
 
 To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing issues with the registration, change the following settings:
 
@@ -219,11 +216,8 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 **Platforminfo > UpdateSMBIOSMode >** `Custom` (standard: `Create`)
 
 [SOURCE](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
-</details>
-<details>
-<summary><strong>Exchanging SMBIOS Data between OpenCore and Clover</strong></summary>
 
-## Exchanging SMBIOS Data between OpenCore and Clover
+## VIII. Exchanging SMBIOS Data between OpenCore and Clover
 ### Manual method
 Exchanging existing SMBIOS data back and forth between an OpenCore and a Clover config can be a bit confusing since both use different names and locations for data fields. 
 
@@ -271,15 +265,9 @@ Besides manually copying over SMBIOS data from your OpenCore to your Clover conf
 
 ### 1-Click-Solution for Clover Users
 If you've used the real MAC Address of your Ethernet Controller ("ROM") when generating your SMBIOS Data for your OpenCore config, you can avoid possible SMBIOS conflicts altogether. In the "Rt Variables" section, click on "from System" and you should be fine!
-</details>
-<details>
-<summary><strong>Online Scan Policy Calculator</strong></summary>
 
 ## Online ScanPolicy Calculator
 https://oc-scanpolicy.vercel.app/
-</details>
-<details>
-<summary><strong>Fixing macOS Monterey beta Updates</strong></summary>
 
 ## Fixing macOS Monterey beta Updates
 If macOS Monterey beta Updates are not offered to you, you could try the following:
@@ -297,4 +285,3 @@ If macOS Monterey beta Updates are not offered to you, you could try the followi
 - If this doesn't work, you can try [this](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) as a workaround.
 
 **NOTE**: `SecureBootModel` j160 may be required if the Update still isn't offered.
-</details>
