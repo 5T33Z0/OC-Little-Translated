@@ -61,7 +61,7 @@ If you would like to contribute to the information provided in this repo in orde
 - sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
-- Cyberdevs from insanelymac for his Z170X Gaming 5 Guide and for being a prime example of a Moderator who treats others with resoect!
+- Cyberdevs from insanelymac for his Z170X Gaming 5 Guide and for being a prime example of a Moderator who treats others with respect!
 <details>
 <summary><strong>Daliansky's original Credits</strong></summary>
 
