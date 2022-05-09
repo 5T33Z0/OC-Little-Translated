@@ -18,6 +18,7 @@ This section contains a small collection of useful tips and tricks for working w
 		- [GUI disabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-without-gui-default)
 		- [GUI enabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
 		- [No GUI, automatic boot from default volume](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-the-os-automatically-from-volume-defined-as-default-no-gui)
+		- [Boot macOS automatically, no GUI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#start-macos-automatically-no-gui-fast)
 - VI. [Resolving NVRAM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vi-resolving-issues-with-nvram)
 	- [Fixing falsely reported OpenCore Version ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-correct-falsely-reported-opencore-version)
 - VII. [Prohibit SMBIOS Injection into other Operating Systems](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-prohibit-smbios-injection-in-other-oses)
