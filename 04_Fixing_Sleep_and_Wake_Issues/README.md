@@ -1,6 +1,6 @@
 # Fixing Sleep and Wake issues
 
-This section contains fixes for resolving common issues related to Sleep and Wake, occuring especially on but not limited to Laptops. The following areas are covered:
+This section contains fixes for resolving common issues related to Sleep and Wake, occurring especially on but not limited to Laptops. The following areas are covered:
 
 ## 1.[`PTSWAKTTS` Sleep and Wake fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
 
@@ -25,6 +25,6 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 ASPM (**Active State Power Management**), is a power link management scheme supported at system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle. You can modify the Active Power State of peripherals like Bluetooth/WiFi or other devices if they interrupt sleep.
 
 ## Notes
-- Before you apply any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package but rather modify them to fit your system requirements or generate custom ones using [SSDTTime](https://github.com/corpnewt/SSDTTime) instead. Doing this can prevent the occurance of sleep and wake issues altogether. 
+- Before you apply any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package but rather modify them to fit your system requirements or generate custom ones using [SSDTTime](https://github.com/corpnewt/SSDTTime) instead. Doing this can prevent the occurrence of sleep and wake issues altogether. 
 - Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.

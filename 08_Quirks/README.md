@@ -8,7 +8,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - **x** = Quirk enabled
 - **( )** = Quirk disabled, but enabled for certain CPUs/Chipsets/Mainboards (read annotations for quirk in question)
 - **(x)** = Quirk enabled, but disabled for certain CPUs/Chipsets/Mainboards (read annotations for quirk in question)
-- **enpty** = Quirk disabled. And by disabled, I mean *disabled* and not leaving it as is!
+- **empty** = Quirk disabled. And by disabled, I mean *disabled* and not leaving it as is!
 
 **Applicable Version**: OpenCore ≥ 0.7.5
 
@@ -22,7 +22,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - 8/9th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html#platforminfo)
 
 ### ACPI Quirks
-| CPU Family | [Cometlake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html) | 10th Gen |Cascade Lake-[X](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Desktop)/[W](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Workstation), Skylake-[X](https://ark.intel.com/content/www/us/en/ark/products/126699/intel-core-i97980xe-extreme-edition-processor-24-75m-cache-up-to-4-20-ghz.html)/[W](https://ark.intel.com/content/www/us/en/ark/products/126793/intel-xeon-w2195-processor-24-75m-cache-2-30-ghz.html)| [Coffeelake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html) | 8th/9th Gen | Description |
+| CPU Family | [Comet Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html) | 10th Gen |Cascade Lake-[X](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Desktop)/[W](https://ark.intel.com/content/www/us/en/ark/products/codename/124664/products-formerly-cascade-lake.html#@Workstation), Skylake-[X](https://ark.intel.com/content/www/us/en/ark/products/126699/intel-core-i97980xe-extreme-edition-processor-24-75m-cache-up-to-4-20-ghz.html)/[W](https://ark.intel.com/content/www/us/en/ark/products/126793/intel-xeon-w2195-processor-24-75m-cache-2-30-ghz.html)| [Coffee Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html) | 8th/9th Gen | Description |
 |:-----------|:---------:|:--------:|:------------:|:----------:|:-----------:|:-----------------|
 |**Platform**|[Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html)|[Mobile/NUC](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html#laptop-coffee-lake-plus-and-comet-lake)|[High End](https://dortania.github.io/OpenCore-Install-Guide/config-HEDT/skylake-x.html)|[Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html)|Mobile/NUC [8th Gen](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html) / [9thGen](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html)|Corresponding Config Guide
 | **SMBIOS** |iMac20,x|MacBookPro16,x / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,x/16,x / Macmini8,1|PlatformInfo
@@ -37,7 +37,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `°`Enabled by fefault in `sample.plist`. This Quirk didn't exist at the time the OpenCore Install Guide was written, so it's unknown if it's a requirement. Most likely it's not.
 
 ### Boooter Quirks
-| CPU Family | Cometlake | 10th Gen |Cascade Lake X| Coffeelake | 8th/9th Gen | Description |
+| CPU Family | Comet Lake | 10th Gen |Cascade Lake X| Coffee Lake | 8th/9th Gen | Description |
 |:-----------|:---------:|:--------:|:------------:|:----------:|:-----------:|:-----------------|
 |**Platform**|Desktop|Mobile/NUC|High End Desktop|Desktop|Mobile/NUC
 | **SMBIOS** |iMac20,X|MacBookPro16,X / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,1 / Macmini8,1|System Management BIOS
@@ -65,7 +65,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `°` Required for Z390 mainboards
 
 ### Kernel Quirks
-| CPU Family | Cometlake | 10th Gen |Cascade Lake X| Coffeelake | 8th/9th Gen | Description |
+| CPU Family | Comet Lake | 10th Gen |Cascade Lake X| Coffee Lake | 8th/9th Gen | Description |
 |:-----------|:---------:|:--------:|:------------:|:----------:|:-----------:|:-----------------|
 |**Platform**|Desktop|Mobile/NUC|High End Desktop|Desktop|Mobile/NUC
 | **SMBIOS** |iMac20,X|MacBookPro16,X / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,1 / Macmini8,1|System Management BIOS
@@ -96,7 +96,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `°°°°` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-| CPU Family | Cometlake | 10th Gen |Cascade Lake X| Coffeelake | 8th/9th Gen | Description |
+| CPU Family | Comet Lake | 10th Gen |Cascade Lake X| Coffee Lake | 8th/9th Gen | Description |
 |:-----------|:---------:|:--------:|:------------:|:----------:|:-----------:|:-----------------|
 |**Platform**|Desktop|Mobile/NUC|High End Desktop|Desktop|Mobile/NUC
 | **SMBIOS** |iMac20,X|MacBookPro16,X / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,1 / Macmini8,1|System Management BIOS
@@ -130,7 +130,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 - 6th Gen Mobile/NUC: [**various**](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html#platforminfo)
 
 ### ACPI Quirks   
-| CPU Family      | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
+| CPU Family      | Kaby Lake    | 7th Gen       | Skylake    | 6th Gen |
 |:----------------|:-----------:|:-------------:|:----------:|:-------:|
 | **ACPI Quirks** | Desktop     | Mobile        | Desktop    | Mobile  |    
 |                 |             | 	        |            |         |
@@ -144,7 +144,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `*`Default in `sample.plist`
 
 ### Booter Quirks
-| CPU Family        | Kabylake    | 7th Gen      | Skylake    | 6th Gen |
+| CPU Family        | Kaby Lake    | 7th Gen      | Skylake    | 6th Gen |
 |:------------------|:-----------:|:-------------:|:---------:|:-------:|
 | **Booter Quirks** | Desktop     | Mobile        | Desktop   | Mobile  |
 |	            |             |               |           |         |
@@ -170,7 +170,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 |SyncRuntimePermissions||||
 
 ### Kernel Quirks
-| CPU Family        | Kabylake    | 7th Gen       | Skylake    | 6th Gen |
+| CPU Family        | Kaby Lake    | 7th Gen       | Skylake    | 6th Gen |
 |:------------------|:-----------:|:-------------:|:----------:|:-------:|
 | **Kernel Quirks** | Desktop     | Mobile        | Desktop    | Mobile  |
 |                   |             |               |            |         |
@@ -200,7 +200,7 @@ Required OpenCore Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs.
 `***` `XhciPortLimit`: Disable for macOS 11.3 and newer – create a USB Port Map instead!
 
 ### UEFI Quirks
-| CPU Family      | Kabylake    | 7th Gen       | Skylake   | 6th Gen |
+| CPU Family      | Kaby Lake    | 7th Gen       | Skylake   | 6th Gen |
 |:----------------|:-----------:|:-------------:|:---------:|:-------:|
 | **UEFI Quirks** | Desktop     | Mobile        | Desktop   | Mobile  |
 |                 |             |               |           |         |

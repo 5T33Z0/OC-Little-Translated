@@ -3,9 +3,9 @@
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Build-≤0.8.0-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤12.4-white.svg)](https://www.apple.com/macos/monterey/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.05.09-blueviolet.svg) ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## ABOUT
-Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Bootloader based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
+Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
 
-This repo provides additional ACPI hotpatches and guides complementary to the ones provided by the OpenCore Package and Dortania's OpenCore Install Guide. It covers all angles of modern hackintoshing. From adding and enabling devices and features, fixing USB and Sleep issues, laptop-specific fixes, GPU optimizations and more (check the TOC for details). Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques can be apllied using the Clover Bootloader as well.
+This repo provides additional ACPI hotpatches and guides complementary to the ones provided by the OpenCore Package and Dortania's OpenCore Install Guide. It covers all angles of modern hackintoshing. From adding and enabling devices and features, fixing USB and Sleep issues, laptop-specific fixes, GPU optimizations and more (check the TOC for details). Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques can be applied using the Clover Boot Manager as well.
 
 <details>
 <summary><strong>About the translation</strong> (click to reveal content)</summary>

@@ -54,7 +54,7 @@ To update OpenCore files and Kexts, do the following:
 ![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)</br>
 For Dev versions, you need to add a link to a repo to download the OC files from. Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)):</br>
 ![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)</br>
-3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updaates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
+3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
 6. You will be notified once it's done:</br>
@@ -65,5 +65,5 @@ For Dev versions, you need to add a link to a repo to download the OC files from
 
 - If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI > APFS > `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
 - As of now, OCAT does not support online updates of OpenCore, so you will not get the latest available version. To find out which version of OpenCore and Resources are used, click on the newly added "Source" links in the Sync window.
-- The lists shown in the Sync Window are scrollable. Whether or not the scrollbars are visible by default or not, depends on the scrollbar behavior selected in "System Settings" > "General".
+- The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If Downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.

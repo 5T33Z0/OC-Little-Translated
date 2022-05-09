@@ -8,7 +8,7 @@ Since one physical USB 3 connector (the blue ones) actually supports 2 USB proto
 
 ## Removing the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable 26 Ports and injet them and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
+The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable 26 Ports and inject them and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
 
 ## Method 1: Mapping USB Ports with Tools
 
@@ -16,7 +16,7 @@ The workaround is to lift the USB port limit and use additional tools to generat
 Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer working past macOS 11.2, you need to take a different approach. The easiest method is to use Windows using **USBToolBox**.
 
 #### Mapping USB Ports in Windows
-- Boot Into Windows from the BIOS bootmenu (to bypass OpenCore injections)
+- Boot Into Windows from the BIOS boot menu (to bypass OpenCore injections)
 - Download the Windows version of [**USBToolBox**](https://github.com/USBToolBox/tool/releases)
 - Run it, follow the [**instructions**](https://github.com/USBToolBox/tool#usage) to map your USB ports
 - Export the `UTBMap.kext`

@@ -7,7 +7,7 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 1. Add the following Drivers to `/EFI/OC/Drivers` and your config.plist:
 	- `OpenLinuxBoot.efi` (included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg))
 	- `btrfs_x64.efi` and/or
-	- `ext4_x64.efi` based on the file system your Linux Distro uses (both included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
+	- `ext4_x64.efi` based on the file system the chosen Linux Distribution uses (both included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
 2. Enable UEFI > Quirks > `RequestBootVarRouting`
 3. Enable Misc > Boot > `LauncherOption` to prevent Linux bootloader from taking over the first slot of the boot entries. Choose either/or:
 	- `Full`: For AMI, Phoenix, and any other modern UEFI BIOS.
@@ -16,7 +16,7 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 5. :warning: Check the EFI > BOOT folder. Make sure there are no other files besides OpenCore's `BOOTx64.efi` in there to prevent GRUB from taking over your boot menu.
 6. Save the config and reboot.
 7. Reset NVRAM.
-8. Linux should be available in the Bootpicker now.
+8. Linux should be available in the Boot Picker now.
 
 ### Troubleshooting
 If it doesn't work, do the following:
@@ -25,9 +25,9 @@ If it doesn't work, do the following:
 - Check if the required file system drivers are installed in `/EFI/OC/Drivers` and listed in your config under UEFI > Drivers. If so, try changing the order (File system drivers first, then OpenLinuxBoot).
 
 ## Notes
-- If multiple Linux Kernels are present, the Bootpicker will become cluttered with entries since OpenLinuxBoot will create a boot entry of each kernel. You can set Misc > Boot > `HideAuxiliary` to `True` to reduce the clutter (press space bar in boot picker to reveal the Linux entries again). This will also hide macOS Recovery, Reset NVRAM and any other tool marked as "Auxiliary".
+- If multiple Linux Kernels are present, the Boot Picker will become cluttered with entries since OpenLinuxBoot will create a boot entry of each kernel. You can set Misc > Boot > `HideAuxiliary` to `True` to reduce the clutter (press space bar in boot picker to reveal the Linux entries again). This will also hide macOS Recovery, Reset NVRAM and any other tool marked as "Auxiliary".
 - If the kernel is not in /boot or the name doesn't start with `vmlinuz`, they won't be detected.
 - The original Linux bootloader (grub, systemd-boot, syslinux, etc) should not be deleted.
 
 ## Credits
-- **mswgen** from Insanelymac.com for the [guide](https://www.insanelymac.com/forum/topic/349838-guide-using-openlinuxboot-to-easily-boot-linux-from-opencore/)
+- **mswgen** from insanelymac.com for the [guide](https://www.insanelymac.com/forum/topic/349838-guide-using-openlinuxboot-to-easily-boot-linux-from-opencore/)
