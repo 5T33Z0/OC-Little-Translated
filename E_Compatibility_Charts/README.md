@@ -21,8 +21,8 @@ Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smoo
 
 For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
 
-## Apple ALC Layout ID's by CODEC
-This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available Apple ALC Layout IDs based on the name of the CODEC.
+## AppleALC Layout ID's by CODEC
+This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available AppleALC Layout IDs based on the name of the CODEC.
 
 - Click on the folder for your vendor
 - Find the .md file for your CODEC 
