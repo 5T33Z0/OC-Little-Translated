@@ -22,13 +22,26 @@ Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smoo
 For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
 
 ## Apple ALC Layout ID's by CODEC
-This repo lists all available Apple ALC Layout IDs based on the name of the CODEC. Just open the .md file for your CODEC to find out if a Layout for your system exists already https://github.com/dreamwhite/applealc-layouts
+This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available Apple ALC Layout IDs based on the name of the CODEC.
+
+- Click on the folder for your vendor
+- Find the .md file for your CODEC 
+- Click to open it
+
+Inside, you will find a list of all availabe Layout-IDs for the selected CODEC with additional info about the system/mainboard it has been created for.
+
+So, if your mainboard uses [ALC1220](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC1220.md) for example, you could easily find out if someone already created a Layout ID for it.
 
 ## Intel CPUs used in real Macs
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0)
 
 ## WiFi/BT Compatibility Chart
-Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) to find out which wireless card are supported on macOS Lion to Monterey.
+[Spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) with compatible wireless cards for macOS Lion to Monterey (sorted by Device-ID, Vendor and required Kext) 
+
+More Lists (.html format, ordered by Vendor and Model):
+
+- For [macOS Sierra to Monterey](https://osxlatitude.com/forums/topic/11138-inventory-of-supportedunsupported-wireless-cards-2-sierra-monterey/)
+- For [Snow Leopard to El Capitan](https://osxlatitude.com/forums/topic/2120-inventory-of-supportedunsupported-wireless-cards-1-snow-leopard-el-capitan/) 
 
 ## SSD Compatibility Chart
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.
@@ -47,3 +60,4 @@ https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/
 - Acidanthera for Whatevergreen FAQs
 - Dortania for SMBIOS Support Guide
 - Slice for SMC Keys Database
+- OSX Latitude for Wireless Card lists
