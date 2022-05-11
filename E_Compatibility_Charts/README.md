@@ -38,11 +38,6 @@ Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN
 ## WiFi/BT Compatibility Chart
 [Spreadsheet](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI) with compatible wireless cards for macOS Lion to Monterey (sorted by Device-ID, Vendor and required Kext) 
 
-More Lists (.html format, ordered by Vendor and Model):
-
-- For [macOS Sierra to Monterey](https://osxlatitude.com/forums/topic/11138-inventory-of-supportedunsupported-wireless-cards-2-sierra-monterey/)
-- For [Snow Leopard to El Capitan](https://osxlatitude.com/forums/topic/2120-inventory-of-supportedunsupported-wireless-cards-1-snow-leopard-el-capitan/) 
-
 ## SSD Compatibility Chart
 Check this [spreadsheet](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) if you are looking for a compatible SSD for your Hackintosh.
 
@@ -60,4 +55,3 @@ https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/
 - Acidanthera for Whatevergreen FAQs
 - Dortania for SMBIOS Support Guide
 - Slice for SMC Keys Database
-- OSX Latitude for Wireless Card lists
