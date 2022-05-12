@@ -19,8 +19,7 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
 
 ![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png)
 
-<details>
-<summary><strong>While PCIInfo contains 18 Devices</strong> (click to reveal)</summary>
+While PCIInfo contains 18 Devices:
 
 ```swift
 1. Vendor ID: 0x8086, Device ID: 0x1E26, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
@@ -60,8 +59,6 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
 18. Vendor ID: 0xFFFF, Device ID: 0xFFFF, RevisionID: 0xFF, ClassCode: 0xFFFFFF, SubsystemVendorID: 0xFFFF, SubsystemID: 0xFFFF,
    DevicePath: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
-</details>
-
 With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup) we can convert that list into a more legible forn:
 
 - Install Python
@@ -74,7 +71,7 @@ With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup) 
 
 The resulting output will be much easier to read:
 
-```
+```swift
 1: 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
 	Vendor ID: 8086
 	Device ID: 1e26
