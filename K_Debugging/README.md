@@ -6,7 +6,7 @@ See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translat
 ## Using OpenCore's `SysReport` feature
 When using the "Debug" version of OpenCore (replace the `OpenCore.efi`), you can enable the `Misc/Debug/SysReport` feature in the config.plist to generate dumps of ACPI tables, Audio CODEC information (requires an additional driver), CPU, SMBIOS and PCI devices:
 
-![](/Users/5t33z0/Desktop/SysReport.png)
+![SysReport](https://user-images.githubusercontent.com/76865553/168154869-30725020-0247-4e9f-95fc-e27d733b9ef6.png)
 
 Unfortubately, these System Reports can only be generated during boot, which means you need an already working `config.plist`. This makes the whole idea of using `SysReport` for actual "debbugging" kind of pointless. Nevertheless, it's still useful for refining your system.
 
@@ -17,7 +17,7 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
 
 **Hackintool lists 16 Devices**:
 
-![](/Users/5t33z0/Desktop/Hackintool.png)
+![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png)
 
 <details>
 <summary><strong>While PCIInfo contains 18 Devices</strong> (click to reveal)</summary>
