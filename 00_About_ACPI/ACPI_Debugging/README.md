@@ -7,8 +7,8 @@ To enable ACPI Debugging, you must install a kext and a SSDT:
 
 1. **Kext**: install `ACPIDebug.kext` to `OC\Kexts` and update the `config.plist`.
 2. **Patches**:
-  - Add `SSDT-RMDT.aml` to `OC\ACPI` and update the config.plist. It adds a `RMDT` (RehabMan Debug Trace) device to your system.
-  - Add debugging code for parameters you want to check to your SSDT(s) (See `SSDT-BKeyQxx-Debug.dsl` for example).
+	- Add `SSDT-RMDT.aml` to `OC\ACPI` and update the config.plist. It adds a `RMDT` (RehabMan Debug Trace) device to your system.
+	- Add debugging code for parameters you want to check to your SSDT(s) (See `SSDT-BKeyQxx-Debug.dsl` for example).
 3. **Reboot**
 
 ## Debugging
