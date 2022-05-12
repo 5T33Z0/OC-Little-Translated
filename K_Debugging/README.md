@@ -150,7 +150,7 @@ The resulting output will be much easier to read:
 ```
 As you can see, devices 12 and 18 don't have a valid Vendor ID and that's the reason why they're not listed by Hackintool. So as far as PCI is concerned you are better off using Hackintool, imo.
 
-Too bee continued…
+To be continued…
 
 ## CREDITS
 @dreamwhite for PCILookup
