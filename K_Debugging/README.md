@@ -2,26 +2,34 @@
 This chapter covers the OpenCore's `SysReport` feature which can be used to gather useful information about the system.
 
 ## Using OpenCore's `SysReport` feature
-When using the "Debug" version of OpenCore (replace `OpenCore.efi` and `OpenRuntime.efi`), you can enable the `Misc/Debug/SysReport` feature in the config.plist to generate dumps of ACPI tables, the Audio CODEC (requires `AudioDxe.efi`), CPU details, SMBIOS and PCI devices:
+With the "Debug" version of OpenCore you can generate dumps of ACPI tables, the Audio CODEC, CPU details, SMBIOS and PCI devices, located in a "SysReport" folder inside the EFI partition:
 
 ![SysReport](https://user-images.githubusercontent.com/76865553/168154869-30725020-0247-4e9f-95fc-e27d733b9ef6.png)
 
-Unfortunately, these System Reports can only be generated during boot, which means you need an already working `config.plist`. This makes the whole idea of using `SysReport` for actual "debbugging" kind of pointless. Nevertheless, it's still useful for refining your system.
+In order to do so, you have to enable the `SysReport` feature in the config.plist. After rebooting the files will be available.
 
+### Preparation and dumping process
+Normally, you would need an already working config and the Debug version of OpenCore to do this. But the guys from Utopia-Team have prepared a generic, pre-build [**Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) which can do it *without* a working config. It contains all necessary files and settings required to create a `SysReport`.
+
+1. Download the EFI.zip and extract it
+2. Copy the EFI folder to a FAT32 formatted flash drive
+3. Reboot your system from the flash drive
+4. The dumping process will beginn: 
+![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
+
+Once you reach OpenCore's boot picker, you can remove the flash drive and reset the system. The files are stored on the flash drive now and you can check them out.
+
+## About the dumped files
 ### ACPI
-With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [SSDTs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
+With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [**SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
 
-**NOTE**: When it comes to obtaining ACPI tables on a system without an already working config, Clover is the better choice since it can do this from the GUI without having to boot (simply press F11 and the tables will be dumped to the USB flash drive).
+**NOTE**: When it comes to obtaining ACPI easily, Clover is the better option since it can do this from the GUI without having a working config (simply press F11 and the tables will be dumped to the USB flash drive).
 
 #### Debugging ACPI Tables
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which requires all necessary details to re-route the audio paths provided by the CODEC on your system and create your own ALC Layout-ID with it. But please don't ask me how to do this.
-
-**NOTE**: To my knowledge, a *complete* CODEC dump can only be obtained by running (a live version of) Linux (Ubuntu e.g.) and entering the following command in terminal:
-
-`cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which includes all necessary data to create your own ALC Layout-ID with it. But please don't ask me how to do this.
 
 ### CPU
 In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
@@ -29,11 +37,13 @@ In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details
 ### PCI
 Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in the `PCI` folder includes useful information about hardware components which can help to figure out which additional kext sor SSDTs you may need. Although Hackintool shows a list of some PCI devices, the PCIInfo.txt shows all. The example below is from my Lenovo T530 Laptop.
 
-Hackintool lists 16 devices:
+<details>
+<summary><strong>Hackintool lists 16 devices:</strong> (click to reveal)</summary>
 
 ![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png)
-
-While PCIInfo contains 18 Devices:
+</details>
+<details>
+<summary><strong>While PCIInfo contains 18:</strong></summary>
 
 ```swift
 1. Vendor ID: 0x8086, Device ID: 0x1E26, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
@@ -73,7 +83,8 @@ While PCIInfo contains 18 Devices:
 18. Vendor ID: 0xFFFF, Device ID: 0xFFFF, RevisionID: 0xFF, ClassCode: 0xFFFFFF, SubsystemVendorID: 0xFFFF, SubsystemID: 0xFFFF,
    DevicePath: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
-With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup), we can restructure the PCIInfo.txt to a more legible form:
+</details>
+With the python script [**PCILookup**](https://github.com/dreamwhite/PCILookup), we can reformat the PCIInfo.txt to a more legible form:
 
 - Install Python
 - Download and upack the Script
@@ -83,7 +94,8 @@ With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup),
 - Next, type `python3 main.py` and hit space
 - Drag in the `PCIInfo.txt` and hit enter
 
-The resulting output is much easier to read and also includes device names:
+<details>
+<summary><strong>The resulting output is much easier to read and also includes device names:</strong></summary>
 
 ```swift
 1: 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
@@ -159,12 +171,15 @@ The resulting output is much easier to read and also includes device names:
 	Device ID: ffff
 	Device Path: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
+</details>
+
 As you can see, devices 12 and 18 don't have a known/valid Vendor ID (`ffff`). That's the reason why they're not listed by Hackintool. So as far analyzing PCI is concerned you are better off using Hackintool, if the system is already up and running.
 
-Note that Device-IDs between PCIInfo and Hackintool will differ in cases where you changes the Device-ID via DeviceProperties to make it work in macOS (iGPUs and LAN Adapters come to mind). 
-
+**NOTE**: Device-IDs of PCIInfo and Hackintool will differ whether you spoof Device-IDs via DeviceProperties or via ACPI, to make a component work in macOS (iGPUs, dGPUS, SATA Controller or LAN Adapters come to mind).
+ 
 ### SMBIOS
 This folder contains some .bins from the used system. Might be interesting for developers.
 
 ## CREDITS
-@dreamwhite for PCILookup
+- dreamwhite for PCILookup
+- Team-Utopia for Debug EFI
