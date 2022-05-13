@@ -157,7 +157,7 @@ The resulting output is much easier to read and also includes device names:
 ```
 As you can see, devices 12 and 18 don't have a known/valid Vendor ID (`ffff`). That's the reason why they're not listed by Hackintool. So as far analyzing PCI is concerned you are better off using Hackintool, if the system is already up and running.
 
-Note that Device-IDs between PCIInfo and Hackintool will differ whether you spoof Device-ID via DeviceProperties though `_DSM` via ACPI to make it work in macOS (iGPUs, dGPUS, SATA controllers, and LAN Adapters come to mind). 
+Note that Device-IDs between PCIInfo and Hackintool will differ whether you spoof Device-ID via DeviceProperties or though `_DSM` via ACPI, to make it work in macOS (iGPUs, dGPUS, SATA controllers, and LAN Adapters come to mind). 
 
 ### SMBIOS
 This folder contains some .bins from the used system. Might be interesting for developers.
