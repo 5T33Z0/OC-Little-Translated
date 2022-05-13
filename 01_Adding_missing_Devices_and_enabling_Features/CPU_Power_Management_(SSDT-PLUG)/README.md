@@ -1,7 +1,7 @@
 # Enabling CPU Power Management (`SSDT-PLUG`)
 
 ## Description
-Enables `X86PlatformPlugin` to implement XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Om macOS Monterey, SSDT-PLUG is no longer required  as [recently discovered](https://www.insanelymac.com/forum/topic/351675-macos-12-monterey-x86platformplugin-without-plugin-type1).
+Enables `X86PlatformPlugin` to implement XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer.
 
 AMD CPUs require [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) instead.
 
@@ -85,3 +85,4 @@ Additionally, you could use [CPUFriendFriend](https://github.com/corpnewt/CPUFri
 - The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
 - Dortania for `SSDT-CPUR.aml` 
 - For Intel Xeon CPUs, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
+- macOS 12.3 dropped the "plugin-type" check within the `X86PlatformPlugin`. This results in the legacy `ACPI_SMC_PlatformPlugin` failing to attach to the CPU, if Plugin-Type `1` is not set for Haswell and newer Intel CPUs by SSDT-PLUG. This is a bug on Apple's behalf which supposedly breaks power management on pre-Ivy Bridge systems. So, with the plugin-type check not working, you can boot macOS Monterey without SSDT-PLUG enabled and the `X86PlatformPlugin` will still be loaded which is reflected in IOReg. But it's not attached to the CPU – it only looks as if. More info [here](https://www.insanelymac.com/forum/topic/351675-macos-12-monterey-x86platformplugin-without-plugin-type1/#comment-2782160).
