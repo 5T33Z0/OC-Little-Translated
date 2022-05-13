@@ -79,7 +79,7 @@ The manual patchinf method described below is outdated, since the patching proce
 ## Testing
 To check if Speedstep and turbo work correctly, run Intel Power Gadget and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency as defined by the product specs.
 
-Additionally, you could use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
+Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
 
 ## Notes and Credits
 - The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
