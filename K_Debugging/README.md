@@ -1,21 +1,35 @@
 # Debugging
-
-## Debugging ACPI Tables
-See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
+This chapter covers the OpenCore's `SysReport` feature which can be used to gather useful information about the system.
 
 ## Using OpenCore's `SysReport` feature
-When using the "Debug" version of OpenCore (replace the `OpenCore.efi`), you can enable the `Misc/Debug/SysReport` feature in the config.plist to generate dumps of ACPI tables, Audio CODEC information (requires an additional driver), CPU, SMBIOS and PCI devices:
+When using the "Debug" version of OpenCore (replace `OpenCore.efi` and `OpenRuntime.efi`), you can enable the `Misc/Debug/SysReport` feature in the config.plist to generate dumps of ACPI tables, the Audio CODEC (requires `AudioDxe.efi`), CPU details, SMBIOS and PCI devices:
 
 ![SysReport](https://user-images.githubusercontent.com/76865553/168154869-30725020-0247-4e9f-95fc-e27d733b9ef6.png)
 
-Unfortubately, these System Reports can only be generated during boot, which means you need an already working `config.plist`. This makes the whole idea of using `SysReport` for actual "debbugging" kind of pointless. Nevertheless, it's still useful for refining your system.
+Unfortunately, these System Reports can only be generated during boot, which means you need an already working `config.plist`. This makes the whole idea of using `SysReport` for actual "debbugging" kind of pointless. Nevertheless, it's still useful for refining your system.
 
-When it comes to dumping ACPI tables on a system without an already working config.plist, Clover is still the better option for obtaining thoes.
+### ACPI
+With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [SSDTs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
 
-### Analyzing`PCIInfo.txt`
-Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in the `PCI` folder included useful information about hardware components which can help to figure out which additional kext sor SSDTs you may need. Although Hackintool shows a list of some PCI devices, the PCIInfo.txt shows all. The example below is fro my Lenovo T530 Notebook.
+**NOTE**: When it comes to obtaining ACPI tables on a system without an already working config, Clover is the better choice since it can do this from the GUI without having to boot (simply press F11 and the tables will be dumped to the USB flash drive).
 
-**Hackintool lists 16 Devices**:
+#### Debugging ACPI Tables
+See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
+
+### Audio
+With `SysReport` and `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which requires all necessary details to re-route the audio paths provided by the CODEC on your system and create your own ALC Layout-ID with it. But please don't ask me how to do this.
+
+**NOTE**: To my knowledge, a *complete* CODEC dump can only be obtained by running (a live version of) Linux (Ubuntu e.g.) and entering the following command in terminal:
+
+`cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+
+### CPU
+In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
+
+### PCI
+Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in the `PCI` folder includes useful information about hardware components which can help to figure out which additional kext sor SSDTs you may need. Although Hackintool shows a list of some PCI devices, the PCIInfo.txt shows all. The example below is from my Lenovo T530 Laptop.
+
+Hackintool lists 16 devices:
 
 ![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png)
 
@@ -59,17 +73,17 @@ While PCIInfo contains 18 Devices:
 18. Vendor ID: 0xFFFF, Device ID: 0xFFFF, RevisionID: 0xFF, ClassCode: 0xFFFFFF, SubsystemVendorID: 0xFFFF, SubsystemID: 0xFFFF,
    DevicePath: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
-With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup) we can convert that list into a more legible forn:
+With the python scripe [**PCILookup**](https://github.com/dreamwhite/PCILookup), we can restructure the PCIInfo.txt to a more legible form:
 
 - Install Python
 - Download and upack the Script
 - Run Terminal
 - Typce `cd`, hit space
-- Drop the PCILookup-master folder in the terminal window and hit enter 
-- Next, enter `python3 main.py` and hit space
+- Drop the "PCILookup-master" folder in the terminal window and hit enter 
+- Next, type `python3 main.py` and hit space
 - Drag in the `PCIInfo.txt` and hit enter
 
-The resulting output will be much easier to read:
+The resulting output is much easier to read and also includes device names:
 
 ```swift
 1: 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
@@ -145,9 +159,12 @@ The resulting output will be much easier to read:
 	Device ID: ffff
 	Device Path: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
-As you can see, devices 12 and 18 don't have a valid Vendor ID and that's the reason why they're not listed by Hackintool. So as far as PCI is concerned you are better off using Hackintool, imo.
+As you can see, devices 12 and 18 don't have a known/valid Vendor ID (`ffff`). That's the reason why they're not listed by Hackintool. So as far analyzing PCI is concerned you are better off using Hackintool, if the system is already up and running.
 
-To be continued…
+Note that Device-IDs between PCIInfo and Hackintool will differ in cases where you changes the Device-ID via DeviceProperties to make it work in macOS (iGPUs and LAN Adapters come to mind). 
+
+### SMBIOS
+This folder contains some .bins from the used system. Might be interesting for developers.
 
 ## CREDITS
 @dreamwhite for PCILookup
