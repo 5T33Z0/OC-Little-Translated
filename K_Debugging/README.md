@@ -2,26 +2,22 @@
 This chapter covers the OpenCore's `SysReport` feature which can be used to gather useful information about the system.
 
 ## Using OpenCore's `SysReport` feature
-When using the "Debug" version of OpenCore (replace `OpenCore.efi` and `OpenRuntime.efi`), you can enable the `Misc/Debug/SysReport` feature in the config.plist to generate dumps of ACPI tables, the Audio CODEC (requires `AudioDxe.efi`), CPU details, SMBIOS and PCI devices:
+When using the "Debug" version of OpenCore using this [generic prebuilt EFI](https://github.com/utopia-team/opencore-debug) which already has all the required files (such as `OpenCore.efi` and `OpenRuntime.efi` and `Misc/Debug/SysReport` enabled) it is possible to generate dumps of ACPI tables, the Audio CODEC (requires `AudioDxe.efi`), CPU details, SMBIOS and PCI devices:
 
 ![SysReport](https://user-images.githubusercontent.com/76865553/168154869-30725020-0247-4e9f-95fc-e27d733b9ef6.png)
 
-Unfortunately, these System Reports can only be generated during boot, which means you need an already working `config.plist`. This makes the whole idea of using `SysReport` for actual "debbugging" kind of pointless. Nevertheless, it's still useful for refining your system.
+When you reach OpenCore's boot menu, you can turn off the system without the need of booting anything, since these dumps occur right after the BIOS entry is selected.
+
+![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
 
 ### ACPI
 With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [SSDTs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
-
-**NOTE**: When it comes to obtaining ACPI tables on a system without an already working config, Clover is the better choice since it can do this from the GUI without having to boot (simply press F11 and the tables will be dumped to the USB flash drive).
 
 #### Debugging ACPI Tables
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which requires all necessary details to re-route the audio paths provided by the CODEC on your system and create your own ALC Layout-ID with it. But please don't ask me how to do this.
-
-**NOTE**: To my knowledge, a *complete* CODEC dump can only be obtained by running (a live version of) Linux (Ubuntu e.g.) and entering the following command in terminal:
-
-`cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+With `SysReport` and `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which can be useful in case you have to re-route the audio paths provided by the CODEC on your system and create your own ALC Layout-ID with it. But please don't ask me how to do this.
 
 ### CPU
 In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
@@ -161,7 +157,7 @@ The resulting output is much easier to read and also includes device names:
 ```
 As you can see, devices 12 and 18 don't have a known/valid Vendor ID (`ffff`). That's the reason why they're not listed by Hackintool. So as far analyzing PCI is concerned you are better off using Hackintool, if the system is already up and running.
 
-Note that Device-IDs between PCIInfo and Hackintool will differ in cases where you changes the Device-ID via DeviceProperties to make it work in macOS (iGPUs and LAN Adapters come to mind). 
+Note that Device-IDs between PCIInfo and Hackintool will differ whether you spoof Device-ID via DeviceProperties though `_DSM` via ACPI to make it work in macOS (iGPUs, dGPUS, SATA controllers, and LAN Adapters come to mind). 
 
 ### SMBIOS
 This folder contains some .bins from the used system. Might be interesting for developers.
