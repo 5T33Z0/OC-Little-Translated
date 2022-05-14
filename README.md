@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Build-≤0.8.0-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤12.4-white.svg)](https://www.apple.com/macos/monterey/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.05.13-blueviolet.svg) ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Build-≤0.8.0-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤12.4-white.svg)](https://www.apple.com/macos/monterey/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.05.14-blueviolet.svg) ![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## ABOUT
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
@@ -49,6 +49,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 * [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#readme)
 * [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
 * [**Compiling slimmed-down variants of Kexts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/J_Compiling_Kexts#readme)
+* [**Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#readme)
 * [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
 
 
