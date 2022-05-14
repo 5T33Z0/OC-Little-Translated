@@ -33,7 +33,7 @@ With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an 
 
 Unfortunately, the dump gathered by OpenCore doesn't work in codecgraph which is an important tool for creating Layout-IDs for AppleALC. It generates a schematic of the CODEC dump data which shows the connecters, nodes and routings, etc:
 
-![](/Users/5t33z0/Desktop/codecgraph/codec_dump.txt.svg)
+![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 
 Therefore, you need to create the CODEC dump in Linux:
 
