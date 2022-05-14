@@ -29,7 +29,17 @@ With `SysReport` enabled, ACPI tables will be dumped which then can be further a
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump which includes all necessary data to create your own ALC Layout-ID with it. But please don't ask me how to do this.
+With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump.
+
+Unfortunately, the dump gathered by OpenCore doesn't work in codecgraph which is an important tool for creating Layout-IDs for AppleALC. It generates a schematic of the CODEC dump data which shows the connecters, nodes and routings, etc:
+
+![](/Users/5t33z0/Desktop/codecgraph/codec_dump.txt.svg)
+
+Therefore, you need to create the CODEC dump in Linux:
+
+- Run a live version of Linux like Ubuntu, e.g (OpenCore's Audio Codec dump is insufficient)
+- In Terminal, enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+- Save the .zip on your flash drive for later use.
 
 ### CPU
 In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
