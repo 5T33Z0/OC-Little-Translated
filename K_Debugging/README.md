@@ -35,11 +35,26 @@ Unfortunately, the dump gathered by OpenCore doesn't work in codecgraph which is
 
 ![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 
-Therefore, you need to create the CODEC dump in Linux:
+Therefore, you need to create the CODEC dump in Linux.
 
-- Run a live version of Linux like Ubuntu, e.g (OpenCore's Audio Codec dump is insufficient)
-- In Terminal, enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
-- Save the .zip on your flash drive for later use.
+#### Preparing a USB flash drive for running Linux from an ISO
+Users who already have Linux installed can skip this!
+
+1. Get a USB 3.0 flash drive (at least 8 GB or more)
+2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [**Instructions**](https://www.ventoy.net/en/doc_start.html) to prepare your USB flash drive. It's pretty straight forward.
+3. Next, Download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop)
+4. Copy the ISO to your newly created Ventoy stick
+5. Reboot from the flash drive
+6. In the Ventoy Menu, select the Linux ISO and hit enter
+7. From the GNU Grub, select "Try or Install Linux"
+8. Once Ubuntu has reached the Desktop environmen, select "Try Ubuntu"
+
+#### Dumping the Audio CODEC
+1. Once Linux is up and running, open Terminal and enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+2. Store the generated `CodecDump.zip` on a medium (HDD, other USB stick, E-Mail, Cloud) which you can access later from within macOS. You cannot store it on the Ventoy USB stick itself unfortunately, since it's formatted in ExFat which can't be accessed by Linux without additional measures.
+3. Reboot into macOS
+4. Extract `CodecDump.zip` to the Desktop
+5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
 
 ### CPU
 In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
