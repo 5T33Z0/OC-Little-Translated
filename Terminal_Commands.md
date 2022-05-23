@@ -145,7 +145,7 @@ https://www.dssw.co.uk/reference/pmset.html
 
 - **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
 
-**Find aut current Bus and CPU Frequency** </br>
+**Find out current Bus and CPU Frequency** </br>
 `sysctl -a | grep freq`
 
 **Dump Audio Codec** (in Linux)</br>
