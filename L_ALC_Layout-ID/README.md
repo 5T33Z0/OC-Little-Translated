@@ -43,8 +43,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 #### Dumping the Audio Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
 	```shell
-	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
-	```
+	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump```
 2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat which can't be accessed by Linux without additional measures.
 3. Reboot into macOS
 4. Extract `CodecDump.zip` to the Desktop
@@ -83,14 +82,14 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
 4. Now, execute the following commands in Terminal (one by one):</br> </br>
-	```shell
+	```swift
 	cd ~/Desktop/codecgraph
 	./codecgraph codec_dump.txt
 	chmod +x ./convert_hex_to_dec.rb
 	./convert_hex_to_dec.rb codec_dump.txt.svg > ~/Desktop/codecgraph/codec_dump_dec.txt.svg
 	./convert_hex_to_dec.rb codec_dump.txt > ~/Desktop/codecgraph/codec_dump_dec.txt
 	./Verbit codec_dump.txt> verbs.txt
-	```
+	``` </br></br>
 	**This creates 4 new files inside the codecgraph folder:**
 	- **`codec_dump_dec.txt`** – Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
@@ -115,8 +114,8 @@ Form              | Function
 **Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
 **Black Lines**   | Available paths
-**Blue Lines**    | Currently active/used
-**Dotted Lines**  | ???
+**Dotted Lines**  | Currently used path
+**Blue Lines**    | ???
 
 Let's have a look at the Block Diagram of the ALC269 in comparison: </br> ![](Pics/ALC269_BlockD.png)
 
@@ -130,7 +129,7 @@ Else:
 
 - The schematic of the Codec dump lists only one clearly visible digital output.
 - As far as the Mixers (labeled as `∑`) are concerned, I count 3 as well: 0Bh, 23h, and 24h.
-- I can't spot the ports which can be either input or output. They shoul have bi-directional arrows attached to them…
+- Line 1+2 and Mic 1+2 can be either Input or Outpt (I/O).
 
 ### Understanding signal flow
 My Lenovo T530 Laptop only has one 1/8" jack which serves as input and output at the same time (combo jack). It detects what kind of plug (Line-in/out, Headphone/Headset) is plugged into it. Headphone have 3 poles, while Headset plugs have 4 poles to separate the 3 audio channels and ground: left/right output (stereo) and a mono input (Aux). 2 variants are available, **OMTP** and **CTIA**.
@@ -178,7 +177,7 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 ## IV. Creating the PinConfiguration
-We can use the schematic and the "verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS with audio devices/routings are available, such as: speakers (Laptops), line-in/out, internal mic. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
+We can use the schematic and the "verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS whuch audio devices/routings are available, such as: speakers (on Laptops), line-in/out, internal mic, analog/digital. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
@@ -222,29 +221,26 @@ Now that we have selected the routings we want to usw, we need to copy the data 
 15. Click save to close the window.
 16. Back in the main window, click on "Get Config Data":</br>![](Pics/Get_ConfigData.png)
 17. Select the generated PinConfig Data (without the <> and copy it to the clipboard 
-18. Create a new raw text file, paste the data and save it as PinConfig01 (or similar). It's just to not loose it
+18. Create a new raw text file, paste the data and save it as PinConfig01 (or similar), so you don't lose the data.
 
 ### Adding the PinConfig to Apple ALC
 Now that we (finally) have the PinConfig Data, we need to somehow inject it into macOS. That's what we use AppleALC.kext for.
 
 1. Open "codec_dump_dec.txt"
-2. Copy the Vendor-Id
-3. Mount your EFI
-4. Find your `AppleALC.kext`
-5. Right-click it and select "Show Package Contents"
-6. Inside the Contents folder, you'll find the "info.plist"
-7. Open it with a Plist editor
-8. All the Layout-IDs (about 600!) are located under:
+2. Copy the "Vendor-Id" in decimal (= "CodecID" in AppleALC)
+3. Locate the `PinConfigs.kext` inside the AppleALC/Resources folder
+4. Right-click it and select "Show Package Contents"
+5. Inside the Contents folder, you'll find the "info.plist"
+6. Open it with a Plist editor
+7. All Layout-IDs and PinConfigs are located under:
 	- IOKitPersonalities
 		- as.vit9696.AppleALC
 			- HDAConfigDefault
-8. Use the search function and enter the "Vendor Id." In my case it's "283902569". In the info.plist "CodecID" is the equivalent to the Vendor Id.
-9. For my test, Im am using this entry which is for a Lenovo X230 for now, since itÄs for the same Codec:</br>![](Pics/infoplist.png)
-10. In the `ConfigData` field, paste in the PinConfig Data you generated with PinConfigurator and save the file.
-11. Make sure `LayoutID` inside your OpenCore/Clover config.plist is set to the same Layout-ID as in the edited section (in this example it's Layout `18`)
-12. Reboot the system and check if the PinConfig is working
-13. If it does: congratulations for hanging in there!
-14. If it doesn't try different nodes and settings.
+8. Use the search function and enter the "Vendor Id." In my case it's "283902569". This will show all existing Layout-IDs your Codec.
+9. For my test, Im am using entry no. 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530:</br>![](Pics/infoplist.png)
+…
+
+…TBC
 
 ## IV Creating a Pathmap
 Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
@@ -258,7 +254,7 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 ---------------------|-----------------------------|-----------------------|:----:
 18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
 20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
-21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 -13 - 3|YES
+21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 - 13 - 3|YES
 23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
 24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
 25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
@@ -270,6 +266,14 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
 29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
 30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
+
+We can also have a look inside the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
+
+![](Pics/Node21.png)
+
+As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13. And Node 13 is connected to Node 3:
+
+
 
 ### Transfering the PathMap to `Platforms.xml` (todo)
 
