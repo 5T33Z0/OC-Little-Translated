@@ -1,6 +1,10 @@
 # Quirks
 Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 
+- [Booter Quirks](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08_Quirks/Quirks_List.md#booter-quirks)
+- [Kernel Quirks](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08_Quirks/Quirks_List.md#kernel-quirks)
+- [UEFI Quirks](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08_Quirks/Quirks_List.md#uefi-quirks)
+
 ## Booter Quirks
 
 ### High End Desktop
@@ -33,6 +37,17 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - ProvideMaxSlide: 0
 
 ### Intel Core i5/i7/i9
+
+#### Intel 12th Gen Alder Lake (Desktop)
+- AvoidRuntimeDefrag
+- DevirtualiseMmio
+- EnableSafeModeSlide
+- ProtectUefiServices
+- ProvideCustomSlide 
+- SetupVirtualMap
+- RebuildAppleMemoryMap
+- SyncRuntimePermissions
+- ProvideMaxSlide: 0
 
 #### Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 - AvoidRuntimeDefrag
@@ -190,6 +205,20 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - XhciPortLimit
 
 ### Intel Core i5/i7i9
+
+#### Intel 12th Gen Alder Lake (Desktop)
+- Kernel > Emulate
+	- **Cpuid1Data**: 55060A00000000000000000000000000
+	- **Cpuid1Mask**: FFFFFFFF000000000000000000000000
+	- **MinKernel**: 20.0.0
+- AppleXcpmCfgLock (only required if CFG Lock can't be disabled in BIOS)
+- CustomSMBIOSGuid
+- DisableLinkedJettison
+- ExtentBTFeatureFlags (optional)
+- ForceAqquantiaEthernet (optional, only req. for 10 Gbit Ethernet)
+- PanicNoKextDump
+- PowerTimeoutKernelPanic
+- ProvideCurrentCpuInfo
 
 #### Intel 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 Usupported CPU. Requires Fake CPU-ID
@@ -380,6 +409,10 @@ Usupported CPU. Requires Fake CPU-ID
 - UnblockFsConnect
 
 ### Intel Core i5/i7/i9
+
+#### Intel 12th Gen Alder Lake (Desktop)
+- EnableVectorAcceleration
+- RequestBootVarRouting
 
 #### Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop)
 - EnableVectorAcceleration
