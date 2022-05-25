@@ -1,4 +1,4 @@
-# How to create a Layout-ID for AppleALC (Work in Progress)
+# How to create/modify a Layout-ID for AppleALC (Work in progress)
 
 ## Preface
 This is my attempt to provide an updated and easy to follow guide for creating a Layout-ID for the AppleALC kext. It is aimed at users for whom the existing Layout-IDs do not work so they're forced to create a Layout-ID from scratch or modify an existing one which was created for the same Codec but maybe a different system/mainboard.
@@ -145,11 +145,12 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 
-### Creating a Pathmap
+## IV Creating a Pathmap
 Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
 
 A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
 
+### Tracing possible routings
 We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
@@ -169,8 +170,9 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
 30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
 
+### Transfering the PathMap to `Platforms.xml` (todo)
 
-## IV. Creating the PinConfiguration
+## V. Creating the PinConfiguration
 Now that we have gathered and converted the necessary data from the codec dump, we can use the schematic and the data inside the "Verbs.txt" file to create a so-called PinConfiguration. The PinConfig tells macOS how to route audio through the Codec to either internal speakers (Laptops) and/or Audio Jacks. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
 Since I have a docking station for my Laptop with an Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So this is an extra step.
@@ -238,7 +240,7 @@ Now that we (finally) have the PinConfig Data, we need to somehow inject it into
 13. If it does: congratulations for hanging in there!
 14. If it doesn't try different nodes and settings.
 
-## V. Creating a unique ALC Layout-ID for your PC/Laptop
+## VI. Creating a unique ALC Layout-ID for your PC/Laptop
 Once you have a fully working PinConfiguration (test all the inputs and outputs), you can create a unique Layout-ID for your type of mainboard or Laptop model.
 
 1. Visit this [Repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
@@ -252,7 +254,7 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 8. Once this is done, change the Layout ID in your config.plist to the new Layout.
 9. Reboot and test
 
-## VI. Compiling AppleALC
+## VII. Compiling AppleALC
 
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30, so make sure you have enough space on your drive!
 - Download and extract [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
@@ -271,9 +273,10 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 - Nect, check if `libkmod.a` is present at /MacKernelSDK/Library/x86_64/ inside the AppleALC Folder.
 - Once all that is done, you can Compile using XCode (or xcodebuild from CLI)
 
-## VII. Adding your Layout-ID to the AppleALC Repo
+## VIII. Testing (todo)
 
-In order to add your newly created Layout-ID to AppleALC's database, you have to create a fork of the repo first, then add the required files to the Resources folder (Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support)), sync it with github and then create a pull request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
+## IX. Adding your Layout-ID to the AppleALC Repo
+Once your custom Layout-ID is working, you can submit it to the main AppleALC Repo. In order to add your newly created Layout-ID to AppleALC's database, you have to create a fork of the repo first, then add the required files to the Resources folder (Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support)), sync it with github and then create a pull request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 ## CREDITS and RESOURCES
 - Mac Peet for original [guide](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
