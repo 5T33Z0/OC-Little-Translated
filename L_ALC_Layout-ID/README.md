@@ -9,6 +9,11 @@ Although AppleALC comes with about 600 (!) pre-configured Layout-IDs already, th
 
 My guess is the lack of guides is due to the fact that some Layout-ID for a given Codec will most likely work somehow so people don't bother how they are actually created. Another factor might be the tremendous effort that goes into creating a proper in-depth guide. I think this one took me at least a week. Not so much the writing of the text but a) understanding how it all works and b) creating workflows to get the tools running.
 
+## Use cases
+1. Users who want/need to create a Layout-ID for their Codec from scratch (because a working one doesn't exist yet)
+2. Users who want to modify an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide
+3. Users who just want to compile a slimmed-down version of AppleALC for the one Layout-ID they are using, can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
+
 ## Contents
 This guide will cover the following topics:
 
@@ -37,7 +42,8 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 #### Dumping the Audio Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
-	```cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump```
+	```shell
+	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump```
 2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat which can't be accessed by Linux without additional measures.
 3. Reboot into macOS
 4. Extract `CodecDump.zip` to the Desktop
@@ -68,22 +74,22 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 Now, that we have most of the prep work out of the way, we can begin.
 
-## II. Extracting relevant data from the Codec Dump
+## II. Extracting relevant data from the Codec dump
 In order to create a routing of the audio inputs and outputs for macOS, we need to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
 
 ### Converting the Codec Dump 
 1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![](Pics/Dump.png)
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
-4. Now, execute the following commands in Terminal (one by one):
-	```
+4. Now, execute the following commands in Terminal (one by one):</br> </br>
+	```swift
 	cd ~/Desktop/codecgraph
 	./codecgraph codec_dump.txt
 	chmod +x ./convert_hex_to_dec.rb
 	./convert_hex_to_dec.rb codec_dump.txt.svg > ~/Desktop/codecgraph/codec_dump_dec.txt.svg
 	./convert_hex_to_dec.rb codec_dump.txt > ~/Desktop/codecgraph/codec_dump_dec.txt
 	./Verbit codec_dump.txt> verbs.txt
-	```
+	``` </br></br>
 	**This creates 4 new files inside the codecgraph folder:**
 	- **`codec_dump_dec.txt`** – Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
@@ -109,7 +115,21 @@ Form              | Function
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
 **Black Lines**   | Available paths
 **Blue Lines**    | Currently active/used
-**Dotted Lines**  |???
+**Dotted Lines**  | ???
+
+Let's have a look at the Block Diagram of the ALC269 in comparison: </br> ![](Pics/ALC269_BlockD.png)
+
+On the I/O side, we have:
+
+- 2 PCM outputs (with a DAC for each channel), 
+- 2 PCM inputs (with an ADC for each channel) and 
+- 2 S/PDIF (Sony/Philips Digital Interface) outputs (I don't care about those since my Laptops doen't have a TosLink nor Coaxial jack)
+
+Else:
+
+- The schematic of the Codec dump lists only one clearly visible digital output.
+- As far as the Mixers (labeled as `∑`) are concerned, I count 3 as well: 0Bh, 23h, and 24h.
+- I can't spot the ports which supp
 
 ### Understanding signal flow
 My Lenovo T530 Laptop only has one 1/8" jack which serves as input and output at the same time (combo jack). It detects what kind of plug (Line-in/out, Headphone/Headset) is plugged into it. Headphone have 3 poles, while Headset plugs have 4 poles to separate the 3 audio channels and ground: left/right output (stereo) and a mono input (Aux). 2 variants are available, **OMTP** and **CTIA**.
@@ -157,16 +177,16 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 ## IV. Creating the PinConfiguration
-Now that we have converted the necessary data from the codec dump, we can use the schematic and the data inside the "Verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS with audio devices/routings are available, such as: speakers (Laptops), line-in/out, internal mic. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
+We can use the schematic and the "verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS with audio devices/routings are available, such as: speakers (Laptops), line-in/out, internal mic. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
-### Understanding the Verbs.txt
+### Understanding `verbs.txt`
 Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/verbs.png)
 
-As you can see, it's divided into two major sections horizontally: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" list currently corrected Verb data which was corrected by `verbit.sh`.
+As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by `verbit.sh`.
 
-You can also see, that some Nodes are not converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br>![](Pics/VerbsNice.png)
+You can also see, that some Nodes have not been converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br>![](Pics/VerbsNice.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:

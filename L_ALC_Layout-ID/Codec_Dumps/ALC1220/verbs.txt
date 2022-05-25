@@ -1,0 +1,4 @@
+ERROR: This doesn't appear to be an alsa codec dump file
+Codec: Realtek ALC1220
+Address: 0
+AFG Function Id: 0x1 (unsol 1)
