@@ -95,7 +95,7 @@ Shown below is `codec_dump.txt_dec.txt.evg`, a visual representation of the data
 
 ![](Pics/codec_dump_dec.svg)
 
-Depending on the Codec used in your system, the schematic will looks different.
+Depending on the Codec used in your system, the schematic will look different.
 
 **Legend**:
 
