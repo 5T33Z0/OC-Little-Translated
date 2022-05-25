@@ -258,8 +258,8 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 - Download and extract [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
 - Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
 - In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
-- Next, enter `git clone MacKernelSDK`</br>
-The resulting folder structure should look like this:
+- Next, enter `git clone MacKernelSDK`
+- The resulting folder structure should look like this:</br>
 ![](Pics/AppleALC.png)
 - Next, run Xcode
 - Open the `AppleALC.xcodeproj` file included in the AppleALC folder
