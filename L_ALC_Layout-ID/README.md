@@ -75,7 +75,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![](Pics/Dump.png)
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
-4. Now, execute the following commands in Terminal (one for one):
+4. Now, execute the following commands in Terminal (one by one):
 	```
 	cd ~/Desktop/codecgraph
 	./codecgraph codec_dump.txt
