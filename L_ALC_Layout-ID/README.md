@@ -2,6 +2,7 @@
 
 ## Preface
 :warning: This is not finished (Chptrs. I to III are finished, though)
+
 This is my attempt to provide an updated and easy to follow guide for creating a Layout-ID for the AppleALC kext. It is aimed at users for whom the existing Layout-IDs do not work so they're forced to create a Layout-ID from scratch or modify an existing one which was created for the same Codec but maybe a different system/mainboard or usage.
 
 Although AppleALC comes with about 600 (!) pre-configured Layout-IDs already, there are almost no up-to-date guides available which explain the whole process for creating a Layout-ID from scratch which is a bit surprising. Even the AppleALC repo doesn't go into details about this. The most compelling and easy to follow guide I know is by MacPeet who created a lot of Layout-IDs. But it's written in German and is from 2015, when AppleALC didn't exist and patching AppleHDA.kext was still a thing.
