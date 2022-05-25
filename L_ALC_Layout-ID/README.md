@@ -52,7 +52,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 	- If you are using **Homebrew**, enter `brew install graphviz` 
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
-- Next, download and unpack the **codecgraph.zip** from this repo
+- Next, download and unpack the [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip) from this repo
 - Copy the `codegraph` folder to the desktop. We need it to visualize the data inside the Codec dump, so we have an easy to read schematic of the codec.
 - Move the `codec_dump.txt` into the "codecgraph" folder
 
