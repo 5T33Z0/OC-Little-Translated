@@ -129,7 +129,7 @@ Else:
 
 - The schematic of the Codec dump lists only one clearly visible digital output.
 - As far as the Mixers (labeled as `∑`) are concerned, I count 3 as well: 0Bh, 23h, and 24h.
-- I can't spot the ports which supp
+- I can't spot the ports which can be either input or output. They shoul have bi-directional arrows attached to them…
 
 ### Understanding signal flow
 My Lenovo T530 Laptop only has one 1/8" jack which serves as input and output at the same time (combo jack). It detects what kind of plug (Line-in/out, Headphone/Headset) is plugged into it. Headphone have 3 poles, while Headset plugs have 4 poles to separate the 3 audio channels and ground: left/right output (stereo) and a mono input (Aux). 2 variants are available, **OMTP** and **CTIA**.
