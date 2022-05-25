@@ -1,7 +1,8 @@
 # How to create/modify a Layout-ID for AppleALC (Work in progress)
 
 ## Preface
-This is my attempt to provide an updated and easy to follow guide for creating a Layout-ID for the AppleALC kext. It is aimed at users for whom the existing Layout-IDs do not work so they're forced to create a Layout-ID from scratch or modify an existing one which was created for the same Codec but maybe a different system/mainboard.
+:warning: This is not finished (Chptrs. I to III are finished, though)
+This is my attempt to provide an updated and easy to follow guide for creating a Layout-ID for the AppleALC kext. It is aimed at users for whom the existing Layout-IDs do not work so they're forced to create a Layout-ID from scratch or modify an existing one which was created for the same Codec but maybe a different system/mainboard or usage.
 
 Although AppleALC comes with about 600 (!) pre-configured Layout-IDs already, there are almost no up-to-date guides available which explain the whole process for creating a Layout-ID from scratch which is a bit surprising. Even the AppleALC repo doesn't go into details about this. The most compelling and easy to follow guide I know is by MacPeet who created a lot of Layout-IDs. But it's written in German and is from 2015, when AppleALC didn't exist and patching AppleHDA.kext was still a thing.
 
@@ -45,7 +46,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 :warning: Please follow the instructions below carefully and thoroughly. Use the suggested file names and locations, otherwise the provided terminal commands won't work without adjustments!
 
 - Install [**Python**](https://www.python.org/downloads/) if you haven't already
-- Next, install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
+- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
 - Once that's done, reboot
 - Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
@@ -55,6 +56,16 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 - Next, download and unpack the [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip) from this repo
 - Copy the `codegraph` folder to the desktop. We need it to visualize the data inside the Codec dump, so we have an easy to read schematic of the codec.
 - Move the `codec_dump.txt` into the "codecgraph" folder
+- Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive!
+- Preparing **AppleALC**:
+	- Clone, Fork or Download and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
+	- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
+	- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
+	- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
+	- The resulting folder structure should look like this:</br>
+	![](Pics/AppleALC.png)
+
+Now, that we have most of the prep work out of the way, we can begin.
 
 ## II. Extracting relevant data from the Codec Dump
 In order to create a routing of the audio inputs and outputs for macOS, we need to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
@@ -144,42 +155,15 @@ Line Input:
 flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
+## IV. Creating the PinConfiguration
+Now that we have converted the necessary data from the codec dump, we can use the schematic and the data inside the "Verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS with audio devices/routings are available, such as: speakers (Laptops), line-in/out, internal mic. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
-## IV Creating a Pathmap
-Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
-
-A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
-
-### Tracing possible routings
-We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
-
-Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
----------------------|-----------------------------|-----------------------|:----:
-18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
-20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
-21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 -13 - 3|YES
-23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
-24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
-25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 11 - 25 or</br> 8 - 35 - 25 or </br> 9 - 34 - 25 or </br> 9 - 34 - 11 - 25
-26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 11 - 15 - 2 (M) or</br>26 - 11 - 12 - 2 or </br> 26 - 11 - 13 - 3
-26 (as Input)        |Speaker at Ext Rear IN HP Detect|8 - 35 - 26 or </br> 8 - 35- 11- 26 or </br> 9 - 34 - 26 or </br> 9 - 34 - 11 - 26 
-27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 11 - 15 - 2 (M) or </br>27 - 11 - 12 - 2 or </br> 27 - 11 - 12 - 2 or </br> 27 - 11 - 13 - 3
-27 (as Input)		 | Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 8 - 35 - 11 - 27 or </br> 9 - 34 - 27 or </br> 9 - 34 - 11 - 27
-29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
-29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
-30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
-
-### Transfering the PathMap to `Platforms.xml` (todo)
-
-## V. Creating the PinConfiguration
-Now that we have gathered and converted the necessary data from the codec dump, we can use the schematic and the data inside the "Verbs.txt" file to create a so-called PinConfiguration. The PinConfig tells macOS how to route audio through the Codec to either internal speakers (Laptops) and/or Audio Jacks. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
-
-Since I have a docking station for my Laptop with an Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So this is an extra step.
+Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding the Verbs.txt
-Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/verbs.png)</br>
-As you can see, it's divided into to major sections horizontally: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" list currently used routing.
+Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/verbs.png)
+
+As you can see, it's divided into two major sections horizontally: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" list currently corrected Verb data which was corrected by `verbit.sh`.
 
 You can also see, that some Nodes are not converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br>![](Pics/VerbsNice.png)
 
@@ -240,6 +224,34 @@ Now that we (finally) have the PinConfig Data, we need to somehow inject it into
 13. If it does: congratulations for hanging in there!
 14. If it doesn't try different nodes and settings.
 
+## IV Creating a Pathmap
+Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
+
+A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
+
+### Tracing possible routings
+We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
+
+Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
+---------------------|-----------------------------|-----------------------|:----:
+18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
+20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
+21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 -13 - 3|YES
+23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
+24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
+25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
+25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 11 - 25 or</br> 8 - 35 - 25 or </br> 9 - 34 - 25 or </br> 9 - 34 - 11 - 25
+26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 11 - 15 - 2 (M) or</br>26 - 11 - 12 - 2 or </br> 26 - 11 - 13 - 3
+26 (as Input)        |Speaker at Ext Rear IN HP Detect|8 - 35 - 26 or </br> 8 - 35- 11- 26 or </br> 9 - 34 - 26 or </br> 9 - 34 - 11 - 26 
+27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 11 - 15 - 2 (M) or </br>27 - 11 - 12 - 2 or </br> 27 - 11 - 12 - 2 or </br> 27 - 11 - 13 - 3
+27 (as Input)		 | Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 8 - 35 - 11 - 27 or </br> 9 - 34 - 27 or </br> 9 - 34 - 11 - 27
+29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
+29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
+30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
+
+### Transfering the PathMap to `Platforms.xml` (todo)
+
+
 ## VI. Creating a unique ALC Layout-ID for your PC/Laptop
 Once you have a fully working PinConfiguration (test all the inputs and outputs), you can create a unique Layout-ID for your type of mainboard or Laptop model.
 
@@ -256,20 +268,13 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 
 ## VII. Compiling AppleALC
 
-- Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30, so make sure you have enough space on your drive!
-- Download and extract [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
-- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
-- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
-- Next, enter `git clone MacKernelSDK`
-- The resulting folder structure should look like this:</br>
-![](Pics/AppleALC.png)
 - Next, run Xcode
 - Open the `AppleALC.xcodeproj` file included in the AppleALC folder
 - Highlight the AppleALC project file:</br> ![](Pics/Xcodsetings01.png)
 - Under "Build Settings", check if the entries </br> `KERNEL_EXTENSION_HEADER_SEARCH_PATHS` and `KERNEL_FRAMEWORK_HEADERS` exist
 - If not, press the "+" button and click on "Add User-Defined Settings" and add them and make sure that both point to "(PROJECT_DIR)/MacKernelSDK/Headers":</br>
 ![](Pics/Xcode_UDS.png)
-- Next, Link to custom `libkmod.a` library by adding it under "Link Binary with Libraries": ![](/Users/5t33z0/Desktop/Layout-ID/Pics/Xcode_link.png)
+- Next, Link to custom `libkmod.a` library by adding it under "Link Binary with Libraries": ![](Pics/Xcode_link.png)
 - Nect, check if `libkmod.a` is present at /MacKernelSDK/Library/x86_64/ inside the AppleALC Folder.
 - Once all that is done, you can Compile using XCode (or xcodebuild from CLI)
 
