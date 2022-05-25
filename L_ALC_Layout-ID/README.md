@@ -82,14 +82,14 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
 4. Now, execute the following commands in Terminal (one by one):</br> </br>
-	```swift
+	```shell
 	cd ~/Desktop/codecgraph
 	./codecgraph codec_dump.txt
 	chmod +x ./convert_hex_to_dec.rb
 	./convert_hex_to_dec.rb codec_dump.txt.svg > ~/Desktop/codecgraph/codec_dump_dec.txt.svg
 	./convert_hex_to_dec.rb codec_dump.txt > ~/Desktop/codecgraph/codec_dump_dec.txt
 	./Verbit codec_dump.txt> verbs.txt
-	``` </br></br>
+	```
 	**This creates 4 new files inside the codecgraph folder:**
 	- **`codec_dump_dec.txt`** – Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
