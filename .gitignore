@@ -263,3 +263,4 @@ paket-files/
 __pycache__/
 *.pyc
 .vscode/settings.json
+L_ALC_Layout-ID/.vscode/settings.json
