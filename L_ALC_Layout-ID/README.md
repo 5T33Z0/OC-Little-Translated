@@ -117,16 +117,15 @@ We can use the schematic and the "finalverbs.txt" to create a PinConfiguration. 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
-Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>
-![](Pics/Verbs_errors.png)
+Open the finalverbs.txt located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/Verbs_errors.png)
+
 As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by verbit.sh.
 
 You may have also noticed that some Nodes have *not* been converted from hex to decimal (pink) while some `PinDefault` data *has* been converted which shouldn't have been converted at all (red). So lets fix this using the original codec_dump.txt and lets fix the formatting along the way. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. 
 
 For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the codec_dump.txt for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
 
-Once we're done with fixing the conversion errors, we get this:</br>
-![](Pics/Fixedverbs.png)
+Once we're done with fixing the conversion errors, we get this:</br>![](Pics/Fixedverbs.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
@@ -139,7 +138,7 @@ When comparing the entries of the "Modified Verbs" section with the .svg schemat
 - Node 29 (ATAPI Purple Speaker) is Mono and not really useful to me &rarr; so I delete this line right away
 
 ### Creating/Modifying the PinCong
-So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br> ![CreatePinConf](https://user-images.githubusercontent.com/76865553/170470941-24cf1a1b-b5db-468b-9aa5-2042d6a21d56.png)
+So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br>![CreatePinConf](https://user-images.githubusercontent.com/76865553/170470941-24cf1a1b-b5db-468b-9aa5-2042d6a21d56.png)
 
 Now that we have selected the routings we want to usw, we need to copy the data ot the "Modified Verbs" column to a new file line for line: 
 
