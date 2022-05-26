@@ -339,7 +339,7 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 8. Once this is done, change the Layout ID in your config.plist to the new Layout.
 9. Reboot and test
 
-## VII. Compiling AppleALC
+## VIII. Compiling AppleALC
 
 - Next, run Xcode
 - Open the `AppleALC.xcodeproj` file included in the AppleALC folder
@@ -351,9 +351,9 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 -  In Terminal, "cd" into the AppleALC folder, enter `xcodebuild` and hit Enter.
 -  Once the kext is compiled it will be present in `/AppleALC/build/Release`.
 
-## VIII. Testing (todo)
+## IX. Testing (todo)
 
-## IX. Adding your Layout-ID to the AppleALC Repo
+## X. Adding your Layout-ID to the AppleALC Repo
 Once your custom Layout-ID is working, you can submit it to the main AppleALC Repo. In order to add your newly created Layout-ID to AppleALC's database, you have to create a fork of the repo first, then add the required files to the Resources folder (Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support)), sync it with github and then create a pull request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 ## CREDITS and RESOURCES
