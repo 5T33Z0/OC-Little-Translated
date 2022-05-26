@@ -1,0 +1,60 @@
+ 
+Blacklist:
+411111f0 400000f0 CD at Int ATAPI
+Removed Nodes: 0x17 0x19 0x1a 0x1b 0x1e 
+Checking 71c Associations
+
+Current Associations
+ 01271c40 = 4 
+ 01471c10 = 1 
+ 01571c20 = 2 
+ 01871c30 = 3 
+ 01d71c05 = 1  note: Changed 0 to 1
+
+  Used associations = 4 1 2 3 1
+Unused associations = 5 6 7 8 9 a b c d e
+
+Correcting duplicate associations
+
+Checking if 4 already exists in: 1 2 3 1 
+   no duplicate found
+Checking if 1 already exists in: 4 2 3 1 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 2 already exists in: 4 1 3 1 
+   no duplicate found
+Checking if 3 already exists in: 4 1 2 1 
+   no duplicate found
+Checking if 1 already exists in: 4 1 2 3 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 5
+
+New 71c Associations
+ Before      After
+--------------------------------------------------
+01271c40   01271c40  01271d01  01271ea6  01271f90
+01471c10   01471c10  01471d01  01471e17  01471f90
+01571c20   01571c20  01571d10  01571e21  01571f03
+01871c30   01871c30  01871d18  01871ea1  01871f03
+01d71c05   01d71c50  01d71d82  01d71e13  01d71f40
+
+Reset 71d Misc to 0
+New 71d Associations
+ Before                After
+--------------------------------------------------
+01271d01   01271c40  01271d00  01271ea6  01271f90
+01471d01   01471c10  01471d00  01471e17  01471f90
+01571d10   01571c20  01571d10  01571e21  01571f03
+01871d18   01871c30  01871d10  01871ea1  01871f03
+01d71d82   01d71c50  01d71d80  01d71e13  01d71f40
+
+Correct 71f 02 FP to 01
+New 71f Associations
+ Before                                    After
+--------------------------------------------------
+01271d01   01271c40  01271d00  01271ea6  01271f90
+01471d01   01471c10  01471d00  01471e17  01471f90
+01571d10   01571c20  01571d10  01571e21  01571f00
+01871d18   01871c30  01871d10  01871ea1  01871f00
+01d71d82   01d71c50  01d71d80  01d71e13  01d71f40
+ 

@@ -14,6 +14,9 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
 	3. Compiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
+<details>
+<summary><strong>Why this guide is necessary</strong> (click to reveal)</summary>
+
 ### Source situation: do we really need another guide for this?
 
 Short answer: **Hell yeah, we need another guide!** But let me explain…
@@ -25,6 +28,7 @@ Most of the guides I did find are either outdated or over-complicated or are no 
 The most compelling guide I found thus far is by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. Although not all of the steps are applicable today, it contains some great workflows and a visual approach to creating Layout-IDs which is a lot easier to understand and follow. Since german is my native language, it's easy for me to follow and translate it, so that's why my guide is based on his work. But it's not just a simple copy/translate/paste typo of deal, but rather an adaption and update, making use of all the new tools and nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
 
 So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
+</details>
 
 ## Contents
 This guide will cover the following topics (subject to change):

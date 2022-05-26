@@ -1,6 +1,5 @@
 Codec: Realtek ALC1220
 Address: 0
-AFG Function Id: 0x1 (unsol 1)
 Vendor Id: 0x10ec1220
 Subsystem Id: 0x1458a0c3
 Revision Id: 0x100101

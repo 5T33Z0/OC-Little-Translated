@@ -9,10 +9,10 @@ Digital Unknown  Mic at Int N/A              18 0x12   0x90a60140   01271c40 012
  Analog Unknown  Speaker at Int N/A          20 0x14   0x90170110   01471c10 01471d01 01471e17 01471f90
     1/8   Black  HP Out at Ext Left          21 0x15   0x03211020   01571c20 01571d10 01571e21 01571f03
     1/8   Black  Speaker at Ext Rear         23 0x17   0x411111f0   01771cf0 01771d11 01771e11 01771f41
- Mic at Ext Left                             24 0x18   60889136     01871c30 01871d18 01871ea1 01871f03  
- Speaker at Ext Rear                         25 0x19   1091637744   01971cf0 01971d11 01971e11 01971f41  
+ Mic at Ext Left    0x18 0x18                        60889136 01871c30 01871d18     01871ea1 01871f03  
+ Speaker at Ext Rear    0x19 0x19                        1091637744 01971cf0 01971d11     01971e11 01971f41  
     1/8   Black  Speaker at Ext Rear         26 0x1a   0x411111f0   01a71cf0 01a71d11 01a71e11 01a71f41
- Speaker at Ext Rear                         27 0x1b   1091637744   01b71cf0 01b71d11 01b71e11 01b71f41  
+ Speaker at Ext Rear    0x1b 0x1b                        1091637744 01b71cf0 01b71d11     01b71e11 01b71f41  
   ATAPI  Purple  Speaker at Ext N/A          29 0x1d   0x40138205   01d71c05 01d71d82 01d71e13 01d71f40
     1/8   Black  Speaker at Ext Rear         30 0x1e   0x411111f0   01e71cf0 01e71d11 01e71e11 01e71f41
 --------------------------------------------------------------------------------------------------------
@@ -23,8 +23,7 @@ Digital Unknown  Mic at Int N/A              18 0x12   0x90a60140   01271c40 012
 Digital Unknown  Mic at Int N/A              18 0x12   0x90a60140   01271c40 01271d00 01271ea6 01271f90
  Analog Unknown  Speaker at Int N/A          20 0x14   0x90170110   01471c10 01471d00 01471e17 01471f90
     1/8   Black  HP Out at Ext Left          21 0x15   0x03211020   01571c20 01571d10 01571e21 01571f00
- Mic at Ext Left                             24 0x18   60889136     01871c30 01871d10 01871ea1 01871f00  
-    1/8   Black  Speaker at Ext Rear         30 0x1e   0x411111f0   01e71cf0 01e71d11 01e71e11 01e71f41
- Speaker at Ext Rear                         27 0x1b   1091637744   01b71cf0 01b71d11 01b71e11 01b71f41  
+ Mic at Ext Left    0x18 0x18                        60889136 01871c30 01871d10     01871ea1 01871f00  
+  ATAPI  Purple  Speaker at Ext N/A          29 0x1d   0x40138205   01d71c50 01d71d80 01d71e13 01d71f40
 --------------------------------------------------------------------------------------------------------
 
