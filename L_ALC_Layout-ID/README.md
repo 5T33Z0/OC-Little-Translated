@@ -3,11 +3,15 @@
 ## Preface
 :warning: This is not finished (Chptrs. I to III are finished, though)
 
-This is my attempt to provide an updated and easy to follow guide for creating a Layout-ID for the AppleALC kext. It is aimed at users for whom the existing Layout-IDs do not work so they're forced to create a Layout-ID from scratch or modify an existing one which was created for the same Codec but maybe a different system/mainboard or usage.
+This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC.kext. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
 
-Although AppleALC comes with about 600 (!) pre-configured Layout-IDs already, there are almost no up-to-date guides available which explain the whole process for creating a Layout-ID from scratch which is a bit surprising. Even the AppleALC repo doesn't go into details about this. The most compelling and easy to follow guide I know is by MacPeet who created a lot of Layout-IDs. But it's written in German and is from 2015, when AppleALC didn't exist and patching AppleHDA.kext was still a thing.
+### Do we really need another guide for creating Layout-IDs?
+Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually create a Layout-ID is not  covered on the AppleALC repo itself which is a missed opportunity, imo. I only found 3 to 4 guides which explain some aspects of but not the entire process.  There are still some key aspects I haven't figured out yet, so that's why this Guide is still a work in progress.
 
-My guess is the lack of guides is due to the fact that some Layout-ID for a given Codec will most likely work somehow so people don't bother how they are actually created. Another factor might be the tremendous effort that goes into creating a proper in-depth guide. I think this one took me at least a week. Not so much the writing of the text but a) understanding how it all works and b) creating workflows to get the tools running.
+Most of the guides I found are either outdated or over-complicated or no longer applicable today. The oldest guide I found is from from 2012 by EMlyDinEsH. It contains some really useful info, but is incomplete. The newest guides I could find are from 2017. One by F0x1c which is basically just an unformatted copy/paste of EMlyDinEsH's guide which is unreadable in markdown. If you the download the data from github as a .zip, you'll find an .rtf document inside of it, that you can extract some additional info from. The third guide is from Daliansky, written in Chinese and is over the top complicated, too long and too hard to follow. 
+
+### About my guide
+The most compelling guide I found yet is by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. Although not all of the steps are applicable today, it contains some great workflows and a visual approach to creating Layout-IDs which is a lot easier to understand and follow. Since german is my native language, it's easy for me to follow and translate, so that's why my guide is based on MacPeet's guide. But it's not just a simple copy/translate/paste guide but rather an adaption and update of his guide, making use of all new tools an all the nice new features markdown has to offer nowadays, such as mermaid integration for creating flowcharts, etc.
 
 ## Use cases
 1. Users who want/need to create a Layout-ID for their Codec from scratch (because a working one doesn't exist yet)
@@ -15,7 +19,7 @@ My guess is the lack of guides is due to the fact that some Layout-ID for a give
 3. Users who just want to compile a slimmed-down version of AppleALC for the one Layout-ID they are using, can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
 
 ## Contents
-This guide will cover the following topics:
+This guide will cover the following topics (subject to change):
 
 - Creating a dump of the Audio Codec in Linux
 - Converting and visualizing the data
@@ -176,7 +180,41 @@ Line Input:
 flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
-## IV. Creating the PinConfiguration
+
+## IV Creating a Pathmap
+Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
+
+A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
+
+### Tracing possible routings
+We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
+
+Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
+---------------------|-----------------------------|-----------------------|:----:
+18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
+20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
+21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 - 13 - 3|YES
+23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
+24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
+25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
+25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 11 - 25 or</br> 8 - 35 - 25 or </br> 9 - 34 - 25 or </br> 9 - 34 - 11 - 25
+26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 11 - 15 - 2 (M) or</br>26 - 11 - 12 - 2 or </br> 26 - 11 - 13 - 3
+26 (as Input)        |Speaker at Ext Rear IN HP Detect|8 - 35 - 26 or </br> 8 - 35- 11- 26 or </br> 9 - 34 - 26 or </br> 9 - 34 - 11 - 26 
+27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 11 - 15 - 2 (M) or </br>27 - 11 - 12 - 2 or </br> 27 - 11 - 12 - 2 or </br> 27 - 11 - 13 - 3
+27 (as Input)		 | Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 8 - 35 - 11 - 27 or </br> 9 - 34 - 27 or </br> 9 - 34 - 11 - 27
+29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
+29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
+30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
+
+We can also have a look inside the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
+
+![](Pics/Node21.png)
+
+As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13. And Node 13 is connected to Node 3:
+
+### Transfering the PathMap to `Platforms.xml` (todo)
+
+## V. Creating the PinConfiguration
 We can use the schematic and the "verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS whuch audio devices/routings are available, such as: speakers (on Laptops), line-in/out, internal mic, analog/digital. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
@@ -242,42 +280,6 @@ Now that we (finally) have the PinConfig Data, we need to somehow inject it into
 
 …TBC
 
-## IV Creating a Pathmap
-Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and create what's called a pathmap.
-
-A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
-
-### Tracing possible routings
-We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
-
-Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
----------------------|-----------------------------|-----------------------|:----:
-18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
-20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
-21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 - 13 - 3|YES
-23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
-24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
-25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 11 - 25 or</br> 8 - 35 - 25 or </br> 9 - 34 - 25 or </br> 9 - 34 - 11 - 25
-26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 11 - 15 - 2 (M) or</br>26 - 11 - 12 - 2 or </br> 26 - 11 - 13 - 3
-26 (as Input)        |Speaker at Ext Rear IN HP Detect|8 - 35 - 26 or </br> 8 - 35- 11- 26 or </br> 9 - 34 - 26 or </br> 9 - 34 - 11 - 26 
-27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 11 - 15 - 2 (M) or </br>27 - 11 - 12 - 2 or </br> 27 - 11 - 12 - 2 or </br> 27 - 11 - 13 - 3
-27 (as Input)		 | Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 8 - 35 - 11 - 27 or </br> 9 - 34 - 27 or </br> 9 - 34 - 11 - 27
-29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
-29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
-30				     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
-
-We can also have a look inside the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
-
-![](Pics/Node21.png)
-
-As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13. And Node 13 is connected to Node 3:
-
-
-
-### Transfering the PathMap to `Platforms.xml` (todo)
-
-
 ## VI. Creating a unique ALC Layout-ID for your PC/Laptop
 Once you have a fully working PinConfiguration (test all the inputs and outputs), you can create a unique Layout-ID for your type of mainboard or Laptop model.
 
@@ -312,7 +314,10 @@ Once your custom Layout-ID is working, you can submit it to the main AppleALC Re
 ## CREDITS and RESOURCES
 - Mac Peet for original [guide](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
 - HaC Mini Hackintosh for addtional info about the [HDA Codec and codecgraph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
+- EMlyDinEsH for [Complete Apple HDA Patching Guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/)
 - Daliansky for his guide [guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+- Daliansky for [List of HDA Verb Parameters](https://blog-daliansky-net.translate.goog/hda-verb-parameter-detail-table.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+- Foxit for [AppleALC_Instructions](https://github.com/F0x1c/AppleALC_Instructions)
 - cmatsuoka for [codecgraph](https://github.com/cmatsuoka/codecgraph)
 - Headkaze for porting [PinConfigurator](https://github.com/headkaze/PinConfigurator) to 64 bit 
 - [graphviz](http://www.pixelglow.com/graphviz/)
@@ -320,3 +325,4 @@ Once your custom Layout-ID is working, you can submit it to the main AppleALC Re
 - Jack Plug schematics: 
 	- OMTP [WIKI Commons](https://commons.wikimedia.org/wiki/File:3mm5_jack_4.svg) 
 	- CTIA [WIKI Commons](https://commons.wikimedia.org/wiki/File:3.5mm_jack_plug_4i.svg)
+- [Using VoodooHDA for finding valid Nodes](https://blog-daliansky-net.translate.goog/With-VoodooHDA-comes-getdump-find-valid-nodes-and-paths.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
