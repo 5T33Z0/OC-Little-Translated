@@ -17,7 +17,7 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 
 ### Source situation: do we really need another guide for this?
 
-Short answer: **Hell yeah, we need another guide!** Let me explain why…
+Short answer: **Hell yeah, we need another guide!** But let me explain…
 
 Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually *create* a Layout-ID from scratch is not covered on the AppleALC repo. As a matter of fact, it's rarely covered at all. I only could find about 4 guides which explain some aspects of if it but never the entire process as it is required today.
 
@@ -39,9 +39,7 @@ This guide will cover the following topics (subject to change):
 
 ## I. Preparations
 ### Obtaining an Audio CODEC dump in Linux
-Why Linux? Unfortunately, neither Codec dumps created with OpenCore nor Clover can be processed with the tools we need to visualize the data of the codec dump. When using dumps created in Linux however, the tools can handle the data inside the dumps just fine.
-
-This might be because in Linux, the paths of an audio codec are dynamically discovered through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
+Why Linux? Unfortunately, neither Codec dumps created with OpenCore nor Clover can be processed with the tools we need to visualize the data of the codec dump. When using dumps created in Linux however, the tools can handle the data inside the dumps just fine. This might be because in Linux, the paths of an audio codec are dynamically discovered through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
 
 Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. I will use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
