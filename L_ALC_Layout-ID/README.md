@@ -317,7 +317,7 @@ If you want to modify an existing Layout-ID, do the following:
 	perl zlib.pl inflate LayoutXY.xml.zlib> LayoutXY.xml
 	perl zlib.pl inflate PlatformsXY.xml.zlib> PlatformsXY.xml
 	```
-- This should give you something like this:</br>![](/Users/5t33z0/Documents/GitHub/OC-Little-Translated/L_ALC_Layout-ID/Pics/Zlib.png)
+- This should give you something like this:</br>![Zlib](https://user-images.githubusercontent.com/76865553/170539172-f06e6da3-6fcc-485d-a8cf-0d2148bb7208.png)
 
 To be continued…
 
