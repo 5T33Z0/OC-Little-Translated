@@ -3,20 +3,25 @@
 ## Preface
 :warning: This is not finished (Chptrs. I to III are finished, though)
 
-This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC.kext. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
+This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC to make audio work on a Hackintosh. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
+
+### How to use this guide
+Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) and a specific device (Lenovo T530 Laptop with a docking station), the basic concepts presented along the way apply to any Audio Codec. Therefore: 
+
+* Don't just follow the given instruction in this guide blindly!
+* Instead, abstract from the given example and apply the presented methods and techniques to your specific use case! These use cases can be:
+
+	1. Creatin a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
+	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
+	3. Coompiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
 
 ### Do we really need another guide for creating Layout-IDs?
-Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually create a Layout-ID is not covered on the AppleALC repo itself. I only found 3 to 4 guides which explain some aspects of but not the entire process.  There are still some key aspects I haven't figured out yet, so that's why this Guide is still a work in progress.
+Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually create a Layout-ID is not covered on the AppleALC repo itself. I only found 4 guides which explain some aspects of but not the entire process.  There are still some key aspects I haven't figured out yet, so that's why this Guide is still a work in progress.
 
 Most of the guides I found are either outdated or over-complicated or no longer applicable today. The oldest guide I found is from from 2012 by EMlyDinEsH. It contains some really useful info, but is incomplete. The newest guides I could find are from 2017. One by F0x1c which is basically just an unformatted copy/paste of EMlyDinEsH's guide which is unreadable in markdown. If you the download the data from github as a .zip, you'll find an .rtf document inside of it, that you can extract some additional info from. The third guide is from Daliansky, written in Chinese and is over the top complicated, too long and too hard to follow. 
 
 ### About my guide
 The most compelling guide I found yet is by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. Although not all of the steps are applicable today, it contains some great workflows and a visual approach to creating Layout-IDs which is a lot easier to understand and follow. Since german is my native language, it's easy for me to follow and translate, so that's why my guide is based on MacPeet's guide. But it's not just a simple copy/translate/paste guide but rather an adaption and update of his guide, making use of all new tools an all the nice new features markdown has to offer nowadays, such as syntax highlighting, tables and mermaid integration for creating flowcharts, etc.
-
-## Use cases
-1. Users who want/need to create a Layout-ID for their Codec from scratch (because a working one doesn't exist yet)
-2. Users who want to modify an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide
-3. Users who just want to compile a slimmed-down version of AppleALC for the one Layout-ID they are using, can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
 
 ## Contents
 This guide will cover the following topics (subject to change):
@@ -30,7 +35,11 @@ This guide will cover the following topics (subject to change):
 
 ## I. Preparations
 ### Obtaining an Audio CODEC dump in Linux
-Why Linux? Unfortunately, neither Codec dumps created with OpenCore nor Clover can be processed by the tools we need to visualize the data of the codec dump. Therefore, we need to use (a live version of) Linux to create the codec dump. I will use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
+Why Linux? Unfortunately, neither Codec dumps created with OpenCore nor Clover can be processed with the tools we need to visualize the data of the codec dump. When using dumps created in Linux however, the tools can handle the data inside the dumps just fine.
+
+This might be because in Linux, the paths of an audio codec are dynamically discovered through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
+
+Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. I will use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
 #### Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Audio Codec"!
