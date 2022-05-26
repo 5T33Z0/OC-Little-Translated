@@ -6,7 +6,7 @@
 This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC.kext. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
 
 ### Do we really need another guide for creating Layout-IDs?
-Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually create a Layout-ID is not  covered on the AppleALC repo itself which is a missed opportunity, imo. I only found 3 to 4 guides which explain some aspects of but not the entire process.  There are still some key aspects I haven't figured out yet, so that's why this Guide is still a work in progress.
+Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually create a Layout-ID is not covered on the AppleALC repo itself. I only found 3 to 4 guides which explain some aspects of but not the entire process.  There are still some key aspects I haven't figured out yet, so that's why this Guide is still a work in progress.
 
 Most of the guides I found are either outdated or over-complicated or no longer applicable today. The oldest guide I found is from from 2012 by EMlyDinEsH. It contains some really useful info, but is incomplete. The newest guides I could find are from 2017. One by F0x1c which is basically just an unformatted copy/paste of EMlyDinEsH's guide which is unreadable in markdown. If you the download the data from github as a .zip, you'll find an .rtf document inside of it, that you can extract some additional info from. The third guide is from Daliansky, written in Chinese and is over the top complicated, too long and too hard to follow. 
 
@@ -85,7 +85,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![](Pics/Dump.png)
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
-4. Now, execute the following commands in Terminal (one by one):</br> </br>
+4. Now, execute the following commands in Terminal (one by one):
 	```swift
 	cd ~/Desktop/codecgraph
 	./codecgraph codec_dump.txt
@@ -93,7 +93,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 	./convert_hex_to_dec.rb codec_dump.txt.svg > ~/Desktop/codecgraph/codec_dump_dec.txt.svg
 	./convert_hex_to_dec.rb codec_dump.txt > ~/Desktop/codecgraph/codec_dump_dec.txt
 	./Verbit codec_dump.txt> verbs.txt
-	``` </br></br>
+	```
 	**This creates 4 new files inside the codecgraph folder:**
 	- **`codec_dump_dec.txt`** – Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
@@ -210,7 +210,13 @@ We can also have a look inside the codec dump to verify the routing. Here's an e
 
 ![](Pics/Node21.png)
 
-As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13. And Node 13 is connected to Node 3:
+As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13, which is one of the Audio mixers:
+
+![](Pics/Node13.png)
+
+ And Node 13's final destination is Node 3, which is the HP out:
+ 
+ ![](Pics/Node3.png)
 
 ### Transfering the PathMap to `Platforms.xml` (todo)
 
