@@ -17,7 +17,7 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 <details>
 <summary><strong>Why this guide is necessary</strong> (click to reveal)</summary>
 
-### Source situation: do we really need another guide for this?
+### Body of source material: do we really need another guide for this?
 
 Short answer: **Hell yeah, we need another guide!** But let me explain…
 
@@ -58,7 +58,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 7. From the GNU Grub, select "Try or Install Linux"
 8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu"
 
-#### Dumping the Audio Codec
+#### Dumping the Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
 	```shell
 	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump```
@@ -98,34 +98,34 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 
 ### Converting the Codec Dump 
 1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![Dump](https://user-images.githubusercontent.com/76865553/170469662-b833bdf9-67a1-4546-80a0-82b9e5bf42ba.png)
-2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
+2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the the following file conversions will fail!
 3. Save the file
-4. Now, execute the following commands in Terminal (one by one):
-	```swift
-	cd ~/Desktop/codecgraph
-	./codecgraph codec_dump.txt
-	chmod +x ./convert_hex_to_dec.rb
-	./convert_hex_to_dec.rb codec_dump.txt.svg > ~/Desktop/codecgraph/codec_dump_dec.txt.svg
-	./convert_hex_to_dec.rb codec_dump.txt > ~/Desktop/codecgraph/codec_dump_dec.txt
-	./Verbit codec_dump.txt> verbs.txt
-	```
-	**This creates 4 new files inside the codecgraph folder:**
-	- **`codec_dump_dec.txt`** – Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
-	- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
-	- **`codec_dump.txt_dec.txt.evg`** – Pathmap converted to decimal. We will work with this most of the time.
-	- **`Verbs.txt`** – Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: 1) the Codec Address, 2) a Node ID, 3) Verb Commands and 4) Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+4. Next, double-click on `Script Patch Codec by HoangThanh`
+
+**This will generate 5 new files inside the codecgraph folder:**
+
+- **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
+- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: 1) the Codec Address, 2) a Node ID, 3) Verb Commands and 4) Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+- **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
+- **`codec_dump.txt_dec.txt.evg`** &rarr; Pathmap converted from hex to decimal. We will work with this most of the time.
+- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
 
 ## III. Creating the PinConfiguration
-We can use the schematic and the "verbs.txt" file to create the PinConfiguration. The PinConfig tells macOS which audio devices/routings are available, such as: speakers (on Laptops), line-in/out, internal mic, analog/digital. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
+We can use the schematic and the "finalverbs.txt" to create a PinConfiguration. The PinConfig tells macOS which audio devices are available, such as: speakers (on Laptops), line-in/out, internal mic, analog/digital. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
-### Understanding `verbs.txt`
-Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![verbs](https://user-images.githubusercontent.com/76865553/170470695-ccfc0195-3650-4a83-81e8-033a9d77ea3f.png)
+### Understanding `finalverbs.txt` and fixing possible conversion errors
+Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>
+![](Pics/Verbs_errors.png)
+As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by verbit.sh.
 
-As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by `verbit.sh`.
+You may have also noticed that some Nodes have *not* been converted from hex to decimal (pink) while some `PinDefault` data *has* been converted which shouldn't have been converted at all (red). So lets fix this using the original codec_dump.txt and lets fix the formatting along the way. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. 
 
-You can also see, that some Nodes have not been converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br> ![VerbsNice](https://user-images.githubusercontent.com/76865553/170470808-dce7b557-367a-4002-ae3e-a82f263b02a6.png)
+For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the codec_dump.txt for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
+
+Once we're done with fixing the conversion errors, we get this:</br>
+![](Pics/Fixedverbs.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
@@ -144,7 +144,7 @@ Now that we have selected the routings we want to usw, we need to copy the data 
 
 1. Press ⌘+N to create a new empty file
 2. From the menubar, select "Format" > "Make Plain Text" (or press ⌘+Shift+T) so the formatting is correct
-3. Back in the "Verbs.txt" window, copy the 4 pairs of digits in the Modified Verbs column and paste them into the new file.
+3. Back in the "finalverbs.txt" window, copy the 4 pairs of digits in the Modified Verbs column and paste them into the new file.
 4. Repeat until you have transferred all the values for each entry. It should look like this:</br>![ModVerbs](https://user-images.githubusercontent.com/76865553/170471065-07d452b5-85fe-40b8-9161-0d06065fb993.png)
 5. Now, select all the values (⌘+A) and Copy them to the Clipboard (⌘+C)
 6. Next, run **PinConfigurator** 
