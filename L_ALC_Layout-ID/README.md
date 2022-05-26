@@ -328,7 +328,7 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 Once your custom Layout-ID is working, you can submit it to the main AppleALC Repo. In order to add your newly created Layout-ID to AppleALC's database, you have to create a fork of the repo first, then add the required files to the Resources folder (Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support)), sync it with github and then create a pull request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 ## CREDITS and RESOURCES
-- Mac Peet for original [guide](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
+- MacPeet for original [guide](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
 - HaC Mini Hackintosh for addtional info about the [HDA Codec and codecgraph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
 - EMlyDinEsH for [Complete Apple HDA Patching Guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/)
 - Daliansky for his [guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
