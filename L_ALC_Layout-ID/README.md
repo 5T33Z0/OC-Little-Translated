@@ -74,7 +74,8 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 	- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
 	- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 	- The resulting folder structure should look like this:</br>
-	![](Pics/AppleALC.png)
+	![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
+
 
 Now, that we have most of the prep work out of the way, we can begin.
 
@@ -82,7 +83,7 @@ Now, that we have most of the prep work out of the way, we can begin.
 In order to create a routing of the audio inputs and outputs for macOS, we need to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
 
 ### Converting the Codec Dump 
-1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![](Pics/Dump.png)
+1. Open the `codec_dump.txt` located in the "codecgraph" folder with TextEdit. It should look similar to this:</br>![Dump](https://user-images.githubusercontent.com/76865553/170469662-b833bdf9-67a1-4546-80a0-82b9e5bf42ba.png)
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; it will cause the generation of "verbs.txt" to fail otherwise
 3. Save the file
 4. Now, execute the following commands in Terminal (one by one):
@@ -103,7 +104,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 ## III. Analyzing the Schematic
 Shown below is `codec_dump.txt_dec.txt.evg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop:
 
-![](Pics/codec_dump_dec.svg)
+![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
 
 Depending on the Codec used in your system, the schematic will look different.
 
@@ -121,7 +122,7 @@ Form              | Function
 **Dotted Lines**  | Currently used path
 **Blue Lines**    | ???
 
-Let's have a look at the Block Diagram of the ALC269 in comparison: </br> ![](Pics/ALC269_BlockD.png)
+Let's have a look at the Block Diagram of the ALC269 in comparison: </br> ![ALC269_BlockD](https://user-images.githubusercontent.com/76865553/170470130-f62273b1-7b00-455c-820e-4c4ea35dc311.png)
 
 On the I/O side, we have:
 
@@ -138,7 +139,7 @@ Else:
 ### Understanding signal flow
 My Lenovo T530 Laptop only has one 1/8" jack which serves as input and output at the same time (combo jack). It detects what kind of plug (Line-in/out, Headphone/Headset) is plugged into it. Headphone have 3 poles, while Headset plugs have 4 poles to separate the 3 audio channels and ground: left/right output (stereo) and a mono input (Aux). 2 variants are available, **OMTP** and **CTIA**.
 
-**OMTP**: ![](Pics/Plug_OMTP.png) and **CTIA**: ![](Pics/Plug_CTIA.png) 
+**OMTP**: ![Plug_OMTP](https://user-images.githubusercontent.com/76865553/170470243-1f88bc29-dab9-4381-99b0-89c35d75224e.png) and **CTIA**: ![Plug_CTIA](https://user-images.githubusercontent.com/76865553/170470318-106063b6-4b69-47e9-8693-d16632e5685f.png)
 
 Once a plug is plugged into the jack, the internal speakers are muted (and turn back on automatically once the plug is pulled). If the plug has 4 poles (as shown above), it is available as a mic or line-in for macOS as well (if the Layout-ID is configured accordingly). So there is some automatic switching going on in the background as well which happens inside the mixer(s).
 
@@ -208,15 +209,15 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 
 We can also have a look inside the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
 
-![](Pics/Node21.png)
+![Node21](https://user-images.githubusercontent.com/76865553/170473509-a3e96ded-c9db-4de5-9774-40b6ef094629.png)
 
 As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13, which is one of the Audio mixers:
 
-![](Pics/Node13.png)
+![Node13](https://user-images.githubusercontent.com/76865553/170470502-7c4952c7-b865-4b63-9d58-d74ec38fe278.png)
 
  And Node 13's final destination is Node 3, which is the HP out:
  
- ![](Pics/Node3.png)
+![Node3](https://user-images.githubusercontent.com/76865553/170470592-22c22176-f1f9-4aec-91b0-6b829c6bdbb1.png)
 
 ### Transfering the PathMap to `Platforms.xml` (todo)
 
@@ -226,11 +227,11 @@ We can use the schematic and the "verbs.txt" file to create the PinConfiguration
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding `verbs.txt`
-Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/verbs.png)
+Open the `verbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![verbs](https://user-images.githubusercontent.com/76865553/170470695-ccfc0195-3650-4a83-81e8-033a9d77ea3f.png)
 
 As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by `verbit.sh`.
 
-You can also see, that some Nodes have not been converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br>![](Pics/VerbsNice.png)
+You can also see, that some Nodes have not been converted from Hex to Decimal and the data is not formatted nicely, so lets fix it for visuals. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. Once we're done with fixing the formatting, we get this:</br> ![VerbsNice](https://user-images.githubusercontent.com/76865553/170470808-dce7b557-367a-4002-ae3e-a82f263b02a6.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
@@ -243,27 +244,28 @@ When comparing the entries of the "Modified Verbs" section with the .svg schemat
 - Node 29 (ATAPI Purple Speaker) is Mono and not really useful to me &rarr; so I delete this line right away
 
 ### Creating/Modifying the PinCong
-So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br> ![](Pics/CreatePinConf.png)
+So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br> ![CreatePinConf](https://user-images.githubusercontent.com/76865553/170470941-24cf1a1b-b5db-468b-9aa5-2042d6a21d56.png)
 
 Now that we have selected the routings we want to usw, we need to copy the data ot the "Modified Verbs" column to a new file line for line: 
 
 1. Press ⌘+N to create a new empty file
 2. From the menubar, select "Format" > "Make Plain Text" (or press ⌘+Shift+T) so the formatting is correct
 3. Back in the "Verbs.txt" window, copy the 4 pairs of digits in the Modified Verbs column and paste them into the new file.
-4. Repeat until you have transferred all the values for each entry. It should look like this:</br>![](Pics/ModVerbs.png)
+4. Repeat until you have transferred all the values for each entry. It should look like this:</br>![ModVerbs](https://user-images.githubusercontent.com/76865553/170471065-07d452b5-85fe-40b8-9161-0d06065fb993.png)
 5. Now, select all the values (⌘+A) and Copy them to the Clipboard (⌘+C)
 6. Next, run **PinConfigurator** 
 7. Click on File > Import > Clipboard
-8. This should create entries with inputs and outputs:</br>![](Pics/PinConfigurator.png)
-9. Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use EAPD:</br>![](Pics/EAPD.png)
-10. Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![](Pics/dropdown01.png)
+8. This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
+9. Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use EAPD:</br>![EAPD](https://user-images.githubusercontent.com/76865553/170471376-bdc52de3-c73b-40a4-99dc-50c4346a1806.png)
+10. Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![dropdown01](https://user-images.githubusercontent.com/76865553/170471478-15e29166-7deb-4793-bc44-163fe8754edf.png)
 11. In the EAPD dropdown menu, select EAPD.
 12. Repeat for other Nodes using EAPD
 13. (Optional) at this stage you could als set the Geo Location of the Jacks and their Color
-14. Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so double click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>![](Pics/PinConfig_done.png)<br>
+14. Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so double click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>
+![PinConfig_done](https://user-images.githubusercontent.com/76865553/170471709-e026836b-5f2c-4b2f-8190-5c1a2d5c3a81.png)<br>
 **Explanation**: Since the rear connector of the dock is basically an extension of the Headphone Jack, I want the routing to switch automatically when connecting/disconnecting a jack to either one of them. The internal speakers are supposed to turn off when plugging in a cable into the dock's audio jack and should switch back to the speakers when pulling it. And of course audio should be coming through the rear port as well, when connecting external speakers. So in order to make the routings switch automatically, I add Node 23 to the same group ad Node 21 (Group 2), but change it's position to 1, because 0 is the headphone Jack.
 15. Click save to close the window.
-16. Back in the main window, click on "Get Config Data":</br>![](Pics/Get_ConfigData.png)
+16. Back in the main window, click on "Get Config Data":</br>![Get_ConfigData](https://user-images.githubusercontent.com/76865553/170471964-f02f9309-b79d-4ed6-8e0b-ef2298e2479b.png)
 17. Select the generated PinConfig Data (without the <> and copy it to the clipboard 
 18. Create a new raw text file, paste the data and save it as PinConfig01 (or similar), so you don't lose the data.
 
@@ -281,10 +283,9 @@ Now that we (finally) have the PinConfig Data, we need to somehow inject it into
 		- as.vit9696.AppleALC
 			- HDAConfigDefault
 8. Use the search function and enter the "Vendor Id." In my case it's "283902569". This will show all existing Layout-IDs your Codec.
-9. For my test, Im am using entry no. 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530:</br>![](Pics/infoplist.png)
-…
+9. For my test, Im am using entry no. 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530:</br>![infoplist](https://user-images.githubusercontent.com/76865553/170472084-0dc4d888-1987-4185-a5b9-153e6fb2225c.png)
 
-…TBC
+…To be continued…
 
 ## VI. Creating a unique ALC Layout-ID for your PC/Laptop
 Once you have a fully working PinConfiguration (test all the inputs and outputs), you can create a unique Layout-ID for your type of mainboard or Laptop model.
@@ -296,7 +297,7 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 6. So back in AppleALC's info.plist duplicate the entry (Dictionary 182) we edited earlier
 7. Next, change the following:
 	- `Codec` field: add Author, the ALC version and the system/board it's for
-	- Change the `LayoutID` to a number which is not used yet:</br>![](Pics/UniqueLOID.png)
+	- Change the `LayoutID` to a number which is not used yet:</br>![UniqueLOID](https://user-images.githubusercontent.com/76865553/170472528-ce7b6ab6-77b3-4f29-95a9-89e51f0aaaca.png)
 8. Once this is done, change the Layout ID in your config.plist to the new Layout.
 9. Reboot and test
 
@@ -304,11 +305,10 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 
 - Next, run Xcode
 - Open the `AppleALC.xcodeproj` file included in the AppleALC folder
-- Highlight the AppleALC project file:</br> ![](Pics/Xcodsetings01.png)
+- Highlight the AppleALC project file:</br>![Xcodsetings01](https://user-images.githubusercontent.com/76865553/170472634-9ead337e-0ccf-46d6-9cbe-8a988cf5d14b.png)
 - Under "Build Settings", check if the entries </br> `KERNEL_EXTENSION_HEADER_SEARCH_PATHS` and `KERNEL_FRAMEWORK_HEADERS` exist
-- If not, press the "+" button and click on "Add User-Defined Settings" and add them and make sure that both point to "(PROJECT_DIR)/MacKernelSDK/Headers":</br>
-![](Pics/Xcode_UDS.png)
-- Next, Link to custom `libkmod.a` library by adding it under "Link Binary with Libraries": ![](Pics/Xcode_link.png)
+- If not, press the "+" button and click on "Add User-Defined Settings" and add them and make sure that both point to "(PROJECT_DIR)/MacKernelSDK/Headers":</br>![Xcode_UDS](https://user-images.githubusercontent.com/76865553/170472740-b842f8ca-0bc7-4023-acc1-c9e30b68bbfa.png)
+- Next, Link to custom `libkmod.a` library by adding it under "Link Binary with Libraries": ![Xcode_link](https://user-images.githubusercontent.com/76865553/170472832-5a077289-96a6-403d-b8c7-322459ff3156.png)
 - Nect, check if `libkmod.a` is present at /MacKernelSDK/Library/x86_64/ inside the AppleALC Folder.
 - Once all that is done, you can Compile using XCode (or xcodebuild from CLI)
 
