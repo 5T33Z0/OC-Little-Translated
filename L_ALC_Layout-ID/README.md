@@ -10,7 +10,7 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 
 - Don't just follow the given instruction in this guide blindly!
 - Instead, abstract from the given example and apply the presented methods and techniques to your specific use case! These use cases can be:
-	1. Creatin a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
+	1. Creating a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
 	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
 	3. Compiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
