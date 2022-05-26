@@ -13,7 +13,7 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 
 	1. Creatin a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
 	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
-	3. Coompiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
+	3. Compiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
 ### Source situation: do we really need another guide for this?
 
@@ -88,7 +88,6 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 	- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 	- The resulting folder structure should look like this:</br>
 	![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
-
 
 Now, that we have most of the prep work out of the way, we can begin.
 
