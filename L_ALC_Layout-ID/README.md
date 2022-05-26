@@ -8,8 +8,8 @@ This is my attempt of providing an up-to-date and easy to follow guide for creat
 ### How to use this guide
 Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) and a specific device (Lenovo T530 Laptop with a docking station), the basic concepts presented along the way apply to any Audio Codec. Therefore: 
 
-* Don't just follow the given instruction in this guide blindly!
-* Instead, abstract from the given example and apply the presented methods and techniques to your specific use case! These use cases can be:
+- Don't just follow the given instruction in this guide blindly!
+- Instead, abstract from the given example and apply the presented methods and techniques to your specific use case! These use cases can be:
 
 	1. Creatin a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
 	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
