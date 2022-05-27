@@ -1,6 +1,6 @@
 # How to create/modify a Layout-ID for AppleALC (work in progress)
 
-## Preface
+## PREFACE
 :warning: This is not finished yet (Chapters I to IV are completed, though)
 
 This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC to make audio work on a Hackintosh. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
@@ -23,14 +23,14 @@ Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more t
 
 Most of the guides I found were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explain how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
 
-The most convincing guide I found yet is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still necessary since AppleALC didn't exist. Altough not all of its instructions are applicable today, it introduced a new, partly automated workflow, which is much easier to understand and follow: it utilizes tools to visualize the Codec dump and scripts to generate required verb data for the PinConfig which previously required a lot of manual labour.
+The most convincing guide I found yet is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still necessary since AppleALC didn't exist. Although not all of its instructions are applicable today, it introduced a new, partly automated workflow, which is much easier to understand and follow: it utilizes tools to visualize the Codec dump and scripts to generate required verb data for the PinConfig which previously required a lot of manual labour.
 
-My guide is an adaptation of MacPeets work but expands on it where necessary to meet today's requirements. It makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
+My guide is an adaptation of MacPeet's work but expands on it where necessary to meet today's requirements. It makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
 
 So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
 </details>
 
-## Contents
+## TABLE of CONTENTS
 This guide will cover the following topics:
 
 - Creating a dump of the Audio Codec in Linux
@@ -97,7 +97,6 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 	- `LayoutXX.aml` and `PlatformsXX.xml` (located in an "ALCXXX"-subfolder for the codec model it is for).
 
 #### Configuring Xcode
-
 - Start Xcode
 - Open the `AppleALC.xcodeproj` file included in the AppleALC folder
 - Highlight the AppleALC project file:</br>![Xcodsetings01](https://user-images.githubusercontent.com/76865553/170472634-9ead337e-0ccf-46d6-9cbe-8a988cf5d14b.png)
@@ -108,7 +107,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 Now, that we have the prep work out of the way, we can begin!
 
-## II. Extracting relevant data from the Codec dump
+## II. Extracting data from the Codec dump
 In order to create a routing of the audio inputs and outputs for macOS, we need to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
 
 ### Converting the Codec Dump 
@@ -118,7 +117,6 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 4. Next, double-click on `Script Patch Codec by HoangThanh`
 
 **This will generate 5 new files inside the codecgraph folder:**
-
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: the Codec's address, a Node ID,  Verb Commands and Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
@@ -126,7 +124,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex.
 
 ## III. Analyzing the Codec dump
-Amongst othe things, the codec dump text contains the following details:
+Amongst other things, the codec dump text contains the following details:
 
 - The Codec model
 - Its Address
@@ -138,7 +136,7 @@ Amongst othe things, the codec dump text contains the following details:
 	- Audio Input Nodes
 	- Number of connections from/to a Node/Mixer/Selector/Switch
 
-All the aspects regarding the audio routing capabilities of the Codec are represented in the .svg schematics we created previouls. So let's have a look at it next.
+All the aspects regarding the audio routing capabilities of the Codec are represented in the .svg schematics we created previously. So let's have a look at it next.
 
 ### Analyzing the Schematic
 Shown below is `codec_dump.txt_dec.txt.evg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the complete routing capabilities of the Audio Codec:
@@ -170,13 +168,13 @@ On the I/O side, we have:
 
 - 2 PCM outputs (with a DAC for each channel), 
 - 2 PCM inputs (with an ADC for each channel) and 
-- 2 S/PDIF (Sony/Philips Digital Interface) outputs (I don't care about those since my Laptops doen't have a TosLink nor Coaxial jack)
+- 2 S/PDIF (Sony/Philips Digital Interface) outputs (I don't care about those since my Laptops doesn't have a TosLink nor Coaxial jack)
 
 Else:
 
 - The schematic of the Codec dump lists only one clearly visible digital output.
 - As far as the Mixers (labeled as `∑`) are concerned, I count 3 as well: 0Bh, 23h, and 24h.
-- Line 1+2 and Mic 1+2 can be either Input or Outpt (I/O).
+- Line 1+2 and Mic 1+2 can be either Input or Output (I/O).
 </details>
 <details>
 <summary><strong>Excursion: Understanding signal flow and switching audio sources</strong> (click to reveal)</summary>
@@ -228,13 +226,11 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 
-## IV. Tracing possible paths
-Now that we know how to read the schematic of the ALC269 Codec, we can deduce all the available routings and use it to create what's called a pathmap later.
+## IV. Creating a Pathmap
+The Pathmap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
 
-A pathmap describes the signal flow within the codec from the Pin Complex to  physical outputs and from Inputs to Pin Complexes. Some routings ar fixed (internal Mics) while others can be routed freely. Some Nodes cane even be input and output at the same time. The path a signal takes is defined by the nodes it travels through. In macOS, the pathmap is limited to 8 nodes.
-
-### Creating a table (optional)
-We will use to the schematic as a visual aid to trace all possible connections and create a table with all the relevant info which makes routing easier later:
+### Tracing possible paths (optional)
+Now that we know how to read the schematic of the Codec, we can use it to trace all available paths the codec provides and create a chart with it, which helps later when transferring the data into .xml:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
 ---------------------|-----------------------------|-----------------------|:----:
@@ -270,11 +266,24 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 ![Node3](https://user-images.githubusercontent.com/76865553/170470592-22c22176-f1f9-4aec-91b0-6b829c6bdbb1.png)
 </details>
 
-## VI. Transferring the PathMap to `PlatformsXY.xml`
+### Transferring the PathMap to `PlatformsXY.xml`
 Now that we found all the possible paths which can connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we want to use into a PlatformXY.xml file ("XY" represents the Layout-ID which we will give it).
 
 AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional xml files, LayoutXY.xml as well as the afore mentioned PlatformXY.xml. For each existing Layout-ID there are corresponding .xml files with the same number.
 
+### Modifying an existing `Platforn.xml`
+If you want to modify an existing Layout-ID, do the following:
+- In Finder, navigate to the resources folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
+- Copy the LayoutYX.xml.zlib and PlatformXY.xml.zlib corresponding to the Layout-ID you want to modify into the "zlib" folder inside the "codecgraph" folder on your "desktop" (In my case layout18.xml.zlib and Platforms18.xml.zlib). We need to unzip the files before we can edit them. 
+- Open Terminal and enter (replace "XY" with the actual number of the files):
+	```swift
+	cd ~/desktop/codecgraph/zlib
+	perl zlib.pl inflate LayoutXY.xml.zlib> LayoutXY.xml
+	perl zlib.pl inflate PlatformsXY.xml.zlib> PlatformsXY.xml
+	```
+- This should give you something like this:</br>![Zlib](https://user-images.githubusercontent.com/76865553/170539172-f06e6da3-6fcc-485d-a8cf-0d2148bb7208.png)
+
+To be continued…
 
 ## V. Creating a `PinConfig`
 
@@ -306,22 +315,7 @@ When comparing the entries of the "Modified Verbs" section with the .svg schemat
 - Node 30 is Digital and since my system neither has Optical or SPDIF, it's not an option either
 - Node 29 (ATAPI Purple Speaker) is Mono and not really useful to me &rarr; so I delete this line right away
 
-
 Whether or not you want to build a Layout-ID from scratch or you want to modify and existing Layout-ID, the workflow slightly differs.
-
-### Modifying an existing `Platforn.xml`
-If you want to modify an existing Layout-ID, do the following:
-- In Finder, navigate to the resources folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
-- Copy the LayoutYX.xml.zlib and PlatformXY.xml.zlib corresponding to the Layout-ID you want to modify into the "zlib" folder inside the "codecgraph" folder on your "desktop" (In my case layout18.xml.zlib and Platforms18.xml.zlib). We need to unzip the files before we can edit them. 
-- Open Terminal and enter (replace "XY" with the actual number of the files):
-	```swift
-	cd ~/desktop/codecgraph/zlib
-	perl zlib.pl inflate LayoutXY.xml.zlib> LayoutXY.xml
-	perl zlib.pl inflate PlatformsXY.xml.zlib> PlatformsXY.xml
-	```
-- This should give you something like this:</br>![Zlib](https://user-images.githubusercontent.com/76865553/170539172-f06e6da3-6fcc-485d-a8cf-0d2148bb7208.png)
-
-To be continued…
 
 ### Creating/Modifying the PinConfig
 So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br>![CreatePinConf](https://user-images.githubusercontent.com/76865553/170470941-24cf1a1b-b5db-468b-9aa5-2042d6a21d56.png)
@@ -367,7 +361,7 @@ Now that we (finally) have the PinConfig Data, we need to somehow inject it into
 
 To be continued…
 
-## VII. Creating a unique ALC Layout-ID for your PC/Laptop
+## VI. Creating a unique ALC Layout-ID for your PC/Laptop
 Once you have a fully working PinConfiguration (test all the inputs and outputs), you can create a unique Layout-ID for your type of mainboard or Laptop model.
 
 1. Visit this [Repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
@@ -381,17 +375,31 @@ Once you have a fully working PinConfiguration (test all the inputs and outputs)
 8. Once this is done, change the Layout ID in your config.plist to the new Layout.
 9. Reboot and test
 
-## VIII. Compiling AppleALC.kext
+## VII. Compiling AppleALC.kext
 
 - In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file
 - Enter `xcodebuild` and hit Enter. Compiling should start and a lot of text should appear on screen during the process.
-- Once the kext is compiled, there will be the propmpt "BUILD SUCCEEDED". 
+- Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
 
-## IX. Testing (todo)
+## VII. Testing
+- Add your newly compiled AppleALC.kext to your EFI/OC/Kexts folder
+- Open the config.plist and change the Layout-ID to the one you chose for your Layout-ID
+- Save the cong and reboot
+- Check if sound is working (Internal, Inputs, Outputs, Headphones)
+- If it's working: Congrats.
+- If it's not working: re-check Pin-Config, Platforms.xml, adjust them, re-compile the kext, replace it in the EFI, reboot, test, repeat.
 
-## X. Adding your Layout-ID to the AppleALC Repo
-Once your custom Layout-ID is working, you can submit it to the main AppleALC Repo. In order to add your newly created Layout-ID to AppleALC's database, you have to create a fork of the repo first, then add the required files to the Resources folder (Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support)), sync it with github and then create a pull request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
+## IX. Adding your Layout-ID to the AppleALC Repo
+Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub repo via Pull Request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
+
+In order to add your Layout-ID to AppleALC's database, you have to do the following:
+- Create a fork of the repo
+- Add the required files to the "Resources" folder. Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support). 
+- Sync it with github and then create a pull request.
+- Wait for approval
+
+Once your Layout is part of the main AppleALC repo you can update AppleALC without having to compile your own version every time the source code is updated. 
 
 ## CREDITS and RESOURCES
 - **Guides**:
@@ -403,7 +411,7 @@ Once your custom Layout-ID is working, you can submit it to the main AppleALC Re
 
 - **About Intel High Definition Audio**:
 	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html)
- 	- HaC Mini Hackintosh for addtional info about the [HDA Codec and Codecgraph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
+ 	- HaC Mini Hackintosh for additional info about the [HDA Codec and Codecgraph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
  	- Daliansky for [List of HDA Verb Parameters](https://blog-daliansky-net.translate.goog/hda-verb-parameter-detail-table.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **Tools**:
 	- cmatsuoka for [codecgraph](https://github.com/cmatsuoka/codecgraph)
