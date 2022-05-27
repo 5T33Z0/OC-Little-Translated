@@ -31,14 +31,14 @@ So, unless you are fine with being dependent on the grace of others to create a 
 </details>
 
 ## Contents
-This guide will cover the following topics (subject to change):
+This guide will cover the following topics:
 
 - Creating a dump of the Audio Codec in Linux
-- Converting and visualizing the data
-- Creating a Pathmap and Pin Configuration
+- Converting and visualizing the Codec dump
+- Creating a Pin Configuration and a PathMap 
 - Creating a new Layout-ID for your Codec
-- Building your own Apple-ALC kext using Xcode
-- Submitting the newly created Layout-ID to the AppleALC github repo via Pull Request
+- Integrating the data into the AppleALC source code and compiling the kext with Xcode
+- Submitting your Layout-ID to the AppleALC github repo via Pull Request
 
 ## I. Preparations
 ### Obtaining an Audio CODEC dump in Linux
@@ -71,14 +71,14 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 ### Required Files and Tools
 :warning: Please follow the instructions below carefully and thoroughly. Use the suggested file names and locations, otherwise the provided terminal commands won't work without adjustments!
 
-- Install [**Python**](https://www.python.org/downloads/) if you haven't already
+- Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
 - Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
-- Once that's done, reboot
+- Once that's done, reboot.
 - Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
 - Next, download and unzip the [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip)
-- Copy the `codegraph` folder to the Desktop. We need it to visualize the data inside the Codec dump, so we have an easy to read schematic of the codec.
+- Copy the `codegraph` folder to the Desktop. We need it to converta and visualize the data inside the Codec dump, so we have can work with it.
 - Move the `codec_dump.txt` into the "codecgraph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
@@ -109,7 +109,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: 1) the Codec Address, 2) a Node ID, 3) Verb Commands and 4) Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
 - **`codec_dump.txt_dec.txt.evg`** &rarr; Pathmap converted from hex to decimal. We will work with this most of the time.
-- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex
+- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex.
 
 ## III. Creating the PinConfiguration
 We can use the schematic and the "finalverbs.txt" to create a PinConfiguration. The PinConfig tells macOS which audio devices are available, such as: speakers (on Laptops), line-in/out, internal mic, analog/digital. Apple's HDA Driver can handle up to 8 devices so stay within that limit.
@@ -117,7 +117,7 @@ We can use the schematic and the "finalverbs.txt" to create a PinConfiguration. 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
-Open the finalverbs.txt located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/Verbs_errors.png)
+Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/Verbs_errors.png)
 
 As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by verbit.sh.
 
