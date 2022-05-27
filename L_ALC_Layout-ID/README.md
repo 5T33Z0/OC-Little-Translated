@@ -93,8 +93,8 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 - The files we need to create a new Layout-ID or modify an exiting one are:
-	- `PinConfigs.kext` (located under `AppleALC/Resources`)
-	- `LayoutXX.aml` and `PlatformsXX.xml` (loctaed in "ALC"-subfolders representing the codec in use)
+	- `info.plist` (located in AppleALC/Resources/PinConfigs.kext/Contents/)
+	- `LayoutXX.aml` and `PlatformsXX.xml` (located in an "ALCXXX"-subfolder for the codec model it is for).
 
 Now, that we have most of the prep work out of the way, we can begin.
 
@@ -110,7 +110,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 **This will generate 5 new files inside the codecgraph folder:**
 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
-- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: 1) the Codec Address, 2) a Node ID, 3) Verb Commands and 4) Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: the Codec's address, a Node ID,  Verb Commands and Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
 - **`codec_dump.txt_dec.txt.evg`** &rarr; Pathmap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex.
