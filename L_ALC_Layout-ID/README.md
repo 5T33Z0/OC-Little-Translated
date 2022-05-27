@@ -69,7 +69,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
 
 ### Required Files and Tools
-:warning: Please follow the instructions below carefully and thoroughly. Use the suggested file names and locations, otherwise the provided terminal commands won't work without adjustments!
+:bulb: Please follow the instructions below carefully and thoroughly. Use the suggested file names and locations, otherwise the provided terminal commands won't work without adjustments!
 
 - Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
 - Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
@@ -84,13 +84,17 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
 - Get a plist editor like PlistEditPro or [**XPlist**](https://github.com/ic005k/Xplist)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
-- Preparing **AppleALC**:
-	- Clone, Fork or Download and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
-	- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
-	- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
-	- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
-	- The resulting folder structure should look like this:</br>
-	![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
+
+#### Preparing AppleALC
+- Clone, Fork or Download and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
+- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
+- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
+- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
+- The resulting folder structure should look like this:</br>
+![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
+- The files we need to create a new Layout-ID or modify an exiting one are:
+	- `PinConfigs.kext` (located under `AppleALC/Resources`)
+	- `LayoutXX.aml` and `PlatformsXX.xml` (loctaed in "ALC"-subfolders representing the codec in use)
 
 Now, that we have most of the prep work out of the way, we can begin.
 
