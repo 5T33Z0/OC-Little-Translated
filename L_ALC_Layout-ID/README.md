@@ -77,7 +77,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 - Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
-- Next, download and unzip the [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip)
+- Next, download and unzip [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip)
 - Copy the `codegraph` folder to the Desktop. We need it to converta and visualize the data inside the Codec dump, so we have can work with it.
 - Move the `codec_dump.txt` into the "codecgraph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
