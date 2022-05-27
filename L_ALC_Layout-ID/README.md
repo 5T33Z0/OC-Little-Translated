@@ -41,10 +41,10 @@ This guide will cover the following topics:
 - Submitting your Layout-ID to the AppleALC github repo via Pull Request
 
 ## I. (Plenty of) Prep work
-Creating a Layout-ID for AppleALC not only is a challenge in itself, it also requires a lot of prep work in order to do so…
+Creating a Layout-ID for AppleALC not only is a challenge in itself, it requires a lot of prep work in order to do so as well…
  
 ### Obtaining an Audio CODEC dump in Linux
-Why Linux? Unfortunately, neither Codec dumps created with Clover nor OpenCore can be processed with the tools required to visualize the data inside the dumps. Codec dumps created in Linux however, can be processed by said tools just fine. This might be because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
+Why Linux? Unfortunately, neither Codec dumps created with Clover nor OpenCore can be processed with the tools required to visualize the data inside the dumps. Codec dumps created in Linux however, can be processed by these tools just fine. This might be because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
 
 Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
@@ -71,7 +71,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
 
 ### Additional Requirements
-:bulb: Please follow the instructions below carefully and thoroughly. Use the suggested file names and locations, otherwise the provided terminal commands won't work without adjustments!
+:bulb: Please follow the instructions below carefully and thoroughly to avoid issues.
 
 - Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
 - Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
@@ -89,8 +89,8 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 #### Preparing the AppleALC Source Code
 - Clone, Fork or Download and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
-- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC-master" folder
-- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into Terminal and press enter.
+- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
+- In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into the window and press enter.
 - Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
@@ -100,7 +100,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 #### Configuring Xcode
 - Start Xcode
-- Open the `AppleALC.xcodeproj` file included in the AppleALC folder
+- Open the `AppleALC.xcodeproj` file located in the AppleALC folder
 - Highlight the AppleALC project file:</br>![Xcodsetings01](https://user-images.githubusercontent.com/76865553/170472634-9ead337e-0ccf-46d6-9cbe-8a988cf5d14b.png)
 - Under "Build Settings", check if the entries </br> `KERNEL_EXTENSION_HEADER_SEARCH_PATHS` and `KERNEL_FRAMEWORK_HEADERS` exist
 - If not, press the "+" button and click on "Add User-Defined Settings" to add them. Make sure that both point to "(PROJECT_DIR)/MacKernelSDK/Headers":</br>![Xcode_UDS](https://user-images.githubusercontent.com/76865553/170472740-b842f8ca-0bc7-4023-acc1-c9e30b68bbfa.png)
