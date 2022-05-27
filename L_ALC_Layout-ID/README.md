@@ -121,7 +121,7 @@ We can use the schematic and the "finalverbs.txt" to create a PinConfiguration. 
 Since I have a docking station for my Lenovo T530 with a Line-out Audio Jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I want to modify Layout 18 for ALC269 since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
-Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![](Pics/Verbs_errors.png)
+Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. In there you should find some kind of table:</br>![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
 
 As you can see, it's divided into two major sections: "Original Verbs" and "Modified Verbs". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by verbit.sh.
 
@@ -129,7 +129,7 @@ You may have also noticed that some Nodes have *not* been converted from hex to 
 
 For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the codec_dump.txt for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
 
-Once we're done with fixing the conversion errors, we get this:</br>![](Pics/Fixedverbs.png)
+Once we're done with fixing the conversion errors, we get this:</br>![Fixedverbs](https://user-images.githubusercontent.com/76865553/170696179-eec3fbc6-8647-4467-bc99-88bfb80ca957.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
