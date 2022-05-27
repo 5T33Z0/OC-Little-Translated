@@ -1,6 +1,6 @@
 # How to create/modify a Layout-ID for AppleALC (work in progress)
 
-## PREFACE
+## Preface
 :warning: This is not finished yet (Chapters I to IV are completed, though)
 
 This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC to make audio work on a Hackintosh. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
@@ -30,7 +30,7 @@ My guide is an adaptation of MacPeet's work but expands on it where necessary to
 So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
 </details>
 
-## TABLE of CONTENTS
+## Contents
 This guide will cover the following topics:
 
 - Creating a dump of the Audio Codec in Linux
@@ -40,18 +40,20 @@ This guide will cover the following topics:
 - Integrating the data into the AppleALC source code and compiling the kext with Xcode
 - Submitting your Layout-ID to the AppleALC github repo via Pull Request
 
-## I. Preparations (a lot of 'em)
+## I. (Plenty of) Prep work
+Creating a Layout-ID for AppleALC not only is a challenge in itself, it also requires a lot of prep work in order to do so…
+ 
 ### Obtaining an Audio CODEC dump in Linux
-Why Linux? Unfortunately, neither Codec dumps created with OpenCore nor Clover can be processed with the tools we need to visualize the data of the codec dump. When using dumps created in Linux however, the tools can handle the data inside the dumps just fine. This might be because in Linux, the paths of an audio codec are dynamically discovered through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
+Why Linux? Unfortunately, neither Codec dumps created with Clover nor OpenCore can be processed with the tools required to visualize the data inside the dumps. Codec dumps created in Linux however, can be processed by said tools just fine. This might be because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
 
-Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. I will use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
+Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
 #### Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
 1. Get a USB 3.0 flash drive (at least 8 GB or more)
-2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the USB flash drive. It's pretty straight forward.
-3. Next, Download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop), [Zorin](https://zorin.com/os/download/) or whatever distro you prefer – they all work fine.
+2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the flash drive. It's pretty straight forward.
+3. Next, download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop), [Zorin](https://zorin.com/os/download/) or whatever distro you prefer – they all work fine.
 4. Copy the ISO to your newly created Ventoy stick
 5. Reboot from the flash drive
 6. In the Ventoy menu, select the Linux ISO and hit enter
@@ -63,7 +65,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 	```shell
 	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
 	```
-2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat which can't be accessed by Linux without additional measures.
+2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat and can't be accessed by Linux without additional measures.
 3. Reboot into macOS
 4. Extract `CodecDump.zip` to the Desktop
 5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
@@ -117,6 +119,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 4. Next, double-click on `Script Patch Codec by HoangThanh`
 
 **This will generate 5 new files inside the codecgraph folder:**
+
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: the Codec's address, a Node ID,  Verb Commands and Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
