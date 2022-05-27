@@ -19,11 +19,13 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 
 ### Why this guide is needed
 
-Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of actually *creating* a Layout-ID from scratch and how to integrate the data into the source code of AppleALC for compiling is not covered on the AppleALC repo at all. As a matter of fact, it's not covered anywhere! I only could find 4 guides which explain some aspects of if it but never the whole process as it is required today.
+Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating the data into the source code for compiling is not covered on the AppleALC repo. As a matter of fact, it's not covered anywhere! I only could find 4 guides which explain parts of if it but never the whole process as it is required today.
 
-Most of the guides I did find were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explains how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
+Most of the guides I did find were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explain how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
 
-The most convincing guide I found thus far is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. So not all of the instructions are applicable today but it uses an easy to understand visual approach to creating Layout-IDs which is a lot easier to follow. So my guide is an adaptation of his work but expands on it where necessary to meet today's requirements and makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
+The most convincing guide I found yet is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still necessary since AppleALC didn't exist. Altough not all of its instructions are applicable today, it introduced a new, partly automated workflow, which is much easier to understand and follow: it utilizes tools to visualize the Codec dump and scripts to generate required verb data for the PinConfig which previously required a lot of manual labour.
+
+My guide is an adaptation of MacPeets work but expands on it where necessary to meet today's requirements. It makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
 
 So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
 </details>
