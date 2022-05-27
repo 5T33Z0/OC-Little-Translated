@@ -15,17 +15,15 @@ Although the Layout-ID created in this guide is for a specific Codec (Realtek AL
 	3. Compiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
 <details>
-<summary><strong>Why this guide is necessary</strong> (click to reveal)</summary>
+<summary><strong>Why this guide is needed</strong> (click to reveal)</summary>
 
-### Body of source material: do we really need another guide for this?
+### Why this guide is needed
 
-Short answer: **Hell yeah, we need another guide!** But let me explain…
+Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of actually *creating* a Layout-ID from scratch and how to integrate the data into the source code of AppleALC for compiling is not covered on the AppleALC repo at all. As a matter of fact, it's not covered anywhere! I only could find 4 guides which explain some aspects of if it but never the whole process as it is required today.
 
-Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of how to actually *create* a Layout-ID from scratch is not covered on the AppleALC repo. As a matter of fact, it's rarely covered at all. I only could find about 4 guides which explain some aspects of if it but never the entire process as it is required today.
+Most of the guides I did find were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explains how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
 
-Most of the guides I did find are either outdated or over-complicated or are no longer applicable today. The oldest guide I found is from from 2012 by EMlyDinEsH. It contains some really insightful info, but is incomplete. The newest guides I could find are from 2017. One by F0x1c which is based on EMlyDinEsH's guide. But the markdown version of his guide is a horrible, unreadable mess. Fortunately, the zipped version of the github source also contains a .rtf document containing some additional details. The third guide I found is by Daliansky. It's written in Chinese and is way too complex, way too long and way too hard to follow. Plus most of the linked content doesn't work once you use google translate.
-
-The most compelling guide I found thus far is by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. Although not all of the steps are applicable today, it contains some great workflows and a visual approach to creating Layout-IDs which is a lot easier to understand and follow. Since german is my native language, it's easy for me to follow and translate it, so that's why my guide is based on his work. But it's not just a simple copy/translate/paste typo of deal, but rather an adaption and update, making use of all the new tools and nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
+The most convincing guide I found thus far is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still a necessity since AppleALC didn't exist yet. So not all of the instructions are applicable today but it uses an easy to understand visual approach to creating Layout-IDs which is a lot easier to follow. So my guide is an adaptation of his work but expands on it where necessary to meet today's requirements and makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
 
 So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
 </details>
