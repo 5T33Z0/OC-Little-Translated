@@ -106,7 +106,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 - Next, Link to custom `libkmod.a` library by adding it under "Link Binary with Libraries": ![Xcode_link](https://user-images.githubusercontent.com/76865553/170472832-5a077289-96a6-403d-b8c7-322459ff3156.png)
 - Verify that `libkmod.a` is present in /MacKernelSDK/Library/x86_64/ inside the AppleALC Folder. Once all that is done, you are prepared to compile AppleALC.kext.
 
-Now, that we have most of the prep work out of the way, we can begin.
+Now, that we have the prep work out of the way, we can begin!
 
 ## II. Extracting relevant data from the Codec dump
 In order to create a routing of the audio inputs and outputs for macOS, we need to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
