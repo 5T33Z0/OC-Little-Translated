@@ -132,8 +132,8 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: the Codec's address, a Node ID,  Verb Commands and Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
-- **`codec_dump.txt_dec.txt.evg`** &rarr; Pathmap converted from hex to decimal. We will work with this most of the time.
-- **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex.
+- **`codec_dump.txt_dec.txt.evg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
+- **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
 ## IV. Creating a `PinConfig`
 
@@ -249,7 +249,7 @@ Amongst other things, the codec dump text contains the following details:
 - Its Address
 - It's Vendor Id (in AppleALC it's used as `CodecID`)
 - Pin Complex Nodes with Control Names (these form the `PinConfig`)
-- The actual routing capabilities of the Coded:
+- The actual routing capabilities of the Codec:
 	- Mixer/Selector Nodes
 	- Audio Output Nodes
 	- Audio Input Nodes
@@ -346,7 +346,7 @@ flowchart LR
 ```
 
 ## VI. Creating a PathMap
-The Pathmap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
+The PathMap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
 
 ### Tracing possible paths
 Now that we know how to read the schematic of the Codec, we can use it to trace all available paths the codec provides and create a chart with it, which helps later when transferring the data into .xml:
@@ -389,6 +389,23 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 Now that we found all the possible paths which can connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we want to use into a PlatformXY.xml file ("XY" corresponds to the previously chosen Layout-ID. In my case: 39).
 
 AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional .xml files, LayoutXY.xml as well as the afore mentioned PlatformXY.xml. For each existing Layout-ID there are corresponding .xml files with the same number.
+
+#### Structure of `Platforms.xml`
+The Platform.xml contains the PathMap and has a convoluted file tree with multiple levels, which makes creating the PathMap rather complicated. If you open it, you don't see much on the top level:</br>
+![](Pics/platforms01.png)</br>
+Once you dive down into the file hierarchy, there will be another `PathMap` Array containing 2 more arrays, `0` and `1`. Array `0` contains Inputs while Array `1` contains Outputs:</br>
+![](Pics/platforms02.png)</br>
+
+**INPUTS Branch**
+
+Let's follow the branch of Array. Next level down we find 2 more arrays representing 2 Input sources:</br>
+![](Pics/platforms03.png)
+Let's continue. The next array contains 3 more array which finally contain the Nodes representing the path of the Interal Mic: Input (with Amp) Nobe 9  &rarr; Node 34 (Mixer) &rarr; 18 (Internal Mic):</br>
+![](Pics/platforms04.png)
+Next, let's check the 2nd Input source (Array 1):</br>![](Pics/platforms05.png)
+
+**OUTPUTS Branch**
+
 
 ### Modifying an existing `Platforn.xml`
 If you want to modify an existing Layout-ID, do the following:
