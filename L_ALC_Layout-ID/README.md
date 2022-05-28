@@ -125,7 +125,113 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump.txt_dec.txt.evg`** &rarr; Pathmap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – Pathmap of the Codec's routing in Hex.
 
-## III. Analyzing the Codec dump
+## III. Creating a `PinConfig`
+
+The `PinConfig` is a long sequence of digits that tells macOS which audio sources are available to the system. Depending on the Codec model, these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
+
+We will primarily use the "finalverbs.txt" to create the PinConfig but we can use the schematic as a visual aid as wel. Once we got the PinConfig, it has to be added to the `info.plist` inside the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
+
+**NOTE**: Since I have a docking station with with a Line-out jack on the back, I want audio to come out of it when I plug in my external speakers which is currently not working. So I have modify the Layout-ID I am using (ID 18 for ALC269). It's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530 in terms of features. So some of the things I do during the course of this guide might not be necessary for your configuration!
+
+### Understanding `finalverbs.txt` and fixing possible conversion errors
+Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:
+
+![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
+
+As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists all the device which are currently connected. Their verb data was corrected/modified by the verbit.sh script.
+
+You may have also noticed that some Nodes have *not* been converted from hex to decimal (pink) while some `PinDefault` data *has* been converted which shouldn't have been converted (red). So lets fix this using the original `codec_dump.txt`. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. While we're at it, we'll fix the formatting as well.
+
+For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the `codec_dump.txt` for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
+
+Once we're done with fixing the conversion errors, we get this:
+
+![Fixedverbs](https://user-images.githubusercontent.com/76865553/170696179-eec3fbc6-8647-4467-bc99-88bfb80ca957.png)
+
+**IMPORTANT**: For a Node to become part of the PinConfig, it ***must*** contain a `Pin Complex` and a `Control: name="XXZ"`. Here, a look into the codec dump might be helpful:
+
+![](Pics/PinComplexCtrlName.png)
+
+### Analyzing the Verb Data
+When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
+
+- Nodes 23, 26, 27 and 30 are labeled as "Ext Rear"
+- Since Node 23 is listed in the same hierarchy as "HP" (= Headphone), it might be a contender for routing audio to the jack of the docking station in my case
+- Node 26 could also be an option since it connects to a Jack ("1/8")
+- Node 27 is not listed as "1/8" (the Jack type), so it might not work
+- Node 30 is a digital output. But since my system doesn't have an Optical or Coaxial S/PDIF, it's not an option for me.
+- Node 29 (ATAPI Purple Speaker) is Mono and not really useful to me either &rarr; I delete this line right away
+
+Whether or not you want to build a Layout-ID from scratch or you want to modify and existing Layout-ID, the workflow slightly differs.
+
+### Modifying the Verb data
+So now that we know which inputs and outputs we want/need, we can adjust the "Modified Verbs" section. For my first trial, I delete Node 29 and replace it Node 23. The result looks like this:
+
+![CreatePinConf](Pics/PinCfg02.png)
+
+Now that we have a list of inputs and outputs we want to use, we have to get the modified verb data into the clipboard so we can import it into PinConfigurator for further editing. Since selecting text in TextEdit is restricted to lines, we have to copy/paste it to an empty section before we can copy it to the clipboard. Like so:
+
+![](Pics/PinCfg03.png)
+
+### Creating the final `PinConfig` in PinConfigurator
+
+- Next, run **PinConfigurator** 
+- Click on File > Import > Clipboard
+- This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
+- Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use of it:</br>![EAPD](https://user-images.githubusercontent.com/76865553/170471376-bdc52de3-c73b-40a4-99dc-50c4346a1806.png)
+- Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![dropdown01](https://user-images.githubusercontent.com/76865553/170471478-15e29166-7deb-4793-bc44-163fe8754edf.png)
+- In the EAPD dropdown menu, select EAPD.
+- Repeat for other Nodes using EAPD
+- (**Optional**) at this stage you can also set the Geo Location of the Jack(s) and their Color(s)
+- Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so I double-click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>
+![PinConfig_done](https://user-images.githubusercontent.com/76865553/170471709-e026836b-5f2c-4b2f-8190-5c1a2d5c3a81.png)<br>
+**Explanation**: Since the rear connector of my dock basically an extension of the Headphone Jack, I want the routing to switch automatically when connecting/disconnecting a jack to either one of them. The internal speakers are supposed to turn off when plugging in a cable into the dock's audio jack and should switch back to the speakers when pulling it. And of course audio should be coming through the rear port as well, when connecting external speakers. So in order to make the routings switch automatically, I add Node 23 to the same group ad Node 21 (Group 2), but change it's position to 1, because 0 is the headphone Jack.
+- Click "Save" to apply the settings and close the window.
+- Back in the main window, de-select "<…>" and click on "Get Config Data":</br>![Get_ConfigData](https://user-images.githubusercontent.com/76865553/170471964-f02f9309-b79d-4ed6-8e0b-ef2298e2479b.png)
+- Select the generated PinConfig Data (without the <>) and copy it to the clipboard 
+- Paste it into "finalverbs.txt" and give it a name so you can see which configs you already tried if this PinConfig doesn't work:</br>![](Pics/PinCfg05.png)
+- Save the file but don't close the window.
+
+### Adding the PinConfig to the AppleALC source code
+Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pich the scenario that suits your use case.
+
+#### Finding an unused Layout-ID number
+In order to find a yet unused Layout-ID for your Codec, you have to check which Layout-IDs exist already and chose a different one in the range from 11 to 99:
+
+- Visit [this repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
+- Click on the folder of your Codec manufacturer (in my case it's Realtek)
+- Next, click on the .md file reprecenting your Codec (in my case: [ALC269](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC269.md))
+- As you can see, ALC269 has a lot of Layout-IDs already.
+- Pick a Layout-ID which is not used already (make a mental note or write it down somehwere)
+
+I am picking Layout-ID 39 because a) it's availabe and b) followed by by the Lenove W530 which is the workstation version of the T530.
+
+**IMPRTANT**: Layout-IDs 1 to 10 are reserved but Layouts 11 to 99 are user-assignable. 
+
+#### Scenario 1: Modifying data of an existing Layout-ID
+
+1. Open "codec_dump_dec.txt"
+2. Copy the "Vendor-Id" in decimal (= `CodecID` in AppleALC)
+3. Locate the `PinConfigs.kext` inside AppleALC/Resources
+4. Right-click it and select "Show Package Contents"
+5. Inside the Contents folder, you'll find the "info.plist"
+6. Open it with a Plist editor (I am using PlistEdit Pro)
+7. All PinConfigs and the Layout-ID they are associataed with are stored under:
+	- IOKitPersonalities
+		- as.vit9696.AppleALC
+			- HDAConfigDefault
+8. Use the search function (⌘+F) and paste the "Vendor Id". In my case it's "283902569". This will show all existing Layout-IDs your Codec.
+9. For my test, Im am using entry number 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530 and works for my system:</br>![infoplist](https://user-images.githubusercontent.com/76865553/170472084-0dc4d888-1987-4185-a5b9-153e6fb2225c.png)
+10. Highlight the dictionary and press ⌘+D. This will duplicate the entry.
+11. Add/change the following data to the new entry:
+	- In the `Codec` String: Author name (Yours) and description
+	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (we stored  it as "PinConfig 01" in finbalverbs.txt)
+	- Change the `LayoutID` the PinConfig Data should be associated with. 
+12. This is the resulting entry:</br>![](Pics/PinCfg_InfoPlist.png)
+
+#### Scenario 2: Creating a new Layou-ID from scratch (todo)
+
+## IV. Analyzing the Codec dump
 Amongst other things, the codec dump text contains the following details:
 
 - The Codec model
@@ -228,7 +334,7 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 
-## IV. Creating a Pathmap
+## V. Creating a Pathmap
 The Pathmap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
 
 ### Tracing possible paths (optional)
@@ -284,86 +390,6 @@ If you want to modify an existing Layout-ID, do the following:
 	perl zlib.pl inflate PlatformsXY.xml.zlib> PlatformsXY.xml
 	```
 - This should give you something like this:</br>![Zlib](https://user-images.githubusercontent.com/76865553/170539172-f06e6da3-6fcc-485d-a8cf-0d2148bb7208.png)
-
-To be continued…
-
-## V. Creating a `PinConfig`
-
-### About the PinConfig
-The `PinConfig` is a long sequence of digits that tells macOS which audio sources are available to the system. Depending on the Codec used in the system these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within that limit. We can use the Codec schematic and the "finalverbs.txt" to create a PinConfig. Once we got it, it has to be added to the `info.plist` inside the `PinConfigs.kext` before compiling the `AppleAlC.kext`. More on that later.
-
-Since I have a docking station for my Lenovo T530 with a Line-out jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I need to modify the currently used Layout-ID (ID 18 for ALC269) since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
-
-### Understanding `finalverbs.txt` and fixing possible conversion errors
-Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:</br>![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
-
-As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists all the device which are currently connected. Their verb data was corrected/modified by verbit.sh.
-
-You may have also noticed that some Nodes have *not* been converted from hex to decimal (pink) while some `PinDefault` data *has* been converted which shouldn't have been converted (red). So lets fix this using the original `codec_dump.txt`. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. While we're at it, we'll fix the formatting as well.
-
-For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the `codec_dump.txt` for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
-
-Once we're done with fixing the conversion errors, we get this:
-
-![Fixedverbs](https://user-images.githubusercontent.com/76865553/170696179-eec3fbc6-8647-4467-bc99-88bfb80ca957.png)
-
-**IMPORTANT**: For a Node to become part of the PinConfig, it ***must*** contain a `Pin Complex` and a `Control: name="XXZ"`. Here's, a look into the codec dump is helpful:
-
-![](Pics/PinComplexCtrlName.png)
-
-### Analyzing the PinConfig
-When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
-
-- Nodes 23, 26, 27 and 30 are labeled as "Ext Rear"
-- Since Node 23 is listed in the same hierarchy as "HP" (= Headphone) this might be a contender to be added to the routing
-- Node 26 could be an option since it connects to a Jack ("1/8")
-- Node 27 is not listed as "1/8" (the Jack type), so it might not work
-- Node 30 is Digital and since my system neither has Optical or SPDIF, it's not an option either
-- Node 29 (ATAPI Purple Speaker) is Mono and not really useful to me &rarr; so I delete this line right away
-
-Whether or not you want to build a Layout-ID from scratch or you want to modify and existing Layout-ID, the workflow slightly differs.
-
-### Creating/Modifying the PinConfig
-So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:
-
-![CreatePinConf](Pics/PinCfg02.png)
-
-Now that we have a list of inputs and outputs we want to use, we have to get the modified verb data into the clipboard so we can use it in another tool soon. Since you can only select data line for line in TextEdit, so we have to copy/paste it to an empty section before we can copy it to the clipboard. Like so:
-
-![](Pics/PinCfg03.png)
-
-- Next, run **PinConfigurator** 
-- Click on File > Import > Clipboard
-- This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
-- Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use of it:</br>![EAPD](https://user-images.githubusercontent.com/76865553/170471376-bdc52de3-c73b-40a4-99dc-50c4346a1806.png)
-- Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![dropdown01](https://user-images.githubusercontent.com/76865553/170471478-15e29166-7deb-4793-bc44-163fe8754edf.png)
-- In the EAPD dropdown menu, select EAPD.
-- Repeat for other Nodes using EAPD
-- (**Optional**) at this stage you can also set the Geo Location of the Jack(s) and their Color(s)
-- Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so I double-click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>
-![PinConfig_done](https://user-images.githubusercontent.com/76865553/170471709-e026836b-5f2c-4b2f-8190-5c1a2d5c3a81.png)<br>
-**Explanation**: Since the rear connector of my dock basically an extension of the Headphone Jack, I want the routing to switch automatically when connecting/disconnecting a jack to either one of them. The internal speakers are supposed to turn off when plugging in a cable into the dock's audio jack and should switch back to the speakers when pulling it. And of course audio should be coming through the rear port as well, when connecting external speakers. So in order to make the routings switch automatically, I add Node 23 to the same group ad Node 21 (Group 2), but change it's position to 1, because 0 is the headphone Jack.
-- Click "Save" to apply the settings and close the window.
-- Back in the main window, de-select "<…>" and click on "Get Config Data":</br>![Get_ConfigData](https://user-images.githubusercontent.com/76865553/170471964-f02f9309-b79d-4ed6-8e0b-ef2298e2479b.png)
-- Select the generated PinConfig Data (without the <>) and copy it to the clipboard 
-- Paste it into "finalverbs.txt" and give it a name so you can see which configs you already tried if this PinConfig doesn't work:</br>![](Pics/PinCfg05.png)
-- Save the file
-
-### Adding the PinConfig to Apple ALC
-Now that we (finally) have the PinConfig Data, we need to somehow inject it into macOS. That's what we use AppleALC.kext for.
-
-1. Open "codec_dump_dec.txt"
-2. Copy the "Vendor-Id" in decimal (= "CodecID" in AppleALC)
-3. Locate the `PinConfigs.kext` inside the AppleALC/Resources folder
-4. Right-click it and select "Show Package Contents"
-5. Inside the Contents folder, you'll find the "info.plist"
-6. Open it with a Plist editor
-7. All Layout-IDs and PinConfigs are located under:
-	- IOKitPersonalities
-		- as.vit9696.AppleALC
-			- HDAConfigDefault
-8. Use the search function and enter the "Vendor Id." In my case it's "283902569". This will show all existing Layout-IDs your Codec.
-9. For my test, Im am using entry no. 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530:</br>![infoplist](https://user-images.githubusercontent.com/76865553/170472084-0dc4d888-1987-4185-a5b9-153e6fb2225c.png)
 
 To be continued…
 
