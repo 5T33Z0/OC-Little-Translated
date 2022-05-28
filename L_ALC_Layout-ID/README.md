@@ -49,7 +49,7 @@ The main components that have to be edited in the AppleALC source code are:
 
 ## II. (Plenty of) Prep work
 Creating a Layout-ID for AppleALC is possibly one of the most challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time demanding, is confusing and requires a lot of tools and prep. So let's get it out the way right away.
- 
+
 ### Obtaining an Audio CODEC dump in Linux
 Why Linux? Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside the Codec dump. Codec dumps created in Linux, however, can be processed by these tools just fine. 
 
@@ -323,7 +323,7 @@ For **Inputs**, the whole process is reversed:
 
 ```mermaid
 flowchart LR
-       id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
+	id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
 ```
 
 #### Examples from ALC269
@@ -381,17 +381,43 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 ![Node13](https://user-images.githubusercontent.com/76865553/170470502-7c4952c7-b865-4b63-9d58-d74ec38fe278.png)
 
  And Node 13's final destination is Node 3, which is the HP out:
- 
+
 ![Node3](https://user-images.githubusercontent.com/76865553/170470592-22c22176-f1f9-4aec-91b0-6b829c6bdbb1.png)
 </details>
 
-### Transferring the PathMap to `PlatformsXY.xml`
+## Transferring the PathMap to `PlatformsXY.xml`
 Now that we found all the possible paths which can connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we want to use into a PlatformXY.xml file ("XY" corresponds to the previously chosen Layout-ID. In my case: 39).
 
 AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional .xml files, LayoutXY.xml as well as the afore mentioned PlatformXY.xml. For each existing Layout-ID there are corresponding .xml files with the same number.
 
-#### Structure of `Platforms.xml`
-The Platform.xml contains the PathMap and has a convoluted file tree with multiple levels, which makes creating the PathMap rather complicated. If you open it, you don't see much on the top level:</br>
+### Structure of `Platforms.xml`
+The Platform.xml contains the PathMap. The PathMap represents the routing of input and output devices of the Codec. The way inputs and outputs are organized within the PathMap structure, defines whether or not inputs and outputs are switched automatically or have to be sitched manually.
+
+#### Switch-Mode
+
+- **PathMap**
+	- **Array 0**
+		- Input 0 (Nodes 0, 1 and 2)
+		- Input 1 (Nodes 0, 1 and 2)
+	- **Array 1**
+		- Output 0 (Nodes 0, 1 and 2)
+		- Output 1 (Nodes 0, 1 and 2)
+	- etc. 
+
+#### Manual-Mode
+
+- **PathMap**
+	- **Array 0**
+		- Input 0 (Nodes 0, 1 and 2)
+	- **Array 1**
+		- Input 1 (Nodes 0, 1 and 2)
+	- **Array 2**
+		- Output 0 (Nodes 0, 1 and 2)
+	- **Array 3**
+ 		- Output 1 (Nodes 0, 1 and 2)
+ 	- etc.
+
+If you open it, you don't see much on the top level:</br>
 ![](Pics/platforms01.png)</br>
 Once you dive down into the file hierarchy, there will be another `PathMap` Array containing 2 more arrays, `0` and `1`. Array `0` contains Inputs while Array `1` contains Outputs:</br>
 ![](Pics/platforms02.png)</br>
@@ -406,6 +432,7 @@ Next, let's check the 2nd Input source (Array 1):</br>![](Pics/platforms05.png)
 
 **OUTPUTS Branch**
 
+TBC
 
 ### Modifying an existing `Platforn.xml`
 If you want to modify an existing Layout-ID, do the following:
