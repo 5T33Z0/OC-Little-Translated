@@ -1,24 +1,21 @@
 # How to create/modify a Layout-ID for AppleALC (work in progress)
 
 ## Preface
-:warning: This is not finished yet (Chapters I to IV are completed, though)
+🚧 This guide is not finished yet, so don't follow it (Chapters I to IV are completed, though)
 
-This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for AppleALC to make audio work on a Hackintosh. It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch or for users who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and they want to change the routing, fix issues or add features.
+This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for the AppleALC kext to make audio work on a Hackintosh. 
+
+It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch and for those who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and causes issues or they want to add auxiliary inputs or outputs missing from the current Layout-ID in use.
 
 ### How to use this guide
-Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) and a specific device (Lenovo T530 Laptop with a docking station), the basic concepts presented along the way apply to any Audio Codec. Therefore: 
+Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific device (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the basic principles and techniques presented along the way are applicable to *any* Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec, device and use case. 
 
-- Don't just follow the given instruction in this guide blindly!
-- Instead, abstract from the given example and apply the presented methods and techniques to your specific use case! These use cases can be:
-	1. Creating a Layout-ID for an Audio Codec from scratch (because a working one doesn't exist yet)
-	2. Modifying an existing Layout-ID (like an additional output for a Laptop dock for example). This is what I am going to do during the course of this guide.
-	3. Compiling a slimmed-down version of AppleALC for the one Layout-ID yo are using. In this case, follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
+**NOTE**: If you'd just like to compile a slimmed-down version of AppleALC for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
 
 <details>
 <summary><strong>Why this guide is needed</strong> (click to reveal)</summary>
 
 ### Why this guide is needed
-
 Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling the kext is not covered on the AppleALC repo. As a matter of fact, it's not covered anywhere! I only could find 4 guides which explain parts of if but never the whole process as it is required today.
 
 Most of the guides I found were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explain how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
@@ -27,14 +24,14 @@ The most convincing guide I found yet is written in German by MacPeet who has cr
 
 My guide is an adaptation of MacPeet's work but expands on it where necessary to meet today's requirements. It makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
 
-So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an up-to-date guide is long overdue.
+So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an updated guide was long overdue.
 </details>
 
 ## Contents
 This guide will cover the following topics:
 
 - Creating a dump of the Audio Codec in Linux
-- Converting and visualizing the Codec dump
+- Converting and visualizing the Codec dump data
 - Creating a Pin Configuration and a PathMap 
 - Creating a new Layout-ID for your Codec
 - Integrating the data into the AppleALC source code and compiling the kext with Xcode
@@ -44,21 +41,23 @@ This guide will cover the following topics:
 Creating a Layout-ID for AppleALC not only is a challenge in itself, it requires a lot of prep work in order to do so as well…
  
 ### Obtaining an Audio CODEC dump in Linux
-Why Linux? Unfortunately, neither Codec dumps created with Clover nor OpenCore can be processed with the tools required to visualize the data inside the dumps. Codec dumps created in Linux however, can be processed by these tools just fine. This might be because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. 
+Why Linux? Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside the Codec dump. Codec dumps created in Linux, however, can be processed by these tools just fine. 
 
-Therefore, we will use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
+When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the amount of data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
+
+Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
 #### Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 
-1. Get a USB 3.0 flash drive (at least 8 GB or more)
+1. Use a USB 3.0 flash drive (at least 8 GB or more)
 2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the flash drive. It's pretty straight forward.
 3. Next, download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop), [Zorin](https://zorin.com/os/download/) or whatever distro you prefer – they all work fine.
 4. Copy the ISO to your newly created Ventoy stick
 5. Reboot from the flash drive
 6. In the Ventoy menu, select the Linux ISO and hit enter
 7. From the GNU Grub, select "Try or Install Linux"
-8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu"
+8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu" (or whatever the distro of your choise prompts).
 
 #### Dumping the Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
@@ -68,7 +67,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat and can't be accessed by Linux without additional measures.
 3. Reboot into macOS
 4. Extract `CodecDump.zip` to the Desktop
-5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
+5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`. ⚠️ This is mandatory because the script we will use later to convert the data is looking for the file "codec_dump.txt" specifically. Otherwise the file conversions will fail.
 
 ### Additional Requirements
 :bulb: Please follow the instructions below carefully and thoroughly to avoid issues.
@@ -211,7 +210,7 @@ flowchart LR
 ```
 
 #### Examples from ALC269
-Headphone Output, possible routings:
+Headphone Output switch, possible routings:
 
 ```mermaid
 flowchart LR
@@ -293,20 +292,24 @@ To be continued…
 ### About the PinConfig
 The `PinConfig` is a long sequence of digits that tells macOS which audio sources are available to the system. Depending on the Codec used in the system these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within that limit. We can use the Codec schematic and the "finalverbs.txt" to create a PinConfig. Once we got it, it has to be added to the `info.plist` inside the `PinConfigs.kext` before compiling the `AppleAlC.kext`. More on that later.
 
-Since I have a docking station for my Lenovo T530 with a Line-out jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I need to modify the currently user ALC Layout-ID (ID 18 for ALC269) since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
+Since I have a docking station for my Lenovo T530 with a Line-out jack on the rear, I want audio coming out of it when I connect my external speakers to it which currently doesn't work. So I need to modify the currently used Layout-ID (ID 18 for ALC269) since it's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530.
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
-Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains some kind of table listing the availabe inputs and outouts of the Codec:</br>![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
+Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:</br>![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
 
-As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists Verb data which was corrected/modified by verbit.sh.
+As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available connections the Codec provides while "Modified Verbs" lists all the device which are currently connected. Their verb data was corrected/modified by verbit.sh.
 
 You may have also noticed that some Nodes have *not* been converted from hex to decimal (pink) while some `PinDefault` data *has* been converted which shouldn't have been converted (red). So lets fix this using the original `codec_dump.txt`. Using the "Calc" function in Hackintool, we can easily convert Hex to Decimal. We find that `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. While we're at it, we'll fix the formatting as well.
 
 For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the `codec_dump.txt` for Nodes `0x18`, `0x19` and `0x1b` or use hackintool's "Calc" function to convert the data back from dec to hex.
 
-Once we're done with fixing the conversion errors, we get this:</br>![Fixedverbs](https://user-images.githubusercontent.com/76865553/170696179-eec3fbc6-8647-4467-bc99-88bfb80ca957.png)
+Once we're done with fixing the conversion errors, we get this:
 
-**IMPORTANT**: For a Node to become part of the PinConfig, it ***must*** contain a `Pin Complex` and a `Control: name="XXZ"`. Here's, a look into codec dump is helpful:</br>![](Pics/PinComplexCtrlName.png)
+![Fixedverbs](https://user-images.githubusercontent.com/76865553/170696179-eec3fbc6-8647-4467-bc99-88bfb80ca957.png)
+
+**IMPORTANT**: For a Node to become part of the PinConfig, it ***must*** contain a `Pin Complex` and a `Control: name="XXZ"`. Here's, a look into the codec dump is helpful:
+
+![](Pics/PinComplexCtrlName.png)
 
 ### Analyzing the PinConfig
 When comparing the entries of the "Modified Verbs" section with the .svg schematic and the jacks available on the system, I notice that:
@@ -321,30 +324,30 @@ When comparing the entries of the "Modified Verbs" section with the .svg schemat
 Whether or not you want to build a Layout-ID from scratch or you want to modify and existing Layout-ID, the workflow slightly differs.
 
 ### Creating/Modifying the PinConfig
-So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:</br>![CreatePinConf](https://user-images.githubusercontent.com/76865553/170470941-24cf1a1b-b5db-468b-9aa5-2042d6a21d56.png)
+So now that we know which entries are required and which are not we can modify the "Modified Verbs" section. For my first trial, I delete the line for Node 29 and add the line for Node 23. The result looks like this:
 
-Now that we have selected the routings we want to usw, we need to copy the data ot the "Modified Verbs" column to a new file line for line: 
+![CreatePinConf](Pics/PinCfg02.png)
 
-1. Press ⌘+N to create a new empty file
-2. From the menubar, select "Format" > "Make Plain Text" (or press ⌘+Shift+T) so the formatting is correct
-3. Back in the "finalverbs.txt" window, copy the 4 pairs of digits in the Modified Verbs column and paste them into the new file.
-4. Repeat until you have transferred all the values for each entry. It should look like this:</br>![ModVerbs](https://user-images.githubusercontent.com/76865553/170471065-07d452b5-85fe-40b8-9161-0d06065fb993.png)
-5. Now, select all the values (⌘+A) and Copy them to the Clipboard (⌘+C)
-6. Next, run **PinConfigurator** 
-7. Click on File > Import > Clipboard
-8. This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
-9. Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use EAPD:</br>![EAPD](https://user-images.githubusercontent.com/76865553/170471376-bdc52de3-c73b-40a4-99dc-50c4346a1806.png)
-10. Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![dropdown01](https://user-images.githubusercontent.com/76865553/170471478-15e29166-7deb-4793-bc44-163fe8754edf.png)
-11. In the EAPD dropdown menu, select EAPD.
-12. Repeat for other Nodes using EAPD
-13. (Optional) at this stage you could als set the Geo Location of the Jacks and their Color
-14. Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so double click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>
+Now that we have a list of inputs and outputs we want to use, we have to get the modified verb data into the clipboard so we can use it in another tool soon. Since you can only select data line for line in TextEdit, so we have to copy/paste it to an empty section before we can copy it to the clipboard. Like so:
+
+![](Pics/PinCfg03.png)
+
+- Next, run **PinConfigurator** 
+- Click on File > Import > Clipboard
+- This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
+- Open the "codec_dump_dec.txt" and search fore for "EAPD" (external amplifier power down). Some systems use it to activate a port (usually headphones or speakers). In my case, Nodes 20 and 21 make use of it:</br>![EAPD](https://user-images.githubusercontent.com/76865553/170471376-bdc52de3-c73b-40a4-99dc-50c4346a1806.png)
+- Back in PinConfigurator double click on a Node which uses EAPD. This brings up the settings window for that Node:</br>![dropdown01](https://user-images.githubusercontent.com/76865553/170471478-15e29166-7deb-4793-bc44-163fe8754edf.png)
+- In the EAPD dropdown menu, select EAPD.
+- Repeat for other Nodes using EAPD
+- (**Optional**) at this stage you can also set the Geo Location of the Jack(s) and their Color(s)
+- Next, I need to configure Node 23 (but it could be any other node added to the default configuration of your Codec for that matter), so I double-click it to bring up the settings menu. For my requirements, I have changed the following settings:</br>
 ![PinConfig_done](https://user-images.githubusercontent.com/76865553/170471709-e026836b-5f2c-4b2f-8190-5c1a2d5c3a81.png)<br>
-**Explanation**: Since the rear connector of the dock is basically an extension of the Headphone Jack, I want the routing to switch automatically when connecting/disconnecting a jack to either one of them. The internal speakers are supposed to turn off when plugging in a cable into the dock's audio jack and should switch back to the speakers when pulling it. And of course audio should be coming through the rear port as well, when connecting external speakers. So in order to make the routings switch automatically, I add Node 23 to the same group ad Node 21 (Group 2), but change it's position to 1, because 0 is the headphone Jack.
-15. Click save to close the window.
-16. Back in the main window, click on "Get Config Data":</br>![Get_ConfigData](https://user-images.githubusercontent.com/76865553/170471964-f02f9309-b79d-4ed6-8e0b-ef2298e2479b.png)
-17. Select the generated PinConfig Data (without the <> and copy it to the clipboard 
-18. Create a new raw text file, paste the data and save it as PinConfig01 (or similar), so you don't lose the data.
+**Explanation**: Since the rear connector of my dock basically an extension of the Headphone Jack, I want the routing to switch automatically when connecting/disconnecting a jack to either one of them. The internal speakers are supposed to turn off when plugging in a cable into the dock's audio jack and should switch back to the speakers when pulling it. And of course audio should be coming through the rear port as well, when connecting external speakers. So in order to make the routings switch automatically, I add Node 23 to the same group ad Node 21 (Group 2), but change it's position to 1, because 0 is the headphone Jack.
+- Click "Save" to apply the settings and close the window.
+- Back in the main window, de-select "<…>" and click on "Get Config Data":</br>![Get_ConfigData](https://user-images.githubusercontent.com/76865553/170471964-f02f9309-b79d-4ed6-8e0b-ef2298e2479b.png)
+- Select the generated PinConfig Data (without the <>) and copy it to the clipboard 
+- Paste it into "finalverbs.txt" and give it a name so you can see which configs you already tried if this PinConfig doesn't work:</br>![](Pics/PinCfg05.png)
+- Save the file
 
 ### Adding the PinConfig to Apple ALC
 Now that we (finally) have the PinConfig Data, we need to somehow inject it into macOS. That's what we use AppleALC.kext for.
