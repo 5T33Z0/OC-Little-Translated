@@ -130,16 +130,18 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 **This will generate 5 new files inside the codecgraph folder:**
 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
-- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings. Verbs consist of 4 components: the Codec's address, a Node ID,  Verb Commands and Verb Data. If you want to extract the necessary verb data for creating the Pin Configuration *manually* or want to know how it works in general, please refer to Chapter 1 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
 - **`codec_dump.txt_dec.txt.evg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
 ## IV. Creating the `PinConfig`
 
-The `PinConfig` is a long sequence of digits that tells macOS which audio sources are available to the system. Depending on the Codec model, these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
+The `PinConfig` that tells macOS which audio sources are available to the system. Depending on the Codec, these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. The PinConfig is a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, a Node ID, Verb Commands and Verb Data. 
 
-First, we will use the "codec_dump_dec.txt" and "codec_dump.txt" to find relevant Nodes which could be part of the PinConfig and the we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
+Luckily for us, the `verbit.sh` we ran in step III. extracted and corrected the verbs form the Codec dump automatically for us and stored it in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general or you want/need to extract the verb data *manually* yourself, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+
+First, we will check the "codec_dump_dec.txt" and "codec_dump.txt" to find relevant Nodes which could be part of the PinConfig. Then we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
 
 Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
 
@@ -148,11 +150,11 @@ Let's find the *relevant* Nodes inside the Codec dump first. You can use "codec_
 
 **And remember**: the search function is your friend!
 
-#### Pin Complex
-Only Pin Complex with Control Names are relevant.
+#### Pin Complexes
+Only Pin Complexes with Control Names are relevant!
 
-Node ID | Control Name             | Type         | PinDefault (Original)| PinDefault Corrected (Hex)
-:------:|--------------------------|---------------|-------------|------
+Node ID | Control Name             | Type         | PinDefault (Original)| PinDefault (Corrected)
+:------:|--------------------------|---------------|:-----------:|:------:
 18      | Internal Mic Boost Volume| Stereo Amp-In | 0x90a60140  |
 20      | Speaker Playback Switch  | Stereo Amp-Out| 0x90170110  |
 21      | Headphone Playback Switch| Stereo Amp-Out| 0x03211020  |
@@ -161,8 +163,8 @@ Node ID | Control Name             | Type         | PinDefault (Original)| PinDe
 27      | Headphone Playback Switch| Stereo Amp-In/ Amp-Out | 1091637744  |
 
 #### Inputs and Outputs
-Node ID | Control Name             | Type         | PinDefault | Path
-:------:|--------------------------|--------------|-------------|------
+Node ID | Control Name |           
+:------:|--------------------------|------------
 2       |	Speaker Playback Volume  | Audio Output | 
 3       | Headphone Playback Volume| Audio Output |
 9       | Capture Volume           | Audio Input  |
@@ -171,8 +173,8 @@ Node ID | Control Name             | Type         | PinDefault | Path
 15      |                          | Audio Mixer
 
 #### Mixer
-Node ID | Control Name             | Type         | PinDefault | Path
-:------:|--------------------------|--------------|-------------|------
+Node ID | Control Name             | Type         
+:------:|--------------------------|--------------
 11      | Stereo Amp-In            | Audio Mixer
 12      | Stereo Amp-In            | Audio Mixer
 13      | Stereo Amp-In            | Audio Mixer
