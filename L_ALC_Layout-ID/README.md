@@ -1,11 +1,16 @@
 # How to create/modify a Layout-ID for AppleALC
 
 ## Preface
-🚧 This guide is a work in progress, so don't follow it yet.
+🚧 This guide is a work in progress, so don't follow it yet. Completed chapters: I, to IV and VIII to XI.
 
-This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for the AppleALC kext to make audio work on a Hackintosh. 
+This is my attempt of providing an up-to-date and easier(?) to follow guide for creating Layout-IDs for the AppleALC kext to make audio work on a Hackintosh. 
 
 It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch and for those who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and causes issues or they want to add auxiliary inputs or outputs missing from the current Layout-ID in use.
+
+### The work that goes into creating a Layout-ID 
+From a user's perspective, making audio work is a simple matter of entering the correct number of an ALC Layou-ID in the config.plist, save it and you're done. 
+
+But once you are on the other side, trying to actually *create* a new Layout-ID this becomes a whooooole different story: you have to dump the audio Codec in Linux, you have to install a bunch of other tools, you have to convert data, you have to edit data inside various files, you have to configure Xcode to compile the kext, you have to add it to your EFI folder. Then you have to reboot to test it. Does it work? Of course not! Well, do it again… and reboot. Does it work? No? Do it again and again and again… and again… and again… Sounds like fun, right?! So now that you have been warned, we can begin – are you still sure you want to do this?
 
 ### How to use this guide
 - **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at all times. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
@@ -39,11 +44,11 @@ This guide will cover the following topics:
 - Integrating the data into the AppleALC source code and compiling the kext with Xcode
 - Submitting your Layout-ID to the AppleALC github repo via Pull Request
 
-## I. What makes an AppleALC Layout-ID?
-The main components that have to be edited in the AppleALC source code are:
+## I. Files that make up the ALC Layout-ID 
+Creating a Layout-ID requires generating Data and editing various files and compiling the AppleALC kext it in Xcode, mainly:
 
 - `info.plist` inside of the `PinConfigs.kext` &rarr; Provides macOS with details about the available audio sources of the Codec (Speakers, Mic, Inputs and Outputs)
-- `LayoutXX.xml` file for the used Codec &rarr; Defines the the properties about the used Codec
+- `LayoutXX.xml` &rarr; Defines the properties of the used Codec
 - `PlatformsXX.xml` &rarr; Contains the actual routing of the Codec
 
 **NOTE**: The `XX` stands for the number of the Layout-ID. More about that later.
@@ -175,8 +180,6 @@ flowchart LR
 ```
 Whether or not a signal travels to more than one Mixer node depends on the design of the Codec and is not really relevant. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output. 
 
-
-
 ### Examples from ALC269
 Headphone Output switch, possible routings:
 
@@ -198,7 +201,7 @@ flowchart LR
 
 We will come back to the schematic later… 
 
-## IV. Creating the `PinConfig`
+## V. Creating the `PinConfig`
 Audio Codecs support various Inputs and Outputs: Internal speakers an/or a mic (on Laptops) as well as Line-Ins and Outs (both analog and digital). Apple's HDA Driver supports up to 8 different audio sources – so stay within this limit when creating your `PinConfig`
 
 These Inputs and Outputs are represented by the so-called `PinConfig`. It tells macOS which audio sources are available to the system. It's a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, Node IDs, Verb Commands and Verb Data which has to extracted from the Codec dump and injected into macOS via AppleALC kext. 
@@ -220,7 +223,6 @@ Amongst other things, the Codec dump text contains the following details:
 	- Audio Output Nodes
 	- Audio Input Nodes
 	- Number of connections from/to a Node/Mixer/Selector/Switch
-
 
 ### Finding relevant Nodes
 First, let's find the *relevant* Nodes inside the Codec dump. You can use "codec_dump_dec.txt" for most of it. But for the `PinDefault` values we need the "codec_dump.txt" instead, since these values needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
@@ -261,7 +263,7 @@ Node ID | Control Name             | Type
 
 TBC…
 
-## V. Modifying an existing `PinConfig`
+## VI. Modifying an existing `PinConfig`
 In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
 
 Since I am using a docking station with a Line-out jack, I want audio to come out of it when I plug my external speakers which is currently not working. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and orks fine besides the missing support for the Line-out of the dock.
@@ -395,22 +397,6 @@ I am picking Layout-ID 39 because a) it's availabe and b) followed by by the Len
 #### Scenario 2: Creating a new Layou-ID from scratch (todo)
 
 Now that we got the PinConfig out of the way, we can continue.
-
-## VI. Analyzing the Codec dump
-Amongst other things, the codec dump text contains the following details:
-
-- The Codec model
-- Its Address
-- It's Vendor Id (in AppleALC it's used as `CodecID`)
-- Pin Complex Nodes with Control Names (these form the `PinConfig`)
-- The actual routing capabilities of the Codec:
-	- Mixer/Selector Nodes
-	- Audio Output Nodes
-	- Audio Input Nodes
-	- Number of connections from/to a Node/Mixer/Selector/Switch
-
-All the aspects regarding the audio routing capabilities of the Codec are represented in the .svg schematics we created previously. So let's have a look at it next.
-
 
 ## VII. Creating a PathMap
 The PathMap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
