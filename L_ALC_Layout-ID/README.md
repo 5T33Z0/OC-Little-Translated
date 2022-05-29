@@ -135,13 +135,64 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump.txt_dec.txt.evg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
-## IV. Creating a `PinConfig`
+## IV. Creating the `PinConfig`
 
 The `PinConfig` is a long sequence of digits that tells macOS which audio sources are available to the system. Depending on the Codec model, these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
 
-We will primarily use the "finalverbs.txt" to create the PinConfig but will have a glance at schematic as a visual aid as well. Once we got the PinConfig, it has to be added to the `info.plist` inside the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
+First, we will use the "codec_dump_dec.txt" and "codec_dump.txt" to find relevant Nodes which could be part of the PinConfig and the we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
 
-**NOTE**: Since I have a docking station with with a Line-out jack on the back, I want audio to come out of it when I plug in my external speakers which is currently not working. So I have modify the Layout-ID I am using (ID 18 for ALC269). It's for the same Codec revision and was created for the Lenovo X230 which is very similar to the T530 in terms of features. So some of the things I do during the course of this guide might not be necessary for your configuration!
+Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
+
+### Finding relevant Nodes
+Let's find the *relevant* Nodes inside the Codec dump first. You can use "codec_dump_dec.txt" for most of it. But for the Pin Default use "codec_dump.txt"  instead, since it needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
+
+**And remember**: the search function is your friend!
+
+#### Pin Complex
+Only Pin Complex with Control Names are relevant.
+
+Node ID | Control Name             | Type         | PinDefault (Original)| PinDefault Corrected (Hex)
+:------:|--------------------------|---------------|-------------|------
+18      | Internal Mic Boost Volume| Stereo Amp-In | 0x90a60140  |
+20      | Speaker Playback Switch  | Stereo Amp-Out| 0x90170110  |
+21      | Headphone Playback Switch| Stereo Amp-Out| 0x03211020  |
+24      | Mic Boost Volume         | Stereo Amp-In/ Amp-Out | 0x03a11830  |
+25      | Dock Mic Boost Volume    | Stereo Amp-In/ Amp-Out | 1091637744  |
+27      | Headphone Playback Switch| Stereo Amp-In/ Amp-Out | 1091637744  |
+
+#### Inputs and Outputs
+Node ID | Control Name             | Type         | PinDefault | Path
+:------:|--------------------------|--------------|-------------|------
+2       |	Speaker Playback Volume  | Audio Output | 
+3       | Headphone Playback Volume| Audio Output |
+9       | Capture Volume           | Audio Input  |
+12      | Stereo Amp-In            | Audio Mixer
+13      |                          | Audio Mixer
+15      |                          | Audio Mixer
+
+#### Mixer
+Node ID | Control Name             | Type         | PinDefault | Path
+:------:|--------------------------|--------------|-------------|------
+11      | Stereo Amp-In            | Audio Mixer
+12      | Stereo Amp-In            | Audio Mixer
+13      | Stereo Amp-In            | Audio Mixer
+15      | Mono Amp-In              | Audio Mixer
+
+## IV. Modifying an existing `PinConfig`
+In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to it that are missing from the current Layout-ID, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
+
+Since I am using a docking station with a Line-out jack, I want audio to come out of it when I plug my external speakers which is currently not working. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and orks fine besides the missing support for the Line-out of the dock.
+
+To modify an existing `PinConfig`, do the following:
+
+- Open the `info.plist` inside the `PinConfig.kext` (under AppleALC/Resources) 
+- Find the Layout-ID for your `CodecID`. I use this:</br>![](Pics/Modpinconf.png)
+- Copy the data inside the `ConfigData` field
+- Start the PinConfigurator App
+- From the menubar, select File > Import > Clipboard
+- This is how it looks:</br> ![](Pics/pincfgimprtd.png)
+
+As expected, there's no entry for second Output (whether HP nor Line-out).
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
 Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:
