@@ -48,8 +48,8 @@ The main components that have to be edited in the AppleALC source code are:
 
 **NOTE**: The `XX` stands for the number of the Layout-ID. More about that later.
 
-## II. (Plenty of) Prep work
-Creating a Layout-ID for AppleALC is possibly one of the most challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time demanding, is confusing and requires a lot of tools and prep. So let's get it out the way right away.
+## II. Prep work (plenty)
+Creating a Layout-ID for AppleALC is possibly one of the most challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
 ### Obtaining an Audio CODEC dump in Linux
 Why Linux? Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside the Codec dump. Codec dumps created in Linux, however, can be processed by these tools just fine. 
@@ -104,9 +104,9 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
-- The files we need to create a new Layout-ID or modify an exiting one are:
+- The files we need to create (or modify) a Layout-ID are:
 	- `info.plist` (located in AppleALC/Resources/PinConfigs.kext/Contents/)
-	- `LayoutXX.aml` and `PlatformsXX.xml` (located in an "ALCXXX"-subfolder for the codec model it is for).
+	- `LayoutXX.aml` and `PlatformsXX.xml` (located in a "ALCXXX"-subfolder corresponding the Codec model).
 
 #### Configuring Xcode
 - Start Xcode
