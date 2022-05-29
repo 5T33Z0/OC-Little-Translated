@@ -90,7 +90,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
 - Next, download and unzip [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip)
-- Copy the `codegraph` folder to the Desktop. We need it to converta and visualize the data inside the Codec dump, so we have can work with it.
+- Copy the `codegraph` folder to the Desktop. We need it to convert and visualize the data inside the Codec dump, so we have can work with it.
 - Move the `codec_dump.txt` into the "codecgraph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
@@ -133,16 +133,15 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
-- **`codec_dump.txt_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
+- **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
 ## IV. Creating the `PinConfig`
+Audio Codecs support various Inputs and Outputs: Internal speakers an/or a mic (on Laptops) as well as Line-Ins and Outs (both analog and digital). Apple's HDA Driver supports up to 8 different audio sources – so stay within this limit when creating your `PinConfig`
 
-The `PinConfig` that tells macOS which audio sources are available to the system. It's is a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, a Node ID, Verb Commands and Verb Data. 
+These Inputs and Outputs are represented by the so-called `PinConfig`. It tells macOS which audio sources are available to the system. It's a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, Node IDs, Verb Commands and Verb Data which has to extracted from the Codec dump and injected into macOS via AppleALC kext. 
 
-Depending on the feature-set of Codec, sources can be: Internal speakers/mic (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
-
-Luckily for us, the script we ran in step III. also extracted and corrected the verbs from the Codec dump automatically and stored them in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general or if you want to extract it *manually*, please refere to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+Luckily for us, the script we ran previously automatically extracted and corrected the verbs from the Codec dump and stored them in the "finalfinalverbs.txt". But if you want know how extract the verb data *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
 Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
 
@@ -156,15 +155,15 @@ Then we will use "finalverbs.txt" and the PinConfigurator App to create the the 
 #### Pin Complex Nodes with `Control: name="XYZ"`
 ⚠️ Only Nodes that are a Pin Complex and have a Control name assigned to them are viable candidates for the PinConfig! So in case of the Realtek ALC269VC in my system, these are:
 
-Node ID | Control Name             | Type         | PinDefault (Original)| PinDefault (Corrected)
-:------:|--------------------------|---------------|:-----------:|:------:
-18      | Internal Mic Boost Volume| Stereo Amp-In | 0x90a60140  |
-20      | Speaker Playback Switch  | Stereo Amp-Out| 0x90170110  |
-21      | Headphone Playback Switch| Stereo Amp-Out| 0x03211020  |
+Node ID | Control Name             | Type                   | PinDefault (Original)| PinDefault (Corrected)
+:------:|--------------------------|------------------------|:-----------:|:------:
+18      | Internal Mic Boost Volume| Stereo Amp-In          | 0x90a60140  |
+20      | Speaker Playback Switch  | Stereo Amp-Out         | 0x90170110  |
+21      | Headphone Playback Switch| Stereo Amp-Out         | 0x03211020  |
 24      | Mic Boost Volume         | Stereo Amp-In/ Amp-Out | 0x03a11830  |
 25      | Dock Mic Boost Volume    | Stereo Amp-In/ Amp-Out | 0x411111f0  |
 27      | Headphone Playback Switch| Stereo Amp-In/ Amp-Out | 0x411111f0  |
-
+29      |                          | Mono-In                | 0x40138205  |	
 #### Mixer Nodes
 Node ID | Name         | Type         
 :------:|--------------|--------------
@@ -183,9 +182,10 @@ Node ID | Control Name             | Type
 8       |                          | Audio Input (Stereo Amp-In)
 9       | Capture Volume           | Audio Input (Stereo Amp-In)
 
+TBC…
 
 ## V. Modifying an existing `PinConfig`
-In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to it that are missing from the current Layout-ID, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
+In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
 
 Since I am using a docking station with a Line-out jack, I want audio to come out of it when I plug my external speakers which is currently not working. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and orks fine besides the missing support for the Line-out of the dock.
 
@@ -194,16 +194,31 @@ To modify an existing `PinConfig`, do the following:
 1. Open the `info.plist` inside the `PinConfig.kext` (under AppleALC/Resources) 
 2. Find the Layout-ID for your `CodecID`. I use this:</br>![](Pics/Modpinconf.png)
 3. Select the data inside the `ConfigData` field (⌘+A) and copy is (⌘+C)
-4. Start the PinConfigurator App
-5. From the menubar, select File > Import > Clipboard
+4. Start the PinConfigurator Appy5. From the menubar, select File > Import > Clipboard
 6. This is how it looks:</br> ![](Pics/pincfgimprtd.png)
 
-As expected, there's no entry for a second Output (whether "HP" nor "Line-out"), so we need to add one. Since Node 27 is a Heaphone Playback switch as well, we will add it to the current PinConfig. It requires a bit of manual copy/paste work, though:
+As expected, there's no entry for a second Output (whether "HP" nor "Line-out"), so we need to add one. Since Node 27 is a Heaphone Playback switch as well, we will add it to the current PinConfig. There are several ways/methods to do this.
 
-7. Open `finalverbs.txt`
-8. Place the cursor at the end of the document 
-9. Paste (⌘+V) the PinConfig (it should still be in the Clipboard).
-10. Next, add the Verb Data for Node you want to add to the PinConfig from the "Orig" 
+### Method 1: Using finalverbs.txt and copy/pasting
+
+1. Open `finalverbs.txt`
+2. Place the cursor at the end of the document 
+3. Paste (⌘+V) the PinConfig (it should still be in the Clipboard).
+4. Next, add the Verb Data for the Node you want to add to the existing PinConfig:</br>![](Pics/Modpfcg18.png)
+5. Copy the resulting PinConfig back into the clipboard
+6. Switch back to PinConfigurator
+7. From the menubar, select File > Import > Clipboard
+8. This is the new PinConfig:</br>![](Pics/modpinpc.png)
+
+### Method 2: Add a node to PinConfigurator and configure it manually
+
+1. In PinConfigurator, click "Add"
+2. This Opens a dialog with a bunch of options to configure the new Node
+3. Use `finalverbs.txt` and the codec dump to configure it. 
+4. In my case, Node 27 will be the new node:</br>![](Pics/nunode72.png)
+5. Back in the main Window, click on "Get ConfigData"
+6. The new/modified PinConfig will be listed in the text field below it:</br> ![](Pics/GetConfig02.png)
+7. Save the new PinConfig in the `finalverbs.text` with a name that makes sense to you. I save it as "PinConfig Trial 1". We need it Later
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
 Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:
