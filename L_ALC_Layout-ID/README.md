@@ -1,7 +1,7 @@
 # How to create/modify a Layout-ID for AppleALC
 
 ## Preface
-🚧 This guide is a work in progress, so don't follow it yet (Chapters I to IV are completed, though)
+🚧 This guide is a work in progress, so don't follow it yet.
 
 This is my attempt of providing an up-to-date and easy to follow guide for creating Layout-IDs for the AppleALC kext to make audio work on a Hackintosh. 
 
@@ -191,16 +191,19 @@ Since I am using a docking station with a Line-out jack, I want audio to come ou
 
 To modify an existing `PinConfig`, do the following:
 
-- Open the `info.plist` inside the `PinConfig.kext` (under AppleALC/Resources) 
-- Find the Layout-ID for your `CodecID`. I use this:</br>![](Pics/Modpinconf.png)
-- Select the data inside the `ConfigData` field (⌘+A) and copy is (⌘+C)
-- Start the PinConfigurator App
-- From the menubar, select File > Import > Clipboard
-- This is how it looks:</br> ![](Pics/pincfgimprtd.png)
+1. Open the `info.plist` inside the `PinConfig.kext` (under AppleALC/Resources) 
+2. Find the Layout-ID for your `CodecID`. I use this:</br>![](Pics/Modpinconf.png)
+3. Select the data inside the `ConfigData` field (⌘+A) and copy is (⌘+C)
+4. Start the PinConfigurator App
+5. From the menubar, select File > Import > Clipboard
+6. This is how it looks:</br> ![](Pics/pincfgimprtd.png)
 
-As expected, there's no entry for a second Output (whether "HP" nor "Line-out"), so we need to add one. Since Node 27 is a Heaphone Playback switch as well, we will add it to the current PinConfig. It requires a bit of manual copy/paste work.
+As expected, there's no entry for a second Output (whether "HP" nor "Line-out"), so we need to add one. Since Node 27 is a Heaphone Playback switch as well, we will add it to the current PinConfig. It requires a bit of manual copy/paste work, though:
 
-- 
+7. Open `finalverbs.txt`
+8. Place the cursor at the end of the document 
+9. Paste (⌘+V) the PinConfig (it should still be in the Clipboard).
+10. Next, add the Verb Data for Node you want to add to the PinConfig from the "Orig" 
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
 Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:
