@@ -137,16 +137,18 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 
 ## IV. Creating the `PinConfig`
 
-The `PinConfig` that tells macOS which audio sources are available to the system. Depending on the Codec, these sources can be: Internal speakers/mics (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. The PinConfig is a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, a Node ID, Verb Commands and Verb Data. 
+The `PinConfig` that tells macOS which audio sources are available to the system. It's is a long sequence of digits (called "verbs") consisting of 4 components: the Codec's address, a Node ID, Verb Commands and Verb Data. 
 
-Luckily for us, the `verbit.sh` we ran in step III. extracted and corrected the verbs form the Codec dump automatically for us and stored it in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general or you want/need to extract the verb data *manually* yourself, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+Depending on the feature-set of Codec, sources can be: Internal speakers/mic (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
 
-First, we will check the "codec_dump_dec.txt" and "codec_dump.txt" to find relevant Nodes which could be part of the PinConfig. Then we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
+Luckily for us, the script we ran in step III. also extracted and corrected the verbs from the Codec dump automatically and stored it in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general, or if you want to extract it *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
 Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
 
 ### Finding relevant Nodes
-Let's find the *relevant* Nodes inside the Codec dump first. You can use "codec_dump_dec.txt" for most of it. But for the Pin Default use "codec_dump.txt"  instead, since it needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
+First, let's find the *relevant* Nodes inside the Codec dump. You can use "codec_dump_dec.txt" for most of it. But for the `PinDefault` values we need the "codec_dump.txt" instead, since these values needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
+
+Then we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The .svg schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
 
 **And remember**: the search function is your friend!
 
@@ -164,10 +166,10 @@ Node ID | Control Name             | Type         | PinDefault (Original)| PinDe
 
 #### Inputs and Outputs
 Node ID | Control Name |           
-:------:|--------------------------|------------
-2       |	Speaker Playback Volume  | Audio Output | 
-3       | Headphone Playback Volume| Audio Output |
-9       | Capture Volume           | Audio Input  |
+:------:|--------------------------|---------------
+2       |	Speaker Playback Volume  | Audio Output  
+3       | Headphone Playback Volume| Audio Output 
+9       | Capture Volume           | Audio Input  
 12      | Stereo Amp-In            | Audio Mixer
 13      |                          | Audio Mixer
 15      |                          | Audio Mixer
@@ -546,10 +548,12 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 
 ## CREDITS and RESOURCES
 - **Guides**:
-	- MacPeet for original [guide](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
+	- MacPeet for [[Guide] Anleitung patch AppleHDA](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
 	- EMlyDinEsH for [Complete Apple HDA Patching Guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/)
 	- F0x1c for [AppleALC_Instructions](https://github.com/F0x1c/AppleALC_Instructions)
-	- Daliansky for his [AppleALC Guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+	- The King for [[HOW TO] Patch AppleHDA - Knowledge Base, Guide for how to fix/use original AppleHDA](http://web.archive.org/web/20150105004602/http://www.projectosx.com/forum/index.php?showtopic=465&st=0)
+	- Master Chief for [[How To] Pinconfig for Linux users](https://www.insanelymac.com/forum/topic/149128-how-to-pinconfig-for-linux-users-%EF%BF%BD-realtek-alc883-example/)
+	- Daliansky for [AppleALC Guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 	- Daliansky for [Using VoodooHDA for finding valid Nodes](https://blog-daliansky-net.translate.goog/With-VoodooHDA-comes-getdump-find-valid-nodes-and-paths.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 
 - **About Intel High Definition Audio**:
