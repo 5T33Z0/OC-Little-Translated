@@ -132,7 +132,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
-- **`codec_dump.txt_dec.txt.evg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
+- **`codec_dump.txt_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
 ## IV. Creating the `PinConfig`
