@@ -136,6 +136,68 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 - **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
+## IV. Understanding the Codec schematic
+Shown below is `codec_dump.txt_dec.txt.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the complete routing capabilities of the Audio Codec.  Depending on the Codec used in your system, the schematic will look different!
+
+![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
+
+Form              | Function
+------------------|-----------------------------------------------
+**Triangle**      | Amplifier
+**Blue Ellipse**  | Audio Output
+**Red Ellipse**   | Audio Input
+**Parallelogram** | Audio selector (this codec doesn't have any)
+**Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
+**Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
+**Black Lines**   | Available paths
+**Dotted Lines**  | Currently used path
+**Blue Lines**    | ???
+
+### How to read the schematic
+The schematic a bit hard to read and comprehend because of its structure. It's also misleading: since all the arrows point to the right one might think this represents the signal flow. But that's not the case! 
+
+Just ignore the arrows! Instead, you need to take a different approch:
+
+#### Routing inputs
+For **Inputs**, start at the input and end at the Pin Complex Node:
+
+```mermaid
+flowchart LR
+		id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
+```
+
+#### Routing outputs
+For **Outputs**, the path that an outgoing signal takes can be obtained by starting at the Pin Complex Node and then following it through the mixer(s) to the physical output (jack or speakers):
+
+```mermaid
+flowchart LR
+       id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|possible path|Bid3{Sub Mix A } & Cid4{Sub Mix B} -->id5(((Output X)))
+```
+Whether or not a signal travels to more than one Mixer node depends on the design of the Codec and is not really relevant. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output. 
+
+
+
+### Examples from ALC269
+Headphone Output switch, possible routings:
+
+```mermaid
+flowchart LR
+    id1(Node21: HP out) --> |possible path A| id3{Mixer 12} --> id5(((Output 2)))
+    id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
+```
+Internal Mic Input:
+```mermaid
+flowchart LR
+       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)
+```
+Line Input:
+```mermaid
+flowchart LR
+       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
+```
+
+We will come back to the schematic later… 
+
 ## IV. Creating the `PinConfig`
 Audio Codecs support various Inputs and Outputs: Internal speakers an/or a mic (on Laptops) as well as Line-Ins and Outs (both analog and digital). Apple's HDA Driver supports up to 8 different audio sources – so stay within this limit when creating your `PinConfig`
 
@@ -144,6 +206,21 @@ These Inputs and Outputs are represented by the so-called `PinConfig`. It tells 
 Luckily for us, the script we ran previously automatically extracted and corrected the verbs from the Codec dump and stored them in the "finalfinalverbs.txt". But if you want know how extract the verb data *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
 Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
+
+### Relevant data
+
+Amongst other things, the Codec dump text contains the following details:
+
+- The Codec model
+- Its Address
+- It's Vendor Id (in AppleALC it's used as `CodecID`)
+- Pin Complex Nodes with Control Names (these form the `PinConfig`)
+- The actual routing capabilities of the Codec:
+	- Mixer/Selector Nodes
+	- Audio Output Nodes
+	- Audio Input Nodes
+	- Number of connections from/to a Node/Mixer/Selector/Switch
+
 
 ### Finding relevant Nodes
 First, let's find the *relevant* Nodes inside the Codec dump. You can use "codec_dump_dec.txt" for most of it. But for the `PinDefault` values we need the "codec_dump.txt" instead, since these values needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
@@ -334,93 +411,6 @@ Amongst other things, the codec dump text contains the following details:
 
 All the aspects regarding the audio routing capabilities of the Codec are represented in the .svg schematics we created previously. So let's have a look at it next.
 
-### Analyzing the Schematic
-Shown below is `codec_dump.txt_dec.txt.evg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the complete routing capabilities of the Audio Codec:
-
-![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
-
-Depending on the Codec used in your system, the schematic will look different!
-
-**Legend**:
-
-Form              | Function
-------------------|-----------------------------------------------
-**Triangle**      | Amplifier
-**Blue Ellipse**  | Audio Output
-**Red Ellipse**   | Audio Input
-**Parallelogram** | Audio selector (this codec doesn't have any)
-**Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
-**Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
-**Black Lines**   | Available paths
-**Dotted Lines**  | Currently used path
-**Blue Lines**    | ???
-
-<details>
-<summary><strong>Excursion: Using the Block Diagram</strong> (click to reveal)</summary>
-
-Let's have a look at the Block Diagram of the ALC269 in comparison:</br>![ALC269_BlockD](https://user-images.githubusercontent.com/76865553/170470130-f62273b1-7b00-455c-820e-4c4ea35dc311.png)
-
-On the I/O side, we have:
-
-- 2 PCM outputs (with a DAC for each channel), 
-- 2 PCM inputs (with an ADC for each channel) and 
-- 2 S/PDIF (Sony/Philips Digital Interface) outputs (I don't care about those since my Laptops doesn't have a TosLink nor Coaxial jack)
-
-Else:
-
-- The schematic of the Codec dump lists only one clearly visible digital output.
-- As far as the Mixers (labeled as `∑`) are concerned, I count 3 as well: 0Bh, 23h, and 24h.
-- Line 1+2 and Mic 1+2 can be either Input or Output (I/O).
-</details>
-<details>
-<summary><strong>Excursion: Understanding signal flow and switching audio sources</strong> (click to reveal)</summary>
-
-My Lenovo T530 Laptop only has one 1/8" jack which serves as input and output at the same time (combo jack). It detects what kind of plug (Line-in/out, Headphone/Headset) is plugged into it. Headphone have 3 poles, while Headset plugs have 4 poles to separate the 3 audio channels and ground: left/right output (stereo) and a mono input (Aux). 2 variants are available, **OMTP** and **CTIA**.
-
-**OMTP**: ![Plug_OMTP](https://user-images.githubusercontent.com/76865553/170470243-1f88bc29-dab9-4381-99b0-89c35d75224e.png) and **CTIA**: ![Plug_CTIA](https://user-images.githubusercontent.com/76865553/170470318-106063b6-4b69-47e9-8693-d16632e5685f.png)
-
-Once a plug is plugged into the jack, the internal speakers are muted (and turn back on automatically once the plug is pulled). If the plug has 4 poles (as shown above), it is available as a mic or line-in for macOS as well (if the Layout-ID is configured accordingly). So there is some automatic switching going on in the background as well which happens inside the mixer(s).
-
-That's why there are several outgoing connections from some nodes as well as two levels of Mixer Nodes, Node 11 being the Main Mixer while Nodes 15, 12, 13 handle output signal while nodes 35 an 34 handle input signals (Mic, Line-In). 
-
-Depending on the way we structure the routing of our Layout-ID ,the audio either is switched automatically when plugging something into a jack or we have to switch the input/output manually via system preferences. More about that later.
-</details>
-
-### Routing outputs
-For **Outputs**, the path that an outgoing signal takes can be obtained by starting at the Pin Complex Node and then following it through the mixer(s) to the physical output (jack):
-
-```mermaid
-flowchart LR
-       id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|possible path|Bid3{Sub Mix A } & Cid4{Sub Mix B} -->id5(((Output X)))
-```
-Wether or not a signal travels to more than one Mixer node depends on the design of the Codec and is not really relevant. What's important is to list all the "stations" a signal passes through from the beginning (Pin Complex) to the destination (Output). 
-
-### Routing inputs
-For **Inputs**, the whole process is reversed:
-
-```mermaid
-flowchart LR
-	id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
-```
-
-#### Examples from ALC269
-Headphone Output switch, possible routings:
-
-```mermaid
-flowchart LR
-    id1(Node21: HP out) --> |possible path A| id3{Mixer 12} --> id5(((Output 2)))
-    id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
-```
-Internal Mic Input:
-```mermaid
-flowchart LR
-       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)
-```
-Line Input:
-```mermaid
-flowchart LR
-       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
-```
 
 ## VII. Creating a PathMap
 The PathMap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
