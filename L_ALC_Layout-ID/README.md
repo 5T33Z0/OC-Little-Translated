@@ -8,9 +8,10 @@ This is my attempt of providing an up-to-date and easy to follow guide for creat
 It is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch and for those who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and causes issues or they want to add auxiliary inputs or outputs missing from the current Layout-ID in use.
 
 ### How to use this guide
-Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific device (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the basic principles and techniques presented along the way are applicable to *any* Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec, device and use case. 
+- **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at all times. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
+- **Do as I say, not as I do**! &rarr; Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific machine (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the general principles and techniques apply to *any* given Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec and use case.
 
-**NOTE**: If you'd just like to compile a slimmed-down version of AppleALC for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
+**NOTE**: If you'd just like to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
 
 <details>
 <summary><strong>Why this guide is needed</strong> (click to reveal)</summary>
@@ -58,7 +59,7 @@ When I compared the dumps obtained with Clover and Linux, I noticed that the one
 Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
 #### Preparing a USB flash drive for running Linux from an ISO
-Users who already have Linux installed can skip to "Dumping the Audio Codec"!
+Users who already have Linux installed can skip to "Dumping the Codec"!
 
 1. Use a USB 3.0 flash drive (at least 8 GB or more)
 2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the flash drive. It's pretty straight forward.
@@ -77,10 +78,10 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat and can't be accessed by Linux without additional measures.
 3. Reboot into macOS
 4. Extract `CodecDump.zip` to the Desktop
-5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`. ⚠️ This is mandatory because the script we will use later to convert the data is looking for the file "codec_dump.txt" specifically. Otherwise the file conversions will fail.
+5. ⚠️ Rename `card0-codec#0.txt` inside the "CodecDump" folder to `codec_dump.txt`. This is important. Otherwise the script we will use in step III. can't find the file (it's looking specifically for "codec_dump.txt") and the file conversion process will fail.
 
 ### Additional Requirements
-:bulb: Please follow the instructions below carefully and thoroughly to avoid issues.
+💡Please follow the instructions below carefully and thoroughly to avoid issues.
 
 - Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
 - Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
@@ -141,19 +142,19 @@ The `PinConfig` that tells macOS which audio sources are available to the system
 
 Depending on the feature-set of Codec, sources can be: Internal speakers/mic (on Laptops) and Line-ins/outs (analog and digital). Apple's HDA Driver supports up to 8 different audio sources so stay within this limit. 
 
-Luckily for us, the script we ran in step III. also extracted and corrected the verbs from the Codec dump automatically and stored it in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general, or if you want to extract it *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+Luckily for us, the script we ran in step III. also extracted and corrected the verbs from the Codec dump automatically and stored them in the "finalfinalverbs.txt". But if you want know how extracting the verb data works in general or if you want to extract it *manually*, please refere to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
 Once we got the PinConfig, it has to be added to the `info.plist` of the `PinConfigs.kext` before compiling the `AppleAlC.kext`.
 
 ### Finding relevant Nodes
 First, let's find the *relevant* Nodes inside the Codec dump. You can use "codec_dump_dec.txt" for most of it. But for the `PinDefault` values we need the "codec_dump.txt" instead, since these values needs to be in Hex. You can double-check the PinDefault data against "finalverbs.txt" as well.
 
-Then we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The .svg schematic is a great visual aid as well to decide which Nodes add to the PinConfig. 
+Then we will use "finalverbs.txt" and the PinConfigurator App to create the the final PinConfig. The .svg schematic is a useful visual aid as well to decide which Nodes add to the PinConfig (check Chapter V to learn how to read it).
 
-**And remember**: the search function is your friend!
+**And Remember**: the search function is your friend!
 
-#### Pin Complexes
-Only Pin Complexes with Control Names are relevant!
+#### Pin Complex Nodes with `Control: name="XYZ"`
+⚠️ Only Nodes that are a Pin Complex and have a Control name assigned to them are viable candidates for the PinConfig! So in case of the Realtek ALC269VC in my system, these are:
 
 Node ID | Control Name             | Type         | PinDefault (Original)| PinDefault (Corrected)
 :------:|--------------------------|---------------|:-----------:|:------:
@@ -161,28 +162,29 @@ Node ID | Control Name             | Type         | PinDefault (Original)| PinDe
 20      | Speaker Playback Switch  | Stereo Amp-Out| 0x90170110  |
 21      | Headphone Playback Switch| Stereo Amp-Out| 0x03211020  |
 24      | Mic Boost Volume         | Stereo Amp-In/ Amp-Out | 0x03a11830  |
-25      | Dock Mic Boost Volume    | Stereo Amp-In/ Amp-Out | 1091637744  |
-27      | Headphone Playback Switch| Stereo Amp-In/ Amp-Out | 1091637744  |
+25      | Dock Mic Boost Volume    | Stereo Amp-In/ Amp-Out | 0x411111f0  |
+27      | Headphone Playback Switch| Stereo Amp-In/ Amp-Out | 0x411111f0  |
 
-#### Inputs and Outputs
-Node ID | Control Name |           
+#### Mixer Nodes
+Node ID | Name         | Type         
+:------:|--------------|--------------
+11      | Audio Mixer  | Stereo Amp-In
+12      | Audio Mixer  | Stereo Amp-In 
+13      | Audio Mixer  | Stereo Amp-In           
+15      | Audio Mixer  | Mono Amp-In
+34      | Audio Mixer  | Stereo Amp-In            
+35      | Audio Mixer  | Stereo Amp-In            
+
+#### Input and Output Nodes
+Node ID | Control Name             | Type       
 :------:|--------------------------|---------------
-2       |	Speaker Playback Volume  | Audio Output  
-3       | Headphone Playback Volume| Audio Output 
-9       | Capture Volume           | Audio Input  
-12      | Stereo Amp-In            | Audio Mixer
-13      |                          | Audio Mixer
-15      |                          | Audio Mixer
+2       |	Speaker Playback Volume  | Audio Output (Stereo Amp-Out)
+3       | Headphone Playback Volume| Audio Output (Stereo Amp-Out)
+8       |                          | Audio Input (Stereo Amp-In)
+9       | Capture Volume           | Audio Input (Stereo Amp-In)
 
-#### Mixer
-Node ID | Control Name             | Type         
-:------:|--------------------------|--------------
-11      | Stereo Amp-In            | Audio Mixer
-12      | Stereo Amp-In            | Audio Mixer
-13      | Stereo Amp-In            | Audio Mixer
-15      | Mono Amp-In              | Audio Mixer
 
-## IV. Modifying an existing `PinConfig`
+## V. Modifying an existing `PinConfig`
 In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to it that are missing from the current Layout-ID, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
 
 Since I am using a docking station with a Line-out jack, I want audio to come out of it when I plug my external speakers which is currently not working. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and orks fine besides the missing support for the Line-out of the dock.
@@ -191,12 +193,14 @@ To modify an existing `PinConfig`, do the following:
 
 - Open the `info.plist` inside the `PinConfig.kext` (under AppleALC/Resources) 
 - Find the Layout-ID for your `CodecID`. I use this:</br>![](Pics/Modpinconf.png)
-- Copy the data inside the `ConfigData` field
+- Select the data inside the `ConfigData` field (⌘+A) and copy is (⌘+C)
 - Start the PinConfigurator App
 - From the menubar, select File > Import > Clipboard
 - This is how it looks:</br> ![](Pics/pincfgimprtd.png)
 
-As expected, there's no entry for second Output (whether HP nor Line-out).
+As expected, there's no entry for a second Output (whether "HP" nor "Line-out"), so we need to add one. Since Node 27 is a Heaphone Playback switch as well, we will add it to the current PinConfig. It requires a bit of manual copy/paste work.
+
+- 
 
 ### Understanding `finalverbs.txt` and fixing possible conversion errors
 Open the `finalverbs.txt` located inside the "codecgraph" folder with TextEdit. It contains a list of the availabe inputs and outouts of the Codec:
@@ -297,7 +301,7 @@ I am picking Layout-ID 39 because a) it's availabe and b) followed by by the Len
 
 Now that we got the PinConfig out of the way, we can continue.
 
-## V. Analyzing the Codec dump
+## VI. Analyzing the Codec dump
 Amongst other things, the codec dump text contains the following details:
 
 - The Codec model
@@ -400,7 +404,7 @@ flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
 
-## VI. Creating a PathMap
+## VII. Creating a PathMap
 The PathMap describes the signal flow within the codec from Pin Complex Nodes to physical outputs and from Inputs to Pin Complex Nodes. Some routings are fixed (internal Mics) while others can be routed freely. Some Nodes can even be both, input and output. The data has to be entered in a PlatformsXX.xml later.
 
 ### Tracing possible paths
@@ -510,7 +514,7 @@ If you want to modify an existing Layout-ID, do the following:
 
 To be continued…
 
-## VII. Preparing an existing `LayoutXX.xml`
+## VIII. Preparing an existing `LayoutXX.xml`
 - Open the Layout.xml file from the previous step with a plist Editor. In my case Layout39.xml
 - Adjust the following settings as needed:</br> ![](Pics/LayoutXML01.png)
 - In my case, I changed the `LayoutID` and `PathMapID` to `39` and added a `LineOut` to the `Outputs` because I think I need it for the dock:</br>![](Pics/LayoutXML02.png)
@@ -519,7 +523,7 @@ To be continued…
 
 **NOTE**: `LayoutID` and `PathMapID` **must be identical** and must use the same number you chose for your Layout-ID previously.
 
-## VIII. Compiling the AppleALC.kext
+## IX. Compiling the AppleALC.kext
 Now that we prepared all the requirred files, wen can finally compile the kext.
 
 - In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file
@@ -527,7 +531,7 @@ Now that we prepared all the requirred files, wen can finally compile the kext.
 - Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
 
-## IX. Testing
+## X. Testing
 - Add your newly compiled AppleALC.kext to your EFI/OC/Kexts folder
 - Open the config.plist and change the Layout-ID to the one you chose for your Layout-ID
 - Save the cong and reboot
@@ -535,7 +539,7 @@ Now that we prepared all the requirred files, wen can finally compile the kext.
 - If it's working: Congrats.
 - If it's not working: re-check Pin-Config, Platforms.xml, adjust them, re-compile the kext, replace it in the EFI, reboot, test, repeat.
 
-## X. Adding your Layout-ID to the AppleALC Repo
+## XI. Adding your Layout-ID to the AppleALC Repo
 Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub repo via Pull Request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 In order to add your Layout-ID to AppleALC's database, you have to do the following:
