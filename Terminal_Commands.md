@@ -15,6 +15,9 @@ https://macos-defaults.com/
 `defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
 `defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
 
+**Disable Library Validation**</br>
+`sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true`
+
 **List MAC Addresses**</br>
 `networksetup -listallhardwareports`
 
