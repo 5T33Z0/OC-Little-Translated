@@ -7,21 +7,20 @@ This is my attempt to provide an up-to-date guide for creating/modifying Layout-
 ### Who this guide is for
 This guide is aimed at users who want to create a new or modify an existing Layout-ID for different reasons. Maybe the one in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
+If you just want to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
+
 ### Are you *sure*, you want to do this?
 From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config – and voilà: Sound! 
 
 But once you are on the other end, trying to actually *create* your own Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around.
 
-So are you sure you still want to do this?
+So, are you still sure you *want* to do this?
 
-### How to use this guide
-- **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at any time. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
-- **Do as I say, not as I do**! &rarr; Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific machine (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the general principles and techniques presented along the way apply to *any* given Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec and use case. And most importantly: don't copy any of the data used in the examples and expect them to work in your Layout-ID – they won't!
-
-**NOTE**: If you'd just like to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
+<details>
+<summary><strong>Why another guide?</strong> (click to reveal)</summary>
 
 ### Why another guide?
-Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling is not covered on the AppleALC repo.
+Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling is not covered on the AppleALC repo – and nowhere else on that matter.
 
 The hand full of guides I could find however, stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated, over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate all the data into the AppleALC source code to compile the kext!
 
@@ -30,14 +29,15 @@ The most convincing guide I did find is written in German by MacPeet. He has cre
 Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
 
 My guide is an adaptation of MacPeet's work but updates and enhances it, where possible.It introduces new tools and workflows and  utilizes all the nice features markdown has to offer to present the instruction in the best way possible, such as: headings, syntax highlighting, tables and mermaid integration for flowcharts, etc.
+</details>
 
 ## II. Preparations
 Creating a Layout-ID for AppleALC is possibly one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
 ### Obtaining an Audio CODEC dump in Linux
-Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside of them. Codec dumps created in Linux, however, can be processed by these tools just fine. 
+Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside of them. Codec dumps created in Linux, however, can be processed by these tools just fine.[^2]
 
-When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
+[^2]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
 
 Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
@@ -140,7 +140,7 @@ Form              | Function
 **Parallelogram** | Audio selector (this codec doesn't have any)
 **Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
-**Black Lines**   | Default connection (has an asterisk next to it in the Codec_Dump.txt!)
+**Black Lines**   | Default connection (indicated by an asterisk next to it in the Codec_Dump.txt!)
 **Dotted Lines**  | Optional connection 
 **Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
 
@@ -151,7 +151,6 @@ Just ignore the arrows! Instead, you need to take a different approach:
 
 #### Routing inputs
 For **Inputs**, start at the input and end at the Pin Complex Node:
-
 ```mermaid
 flowchart LR
 		id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
@@ -159,7 +158,6 @@ flowchart LR
 
 #### Routing outputs
 For **Outputs**, the path that an outgoing signal takes can be obtained by starting at the Pin Complex Node and then following it through the mixer(s) to the physical output (jack or speakers):
-
 ```mermaid
 flowchart LR
        id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|possible path|Bid3{Sub Mix A } & Cid4{Sub Mix B} -->id5(((Output X)))
@@ -167,19 +165,18 @@ flowchart LR
 Whether or not a signal travels to more than one Mixer node depends on the design of the Codec and is not really relevant. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output. 
 
 #### Routing Examples from ALC269
-Headphone Output switch, possible routings:
-
+**Headphone Output switch:**
 ```mermaid
 flowchart LR
     id1(Node21: HP out) --> |possible path A| id3{Mixer 12} --> id5(((Output 2)))
     id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
 ```
-Internal Mic Input:
+**Internal Mic Input:**
 ```mermaid
 flowchart LR
        id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)
 ```
-Line Input:
+**Line Input**:
 ```mermaid
 flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
