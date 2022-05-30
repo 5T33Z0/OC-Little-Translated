@@ -51,7 +51,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 5. Reboot from the flash drive
 6. In the Ventoy menu, select the Linux ISO and hit enter
 7. From the GNU Grub, select "Try or Install Linux"
-8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu" (or whatever the distro of your choise prompts).
+8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu" (or whatever the distro of your choice prompts).
 
 #### Dumping the Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
@@ -87,15 +87,17 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
-- Important files we have to work on:
-|Parameter    |File              |Locataion
+
+#### Important files we have to work on:
+
+|Parameter(s)   |File            |Location
 :------------:|------------------|----------
 **PinConfig** |`info.plist`      |Inside `PinConfigs.kext` (AppleALC/Resources/PinConfigs)
 **PathMap**   |`PlatformsXX.xml` |AppleALC/Resources &rarr; ALCXXX-subfolder of corresponding Codec
 **various**   | `layoutXX.xml`   |same
-**PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.plist` | same
+Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.plist` | same
 
-**NOTE**: The `XX` stands for the number of the Layout-ID, `XXX` represents the Codec model (and not what you thought). More about that later.
+**NOTE**: The `XX` stands for the number of the chosen Layout-ID. `XXX` stands for the corresponding Codec model the Layout-ID is for (and not what you thought). More about that later.
 
 #### Configuring Xcode
 - Start Xcode
@@ -120,7 +122,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we need 
 **This will generate 5 new files inside the codecgraph folder:**
 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
-- **`finalfinalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
+- **`finalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
 - **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
 - **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
@@ -145,7 +147,7 @@ Form              | Function
 ### How to read the schematic
 The schematic a bit hard to read and comprehend because of its structure. It's also misleading: since all the arrows point to the right one might think this represents the signal flow. But that's not the case! 
 
-Just ignore the arrows! Instead, you need to take a different approch:
+Just ignore the arrows! Instead, you need to take a different approach:
 
 #### Routing inputs
 For **Inputs**, start at the input and end at the Pin Complex Node:
@@ -227,7 +229,7 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 We will come back to the schematic later… 
 
 ## V. Understanding `finalverbs.txt` 
-Open the `finalverbs.txt` located inside the "codecgraph" folder. It contains a list of the availabe inputs and outouts of the Codec represented by code, namely: `Nodes`, `PinDefault` and `Verbs`:
+Open the `finalverbs.txt` located inside the "codecgraph" folder. It contains a list of the available inputs and outputs of the Codec represented by code, namely: `Nodes`, `PinDefault` and `Verbs`:
 
 ![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
 
