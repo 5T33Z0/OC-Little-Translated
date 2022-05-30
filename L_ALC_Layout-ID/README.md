@@ -1,41 +1,37 @@
 # How to create/modify a Layout-ID for AppleALC
-🚧 This guide is a work in progress, so don't follow it yet. Completed chapters: I, to IV and VIII to XI.
+🚧 This guide is a work in progress, so don't follow it yet.
 
 ## I. Introduction
-This is my attempt of providing an up-to-date guide for creating Layout-IDs for the AppleALC kext to make audio work on a Hackintosh. 
+This is my attempt to provide an up-to-date guide for creating/modifying Layout-IDs for the AppleALC kext to make audio work on a Hackintosh in 2022 (and beyond).
 
-### Whos this guide is for
-This guide is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch and for those who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
+### Who this guide is for
+This guide is aimed at users who want to create a new or modify an existing Layout-ID for different reasons. Maybe the one in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
-### The work that goes into creating a Layout-ID 
-From a user's perspective, making audio work is a simple matter of entering the correct number of an ALC Layout-ID in the config.plist, save it and you're done. 
+### Are you *sure*, you want to do this?
+From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config – and voilà: Sound! 
 
-But once you are on the other side, trying to actually *create* a new Layout-ID this becomes a whole different story: you have to dump the audio Codec in Linux, install a bunch of other tools, convert data, analyze and edit it, transfer it to different files, configure Xcode to compile the kext, etc, etc. 
+But once you are on the other end, trying to actually *create* your own Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around.
 
-And once you've done all of this, you reboot the system just to find out it doesn't work. So you have to do it all over again. Sounds like fun, right? So now that you have been warned, we can begin – are you sure you still want to do this?
+So are you sure you still want to do this?
 
 ### How to use this guide
-- **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at all times. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
-- **Do as I say, not as I do**! &rarr; Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific machine (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the general principles and techniques apply to *any* given Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec and use case.
+- **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at any time. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
+- **Do as I say, not as I do**! &rarr; Although the Layout-ID created in this guide is for a specific Codec (Realtek ALC269VC) in a specific machine (Lenovo T530 Laptop) and a specific use case (getting the line-out of the docking station station to work), the general principles and techniques presented along the way apply to *any* given Audio Codec. You just have to abstract from the given example and apply the concepts and techniques to your specific Codec and use case. And most importantly: don't copy any of the data used in the examples and expect them to work in your Layout-ID – they won't!
 
-**NOTE**: If you'd just like to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build) instead.
+**NOTE**: If you'd just like to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
-<details>
-<summary><strong>Why this guide is needed</strong> (click to reveal)</summary>
+### Why another guide?
+Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling is not covered on the AppleALC repo.
 
-### Why this guide is needed
-Although AppleALC comes with around 600 (!) pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling the kext is not covered on the AppleALC repo. As a matter of fact, it's not covered anywhere! I only could find 4 guides which explain parts of if but never the whole process as it is required today.
+The hand full of guides I could find however, stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated, over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate all the data into the AppleALC source code to compile the kext!
 
-Most of the guides I found were either outdated, over-complicated or only parts of them are applicable today (check the "Credits and Resources" section). More importantly, ***none*** of the existing guides actually explain how to integrate the PinConfig data into the AppleALC source code and how to compile the actual kext!
+The most convincing guide I did find is written in German by MacPeet. He has created more than 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC. 
 
-The most convincing guide I found yet is written in German by MacPeet who has created a lot of Layout-IDs for AppleALC over the years. It's from 2015 when patching AppleHDA.kext was still necessary since AppleALC didn't exist. Although not all of its instructions are applicable today, it introduced a new, partly automated workflow, which is much easier to understand and follow: it utilizes tools to visualize the Codec dump and scripts to generate required verb data for the PinConfig which previously required a lot of manual labour.
+Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
 
-My guide is an adaptation of MacPeet's work but expands on it where necessary to meet today's requirements. It makes use of all the nice new features markdown has to offer, such as syntax highlighting, adding tables and mermaid integration for creating flowcharts, etc.
+My guide is an adaptation of MacPeet's work but updates and enhances it, where possible.It introduces new tools and workflows and  utilizes all the nice features markdown has to offer to present the instruction in the best way possible, such as: headings, syntax highlighting, tables and mermaid integration for flowcharts, etc.
 
-So, unless you are fine with being dependent on the grace of others to create a Layout-ID for you, an updated guide was long overdue.
-</details>
-
-## II. Preperations
+## II. Preparations
 Creating a Layout-ID for AppleALC is possibly one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
 ### Obtaining an Audio CODEC dump in Linux
@@ -84,19 +80,23 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - Get a plist editor like PlistEditPro or [**XPlist**](https://github.com/ic005k/Xplist)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
-#### Preparing the AppleALC Source Code
+### Preparing the AppleALC Source Code
 - Clone, Fork or Download and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
 - Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
 - In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into the window and press enter.
 - Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
-- The files we need to create (or modify) a Layout-ID are:
-	- **`info.plist`** (located in AppleALC/Resources/PinConfigs.kext/Contents/)
-	- **`LayoutXX.aml`** (located in a "ALCXXX"-subfolder corresponding the Codec model)
-	- **`PlatformsXX.xml`** (same).
+- Important files we have to work on:
 
-**NOTE**: The `XX` stands for the number of the Layout-ID. More about that later.
+	|Parameter    |File              |Locataion
+:------------:|------------------|----------
+**PinConfig** |`info.plist`      |Inside `PinConfigs.kext` (AppleALC/Resources/PinConfigs)
+**PathMap**   |`PlatformsXX.xml` |AppleALC/Resources &rarr; ALCXXX-subfolder of corresponding Codec
+**various**   | `layoutXX.xml`   |same
+**PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.plist` | same
+
+**NOTE**: The `XX` stands for the number of the Layout-ID, `XXX` represents the Codec model (and not what you thought). More about that later.
 
 #### Configuring Xcode
 - Start Xcode
