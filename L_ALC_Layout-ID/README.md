@@ -474,7 +474,6 @@ Let's have a look at the output side of the schematic:</br>![](Pics/SwitchMode01
 - Therefore, they can be operated in switch-mode
 
 ##### Possible Configurations: Odd/Even
-
 We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
 
 ```mermaid
@@ -492,6 +491,22 @@ flowchart LR
 	id0(Dict) -->
 	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
 ```
+
+##### Possible Configurations: Custom
+For my use, I need Node 20 needs to be fixed. All the switching between HP Out and any of the other available Nodes (24, 25, 26 and 27) need to happen on Mixer 13 and output 3. So something like this
+
+```mermaid
+flowchart LR
+	id0(Dict) -->
+	id1(Node20: Speakers) --> id2{Mixer 12} --> id3(((Output 2)))
+	id0(Dict) -->
+	id4(Node21: HP Out) --> id5{Mixer 13} --> id6(((Output 3)))
+	id0(dict) -->
+	id10(Node25: Speaker Ext) --> id11{Mixer 13} --> id12(((Output 3)))
+	id0(Dict) -->
+	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
+```
+
 #### Manual Mode
 In manual mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
