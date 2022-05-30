@@ -10,7 +10,9 @@ This guide is aimed at users for whom the existing Layout-IDs either do not work
 ### The work that goes into creating a Layout-ID 
 From a user's perspective, making audio work is a simple matter of entering the correct number of an ALC Layou-ID in the config.plist, save it and you're done. 
 
-But once you are on the other side, trying to actually *create* a new Layout-ID this becomes a whooooole different story: you have to dump the audio Codec in Linux, you have to install a bunch of other tools, you have to convert data, you have to edit data inside various files, you have to configure Xcode to compile the kext, you have to add it to your EFI folder. Then you have to reboot to test it. Does it work? Of course not! Well, do it again… and reboot. Does it work? No? Do it again and again and again… and again… and again… Sounds like fun, right?! So now that you have been warned, we can begin – are you still sure you want to do this?
+But once you are on the other side, trying to actually *create* a new Layout-ID this becomes a whole different story: you have to dump the audio Codec in Linux, install a bunch of other tools, convert data, analyze and edit it, transfer it to different files, configure Xcode to compile the kext, etc, etc. 
+
+And once you've done all of this, you reboot the system just to find out it doesn't work. So you have to do it all over again. Sounds like fun, right? So now that you have been warned, we can begin – are you sure you still want to do this?
 
 ### How to use this guide
 - **Feel free to jump back and forth between chapters**! &rarr; The process of creating a Layout-ID for AppleALC is rather complex. It requires going back and forth between editing files and data, having various Apps and windows open at all times. Although this guide follows a linear structure that will get you from A to Z eventually, you probably will have to jump between chapters IV to IX more than once.
