@@ -123,7 +123,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we have 
 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
-- **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.[^3]
+- **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.
 - **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
@@ -239,7 +239,7 @@ Open the `finalverbs.txt` located inside the "codecgraph" folder. It contains a 
 
 ![Verbs_errors](https://user-images.githubusercontent.com/76865553/170696296-6ae7d154-eecd-4f13-bd98-2a0c61d1214d.png)
 
-As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available audio sources the Codec provides while "Modified Verbs" lists all the source which are actually connected and their verb data was corrected/modified by the verbit.sh script.
+As you can see, it's divided into two major sections: "**Original Verbs**" and "**Modified Verbs**". "Original Verbs" lists all available audio sources the Codec provides while "Modified Verbs" lists all the source which are actually connected and their verb data was corrected/modified[^3] by the verbit.sh script.
 
 ### Fixing conversion errors
 
