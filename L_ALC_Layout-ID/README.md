@@ -88,8 +88,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 - Important files we have to work on:
-
-	|Parameter    |File              |Locataion
+|Parameter    |File              |Locataion
 :------------:|------------------|----------
 **PinConfig** |`info.plist`      |Inside `PinConfigs.kext` (AppleALC/Resources/PinConfigs)
 **PathMap**   |`PlatformsXX.xml` |AppleALC/Resources &rarr; ALCXXX-subfolder of corresponding Codec
