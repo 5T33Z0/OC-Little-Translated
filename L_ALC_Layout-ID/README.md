@@ -115,15 +115,15 @@ In order to create a routing of the audio inputs and outputs for macOS, we have 
 
 ### Converting the Codec Dump 
 1. Open the `codec_dump.txt` located in the "codecgraph"
-2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the the following file conversions will fail:</br>![Dump](https://user-images.githubusercontent.com/76865553/170469662-b833bdf9-67a1-4546-80a0-82b9e5bf42ba.png)
+2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
 3. Save the file.
-4. Next, double-click on `Script Patch Codec by HoangThanh`
+4. Next, double-click `Script Patch Codec by HoangThanh`
 
 **This will generate 5 new files inside the codecgraph folder:**
 
 - **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We we need it since the data has to be entered in decimals in AppleAlC's .xml files.
 - **`finalverbs.txt`** &rarr; Text file containing the Pin Configuration extracted from the codec dump using the [verbit.sh](https://github.com/maywzh/useful_scripts/blob/master/verbit.sh) script. The Pin Configuration represents the available inputs/outputs in macOS'es Audio Settings.
-- **`verbitdebug.txt`** &rarr; A log file of the corrections[^3] and modifications `verbit.sh` applied to the verb data.
+- **`verbitdebug.txt`** &rarr; A log file of the corrections and modifications `verbit.sh` applied to the verb data.[^3]
 - **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
