@@ -8,7 +8,7 @@ This is my attempt of providing an up-to-date guide for creating Layout-IDs for 
 This guide is aimed at users for whom the existing Layout-IDs either do not work so they're forced to create one from scratch and for those who wish to modify an existing Layout-ID for other reasons. Maybe the Layout-ID in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
 ### The work that goes into creating a Layout-ID 
-From a user's perspective, making audio work is a simple matter of entering the correct number of an ALC Layou-ID in the config.plist, save it and you're done. 
+From a user's perspective, making audio work is a simple matter of entering the correct number of an ALC Layout-ID in the config.plist, save it and you're done. 
 
 But once you are on the other side, trying to actually *create* a new Layout-ID this becomes a whole different story: you have to dump the audio Codec in Linux, install a bunch of other tools, convert data, analyze and edit it, transfer it to different files, configure Xcode to compile the kext, etc, etc. 
 
@@ -139,9 +139,9 @@ Form              | Function
 **Parallelogram** | Audio selector (this codec doesn't have any)
 **Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
-**Black Lines**   | Available paths
-**Dotted Lines**  | Currently used path
-**Blue Lines**    | ???
+**Black Lines**   | Default connection (has an asterisk next to it in the Codec_Dump.txt!)
+**Dotted Lines**  | Optional connection 
+**Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
 
 ### How to read the schematic
 The schematic a bit hard to read and comprehend because of its structure. It's also misleading: since all the arrows point to the right one might think this represents the signal flow. But that's not the case! 
@@ -183,6 +183,47 @@ Line Input:
 flowchart LR
        id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
 ```
+
+#### Tracing possible paths
+Since I want the Line-Out of the Dock to work, I need to assign some other Pin Complex Node to Mixer13. 
+
+we can use it to trace all available paths the codec provides and create a chart with it, which helps later when transferring the data into .xml:
+
+Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^1]
+:--------------------:|-----------------------------|-----------------------|:----:
+18 (In)               |Internal Mic (S)             | 9 - 34 - 18 (fixed)    |
+20 (Out)              |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
+21 (Out)              |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
+23 (Out)              |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono)    |
+24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br> 24 - 13 - 3|
+24 (as Input)        | (Jack) Mic at Ext Left | 8 - 35 -24 or </br> 9 - 34 - 24
+25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 12 - 2 or </br>25 - 13 - 3
+25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 25 or </br> 9 - 34 - 25
+26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 12 - 2 or</br>26 - 13 - 3
+26 (as Input)        |Speaker at Ext Rear IN HP Detect| 8 - 35 - 26 or </br> 9 - 34 - 26 
+27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 13 - 3 or </br>27 - 12 - 2
+27 (as Input)		 |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 9 - 34 - 27 or
+29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
+30	(Digital Out)    |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
+
+[^1]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
+
+<details>
+<summary><strong>Double-Checking</strong> (click to reveal)</summary>
+
+##### Double-Checking against codec-dump_dec.txt
+We can also use the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
+
+![Node21](https://user-images.githubusercontent.com/76865553/170473509-a3e96ded-c9db-4de5-9774-40b6ef094629.png)
+
+As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13, which is one of the Audio mixers:
+
+![Node13](https://user-images.githubusercontent.com/76865553/170470502-7c4952c7-b865-4b63-9d58-d74ec38fe278.png)
+
+ And Node 13's final destination is Node 3, which is the HP out:
+
+![Node3](https://user-images.githubusercontent.com/76865553/170470592-22c22176-f1f9-4aec-91b0-6b829c6bdbb1.png)
+</details>
 
 We will come back to the schematic later… 
 
@@ -390,12 +431,14 @@ As expected, there's no entry for a second Output (whether "HP" nor "Line-out"),
 The PathMap defines the routings within the codec. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output. The data has to be entered in the `PlatformsXY.xml` file (XY = number of the layout).
 
 ### Structure of `PlatformsXY.xml`
-The `PlatformXY.xml` contains the PathMap. It represents the routing of input and output devices of the Codec. The way inputs and outputs are organized within the hierarchy of the PathMap, defines whether or not inputs and outputs are switched automatically or have to be sitched manually in the System Preferences.
+The `PlatformXY.xml` contains the PathMap. It represents the routing of input and output devices of the Codec. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs and outputs are switched automatically or have to be switched manually in System Preferences.
 
 #### Switch-Mode
 In Switch-Mode, the output signal is re-routed from the current output to another one automatically, once a jack is plugged into the system. On Laptops for example, the internal speakers are muted and the signal is automatically re-routed to the Headphone or Line-out. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. 
 
-This has to be represented in the file structure of the Pathmap. Nodes you want to switch between have to be part of that same Array:
+For Switch-Mode to work, certain conditions have to be met also: the Pin Complex Node must support "Detect" and the Pin Complex Node must be capable to connect to more than one Mixer Node.
+
+This has to be represented in the file structure of the PathMap. Nodes you want to switch between have to be part of that same Array:
 
 - **PathMap**
 	- **Array 0** (Inputs)
@@ -418,18 +461,39 @@ This has to be represented in the file structure of the Pathmap. Nodes you want 
 			- Output Node 
 		- etc. 
 
-For Switch-Mode to work, certain conditions have to be met also:
+Let's have a look how Switch-Mode for Outputs is realized in ALC Layout-ID 18 inside of `Platforms18.xml`:</br>![](Pics/PlatformsStructure01.png)
 
-- The Pin Complex Node must support "Detect"
-- The Pin Complex Node must have the ability to connect to more than one Mixer Node
+On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:
 
-**Example**: Let's have a look at the output side of the schematic:</br>![](Pics/SwitchMode01.png)
+![](Pics/PlatformsStructure02.png)
+
+Let's have a look at the output side of the schematic:</br>![](Pics/SwitchMode01.png)
 
 - Nodes 20, 21, 24, 25, 26 and 27 support the Detect feature
-- Can all connect to Mixers 12 (red) and 13 (green)
-- Therefore, these Nodes can all be operated in switch-mode
+- These Nodes can all connect to Mixers 12 (red) and 13 (green)
+- Therefore, they can be operated in switch-mode
 
-#### Manual-Mode
+##### Possible Configurations: Odd/Even
+
+We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
+
+```mermaid
+flowchart LR
+	id0(Dict) -->
+	id1(Node20: Speakers) --> id2{Mixer 12} --> id3(((Output 2)))
+	id0(Dict) -->
+	id4(Node21: HP Out) --> id5{Mixer 13} --> id6(((Output 3)))
+	id0(dict) -->
+	id7(Node24: Mic) --> id8{Mixer 12} --> id9(((Output 2)))
+	id0(Dict) -->
+	id10(Node25: Speaker Ext) --> id11{Mixer 13} --> id12(((Output 3)))
+	id0(Dict) -->
+	id13(Node26: Mic) --> id14{Mixer 12} --> id15(((Output 2)))
+	id0(Dict) -->
+	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
+```
+#### Manual Mode
+In manual mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
 - **PathMap**
 	- **Array 0**
@@ -442,44 +506,7 @@ For Switch-Mode to work, certain conditions have to be met also:
  		- Output 1 (Nodes 0, 1 and 2)
  	- etc.
 
-### Tracing possible paths
-Now that we know how to read the schematic of the Codec, we can use it to trace all available paths the codec provides and create a chart with it, which helps later when transferring the data into .xml:
-
-Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
----------------------|-----------------------------|-----------------------|:----:
-18                   |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
-20                   |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
-21                   |Headphone Output (S)         | 21 - 12 - 2 or 21 - 13 - 3|YES
-23                   |Speaker at Ext Rear (M)      | 23 - 15 - 2              |
-24                   |Line-In (Jack) (S)           | 8 - 35 - 24              |
-25 (as Output)       | Speaker Ext. Rear (S) OUT Detect|25 - 11 - 15 - 2 (Mono) or </br>25 - 11 - 12 - 2 or</br>25 - 11 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 11 - 25 or</br> 8 - 35 - 25 or </br> 9 - 34 - 25 or </br> 9 - 34 - 11 - 25
-26 (as Output)		 |Speaker at Ext Rear OUT HP Detect| 26 - 11 - 15 - 2 (M) or</br>26 - 11 - 12 - 2 or </br> 26 - 11 - 13 - 3
-26 (as Input)        |Speaker at Ext Rear IN HP Detect|8 - 35 - 26 or </br> 8 - 35- 11- 26 or </br> 9 - 34 - 26 or </br> 9 - 34 - 11 - 26 
-27 (as Output)		 | Speaker at Ext Rear OUT Detect| 27 - 11 - 15 - 2 (M) or </br>27 - 11 - 12 - 2 or </br> 27 - 11 - 12 - 2 or </br> 27 - 11 - 13 - 3
-27 (as Input)		    |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 8 - 35 - 11 - 27 or </br> 9 - 34 - 27 or </br> 9 - 34 - 11 - 27
-29 Mono (as Output)	 |Speaker at Ext |29 - 11- 15 - 2 (M) or </br> 29 - 11 - 12 - 2 or </br> 29 - 11 - 13 - 3
-29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
-30				        |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
-
-<details>
-<summary><strong>Double-Checking</strong> (click to reveal)</summary>
-
-#### Double-Checking against codec-dump_dec.txt
-We can also use the codec dump to verify the routing. Here's an example for Node 21 which is the main output of the T530:
-
-![Node21](https://user-images.githubusercontent.com/76865553/170473509-a3e96ded-c9db-4de5-9774-40b6ef094629.png)
-
-As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is currently connected to Node 13, which is one of the Audio mixers:
-
-![Node13](https://user-images.githubusercontent.com/76865553/170470502-7c4952c7-b865-4b63-9d58-d74ec38fe278.png)
-
- And Node 13's final destination is Node 3, which is the HP out:
-
-![Node3](https://user-images.githubusercontent.com/76865553/170470592-22c22176-f1f9-4aec-91b0-6b829c6bdbb1.png)
-</details>
-
-## Transferring the PathMap to `PlatformsXY.xml`
+### Transferring the PathMap to `PlatformsXY.xml`
 Now that we found all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXY.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
 
 AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional .xml files, such as `LayoutXY.xml` as well as `PlatformXY.xml`. For each existing Layout-ID there are corresponding .xml files with the same number.
