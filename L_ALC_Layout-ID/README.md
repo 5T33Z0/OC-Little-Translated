@@ -296,7 +296,7 @@ Now that we have a list of inputs and outputs we want to use, we have to get the
 
 ![](Pics/PinCfg03.png)
 
-### Creating a `PinConfig` in PinConfigurator
+### Finalizing the `PinConfig` with PinConfigurator
 - Next, run **PinConfigurator** 
 - Click on File > Import > Clipboard
 - This should create entries with inputs and outputs:</br>![PinConfigurator](https://user-images.githubusercontent.com/76865553/170471223-b0b8e3db-23ef-4a7f-bb0f-86edc46463b1.png)
@@ -314,7 +314,7 @@ Now that we have a list of inputs and outputs we want to use, we have to get the
 - Paste it into "finalverbs.txt" and give it a name so you can see which configs you already tried if this PinConfig doesn't work:</br>![](Pics/PinCfg05.png)
 - Save the file but don't close the window yet.
 
-Continue with Chapter VI.…
+**NOTE**: Unless you woul like to modify an existing PinConfig, skip the next section and continue with Chapter VI!
 
 ### Modifying an existing `PinConfig`
 In case you already have a working Layout-ID for your system which you just want to modify in order to add Inputs or Outputs to, you don't need to build the `PinConfig` from scratch again. You only have to modify the existing `PinConfig` data, add the path of new source to the PathMap inside the corresponding Platform.xml. and re-compile the AppleALC kext.
