@@ -510,7 +510,7 @@ On the Input side, the structure is the same. The only difference is that the or
 **NOTE**: `LayoutID` and `PathMapID` **must be identical** and must use the same number you chose for your Layout-ID previously.
 
 ## X. Add `Platforms.xml` and `layout.xml` to `info.plist`
-As mentioned earlier, there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
+As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
 
 - Open the `info.plist`
 - Look for the `Files` Dictionary:</br>![](Pics/Info01.png)
