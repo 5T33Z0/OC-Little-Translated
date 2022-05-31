@@ -1,53 +1,19 @@
 # How to create/modify a Layout-ID for AppleALC
 **TABLE of CONTENTS**
 <!-- vscode-markdown-toc -->
-* [I. Introduction](#i.-introduction)
-    * [Who this guide is for](#who-this-guide-is-for)
-    * [Are you *sure*, you want to do this?](#are-you-*sure*,-you-want-to-do-this?)
-    * [Why another guide?](#why-another-guide?)
-* [II. Preparations](#ii.-preparations)
-    * [Obtaining an Audio CODEC dump in Linux](#obtaining-an-audio-codec-dump-in-linux)
-        * [Preparing a USB flash drive for running Linux from an ISO](#preparing-a-usb-flash-drive-for-running-linux-from-an-iso)
-        * [Dumping the Codec](#dumping-the-codec)
-        * [Relevant Codec data](#relevant-codec-data)
-    * [Required Tools and Files](#required-tools-and-files)
-    * [Preparing the AppleALC Source Code](#preparing-the-applealc-source-code)
-        * [Important files we have to work on:](#important-files-we-have-to-work-on:)
-    * [Configuring Xcode](#configuring-xcode)
-* [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
-    * [Converting the Codec Dump](#converting-the-codec-dump)
-* [IV. Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)
-    * [How to read the schematic](#how-to-read-the-schematic)
-        * [Routing inputs](#routing-inputs)
-        * [Routing outputs](#routing-outputs)
-        * [Routing Examples from ALC269](#routing-examples-from-alc269)
-        * [Tracing possible paths](#tracing-possible-paths)
-* [V. Creating the `PinConfig`](#v.-creating-the-`pinconfig`)
-    * [Understanding "Verbs"](#understanding-"verbs")
-    * [About `finalverbs.txt`](#about-`finalverbs.txt`)
-        * [Fixing possible conversion errors](#fixing-possible-conversion-errors)
-        * [Analyzing the Verb Data](#analyzing-the-verb-data)
-        * [Modifying the Verb data](#modifying-the-verb-data)
-    * [Finalizing the `PinConfig` with PinConfigurator](#finalizing-the-`pinconfig`-with-pinconfigurator)
-    * [Modifying an existing `PinConfig`](#modifying-an-existing-`pinconfig`)
-        * [Method 1: Using finalverbs.txt and copy/pasting](#method-1:-using-finalverbs.txt-and-copy/pasting)
-        * [Method 2: Add a node to PinConfigurator and configure it manually](#method-2:-add-a-node-to-pinconfigurator-and-configure-it-manually)
-* [VI. Integrading the `PinConfig` into the AppleALC source code](#vi.-integrading-the-`pinconfig`-into-the-applealc-source-code)
-    * [Finding an unused Layout-ID number](#finding-an-unused-layout-id-number)
-        * [Scenario 1: Modifying data of an existing Layout-ID](#scenario-1:-modifying-data-of-an-existing-layout-id)
-        * [Scenario 2: Creating a new Layout-ID from scratch (todo)](#scenario-2:-creating-a-new-layout-id-from-scratch-(todo))
-* [VII. Creating a PathMap](#vii.-creating-a-pathmap)
-    * [Structure of `PlatformsXX.xml`](#structure-of-`platformsxx.xml`)
-        * [Switch-Mode](#switch-mode)
-        * [Manual Mode](#manual-mode)
-* [VIII. Preparing a `PlatformsXX.xml`](#viii.-preparing-a-`platformsxx.xml`)
-* [IX. Transferring the PathMap to `PlatformsXX.xml`](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
-* [X. Add `Platforms.xml` and `layout.xml` to `info.plist`](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
-* [XI. Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)
-* [XII. Testing and Troubleshooting](#xii.-testing-and-troubleshooting)
-    * [Testing the new Layout](#testing-the-new-layout)
-    * [Troubleshooting](#troubleshooting)
-* [XIII. Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)
+- [Introduction](#i.-introduction)</br>
+- [Preparations](#ii.-preparations)</br>
+- [Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)</br>
+- [Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)</br>
+- [Creating the `PinConfig`](#v.-creating-the-`pinconfig`)</br>
+- [Integrating the `PinConfig` into the AppleALC source code](#vi.-integrading-the-`pinconfig`-into-the-applealc-source-code)</br>
+- [Creating a PathMap](#vii.-creating-a-pathmap)</br>
+- [Preparing a `PlatformsXX.xml`](#viii.-preparing-a-`platformsxx.xml`)</br>
+- [Transferring the PathMap to `PlatformsXX.xml`](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)</br>
+- [Add `Platforms.xml` and `layout.xml` to `info.plist`](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)</br>
+- [Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)</br>
+- [Testing and Troubleshooting](#xii.-testing-and-troubleshooting)</br>
+- [Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)</br>
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -408,7 +374,7 @@ As expected, there's no entry for a second Output (whether "HP" nor "Line-out"),
 6. The new/modified PinConfig will be listed in the text field below it:</br> ![](Pics/GetConfig02.png)
 7. Save the new PinConfig in the `finalverbs.text` with a name that makes sense to you. I save it as "PinConfig Trial 1". We need it Later
 
-## <a name='vi.-integrading-the-`pinconfig`-into-the-applealc-source-code'></a>VI. Integrading the `PinConfig` into the AppleALC source code
+## <a name='vi.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>VI. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
 
 ### <a name='finding-an-unused-layout-id-number'></a>Finding an unused Layout-ID number
