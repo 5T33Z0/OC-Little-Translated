@@ -5,8 +5,8 @@
 - [Preparations](#ii.-preparations)</br>
 - [Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)</br>
 - [Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)</br>
-- [Creating the `PinConfig`](#v.-creating-the-`pinconfig`)</br>
-- [Integrating the `PinConfig` into the AppleALC source code](#vi.-integrading-the-`pinconfig`-into-the-applealc-source-code)</br>
+- [Creating the `PinConfig`](#v.-creating-a-pinconfig)</br>
+- [Integrating the `PinConfig` into the AppleALC source code](#vi.-integrating-the-`pinconfig`-into-the-applealc-source-code)</br>
 - [Creating a PathMap](#vii.-creating-a-pathmap)</br>
 - [Preparing a `PlatformsXX.xml`](#viii.-preparing-a-`platformsxx.xml`)</br>
 - [Transferring the PathMap to `PlatformsXX.xml`](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)</br>
@@ -265,7 +265,7 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 
 We will come back to the schematic later… 
 
-## <a name='v.-creating-the-`pinconfig`'></a>V. Creating the `PinConfig`
+## <a name='v.-creating-a-pinconfig'></a>V. Creating a PinConfig
 Audio Codecs support various Inputs and Outputs: Internal speakers and/or a mic (on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the the so-called `PinConfig`.
 
 Apple's HDA Driver supports up to 8 different audio sources – so stay within this limit when creating your `PinConfig`!
