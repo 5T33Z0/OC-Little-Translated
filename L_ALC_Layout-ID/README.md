@@ -10,7 +10,7 @@
 * [VII. Creating a PathMap](#vii.-creating-a-pathmap)
 * [VIII. Preparing a PlatformsXX.xml](#viii.-preparing-a-`platformsxx.xml`)
 * [IX. Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
-* [X. Adding Platforms.xml and layout.xml` to info.plist](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
+* [X. Adding Platforms.xml and layout.xml to info.plist](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
 * [XI. Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)
 * [XII. Testing and Troubleshooting](#xii.-testing-and-troubleshooting)
 * [XIII. Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)
