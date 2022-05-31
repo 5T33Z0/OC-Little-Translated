@@ -9,7 +9,7 @@
 - [Integrating the PinConfig into the AppleALC source code](#vi.-integrating-the-pinconfig-into-the-applealc-source-code)</br>
 - [Creating a PathMap](#vii.-creating-a-pathmap)</br>
 - [Preparing a PlatformsXX.xml](#viii.-preparing-a-`platformsxx.xml`)</br>
-- [Transferring the PathMap to `PlatformsXX.xml`](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)</br>
+- [Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)</br>
 - [Add Platforms.xml and layout.xml to info.plist](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)</br>
 - [Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)</br>
 - [Testing and Troubleshooting](#xii.-testing-and-troubleshooting)</br>
