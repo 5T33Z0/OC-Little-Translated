@@ -353,8 +353,8 @@ As expected, there's no entry for a second Output (whether "HP" nor "Line-out"),
 6. The new/modified PinConfig will be listed in the text field below it:</br> ![](Pics/GetConfig02.png)
 7. Save the new PinConfig in the `finalverbs.text` with a name that makes sense to you. I save it as "PinConfig Trial 1". We need it Later
 
-## VI. Adding the `PinConfig` to the AppleALC source code
-Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick the scenario that suits your use case.
+## VI. Integrading the `PinConfig` into the AppleALC source code
+Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
 
 ### Finding an unused Layout-ID number
 In order to find a yet unused Layout-ID for your Codec, you have to check which Layout-IDs exist already and chose a different one in the range from 11 to 99:
