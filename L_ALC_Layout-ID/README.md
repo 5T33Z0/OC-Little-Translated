@@ -490,6 +490,7 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 - Select the `Platforms.xml` of the Layout-ID you are currently using (the number is identical). Since I am using ALC Layout-ID 18, I use Platforms18.xml.
 - Duplicate the file (⌘+D)
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
+- Change the `PathmapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`): </br> ![](Pics/platforms02.png)
 
 ## IX. Transferring the PathMap to `PlatformsXX.xml`
 Now that we found all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
