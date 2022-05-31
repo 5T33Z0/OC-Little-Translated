@@ -271,11 +271,9 @@ As you can see, it's divided into two major sections: "**Original Verbs**" and "
 
 #### Fixing possible conversion errors
 
-You may have also noticed that the formatting look a bit little off in some lines. On closer inspection, it turns out that some Nodes have *not* been converted from hex to decimal (pink) while their `PinDefault` data (red) *has* been converted to decimal which shouldn't have happened.
+You may have also noticed that the formatting looks a bit little off in some lines. On closer inspection, it turns out that some Nodes have *not* been converted from hex to decimal (pink) while their `PinDefault` data (red) *has* been converted to decimal which shouldn't have happened.
 
-If you want to integrate any of the pink nodes into your PinConfig, you need to fix their `PinDefault` data first. In order to do so,Look up the data in the original `codec_dump.txt` and copy it over. With the "Calc" function in Hackintool, we can easily convert Hex to Decimal: `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. 
-
-For fixing the errors in the `PinDefault` column (red), you can either look up the correct PinDefault data in the `codec_dump.txt` for Nodes `0x18`, `0x19` and `0x1b` or use Hackintool's "Calc" function to convert the data back from dec to hex.
+If you want to integrate any of the pink nodes into your PinConfig, you need to fix their `PinDefault` data first. In order to do so, look-up the data in the original `codec_dump.txt` and copy it over. With the "Calc" function in Hackintool, we can easily convert Hex to Decimal: `0x18` is `24`, `0x19` is `25` and `0x1b` is `27`. 
 
 Once we're done fixing the conversion errors, we get this:
 
