@@ -521,7 +521,7 @@ As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 
 	- **Comment**: Author and Codec/Device
 	- **Id**: Enter the Layout-ID you are using
 	- **Path**: layoutXX.xlm.zlib (XX = the chosen layout-id number. During compilation, the .xml file will be compressed to .zlib so the path has to point to the compressed version)
-- Do the same for the PlatformsXX.xml file:</br>![](Pics/Info03.png)
+- Do the same in the "Platforms" section:</br>![](Pics/Info03.png)
 
 **IMPORTANT**: If these entries don't exist, the AppleALC.kext will be compiled but your Layout-ID entry won't be included, aka no Sound!
 
