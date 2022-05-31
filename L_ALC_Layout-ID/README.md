@@ -204,9 +204,7 @@ flowchart LR
 ```
 
 #### Tracing possible paths
-Since I want the Line-Out of the Dock to work, I need to assign some other Pin Complex Node to Mixer13. 
-
-we can use it to trace all available paths the codec provides and create a chart with it, which helps later when transferring the data into .xml:
+Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^1]
 :-------------------:|-----------------------------|-----------------------|:----:
@@ -223,7 +221,7 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^
 27 (as Output)		 |Speaker at Ext Rear OUT Detect| 27 - 13 - 3 or </br>27 - 12 - 2
 27 (as Input)        |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 9 - 34 - 27 or
 29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
-30	(Digital Out)     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
+30 (Digital Out)     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
 
 [^1]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
 
