@@ -1,5 +1,5 @@
 # How to create/modify a Layout-ID for AppleALC
-
+**TABLE of CONTENTS**
 <!-- vscode-markdown-toc -->
 * [I. Introduction](#i.-introduction)
     * [Who this guide is for](#who-this-guide-is-for)
