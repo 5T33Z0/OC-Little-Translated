@@ -1,19 +1,19 @@
 # How to create/modify a Layout-ID for AppleALC
 **TABLE of CONTENTS**
 <!-- vscode-markdown-toc -->
-- [Introduction](#i.-introduction)</br>
-- [Preparations](#ii.-preparations)</br>
-- [Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)</br>
-- [Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)</br>
-- [Creating a PinConfig](#v.-creating-a-pinconfig)</br>
-- [Integrating the PinConfig into the AppleALC source code](#vi.-integrating-the-pinconfig-into-the-applealc-source-code)</br>
-- [Creating a PathMap](#vii.-creating-a-pathmap)</br>
-- [Preparing a PlatformsXX.xml](#viii.-preparing-a-`platformsxx.xml`)</br>
-- [Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)</br>
-- [Add Platforms.xml and layout.xml to info.plist](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)</br>
-- [Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)</br>
-- [Testing and Troubleshooting](#xii.-testing-and-troubleshooting)</br>
-- [Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)</br>
+* [I. Introduction](#i.-introduction)
+* [II. Preparations](#ii.-preparations)
+* [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
+* [IV. Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)
+* [V. Creating a PinConfig](#v.-creating-a-pinconfig)
+* [VI. Integrating the `PinConfig` into the AppleALC source code](#vi.-integrating-the-`pinconfig`-into-the-applealc-source-code)
+* [VII. Creating a PathMap](#vii.-creating-a-pathmap)
+* [VIII. Preparing a `PlatformsXX.xml`](#viii.-preparing-a-`platformsxx.xml`)
+* [IX. Transferring the PathMap to `PlatformsXX.xml`](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
+* [X. Add `Platforms.xml` and `layout.xml` to `info.plist`](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
+* [XI. Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)
+* [XII. Testing and Troubleshooting](#xii.-testing-and-troubleshooting)
+* [XIII. Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
