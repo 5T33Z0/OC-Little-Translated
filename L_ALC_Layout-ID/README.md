@@ -195,13 +195,13 @@ The schematic a bit hard to read and comprehend because of its structure. It's a
 Just ignore the arrows! Instead, you need to take a different approach:
 
 #### <a name='routing-inputs'></a>Routing inputs
-For **Inputs**, start at the input and end at the Pin Complex Node:
+For **Inputs**, start at the input and end at the Pin Complex Node (Input > Mixer > PinComplex > Node):
 ```mermaid
 flowchart LR
 		id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
 ```
 #### <a name='routing-outputs'></a>Routing outputs
-For **Outputs**, the path that an outgoing signal takes can be obtained by starting at the Pin Complex Node and then following it through the mixer(s) to the physical output (jack or speakers):
+For **Outputs**, start at the Pin Complex Node and follow the signal through the mixer(s) to the physical output (PinComplex Node > Mixer > Output):
 ```mermaid
 flowchart LR
        id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|possible path|Bid3{Sub Mix A } & Cid4{Sub Mix B} -->id5(((Output X)))
