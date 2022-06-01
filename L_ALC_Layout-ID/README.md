@@ -275,7 +275,7 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 #### Default Method (keeps connected Nodes only)
 1. Open **PinConfurator**
 2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
-3. This will extract and import all the available audio sources from the Codec dump:</br>![](Pics/PCnu01.png)
+3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
 4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
 5. Click on "Options > Verb Sanitze" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
 6. Select "Patch > Verb Sanatize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
@@ -330,7 +330,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 
 **Config Notes** (subject to change):
 
-- **NodeID**: Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example: </br>![](Pics/PinComplexCtrlName.png)
+- **NodeID**: Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
 - **PinDefault**: Get the `PinDefault` value for the Node from `codec_dump.txt` (has to be in Hex)
 - **Jack Color**: 
 	- For internal devices: select "[0] Unknown" 
@@ -373,7 +373,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 	- In the `Codec` String: Author name (Yours) and description
 	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (we stored  it as "PinConfig 01" in "finalverbs".txt)
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
-12. This is the resulting entry:</br>![](Pics/PinCfg_InfoPlist.png)
+12. This is the resulting entry:</br>![PinCfg_InfoPlist](https://user-images.githubusercontent.com/76865553/171392920-4f11e5e9-bf34-4e4e-a1d9-fec04f8ee6c9.png)
 
 #### <a name='scenario-2:-creating-a-new-layout-id-from-scratch-(todo)'></a>Scenario 2: Creating a new Layout-ID from scratch (todo)
 
@@ -414,7 +414,7 @@ This has to be represented in the file structure of the PathMap. Nodes you want 
 			- Output Node 
 		- etc. 
 
-Let's have a look at the output side of the schematic:</br>![](Pics/SwitchMode01.png)
+Let's have a look at the output side of the schematic:</br>![SwitchMode01](https://user-images.githubusercontent.com/76865553/171393009-65312baf-77c3-41d6-96d6-18359933aad5.png)
 
 - Nodes 20, 21, 24, 25, 26 and 27 support the Detect feature
 - These Nodes can all connect to Mixers 12 (red) and 13 (green)
@@ -475,18 +475,16 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 - Select the `Platforms.xml` of the Layout-ID you are currently using (the number is identical). Since I am using ALC Layout-ID 18, I use Platforms18.xml.
 - Duplicate the file (⌘+D)
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
-- Change the `PathmapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`): </br> ![](Pics/platforms02.png)
+- Change the `PathmapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`):</br>![platforms02](https://user-images.githubusercontent.com/76865553/171393131-44cd8562-104b-4008-9a4d-43707b880327.png)
 
 ## <a name='ix.-transferring-the-pathmap-to-`platformsxx.xml`'></a>IX. Transferring the PathMap to `PlatformsXX.xml`
 Now that we found all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
 
 AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional .xml files, such as `LayoutXY.xml` as well as `PlatformXY.xml`. For each existing Layout-ID there are corresponding .xml files with the same number.
 
-Let's have a look how Switch-Mode for Outputs is realized in ALC Layout-ID 18 inside of `Platforms18.xml`:</br>![](Pics/PlatformsStructure01.png)
+Let's have a look how Switch-Mode for Outputs is realized in ALC Layout-ID 18 inside of `Platforms18.xml`:</br>![PlatformsStructure01](https://user-images.githubusercontent.com/76865553/171393277-13b2ec45-ec83-452c-ba5d-06aaab795d74.png)
 
-On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:
-
-![](Pics/PlatformsStructure02.png)
+On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:</br>![PlatformsStructure02](https://user-images.githubusercontent.com/76865553/171393394-0244592c-a961-4ab7-ae1f-1942dbd6a5d4.png)
 
 - Enter the required NodeIDs you found in chapter IV for the Inputs and Outputs you need (as explained). 
 - To add more devices to the PathMap, duplicate one of the "Source" Array and change the data
@@ -498,15 +496,15 @@ On the Input side, the structure is the same. The only difference is that the or
 As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
 
 - Open the `info.plist`
-- Look for the `Files` Dictionary:</br>![](Pics/Info01.png)
+- Look for the `Files` Dictionary:</br>![Info01](https://user-images.githubusercontent.com/76865553/171393791-6c8f90ab-e860-42e0-940a-1b2fa26a1fc6.png)
 - Open the `Layouts` Dictionary
 - Duplicate one of the Dictionaries, doesn't matter which one
-- Expand it:</br>![](Pics/Info02.png)
+- Expand it:</br>![Info02](https://user-images.githubusercontent.com/76865553/171393919-0797081d-3296-4588-be78-7213e819a36a.png)
 - Change the following details:
 	- **Comment**: Author and Codec/Device
 	- **Id**: Enter the Layout-ID you are using
 	- **Path**: layoutXX.xlm.zlib (XX = the chosen layout-id number. During compilation, the .xml file will be compressed to .zlib so the path has to point to the compressed version)
-- Do the same in the "Platforms" section:</br>![](Pics/Info03.png)
+- Do the same in the "Platforms" section:</br>![Info03](https://user-images.githubusercontent.com/76865553/171394021-c85dbda3-e248-4445-85b1-8c5d7c15cf9c.png)
 
 **IMPORTANT**: If these entries don't exist, the AppleALC.kext will be compiled but your Layout-ID entry won't be included, aka no Sound!
 
