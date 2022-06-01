@@ -32,11 +32,9 @@ This guide is aimed at users who want to create a new or modify an existing Layo
 If you just want to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 
 ### <a name='are-you-*sure*,-you-want-to-do-this?'></a>Are you *sure*, you want to do this?
-From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config – and voilà: Sound! 
+From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config and reboot. And voilà: Sound! 
 
-But once you are on the other end, trying to actually *create* your own Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around.
-
-So, are you still sure you *want* to do this?
+But once you are on the other end, trying to actually *create* your own ALC Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around. So, are you still sure you *want* to do this?
 
 <details>
 <summary><strong>Why another guide?</strong> (click to reveal)</summary>
@@ -562,10 +560,12 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
  	- Daliansky for [List of HDA Verb Parameters](https://blog-daliansky-net.translate.goog/hda-verb-parameter-detail-table.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **Tools**:
 	- cmatsuoka for [codecgraph](https://github.com/cmatsuoka/codecgraph)
+	- Core-i99 for the Python 3 port of [codecgraph](https://github.com/Core-i99/Codec-Graph)
 	- Headkaze for porting [PinConfigurator](https://github.com/headkaze/PinConfigurator) to 64 bit 
 	- Pixelglow for [graphviz](http://www.pixelglow.com/graphviz/)
 - **Other**:
 	- [Mermaid](https://mermaid-js.github.io/mermaid/#/README) script for creating flowcharts and diagrams in Markdown
+	- Core-i99 for PinConfigurator tips
 	- Jack Plug schematics: 
 		- OMTP [WIKI Commons](https://commons.wikimedia.org/wiki/File:3mm5_jack_4.svg) 
 		- CTIA [WIKI Commons](https://commons.wikimedia.org/wiki/File:3.5mm_jack_plug_4i.svg)
