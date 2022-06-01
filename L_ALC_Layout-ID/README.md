@@ -163,15 +163,6 @@ In order to create a routing of the audio inputs and outputs for macOS, we have 
 - **`codec_dump_dec.txt.svg`** &rarr; PathMap converted from hex to decimal. We will work with this most of the time. You can open it in the web browser to view it in full size.
 - **`codec_dump.txt.svg`** – PathMap of the Codec's routing in Hex.
 
-[^3]: Applied corrections:</br>Pin Defaults of 0x411111f0 or 0x400000f0 are removed 
-Remove CD at INT ATAPI</br>
-Taken Care of by blacklist array above, shouldn't be in current verb array</br>
-71c Sequence should always be 0</br>
-71c Association needs to be unique!</br>
-71d Set all Misc to 0 (Jack Detect Enabled) and determine which should be 1 later </br>
-71e Not Processed in this version <br>
-71f Location should not use 02 for Front Panel, use 01 instead
-
 ## <a name='iv.-understanding-the-codec-schematic'></a>IV. Understanding the Codec schematic and signal flow
 Shown below is `codec_dump.txt_dec.txt.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different!
 
