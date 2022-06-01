@@ -215,15 +215,19 @@ flowchart LR
     id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
 ```
 **Internal Mic Input:**
+
 ```mermaid
 flowchart LR
-       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)-.-> id3(Aux Return to Mixer 11)
+       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)-.-> id3(Aux Return to Mixer 11)-.->id4(Etc.)
 ```
 **Line Input**:
 ```mermaid
 flowchart LR
-       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)-.-> id3(Aux Return to Mixer 11)
+       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)-.-> id3(Aux Return to Mixer 11)-.->id4(Etc.)
 ```
+**💡 About Signal Flow**:
+
+ALC 269 includes an Aux Return to send (or return) the incoming signal back into the Output path for monitoring via Mixer 11 through either Mixer Nodes 12/13 or 15 (Mono). If you would just follow the arrows in the schematic, the existence of Mixer 11 wouldn't make sense otherwise. That's why you have to follow the signal flow instead of the arrows! But for the PathMap you only need to follow the formula: Input > Mixer > PinComplex Node!
 
 #### <a name='tracing-possible-paths'></a>Tracing possible paths
 Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
