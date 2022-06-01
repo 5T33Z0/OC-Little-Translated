@@ -6,7 +6,7 @@
 * [I. Introduction](#i.-introduction)
 * [II. Preparations](#ii.-preparations)
 * [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
-* [IV. Understanding the Codec schematic](#iv.-understanding-the-codec-schematic)
+* [IV. Understanding the Codec schematic and signal flow](#iv.-understanding-the-codec-schematic)
 * [V. Creating a PinConfig](#v.-creating-a-pinconfig)
 * [VI. Integrating the PinConfig into the AppleALC source code](#vi.-integrating-the-`pinconfig`-into-the-applealc-source-code)
 * [VII. Creating a PathMap](#vii.-creating-a-pathmap)
@@ -172,7 +172,7 @@ Taken Care of by blacklist array above, shouldn't be in current verb array</br>
 71e Not Processed in this version <br>
 71f Location should not use 02 for Front Panel, use 01 instead
 
-## <a name='iv.-understanding-the-codec-schematic'></a>IV. Understanding the Codec schematic
+## <a name='iv.-understanding-the-codec-schematic'></a>IV. Understanding the Codec schematic and signal flow
 Shown below is `codec_dump.txt_dec.txt.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different!
 
 ![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
