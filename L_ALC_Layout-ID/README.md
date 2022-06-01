@@ -44,8 +44,7 @@ Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for mo
 
 The hand full of guides I could find however, stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated, over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate all the data into the AppleALC source code to compile the kext!
 
-The most convincing guide I did find is written in German by MacPeet. He has created more than 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC. 
-
+The most convincing guide I did find is written in German by MacPeet. He has created more than 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC as well.
 Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
 
 My guide is an adaptation of MacPeet's work but updates and enhances it, where possible.It introduces new tools and workflows and  utilizes all the nice features markdown has to offer to present the instruction in the best way possible, such as: headings, syntax highlighting, tables and mermaid integration for flowcharts, etc.
@@ -55,11 +54,13 @@ My guide is an adaptation of MacPeet's work but updates and enhances it, where p
 Creating a Layout-ID for AppleALC is possibly one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
 ### <a name='obtaining-an-audio-codec-dump-in-linux'></a>Obtaining an Audio CODEC dump in Linux
-Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside of them. Codec dumps created in Linux, however, can be processed by these tools just fine.[^2]
+Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside of them. Codec dumps created in Linux, however, can be processed by these tools just fine.[^1]
 
 Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
-[^2]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
+**NOTE**: If you can live without a schematic of the Codec dump, you *can* work with the dumps created with Clover and OpenCore (continue with Chapter V in this case). In Clover, you just have to hit `F8` in the Boot menu to create the dump. It will be stored in EFI/CLOVER/misc folder. Dumping the Audio Codec in OpenCore requires the debug version. It's described in the [Debugging Section](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#using-opencores-sysreport-feature).
+
+[^1]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
 
 #### <a name='preparing-a-usb-flash-drive-for-running-linux-from-an-iso'></a>Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Codec"!
@@ -221,7 +222,7 @@ ALC 269 includes an Aux Return to send (or return) the incoming signal back into
 #### <a name='tracing-possible-paths'></a>Tracing possible paths
 Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
-Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^1]
+Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^2]
 :-------------------:|-----------------------------|-----------------------|:----:
 18 (In)              |Internal Mic (S)             | 9 - 34 - 18 (fixed)    |
 20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
@@ -238,7 +239,7 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)           | EAPD [^
 29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
 30 (Digital Out)     |Speaker Ext. Rear Digital (SPDIF) | 6 - 30| 
 
-[^1]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
+[^2]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
 
 <details>
 <summary><strong>Double-Checking</strong> (click to reveal)</summary>
