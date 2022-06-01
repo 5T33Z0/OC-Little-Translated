@@ -276,10 +276,10 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 1. Open **PinConfurator**
 2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
 3. This will extract and import all the available audio sources from the Codec dump:</br>![](Pics/PCnu01.png)
-4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![](Pics/PCnu02.png)
-5. Click on "Options > Verb Sanitze" and enable all the options:</br>![](Pics/Verbfixes.png)
-6. Select "Patch > Verb Sanatize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
-7. Next, click on "Get ConfigData":</br>![](Pics/PCnu04.png)
+4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
+5. Click on "Options > Verb Sanitze" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
+6. Select "Patch > Verb Sanatize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
 8. Export the data. There are 2 ways to do so: 
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
@@ -289,27 +289,27 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 In case you already have a working Layout-ID that you just want to modify, do the following:
 
 1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
-2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt`):</br>![](Pics/Modpinconf.png)
+2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt`):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
 3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C)
 4. Start the PinConfigurator App
 5. From the menubar, select "File > Import > Clipboard"
-6. This is how it looks:</br> ![](Pics/pincfgimprtd.png)
+6. This is how it looks:</br>![pincfgimprtd](https://user-images.githubusercontent.com/76865553/171391513-9cf5d5a7-b83f-4641-a11f-87603092306b.png)
 7. Check `codec_dump_dec.txt.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.
 
 **NOTES**: In my case, the PinConfig lacks a second Output to get sound out of the dockinstaion when I connect external speakers to it. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-out of the dock.
 
 Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
 
-There are 2 ways to do add a Node: you can either add one in PinConfigurator and configurate it manually or combine verb data from the `finalverbs.txt` to "craft" one and import it:
+There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configurate it manually or combine verb data from the `finalverbs.txt` to "craft" one and then import it.
 
 #### Method 1: Use finalverbs.txt to add a Node to the PinConfig
 1. Open `finalverbs.txt`
 2. Place the cursor at the end of the document 
-3. Paste (⌘+V) the ConfigDate (green). It should still be stored in the Clipboard).
-4. Next, add the Verb Data of the Node(s) you want to add (cyan) to the existing PinConfig:</br>![](Pics/Modpfcg18.png)
+3. Paste (⌘+V) the ConfigDate (green). It should still be stored in the Clipboard.
+4. Next, add the Verb Data of the Node(s) you want to add (cyan) to the existing PinConfig:</br>![Modpfcg18](https://user-images.githubusercontent.com/76865553/171391880-12628a54-8cde-4a66-bf3b-7bd810f09bd7.png)
 5. Copy the resulting PinConfig (pink) into the clipboard
 6. Switch back to PinConfigurator
-7. From the menubar, select File > Import > Clipboard. In this example, Node 27 has been added:</br>![](Pics/modpinpc.png)
+7. From the menubar, select File > Import > Clipboard. In this example, Node 27 has been added:</br>![modpinpc](https://user-images.githubusercontent.com/76865553/171392147-c6b4df49-8f51-46a5-a707-c2e0fc40a557.png)
 8. Select "Patch > Verb Sanatize" to correct the Verb data.
 9. Export the data. There are 2 ways to do so: 
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
@@ -318,13 +318,13 @@ There are 2 ways to do add a Node: you can either add one in PinConfigurator and
 #### <a name='method-2:-add-a-node-to-pinconfigurator-and-configure-it-manually'></a>Method 2: Add a node to PinConfigurator and configure it manually
 
 1. In PinConfigurator, click "Add"
-2. This opens a dialog with a bunch of options to configure the new Node:</br>![](Pics/nunode72.png)
+2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
 3. Use `finalverbs.txt` or `codec_dump.txt` to configure the Node (see "Config Notes")
 4. Press "Save" when you're done. In my case, Node 27 will be added.
-4. Select "Patch > Verb Sanatize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
-5. Back in the main Window, click on "Get ConfigData"
-6. The new/modified PinConfig will be listed in the text field below it:</br> ![](Pics/GetConfig02.png)
-7. Export the data. There are 2 ways to do so: 
+5. Select "Patch > Verb Sanatize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+6. Back in the main Window, click on "Get ConfigData"
+7. The new/modified PinConfig will be listed in the text field below it:</br>![GetConfig02](https://user-images.githubusercontent.com/76865553/171392396-5dea072e-f57b-492f-b44e-d2819e2a74d7.png)
+8. Export the data. There are 2 ways to do so: 
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
