@@ -108,7 +108,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
-- Next, download and unzip [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip). macOS Monterey users need to use the version for python 3 version by [Core-99](https://github.com/Core-i99/Codec-Graph) instead. 
+- Next, download and unzip [**codecgraph.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/L_ALC_Layout-ID/codecgraph.zip). macOS Monterey users need to grab the version for python 3 version by [Core-99](https://github.com/Core-i99/Codec-Graph/releases) instead. 
 - Copy the `codegraph` folder to the Desktop. We need it to convert and visualize the data inside the Codec dump, so we have can work with it.
 - Move the `codec_dump.txt` into the "codecgraph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
@@ -190,9 +190,8 @@ Form              | Function
 **Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
 
 ### <a name='how-to-read-the-schematic'></a>How to read the schematic
-The schematic a bit hard to read and comprehend because of its structure. It's also misleading: since all the arrows point to the right one might think this represents the signal flow. But that's not the case! 
 
-Just ignore the arrows! Instead, you need to take a different approach:
+⚠️ The schematic is a bit hard to comprehend and interpret because of its structure. It's also misleading: since all the arrows point to the right one might think they represent the signal flow – they don't. So ignore them! Instead, you need to take an approach which follows the signal flow.
 
 #### <a name='routing-inputs'></a>Routing inputs
 For **Inputs**, start at the input and end at the Pin Complex Node (Input > Mixer > PinComplex Node):
@@ -218,12 +217,12 @@ flowchart LR
 **Internal Mic Input:**
 ```mermaid
 flowchart LR
-       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)
+       id1(((Input 9))) -->Aid2{Mixer 34} -->id2(Node 18: Mic Int. fixed)-.-> id3(Aux Return to Mixer 11)
 ```
 **Line Input**:
 ```mermaid
 flowchart LR
-       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)
+       id1(((Input 8))) -->Aid2{Mixer 35} -->id2(Node 24: Mic Jack)-.-> id3(Aux Return to Mixer 11)
 ```
 
 #### <a name='tracing-possible-paths'></a>Tracing possible paths
