@@ -195,7 +195,7 @@ The schematic a bit hard to read and comprehend because of its structure. It's a
 Just ignore the arrows! Instead, you need to take a different approach:
 
 #### <a name='routing-inputs'></a>Routing inputs
-For **Inputs**, start at the input and end at the Pin Complex Node (Input > Mixer > PinComplex > Node):
+For **Inputs**, start at the input and end at the Pin Complex Node (Input > Mixer > PinComplex Node):
 ```mermaid
 flowchart LR
 		id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
