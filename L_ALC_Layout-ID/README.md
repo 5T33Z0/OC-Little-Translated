@@ -58,7 +58,10 @@ Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by t
 
 Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
 
-**NOTE**: If you can live without a schematic of the Codec dump, you *can* work with the dumps created with Clover and OpenCore (continue with Chapter V in this case). In Clover, you just have to hit `F8` in the Boot menu to create the dump. It will be stored in EFI/CLOVER/misc folder. Dumping the Audio Codec in OpenCore requires the debug version. It's described in the [Debugging Section](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#using-opencores-sysreport-feature).
+**NOTES**: If you can live without a schematic of the Codec dump, you *can* use the dumps created with Clover and OpenCore as well.
+
+- **Clover**: Hit `F8` in the boot menu. `AudioDxe.efi` has to be present in CLOVER/drivers/UEFI. The file(s) will be stored in EFI/CLOVER/misc.
+- **OpenCore**: Requires the Debug version. Check the [Debugging Section](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#using-opencores-sysreport-feature) for details.
 
 [^1]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
 
