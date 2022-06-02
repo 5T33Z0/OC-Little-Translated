@@ -1,0 +1,30 @@
+
+Verbs from Linux Codec Dump File: codec_dump.txt
+
+Codec: Realtek ALCS1200A   Address: 0   DevID: 283904768 (0x10ec0b00)
+
+   Jack   Color  Description                  Node     PinDefault             Original Verbs
+--------------------------------------------------------------------------------------------------------
+Unknown Unknown  Line Out at Ext N/A         17 0x11   0x40000000   01171c00 01171d00 01171e00 01171f40
+    1/8   Green  Line Out at Ext Rear        20 0x14   0x01014010   01471c10 01471d40 01471e01 01471f01
+    1/8   Black  Speaker at Ext Rear         21 0x15   0x411111f0   01571cf0 01571d11 01571e11 01571f41
+    1/8   Black  Speaker at Ext Rear         22 0x16   0x411111f0   01671cf0 01671d11 01671e11 01671f41
+    1/8   Black  Speaker at Ext Rear         23 0x17   0x411111f0   01771cf0 01771d11 01771e11 01771f41
+ Mic at Ext Rear    0x18 0x18                        27365424 01871c30 01871d90     01871ea1 01871f01  
+ Mic at Ext Front    0x19 0x19                        44142656 01971c40 01971d90     01971ea1 01971f02  
+ Line In at Ext Rear    0x1a 0x1a                        25243711 01a71c3f 01a71d30     01a71e81 01a71f01  
+ HP Out at Ext Front    0x1b 0x1b                        35733536 01b71c20 01b71d40     01b71e21 01b71f02  
+    1/8   Black  Speaker at Ext Rear         30 0x1e   0x411111f0   01e71cf0 01e71d11 01e71e11 01e71f41
+--------------------------------------------------------------------------------------------------------
+
+
+   Jack   Color  Description                  Node     PinDefault             Modified Verbs
+--------------------------------------------------------------------------------------------------------
+Unknown Unknown  Line Out at Ext N/A         17 0x11   0x40000000   01171c00 01171d00 01171e00 01171f40
+    1/8   Green  Line Out at Ext Rear        20 0x14   0x01014010   01471c50 01471d40 01471e01 01471f01
+ Mic at Ext Rear    0x18 0x18                        27365424 01871c30 01871d90     01871ea1 01871f01  
+ Mic at Ext Front    0x19 0x19                        44142656 01971c40 01971d90     01971ea1 01971f01  
+ Line In at Ext Rear    0x1a 0x1a                        25243711 01a71c60 01a71d30     01a71e81 01a71f01  
+ HP Out at Ext Front    0x1b 0x1b                        35733536 01b71c20 01b71d40     01b71e21 01b71f01  
+--------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,26 @@
+
+Verbs from Linux Codec Dump File: codec_dump.txt
+
+Codec: IDT 92HD99BXX   Address: 0   DevID: 287143653 (0x111d76e5)
+
+   Jack   Color  Description                  Node     PinDefault             Original Verbs
+--------------------------------------------------------------------------------------------------------
+ Mic at Ext Right    0x0a 0x0a                        77664288 00a71c20 00a71d10     00a71ea1 00a71f04  
+    1/8   Black  HP Out at Ext Right         11 0x0b   0x0421101f   00b71c1f 00b71d10 00b71e21 00b71f04
+Unknown Unknown  Other at Ext N/A            12 0x0c   0x40f000f0   00c71cf0 00c71d00 00c71ef0 00c71f40
+ Analog Unknown  Speaker at Int N/A          13 0x0d   0x90170110   00d71c10 00d71d01 00d71e17 00d71f90
+Unknown Unknown  Other at Ext N/A            15 0x0f   0x40f000f0   00f71cf0 00f71d00 00f71ef0 00f71f40
+  ATAPI Unknown  Mic at Int Top              17 0x11   0xd5a30140   01171c40 01171d01 01171ea3 01171fd5
+--------------------------------------------------------------------------------------------------------
+
+
+   Jack   Color  Description                  Node     PinDefault             Modified Verbs
+--------------------------------------------------------------------------------------------------------
+ Mic at Ext Right    0x0a 0x0a                        77664288 00a71c20 00a71d10     00a71ea1 00a71f00  
+    1/8   Black  HP Out at Ext Right         11 0x0b   0x0421101f   00b71c10 00b71d10 00b71e21 00b71f00
+Unknown Unknown  Other at Ext N/A            12 0x0c   0x40f000f0   00c71cf0 00c71d00 00c71ef0 00c71f40
+ Analog Unknown  Speaker at Int N/A          13 0x0d   0x90170110   00d71c30 00d71d00 00d71e17 00d71f90
+Unknown Unknown  Other at Ext N/A            15 0x0f   0x40f000f0   00f71c50 00f71d00 00f71ef0 00f71f40
+  ATAPI Unknown  Mic at Int Top              17 0x11   0xd5a30140   01171c40 01171d00 01171ea3 01171fd0
+--------------------------------------------------------------------------------------------------------
+

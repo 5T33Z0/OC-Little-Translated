@@ -1,0 +1,112 @@
+ 
+Blacklist:
+411111f0 400000f0 CD at Int ATAPI
+Removed Nodes: 
+Checking 71c Associations
+
+Current Associations
+ 22471c10 = 1 
+ 22571c12 = 1 
+ 22671c11 = 1 
+ 22771cf0 = f 
+ 22871c1f = 1 
+ 22971c37 = 3 
+ 22a71c3e = 3 
+ 22b71c36 = 3 
+ 22c71cf0 = f 
+ 22d71cf0 = f 
+ 22e71cf0 = f 
+ 22f71cf0 = f 
+
+  Used associations = 1 1 1 f 1 3 3 3 f f f f
+Unused associations = 2 4 5 6 7 8 9 a b c d e
+
+Correcting duplicate associations
+
+Checking if 1 already exists in: 1 1 f 1 3 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 1 already exists in: 1 1 f 1 3 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 2
+Checking if 1 already exists in: 1 2 f 1 3 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 4
+Checking if f already exists in: 1 2 4 1 3 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 1 already exists in: 1 2 4 f 3 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 5
+Checking if 3 already exists in: 1 2 4 f 5 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 3 already exists in: 1 2 4 f 5 3 3 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 6
+Checking if 3 already exists in: 1 2 4 f 5 3 6 f f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 7
+Checking if f already exists in: 1 2 4 f 5 3 6 7 f f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 8
+Checking if f already exists in: 1 2 4 f 5 3 6 7 8 f f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 9
+Checking if f already exists in: 1 2 4 f 5 3 6 7 8 9 f 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: a
+Checking if f already exists in: 1 2 4 f 5 3 6 7 8 9 a 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: b
+
+New 71c Associations
+ Before      After
+--------------------------------------------------
+22471c10   22471c10  22471d40  22471e01  22471f01
+22571c12   22571c20  22571d10  22571e01  22571f01
+22671c11   22671c40  22671d60  22671e01  22671f01
+22771cf0   22771cf0  22771d20  22771e01  22771f41
+22871c1f   22871c50  22871d40  22871e21  22871f02
+22971c37   22971c30  22971d90  22971ea1  22971f02
+22a71c3e   22a71c60  22a71d30  22a71e81  22a71f01
+22b71c36   22b71c70  22b71d90  22b71ea1  22b71f01
+22c71cf0   22c71c80  22c71d01  22c71e37  22c71f50
+22d71cf0   22d71c90  22d71d11  22d71e45  22d71f07
+22e71cf0   22e71ca0  22e71d11  22e71e45  22e71f07
+22f71cf0   22f71cb0  22f71d01  22f71e56  22f71f58
+
+Reset 71d Misc to 0
+New 71d Associations
+ Before                After
+--------------------------------------------------
+22471d40   22471c10  22471d40  22471e01  22471f01
+22571d10   22571c20  22571d10  22571e01  22571f01
+22671d60   22671c40  22671d60  22671e01  22671f01
+22771d20   22771cf0  22771d20  22771e01  22771f41
+22871d40   22871c50  22871d40  22871e21  22871f02
+22971d90   22971c30  22971d90  22971ea1  22971f02
+22a71d30   22a71c60  22a71d30  22a71e81  22a71f01
+22b71d90   22b71c70  22b71d90  22b71ea1  22b71f01
+22c71d01   22c71c80  22c71d00  22c71e37  22c71f50
+22d71d11   22d71c90  22d71d10  22d71e45  22d71f07
+22e71d11   22e71ca0  22e71d10  22e71e45  22e71f07
+22f71d01   22f71cb0  22f71d00  22f71e56  22f71f58
+
+Correct 71f 02 FP to 01
+New 71f Associations
+ Before                                    After
+--------------------------------------------------
+22471d40   22471c10  22471d40  22471e01  22471f01
+22571d10   22571c20  22571d10  22571e01  22571f01
+22671d60   22671c40  22671d60  22671e01  22671f01
+22771d20   22771cf0  22771d20  22771e01  22771f41
+22871d40   22871c50  22871d40  22871e21  22871f01
+22971d90   22971c30  22971d90  22971ea1  22971f01
+22a71d30   22a71c60  22a71d30  22a71e81  22a71f01
+22b71d90   22b71c70  22b71d90  22b71ea1  22b71f01
+22c71d01   22c71c80  22c71d00  22c71e37  22c71f50
+22d71d11   22d71c90  22d71d10  22d71e45  22d71f00
+22e71d11   22e71ca0  22e71d10  22e71e45  22e71f00
+22f71d01   22f71cb0  22f71d00  22f71e56  22f71f50
+ 

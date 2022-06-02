@@ -1,0 +1,34 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: Realtek ALC269VC   Address: 0   DevID: 283902569 (0x10EC0269)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+18 (0x12) 90A60140   In  Mic In             Other Digital       Fixed           Internal N/A                Unknown   4  0  -     01271C40 01271D01 01271EA6 01271F90
+20 (0x14) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   01471C10 01471D01 01471E17 01471F90 01470C02
+21 (0x15) 03211020   Out HP Out             1/8" Stereo/Mono    Jack            External Left               Black     2  0  0x2   01571C20 01571D10 01571E21 01571F03 01570C02
+23 (0x17) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01771CF0 01771D11 01771E11 01771F41
+24 (0x18) 03A11830   In  Mic In             1/8" Stereo/Mono    Jack            External Left               Black     3  0  -     01871C30 01871D18 01871EA1 01871F03
+25 (0x19) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01971CF0 01971D11 01971E11 01971F41
+26 (0x1A) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01A71CF0 01A71D11 01A71E11 01A71F41
+27 (0x1B) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01B71CF0 01B71D11 01B71E11 01B71F41
+29 (0x1D) 40138205   Out Speaker            ATAPI Internal      No Connection   External N/A                Purple    0  5  -     01D71C05 01D71D82 01D71E13 01D71F40
+30 (0x1E) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01E71CF0 01E71D11 01E71E11 01E71F41
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+29 (0x1D) 40138205   Out Speaker            ATAPI Internal      No Connection   External N/A                Purple    0  5  -     01D71C05 01D71D82 01D71E13 01D71F40
+20 (0x14) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   01471C10 01471D01 01471E17 01471F90 01470C02
+21 (0x15) 03211020   Out HP Out             1/8" Stereo/Mono    Jack            External Left               Black     2  0  0x2   01571C20 01571D10 01571E21 01571F03 01570C02
+24 (0x18) 03A11830   In  Mic In             1/8" Stereo/Mono    Jack            External Left               Black     3  0  -     01871C30 01871D18 01871EA1 01871F03
+18 (0x12) 90A60140   In  Mic In             Other Digital       Fixed           Internal N/A                Unknown   4  0  -     01271C40 01271D01 01271EA6 01271F90
+23 (0x17) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01771CF0 01771D11 01771E11 01771F41
+25 (0x19) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01971CF0 01971D11 01971E11 01971F41
+26 (0x1A) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01A71CF0 01A71D11 01A71E11 01A71F41
+27 (0x1B) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01B71CF0 01B71D11 01B71E11 01B71F41
+30 (0x1E) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01E71CF0 01E71D11 01E71E11 01E71F41
+------------------------------------------------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,29 @@
+
+Verbs from Linux Codec Dump File: codec_dump.txt
+
+Codec: Realtek ALC3246   Address: 0   DevID: 283902550 (0x10ec0256)
+
+   Jack   Color  Description                  Node     PinDefault             Original Verbs
+--------------------------------------------------------------------------------------------------------
+Digital Unknown  Mic at Int N/A              18 0x12   0x90a60180   01271c80 01271d01 01271ea6 01271f90
+Unknown Unknown  Line Out at Ext N/A         19 0x13   0x40000000   01371c00 01371d00 01371e00 01371f40
+ Analog Unknown  Speaker at Int N/A          20 0x14   0x90170120   01471c20 01471d01 01471e17 01471f90
+    1/8   Black  Speaker at Ext Rear         24 0x18   0x411111f0   01871cf0 01871d11 01871e11 01871f41
+    1/8   Black  Speaker at Ext Rear         25 0x19   0x411111f0   01971cf0 01971d11 01971e11 01971f41
+    1/8   Black  Speaker at Ext Rear         26 0x1a   0x411111f0   01a71cf0 01a71d11 01a71e11 01a71f41
+ Speaker at Ext Rear    0x1b 0x1b                        1091637744 01b71cf0 01b71d11     01b71e11 01b71f41  
+Unknown Unknown  Modem Hand at Ext N/A       29 0x1d   0x40700001   01d71c01 01d71d00 01d71e70 01d71f40
+    1/8   Black  Speaker at Ext Rear         30 0x1e   0x411111f0   01e71cf0 01e71d11 01e71e11 01e71f41
+    1/8   Black  HP Out at Ext Front         33 0x21   0x02211030   02171c30 02171d10 02171e21 02171f02
+--------------------------------------------------------------------------------------------------------
+
+
+   Jack   Color  Description                  Node     PinDefault             Modified Verbs
+--------------------------------------------------------------------------------------------------------
+Digital Unknown  Mic at Int N/A              18 0x12   0x90a60180   01271c80 01271d00 01271ea6 01271f90
+Unknown Unknown  Line Out at Ext N/A         19 0x13   0x40000000   01371c00 01371d00 01371e00 01371f40
+ Analog Unknown  Speaker at Int N/A          20 0x14   0x90170120   01471c20 01471d00 01471e17 01471f90
+Unknown Unknown  Modem Hand at Ext N/A       29 0x1d   0x40700001   01d71c40 01d71d00 01d71e70 01d71f40
+    1/8   Black  HP Out at Ext Front         33 0x21   0x02211030   02171c30 02171d10 02171e21 02171f01
+--------------------------------------------------------------------------------------------------------
+
