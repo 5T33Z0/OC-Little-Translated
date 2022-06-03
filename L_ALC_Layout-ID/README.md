@@ -671,14 +671,14 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 	- Daliansky for [AppleALC Guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 	- Daliansky for [Using VoodooHDA for finding valid Nodes](https://blog-daliansky-net.translate.goog/With-VoodooHDA-comes-getdump-find-valid-nodes-and-paths.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **About Intel High Definition Audio**:
-	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html)
+	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html), esp. Chpt. 7: "Codec Features and Requirements".
  	- HaC Mini Hackintosh for additional info about the [HDA Codec and Codecgraph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
  	- Daliansky for [List of HDA Verb Parameters](https://blog-daliansky-net.translate.goog/hda-verb-parameter-detail-table.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **Tools**:
 	- Apple for [XCode](https://developer.apple.com/xcode/)
-	- Acidanthera for [AppleALC](https://github.com/acidanthera/AppleALC) and [MacKernelSDK](https://github.com/acidanthera/MacKernelSDK)
+	- Acidanthera for [AppleALC](https://github.com/acidanthera/AppleALC), [Lilu](https://github.com/acidanthera/Lilu) and [MacKernelSDK](https://github.com/acidanthera/MacKernelSDK)
 	- cmatsuoka for [codecgraph](https://github.com/cmatsuoka/codecgraph)
-	- Core-i99 for the Python 3 port of [codecgraph](https://github.com/Core-i99/Codec-Graph)
+	- Core-i99 for the Python 3 Port of [codecgraph](https://github.com/Core-i99/Codec-Graph)
 	- Headkaze for [Hackintool](https://github.com/headkaze/Hackintool) and porting [PinConfigurator](https://github.com/headkaze/PinConfigurator) to 64 bit 
 	- Pixelglow for [graphviz](http://www.pixelglow.com/graphviz/)
 - **Other**:
