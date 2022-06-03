@@ -258,14 +258,14 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 21 (Out)             |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
 23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono)    |
 24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br> 24 - 13 - 3|
-24 (as Input)        |(Jack) Mic at Ext Left | 8 - 35 -24 or </br> 9 - 34 - 24
-25 (as Output)       |Speaker Ext. Rear (S) OUT Detect|25 - 12 - 2 or </br>25 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect|8 - 35 - 25 or </br> 9 - 34 - 25
+24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 -24 or </br> 9 - 34 - 24
+25 (as Output)       |Speaker Ext. Rear (S) OUT Detect| 25 - 12 - 2 or </br>25 - 13 - 3
+25 (as Input)        |Speaker Ext. Rear (S) IN  Detect| 8 - 35 - 25 or </br> 9 - 34 - 25
 26 (as Output)       |Speaker at Ext Rear OUT HP Detect| 26 - 12 - 2 or</br>26 - 13 - 3
 26 (as Input)        |Speaker at Ext Rear IN HP Detect| 8 - 35 - 26 or </br> 9 - 34 - 26 
 27 (as Output)       |Speaker at Ext Rear OUT Detect| 27 - 13 - 3 or </br>27 - 12 - 2
 27 (as Input)        |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 9 - 34 - 27 or
-29 Mono (as Input)   |Mono IN| 8 - 35 - 29 or </br> 9 - 34 -29
+29 Mono (as Input)   |Mono In                      | 8 - 35 - 29 or </br> 9 - 34 -29
 30 (Digital Out)     |Speaker Ext. Rear Digital (S/PDIF)| 6 - 30| 
 
 [^2]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
@@ -308,12 +308,13 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 5. Click on "Options > Verb Sanitize" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
 6. Select "Patch > Verb Sanitize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
 7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
-8. Export the data. There are 2 ways to do so: 
-	- Either copy/paste the ConfigData to a text file and save it for later, or 
-	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
+8. Copy the `ConfigData` into the clipboard
+9. Select "File > Export > verbs.txt". It will be stored on the Desktop.
+10. Open verbs.txt.
+11. Paste the ConfigDate in an empty line and save the file. We'll need it later
+12. Continue in Chapter VI!
 
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
-
 In case you already have a working Layout-ID that you just want to modify, do the following:
 
 1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
@@ -399,9 +400,10 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 10. Highlight the dictionary and press ⌘+D. This will duplicate the entry.
 11. Add/change the following data to the new entry:
 	- In the `Codec` String: Author name (Yours) and description
-	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (we stored  it as "PinConfig 01" in "finalverbs".txt)
+	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (and saved in "verbs.txt")
+	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![](/Users/5t33z0/Desktop/verbspcfg.png)
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
-12. This is the resulting entry:</br>![PinCfg_InfoPlist](https://user-images.githubusercontent.com/76865553/171392920-4f11e5e9-bf34-4e4e-a1d9-fec04f8ee6c9.png)
+12. This is the resulting entry:</br>![](/Users/5t33z0/Desktop/PCfginfopl.png)
 
 #### <a name='scenario-2:-creating-a-new-layout-id-from-scratch-(todo)'></a>Scenario 2: Creating a new Layout-ID from scratch (todo)
 
