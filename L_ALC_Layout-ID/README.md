@@ -415,9 +415,17 @@ The PathMap defines the routings of the Nodes within the Codec which are injecte
 2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs/outputs switch automatically if a device is plugged in or if the input/output have to be changed manually in System Preferences.
 
 #### <a name='switch-mode'></a>Switch-Mode
-In Switch-Mode, the output signal is re-routed from the current output to another one automatically, once a jack is plugged into the system. On Laptops for example, the internal speakers are muted and the signal is automatically re-routed to the Headphone or Line-out. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. 
+In Switch-Mode, the Output signal is re-routed from the current output to another one automatically, once a jack is plugged into the system. On Laptops for example, the internal speakers are muted and the signal is automatically re-routed to the Headphone or Line-out. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. 
 
-For Switch-Mode to work, certain conditions have to be met also: the Pin Complex Node must support "Detect" and the Pin Complex Node must be capable to connect to more than one Mixer Node.
+For Switch-Mode to work, certain conditions have to be met: 
+- The Pin Complex Node(s) must support the "Detect" feature
+- The Pin Complex Node(s) that should be switched between must be attached to the same Mixer Node.
+
+Let's have a look at the output side of the schematic:</br>![SwitchMode01](https://user-images.githubusercontent.com/76865553/171393009-65312baf-77c3-41d6-96d6-18359933aad5.png)
+
+- Nodes 20, 21, 24, 25, 26 and 27 support the Detect feature
+- These Nodes can all connect to Mixers 12 (red) and 13 (green)
+- Therefore, they can be operated in switch-mode
 
 This has to be represented in the file structure of the PathMap. Nodes you want to switch between have to be part of that same Array:
 
@@ -441,12 +449,6 @@ This has to be represented in the file structure of the PathMap. Nodes you want 
 			- Mixer Node
 			- Output Node 
 		- etc. 
-
-Let's have a look at the output side of the schematic:</br>![SwitchMode01](https://user-images.githubusercontent.com/76865553/171393009-65312baf-77c3-41d6-96d6-18359933aad5.png)
-
-- Nodes 20, 21, 24, 25, 26 and 27 support the Detect feature
-- These Nodes can all connect to Mixers 12 (red) and 13 (green)
-- Therefore, they can be operated in switch-mode
 
 ##### Possible Configurations: Odd/Even
 We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
@@ -574,12 +576,38 @@ Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels:
 	- `nsteps` in ***Amp-Outs Nodes*** = `PublishVolume`
 	- `nsteps=3` in **Amp-In Node** = `Boost` factor 3 last Node of the Chain on the Input Device (as shown in the first screenshot)
 
+### Example: Adding an Output device to the PlatformsXX.xml
 
+As we figured out in Chapter IV and VII, possible paths for adding Node 27 as an Output device can be: 27 &rarr; 13  &rarr; 3 or 27  &rarr; 12  &rarr; 2. I may have to try both. 
+Since I want the Output to switch from the speakers (connected via 21 &rarr; 12 &rarr; 2) to the dock when I pluck my speakers in, I first try to connect Node 27 to Mixer 12 and Output 2 as well and see if it switches between Node 21 and 27.
 
+So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 
+- Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
+- Navigate to the branch containing the Output Devices (expand PathMaps > 0 > Pathmap > 1):</br> ![](/Users/5t33z0/Desktop/_01/Outdevs01.png)
+- Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![](/Users/5t33z0/Desktop/_01/Outdevs02.png)
+- Next, we need to correct the Nodes inside of Array 2 (Ouput device 3) to 27, 12, 2: </br>![](/Users/5t33z0/Desktop/_01/Outdevs03.png)
+- Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
+
+	```swift
+Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
+  Control: name="Headphone Playback Switch", index=1, device=0
+    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [0 0]
+  ...
+  Connection: 2
+     12 13* // 13 = Mixer 13 is the default connection in this case
+```
+- So, the Amp-Out caps are: nsteps=0, mute=1. Let's transfer that into .xml. Since I don't want this Node to be an Input as well, I leave MuteInputAmp enabled and VolumeInputAmp disabled:</br>![](/Users/5t33z0/Desktop/_01/Outdevs04.png).
+- Repeat for other devices you want to add to the PathMap
+- Save the file
 
 ## <a name='x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>X. Add `Platforms.xml` and `layout.xml` to `info.plist`
-As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
+
+Now the we have edited all the files we need, we have to integrate them into the AppleALC Source Code. As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
 
 - Open the `info.plist`
 - Look for the `Files` Dictionary:</br>![Info01](https://user-images.githubusercontent.com/76865553/171393791-6c8f90ab-e860-42e0-940a-1b2fa26a1fc6.png)
