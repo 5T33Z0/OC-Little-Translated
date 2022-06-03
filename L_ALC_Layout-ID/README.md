@@ -646,6 +646,7 @@ If it's not working, do the following:
 	- PathMap inside of PlatformsXX.xml
 	- LayoutXX.xml 
 	- Info.plist &rarr; check if you added your LayoutXX.xml and PlatfomsXX.xml 
+	- Take notes. You can use my [Template](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Testing_Notes.md) for this
 - Re-compile the kext, replace it in the EFI, reboot, test, repeat.
 - Ask for help on a Forum.
 
