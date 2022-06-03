@@ -187,28 +187,24 @@ Form              | Function
 #### <a name='routing-inputs'></a>Routing Input Devices
 For **Input Devices**, start at the input and trace the route to the Pin Complex Node. 
 
-- **Option 1**: Input &rarr; (Mixer/Audio Selector) &rarr; PinComplex Node:
+- **Option 1**: Input &rarr; Mixer/Audio Selector &rarr; PinComplex Node:
 
 	```mermaid
 	flowchart LR
-		id1(((Input))) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id2(Pin Complex XY)
-	```
-	```mermaid
-	flowchart LR
-		id2(((Input))) --->id3[/Audio Selector/]--->id4(Pin Complex XY)
-		
+		id1(((Input))) -->|Signal flow|id2{Mixer A} -->|Signal flow|id3(Pin Complex XY)
+		id4(((Input))) -->id5[/Audio Selector/]-->id6(Pin Complex XY)
 	```
 - **Option 2**: Input &rarr; PinComplex Node:
 
 	```mermaid
-	flowchart LR
-		id1(((Input))) ----->|Direct Connection|id3(Pin Complex XY)
+		flowchart LR
+		id1(((Input))) ------>|Direct Connection|id3(Pin Complex XY)
 	```
 #### <a name='routing-outputs'></a>Routing Output Devices
 For **Output Devices**, start at the Pin Complex Node and follow the signal through Audio Mixer(s)/Selectors to the physical output Here are some examples of possible routings.
 
 - **Option 1**: Pin Complex Note &rarr; Mixer/Audio Selector &rarr; Output (common):
-	
+
 	```mermaid
 	flowchart LR
        id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id5(((Output X)))
@@ -309,8 +305,8 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
 3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
 4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
-5. Click on "Options > Verb Sanitze" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
-6. Select "Patch > Verb Sanatize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+5. Click on "Options > Verb Sanitize" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
+6. Select "Patch > Verb Sanitize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
 7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
 8. Export the data. There are 2 ways to do so: 
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
@@ -332,7 +328,7 @@ In case you already have a working Layout-ID that you just want to modify, do th
 
 Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
 
-There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configurate it manually or combine verb data from the `finalverbs.txt` to "craft" one and then import it.
+There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data from the `finalverbs.txt` to "craft" one and then import it.
 
 #### Method 1: Use finalverbs.txt to add a Node to the PinConfig
 1. Open `finalverbs.txt`
@@ -353,7 +349,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
 3. Use `finalverbs.txt` or `codec_dump.txt` to configure the Node (see "Config Notes")
 4. Press "Save" when you're done. In my case, Node 27 will be added.
-5. Select "Patch > Verb Sanatize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+5. Select "Patch > Verb Sanitize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
 6. Back in the main Window, click on "Get ConfigData"
 7. The new/modified PinConfig will be listed in the text field below it:</br>![GetConfig02](https://user-images.githubusercontent.com/76865553/171392396-5dea072e-f57b-492f-b44e-d2819e2a74d7.png)
 8. Export the data. There are 2 ways to do so: 
@@ -512,9 +508,13 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 ## <a name='ix.-transferring-the-pathmap-to-`platformsxx.xml`'></a>IX. Transferring the PathMap to `PlatformsXX.xml`
 Now that we traced all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
 
-AppleALC's "Resources" folder contains sub-folders for each supported Codec. All of these sub-folders contain additional .xml files, such as `LayoutXY.xml` and `PlatformXY.xml`. For each existing Layout-ID there are corresponding .xml files with the same number.
+### Transferring PinComplex Nodes to PlatformsXX.xml
+1. Take the chart with the possible connections you traced in Chapter IV.
+2. Decide which Input/Output Device(s) you want to add to the PathMap
+3. Decide if you want to add the device(s) in a switch mode configuration or if you want switch the device manually.
+4. Add the Nodes to the PlatformsXX.xml accordingly
 
-Let's have a look how Switch-Mode for Outputs is realized in ALC Layout-ID 18 inside of `Platforms18.xml`:</br>![PlatformsStructure01](https://user-images.githubusercontent.com/76865553/171393277-13b2ec45-ec83-452c-ba5d-06aaab795d74.png)
+For reference, Let's have a look how Switch-Mode for Outputs is realized in ALC Layout-ID 18 inside of `Platforms18.xml`:</br>![PlatformsStructure01](https://user-images.githubusercontent.com/76865553/171393277-13b2ec45-ec83-452c-ba5d-06aaab795d74.png)
 
 On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:</br>![PlatformsStructure02](https://user-images.githubusercontent.com/76865553/171393394-0244592c-a961-4ab7-ae1f-1942dbd6a5d4.png)
 
@@ -525,7 +525,7 @@ On the Input side, the structure is the same. The only difference is that the or
 **NOTE**: `LayoutID` and `PathMapID` **must be identical** and must use the same number you chose for your Layout-ID previously.
 
 ### Amp Capabilities
-Besides entries for the Nodes that the incoming/outgoing signal traverses, **Platforms.xml** also contains entries for the Amp stage(s) that exist along that signal chain.
+Besides entries for the Nodes that the incoming/outgoing signal traverses, the Codec dump also includes entries for Amp stage(s) which have to be reflected in the **Platforms.xml** as well.
 
 #### Amp Node (Input side)
 For Inputs, the Amp is usually part of the first entry in the chain, the Input Node: 
@@ -549,28 +549,34 @@ Next, let's look at Array 1 of the PathMap, which contains the Output Devices:
 
 As you can see, for the ALC269, each Node of the Output Path has an Amp stage and the "Channels" array is part of the last Node in the chain rather than the first Node.
 
+### Transferring Amp Capabilities to PlatformsXX.xml
+
 Here's how "Amp Caps" translate to entries in the Platforms.xml:
 
 Dump.txt               | Platforms.xml
------------------------|---------------------------------------------------
-Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono. </br>⚠️ The "Channels" array is only included **once** in the chain: on the Input side it's part of the *first* node, on the Output side it's included in the *last* Node!||
+-----------------------|------------------------------------------
+Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono.</br> ⚠️ The "Channels" array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Device side it's included in the *last* Node!||
 **Amp-In Caps**        | 
 **nsteps**=0 or ≥1     | **VolumeInputAmp** (NO/YES)
 **mute**=0 or 1        | **MuteInputAmp** (NO/YES)
 **nsteps**=3           | Special case. Describes the "Boost" Level (=3) applied to the destination Node (last Node in the chain). In this example to Node 18 "Internal Mic Boost Volume". For ALC269 is also applies to Nodes 11, 24, 25, 26, and 27.||
 **Amp-Out Caps**       |
-**nsteps** 0 or ≥1     | **PublishVolume**
+**nsteps** 0 or ≥1     | **PublishVolume** (NO/YES)
 **mute**=0 or 1        | **PublishMute**
 
 **Explanations**: 
 
-- `Mute` has different functions for Amp-In an Amp-Out Nodes:
-	- If mute is `0` or `1` for ***Amp-In Nodes***, the `MuteInputAmp` has to be set to `NO`/`YES` in Platforms.xml.
-	- if mute is `0` or `1` for ***Amp-Out Nodes***, `PublishMute` has to be set to `NO`/`YES`
-- `nsteps` also has different function for Amp-In an Amp-Out Nodes:
-	- For Amp-Ins it translates to ***VolumeInputAmp***
-	- For Amp-Outs it translates to ***PublishVolume***
-	- "Nsteps" can be larger than `1`, so unless its value is `0` or `3` in the dump, `PublishVolume` + `VolumeInputAmp` have to be set to `YES`. If nsteps = `3` in the destination Node, this correlates to the "Boost" factor in the .xml file. (as shown in the first screenshot).
+- `Mute` in Amp-In an Amp-Out Nodes are different functions in Platforms.xml:
+	- `mute` in ***Amp-In Nodes*** = `MuteInputAmp`
+	- `mute` in ***Amp-Out Nodes*** = `PublishMute`
+- `Nsteps` also has different functions whether it's used in Amp-In or Amp-Out Nodes:
+	- `nsteps` in ***Amp-In Nodes*** = `VolumeInputAmp`
+	- `nsteps` in ***Amp-Outs Nodes*** = `PublishVolume`
+	- `nsteps=3` in **Amp-In Node** = `Boost` factor 3 last Node of the Chain on the Input Device (as shown in the first screenshot)
+
+
+
+
 
 ## <a name='x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>X. Add `Platforms.xml` and `layout.xml` to `info.plist`
 As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
