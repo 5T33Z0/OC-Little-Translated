@@ -584,9 +584,9 @@ Since I want the Output to switch from the speakers (connected via 21 &rarr; 12 
 So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 
 - Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
-- Navigate to the branch containing the Output Devices (expand PathMaps > 0 > Pathmap > 1):</br> ![](/Users/5t33z0/Desktop/_01/Outdevs01.png)
-- Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![](/Users/5t33z0/Desktop/_01/Outdevs02.png)
-- Next, we need to correct the Nodes inside of Array 2 (Ouput device 3) to 27, 12, 2: </br>![](/Users/5t33z0/Desktop/_01/Outdevs03.png)
+- Navigate to the branch containing the Output Devices (expand PathMaps > 0 > Pathmap > 1):</br> ![Outdevs01](https://user-images.githubusercontent.com/76865553/171813688-09bc6040-cbe8-4262-ad62-0321297df4cb.png)
+- Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![Outdevs02](https://user-images.githubusercontent.com/76865553/171813707-703f1526-54da-454d-b1d3-879d34efc61e.png)
+- Next, we need to correct the Nodes inside of Array 2 (Ouput device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
 - Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
 
 	```swift
@@ -601,7 +601,7 @@ Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
   Connection: 2
      12 13* // 13 = Mixer 13 is the default connection in this case
 ```
-- So, the Amp-Out caps are: nsteps=0, mute=1. Let's transfer that into .xml. Since I don't want this Node to be an Input as well, I leave MuteInputAmp enabled and VolumeInputAmp disabled:</br>![](/Users/5t33z0/Desktop/_01/Outdevs04.png).
+- So, the Amp-Out caps are: nsteps=0, mute=1. Let's transfer that into .xml. Since I don't want this Node to be an Input as well, I leave MuteInputAmp enabled and VolumeInputAmp disabled:</br>![Outdevs04](https://user-images.githubusercontent.com/76865553/171813844-fc568a78-39f0-4b20-a8a6-5de331f3ba02.png)
 - Repeat for other devices you want to add to the PathMap
 - Save the file
 
