@@ -588,19 +588,18 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![Outdevs02](https://user-images.githubusercontent.com/76865553/171813707-703f1526-54da-454d-b1d3-879d34efc61e.png)
 - Next, we need to correct the Nodes inside of Array 2 (Ouput device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
 - Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
-
 	```swift
-Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
+  Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
   Control: name="Headphone Playback Switch", index=1, device=0
-    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  ControlAmp: chs=3, dir=Out, idx=0, ofs=0
   Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
   Amp-In vals:  [0 0]
   Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
   Amp-Out vals:  [0 0]
   ...
   Connection: 2
-     12 13* // 13 = Mixer 13 is the default connection in this case
-```
+  12 13* // In the dump, Mixer 13 is the current/default connection!
+	```
 - So, the Amp-Out caps are: nsteps=0, mute=1. Let's transfer that into .xml. Since I don't want this Node to be an Input as well, I leave MuteInputAmp enabled and VolumeInputAmp disabled:</br>![Outdevs04](https://user-images.githubusercontent.com/76865553/171813844-fc568a78-39f0-4b20-a8a6-5de331f3ba02.png)
 - Repeat for other devices you want to add to the PathMap
 - Save the file
