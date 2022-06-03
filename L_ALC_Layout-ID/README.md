@@ -401,9 +401,9 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 11. Add/change the following data to the new entry:
 	- In the `Codec` String: Author name (Yours) and description
 	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (and saved in "verbs.txt")
-	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![](/Users/5t33z0/Desktop/verbspcfg.png)
+	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![verbspcfg](https://user-images.githubusercontent.com/76865553/171962726-acbb19cd-e231-43f1-9499-6025f6f1898a.png)
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
-12. This is the resulting entry:</br>![](/Users/5t33z0/Desktop/PCfginfopl.png)
+12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
 
 #### <a name='scenario-2:-creating-a-new-layout-id-from-scratch-(todo)'></a>Scenario 2: Creating a new Layout-ID from scratch (todo)
 
