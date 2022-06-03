@@ -592,9 +592,9 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
   Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
   Control: name="Headphone Playback Switch", index=1, device=0
   ControlAmp: chs=3, dir=Out, idx=0, ofs=0
-  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0 // => Current Settings: Boost=3; MuteInputAmp=NO 
   Amp-In vals:  [0 0]
-  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1 // => Current Settings: PublishVolume=NO; PublishMute=YES
   Amp-Out vals:  [0 0]
   ...
   Connection: 2
