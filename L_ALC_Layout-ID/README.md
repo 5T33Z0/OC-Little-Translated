@@ -12,10 +12,11 @@
 * [VII. Creating a PathMap](#vii.-creating-a-pathmap)
 * [VIII. Preparing a PlatformsXX.xml](#viii.-preparing-a-`platformsxx.xml`)
 * [IX. Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
-* [X. Adding Platforms.xml and layout.xml to info.plist](#x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
-* [XI. Compiling the AppleALC.kext](#xi.-compiling-the-applealc.kext)
-* [XII. Testing and Troubleshooting](#xii.-testing-and-troubleshooting)
-* [XIII. Adding your Layout-ID to the AppleALC Repo](#xiii.-adding-your-layout-id-to-the-applealc-repo)
+* [X. Adding/Modifying layoutXX.xml](#x.-adding/modifying-a-layoutxx.xml)
+* [XI. Adding Platforms.xml and layout.xml to info.plist](#xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
+* [XII. Compiling the AppleALC.kext](#xii.-compiling-the-applealc.kext)
+* [XIII. Testing and Troubleshooting](#xiii.-testing-and-troubleshooting)
+* [XIV. Adding your Layout-ID to the AppleALC Repo](#xiv.-adding-your-layout-id-to-the-applealc-repo)
 <!-- vscode-markdown-toc-config
 	numbering=false
 	autoSave=true
@@ -621,7 +622,25 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Repeat for other devices you want to add to the PathMap
 - Save the file
 
-## <a name='x.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>X. Add `Platforms.xml` and `layout.xml` to `info.plist`
+## <a name='x.-adding/modifying-a-layoutxx.xml'></a>X. Adding/Modifying `layoutXX.xml`
+
+### Modifying an existing `LayoutXX.xml`
+- Navigate to `AppleALC/Resorces/YOUR_CODEC` (in my case ALC269)
+- Duplicate the `LayoutXX.xml` you want to modify (in my case Layout18.xml)
+- Assign an unused number to it (in my case: Layout39.xml)
+- Open it with a Plist Editor 
+- Change the `LayoutID` &rarr; must be identical with # used in filename
+- Expand `PathMapRef`
+- Adjust the following settings:
+	- `Inputs`: Add Type of Inputs (if missing)
+	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Dockin Station.
+	- `PathmapID` (# must match that of the filename. In my case: 39):</br>![](/Users/5t33z0/Desktop/layoutxml.png)
+- Save the file.
+
+### Creating a new `LayoutXX.xml` from scratch
+TODO…
+
+## <a name='xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>XI. Add `Platforms.xml` and `layout.xml` to `info.plist`
 
 Now the we have edited all the files we need, we have to integrate them into the AppleALC Source Code. As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
 
@@ -638,7 +657,7 @@ Now the we have edited all the files we need, we have to integrate them into the
 
 **IMPORTANT**: If these entries don't exist, the AppleALC.kext will be compiled but your Layout-ID entry won't be included, aka no Sound!
 
-## <a name='xi.-compiling-the-applealc.kext'></a>XI. Compiling the AppleALC.kext
+## <a name='xii.-compiling-the-applealc.kext'></a>XII. Compiling the AppleALC.kext
 Now that we finally prepared all the required files, we can finally compile the kext.
 
 - In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file
@@ -646,7 +665,7 @@ Now that we finally prepared all the required files, we can finally compile the 
 - Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
 
-## <a name='xii.-testing-and-troubleshooting'></a>XII. Testing and Troubleshooting
+## <a name='xiii.-testing-and-troubleshooting'></a>XIII. Testing and Troubleshooting
 ### <a name='testing-the-new-layout'></a>Testing the new Layout
 - Add your newly compiled AppleALC.kext to your EFI/OC/Kexts folder
 - Open the config.plist and change the Layout-ID to the one you chose for your Layout-ID
@@ -669,7 +688,7 @@ If it's not working, do the following:
 - Re-compile the kext, replace it in the EFI, reboot, test, repeat.
 - Ask for help on a Forum.
 
-## <a name='xiii.-adding-your-layout-id-to-the-applealc-repo'></a>XIII. Adding your Layout-ID to the AppleALC Repo
+## <a name='xiv.-adding-your-layout-id-to-the-applealc-repo'></a>XIV. Adding your Layout-ID to the AppleALC Repo
 Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub repo via Pull Request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 In order to add your Layout-ID to AppleALC's database, you have to do the following:
