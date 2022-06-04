@@ -148,9 +148,7 @@ Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.pli
 ### Configuring Xcode
 - Start Xcode
 - Open the `AppleALC.xcodeproj` file located in the AppleALC folder
-- From the menubar, select "File > Project Settings"
-- Change "Derived Data" to "Project-relative Location" and click "Done".
-- Next, select the AppleALC project
+- Highlight the AppleALC project
 - Under "Build Settings", scroll down to "User-Defined Settings" and check if the entries `KERNEL_EXTENSION_HEADER_SEARCH_PATHS` and `KERNEL_FRAMEWORK_HEADERS` exist
 - If not, press the "+" button, click on "Add User-Defined Settings" and add them:<br>![Xcodsetings01](https://user-images.githubusercontent.com/76865553/170472634-9ead337e-0ccf-46d6-9cbe-8a988cf5d14b.png)
 - Make sure that both point to "(PROJECT_DIR)/MacKernelSDK/Headers":</br>![Xcode_UDS](https://user-images.githubusercontent.com/76865553/170472740-b842f8ca-0bc7-4023-acc1-c9e30b68bbfa.png)
