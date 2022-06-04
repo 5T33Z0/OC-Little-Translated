@@ -3,7 +3,7 @@
 **TABLE of CONTENTS**
 
 <!-- vscode-markdown-toc -->
-* [I. Introduction](#i.-introduction)
+* [I. Summery](#i.-summery)
 * [II. Preparations](#ii.-preparations)
 * [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
 * [IV. Understanding the Codec schematic and signal flow](#iv.-understanding-the-codec-schematic)
@@ -22,15 +22,24 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## <a name='i.-introduction'></a>I. Introduction
-This is my attempt to provide an up-to-date guide for creating/modifying Layout-IDs for the AppleALC kext to make audio work on a Hackintosh in 2022 (and beyond).
+## <a name='i.-summery'></a>I. Summery
+### About
+This is my attempt to provide an up-to-date guide for creating/modifying Layout-IDs for the AppleALC kext to make audio work on a Hackintosh in 2022 (and beyond). It covers the following topics:
 
-### <a name='who-this-guide-is-for'></a>Who this guide is for
+- Installing and configuring the necessary tools
+- Creating a Codec dump in Linux
+- Converting the Data
+- Creating a PinConfig, Layout.xml and Platforms.xml files
+- Integrating the data into the AppleALC Source Code 
+- Compiling a AppleALC.kext
+- Adding the newly created Layout-ID to the AppleALC repo
+
+### Who this guide is for
 This guide is aimed at users who want to create a new or modify an existing Layout-ID for different reasons. Maybe the one in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
 **TIP**: If you just want a slimmed-down version of AppleALC.kext for your Codec, you can use dreamwhite's [Custom AppleALC builds](https://github.com/dreamwhite/ChonkyAppleALC-Build/releases) instead.
 
-### <a name='are-you-*sure*,-you-want-to-do-this?'></a>Are you *sure*, you want to do this?
+### Are you *sure*, you want to do this?
 From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config and reboot. And voilà: Sound! 
 
 But once you are on the other end, trying to actually *create* your own ALC Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around. So, are you still sure you *want* to do this?
@@ -38,7 +47,7 @@ But once you are on the other end, trying to actually *create* your own ALC Layo
 <details>
 <summary><strong>Why another guide?</strong> (click to reveal)</summary>
 
-### <a name='why-another-guide?'></a>Why another guide?
+### Why another guide?
 Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating it into the source code for compiling is not covered on the AppleALC repo – and nowhere else on that matter.
 
 The hand full of guides I could find however, stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated, over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate all the data into the AppleALC source code to compile the kext!
@@ -49,9 +58,9 @@ My guide is an adaptation of MacPeet's work but updates and enhances it, where p
 </details>
 
 ## <a name='ii.-preparations'></a>II. Preparations
-Creating a Layout-ID for AppleALC is possibly one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
+Creating a Layout-ID for AppleALC is one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
-### <a name='obtaining-an-audio-codec-dump-in-linux'></a>Obtaining an Audio CODEC dump in Linux
+### Obtaining an Audio CODEC dump in Linux
 Unfortunately, Codec dumps obtained with Clover/OpenCore can't be processed by the tools required to convert and visualize the data inside of them. Codec dumps created in Linux, however, can be processed by these tools just fine.[^1]
 
 Therefore, we need to use (a live version of) Linux to create the codec dump without having to actually install Linux. We can use Ventoy for this. It prepares a USB flash drive which can run almost any ISO directly without having to create a USB installer.
@@ -63,7 +72,7 @@ Therefore, we need to use (a live version of) Linux to create the codec dump wit
 
 [^1]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
 
-#### <a name='preparing-a-usb-flash-drive-for-running-linux-from-an-iso'></a>Preparing a USB flash drive for running Linux from an ISO
+#### Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Codec"!
 
 1. Use a USB 3.0 flash drive (at least 8 GB or more)
@@ -75,7 +84,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 7. From the GNU Grub, select "Try or Install Linux"
 8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu" (or whatever the distro of your choice prompts).
 
-#### <a name='dumping-the-codec'></a>Dumping the Codec
+#### Dumping the Codec
 1. Once Linux is up and running, open Terminal and enter:</br>
 	```shell
 	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
@@ -85,7 +94,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 4. Extract `CodecDump.zip` to the Desktop
 5. ⚠️ Rename `card0-codec#0.txt` inside the "CodecDump" folder to `codec_dump.txt`. This is important. Otherwise the script we will use in step III. can't find the file (it's looking specifically for "codec_dump.txt") and the file conversion process will fail.
 
-#### <a name='relevant-codec-data'></a>Relevant Codec data
+#### Relevant Codec data
 Amongst other things, the Codec dump text contains the following details:
 
 - The Codec model
@@ -99,7 +108,7 @@ Amongst other things, the Codec dump text contains the following details:
 	- Audio Input Nodes
 	- Number of connections from/to a Node/Mixer/Selector/Switch
 
-### <a name='required-tools-and-files'></a>Required Tools and Files
+### Required Tools and Files
 💡Please follow the instructions below carefully and thoroughly to avoid issues.
 
 - Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
@@ -116,7 +125,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Get a plist editor like PlistEditPro or [**XPlist**](https://github.com/ic005k/Xplist)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
-### <a name='preparing-the-applealc-source-code'></a>Preparing the AppleALC Source Code
+### Preparing the AppleALC Source Code
 - Clone, Download or Fork or and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
 - Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
 - In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into the window and press enter.
@@ -124,7 +133,7 @@ Amongst other things, the Codec dump text contains the following details:
 - The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 
-#### <a name='important-files-we-have-to-work-on:'></a>Important files we have to work on:
+#### Important files we have to work on:
 
 |Parameter(s)   |File            |Location
 :------------:|------------------|----------
@@ -135,7 +144,7 @@ Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.pli
 
 **NOTE**: The `XX` stands for the number of the chosen Layout-ID. `XXX` stands for the corresponding Codec model the Layout-ID is for (and not what you thought). More about that later.
 
-### <a name='configuring-xcode'></a>Configuring Xcode
+### Configuring Xcode
 - Start Xcode
 - Open the `AppleALC.xcodeproj` file located in the AppleALC folder
 - From the menubar, select "File > Project Settings"
@@ -152,7 +161,7 @@ Now, that we've got the prep work out of the way, we can begin!
 ## <a name='iii.-extracting-data-from-the-codec-dump'></a>III. Extracting data from the Codec dump
 In order to create a routing of the audio inputs and outputs for macOS, we have to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
 
-### <a name='converting-the-codec-dump'></a>Converting the Codec Dump 
+### Converting the Codec Dump 
 1. Open the `codec_dump.txt` located in the "codecgraph" folder
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
 3. Save the file.
@@ -186,11 +195,10 @@ Form              | Function
 **Dotted Lines**  | Optional connection 
 **Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
 
-### <a name='how-to-read-the-schematic'></a>How to read the schematic
-
+### How to read the schematic
 ⚠️ The schematic is a bit hard to comprehend and interpret because of its structure. It's also misleading: since all the arrows point to the right one might think they represent the signal flow – they don't. So ignore them! Instead, you need to take an approach which follows the signal flow.
 
-#### <a name='routing-inputs'></a>Routing Input Devices
+#### Routing Input Devices
 For **Input Devices**, start at the input and trace the route to the Pin Complex Node. 
 
 - **Option 1**: Input &rarr; Mixer/Audio Selector &rarr; PinComplex Node:
@@ -206,7 +214,7 @@ For **Input Devices**, start at the input and trace the route to the Pin Complex
 		flowchart LR
 		id1(((Input))) ------>|Direct Connection|id3(Pin Complex XY)
 	```
-#### <a name='routing-outputs'></a>Routing Output Devices
+#### Routing Output Devices
 For **Output Devices**, start at the Pin Complex Node and follow the signal through Audio Mixer(s)/Selectors to the physical output Here are some examples of possible routings.
 
 - **Option 1**: Pin Complex Note &rarr; Mixer/Audio Selector &rarr; Output (common):
@@ -225,7 +233,7 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
 
 **NOTE**: Whether or not a signal traverses more than one Mixer Node depends on the Codec design. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output!
 
-#### <a name='routing-examples-from-alc269'></a>Routing Examples from ALC269
+#### Routing Examples from ALC269
 
 - **Headphone Output switch**:
 
@@ -253,7 +261,7 @@ The ALC 269 Codec includes an Aux Return to send (or return) the incoming signal
 
 If you would trust the arrows in the schematic, the existence of Mixer 11 wouldn't make any sense. That's why ***you need to follow the signal flow instead of the arrows***! For the `PathMap`, you only need to enter the path following this formula: Input &rarr; Mixer &rarr; PinComplex Node.
 
-#### <a name='tracing-possible-paths'></a>Tracing possible paths
+#### Tracing possible paths
 Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. 
 
 We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
@@ -351,7 +359,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
-#### <a name='method-2:-add-a-node-to-pinconfigurator-and-configure-it-manually'></a>Method 2: Add a node to PinConfigurator and configure it manually
+#### Method 2: Add a node to PinConfigurator and configure it manually
 
 1. In PinConfigurator, click "Add"
 2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
@@ -377,7 +385,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 ## <a name='vi.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>VI. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
 
-### <a name='finding-an-unused-layout-id-number'></a>Finding an unused Layout-ID number
+### Finding an unused Layout-ID number
 In order to find a yet unused Layout-ID for your Codec, you have to check which Layout-IDs exist already and chose a different one in the range from 11 to 99:
 
 - Visit [this repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
@@ -390,7 +398,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 
 **IMPORTANT**: Layout-IDs 1 to 10 are reserved but Layouts 11 to 99 are user-assignable. 
 
-#### <a name='scenario-1:-modifying-data-of-an-existing-layout-id'></a>Scenario 1: Modifying data of an existing Layout-ID
+#### Scenario 1: Modifying data of an existing Layout-ID
 
 1. Open "codec_dump_dec.txt"
 2. Copy the "Vendor-Id" in decimal (= `CodecID` in AppleALC)
@@ -412,18 +420,18 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
 12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
 
-#### <a name='scenario-2:-creating-a-new-layout-id-from-scratch-(todo)'></a>Scenario 2: Creating a new Layout-ID from scratch (todo)
+#### Scenario 2: Creating a new Layout-ID from scratch (todo)
 
 Now that we got the PinConfig out of the way, we can continue.…
 
 ## <a name='vii.-creating-a-pathmap'></a>VII. Creating a PathMap
 The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output. The data has to be entered in the `PlatformsXY.xml` file (XY = number of the layout).
 
-### <a name='structure-of-`platformsxx.xml`'></a>Structure of `PlatformsXX.xml`
+### Structure of `PlatformsXX.xml`
 1. The PathMap has to be enterer in `PlatformXX.xml` (`XX` = chosen Layout-ID). 
 2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs/outputs switch automatically if a device is plugged in or if the input/output have to be changed manually in System Preferences.
 
-#### <a name='switch-mode'></a>Switch-Mode
+#### Switch-Mode
 In Switch-Mode, the Output signal is re-routed from the current output to another one automatically, once a jack is plugged into the system. On Laptops for example, the internal speakers are muted and the signal is automatically re-routed to the Headphone or Line-out. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. 
 
 For Switch-Mode to work, certain conditions have to be met: 
@@ -491,7 +499,7 @@ flowchart LR
 	id0(Dict) -->
 	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
 ```
-#### <a name='manual-mode'></a>Manual Mode
+#### Manual Mode
 In manual mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
 - **PathMap**
@@ -510,7 +518,7 @@ Now that we know to enter the routing data into the PlatformsXX.xml file, we can
 ## <a name='viii.-preparing-a-`platformsxx.xml`'></a>VIII. Preparing a `PlatformsXX.xml`
 Obviously, we need to avoid changing data of existing Platforms.xml files created by other users. Because it would destroy the Layout for other users, if the Source Code would get synced with the AppleALC repo. Instead, we need to create a new one for our Layout-ID with our own routing, so do the following:
 
-- In Finder, navigate to the resources folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
+- In Finder, navigate to the "Resources" folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
 - Select the `Platforms.xml` of the Layout-ID you are currently using (the number is identical). Since I am using ALC Layout-ID 18, I use Platforms18.xml.
 - Duplicate the file (⌘+D)
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
@@ -648,7 +656,7 @@ Now that we finally prepared all the required files, we can finally compile the 
 
 **NOTE**: For testing verbs and WakeConfigData you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext everytime you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1`  (or `alc-verbs` device property) to be present in the `config.plist`.
 
-### <a name='troubleshooting'></a>Troubleshooting
+### Troubleshooting
 If it's not working, do the following: 
 
 - Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore-Install-Guide/blob/e08ee8ebe6fa030393c153b055225f721edafab2/post-install/audio.md#troubleshooting) by Dortania
@@ -672,7 +680,7 @@ In order to add your Layout-ID to AppleALC's database, you have to do the follow
 
 Once your Layout is part of the main AppleALC repo you can update AppleALC without having to compile your own version every time the source code is updated. 
 
-## <a name='credits-and-resources'></a>CREDITS and RESOURCES
+## CREDITS and RESOURCES
 - **Guides**:
 	- MacPeet for [[Guide] Anleitung patch AppleHDA](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
 	- EMlyDinEsH for [Complete Apple HDA Patching Guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/)
