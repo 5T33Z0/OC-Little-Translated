@@ -3,7 +3,7 @@
 **TABLE of CONTENTS**
 
 <!-- vscode-markdown-toc -->
-* [I. Summery](#i.-summery)
+* [I. Summary](#i.-summary)
 * [II. Preparations](#ii.-preparations)
 * [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
 * [IV. Understanding the Codec schematic and signal flow](#iv.-understanding-the-codec-schematic)
@@ -23,7 +23,7 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## <a name='i.-summery'></a>I. Summery
+## <a name='i.-summary'></a>I. Summary
 ### About
 This is my attempt to provide an up-to-date guide for creating/modifying Layout-IDs for the AppleALC kext to make audio work on a Hackintosh in 2022 (and beyond). It covers the following topics:
 
