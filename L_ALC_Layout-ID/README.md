@@ -38,11 +38,11 @@ This is my attempt to provide an up-to-date guide for creating/modifying Layout-
 This guide is aimed at users who want to create a new or modify an existing Layout-ID for different reasons. Maybe the one in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
 ### Why another guide?
-Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating the data into the source code for compiling the kext is not covered on the AppleALC repo.
+Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating the data into the source code for compiling the kext is not documented on the AppleALC repo.
 
-The hand full of guides I could find however, stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated (I had to use waybackmachine for some), over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate the data into the AppleALC source code to compile the kext!
+The hand full of guides I could find stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated (I had to use waybackmachine for some), over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate the data into the AppleALC source code to compile the kext!
 
-The most convincing guide I did find is written in German by MacPeet. He has created more than 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC as well. Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
+The most convincing guide I did find is written in German by MacPeet. He has created over 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC as well. Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
 
 My guide is an adaptation of MacPeet's work but updates and enhances it, where possible. It introduces new tools and workflows and utilizes all the nice features markdown has to offer to present the instruction in the best way possible, such as: headings, syntax highlighting, tables and mermaid integration for flowcharts, etc.
 
@@ -51,7 +51,7 @@ So all in all, there is a justification for having new guide for this to enable 
 ### Are you *sure*, you want to do this?
 From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config and reboot. And voilà: Sound! 
 
-But once you are on the other end, trying to actually *create* your own ALC Layout-ID this becomes a completely different story quickly and chances are that your custom Layout-ID won't work at all the first time around. So, are you still sure you *want* to do this?
+But once you are on the other end, trying to actually *create* your own ALC Layout-ID this becomes a completely different story quickly and it's almost a give that your Layout-ID won't work at all the first time around. So, are you still sure you *want* to do this?
 
 💡 **TIPS**
 
