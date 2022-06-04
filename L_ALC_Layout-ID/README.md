@@ -119,7 +119,7 @@ Amongst other things, the Codec dump text contains the following details:
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
 - Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Codec-Graph.zip?raw=true). 
-- Copy the `CodeC-Graph` folder to the Desktop. We need it to convert and visualize the data inside the Codec dump, so we have can work with it.
+- Copy the `Codec-Graph` folder to the Desktop. We need it to convert and visualize the data inside the Codec dump, so we have can work with it.
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
