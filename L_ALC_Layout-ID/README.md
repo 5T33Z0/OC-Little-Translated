@@ -167,7 +167,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we have 
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
 3. Save the file.
 4. Next, double-click `Conver_Dump`. 
-5. This will start Codec-Graph (and run another file conversion in the background)
+5. This will start Codec-Graph (and perform one additional file conversion)
 6. Press "N", hit enter
 7. Drag and drop the "codec_dump.txt" into the window and hit "Enter"
 8. Press "N", hit enter. This creates 3 new files inside the "output" folder:
