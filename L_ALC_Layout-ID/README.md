@@ -28,7 +28,7 @@ This is my attempt to provide an up-to-date guide for creating/modifying Layout-
 ### <a name='who-this-guide-is-for'></a>Who this guide is for
 This guide is aimed at users who want to create a new or modify an existing Layout-ID for different reasons. Maybe the one in use was created for the same Codec but a different system/mainboard and causes issues or they want to add inputs or outputs missing from the current Layout-ID in use.
 
-If you just want to compile a slimmed-down version of the AppleALC kext for the Layout-ID you are using, you can follow [this guide](https://github.com/dreamwhite/ChonkyAppleALC-Build).
+**TIP**: If you just want a slimmed-down version of AppleALC.kext for your Codec, you can use dreamwhite's [Custom AppleALC builds](https://github.com/dreamwhite/ChonkyAppleALC-Build/releases) instead.
 
 ### <a name='are-you-*sure*,-you-want-to-do-this?'></a>Are you *sure*, you want to do this?
 From a user's perspective, making audio work in hackintosh is a no-brainer: add AppleALC to the kext folder of your Boot Manager, enter the correct ALC Layout-ID to the config and reboot. And voilà: Sound! 
@@ -645,6 +645,8 @@ Now that we finally prepared all the required files, we can finally compile the 
 - Save the config and reboot
 - Check if sound is working (Internal, Inputs, Outputs, Headphones)
 - If it's working: congrats!
+
+**NOTE**: For testing verbs and WakeConfigData you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext everytime you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1`  (or `alc-verbs` device property) to be present in the `config.plist`.
 
 ### <a name='troubleshooting'></a>Troubleshooting
 If it's not working, do the following: 
