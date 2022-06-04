@@ -1,4 +1,4 @@
-# How to create/modify a Layout-ID for AppleALC
+y# How to create/modify a Layout-ID for AppleALC
 
 **TABLE of CONTENTS**
 
@@ -41,7 +41,7 @@ This guide is aimed at users who want to create a new or modify an existing Layo
 ### Why another guide?
 Although the AppleALC kext comes with about 600 pre-configured Layout-IDs for more than 100 Audio Codecs, the process of *creating* or *modifying* a Layout-ID and integrating the data into the source code for compiling the kext is not documented on the AppleALC repo.
 
-The hand full of guides I could find stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated (I had to use waybackmachine for some), over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate the data into the AppleALC source code to compile the kext!
+The hand full of guides I could find stem from an era before AppleALC even existed, when patching AppleHDA was still a thing. Most of them are either outdated (I had to use Wayback Machine for some), over-complicated or only parts of them are applicable today. And most importantly: ***none*** of them actually explain how to integrate the data into the AppleALC source code to compile the kext!
 
 The most convincing guide I did find is written in German by MacPeet. He has created over 50 (!) Layout-IDs for AppleALC over the years. It's from 2015 so it predates AppleALC as well. Although not all of its instructions are applicable today, his guide introduced a new, partly automated workflow, using tools to visualize the Codec dump and scripts to extract required data from it which previously had to be extracted manually.
 
@@ -56,7 +56,7 @@ But once you are on the other end, trying to actually *create* your own ALC Layo
 
 💡 **TIPS**
 
-- Click on the litte Header icon next to `README.md` to navigate in the document quickly
+- Click on the little Header icon next to `README.md` to navigate in the document quickly
 - If you just want a slimmed-down version of AppleALC.kext for your Codec, you can use dreamwhite's [Custom AppleALC builds](https://github.com/dreamwhite/ChonkyAppleALC-Build/releases) instead.
 
 ## <a name='ii.-preparations'></a>II. Preparations
@@ -165,7 +165,7 @@ In order to create a routing of the audio inputs and outputs for macOS, we have 
 1. Open the `codec_dump.txt` located in the "Codec-Graph" folder
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
 3. Save the file.
-4. Next, double-click `Conver_Dump`. 
+4. Next, double-click `Convert_Dump`. 
 5. This will start Codec-Graph (and perform one additional file conversion)
 6. Press "N", hit enter
 7. Drag and drop the "codec_dump.txt" into the window and hit "Enter"
@@ -316,7 +316,7 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 #### Default Method (keeps connected Nodes only)
 Preferred method if you just want to implement the default Codec configuration.
 
-1. Open **PinConfurator**
+1. Open **PinConfigurator**
 2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
 3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
 4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
@@ -330,7 +330,7 @@ Preferred method if you just want to implement the default Codec configuration.
 12. Continue in **Chapter VI.**
 
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
-In case you already have a somewhat working Layout-ID that you want/nedd to modify, do the following:
+In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
 
 1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
 2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt` or search by description in `Codec` field):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
@@ -344,7 +344,7 @@ In case you already have a somewhat working Layout-ID that you want/nedd to modi
 
 Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
 
-There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data insiede the `verbs.txt` to "craft" one, copy it into memory and import it.
+There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
 
 #### Method 1: Use verbs.txt to add a Node to the PinConfig
 
@@ -355,7 +355,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 5. Copy the resulting PinConfig (pink) into the clipboard
 6. Switch back to PinConfigurator
 7. From the menubar, select File > Import > Clipboard. In this example, Node 27 has been added:</br>![modpinpc](https://user-images.githubusercontent.com/76865553/171392147-c6b4df49-8f51-46a5-a707-c2e0fc40a557.png)
-8. Select "Patch > Verb Sanatize" to correct the Verb data.
+8. Select "Patch > Verb Sanitize" to correct the Verb data.
 9. Export the data. There are 2 ways to do so: 
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
@@ -539,8 +539,8 @@ For reference, Let's have a look how Switch-Mode for Outputs is realized in ALC 
 On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:</br>![PlatformsStructure02](https://user-images.githubusercontent.com/76865553/171393394-0244592c-a961-4ab7-ae1f-1942dbd6a5d4.png)
 
 - Enter the required NodeIDs you found in chapter IV for the Inputs and Outputs you need (as explained). 
-- To add more devices to the PathMap, duplicate one of the "Source" Array and change the data
-- Once, you're done, save the file
+- To add more devices to the PathMap, duplicate one of the "Source" Array and change the data.
+- Once, you're done, save the file.
 
 **NOTE**: `LayoutID` and `PathMapID` **must be identical** and must use the same number you chose for your Layout-ID previously.
 
@@ -604,7 +604,7 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
 - Navigate to the branch containing the Output Devices (expand PathMaps > 0 > Pathmap > 1):</br> ![Outdevs01](https://user-images.githubusercontent.com/76865553/171813688-09bc6040-cbe8-4262-ad62-0321297df4cb.png)
 - Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![Outdevs02](https://user-images.githubusercontent.com/76865553/171813707-703f1526-54da-454d-b1d3-879d34efc61e.png)
-- Next, we need to correct the Nodes inside of Array 2 (Ouput device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
+- Next, we need to correct the Nodes inside of Array 2 (Output device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
 - Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
 	```swift
   Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
@@ -667,23 +667,21 @@ Now that we finally prepared all the required files, we can finally compile the 
 
 ## <a name='xiii.-testing-and-troubleshooting'></a>XIII. Testing and Troubleshooting
 ### <a name='testing-the-new-layout'></a>Testing the new Layout
-- Add your newly compiled AppleALC.kext to your EFI/OC/Kexts folder
+- Add your newly compiled AppleALC.kext to your `EFI/OC/Kexts` folder
 - Open the config.plist and change the Layout-ID to the one you chose for your Layout-ID
 - Save the config and reboot
 - Check if sound is working (Internal, Inputs, Outputs, Headphones)
 - If it's working: congrats!
 
-**NOTE**: For testing verbs and WakeConfigData you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext everytime you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1`  (or `alc-verbs` device property) to be present in the `config.plist`.
+**NOTE**: For testing verbs and WakeConfigData you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext every time you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1` or `alc-verbs` device property to be present in the `config.plist`.
 
 ### Troubleshooting
-If it's not working, do the following: 
-
-- Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore-Install-Guide/blob/e08ee8ebe6fa030393c153b055225f721edafab2/post-install/audio.md#troubleshooting) by Dortania
-- Check and adjust/correct: 
+Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore-Install-Guide/blob/e08ee8ebe6fa030393c153b055225f721edafab2/post-install/audio.md#troubleshooting) by Dortania
+- Check and adjust/correct:
 	- Pin-Config (maybe calculate it manually)
 	- PathMap inside of PlatformsXX.xml
 	- LayoutXX.xml 
-	- Info.plist &rarr; check if you added your LayoutXX.xml and PlatfomsXX.xml 
+	- Info.plist &rarr; check if you added your layoutXX.xml and PlatformsXX.xml 
 	- Take notes. You can use my [Template](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Testing_Notes.md) for this
 - Re-compile the kext, replace it in the EFI, reboot, test, repeat.
 - Ask for help on a Forum.
@@ -701,7 +699,7 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 
 ## CREDITS and RESOURCES
 - **Guides**:
-	- MacPeet for [[Guide] Anleitung patch AppleHDA](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
+	- MacPeet for [Anleitung patch AppleHDA](https://www.root86.com/blog/40/entry-51-guide-anleitung-patch-applehda-bedingt-auch-f%C3%BCr-codec-erstellung-in-applealc/) (German)
 	- EMlyDinEsH for [Complete Apple HDA Patching Guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/)
 	- F0x1c for [AppleALC_Instructions](https://github.com/F0x1c/AppleALC_Instructions)
 	- The King for [[HOW TO] Patch AppleHDA - Knowledge Base, Guide for how to fix/use original AppleHDA](http://web.archive.org/web/20150105004602/http://www.projectosx.com/forum/index.php?showtopic=465&st=0)
@@ -709,7 +707,7 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 	- Daliansky for [AppleALC Guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 	- Daliansky for [Using VoodooHDA for finding valid Nodes](https://blog-daliansky-net.translate.goog/With-VoodooHDA-comes-getdump-find-valid-nodes-and-paths.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **About Intel High Definition Audio**:
-	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html), esp. Chpt. 7: "Codec Features and Requirements".
+	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html), esp. Chapter 7: "Codec Features and Requirements".
  	- HaC Mini Hackintosh for additional info about the [HDA Codec and Codec-Graph](https://osy.gitbook.io/hac-mini-guide/details/hda-fix#hda-codec)
  	- Daliansky for [List of HDA Verb Parameters](https://blog-daliansky-net.translate.goog/hda-verb-parameter-detail-table.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **Tools**:
