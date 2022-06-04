@@ -634,7 +634,7 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Adjust the following settings:
 	- `Inputs`: Add Type of Inputs (if missing)
 	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Dockin Station.
-	- `PathmapID` (# must match that of the filename. In my case: 39):</br>![](/Users/5t33z0/Desktop/layoutxml.png)
+	- `PathmapID` (# must match that of the filename. In my case: 39):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
 - Save the file.
 
 ### Creating a new `LayoutXX.xml` from scratch
