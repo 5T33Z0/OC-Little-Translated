@@ -306,17 +306,17 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 We will come back to the schematic later… 
 
 ## <a name='v.-creating-a-pinconfig'></a>V. Creating a PinConfig 
-Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the the so-called `PinConfig`.
+Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
 
-"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext.
+"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
-For more info on how to extract the verb data from the Codec dumpe *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
-
-Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump…
+Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically…
 
 ### Using PinConfigurator to create a PinConfig
 
 #### Default Method (keeps connected Nodes only)
+Preferred method if you just want to implement the default Codec configuration.
+
 1. Open **PinConfurator**
 2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
 3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
@@ -327,14 +327,14 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 8. Copy the `ConfigData` into the clipboard
 9. Select "File > Export > verbs.txt". It will be stored on the Desktop.
 10. Open verbs.txt.
-11. Paste the ConfigDate in an empty line and save the file. We'll need it later
-12. Continue in Chapter VI!
+11. Paste the ConfigDate in an empty line and save the file. We'll need it later.
+12. Continue in **Chapter VI.**
 
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
-In case you already have a working Layout-ID that you just want to modify, do the following:
+In case you already have a somewhat working Layout-ID that you want/nedd to modify, do the following:
 
 1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
-2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt`):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
+2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt` or search by description in `Codec` field):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
 3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C)
 4. Start the PinConfigurator App
 5. From the menubar, select "File > Import > Clipboard"
@@ -345,9 +345,10 @@ In case you already have a working Layout-ID that you just want to modify, do th
 
 Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
 
-There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data from the `verbs.txt` to "craft" one and then import it.
+There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data insiede the `verbs.txt` to "craft" one, copy it into memory and import it.
 
 #### Method 1: Use verbs.txt to add a Node to the PinConfig
+
 1. Open `verbs.txt`
 2. Place the cursor at the end of the document 
 3. Paste (⌘+V) the ConfigDate (green). It should still be stored in the Clipboard.
