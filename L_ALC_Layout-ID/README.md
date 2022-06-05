@@ -475,6 +475,8 @@ This has to be represented in the file structure of the `PathMap`. Nodes you wan
 						-  2 (Dict) Output Node
 				- etc. 
 
+**IMPORTANT**: Make sure to nail this structure. Otherwise there won't be any Input/Output Sources available!
+
 ##### Possible Configurations: Odd/Even
 We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
 
@@ -510,26 +512,28 @@ flowchart LR
 #### Manual Switching Mode
 In manual switching mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
-- **PathMap**
-	- **0 (Array)**
-		- 0 (Array) (Device 1) (Input 1)
-			- 0 (Dict) (Nodes of Input 1)
-				- 0 (Dict) (Input Node)
-				- 1 (Dict) (Mixer Node)
-				- 2 (Dict) (Pin Complex Node)
-	- **1 (Array)**
-		- 0 (Array) (Device 2) (Input 2)
-			- 0 (Dict) (Nodes of Input 2)
-				- 0 (Dict) (Input Node)
-				- 1 (Dict) (Mixer Node)
-				- 2 (Dict) (Pin Complex Node)
-	- **2 (Array)**
-		- 0 (Array) (Device 3) (Output 1)
-			- 0 (Dict) (Nodes of Device 1)
-				- 0 (Dict) (Pin Complex Node)
-				- 1 (Dict) (Mixer Node)
-				- 2 (Dict) (Output Node)
-	- etc.
+- PathMaps (Array)
+	- 0 (Dict) 
+		- PathMap (Array)
+			- 0 (Array)
+				- 0 (Array) (Device 1) (Input 1)
+					- 0 (Dict) (Nodes of Input 1)
+						- 0 (Dict) (Input Node)
+						- 1 (Dict) (Mixer Node)
+						- 2 (Dict) (Pin Complex Node)
+			- 1 (Array)
+				- 0 (Array) (Device 2) (Input 2)
+					- 0 (Dict) (Nodes of Input 2)
+						- 0 (Dict) (Input Node)
+						- 1 (Dict) (Mixer Node)
+						- 2 (Dict) (Pin Complex Node)
+			- 2 (Array)
+				- 0 (Array) (Device 3) (Output 1)
+					- 0 (Dict) (Nodes of Device 1)
+						- 0 (Dict) (Pin Complex Node)
+						- 1 (Dict) (Mixer Node)
+						- 2 (Dict) (Output Node)
+			- etc.
 
 **IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth beteen generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
