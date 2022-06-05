@@ -519,16 +519,12 @@ In manual switching mode, you have to – you've guessed it – switch the input
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
 
 ## <a name='viii.-creating-a-`platformsxx.xml`'></a>VIII. Creating a `PlatformsXX.xml`
-There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML` that will generate a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. The second method is the traditional manual method. Choose either or!
+There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML`. It generates a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. Unfortunately, this method doesn't work beyond macOS Catalina, so users of Big Sur and newer need to follow the manual method instead.
 
-### Automated Method using VoodooHDA and GetDumpXML
+### Automated method using VoodooHDA and GetDumpXML (macOS ≤ 10.15.7 only)
 - Download [GetDumpXML.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/GetDumpXML.zip?raw=true) and unpack it
-- Mount EFI
-- Add VoodooHDA.kext to your kext folder 
-- Open your config.plist (OpenCore users only)
-- Disable AppleALC.kext (Clover users: move AppleALC to "Off" folder)
-- Add VoodooHDA.kext to `Kernel/Add` section (OpenCore only) 
-- Save the config (OpenCore only)
+- Add VoodooHDA.kext to your EFI's kext folder and config.plist.
+- Disable/delete ApppleALC.kext
 - Reboot
 - Double-click `GetDumpXML` (in GetDumpXML folder)
 - This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing `Platforms.xml` file
