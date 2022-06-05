@@ -445,32 +445,35 @@ Let's have a look at the output side of the schematic:</br>![SwitchMode01](https
 - These Nodes can all connect to Mixers 12 (red) and 13 (green)
 - Therefore, they can be operated in Auto Switching Mode
 
-This has to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array:
+This has to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array. Here's how the structure inside the Platforms.xml file looks:
 
-- **PathMap** (Array)
-	- **0 (Array)** (Inputs)
-		- 0 (Array) (Device 1)
-			- 0 (Array) (Nodes of Device 1)
-				-  0 (Dict) Input Node 
-				-  1 (Dict) Mixer Node
-				-  2 (Dict) Pin Complex Node
-		- 1 (Array) (Device 2)
-			- 0 (Array) (Nodes of Device 2)
-				-  0 (Dict) Input Node 
-				-  1 (Dict) Mixer Node
-				-  2 (Dict) Pin Complex Node
-	- **Array 1** (Outputs)
-		- 0 (Array) (Device 1)
-			- 0 (Array) (Nodes of Device 1)
-				-  0 (Dict) Pin Complex Node
-				-  1 (Dict) Mixer Node
-				-  2 (Dict) Output Node
-		- 1 (Array) (Device 2)
-			- 0 (Array) (Nodes of Device 2)
-				-  0 (Dict) Pin Complex Node
-				-  1 (Dict) Mixer Node
-				-  2 (Dict) Output Node
-		- etc. 
+- PathMaps (Array)
+	- 0 (Dict) 
+		- PathMap (Array)
+			- **0 (Array) [INPUTS]**
+				- 0 (Array) [Input Source 1]
+					- 0 (Array) [Container for Nodes of Input Source 1]
+						-  0 (Dict) Input Node 
+						-  1 (Dict) Mixer Node
+						-  2 (Dict) Pin Complex Node
+				- 1 (Array) (Input Source 2)
+					- 0 (Array) [Container for Nodes of Input Soure 2]
+						-  0 (Dict) Input Node 
+						-  1 (Dict) Mixer Node
+						-  2 (Dict) Pin Complex Node
+					- etc.
+			- **1 (Array) [OUTPUTS]**
+				- 0 (Array) [Output Source 1]
+					- 0 (Array) [Container for Nodes of Output Source 1]
+						-  0 (Dict) Pin Complex Node
+						-  1 (Dict) Mixer Node
+						-  2 (Dict) Output Node
+				- 1 (Array) (Output Source 2)
+					- 0 (Array) [Container for Nodes of Output Source 2]
+						-  0 (Dict) Pin Complex Node
+						-  1 (Dict) Mixer Node
+						-  2 (Dict) Output Node
+				- etc. 
 
 ##### Possible Configurations: Odd/Even
 We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
