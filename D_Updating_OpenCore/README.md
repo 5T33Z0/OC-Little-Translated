@@ -66,7 +66,7 @@ For the release version (default), you can only select Release Versions of OpenC
 
 ![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)
 
-For downloading and syncing the latest **Dev** versions, you have to change View to `Dev` and add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field:
+For downloading and syncing the latest **Dev** versions, you have to change View to `Dev` and add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore":
 
 ![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)
 
