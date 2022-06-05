@@ -653,16 +653,16 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 
 ## <a name='x.-adding/modifying-a-layoutxx.xml'></a>X. Adding/Modifying `layoutXX.xml`
 
-### Modifying an existing `LayoutXX.xml`
+### Modifying an existing `layoutXX.xml`
 - Navigate to `AppleALC/Resorces/YOUR_CODEC` (in my case ALC269)
-- Duplicate the `LayoutXX.xml` you want to modify (in my case Layout18.xml)
+- Duplicate the `LayoutXX.xml` you want to modify (in my case layout18.xml)
 - Assign an unused number to it (in my case: Layout39.xml)
 - Open it with a Plist Editor 
 - Change the `LayoutID` &rarr; must be identical with # used in filename
 - Expand `PathMapRef`
 - Adjust the following settings:
 	- `Inputs`: Add Type of Inputs (if missing)
-	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Dockin Station.
+	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Docking Station.
 	- `PathmapID` (# must match that of the filename. In my case: 39):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
 - Save the file.
 
