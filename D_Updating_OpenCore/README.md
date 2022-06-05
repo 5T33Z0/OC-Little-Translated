@@ -49,17 +49,28 @@ To update OpenCore files and Kexts, do the following:
 1. Click on the `Sync` button (looks similar to a Recycle symbol):</br>
 	![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = link to repo is missing (add it to "Database" > "Kext Update URL"). Besides the displayed version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
-	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)</br>
-**Addendum**: The sync window is object to change during app development. Currently, depending on the OC variant you chose in the "View" menu, the sync dialog window will look different. For the release version, you can select the OpenCore version you want to install from a dropdown menu:</br>
-![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)</br>
-For Dev versions, you need to add the [link to the repo](https://github.com/bugprogrammer/HackinPlugins) to download the OC files from. Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)):</br>
-![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)</br>
+	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
 6. You will be notified once it's done:</br>
 	![syncdone2](https://user-images.githubusercontent.com/76865553/140641897-c8f26c31-bb4c-47ae-be1f-fa8c1e0163a0.png)
-6. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+t. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+
+### Release builds vs Dev builds
+The sync window looks different depending on the OpenCore variant you choose in the "View" menu: 
+
+![](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png) 
+
+For the release version (default), you can only select Release Versions of OpenCore version you want to install from a dropdown menu:
+
+![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)
+
+For downloading and syncing the latest **Dev** versions, you have to change View to `Dev` and add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field:
+
+![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)
+
+Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)):
 
 ## NOTES
 
