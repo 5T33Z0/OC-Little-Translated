@@ -26,3 +26,6 @@ Build your `AppleALC.kext` in Xcode and test it. If it's not working, do the fol
 
 To revert to settings of a previous build, you only have toopy the backed up files from the "Release" Folder you your choise back to their correct location in the AppleALC/Resources folder and ALCXXX sub-folder.
 
+**Screenshot:** 
+
+![Backup-n-Restore](https://user-images.githubusercontent.com/76865553/172054278-8b98ab30-97a6-4a64-b705-d560b11f13c0.png)
