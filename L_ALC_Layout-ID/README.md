@@ -1,4 +1,4 @@
-y# How to create/modify a Layout-ID for AppleALC
+# How to create/modify a Layout-ID for AppleALC
 
 **TABLE of CONTENTS**
 
@@ -520,7 +520,7 @@ Now that we know to enter the routing data into the PlatformsXX.xml file, we can
 There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML` that will generate a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. The second method is the traditional manual method. Choose either or!
 
 ### Automated Method using VoodooHDA and GetDumpXML
-- Download GetDumpXML.zip and unpack it
+- Download [GetDumpXML.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/GetDumpXML.zip?raw=true) and unpack it
 - Mount EFI
 - Add VoodooHDA.kext to your kext folder 
 - Open your config.plist (OpenCore users only)
