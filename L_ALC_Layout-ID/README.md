@@ -447,25 +447,29 @@ Let's have a look at the output side of the schematic:</br>![SwitchMode01](https
 
 This has to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array:
 
-- **PathMap**
-	- **Array 0** (Inputs)
-		- Input 0
-			- Input Node
-			- Mixer Node
-			- Pin Complex Node
-		- Input 1
-			- Input Node
-			- Mixer Node
-			- Pin Complex Node
+- **PathMap** (Array)
+	- **0 (Array)** (Inputs)
+		- 0 (Array) (Device 1)
+			- 0 (Array) (Nodes of Device 1)
+				-  0 (Dict) Input Node 
+				-  1 (Dict) Mixer Node
+				-  2 (Dict) Pin Complex Node
+		- 1 (Array) (Device 2)
+			- 0 (Array) (Nodes of Device 2)
+				-  0 (Dict) Input Node 
+				-  1 (Dict) Mixer Node
+				-  2 (Dict) Pin Complex Node
 	- **Array 1** (Outputs)
-		- Output 0
-			- Pin Complex Node
-			- Mixer Node
-			- Output
-		- Output 1
-			- Pin Complex Node
-			- Mixer Node
-			- Output Node 
+		- 0 (Array) (Device 1)
+			- 0 (Array) (Nodes of Device 1)
+				-  0 (Dict) Pin Complex Node
+				-  1 (Dict) Mixer Node
+				-  2 (Dict) Output Node
+		- 1 (Array) (Device 2)
+			- 0 (Array) (Nodes of Device 2)
+				-  0 (Dict) Pin Complex Node
+				-  1 (Dict) Mixer Node
+				-  2 (Dict) Output Node
 		- etc. 
 
 ##### Possible Configurations: Odd/Even
@@ -504,15 +508,25 @@ flowchart LR
 In manual switching mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
 - **PathMap**
-	- **Array 0**
-		- Input 0 (Nodes 0, 1 and 2)
-	- **Array 1**
-		- Input 1 (Nodes 0, 1 and 2)
-	- **Array 2**
-		- Output 0 (Nodes 0, 1 and 2)
-	- **Array 3**
- 		- Output 1 (Nodes 0, 1 and 2)
- 	- etc.
+	- **0 (Array)**
+		- 0 (Array) (Device 1) (Input 1)
+			- 0 (Dict) (Nodes of Input 1)
+				- 0 (Dict) (Input Node)
+				- 1 (Dict) (Mixer Node)
+				- 2 (Dict) (Pin Complex Node)
+	- **1 (Array)**
+		- 0 (Array) (Device 2) (Input 2)
+			- 0 (Dict) (Nodes of Input 2)
+				- 0 (Dict) (Input Node)
+				- 1 (Dict) (Mixer Node)
+				- 2 (Dict) (Pin Complex Node)
+	- **2 (Array)**
+		- 0 (Array) (Device 3) (Output 1)
+			- 0 (Dict) (Nodes of Device 1)
+				- 0 (Dict) (Pin Complex Node)
+				- 1 (Dict) (Mixer Node)
+				- 2 (Dict) (Output Node)
+	- etc.
 
 **IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth beteen generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
