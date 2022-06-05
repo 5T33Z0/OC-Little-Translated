@@ -532,7 +532,7 @@ There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHD
 - This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing `Platforms.xml` file
 - Add the # of your chosen Layout-ID to the filename (`Platforms39.xml` in my case)
 - Open the File with a Plist Editor
-- Expand `PathMaps` branch. As you can see, the entries are organized for manual switching:</br>![](/Users/5t33z0/Desktop/VoodooHDAXML01.png)
+- Expand `PathMaps` branch. As you can see, the entries are organized for manual switching:</br>![VoodooHDAXML01](https://user-images.githubusercontent.com/76865553/172041677-93a86db8-af31-4172-a68f-dffcc0888646.png)
 - Compare the Nodes used in the PathMap with the Nodes present your PinConfig and adjust the PinConfig accordingly, so that it contains the same nodes as the PathMap!
 - Change `PathmapID` to the number of your Layout-ID!
 - Save the file
