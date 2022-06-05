@@ -432,10 +432,10 @@ The PathMap defines the routings of the Nodes within the Codec which are injecte
 1. The PathMap has to be enterer in `PlatformXX.xml` (`XX` = chosen Layout-ID). 
 2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs/outputs switch automatically if a device is plugged in or if the input/output have to be changed manually in System Preferences.
 
-#### Switch-Mode
-In Switch-Mode, the Output signal is re-routed from the current output to another one automatically, once a jack is plugged into the system. On Laptops for example, the internal speakers are muted and the signal is automatically re-routed to the Headphone or Line-out. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. 
+#### Auto-Switching Mode
+In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line-Out Output. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
 
-For Switch-Mode to work, certain conditions have to be met: 
+For Auto Switching-Mode to work, certain conditions have to be met: 
 - The Pin Complex Node(s) must support the "Detect" feature
 - The Pin Complex Node(s) that should be switched between must be attached to the same Mixer Node.
 
@@ -443,9 +443,9 @@ Let's have a look at the output side of the schematic:</br>![SwitchMode01](https
 
 - Nodes 20, 21, 24, 25, 26 and 27 support the Detect feature
 - These Nodes can all connect to Mixers 12 (red) and 13 (green)
-- Therefore, they can be operated in switch-mode
+- Therefore, they can be operated in Auto Switching Mode
 
-This has to be represented in the file structure of the PathMap. Nodes you want to switch between have to be part of that same Array:
+This has to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array:
 
 - **PathMap**
 	- **Array 0** (Inputs)
@@ -500,8 +500,8 @@ flowchart LR
 	id0(Dict) -->
 	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
 ```
-#### Manual Mode
-In manual mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
+#### Manual Switching Mode
+In manual switching mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
 - **PathMap**
 	- **Array 0**
@@ -513,6 +513,8 @@ In manual mode, you have to – you've guessed it – switch the input/output ma
 	- **Array 3**
  		- Output 1 (Nodes 0, 1 and 2)
  	- etc.
+
+**IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth beteen generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
 
