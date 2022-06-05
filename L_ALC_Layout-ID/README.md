@@ -7,12 +7,12 @@
 * [II. Preparations](#ii.-preparations)
 * [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
 * [IV. Understanding the Codec schematic and signal flow](#iv.-understanding-the-codec-schematic)
-* [V. Creating a PinConfig](#v.-creating-a-pinconfig)
-* [VI. Integrating the PinConfig into the AppleALC source code](#vi.-integrating-the-`pinconfig`-into-the-applealc-source-code)
-* [VII. Creating a PathMap](#vii.-creating-a-pathmap)
-* [VIII. Creating a PlatformsXX.xml](#viii.-creating-a-`platformsxx.xml`)
-* [IX. Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
-* [X. Adding/Modifying layoutXX.xml](#x.-adding/modifying-a-layoutxx.xml)
+* [V. Creating a PathMap](#v.-creating-a-pathmap)
+* [VI. Creating a PlatformsXX.xml](#vi.-creating-a-`platformsxx.xml`)
+* [VII. Transferring the PathMap to PlatformsXX.xml](#vii.-transferring-the-pathmap-to-`platformsxx.xml`)
+* [VIII. Adding/Modifying layoutXX.xml](#viii.-adding/modifying-a-layoutxx.xml)
+* [IX. Creating a PinConfig](#ix.-creating-a-pinconfig)
+* [X. Integrating the PinConfig into the AppleALC source code](#x.-integrating-the-`pinconfig`-into-the-applealc-source-code)
 * [XI. Adding Platforms.xml and layout.xml to info.plist](#xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
 * [XII. Compiling the AppleALC.kext](#xii.-compiling-the-applealc.kext)
 * [XIII. Testing and Troubleshooting](#xiii.-testing-and-troubleshooting)
@@ -304,128 +304,7 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 
 We will come back to the schematic later… 
 
-## <a name='v.-creating-a-pinconfig'></a>V. Creating a PinConfig 
-Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
-
-"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
-
-Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically…
-
-### Using PinConfigurator to create a PinConfig
-
-#### Default Method (keeps connected Nodes only)
-Preferred method if you just want to implement the default Codec configuration.
-
-1. Open **PinConfigurator**
-2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
-3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
-4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
-5. Click on "Options > Verb Sanitize" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
-6. Select "Patch > Verb Sanitize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
-7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
-8. Copy the `ConfigData` into the clipboard
-9. Select "File > Export > verbs.txt". It will be stored on the Desktop.
-10. Open verbs.txt.
-11. Paste the ConfigDate in an empty line and save the file. We'll need it later.
-12. Continue in **Chapter VI.**
-
-#### Modifying an existing PinConfig (adding Outputs/Inputs)
-In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
-
-1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
-2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt` or search by description in `Codec` field):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
-3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C)
-4. Start the PinConfigurator App
-5. From the menubar, select "File > Import > Clipboard"
-6. This is how it looks:</br>![pincfgimprtd](https://user-images.githubusercontent.com/76865553/171391513-9cf5d5a7-b83f-4641-a11f-87603092306b.png)
-7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.
-
-**NOTES**: In my case, the PinConfig lacks a second Output to get sound out of the docking station when I connect external speakers to it. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-out of the dock.
-
-Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
-
-There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
-
-#### Method 1: Use verbs.txt to add a Node to the PinConfig
-
-1. Open `verbs.txt`
-2. Place the cursor at the end of the document 
-3. Paste (⌘+V) the ConfigDate (green). It should still be stored in the Clipboard.
-4. Next, add the Verb Data of the Node(s) you want to add (cyan) to the existing PinConfig:</br>![Modpfcg18](https://user-images.githubusercontent.com/76865553/171391880-12628a54-8cde-4a66-bf3b-7bd810f09bd7.png)
-5. Copy the resulting PinConfig (pink) into the clipboard
-6. Switch back to PinConfigurator
-7. From the menubar, select File > Import > Clipboard. In this example, Node 27 has been added:</br>![modpinpc](https://user-images.githubusercontent.com/76865553/171392147-c6b4df49-8f51-46a5-a707-c2e0fc40a557.png)
-8. Select "Patch > Verb Sanitize" to correct the Verb data.
-9. Export the data. There are 2 ways to do so: 
-	- Either copy/paste the ConfigData to a text file and save it for later, or 
-	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
-
-#### Method 2: Add a node to PinConfigurator and configure it manually
-
-1. In PinConfigurator, click "Add"
-2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
-3. Use `verbs.txt` or `codec_dump.txt` to configure the Node (see "Config Notes")
-4. Press "Save" when you're done. In my case, Node 27 will be added.
-5. Select "Patch > Verb Sanitize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
-6. Back in the main Window, click on "Get ConfigData"
-7. The new/modified PinConfig will be listed in the text field below it:</br>![GetConfig02](https://user-images.githubusercontent.com/76865553/171392396-5dea072e-f57b-492f-b44e-d2819e2a74d7.png)
-8. Export the data. There are 2 ways to do so: 
-	- Either copy/paste the ConfigData to a text file and save it for later, or 
-	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
-
-**Config Notes** (subject to change):
-
-- **NodeID**: Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
-- **PinDefault**: Get the `PinDefault` value for the Node from `codec_dump.txt` (has to be in Hex)
-- **Jack Color**: 
-	- For internal devices: select "[0] Unknown" 
-	- For external devices like Headphones etc., select "[1] Black".
-- **EAPD**: Check if the Node you want to add supports EAPD and adjust the Node accordingly
-- To be continued…
-
-## <a name='vi.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>VI. Integrating the `PinConfig` into the AppleALC source code
-Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
-
-### Finding an unused Layout-ID number
-In order to find a yet unused Layout-ID for your Codec, you have to check which Layout-IDs exist already and chose a different one in the range from 11 to 99:
-
-- Visit [this repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
-- Click on the folder of your Codec manufacturer (in my case it's "Realtek")
-- Next, click on the .md file representing your Codec (in my case: [ALC269](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC269.md))
-- As you can see, ALC269 has a lot of Layout-IDs already.
-- Pick a Layout-ID which is not used already (make a mental note or write it down somewhere)
-
-I am picking Layout-ID 39 because a) it's available and b) followed by by the Lenovo W530 which is the workstation version of the T530.
-
-**IMPORTANT**: Layout-IDs 1 to 10 are reserved but Layouts 11 to 99 are user-assignable. 
-
-#### Scenario 1: Modifying data of an existing Layout-ID
-
-1. Open "codec_dump_dec.txt"
-2. Copy the "Vendor-Id" in decimal (= `CodecID` in AppleALC)
-3. Locate the `PinConfigs.kext` inside AppleALC/Resources
-4. Right-click it and select "Show Package Contents"
-5. Inside the Contents folder, you'll find the "info.plist"
-6. Open it with a Plist editor (I am using PlistEdit Pro)
-7. All PinConfigs and the Layout-ID they are associated with are stored under:
-	- IOKitPersonalities
-		- as.vit9696.AppleALC
-			- HDAConfigDefault
-8. Use the search function (⌘+F) and paste the "Vendor Id". In my case it's "283902569". This will show all existing Layout-IDs your Codec.
-9. For my test, Im am using entry number 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530 and works for my system:</br>![infoplist](https://user-images.githubusercontent.com/76865553/170472084-0dc4d888-1987-4185-a5b9-153e6fb2225c.png)
-10. Highlight the dictionary and press ⌘+D. This will duplicate the entry.
-11. Add/change the following data to the new entry:
-	- In the `Codec` String: Author name (Yours) and description
-	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (and saved in "verbs.txt")
-	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![verbspcfg](https://user-images.githubusercontent.com/76865553/171962726-acbb19cd-e231-43f1-9499-6025f6f1898a.png)
-	- Change the `LayoutID` the PinConfig Data should be associated with. 
-12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
-
-#### Scenario 2: Creating a new Layout-ID from scratch (todo)
-
-Now that we got the PinConfig out of the way, we can continue.…
-
-## <a name='vii.-creating-a-pathmap'></a>VII. Creating a PathMap
+## <a name='v.-creating-a-pathmap'></a>V. Creating a PathMap
 The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output. The data has to be entered in the `PlatformsXY.xml` file (XY = number of the layout).
 
 ### Structure of `PlatformsXX.xml`
@@ -457,7 +336,7 @@ This has to be represented in the file structure of the `PathMap`. Nodes you wan
 						-  1 (Dict) Mixer Node
 						-  2 (Dict) Pin Complex Node
 				- 1 (Array) (Input Source 2)
-					- 0 (Array) [Container for Nodes of Input Soure 2]
+					- 0 (Array) [Container for Nodes of Input Source 2]
 						-  0 (Dict) Input Node 
 						-  1 (Dict) Mixer Node
 						-  2 (Dict) Pin Complex Node
@@ -535,17 +414,17 @@ In manual switching mode, you have to – you've guessed it – switch the input
 						- 2 (Dict) (Output Node)
 			- etc.
 
-**IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth beteen generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
+**IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
 
-## <a name='viii.-creating-a-`platformsxx.xml`'></a>VIII. Creating a `PlatformsXX.xml`
+## <a name='vi.-creating-a-`platformsxx.xml`'></a>VI. Creating a `PlatformsXX.xml`
 There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML`. It generates a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. Unfortunately, this method doesn't work beyond macOS Catalina, so users of Big Sur and newer need to follow the manual method instead.
 
 ### Automated method using VoodooHDA and GetDumpXML (macOS ≤ 10.15.7 only)
 - Download [GetDumpXML.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/GetDumpXML.zip?raw=true) and unpack it
 - Add VoodooHDA.kext to your EFI's kext folder and config.plist.
-- Disable/delete ApppleALC.kext
+- Disable/delete AppleALC.kext
 - Reboot
 - Double-click `GetDumpXML` (in GetDumpXML folder)
 - This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing `Platforms.xml` file
@@ -553,7 +432,7 @@ There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHD
 - Open the File with a Plist Editor
 - Expand `PathMaps` branch. As you can see, the entries are organized for manual switching:</br>![VoodooHDAXML01](https://user-images.githubusercontent.com/76865553/172041677-93a86db8-af31-4172-a68f-dffcc0888646.png)
 - Compare the Nodes used in the PathMap with the Nodes present your PinConfig and adjust the PinConfig accordingly, so that it contains the same nodes as the PathMap!
-- Change `PathmapID` to the number of your Layout-ID!
+- Change `PathMapID` to the number of your Layout-ID!
 - Save the file
 - Move PlatformsXX.xml to: "AppleALC/Resources/YOURCODEC" folder
 - Disable/remove VoodooHDA.kext and re-enable AppleALC.kext again
@@ -571,7 +450,7 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
 - Change the `PathmapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`):</br>![platforms02](https://user-images.githubusercontent.com/76865553/171393131-44cd8562-104b-4008-9a4d-43707b880327.png)
 
-## <a name='ix.-transferring-the-pathmap-to-`platformsxx.xml`'></a>IX. Transferring the PathMap to `PlatformsXX.xml`
+## <a name='vii.-transferring-the-pathmap-to-`platformsxx.xml`'></a>VII. Transferring the PathMap to `PlatformsXX.xml`
 Now that we traced all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
 
 ### Transferring PinComplex Nodes to PlatformsXX.xml
@@ -668,7 +547,7 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Repeat for other devices you want to add to the PathMap
 - Save the file
 
-## <a name='x.-adding/modifying-a-layoutxx.xml'></a>X. Adding/Modifying `layoutXX.xml`
+## <a name='viii.-adding/modifying-a-layoutxx.xml'></a>VIII. Adding/Modifying `layoutXX.xml`
 
 ### Modifying an existing `layoutXX.xml`
 - Navigate to `AppleALC/Resorces/YOUR_CODEC` (in my case ALC269)
@@ -680,11 +559,132 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Adjust the following settings:
 	- `Inputs`: Add Type of Inputs (if missing)
 	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Docking Station.
-	- `PathmapID` (# must match that of the filename. In my case: 39):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
+	- `PathMapID` (# must match that of the filename. In my case: 39):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
 - Save the file.
 
 ### Creating a new `LayoutXX.xml` from scratch
 TODO…
+
+## <a name='ix.-creating-a-pinconfig'></a>IX. Creating a PinConfig 
+Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
+
+"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+
+Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically…
+
+### Using PinConfigurator to create a PinConfig
+
+#### Default Method (keeps connected Nodes only)
+Preferred method if you just want to implement the default Codec configuration.
+
+1. Open **PinConfigurator**
+2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
+3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
+4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
+5. Click on "Options > Verb Sanitize" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
+6. Select "Patch > Verb Sanitize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
+8. Copy the `ConfigData` into the clipboard
+9. Select "File > Export > verbs.txt". It will be stored on the Desktop.
+10. Open verbs.txt.
+11. Paste the ConfigDate in an empty line and save the file. We'll need it later.
+12. Continue in **Chapter VI.**
+
+#### Modifying an existing PinConfig (adding Outputs/Inputs)
+In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
+
+1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
+2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt` or search by description in `Codec` field):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
+3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C)
+4. Start the PinConfigurator App
+5. From the menubar, select "File > Import > Clipboard"
+6. This is how it looks:</br>![pincfgimprtd](https://user-images.githubusercontent.com/76865553/171391513-9cf5d5a7-b83f-4641-a11f-87603092306b.png)
+7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.
+
+**NOTES**: In my case, the PinConfig lacks a second Output to get sound out of the docking station when I connect external speakers to it. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-out of the dock.
+
+Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
+
+There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
+
+#### Method 1: Use verbs.txt to add a Node to the PinConfig
+
+1. Open `verbs.txt`
+2. Place the cursor at the end of the document 
+3. Paste (⌘+V) the ConfigDate (green). It should still be stored in the Clipboard.
+4. Next, add the Verb Data of the Node(s) you want to add (cyan) to the existing PinConfig:</br>![Modpfcg18](https://user-images.githubusercontent.com/76865553/171391880-12628a54-8cde-4a66-bf3b-7bd810f09bd7.png)
+5. Copy the resulting PinConfig (pink) into the clipboard
+6. Switch back to PinConfigurator
+7. From the menubar, select File > Import > Clipboard. In this example, Node 27 has been added:</br>![modpinpc](https://user-images.githubusercontent.com/76865553/171392147-c6b4df49-8f51-46a5-a707-c2e0fc40a557.png)
+8. Select "Patch > Verb Sanitize" to correct the Verb data.
+9. Export the data. There are 2 ways to do so: 
+	- Either copy/paste the ConfigData to a text file and save it for later, or 
+	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
+
+#### Method 2: Add a node to PinConfigurator and configure it manually
+
+1. In PinConfigurator, click "Add"
+2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
+3. Use `verbs.txt` or `codec_dump.txt` to configure the Node (see "Config Notes")
+4. Press "Save" when you're done. In my case, Node 27 will be added.
+5. Select "Patch > Verb Sanitize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
+6. Back in the main Window, click on "Get ConfigData"
+7. The new/modified PinConfig will be listed in the text field below it:</br>![GetConfig02](https://user-images.githubusercontent.com/76865553/171392396-5dea072e-f57b-492f-b44e-d2819e2a74d7.png)
+8. Export the data. There are 2 ways to do so: 
+	- Either copy/paste the ConfigData to a text file and save it for later, or 
+	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
+
+**Config Notes** (subject to change):
+
+- **NodeID**: Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+- **PinDefault**: Get the `PinDefault` value for the Node from `codec_dump.txt` (has to be in Hex)
+- **Jack Color**: 
+	- For internal devices: select "[0] Unknown" 
+	- For external devices like Headphones etc., select "[1] Black".
+- **EAPD**: Check if the Node you want to add supports EAPD and adjust the Node accordingly
+- To be continued…
+
+## <a name='x.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>X. Integrating the `PinConfig` into the AppleALC source code
+Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
+
+### Finding an unused Layout-ID number
+In order to find a yet unused Layout-ID for your Codec, you have to check which Layout-IDs exist already and chose a different one in the range from 11 to 99:
+
+- Visit [this repo](https://github.com/dreamwhite/ChonkyAppleALC-Build)
+- Click on the folder of your Codec manufacturer (in my case it's "Realtek")
+- Next, click on the .md file representing your Codec (in my case: [ALC269](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC269.md))
+- As you can see, ALC269 has a lot of Layout-IDs already.
+- Pick a Layout-ID which is not used already (make a mental note or write it down somewhere)
+
+I am picking Layout-ID 39 because a) it's available and b) followed by by the Lenovo W530 which is the workstation version of the T530.
+
+**IMPORTANT**: Layout-IDs 1 to 10 are reserved but Layouts 11 to 99 are user-assignable. 
+
+#### Scenario 1: Modifying data of an existing Layout-ID
+
+1. Open "codec_dump_dec.txt"
+2. Copy the "Vendor-Id" in decimal (= `CodecID` in AppleALC)
+3. Locate the `PinConfigs.kext` inside AppleALC/Resources
+4. Right-click it and select "Show Package Contents"
+5. Inside the Contents folder, you'll find the "info.plist"
+6. Open it with a Plist editor (I am using PlistEdit Pro)
+7. All PinConfigs and the Layout-ID they are associated with are stored under:
+	- IOKitPersonalities
+		- as.vit9696.AppleALC
+			- HDAConfigDefault
+8. Use the search function (⌘+F) and paste the "Vendor Id". In my case it's "283902569". This will show all existing Layout-IDs your Codec.
+9. For my test, Im am using entry number 162 as a base, since it's for the same Codec and was created for the the Lenovo X230 which is very similar to the T530 and works for my system:</br>![infoplist](https://user-images.githubusercontent.com/76865553/170472084-0dc4d888-1987-4185-a5b9-153e6fb2225c.png)
+10. Highlight the dictionary and press ⌘+D. This will duplicate the entry.
+11. Add/change the following data to the new entry:
+	- In the `Codec` String: Author name (Yours) and description
+	- In `ConfigData`, enter the PinConfig data we created in PinConfigurator (and saved in "verbs.txt")
+	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![verbspcfg](https://user-images.githubusercontent.com/76865553/171962726-acbb19cd-e231-43f1-9499-6025f6f1898a.png)
+	- Change the `LayoutID` the PinConfig Data should be associated with. 
+12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
+
+#### Scenario 2: Creating a new Layout-ID from scratch (todo)
+
+Now that we got the PinConfig out of the way, we can continue…
 
 ## <a name='xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>XI. Add `Platforms.xml` and `layout.xml` to `info.plist`
 
@@ -719,7 +719,7 @@ Now that we finally prepared all the required files, we can finally compile the 
 - Check if sound is working (Internal, Inputs, Outputs, Headphones)
 - If it's working: congrats!
 
-**NOTE**: For testing verbs and WakeConfigData you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext every time you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1` or `alc-verbs` device property to be present in the `config.plist`.
+**NOTE**: For testing verbs and `WakeConfigData` you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext every time you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1` or `alc-verbs` device property to be present in the `config.plist`.
 
 ### Troubleshooting
 Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore-Install-Guide/blob/e08ee8ebe6fa030393c153b055225f721edafab2/post-install/audio.md#troubleshooting) by Dortania
