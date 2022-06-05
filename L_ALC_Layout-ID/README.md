@@ -10,7 +10,7 @@ y# How to create/modify a Layout-ID for AppleALC
 * [V. Creating a PinConfig](#v.-creating-a-pinconfig)
 * [VI. Integrating the PinConfig into the AppleALC source code](#vi.-integrating-the-`pinconfig`-into-the-applealc-source-code)
 * [VII. Creating a PathMap](#vii.-creating-a-pathmap)
-* [VIII. Preparing a PlatformsXX.xml](#viii.-preparing-a-`platformsxx.xml`)
+* [VIII. Creating a PlatformsXX.xml](#viii.-creating-a-`platformsxx.xml`)
 * [IX. Transferring the PathMap to PlatformsXX.xml](#ix.-transferring-the-pathmap-to-`platformsxx.xml`)
 * [X. Adding/Modifying layoutXX.xml](#x.-adding/modifying-a-layoutxx.xml)
 * [XI. Adding Platforms.xml and layout.xml to info.plist](#xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
@@ -516,7 +516,34 @@ In manual mode, you have to – you've guessed it – switch the input/output ma
 
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
 
-## <a name='viii.-preparing-a-`platformsxx.xml`'></a>VIII. Preparing a `PlatformsXX.xml`
+## <a name='viii.-creating-a-`platformsxx.xml`'></a>VIII. Creating a `PlatformsXX.xml`
+There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML` that will generate a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. The second method is the traditional manual method. Choose either or!
+
+### Automated Method using VoodooHDA and GetDumpXML
+- Download GetDumpXML.zip and unpack it
+- Mount EFI
+- Add VoodooHDA.kext to your kext folder 
+- Open your config.plist (OpenCore users only)
+- Disable AppleALC.kext (Clover users: move AppleALC to "Off" folder)
+- Add VoodooHDA.kext to `Kernel/Add` section (OpenCore only) 
+- Save the config (OpenCore only)
+- Reboot
+- Double-click `GetDumpXML` (in GetDumpXML folder)
+- This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing `Platforms.xml` file
+- Add the # of your chosen Layout-ID to the filename (`Platforms39.xml` in my case)
+- Open the File with a Plist Editor
+- Expand `PathMaps` branch. As you can see, the entries are organized for manual switching:</br>![](/Users/5t33z0/Desktop/VoodooHDAXML01.png)
+- Compare the Nodes used in the PathMap with the Nodes present your PinConfig and adjust the PinConfig accordingly, so that it contains the same nodes as the PathMap!
+- Change `PathmapID` to the number of your Layout-ID!
+- Save the file
+- Move PlatformsXX.xml to: "AppleALC/Resources/YOURCODEC" folder
+- Disable/remove VoodooHDA.kext and re-enable AppleALC.kext again
+- Reboot
+- Continue in Chapter X.
+
+**NOTE**: You can also rearrange the structure of the .xml file to introduce auto-switching, but I would do that after you've verified that everything is working.
+
+### Manual Method
 Obviously, we need to avoid changing data of existing Platforms.xml files created by other users. Because it would destroy the Layout for other users, if the Source Code would get synced with the AppleALC repo. Instead, we need to create a new one for our Layout-ID with our own routing, so do the following:
 
 - In Finder, navigate to the "Resources" folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
@@ -705,6 +732,7 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 	- The King for [[HOW TO] Patch AppleHDA - Knowledge Base, Guide for how to fix/use original AppleHDA](http://web.archive.org/web/20150105004602/http://www.projectosx.com/forum/index.php?showtopic=465&st=0)
 	- Master Chief for [[How To] PinConfig for Linux users](https://www.insanelymac.com/forum/topic/149128-how-to-pinconfig-for-linux-users-%EF%BF%BD-realtek-alc883-example/)
 	- Daliansky for [AppleALC Guide](https://blog-daliansky-net.translate.goog/Use-AppleALC-sound-card-to-drive-the-correct-posture-of-AppleHDA.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+	- Applelife.ru for [GetDumpXML-Auto build Platforms.xml](https://applelife-ru.translate.goog/threads/getdumpxml-applehda-zvuk-avtomaticheskoe-postroenie-fajla-platforms-xml.2942828/?_x_tr_sl=ru&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 	- Daliansky for [Using VoodooHDA for finding valid Nodes](https://blog-daliansky-net.translate.goog/With-VoodooHDA-comes-getdump-find-valid-nodes-and-paths.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
 - **About Intel High Definition Audio**:
 	- Intel for [HDA Specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html), esp. Chapter 7: "Codec Features and Requirements".
