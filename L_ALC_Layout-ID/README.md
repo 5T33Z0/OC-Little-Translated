@@ -190,15 +190,15 @@ Form              | Function
 **Parallelogram** | Audio selector (this codec doesn't have any)
 **Hexagon**       | Audio mixer (with various connections 0, 1, 2,…)
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
-**Black Lines**   | Default connection (indicated by an asterisk next to it in the Codec_Dump.txt!)
-**Dotted Lines**  | Optional connection 
+**Black Lines**   | Default connection (indicated by an asterisk in the Codec_Dump.txt)
+**Dotted Lines**  | Optional connection(s) a Node offers 
 **Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
 
 ### How to read the schematic
 ⚠️ The schematic is a bit hard to comprehend and interpret because of its structure. It's also misleading: since all the arrows point to the right one might think they represent the signal flow – they don't. So ignore them! Instead, you need to take an approach which follows the signal flow.
 
 #### Routing Input Devices
-For **Input Devices**, start at the input and trace the route to the Pin Complex Node. 
+For **Input Devices**, start at the Input Node (red) and trace the route to the Pin Complex Node. 
 
 - **Option 1**: Input &rarr; Mixer/Audio Selector &rarr; PinComplex Node:
 
@@ -214,7 +214,7 @@ For **Input Devices**, start at the input and trace the route to the Pin Complex
 		id1(((Input))) ------>|Direct Connection|id3(Pin Complex XY)
 	```
 #### Routing Output Devices
-For **Output Devices**, start at the Pin Complex Node and follow the signal through Audio Mixer(s)/Selectors to the physical output Here are some examples of possible routings.
+For **Output Devices**, start at the Pin Complex Node and follow the signal through Audio Mixer(s)/Selectors to the physical output.Here are some examples of possible routings.
 
 - **Option 1**: Pin Complex Note &rarr; Mixer/Audio Selector &rarr; Output (common):
 
@@ -223,7 +223,7 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
        id1(Pin Complex XY) -->|Signal flow|Aid2{Mixer A} -->|Signal flow|id5(((Output X)))
        id3(Pin Complex XY)-->id2[/Audio Selector/]-->id6(((Output X)))
 	 ```
-- **Option 2**: Direct Connection from Pin Complex Node to Output:
+- **Option 2**: Direct connection from Pin Complex Node to Output:
 
 	```mermaid
 	flowchart LR
@@ -258,7 +258,7 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
 
 The ALC 269 Codec includes an Aux Return to send (or return) the incoming signal back into the Output path for monitoring via Mixer 11 through either Mixer Nodes 12/13 or 15 (Mono). 
 
-If you would trust the arrows in the schematic, the existence of Mixer 11 wouldn't make any sense. That's why ***you need to follow the signal flow instead of the arrows***! For the `PathMap`, you only need to enter the path following this formula: Input &rarr; Mixer &rarr; PinComplex Node.
+If you'd trust the arrows in the schematic, the existence of Mixer 11 wouldn't make any sense. That's why ***you need to follow the signal flow instead of the arrows!*** For the `PathMap`, you only need to enter the path following this formula: Input &rarr; Mixer &rarr; PinComplex Node.
 
 #### Tracing possible paths
 Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. 
@@ -266,15 +266,15 @@ Since I want the Line-Out of my docking station dock to work, I need to assign s
 We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD [^2]
-:-------------------:|-----------------------------|-----------------------|:----:
+:-------------------:|-----------------------------|-----------------------|:--------:
 18 (In)              |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
-20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 or</br> 20 - 13- 3|YES
+20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 or</br>20 - 13- 3|YES
 21 (Out)             |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
-23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono)    |
-24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br> 24 - 13 - 3|
-24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 -24 or </br> 9 - 34 - 24
+23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono) |
+24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br>24 - 13 - 3|
+24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 -24 or </br>9 - 34 - 24
 25 (as Output)       |Speaker Ext. Rear (S) OUT Detect| 25 - 12 - 2 or </br>25 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect| 8 - 35 - 25 or </br> 9 - 34 - 25
+25 (as Input)        |Speaker Ext. Rear (S) IN  Detect| 8 - 35 - 25 or </br>9 - 34 - 25
 26 (as Output)       |Speaker at Ext Rear OUT HP Detect| 26 - 12 - 2 or</br>26 - 13 - 3
 26 (as Input)        |Speaker at Ext Rear IN HP Detect| 8 - 35 - 26 or </br> 9 - 34 - 26 
 27 (as Output)       |Speaker at Ext Rear OUT Detect| 27 - 13 - 3 or </br>27 - 12 - 2
@@ -305,16 +305,17 @@ We will come back to the schematic later…
 
 ## <a name='v.-creating-a-pathmap'></a>V. Creating a PathMap
 The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output.
+
 ### Structure of `PlatformsXX.xml`
-1. The PathMap has to be entered in `PlatformXX.xml` (`XX` = chosen Layout-ID). 
-2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs/outputs switch automatically if a device is plugged in or if the inputs/outputs have to be changed manually in System Preferences.
+1. The PathMap has to be entered in `PlatformXX.xml` (`XX` = chosen number of the Layout-ID). 
+2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not the system switches between input/output sources automatically if a device is plugged in or if the inputs/outputs have to be changed manually in System Preferences (just like when using VoodooHDA.kext)
 
 #### Auto-Switching Mode
 In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line Output. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
 
 For Auto Switching-Mode to work, certain conditions have to be met: 
 - The Pin Complex Node(s) must support the "Detect" feature
-- The Pin Complex Node(s) that should be switched between must be attached to the same Mixer Node.
+- The Pin Complex Node(s) must have at least 2 possible connections to 2 different Mixer Nodes or Audio switches. (Maybe switching between 2 Nodes connected to the same Mixer Node and Output works as well but I haven't tested it yet.)
 
 Let's have a look at the output side of the schematic:</br>![SwitchMode01](https://user-images.githubusercontent.com/76865553/171393009-65312baf-77c3-41d6-96d6-18359933aad5.png)
 
@@ -620,7 +621,7 @@ Parameter        | Description
 **Misc.** |Bit field used to indicate other information about the jack. Currently, only bit `0` is defined. If bit `0` is set, it indicates that the jack has no presence detect capability, so even if a Pin Complex indicates that the codec hardware supports the presence detect functionality on the jack, the external circuitry is not capable of supporting the functionality.
 **Group** | = **Default Association**. Default Association and Sequence are used together by software to **group** Pin Complexes (and therefore jacks) together into functional blocks to support multichannel operation. Software may assume that all jacks with the same association number are intended to be grouped together, for instance to provide six channel analog output. The Default Association can also be used by software to prioritize resource allocation in constrained situations. Lower Default Association values would be higher in priority for resources such as processing nodes or Input and Output Converters.
 **Position** | = **Sequence**. Indicates the **order** of the jacks in the association group. The lowest numbered jack in the association group should be assigned the lowest numbered channels in the stream, etc. The numbers need not be sequential within the group, only the order matters. Sequence numbers within a set of Default Associations must be unique.
-**EAPD** | Check if the Node supports EAPD and adjust the setting accordingly. But there are more options in the dropdown menu. No clue what they do.
+**EAPD** | = **EAPD/BTL Enable, L/R Swap**. Controls the EAPD pin and configures Pin Widgets into balanced output mode, when these features are supported. It also configures any widget to swap L and R channels when this feature is supported. Check if the Node supports EAPD and adjust the setting accordingly. Read chapter 7.3.3.16 of the HDA Specs for more details.
 
 ## <a name='x.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>X. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
