@@ -304,14 +304,13 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 We will come back to the schematic later… 
 
 ## <a name='v.-creating-a-pathmap'></a>V. Creating a PathMap
-The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output. The data has to be entered in the `PlatformsXY.xml` file (XY = number of the layout).
-
+The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output.
 ### Structure of `PlatformsXX.xml`
 1. The PathMap has to be enterer in `PlatformXX.xml` (`XX` = chosen Layout-ID). 
 2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not inputs/outputs switch automatically if a device is plugged in or if the input/output have to be changed manually in System Preferences.
 
 #### Auto-Switching Mode
-In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line-Out Output. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
+In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line Output. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
 
 For Auto Switching-Mode to work, certain conditions have to be met: 
 - The Pin Complex Node(s) must support the "Detect" feature
