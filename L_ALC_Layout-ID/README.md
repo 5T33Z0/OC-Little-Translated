@@ -587,7 +587,7 @@ Preferred method if you just want to inject the default Codec configuration into
 9. Select "File > Export > verbs.txt". It will be stored on the Desktop.
 10. Open verbs.txt.
 11. Paste the ConfigDate in an empty line and save the file. We'll need it later.
-12. Continue in **Chapter VI.**
+12. Continue in **Chapter X.**
 
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
 In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
