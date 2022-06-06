@@ -352,40 +352,6 @@ This has to be represented in the file structure of the `PathMap`. Nodes you wan
 						-  2 (Dict) Output Node
 				- etc. 
 
-**IMPORTANT**: Make sure to nail this structure. Otherwise there won't be any Input/Output Sources available!
-
-##### Possible Configurations: Odd/Even
-We could apply a bit of logic and group even numbered Nodes and odd numbered Nodes together to create a big switch array.
-
-```mermaid
-flowchart LR
-	id0(Dict) -->
-	id1(Node20: Speakers) --> id2{Mixer 12} --> id3(((Output 2)))
-	id0(Dict) -->
-	id4(Node21: HP Out) --> id5{Mixer 13} --> id6(((Output 3)))
-	id0(dict) -->
-	id7(Node24: Mic) --> id8{Mixer 12} --> id9(((Output 2)))
-	id0(Dict) -->
-	id10(Node25: Speaker Ext) --> id11{Mixer 13} --> id12(((Output 3)))
-	id0(Dict) -->
-	id13(Node26: Mic) --> id14{Mixer 12} --> id15(((Output 2)))
-	id0(Dict) -->
-	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
-```
-##### Possible Configurations: Custom
-For my use, I need Node 20 needs to be fixed. All the switching between HP Out and any of the other available Nodes (24, 25, 26 and 27) need to happen on Mixer 13 and output 3. So something like this
-
-```mermaid
-flowchart LR
-	id0(Dict) -->
-	id1(Node20: Speakers) --> id2{Mixer 12} --> id3(((Output 2)))
-	id0(Dict) -->
-	id4(Node21: HP Out) --> id5{Mixer 13} --> id6(((Output 3)))
-	id0(dict) -->
-	id10(Node25: Speaker Ext) --> id11{Mixer 13} --> id12(((Output 3)))
-	id0(Dict) -->
-	id16(Node27: Speaker Ext) --> id17{Mixer 13} --> id18(((Output 3)))
-```
 #### Manual Switching Mode
 In manual switching mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
 
@@ -412,9 +378,12 @@ In manual switching mode, you have to – you've guessed it – switch the input
 						- 2 (Dict) (Output Node)
 			- etc.
 
-**IMPORTANT**: Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
-
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
+
+⚠️ **NOTES**
+- You can combine both auto switching and manual switching. For example, you could use auto mode to switch back and forth between internal Speakers and the Headphone Out but add an extra Line-Out in manual mode if your Codec can't be configured to switch  between all three sources automatically.
+- Make sure to get the hierarchy of the Platforms.xml right. Otherwise there won't be any Input/Output Sources available!
+- Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
 ## <a name='vi.-creating-a-`platformsxx.xml`'></a>VI. Creating a `PlatformsXX.xml`
 There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML`. It generates a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. Unfortunately, this method doesn't work beyond macOS Catalina, so users of Big Sur and newer need to follow the manual method instead.
@@ -446,7 +415,7 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 - Select the `Platforms.xml` of the Layout-ID you are currently using (the number is identical). Since I am using ALC Layout-ID 18, I use Platforms18.xml.
 - Duplicate the file (⌘+D)
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
-- Change the `PathmapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`):</br>![platforms02](https://user-images.githubusercontent.com/76865553/171393131-44cd8562-104b-4008-9a4d-43707b880327.png)
+- Change the `PathMapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`):</br>![platforms02](https://user-images.githubusercontent.com/76865553/171393131-44cd8562-104b-4008-9a4d-43707b880327.png)
 
 ## <a name='vii.-transferring-the-pathmap-to-`platformsxx.xml`'></a>VII. Transferring the PathMap to `PlatformsXX.xml`
 Now that we traced all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
@@ -497,7 +466,7 @@ As you can see, for the ALC269, each Node of the Output Path has an Amp stage an
 Here's how "Amp Caps" translate to entries in the Platforms.xml:
 
 Dump.txt               | Platforms.xml
------------------------|------------------------------------------
+-----------------------|----------------------------
 Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono.</br> ⚠️ The "Channels" array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Device side it's included in the *last* Node!||
 **Amp-In Caps**        | 
 **nsteps**=0 or ≥1     | **VolumeInputAmp** (NO/YES)
@@ -525,7 +494,7 @@ Since I want the Output to switch from the speakers (connected via 21 &rarr; 12 
 So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 
 - Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
-- Navigate to the branch containing the Output Devices (expand PathMaps > 0 > Pathmap > 1):</br> ![Outdevs01](https://user-images.githubusercontent.com/76865553/171813688-09bc6040-cbe8-4262-ad62-0321297df4cb.png)
+- Navigate to the branch containing the Output Devices (expand PathMaps > 0 > PathMap > 1):</br> ![Outdevs01](https://user-images.githubusercontent.com/76865553/171813688-09bc6040-cbe8-4262-ad62-0321297df4cb.png)
 - Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![Outdevs02](https://user-images.githubusercontent.com/76865553/171813707-703f1526-54da-454d-b1d3-879d34efc61e.png)
 - Next, we need to correct the Nodes inside of Array 2 (Output device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
 - Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
@@ -549,7 +518,7 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Vendor Id` in codec_dump_dec.txt) and describes the types of Inputs and Outputs that are available. It also contains the reference to the PathMap which should be applied to the Codec (`PathMapID`) for the chosen `LayoutID` (ID 39 in this example).
 
 ### Modifying an existing `layoutXX.xml`
-- Navigate to `AppleALC/Resorces/YOUR_CODEC` (in my case ALC269)
+- Navigate to `AppleALC/Resources/YOUR_CODEC` (in my case ALC269)
 - Duplicate the `LayoutXX.xml` you want to modify (in my case layout18.xml)
 - Change the number of the filename an unused one (between 11 to 99). In my case: layout39.xml
 - Open it with a Plist Editor 
@@ -571,12 +540,12 @@ Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (us
 
 Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically. 
 
-⚠️ Make sure that your `PinConfig` contains ***all*** the Input and Output Nodes (Mixers/Switces are irrelavant) you are refering to in the `PathMap` so the routing is coherent!. If you are referencing a node in a path which doesn't exist (in the PinConfig) then there will be no sound for this path. On the other hand, you can have more Nodes in the PinConfig than you are actually assigning in the PathMap – they just won't be available/visible in System Preferences as Input/Output sources.
+⚠️ Make sure that your `PinConfig` contains ***all*** the Input and Output Nodes (Mixers/Switches are irrelevant) you are referring to in the `PathMap` so the routing is coherent. If you are referencing a node in a path which doesn't exist (in the PinConfig) then there will be no sound for this path. On the other hand, you can have more Nodes in the PinConfig than you are actually assigning in the PathMap – they just won't be available/visible in System Preferences as Input/Output sources.
 
 ### Using PinConfigurator to create a PinConfig
 
 #### Default Method (keeps connected Nodes only)
-Preferred method if you just want to inject the default Input/Output Soures into macOS (Double-check against Nodes used in the Platforms.xml and if necessary, adjust them accordingly).
+Preferred method if you just want to inject the default Input/Output sources into macOS (Double-check against Nodes used in the Platforms.xml and if necessary, adjust them accordingly).
 
 1. Open **PinConfigurator**
 2. Click on "File > Open…" (⌘+O) and select "codec_dump.txt"
@@ -638,15 +607,15 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 #### PinConfigurator's "Edit Node" window explained
 PinConfigurator's "Edit Node" dialog window lets you configure the `PinDefault` value of Node. Some of the settings are obvious while others are nor (like Misc, Group or Position) since PinConfigurator is mostly undocumented. But chapter `7.3.3.31 Configuration Default` of the [Intel HDA specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html) provides the necessary details:
 
-Parameter | Description
-----------|------------
-**NodeID** (NID)| Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+Parameter        | Description
+-----------------|------------
+**NodeID** (NID) | Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
 **PinDefault** | = **Configuration Default**. A 32-bit register required in each Pin Widget. It is used by software as an aid in determining the configuration of jacks and devices attached to the codec. At the time the codec is first powered on, this register is internally loaded with default values indicating the typical system use of this particular pin/jack. Get the `PinDefault` value (in Hex) from `codec_dump.txt`
 **Device** | = **Default Device.** Indicates the intended use of the jack or device. This can indicate either the label on the jack or the device that is hardwired to the port, as with integrated speakers and the like.
 **Connector** | = **Connection Type.** Indicates the type of physical connection, such as a 1/8-inch stereo jack or an optical digital connector, etc. Software can use this information to provide helpful user interface descriptions to the user or to modify reported codec capabilities based on the capabilities of the physical transport external to the codec.
 **Port** | = **Port Connectivity**. Indicates the external connectivity of the Pin Complex. Software can use this value to know what Pin Complexes are connected to jacks, internal devices, or not connected at all. If a Node contains "fixed" in the Codec Schematic (usually for Laptop Speakers and Internal Mics) it should be set to fixed here as well.
-**Gross Location** | Upper bits of the Location field decribing the gross location, such as “External” (on the primary system chassis, accessible to the user), “Internal” (on the motherboard, not accessible without opening the box), on a separate chassis (such as a mobile box), or other. For Internal Speakers/Mics, set it to "Internal" (mostly Laptops), for things you connect to it by a plug, select "External".
-**Geo Location** | Lower bits of the Location fiel. Provide a geometric location, such as “Front,” “Left,” etc., or provide special encodings to indicate locations such as mobile lid mounted microphones.
+**Gross Location** | Upper bits of the Location field describing the gross location, such as “External” (on the primary system chassis, accessible to the user), “Internal” (on the motherboard, not accessible without opening the box), on a separate chassis (such as a mobile box), or other. For Internal Speakers/Mics, set it to "Internal" (mostly Laptops), for things you connect to it by a plug, select "External".
+**Geo Location** | Lower bits of the Location field. Provide a geometric location, such as “Front,” “Left,” etc., or provide special encodings to indicate locations such as mobile lid mounted microphones.
 **Color** | Indicates the color of the physical jack for use by software.</br>- For internal devices: select "[0] Unknown" </br> - For external devices like Headphones etc.: select "[1] Black".
 **Misc.** |Bit field used to indicate other information about the jack. Currently, only bit `0` is defined. If bit `0` is set, it indicates that the jack has no presence detect capability, so even if a Pin Complex indicates that the codec hardware supports the presence detect functionality on the jack, the external circuitry is not capable of supporting the functionality.
 **Group** | = **Default Association**. Default Association and Sequence are used together by software to **group** Pin Complexes (and therefore jacks) together into functional blocks to support multichannel operation. Software may assume that all jacks with the same association number are intended to be grouped together, for instance to provide six channel analog output. The Default Association can also be used by software to prioritize resource allocation in constrained situations. Lower Default Association values would be higher in priority for resources such as processing nodes or Input and Output Converters.
@@ -777,6 +746,4 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 	- [Mermaid](https://mermaid-js.github.io/mermaid/#/README) script for creating flowcharts and diagrams in Markdown
 	- Core-i99 for PinConfigurator tips
 	- Hardwaresecrets – [How on-board Audio works](https://hardwaresecrets.com/how-on-board-audio-works/)
-	- Jack Plug schematics
-		- OMTP: [WIKI Commons](https://commons.wikimedia.org/wiki/File:3mm5_jack_4.svg) 
-		- CTIA: [WIKI Commons](https://commons.wikimedia.org/wiki/File:3.5mm_jack_plug_4i.svg)
+
