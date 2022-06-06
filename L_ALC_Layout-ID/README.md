@@ -131,8 +131,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Clone, Download or Fork or and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
 - Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
 - In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into the window and press enter.
-- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter.
-- The resulting folder structure should look like this:</br>
+- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter. This will add the MacKernelSDK to the AppleALC source code. The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 
 #### Important files we have to work on:
