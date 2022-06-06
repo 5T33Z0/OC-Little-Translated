@@ -636,21 +636,21 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
 #### PinConfigurator's "Edit Node" dialog (work in progres)
-PinConfigurator's "Edit Node" dialog window lets you configure a Node and all of its parameters/verbs. Some of the settings are obvious while I have no clue what others do (like Misc, Group or Position) since PinConfigurator is mostly undocumented.
+PinConfigurator's "Edit Node" dialog window lets you configure a the `PinDefault` value of Node. Some of the settings are obvious while I have no clue what others do (like Misc, Group or Position) since PinConfigurator is mostly undocumented. But chapter `7.3.3.31 Configuration Default` of the [Intel HDA specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html) provides the necessayr details:
 
 Fuction | Description
 --------|------------
-**NodeID** (NID)| Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
-**PinDefault** | `PinDefault` value for the selected/added Node (in Hex). Get it from `codec_dump.txt`
-**Device** | Type of the device the Node should be shown as in macOS (I think)
-**Connector** | Type of connection between the Source and the Coded. This could also to the icon used in macOS but I am uncertain.
-**Port** | Type of Connector used. If a Node contains "fixed" in the Codec Schematic (usually for Laptop Speakers and Internal Mics) it should be set to fixed here as well.
-**Gross Location** | Either External/Internal/Seperate/Other. For Internal Speakers/Mics, set it to "Internal" (mostly Laptops), for things you connect to it by a plug, select "External". The rest, I don't know yet.
-**Geo Location** | Physical location of the Port for the Device
-**Color**| - For internal devices: select "[0] Unknown" </br> - For external devices like Headphones etc.: select "[1] Black".
-**Misc.**|I think it's related to the way the Codec reacts when something is plugged into a jack, but I am uncertain.
-**Group** | I know it's changing the last 2 digits of the PinDefault Value but I don't know If you have to puts 2 Nodes you want to switch between in the same group.
-**Position** | I think it defines the order of Nodes in a Group
+**NodeID** (NID)| Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+**PinDefault** | = **Configuration Default**. A 32-bit register required in each Pin Widget. It is used by software as an aid in determining the configuration of jacks and devices attached to the codec. At the time the codec is first powered on, this register is internally loaded with default values indicating the typical system use of this particular pin/jack. Get the `PinDefault` value (in Hex) from `codec_dump.txt`
+**Device** | = Default Device. Indicates the intended use of the jack or device. This can indicate either the label on the jack or the device that is hardwired to the port, as with integrated speakers and the like.
+**Connector** | = **Connection Type.** Indicates the type of physical connection, such as a 1/8-inch stereo jack or an optical digital connector, etc. Software can use this information to provide helpful user interface descriptions to the user or to modify reported codec capabilities based on the capabilities of the physical transport external to the codec.
+**Port** | = **Port Connectivity**. Indicates the external connectivity of the Pin Complex. Software can use this value to know what Pin Complexes are connected to jacks, internal devices, or not connected at all. If a Node contains "fixed" in the Codec Schematic (usually for Laptop Speakers and Internal Mics) it should be set to fixed here as well.
+**Gross Location** | Upper bits of the Location field decribing the gross location, such as “External” (on the primary system chassis, accessible to the user), “Internal” (on the motherboard, not accessible without opening the box), on a separate chassis (such as a mobile box), or other. For Internal Speakers/Mics, set it to "Internal" (mostly Laptops), for things you connect to it by a plug, select "External".
+**Geo Location** | Lower bits of the Location fiel. Provide a geometric location, such as “Front,” “Left,” etc., or provide special encodings to indicate locations such as mobile lid mounted microphones.
+**Color** | Indicates the color of the physical jack for use by software.</br>- For internal devices: select "[0] Unknown" </br> - For external devices like Headphones etc.: select "[1] Black".
+**Misc.** |Bit field used to indicate other information about the jack. Currently, only bit `0` is defined. If bit `0` is set, it indicates that the jack has no presence detect capability, so even if a Pin Complex indicates that the codec hardware supports the presence detect functionality on the jack, the external circuitry is not capable of supporting the functionality.
+**Group** | = **Default Association**. Default Association and Sequence are used together by software to **group** Pin Complexes (and therefore jacks) together into functional blocks to support multichannel operation. Software may assume that all jacks with the same association number are intended to be grouped together, for instance to provide six channel analog output. The Default Association can also be used by software to prioritize resource allocation in constrained situations. Lower Default Association values would be higher in priority for resources such as processing nodes or Input and Output Converters.
+**Position** | = **Sequence**. Indicates the **order** of the jacks in the association group. The lowest numbered jack in the association group should be assigned the lowest numbered channels in the stream, etc. The numbers need not be sequential within the group, only the order matters. Sequence numbers within a set of Default Associations must be unique.
 **EAPD** |Check if the Node supports EAPD and adjust the setting accordingly. But there are more options in the dropdown menu. No clue what they do.
 
 ## <a name='x.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>X. Integrating the `PinConfig` into the AppleALC source code
