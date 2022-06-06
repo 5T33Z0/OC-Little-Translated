@@ -623,7 +623,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 #### Method 2: Add a node to PinConfigurator and configure it manually
 
 1. In PinConfigurator, click "Add"
-2. This opens a dialog with a bunch of options to configure the new Node:</br>![nunode72](https://user-images.githubusercontent.com/76865553/171392271-561909d0-9747-4963-9cbc-d120c84daa87.png)
+2. This opens a dialog with a bunch of options to configure the new Node:</br>![AddNode01](https://user-images.githubusercontent.com/76865553/172112636-1f207237-bb45-48a7-9b21-b20a72927e0a.png)
 3. Use `verbs.txt` or `codec_dump.txt` to configure the Node (see "Config Notes")
 4. Press "Save" when you're done. In my case, Node 27 will be added.
 5. Select "Patch > Verb Sanitize". This will apply [fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
