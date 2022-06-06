@@ -638,8 +638,8 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 #### PinConfigurator's "Edit Node" window explained
 PinConfigurator's "Edit Node" dialog window lets you configure the `PinDefault` value of Node. Some of the settings are obvious while others are nor (like Misc, Group or Position) since PinConfigurator is mostly undocumented. But chapter `7.3.3.31 Configuration Default` of the [Intel HDA specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html) provides the necessary details:
 
-Fuction | Description
---------|------------
+Parameter | Description
+----------|------------
 **NodeID** (NID)| Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
 **PinDefault** | = **Configuration Default**. A 32-bit register required in each Pin Widget. It is used by software as an aid in determining the configuration of jacks and devices attached to the codec. At the time the codec is first powered on, this register is internally loaded with default values indicating the typical system use of this particular pin/jack. Get the `PinDefault` value (in Hex) from `codec_dump.txt`
 **Device** | = Default Device. Indicates the intended use of the jack or device. This can indicate either the label on the jack or the device that is hardwired to the port, as with integrated speakers and the like.
