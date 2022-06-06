@@ -569,7 +569,7 @@ Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (us
 
 "Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
-Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically…
+Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically. Ensure that your PinConfig contains all the Nodes that are part of the PathMap!
 
 ### Using PinConfigurator to create a PinConfig
 
