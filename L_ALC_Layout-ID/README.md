@@ -546,18 +546,19 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Save the file
 
 ## <a name='viii.-adding/modifying-a-layoutxx.xml'></a>VIII. Adding/Modifying `layoutXX.xml`
+The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Vendor Id` in codec_dump_dec.txt) and describes the types of Inputs and Outputs that are available. It also contains the reference to the PathMap which should be applied to the Codec (`PathMapID`) for the chosen `LayoutID` (ID 39 in this example).
 
 ### Modifying an existing `layoutXX.xml`
 - Navigate to `AppleALC/Resorces/YOUR_CODEC` (in my case ALC269)
 - Duplicate the `LayoutXX.xml` you want to modify (in my case layout18.xml)
-- Assign an unused number to it (in my case: Layout39.xml)
+- Change the number of the filename an unused one (between 11 to 99). In my case: layout39.xml
 - Open it with a Plist Editor 
-- Change the `LayoutID` &rarr; must be identical with # used in filename
+- Change the `LayoutID` &rarr; must be identical with # used in the filename
 - Expand `PathMapRef`
 - Adjust the following settings:
 	- `Inputs`: Add Type of Inputs (if missing)
-	- `Output`: Add Type of Output (if missing). I had to add `LineOut` for my Docking Station.
-	- `PathMapID` (# must match that of the filename. In my case: 39):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
+	- `Output`: Add Type of Output (if missing). I have to add `LineOut` for my Docking Station.
+	- `PathMapID` (# must match that of the filename):</br>![layoutxml](https://user-images.githubusercontent.com/76865553/172024303-0485b52c-1f2f-4615-bcac-bdd056ea745b.png)
 - Save the file.
 
 ### Creating a new `LayoutXX.xml` from scratch
@@ -573,12 +574,12 @@ Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Cod
 ### Using PinConfigurator to create a PinConfig
 
 #### Default Method (keeps connected Nodes only)
-Preferred method if you just want to implement the default Codec configuration.
+Preferred method if you just want to inject the default Codec configuration into macOS.
 
 1. Open **PinConfigurator**
-2. Click on "File > Open…" (⌘+O) and open "codec_dump.txt"
+2. Click on "File > Open…" (⌘+O) and select "codec_dump.txt"
 3. This will extract and import all the available audio sources from the Codec dump:</br>![PCnu01](https://user-images.githubusercontent.com/76865553/171392638-7a72f44b-8e13-4ff4-ae9e-9e24d11accda.png)
-4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except Atapi Internal:</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
+4. Next, click on "Patch > Remove Disabled". This will remove all Nodes which are not connected except ATAPI Internal (= Optical Drive):</br>![PCnu02](https://user-images.githubusercontent.com/76865553/171389936-1931ef51-b2ae-4f5b-889e-d02acc057710.png)
 5. Click on "Options > Verb Sanitize" and enable all the options:</br>![Verbfixes](https://user-images.githubusercontent.com/76865553/171390150-65fb7777-666d-4385-8798-ed2288bfd6e5.png)
 6. Select "Patch > Verb Sanitize". This will apply [various fixes](https://github.com/headkaze/PinConfigurator#what-patch-apply-verbit-fix-does-now) to the PinDefault values and Verb Data so that the `PinConfig` will work in macOS.
 7. Next, click on "Get ConfigData":</br>![PCnu04](https://user-images.githubusercontent.com/76865553/171390411-5335a259-2aae-4e27-82fa-cb00f3799ecf.png)
@@ -591,17 +592,17 @@ Preferred method if you just want to implement the default Codec configuration.
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
 In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
 
-1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources) 
-2. Find the Layout-ID for your `CodecID` (look it up in `codec_dump_dec.txt` or search by description in `Codec` field):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
-3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C)
+1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources)
+2. Use the search function to to find the Layout-ID you want to modify:
+	- Search by `CodecID` (look it up in `codec_dump_dec.txt`) and skip through the results until you find it, or
+	- Search by the description the author added to the `Codec` string – like the Codec name, Laptop or Mainboard model for example.
+3. Select the data inside the `ConfigData` field (⌘+A) and copy it (⌘+C):</br>![Modpinconf](https://user-images.githubusercontent.com/76865553/171391426-5b518d5d-f0f4-464c-89e5-9eb65b7437fe.png)
 4. Start the PinConfigurator App
 5. From the menubar, select "File > Import > Clipboard"
 6. This is how it looks:</br>![pincfgimprtd](https://user-images.githubusercontent.com/76865553/171391513-9cf5d5a7-b83f-4641-a11f-87603092306b.png)
-7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.
+7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.[^3]
 
-**NOTES**: In my case, the PinConfig lacks a second Output to get sound out of the docking station when I connect external speakers to it. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-out of the dock.
-
-Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your Codec you should refer to the Codec schematic and the codec dump text file to find appropriate nodes. 
+[^3]: In my case, the PinConfig lacks a second Output to get sound out of the docking station's jack when I plug in external speakers. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-Out for the dock. Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your configuring your Codec, you will have to refer to the Codec schematic and the codec dump text file to find appropriate nodes. In some cases you might even have to inspect the block diagram which is part of the documentation provided by the Codec manufacturer. 
 
 There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
 
@@ -634,7 +635,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 
 **Config Notes** (subject to change):
 
-- **NodeID**: Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+- **NodeID** (NID): Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
 - **PinDefault**: Get the `PinDefault` value for the Node from `codec_dump.txt` (has to be in Hex)
 - **Jack Color**: 
 	- For internal devices: select "[0] Unknown" 
