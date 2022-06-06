@@ -569,12 +569,14 @@ Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (us
 
 "Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
-Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically. Ensure that your PinConfig contains all the Nodes that are part of the PathMap!
+Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically. 
+
+⚠️ Make sure that your `PinConfig` contains ***all*** the Input and Output Nodes (Mixers/Switces are irrelavant) you are refering to in the `PathMap` so the routing is coherent!. If you are referencing a node in a path which doesn't exist (in the PinConfig) then there will be no sound for this path. On the other hand, you can have more Nodes in the PinConfig than you are actually assigning in the PathMap – they just won't be available/visible in System Preferences as Input/Output sources.
 
 ### Using PinConfigurator to create a PinConfig
 
 #### Default Method (keeps connected Nodes only)
-Preferred method if you just want to inject the default Codec configuration into macOS.
+Preferred method if you just want to inject the default Input/Output Soures into macOS (Double-check against Nodes used in the Platforms.xml and if necessary, adjust them accordingly).
 
 1. Open **PinConfigurator**
 2. Click on "File > Open…" (⌘+O) and select "codec_dump.txt"
@@ -633,15 +635,23 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
-**Config Notes** (subject to change):
+#### PinConfigurator's "Edit Node" dialog (work in progres)
+PinConfigurator's "Edit Node" dialog window lets you configure a Node and all of its parameters/verbs. Some of the settings are obvious while I have no clue what others do (like Misc, Group or Position) since PinConfigurator is mostly undocumented.
 
-- **NodeID** (NID): Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
-- **PinDefault**: Get the `PinDefault` value for the Node from `codec_dump.txt` (has to be in Hex)
-- **Jack Color**: 
-	- For internal devices: select "[0] Unknown" 
-	- For external devices like Headphones etc., select "[1] Black".
-- **EAPD**: Check if the Node you want to add supports EAPD and adjust the Node accordingly
-- To be continued…
+Fuction | Description
+--------|------------
+**NodeID** (NID)| Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! Example:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+**PinDefault** | `PinDefault` value for the selected/added Node (in Hex). Get it from `codec_dump.txt`
+**Device** | Type of the device the Node should be shown as in macOS (I think)
+**Connector** | Type of connection between the Source and the Coded. This could also to the icon used in macOS but I am uncertain.
+**Port** | Type of Connector used. If a Node contains "fixed" in the Codec Schematic (usually for Laptop Speakers and Internal Mics) it should be set to fixed here as well.
+**Gross Location** | Either External/Internal/Seperate/Other. For Internal Speakers/Mics, set it to "Internal" (mostly Laptops), for things you connect to it by a plug, select "External". The rest, I don't know yet.
+**Geo Location** | Physical location of the Port for the Device
+**Color**| - For internal devices: select "[0] Unknown" </br> - For external devices like Headphones etc.: select "[1] Black".
+**Misc.**|I think it's related to the way the Codec reacts when something is plugged into a jack, but I am uncertain.
+**Group** | I know it's changing the last 2 digits of the PinDefault Value but I don't know If you have to puts 2 Nodes you want to switch between in the same group.
+**Position** | I think it defines the order of Nodes in a Group
+**EAPD** |Check if the Node supports EAPD and adjust the setting accordingly. But there are more options in the dropdown menu. No clue what they do.
 
 ## <a name='x.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>X. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
