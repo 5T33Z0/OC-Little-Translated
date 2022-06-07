@@ -73,21 +73,22 @@ For downloading and syncing the latest **Dev** versions, you have to change View
 Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
 ## Fixing "Development version database does not exist" issue
-![](/Users/klasus/Desktop/Err01.png)
+
+![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
 
 This error usually appears when opening a config.plist which was created for a newer dev version of OpenCore. Do the following to fix it:
 
 1. Press "OK" 
 2. DON'T save the config!
 3. **Option 1**: 
-	- Click on "Help > Download Upgrade Packages":</br>![](/Users/klasus/Desktop/Err02.png)</br> This should fix the issue. If your build is even newer, use Option 2
+	- Click on "Help > Download Upgrade Packages":</br>![Err02](https://user-images.githubusercontent.com/76865553/172385089-28a836fb-c438-42da-bee8-2d9e7c3b489f.png)</br> This should fix the issue. If the config is even newer, use Option 2
 4. **Option 2**:	
 	- Download the latest OC release build from [Dortanias Repo](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
 	- Open the "Upgrade OpenCore an Kexts" Window
 	- Click on "Import"
 	- Navigate to the "OpenCore-0.8.X-RELEASE.zip" and open it
 	- Ignore the error messages (hit "OK" twice)
-5. Close the Syn Window. Now you have the latest avaialble files in the database:</br>![](/Users/klasus/Desktop/Err04.png)
+5. Close the Syn Window. Now you have the latest avaialble files in the database:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
 ## NOTES
 
