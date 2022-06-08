@@ -234,14 +234,22 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
 
 #### Routing Examples from ALC269
 
-- **Headphone Output switch**:
+- **Internal Speakers** (Fixed):
+
+	```mermaid
+	flowchart LR
+    	id1(Node 20: Speaker out) --> |Fixed path| id3{Mixer 12} --> id5(((Output 2)))
+	```
+
+- **Headphone Output**:
 
 	```mermaid
 	flowchart LR
     	id1(Node21: HP out) --> |possible path A| id3{Mixer 12} --> id5(((Output 2)))
     	id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
 	```
-- **Internal Mic Input**:
+	**NOTE**: The number of possible paths depends on the number of connections a PinComplex Node provides. 
+- **Internal Mic Input** (Fixed):
 
 	```mermaid
 	flowchart LR
@@ -266,9 +274,9 @@ Since I want the Line-Out of my docking station dock to work, I need to assign s
 We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD [^2]
-:-------------------:|-----------------------------|-----------------------|:--------:
-18 (In)              |Internal Mic (**FIXED**)     | 9 - 34 - 18 |
-20 (Out)             |Internal Speakers (S) (**FIXED**) | 20 - 12 - 2  | YES
+-----------------:|-----------------------------|-----------------------|:--------:
+18 (In)              |Internal Mic     | 9 - 34 - 18 (**FIXED**) |
+20 (Out)             |Internal Speakers (S) | 20 - 12 - 2 (**FIXED**)| YES
 21 (Out)             |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
 23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono) |
 24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br>24 - 13 - 3|
@@ -281,8 +289,6 @@ Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAP
 27 (as Input)        |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 9 - 34 - 27 or
 29 Mono (as Input)   |Mono In                      | 8 - 35 - 29 or </br> 9 - 34 -29
 30 (Digital Out)     |Speaker Ext. Rear Digital (S/PDIF)| 6 - 30| 
-
-[^2]: **EAPD** = EAPD (External Amplifier Power Down). If it's supported by the Node, enabling it is recommended. For more details, please refer to Chapter 7.3.3.16 of the High Definition Audio Specification, Rev. 1.0a by Intel, 2010.
 
 <details>
 <summary><strong>Double-Checking</strong> (click to reveal)</summary>
@@ -568,8 +574,9 @@ In case you already have a somewhat working Layout-ID that you want/need to modi
 If `AppleALC.kext` is loaded, you can import the `PinConfig` directly from the I/O Registry:
 
 1. Open PinConfigurator
-2. From the menubar, select "File > Impot > IO Registry"
-3. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig and modify it as explained in the next section
+2. From the menubar, select "File > Import > IO Registry"
+3. Select the Audio Codec (not the HDMI port)
+4. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig and modify it as explained in the next section
 
 ##### Method 2 Importing PinConfig from PinConfigs.kext
 If AppleALC is not loaded or you want to import a different PinConfig for your Codec, do the following:
