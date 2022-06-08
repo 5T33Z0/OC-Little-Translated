@@ -54,11 +54,10 @@ From a user's perspective, making audio work in hackintosh is a no-brainer: add 
 
 But once you are on the other end, trying to actually *create* your own ALC Layout-ID this becomes a completely different story quickly and it's almost a give that your Layout-ID won't work at all the first time around. So, are you still sure you *want* to do this?
 
-💡 **TIPS**
+### 💡 Tips
 
 - Click on the little Header icon next to `README.md` to navigate in the document quickly
-- If you just want a slimmed-down version of AppleALC.kext for your Codec, you can use dreamwhite's [Custom AppleALC builds](https://github.com/dreamwhite/ChonkyAppleALC-Build/releases) instead.
-- Take notes and backup files you change in the Source Code! Otherwise you will completely lose track of PinConfig and PathMap combinations you have tried already! I prepared a [table for taking notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Testing_Notes.md) which might help. You can open it in a Markdown Editor such as Macdown or use Visual Studio Code.
+- [Backup files you change](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/AppleALC_Settings_Management.md) in the Source Code and document configuration changed! Otherwise you will completely lose track of PinConfig and PathMap combinations you have tried already! I prepared a [table for taking notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Testing_Notes.md) which might help. You can open it in a Markdown Editor such as Macdown or use Visual Studio Code.
 
 ## <a name='ii.-preparations'></a>II. Preparations
 Creating a Layout-ID for AppleALC is one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
