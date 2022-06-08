@@ -6,7 +6,7 @@
 		- [Who this guide is for](#who-this-guide-is-for)
 		- [Why another guide?](#why-another-guide)
 		- [Are you *sure*, you want to do this?](#are-you-sure-you-want-to-do-this)
-		- [💡 Tips](#-tips)
+		- [Tips](#-tips)
 	- [II. Preparations](#ii-preparations)
 		- [Obtaining an Audio CODEC dump in Linux](#obtaining-an-audio-codec-dump-in-linux)
 			- [Preparing a USB flash drive for running Linux from an ISO](#preparing-a-usb-flash-drive-for-running-linux-from-an-iso)
