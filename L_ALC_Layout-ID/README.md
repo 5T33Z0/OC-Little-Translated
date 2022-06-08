@@ -69,7 +69,7 @@ Therefore, we need to use (a live version of) Linux to create the codec dump wit
 
 **NOTES**: If you can live without a schematic of the Codec dump, you *can* use the dumps created with Clover and OpenCore as well.
 
-- **Clover**: Hit `F8` in the boot menu. `AudioDxe.efi` has to be present in `CLOVER/drivers/UEFI`. The file(s) will be stored in `EFI/CLOVER/misc`.
+- **Clover**: Hit "F8" in the boot menu. `AudioDxe.efi` has to be present in `CLOVER/drivers/UEFI`. The file(s) will be stored in `EFI/CLOVER/misc`.
 - **OpenCore**: Requires the Debug version. Check the [Debugging Section](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#using-opencores-sysreport-feature) for details.
 
 [^1]: When I compared the dumps obtained with Clover and Linux, I noticed that the one created in Linux contained almost twice the data (293 vs 172 lines). I guess this is because Linux dynamically discovers the paths of an audio codec through a graph traversal algorithm. And in cases where the algorithm fails, it uses a huge lookup table of patches specific to each Codec. My guess is that this additional data is captured in the Codec dump as well.
@@ -77,8 +77,8 @@ Therefore, we need to use (a live version of) Linux to create the codec dump wit
 #### Preparing a USB flash drive for running Linux from an ISO
 Users who already have Linux installed can skip to "Dumping the Codec"!
 
-1. Use a USB 3.0 flash drive (at least 8 GB or more)
-2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the flash drive. It's pretty straight forward.
+1. Use a USB 3.0 flash drive (at least 8 GB or more).
+2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [Instructions](https://www.ventoy.net/en/doc_start.html) to prepare the flash drive. 
 3. Next, download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop), [Zorin](https://zorin.com/os/download/) or whatever distro you prefer – they all work fine.
 4. Copy the ISO to your newly created Ventoy stick
 5. Reboot from the flash drive
@@ -91,10 +91,10 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 	```shell
 	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
 	```
-2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy flash drive itself, since it's formatted in ExFat and can't be accessed by Linux without additional measures.
-3. Reboot into macOS
-4. Extract `CodecDump.zip` to the Desktop
-5. ⚠️ Rename `card0-codec#0.txt` inside the "CodecDump" folder to `codec_dump.txt`. Otherwise the script we will use in Chapter III to convert the data will fail since it can't find the file.
+2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy drive itself, since it's formatted in ExFat and can't be accessed by Linux without installing additional utilities.
+3. Reboot into macOS.
+4. Extract `CodecDump.zip` to the Desktop. It contains a folder with one or more .txt files. We are only interested in `card1-codec#0.txt`, additional dumps are usually from HDMI audio devices of GPUs.
+5. ⚠️ Rename `card0-codec#0.txt` to `codec_dump.txt`. Otherwise the script we will use later to convert it will fail. 
 
 #### Relevant Codec data
 Amongst other things, the Codec dump text contains the following details:
@@ -102,7 +102,7 @@ Amongst other things, the Codec dump text contains the following details:
 - The Codec model
 - Its Address (usually `0`)
 - It's Vendor Id (in AppleALC it's used as `CodecID`)
-- Pin Complex Nodes with Control Names (these form the `PinConfig`)
+- Pin Complex Nodes with Control Names (these are eligible for the `PinConfig`)
 - The actual routing capabilities of the Codec:
 	- Pin Complex Nodes
 	- Mixer/Selector Nodes
@@ -111,16 +111,16 @@ Amongst other things, the Codec dump text contains the following details:
 	- Number of connections from/to a Node/Mixer/Selector/Switch
 
 ### Required Tools and Files
-💡Please follow the instructions below carefully and thoroughly to avoid issues.
+💡Please follow the instructions carefully and thoroughly to avoid issues.
 
-- Download and install [**Python**](https://www.python.org/downloads/) if you haven't already
-- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts, but Homebrew works, too)
-- Once that's done, reboot.
-- Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
+- Install [**Python 3**](https://www.python.org/downloads/) if you haven't already
+- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/)
+- Once that's done, reboot
+- Next, install [**graphviz**](https://graphviz.org/) via terminal (takes a few minutes):
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
-- Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Codec-Graph.zip?raw=true). 
-- Copy the `Codec-Graph` folder to the Desktop. We need it to convert and visualize the data inside the Codec dump, so we have can work with it.
+- Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Codec-Graph.zip?raw=true)
+- Copy the `Codec-Graph` folder to the Desktop
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
@@ -128,10 +128,12 @@ Amongst other things, the Codec dump text contains the following details:
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
 ### Preparing the AppleALC Source Code
-- Clone, Download or Fork or and extract the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip")
-- Download the Debug Version of [**Lilu**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
+- Clone, Fork or download (click on "Code" and "Download Zip") the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code 
+- Download the Debug Version of [**Lilu Kext**](https://github.com/acidanthera/Lilu/releases) and copy it to the "AppleALC" root folder
 - In Terminal, enter: `cd`, hit space and drag and drop your AppleALC folder into the window and press enter.
-- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter. This will add the MacKernelSDK to the AppleALC source code. The resulting folder structure should look like this:</br>
+- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter. This add the MacKernelSDK in the AppleALC source folder.
+
+The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 
 #### Important files we have to work on:
@@ -158,29 +160,31 @@ Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.pli
 Now, that we've got the prep work out of the way, we can begin!
 
 ## <a name='iii.-extracting-data-from-the-codec-dump'></a>III. Extracting data from the Codec dump
-In order to create a routing of the audio inputs and outputs for macOS, we have to extract and convert data from the codec dump. To make the data easier to work with, we will visualize it so we have a schematic of the audio codec which makes routing easier than browsing through the text file of the codec dump.
+In order to route audio inputs and outputs for macOS, we need to analyze and work with data inside the Codec dump. To make the data easier to work with, we will use codec-graph to generate a schematic of the audio codec which makes routing audio much easier than working solely with the text file.
 
 ### Converting the Codec Dump 
 1. Open the `codec_dump.txt` located in the "Codec-Graph" folder
 2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
 3. Save the file.
 4. Next, double-click `Convert_Dump`. 
-5. This will start Codec-Graph (and perform one additional file conversion)
+5. This will start Codec-Graph (and perform an additional hex to decimal conversion)
 6. Press "N", hit enter
 7. Drag and drop the "codec_dump.txt" into the window and hit "Enter"
 8. Press "N", hit enter. This creates 3 new files inside the "output" folder:
 	- **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codecdump.svg`** – Schematic of the Codec.
 	- **`codecdumpdec.svg`** &rarr; Schematic of the Codec converted from hex to decimal. We will work with this primarily. You can open it in the web browser to view it in full size.
-5. Run PinConfigurator
+5. Nexz, run PinConfigurator
 6. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
 7. This will extract the available audio sources from the Codec dump
-8. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We will need it later.
+8. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
 
 ## <a name='iv.-understanding-the-codec-schematic'></a>IV. Understanding the Codec schematic and signal flow
-Shown below is `codecdumpdec.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different!
+Shown below is `codecdumpdec.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different![^3]
 
 ![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
+
+[^3]: This repo contains some more Codec dumps with schematics you can check out.
 
 Form              | Function
 ------------------|-----------------------------------------------
@@ -273,7 +277,7 @@ Since I want the Line-Out of my docking station dock to work, I need to assign s
 
 We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
-Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD [^2]
+Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
 -----------------:|-----------------------------|-----------------------|:--------:
 18 (In)              |Internal Mic     | 9 - 34 - 18 (**FIXED**) |
 20 (Out)             |Internal Speakers (S) | 20 - 12 - 2 (**FIXED**)| YES
@@ -589,9 +593,9 @@ If AppleALC is not loaded or you want to import a different PinConfig for your C
 4. Start the PinConfigurator App
 5. From the menubar, select "File > Import > Clipboard"
 6. This is how it looks:</br>![pincfgimprtd](https://user-images.githubusercontent.com/76865553/171391513-9cf5d5a7-b83f-4641-a11f-87603092306b.png)
-7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.[^3]
+7. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig.[^2]
 
-[^3]: In my case, the PinConfig lacks a second Output to get sound out of the docking station's jack when I plug in external speakers. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-Out for the dock. Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your configuring your Codec, you will have to refer to the Codec schematic and the codec dump text file to find appropriate nodes. In some cases you might even have to inspect the block diagram which is part of the documentation provided by the Codec manufacturer. 
+[^2]: In my case, the PinConfig lacks a second Output to get sound out of the docking station's jack when I plug in external speakers. The Layout-ID I am currently using (ID 18 for ALC269) was created for the Lenovo X230 which is very similar to the T530 in terms of features. It uses the same Codec revision and works fine besides the missing Line-Out for the dock. Since Node 27 has a Headphone Playback switch as well, I will add it to the current PinConfig. For your configuring your Codec, you will have to refer to the Codec schematic and the codec dump text file to find appropriate nodes. In some cases you might even have to inspect the block diagram which is part of the documentation provided by the Codec manufacturer. 
 
 There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
 
