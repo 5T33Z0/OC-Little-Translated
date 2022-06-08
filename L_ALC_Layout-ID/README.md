@@ -328,7 +328,7 @@ This has to be represented in the file structure of the `PathMap`. Nodes you wan
 - PathMaps (Array)
 	- 0 (Dict) 
 		- PathMap (Array)
-			- **0 (Array) [INPUTS]**
+			- **0 (Array) [INPUTS]** (Sources you want to switch between)
 				- 0 (Array) [Input Source 1]
 					- 0 (Array) [Container for Nodes of Input Source 1]
 						-  0 (Dict) Input Node 
@@ -562,7 +562,17 @@ Preferred method if you just want to inject the default Input/Output sources int
 12. Continue in **Chapter X.**
 
 #### Modifying an existing PinConfig (adding Outputs/Inputs)
-In case you already have a somewhat working Layout-ID that you want/need to modify, do the following:
+In case you already have a somewhat working Layout-ID that you want/need to modify, you can import its PinConfig into PinConfigurator for editing. There are 2 methods to do it:
+
+##### Method 1: Importing PinConfig from IO Registry
+If `AppleALC.kext` is loaded, you can import the `PinConfig` directly from the I/O Registry:
+
+1. Open PinConfigurator
+2. From the menubar, select "File > Impot > IO Registry"
+3. Check `codecdumpdec.svg` to find the Pin Complex Nodes you want to add to the current PinConfig and modify it as explained in the next section
+
+##### Method 2 Importing PinConfig from PinConfigs.kext
+If AppleALC is not loaded or you want to import a different PinConfig for your Codec, do the following:
 
 1. Open the `info.plist` inside the `PinConfig.kext` (in AppleALC/Resources)
 2. Use the search function to to find the Layout-ID you want to modify:
@@ -578,7 +588,7 @@ In case you already have a somewhat working Layout-ID that you want/need to modi
 
 There are 2 methods to do add a Node to the PinConfig: you can either add one in PinConfigurator and configure it manually or combine verb data inside the `verbs.txt` to "craft" one, copy it into memory and import it.
 
-#### Method 1: Use verbs.txt to add a Node to the PinConfig
+#### Adding Nodes, Method 1: Using `verbs.txt`
 
 1. Open `verbs.txt`
 2. Place the cursor at the end of the document 
@@ -592,7 +602,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 	- Either copy/paste the ConfigData to a text file and save it for later, or 
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
-#### Method 2: Add a node to PinConfigurator and configure it manually
+#### Adding Nodes, Method 2: Using PinConfigurator's `Add` feature
 
 1. In PinConfigurator, click "Add"
 2. This opens a dialog with a bunch of options to configure the new Node:</br>![AddNode01](https://user-images.githubusercontent.com/76865553/172112636-1f207237-bb45-48a7-9b21-b20a72927e0a.png)
