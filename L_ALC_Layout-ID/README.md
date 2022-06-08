@@ -267,8 +267,8 @@ We can use the .svg schematic to trace all available paths the codec provides an
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD [^2]
 :-------------------:|-----------------------------|-----------------------|:--------:
-18 (In)              |Internal Mic (S)             | 9 - 34 - 18 (fixed)   |
-20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 or</br>20 - 13- 3|YES
+18 (In)              |Internal Mic (**FIXED**)     | 9 - 34 - 18 |
+20 (Out)             |Internal Speakers (S) (**FIXED**) | 20 - 12 - 2  | YES
 21 (Out)             |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
 23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono) |
 24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br>24 - 13 - 3|
