@@ -1,0 +1,35 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: Realtek ALC1220   Address: 0   DevID: 283906592 (0x10EC1220)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+18 (0x12) 403FD500   Out CD                 Other               No Connection   External N/A                Reserved2 0  0  -     01271C00 01271DD5 01271E3F 01271F40
+20 (0x14) 01014010   Out Line Out           1/8" Stereo/Mono    Jack            External Rear               Green     1  0  0x2   01471C10 01471D40 01471E01 01471F01 01470C02
+21 (0x15) 01011012   Out Line Out           1/8" Stereo/Mono    Jack            External Rear               Black     1  2  -     01571C12 01571D10 01571E01 01571F01
+22 (0x16) 01016011   Out Line Out           1/8" Stereo/Mono    Jack            External Rear               Orange    1  1  -     01671C11 01671D60 01671E01 01671F01
+23 (0x17) 01012014   Out Line Out           1/8" Stereo/Mono    Jack            External Rear               Gray      1  4  -     01771C14 01771D20 01771E01 01771F01
+24 (0x18) 01A19040   In  Mic In             1/8" Stereo/Mono    Jack            External Rear               Pink      4  0  -     01871C40 01871D90 01871EA1 01871F01
+25 (0x19) 02A19050   In  Mic In             1/8" Stereo/Mono    Jack            External Front              Pink      5  0  -     01971C50 01971D90 01971EA1 01971F02
+26 (0x1A) 01813C4F   In  Line In            1/8" Stereo/Mono    Jack            External Rear               Blue      4  15 -     01A71C4F 01A71D3C 01A71E81 01A71F01
+27 (0x1B) 02214020   Out HP Out             1/8" Stereo/Mono    Jack            External Front              Green     2  0  0x2   01B71C20 01B71D40 01B71E21 01B71F02 01B70C02
+29 (0x1D) 4046E641   Out SPDIF Out          Other Digital       No Connection   External N/A                White     4  1  -     01D71C41 01D71DE6 01D71E46 01D71F40
+30 (0x1E) 99430130   Out SPDIF Out          ATAPI Internal      Fixed           Internal ATAPI              Unknown   3  0  -     01E71C30 01E71D01 01E71E43 01E71F99
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+18 (0x12) 403FD010   Out CD                 Other               No Connection   External N/A                Reserved2 1  0  -     01271C10 01271DD0 01271E3F 01271F40
+27 (0x1B) 01214020   Out HP Out             1/8" Stereo/Mono    Jack            External Rear               Green     2  0  0x2   01B71C20 01B71D40 01B71E21 01B71F01 01B70C02
+20 (0x14) 01114030   Out Speaker            1/8" Stereo/Mono    Jack            External Rear               Green     3  0  0x2   01471C30 01471D40 01471E11 01471F01 01470C02
+24 (0x18) 91A09040   In  Mic In             Unknown             Fixed           Internal Rear               Pink      4  0  -     01871C40 01871D90 01871EA0 01871F91
+25 (0x19) 01809050   In  Line In            Unknown             Jack            External Rear               Pink      5  0  -     01971C50 01971D90 01971E80 01971F01
+22 (0x16) 01116060   Out Speaker            1/8" Stereo/Mono    Jack            External Rear               Orange    6  0  -     01671C60 01671D60 01671E11 01671F01
+21 (0x15) 01111070   Out Speaker            1/8" Stereo/Mono    Jack            External Rear               Black     7  0  -     01571C70 01571D10 01571E11 01571F01
+23 (0x17) 01112080   Out Speaker            1/8" Stereo/Mono    Jack            External Rear               Gray      8  0  -     01771C80 01771D20 01771E11 01771F01
+29 (0x1D) 4046E090   Out SPDIF Out          Other Digital       No Connection   External N/A                White     9  0  -     01D71C90 01D71DE0 01D71E46 01D71F40
+26 (0x1A) 018130A0   In  Line In            1/8" Stereo/Mono    Jack            External Rear               Blue      10 0  -     01A71CA0 01A71D30 01A71E81 01A71F01
+------------------------------------------------------------------------------------------------------------------------------------------------
+

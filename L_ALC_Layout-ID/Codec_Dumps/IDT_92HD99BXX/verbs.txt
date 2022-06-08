@@ -1,0 +1,23 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: IDT 92HD99BXX   Address: 0   DevID: 287143653 (0x111D76E5)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+10 (0x0A) 04A11020   In  Mic In             1/8" Stereo/Mono    Jack            External Right              Black     2  0  0x2   00A71C20 00A71D10 00A71EA1 00A71F04 00A70C02
+11 (0x0B) 0421101F   Out HP Out             1/8" Stereo/Mono    Jack            External Right              Black     1  15 0x2   00B71C1F 00B71D10 00B71E21 00B71F04 00B70C02
+12 (0x0C) 40F000F0   --  Other              Unknown             No Connection   External N/A                Unknown   15 0  0x2   00C71CF0 00C71D00 00C71EF0 00C71F40 00C70C02
+13 (0x0D) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   00D71C10 00D71D01 00D71E17 00D71F90 00D70C02
+15 (0x0F) 40F000F0   --  Other              Unknown             No Connection   External N/A                Unknown   15 0  0x2   00F71CF0 00F71D00 00F71EF0 00F71F40 00F70C02
+17 (0x11) D5A30140   In  Mic In             ATAPI Internal      Jack + Internal Internal Top                Unknown   4  0  -     01171C40 01171D01 01171EA3 01171FD5
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+13 (0x0D) 90170010   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   00D71C10 00D71D00 00D71E17 00D71F90 00D70C02
+10 (0x0A) 90A01020   In  Mic In             Unknown             Fixed           Internal N/A                Black     2  0  0x2   00A71C20 00A71D10 00A71EA0 00A71F90 00A70C02
+11 (0x0B) 00211030   Out HP Out             1/8" Stereo/Mono    Jack            External N/A                Black     3  0  0x2   00B71C30 00B71D10 00B71E21 00B71F00 00B70C02
+------------------------------------------------------------------------------------------------------------------------------------------------
+

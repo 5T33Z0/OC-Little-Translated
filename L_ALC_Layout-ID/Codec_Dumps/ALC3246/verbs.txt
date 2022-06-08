@@ -1,0 +1,30 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: Realtek ALC3246   Address: 0   DevID: 283902550 (0x10EC0256)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+18 (0x12) 90A60180   In  Mic In             Other Digital       Fixed           Internal N/A                Unknown   8  0  -     01271C80 01271D01 01271EA6 01271F90
+19 (0x13) 40000000   Out Line Out           Unknown             No Connection   External N/A                Unknown   0  0  -     01371C00 01371D00 01371E00 01371F40
+20 (0x14) 90170120   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   2  0  0x2   01471C20 01471D01 01471E17 01471F90 01470C02
+24 (0x18) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01871CF0 01871D11 01871E11 01871F41
+25 (0x19) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01971CF0 01971D11 01971E11 01971F41
+26 (0x1A) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01A71CF0 01A71D11 01A71E11 01A71F41
+27 (0x1B) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  0x2   01B71CF0 01B71D11 01B71E11 01B71F41 01B70C02
+29 (0x1D) 40700001   Out Modem Handset Side Unknown             No Connection   External N/A                Unknown   0  1  -     01D71C01 01D71D00 01D71E70 01D71F40
+30 (0x1E) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01E71CF0 01E71D11 01E71E11 01E71F41
+33 (0x21) 02211030   Out HP Out             1/8" Stereo/Mono    Jack            External Front              Black     3  0  0x2   02171C30 02171D10 02171E21 02171F02 02170C02
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+19 (0x13) 40100010   Out Speaker            Unknown             No Connection   External N/A                Unknown   1  0  -     01371C10 01371D00 01371E10 01371F40
+20 (0x14) 90170020   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   2  0  0x2   01471C20 01471D00 01471E17 01471F90 01470C02
+33 (0x21) 01211030   Out HP Out             1/8" Stereo/Mono    Jack            External Rear               Black     3  0  0x2   02171C30 02171D10 02171E21 02171F01 02170C02
+29 (0x1D) 40700040   Out Modem Handset Side Unknown             No Connection   External N/A                Unknown   4  0  -     01D71C40 01D71D00 01D71E70 01D71F40
+26 (0x1A) 018B1050   In  Line In            Combination         Jack            External Rear               Black     5  0  -     01A71C50 01A71D10 01A71E8B 01A71F01
+18 (0x12) 90A00080   In  Mic In             Unknown             Fixed           Internal N/A                Unknown   8  0  -     01271C80 01271D00 01271EA0 01271F90
+------------------------------------------------------------------------------------------------------------------------------------------------
+
