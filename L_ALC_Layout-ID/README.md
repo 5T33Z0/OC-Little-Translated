@@ -1,29 +1,69 @@
 # How to create/modify a Layout-ID for AppleALC
 
-**TABLE of CONTENTS**
+- [How to create/modify a Layout-ID for AppleALC](#how-to-createmodify-a-layout-id-for-applealc)
+	- [I. Summary](#i-summary)
+		- [About](#about)
+		- [Who this guide is for](#who-this-guide-is-for)
+		- [Why another guide?](#why-another-guide)
+		- [Are you *sure*, you want to do this?](#are-you-sure-you-want-to-do-this)
+		- [💡 Tips](#-tips)
+	- [II. Preparations](#ii-preparations)
+		- [Obtaining an Audio CODEC dump in Linux](#obtaining-an-audio-codec-dump-in-linux)
+			- [Preparing a USB flash drive for running Linux from an ISO](#preparing-a-usb-flash-drive-for-running-linux-from-an-iso)
+			- [Dumping the Codec](#dumping-the-codec)
+			- [Relevant Codec data](#relevant-codec-data)
+		- [Required Tools and Files](#required-tools-and-files)
+		- [Preparing the AppleALC Source Code](#preparing-the-applealc-source-code)
+			- [Important files we have to work on](#important-files-we-have-to-work-on)
+		- [Configuring Xcode](#configuring-xcode)
+	- [III. Extracting data from the Codec dump](#iii-extracting-data-from-the-codec-dump)
+		- [Converting the Codec Dump](#converting-the-codec-dump)
+	- [IV. Understanding the Codec schematic and signal flow](#iv-understanding-the-codec-schematic-and-signal-flow)
+		- [How to read the schematic](#how-to-read-the-schematic)
+			- [Routing Input Devices](#routing-input-devices)
+			- [Routing Output Devices](#routing-output-devices)
+			- [Routing Examples from ALC269](#routing-examples-from-alc269)
+			- [Tracing possible paths](#tracing-possible-paths)
+				- [Double-Checking against codec-dump_dec.txt](#double-checking-against-codec-dump_dectxt)
+	- [V. Creating a PathMap](#v-creating-a-pathmap)
+		- [Structure of `PlatformsXX.xml`](#structure-of-platformsxxxml)
+			- [Auto-Switching Mode](#auto-switching-mode)
+			- [Manual Switching Mode](#manual-switching-mode)
+	- [VI. Creating a `PlatformsXX.xml`](#vi-creating-a-platformsxxxml)
+		- [Automated method using VoodooHDA and GetDumpXML (macOS ≤ 10.15.7 only)](#automated-method-using-voodoohda-and-getdumpxml-macos--10157-only)
+		- [Manual Method](#manual-method)
+	- [VII. Transferring the PathMap to `PlatformsXX.xml`](#vii-transferring-the-pathmap-to-platformsxxxml)
+		- [Transferring PinComplex Nodes to PlatformsXX.xml](#transferring-pincomplex-nodes-to-platformsxxxml)
+		- [Amp Capabilities](#amp-capabilities)
+			- [Amp Node (Input side)](#amp-node-input-side)
+			- [Amp Node (Output side)](#amp-node-output-side)
+		- [Transferring Amp Capabilities to PlatformsXX.xml](#transferring-amp-capabilities-to-platformsxxxml)
+		- [Example: Adding an Output device to the PlatformsXX.xml](#example-adding-an-output-device-to-the-platformsxxxml)
+	- [VIII. Adding/Modifying `layoutXX.xml`](#viii-addingmodifying-layoutxxxml)
+		- [Modifying an existing `layoutXX.xml`](#modifying-an-existing-layoutxxxml)
+		- [Creating a new `LayoutXX.xml` from scratch](#creating-a-new-layoutxxxml-from-scratch)
+	- [IX. Creating a PinConfig](#ix-creating-a-pinconfig)
+		- [Using PinConfigurator to create a PinConfig](#using-pinconfigurator-to-create-a-pinconfig)
+			- [Default Method (keeps connected Nodes only)](#default-method-keeps-connected-nodes-only)
+			- [Modifying an existing PinConfig (adding Outputs/Inputs)](#modifying-an-existing-pinconfig-adding-outputsinputs)
+				- [Method 1: Importing PinConfig from IO Registry](#method-1-importing-pinconfig-from-io-registry)
+				- [Method 2 Importing PinConfig from PinConfigs.kext](#method-2-importing-pinconfig-from-pinconfigskext)
+			- [Adding Nodes, Method 1: Using `verbs.txt`](#adding-nodes-method-1-using-verbstxt)
+			- [Adding Nodes, Method 2: Using PinConfigurator's `Add` feature](#adding-nodes-method-2-using-pinconfigurators-add-feature)
+			- [PinConfigurator's "Edit Node" window explained](#pinconfigurators-edit-node-window-explained)
+	- [X. Integrating the `PinConfig` into the AppleALC source code](#x-integrating-the-pinconfig-into-the-applealc-source-code)
+		- [Finding an unused Layout-ID number](#finding-an-unused-layout-id-number)
+			- [Scenario 1: Modifying data of an existing Layout-ID](#scenario-1-modifying-data-of-an-existing-layout-id)
+			- [Scenario 2: Creating a new Layout-ID from scratch (todo)](#scenario-2-creating-a-new-layout-id-from-scratch-todo)
+	- [XI. Add `Platforms.xml` and `layout.xml` to `info.plist`](#xi-add-platformsxml-and-layoutxml-to-infoplist)
+	- [XII. Compiling the AppleALC.kext](#xii-compiling-the-applealckext)
+	- [XIII. Testing and Troubleshooting](#xiii-testing-and-troubleshooting)
+		- [Testing the new Layout](#testing-the-new-layout)
+		- [Troubleshooting](#troubleshooting)
+	- [XIV. Adding your Layout-ID to the AppleALC Repo](#xiv-adding-your-layout-id-to-the-applealc-repo)
+	- [CREDITS and RESOURCES](#credits-and-resources)
 
-<!-- vscode-markdown-toc -->
-* [I. Summary](#i.-summary)
-* [II. Preparations](#ii.-preparations)
-* [III. Extracting data from the Codec dump](#iii.-extracting-data-from-the-codec-dump)
-* [IV. Understanding the Codec schematic and signal flow](#iv.-understanding-the-codec-schematic)
-* [V. Creating a PathMap](#v.-creating-a-pathmap)
-* [VI. Creating a PlatformsXX.xml](#vi.-creating-a-`platformsxx.xml`)
-* [VII. Transferring the PathMap to PlatformsXX.xml](#vii.-transferring-the-pathmap-to-`platformsxx.xml`)
-* [VIII. Adding/Modifying layoutXX.xml](#viii.-adding/modifying-a-layoutxx.xml)
-* [IX. Creating a PinConfig](#ix.-creating-a-pinconfig)
-* [X. Integrating the PinConfig into the AppleALC source code](#x.-integrating-the-`pinconfig`-into-the-applealc-source-code)
-* [XI. Adding Platforms.xml and layout.xml to info.plist](#xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`)
-* [XII. Compiling the AppleALC.kext](#xii.-compiling-the-applealc.kext)
-* [XIII. Testing and Troubleshooting](#xiii.-testing-and-troubleshooting)
-* [XIV. Adding your Layout-ID to the AppleALC Repo](#xiv.-adding-your-layout-id-to-the-applealc-repo)
-<!-- vscode-markdown-toc-config
-	numbering=false
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
-
-## <a name='i.-summary'></a>I. Summary
+## I. Summary
 ### About
 This is my attempt to provide an up-to-date guide for creating/modifying Layout-IDs for the AppleALC kext to make audio work on a Hackintosh in 2022 (and beyond). It covers the following topics:
 
@@ -59,7 +99,7 @@ But once you are on the other end, trying to actually *create* your own ALC Layo
 - Click on the little Header icon next to `README.md` to navigate in the document quickly
 - [Backup files you change](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/AppleALC_Settings_Management.md) in the Source Code and document configuration changed! Otherwise you will completely lose track of PinConfig and PathMap combinations you have tried already! I prepared a [table for taking notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Testing_Notes.md) which might help. You can open it in a Markdown Editor such as Macdown or use Visual Studio Code.
 
-## <a name='ii.-preparations'></a>II. Preparations
+## II. Preparations
 Creating a Layout-ID for AppleALC is one of the more challenging tasks for "regular" hackintosh users who are not programmers (me included). It's not only challenging and time consuming, it's also confusing and requires a lot of tools and prep work. So let's get it out the way right away.
 
 ### Obtaining an Audio CODEC dump in Linux
@@ -136,7 +176,7 @@ Amongst other things, the Codec dump text contains the following details:
 The resulting folder structure should look like this:</br>
 ![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
 
-#### Important files we have to work on:
+#### Important files we have to work on
 
 |Parameter(s)   |File            |Location
 :------------:|------------------|----------
@@ -159,7 +199,7 @@ Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.pli
 
 Now, that we've got the prep work out of the way, we can begin!
 
-## <a name='iii.-extracting-data-from-the-codec-dump'></a>III. Extracting data from the Codec dump
+## III. Extracting data from the Codec dump
 In order to route audio inputs and outputs for macOS, we need to analyze and work with data inside the Codec dump. To make the data easier to work with, we will use codec-graph to generate a schematic of the audio codec which makes routing audio much easier than working solely with the text file.
 
 ### Converting the Codec Dump 
@@ -179,7 +219,7 @@ In order to route audio inputs and outputs for macOS, we need to analyze and wor
 7. This will extract the available audio sources from the Codec dump
 8. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
 
-## <a name='iv.-understanding-the-codec-schematic'></a>IV. Understanding the Codec schematic and signal flow
+## IV. Understanding the Codec schematic and signal flow
 Shown below is `codecdumpdec.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different![^3]
 
 ![codec_dump_dec](https://user-images.githubusercontent.com/76865553/170470041-6a872399-d75a-4145-b305-b66e242a1b47.svg)
@@ -313,7 +353,7 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 
 We will come back to the schematic later… 
 
-## <a name='v.-creating-a-pathmap'></a>V. Creating a PathMap
+## V. Creating a PathMap
 The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output.
 
 ### Structure of `PlatformsXX.xml`
@@ -396,7 +436,7 @@ Now that we know to enter the routing data into the PlatformsXX.xml file, we can
 - Make sure to get the hierarchy of the Platforms.xml right. Otherwise there won't be any Input/Output Sources available!
 - Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
 
-## <a name='vi.-creating-a-`platformsxx.xml`'></a>VI. Creating a `PlatformsXX.xml`
+## VI. Creating a `PlatformsXX.xml`
 There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML`. It generates a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. Unfortunately, this method doesn't work beyond macOS Catalina, so users of Big Sur and newer need to follow the manual method instead.
 
 ### Automated method using VoodooHDA and GetDumpXML (macOS ≤ 10.15.7 only)
@@ -428,7 +468,7 @@ Obviously, we need to avoid changing data of existing Platforms.xml files create
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
 - Change the `PathMapID` at the bottom of list so it's identical to the number of your Layout-ID (in my case it's `39`):</br>![platforms02](https://user-images.githubusercontent.com/76865553/171393131-44cd8562-104b-4008-9a4d-43707b880327.png)
 
-## <a name='vii.-transferring-the-pathmap-to-`platformsxx.xml`'></a>VII. Transferring the PathMap to `PlatformsXX.xml`
+## VII. Transferring the PathMap to `PlatformsXX.xml`
 Now that we traced all the possible paths to connect Pin Complex Nodes with Inputs and Outputs, we need to transfer the ones we need to a PlatformXXX.xml file. "XY" corresponds to the previously chosen Layout-ID. In my case it will be `Platforms39.xml`.
 
 ### Transferring PinComplex Nodes to PlatformsXX.xml
@@ -525,7 +565,7 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Repeat for other devices you want to add to the PathMap
 - Save the file
 
-## <a name='viii.-adding/modifying-a-layoutxx.xml'></a>VIII. Adding/Modifying `layoutXX.xml`
+## VIII. Adding/Modifying `layoutXX.xml`
 The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Vendor Id` in codec_dump_dec.txt) and describes the types of Inputs and Outputs that are available. It also contains the reference to the PathMap which should be applied to the Codec (`PathMapID`) for the chosen `LayoutID` (ID 39 in this example).
 
 ### Modifying an existing `layoutXX.xml`
@@ -544,7 +584,7 @@ The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Ve
 ### Creating a new `LayoutXX.xml` from scratch
 TODO…
 
-## <a name='ix.-creating-a-pinconfig'></a>IX. Creating a PinConfig 
+## IX. Creating a PinConfig 
 Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
 
 "Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
@@ -644,7 +684,7 @@ Parameter        | Description
 **Position** | = **Sequence**. Indicates the **order** of the jacks in the association group. The lowest numbered jack in the association group should be assigned the lowest numbered channels in the stream, etc. The numbers need not be sequential within the group, only the order matters. Sequence numbers within a set of Default Associations must be unique.
 **EAPD** | = **EAPD/BTL Enable, L/R Swap**. Controls the EAPD pin and configures Pin Widgets into balanced output mode, when these features are supported. It also configures any widget to swap L and R channels when this feature is supported. Check if the Node supports EAPD and adjust the setting accordingly. Read chapter 7.3.3.16 of the HDA Specs for more details.
 
-## <a name='x.-integrating-the-`pinconfig`-into-the-applealc-source-code'></a>X. Integrating the `PinConfig` into the AppleALC source code
+## X. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
 
 ### Finding an unused Layout-ID number
@@ -686,7 +726,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 
 Now that we got the PinConfig out of the way, we can continue…
 
-## <a name='xi.-add-`platforms.xml`-and-`layout.xml`-to-`info.plist`'></a>XI. Add `Platforms.xml` and `layout.xml` to `info.plist`
+## XI. Add `Platforms.xml` and `layout.xml` to `info.plist`
 
 Now the we have edited all the files we need, we have to integrate them into the AppleALC Source Code. As mentioned [earlier](README.md#important-files-we-have-to-work-on), there are 2 info.plists which have to be edited in the AppleALC Source Code. In this case, I am referring to the second one, located inside the ALCXXX folder. In my case the one in `AppleALC/Resources/ALC269`.
 
@@ -703,7 +743,7 @@ Now the we have edited all the files we need, we have to integrate them into the
 
 **IMPORTANT**: If these entries don't exist, the AppleALC.kext will be compiled but your Layout-ID entry won't be included, aka no Sound!
 
-## <a name='xii.-compiling-the-applealc.kext'></a>XII. Compiling the AppleALC.kext
+## XII. Compiling the AppleALC.kext
 Now that we finally prepared all the required files, we can finally compile the kext.
 
 - In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file
@@ -711,8 +751,8 @@ Now that we finally prepared all the required files, we can finally compile the 
 - Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
 
-## <a name='xiii.-testing-and-troubleshooting'></a>XIII. Testing and Troubleshooting
-### <a name='testing-the-new-layout'></a>Testing the new Layout
+## XIII. Testing and Troubleshooting
+### Testing the new Layout
 - Add your newly compiled AppleALC.kext to your `EFI/OC/Kexts` folder
 - Open the config.plist and change the Layout-ID to the one you chose for your Layout-ID
 - Save the config and reboot
@@ -732,7 +772,7 @@ Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore
 - Re-compile the kext, replace it in the EFI, reboot, test, repeat.
 - Ask for help on a Forum.
 
-## <a name='xiv.-adding-your-layout-id-to-the-applealc-repo'></a>XIV. Adding your Layout-ID to the AppleALC Repo
+## XIV. Adding your Layout-ID to the AppleALC Repo
 Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub repo via Pull Request. Otherwise you would lose your custom made routing every time you update the AppleALC.kext since this overwrites the info.plist and the .xml support files.
 
 In order to add your Layout-ID to AppleALC's database, you have to do the following:
