@@ -1,5 +1,6 @@
 # How to create/modify a Layout-ID for AppleALC
 
+<<<<<<< Updated upstream
 - [How to create/modify a Layout-ID for AppleALC](#how-to-createmodify-a-layout-id-for-applealc)
 	- [I. Summary](#i-summary)
 		- [About](#about)
@@ -62,6 +63,22 @@
 		- [Troubleshooting](#troubleshooting)
 	- [XIV. Adding your Layout-ID to the AppleALC Repo](#xiv-adding-your-layout-id-to-the-applealc-repo)
 	- [CREDITS and RESOURCES](#credits-and-resources)
+=======
+- [I. Summary](#i-summary)
+- [II. Preparations](#ii-preparations)
+- [III. Extracting data from the Codec dump](#iii-extracting-data-from-the-codec-dump)
+- [IV. Understanding the Codec schematic and signal flow](#iv-understanding-the-codec-schematic-and-signal-flow)
+- [V. Creating a PathMap](#v-creating-a-pathmap)
+- [VI. Creating a `PlatformsXX.xml`](#vi-creating-a-platformsxxxml)
+- [VII. Transferring the PathMap to `PlatformsXX.xml`](#vii-transferring-the-pathmap-to-platformsxxxml)
+- [VIII. Adding/Modifying `layoutXX.xml`](#viii-addingmodifying-layoutxxxml)
+- [IX. Creating a PinConfig](#ix-creating-a-pinconfig)
+- [X. Integrating the `PinConfig` into the AppleALC source code](#x-integrating-the-pinconfig-into-the-applealc-source-code)
+- [XI. Add `Platforms.xml` and `layout.xml` to `info.plist`](#xi-add-platformsxml-and-layoutxml-to-infoplist)
+- [XII. Compiling the AppleALC.kext](#xii-compiling-the-applealckext)
+- [XIII. Testing and Troubleshooting](#xiii-testing-and-troubleshooting)
+- [XIV. Adding your Layout-ID to the AppleALC Repo](#xiv-adding-your-layout-id-to-the-applealc-repo)
+>>>>>>> Stashed changes
 
 ## I. Summary
 ### About
