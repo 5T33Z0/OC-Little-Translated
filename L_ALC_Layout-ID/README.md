@@ -540,7 +540,7 @@ The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Ve
 ### Calculating MuteGPIO
 `MuteGPIO` is responsible for enabling/disabling Mic and LineIn Amps. It has to be entered in the layout.xml in decimal (if it is not present already):
 
-![](/Users/5t33z0/Desktop/Mutegpio01.png)
+![Mutegpio01](https://user-images.githubusercontent.com/76865553/172787254-f5fe21fb-5466-49a6-afcc-87c16391aa71.png)
 
 `MuteGPIO` is calculated based on the following formula:  
 
