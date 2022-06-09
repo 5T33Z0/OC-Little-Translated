@@ -27,14 +27,7 @@ Users who already have Linux installed can skip to "Dumping the Audio Codec"!
 2. Store the generated `CodecDump.zip` on a medium which you can access later from within macOS (HDD, other USB stick, E-Mail, Cloud). You cannot store it on the Ventoy drive itself, since it's formatted in ExFat and can't be accessed by Linux without installing additional utilities.
 3. Reboot into macOS.
 4. Extract `CodecDump.zip` to the Desktop. It contains a folder with one or more .txt files. We are only interested in `card1-codec#0.txt`, additional dumps are usually from HDMI audio devices of GPUs.
-5. ⚠️ Rename `card0-codec#0.txt` to `codec_dump.txt`. Otherwise the script we will use later to convert it will fail. 
-
-
-1. Once Linux is up and running, open Terminal and enter:</br>
-	```shell
-	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
-	```
-2
+5. ⚠️ Rename `card0-codec#0.txt` to `codec_dump.txt`. Otherwise the script convert it will fail. 
 
 ## Creating Codec dump Schematics
 - Install [**graphviz**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/graphviz-2.40.1.pkg?raw=true) 
