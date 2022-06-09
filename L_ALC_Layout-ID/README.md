@@ -110,11 +110,7 @@ Amongst other things, the Codec dump text contains the following details:
 💡Please follow the instructions carefully and thoroughly to avoid issues.
 
 - Install [**Python 3**](https://www.python.org/downloads/) if you haven't already
-- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/)
-- Once that's done, reboot
-- Next, install [**graphviz**](https://graphviz.org/) via terminal (takes a few minutes):
-	- If you are using **MacPorts**, enter `sudo port install graphviz`
-	- If you are using **Homebrew**, enter `brew install graphviz` 
+- Install [**graphviz**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/graphviz-2.40.1.pkg?raw=true) 
 - Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Codec-Graph.zip?raw=true)
 - Copy the `Codec-Graph` folder to the Desktop
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
@@ -540,7 +536,7 @@ The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Ve
 ### Calculating MuteGPIO
 `MuteGPIO` is responsible for enabling/disabling Mic and LineIn Amps. It has to be entered in the layout.xml in decimal (if it is not present already):
 
-![Mutegpio01](https://user-images.githubusercontent.com/76865553/172787254-f5fe21fb-5466-49a6-afcc-87c16391aa71.png)
+![](https://user-images.githubusercontent.com/76865553/172787254-f5fe21fb-5466-49a6-afcc-87c16391aa71.png)
 
 `MuteGPIO` is calculated based on the following formula:  
 
