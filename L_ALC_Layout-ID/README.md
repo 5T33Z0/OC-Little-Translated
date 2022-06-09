@@ -212,7 +212,7 @@ For **Input Devices**, start at the Input Node (red) and trace the route to the 
 #### Routing Output Devices
 For **Output Devices**, start at the Pin Complex Node and follow the signal through Audio Mixer(s)/Selectors to the physical output.Here are some examples of possible routings.
 
-- **Option 1**: Pin Complex Note &rarr; Mixer/Audio Selector &rarr; Output (common):
+- **Option 1**: Pin Complex Node &rarr; Mixer/Audio Selector &rarr; Output (common):
 
 	```mermaid
 	flowchart LR
