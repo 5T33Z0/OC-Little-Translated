@@ -51,6 +51,6 @@ The **`verbs.txt`** will be stored on the desktop:
 
 ![verbsreallyfixed](https://user-images.githubusercontent.com/76865553/171468008-cb04fa6b-e9d3-4cf3-a4b5-3fab0f48f553.png)
 
-**NOTE**: You may hav to sanitize the verbs so macOS can handle the data and soud will work.
+**NOTE**: You may have to sanitize the verbs so macOS can handle the data and sound will work.
 
 
