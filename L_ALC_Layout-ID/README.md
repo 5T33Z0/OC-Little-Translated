@@ -166,7 +166,7 @@ In order to route audio inputs and outputs for macOS, we need to analyze and wor
 	- **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codecdump.svg`** – Schematic of the Codec.
 	- **`codecdumpdec.svg`** &rarr; Schematic of the Codec converted from hex to decimal. We will work with this primarily. You can open it in the web browser to view it in full size.
-5. Nexz, run PinConfigurator
+5. Next, run PinConfigurator
 6. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
 7. This will extract the available audio sources from the Codec dump
 8. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
