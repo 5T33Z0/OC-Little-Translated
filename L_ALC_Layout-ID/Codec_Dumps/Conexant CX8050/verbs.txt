@@ -1,0 +1,23 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: Conexant Generic   Address: 0   DevID: 351346546 (0x14F11F72)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+22 (0x16) 04211040   Out HP Out             1/8" Stereo/Mono    Jack            External Right              Black     4  0  0x2   01671C40 01671D10 01671E21 01671F04 01670C02
+23 (0x17) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   01771C10 01771D01 01771E17 01771F90 01770C02
+24 (0x18) 40F001F0   --  Other              Unknown             No Connection   External N/A                Unknown   15 0  -     01871CF0 01871D01 01871EF0 01871F40
+25 (0x19) 04A11030   In  Mic In             1/8" Stereo/Mono    Jack            External Right              Black     3  0  -     01971C30 01971D10 01971EA1 01971F04
+26 (0x1A) 95A70120   In  Mic In             Other Analog        Fixed           Internal Top                Unknown   2  0  -     01A71C20 01A71D01 01A71EA7 01A71F95
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+23 (0x17) 90170010   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  0x2   01771C10 01771D00 01771E17 01771F90 01770C02
+26 (0x1A) 90A00020   In  Mic In             Unknown             Fixed           Internal N/A                Unknown   2  0  -     01A71C20 01A71D00 01A71EA0 01A71F90
+25 (0x19) 00801030   In  Line In            Unknown             Jack            External N/A                Black     3  0  -     01971C30 01971D10 01971E80 01971F00
+22 (0x16) 00211040   Out HP Out             1/8" Stereo/Mono    Jack            External N/A                Black     4  0  0x2   01671C40 01671D10 01671E21 01671F00 01670C02
+------------------------------------------------------------------------------------------------------------------------------------------------
+
