@@ -110,7 +110,11 @@ Amongst other things, the Codec dump text contains the following details:
 💡Please follow the instructions carefully and thoroughly to avoid issues.
 
 - Install [**Python 3**](https://www.python.org/downloads/) if you haven't already
-- Install [**graphviz**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/graphviz-2.40.1.pkg?raw=true) 
+- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts but Homebrew works as well)
+- Once that's done, reboot.
+- Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
+	- If you are using **MacPorts**, enter `sudo port install graphviz`
+	- If you are using **Homebrew**, enter `brew install graphviz` 
 - Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/Codec-Graph.zip?raw=true)
 - Copy the `Codec-Graph` folder to the Desktop
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
@@ -160,16 +164,15 @@ In order to route audio inputs and outputs for macOS, we need to analyze and wor
 3. Save the file.
 4. Next, double-click `Convert_Dump`. 
 5. This will start Codec-Graph (and perform an additional hex to decimal conversion)
-6. Press "N", hit enter
-7. Drag and drop the "codec_dump.txt" into the window and hit "Enter"
-8. Press "N", hit enter. This creates 3 new files inside the "output" folder:
+6. Follow the on-screen instructions to convert the Codec dump
+7. This creates 3 new files inside the "output" folder:
 	- **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codecdump.svg`** – Schematic of the Codec.
 	- **`codecdumpdec.svg`** &rarr; Schematic of the Codec converted from hex to decimal. We will work with this primarily. You can open it in the web browser to view it in full size.
-5. Next, run PinConfigurator
-6. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
-7. This will extract the available audio sources from the Codec dump
-8. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
+8. Next, run PinConfigurator
+9. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
+10. This will extract the available audio sources from the Codec dump
+11. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
 
 ## IV. Understanding the Codec schematic and signal flow
 Shown below is `codecdumpdec.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different![^3]
