@@ -6,8 +6,17 @@ Adds Intel Management Engine (IMEI) to the device tree, if it does not exist in 
 
 In other words: adding this device is only necessary if you combine a 2nd Gen Intel Core CPU with a 3rd Gen mainboard or 3rd Gen CPU with a 2nd Gen mainboard!
 
-## Instructions
+## Prerequisites
+To find out if you need this SSDT, do the following:
 
+- Ensure you have Lilu and Whatevergreen kexts present and enabled.
+- Enter `ioreg | grep IMEI` in Terminal to chheck if `IMEI` is present in IO Registry
+- Terminal should report its device path and status, similar to this:</br>
+	`| |   +-o IMEI@16  <class IOPCIDevice, id 0x100000200, registered, matched, active, busy 0 (26 ms), retain 10>`
+
+In this case, you don't need `SSDT-IMEI`. But if Terminal just returns an empty line and you have a Sandy/Ivy Bridge CPU, then you need this SSDT!
+
+## Instructions
 In **DSDT**, search for:
 
 `0x00160000`. If missing, add ***SSDT-IMEI*** to ACPI Folder and Config.
