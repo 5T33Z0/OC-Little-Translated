@@ -456,13 +456,13 @@ On the Input side, the structure is the same. The only difference is that the or
 #### Example: Finished PathMap for Layout39
 Here's how the finished `Platforms39.xml` with added Node 27 in Auto Switch Mode looks like:
 
-![](/Users/5t33z0/Desktop/Outputs_final01.png)
+![Outputs_final01](https://user-images.githubusercontent.com/76865553/173155479-1d16c43c-ffc1-47f6-9998-3e4ad3e4a9fa.png)
 
 On the Input side, the PathMap looks like this:
 
-![](/Users/5t33z0/Desktop/Inputs_final01.png) 
+![Inputs_final01](https://user-images.githubusercontent.com/76865553/173155511-e9f260fd-5c80-4f0a-a12b-8388b15960ba.png)
 
-Since the T530 uses a Combojack which integrates the input and output into the same jack and since the ALC269 doesn't have audio switches, switching between the Line-In of the Headphone jack and the Line-In one on the Dockingstation doesn't work in auto-mode (which took me ages to figure out), so we need to add another Line-In path to switch between the Line-In on the Dock and the Headphone manually.
+Since the T530 uses a Combojack which integrates the input and output into the same jack and since the ALC269 doesn't have audio switches, switching between the Line-In of the Headphone jack and the Line-In one on the Dockingstation doesn't work in auto-mode (which took me ages to figure out), so we need to add another Line-In path so I can switch between the Line-In on the Dock and the Headphone manually.
 
 ### Amp Capabilities
 Besides entries for the Nodes that the incoming/outgoing signal traverses, the Codec dump also includes entries for Amp stage(s) which have to be reflected in the **Platforms.xml** as well.
@@ -700,6 +700,10 @@ Parameter        | Description
 **Group** | = **Default Association**. Default Association and Sequence are used together by software to **group** Pin Complexes (and therefore jacks) together into functional blocks to support multichannel operation. Software may assume that all jacks with the same association number are intended to be grouped together, for instance to provide six channel analog output. The Default Association can also be used by software to prioritize resource allocation in constrained situations. Lower Default Association values would be higher in priority for resources such as processing nodes or Input and Output Converters.
 **Position** | = **Sequence**. Indicates the **order** of the jacks in the association group. The lowest numbered jack in the association group should be assigned the lowest numbered channels in the stream, etc. The numbers need not be sequential within the group, only the order matters. Sequence numbers within a set of Default Associations must be unique.
 **EAPD** | = **EAPD/BTL Enable, L/R Swap**. Controls the EAPD pin and configures Pin Widgets into balanced output mode, when these features are supported. It also configures any widget to swap L and R channels when this feature is supported. Check if the Node supports EAPD and adjust the setting accordingly. Read chapter 7.3.3.16 of the HDA Specs for more details.
+
+#### Example: Final PinConfig for ALC269 for Lenovo T530 with Docking station 4337 an 4338
+
+![FinalVerbs](https://user-images.githubusercontent.com/76865553/173156051-e637bb26-bf53-479e-9260-d7e050c527bc.png)
 
 ## X. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
