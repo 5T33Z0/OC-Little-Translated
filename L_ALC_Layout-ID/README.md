@@ -268,26 +268,37 @@ The ALC 269 Codec includes an Aux Return to send (or return) the incoming signal
 If you'd trust the arrows in the schematic, the existence of Mixer 11 wouldn't make any sense. That's why ***you need to follow the signal flow instead of the arrows!*** For the `PathMap`, you only need to enter the path following this formula: Input &rarr; Mixer &rarr; PinComplex Node.
 
 #### Tracing possible paths
-Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer13. 
+Since I want the Line-Out of my docking station dock to work, I need to assign some other Pin Complex Node to Mixer 13. 
 
 We can use the .svg schematic to trace all available paths the codec provides and create a chart with it, which helps when transferring the data to a Platforms.xml fle later:
 
 Node ID (Pin Complex)| Device Name/Type            | Path(s)               | EAPD
------------------:|-----------------------------|-----------------------|:--------:
-18 (In)              |Internal Mic     | 9 - 34 - 18 (**FIXED**) |
-20 (Out)             |Internal Speakers (S) | 20 - 12 - 2 (**FIXED**)| YES
+--------------------:|-----------------------------|-----------------------|:--------:
+18 (In)              |Internal Mic                 | 9 - 34 - 18 (**FIXED**)|
+20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 (**FIXED**)| YES
 21 (Out)             |Headphone Output (S)         | 21 - 12 - 2 or </br>21 - 13 - 3|YES
 23 (Out)             |Speaker at Ext Rear (M)      | 23 - 15 - 2 (Mono) |
 24 (as Output)       |Mic/Line-In (Jack) (S)       | 24 - 12 - 2 or </br>24 - 13 - 3|
-24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 -24 or </br>9 - 34 - 24
+24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 - 24 or </br> 9 - 34 - 24
 25 (as Output)       |Speaker Ext. Rear (S) OUT Detect| 25 - 12 - 2 or </br>25 - 13 - 3
-25 (as Input)        |Speaker Ext. Rear (S) IN  Detect| 8 - 35 - 25 or </br>9 - 34 - 25
+25 (as Input)        |Speaker Ext. Rear (S) IN Detect| 8 - 35 - 25 or </br>9 - 34 - 25
 26 (as Output)       |Speaker at Ext Rear OUT HP Detect| 26 - 12 - 2 or</br>26 - 13 - 3
 26 (as Input)        |Speaker at Ext Rear IN HP Detect| 8 - 35 - 26 or </br> 9 - 34 - 26 
 27 (as Output)       |Speaker at Ext Rear OUT Detect| 27 - 13 - 3 or </br>27 - 12 - 2
 27 (as Input)        |Speaker at Ext Rear IN Detect| 8 - 35 - 27 or </br> 9 - 34 - 27 or
 29 Mono (as Input)   |Mono In                      | 8 - 35 - 29 or </br> 9 - 34 -29
-30 (Digital Out)     |Speaker Ext. Rear Digital (S/PDIF)| 6 - 30| 
+30 (Digital Out)     |Speaker Ext. Rear Digital (S/PDIF)| 6 - 30|
+
+After a many, many trials, I settled with the following routing:
+
+Node ID (Pin Complex)| Device Name/Type            | Path(s)                | EAPD
+--------------------:|-----------------------------|------------------------|:-----:
+18 (In)              |Internal Mic                 | 9 - 34 - 18 (**FIXED**)|
+20 (Out)             |Internal Speakers (S)        | 20 - 12 - 2 (**FIXED**)| YES
+21 (Out)             |Headphone Output (S)         | 21 - 13 - 3            | YES
+24 (as Input)        |(Jack) Mic at Ext Left       | 8 - 35 - 24            |
+25 (as Input)        |Speaker Ext. (S) IN Detect   | 8 - 35 - 25            |
+27 (as Output)       |Speaker Ext. Rear OUT Detect | 27 - 13 - 3            |
 
 <details>
 <summary><strong>Double-Checking</strong> (click to reveal)</summary>
