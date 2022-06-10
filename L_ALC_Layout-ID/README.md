@@ -491,18 +491,16 @@ As you can see, for the ALC269, each Node of the Output Path has an Amp stage an
 
 ### Transferring Amp Capabilities to PlatformsXX.xml
 
-Here's how "Amp Caps" translate to entries in the Platforms.xml:
+Here's how "Amp Caps" translate to entries in the .xml file:
 
-codec_dump.txt         | Platforms.xml
+codec_dump.txt         | PlatformsXX.xml
 -----------------------|----------------------------
-Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono.</br> ⚠️ The "Channels" array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Device side it's included in the *last* Node!||
-**Amp-In Caps**        | 
-**nsteps**=0 or ≥1     | **VolumeInputAmp** (NO/YES)
+Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono.</br> ⚠️ The "Channels" array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Device side it's included in the *last* Node!|
+**Amp-In Caps**</br>**nsteps**= 0 or ≥1 |</br>**VolumeInputAmp** (NO/YES)
 **mute**=0 or 1        | **MuteInputAmp** (NO/YES)
-**nsteps**=3           | Special case. Describes the "Boost" Level (=3) applied to the destination Node (last Node in the chain). In this example to Node 18 "Internal Mic Boost Volume". For ALC269 is also applies to Nodes 11, 24, 25, 26, and 27.||
-**Amp-Out Caps**       |
-**nsteps** 0 or ≥1     | **PublishVolume** (NO/YES)
-**mute**=0 or 1        | **PublishMute** (NO/YES)
+**nsteps**=3           | Special case. Describes **Boost** Level (=3) applied to the destination Node (last Node in the chain). In this example to Node 18 "Internal Mic Boost Volume". For ALC269 is also applies to Nodes 11, 24, 25, 26, and 27.||
+**Amp-Out Caps**</br>**nsteps** 0 or ≥1   |</br>**PublishVolume** (NO/YES)
+**mute**=0 or 1        | **PublishMute** (YES/NO)
 
 **Explanations**: 
 
