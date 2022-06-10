@@ -447,11 +447,22 @@ For reference, Let's have a look how Switch-Mode for Outputs is realized in ALC 
 
 On the Input side, the structure is the same. The only difference is that the order of the nodes is reversed: instead of tracing the path from the Pin Complex Nodes to the Outputs, you start at the output and trace the path back to the Pin Complex Node:</br>![PlatformsStructure02](https://user-images.githubusercontent.com/76865553/171393394-0244592c-a961-4ab7-ae1f-1942dbd6a5d4.png)
 
-- Enter the required NodeIDs you found in chapter IV for the Inputs and Outputs you need (as explained). 
+- Enter the required Node IDs you found in chapter IV for the Inputs and Outputs you need (as explained). 
 - To add more devices to the PathMap, duplicate one of the "Source" Array and change the data.
 - Once, you're done, save the file.
 
 **NOTE**: `LayoutID` and `PathMapID` **must be identical** and must use the same number you chose for your Layout-ID previously.
+
+#### Example: Finished PathMap for Layout39
+Here's how the finished `Platforms39.xml` with added Node 27 in Auto Switch Mode looks like:
+
+![](/Users/5t33z0/Desktop/Outputs_final01.png)
+
+On the Input side, the PathMap looks like this:
+
+![](/Users/5t33z0/Desktop/Inputs_final01.png) 
+
+Since the T530 uses a Combojack which integrates the input and output into the same jack and since the ALC269 doesn't have audio switches, switching between the Line-In of the Headphone jack and the Line-In one on the Dockingstation doesn't work in auto-mode (which took me ages to figure out), so we need to add another Line-In path to switch between the Line-In on the Dock and the Headphone manually.
 
 ### Amp Capabilities
 Besides entries for the Nodes that the incoming/outgoing signal traverses, the Codec dump also includes entries for Amp stage(s) which have to be reflected in the **Platforms.xml** as well.
