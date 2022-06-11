@@ -466,7 +466,7 @@ Array 2 (Line-In, manual mode) is an extra Line-In connection with path 8 – 35
 
 Since the T530 uses a Combojack which integrates the input and output into the Headphone jack, simply plugging a headset into it reserves the Line-In as long as it is physically connected because headsets have a plug with 4 poles (Mic, Ground, L and R Audio). So automatic swithing to a Line-In of the dock is not possible. Therefore, you have to switch between Line-In of the dock and the Line-In of the HP jack manually in System Settings:
 
-![](/Users/5t33z0/Desktop/Lineinswitch.png)
+![Lineinswitch](https://user-images.githubusercontent.com/76865553/173165968-e4a607c7-a32b-4610-a7c3-1f44e4c40b55.png)
 
 ### Amp Capabilities
 Besides entries for the Nodes that the incoming/outgoing signal traverses, the Codec dump also includes entries for Amp stage(s) which have to be reflected in the **Platforms.xml** as well.
