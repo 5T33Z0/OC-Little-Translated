@@ -462,7 +462,11 @@ On the Input side, the PathMap looks like this:
 
 ![Inputs_final01](https://user-images.githubusercontent.com/76865553/173155511-e9f260fd-5c80-4f0a-a12b-8388b15960ba.png)
 
-Since the T530 uses a Combojack which integrates the input and output into the same jack and since the ALC269 doesn't have audio switches, switching between the Line-In of the Headphone jack and the Line-In one on the Dockingstation doesn't work in auto-mode (which took me ages to figure out), so we need to add another Line-In path so I can switch between the Line-In on the Dock and the Headphone manually.
+Array 2 (Line-In, manual mode) is an extra Line-In connection with path 8 – 35 – 24. It can be used to override the Line-In of the Headphone jack in order to attach a different mic or audio input to it. 
+
+Since the T530 uses a Combojack which integrates the input and output into the Headphone jack, simply plugging a headset into it reserves the Line-In as long as it is physically connected because headsets have a plug with 4 poles (Mic, Ground, L and R Audio). So automatic swithing to a Line-In of the dock is not possible. Therefore, you have to switch between Line-In of the dock and the Line-In of the HP jack manually in System Settings:
+
+![](/Users/5t33z0/Desktop/Lineinswitch.png)
 
 ### Amp Capabilities
 Besides entries for the Nodes that the incoming/outgoing signal traverses, the Codec dump also includes entries for Amp stage(s) which have to be reflected in the **Platforms.xml** as well.
