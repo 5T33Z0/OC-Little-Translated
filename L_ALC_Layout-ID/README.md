@@ -120,7 +120,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
-- Get a plist editor like PlistEditPro (or use Xcode instead)
+- Get a plist editor like PlistEditPro (or use Xcode or Visiual Studio Code)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
 ### Preparing the AppleALC Source Code
@@ -751,9 +751,9 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 
 :warning: **IMPORTANT**: I've noticed that when handling larger files, PlistEdit and Xcode tend to place new entries at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
 
-1. Open the info.plis again in TextEdit
-2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at the end right before the end of the `</array>`: </br>![02PastePinCfgTxt](https://user-images.githubusercontent.com/76865553/173181922-6d9c19fc-9515-4a97-815d-6fd895e2154d.png)
-3. Verify that the Layout is correct and save the file
+1. Open the info.plis again in Visual Studio Code (or TextEdit)
+2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at right before the end of the `</array>` (you can use the verical lines as a guides):</br>![](/Users/5t33z0/Desktop/VScodeplist.png)
+3. Verify that the Layout is correct and save the file.
 4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
 Now that we got the PinConfig out of the way, we can continue integrating the rest of the files into the AppleALC Source Code…
