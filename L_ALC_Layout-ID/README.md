@@ -120,7 +120,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
-- Get a plist editor like PlistEditPro (or use Xcode or Visiual Studio Code)
+- Get a plist editor like PlistEditPro (or use Xcode or Visual Studio Code)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
 ### Preparing the AppleALC Source Code
@@ -428,7 +428,7 @@ There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHD
 ### Manual Method
 Obviously, we need to avoid changing data of existing Platforms.xml files created by other users. Because it would destroy the Layout for other users, if the Source Code would get synced with the AppleALC repo. Instead, we need to create a new one for our Layout-ID with our own routing, so do the following:
 
-- In Finder, navigate to the "Resources" folder for your Codec. (For me, it's `AppleALC/Resources/ALC269`)
+- In Finder, navigate to the "Resources" folder for your Codec. For me, it's `AppleALC/Resources/ALC269`.
 - Select the `Platforms.xml` of the Layout-ID you are currently using (the number is identical). Since I am using ALC Layout-ID 18, I use Platforms18.xml.
 - Duplicate the file (⌘+D)
 - Change the name to the Layout-ID you chose (For me Platforms39.xml)
@@ -464,7 +464,7 @@ On the Input side, the PathMap looks like this:
 
 Array 2 (Line-In, manual mode) is an extra Line-In connection with path 8 – 35 – 24. It can be used to override the Line-In of the Headphone jack in order to attach a different mic or audio input to it. 
 
-Since the T530 uses a Combojack which integrates the input and output into the Headphone jack, simply plugging a headset into it reserves the Line-In as long as it is physically connected because headsets have a plug with 4 poles (Mic, Ground, L and R Audio). So automatic swithing to a Line-In of the dock is not possible. Therefore, you have to switch between Line-In of the dock and the Line-In of the HP jack manually in System Settings:
+Since the T530 uses a Combojack which integrates the input and output into the Headphone jack, simply plugging a headset into it reserves the Line-In as long as it is physically connected because headsets have a plug with 4 poles (Mic, Ground, L and R Audio). So automatic switching to a Line-In of the dock is not possible. Therefore, you have to switch between Line-In of the dock and the Line-In of the HP jack manually in System Settings:
 
 ![Lineinswitch](https://user-images.githubusercontent.com/76865553/173165968-e4a607c7-a32b-4610-a7c3-1f44e4c40b55.png)
 
@@ -751,7 +751,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 
 :warning: **IMPORTANT**: I've noticed that when handling larger files, PlistEdit and Xcode tend to place new entries at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
 
-1. Open the info.plis again in Visual Studio Code (or TextEdit)
+1. Open the `info.plist` again in Visual Studio Code (or TextEdit)
 2. Scroll all the way to the end of the `HDAConfigDefault` array containing the entries for the PinConfigs and paste your entry right before the end of the `</array>` (you can use the vertical lines as a visual guide):</br>![VScodeplist](https://user-images.githubusercontent.com/76865553/173192223-fbdcac89-f903-4bbf-99c8-60bc23ab7252.png)
 3. Verify that the Layout is correct and save the file.
 4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
@@ -779,7 +779,7 @@ Now the we have edited all the files we need, we have to integrate them into the
 ## XII. Compiling the AppleALC.kext
 Now that we finally prepared all the required files, we can finally compile the kext.
 
-- In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file
+- In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file.
 - Enter `xcodebuild` and hit Enter. Compiling should start and a lot of text should appear on screen during the process.
 - Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
