@@ -690,7 +690,7 @@ PinConfigurator's "Edit Node" dialog window lets you configure the `PinDefault` 
 
 Parameter        | Description
 -----------------|------------
-**NodeID** (NID) | Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PinComplexCtrlName](https://user-images.githubusercontent.com/76865553/171392762-8251acfe-9949-41b4-a5bd-fa74150dcb0f.png)
+**NodeID** (NID) | Add the Node number in decimal (get it from `codec_dump_dec.txt`). Only PinComplex Nodes with a Control Name are eligible! **Example**:</br>![PCNID](https://user-images.githubusercontent.com/76865553/173185594-cf4757df-47c0-4ae7-aaec-003e72ecaf73.png)
 **PinDefault** | = **Configuration Default**. A 32-bit register required in each Pin Widget. It is used by software as an aid in determining the configuration of jacks and devices attached to the codec. At the time the codec is first powered on, this register is internally loaded with default values indicating the typical system use of this particular pin/jack. Get the `PinDefault` value (in Hex) from `codec_dump.txt`
 **Device** | = **Default Device.** Indicates the intended use of the jack or device. This can indicate either the label on the jack or the device that is hardwired to the port, as with integrated speakers and the like.
 **Connector** | = **Connection Type.** Indicates the type of physical connection, such as a 1/8-inch stereo jack or an optical digital connector, etc. Software can use this information to provide helpful user interface descriptions to the user or to modify reported codec capabilities based on the capabilities of the physical transport external to the codec.
