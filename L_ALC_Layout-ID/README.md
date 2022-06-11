@@ -744,6 +744,17 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![verbspcfg](https://user-images.githubusercontent.com/76865553/171962726-acbb19cd-e231-43f1-9499-6025f6f1898a.png)
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
 12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
+13. Highlight the raw text (even empty space) for this entry, exactly as shown below:
+![](/Users/5t33z0/Desktop/01CopyPinCfgPlist.png)
+14. Copy the raw text to the Clipboard
+15. Close the Plist Editor but **DON'T SAVE THE FILE!!!**
+
+I've noticed that when handling larger files, PlistEdit and Xcode tend to place it at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
+
+1. Open the info.plis again in TextEdit
+2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at the end right before the end of the `</array>`: </br> ![](/Users/5t33z0/Desktop/02PastPinCfgTxt.png)
+3. Verify that the Layout is correct and save the file
+4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![](/Users/5t33z0/Desktop/02Verify.png)
 
 #### Scenario 2: Creating a new Layout-ID from scratch (todo)
 
