@@ -752,7 +752,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 :warning: **IMPORTANT**: I've noticed that when handling larger files, PlistEdit and Xcode tend to place new entries at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
 
 1. Open the info.plis again in Visual Studio Code (or TextEdit)
-2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at right before the end of the `</array>` (you can use the verical lines as a guides):</br>![VScodeplist](https://user-images.githubusercontent.com/76865553/173192223-fbdcac89-f903-4bbf-99c8-60bc23ab7252.png)
+2. Scroll all the way to the end of the `HDAConfigDefault` array containing the entries for the PinConfigs and paste your entry right before the end of the `</array>` (you can use the vertical lines as a visual guide):</br>![VScodeplist](https://user-images.githubusercontent.com/76865553/173192223-fbdcac89-f903-4bbf-99c8-60bc23ab7252.png)
 3. Verify that the Layout is correct and save the file.
 4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
