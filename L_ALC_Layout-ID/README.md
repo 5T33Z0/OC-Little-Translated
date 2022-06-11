@@ -705,7 +705,7 @@ Parameter        | Description
 
 #### Example: Final PinConfig for ALC269 for Lenovo T530 with Docking station 4337 an 4338
 
-![FinalVerbs](https://user-images.githubusercontent.com/76865553/173156051-e637bb26-bf53-479e-9260-d7e050c527bc.png)
+![PCfgFnl01](https://user-images.githubusercontent.com/76865553/173185501-f06f390b-819b-4859-9796-6cbac3487618.png)
 
 ## X. Integrating the `PinConfig` into the AppleALC source code
 Now that we (finally) have our `PinConfig`, we have to integrate it into the AppleALC source code. Depending on your use case, the workflow differs. So pick a scenario which best suits your use case.
