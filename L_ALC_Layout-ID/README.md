@@ -1,4 +1,4 @@
- [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
+[![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
 # How to create/modify a Layout-ID for AppleALC
 
 - [I. Summary](#i-summary)
@@ -842,4 +842,3 @@ Once your Layout is part of the main AppleALC repo you can update AppleALC witho
 	- [Mermaid](https://mermaid-js.github.io/mermaid/#/README) script for creating flowcharts and diagrams in Markdown
 	- Core-i99 for PinConfigurator tips
 	- Hardwaresecrets – [How on-board Audio works](https://hardwaresecrets.com/how-on-board-audio-works/)
-
