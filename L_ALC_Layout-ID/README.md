@@ -745,16 +745,16 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
 12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
 13. Highlight the raw text (even empty space) for this entry, exactly as shown below:
-![](/Users/5t33z0/Desktop/01CopyPinCfgPlist.png)
+![01CopyPinCfgPlist](https://user-images.githubusercontent.com/76865553/173181910-77013179-0a5c-43b1-b2b6-1040d334e20b.png)
 14. Copy the raw text to the Clipboard
 15. Close the Plist Editor but **DON'T SAVE THE FILE!!!**
 
 I've noticed that when handling larger files, PlistEdit and Xcode tend to place it at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
 
 1. Open the info.plis again in TextEdit
-2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at the end right before the end of the `</array>`: </br> ![](/Users/5t33z0/Desktop/02PastPinCfgTxt.png)
+2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at the end right before the end of the `</array>`: </br>![02PastePinCfgTxt](https://user-images.githubusercontent.com/76865553/173181922-6d9c19fc-9515-4a97-815d-6fd895e2154d.png)
 3. Verify that the Layout is correct and save the file
-4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![](/Users/5t33z0/Desktop/02Verify.png)
+4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
 #### Scenario 2: Creating a new Layout-ID from scratch (todo)
 
