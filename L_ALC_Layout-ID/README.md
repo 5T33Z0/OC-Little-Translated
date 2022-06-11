@@ -120,7 +120,7 @@ Amongst other things, the Codec dump text contains the following details:
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
-- Get a plist editor like PlistEditPro or [**XPlist**](https://github.com/ic005k/Xplist)
+- Get a plist editor like PlistEditPro (or use Xcode instead)
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
 
 ### Preparing the AppleALC Source Code
@@ -749,16 +749,14 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 14. Copy the raw text to the Clipboard
 15. Close the Plist Editor but **DON'T SAVE THE FILE!!!**
 
-I've noticed that when handling larger files, PlistEdit and Xcode tend to place it at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
+:warning: **IMPORTANT**: I've noticed that when handling larger files, PlistEdit and Xcode tend to place new entries at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
 
 1. Open the info.plis again in TextEdit
 2. Scroll all the way to the end of the section containing the Entries for the PinConfigs and paste your entry at the end right before the end of the `</array>`: </br>![02PastePinCfgTxt](https://user-images.githubusercontent.com/76865553/173181922-6d9c19fc-9515-4a97-815d-6fd895e2154d.png)
 3. Verify that the Layout is correct and save the file
 4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
-#### Scenario 2: Creating a new Layout-ID from scratch (todo)
-
-Now that we got the PinConfig out of the way, we can continue…
+Now that we got the PinConfig out of the way, we can continue integrating the rest of the files into the AppleALC Source Code…
 
 ## XI. Add `Platforms.xml` and `layout.xml` to `info.plist`
 
@@ -767,13 +765,14 @@ Now the we have edited all the files we need, we have to integrate them into the
 - Open the `info.plist`
 - Look for the `Files` Dictionary:</br>![Info01](https://user-images.githubusercontent.com/76865553/171393791-6c8f90ab-e860-42e0-940a-1b2fa26a1fc6.png)
 - Open the `Layouts` Dictionary
-- Duplicate one of the Dictionaries, doesn't matter which one
+- Duplicate one of the Dictionaries inside it, doesn't matter which one
+- Move the Dictionary to the end of the list (makes it easier when committing the file for a Pull Request).
 - Expand it:</br>![Info02](https://user-images.githubusercontent.com/76865553/171393919-0797081d-3296-4588-be78-7213e819a36a.png)
 - Change the following details:
 	- **Comment**: Author and Codec/Device
 	- **Id**: Enter the Layout-ID you are using
 	- **Path**: layoutXX.xlm.zlib (XX = the chosen layout-id number. During compilation, the .xml file will be compressed to .zlib so the path has to point to the compressed version)
-- Do the same in the "Platforms" section:</br>![Info03](https://user-images.githubusercontent.com/76865553/171394021-c85dbda3-e248-4445-85b1-8c5d7c15cf9c.png)
+- Do the same in the "Platforms" section but use "PlatformsXX.xml.zlib" as "Path" instead:</br>![Info03](https://user-images.githubusercontent.com/76865553/171394021-c85dbda3-e248-4445-85b1-8c5d7c15cf9c.png)
 
 **IMPORTANT**: If these entries don't exist, the AppleALC.kext will be compiled but your Layout-ID entry won't be included, aka no Sound!
 
@@ -812,7 +811,8 @@ Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub 
 In order to add your Layout-ID to AppleALC's database, you have to do the following:
 - Create a fork of the repo
 - Add the required files to the "Resources" folder. Follow the [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support). 
-- Sync it with github and then create a pull request.
+- Push the changes you made to your Fork
+- Create a pull request on GiHub
 - Wait for approval
 
 Once your Layout is part of the main AppleALC repo you can update AppleALC without having to compile your own version every time the source code is updated. 
