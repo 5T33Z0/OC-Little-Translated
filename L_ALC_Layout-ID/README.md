@@ -118,14 +118,14 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 The resulting folder structure should look like this:</br>
 ![AppleALCDir](https://user-images.githubusercontent.com/76865553/173216733-4ad465a9-e778-4391-a898-ef3f45787e8f.png)
 
-#### Important files we have to work on
+#### Files we have to work on
 
-|Parameter(s)   |File            |Location
-:------------:|------------------|----------
-**PinConfig** |`info.plist`      |Inside `PinConfigs.kext` (AppleALC/Resources/PinConfigs)
-**PathMap**   |`PlatformsXX.xml` |AppleALC/Resources &rarr; ALCXXX-subfolder of corresponding Codec
-**various**   | `layoutXX.xml`   |same
-Add entries for **PlatformsXX.xml.zlib** </br> **layoutXX.xml.zlib** | `info.plist` | same
+|File             |Location            |Parameter(s)
+-----------------|--------------------|----------
+`info.plist`      |AppleALC/Resources/PinConfigs.kext/Contents/Info.plists |PinConfig
+`PlatformsXX.xml` |AppleALC/Resources/subfolder for your Codec | PathMap
+`layoutXX.xml`    |AppleALC/Resources/subfolder for your Codec | Layout-ID and others
+`info.plist`      |AppleALC/Resources/subfolder for your Codec | PlatformsXX.xml.zlib </br> layoutXX.xml.zlib 
 
 **NOTE**: The `XX` stands for the number of the chosen Layout-ID. `XXX` stands for the corresponding Codec model the Layout-ID is for (and not what you thought). More about that later.
 
@@ -159,6 +159,20 @@ In order to route audio inputs and outputs for macOS, we need to analyze and wor
 9. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
 10. This will extract the available audio sources from the Codec dump
 11. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
+
+### Relevant Codec data
+Amongst other things, the Codec dump text contains the following details:
+
+- The Codec model
+- Its Address (usually `0`)
+- It's Vendor Id (in AppleALC it's used as `CodecID`)
+- Pin Complex Nodes with Control Names (these are eligible for the `PinConfig`)
+- The actual routing capabilities of the Codec:
+	- Pin Complex Nodes
+	- Mixer/Selector Nodes
+	- Audio Output Nodes
+	- Audio Input Nodes
+	- Number of connections from/to a Node/Mixer/Selector/Switch
 
 ## IV. Understanding the Codec schematic and signal flow
 Shown below is `codecdumpdec.svg`, a visual representation of the data inside the codec dump for the **Realtek ALC269VC** used in my Laptop. It shows the routing capabilities of the Audio Codec. Depending on the Codec used in your system, the schematic will look different![^3]
@@ -215,7 +229,7 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
        id1(Pin Complex XY) ---->|Direct Connection|id5(((Output X)))
 	```
 
-**NOTE**: Whether or not a signal traverses more than one Mixer Node depends on the Codec design. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output!
+**NOTE**: Whether or not a signal traverses more than one Mixer Node depends on a Codec's design. What's important is to list all the "stations" a signal passes from the Pin Complex Node to the desired Output!
 
 #### Routing Examples from ALC269
 
@@ -234,7 +248,7 @@ For **Output Devices**, start at the Pin Complex Node and follow the signal thro
     	id1(Node21: HP out) --> |possible path B| id4{Mixer 13} --> id6(((Output 3)))
 	```
 	**NOTE**: The number of possible paths depends on the number of connections a PinComplex Node provides. 
-- **Internal Mic Input** (Fixed):
+- **Internal Mic Input** (fixed/hardwired connection):
 
 	```mermaid
 	flowchart LR
@@ -306,18 +320,18 @@ As you can see, Node 21 has 2 possible connections (Node 12 and 13) and is curre
 We will come back to the schematic later… 
 
 ## V. Creating a PathMap
-The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Mics) while others can be routed freely. some Nodes can even be both, input and output.
+The PathMap defines the routings of the Nodes within the Codec which are injected into macOS. Some routings are fixed (internal Speakers/Mics) while others can be routed freely. some Nodes can even be both, input and output.
 
 ### Structure of `PlatformsXX.xml`
 1. The PathMap has to be entered in `PlatformXX.xml` (`XX` = chosen number of the Layout-ID). 
-2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not the system switches between input/output sources automatically if a device is plugged in or if the inputs/outputs have to be changed manually in System Preferences (just like when using VoodooHDA.kext)
+2. The way inputs and outputs are organized within the hierarchy of the PathMap defines whether or not the system switches between sources automatically if a device is plugged in or if the inputs/outputs have to be changed manually in System Preferences (as VoodooHDA.kext requires). For auto-switching between sources to work, they have to be in the same group/array. Usually you create a group for inputs and a group. for outputs.
 
 #### Auto-Switching Mode
-In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line Output. Once the plug is pulled from the audio jack, the audio output is switched back to the internal speakers again. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
+In Auto-Switching Mode, the Input/Output signal is re-routed from the current Input/Output to another one automatically, once a jack is plugged into the system. On Laptops for example, Internal Speakers are muted and the signal is automatically re-routed to the Headphone or Line Output. Once the plug is pulled from the audio jack, the output switches  back to the internal speakers. Same for Inputs: the Internal Mic is muted when an external Mic or Headset is plugged into the 1/8" audio jack.
 
 For Auto Switching-Mode to work, certain conditions have to be met: 
 - The Pin Complex Node(s) must support the "Detect" feature
-- The Pin Complex Node(s) must have at least 2 possible connections to 2 different Mixer Nodes or Audio switches. (Maybe switching between 2 Nodes connected to the same Mixer Node and Output works as well but I haven't tested it yet.)
+- The Pin Complex Node(s) must have at least 2 possible connections to 2 different Mixer Nodes or Audio switches. Maybe switching between 2 Nodes connected to the same Mixer Node works as well but I haven't tested it yet.
 
 Let's have a look at the output side of the schematic:</br>![SwitchMode01](https://user-images.githubusercontent.com/76865553/171393009-65312baf-77c3-41d6-96d6-18359933aad5.png)
 
@@ -325,10 +339,10 @@ Let's have a look at the output side of the schematic:</br>![SwitchMode01](https
 - These Nodes can all connect to Mixers 12 (red) and 13 (green)
 - Therefore, they can be operated in Auto Switching Mode
 
-This has to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array. Here's how the structure inside the Platforms.xml file looks:
+Nodes that make up the audio "circuitry" as well as the switching behavior have to be represented in the file structure of the `PathMap`. Nodes you want to switch between have to be part of that same Array (one for Inputs, one for Outputs). Here's how the structure inside the Platforms.xml file looks:
 
 - PathMaps (Array)
-	- 0 (Dict) 
+	- 0 (Dict) (Codec Address)
 		- PathMap (Array)
 			- **0 (Array) [INPUTS]** (Sources you want to switch between)
 				- 0 (Array) [Input Source 1]
@@ -356,10 +370,10 @@ This has to be represented in the file structure of the `PathMap`. Nodes you wan
 				- etc. 
 
 #### Manual Switching Mode
-In manual switching mode, you have to – you've guessed it – switch the input/output manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows
+In manual switching mode, you have to switch/select Inputs/Outputs manually in the Audio Settings. In this configuration, each Array only contains the nodes for the path of one device. The structure looks as follows:
 
 - PathMaps (Array)
-	- 0 (Dict) 
+	- 0 (Dict) (Codec Address)
 		- PathMap (Array)
 			- 0 (Array)
 				- 0 (Array) (Device 1) (Input 1)
@@ -384,20 +398,21 @@ In manual switching mode, you have to – you've guessed it – switch the input
 Now that we know to enter the routing data into the PlatformsXX.xml file, we can begin entering the data in a new file.
 
 ⚠️ **NOTES**
-- You can combine both auto switching and manual switching. For example, you could use auto mode to switch back and forth between internal Speakers and the Headphone Out but add an extra Line-Out in manual mode if your Codec can't be configured to switch  between all three sources automatically.
+
 - Make sure to get the hierarchy of the Platforms.xml right. Otherwise there won't be any Input/Output Sources available!
-- Remember that the Nodes used in the `PathMap` must exist in the `PinConfig`. So therefore you might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
+- Nodes used in the `PathMap` must exist in the `PinConfig`! You might have to go back and forth between generating a `PinConfig`, adding/updating it in the info.plist inside of `PinConfigs.kext` and adjusting the `PlatformsXX.xml` to make it all work!
+- You can combine both, auto switching and manual switching. For example, you could use auto mode to switch back and forth between internal Speakers and the Headphone Out but add an extra Line-Out in manual mode if your Codec can't be configured to switch between all three sources automatically (if it lacks an Audio Switch).
 
 ## VI. Creating a `PlatformsXX.xml`
 There are 2 methods for creating a `PlatformsXX.xml` file: one utilizes VoodooHDA.kext and a forgotten script called `GetDumpXML`. It generates a `Platforms.xml` file, which contains all the required Nodes for switching Inputs/Outputs manually. It works out of the box and allows you to skip Chapter IX completely which is a big time saver. Unfortunately, this method doesn't work beyond macOS Catalina, so users of Big Sur and newer need to follow the manual method instead.
 
 ### Automated method using VoodooHDA and GetDumpXML (macOS ≤ 10.15.7 only)
-- Download [GetDumpXML.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/GetDumpXML.zip?raw=true) and unpack it
+- Download [**GetDumpXML.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/GetDumpXML.zip?raw=true) and unpack it
 - Add VoodooHDA.kext to your EFI's kext folder and config.plist.
 - Disable/delete AppleALC.kext
 - Reboot
 - Double-click `GetDumpXML` (in GetDumpXML folder)
-- This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing `Platforms.xml` file
+- This will create a "GetDumpXML_YOURCODEC" folder on the desktop, containing a `Platforms.xml` file.
 - Add the # of your chosen Layout-ID to the filename (`Platforms39.xml` in my case)
 - Open the File with a Plist Editor
 - Expand `PathMaps` branch. As you can see, the entries are organized for manual switching:</br>![VoodooHDAXML01](https://user-images.githubusercontent.com/76865553/172041677-93a86db8-af31-4172-a68f-dffcc0888646.png)
@@ -501,6 +516,20 @@ Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels:
 	- `nsteps` in ***Amp-In Nodes*** = `VolumeInputAmp`
 	- `nsteps` in ***Amp-Outs Nodes*** = `PublishVolume`
 	- `nsteps=3` in **Amp-In Node** = `Boost` factor 3 last Node of the Chain on the Input Device (as shown in the first screenshot)
+
+#### Usual Amp Settings used in PlatformsXX.xml
+
+- For **Inputs**:
+	- MuteInputAmp: YES
+	- PublishMute: YES
+	- PublishVolume: YES
+	- VolumeInputAmp: YES
+
+- For **Outputs**:
+	- MuteInputAmp: YES
+	- PublishMute: YES
+	- PublishVolume: YES
+	- VolumeInputAmp: NO
 
 ### Example: Adding an Output device to the PlatformsXX.xml
 
