@@ -1,7 +1,6 @@
 # ACPI Basics
 
-## Brief Introduction to ACPI
-
+## A brief Introduction to ACPI
 "ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
 
 ### What is ACPI?
@@ -120,16 +119,18 @@ The following section refers to patching other ACPI tables (apart from `DSDT.aml
 <details>
 <summary><strong>ACPI Source Language (ASL) Basics</strong></summary>
 
-# ACPI Source Language (ASL) Basics
+## ACPI Source Language (ASL) Basics
 > The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Tutorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
 >
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
 > - Translated from Chinese into English and edited by [5T33Z0](https://github.com/5T33Z0).
 
-## Preface
+### Preface
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a BIOS developer, it is possible that there could be mistakes in the provided ASL examples.
 
-## Explanation 
+##- [ASL to AML Conversion Table](#asl-to-aml-conversion-table)
+- [SSDT Loading Sequence](#ssdt-loading-sequence)
+  - [Example](#example)# Explanation 
 Did you ever wonder what a `DSDT` or `SSDT` is and what it does? Or how these rename patches that you have in your `config.plist` work? Well, after reading this, you will know for sure!
 
 ### ACPI
