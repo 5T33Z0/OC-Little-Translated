@@ -500,10 +500,10 @@ Here's how "Amp Caps" translate to entries in the .xml file:
 
 codec_dump.txt         | PlatformsXX.xml
 -----------------------|----------------------------
-Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels: 2=Stereo, 1=Mono.</br> ⚠️ The "Channels" array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Device side it's included in the *last* Node!|
+Mono/Stereo Amp-In/Out | **Channels** Array with 1 or 2 Dictionaries: 2=Stereo, 1=Mono</br> ⚠️ The "Channels" Array is only present **once** in a path: </br> • In Input Devices it's included in the *first* node</br> • In Output Devices side it's included in the *last* Node!|
 **Amp-In Caps**</br>**nsteps**= 0 or ≥1 |</br>**VolumeInputAmp** (NO/YES)
 **mute**=0 or 1        | **MuteInputAmp** (NO/YES)
-**nsteps**=3           | Special case. Describes **Boost** Level (=3) applied to the destination Node (last Node in the chain). In this example to Node 18 "Internal Mic Boost Volume". For ALC269 is also applies to Nodes 11, 24, 25, 26, and 27.||
+**nsteps**=3           | **Boost** Level (=3) on the input. Applied to the destination Node (last Node in the chain). In this example to Node 18 "Internal Mic Boost Volume". For ALC269 is also applies to Nodes 11, 24, 25, 26, and 27.||
 **Amp-Out Caps**</br>**nsteps** 0 or ≥1   |</br>**PublishVolume** (NO/YES)
 **mute**=0 or 1        | **PublishMute** (YES/NO)
 
@@ -520,7 +520,7 @@ Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels:
 #### Usual Amp Settings used in PlatformsXX.xml
 
 - For **Inputs**:
-	- MuteInputAmp: YES
+	- MuteInputAmp: NO
 	- PublishMute: YES
 	- PublishVolume: YES
 	- VolumeInputAmp: YES
@@ -533,7 +533,7 @@ Mono/Stereo Amp-In/Out | **Channels** array representing the number of channels:
 
 ### Example: Adding an Output device to the PlatformsXX.xml
 
-As we figured out in Chapter IV and VII, possible paths for adding Node 27 as an Output device can be: 27 &rarr; 13  &rarr; 3 or 27  &rarr; 12  &rarr; 2. I may have to try both. 
+As we figured out in Chapter IV and VII, possible paths for adding Node 27 as an Output device can be: 27 &rarr; 13 &rarr; 3 or 27 &rarr; 12  &rarr; 2. I may have to try both. 
 Since I want the Output to switch from the speakers (connected via 21 &rarr; 12 &rarr; 2) to the dock when I pluck my speakers in, I first try to connect Node 27 to Mixer 12 and Output 2 as well and see if it switches between Node 21 and 27.
 
 So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
@@ -542,22 +542,26 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 - Navigate to the branch containing the Output Devices (expand PathMaps > 0 > PathMap > 1):</br> ![Outdevs01](https://user-images.githubusercontent.com/76865553/171813688-09bc6040-cbe8-4262-ad62-0321297df4cb.png)
 - Duplicate Array 1 (Output Device 2). The Output device branch should contain 3 arrays now:</br>![Outdevs02](https://user-images.githubusercontent.com/76865553/171813707-703f1526-54da-454d-b1d3-879d34efc61e.png)
 - Next, we need to correct the Nodes inside of Array 2 (Output device 3) to 27, 12, 2: </br>![Outdevs03](https://user-images.githubusercontent.com/76865553/171813717-e691b1fc-7d26-45cd-8a97-3896b1621bcf.png)
-- Next, we need to take care of the Amp section of Node 27. Since we are modifying an existing Layout-ID, we already know that Node 12 and 2 are working fine, so we only need to have a look inside `codec_dump_dec.txt` to get the relevant details about Amp-Out Caps of Node 27:
-	```swift
-  Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
-  Control: name="Headphone Playback Switch", index=1, device=0
-  ControlAmp: chs=3, dir=Out, idx=0, ofs=0
-  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0 // => Current Settings: Boost=3; MuteInputAmp=NO 
-  Amp-In vals:  [0 0]
-  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1 // => Current Settings: PublishVolume=NO; PublishMute=YES
-  Amp-Out vals:  [0 0]
-  ...
-  Connection: 2
-  12 13* // In the dump, Mixer 13 is the current/default connection!
-	```
-- So, the Amp-Out caps are: nsteps=0, mute=1. Let's transfer that into .xml. Since I don't want this Node to be an Input as well, I leave MuteInputAmp enabled and VolumeInputAmp disabled:</br>![Outdevs04](https://user-images.githubusercontent.com/76865553/171813844-fc568a78-39f0-4b20-a8a6-5de331f3ba02.png)
+- Next, we need to take care of the Amp section of Node 27. Since we are configuring as an output, we can use the default settings for testing:
+	- **MuteInputAmp**: YES
+	- **PublishMute**: YES
+	- **PublishVolume**: YES
+	- **VolumeInputAmp**: NO 
+- For Inputs, you also have to check the `nsteps` value of the Amp-In Caps and add an entry for "Boost" to the last Node of a path. If `nsteep=3`. Take For example 
 - Repeat for other devices you want to add to the PathMap
 - Save the file
+
+### Example: Adding an Input device to the PlatformsXX.xml
+- Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
+- Navigate to the branch containing the Input Devices (expand PathMaps > 0 > PathMap > 0):</br>![](/Users/5t33z0/Desktop/InputsArray0.png)
+- Duplicate an existing Device Array
+- Adjust the following:
+	- Node IDs (according the the path of the source you want to add), 
+	- Amp Settings
+	- Boost Settings (If `Amp-In Caps` of destination Node contain `nsteps=3`, add `Boost` entry to the last Node in the path (here NID 25)
+- Let's look inside Device 2. It contains the following Nodes and settings:</br>![](/Users/5t33z0/Desktop/Input01Nodes.png)
+- Repeat for other devices you want to add to the PathMap
+- Save the file.
 
 ## VIII. Adding/Modifying `layoutXX.xml`
 The layoutXX.aml file defines for which Codec the Layout is for (`CodecID` = `Vendor Id` in codec_dump_dec.txt) and describes the types of Inputs and Outputs that are available. It also contains the reference to the PathMap which should be applied to the Codec (`PathMapID`) for the chosen `LayoutID` (ID 39 in this example).
