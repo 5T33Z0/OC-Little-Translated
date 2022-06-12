@@ -116,7 +116,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter. This add the MacKernelSDK in the AppleALC source folder.
 
 The resulting folder structure should look like this:</br>
-![AppleALC](https://user-images.githubusercontent.com/76865553/170469554-96f5323c-4712-4fc1-a8ac-d8705728c790.png)
+![AppleALCDir](https://user-images.githubusercontent.com/76865553/173216733-4ad465a9-e778-4391-a898-ef3f45787e8f.png)
 
 #### Important files we have to work on
 
