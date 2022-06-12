@@ -553,13 +553,13 @@ So, I add the path 27 - 12 - 2 to `Platforms39.xml`:
 
 ### Example: Adding an Input device to the PlatformsXX.xml
 - Open PlatformsXX.xml (`XX` = number you chose for your Layout-ID)
-- Navigate to the branch containing the Input Devices (expand PathMaps > 0 > PathMap > 0):</br>![](/Users/5t33z0/Desktop/InputsArray0.png)
+- Navigate to the branch containing the Input Devices (expand PathMaps > 0 > PathMap > 0):</br>![InputsArray0](https://user-images.githubusercontent.com/76865553/173223277-d471a722-bf75-47ba-bea5-a84c6c313689.png)
 - Duplicate an existing Device Array
 - Adjust the following:
 	- Node IDs (according the the path of the source you want to add), 
 	- Amp Settings
 	- Boost Settings (If `Amp-In Caps` of destination Node contain `nsteps=3`, add `Boost` entry to the last Node in the path (here NID 25)
-- Let's look inside Device 2. It contains the following Nodes and settings:</br>![](/Users/5t33z0/Desktop/Input01Nodes.png)
+- Let's look inside Device 2. It contains the following Nodes and settings:</br>![Input01Nodes](https://user-images.githubusercontent.com/76865553/173223291-53c78f9e-976e-4044-9eb8-812b709dee86.png)
 - Repeat for other devices you want to add to the PathMap
 - Save the file.
 
