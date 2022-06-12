@@ -92,36 +92,22 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 4. Extract `CodecDump.zip` to the Desktop. It contains a folder with one or more .txt files. We are only interested in `card1-codec#0.txt`, additional dumps are usually from HDMI audio devices of GPUs.
 5. ⚠️ Rename `card0-codec#0.txt` to `codec_dump.txt`. Otherwise the script we will use later to convert it will fail. 
 
-#### Relevant Codec data
-Amongst other things, the Codec dump text contains the following details:
-
-- The Codec model
-- Its Address (usually `0`)
-- It's Vendor Id (in AppleALC it's used as `CodecID`)
-- Pin Complex Nodes with Control Names (these are eligible for the `PinConfig`)
-- The actual routing capabilities of the Codec:
-	- Pin Complex Nodes
-	- Mixer/Selector Nodes
-	- Audio Output Nodes
-	- Audio Input Nodes
-	- Number of connections from/to a Node/Mixer/Selector/Switch
-
 ### Required Tools and Files
 💡Please follow the instructions carefully and thoroughly to avoid issues.
 
 - Install [**Python 3**](https://www.python.org/downloads/) if you haven't already
-- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (I used MacPorts but Homebrew works as well)
+- Install either [**MacPorts**](https://www.macports.org/install.php) or [**Homebrew**](https://brew.sh/) (may require reboot afterwards)
 - Once that's done, reboot.
-- Next, install [**graphviz**](https://graphviz.org/) via terminal (takes about 10 minutes!):
+- Next, install [**graphviz**](https://graphviz.org/) via terminal:
 	- If you are using **MacPorts**, enter `sudo port install graphviz`
 	- If you are using **Homebrew**, enter `brew install graphviz` 
-- Next, download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/Codec-Graph.zip?raw=true)
+- Download and unzip [**Codec-Graph.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/L_ALC_Layout-ID/Tools/Codec-Graph.zip?raw=true)
 - Copy the `Codec-Graph` folder to the Desktop
 - Move the `codec_dump.txt` into the "Codec-Graph" folder
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
-- Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for checking PCI devices and Hex to Decimal conversions later.
-- Get a plist editor like PlistEditPro (or use Xcode or Visual Studio Code)
-- Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by the macOS you are running. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough space on your drive! And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
+- Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for Hex to Decimal conversions later.
+- Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by your macOS. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough disk space. And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
+- Get a plist editor like PlistEditPro (Xcode or [**Viual Studio Code**](https://code.visualstudio.com/) can open them as well)
 
 ### Preparing the AppleALC Source Code
 - Clone, Fork or download (click on "Code" and "Download Zip") the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code 
