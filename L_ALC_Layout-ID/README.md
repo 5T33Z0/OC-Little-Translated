@@ -705,7 +705,7 @@ There are 2 methods to do add a Node to the PinConfig: you can either add one in
 	- Select "File > Export > "PinConfigs.kext" (it's located under /AppleALC/Resources/) to write the data to the info.plist of the kext directly.
 
 #### PinConfigurator's "Edit Node" window explained
-PinConfigurator's "Edit Node" dialog window lets you configure the `PinDefault` value of a Node. Since PinConfigurator is mostly undocumented, some of the settings are obvious while others are not (like "Misc", "Group" or "Position"). Luckily, chapter `7.3.3.31 Configuration Default` of the [Intel HDA specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html) provides the necessary explanations:
+PinConfigurator's "Edit Node" dialog window lets you configure the `PinDefault` value of a Node. Since the App is mostly undocumented, some of the settings are obvious while others are not (like "Misc", "Group" or "Position"). Luckily, chapter `7.3.3.31 Configuration Default` of the [Intel HDA specs](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html) provides the necessary explanations:
 
 Parameter        | Description
 -----------------|------------
