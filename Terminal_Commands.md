@@ -22,8 +22,7 @@ https://macos-defaults.com/
 `networksetup -listallhardwareports`
 
 **Add "Quit" option to Finder**:</br>
-`defaults write com.apple.finder QuitMenuItem -bool YES`</br>
-`killall Finder`</br>
+`defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
 
 **Show all Files in Finder**:</br>
 `defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder`</br>
