@@ -30,4 +30,5 @@ If it doesn't work, do the following:
 - The original Linux bootloader (grub, systemd-boot, syslinux, etc) should not be deleted.
 
 ## Credits
+- Acidanthera for OpenCore Package and OpenCore Binaray Data
 - **mswgen** from insanelymac.com for the [guide](https://www.insanelymac.com/forum/topic/349838-guide-using-openlinuxboot-to-easily-boot-linux-from-opencore/)
