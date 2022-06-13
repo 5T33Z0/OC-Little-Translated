@@ -830,7 +830,7 @@ Once your custom Layout-ID is working, you can submit it to the AppleALC GitHub 
 In order to add your Layout-ID to AppleALC's database, you have to do the following:
 
 - Create a fork of the AppleALC Repo
-- Include the changes you made into the files 4 files mentioned in the "[Files we have to work on](https://github.com/5T33Z0/OC-Little-Translated/tree/2454a5ff91e4e565e5a4c709b27c648fb1ad02bf/L_ALC_Layout-ID#files-we-have-to-work-on)" section. Read the official [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support) for more details. 
+- Include the changes you made into the files 4 files mentioned in the "[Files we have to work on](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#files-we-have-to-work-on)" section. Read the official [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support) for more details. 
 - Push the changes you made to your Fork
 - Create a pull request on GiHub
 - :warning: Make sure it has no conflicts, otherwise it will be rejected
