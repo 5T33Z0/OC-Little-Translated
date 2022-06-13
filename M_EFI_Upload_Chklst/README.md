@@ -16,3 +16,8 @@ Before sharing your OpenCore EFI with the would, you should check the following 
 	- Deactivate non-essential or optional kexts for 3rd party devices that are not part of your mainboard.
 	- Add proper Descriptions in the Comment field!
 	- Add `MinKernel` and `MaxKernel` Settings ([if available](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md)) 
+- UEFI/APFS
+	- `MinDate` = -1
+	- `Maxdate` = -1
+
+There's also a Python script available which can do all this (and more): [Catone](https://github.com/dreamwhite/Catone)
