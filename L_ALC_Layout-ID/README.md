@@ -128,11 +128,11 @@ The resulting folder structure should look like this:</br>![AALC_Dir](https://us
 
 `XX` = Number of the chosen Layout-ID.
 
-### 💡 Tips
+### 💡 Tips for editing
 
-- To avoid any conflicts with the source code of AppleALC repo when creating a Pull Request to, it's best to clone the Repo locally to work on the files.
-- When copying data into the source code for syncing with the AppleALC repo, make sure to use Visual Studio Code or TextEdit to edit the files – especially when editing the info.plist inside the PinConfig.kext. I have noticed that PlistEditoPro and even Xcode keep introducing changes in places you didn't even touch just by saving the file.
-- Add entries to both info.plists to the end of the corresponding section. It make reviewing the code easier
+- To avoid conflicts with the AppleALC repo when creating a Pull Request, it's best to clone the Repo locally to work on the files before integrating the data into the source code.
+- When integrating data into the source code, make sure to use Visual Studio Code or TextEdit to edit the files – especially when editing the info.plist indside of the PinConfig.kext. I have noticed that PlistEditoPro and even Xcode introduce changes in places you didn't even touch just by opening and saving the file.  I've seen changes in the formatting as well as changes in ConfigData. This will intoduce conflicts in the code when creating the Pull Request and it will be rejected.
+- Add entries to both info.plists at the end of the corresponding sections to append lines to the source code only and not juggles lines around. The reduces chances of conflicts and makes the reviewing and merging process easier.
 
 ### Configuring Xcode
 - Start Xcode
