@@ -50,7 +50,13 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 
 ## Hackintosh specific
 **Currently used SMBIOS**</br>
-`system_profiler SPHardwareDataType | grep 'Model Identifier'` 
+`system_profiler SPHardwareDataType | grep 'Model Identifier'`
+
+**Check OpenCore version set in NVRAM**:</br>
+`nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version`
+
+**Check currently active csr-active-config set in NVRAM**:</br>
+`nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config`
 
 **Find loaded Kexts** (excluding those from Apple)</br>
 `kextstat | grep -v com.apple`</br>
@@ -68,15 +74,8 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 `log show --last boot`
 
 **Search for terms in last boot log**:</br>
-`show --last boot | grep` your searchterm
-
-log show --last boot | grep "VRMI"
-
-**Check currently active csr-active-config set in NVRAM**:</br>
-`nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config`
-
-**Check currently booted OpenCore Version set in NVRAM**:</br>
-`nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version`
+`log show --last boot | grep "your search term"` </br>
+Exanple: `log show --last boot | grep "ACPI"`
 
 **Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
 `csrutil authenticated-root disable`</br>
