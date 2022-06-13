@@ -139,9 +139,9 @@ or
 `sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist`</br>
 `sudo rm /Library/Preferences/SystemConfiguration/preferences.plist`</br>
 
-**Listing ACPI Errors**
+**Listing ACPI Errors**</br>
 `log show --last boot | grep AppleACPIPlatform` </br>
-`log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log (creates a Log on Desktop)
+`log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log` (Saves Log to Desktop)
 
 **Checking for Wake Reasons**</br>
 `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
