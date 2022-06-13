@@ -127,7 +127,13 @@ The resulting folder structure should look like this:</br>
 `layoutXX.xml`    |AppleALC/Resources/subfolder for your Codec | Layout-ID and others
 `info.plist`      |AppleALC/Resources/subfolder for your Codec | PlatformsXX.xml.zlib </br> layoutXX.xml.zlib 
 
-**NOTE**: The `XX` stands for the number of the chosen Layout-ID. `XXX` stands for the corresponding Codec model the Layout-ID is for (and not what you thought). More about that later.
+`XX` = Number of the chosen Layout-ID.
+
+### 💡 Tips
+
+- To avoid any conflicts with the source code of AppleALC repo when creating a Pull Request to, it's best to clone the Repo locally to work on the files.
+- When copying data into the source code for syncing with the AppleALC repo, make sure to use Visual Studio Code or TextEdit to edit the files – especially when editing the info.plist inside the PinConfig.kext. I have noticed that PlistEditoPro and even Xcode keep introducing changes in places you didn't even touch just by saving the file.
+- Add entries to both info.plists to the end of the corresponding section. It make reviewing the code easier
 
 ### Configuring Xcode
 - Start Xcode
@@ -833,7 +839,7 @@ In order to add your Layout-ID to AppleALC's database, you have to do the follow
 - Include the changes you made into the files 4 files mentioned in the "[Files we have to work on](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#files-we-have-to-work-on)" section. Read the official [Instructions](https://github.com/acidanthera/AppleALC/wiki/Adding-codec-support) for more details. 
 - Push the changes you made to your Fork
 - Create a pull request on GiHub
-- :warning: Make sure it has no conflicts, otherwise it will be rejected
+- :warning: Make sure it has no conflicts, otherwise it will be rejected.
 - Wait for approval
 
 Once your Layout is approved it will be part of the main AppleALC repo and you can update AppleALC without having to compile your own version every time the source code is updated. 
