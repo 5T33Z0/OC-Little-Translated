@@ -17,7 +17,7 @@ Some Ethernet Controllers and/or Wifi Cards require `Vt-D` to be enabled in BIOS
 
 Once Vt-D is enabled, it should be present in the IO Registry as `AppleVTD`:
 
-![](/Users/5t33z0/Desktop/AppleVTD.png)
+![AppleVTD](https://user-images.githubusercontent.com/76865553/173662447-02328900-46a3-445f-aa39-205a8eecdff8.png)
 
 If `AppleVTD` is not present after enabling it, adding a DMAC device via `SSDT-DMAC` might resolve this issus. In general, the `DisableIOMapper` Quirk should not be used when Vt-D is enabled, since it disables Vt-D in macOS and also blocks loading of the DMAR table which defeats the whole pupose of trying to get these Ethernet Controllers to work.
 
