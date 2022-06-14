@@ -768,7 +768,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 	- Add `WakeConfigData`. It's part of the "verbs.txt":</br>![verbspcfg](https://user-images.githubusercontent.com/76865553/171962726-acbb19cd-e231-43f1-9499-6025f6f1898a.png)
 	- Change the `LayoutID` the PinConfig Data should be associated with. 
 12. This is the resulting entry:</br>![PCfginfopl](https://user-images.githubusercontent.com/76865553/171962769-834652b6-96e3-462e-bc39-3ed7e9c258af.png)
-13. Highlight the raw text (even empty space) for this entry, exactly as shown below:
+13. Highlight the raw text of this entry, exactly as shown below (whitespace included):
 ![01CopyPinCfgPlist](https://user-images.githubusercontent.com/76865553/173181910-77013179-0a5c-43b1-b2b6-1040d334e20b.png)
 14. Copy the raw text to the Clipboard
 15. Close the Plist Editor but **DON'T SAVE THE FILE!!!**
@@ -777,7 +777,8 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 
 1. Open the `info.plist` again in Visual Studio Code (or TextEdit)
 2. Scroll all the way to the end of the `HDAConfigDefault` array containing the entries for the PinConfigs and paste your entry right before the end of the `</array>` (you can use the vertical lines as a visual guide):</br>![VScodeplist](https://user-images.githubusercontent.com/76865553/173192223-fbdcac89-f903-4bbf-99c8-60bc23ab7252.png)
-3. Verify that the Layout is correct and save the file.
+3. Ensure that all keys in the dictionary consist of 1 line only: `<key>AAAAAA</key>`. Fix any line breaks that may be in raw text.
+4. Save the file.
 4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
 Now that we got the PinConfig out of the way, we can continue integrating the rest of the files into the AppleALC Source Code…
@@ -803,9 +804,10 @@ Now the we have edited all the files we need, we have to integrate them into the
 ## XII. Compiling the AppleALC.kext
 Now that we finally prepared all the required files, we can finally compile the kext.
 
-- In Terminal, "cd" into the AppleALC folder containing the `AppleALC.xcodeproj` file.
-- Enter `xcodebuild` and hit Enter. Compiling should start and a lot of text should appear on screen during the process.
-- Once the kext is compiled, there will be the prompt "BUILD SUCCEEDED". 
+- Open Terminal
+- Type `cd`, hit space, drag your AppleALC Folder into the Terminal window and hit enter. This is now your working directory.
+- Enter `xcodebuild` and hit Enter. Compiling should begin and a lot of text will scroll on screen during the process.
+- Once the kext is compiled, there should be as prompt: "BUILD SUCCEEDED". 
 - The kext will present in `/AppleALC/build/Release`.
 
 ## XIII. Testing and Troubleshooting
@@ -816,7 +818,7 @@ Now that we finally prepared all the required files, we can finally compile the 
 - Check if sound is working (Internal, Inputs, Outputs, Headphones)
 - If it's working: congrats!
 
-**NOTE**: For testing verbs and `WakeConfigData` you can use `alc-verb` (it's in the Build folder) and Terminal to inject those into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext every time you want to test something. But I have yet to figure out how to use it. Requires boot-arg `alcverbs=1` or `alc-verbs` device property to be present in the `config.plist`.
+**NOTE**: For testing verbs and `WakeConfigData` you can use `alc-verb` (it's in the Build folder) and Terminal to inject verbs into the Codec during runtime. This way, you don't have to edit the PinConfig, the .xml files and recompile the kext every time you want to test something. But I have yet to figure out how it works. Requires boot-arg `alcverbs=1` or `alc-verbs` device property for the Codec to be present in the `config.plist`.
 
 ### Troubleshooting
 Follow the [AppleALC Troubleshooting Guide](https://github.com/dortania/OpenCore-Install-Guide/blob/e08ee8ebe6fa030393c153b055225f721edafab2/post-install/audio.md#troubleshooting) by Dortania
