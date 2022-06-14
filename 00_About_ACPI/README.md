@@ -1,4 +1,48 @@
 # ACPI Basics
+<details>
+<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+
+- [ACPI Basics](#acpi-basics)
+  - [A brief Introduction to ACPI](#a-brief-introduction-to-acpi)
+    - [What is ACPI?](#what-is-acpi)
+    - [Introduction to ACPI Hotpatching](#introduction-to-acpi-hotpatching)
+    - [Important ACPI Tables for hackintoshing](#important-acpi-tables-for-hackintoshing)
+      - [`DSDT.aml`](#dsdtaml)
+      - [`SSDT-xxxx.aml`](#ssdt-xxxxaml)
+  - [ACPI Renames and Hotpatches](#acpi-renames-and-hotpatches)
+    - [General Patching Guidelines](#general-patching-guidelines)
+    - [ACPI patching in OpenCore](#acpi-patching-in-opencore)
+      - [ACPI Quirks in OpenCore](#acpi-quirks-in-opencore)
+  - [ACPI Source Language (ASL) Basics](#acpi-source-language-asl-basics)
+    - [Preface](#preface)
+    - [ACPI](#acpi)
+    - [Why to prefer SSDTs over a patched DSDT](#why-to-prefer-ssdts-over-a-patched-dsdt)
+    - [ASL](#asl)
+  - [ASL Guidelines](#asl-guidelines)
+  - [Common ASL Data Types](#common-asl-data-types)
+  - [ASL Variables Definition](#asl-variables-definition)
+  - [ASL Assignment](#asl-assignment)
+  - [ASL Calculation](#asl-calculation)
+  - [ASL Logic](#asl-logic)
+  - [Defining Methods in ASL](#defining-methods-in-asl)
+  - [ACPI Preset Function](#acpi-preset-function)
+    - [`_OSI` (Operating System Interfaces)](#_osi-operating-system-interfaces)
+    - [`_STA` (Status)](#_sta-status)
+    - [`_CRS` (Current Resource Settings)](#_crs-current-resource-settings)
+  - [ASL flow Control](#asl-flow-control)
+    - [Branch control `If` & `Switch`](#branch-control-if--switch)
+      - [`If`](#if)
+      - [`ElseIf`, `Else`](#elseif-else)
+      - [`Switch`, `Case`, `Default`, `BreakPoint`](#switch-case-default-breakpoint)
+    - [Loop control](#loop-control)
+      - [`While` & `Stall`](#while--stall)
+      - [`For`](#for)
+  - [`External` Quote](#external-quote)
+  - [ASL CondRefOf](#asl-condrefof)
+- [ASL to AML Conversion Table](#asl-to-aml-conversion-table)
+- [SSDT Loading Sequence](#ssdt-loading-sequence)
+  - [Examples](#examples)
+</details>
 
 ## A brief Introduction to ACPI
 "ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for. But first things first…
@@ -40,31 +84,23 @@ Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
 For more details about ACPI in general, please refer to the official [**ACPI Specification**](https://uefi.org/specs/ACPI/6.4/index.html) For an introduction to the ASL language, please refer to chapter [**ACPI Source Language Reference**](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
 
 The following sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames, so you can edit SSDT files. Click on a triangle to unfold its content.
-<details>
-<summary><strong>ACPI Renames and Hotpatches</strong></summary>
 
 ## ACPI Renames and Hotpatches
 
 Try to avoid ACPI binary renames and patches such as `HDAS` to `HDEF`, `EC0` to `EC`, `SSDT-OC-XOSI`, etc. whenever possible. Especially renaming of methods (`MethodObj`) such as `_STA`, `_OSI`, etc. should be performed with caution. Nowadays, a lot of renames are handled by kexts like **AppleALC** and **WhateverGreen** anyway.
 
-### General Guidelines
+### General Patching Guidelines
 
-- No OS patches are required. For parts that do not work properly use custom SSDT patches to enable them. For special requirements of operating systems, use the `SSDT-XOSI` Patch.
-- For Brightness Control Keys to work, some machines do not require extra patches. You can use `PS2 Keyboard Mapping` instead to achieve the same.
+- Whenever possible, use SSDTs to inject preset variables and (Fake) Devices since this method is very reliable and ACPI conform (if done correctly). **Recommended approach**. 
+- `Binary Renames`: The binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems these patches should be used with **caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
+- No OS patches are required. For components that do not work properly use custom SSDT patches to enable them instead. For special OS requirements, use the `SSDT-XOSI` Patch.
+- For Brightness Control Keys to work, some machines do not require extra patches. You can use `PS2 Keyboard Mapping` instead to achieve the same results.
 - For now, the vast majority of Notebooks require the `0D6D Patch` to fix `Instant Wake` issues.
-- Almost all Laptops require additional, device-specific renames and patches for the Battery Percentage Indicator to work. But recently, a new kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was introduced which enables macOS to read the battery status provided the Embedded Controller, so no more patching is required. It doesn't work in all cases, but it's a good idea to give it a try first.
+- Almost all Laptops require additional, device-specific renames and patches for the Battery Percentage Indicator to work. But recently, a new kext called [ECEnabler](https://github.com/1Revenger1/ECEnabler) was released which enables macOS to read the battery status provided the Embedded Controller, so no more patching is required. It doesn't work in all cases, but it's a good idea to give it a try first.
 - Most ThinkPad Laptops require the `PTSWAKTTS` patch to stop the Power Button LED from pulsing after waking up from sleep.
 - For machines with a dedicated Sleep Button: if pressing the Sleep Button crashes the system, use the `PNP0C0E Sleep Correction Method` to fix it.
 
 You may need to disable or enable certain components in order to solve specific problems.
-
-### In general, use:
-
-- `Binary Renames & Preset Variables` – the binary rename method is especially effective for computers running only macOS. On multi-boot systems with different Operating Systems these patches should be used with **caution** since binary renames apply to all systems which can cause issues. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether, so no patches are injected. Or use Clover instead, since it does not inject patches into other OSes.
-- `Fake Devices` since this method is very reliable. **Recommended**. 
-</details>
-<details>
-<summary><strong>ACPI Patches in OpenCore</strong></summary>
 
 ### ACPI patching in OpenCore 
 OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
@@ -79,47 +115,20 @@ The following section refers to patching other ACPI tables (apart from `DSDT.aml
 
 ![ACPI_quirks](https://user-images.githubusercontent.com/76865553/166452836-80cf06a7-3337-4a32-88b1-ac822c5fb43d.png)
 
-- **`FACP.aml`**
-	- **Patch method**: `ACPI\Quirks\FadtEnableReset` = `true`
-	- **Description**: Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), FADT defines various static system information related to configuration and power management. The FADT describes the implementation and configuration details of the ACPI hardware registers on the platform represented by **FACP.aml**. These include the Realtime Clock, Power and Sleep Buttons, Power Management, etc. In Hackintoshland this affects the following functions:
-		- If holding the **Power Button** does not invoke the "Restart, Sleep, Cancel, Shutdown" menu, set `ACPI\Quirks\FadtEnableReset`to `true`. If this doesn't fix it, try adding **SSDT-PMC.aml** instead. It's located under ["Adding Missing Devices/Features"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features).
-		- `Low Power S0 Idle` state. The **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) system. See the [About AOAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) section for more details.
-
-- **Clear ACPI Header fields**
-	- **Patch method**: `ACPI\Quirks\NormalizeHeaders` = `true`
-	- **Note**: Only required on macOS 10.13
-
-- **`BGRT.aml`**
-    - **Patch method**: `ACPI\Quirks\ResetLogoStatus` = `true`
-    - **Description**: **BGRT.aml** form is the bootstrap graphics resource table. According to the [`ACPI specification`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch works to make `Displayed` = `0`.
-    - **Note:** Not all machines have this form
-
-- **Relocate ACPI Memory Regions**
-    - **Patch method**: `ACPI\Quirks\RebaseRegions` = `true`
-    - **Description**: ACPI forms have memory regions with both dynamically allocated addresses and fixed addresses.
-    - **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
-
-- **`FACS.aml`**
-    - **Patch method**: `ACPI\Quirks\ResetHwSig` = `true`
-    - **Decription**: The `Hardware Signature` item of the **FACS.aml** form is a 4-byte hardware signature, which is calculated after the system boots based on the hardware configuration. If this value is changed after the machine wakes up from a **Hibernate** state, the system will not recover correctly. The patch works by setting the `Hardware Signature` = `0` to resolve this issue.
-    - **Note:** If the system has **Hibernation** disabled, you do not need to bother with this patch!
-
-- **`SLIC.aml`**
-	- **Patch method**: `ACPI\Quirks\SyncTableIds` = `true`
-	- **Description**: Microsoft Software Licensing table. This works around patched tables becoming incompatible with the `SLIC` table causing licensing issues in older Windows operating systems.
-
-- **`DMAR.aml`**
-    - **Patch method**: `Kernel\Quirks\DisableIoMapper` = `true` 
-    - **Description**: The patch works the same as disabling `VT-d` in BIOS or using a rule to [delete/drop the table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table)
-    - **Note**: Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
+Quirk               | Affected Table(s) | Description | Fixes
+--------------------|-------------------|-------------|--------------
+**FadtEnableReset** | **`FACP.aml`**    |Fixed ACPI Description Table (FADT). In the [ACPI Specification](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#fixed-acpi-description-table-fadt), FADT defines various static system information related to configuration and power management.| If holding the **Power Button** does not invoke the "Restart, Sleep, Cancel, Shutdown" menu, enable this quirk. If this doesn't fix it, try adding [**SSDT-PMC.aml**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMC_Support_(SSDT-PMC)).</br> `Low Power S0 Idle` state. The **FACP.aml** form characterizes the machine type and determines the power management method. If `Low Power S0 Idle` = `1`, it's an `AOAC` (Always On Always Connected) system. See the [About AOAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) section for more details.
+**NormalizeHeaders** | All Table Headers | Clear ACPI Header fields | Removes illegal characters from ACPI Headers. Only required for macOS 10.13
+**ResetLogoStatus** |**`BGRT.aml`**      | Bootstrap graphics resource table | According to the [`ACPI Specs`](https://www.acpica.org/documentation), the `Displayed` item of the form should = `0`. However, some vendors have written non-zero data to the `Displayed` entry for some reason, which may cause the screen refresh to fail during the boot phase. The patch sets `Displayed` to `0`. **Note:** Not all machines have this table.
+**RebaseRegions** | All Tables | Relocates ACPI Memory Regions | ACPI forms have memory regions with both dynamically allocated as well as fixed addresses. This quirk turns dynamically allocated addresses into fixed ones which can help with patched `DSDTs`. **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
+**ResetHwSig** | **`FACS.aml`**| Sets Hardware Signature to `0` | `Hardware Signature` is part of the **FACS.aml** table. It's calculated after the system has started based on the hardware configuration. If this value changes after the machine wakes up from a **Hibernate** state, the system will not recover correctly. **Note:** If the system has **Hibernation** disabled, you do not need to this quirk!
+**SyncTableIds**| **`SLIC.aml`** | Microsoft Software Licensing table |Fixes `SLIC` table causing licensing issues in older Windows versions.
+**DisableIoMapper** | **`DMAR.aml`** | Kernel Quirk to disable Vt-d and [dropping the DMAR table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/).| Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
 
 **NOTE**: For more info about ACPI Tables in general, please refer to the official [ACPI Specs](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
 
-</details>
-<details>
-<summary><strong>ACPI Source Language (ASL) Basics</strong></summary>
-
 ## ACPI Source Language (ASL) Basics
+
 > The provided explanations in this Section are based on the following Post at PCBeta Forums by the User suhetao: "[DIY DSDT Tutorial Series, Part 1: ASL (ACPI Source Language) Basics](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1)"
 >
 > - Reformatted for Markdown by Bat.bat (williambj1) on 2020-2-14, with some additions and corrections.
@@ -128,9 +137,6 @@ The following section refers to patching other ACPI tables (apart from `DSDT.aml
 ### Preface
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a BIOS developer, it is possible that there could be mistakes in the provided ASL examples.
 
-##- [ASL to AML Conversion Table](#asl-to-aml-conversion-table)
-- [SSDT Loading Sequence](#ssdt-loading-sequence)
-  - [Example](#example)# Explanation 
 Did you ever wonder what a `DSDT` or `SSDT` is and what it does? Or how these rename patches that you have in your `config.plist` work? Well, after reading this, you will know for sure!
 
 ### ACPI
@@ -188,7 +194,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
    - `\_SI` &rarr; System indicator
    - `\_TZ` &rarr; Thermal zone
 
-	Components with different attributes are place below/inside the corresponding Scope. For example:
+	Components with different attributes are placed below/inside the corresponding Scope. For example:
 
    - `Device (PCI0)` is placed inside `Scope (\_SB)`
 
@@ -231,8 +237,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
       }
       ```
 
-      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
-
+      Yes, methods can be placed here. Caution, methods beginning with **`_`** are reserved for operating systems.
 5. `Device (xxxx)` also can be recognized as a scope, it contains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly, `^` is superior to `^^`.
 7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
@@ -274,26 +279,18 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
   })
   ```
 
-- Define Buffer Field (6 available types in total):
+- Define Buffer Field (6 available types in total):</br>
+	
+	| Create statement |   size    | Syntax                           |
+	| :--------------: | :-------: |----------------------------------|
+	| CreateBitField   |  1-Bit    | CreateBitField (AAAA, Zero, CCCC)
+	| CreateByteField  |  8-Bit    | CreateByteField (DDDD, 0x01, EEEE)
+	| CreateWordField  |  16-Bit   | CreateWordField (FFFF, 0x05, GGGG)
+	| CreateDWordField |  32-Bit   | CreateDWordField (HHHH, 0x06, IIII)
+	| CreateQWordField |  64-Bit   | CreateQWordField (JJJJ, 0x14, KKKK)
+	| CreateField      | any size. | CreateField (LLLL, Local0, 0x38, MMMM)
 
-| Create statement |   size    |
-| :--------------: | :-------: |
-| CreateBitField   |  1-Bit    |
-| CreateByteField  |  8-Bit    |
-| CreateWordField  |  16-Bit   |
-| CreateDWordField |  32-Bit   |
-| CreateQWordField |  64-Bit   |
-| CreateField      | any sizes |
-
-  ```swift
-  CreateBitField (AAAA, Zero, CCCC)
-  CreateByteField (DDDD, 0x01, EEEE)
-  CreateWordField (FFFF, 0x05, GGGG)
-  CreateDWordField (HHHH, 0x06, IIII)
-  CreateQWordField (JJJJ, 0x14, KKKK)
-  CreateField (LLLL, Local0, 0x38, MMMM)
-  ```
-It is not necessary to announce its type when defining a variable.
+	It is not necessary to announce its type when defining a variable.
 
 ## ASL Assignment
 
@@ -314,8 +311,8 @@ Local1 = Local0
 
 ## ASL Calculation
 
-|  ASL+  |  Legacy ASL|  Examples                                                                 |
-| :----: | :--------: | :------------------------------------------------------------------------ |
+|  ASL+  |  Legacy ASL|  Examples        
+| :----: | :--------: |:----------------------------------------------------------- |
 |   +    |    Add     | `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                                 |
 |   -    |  Subtract  | `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`                            |
 |   *    |  Multiply  | `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`                            |
@@ -335,7 +332,7 @@ Read `ACPI Specification` for more details
 ## ASL Logic
 
 |  ASL+  |   Legacy ASL  | Examples                                                         |
-| :----: | :-----------: | :----------------------------------------------------------------|
+| :----: | :-----------: | :-----------------------------------------------------------|
 |   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`                 |
 |   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                     |
 | &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`         |
@@ -641,9 +638,6 @@ Method (SSCN, 0, NotSerialized)
 ```
 
 The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the original value.
-</details>
-<details>
-<summary><strong>ASL to AML Conversion Table</strong></summary>
 
 # ASL to AML Conversion Table
 
@@ -654,8 +648,8 @@ The following table can be regarded as the quasi dictionary for translating from
 Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of the "Find" value: `5F44534D` and the "Replace" value `5844534D`. This all seems kind of random at first, but in fact it is not. If you take a look in the binary column, you can see that the underscore "`_`" has a value of "5F" (we omit the leading zeros), "D" has "44", "S" is "3S" and "M" corresponds to "4d" – which equals "`_DSM`" in binary. And binary "58" "44" "53" "4D" equals to "`XDSM`" in ASL. And that's how you can read and translate between ASL and AML and create your own renames, if necessary.
 
 
-|          ASL           |   Binary (AML) |
-| :--------------------: | :---------:    |
+|          ASL           | Binary (AML)|
+| :--------------------: | :---------: |
 |          ZERO          |   `0x00`    |
 |          ONE           |   `0x01`    |
 | **##################** | **-------** |
@@ -810,15 +804,12 @@ Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of t
 |      INDEX_FIELD       |   `0x86`    |
 |       BANK_FIELD       |   `0x87`    |
 |      DATA_REGION       |   `0x88`    |
-</details>
-<details>
-<summary><strong>SSDT Loading Sequence</strong></summary>
 
 # SSDT Loading Sequence
 
 Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
 
-## Example
+## Examples
 
 - **Patch 1**：***SSDT-XXXX-1.aml***
   
@@ -846,7 +837,7 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
     }
   ```
   
-- SSDT Loading Sequence in `config.plist` under `ACPI > Add`: 
+- SSDT Loading Sequence in `config.plist` under `ACPI/Add`: 
 
   ```XML
   Item 1
@@ -854,4 +845,3 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
   Item 2
             path    <SSDT-XXXX-2.aml>
   ```
-</details>
