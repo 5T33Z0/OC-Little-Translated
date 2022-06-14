@@ -1,13 +1,15 @@
 # Add PMCR Device (`SSDT-PMC`)
 ## About
-:warning: Mandatory for 390-series mainboards (recommended for 400/500/600-series chipsets)! In ACPI, you won't find `PMCR` or `APP9876`, since it's a device exclusively used by Apple in their DSDTs.
+`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards qith Z390 chipsets so the system boots (see "Technical Background" for details).
 
-**Instructions**:
+:warning: Mandatory for 390-series mainboards (optional for 400/500/600-series chipsets)!
+
+### Instructions
 
 - Add ***SSDT-PMC.aml***
 - **For**: 300/400/500/600-series mainboards (100 and 200-series Boards use **SSDT-PPMC** instead!)
 
-**CAUTION:** When using this patch, makes sur that the name of the Low Pin Configration Bus (`LPC`/`LPCB`) is consistent with the name used in the original DSDT.
+**CAUTION**: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 
 ### Verifying that the patch is working
 Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should find it:</br>

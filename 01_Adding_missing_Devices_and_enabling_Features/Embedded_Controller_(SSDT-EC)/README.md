@@ -147,4 +147,3 @@ MacMini7,1 and older|N/A|N/A|N/A|N/A
 MacPro6,1 and older|N/A|N/A|N/A|N/A
 
 As you can see, desktop machines (iMac, iMacPro and MacPrp) use the same values, whereas the values for notebooks and MacMinis differ.
-

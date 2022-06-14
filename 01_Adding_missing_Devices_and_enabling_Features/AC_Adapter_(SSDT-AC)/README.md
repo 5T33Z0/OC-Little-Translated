@@ -48,7 +48,7 @@ If you use the kext, it also links the battery to `AppleSmartBatteryManager`:
 If it's not present, then you did something wrong, so start over.
 
 ## Notes
-- When using the SSDT patches, make sure that the name of the LPC Bus (`LPC`/`LPCB`) is consistent with the name used in the original `DSDT`.
+- When using these patches, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 - In Clover, you can use the DSDT patch `FixADP1` instead to attach the AC device in IOReg.
 
 ## Credits
