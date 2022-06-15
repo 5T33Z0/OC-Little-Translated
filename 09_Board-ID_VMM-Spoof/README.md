@@ -1,4 +1,6 @@
-# Using unsupported Board-IDs with macOS BigSur/Monterey
+![macOS](https://img.shields.io/badge/Supported_macOS:-macOS_11.4_to_12.5_beta-white.svg)
+
+# Using unsupported Board-IDs with macOS Big Sur/Monterey
 A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
 
 ## Use Cases
@@ -101,7 +103,8 @@ Installation went smoothly and macOS 12.1 booted without issues:
 ![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
 </details>
 
-## Credits
+## Notes and Credits
 - Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
 - parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281)
 - reenigneorcim for [**SurPlus**](https://github.com/reenigneorcim/SurPlus)
+- These patches currently don't work with macOS Ventura so disable them before installation
