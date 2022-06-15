@@ -112,9 +112,9 @@ You should deactivate the single user mode for security reasons, because it can 
 
    **NVRAM > Delete > 7C436110-AB2A-4BBB-A880-FE41995C9F82** > `csr-active-config`.
 
-   This deletes the current csr value from the NVRAM on reboot and will be replaced by the value stored under "NVRAM > Add…". This is Very useful if you have different macOS installs which use different CSR values.
+   This deletes the current csr value from the NVRAM on reboot and replaces it with the value stored under "NVRAM > Add…". This is Very useful if you have different macOS installs which use different CSR values.
 
-   To test if the settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this:
+   To test if the correct settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this:
 
     	Configuration:
     	 Apple Internal: enabled
@@ -163,7 +163,7 @@ For more details check the `Configuration.pdf` included in the OpenCore package.
 
 If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case. 
 
-**NOTE**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
+**CAUTION**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
 ### Boot variants (Selection)
 
