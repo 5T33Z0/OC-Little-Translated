@@ -6,8 +6,7 @@ If you are looking for an actual tool to calculate these things (and more), you 
 
 There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.app/)
 
-**Supported OC Version:** 0.7.4+
-
+**Supported OC Version:** 0.7.4+</br>
 **Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes, ExposeSensitiveData and Darkwake
 
 **Screenshots**:

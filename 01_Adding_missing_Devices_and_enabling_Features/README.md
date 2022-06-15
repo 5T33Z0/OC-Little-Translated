@@ -1,4 +1,5 @@
 # Enabling Devices and Features for macOS
+
 ## About
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
