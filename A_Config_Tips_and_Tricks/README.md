@@ -17,7 +17,7 @@ This section contains a small collection of useful tips and tricks for working w
 - V. [Customizing Boot Options](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#v-customizing-boot-options)
 	- [Defining the default Volume in Boot Picker](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#set-default-boot-drive-in-bootpicker)
 	- [Enabling Apple Hotkeys Support](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#enable-apple-hotkey-functions)
-	- [Accelerate Boot](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#accelerate-boot-result-will-vary)
+	- [Accelerate Boot](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#accelerate-boot-results-will-vary)
 	- [Boot Variants](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-variants-selection)
 		- [GUI disabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-without-gui-default)
 		- [GUI enabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
@@ -151,7 +151,7 @@ Enables keyboard shortcuts known from Macs to use different boot modes like Verb
 
 For more details check the `Configuration.pdf` included in the OpenCore package.
 
-### Accelerate boot (result will vary)
+### Accelerate boot (results will vary)
 
 **ConnectDrivers** = `No`
 
