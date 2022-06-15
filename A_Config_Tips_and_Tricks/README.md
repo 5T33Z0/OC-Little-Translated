@@ -147,7 +147,9 @@ In the BootPicker: Select drive/partition, hold [CTRL] and press [ENTER]. After 
 
 **PollAppleHotKeys** = `Yes`
 
-Enables the key combinations known from Macs to use boot modes like Verbose, Safe and Single User Mode, etc. without having to set extra boot-args. For details see `Configuration.pdf` included in the OpenCore package.
+Enables keyboard shortcuts known from Macs to use different boot modes like Verbose, Safe or Single User Mode, etc. without having to set extra boot-args. For example, you can enter CMD+V before starting macOS and it will then boot in verbose mode. So no need to add `-v ` to the boot-args. 
+
+For more details check the `Configuration.pdf` included in the OpenCore package.
 
 ### Accelerate boot (result will vary)
 
