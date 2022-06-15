@@ -60,6 +60,9 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 | 20190820 | 9452750070000000 | req. macOS ≥ Mojave (10.14)                  |
 | 20180621 | 7480770080000000 | req. macOS ≥ High Sierra (10.13)             |
 
+**Source**: [Acidanthera](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h)
+
+**IMPORTANT**: For security reasons, you should change these values according to the version of macOS you are using.
 
 ## I. Updating config.plist and fixing errors
 
@@ -78,11 +81,9 @@ If the system doesn't boot despite correct boot and kernel settings and hangs di
 
 If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
 
-- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
+- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version of macOS you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
 
 **BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a verified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
-
-**IMPORTANT**: For security reason you should change these values according to the version of macOS you are using. A list with the correct values for `MinDate` and `MinVersion`can be found here: https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h
 
 ## III. Security Settings
 
