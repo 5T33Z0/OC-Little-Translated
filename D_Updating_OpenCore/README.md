@@ -1,5 +1,10 @@
 # Updating OpenCore and Kexts with OCAT
-Currently, the easiest method to keep your OpenCore files, drivers, config and kexts up to date is to use a OpenCore Auxiliary Tools (OCAT). OCAT actually merges any changes made to the structure of the config-plist and feature-set, thereby updating it to the latest version, without losing settings. This saves so much time compared to older method, where you had to do all of this manually. 
+## About
+Currently, the easiest method for keeping your OpenCore files, drivers, config and kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
+
+OCAT has OCValidate integrated and runs it automatically when opening the config.plist and points to errors. Simply hitting the "save" button will merge any changes present in the config-sample into the config.plist, thereby updating it to the latest version and feature set, which will fix most of the errors already, without losing settings. This saves so much time compared to using OCConfigCompare and ProperTree where you had to do all of this manually.
+
+It also intergrates new keys/features added to the conifg.plist into the GUI automatically – no other configurator App can do this.
 
 ## Tools and prerequisites
 - Working Internet Connection
