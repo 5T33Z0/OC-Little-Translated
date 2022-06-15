@@ -1,7 +1,8 @@
 # OpenCore Config Tips and Tricks
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
-## TABLE of CONTENTS
+<details><summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+
 - [OpenCore Troubleshooting Workflow](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#opencore-troubleshooting-quick-tips)</br>
 	- [MinDate / MinVersion settings explained](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver)</br>
 - I. [Updating config.plist and fixing errors](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#i-updating-configplist-and-fixing-errors)</br>
@@ -27,6 +28,7 @@ This section contains a small collection of useful tips and tricks for working w
 - VIII. [Exchanging SMBIOS Data between OpenCore and CLover](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#viii-exchanging-smbios-data-between-opencore-and-clover)
 	- [Manual method ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-method)
 	- [Automated method, using OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#smbios-data-importexport-with-ocat)
+</details>
 
 ## OpenCore Troubleshooting Quick Tips
 
