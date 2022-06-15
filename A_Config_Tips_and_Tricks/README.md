@@ -99,7 +99,7 @@ You should deactivate the single user mode for security reasons, because it can 
 
    `FF030000` (for High Sierra)</br>
    `FF070000` (for Mojave/Catalina)</br>
-   `67080000` (for Big Sur to Ventura)
+   `67080000` (for Big Sur to Ventura)</br>
    `EF0F0000` (for Big Sur to Ventura. Disables even more security features.)
 
    **NOTES**
