@@ -2,7 +2,7 @@
 Incomplete collection of Intel iGPU related fixes.
 
 ## Force-enabling graphics with a fake Platform-ID
-⚠️ This is only for users who don't have graphics output at all. It's only a temporary solution to force-enable software rendering of graphics in macOS, so you can at least  follow the instructions on-screen to generate a proper framebuffer patch. If your display is working already, skip this step!
+⚠️ This is only for users who don't have graphics output at all. It's only a temporary solution to force-enable software rendering of graphics in macOS, so you can at least have a picture output so you can generate a proper framebuffer patch with Hackintool for example.
 
 First try adding `-igfxvesa` boot-arg to the config.plist and reboot. This will enable VESA mode for graphics which bypasses any GPU and uses software rendering instead.
 
