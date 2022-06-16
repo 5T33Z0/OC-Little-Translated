@@ -1,4 +1,5 @@
 # Intel iGPU Fixes
+Incomplete collection of Intel iGPU related fixes.
 
 ## Force-enabling graphics with a fake Platform-ID
 ⚠️ This is only for users who don't have graphics output at all. It's only a temporary solution to force-enable software rendering of graphics in macOS, so you can at least  follow the instructions on-screen to generate a proper framebuffer patch. If your display is working already, skip this step!
