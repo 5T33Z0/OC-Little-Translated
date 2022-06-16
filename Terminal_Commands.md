@@ -51,10 +51,13 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 
 ## CPU related
 
-**Display CPU Vendor**</br>
+**Show CPU Vendor**</br>
 `sysctl -a | grep machdep.cpu.vendor`
 
-**Display CPU Model**</br>
+**Show CPU Model** (doesn't really tell you much)</br> 
+`sysctl -a | grep machdep.cpu.model`
+
+**Show CPU Brand String**</br>
 `sysctl machdep.cpu.brand_string`
 
 **List CPU features**</br>
