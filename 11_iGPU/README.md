@@ -10,7 +10,7 @@ If this doesn't work, we can inject a non-existing `AAPL,ig-platform-id` via `De
 
 Booting with this hack will take much longer (up to 2 minutes), only about 5 MB of VRAM will be available and everything will be running slow and sluggish – but at least you have a video signal. 
 
-#### Enabling a fake Platform-ID in OpenCore
+### Enabling a fake Platform-ID in OpenCore
 - Open your config.plist
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)`
 - Add the following Keys as children:</br>
@@ -22,7 +22,7 @@ Booting with this hack will take much longer (up to 2 minutes), only about 5 MB 
 The entry should look like this:</br>![OC_fakeid](https://user-images.githubusercontent.com/76865553/174105739-517dc1da-58f3-45f1-976a-0e3e91afdaa5.png)
 
 **NOTE**: Make sure to delete/disable the fake Platform-ID once you have generated your Framebuffer patch!
-
+____
 ## Enabling Intel HD 530 support in macOS 13 (Desktop)
 With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated grpahics you need to spoof Kabylake Framebuffers. The example is from an i7 6700K.
 
