@@ -18,5 +18,6 @@ Booting with this hack will take much longer (up to 2 minutes), only about 5 MB 
 	framebuffer-patch-enable | 01000000 |Data
 
 	The entry should look like this:</br>![OC_fakeid](https://user-images.githubusercontent.com/76865553/174105739-517dc1da-58f3-45f1-976a-0e3e91afdaa5.png)
+- Save the config.plist and boot into macOS.
 
 **NOTE**: Make sure to delete/disable the fake Platform-ID once you have generated your Framebuffer patch!
