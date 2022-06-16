@@ -11,9 +11,16 @@ https://macos-defaults.com/
 **Disable Gatekeeper:**</br>
 `sudo spctl --master-disable`
 
+**Show the User Library in Big Sur**:</br>
+`setfile -a v ~/Library`</br>
+`chflags nohidden ~/Library`
+
 **Disable/enable DMG Verification**:</br>
 `defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
 `defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
+
+**Add "Quit" option to Finder**:</br>
+`defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
 
 **Disable Library Validation**</br>
 `sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true`
@@ -21,21 +28,15 @@ https://macos-defaults.com/
 **List MAC Addresses**</br>
 `networksetup -listallhardwareports`
 
-**Add "Quit" option to Finder**:</br>
-`defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
-
 **Show all Files in Finder**:</br>
 `defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder`</br>
 `defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder` (to revert it)
-
-**Show the User Library in Big Sur**:</br>
-`setfile -a v ~/Library`</br>
-`chflags nohidden ~/Library`
 
 **Rebuild Launch Services**:</br>
 `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
 
 **Rebuild DYLD and XPC caches**
+
 ```
 sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
@@ -47,6 +48,20 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
+
+## CPU related
+
+**Display CPU Vendor**</br>
+`sysctl -a | grep machdep.cpu.vendor`
+
+**Display CPU Model**</br>
+`sysctl machdep.cpu.brand_string`
+
+**List CPU features**</br>
+`sysctl -a | grep machdep.cpu.features` 
+
+**List supported instruction sets** (AVX2 and others):<br>
+`sysctl -a | grep machdep.cpu.leaf7_features`
 
 ## Hackintosh specific
 **Currently used SMBIOS**</br>
