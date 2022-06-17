@@ -14,22 +14,22 @@ This guide is for compiling AppleALC for your Codec only. This reduced the kext 
 ## Slimming the files
 
 ### 1. Deleting unused Codecs
-- Enter the Resources folder:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/01.png)
-- Delete the folders which are not for your Codec. In my case, I only keep the ALC269 folder:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/02.png)
+- Enter the Resources folder:</br>![01](https://user-images.githubusercontent.com/76865553/174393266-55d3f7ff-9e97-46a0-bc8a-75c94c39eea5.png)
+- Delete the folders which are not for your Codec. In my case, I only keep the ALC269 folder:</br>![02](https://user-images.githubusercontent.com/76865553/174393321-eae1f416-16de-4b08-b70a-260f7de7e9f9.png)
 
 ### 2. Removing unused Layouts and Platforms
-- Next, enter the folder for your Codec:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/03.png)
-- Delete the layout and Platforms.xml files which are NOT the one you are using. In my case, I keep the files for Layout and Platforms 18 and 39:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/05.png)
+- Next, enter the folder for your Codec:</br>![03](https://user-images.githubusercontent.com/76865553/174393366-9587befc-b27c-45f6-8cbd-6c7fcdcf68d7.png)
+- Delete the layout and Platforms.xml files which are NOT the one you are using. In my case, I keep the files for Layout and Platforms 18 and 39:</br>![05](https://user-images.githubusercontent.com/76865553/174393427-9109b99b-de52-4ffe-b244-dd4b08e49a95.png)
 - Next, open the `Info.plist` in the same folder with a Plist Editor:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/09.png)
-- Delete all the entries for Layouts and Platforms you don't intend to use. You have to look inside the entries or use the search function to find yours to keep. In my case, I keep Layouts 18 and 39 and Platforms 18 and 39:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/10.png)
+- Delete all the entries for Layouts and Platforms you don't intend to use. You have to look inside the entries or use the search function to find yours to keep. In my case, I keep Layouts 18 and 39 and Platforms 18 and 39:</br>![10](https://user-images.githubusercontent.com/76865553/174393502-7fe9556e-26f9-4c73-936a-3cc024db4741.png)
 - Save the file
 
 ### 3. Removing Layouts from `PinConfig.kext`
-- Select PinConfig.kext in the AppleALC folder:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/04.png)
-- Right-click the `PinConfig.kext` and select "Show Package Contents":</br>![](/Users/5t33z0/Desktop/Neuer Ordner/06.png)
-- Open the info.plist with a Plist Editor:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/07.png)
+- Select PinConfig.kext in the AppleALC folder:</br>![04](https://user-images.githubusercontent.com/76865553/174393542-41458a9c-a33e-4d6d-91e3-94c0ecd05ae3.png)
+- Right-click the `PinConfig.kext` and select "Show Package Contents":</br>![06](https://user-images.githubusercontent.com/76865553/174393581-d361874f-4539-4407-b208-5eb505ee2d66.png)
+- Open the info.plist with a Plist Editor:</br>![07](https://user-images.githubusercontent.com/76865553/174393627-6784074e-94fd-4cc7-aabc-6a18bb5bc4e8.png)
 - Delete the Dictionaries which do not contain your Layout-ID. There are about 600 Layouts in this file, so use the search function to find yours
-- In my case, I keep 2 Layouts:</br>![](/Users/5t33z0/Desktop/Neuer Ordner/08.png)
+- In my case, I keep 2 Layouts:</br>![08](https://user-images.githubusercontent.com/76865553/174393729-500ddaa2-07e7-40b4-abcb-1b5311cbd5d6.png)
 
 Now you have removed all the unnecessary files from the AppleALC Source Code and can compile the Kext…
 
