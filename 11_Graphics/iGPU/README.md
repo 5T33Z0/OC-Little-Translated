@@ -6,3 +6,7 @@ Incomplete collection of Intel iGPU related fixes. For generel configurtaion of 
 - [Enabling Skylage Graphics in macOS Ventura ](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Enabling_Skylake_Graphics_in_macOS13.md)
 - [Force-enabling graphics with a fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Fake_ig-platform-id.md)
 - [Obtaining an Intel Register Dump in Linux](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Intel_Reg_Dump.md)
+
+## Notes
+
+- `DeviceProperties` with Framebuffer Patced for numerous Intel iGPUs for most CPU Generations can be obtained from the config.plists in the &rarr; [**Desktop EFIs Section**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
