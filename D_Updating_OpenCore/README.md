@@ -77,6 +77,11 @@ For downloading and syncing the latest **Dev** versions, you have to change View
 
 Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
+## Updating Kexts to Nightly Builds
+The latest update of OCAT indroduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
+
+- In the Sync window, enable the "DEV" option:</br>![](/Users/5t33z0/Desktop/kextsdev.png)
+
 ## Fixing "Development version database does not exist" issue
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
