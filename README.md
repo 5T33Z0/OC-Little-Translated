@@ -18,7 +18,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 - Rewrote whole sections which were confusing/misleading (`ACPI` and `USB Port Mapping` for example)
 - Added missing descriptions
 - Added further explanations where necessary
-- Added new content (USB Port Mapping via ACPI to Chapter 3, Chapters 7 to 10 and the whole Appendix section)
+- Added new content (added USB Port Mapping via ACPI to Chapter 3, Chapters 7 to 11 as well as the whole "Appendix" section)
 
 **NOTE**: Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
 </details>
