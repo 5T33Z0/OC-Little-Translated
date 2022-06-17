@@ -80,7 +80,7 @@ Alternatively, you can click on "Import" to open a downloaded .zip containing Op
 ## Updating Kexts to Nightly Builds
 The latest update of OCAT indroduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
 
-- In the Sync window, enable the "DEV" option:</br>![](/Users/5t33z0/Desktop/kextsdev.png)
+- In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
 ## Fixing "Development version database does not exist" issue
 
