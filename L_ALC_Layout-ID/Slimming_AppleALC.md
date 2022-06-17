@@ -7,7 +7,7 @@ This guide is for compiling AppleALC for your Codec only. This reduced the kext 
 - Download [AppleALC](https://github.com/acidanthera/AppleALC) Source Code (click on "Code" and "Download Zip") 
 - Unpack the .zip file
 - In Terminal, enter: `cd`, hit space, drag the AppleALC folder into the Terminal window and press enter.
-- Next, enter git clone `https://github.com/acidanthera/MacKernelSDK` and hit enter. This adds the MacKernelSDK in the AppleALC source folder.
+- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` and hit enter. This adds the MacKernelSDK in the AppleALC source folder.
 - Add the Debug version of [Lilu.kext](https://github.com/acidanthera/Lilu/releases) to the AppleALC folder.
 - The resulting folder structure should look like this:</br>![](https://user-images.githubusercontent.com/76865553/173291777-9bc1285d-1ffa-479f-b7bf-b74cda6f23ae.png)
 
