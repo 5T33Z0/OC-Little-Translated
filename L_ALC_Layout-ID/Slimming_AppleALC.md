@@ -41,5 +41,3 @@ Now you have removed all the unnecessary files from the AppleALC Source Code and
 - Add the kext to your EFI/OC/Kexts folder, replacing the existing one.
 - Adjust the Layout-ID if necessary
 - Reboot and enjoy your slimmed AppleALC kext.
-
-
