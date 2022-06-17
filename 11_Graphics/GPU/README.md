@@ -19,5 +19,5 @@ And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes â€
 ## Intel on-board Graphics
 For generel configurtaion of Intel iGPUs, please refer to the corresonding section of the OpenCore Install Guide for your CPU. For an in-depth explanations check Dortania's [Intel iGPU Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/#getting-started) Guide
 
-For fixing current issues, see Chapter &rarr; Intel iGPU Fixes
+For fixing current issues, see Chapter &rarr; [Intel iGPU Fixes](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU)
 
