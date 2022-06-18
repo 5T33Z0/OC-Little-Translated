@@ -160,13 +160,13 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
 
-#### Finding the PCIe path
+### Finding the PCIe path
 - Run Hackintool
 - Click on the "PCIe" Tab
 - Find your GPU (should be listed as "Display Controller")
 - Right-click the entry and select "Copy Device Path":</br>![PCIpath](https://user-images.githubusercontent.com/76865553/174430790-a35272cb-70fe-4756-a116-06c0f048e7a0.png)
 
-#### Config Edits
+### Config Edits
 - Mount your EFI
 - For NAVI Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
 - Disable Whatevergreen.kext
