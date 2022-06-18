@@ -16,118 +16,118 @@ This chapter contains two approaches for improving the performance of AMD Radeon
 Contents of `SSDT-NAVI.aml`:
 
 ```swift
-    External (_SB_.PCI0, DeviceObj)
-    External (_SB_.PCI0.PEG0, DeviceObj)
-    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
+External (_SB_.PCI0, DeviceObj)
+External (_SB_.PCI0.PEG0, DeviceObj)
+External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
 
-    Scope (\_SB)
+Scope (\_SB)
+{
+    Scope (PCI0)
     {
-        Scope (PCI0)
+        Scope (PEG0)
         {
-            Scope (PEG0)
+            Scope (PEGP)
             {
-                Scope (PEGP)
+                Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    If (_OSI ("Darwin"))
                     {
-                        If (_OSI ("Darwin"))
-                        {
-                            Return (Zero)
-                        }
-                        Else
-                        {
-                            Return (0x0F)
-                        }
+                        Return (Zero)
+                    }
+                    Else
+                    {
+                        Return (0x0F)
+                    }
+                }
+            }
+
+            Device (EGP0)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+                Method (_STA, 0, NotSerialized)  // _STA: Status
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Return (0x0F)
+                    }
+                    Else
+                    {
+                        Return (Zero)
                     }
                 }
 
-                Device (EGP0)
+                Device (EGP1)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    Device (GFX0)
                     {
-                        If (_OSI ("Darwin"))
+                        Name (_ADR, Zero)  // _ADR: Address
+                        Name (_SUN, One)  // _SUN: Slot User Number
+                        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                         {
-                            Return (0x0F)
-                        }
-                        Else
-                        {
-                            Return (Zero)
+                            If ((Arg2 == Zero))
+                            {
+                                Return (Buffer (One)
+                                {
+                                     0x03                                             // .
+                                })
+                            }
+
+                            Return (Package (0x02)
+                            {
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-2"
+                                }
+                            })
                         }
                     }
 
-                    Device (EGP1)
+                    Device (HDAU)
                     {
-                        Name (_ADR, Zero)  // _ADR: Address
-                        Device (GFX0)
+                        Name (_ADR, One)  // _ADR: Address
+                        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_ADR, Zero)  // _ADR: Address
-                            Name (_SUN, One)  // _SUN: Slot User Number
-                            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                            If ((Arg2 == Zero))
                             {
-                                If ((Arg2 == Zero))
+                                Return (Buffer (One)
                                 {
-                                    Return (Buffer (One)
-                                    {
-                                         0x03                                             // .
-                                    })
-                                }
-
-                                Return (Package (0x02)
-                                {
-                                    "hda-gfx", 
-                                    Buffer (0x0A)
-                                    {
-                                        "onboard-2"
-                                    }
+                                     0x03                                             // .
                                 })
                             }
-                        }
 
-                        Device (HDAU)
-                        {
-                            Name (_ADR, One)  // _ADR: Address
-                            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                            Return (Package (0x0A)
                             {
-                                If ((Arg2 == Zero))
+                                "AAPL,slot-name", 
+                                "Built In", 
+                                "device_type", 
+                                Buffer (0x13)
                                 {
-                                    Return (Buffer (One)
-                                    {
-                                         0x03                                             // .
-                                    })
+                                    "Controller HDMI/DP"
+                                }, 
+
+                                "name", 
+                                "High Definition Multimedia Interface", 
+                                "model", 
+                                Buffer (0x25)
+                                {
+                                    "High Definition Multimedia Interface"
+                                }, 
+
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-2"
                                 }
-
-                                Return (Package (0x0A)
-                                {
-                                    "AAPL,slot-name", 
-                                    "Built In", 
-                                    "device_type", 
-                                    Buffer (0x13)
-                                    {
-                                        "Controller HDMI/DP"
-                                    }, 
-
-                                    "name", 
-                                    "High Definition Multimedia Interface", 
-                                    "model", 
-                                    Buffer (0x25)
-                                    {
-                                        "High Definition Multimedia Interface"
-                                    }, 
-
-                                    "hda-gfx", 
-                                    Buffer (0x0A)
-                                    {
-                                        "onboard-2"
-                                    }
-                                })
-                            }
+                            })
                         }
                     }
                 }
             }
         }
     }
+}
 ```
 
 ## Method 2: Using AMD Radeon Patches by mattystonie
@@ -152,6 +152,39 @@ Contents of `SSDT-NAVI.aml`:
 	TableSignature: 44534454
 	```
 5. Save your config, reboot and run some benchmark tests for comparison.
+
+## Method 3: Injecting AMD Framebuffers via `DeviceProperties`
+With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
+
+#### Finding the PCIe path
+- Run Hackintool
+- Click on the "PCIe" Tab
+- Find your GPU (should be listed as "Display Controller")
+- Right-click the entry and select "Copy Device Path":</br>![](/Users/5t33z0/Desktop/PCIpath.png)
+
+#### Config Edits
+- Mount your EFI
+- For NAVI Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
+- Disable Whatevergreen.kext
+- Disable boot-arg agdpmod=pikera
+- Under `DeviceProperties/Add` create a new Child
+- Set it to "Dictionary"
+- Double Click its name and paste the PCI path:</br>![](/Users/5t33z0/Desktop/DevProps01.png)
+- Create a new child
+	- **Type**: String
+	- **Name**: @0,name
+	- **Value**: ATY,followed by a Framebuffername for your GPU:
+		- **RX6900** &rarr; `Carswell`
+		- **RX6800** &rarr; `Belknap`
+ 		- **RX6600/XT** &rarr; `Henbury`
+		- **RX6600** &rarr; `Henbury` 
+		- **RX5700** &rarr; `Adder`
+		- **RX5500** &rarr; `Python`
+		- **RX570/580** &rarr; `Orinoco`
+	- In this example, we use ATI,Henbury (without empty spaces):</br>![](/Users/5t33z0/Desktop/DevProps02.png)
+- Save and reboot.
+
+**Source**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
 
