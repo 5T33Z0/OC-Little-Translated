@@ -177,14 +177,13 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 - Create a new child
 	- **Type**: String
 	- **Name**: @0,name
-	- **Value**: ATY,followed by a Framebuffername for your GPU:
-		- **RX6900** &rarr; `Carswell`
-		- **RX6800** &rarr; `Belknap`
- 		- **RX6600/XT** &rarr; `Henbury`
-		- **RX6600** &rarr; `Henbury` 
-		- **RX5700** &rarr; `Adder`
-		- **RX5500** &rarr; `Python`
-		- **RX570/580** &rarr; `Orinoco`
+	- **Value**: select the one for your GPU model from the list below:
+		- **RX6900** &rarr; `ATY,Carswell`
+		- **RX6800** &rarr; `ATY,Belknap`
+ 		- **RX6600/XT** &rarr; `ATY,Henbury`
+		- **RX5700** &rarr; `ATY,Adder`
+		- **RX5500** &rarr; `ATY,Python`
+		- **RX570/580** &rarr; `ATY,Orinoco`
 	- In this example, we use ATI,Henbury (without empty spaces):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
 - Save and reboot.
 
