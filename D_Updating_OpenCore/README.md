@@ -1,14 +1,27 @@
 # Updating OpenCore and Kexts with OCAT
+
+**TABLE of CONTENTS**
+
+- [About](#about)
+- [Tools and prerequisites](#tools-and-prerequisites)
+	- [For users updating from OpenCore 0.6.5 or lower](#for-users-updating-from-opencore-065-or-lower)
+- [How-to update your `config.plist`](#how-to-update-your-configplist)
+	- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
+	- [Release builds vs Dev builds](#release-builds-vs-dev-builds)
+- [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
+- [Fixing "Development version database does not exist" issue](#fixing-development-version-database-does-not-exist-issue)
+- [Notes](#notes)
+
 ## About
 Currently, the easiest method for keeping your OpenCore files, drivers, config and kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
 
 OCAT has OCValidate integrated and runs it automatically when opening the config.plist and points to errors. Simply hitting the "save" button will merge any changes present in the config-sample into the config.plist, thereby updating it to the latest version and feature set, which will fix most of the errors already, without losing settings. This saves so much time compared to using OCConfigCompare and ProperTree where you had to do all of this manually.
 
-It also intergrates new keys/features added to the conifg.plist into the GUI automatically – no other configurator App can do this.
+It also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
 ## Tools and prerequisites
 - Working Internet Connection
-- Downlaod and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
+- Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 
 ### For users updating from OpenCore 0.6.5 or lower
 :warning: **ATTENTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
@@ -49,6 +62,8 @@ The following combinations are possible:
 - OpenCore DEV (nightly builds)
 - OpenCore DEV DEBUG (Debug versions of nightly builds)
 
+For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo.
+
 To update OpenCore files and Kexts, do the following:
 
 1. Click on the `Sync` button (looks similar to a Recycle symbol):</br>
@@ -78,7 +93,7 @@ For downloading and syncing the latest **Dev** versions, you have to change View
 Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
 ## Updating Kexts to Nightly Builds
-The latest update of OCAT indroduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
+The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
 
 - In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
@@ -93,15 +108,15 @@ This error usually appears when opening a config.plist which was created for a n
 3. **Option 1**: 
 	- Click on "Help > Download Upgrade Packages":</br>![Err02](https://user-images.githubusercontent.com/76865553/172385089-28a836fb-c438-42da-bee8-2d9e7c3b489f.png)</br> This should fix the issue. If the config is even newer, use Option 2
 4. **Option 2**:	
-	- Download the latest OC release build from [Dortanias Repo](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
+	- Download the latest OC release build from [Dortania's Repo](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
 	- Open the "Upgrade OpenCore an Kexts" Window
 	- Click on "Import"
 	- Navigate to the "OpenCore-0.8.X-RELEASE.zip" and open it
 	- Ignore the error messages (hit "OK" twice)
-5. Close the Syn Window. Now you have the latest avaialble files in the database:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
+5. Close the Syn Window. Now you have the latest available files in the database:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
 ## NOTES
 
-- If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI > APFS > `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
+- If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
