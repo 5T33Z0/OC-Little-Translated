@@ -32,6 +32,7 @@ Do the following to enabled Intel HD 530 in macOS 13:
 		</dict>
 	...
 	```
+- Add this Kext [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip).	
 - Save your config and reboot.
 
 </details>
