@@ -172,3 +172,8 @@ https://www.dssw.co.uk/reference/pmset.html
 
 **Dump Audio Codec** (in Linux)</br>
 `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
+___
+
+# Keyboard Shorcuts
+
+**Show hidden Files and Folders in Finder**: ⌘⇧. (Command-Shift-.)
