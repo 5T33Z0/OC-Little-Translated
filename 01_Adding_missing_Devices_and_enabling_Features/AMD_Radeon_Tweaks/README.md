@@ -184,7 +184,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 		- **RX5700** &rarr; `Adder`
 		- **RX5500** &rarr; `Python`
 		- **RX570/580** &rarr; `Orinoco`
-	- In my case, I use `Orinoco` since I have a RX 580:</br>![](/Users/steezonics/Desktop/FBNamenu.png)
+	- In my case, I use `Orinoco` since I have a RX 580:</br>![FBNamenu](https://user-images.githubusercontent.com/76865553/174436135-de421d55-8af5-4ac4-af0f-cb2d882e8190.png)
 - Save and reboot.
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
