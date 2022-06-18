@@ -29,9 +29,7 @@ With `SysReport` enabled, ACPI tables will be dumped which then can be further a
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump.
-
-Unfortunately, the dump gathered by OpenCore doesn't work in codecgraph which is an important tool for creating Layout-IDs for AppleALC. It generates a schematic of the CODEC dump data which shows the connecters, nodes and routings, etc:
+With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a prizeless asset when [creating Layout-IDs for AppleALC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
 
 ![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 
@@ -207,4 +205,4 @@ This folder contains some .bins from the used system. Might be interesting for d
 
 ## CREDITS
 - dreamwhite for PCILookup
-- Team-Utopia for Debug EFI
+- utopia-team for Debug EFI
