@@ -10,7 +10,7 @@ Do the following to enabled Intel HD 530 in macOS 13:
 	|Key Name                |Value     | Type
 	-------------------------|----------|:----:
 	AAPL,ig-platform-id      | 00001259 | Data
-	device-id                | 12590000 | Data| 
+	device-id                | 12590000 | Data
 	
 	The entry should look like this:</br>![hd530plist](https://user-images.githubusercontent.com/76865553/174105880-d3261daa-cfa4-4732-acaf-5adbc85018a9.png)
 	<details>
@@ -31,11 +31,10 @@ Do the following to enabled Intel HD 530 in macOS 13:
 			</data>
 		</dict>
 	...
-	```
-- Add this Kext [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip).	
-- Save your config and reboot.
-
-</details>
+	```	
+	</details>
+- Add [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip) to EFI/OC/Kexts and config.plist.
+- Save and reboot.
 
 ## Verifying
 Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADecoderChecker.zip) or VideoProc. In this case, iGPU Acceleration is working fine:
