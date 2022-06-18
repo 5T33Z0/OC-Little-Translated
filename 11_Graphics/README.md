@@ -1,5 +1,5 @@
 # Graphics
-Incomplete collection of Intel iGPU related fixes. Work in Progress…
+Collection of GPU and Intel iGPU related guides and fixes not covered in the OpenCore Install Guide.
 
 **TABLE of CONTENTS**
 
