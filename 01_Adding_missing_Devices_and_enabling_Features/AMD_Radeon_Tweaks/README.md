@@ -175,16 +175,16 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 - Set it to "Dictionary"
 - Double Click its name and paste the PCI path
 - Create a new child
-	- **Type**: String
 	- **Name**: `fb_name`
-	- **Value**: select the FB namer for your GPU model from the list below:
+	- **Type**: String
+	- **Value**: select the corresponding FB name for your GPU from the list below:
 		- **RX6900** &rarr; `Carswell`
 		- **RX6800** &rarr; `Belknap`
  		- **RX6600/XT** &rarr; `Henbury`
 		- **RX5700** &rarr; `Adder`
 		- **RX5500** &rarr; `Python`
 		- **RX570/580** &rarr; `Orinoco`
-	- In my case, I use `Orinoco` since I have a RX 580:</br>![](/Users/steezonics/Desktop/DevPropsnu01.png)
+	- In my case, I use `Orinoco` since I have a RX 580:</br>![](/Users/steezonics/Desktop/FBNamenu.png)
 - Save and reboot.
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
