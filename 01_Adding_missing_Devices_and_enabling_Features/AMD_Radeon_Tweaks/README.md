@@ -171,23 +171,21 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 - For NAVI Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
 - Disable Whatevergreen.kext
 - Disable boot-arg agdpmod=pikera
-- Under `DeviceProperties/Add` create a new Child
+- Under `DeviceProperties/Add` create a new child
 - Set it to "Dictionary"
-- Double Click its name and paste the PCI path:</br>![DevProps01](https://user-images.githubusercontent.com/76865553/174430804-b750e59a-46c7-4f38-aa0f-60977500b976.png)
+- Double Click its name and paste the PCI path
 - Create a new child
 	- **Type**: String
-	- **Name**: @0,name
-	- **Value**: select the one for your GPU model from the list below:
-		- **RX6900** &rarr; `ATY,Carswell`
-		- **RX6800** &rarr; `ATY,Belknap`
- 		- **RX6600/XT** &rarr; `ATY,Henbury`
-		- **RX5700** &rarr; `ATY,Adder`
-		- **RX5500** &rarr; `ATY,Python`
-		- **RX570/580** &rarr; `ATY,Orinoco`
-	- In this example, we use ATI,Henbury (without empty spaces):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
+	- **Name**: `fb_name`
+	- **Value**: select the FB namer for your GPU model from the list below:
+		- **RX6900** &rarr; `Carswell`
+		- **RX6800** &rarr; `Belknap`
+ 		- **RX6600/XT** &rarr; `Henbury`
+		- **RX5700** &rarr; `Adder`
+		- **RX5500** &rarr; `Python`
+		- **RX570/580** &rarr; `Orinoco`
+	- In my case, I use `Orinoco` since I have a RX 580:</br>![](/Users/steezonics/Desktop/DevPropsnu01.png)
 - Save and reboot.
-
-**Source**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
 
