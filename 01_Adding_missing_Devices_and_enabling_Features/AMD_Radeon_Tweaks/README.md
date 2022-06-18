@@ -156,7 +156,9 @@ Scope (\_SB)
 5. Save your config, reboot and run some benchmark tests for comparison.
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
-With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
+With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
+
+:warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
 
 #### Finding the PCIe path
 - Run Hackintool
