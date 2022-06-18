@@ -13,7 +13,8 @@ This chapter contains two approaches for improving the performance of AMD Radeon
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
 
-Contents of `SSDT-NAVI.aml`:
+<details>
+<summary>Contents of <strong>SSDT-NAVI.aml</strong> (click to reveal)</summary>
 
 ```swift
 External (_SB_.PCI0, DeviceObj)
@@ -129,6 +130,7 @@ Scope (\_SB)
     }
 }
 ```
+</details>
 
 ## Method 2: Using AMD Radeon Patches by mattystonie
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed.
@@ -153,7 +155,7 @@ Scope (\_SB)
 	```
 5. Save your config, reboot and run some benchmark tests for comparison.
 
-## Method 3: Injecting AMD Framebuffers via `DeviceProperties`
+## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
 
 #### Finding the PCIe path
