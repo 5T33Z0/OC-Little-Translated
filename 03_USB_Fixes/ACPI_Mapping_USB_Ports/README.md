@@ -375,3 +375,7 @@ Once you are done with your port mapping activities, do the following:
 </details>
 
 **Good Luck!**
+
+## Credits
+- Pikeralpha for [discovering the method](https://pikeralpha.wordpress.com/2016/07/13/simple-skylake-usb-fix-no-kexts-required/)
+- Apfelnico and N0b0dy from hackintosh-forum.de for explanations
