@@ -1,4 +1,5 @@
 # Intel iGPU Fixes
+
 Incomplete collection of Intel iGPU related fixes. For general configuration of Intel iGPUs, please refer to the corresponding section of the OpenCore Install Guide for your CPU. For in-depth explanations check Dortania's [Intel iGPU Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/#getting-started) Guide.
 
 ## Table of Contents

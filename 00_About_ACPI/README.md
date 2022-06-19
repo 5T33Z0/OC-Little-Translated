@@ -845,3 +845,6 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
   Item 2
             path    <SSDT-XXXX-2.aml>
   ```
+
+## Credits & Resources
+- [ASL Tutorial PDF](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf) by acpica.org
