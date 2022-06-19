@@ -9,13 +9,12 @@ Do the following to enabled Intel HD 530 in macOS 13:
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add or modify the following Keys:
-	
 	|Key Name                |Value     | Type
 	-------------------------|----------|:----:
 	AAPL,ig-platform-id      | 00001259 | Data
 	device-id                | 12590000 | Data
-	
-	The entry should look like this:</br>![hd530plist](https://user-images.githubusercontent.com/76865553/174105880-d3261daa-cfa4-4732-acaf-5adbc85018a9.png)
+
+The entry should look like this:</br>![hd530plist](https://user-images.githubusercontent.com/76865553/174105880-d3261daa-cfa4-4732-acaf-5adbc85018a9.png)
 	<details>
 	<summary><strong>Raw Text</strong> (click to reveal)</summary>
 	
