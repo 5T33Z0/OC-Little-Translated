@@ -5,37 +5,14 @@ Do the following to enabled Intel HD 530 in macOS 13:
 
 - Download the latest version of [Lilu](https://dortania.github.io/builds/?product=Lilu&viewall=true) and this special build of [Whatevergreen](https://github.com/acidanthera/WhateverGreen/actions/runs/2495481119) 
 - Download and unzip [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip)
-- Add them to your EFI/OC/Kexts folder and config.plist.
+- Add them to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add or modify the following Keys:
-	
 	|Key Name                |Value     | Type
 	-------------------------|----------|:----:
 	AAPL,ig-platform-id      | 00001259 | Data
 	device-id                | 12590000 | Data
-	
-	The entry should look like this:</br>![hd530plist](https://user-images.githubusercontent.com/76865553/174105880-d3261daa-cfa4-4732-acaf-5adbc85018a9.png)
-	<details>
-	<summary><strong>Raw Text</strong> (click to reveal)</summary>
-	
-	```swift
-	<key>Add</key>
-	<dict>
-		<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-		<dict>
-			<key>AAPL,ig-platform-id</key>
-			<data>
-			AAASWQ==
-			</data>
-			<key>device-id</key>
-			<data>
-			ElkAAA==
-			</data>
-		</dict>
-	...
-	```	
-	</details>
 - Save and reboot
 
 ## Verifying
