@@ -1,5 +1,32 @@
 # USB port mapping via ACPI (macOS 11.3+)
->**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work with macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
+
+>**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
+
+- [Background](#background)
+- [Approach](#approach)
+- [Preparations](#preparations)
+	- [Required Tools](#required-tools)
+	- [Dumping ACPI Tables](#dumping-acpi-tables)
+- [Finding and dropping the original USB port table](#finding-and-dropping-the-original-usb-port-table)
+	- [Intel Skylake and newer CPUs](#intel-skylake-and-newer-cpus)
+	- [Intel Broadwell and older CPUs](#intel-broadwell-and-older-cpus)
+	- [Adding a delete rule to config.plist](#adding-a-delete-rule-to-configplist)
+- [Preparing the replacement SSDT](#preparing-the-replacement-ssdt)
+	- [Modifying the original USB Table](#modifying-the-original-usb-table)
+		- [Adding `Arg1` to `GUPC`](#adding-arg1-to-gupc)
+		- [Deleting the existing `_UPC` method](#deleting-the-existing-_upc-method)
+		- [Adding the new `_UPC` method](#adding-the-new-_upc-method)
+- [Mapping the ports (finally)](#mapping-the-ports-finally)
+	- [How USB is structured in ACPI](#how-usb-is-structured-in-acpi)
+	- [USB Port Types](#usb-port-types)
+	- [USB Port Names](#usb-port-names)
+	- [Port mapping options](#port-mapping-options)
+		- [Option A: Mapping ports based on a known configuration](#option-a-mapping-ports-based-on-a-known-configuration)
+		- [OPTION B: Mapping Ports of an unknown configuration](#option-b-mapping-ports-of-an-unknown-configuration)
+			- [Gathering information about USB Ports](#gathering-information-about-usb-ports)
+	- [Assigning Physical Location of Device (`_PLD`)](#assigning-physical-location-of-device-_pld)
+- [Wrapping up and testing](#wrapping-up-and-testing)
+- [Credits](#credits)
 
 ## Background
 Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
@@ -15,8 +42,6 @@ In order to build our own USB Port map as SSDT, we will do the following:
 The method presented here is a slightly modified version of a guide by "Apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
 I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
-
-<details><summary><strong>Preparations</strong> (click to reveal)</summary>
 
 ## Preparations
 
@@ -37,10 +62,8 @@ There are various ways to dump ACPI Tables from your BIOS:
 
 - Using **Clover** (easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
 - Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
-</details>
-<details><summary><strong>Dropping the original USB table</strong> (click to reveal)</summary>
 
-## Finding the ports
+## Finding and dropping the original USB port table
 ### Intel Skylake and newer CPUs
 Have a look into Clover's "ACPI/origin" folder. In there you will find a lot of ACPI tables. We are interested in **SSDT-xxxx.aml** files. Find the one which includes code like this:
 
@@ -59,7 +82,7 @@ ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapp
 	
 As you can see, the `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. So does the `EHC1` device (ports `PRT0` to `PRT7`). `EHC2` only contains 6 Ports (`PRT8` to `PRTD`). 
 
-If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not beeing detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
+If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not being detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
 **NOTE**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
 
@@ -78,17 +101,15 @@ In order to delete (or drop) the original table during boot and replace it with 
 6. Save the config.
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
-</details>
-<details><summary><strong>Preparing the replacement SSDT</strong> (click to reveal)</summary>
 
 ## Preparing the replacement SSDT
 Now that we have found the SSDT with the original USB port declarations, we can start modifying them. Almost. We still need more details, though…
 
-### Modifying the orginal USB Table
+### Modifying the original USB Table
 In general, two methods are relevant for declaring USB ports:
  
 1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)): defines the type of port and it's state (enabled/disabled)
-2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)): defines the location of the pysical port and its properties. 
+2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)): defines the location of the physical port and its properties. 
 
 Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (`RHUB`).
 
@@ -164,11 +185,9 @@ Which looks like this:
 ![New_UPC](https://user-images.githubusercontent.com/76865553/137521717-b747a017-f9d1-4189-a6cd-0e77a7475d9d.png)
 
 Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/USB 3.0 Type A. Let's save it as `SSDT-PORTS_start.aml`. But we are not done yet, sorry.
-</details>
-<details><summary><strong>Mapping the Ports</strong> (click to reveal)</summary>
 
 ## Mapping the ports (finally)
-Next, we need to figure out how the ports are attached to actualy physical USB connectors.
+Next, we need to figure out how the ports are attached to actually physical USB connectors.
 
 ### How USB is structured in ACPI
 When it comes to USB, there is a Root Hub (RHUB) which defines ports. But a port can also function as Hub itself (Integrated Hub), as you can see in this illustration:
@@ -355,8 +374,6 @@ Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
 })
 ```
 Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
-</details>
-<details><summary><strong>Wrapping up and testing</strong> (click to reveal)</summary>
 
 ## Wrapping up and testing
 Once you are done with your port mapping activities, do the following:
@@ -372,7 +389,6 @@ Once you are done with your port mapping activities, do the following:
 - Test the ports with macOS and your other Operating systems.
 - If it works, Congrats! 
 - Copy the .aml and your config.plist back to the EFI folder on the hard disk.
-</details>
 
 **Good Luck!**
 
