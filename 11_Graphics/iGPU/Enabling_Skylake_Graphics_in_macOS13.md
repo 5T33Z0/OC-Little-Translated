@@ -5,7 +5,7 @@ Do the following to enabled Intel HD 530 in macOS 13:
 
 - Download the latest version of [Lilu](https://dortania.github.io/builds/?product=Lilu&viewall=true) and this special build of [Whatevergreen](https://github.com/acidanthera/WhateverGreen/actions/runs/2495481119) 
 - Download and unzip [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip)
-- Add them to your EFI/OC/Kexts folder and config.plist.
+- Add them to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add or modify the following Keys:
