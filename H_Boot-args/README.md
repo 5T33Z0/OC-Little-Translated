@@ -30,7 +30,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 ### Network-specific boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
-**`dk.e1000=0`/`e1000=0`**|Prohibits `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from attaching the Intel I225-V Ethernet controller used on higher end Comet Lake boards, so Apple's I225 kext driver is used instead. This is optional since most boards with an I225-V NIC are compatible with the DEXT driver. It may be required on Gigabyte boards and others, which can only use the kext driver, as the DEXT driver causes hangs. For macOS 12.3 and newer, use `e1000=0`. You can use both boot-args at the same time in case you are running both macOS Big Sur and Monterey on your system.
+**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and use `AppleIntelI210Ethernet.kext` instead. This is optional since most boards with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Venture, since the .kext version was removed from the `IONetworkingFamily.kext` located under /S/L/E/!
 
 ### Other useful boot arguments
 |Boot-arg|Description|
