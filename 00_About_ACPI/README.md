@@ -847,4 +847,4 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
   ```
 
 ## Credits & Resources
-- [ASL Tutorial PDF](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf) by acpica.org
+- ASL Tutorial by acpica.org ([PDF](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
