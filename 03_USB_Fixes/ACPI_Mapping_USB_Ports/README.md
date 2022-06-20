@@ -1,6 +1,6 @@
 # USB port mapping via ACPI (macOS 11.3+)
 
->**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it works for everybody – and I cannot and will nor fix your SSDTs!
+>**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it works for everybody – and I cannot and will not fix your SSDTs!
 
 **TABLE of CONTENTS**
 
