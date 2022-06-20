@@ -52,7 +52,7 @@ I broke it down in smaller sections so you won't be overwhelmed by a seemingly e
 - [**maciASL**](https://github.com/acidanthera/MaciASL) or [**QtiASL**](https://github.com/ic005k/QtiASL) for editing `.aml` files.
 - [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
-- [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Mapping_USB_in_ACPI/Example_Files) (for following along)
+- [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports/Example_Files#readme) (for following along)
 - FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
 - USB 2.0 Flash Drive (optional, also for probing Ports).
 - Your mainboard manual with a schematic listing all its ports and USB headers
