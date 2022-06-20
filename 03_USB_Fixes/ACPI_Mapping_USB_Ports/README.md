@@ -168,7 +168,7 @@ Repeat this step 23 more times. For `USR1` and `USR2` we can set `GUPC` to `(Zer
 
 ![USR](https://user-images.githubusercontent.com/76865553/137521318-60b2a97f-8e7a-4489-80cb-fa040631a947.png)
 
-Once all `_UPC` methods are deleted from the rest of the ports, there should be no more compilation errors:
+Once all `_UPC` methods are deleted from the rest of the ports, there should be no more compiler errors:
 
 ![No_errors](https://user-images.githubusercontent.com/76865553/137521582-8b901345-ade2-47eb-9388-321b7cc46df1.png)
 
@@ -375,7 +375,7 @@ Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
         PLD_HorizontalOffset   = 0x0)
 })
 ```
-Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
+Among all these rather unnecessary properties, "Ejectable" might be useable. You want to make sure that internally connected USB ports, for Bluetooth for example are not ejectable. Otherwise you have to power cycle (aka reboot) your system to enable it again. Since modifying `_PLD` won't be covered in this guide, please refer to to the ACPI specifications for [**`_PLD`**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)
 
 ## Wrapping up and testing
 Once you are done with your port mapping activities, do the following:
