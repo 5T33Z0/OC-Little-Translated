@@ -1,6 +1,6 @@
 ## OpenCore EFI Upload Checklist
 
-Before sharing your OpenCore EFI with the would, you should check the following things in your `config.plist` and correct them: 
+Before sharing your OpenCore EFI and config.plist with the world, you should work through the following check list: 
 
 - `ACPI/Add` Section: 
 	- Add proper Comments!
