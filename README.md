@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.2-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.06.19-blueviolet.svg)</br>![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.2-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.06.20-blueviolet.svg)</br>![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## ABOUT
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
@@ -52,9 +52,9 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 * [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
 * [**Compiling slimmed-down variants of Kexts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/J_Compiling_Kexts#readme)
 * [**Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#readme)
-* [**List of Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
+* [**OpenCore EFI Upload Checklist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/M_EFI_Upload_Chklst#readme)
 * [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
-
+* [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
 
 ## CONTRIBUTIONS
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
