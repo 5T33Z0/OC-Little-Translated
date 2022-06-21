@@ -630,9 +630,9 @@ TODO…
 ## IX. Creating a PinConfig 
 Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
 
-"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. For info on how to extract verbs from the Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
+"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. If you're interested in the tedious process of extracting verbs from a Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
-Luckily for us, we can use **PinConfigurator** to extract the Verbs from the Codec dump automatically. 
+Luckily for us, we can use **PinConfigurator** to extract Verbs from the Codec dump automatically insteas and also apply corrections to them easily.
 
 ⚠️ Make sure that your `PinConfig` contains ***all*** the Input and Output Nodes (Mixers/Switches are irrelevant) you are referring to in the `PathMap` so the routing is coherent. If you are referencing a node in a path which doesn't exist (in the PinConfig) then there will be no sound for this path. On the other hand, you can have more Nodes in the PinConfig than you are actually assigning in the PathMap – they just won't be available/visible in System Preferences as Input/Output sources.
 
