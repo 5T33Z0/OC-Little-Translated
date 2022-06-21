@@ -6,9 +6,8 @@ With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped]
 Do the following to enabled Intel HD 530 on-board graphics in macOS 13: 
 
 - Download and unzip the latest version of [Lilu](https://dortania.github.io/builds/?product=Lilu&viewall=true)
-- [Download](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13/WhateverGreen-1.6.0-RELEASE.zip?raw=true) and unzip this specific build of Whatevergreen. It's from a different [branch](https://github.com/acidanthera/WhateverGreen/actions/runs/2495481119) of the Whatevergreen tree, which supports Skylake spoofing.
-- Download and unzip [SKLAsKBLGraphicsInfo.kext](https://github.com/Lorys89/OC-Little-Translated/raw/main/11_Graphics/iGPU/SKLAsKBLGraphicsInfo.kext.zip)
-- Add them to your `EFI/OC/Kexts` folder and config.plist.
+- [Download](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13/WhateverGreen-1.6.0-RELEASE.zip?raw=true) and unzip this specific build of Whatevergreen. It's from a different [branch](https://github.com/acidanthera/WhateverGreen/actions/runs/2525559960) of the Whatevergreen tree, which supports Skylake spoofing.
+- Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add or modify the following Keys ([Plist Entry](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Plists/OC_SKL2KBL_Ventura.plist)):
@@ -24,6 +23,7 @@ Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADe
 ![videoproc_HD530](https://user-images.githubusercontent.com/76865553/174106261-050c342d-66f9-4f98-b63c-c4bbea3f7f28.png)
 
 ## CREDITS
+- The previously used, additional `SKLAsKBLGraphicsInfo.kext` is no longer required
 - PMheart for the Patch 
 - Acidanthera for OpenCore, Lilu and Whatevergreen
 - Lorys89 for SKLAsKBLGraphicsInfo.kext
