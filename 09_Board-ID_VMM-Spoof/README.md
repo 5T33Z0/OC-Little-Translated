@@ -46,16 +46,14 @@ The patching consists of two stages:
 1. Skipping the Board-ID checks and rerouting the Hardware Board-ID to OpenCore (Booter Patches).
 2. In the 2nd stage, Kernel patches are used to make Update Servers believe that macOS Monterey is running as a Virtual Machine with a supported Board-ID.
 
-I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them.
-
-The attached plist contains these patches to make this work and a few more.
+I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them. The attached plist contains these patches to make this work and a few more.
 
 ## Applying the Patches
 :warning: Before applying these patches, make sure you have a working backup of your EFI stored on a FAT32 formatted USB stick to boot your PC from just in case something goes wrong!
 
-- Download the attached .plist
+- [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/09_Board-ID_VMM-Spoof/BoardIDSkip+VMMPatch.plist.zip?raw=true) and unzip the attached .plist
 - Open it with a plist editor
-- Copy the patches located under Booter > Patch over to your OpenCore config to the same section.
+- Copy the patches located under Booter/Patch over to your OpenCore config to the same section.
 - Do the same for the Kernel Patches. Enable additional patches if required (SurPlus patches for Sandy Bridge for example).
 - Optional: add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
 - Save the config
