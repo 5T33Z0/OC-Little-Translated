@@ -3,7 +3,7 @@
 
 With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated graphics, you need to spoof Kaby Lake Framebuffers. The example below is from an i7 6700K.
 
-Do the following to enabled Intel HD 530 in macOS 13: 
+Do the following to enabled Intel HD 530 on-board graphics in macOS 13: 
 
 - Download and unzip the latest version of [Lilu](https://dortania.github.io/builds/?product=Lilu&viewall=true)
 - [Download](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/WhateverGreen-1.6.0-RELEASE.zip?raw=true) and unzip this specific build of Whatevergreen. It's from a different [branch](https://github.com/acidanthera/WhateverGreen/actions/runs/2495481119) of the Whatevergreen tree, which supports Skylake spoofing.
@@ -24,5 +24,6 @@ Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADe
 ![videoproc_HD530](https://user-images.githubusercontent.com/76865553/174106261-050c342d-66f9-4f98-b63c-c4bbea3f7f28.png)
 
 ## CREDITS
+- PMheart for the Patch 
 - Acidanthera for OpenCore and kexts
 - Cyberdevs for the [settings](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2785675)
