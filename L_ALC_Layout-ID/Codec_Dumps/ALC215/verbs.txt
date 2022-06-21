@@ -1,0 +1,38 @@
+
+Verbs from File: "codec_dump.txt"
+
+Codec: Realtek ALC215   Address: 0   DevID: 283902485 (0x10EC0215)
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Original Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+18 (0x12) B7A60130   In  Mic In             Other Digital       Fixed           Other    Mobile Lid-Inside  Unknown   3  0  -     01271C30 01271D01 01271EA6 01271FB7
+19 (0x13) 40000000   Out Line Out           Unknown             No Connection   External N/A                Unknown   0  0  -     01371C00 01371D00 01371E00 01371F40
+20 (0x14) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  0x2   01471CF0 01471D11 01471E11 01471F41 01470C02
+22 (0x16) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01671CF0 01671D11 01671E11 01671F41
+23 (0x17) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  -     01771C10 01771D01 01771E17 01771F90
+24 (0x18) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01871CF0 01871D11 01871E11 01871F41
+25 (0x19) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01971CF0 01971D11 01971E11 01971F41
+26 (0x1A) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01A71CF0 01A71D11 01A71E11 01A71F41
+27 (0x1B) 03A11040   In  Mic In             1/8" Stereo/Mono    Jack            External Left               Black     4  0  0x2   01B71C40 01B71D10 01B71EA1 01B71F03 01B70C02
+29 (0x1D) 4067992D   Out Modem Line Side    Other Analog        No Connection   External N/A                Pink      2  13 -     01D71C2D 01D71D99 01D71E67 01D71F40
+30 (0x1E) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01E71CF0 01E71D11 01E71E11 01E71F41
+33 (0x21) 03211020   Out HP Out             1/8" Stereo/Mono    Jack            External Left               Black     2  0  0x2   02171C20 02171D10 02171E21 02171F03 02170C02
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NID       PinDefault     Device             Connector           Port            Location                    Color     G  P  EAPD  Modified Verbs
+------------------------------------------------------------------------------------------------------------------------------------------------
+19 (0x13) 40000000   Out Line Out           Unknown             No Connection   External N/A                Unknown   0  0  -     01371C00 01371D00 01371E00 01371F40
+23 (0x17) 90170110   Out Speaker            Other Analog        Fixed           Internal N/A                Unknown   1  0  -     01771C10 01771D01 01771E17 01771F90
+33 (0x21) 03211020   Out HP Out             1/8" Stereo/Mono    Jack            External Left               Black     2  0  0x2   02171C20 02171D10 02171E21 02171F03 02170C02
+29 (0x1D) 4067992D   Out Modem Line Side    Other Analog        No Connection   External N/A                Pink      2  13 -     01D71C2D 01D71D99 01D71E67 01D71F40
+18 (0x12) B7A60130   In  Mic In             Other Digital       Fixed           Other    Mobile Lid-Inside  Unknown   3  0  -     01271C30 01271D01 01271EA6 01271FB7
+27 (0x1B) 03A11040   In  Mic In             1/8" Stereo/Mono    Jack            External Left               Black     4  0  0x2   01B71C40 01B71D10 01B71EA1 01B71F03 01B70C02
+20 (0x14) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  0x2   01471CF0 01471D11 01471E11 01471F41 01470C02
+22 (0x16) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01671CF0 01671D11 01671E11 01671F41
+24 (0x18) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01871CF0 01871D11 01871E11 01871F41
+25 (0x19) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01971CF0 01971D11 01971E11 01971F41
+26 (0x1A) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01A71CF0 01A71D11 01A71E11 01A71F41
+30 (0x1E) 411111F0   Out Speaker            1/8" Stereo/Mono    No Connection   External Rear               Black     15 0  -     01E71CF0 01E71D11 01E71E11 01E71F41
+------------------------------------------------------------------------------------------------------------------------------------------------
+

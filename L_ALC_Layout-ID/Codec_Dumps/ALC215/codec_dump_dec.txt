@@ -1,0 +1,286 @@
+Codec: Realtek ALC215
+Address: 0
+AFG Function Id: 1 (unsol 1)
+Vendor Id: 283902485
+Subsystem Id: 271059355
+Revision Id: 1048578
+No Modem Function Group found
+Default PCM:
+    rates [1376]: 44100 48000 96000 192000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+Default Amp-In caps: N/A
+Default Amp-Out caps: N/A
+State of AFG node 1:
+  Power states:  D0 D1 D2 D3 D3cold CLKSTOP EPSS
+  Power: setting=D0, actual=D0
+GPIO: io=3, o=0, i=0, unsolicited=1, wake=0
+  IO[0]: enable=0, dir=0, wake=0, sticky=0, data=0, unsol=0
+  IO[1]: enable=0, dir=0, wake=0, sticky=0, data=0, unsol=0
+  IO[2]: enable=0, dir=0, wake=0, sticky=0, data=0, unsol=0
+Node 2 [Audio Output] wcaps 1053: Stereo Amp-Out
+  Control: name="Headphone Playback Volume", index=0, device=0
+    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  Device: name="ALC215 Analog", type="Audio", device=0
+  Amp-Out caps: ofs=87, nsteps=87, stepsize=2, mute=0
+  Amp-Out vals:  [0 0]
+  Converter: stream=0, channel=0
+  PCM:
+    rates [64]: 48000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 3 [Audio Output] wcaps 1053: Stereo Amp-Out
+  Control: name="Speaker Playback Volume", index=0, device=0
+    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  Amp-Out caps: ofs=87, nsteps=87, stepsize=2, mute=0
+  Amp-Out vals:  [60 60]
+  Converter: stream=0, channel=0
+  PCM:
+    rates [64]: 48000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 4 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 5 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 6 [Audio Output] wcaps 1041: Stereo
+  Converter: stream=0, channel=0
+  PCM:
+    rates [64]: 48000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 7 [Audio Input] wcaps 1049883: Stereo Amp-In
+  Amp-In caps: ofs=23, nsteps=63, stepsize=2, mute=1
+  Amp-In vals:  [151 151]
+  Converter: stream=0, channel=0
+  SDI-Select: 0
+  PCM:
+    rates [64]: 48000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 1
+     36
+Node 8 [Audio Input] wcaps 1049883: Stereo Amp-In
+  Control: name="Capture Volume", index=0, device=0
+    ControlAmp: chs=3, dir=In, idx=0, ofs=0
+  Control: name="Capture Switch", index=0, device=0
+    ControlAmp: chs=3, dir=In, idx=0, ofs=0
+  Device: name="ALC215 Analog", type="Audio", device=0
+  Amp-In caps: ofs=23, nsteps=63, stepsize=2, mute=1
+  Amp-In vals:  [39 39]
+  Converter: stream=0, channel=0
+  SDI-Select: 0
+  PCM:
+    rates [1376]: 44100 48000 96000 192000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 1
+     35
+Node 9 [Audio Input] wcaps 1049883: Stereo Amp-In
+  Amp-In caps: ofs=23, nsteps=63, stepsize=2, mute=1
+  Amp-In vals:  [151 151]
+  Converter: stream=0, channel=0
+  SDI-Select: 0
+  PCM:
+    rates [1376]: 44100 48000 96000 192000
+    bits [14]: 16 20 24
+    formats [1]: PCM
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 1
+     34
+Node 10 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 11 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 12 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 13 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 14 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 15 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 16 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 17 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 18 [Pin Complex] wcaps 4195339: Stereo Amp-In
+  Control: name="Internal Mic Boost Volume", index=0, device=0
+    ControlAmp: chs=3, dir=In, idx=0, ofs=0
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Pincap 32: IN
+  Pin Default 3081109808: [Fixed] Mic at Oth Mobile-In
+    Conn = Digital, Color = Unknown
+    DefAssociation = 3, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 32: IN
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 19 [Pin Complex] wcaps 4195339: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Pincap 32: IN
+  Pin Default 1073741824: [N/A] Line Out at Ext N/A
+    Conn = Unknown, Color = Unknown
+    DefAssociation = 0, Sequence = 0
+  Pin-ctls: 0:
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 20 [Pin Complex] wcaps 4195725: Stereo Amp-Out
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [128 128]
+  Pincap 65556: OUT EAPD Detect
+  EAPD 2: EAPD
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 0:
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 1
+     2
+Node 21 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 22 [Pin Complex] wcaps 4195725: Stereo Amp-Out
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [128 128]
+  Pincap 28: OUT HP Detect
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 0:
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 2
+     2* 3
+Node 23 [Pin Complex] wcaps 4195725: Stereo Amp-Out
+  Control: name="Speaker Playback Switch", index=0, device=0
+    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [0 0]
+  Pincap 28: OUT HP Detect
+  Pin Default 2417426704: [Fixed] Speaker at Int N/A
+    Conn = Analog, Color = Unknown
+    DefAssociation = 1, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 3
+     2 3* 6
+Node 24 [Pin Complex] wcaps 4195467: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Pincap 36: IN Detect
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 0:
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 25 [Pin Complex] wcaps 4195467: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Pincap 14116: IN Detect
+    Vref caps: HIZ 50 GRD 80 100
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 32: IN VREF_HIZ
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 26 [Pin Complex] wcaps 4195467: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Pincap 14116: IN Detect
+    Vref caps: HIZ 50 GRD 80 100
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 0: VREF_HIZ
+  Unsolicited: tag=00, enabled=0
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 27 [Pin Complex] wcaps 4195727: Stereo Amp-In Amp-Out
+  Control: name="Mic Boost Volume", index=0, device=0
+    ControlAmp: chs=3, dir=In, idx=0, ofs=0
+  Amp-In caps: ofs=0, nsteps=3, stepsize=39, mute=0
+  Amp-In vals:  [0 0]
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [128 128]
+  Pincap 79668: IN OUT EAPD Detect
+    Vref caps: HIZ 50 GRD 80 100
+  EAPD 2: EAPD
+  Pin Default 60887104: [Jack] Mic at Ext Left
+    Conn = 1/8, Color = Black
+    DefAssociation = 4, Sequence = 0
+  Pin-ctls: 36: IN VREF_80
+  Unsolicited: tag=02, enabled=1
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 2
+     2* 3
+Node 28 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 29 [Pin Complex] wcaps 4195328: Mono
+  Pincap 32: IN
+  Pin Default 1080531245: [N/A] Modem Line at Ext N/A
+    Conn = Analog, Color = Pink
+    DefAssociation = 2, Sequence = 13
+    Misc = NO_PRESENCE
+  Pin-ctls: 32: IN
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+Node 30 [Pin Complex] wcaps 4195585: Stereo
+  Pincap 16: OUT
+  Pin Default 1091637744: [N/A] Speaker at Ext Rear
+    Conn = 1/8, Color = Black
+    DefAssociation = 15, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 1
+     6
+Node 31 [Vendor Defined Widget] wcaps 15728640: Mono
+Node 32 [Vendor Defined Widget] wcaps 15728704: Mono
+  Processing caps: benign=0, ncoeff=142
+Node 33 [Pin Complex] wcaps 4195725: Stereo Amp-Out
+  Control: name="Headphone Playback Switch", index=0, device=0
+    ControlAmp: chs=3, dir=Out, idx=0, ofs=0
+  Amp-Out caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-Out vals:  [128 128]
+  Pincap 65564: OUT HP EAPD Detect
+  EAPD 2: EAPD
+  Pin Default 52498464: [Jack] HP Out at Ext Left
+    Conn = 1/8, Color = Black
+    DefAssociation = 2, Sequence = 0
+  Pin-ctls: 192: OUT HP
+  Unsolicited: tag=01, enabled=1
+  Power states:  D0 D1 D2 D3 EPSS
+  Power: setting=D0, actual=D0
+  Connection: 2
+     2* 3
+Node 34 [Audio Mixer] wcaps 2097419: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-In vals:  [128 128] [128 128] [128 128] [128 128] [128 128]
+  Connection: 5
+     25 26 27 29 19
+Node 35 [Audio Mixer] wcaps 2097419: Stereo Amp-In
+  Amp-In caps: ofs=0, nsteps=0, stepsize=0, mute=1
+  Amp-In vals:  [128 128] [128 128] [128 128] [128 128] [0 0]
+  Connection: 5
+     25 26 27 29 18
+Node 36 [Audio Selector] wcaps 3145985: Stereo
+  Connection: 3
+     18* 19 24
