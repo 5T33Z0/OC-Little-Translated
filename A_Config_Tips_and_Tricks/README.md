@@ -33,7 +33,7 @@ This section contains a small collection of useful tips and tricks for working w
 
 ## OpenCore Troubleshooting Quick Tips
 
-Besides checking the obvious (like Booter Settings and Quirks), check the following Settings:
+Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following Settings:
 
 - `ConnectDrivers` = true
 - `SecureBootModel` = Disabled
