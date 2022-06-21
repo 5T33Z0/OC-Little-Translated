@@ -630,9 +630,9 @@ TODO…
 ## IX. Creating a PinConfig 
 Audio Codecs support various Inputs and Outputs: Internal speakers and a mic (usually on Laptops) as well as Line-Ins and Outs (both analog and digital). These audio sources are injected into macOS by AppleALC as a long sequence of code (or "verbs") which form the so-called `PinConfig`. It's the single most important parameter to get Audio Inputs and Outputs working properly.
 
-"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. Here's a color-coded example showing all the paramaters that form the PinDefault value and their position in the bitmask:
+"Verbs" consist of a combination of 4 components: the Codec's address, Pin Complex Nodes with Control Names, Verb Commands and Verb Data which has to be extracted from the Codec dump, corrected and injected into macOS via AppleALC kext. Here's a color-coded example showing all the paramaters (and their positions in the bitmask) that form the PinDefault value of a Pin Complex Node:
 
-![](/Users/5t33z0/Desktop/PinComplexNodeStructure.png)
+![PinComplexNodeStructure](https://user-images.githubusercontent.com/76865553/174908462-07db8885-9337-4e34-b620-54619c38db06.png)
 
 If you're interested in the tedious process of extracting verbs from a Codec dump *manually*, please refer to Parts 2 and 3 of [EMlyDinEsH's guide](https://osxlatitude.com/forums/topic/1946-complete-applehda-patching-guide/).
 
