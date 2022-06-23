@@ -1,6 +1,6 @@
 # Intel I225-V Ethernet Controller Fix
 > **Affected Boards**: Gigabyte Z490 </br>
-> **Applicable to:** macOS 12 and newer
+> **Required for**: macOS 12 and newer
 
 **TABLE of CONTENTS**
 
