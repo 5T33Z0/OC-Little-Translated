@@ -10,9 +10,11 @@
 - [Troubleshooting](#troubleshooting)
 
 ## About
-The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos. The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver.
+The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos.[^1] The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver.
 
 Apply this fix to re-enable Intenet in macOS Monterey and newer.
+
+[^1]: Check [this thread](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786699) for details.
 
 ## Adding SSDT-I225-V
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS. For macOS Ventura, you also need to inject the .kext version of the AppleIntel210Ethernet driver to make it work.
@@ -40,10 +42,10 @@ macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)| I22
 :--------------|:------:|:-------------:|:--------:|:---------------------:|:--------------------------:
 12.5+ (with SSDT)  | ON     |**OFF**        | **YES**  | **NO / NO**           | **YES / YES**
 12.5+ (stock fw)  | ON     | OFF           | YES      | NO / NO               | **NO / YES**
-11.4 to 11.6.7 | ON     | ON [^1]       | NO       | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
+11.4 to 11.6.7 | ON     | ON [^2]       | NO       | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
 10.15 to 11.3  | OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
 
-[^1]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me but that's what the user reported as working.
+[^2]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me but that's what the user reported as working.
 
 ## Troubleshooting
 
