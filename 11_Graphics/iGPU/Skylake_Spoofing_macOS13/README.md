@@ -5,8 +5,8 @@ With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped]
 
 Do the following to enabled Intel HD 530 on-board graphics in macOS 13: 
 
-- Download and unzip the latest version of [**Lilu**](https://dortania.github.io/builds/?product=Lilu&viewall=true)
-- [**Download**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true) the latest version of Whatevergreen from Dortania's build repo.
+- [**Download**](https://dortania.github.io/builds/?product=Lilu&viewall=true) the latest version of Lilu from Dortania's Build Repo.
+- [**Download**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true) the latest version of Whatevergreen as well.
 - Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
@@ -22,7 +22,7 @@ Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADe
 
 ![videoproc_HD530](https://user-images.githubusercontent.com/76865553/174106261-050c342d-66f9-4f98-b63c-c4bbea3f7f28.png)
 
-## CREDITS
+## NOTES and CREDITS
 - The previously used, additional `SKLAsKBLGraphicsInfo.kext` is no longer required
 - PMheart for the Patch 
 - Acidanthera for OpenCore, Lilu and Whatevergreen
