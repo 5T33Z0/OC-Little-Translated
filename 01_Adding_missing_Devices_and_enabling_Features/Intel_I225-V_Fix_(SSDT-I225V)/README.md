@@ -1,6 +1,6 @@
+![macOS](https://img.shields.io/badge/Applicable_to:-macOS_12+-version.svg) ![macOS](https://img.shields.io/badge/Affected_Mainboard:-Gigabyte_Z490-white.svg)
+
 # Intel I225-V Ethernet Controller Fix
-> **Affected Boards**: Gigabyte Z490 </br>
-> **Required for**: macOS 12 and newer
 
 **TABLE of CONTENTS**
 
