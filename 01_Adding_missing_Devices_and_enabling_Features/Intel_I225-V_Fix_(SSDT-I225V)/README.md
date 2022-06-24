@@ -17,16 +17,16 @@ Apply this fix to re-enable Intenet in macOS Monterey and newer.
 [^1]: Check [this thread](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786699) for details.
 
 ## Adding SSDT-I225-V
-Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS. For macOS Ventura, you also need to inject the .kext version of the AppleIntel210Ethernet driver to make it work.
+Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. For macOS 13, you also need to inject AppleIntel210Ethernet.kext, since it has been removed from the IONetworkingFamily.kext and you can't use the .dext version (unless you flash a modded firmware).
 
-:warning: Before using this SSDT, verify the ACPI path of the I225-V is identical to the one used in your `DSDT` and adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
+:warning: Before deploying this SSDT, verify the ACPI path of the I225-V is identical to the one used in your `DSDT` and adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
 
 **Instructions**:
 
-- Add `SSDT-I225V.aml` to the `EFI/OC/ACPI` folder and config.plist (just drag it into the ACPI/Add section in OCAT)
+- Add `SSDT-I225V.aml` to the `EFI/OC/ACPI` folder and config.plist (OCAT users can just drag it into the ACPI/Add section)
 - macOS 13 only: 
 	- [**Download**](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786214) the `AppleIntel210Ethernet.kext` and unzip it.
-	- Add it to `EFI/OC/Kexts` and config.plist (just drag it into the Kernel/Add section in OCAT)
+	- Add it to `EFI/OC/Kexts` and config.plist (OCAT users can just drag it into the Kernel/Add section)
 	- Change `MinKernel` to `22.0.0` so the AppleIntel210Ethernet.kext is only injected into macOS Ventura!
 - Add boot-arg `dk.e1000=0` (macOS Big Sur) or `e1000=0` (macOS Monterey/Ventura)
 - Apply the correct Settings as shown below
@@ -43,9 +43,10 @@ macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)| I22
 12.5+ (with SSDT)  | ON     |**OFF**        | **YES**  | **NO / NO**           | **YES / YES**
 12.5+ (stock fw)  | ON     | OFF           | YES      | NO / NO               | **NO / YES**
 11.4 to 11.6.7 | ON     | ON [^2]       | NO       | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
-10.15 to 11.3  | OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
+10.15 to 11.3 [^3]| OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
 
 [^2]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me but that's what the user reported as working.
+[^3]: Enabling the I225-V in macOS Catalina requires modified DeviceProperties as well as a Kernel Patch since it's not supported natively. With this, the Controller will be spoofed as an Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the DeviceProperties for anything newer than macOS 11.3!
 
 ## Troubleshooting
 
