@@ -184,7 +184,7 @@ Shown below is `codecdumpdec.svg`, a visual representation of the data inside th
 
 [^3]: This repo contains some more Codec dumps with schematics you can check out.
 
-Form              | Function
+Form/Color        | Function
 ------------------|-----------------------------------------------
 **Triangle**      | Amplifier
 **Blue Ellipse**  | Audio Output
