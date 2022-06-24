@@ -1,6 +1,18 @@
 # Dropping ACPI Tables
 Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover an OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to dump the existing ACPI files from your BIOS/Firmware to be able to look inside them.
 
+**TABLE of CONTENTS**
+
+- [Preparations: Dumping ACPI Tables](#preparations-dumping-acpi-tables)
+- [Method 1: Dropping Tables based on OEM Tabled ID](#method-1-dropping-tables-based-on-oem-tabled-id)
+	- [Verifying that the table has been dropped](#verifying-that-the-table-has-been-dropped)
+- [Method 2: Dropping Tables based on Table Signature](#method-2-dropping-tables-based-on-table-signature)
+	- [Example 1: dropping the `DMAR` Table](#example-1-dropping-the-dmar-table)
+	- [Verifying that the table has been dropped/deleted](#verifying-that-the-table-has-been-droppeddeleted)
+	- [Example 2: replacing a dropped DMAR with a modified one](#example-2-replacing-a-dropped-dmar-with-a-modified-one)
+	- [Modifying a table](#modifying-a-table)
+	- [Verifying that the Table has been replaced](#verifying-that-the-table-has-been-replaced)
+
 ## Preparations: Dumping ACPI Tables
 There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore:
 
@@ -69,7 +81,7 @@ After rebooting, do the following:
 - Put it in the ACPI Folder of OpenCore and add it to your `config.plist`.
 - Save, reboot.
 
-## Verifying that a Table has been replaced
+### Verifying that the Table has been replaced
 - Open maciASL
 - Select "File" > "New from ACPI"
 - Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions:</br>
