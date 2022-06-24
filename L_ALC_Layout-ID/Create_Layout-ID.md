@@ -194,7 +194,7 @@ Form              | Function
 **Rectangle**     | Pin Complex Nodes representing audio sources we can select in system settings (Mic, Line-out, Headphone etc.)
 **Black Lines**   | Default connection (indicated by an asterisk in the Codec_Dump.txt)
 **Dotted Lines**  | Optional connection(s) a Node offers 
-**Blue Lines**    | Info N/A. I guess it's the connection to the output Nodes
+**Blue Lines**    | Connections to the Outputs
 
 ### How to read the schematic
 ⚠️ The schematic is a bit hard to comprehend and interpret because of its structure. It's also misleading: since all the arrows point to the right one might think they represent the signal flow – they don't. So ignore them! Instead, you need to take an approach which follows the signal flow.
