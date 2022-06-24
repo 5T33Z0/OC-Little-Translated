@@ -150,20 +150,18 @@ Now, that we've got the prep work out of the way, we can begin!
 In order to route audio inputs and outputs for macOS, we need to analyze and work with data inside the Codec dump. To make the data easier to work with, we will use codec-graph to generate a schematic of the audio codec which makes routing audio much easier than working solely with the text file.
 
 ### Converting the Codec Dump 
-1. Open the `codec_dump.txt` located in the "Codec-Graph" folder
-2. Delete the line: `AFG Function Id: 0x1 (unsol 1)` &rarr; otherwise the file conversions will fail!
-3. Save the file.
-4. Next, double-click `Convert_Dump`. 
-5. This will start Codec-Graph (and perform an additional hex to decimal conversion)
-6. Follow the on-screen instructions to convert the Codec dump
-7. This creates 3 new files inside the "output" folder:
+1. Enter the Codec-Graph folder
+2. Double-click `Convert_Dump`. 
+3. This will start Codec-Graph (and perform an additional hex to decimal conversion)
+4. Follow the on-screen instructions to convert the Codec dump
+5. This creates 3 new files inside the "output" folder:
 	- **`codec_dump_dec.txt`** &rarr; Codec dump converted from Hex to Decimal. We need it since the data has to be entered in decimals in AppleAlC's .xml files.
 	- **`codecdump.svg`** – Schematic of the Codec.
 	- **`codecdumpdec.svg`** &rarr; Schematic of the Codec converted from hex to decimal. We will work with this primarily. You can open it in the web browser to view it in full size.
-8. Next, run PinConfigurator
-9. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
-10. This will extract the available audio sources from the Codec dump
-11. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
+6. Next, run PinConfigurator
+7. Select "File > Open…" (⌘+O) and open "codec_dump.txt"
+8. This will extract the available audio sources from the Codec dump
+9. Select File > Export > **`verbs.txt`**. It will will be stored on the Desktop automatically. We may need it later.
 
 ### Relevant Codec data
 Amongst other things, the Codec dump text contains the following details:
