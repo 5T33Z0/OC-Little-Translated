@@ -68,6 +68,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX).|`PNP0C09`
 [**SSDT-GPIO**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch)|Enables GPIO device|–
 [**SSDT-HPET**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))|Fixes IRQ conflicts. Required for on-board sound to work|–
+[**SSDT-I225V**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Inte I225-V Ethernet Controller on Gigabyte Boards|–
 [**SSDT-IMEI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms.|`0x00160000`
 [**SSDT-LAN**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-NAVI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AMD_Radeon_Tweaks)|For AMD Navi Cards running in macOS|–
@@ -82,7 +83,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
 #### Cosmetic SSDTs (optional)
-The SSDTs listed below are cosmetic and non-essential. They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides _mimicking the look_ of the I/O registy of the Mac model selected in the SMBIOS/PlatformInfo section:
+The SSDTs listed below are considered cosmetic and non-essential. They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides _mimicking the look_ of the I/O registy of the Mac model selected in the SMBIOS/PlatformInfo section:
 
 > It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
 > 
@@ -90,10 +91,10 @@ The SSDTs listed below are cosmetic and non-essential. They add devices which ar
 
 Basically, any SSDTs which define devices that are not already present in the system's DSDT have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O Registry: if the device in questions contains collapsed sections, they will snap close again as soon as you click on them because no data can be gathered for it.
 
-Nonetheless I included them here for two reasons:
+Nonetheless, I included them here for two reasons:
 
 1. It's your choice to use them or not
-2. For documentary purposes. Sometimes it can be streunous to find out what a device listed in an `.ioreg` file actually is and does. 
+2. For documentary purposes. Sometimes it can be strenuous to find out what a device listed in an `.ioreg` file actually is and does. 
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
