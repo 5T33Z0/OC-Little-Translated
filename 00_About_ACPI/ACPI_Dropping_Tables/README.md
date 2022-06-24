@@ -36,7 +36,7 @@ This method is used to drop tables such as SSDTs and others which have a distinc
 - If you dropped the table successfully, "SSDT (CpuPm)" shouldn't be listed, unless you replaced it with a new table with the same OEM Table ID. If you created your own `SSDT-PM.aml` which is injected by OpenCore, this would be present, since it has the same OEM Table ID.
 
 ## Method 2: Dropping Tables based on Table Signature
-For tables other than SSDTs, the OEM Table ID provided by the vendor isn't a reliable method to detect and drop a table because its OEM Table ID might contain a lot of blanks, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead.
+For tables other than SSDTs, OEM Table ID isn't a reliable source to detect and drop a table by because (based on vendor) the OEM Table IDs may only contain some letters followed by a lot of blanks or underscores, for example `AMI____`. In this case, we use `Table Signature` and `Table Length` instead to clearly identify the table.
 
 ### Example 1: dropping the `DMAR` Table
 
