@@ -398,4 +398,4 @@ Once you are done with your port mapping activities, do the following:
 
 ## Credits
 - Pikeralpha for [discovering the method](https://pikeralpha.wordpress.com/2016/07/13/simple-skylake-usb-fix-no-kexts-required/)
-- Apfelnico and N0b0dy from hackintosh-forum.de for explanations
+- Apfelnico and N0b0dy for the [explanations](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?pageNo=1)
