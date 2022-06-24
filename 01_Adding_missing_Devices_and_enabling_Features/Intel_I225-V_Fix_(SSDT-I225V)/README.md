@@ -46,7 +46,7 @@ macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^2]|
 11.4 to 11.6.7 | ON     | ON [^3]       | NO       | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
 10.15 to 11.3 [^4]| OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
 
-[^2]: Check my guide for [dropping DMAR](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#method-2-dropping-tables-based-on-table-signature)
+[^2]: Check my guide for [dropping ACPI tables](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
 [^3]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me but that's what the user reported as working.
 [^4]: Enabling the I225-V in macOS Catalina requires modified DeviceProperties as well as a Kernel Patch since it's not supported natively. With this, the Controller will be spoofed as an Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the DeviceProperties for anything newer than macOS 11.3!
 
