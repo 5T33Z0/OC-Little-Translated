@@ -17,7 +17,7 @@ Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some feature
 There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore:
 
 - Using **Clover** (the easiest method): Hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a `.zip` file, extract it, put it on a FAT32 formatted USB flash drive and boot from it. The dumped ACPI Tables will be located in: `EFI\CLOVER\ACPI\origin`
-- Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot.
+- Using **OpenCore** (requires the Debug version and a working config): enable Misc > Debug > `SysReport` Quirk. The ACPI Tables will be dumped during next boot. Requires a working config.
 
 ## Method 1: Dropping Tables based on OEM Tabled ID
 This method is used to drop tables such as SSDTs and others which have a distinct OEM Table ID in the header to describe them. In this example we drop `CpuPm`.
