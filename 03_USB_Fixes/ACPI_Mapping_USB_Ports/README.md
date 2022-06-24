@@ -102,6 +102,8 @@ In order to delete (or drop) the original table during boot and replace it with 
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
+**NOTE**: In some cases, the `TableLength` may be required as well to drop the table successfully.
+
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 
 ## Preparing the replacement SSDT
