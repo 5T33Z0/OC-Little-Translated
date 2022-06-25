@@ -2,22 +2,21 @@
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
-- [ACPI Basics](#acpi-basics)
-  - [A brief Introduction to ACPI](#a-brief-introduction-to-acpi)
-    - [What is ACPI?](#what-is-acpi)
-    - [Introduction to ACPI Hotpatching](#introduction-to-acpi-hotpatching)
-    - [Important ACPI Tables for hackintoshing](#important-acpi-tables-for-hackintoshing)
-      - [`DSDT.aml`](#dsdtaml)
-      - [`SSDT-xxxx.aml`](#ssdt-xxxxaml)
-  - [ACPI Renames and Hotpatches](#acpi-renames-and-hotpatches)
-    - [General Patching Guidelines](#general-patching-guidelines)
-    - [ACPI patching in OpenCore](#acpi-patching-in-opencore)
-      - [ACPI Quirks in OpenCore](#acpi-quirks-in-opencore)
-  - [ACPI Source Language (ASL) Basics](#acpi-source-language-asl-basics)
-    - [Preface](#preface)
-    - [ACPI](#acpi)
-    - [Why to prefer SSDTs over a patched DSDT](#why-to-prefer-ssdts-over-a-patched-dsdt)
-    - [ASL](#asl)
+- [A brief Introduction to ACPI](#a-brief-introduction-to-acpi)
+  - [What is ACPI?](#what-is-acpi)
+  - [Introduction to ACPI Hotpatching](#introduction-to-acpi-hotpatching)
+  - [Important ACPI Tables for hackintoshing](#important-acpi-tables-for-hackintoshing)
+    - [`DSDT.aml`](#dsdtaml)
+    - [`SSDT-xxxx.aml`](#ssdt-xxxxaml)
+- [ACPI Renames and Hotpatches](#acpi-renames-and-hotpatches)
+  - [General Patching Guidelines](#general-patching-guidelines)
+  - [ACPI patching in OpenCore](#acpi-patching-in-opencore)
+    - [ACPI Quirks in OpenCore](#acpi-quirks-in-opencore)
+- [ACPI Source Language (ASL) Basics](#acpi-source-language-asl-basics)
+  - [Preface](#preface)
+  - [ACPI](#acpi)
+  - [Why to prefer SSDTs over a patched DSDT](#why-to-prefer-ssdts-over-a-patched-dsdt)
+- [ASL](#asl)
   - [ASL Guidelines](#asl-guidelines)
   - [Common ASL Data Types](#common-asl-data-types)
   - [ASL Variables Definition](#asl-variables-definition)
@@ -25,23 +24,24 @@
   - [ASL Calculation](#asl-calculation)
   - [ASL Logic](#asl-logic)
   - [Defining Methods in ASL](#defining-methods-in-asl)
-  - [ACPI Preset Function](#acpi-preset-function)
-    - [`_OSI` (Operating System Interfaces)](#_osi-operating-system-interfaces)
-    - [`_STA` (Status)](#_sta-status)
-    - [`_CRS` (Current Resource Settings)](#_crs-current-resource-settings)
-  - [ASL flow Control](#asl-flow-control)
-    - [Branch control `If` & `Switch`](#branch-control-if--switch)
-      - [`If`](#if)
-      - [`ElseIf`, `Else`](#elseif-else)
-      - [`Switch`, `Case`, `Default`, `BreakPoint`](#switch-case-default-breakpoint)
-    - [Loop control](#loop-control)
-      - [`While` & `Stall`](#while--stall)
-      - [`For`](#for)
-  - [`External` Quote](#external-quote)
-  - [ASL CondRefOf](#asl-condrefof)
+- [ACPI Preset Functions](#acpi-preset-functions)
+  - [`_OSI` (Operating System Interfaces)](#_osi-operating-system-interfaces)
+  - [`_STA` (Status)](#_sta-status)
+  - [`_CRS` (Current Resource Settings)](#_crs-current-resource-settings)
+- [ASL flow Control](#asl-flow-control)
+  - [Branch control `If` & `Switch`](#branch-control-if--switch)
+    - [`If`](#if)
+    - [`ElseIf`, `Else`](#elseif-else)
+    - [`Switch`, `Case`, `Default`, `BreakPoint`](#switch-case-default-breakpoint)
+  - [Loop control](#loop-control)
+    - [`While` & `Stall`](#while--stall)
+    - [`For`](#for)
+- [`External` Quote](#external-quote)
+- [ASL CondRefOf](#asl-condrefof)
 - [ASL to AML Conversion Table](#asl-to-aml-conversion-table)
 - [SSDT Loading Sequence](#ssdt-loading-sequence)
   - [Examples](#examples)
+- [CREDITS & RESOURCES](#credits--resources)
 </details>
 
 ## A brief Introduction to ACPI
@@ -149,10 +149,10 @@ These issues stem from DSDTs made with Windows support in mind on one hand and A
 
 Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore, *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that's why you should avoid patched DSDTs – especially those from MaLDon/Olarila!
 
-### ASL
+## ASL
 A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines.
 
-## ASL Guidelines
+### ASL Guidelines
 
 1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
 2. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
@@ -245,7 +245,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customized.
 10. Local variables in ASL can accept up to 8 arguments represented by `Local0`~`Local7`. Definitions are not necessary, but should be initialized, in other words, assignment is needed.
 
-## Common ASL Data Types
+### Common ASL Data Types
 
 |    ASL    |
 | :-------: |
@@ -255,7 +255,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 | `Buffer`  |
 | `Package` |
 
-## ASL Variables Definition
+### ASL Variables Definition
 
 - Define Integer:
 
@@ -292,7 +292,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 	It is not necessary to announce its type when defining a variable.
 
-## ASL Assignment
+### ASL Assignment
 
 ```swift
 Store (a,b) /* legacy ASL */
@@ -309,7 +309,7 @@ Store (Local0, Local1)
 Local1 = Local0
 ```
 
-## ASL Calculation
+### ASL Calculation
 
 |  ASL+  |  Legacy ASL|  Examples        
 | :----: | :--------: |:----------------------------------------------------------- |
@@ -329,7 +329,7 @@ Local1 = Local0
 
 Read `ACPI Specification` for more details
 
-## ASL Logic
+### ASL Logic
 
 |  ASL+  |   Legacy ASL  | Examples                                                         |
 | :----: | :-----------: | :-----------------------------------------------------------|
@@ -345,7 +345,7 @@ Read `ACPI Specification` for more details
 
 Only two results from logical calculation - `0` or `1`
 
-## Defining Methods in ASL
+### Defining Methods in ASL
 
 1. Define a Method:
 
@@ -433,13 +433,13 @@ Only two results from logical calculation - `0` or `1`
 
    when one of `TEST` called from `Devx`, another `TEST` will be failed to create `MSTR`.
 
-## ACPI Preset Function
+## ACPI Preset Functions
 
 ### `_OSI` (Operating System Interfaces)
 
-It is easy to acquire the current operating system's name and version when applying `_OSI`. For example, we could apply a patch that is specific to Windows or macOS.
+It is easy to acquire the current operating system's name and version when applying the `_OSI` method. For example, we could apply a patch that is specific to Windows or macOS.
 
-`_OSI` requires a string, the string must be picked from the table below.
+`_OSI` requires a string which must be picked from the table below.
 
 |   OS                         |      String     |
 | :--------------------------: | :-------------: |
@@ -463,13 +463,13 @@ If (_OSI ("Darwin")) /* judge if the current system is macOS */
 
 5 types of bit can be return from `_STA` method, explanations are listed below:
 
-| Bit   | Explanations                           |
-| :-----: | :----------------------------- |
-| Bit [0] | Set if the device is present.                   |
+| Bit     | Explanation                          |
+| :-----: | :----------------------------------- |
+| Bit [0] | Set if the device is present. |
 | Bit [1] | Set if the device is enabled and decoding its resources. |
-| Bit [2] | Set if the device should be shown in the UI.         |
-| Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).            |
-| Bit [4] | Set if the battery is present.             |
+| Bit [2] | Set if the device should be shown in the UI.|
+| Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).|
+| Bit [4] | Set if the battery is present.|
 
 We need to transfer these bits from hexadecimal to binary. `0x0F` transferred to `1111`, meaning enable it(the first four bits); while `Zero` means disable. 
 
@@ -484,7 +484,7 @@ We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the 
 
 ## ASL flow Control
 
-ASL also has its method to control flow.
+ASL also has methods to control flow.
 
 - Switch
   - Case
@@ -639,13 +639,13 @@ Method (SSCN, 0, NotSerialized)
 
 The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the original value.
 
-# ASL to AML Conversion Table
+## ASL to AML Conversion Table
 
-> `ASL` is an abbreviation for ACPI Source Language, i.e. `ACPI Source Code`. `AML` on the other hand is its binary counterpart, the `ACPI Machine Language Binary`– the language computers can understand.
+> `ASL` is an abbreviation for **A**CPI **S**ource **L**anguage, i.e. the ACPI Source Code. `AML` on the other hand is its binary counterpart, the **A**CPI **M**achine **L**anguage – a binary language computers can understand.
 
-The following table can be regarded as the quasi dictionary for translating from ASL to AML. 
+The following table can be regarded as the quasi dictionary for translating ASL to AML and vice versa. 
 
-Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of the "Find" value: `5F44534D` and the "Replace" value `5844534D`. This all seems kind of random at first, but in fact it is not. If you take a look in the binary column, you can see that the underscore "`_`" has a value of "5F" (we omit the leading zeros), "D" has "44", "S" is "3S" and "M" corresponds to "4d" – which equals "`_DSM`" in binary. And binary "58" "44" "53" "4D" equals to "`XDSM`" in ASL. And that's how you can read and translate between ASL and AML and create your own renames, if necessary.
+Here's an Example: the well-known `_DSM` to `XDSM` binary rename consists of the "Find" value: `5F44534D` and the "Replace" value `5844534D`. This all seems kind of random at first, but in fact it is not. If you take a look in the binary column, you can see that the underscore "`_`" has a value of "5F" (we omit the leading zeros), "D" has "44", "S" is "3S" and "M" corresponds to "4d" – which equals "`_DSM`" in binary. And binary "58" "44" "53" "4D" equals to "`XDSM`" in ASL. And that's how you can read and translate between ASL and AML and create your own renames, if necessary.
 
 
 |          ASL           | Binary (AML)|
@@ -805,11 +805,11 @@ Here's an Example: the well-known "`_DSM` to `XDSM`" binary rename consists of t
 |       BANK_FIELD       |   `0x87`    |
 |      DATA_REGION       |   `0x88`    |
 
-# SSDT Loading Sequence
+## SSDT Loading Sequence
 
 Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
 
-## Examples
+### Examples
 
 - **Patch 1**：***SSDT-XXXX-1.aml***
   
@@ -823,7 +823,6 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
       }
   }
   ```
-  
 - **Patch 2**：***SSDT-XXXX-2.aml***
 
   ```swift
@@ -836,7 +835,6 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
        }
     }
   ```
-  
 - SSDT Loading Sequence in `config.plist` under `ACPI/Add`: 
 
   ```XML
@@ -846,6 +844,6 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
             path    <SSDT-XXXX-2.aml>
   ```
 
-## Credits & Resources
+## CREDITS & RESOURCES
 - ACPI [Specifications](https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/)
 - ASL Tutorial by acpica.org ([PDF](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
