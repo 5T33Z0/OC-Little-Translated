@@ -641,7 +641,7 @@ The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XS
 
 ## ASL to AML Conversion Table
 
-> `ASL` is an abbreviation for **A**CPI **S**ource **L**anguage, i.e. the ACPI Source Code. `AML` on the other hand is its binary counterpart, the **A**CPI **M**achine **L**anguage – a binary language computers can understand.
+> `ASL` is an abbreviation for **A**CPI **S**ource **L**anguage, i.e. the ACPI Source Code. `AML` on the other hand is its binary counterpart, the **A**CPI **M**achine **L**anguage – a bytecode language computers can understand.
 
 The following table can be regarded as the quasi dictionary for translating ASL to AML and vice versa. 
 
