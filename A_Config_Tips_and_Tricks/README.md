@@ -1,8 +1,7 @@
 # OpenCore Config Tips and Tricks
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
-<details>
-<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+**TABLE of CONTENTS**
 
 - [OpenCore Troubleshooting Workflow](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#opencore-troubleshooting-quick-tips)</br>
 	- [MinDate / MinVersion settings explained](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver)</br>
