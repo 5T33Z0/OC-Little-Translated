@@ -89,12 +89,12 @@ If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (O
 ### How to disable Single User Mode
 You should deactivate the single user mode for security reasons, because it can be mis-used as a backdoor to bypass the password protection of the Admin account. To do this, enable the following option:
 
-**Misc > Security > DisableSingleUser** = `Yes`
+**Misc/Security/DisableSingleUser** = `Yes`
 
 ### How to disable System Integrity Protection (SIP)
 1. To disable System Integrity Protection, add one of the following values to the config:
 
-   **NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82** > change `csr-active-config` from `00000000`(SIP enabled) to:
+   **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82** &rarr; change `csr-active-config` from `00000000`(SIP enabled) to:
 
    `FF030000` (for High Sierra)</br>
    `FF070000` (for Mojave/Catalina)</br>
@@ -109,7 +109,7 @@ You should deactivate the single user mode for security reasons, because it can 
 
 2. To avoid the need of resetting NVRAM every time after you've changed  the csr value, add the following parameter to the config:
 
-   **NVRAM > Delete > 7C436110-AB2A-4BBB-A880-FE41995C9F82** > `csr-active-config`.
+   **NVRAM/Delete/7C436110-AB2A-4BBB-A880-FE41995C9F82** &rarr; `csr-active-config`.
 
    This deletes the current csr value from the NVRAM on reboot and replaces it with the value stored under "NVRAM > Add…". This is Very useful if you have different macOS installs which use different CSR values.
 
@@ -216,13 +216,16 @@ Otherwise, check if there might be a BIOS update available that fixes general pr
 
 ### Fixing falsely reported OpenCore version
 
-It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater or Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until you delete it. To fix it, do the following:
+It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater or Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until deletion. To fix it, do the following:
 
 - Create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**
 - call it `opencore-version` 
 - Save the config and reboot
-
 After restarting, the correct OC version should be displayed and you can delete the entry again.
+
+Alternatively, you can use Terminal to delete the key (no restart required):
+
+`sudo nvram -d 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version`
 
 ## VII. Prohibit SMBIOS injection in other OSes:
 
