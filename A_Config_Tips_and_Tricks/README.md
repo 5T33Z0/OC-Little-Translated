@@ -24,7 +24,7 @@ This section contains a small collection of useful tips and tricks for working w
 		- [No GUI, automatic boot from default volume](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-the-os-automatically-from-volume-defined-as-default-no-gui)
 		- [Boot macOS automatically, no GUI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#start-macos-automatically-no-gui-fast)
 - VI. [Resolving NVRAM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vi-resolving-issues-with-nvram)
-	- [Fixing falsely reported OpenCore Version ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-correct-falsely-reported-opencore-version)
+	- [Fixing falsely reported OpenCore Version ](#fixing-falsely-reported-opencore-version)
 - VII. [Prohibit SMBIOS Injection into other Operating Systems](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-prohibit-smbios-injection-in-other-oses)
 - VIII. [Exchanging SMBIOS Data between OpenCore and CLover](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#viii-exchanging-smbios-data-between-opencore-and-clover)
 	- [Manual method ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-method)
