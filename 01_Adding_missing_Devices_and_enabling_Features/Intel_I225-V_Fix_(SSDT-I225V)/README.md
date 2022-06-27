@@ -47,7 +47,7 @@ macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^2]|
 10.15 to 11.3 [^4]| OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
 
 [^2]: Check my guide for [dropping ACPI tables](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
-[^3]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me but that's what the user reported as working.
+[^3]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me in regards to enabling the I225-V in macOS but that's what the user reported as working.
 [^4]: Enabling the I225-V in macOS Catalina requires modified DeviceProperties as well as a Kernel Patch since it's not supported natively. With this, the Controller will be spoofed as an Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the DeviceProperties for anything newer than macOS 11.3!
 
 ## Troubleshooting
