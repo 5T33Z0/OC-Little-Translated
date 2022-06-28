@@ -1,5 +1,5 @@
 # Merging all SSDT Hotpatches into one file
-You can use this guide to combine all of your SSDT Hotpatches into one big file. With this approach, you lose all the modularity which indvidual SSDTs provide – either *all* patches are active or *none*.
+You can use this guide to combine all of your SSDT Hotpatches into one big file. With this approach, you lose all the modularity which indvidual SSDTs provide – either *all* patches are active or *none*. You should only consider doing this if all your ACPI tables don't contain any errors and are working correctly.
 
 In my tests, using a combined, unified SSDT slowed down boot times noticeably. It's also harder to troubleshoot errors this way. All in all, I am not a fan of this method but it exist and if you want to use it, this is how it's done.
 
