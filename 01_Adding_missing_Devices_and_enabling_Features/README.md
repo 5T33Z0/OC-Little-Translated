@@ -10,6 +10,11 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 - Patches which rename the original device or controlling method to something else so a replacement SSDT can be written which takes its place and redefines the device or method, to address Sleep and Wake issues or Touchpads working incorrectly.
 - Devices which are disabled for some reason, but macOS needs them to be present in order to boot, like legacy Realtime Clocks (RTC) in newer ACPI variants (300-series chipsets and newer)
 
+### :warning: Don't add SSDTs for known devices
+Sometimes I come across EFI folders by users who inject all the tables Hackintool extracted for them back into the syste. In other words: they inject already known, unchanged, identical tables back into macOS. This is completely unnecessary, tautological and counter-productive – it slows down boot times as well. 
+
+:bulb: You only need to inject SSDTs for unknown devices or feature or in case you need to adjust parameters of devices, features etc. So please: don't inject unchanged tables into the system that you got from the same system in the first place!
+
 ## Properties of Fake ACPI Devices
 
 - **Features**:
