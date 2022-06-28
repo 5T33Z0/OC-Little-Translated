@@ -67,4 +67,4 @@ In cases where you're getting compiler errors like "Existing object has invalid 
 
 ## Credits
 - [ic005k](https://github.com/ic005k) for Xiasl
-- [dreamwhite](https://github.com/dreamwhite/dreamwhite) for the "#include" method and instructions
+- [dreamwhite](https://github.com/dreamwhite/dreamwhite) for the "#include" method and compiler instructions
