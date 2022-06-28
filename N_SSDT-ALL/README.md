@@ -17,12 +17,12 @@ In my tests, using a combined, unified SSDT slowed down boot times noticeably. I
 - Open Preferences
 - Check "Batch decompilation"
 - Open one of the .aml files in the ACPI folder
-- This will batch decompile all the files to `.dsl` automatically:</br>![](/Users/5t33z0/Desktop/xiasl01.png)
+- This will batch decompile all the files to `.dsl` automatically:</br>![xiasl01](https://user-images.githubusercontent.com/76865553/176115267-d5c224ba-58f4-4fb5-a317-d0029e7dc5a1.png)
 
 **NOTE**: If someone knows if maciASL supports batch conversion, please let me knwo.
 
 ## Modifying the .dsl files
-- Delete the `DefinitionBlock` (curly brackets of the 1st level included) from each table:</br>**Before**:</br>![](/Users/5t33z0/Desktop/xiasl02.png)</br>**After**:</br>![](/Users/5t33z0/Desktop/xiasl03.png)
+- Delete the `DefinitionBlock` (curly brackets of the 1st level included) from each table:</br>**Before**:</br>![xiasl02](https://user-images.githubusercontent.com/76865553/176115380-29d3cd77-eff8-45f0-863a-e22b25f0f8a7.png)</br>**After**:</br>![xiasl03](https://user-images.githubusercontent.com/76865553/176115472-5285e051-bf6b-4cf7-b6ec-533fef2c6136.png)
 - Save the file(s) (CMD+S)
 
 ## Picking SSDTs to merge into one files
@@ -33,10 +33,10 @@ In my tests, using a combined, unified SSDT slowed down boot times noticeably. I
 	{
     	#include "SSDT-.dsl"
 	}
-```
+	```
 - Change "Author" to a different name (ideally, use four letters only)
 - Change the OEM Table ID ("HACKSSDT") to something else (ideally, use four letters only). I am using "T530" since this is my Laptop Model.
-- List all the SSDTs which should be included in the new SSDT:</br>![](/Users/5t33z0/Desktop/xiasl04.png)
+- List all the SSDTs which should be included in the new SSDT:</br>![xiasl04](https://user-images.githubusercontent.com/76865553/176115532-81d5fe93-70b7-485d-9b8e-d6bfb7b91d96.png)
 - Save the file as `SSDT-ALL.dsl` to Desktop/ACPI
 
 ### :warning: The following SSDTs should be excluded from the List 
@@ -51,7 +51,7 @@ Don't merge the following tables into the SSDT-ALL file if you plan to share you
 2. Enter `cd desktop/ACPI`
 3. Next, enter `iasl SSDT-ALL.dsl`
 
-This will merge all the listed files into a new `SSDT-ALL.aml` file, containing all the content of the included SSDTs:</br>![](/Users/5t33z0/Desktop/xiasl06.png)
+This will merge all the listed files into a new `SSDT-ALL.aml` file, containing all the content of the included SSDTs:</br>![xiasl06](https://user-images.githubusercontent.com/76865553/176115651-a23562bd-8271-4490-965b-6521fd0abbe0.png)
 
 ## Adding SSDT-ALL.aml to EFI and Config
 :warning: Have a working backup of your EFI folder on a FAT32 formatted USB flash drive just in case the system won't boot 
@@ -63,8 +63,8 @@ This will merge all the listed files into a new `SSDT-ALL.aml` file, containing 
 - Save and reboot
 
 ## Troubleshooting
-In cases where you're getting compiler errors like "Existing object has invalid type for Scope operator (_SB.PCI0 [Untyped])", add it as an "External" reference as shown below:</br>![](/Users/5t33z0/Desktop/xiasl05.png)
+In cases where you're getting compiler errors like "Existing object has invalid type for Scope operator (_SB.PCI0 [Untyped])", add it as an "External" reference as shown below:</br>![xiasl05](https://user-images.githubusercontent.com/76865553/176115716-3fd315ae-43ef-4f06-8dcf-a3ddf7a933bc.png)
 
 ## Credits
-- ic005k for Xiasl
-- dreamwhite for the "#include" method and compiler guide
+- @ic005k for Xiasl
+- @dreamwhite for the "#include" method
