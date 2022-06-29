@@ -9,7 +9,7 @@ In my tests, using a combined, unified SSDT slowed down boot times noticeably. I
 - Copy the `iasl` file located under `/Contents/MacOS/` to memory (CMD+C)
 - In Finder, press `CMD+SHIFT+.` to show hidden files and folders.
 - Navigate to `/usr/local/bin/` and paste the `iasl` file. We need it there for running iasl in Terminal
-- Press `CMD+SHIFT+.` again, to mask hidden files and folders again.
+- Press `CMD+SHIFT+.`, to mask hidden files and folders again.
 - Mount your EFI partition and copy the `EFI/OC/ACPI` folder to your desktop
 - Unmount your EFI so you don't accidentally ruin your working ACPI tables
 
