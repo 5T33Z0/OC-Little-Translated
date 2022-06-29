@@ -52,5 +52,5 @@ So the best way to declare USB ports is via ACPI since this method is OS-agnosti
 Follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via SSDT Table.
 
 ## Other Resources
-- Updated version of [USBInjectAll.kext](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 600-series mainboards. But beware: this still only works up to macOS ≤ 11.2!
-- Kext and SSDT for fixing USB Wake issues: https://github.com/osy/USBWakeFixup.
+- [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version of USBInjectall with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 600-series mainboards.
+- [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) – Kext and SSDT for fixing USB Wake issues
