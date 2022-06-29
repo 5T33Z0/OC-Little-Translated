@@ -107,7 +107,8 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
    DevicePath: PciRoot(0x0)/Pci(0x1F,0x6)
 ```
 </details>
-With the python script [**PCILookup**](https://github.com/dreamwhite/PCILookup), we can reformat the PCIInfo.txt to a more legible form:
+
+With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup), we can reformat the PCIInfo.txt to a more legible form:
 
 - Install Python
 - Download and upack the Script
