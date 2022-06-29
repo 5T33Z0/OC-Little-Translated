@@ -28,7 +28,7 @@ Since the `XhciPortLimit` Quirk required for mapping the USB ports is no longer 
 - Unpack the zip package and add the 2 included kexts to your kext folder and config.
 - Save and reboot
 - Next, Run USBToolBox
-- Now you have to decide which method to use for mapping ports. There are 2 options available which lead to 2 different kexts being generated:
+- There are 2 options of mapping USB ports which lead to 2 different kexts being generated:
 	- **Option 1** (default): Generates `UTBMap.kext` which has to be used in tandem with `USBToolBox.kext` to make the whole construct work. It has the advantage that the mapping is SMBIOS-independent so it can be used with any SMBIOS.
 	- **Option 2** (uses native Apple classes): Hit "C" to enter the settings and then "N" to enable native Apple classes (AppleUSBHostMergeProperties).
 - Follow the [**instructions**](https://github.com/USBToolBox/kext#usage) to map your USB ports.
@@ -52,5 +52,5 @@ So the best way to declare USB ports is via ACPI since this method is OS-agnosti
 Follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via SSDT Table.
 
 ## Other Resources
-- [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version of USBInjectall with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 600-series mainboards.
+- [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 600-series mainboards.
 - [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) – Kext and SSDT for fixing USB Wake issues
