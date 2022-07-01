@@ -42,12 +42,13 @@ In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop bu
 
 :bulb: **Tip**: Select all `.aml` files in Finder, copy and paste them into the Editor to bring in the file names (avoids typos).
 
-### :warning: The following SSDTs should be excluded from the List 
-Don't merge the following tables into the SSDT-ALL file if you plan to share your EFI and Config online:
+### :warning: Tables to exclude from the list 
+Don't merge the following tables into the SSDT-ALL file if you plan to share your EFI and config online:
 
 - SSDTs related to CPU Power Management, such as: `SSDT-PM` (for Sandy/Ivy Bridge) and `SSDT-PLUG` – especially if they contain Frequency Vectors for specific CPUs
 - Any SSDT for 3rd party devices which are not part of the default configuration of Mainboard/Laptop
-- Include these SSDTs as individual files
+- Any other ACPI Table which is **NOT** an SSDT! These are seperate entities!
+- Add excluded SSDTs as seperate, individual files to the EFI/OC/ACPI folder instead.
 
 ## Compiling the new, unified SSDT
 1. Open Terminal
