@@ -1,5 +1,5 @@
 # Merging all SSDT Hotpatches into one file
-You can use this guide to merge all of your SSDT Hotpatches into one big semi-automatically. With this approach, you lose all the modularity indvidual SSDTs provide – either *all* patches are active or *none*, which makes it harder to troubleshoot. You should only consider doing this if your ACPI tables work correctly and don't contain any errors. But even then it's not guaranteed that the system will boot afterwards.
+You can use this guide to merge all of your SSDT Hotpatches into one big file semi-automatically. With this approach, you lose all the modularity indvidual SSDTs provide – either *all* patches are active or *none*, which makes it harder to troubleshoot. You should only consider doing this if your ACPI tables work correctly and don't contain any errors. But even then it's not guaranteed that the system will boot afterwards.
 
 In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop but my Desktop wouldn't boot at all. Even disabling automatic Compiler "Optimizations" couldn't fix this. So this method has to be regarded as "experimental". I am not really a fan of it but it exists and if you want to try it, this is how it's done.
 
