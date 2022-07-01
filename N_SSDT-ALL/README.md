@@ -67,6 +67,6 @@ This will merge all the listed files into a new `SSDT-ALL.aml` file, containing 
 In cases where you're getting compiler errors like "Existing object has invalid type for Scope operator (_SB.PCI0 [Untyped])", add it as an "External" reference as shown below:</br>![xiasl05](https://user-images.githubusercontent.com/76865553/176115716-3fd315ae-43ef-4f06-8dcf-a3ddf7a933bc.png)
 
 ## Credits & Resources
-- [ASL Compiler User Reference](https://www.acpica.org/sites/acpica/files/aslcompiler_11.pdf)
+- [ASL Compiler User Reference](https://www.acpica.org/sites/acpica/files/aslcompiler_11.pdf) (PDF)
 - [ic005k](https://github.com/ic005k) for Xiasl
 - [dreamwhite](https://github.com/dreamwhite/dreamwhite) for the "#include" method and compiler instructions
