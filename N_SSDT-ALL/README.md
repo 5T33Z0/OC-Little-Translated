@@ -50,7 +50,7 @@ Don't merge the following tables into the SSDT-ALL file if you plan to share you
 ## Compiling the new, unified SSDT
 1. Open Terminal
 2. Enter `cd desktop/ACPI`
-3. Next, enter `iasl SSDT-ALL.dsl` (if you want to disable compiler Optimizations, use `iasl -oa SSDT-ALL.dsl`).
+3. Next, enter `iasl SSDT-ALL.dsl` (to disable Compiler Optimizations, use `iasl -oa SSDT-ALL.dsl` instead).
 
 This will merge all the listed files into a new `SSDT-ALL.aml` file, containing all the content of the included SSDTs:</br>![xiasl06](https://user-images.githubusercontent.com/76865553/176115651-a23562bd-8271-4490-965b-6521fd0abbe0.png)
 
