@@ -1,7 +1,7 @@
 # Merging all SSDT Hotpatches into one file
 You can use this guide to combine all of your SSDT Hotpatches into one big file. With this approach, you lose all the modularity which indvidual SSDTs provide – either *all* patches are active or *none*. You should only consider doing this if all your ACPI tables don't contain any errors and are working correctly.
 
-In my tests, using a combined, unified SSDT slowed down boot times noticeably. It's also harder to troubleshoot errors this way. All in all, I am not a fan of this method but it exist and if you want to use it, this is how it's done.
+My tests had mixed results: the all-in-one SSDT slightly slowed down boot times on my Laptop while my Desktop wouldn't boot at all. My guess it's because the iasl compiler automatically applied some "Optimizations" – no idea how to turn these off. It's also harder to troubleshoot errors this way. All in all, I am not a fan of this method but it exist and if you want to use it, this is how it's done.
 
 ## Preparations
 - Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it for batch convert `.aml` files to `.dsl`.
