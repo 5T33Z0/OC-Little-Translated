@@ -37,8 +37,10 @@ In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop bu
 	```
 - Change "Author" to a different name (ideally, use four letters only)
 - Change the OEM Table ID ("HACKSSDT") to something else (ideally, use four letters only). I am using "T530" since this is my Laptop Model.
-- List all the SSDTs which should be included in the new SSDT (select all the .aml files in Finder, Copy and Paste them into the editor to get the file names):</br>![xiasl04](https://user-images.githubusercontent.com/76865553/176115532-81d5fe93-70b7-485d-9b8e-d6bfb7b91d96.png)
+- List all the SSDTs which should be included in the new SSDT:</br>![xiasl04](https://user-images.githubusercontent.com/76865553/176115532-81d5fe93-70b7-485d-9b8e-d6bfb7b91d96.png)
 - Save the file as `SSDT-ALL.dsl` to Desktop/ACPI
+
+:bulb: **Tip**: Select all `.aml` files in Finder, copy and paste them into the Editor to bring in the file names (avoids typos).
 
 ### :warning: The following SSDTs should be excluded from the List 
 Don't merge the following tables into the SSDT-ALL file if you plan to share your EFI and Config online:
