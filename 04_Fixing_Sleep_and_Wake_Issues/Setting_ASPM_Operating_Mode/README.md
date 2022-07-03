@@ -12,8 +12,8 @@ ASPM, **Active State Power Management**, is a power link management scheme suppo
 - For machines using [**AOAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) technology, try to change the ASPM mode of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption of the machine.
 - Changing the ASPM mode of PCI devices can solve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
 
-## Injecting ASPM operation Mode
-There are two possible method of setting the correct ASPM mode: via DeviceProperties or with SSDTs.
+## Injecting ASPM operation mode
+There are two methods for setting/changing the ASPM mode: via DeviceProperties or with SSDTs.
 
 ### Method 1: Injecting ASPM mode via `DeviceProperties` (recommended):
 - Inject `pci-aspm-default` into the PCI **parent device** and its **child device** respectively
