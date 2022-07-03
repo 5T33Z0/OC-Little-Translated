@@ -2,15 +2,15 @@
 
 ## Description
 
-ASPM, **Active State Power Management**, is a power link management scheme supported at the system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle.
+ASPM, **Active State Power Management**, is a power link management scheme supported at system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle.
 
 - ASPM operates in several modes or states:
-  - **`L0`** – Active state: All PCIe transactions and operations are enabled.
-  - **`L0s`** – Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
-  - **`L1`** – Higher latency, lower power standby state. L1 further reduces power consumption compared to `L0s`. However, the time to enter and exit this state takes longer than in L0s.
-  - **`L2`** – Auxiliary-powered link, deep-energy-saving state: In `L2`, the component’s main power supply inputs and reference clock inputs are shut off. Not covered here.
-- For machines with `AOAC` technology, try to change the ASPM mode of PCI devices such as `Wireless NIC`, `SSD`, etc. to reduce the power consumption of the machine.
-- Changing the ASPM mode of PCI devices may solve issues of some third-party devices not being driven correctly during boot. For example, the SD Card Reader of RTS525A model may not be recognized in `L0s` mode (default mode). After changing it to `L1`, it is recognized correctly.
+  - **`L0`** = Active state: All PCIe transactions and operations are enabled.
+  - **`L0s`** = Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
+  - **`L1`** = Higher latency, lower power standby state. L1 further reduces power consumption compared to L0s. However, the time to enter and exit this state takes longer than in L0s.
+  - **`L2`** = Auxiliary-powered link, deep-energy-saving state: in L2, the component’s main power supply inputs and reference clock inputs are shut off. Not covered here.
+- For machines using [**AOAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) technology, try to change the ASPM mode of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption of the machine.
+- Changing the ASPM mode of PCI devices can solve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
 
 ## Injecting ASPM operation Mode
 There are two possible method of setting the correct ASPM mode: via DeviceProperties or with SSDTs.
