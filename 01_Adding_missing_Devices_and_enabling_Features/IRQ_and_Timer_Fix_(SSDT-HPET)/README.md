@@ -2,7 +2,7 @@
 
 ## Description
 
-Sound cards of earlier systems require High Precision Event Timer **HPET** **`PNP0103`** to provide interrupts `0` & `8`, otherwise the sound card will not work properly. 
+Sound cards of older systems require High Precision Event Timer **HPET** **`PNP0103`** to provide interrupts `0` & `8`, otherwise the sound card will not work properly. 
 
 In most cased, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **`PNP0B00`** or **TIMR** **`PNP0100`** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
@@ -39,18 +39,18 @@ Audio should work now (assuming AppleALC.kext is present along with the correct 
 If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 <details>
-<summary><strong>Old Method </strong>(kept for documentary purposes)</summary
+<summary><strong>Old Method </strong>(kept for documentary purposes)</summary>
 
 # Sound Card IRQ Patch (manual method)
 ## About
 Below you will find the guide for fixing IRQ issues manually if you don't want to use SSDTTime.
 
 ### Technical Background 
-Although mostly older platforms (mobile Ivy Bridge for example) are affected by `IRQ` issues which cause the on-board sound not to work since `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is), the problem can occur on recent platforms as well. 
+Although mostly older platforms (mobile Ivy Bridge for example) are affected by `IRQ` issues which cause the on-board sound not to work because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is), the problem can occur on recent platforms as well. 
 
 This is due to the fact that `HPET` is a legacy device from Intel's 6th Gen platform and is only present for backward compatibility with older Windows versions. If you use 7th Gen Intel Core CPU or newer with Windows 8.1+, HPET (High Precision Event Timer) is no longer present in Device Manager (the driver is unloaded).
 	
-For macOS 10.12 and newer, if the problem occurs on the 6th Gen HPET can be blocked directly to solve the problem. Consult the original DSDT's HPET `_STA` method for specific settings.
+For macOS 10.12 and newer, if the problem occurs on the 6th Gen, HPET can be blocked directly to solve the problem. Consult the original DSDT's HPET `_STA` method for specific settings.
 
 - The sound card on earlier machines required part **HPET** **`PNP0103`** to provide interrupt numbers `0` & `8`, otherwise the sound card would not work properly. In reality almost all machines have **HPET** without any interrupt number provided. Usually, interrupt numbers `0` & `8` are occupied by **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`** respectively
 - To solve the above problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
