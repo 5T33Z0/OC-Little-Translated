@@ -86,11 +86,11 @@ For the release version (default), you can only select Release Versions of OpenC
 
 ![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)
 
-For downloading and syncing the latest **Dev** versions, you have to change View to `Dev` and add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore":
+For downloading and syncing the latest **Dev** versions, you have to change View to `Dev`, which results in a slightly different Sync menu. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
 
-![NIGHTLY](https://user-images.githubusercontent.com/76865553/155942273-805db986-8743-435a-8665-8714c940af38.png)
+![devrepo](https://user-images.githubusercontent.com/76865553/177286293-1fbbf191-3af0-4751-8c84-5c878b58fd51.png)
 
-Alternatively, you can click on "Import" to open a downloaded .zip containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
+Alternatively, you can click on "Import" to open a downloaded `.zip` containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
 ## Updating Kexts to Nightly Builds
 The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
