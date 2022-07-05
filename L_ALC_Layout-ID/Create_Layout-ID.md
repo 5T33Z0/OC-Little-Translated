@@ -756,7 +756,7 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 3. Locate the `PinConfigs.kext` inside AppleALC/Resources
 4. Right-click it and select "Show Package Contents"
 5. Inside the Contents folder, you'll find the "info.plist"
-6. Open it with a Plist editor (I am using PlistEdit Pro)
+6. Open it with a Plist editor. I am using PlistEdit Pro because it automatically converts `<data>` fields to base64 which we need.
 7. All PinConfigs and the Layout-ID they are associated with are stored under:
 	- IOKitPersonalities
 		- as.vit9696.AppleALC
@@ -775,13 +775,15 @@ I am picking Layout-ID 39 because a) it's available and b) followed by by the Le
 14. Copy the raw text to the Clipboard
 15. Close the Plist Editor but **DON'T SAVE THE FILE!!!**
 
-:warning: **IMPORTANT**: I've noticed that when handling larger files, PlistEdit and Xcode tend to place new entries at the top and not the end and in some occations even duplicates entries, which changes the whole file when committing it to the AppleALC Repo which probably results in your Pull Request being rejected. To avoid this, it's safer to paste the entry as raw text using TextEdit instead:
+:warning: **IMPORTANT**: I've noticed that PlistEdit Pro and Xcode tend to mess up huge plist files and change formatting and data which shouldn't be changed and which you didn't even touch. This will result in your Pull Request being rejected. There have also been reports about Xcode changing `<integer>` to `<real>` which is a nightmare. Because if this slips into the source code unnoticed it will cause kernel panics during boot on the target system, which happened with the release of AppleALC 1.7.3.
+
+To avoid this, use Visual Studio Code or TextEdit to paste the entry instead:
 
 1. Open the `info.plist` again in Visual Studio Code (or TextEdit)
 2. Scroll all the way to the end of the `HDAConfigDefault` array containing the entries for the PinConfigs and paste your entry right before the end of the `</array>` (you can use the vertical lines as a visual guide):</br>![VScodeplist](https://user-images.githubusercontent.com/76865553/173192223-fbdcac89-f903-4bbf-99c8-60bc23ab7252.png)
 3. Ensure that all keys in the dictionary consist of 1 line only: `<key>AAAAAA</key>`. Fix any line breaks that may be in raw text.
 4. Save the file.
-4. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
+5. Open it again in Xcode or a Plist Editor and verify that the entry is in the correct location (at the end):</br>![02Verify](https://user-images.githubusercontent.com/76865553/173181933-5dff03a6-fbd0-46d1-bd99-40d9ee2e5b29.png)
 
 Now that we got the PinConfig out of the way, we can continue integrating the rest of the files into the AppleALC Source Code…
 
