@@ -10,7 +10,7 @@
 	- [Release builds vs Dev builds](#release-builds-vs-dev-builds)
 - [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
 - [Fixing "Development version database does not exist" issue](#fixing-development-version-database-does-not-exist-issue)
-- [Notes](#notes)
+- [NOTES](#notes)
 
 ## About
 Currently, the easiest method for keeping your OpenCore files, drivers, config and kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
