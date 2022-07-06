@@ -54,7 +54,7 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 5. Find the Device Properties of your iGPU located under `PciRoot(0x0)/Pci(0x2,0x0)`
 6. Expand the entry and find the Key `AAPL,slot-name`:</br>![slotname01](https://user-images.githubusercontent.com/76865553/177569800-af6a2502-52a7-4586-bcf7-c884156ae9d5.png)
 7. Copy the key to the clipboard
-8. Open yoor config.plist
+8. Mount your EFI and open your config.plist
 9. Under `DeviceProperties/Add` find `PciRoot(0x0)/Pci(0x2,0x0)`
 10. Paste the `AAPL,slot-name` as a child. The resulting entry should like like this:</br>![slotname02a](https://user-images.githubusercontent.com/76865553/177569902-844f6663-1d6a-4619-ac8a-39b59ffd1ffc.png)
 11. Alternatively you can set `AAPL,slot-name` to `build-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
