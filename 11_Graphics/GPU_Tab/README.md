@@ -1,6 +1,6 @@
 [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
 # How to enable "GPU" Tab in Activity Monitor
-> :warning: **Disclaimer**: The Framebuffer Data used in this guide are for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead!
+> :warning: **Disclaimer**: The Framebuffer Data used in this guide are for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! If you are using an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like iMacPro1,1 or MacPro7,1 – you shouldn't add an iGPU. Use the default-write method explained in Step 4 instead!
 
 **TABLE of CONTENTS**
 
