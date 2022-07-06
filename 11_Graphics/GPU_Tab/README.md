@@ -30,6 +30,7 @@ From what I understand, this Tab is only appears if your system has *both* an iG
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
 - [**XPlist**](https://github.com/ic005k/Xplist) or PlistEditPro to copy keys from one .plist file to another
+- Download metalgpu.zip and upack it
 - WhateverGreen's [Intel HD Framebuffer Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 - Big/Little Endian Converter: https://www.save-editor.com/tools/wse_hex.html#littleendian
 
@@ -74,9 +75,9 @@ If you are attentive, you may have noticed the similaries between the numbers us
 **Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decemal!
 
 ## 3. Verifying and Troubleshooting
-After applying the chnages to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything is working correctly.
+After applying the chnages to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything should be working correctly. But just to make sure, run the metalgpu script for macOS13:</br>![](/Users/5t33z0/Desktop/macOS13Metal.png)
 
-If it is missing, you need a different empty framebuffer. Depending on the CPU family you are using there might be more than one framebuffer to choose from. 
+If the GPU Tab is missing from Activity Monitor, you need a different empty framebuffer. Depending on the CPU family you are using there might be more than one framebuffer to choose from. 
 
 1. Visit Whatevergreen's [**Intel HD Graphics FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 2. Find the Frambuuffers for your CPU Family, in my case I have a Comet Lake CPU with [**Intel UHD 630**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors)
@@ -93,3 +94,4 @@ If it is missing, you need a different empty framebuffer. Depending on the CPU f
 
 ## Credits
 FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the depency of GPU tab in Activity Monitor and AAPL,slot-name
+ricoc90 and miliuco for for macOS 13 [GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954) 
