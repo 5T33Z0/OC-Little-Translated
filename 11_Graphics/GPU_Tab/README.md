@@ -1,3 +1,4 @@
+[![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
 # How to enable "GPU" Tab in Activity Monitor
 > :warning: **Disclamer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use them to fix your iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead!
 
