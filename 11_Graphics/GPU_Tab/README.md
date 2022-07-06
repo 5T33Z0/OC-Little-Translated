@@ -17,7 +17,7 @@ Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UH
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
 
-From what I understand, this Tab is only appears if your system has *both* an iGPU and a dedicated GPU. So unless your system matches these specs, you can stop here.
+From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU. So unless your system matches these specs, you can stop here.
 
 ### `config.plist` Requirements
 - Device Property entries for both iGPU and dGPU
