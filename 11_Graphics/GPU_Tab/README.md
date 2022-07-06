@@ -5,7 +5,7 @@
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them. 
 
-Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless( and an RX580 Nitro+:
+Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless) and an RX580 Nitro+:
 
 ![GPUTabActMon](https://user-images.githubusercontent.com/76865553/177569534-bd40eefd-7bca-4b23-bfe0-bd47ad4bc22b.png)
 
