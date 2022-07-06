@@ -94,5 +94,5 @@ If the GPU Tab is missing from Activity Monitor, you need a different empty fram
 13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one
 
 ## Credits
-- FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the depency of GPU tab in Activity Monitor and AAPL,slot-name
-- ricoc90 and miliuco for for macOS 13 [GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954) 
+- FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor.
+- ricoc90 and miliuco for for macOS 13 [GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954).
