@@ -83,7 +83,7 @@ If the GPU Tab is missing from Activity Monitor, you need a different empty fram
 2. Find the Frambuuffers for your CPU Family, in my case I have a Comet Lake CPU with [**Intel UHD 630**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors)
 3. Only Framebuffers with `0` Connectors and `1 MB` Stolen Memory are applicable. In my case there are 6 possible Framebuffers. From my tests, I already know that the one suggested by the OpenCore Install Guide (`0300C89B`) does not work for this so only 5 possible candidats remain.
 4. Copy the first one into memory. In this example: `0x3E920003`
-5. Convert it from Big Endian to Little Endian Converter:</br>![Convert](https://user-images.githubusercontent.com/76865553/177570832-4198ba52-7ad6-4657-a0b0-2522718f3879.png)
+5. Convert it from Big Endian to Little Endian using the online converter mentioned earlier:</br>![Convert](https://user-images.githubusercontent.com/76865553/177570832-4198ba52-7ad6-4657-a0b0-2522718f3879.png)
 6. Copy the converted Framebuffer (`0300923E` in this example) to the Clipboard
 7. Open your config.plist
 9. Under `DeviceProperties/Add` find `PciRoot(0x0)/Pci(0x2,0x0)`
