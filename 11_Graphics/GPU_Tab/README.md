@@ -30,8 +30,8 @@ From what I understand, this Tab is only appears if your system has *both* an iG
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
 - [**XPlist**](https://github.com/ic005k/Xplist) or PlistEditPro to copy keys from one .plist file to another
-- Download metalgpu.zip and upack it
-- WhateverGreen's [Intel HD Framebuffer Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+- Download [**metalgpu.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) and upack it
+- WhateverGreen's [**Intel HD Framebuffer Guide**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 - Big/Little Endian Converter: https://www.save-editor.com/tools/wse_hex.html#littleendian
 
 #### A note on Big Endian and Little Endian
