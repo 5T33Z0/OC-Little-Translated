@@ -6,7 +6,7 @@ If the Device Properties of your iGPU and dGPU are configured correctly, you wil
 
 Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless( and an RX580 Nitro+:
 
-![](/Users/5t33z0/Desktop/PCI GPU/GPUTabActMon.png)
+![GPUTabActMon](https://user-images.githubusercontent.com/76865553/177569534-bd40eefd-7bca-4b23-bfe0-bd47ad4bc22b.png)
 
 ## 1. Requirements
 
@@ -47,24 +47,24 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 ### Method 1: using Hackintool 
 
 1. Start Hackintool
-2. In the Toolbar, click on "PCIe":</br>![](/Users/5t33z0/Desktop/PCIe01.png)
-3. Next, click on the Export button at the bottom of the Window:</br>![](/Users/5t33z0/Desktop/PCIe02.png)
+2. In the Toolbar, click on "PCIe":</br>![PCIe01](https://user-images.githubusercontent.com/76865553/177569617-13373bc4-7d6d-4a60-baf4-a486a4621c8a.png)
+3. Next, click on the Export button at the bottom of the Window:</br>![PCIe02](https://user-images.githubusercontent.com/76865553/177569699-4b7eca90-091e-43ef-9a4a-9ad04543dad2.png)
 4. This will create 4 new files on your Desktop: pcidevices.dsl, pcidevices.json, pcidevices.plist, pcidevices.txt. Open `pcidevices.plist`
 5. Find the Device Properties of your iGPU located under `PciRoot(0x0)/Pci(0x2,0x0)`
-6. Expand the entry and find the Key `AAPL,slot-name`:</br>![](/Users/5t33z0/Desktop/slotname01.png)
+6. Expand the entry and find the Key `AAPL,slot-name`:</br>![slotname01](https://user-images.githubusercontent.com/76865553/177569800-af6a2502-52a7-4586-bcf7-c884156ae9d5.png)
 7. Copy the key to the clipboard
 8. Open yoor config.plist
 9. Under `DeviceProperties/Add` find `PciRoot(0x0)/Pci(0x2,0x0)`
-10. Paste the `AAPL,slot-name` as a child. The resulting entry should like like this:</br>![](/Users/5t33z0/Desktop/slotname02a.png)
-11. Alternatively you can set `AAPL,slot-name` to `build-in`: </br>![](/Users/5t33z0/Desktop/slotname02.png)
+10. Paste the `AAPL,slot-name` as a child. The resulting entry should like like this:</br>![slotname02a](https://user-images.githubusercontent.com/76865553/177569902-844f6663-1d6a-4619-ac8a-39b59ffd1ffc.png)
+11. Alternatively you can set `AAPL,slot-name` to `build-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
 12. In case you haven't already, also add key `enable-metal` (DATA) `01000000` to the iGPU to enable Metal 3 support in macOS Ventura.
 13. Repeat the same for the GPU. In the `pcidevices.plist`, search for the GPU Model (like "Radeon" or "GTX"). Since the PCI path for GPUs is not fixed and my differ from sysetm to system it's easier to find it this way,
-14. Copy the `AAPL,slot-name` key of the GPU and paste it into the Device property entry for the GPU of the config.plist:</br>![](/Users/5t33z0/Desktop/slotname03.png)
+14. Copy the `AAPL,slot-name` key of the GPU and paste it into the Device property entry for the GPU of the config.plist:</br>![slotname03](https://user-images.githubusercontent.com/76865553/177570223-cd78b7e5-197d-456f-b100-deaac61d084d.png)
 15. Save the config.plist and reboot
 16. Continue in Chapter 3
 
 ### Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)
-If you are attentive, you may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slotname`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![](/Users/5t33z0/Desktop/slotname04.png). 
+If you are attentive, you may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slotname`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
 
 - For iGPUs `AAPL,slot-name`, use: `internal@0,2,0` or `built-in` (both work)
 - For the dGPU, you have to calculate it based on it's PCI path. In my case it's `Internal@0,1,0/0,0`. You have to incorporate slashes as well if the PCI path contains additional "PCI" levels, which is the case for my GPU: `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`
@@ -82,7 +82,7 @@ If it is missing, you need a different empty framebuffer. Depending on the CPU f
 2. Find the Frambuuffers for your CPU Family, in my case I have a Comet Lake CPU with [**Intel UHD 630**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors)
 3. Only Framebuffers with `0` Connectors and `1 MB` Stolen Memory are applicable. In my case there are 6 possible Framebuffers. From my tests, I already know that the one suggested by the OpenCore Install Guide (`0300C89B`) does not work for this so only 5 possible candidats remain.
 4. Copy the first one into memory. In this example: `0x3E920003`
-5. Convert it from Big Endian to Little Endian Converter:</br>![](/Users/5t33z0/Desktop/Convert.png)
+5. Convert it from Big Endian to Little Endian Converter:</br>![Convert](https://user-images.githubusercontent.com/76865553/177570832-4198ba52-7ad6-4657-a0b0-2522718f3879.png)
 6. Copy the converted Framebuffer (`0300923E` in this example) to the Clipboard
 7. Open your config.plist
 9. Under `DeviceProperties/Add` find `PciRoot(0x0)/Pci(0x2,0x0)`
