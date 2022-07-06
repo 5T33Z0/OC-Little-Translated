@@ -89,7 +89,7 @@ If it is missing, you need a different empty framebuffer. Depending on the CPU f
 10. Look for Key `AAPL,ig-platform-id`
 11. Paste the new Framebuffer: `0300923E`
 12. Save the config and reboot
-13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working onw
+13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one
 
 ## Credits
 FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the depency of GPU tab in Activity Monitor and AAPL,slot-name
