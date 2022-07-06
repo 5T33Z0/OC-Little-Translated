@@ -1,6 +1,6 @@
 [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
 # How to enable "GPU" Tab in Activity Monitor
-> :warning: **Disclamer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use it to fix your iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead!
+> :warning: **Disclaimer**: The Framebuffer Data used in this guide are for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead!
 
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them. 
@@ -31,7 +31,7 @@ From what I understand, this Tab only appears if your system has *both* an iGPU 
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
 - [**XPlist**](https://github.com/ic005k/Xplist) or PlistEditPro to copy keys from one .plist file to another
-- Download [**metalgpu.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) and upack it
+- Download [**metalgpu.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) and unpack it
 - WhateverGreen's [**Intel HD Framebuffer Guide**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 - Big/Little Endian Converter: https://www.save-editor.com/tools/wse_hex.html#littleendian
 
@@ -60,28 +60,28 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 10. Paste the `AAPL,slot-name` as a child. The resulting entry should like like this:</br>![slotname02a](https://user-images.githubusercontent.com/76865553/177569902-844f6663-1d6a-4619-ac8a-39b59ffd1ffc.png)
 11. Alternatively you can set `AAPL,slot-name` to `build-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
 12. In case you haven't already, also add key `enable-metal` (DATA) `01000000` to the iGPU to enable Metal 3 support in macOS Ventura.
-13. Repeat the same for the GPU. In the `pcidevices.plist`, search for the GPU Model (like "Radeon" or "GTX"). Since the PCI path for GPUs is not fixed and my differ from sysetm to system it's easier to find it this way,
+13. Repeat the same for the GPU. In the `pcidevices.plist`, search for the GPU Model (like "Radeon" or "GTX"). Since the PCI path for GPUs is not fixed and my differ from system to system it's easier to find it this way,
 14. Copy the `AAPL,slot-name` key of the GPU and paste it into the Device property entry for the GPU of the config.plist:</br>![slotname03](https://user-images.githubusercontent.com/76865553/177570223-cd78b7e5-197d-456f-b100-deaac61d084d.png)
 15. Save the config.plist and reboot
 16. Continue in Chapter 3
 
 ### Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)
-If you are attentive, you may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slotname`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
+If you are attentive, you may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
 
 - For iGPUs `AAPL,slot-name`, use: `internal@0,2,0` or `built-in` (both work)
 - For the dGPU, you have to calculate it based on it's PCI path. In my case it's `Internal@0,1,0/0,0`. You have to incorporate slashes as well if the PCI path contains additional "PCI" levels, which is the case for my GPU: `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`
 
 :warning: **CAUTION**: Keep in mind, that the numbers used in PCI paths are hexadecimal. So you have to convert them to decimal (if they exceed `0x09`) before adding them to the `AAPL,slot-name` key. You can use the calculator provided by Hackintool to convert hex to dec.
 
-**Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decemal!
+**Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decimal!
 
 ## 3. Verifying and Troubleshooting
-After applying the chnages to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything should be working correctly. But just to make sure, run the metalgpu script for macOS13:</br>![macOS13Metal](https://user-images.githubusercontent.com/76865553/177574170-8f5158ab-1222-433f-9937-861e62ef2342.png)
+After applying the changes to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything should be working correctly. But just to make sure, run the "metalgpu" script for macOS13:</br>![macOS13Metal](https://user-images.githubusercontent.com/76865553/177574170-8f5158ab-1222-433f-9937-861e62ef2342.png)
 
 If the GPU Tab is missing from Activity Monitor, you need a different empty framebuffer. Depending on the CPU family you are using there might be more than one framebuffer to choose from. 
 
 1. Visit Whatevergreen's [**Intel HD Graphics FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-2. Find the Frambuuffers for your CPU Family, in my case I have a Comet Lake CPU with [**Intel UHD 630**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors)
+2. Find the Framebuffers for your CPU Family, in my case I have a Comet Lake CPU with [**Intel UHD 630**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors)
 3. Only Framebuffers with `0` Connectors and `1 MB` Stolen Memory are applicable. In my case there are 6 possible Framebuffers.
 4. Copy the first one into memory. In this example: `0x3E920003`
 5. Convert it from Big Endian to Little Endian using the online converter mentioned earlier:</br>![Convert](https://user-images.githubusercontent.com/76865553/177570832-4198ba52-7ad6-4657-a0b0-2522718f3879.png)
