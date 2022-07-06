@@ -1,5 +1,5 @@
 # How to enable "GPU" Tab in Activity Monitor
-> :warning: **Disclamer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use them to fix your iGPU (unless you have a Comet Lake CPU as well). Follow the Guide don't just copy data from the guide and expect
+> :warning: **Disclamer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use them to fix your iGPU (unless you have a Comet Lake CPU as well).
 
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them. 
