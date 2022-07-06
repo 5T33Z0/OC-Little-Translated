@@ -107,7 +107,7 @@ If the GPU Tab is missing from Activity Monitor, you need a different empty fram
 12. Save the config and reboot
 13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one.
 
-## 4. Shorcut: Using a defaults-write command
+## 4. Shortcut: Using a defaults-write command
 If all of above doesn't work, or you just can't be bothered, you could just enter this defaults-write command in Terminal instead to force-enable the "GPU" Tab: 
 
 `defaults write com.apple.ActivityMonitor ShowGPUTab -bool true`
