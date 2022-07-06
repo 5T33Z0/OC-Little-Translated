@@ -58,7 +58,7 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 8. Mount your EFI and open your config.plist
 9. Under `DeviceProperties/Add` find `PciRoot(0x0)/Pci(0x2,0x0)`
 10. Paste the `AAPL,slot-name` as a child. The resulting entry should like like this:</br>![slotname02a](https://user-images.githubusercontent.com/76865553/177569902-844f6663-1d6a-4619-ac8a-39b59ffd1ffc.png)
-11. Alternatively you can set `AAPL,slot-name` to `build-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
+11. Alternatively you can set `AAPL,slot-name` to `built-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
 12. In case you haven't already, also add key `enable-metal` (DATA) `01000000` to the iGPU to enable Metal 3 support in macOS Ventura.
 13. Repeat the same for the GPU. In the `pcidevices.plist`, search for the GPU Model (like "Radeon" or "GTX"). Since the PCI path for GPUs is not fixed and my differ from system to system it's easier to find it this way,
 14. Copy the `AAPL,slot-name` key of the GPU and paste it into the Device property entry for the GPU of the config.plist:</br>![slotname03](https://user-images.githubusercontent.com/76865553/177570223-cd78b7e5-197d-456f-b100-deaac61d084d.png)
