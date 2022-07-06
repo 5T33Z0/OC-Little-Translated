@@ -2,10 +2,24 @@
 # How to enable "GPU" Tab in Activity Monitor
 > :warning: **Disclaimer**: The Framebuffer Data used in this guide are for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead!
 
-## About
-If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them. 
+**TABLE of CONTENTS**
 
-Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless) and an RX580 Nitro+:
+- [About](#about)
+- [1. Requirements](#1-requirements)
+	- [Hardware Requirements](#hardware-requirements)
+	- [`config.plist` Requirements](#configplist-requirements)
+	- [Required Software and Resources](#required-software-and-resources)
+		- [A note on Big Endian and Little Endian](#a-note-on-big-endian-and-little-endian)
+- [2. Obtaining `AAPL,slot-name` for iGPU and GPU](#2-obtaining-aaplslot-name-for-igpu-and-gpu)
+	- [Method 1: using Hackintool](#method-1-using-hackintool)
+	- [Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)](#method-2-calculating-aaplslot-name-manually-advanced-users)
+- [3. Verifying and Troubleshooting](#3-verifying-and-troubleshooting)
+- [4. Shortcut: Using a defaults-write command](#4-shortcut-using-a-defaults-write-command)
+
+## About
+If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them.
+
+Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless) and a RX580 Nitro+:
 
 ![GPUTabActMon](https://user-images.githubusercontent.com/76865553/177569534-bd40eefd-7bca-4b23-bfe0-bd47ad4bc22b.png)
 
@@ -17,7 +31,7 @@ Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UH
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
 
-From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU. So unless your system matches these specs, you can stop here.
+From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, you can stop here.
 
 ### `config.plist` Requirements
 - Device Property entries for both iGPU and dGPU
@@ -91,8 +105,16 @@ If the GPU Tab is missing from Activity Monitor, you need a different empty fram
 10. Look for Key `AAPL,ig-platform-id`
 11. Paste the new Framebuffer: `0300923E`
 12. Save the config and reboot
-13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one
+13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one.
+
+## 4. Shorcut: Using a defaults-write command
+If all of above doesn't work, or you just can't be bothered, you could just enter this defaults-write command in Terminal instead to force-enable the "GPU" Tab: 
+
+`defaults write com.apple.ActivityMonitor ShowGPUTab -bool true`
+
+You still have to add the `enable-metal` property to the iGPU to get Metal 3 support in macOS Vebtura, though.
 
 ## Credits
 - FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor
 - ricoc90 and miliuco for the macOS 13 [GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954)
+- @notjosh for defaults-write command
