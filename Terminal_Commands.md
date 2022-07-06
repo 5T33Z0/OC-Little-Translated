@@ -22,6 +22,9 @@ https://macos-defaults.com/
 **Add "Quit" option to Finder**:</br>
 `defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
 
+**Add "GPU" Tab to Activity Monitor**:</br>
+`defaults write com.apple.ActivityMonitor ShowGPUTab -bool true`
+
 **Disable Library Validation**</br>
 `sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true`
 
