@@ -33,7 +33,7 @@ You can follow this guide not only to enable the "GPU" Tab but also to figure ou
 
 ### Hardware Requirements
 - System with both Intel (U)HD on-board Graphics and a discrete GPU
-- SMBIOS which utilized the iGPU &rarr; **iMacPro1,1** or **MacPro7,1** users: don't add an iGPU! Skip to section 5 of the Guide instead!
+- SMBIOS which utilized the iGPU &rarr; **iMacPro1,1** or **MacPro7,1** users: don't add an iGPU!
 - iGPU must be enabled in BIOS
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
