@@ -1,4 +1,5 @@
 [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
+
 # How to enable "GPU" Tab in Activity Monitor (and Metal 3 in macOS Ventura)
 > :warning: **Disclaimer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! 
 > 
@@ -15,7 +16,7 @@
 - [2. Checking if you need this fix](#2-checking-if-you-need-this-fix)
 - [3. Obtaining `AAPL,slot-name` for iGPU and GPU](#3-obtaining-aaplslot-name-for-igpu-and-gpu)
 	- [Method 1: using Hackintool](#method-1-using-hackintool)
-	- [Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)](#method-2-calculating-aaplslot-name-manually-advanced-users)
+	- [Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)](#method-2-calculating-aaplslot-name-manually-for-advanced-users)
 - [4. Verifying and Troubleshooting](#4-verifying-and-troubleshooting)
 - [5. Shortcut: Using a defaults-write command](#5-shortcut-using-a-defaults-write-command)
 - [Credits](#credits)
