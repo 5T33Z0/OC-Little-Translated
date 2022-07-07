@@ -72,12 +72,10 @@ So when implementing data from the Intel HD Graphics FAQ into your config as `AA
 	- If it is present, you don't have to fix it
 	- If it is not present you can follow the guide to fix your DeviceProperties or skip straight to section 5 to use a defaults-write command to enable the GPU Tab instead.
 2. Checking Hardware Acceleration and Metal Support
-	- Run **VDADecoderChecker** to check if Hardware Acceleration is working
-	- Run **metalgpu** to check metal support of iGPU and GPU in macOS 13
-	- If Acceleration is working and if Metal 3 is supported by your iGPU than you don't need a fix.
-	- If either one is not working you can follow the guide to fix your DeviceProperties
+	- Double-click **VDADecoderChecker** &rarr; if Hardware Acceleration is not working, follow the Guide to fix your Framebuffer patch via `DeviceProperties`
+	- macOS 13 only: double-click **metalgpu** to check metal support of iGPU and GPU &rarr; if the iGPU is not listed in the test results, Metal 3 is not working. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU.
 
-**NOTE**: Metal capabilities of GPUs are limited by the used hardware. GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) also support Metal 3.
+**NOTE**: The Metal capabilities of GPUs are limited by the used hardware. GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
 
 ## 3. Obtaining `AAPL,slot-name` for iGPU and GPU
 In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,slot-name to the DeviceProperties of the iGPU and dGPU. Follow either Method 1 or 2 to do so:
