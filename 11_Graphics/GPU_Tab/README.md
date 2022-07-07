@@ -1,6 +1,8 @@
 [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
-# How to enable "GPU" Tab in Activity Monitor
-> :warning: **Disclaimer**: The Framebuffer Data used in this guide are for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! If you are using an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like iMacPro1,1 or MacPro7,1 – you shouldn't add an iGPU. Use the default-write method explained in Step 4 instead!
+# How to enable "GPU" Tab in Activity Monitor (and Metal 3 in macOS Ventura)
+> :warning: **Disclaimer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! 
+> 
+> If you are using a CPU without on-board graphics and/or an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like **iMacPro1,1** or **MacPro7,1** – don't add an iGPU. Use the defaults-write method explained in section 5 instead!
 
 **TABLE of CONTENTS**
 
@@ -10,23 +12,28 @@
 	- [`config.plist` Requirements](#configplist-requirements)
 	- [Required Software and Resources](#required-software-and-resources)
 		- [A note on Big Endian and Little Endian](#a-note-on-big-endian-and-little-endian)
-- [2. Obtaining `AAPL,slot-name` for iGPU and GPU](#2-obtaining-aaplslot-name-for-igpu-and-gpu)
+- [2. Checking if you need this fix](#2-checking-if-you-need-this-fix)
+- [3. Obtaining `AAPL,slot-name` for iGPU and GPU](#3-obtaining-aaplslot-name-for-igpu-and-gpu)
 	- [Method 1: using Hackintool](#method-1-using-hackintool)
 	- [Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)](#method-2-calculating-aaplslot-name-manually-advanced-users)
-- [3. Verifying and Troubleshooting](#3-verifying-and-troubleshooting)
-- [4. Shortcut: Using a defaults-write command](#4-shortcut-using-a-defaults-write-command)
+- [4. Verifying and Troubleshooting](#4-verifying-and-troubleshooting)
+- [5. Shortcut: Using a defaults-write command](#5-shortcut-using-a-defaults-write-command)
+- [Credits](#credits)
 
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them.
 
-Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless) and a RX580 Nitro+:
+Here's an example from my Desktop which uses an 10th Gen i9 CPU with an Intel UHD 630 (configured headless) and a RX580 Nitro+ in macOS Ventura:
 
 ![GPUTabActMon](https://user-images.githubusercontent.com/76865553/177569534-bd40eefd-7bca-4b23-bfe0-bd47ad4bc22b.png)
+
+You can follow this guide not only to enable the "GPU" Tab but also to figure out if your iGPU and/or GPU supports metal 3 and enable it for the iGPU if it is not supported by your GPU.
 
 ## 1. Requirements
 
 ### Hardware Requirements
 - System with both Intel (U)HD on-board Graphics and a discrete GPU
+- SMBIOS which utilized the iGPU &rarr; **iMacPro1,1** or **MacPro7,1** users: don't add an iGPU! Skip to section 5 of the Guide instead!
 - iGPU must be enabled in BIOS
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
@@ -45,9 +52,10 @@ From what I understand, this Tab only appears if your system has *both* an iGPU 
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
 - [**XPlist**](https://github.com/ic005k/Xplist) or PlistEditPro to copy keys from one .plist file to another
-- Download [**metalgpu.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) and unpack it
+- [**metalgpu**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) for checking metal support of iGPU and GPU in macOS 13 (download and unzip)
+- [**VDADecoderChecker**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/VDADecoderChecker.zip?raw=true) for checking Hardware Acceleration is working (download and unzip)
 - WhateverGreen's [**Intel HD Framebuffer Guide**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-- Big/Little Endian Converter: https://www.save-editor.com/tools/wse_hex.html#littleendian
+- [**Big/Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html#littleendian) (online)
 
 #### A note on Big Endian and Little Endian
 
@@ -57,7 +65,21 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 
 So when implementing data from the Intel HD Graphics FAQ into your config as `AAPL,ig-platform-id`, make sure to convert it to little Endian first using the converter listed above. The inverted principle applies when trying to find info about a framebuffer you are using in your config.plist: convert it to Big Endian and then paste it as a search term into the Intel HD Graphics FAQ to find it.
 
-## 2. Obtaining `AAPL,slot-name` for iGPU and GPU
+## 2. Checking if you need this fix
+1. Checking if "GPU" Tab is present in Activity Monitor
+	- Run Activity Monitor (located under Programs/Utilities)
+	- Check if it contains a Tab called "GPU" (as shown in the screenshot above)
+	- If it is present, you don't have to fix it
+	- If it is not present you can follow the guide to fix your DeviceProperties or skip straight to section 5 to use a defaults-write command to enable the GPU Tab instead.
+2. Checking Hardware Acceleration and Metal Support
+	- Run **VDADecoderChecker** to check if Hardware Acceleration is working
+	- Run **metalgpu** to check metal support of iGPU and GPU in macOS 13
+	- If Acceleration is working and if Metal 3 is supported by your iGPU than you don't need a fix.
+	- If either one is not working you can follow the guide to fix your DeviceProperties
+
+**NOTE**: Metal capabilities of GPUs are limited by the used hardware. GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) also support Metal 3.
+
+## 3. Obtaining `AAPL,slot-name` for iGPU and GPU
 In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,slot-name to the DeviceProperties of the iGPU and dGPU. Follow either Method 1 or 2 to do so:
 
 ### Method 1: using Hackintool 
@@ -79,17 +101,17 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 15. Save the config.plist and reboot
 16. Continue in Chapter 3
 
-### Method 2: "calculating" `AAPL,slot-name` manually (Advanced Users)
-If you are attentive, you may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
+### Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)
+You may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
 
 - For iGPUs `AAPL,slot-name`, use: `internal@0,2,0` or `built-in` (both work)
-- For the dGPU, you have to calculate it based on it's PCI path. In my case it's `Internal@0,1,0/0,0`. You have to incorporate slashes as well if the PCI path contains additional "PCI" levels, which is the case for my GPU: `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`
+- For the dGPU, you have to calculate it based on its PCI path. In my case it's `Internal@0,1,0/0,0`. You have to incorporate slashes as well if the PCI path contains additional "PCI" levels, which is the case for my GPU: `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`. Only the slashes deviding "Pci" are relevant for this, not the "PciRoot" part.
 
 :warning: **CAUTION**: Keep in mind, that the numbers used in PCI paths are hexadecimal. So you have to convert them to decimal (if they exceed `0x09`) before adding them to the `AAPL,slot-name` key. You can use the calculator provided by Hackintool to convert hex to dec.
 
 **Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decimal!
 
-## 3. Verifying and Troubleshooting
+## 4. Verifying and Troubleshooting
 After applying the changes to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything should be working correctly. But just to make sure, run the "metalgpu" script for macOS13:</br>![macOS13Metal](https://user-images.githubusercontent.com/76865553/177574170-8f5158ab-1222-433f-9937-861e62ef2342.png)
 
 If the GPU Tab is missing from Activity Monitor, you need a different empty framebuffer. Depending on the CPU family you are using there might be more than one framebuffer to choose from. 
@@ -107,14 +129,20 @@ If the GPU Tab is missing from Activity Monitor, you need a different empty fram
 12. Save the config and reboot
 13. If it is working, congrats. Otherwise test the remaining Framebuffers one by ome until you find a working one.
 
-## 4. Shortcut: Using a defaults-write command
-If all of above doesn't work, or you just can't be bothered, you could just enter this defaults-write command in Terminal instead to force-enable the "GPU" Tab: 
+## 5. Shortcut: Using a defaults-write command
+If all of above doesn't work, or you just can't be bothered, enter the following defaults-write command in Terminal to enable the "GPU" Tab in Activity Monitor: 
 
 `defaults write com.apple.ActivityMonitor ShowGPUTab -bool true`
 
-You still have to add the `enable-metal` property to the iGPU to get Metal 3 support in macOS Vebtura, though.
+To disable it, enter
+
+`defaults write com.apple.ActivityMonitor ShowGPUTab -bool false`
+
+**NOTE**: You still may have to fix your DeviceProperties to get proper Hardware Acceleration and Metal 3 support in macOS Ventura, though.
 
 ## Credits
 - FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor
-- ricoc90 and miliuco for the macOS 13 [GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954)
+- ricoc90 and miliuco for the [Metal GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954) for macOS 13
 - @notjosh for defaults-write command
+- Headkaze for Hackintool
+- Dortania for VDADecoderChecker
