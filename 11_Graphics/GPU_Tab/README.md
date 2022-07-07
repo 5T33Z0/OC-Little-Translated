@@ -143,6 +143,6 @@ To disable it, enter
 ## Credits
 - FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor
 - ricoc90 and miliuco for the [Metal GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954) for macOS 13
-- @notjosh for defaults-write command
+- [notjosh](https://github.com/notjosh) for the defaults-write command
 - Headkaze for Hackintool
 - Dortania for VDADecoderChecker
