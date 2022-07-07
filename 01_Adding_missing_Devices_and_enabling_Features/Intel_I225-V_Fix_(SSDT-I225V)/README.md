@@ -54,12 +54,13 @@ macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^2]|
 
 If you are facing issues afterwards, you could try attaching the I225-V to the `AppleIntelI210Ethernet.kext` by using boot boot-arg `dk.e1000=0` (Big Sur) or `e1000=0` (macOS Monterey/Ventura).
 
-If you can't access the Internet after flashing the custom firmware, remove the following preferences via Terminal and reboot:
+If you can't access the Internet after flashing the custom firmware, remove the following preferences via Terminal and reboot and reset kext cache:
 
 - `sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist`
 - `sudo rm /Library/Preferences/SystemConfiguration/preferences.plist`
+- `sudo kextcache -i /`
 
-If you still can't access the Internet, delete the following prefeences followed by a reboot:
+After a few seconds, the connection should work. If you still can't access the Internet, delete the following prefeences followed by a reboot:
 
 - `/Library/Preferences/com.apple.networkextension.necp.plist`
 - `/Library/Preferences/com.apple.networkextension.plist`
