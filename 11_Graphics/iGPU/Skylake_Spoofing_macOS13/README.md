@@ -23,7 +23,7 @@ Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADe
 ![videoproc_HD530](https://user-images.githubusercontent.com/76865553/174106261-050c342d-66f9-4f98-b63c-c4bbea3f7f28.png)
 
 ## NOTES and CREDITS
-- When spoofing the iGPU in macOS Ventura this way, there are still issues related to HEVC encoding/decoding. Aben has provided a [test build of WEG](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/page/67/#comment-2788244) which tries to address this issue.
+- When spoofing the iGPU in macOS Ventura this way, there are still issues related to HEVC encoding/decoding. Aben is working on a [test build of WEG](https://github.com/abenraj/WhateverGreen/tree/SKL-HEVC-test) which tries to address this issue.
 - The previously used, additional `SKLAsKBLGraphicsInfo.kext` is no longer required
 - PMheart for the Patch 
 - Acidanthera for OpenCore, Lilu and Whatevergreen
