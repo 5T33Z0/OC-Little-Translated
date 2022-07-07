@@ -2,7 +2,7 @@
 # How to enable "GPU" Tab in Activity Monitor (and Metal 3 in macOS Ventura)
 > :warning: **Disclaimer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! 
 > 
-> If you are using a CPU without on-board graphics and/or an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like **iMacPro1,1** or **MacPro7,1** – don't add an iGPU. Use the defaults-write method explained in section 5 instead!
+> If you are using a CPU without on-board graphics and/or an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like **iMacPro1,1** or **MacPro7,1** – don't add an iGPU. Use the defaults-write method explained in S[](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/README.md#5-shortcut-using-a-defaults-write-command)ection 5 instead!
 
 **TABLE of CONTENTS**
 
@@ -38,7 +38,7 @@ You can follow this guide not only to enable the "GPU" Tab but also to figure ou
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
 
-From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, you can stop here or skip to Section 5 to enable th GPU Tab via a defaults-write command.
+From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, you can skip to [Section 5](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/README.md#5-shortcut-using-a-defaults-write-command) to enable the GPU Tab via defaults-write command.
 
 ### `config.plist` Requirements
 - Device Property entries for both iGPU and dGPU
