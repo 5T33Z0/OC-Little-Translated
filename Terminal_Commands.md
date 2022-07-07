@@ -3,7 +3,7 @@
 ## macOS related
 
 **Collection of defaults commands** (for modifying behavior, options, look and feel of macOS):</br>
-https://macos-defaults.com/
+**https://macos-defaults.com/**
 
 **Show macOS Kernel Version**:</br>
 `uname -r`
