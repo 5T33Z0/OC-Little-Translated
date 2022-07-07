@@ -63,7 +63,7 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 
 **Example**: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends Framebuffer `07009B3E`. But if you compare this value with Whatevergreen's Intel HD Graphics FAQ, the recommended Framebuffer is `0x3E9B0007`. It's the same framebuffer just with a different Endianness.
 
-So when implementing data from the Intel HD Graphics FAQ into your config as `AAPL,ig-platform-id`, make sure to convert it to little Endian first using the converter listed above. The inverted principle applies when trying to find info about a framebuffer you are using in your config.plist: convert it to Big Endian and then paste it as a search term into the Intel HD Graphics FAQ to find it.
+So when implementing data from the Intel HD Graphics FAQ into your config, such as `AAPL,ig-platform-id`, make sure to convert it to little Endian first using the converter listed above. The inverted principle applies when trying to find info about a framebuffer you are using in your config.plist: convert it to Big Endian and then paste it as a search term into the Intel HD Graphics FAQ to find it.
 
 ## 2. Checking if you need this fix
 1. Checking if "GPU" Tab is present in Activity Monitor
