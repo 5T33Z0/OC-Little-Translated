@@ -38,7 +38,7 @@ You can follow this guide not only to enable the "GPU" Tab but also to figure ou
 - iGPU must be configured headless, using an empty Framebuffer
 - GPU must be supported by macOS (obviously)
 
-From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, you can skip to [Section 5](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/README.md#5-shortcut-using-a-defaults-write-command) to enable the GPU Tab via defaults-write command.
+From what I understand, this Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, you can skip to [Section 5](#5-shortcut-using-a-defaults-write-command) to enable the GPU Tab via defaults-write command.
 
 ### `config.plist` Requirements
 - Device Property entries for both iGPU and dGPU
