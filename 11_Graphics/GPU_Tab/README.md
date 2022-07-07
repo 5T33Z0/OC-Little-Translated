@@ -68,7 +68,7 @@ So when implementing data from the Intel HD Graphics FAQ into your config, such 
 ## 2. Checking if you need this fix
 1. Checking if "GPU" Tab is present in Activity Monitor
 	- Run Activity Monitor (located under Programs/Utilities)
-	- Check if it contains a Tab called "GPU" (as shown in the screenshot above)
+	- Check if it contains a Tab called "GPU" (as shown in the "About" section)
 	- If it is present, you don't have to fix it
 	- If it is not present you can follow the guide to fix your DeviceProperties or skip straight to section 5 to use a defaults-write command to enable the GPU Tab instead.
 2. Checking Hardware Acceleration and Metal Support
@@ -95,9 +95,9 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 11. Alternatively you can set `AAPL,slot-name` to `built-in`: </br>![slotname02](https://user-images.githubusercontent.com/76865553/177569983-9c4602a7-acd7-42e8-b791-8141f88dbee1.png)
 12. In case you haven't already, also add key `enable-metal` (DATA) `01000000` to the iGPU to enable Metal 3 support in macOS Ventura.
 13. Repeat the same for the GPU. In the `pcidevices.plist`, search for the GPU Model (like "Radeon" or "GTX"). Since the PCI path for GPUs is not fixed and my differ from system to system it's easier to find it this way,
-14. Copy the `AAPL,slot-name` key of the GPU and paste it into the Device property entry for the GPU of the config.plist:</br>![slotname03](https://user-images.githubusercontent.com/76865553/177570223-cd78b7e5-197d-456f-b100-deaac61d084d.png)
+14. Copy the `AAPL,slot-name` key for the GPU and paste it into the corresponding section of your config.plist:</br>![slotname03](https://user-images.githubusercontent.com/76865553/177570223-cd78b7e5-197d-456f-b100-deaac61d084d.png)
 15. Save the config.plist and reboot
-16. Continue in Chapter 3
+16. Continue in Chapter 4
 
 ### Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)
 You may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
