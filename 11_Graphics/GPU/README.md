@@ -4,7 +4,7 @@ In general, please refer to Dortania's [GPU Buyer's Guide ](https://dortania.git
 
 ## AMD GPU Cards Support
 
-- For current AMD GPUs see &rarr; Chapter [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AMD_Radeon_Tweaks)
+- For current AMD GPUs see &rarr; Chapter [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
 - For vintage AMD Cards and macOS &rarr; Check Rampage Dev's excellent [AMD Graphics Guide](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/)
 
 ## NVIDIA GPU Support†
