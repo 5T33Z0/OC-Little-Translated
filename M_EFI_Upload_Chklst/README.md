@@ -11,7 +11,7 @@ Before sharing your OpenCore EFI and config.plist with the world, you should wor
 - `Misc/Security/ApECID` &rarr; set it to `0`
 - `Misc/Security/Vault` &rarr; set it to `Optional`
 - `Misc/Entries` &rarr; Delete Custom entries 
-- `Misc/Security/SecureBootModel` &rarr; `Disabled`. Hint users to enabling it in Post-Install so System Updates work for SMBIOSes which use a T2 Security Chip.
+- `Misc/Security/SecureBootModel` &rarr; `Disabled`. Disables Apple Secure Boot hardware model to avoid issues during Installation. Re-enable it in Post-Install so System Updates work when using an SMBIOS of a Mac model with a T2 Security Chip.
 - `Kernel` section:
 	- Deactivate non-essential or optional kexts for 3rd party devices that are not part of your mainboard.
 	- Add proper Descriptions in the Comment field!
