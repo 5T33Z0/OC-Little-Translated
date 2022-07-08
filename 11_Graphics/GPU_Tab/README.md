@@ -99,6 +99,9 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 15. Save the config.plist and reboot
 16. Continue in Chapter 4
 
+#### ADDENDUM 
+After further research and testing, it turns out that the nummber of properties can be reduced to 3 to get it working, respectively 4 (device-id) to get the name of the iPGU correct as well:</br>![](/Users/klasus/Desktop/DevProps3.png)
+
 ### Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)
 You may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
 
