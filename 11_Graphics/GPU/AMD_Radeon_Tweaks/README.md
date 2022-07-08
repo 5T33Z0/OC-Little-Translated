@@ -201,3 +201,4 @@ If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - Baio1977 for `SSDT-NAVI.aml`
 - CMMMChris for his Radeon VII PowerPlay Table Generator
+- [Jellyfish Video Bitrate Test Files](https://jell.yfish.us/)

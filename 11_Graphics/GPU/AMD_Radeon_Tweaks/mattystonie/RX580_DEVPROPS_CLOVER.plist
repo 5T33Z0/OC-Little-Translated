@@ -13,14 +13,9 @@
 				<key>AAPL,slot-name</key>
 				<string>Slot-1@0,1,0/0,0</string>
 				<key>ATY,EFIVersion</key>
-				<data>
-				MDEuMDEuMTkw
-				</data>
+				<data>MDEuMDEuMTkw</data>
 				<key>CFG_PTPL2_TBL</key>
-				<data>
-				ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABS
-				AAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==
-				</data>
+				<data>ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABSAAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==</data>
 				<key>CFG_USE_AGDC</key>
 				<true/>
 				<key>CFG_USE_SCANOUT</key>
@@ -28,15 +23,11 @@
 				<key>CFG_USE_TCON</key>
 				<true/>
 				<key>PP_BootupDisplayState</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>PP_DisableMCDownLoadFeature</key>
 				<integer>1</integer>
 				<key>PP_PowerPlayEnabled</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>model</key>
 				<string>AMD Radeon RX 580</string>
 			</dict>
