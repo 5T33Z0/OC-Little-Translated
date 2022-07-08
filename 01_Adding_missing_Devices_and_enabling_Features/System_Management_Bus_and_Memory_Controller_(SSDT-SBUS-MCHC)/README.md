@@ -29,7 +29,7 @@ In **DSDT**, search for:
 - `0x001F0003` (Gen 6 and older) or `0x001F0004` (Gen 6 and later) 
 - Find device name and location of the SMBus Device. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:
 
-![SMBUS](https://user-images.githubusercontent.com/76865553/164179008-9f0e467c-41c2-4569-a186-0ab3f9a435a7.png)
+![sbusmchc](https://user-images.githubusercontent.com/76865553/177932530-f2190e85-17f2-4d15-9326-c37cd4c410e3.png)
 
 ### 3. Pick the correct SSDT[^1]
 Depending on the results of your search, add the corresponding SSDT to your ACPI Folder and config.plist:
