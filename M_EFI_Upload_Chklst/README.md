@@ -20,4 +20,4 @@ Before sharing your OpenCore EFI and config.plist with the world, you should wor
 	- `MinDate` = -1
 	- `Maxdate` = -1
 
-**NOTE**: There's also a Python script which can do all of this automatically (open the script in TextEdit or IDLE for details): [Catone](https://github.com/dreamwhite/Catone)
+**NOTE**: There's also a Python script which can do all of this automatically: [OC Anonymizer](https://github.com/5T33Z0/OC-Anonymizer)
