@@ -18,7 +18,7 @@
 	- [Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)](#method-2-calculating-aaplslot-name-manually-for-advanced-users)
 - [4. Verifying and Troubleshooting](#4-verifying-and-troubleshooting)
 - [5. Shortcut: Using a defaults-write command](#5-shortcut-using-a-defaults-write-command)
-- [Credits](#credits)
+- [Credits & Resources](#credits-and-resources)
 
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them.
@@ -141,9 +141,10 @@ To disable it, enter
 
 **NOTE**: You still may have to fix your DeviceProperties to get proper Hardware Acceleration and Metal 3 support in macOS Ventura, though.
 
-## Credits
+## Credits and Resources
 - FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor
 - ricoc90 and miliuco for the [Metal GPU Testing Utility](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2787954) for macOS 13
 - [notjosh](https://github.com/notjosh) for the defaults-write command
 - Headkaze for Hackintool
 - Dortania for VDADecoderChecker
+- About [Apple GUC](https://www.reddit.com/r/hackintosh/comments/gbg5ms/oopencores_igfxfw_and_apples_guc/)
