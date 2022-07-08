@@ -11,7 +11,7 @@ Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedi
 
 ## Instructions
 
-### 1. Test if you need this Fix
+### 1. Check if you need this Fix
 Run Terminal and enter:
 
 `kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
