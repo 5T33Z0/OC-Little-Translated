@@ -7,7 +7,7 @@ In general, please refer to Dortania's [GPU Buyer's Guide ](https://dortania.git
 - For current AMD GPUs see &rarr; Chapter [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AMD_Radeon_Tweaks)
 - For vintage AMD Cards and macOS &rarr; Check Rampage Dev's excellent [AMD Graphics Guide](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/)
 
-## NVIDIA GPU Support (†)
+## NVIDIA GPU Support†
 It's complicated… well, actually it isn't: just don't buy them! ;)
 
 Although NVIDIA Cards ***were*** officially supported up to macOS High Sierra, you can no longer install Nvidia Web Drivers since [Nvidia revoked the certificates](https://twitter.com/khronokernel/status/1532545973372588033) shortly after Khronokernel figured out how to enable Nvidia Web Drivers in macOS Monterey. I don't know if this also affects previously installed Web Drivers (I guess you have to stay offline to not lose the Certs), but at this stage my advice would be to just move on and switch to AMD.
