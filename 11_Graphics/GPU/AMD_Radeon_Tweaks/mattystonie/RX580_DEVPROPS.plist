@@ -22,11 +22,11 @@
 				AAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==
 				</data>
 				<key>CFG_USE_AGDC</key>
-				<true/>
+				<integer>1</integer>
 				<key>CFG_USE_SCANOUT</key>
-				<true/>
+				<integer>1</integer>
 				<key>CFG_USE_TCON</key>
-				<true/>
+				<integer>1</integer>
 				<key>PP_BootupDisplayState</key>
 				<data>
 				AQAAAA==
@@ -37,6 +37,8 @@
 				<data>
 				AQAAAA==
 				</data>
+				<key>device_type</key>
+				<string>VGA compatible controller</string>
 				<key>model</key>
 				<string>AMD Radeon RX 580</string>
 			</dict>
