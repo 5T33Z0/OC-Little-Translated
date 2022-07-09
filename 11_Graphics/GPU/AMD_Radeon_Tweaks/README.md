@@ -1,7 +1,7 @@
 # AMD Radeon Performance Tweaks
 
 ## About
-This chapter contains two approaches for improving the performance of AMD Radeon Graphics Cards when running macOS. The first method is pretty much standard to get the card running under macOS. The 2nd method has to be regarded as experimental. It makes use of modified SSDTs and a kext to improve the performance of AMD Radeon GPUs in OpenCL and Metal applications while also lowering the power consumption of the card. This method tries to mimic how the card would operate in a real Mac. 
+This chapter contains two approaches for improving the performance of AMD Radeon Graphics Cards when running macOS. The first method is pretty much standard to get the card running under macOS. The 2nd method has to be regarded as experimental. It makes use of modified SSDTs and a kext to improve the performance of AMD Radeon GPUs in OpenCL and Metal applications while also lowering the power consumption of the card. This method tries to mimic how the card would operate in a real Mac.
 
 :warning: Use either method 1 or 2, not both!
 
@@ -154,6 +154,13 @@ Scope (\_SB)
 	TableSignature: 44534454
 	```
 5. Save your config, reboot and run some benchmark tests for comparison.
+
+### Addendum: SSDT vs. Device Properties
+I've noticed that the SSDT for the RX580 in my system doesn't really work as promised. In my tests on macOS Catlina and newer the performance wasn't improved much and the DAGPM kext also doesn't reduce the power consumption (around 100 Watts in idle). 
+
+So I've gone throug the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found Device Properties which worked: improved performance with lowered power consumption (around 70 Watts in idle instead of 100). 
+
+I created plist for both Clover and OpenCore (RX580_Clover.plist and RX580_OC.plist). You can copy the included properties to the corresponding section of your config. But make sure that the PCI paths match the ones used in your system (check in Hackintool).
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
