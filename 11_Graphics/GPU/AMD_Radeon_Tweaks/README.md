@@ -132,16 +132,16 @@ Scope (\_SB)
 ```
 </details>
 
-## Method 2: Using AMD Radeon Patches by mattystonie
-**Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intentend but that's not guaranteed.
+## Method 2: Using AMD Radeon Patches by mattystonnie
+**Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
-1. Choose the SSDT matching your GPU model contained in the "mattystonie" Folder and export it as `.aml`.
+1. Choose the SSDT matching your GPU model contained in the "mattystonnie" Folder and export it as `.aml`.
     - For **RX 580**: Use `SSDT-RX580.aml`
     - For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: Use `SSDT-RX5700XT.aml`
     - For **RX Vega 64**: Use `SSDT-RXVega64.aml`
 2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
-    - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards.
+    - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
@@ -156,13 +156,14 @@ Scope (\_SB)
 5. Save your config, reboot and run some benchmark tests for comparison.
 
 ### Addendum: SSDT vs. Device Properties vs. macOS Ventura
-I've noticed that the SSDT for the RX580 in my system doesn't really work as promised. In my tests on macOS Catlina and newer the performance wasn't improved much and the DAGPM kext also doesn't reduce the power consumption (around 100 Watts in idle). 
 
-So I've gone throug the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found Device Properties which worked: improved performance with lowered power consumption (around 70 Watts in idle instead of 100). 
+I've noticed that the SSDT for the RX 580 doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve much and power consumption wasn't optimized as well – around 100 Watts in idle seems too high, imo. Also, the `AGPMController` was loaded even without the `DAGPM.kext`, so that's not really a requirement. Same for `AGPM.kext` by Pavo-IM.   
 
-I created plist for both Clover and OpenCore (RX580_Clover.plist and RX580_OC.plist). You can copy the included properties to the corresponding section of your config. But make sure that the PCI paths match the ones used in your system (check in Hackintool).
+So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found Device Properties which worked: improved performance with lowered power consumption (around 70 Watts in idle instead of 100). 
 
-The DeviceProperties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though is present in the AMD9500Controller kext. Needs further investigation.
+I created plists for both Clover and OpenCore (`RX580_Clover.plist` and `RX580_OC.plist`). You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths match the ones used in your system (use Hackintool to verify).
+
+The Device Properties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though it is present in the `AMD9500Controller.kext`. Needs further investigation.
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
@@ -179,7 +180,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 - Mount your EFI
 - For NAVI Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
 - Disable Whatevergreen.kext
-- Disable boot-arg agdpmod=pikera
+- Disable boot-arg `agdpmod=pikera`
 - Under `DeviceProperties/Add` create a new child
 - Set it to "Dictionary"
 - Double Click its name and paste the PCI path:</br>![DevProps01](https://user-images.githubusercontent.com/76865553/174430804-b750e59a-46c7-4f38-aa0f-60977500b976.png)
@@ -201,7 +202,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
 
-If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a special device property using an Excel spreadheet allowing you to modify all sorts of parameters to optimize the performance of you card.
+If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a special device property using an Excel spreadsheet allowing you to modify all sorts of parameters to optimize the performance of you card.
 
 ## Credits & Resources
 - Using Radeon RX6600 XT Cards with [macOS Monterey](https://github.com/perez987/rx6600xt-on-macos-monterey)
