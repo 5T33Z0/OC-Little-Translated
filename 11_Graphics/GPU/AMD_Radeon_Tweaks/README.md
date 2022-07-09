@@ -155,12 +155,14 @@ Scope (\_SB)
 	```
 5. Save your config, reboot and run some benchmark tests for comparison.
 
-### Addendum: SSDT vs. Device Properties
+### Addendum: SSDT vs. Device Properties vs. macOS Ventura
 I've noticed that the SSDT for the RX580 in my system doesn't really work as promised. In my tests on macOS Catlina and newer the performance wasn't improved much and the DAGPM kext also doesn't reduce the power consumption (around 100 Watts in idle). 
 
 So I've gone throug the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found Device Properties which worked: improved performance with lowered power consumption (around 70 Watts in idle instead of 100). 
 
 I created plist for both Clover and OpenCore (RX580_Clover.plist and RX580_OC.plist). You can copy the included properties to the corresponding section of your config. But make sure that the PCI paths match the ones used in your system (check in Hackintool).
+
+The DeviceProperties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though is present in the AMD9500Controller kext. Needs further investigation.
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
