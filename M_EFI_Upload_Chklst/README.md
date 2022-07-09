@@ -21,4 +21,4 @@ Before sharing your OpenCore EFI and config.plist with the world, you should wor
 	- `MinDate` = -1
 	- `Maxdate` = -1
 
-**NOTE**: There's also a Python script which can do most of this automatically: [OC Anonymizer](https://github.com/5T33Z0/OC-Anonymizer)
+**NOTE**: There's also a Python script which can do most of this automatically (except for ACPT and kernel-related tasks): [OC Anonymizer](https://github.com/5T33Z0/OC-Anonymizer)
