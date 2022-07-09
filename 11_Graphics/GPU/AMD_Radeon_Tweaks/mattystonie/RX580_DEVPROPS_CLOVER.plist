@@ -13,9 +13,14 @@
 				<key>AAPL,slot-name</key>
 				<string>Slot-1@0,1,0/0,0</string>
 				<key>ATY,EFIVersion</key>
-				<data>MDEuMDEuMTkw</data>
+				<data>
+				MDEuMDEuMTkw
+				</data>
 				<key>CFG_PTPL2_TBL</key>
-				<data>ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABSAAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==</data>
+				<data>
+				ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABS
+				AAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==
+				</data>
 				<key>CFG_USE_AGDC</key>
 				<true/>
 				<key>CFG_USE_SCANOUT</key>
@@ -23,13 +28,30 @@
 				<key>CFG_USE_TCON</key>
 				<true/>
 				<key>PP_BootupDisplayState</key>
-				<data>AQAAAA==</data>
+				<data>
+				AQAAAA==
+				</data>
 				<key>PP_DisableMCDownLoadFeature</key>
 				<integer>1</integer>
 				<key>PP_PowerPlayEnabled</key>
-				<data>AQAAAA==</data>
+				<data>
+				AQAAAA==
+				</data>
 				<key>model</key>
 				<string>AMD Radeon RX 580</string>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x1)</key>
+			<dict>
+				<key>AAPL,slot-name</key>
+				<string>Internal@0,3,0/0,1</string>
+				<key>device_type</key>
+				<string>Audio device</string>
+				<key>layout-id</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>model</key>
+				<string>AMD RX 580 HDMI Audio</string>
 			</dict>
 		</dict>
 	</dict>

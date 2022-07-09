@@ -42,6 +42,19 @@
 				<key>model</key>
 				<string>AMD Radeon RX 580</string>
 			</dict>
+			<key>PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x1)</key>
+			<dict>
+				<key>AAPL,slot-name</key>
+				<string>Internal@0,3,0/0,1</string>
+				<key>device_type</key>
+				<string>Audio device</string>
+				<key>layout-id</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>model</key>
+				<string>AMD RX 580 HDMI Audio</string>
+			</dict>
 		</dict>
 	</dict>
 </dict>
