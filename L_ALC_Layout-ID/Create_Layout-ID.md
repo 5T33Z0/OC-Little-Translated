@@ -107,7 +107,7 @@ Users who already have Linux installed can skip to "Dumping the Codec"!
 - Download and extract [**PinConfigurator**](https://github.com/headkaze/PinConfigurator/releases)
 - Download [**Hackintool**](https://github.com/headkaze/Hackintool). We may need it for Hex to Decimal conversions later.
 - Download and install the [correct version](https://developer.apple.com/support/xcode/) of [**Xcode**](https://developer.apple.com/download/all/?q=xcode) supported by your macOS. The download is about 10 GB and the installed application is about 30 GB, so make sure you have enough disk space. And: make sure to move the app to the "Programs" folder – otherwise compiling fails.
-- Get a plist editor like PlistEditPro (Xcode or [**Viual Studio Code**](https://code.visualstudio.com/) can open them as well)
+- Plist Edior like [**ProperTree**](https://github.com/corpnewt/ProperTree) or PlistEditPro (Xcode and [**Viual Studio Code**](https://code.visualstudio.com/) can open plists as well)
 
 ### Preparing the AppleALC Source Code
 - Clone, Fork or download (click on "Code" and "Download Zip") the [**AppleALC**](https://github.com/acidanthera/AppleALC) Source Code 
