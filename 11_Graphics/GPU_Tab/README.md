@@ -105,7 +105,7 @@ You may have noticed the similaries between the numbers used in the PCI path and
 - For iGPUs `AAPL,slot-name`, use: `internal@0,2,0` or `built-in` (both work)
 - For the dGPU, you have to calculate it based on its PCI path. In my case it's `Internal@0,1,0/0,0`. You have to incorporate slashes as well if the PCI path contains additional "PCI" levels, which is the case for my GPU: `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`. Only the slashes separating "Pci" are relevant for this, not the "PciRoot" part.
 
-:warning: **CAUTION**: Keep in mind, that the numbers used in PCI paths are hexadecimal. So you have to convert them to decimal (if they exceed `0x09`) before adding them to the `AAPL,slot-name` key. You can use the calculator provided by Hackintool to convert hex to dec.
+:warning: **CAUTION**: Keep in mind that the numbers used in PCI paths are hexadecimal. So you have to convert them to decimal (if they exceed `0x09`) before adding them to the `AAPL,slot-name` key. You can use the Hackintool's calculator to convert from hex to dec.
 
 **Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decimal!
 
