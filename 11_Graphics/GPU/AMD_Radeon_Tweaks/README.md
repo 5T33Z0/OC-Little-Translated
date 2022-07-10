@@ -135,7 +135,7 @@ Scope (\_SB)
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
 1. Choose the SSDT matching your GPU model contained in the "mattystonnie" folder, export it as `.aml` and add it to `EFI/OC/ACPI` and config.plist:
-    - For **RX 580**: `SSDT-RX580.aml` and `DTGP.aml` (required since the table utilizes this method)
+    - For **RX 580**: `SSDT-RX580.aml` and `DTGP.aml`
     - For **RX 5500/5500XT**: `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: `SSDT-RX5700XT.aml`
     - For **RX Vega 64**: `SSDT-RXVega64.aml`
