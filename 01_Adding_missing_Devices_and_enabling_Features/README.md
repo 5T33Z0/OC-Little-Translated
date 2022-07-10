@@ -11,9 +11,11 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 - Devices which are present in the `DSDT` but are disabled because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs – usually found on mainboards with 300-series chipsets and newer.
 
 ### :warning: Don't inject already known Devices
-A lot of times I come across user configs which contain ACPI Tables and DeviceProperties Hackintool extracted for them. In other words: they inject the same already known, unchanged, identical tables and properties back into macOS. This is completely unnecessary and slows down boot times as well. 
+Sometimed I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
 
-:bulb: You only need to inject SSDTs and DeviceProperties for *unknown* devices or features or in case you need to adjust parameters of devices, features etc. So please: don't inject unchanged tables and unmodified properties into the system that you got from the same system in the first place – there are no benefits to it!
+The only reason for doing this is to have installed PCIe cards listed in the "PCI" Section of System Profiler. Apart from that all detected devices will be listed in the corresponding category they belong to. So there's really no need to do this otherwise.
+
+:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features etc. So please: don't inject the same, unmodified properties into the system you got them from in the first place.
 
 ## Properties of Fake ACPI Devices
 
