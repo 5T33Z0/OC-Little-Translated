@@ -134,11 +134,11 @@ Scope (\_SB)
 ## Method 2: Using AMD Radeon Patches by mattystonnie
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
-1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to `EFI/OC/ACPI` and config.plist.
-    - For **RX 580**: `SSDT-RX580.aml` and `DTGP.aml`
-    - For **RX 5500/5500XT**: `SSDT-RX5500XT.aml` 
-    - For **RX 5600/5700/5700XT**: `SSDT-RX5700XT.aml`
-    - For **RX Vega 64**: `SSDT-RXVega64.aml`
+1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to add `EFI/OC/ACPI` and config.plist.
+    - For **RX 580**: add `SSDT-RX580.aml` and `DTGP.aml`
+    - For **RX 5500/5500XT**: add `SSDT-RX5500XT.aml` 
+    - For **RX 5600/5700/5700XT**: add`SSDT-RX5700XT.aml`
+    - For **RX Vega 64**: add `SSDT-RXVega64.aml`
 2. Add the following Kexts to `EFI/OC/Kexts` and config.plist:
     - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
@@ -153,15 +153,13 @@ Scope (\_SB)
 	```
 5. Save your config, reboot and run some benchmark tests for comparison.
 
-### Addendum: SSDT vs. Device Properties vs. macOS Ventura
+### Addendum: SSDT vs. Device Properties
 
 I've noticed that SSDT-RX580 doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle seems too high, imo. Also, the `AGPMController` was present without injecting `DAGPM.kext`, so that's not really a requirement (same applies to `AGPM.kext` by Pavo-IM).   
 
-So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach which injects the data via Device Properties, improving performance and power consumption (around 70 Watts in idle instead of 100). 
+So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach which injects the data via Device Properties, improving performance and reducing power consumption to around 70 Watts in idle (instead of the previously used 100 Watts). 
 
-I've added plists for both Clover and OpenCore. You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and DAGPM.kext when using this method. 
-
-The Device Properties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though it is present in the `AMD9500Controller.kext`. Needs further investigation.
+I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and DAGPM.kext when using this method. 
 
 [^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab#3-obtaining-aaplslot-name-for-igpu-and-gpu) to to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
