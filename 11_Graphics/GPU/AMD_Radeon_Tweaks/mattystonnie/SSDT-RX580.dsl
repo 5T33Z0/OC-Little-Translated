@@ -149,4 +149,3 @@ DefinitionBlock ("", "SSDT", 1, "hack", "Matty", 0x00000000)
         }
     }
 }
-

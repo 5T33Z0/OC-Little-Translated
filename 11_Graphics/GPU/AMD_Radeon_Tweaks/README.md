@@ -135,18 +135,17 @@ Scope (\_SB)
 ## Method 2: Using AMD Radeon Patches by mattystonnie
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
-1. Choose the SSDT matching your GPU model contained in the "mattystonnie" Folder and export it as `.aml`.
-    - For **RX 580**: Use `SSDT-RX580.aml`
-    - For **RX 5500/5500XT**: Use `SSDT-RX5500XT.aml` 
-    - For **RX 5600/5700/5700XT**: Use `SSDT-RX5700XT.aml`
-    - For **RX Vega 64**: Use `SSDT-RXVega64.aml`
-2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
+1. Choose the SSDT matching your GPU model contained in the "mattystonnie" folder, export it as `.aml` and add it to `EFI/OC/ACPI` and config.plist:
+    - For **RX 580**: `SSDT-RX580.aml` and `DTGP.aml` (required since the table utilizes this method)
+    - For **RX 5500/5500XT**: `SSDT-RX5500XT.aml` 
+    - For **RX 5600/5700/5700XT**: `SSDT-RX5700XT.aml`
+    - For **RX Vega 64**: `SSDT-RXVega64.aml`
+   2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
     - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 4. Add the following rename to `ACPI/Patch` (not required for Vega 56/64 and RX 580):
-	
 	```swift
 	Find: 50454750
 	Replace: 45475030
