@@ -7,7 +7,6 @@ This chapter contains two approaches for improving the performance of AMD Radeon
 
 ## Method 1: For Navi GPUs (Recommended)
 1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only). Also adds `HDAU` device for audio over HDMI.
-
 2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
     - `Lilu.kext`
     - `Whatevergreen.kext`
@@ -140,7 +139,7 @@ Scope (\_SB)
     - For **RX 5500/5500XT**: `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: `SSDT-RX5700XT.aml`
     - For **RX Vega 64**: `SSDT-RXVega64.aml`
-   2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
+2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
     - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
     - `Whatevergreen.kext`
