@@ -164,6 +164,7 @@ I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You
 [^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab#3-obtaining-aaplslot-name-for-igpu-and-gpu) to to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
+
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
 
 :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
@@ -198,9 +199,11 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
-## PowerPlay Table Property Generator for Radeon VII Cards
+## PowerPlay Table Generators for Radeon RX5700, Radeon VII and Vega 64
 
-If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a value for the `PP_PhmSoftPowerPlayTable` device property using an Excel spreadsheet. This way you can inject all sorts of parameters to optimize the performance of you card such as: Power Limits, Clock Speeds, Fan Control and more.
+You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPowerPlayTable` device property for [**Radeon VII**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/), [**Vega64**](https://www.hackintosh-forum.de/forum/thread/39923-tool-vega-64-powerplaytable-generator/) and [**RX5700**](https://www.insanelymac.com/forum/topic/340909-tool-amd-radeon-rx-5700-xt-powerplay-table-generator/) cards. These are basically Excel spreadsheets which generate the necessary hex values.
+
+This way, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card.
 
 ## Credits & Resources
 - **Files**:
@@ -208,7 +211,7 @@ If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.
 	- mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 	- Baio1977 for `SSDT-NAVI.aml`
 	- Toleda for `DAGPM.kext`
-	- CMMMChris for Radeon VII PowerPlay Table Generator
+	- CMMMChris for PowerPlay Table Generators
 	- [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
 - **Additional Guides**:
 	- [**Creating Custom PowerPlay tables and fan curves for Polaris Cards**](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/)
