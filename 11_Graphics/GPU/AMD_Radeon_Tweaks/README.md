@@ -159,9 +159,11 @@ I've noticed that SSDT-RX580 doesn't work as expected in macOS Catalina and beyo
 
 So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach which injects the data via Device Properties, improving performance and power consumption (around 70 Watts in idle instead of 100). 
 
-I've added plists for both Clover and OpenCore. You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths match the ones used in your system (use Hackintool to verify). Disable/delete the SSDTs and DAGPM.kext when using this method. 
+I've added plists for both Clover and OpenCore. You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and DAGPM.kext when using this method. 
 
 The Device Properties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though it is present in the `AMD9500Controller.kext`. Needs further investigation.
+
+[^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab#3-obtaining-aaplslot-name-for-igpu-and-gpu) to to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
 ## Method 3: Injecting specific AMD Framebuffers via `DeviceProperties`
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 

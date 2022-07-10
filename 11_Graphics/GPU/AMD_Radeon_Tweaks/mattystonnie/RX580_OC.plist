@@ -12,15 +12,8 @@
 				<string>ATY,Orinoco</string>
 				<key>AAPL,slot-name</key>
 				<string>Slot-1@0,1,0/0,0</string>
-				<key>ATY,EFIVersion</key>
-				<data>
-				MDEuMDEuMTkw
-				</data>
 				<key>CFG_PTPL2_TBL</key>
-				<data>
-				ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABS
-				AAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==
-				</data>
+				<data>ggAAAHwAAAB2AAAAcAAAAGoAAABkAAAAXgAAAFgAAABSAAAATAAAAEYAAABAAAAAOgAAADQAAAAuAAAAKAAAAA==</data>
 				<key>CFG_USE_AGDC</key>
 				<integer>1</integer>
 				<key>CFG_USE_SCANOUT</key>
@@ -28,15 +21,11 @@
 				<key>CFG_USE_TCON</key>
 				<integer>1</integer>
 				<key>PP_BootupDisplayState</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>PP_DisableMCDownLoadFeature</key>
 				<integer>1</integer>
 				<key>PP_PowerPlayEnabled</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>device_type</key>
 				<string>VGA compatible controller</string>
 				<key>model</key>
@@ -49,9 +38,7 @@
 				<key>device_type</key>
 				<string>Audio device</string>
 				<key>layout-id</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>model</key>
 				<string>AMD RX 580 HDMI Audio</string>
 			</dict>

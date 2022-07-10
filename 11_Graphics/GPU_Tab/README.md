@@ -99,9 +99,6 @@ In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,s
 15. Save the config.plist and reboot
 16. Continue in Chapter 4
 
-#### ADDENDUM 
-After further research and testing, it turns out that the nummber of properties can be reduced to 3 to get it working, respectively 4 (device-id) to get the name of the iPGU correct as well:</br>![DevProps3](https://user-images.githubusercontent.com/76865553/178031340-50b48d34-6d54-424d-a972-493b9bcb4a88.png)
-
 ### Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)
 You may have noticed the similaries between the numbers used in the PCI path and the ones used in `AAPL,slot-name`: whatever number is contained in the PCI path after `0x` becomes part ot the "Internal@" string:</br>![slotname04](https://user-images.githubusercontent.com/76865553/177570451-d0501d80-fac1-4dae-b646-0bfbf881788c.png)
 
@@ -111,6 +108,9 @@ You may have noticed the similaries between the numbers used in the PCI path and
 :warning: **CAUTION**: Keep in mind, that the numbers used in PCI paths are hexadecimal. So you have to convert them to decimal (if they exceed `0x09`) before adding them to the `AAPL,slot-name` key. You can use the calculator provided by Hackintool to convert hex to dec.
 
 **Example**: The `AAPL,slot-name` of **PciRoot(0x0)/Pci(0x17,0x0)** is **not** Internal@0,17,0 but **Internal@0,23,0**. That's because `17` in hex is `23` in decimal!
+
+### ADDENDUM 
+After further research and testing, it turns out that the nummber of properties can be reduced to 3 to get it working, respectively 4 (device-id) to get the name of the iPGU correct as well:</br>![DevProps3](https://user-images.githubusercontent.com/76865553/178031340-50b48d34-6d54-424d-a972-493b9bcb4a88.png)
 
 ## 4. Verifying and Troubleshooting
 After applying the changes to the config and a reboot, open Activity Monitor and check if the Tab "GPU" is present. If it is present everything should be working correctly. But just to make sure, run the "metalgpu" script for macOS13:</br>![macOS13Metal](https://user-images.githubusercontent.com/76865553/177574170-8f5158ab-1222-433f-9937-861e62ef2342.png)
