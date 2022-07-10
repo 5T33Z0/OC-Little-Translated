@@ -203,10 +203,13 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a value for the `PP_PhmSoftPowerPlayTable` device property using an Excel spreadsheet. This way you can inject all sorts of parameters to optimize the performance of you card such as: Power Limits, Clock Speeds, Fan Control and more.
 
 ## Credits & Resources
-- Using Radeon RX6600 XT Cards with [macOS Monterey](https://github.com/perez987/rx6600xt-on-macos-monterey)
-- mattystonnie for the SSDTs and original [Guide](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
-- Toleda for `DAGPM.kext`
-- Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
-- Baio1977 for `SSDT-NAVI.aml`
-- CMMMChris for his Radeon VII PowerPlay Table Generator
-- [Jellyfish Video Bitrate Test Files](https://jell.yfish.us/)
+- **Files**:
+	- Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
+	- mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+	- Baio1977 for `SSDT-NAVI.aml`
+	- Toleda for `DAGPM.kext`
+	- CMMMChris for Radeon VII PowerPlay Table Generator
+	- [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
+- **Additional Guides**:
+	- [**Creating Custom PowerPlay tables and fan curves for Polaris Cards**](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/)
+	- [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
