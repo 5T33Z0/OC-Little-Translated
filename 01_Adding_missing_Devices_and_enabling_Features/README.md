@@ -13,7 +13,7 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 ### :warning: Don't inject already known Devices
 Sometimed I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
 
-The only reason for doing this is to have installed PCIe cards listed in the "PCI" Section of System Profiler. Apart from that all detected devices will be listed in the corresponding category they belong to. So there's really no need to do this otherwise.
+The only reason for doing this is to have installed PCIe cards listed in the "PCI" section of System Profiler. Apart from that, all detected devices will be listed in the corresponding category they belong to automatically. So there's really no need to do this.
 
 :bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features etc. So please: don't inject the same, unmodified properties into the system you got them from in the first place.
 
