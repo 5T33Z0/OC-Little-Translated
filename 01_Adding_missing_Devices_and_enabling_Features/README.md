@@ -10,10 +10,10 @@ Among the many `SSDT` patches included in this repo, a significant number of the
 - Patches which rename the original device or method to something else so a replacement SSDT can be written which redefines the device or method to address issues such and Sleep and Wake or Touchpads not working properly, for example.
 - Devices which are present in the `DSDT` but are disabled because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs – usually found on mainboards with 300-series chipsets and newer.
 
-### :warning: Don't inject alread known Devices
-A lot of times I come across user configs which contain ACPI Tables and DeviceProperties Hackintool extracted for them. In other words: they inject the same already known, unchanged, identical tables adn propertis back into macOS. This is completely unnecessary, tautological and counter-productive – it slows down boot times as well. 
+### :warning: Don't inject already known Devices
+A lot of times I come across user configs which contain ACPI Tables and DeviceProperties Hackintool extracted for them. In other words: they inject the same already known, unchanged, identical tables adn propertis back into macOS. This is completely unnecessary and slows down boot times as well. 
 
-:bulb: You only need to inject SSDTs and DeviceProperties for *unknown* devices or features or in case you need to adjust parameters of devices, features etc. So please: don't inject unchanged tables and into the system that you got from the same system in the first place!
+:bulb: You only need to inject SSDTs and DeviceProperties for *unknown* devices or features or in case you need to adjust parameters of devices, features etc. So please: don't inject unchanged tables and unmodified properties into the system that you got from the same system in the first place – there are no benefits to it!
 
 ## Properties of Fake ACPI Devices
 
