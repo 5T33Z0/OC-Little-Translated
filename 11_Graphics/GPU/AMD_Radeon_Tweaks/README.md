@@ -155,7 +155,7 @@ Scope (\_SB)
 
 ### Addendum: SSDT vs. Device Properties
 
-I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this is not really a requirement either (same applies to `AGPM.kext` by Pavo-IM).   
+I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this is not really a requirement either (same applies to `AGPMInjector.kext` by Pavo-IM).   
 
 Looking for a solution, I've gone through the whole thread (90+ pages). On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach utilizing Device Properties to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of the previously used 100). 
 
