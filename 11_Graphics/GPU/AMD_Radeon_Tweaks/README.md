@@ -7,7 +7,7 @@ This chapter contains two approaches for improving the performance of AMD Radeon
 
 ## Method 1: For Navi GPUs (Recommended)
 1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only). Also adds `HDAU` device for audio over HDMI.
-2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
+2. Add the following Kexts to `EFI/OC/Kexts` and config.plist:
     - `Lilu.kext`
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
@@ -134,12 +134,12 @@ Scope (\_SB)
 ## Method 2: Using AMD Radeon Patches by mattystonnie
 **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
-1. Choose the SSDT matching your GPU model contained in the "mattystonnie" folder, export it as `.aml` and add it to `EFI/OC/ACPI` and config.plist:
+1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to `EFI/OC/ACPI` and config.plist.
     - For **RX 580**: `SSDT-RX580.aml` and `DTGP.aml`
     - For **RX 5500/5500XT**: `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: `SSDT-RX5700XT.aml`
     - For **RX Vega 64**: `SSDT-RXVega64.aml`
-2. Add the following Kexts to `/Volumes/EFI/EFI/OC/Kexts` and config.plist:
+2. Add the following Kexts to `EFI/OC/Kexts` and config.plist:
     - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
     - `Whatevergreen.kext`
@@ -155,11 +155,11 @@ Scope (\_SB)
 
 ### Addendum: SSDT vs. Device Properties vs. macOS Ventura
 
-I've noticed that the SSDT for the RX 580 doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve much and power consumption wasn't optimized as well – around 100 Watts in idle seems too high, imo. Also, the `AGPMController` was loaded even without the `DAGPM.kext`, so that's not really a requirement. Same for `AGPM.kext` by Pavo-IM.   
+I've noticed that SSDT-RX580 doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle seems too high, imo. Also, the `AGPMController` was present without injecting `DAGPM.kext`, so that's not really a requirement (same applies to `AGPM.kext` by Pavo-IM).   
 
-So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found Device Properties which worked: improved performance with lowered power consumption (around 70 Watts in idle instead of 100). 
+So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach which injects the data via Device Properties, improving performance and power consumption (around 70 Watts in idle instead of 100). 
 
-I created plists for both Clover and OpenCore (`RX580_Clover.plist` and `RX580_OC.plist`). You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths match the ones used in your system (use Hackintool to verify).
+I've added plists for both Clover and OpenCore. You can copy the included properties to the corresponding section of your config. Ensure that the PCI paths match the ones used in your system (use Hackintool to verify). Disable/delete the SSDTs and DAGPM.kext when using this method. 
 
 The Device Properties work fine in macOS Catalina up to Monterey, but in Ventura, the Orinoco Framebuffer I am using for the RX580 is not loaded even though it is present in the `AMD9500Controller.kext`. Needs further investigation.
 
@@ -200,7 +200,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 ## PowerPlay Table Property Generator for Radeon VII Cards
 
-If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a special device property using an Excel spreadsheet allowing you to modify all sorts of parameters to optimize the performance of you card.
+If you have an AMD Radeon VII Card, you can follow [**this guide**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/) to generate a value for the `PP_PhmSoftPowerPlayTable` device property using an Excel spreadsheet. This way you can inject all sorts of parameters to optimize the performance of you card such as: Power Limits, Clock Speeds, Fan Control and more.
 
 ## Credits & Resources
 - Using Radeon RX6600 XT Cards with [macOS Monterey](https://github.com/perez987/rx6600xt-on-macos-monterey)
