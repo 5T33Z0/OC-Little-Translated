@@ -132,7 +132,7 @@ Scope (\_SB)
 </details>
 
 ## Method 2: Using AMD Radeon Patches by mattystonnie
-**Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
+> **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
 1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to add `EFI/OC/ACPI` and config.plist.
     - For **RX 580**: add `SSDT-RX580.aml` and `DTGP.aml`
@@ -155,9 +155,9 @@ Scope (\_SB)
 
 ### Addendum: SSDT vs. Device Properties
 
-I've noticed that SSDT-RX580 doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle seems too high, imo. Also, the `AGPMController` was present without injecting `DAGPM.kext`, so that's not really a requirement (same applies to `AGPM.kext` by Pavo-IM).   
+I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this is not really a requirement either (same applies to `AGPM.kext` by Pavo-IM).   
 
-So I've gone through the whole thread (90+ pages) looking for a solution. On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach which injects the data via Device Properties, improving performance and reducing power consumption to around 70 Watts in idle (instead of the previously used 100 Watts). 
+Looking for a solution, I've gone through the whole thread (90+ pages). On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach utilizing Device Properties to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of the previously used 100). 
 
 I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and DAGPM.kext when using this method. 
 
