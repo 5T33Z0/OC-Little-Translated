@@ -22,6 +22,9 @@
 ## About
 Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Limits to optimize performance while reducing power consumption at the same time which wouldn't be possible otherwise. On top of that you don't have to flash a modified BIOS on your GPU.
 
+### How it works
+Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you extract the section with the PowerPlay Info table from the modded ROM with a Hex Editor and inject into macOS via `DeviceProperties`.
+
 ## Requirements
 
 - Windows Installation
