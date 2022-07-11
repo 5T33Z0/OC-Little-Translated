@@ -5,7 +5,7 @@ This chapter contains two approaches for improving the performance of AMD Radeon
 
 :warning: Use either method 1 or 2, not both!
 
-## Method 1: For Navi GPUs (Recommended)
+## Method 1: For Navi GPUs
 1. Add `SSDT-NAVI.aml` &rarr; Renames `PEGP` to `EGP0` so the GPU works (required for RX 5000/6000 Series Cards only). Also adds `HDAU` device for audio over HDMI.
 2. Add the following Kexts to `EFI/OC/Kexts` and config.plist:
     - `Lilu.kext`
@@ -199,11 +199,15 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
-## PowerPlay Table Generators for Radeon RX5700, Radeon VII and Vega 64
+## Method 4: Using PowerPlay Tables (recommended)
+With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card.
+
+### Creating PowerPlay Tables for AMD Polaris Cards
+&rarr; [**Follow this Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/Polaris_PoperPlay_Tables.md)
+
+### PowerPlay Table Generators for Radeon RX5700, Radeon VII and Vega 64
 
 You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPowerPlayTable` device property for [**Radeon VII**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/), [**Vega64**](https://www.hackintosh-forum.de/forum/thread/39923-tool-vega-64-powerplaytable-generator/) and [**RX5700**](https://www.insanelymac.com/forum/topic/340909-tool-amd-radeon-rx-5700-xt-powerplay-table-generator/) cards. These are basically Excel spreadsheets which generate the necessary hex values.
-
-This way, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card.
 
 ## Credits & Resources
 - **Files**:
