@@ -15,15 +15,12 @@
 - [Testing](#testing)
 	- [Enable Monitoring](#enable-monitoring)
 	- [Run some Benchmark Tests](#run-some-benchmark-tests)
-- [Test results](#test-results)
-- [Credits and Resources](#credits-and-resources)
+	- [Test results](#test-results)
+- [Example Files](#example-files)
+- [Credits and Thank Yous](#credits-and-thank-yous)
 
 ## About
-Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Consumption to optimize performance while reducing power consumption at the same time. In Windows you can use 
-
-which wouldn't be possible otherwise. And on top of that you don't have to flash a modified BIOS on your GPU.
-
-This reduces Power Consumption and improves Perfor
+Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Limits to optimize performance while reducing power consumption at the same time which wouldn't be possible otherwise. On top of that you don't have to flash a modified BIOS on your GPU.
 
 ## Requirements
 
@@ -106,7 +103,7 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 - Enable the following options:</br>![HWMonSMC2_01](https://user-images.githubusercontent.com/76865553/178275364-aff56ce8-ef72-466d-af8d-945c90e69396.png)
 - Close the settings. The HWMonitor Icon is now present in the Menubar. Click on it to show the monitored devices:</br>![HWMonSMC2](https://user-images.githubusercontent.com/76865553/178275501-2f35da79-dc90-40da-a1b1-7edb84aa47f0.png)
 
-:bulb: Alternatively, you can monitor GPU useage via Terminal, using this command: 
+:bulb: Alternatively, you can monitor GPU usage via Terminal, using this command: 
 
 `ioreg -l |grep \"PerformanceStatistics\" | cut -d '{' -f 2 | tr '|' ',' | tr -d '}' | tr ',' '\n'|grep 'Temp\|Fan\|Power\|Clock\|Utilization'`
 
@@ -119,9 +116,9 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 - Open your config.plist 
 - Put a `#` in front of `PP_PhmSoftPowerPlayTable` to disable the key
 - Reboot macOS and perform the tests again
-- Also check in HWMonitorSMC2 for Power Consumption of the GPU.
+- Check power consumption, temps and clock speed in HWMonitorSMC2.
 
-## Test results
+### Test results
 Here are some Geekbench scores for my Sapphire Nitro+ Radeon RX 580 (4 GB):
 
 - **Metal** (stock): [**51211**](https://browser.geekbench.com/v5/compute/5112722) 
@@ -135,7 +132,7 @@ Power consumption in idle (in Watts):
 - **Modded**: ≈ 70 W
 
 ## Example Files
-Here are some example files by Jasomhacks which explain which sections of the PowerPlay Table code does what. Download 
+Here are some example files by Jasomhacks which explain which sections of the PowerPlay Table code do what. [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/PowerPlayInfo/PowerPlayInfo.zip?raw=true) 
 
 ## Credits and Thank Yous
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
