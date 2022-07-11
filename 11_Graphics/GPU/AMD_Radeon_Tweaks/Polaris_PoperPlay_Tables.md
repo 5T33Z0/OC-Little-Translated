@@ -1,5 +1,22 @@
-## Creating Custom PowerPlay Tables for AMD Polaris Cards
+# Creating Custom PowerPlay Tables for AMD Polaris Cards
 > **DISCLAIMER**: Playing around with the parameters of your vBIOS can cause irreparable damage to your GPU if you don't know what you are doing. Use this guide on your own risk! Since I don't know which GPU you are using and I don't know what you want to change/optimize, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that our or research it.
+
+**TABLE of CONTENTS**
+
+- [About](#about)
+- [Requirements](#requirements)
+- [Instructions](#instructions)
+	- [Dumping the vBIOS](#dumping-the-vbios)
+	- [Modifying the vBIOS](#modifying-the-vbios)
+	- [Locating the `PowerPlayInfo` inside the modded .rom file](#locating-the-powerplayinfo-inside-the-modded-rom-file)
+	- [Extracting `PowerPlayInfo` from the modded vBIOS .rom](#extracting-powerplayinfo-from-the-modded-vbios-rom)
+	- [Gathering the PCI path of your dGPU](#gathering-the-pci-path-of-your-dgpu)
+	- [Editing the config.plist](#editing-the-configplist)
+- [Testing](#testing)
+	- [Enable Monitoring](#enable-monitoring)
+	- [Run some Benchmark Tests](#run-some-benchmark-tests)
+- [Test results](#test-results)
+- [Credits and Resources](#credits-and-resources)
 
 ## About
 Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Consumption to optimize performance while reducing power consumption at the same time. In Windows you can use 
