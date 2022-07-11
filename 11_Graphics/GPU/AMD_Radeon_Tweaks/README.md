@@ -200,7 +200,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
 ## Method 4: Using PowerPlay Tables (recommended)
-With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via `@0,name` property to select a specific Framebuffer this is probably the best solution.
+With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to oprimize the performance of your AMD card under macOS.
 
 ### Creating PowerPlay Tables for AMD Polaris Cards
 &rarr; [**Follow this Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/Polaris_PoperPlay_Tables.md)
