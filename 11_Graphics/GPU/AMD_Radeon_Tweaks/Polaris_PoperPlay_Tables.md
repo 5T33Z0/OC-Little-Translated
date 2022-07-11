@@ -134,7 +134,10 @@ Power consumption in idle (in Watts):
 - **Stock**: ≈ 100 W
 - **Modded**: ≈ 70 W
 
+## Example Files
+Here are some example files by Jasomhacks which explain which sections of the PowerPlay Table code does what. Download 
+
 ## Credits and Thank Yous
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
 - Examples of [modded PowerPlayTables](https://forums.macrumors.com/threads/sapphire-pulse-rx580-8gb-vbios-study.2133607/)
-- Jasonhacks for his explanations
+- Jasonhacks for explanations and example files
