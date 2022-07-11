@@ -104,6 +104,19 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 - Reboot macOS and perform the tests again
 - Also check in HWMonitorSMC2 for Power Consumption of the GPU.
 
+## Test results
+Here are some Geekbench scores for my Sapphire Nitro+ Radeon RX 580 (4 GB):
+
+- **Metal** (stock): [**51211**](https://browser.geekbench.com/v5/compute/5112722) 
+- **OpenCL** (stock): [**48076**](https://browser.geekbench.com/v5/compute/5112729)
+- **Metal** (with PowerPlay Table): [**53023**](https://browser.geekbench.com/v5/compute/5112672)
+- **OpenCL** (with PowerPlay Table): [**46030**](https://browser.geekbench.com/v5/compute/5112679)
+
+Power consumption in idle (in Watts): 
+
+- **Stock**: ≈ 100 W
+- **Modded**: ≈ 70 W
+
 ## Credits and Resources
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
 - Examples of [modded PowerPlayTables](https://forums.macrumors.com/threads/sapphire-pulse-rx580-8gb-vbios-study.2133607/)
