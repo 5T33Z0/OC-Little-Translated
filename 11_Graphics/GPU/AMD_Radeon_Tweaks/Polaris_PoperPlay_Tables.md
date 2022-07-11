@@ -28,7 +28,7 @@ This reduces Power Consumption and improves Perfor
 
 ### Dumping the vBIOS
 1. Boot Windows
-2. Run `amdvbflashWin.exe` as Admin:</br>![](/Users/5t33z0/Desktop/Pics_2/ATIWinFlash.PNG)
+2. Run `amdvbflashWin.exe` as Admin:</br>![ATIWinFlash](https://user-images.githubusercontent.com/76865553/178274110-f868d4fe-52b1-4d95-b4cd-351a8122d509.PNG)
 3. Press "Save" to dump the vBIOS ROM
 4. Give it a reasonable name like "BIOS_stock" and save it.
 
@@ -36,7 +36,7 @@ This reduces Power Consumption and improves Perfor
 
 ### Modifying the vBIOS
 1. Open `PolarisBiosEditor`
-2. Click on "Open BIOS" and open the BIOS dumped previously:</br>![](/Users/5t33z0/Desktop/Pics_2/RX580 mod.PNG)
+2. Click on "Open BIOS" and open the BIOS dumped previously:</br>![RX580_mod](https://user-images.githubusercontent.com/76865553/178274228-4beeb3b4-e6d9-4f86-a83c-c7924c2905aa.PNG)
 3. Select the parameter you want to change and enter its new value
 4. Once you done editing click on "SAVE AS"
 5. Save the file as "BIOS_Mod". Don't override the original vBIOS file
@@ -44,9 +44,9 @@ This reduces Power Consumption and improves Perfor
 :bulb: For suggestions on which parameters to modify, you can check out the BIOS mods presented in this [thread](https://forums.macrumors.com/threads/sapphire-pulse-rx580-8gb-vbios-study.2133607/). But don't flash the actual modified ROM(s) as suggested  in that guide – this is only necessary on real Macs, not Hackintoshes! We will inject `DeviceProperties` instead.
 
 ### Locating the `PowerPlayInfo` inside the modded .rom file
-1. Run `ATOMBIOSReader.exe`</br>:![](/Users/5t33z0/Desktop/Pics_2/AtomBIOS01.png)
+1. Run `ATOMBIOSReader.exe`</br>:![AtomBIOS01](https://user-images.githubusercontent.com/76865553/178274627-7efa0663-c93a-40bf-bcd8-076443f99663.png)
 2. Open you `BIOS_Mod.rom` file &rarr; this will generate a .txt file. It contains a list of all the Command Tables of the ROM ass well as the addresses they are located at in memory.
-3. Open the `BIOS_Mod.rom.txt` file and search for "PowerPlayInfo":</br>![](/Users/5t33z0/Desktop/Pics_2/txtfile.png)
+3. Open the `BIOS_Mod.rom.txt` file and search for "PowerPlayInfo":</br>![txtfile](https://user-images.githubusercontent.com/76865553/178274713-c22c7e4e-5892-46cd-9c0b-b496e2fbf865.png)
 4. It says **9bba  Len 0341** in my case.
 
 This means the `PowerPlayInfo` starts at position `9bba` (hex) of the ROM and has a length of `341`. So we have to copy the code starting at position `9bba` for the length of 341.
@@ -55,11 +55,11 @@ This means the `PowerPlayInfo` starts at position `9bba` (hex) of the ROM and ha
 1. Run HxD Hex Editor 
 2. Open your patched "BIOS_MOD.rom" file
 3. In the lower lef corner, double-click on "Offset(h)".
-4. Paste the offset you gathered from the text file (in Hex) into the dialog Window and click "OK":</br>![](/Users/5t33z0/Desktop/Pics_2/HxD003.png)
+4. Paste the offset you gathered from the text file (in Hex) into the dialog Window and click "OK":</br>![HxD003](https://user-images.githubusercontent.com/76865553/178274929-f36b150b-761d-4b30-b54f-5b8d53cee05b.png)
 5. This puts the cursor to the correct location
-6. Select the code starting from the Offset for the length you found previously. In my case 341:</br>![](/Users/5t33z0/Desktop/Pics_2/HxD04.png)
+6. Select the code starting from the Offset for the length you found previously. In my case 341:</br>![HxD04](https://user-images.githubusercontent.com/76865553/178275828-0f27f7bb-fae6-4da6-ac0b-9210ab3c302f.png)
 7. Copy the value to memory (CTRL+C)
-8. Open Editor, paste in the value and save the file as `PPT01.txt` or similar at a location which you can access from within macOS:</br>![](/Users/5t33z0/Desktop/Pics_2/PPT01.png)
+8. Open Editor, paste in the value and save the file as `PPT01.txt` or similar at a location which you can access from within macOS:</br>![PPT01](https://user-images.githubusercontent.com/76865553/178275032-fbd01753-44b2-4d49-8b4b-20c983e468b7.png)
 9. Reboot into macOS
 
 ### Gathering the PCI path of your dGPU
@@ -75,7 +75,7 @@ This means the `PowerPlayInfo` starts at position `9bba` (hex) of the ROM and ha
 - Double-click its name and paste in the Device Path (CMD+V). Usually it's `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)`.
 - Next, create a new Key called `PP_PhmSoftPowerPlayTable` (Type: DATA)
 - Paste in the data from the `PPT01.txt`
-- The resulting entry should look similar to this:</br>![](/Users/5t33z0/Desktop/Pics_2/propertree01.png)
+- The resulting entry should look similar to this:</br>![propertree01](https://user-images.githubusercontent.com/76865553/178275171-7f32aaf9-8d90-4cc3-b3be-034fb0b2b15d.png)
 - Save your config.plist and reboot
 
 ## Testing
@@ -85,9 +85,9 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 - Install Intel Power Gadget 
 - Install HWMonitorSMC2
 - Run HWMonitorSMC2
-- Click on the cog wheel to open the preferences 
-- Enable the following options:</br>![](/Users/5t33z0/Desktop/Pics_2/HWMonSMC2_01.png)
-- Close the settings. The HWMonitor Icon is now present in the Menubar. Click on it to show the monitored devices:</br>![](/Users/5t33z0/Desktop/Pics_2/HWMonSMC2.png)
+- Click on the cog wheel to open the preferences
+- Enable the following options:</br>![HWMonSMC2_01](https://user-images.githubusercontent.com/76865553/178275364-aff56ce8-ef72-466d-af8d-945c90e69396.png)
+- Close the settings. The HWMonitor Icon is now present in the Menubar. Click on it to show the monitored devices:</br>![HWMonSMC2](https://user-images.githubusercontent.com/76865553/178275501-2f35da79-dc90-40da-a1b1-7edb84aa47f0.png)
 
 :bulb: Alternatively, you can monitor GPU useage via Terminal, using this command: 
 
