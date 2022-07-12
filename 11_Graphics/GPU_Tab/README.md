@@ -16,9 +16,10 @@
 - [3. Obtaining `AAPL,slot-name` for iGPU and GPU](#3-obtaining-aaplslot-name-for-igpu-and-gpu)
 	- [Method 1: using Hackintool](#method-1-using-hackintool)
 	- [Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)](#method-2-calculating-aaplslot-name-manually-for-advanced-users)
+	- [ADDENDUM](#addendum)
 - [4. Verifying and Troubleshooting](#4-verifying-and-troubleshooting)
 - [5. Shortcut: Using a defaults-write command](#5-shortcut-using-a-defaults-write-command)
-- [Credits & Resources](#credits-and-resources)
+- [Credits and Resources](#credits-and-resources)
 
 ## About
 If the Device Properties of your iGPU and dGPU are configured correctly, you will find the Tab "GPU" in the Activity Monitor App which lists the graphics devices and the tasks/processes assigned to each of them.
@@ -149,4 +150,3 @@ To disable it, enter
 - Dortania for VDADecoderChecker
 - About [Apple GUC](https://www.reddit.com/r/hackintosh/comments/gbg5ms/oopencores_igfxfw_and_apples_guc/)
 - [Test](https://www.insanelymac.com/forum/topic/352523-imac191headless-vs-imacpro11-video-encoding-performance-test): iMac19,1 (Headless) vs iMacPro1,1 Video Encoding Performance
-
