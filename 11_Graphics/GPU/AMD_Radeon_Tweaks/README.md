@@ -74,7 +74,9 @@ With this method, you can inject all sorts of parameters into macOS to optimize 
 
 ### PowerPlay Table Generators for Radeon RX5700, Radeon VII and Vega 64
 
-You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPowerPlayTable` device property for [**Radeon VII**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/), [**Vega64**](https://www.hackintosh-forum.de/forum/thread/39923-tool-vega-64-powerplaytable-generator/) and [**RX5700**](https://www.insanelymac.com/forum/topic/340909-tool-amd-radeon-rx-5700-xt-powerplay-table-generator/) cards. These are basically Excel spreadsheets which generate the necessary hex values.
+You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPowerPlayTable` device property for [**Radeon VII**](https://www.insanelymac.com/forum/topic/340009-tool-radeon-vii-powerplay-table-generator-oc-uv-fan-curve/), [**Vega64**](https://www.hackintosh-forum.de/forum/thread/39923-tool-vega-64-powerplaytable-generator/) and [**RX5700**](https://www.insanelymac.com/forum/topic/340909-tool-amd-radeon-rx-5700-xt-powerplay-table-generator/) cards. These are basically Excel spreadsheets which generate the necessary hex values. 
+
+There's another [**method**](https://www.insanelymac.com/forum/topic/351276-rx-6600-xt-on-macos-zero-rpm-with-softpowerplaytable/#comment-2779094) for obtaining PowerPlay Tables for Navi Cards under Windows using Tools and Registry Editor.
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
@@ -82,5 +84,4 @@ You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPower
 - Toleda for `DAGPM.kext`
 - CMMMChris for PowerPlay Table Generators
 - [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
-- [**Creating Custom PowerPlay tables and fan curves for Polaris Cards**](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/)
 - [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
