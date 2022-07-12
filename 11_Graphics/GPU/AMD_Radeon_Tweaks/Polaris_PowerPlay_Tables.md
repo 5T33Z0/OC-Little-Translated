@@ -1,29 +1,31 @@
 # Creating Custom PowerPlay Tables for AMD Polaris Cards
-> **DISCLAIMER**: Use this guide on your own risk! Playing around with the parameters of your vBIOS can cause irreparable damage to your Graphics Card if you don't know what you are doing. Since I don't know which GPU you are using and I don't know which paramters you want to modify, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that out. You can use the example files contained in the PowerPlayInfo.zip file for reference. They contain further explanations about the structure of the PowerPlayInfo data contained in the vBIOS.
+> **DISCLAIMER**: Use this guide on your own risk! Playing around with the parameters of your vBIOS can cause irreparable damage to your Graphics Card if you don't know what you are doing. Since I don't know which GPU you are using and I don't know which parameters you want to modify, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that out. You can use the example files contained in the PowerPlayInfo.zip file for reference. They contain further explanations about the structure of the PowerPlayInfo data contained in the vBIOS.
 
 **TABLE of CONTENTS**
 
-- [About](#about)
-- [Requirements](#requirements)
-- [Instructions](#instructions)
-	- [Dumping the vBIOS](#dumping-the-vbios)
-	- [Modifying the vBIOS](#modifying-the-vbios)
-	- [Locating the `PowerPlayInfo` inside the modded .rom file](#locating-the-powerplayinfo-inside-the-modded-rom-file)
-	- [Extracting `PowerPlayInfo` from the modded vBIOS .rom](#extracting-powerplayinfo-from-the-modded-vbios-rom)
-	- [Gathering the PCI path of your dGPU](#gathering-the-pci-path-of-your-dgpu)
-	- [Editing the config.plist](#editing-the-configplist)
-- [Testing](#testing)
-	- [Enable Monitoring](#enable-monitoring)
-	- [Run some Benchmark Tests](#run-some-benchmark-tests)
-	- [Test results](#test-results)
-- [Example Files](#example-files)
-- [Credits and Thank Yous](#credits-and-thank-yous)
+- [Creating Custom PowerPlay Tables for AMD Polaris Cards](#creating-custom-powerplay-tables-for-amd-polaris-cards)
+	- [About](#about)
+		- [How it works](#how-it-works)
+	- [Requirements](#requirements)
+	- [Instructions](#instructions)
+		- [Dumping the vBIOS](#dumping-the-vbios)
+		- [Modifying the vBIOS](#modifying-the-vbios)
+		- [Locating the `PowerPlayInfo` inside the modded .rom file](#locating-the-powerplayinfo-inside-the-modded-rom-file)
+		- [Extracting `PowerPlayInfo` from the modded vBIOS .rom](#extracting-powerplayinfo-from-the-modded-vbios-rom)
+		- [Gathering the PCI path of your dGPU](#gathering-the-pci-path-of-your-dgpu)
+		- [Editing the config.plist](#editing-the-configplist)
+	- [Testing](#testing)
+		- [Enable GPU Monitoring](#enable-gpu-monitoring)
+		- [Run some Benchmark Tests](#run-some-benchmark-tests)
+		- [Test results](#test-results)
+	- [Example Files](#example-files)
+	- [Credits and Thank Yous](#credits-and-thank-yous)
 
 ## About
 Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Limits to optimize performance while reducing power consumption at the same time which wouldn't be possible otherwise. On top of that you don't have to flash a modified BIOS on your GPU.
 
 ### How it works
-Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you extract the PowerPlayInfo table from the modded ROM with a Hex Editor and inject into macOS via `DeviceProperties`. Combined with [`@0,name`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks#method-2-selecting-specific-amd-framebuffers-via-deviceproperties) property to select a specific Framebuffer this is probably the best method to optimze performance and power consumption of AMD cards under macOS
+Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you extract the PowerPlayInfo table from the modded ROM with a Hex Editor and inject into macOS via `DeviceProperties`. Combined with [`@0,name`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks#method-2-selecting-specific-amd-framebuffers-via-deviceproperties) property to select a specific Framebuffer this is probably the best method to optimize performance and power consumption of AMD cards under macOS
 
 ## Requirements
 
