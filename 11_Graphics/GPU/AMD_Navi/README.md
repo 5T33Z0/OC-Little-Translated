@@ -133,6 +133,5 @@ When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen 
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - Baio1977 for `SSDT-NAVI.aml`
 - [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
-guide_polaris_rx_560_580_etc_custom_powerplay/)
 - [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
 - [**AMD Boot Flags**](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html#amd-boot-arguments)
