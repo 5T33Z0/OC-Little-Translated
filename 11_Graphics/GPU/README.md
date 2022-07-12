@@ -1,6 +1,6 @@
 # GPU Support in macOS
 
-In general, please refer to Dortania's [GPU Buyer's Guide ](https://dortania.github.io/GPU-Buyers-Guide/)if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
+In general, please refer to Dortania's [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/) if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
 
 ## AMD GPU Cards Support
 - [Enabling Navi Cards](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)
