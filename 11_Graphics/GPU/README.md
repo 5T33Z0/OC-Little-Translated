@@ -3,9 +3,9 @@
 In general, please refer to Dortania's [GPU Buyer's Guide ](https://dortania.github.io/GPU-Buyers-Guide/)if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
 
 ## AMD GPU Cards Support
-
-- For current AMD GPUs see &rarr; Chapter [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
-- For vintage AMD Cards and macOS &rarr; Check Rampage Dev's excellent [AMD Graphics Guide](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/)
+- [Enabling Navi Cards](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)
+- [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
+- For Legacy AMD Cards and macOS &rarr; Check Rampage Dev's excellent [AMD Graphics Guide](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/)
 
 ## NVIDIA GPU Support†
 It's complicated… well, actually it isn't: just don't buy them! ;)
