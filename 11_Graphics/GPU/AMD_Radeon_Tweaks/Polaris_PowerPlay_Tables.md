@@ -146,3 +146,4 @@ Here are some example files by Jasonhacks with explanations about the sections o
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
 - Examples of [modded PowerPlayTables](https://forums.macrumors.com/threads/sapphire-pulse-rx580-8gb-vbios-study.2133607/)
 - Jasonhacks for explanations and example files
+- Another [method](https://www.insanelymac.com/forum/topic/351276-rx-6600-xt-on-macos-zero-rpm-with-softpowerplaytable/#comment-2779094) for obtaining PowerPlay Tables
