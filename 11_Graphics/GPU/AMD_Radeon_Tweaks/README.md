@@ -26,7 +26,7 @@ I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and 
 
 Looking for a solution, I've gone through the whole thread (90+ pages). On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach utilizing Device Properties to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of the previously used 100). 
 
-I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and DAGPM.kext when using this method. 
+I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and `DAGPM.kext` when using this method. 
 
 [^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab#3-obtaining-aaplslot-name-for-igpu-and-gpu) to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
@@ -44,7 +44,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 ### Config Edits
 - Mount your EFI
-- For NAVI Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
+- For Navi Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
 - Disable Whatevergreen.kext
 - Disable boot-arg `agdpmod=pikera`
 - Under `DeviceProperties/Add` create a new child
@@ -61,13 +61,13 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 		- **RX5700** &rarr; `ATY,Adder`
 		- **RX5500** &rarr; `ATY,Python`
 		- **RX570/580** &rarr; `ATY,Orinoco`
-	- In this example, we use ATI,Henbury (without empty spaces):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
+	- In this example, we use `ATI,Henbury` (without blankspace):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
 - Save and reboot.
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
 ## Method 3: Using PowerPlay Tables
-With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to oprimize the performance of your AMD card under macOS.
+With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to optimize the performance of your AMD card under macOS.
 
 ### Creating PowerPlay Tables for AMD Polaris Cards (RX 500-series)
 &rarr; [**Follow this Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/Polaris_PowerPlay_Tables.md)
