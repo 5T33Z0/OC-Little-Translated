@@ -18,6 +18,8 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 4. Save your config, reboot and run some benchmark tests for comparison.
 
+**NOTE**: These are slightly modified variants of mattystonnie's tables which have the `PEGP` to `EGP0` rename already integrated in the SSDT (where required), so you don't need to add any binary renames to your config.plist
+
 ### Addendum: SSDT vs. Device Properties
 
 I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this is not really a requirement either (same applies to `AGPMInjector.kext` by Pavo-IM).   
