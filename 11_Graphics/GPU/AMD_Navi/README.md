@@ -8,7 +8,7 @@ This SSDT enables Navi Cards (RX 5000/6000 series) in macOS. It renames `PEGP` t
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
 
-## SSDT Content
+## SSDT-NAVI Content
 
 ```swift
 External (_SB_.PCI0, DeviceObj)
