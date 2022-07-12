@@ -78,7 +78,7 @@ So when implementing data from the Intel HD Graphics FAQ into your config, such 
 
 **NOTE**: The Metal capabilities of GPUs are limited by the used hardware. GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
 
-## 3. Obtaining `AAPL,slot-name` for iGPU and GPU
+## 3. Obtaining AAPL,slot-name for iGPU and GPU
 In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,slot-name to the DeviceProperties of the iGPU and dGPU. Follow either Method 1 or 2 to do so:
 
 ### Method 1: using Hackintool 
