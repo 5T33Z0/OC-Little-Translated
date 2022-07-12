@@ -1,5 +1,5 @@
 # Creating Custom PowerPlay Tables for AMD Polaris Cards
-> **DISCLAIMER**: Playing around with the parameters of your vBIOS can cause irreparable damage to your GPU if you don't know what you are doing. Use this guide on your own risk! Since I don't know which GPU you are using and I don't know what you want to change/optimize, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that our or research it.
+> **DISCLAIMER**: Playing around with the parameters of your vBIOS can cause irreparable damage to your GPU if you don't know what you are doing. Use this guide on your own risk! Since I don't know which GPU you are using and I don't know which paramters you want to modify, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that. You can use the example files contained in the PowerPlayInfo.zip file for reference. It contains further explanations about the structure of the PowerPlayInfo data.
 
 **TABLE of CONTENTS**
 
@@ -23,10 +23,11 @@
 Guide for creating a `PP_PhmSoftPowerPlayTable` Device Property for Radeon Polaris cards to inject into macOS. This way you can modify things like Clock Speeds, Fan Curves and Power Limits to optimize performance while reducing power consumption at the same time which wouldn't be possible otherwise. On top of that you don't have to flash a modified BIOS on your GPU.
 
 ### How it works
-Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you extract the section with the PowerPlay Info table from the modded ROM with a Hex Editor and inject into macOS via `DeviceProperties`.
+Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you extract the section with the PowerPlay Info table from the modded ROM with a Hex Editor and inject into macOS via `DeviceProperties`. Combine with [`@0,name`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks#method-3-injecting-specific-amd-framebuffers-via-deviceproperties) property to select specifiy Framebuffer.
 
 ## Requirements
 
+- 500-series AMD GPU with Polaris BIOS (usually Radeon RX 570 to RX 590) 
 - Windows Installation
 - **Software** (Windows):
 	- [**amdvbflash**](https://www.techpowerup.com/download/ati-atiflash/)  &rarr; for dumping vBIOS ROM(s) from the GPU
@@ -96,7 +97,7 @@ This means the `PowerPlayInfo` starts at position `9bba` (hex) of the ROM and ha
 - Save your config.plist and reboot
 
 ## Testing
-### Enable Monitoring
+### Enable GPU Monitoring
 To get a bit more insight on what's happening on your Hackintosh, we install some tools to monitor performance and Power Consumption of the GPU.
 
 - Install Intel Power Gadget 
@@ -121,6 +122,8 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 - Reboot macOS and perform the tests again
 - Check power consumption, temps and clock speed in HWMonitorSMC2.
 
+**NOTE**: Don't forget to re-enable `PP_PhmSoftPowerPlayTable` when you're done comparing test results.
+
 ### Test results
 Here are some Geekbench scores for my Sapphire Nitro+ Radeon RX 580 (4 GB):
 
@@ -135,7 +138,7 @@ Power consumption in idle (in Watts):
 - **Modded**: ≈ 70 W
 
 ## Example Files
-Here are some example files by Jasomhacks which explain which sections of the PowerPlay Table code do what. [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/PowerPlayInfo/PowerPlayInfo.zip?raw=true) 
+Here are some example files by Jasonhacks with explanations about the sections of the PowerPlayInfo Table code. The tables are for a Sapphire Nitro+ Radeon RX 580 (8 GB). So unless you have the same model I wouldn't recommend just copying over the data 1:1. Instead, study the principle behind it. [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/PowerPlayInfo/PowerPlayInfo.zip?raw=true) 
 
 ## Credits and Thank Yous
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
