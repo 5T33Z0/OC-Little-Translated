@@ -4,10 +4,10 @@
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
 
-- Devices which can simply be enabled by renaming them, so macOS can detect and use them. OpenCore users should avoid this method since OpenCore applies binary renames system-wide which can break other OSes, whereas Clover restricts renames and SSDT hotpatches to macOS only.
+- Devices which can simply be enabled by renaming them, so macOS can detect and use them. OpenCore users should avoid using binary renames for this since they are applied system-wide which can break other OSes. Ideally, an SSDT shoud be used to renames the device/method in macOS only. Clover users don't need to worry about this since binary rename and SSDT hotpatches are applied to macOS only.
 - Devices which either do not exist in ACPI or have different names than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect.
 - Fake Devices like Embedded Controllers or Ambient Light Sensors, so macOS is happy.
-- Patches which rename the original device or method to something else so a replacement SSDT can be written which redefines the device or method to address issues such and Sleep and Wake or Touchpads not working properly, for example.
+- Patches which rename the original device or method to something else so a replacement SSDT can be written which redefines the device or method to address issues such as Sleep and Wake or Touchpads not working properly, for example.
 - Devices which are present in the `DSDT` but are disabled because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs – usually found on mainboards with 300-series chipsets and newer.
 
 ### :warning: Don't inject already known Devices
