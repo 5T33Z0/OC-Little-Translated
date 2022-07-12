@@ -7,7 +7,7 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
 > **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
 1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to add `EFI/OC/ACPI` and config.plist.
-    - For **RX 580**: add `SSDT-RX580.aml` and `DTGP.aml`
+    - For **RX 580**: add `SSDT-RX580.aml` and `DTGP.kext`
     - For **RX 5500/5500XT**: add `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: add`SSDT-RX5700XT.aml`
     - For **RX Vega 64**: add `SSDT-RXVega64.aml`
@@ -16,14 +16,7 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
     - `Lilu.kext`
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
-4. Add the following rename to `ACPI/Patch` (not required for Vega 56/64 and RX 580):
-	```swift
-	Find: 50454750
-	Replace: 45475030
-	Comment: Change PEGP to EGP0
-	TableSignature: 44534454
-	```
-5. Save your config, reboot and run some benchmark tests for comparison.
+4. Save your config, reboot and run some benchmark tests for comparison.
 
 ### Addendum: SSDT vs. Device Properties
 
