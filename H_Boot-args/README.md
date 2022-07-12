@@ -20,11 +20,11 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 
 |Boot-arg|Description|
 |:------:|-----------|
-**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without it you'll get a black screen. Although not necessary for Polaris or Vega Cards it can be used to fix black screen issues in multi-monitor setups.
+**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000/6000 series). Without it, you'll get a black screen. Although not necessary for Polaris or Vega Cards, it can be resolve black screen issues in multi-monitor setups.
 **`igfxonln=1`**|Forces all displays online. Resolves screen wake issues after quitting sleep mode in macOS 10.15.4 and newer when using Coffee and Comet Lake's Intel UHD 630.
 **`-igfxvesa`** |Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
 **`-wegnoegpu`**|Disables all GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
-**`nvda_drv=1`**|Enables Web Drivers for NVIDIA Graphics Cards (≤ macOS 10.13). Newer versions of macOS require an NVRAM parameter instead, so add a new key to **`NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31`** (**Type**: Data). Clover users: enable `NvidiaWeb` under System Parameters.
+**`nvda_drv=1`**|Was used to enabled Web Drivers for NVIDIA Graphics Cards (≤ mac 10.11). MacOS Siera/High Sierra require an NVRAM parameter instead. In OpenCore, add **`NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31`** (**Type**: Data). Clover users: enable `NvidiaWeb` under System Parameters.
 **`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
 
 ### Network-specific boot arguments
