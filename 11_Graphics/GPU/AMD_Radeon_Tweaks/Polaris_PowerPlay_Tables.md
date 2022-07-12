@@ -1,5 +1,5 @@
 # Creating Custom PowerPlay Tables for AMD Polaris Cards
-> **DISCLAIMER**: Playing around with the parameters of your vBIOS can cause irreparable damage to your GPU if you don't know what you are doing. Use this guide on your own risk! Since I don't know which GPU you are using and I don't know which paramters you want to modify, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that. You can use the example files contained in the PowerPlayInfo.zip file for reference. It contains further explanations about the structure of the PowerPlayInfo data.
+> **DISCLAIMER**: Use this guide on your own risk! Playing around with the parameters of your vBIOS can cause irreparable damage to your GPU if you don't know what you are doing. Since I don't know which GPU you are using and I don't know which paramters you want to modify, I am only showing you ***how*** to change them but ***not*** which settings to use specifically. It's up to you to figure that out. You can use the example files contained in the PowerPlayInfo.zip file for reference. They contain further explanations about the structure of the PowerPlayInfo data contained in the vBIOS.
 
 **TABLE of CONTENTS**
 
