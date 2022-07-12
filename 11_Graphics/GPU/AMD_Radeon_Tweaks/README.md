@@ -1,7 +1,7 @@
 # AMD Radeon Performance Tweaks
 
 ## About
-This chapter contains 3 approaches for improving the performance of AMD Radeon Graphics Cards when running macOS. The 1st method uses SDDTs and DeviceProperties to inject PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the power consumption. This method tries to mimic how the card would operate in a real Mac. Methods 2 and 3 utilize `DeviceProperties` to select specific Framebuffers (method 3) and inject PowerPlayInfo tables (method 4). Both methods can be combined. In my experience using a RX 580, combining methods 3 and 4 gives the best results.
+This chapter contains 3 approaches for improving the performance of AMD Radeon Graphics Cards when running macOS. The 1st method uses SDDTs and DeviceProperties to inject PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the power consumption. This method tries to mimic how the card would operate in a real Mac. Methods 2 and 3 utilize `DeviceProperties` to select specific Framebuffers (method 2) and inject PowerPlayInfo tables (method 3). Both methods can be combined. In my experience using a RX 580, combining methods 2 and 3 gives the best results.
 
 ## Method 1: Using AMD Radeon Patches by mattystonnie
 > **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
