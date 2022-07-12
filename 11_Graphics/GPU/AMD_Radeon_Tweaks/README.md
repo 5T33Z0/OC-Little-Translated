@@ -18,7 +18,7 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
 3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 4. Save your config, reboot and run some benchmark tests for comparison.
 
-**NOTE**: These are slightly modified variants of mattystonnie's tables which have the `PEGP` to `EGP0` rename already integrated in the SSDT (where required), so you don't need to add any binary renames to your config.plist
+**NOTE**: These are slightly modified variants of mattystonnie's tables which have the `PEGP` to `EGP0` rename already integrated in the SSDT (where required), so you don't need to add any binary renames to your config.plist!
 
 ### Addendum: SSDT vs. Device Properties
 
