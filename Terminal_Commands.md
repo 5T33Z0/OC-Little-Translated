@@ -127,7 +127,7 @@ defaults write com.apple.sidecar.display hasShownPref -bool true
 
 **Search for terms in last boot log**:</br>
 `log show --last boot | grep "your search term"` </br>
-Exanple: `log show --last boot | grep "ACPI"`
+Example: `log show --last boot | grep "ACPI"`
 
 **Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
 
