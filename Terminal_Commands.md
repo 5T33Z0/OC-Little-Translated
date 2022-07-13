@@ -92,6 +92,11 @@ defaults write com.apple.sidecar.display hasShownPref -bool true
 **List supported instruction sets** (AVX2 and others):<br>
 `sysctl -a | grep machdep.cpu.leaf7_features`
 
+**Get CPU details** from IO Registry:</br>
+`ioreg -rxn "CPU0@0"`
+
+**NOTE**: Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG/SSDT-PM` to find the correct name.
+
 ## Hackintosh specific
 **Checking Reasons for Wake**</br>
 `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
@@ -140,9 +145,6 @@ bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapsho
 	-  if `%00` = No Security
 	-  if `%01` = Medium Security
 	-  if `%02` = Full Security 
-
-**Display CPU details**:</br>
-`ioreg -rxn "CPU0@0"` (The text in quotes = CPU name as defined in ACPI. On modern Intel it can be "PR00@0". Check `SSDT-PLUG.aml` for reference)
 
 **Show currently used Board-ID**:<br>
 `ioreg -l | grep -i board-id`
