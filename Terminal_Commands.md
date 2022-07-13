@@ -5,13 +5,16 @@
 **Collection of defaults commands** (for modifying behavior, options, look and feel of macOS):</br>
 **https://macos-defaults.com/**
 
+**Show macOS Version and Build Number**</br>
+`sw_vers`
+
 **Show macOS Kernel Version**:</br>
 `uname -r`
 
 **Disable Gatekeeper:**</br>
 `sudo spctl --master-disable`
 
-**Show the User Library in Big Sur**:</br>
+**Show the User Library in Big Sur+**:</br>
 `setfile -a v ~/Library`</br>
 `chflags nohidden ~/Library`
 
@@ -34,6 +37,8 @@
 **Show all Files in Finder**:</br>
 `defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder`</br>
 `defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder` (to revert it)
+
+Alternatively, use a **Key Command**: ⌘⇧. (Command-Shift-Dot)
 
 **Rebuild Launch Services**:</br>
 `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
@@ -179,4 +184,4 @@ ___
 
 # Keyboard Shorcuts
 
-**Show hidden Files and Folders in Finder**: ⌘⇧. (Command-Shift-.)
+**Show hidden Files and Folders in Finder**: ⌘⇧. (Command-Shift-Dot)
