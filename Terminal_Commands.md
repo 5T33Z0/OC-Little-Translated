@@ -5,6 +5,11 @@
 **Collection of defaults commands** (for modifying behavior, options, look and feel of macOS):</br>
 **https://macos-defaults.com/**
 
+**List of PMSET Commands**<br>
+https://www.dssw.co.uk/reference/pmset.html
+
+- **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
+
 **Show macOS Version and Build Number**</br>
 `sw_vers`
 
@@ -15,12 +20,17 @@
 `sudo spctl --master-disable`
 
 **Show the User Library in Big Sur+**:</br>
-`setfile -a v ~/Library`</br>
-`chflags nohidden ~/Library`
 
+```
+setfile -a v ~/Library
+chflags nohidden ~/Library`
+```
 **Disable/enable DMG Verification**:</br>
-`defaults write com.apple.frameworks.diskimages skip-verify TRUE`</br>
-`defaults write com.apple.frameworks.diskimages skip-verify FALSE`</br>
+
+```
+defaults write com.apple.frameworks.diskimages skip-verify TRUE 
+defaults write com.apple.frameworks.diskimages skip-verify FALSE
+```
 
 **Add "Quit" option to Finder**:</br>
 `defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
@@ -35,15 +45,17 @@
 `networksetup -listallhardwareports`
 
 **Show all Files in Finder**:</br>
-`defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder`</br>
-`defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder` (to revert it)
 
+```
+defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
+defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
+```
 Alternatively, use a **Key Command**: ⌘⇧. (Command-Shift-Dot)
 
 **Rebuild Launch Services**:</br>
 `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user`
 
-**Rebuild DYLD and XPC caches**
+**Rebuild DYLD and XPC caches** (≤ macOS 10.15)
 
 ```
 sudo update_dyld_shared_cache -force
@@ -51,8 +63,11 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 ```
 
 **Enable Sidecar**:</br>
-`defaults write com.apple.sidecar.display AllowAllDevices -bool true`</br>
-`defaults write com.apple.sidecar.display hasShownPref -bool true`
+
+```
+defaults write com.apple.sidecar.display AllowAllDevices -bool true
+defaults write com.apple.sidecar.display hasShownPref -bool true
+```
 
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
@@ -69,12 +84,18 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 `sysctl machdep.cpu.brand_string`
 
 **List CPU features**</br>
-`sysctl -a | grep machdep.cpu.features` 
+`sysctl -a | grep machdep.cpu.features`
+
+**Display Bus and CPU Frequency** </br>
+`sysctl -a | grep freq`
 
 **List supported instruction sets** (AVX2 and others):<br>
 `sysctl -a | grep machdep.cpu.leaf7_features`
 
 ## Hackintosh specific
+**Checking Reasons for Wake**</br>
+`pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
+
 **Currently used SMBIOS**</br>
 `system_profiler SPHardwareDataType | grep 'Model Identifier'`
 
@@ -104,16 +125,21 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 Exanple: `log show --last boot | grep "ACPI"`
 
 **Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
-`csrutil authenticated-root disable`</br>
-`bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot` (x = name of your macOS Big Sur/Monterey Volume)
+
+```
+csrutil authenticated-root disable
+bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot
+``` 
+**x** = name of your macOS Big Sur/Monterey Volume
 
 **Check if used Hardware supports Apple Secure Boot**:</br>
-1. In Terminal, execute:</br>
+
+1. In Terminal, enter:</br>
 `nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
 3. Check the Results:
-	-  if `%00` = No Security mode.
-	-  if `%01` = Medium Security mode
-	-  if `%02` = Full Security mode 
+	-  if `%00` = No Security
+	-  if `%01` = Medium Security
+	-  if `%02` = Full Security 
 
 **Display CPU details**:</br>
 `ioreg -rxn "CPU0@0"` (The text in quotes = CPU name as defined in ACPI. On modern Intel it can be "PR00@0". Check `SSDT-PLUG.aml` for reference)
@@ -128,10 +154,13 @@ Exanple: `log show --last boot | grep "ACPI"`
 `chmod +x` (drag file in terminal, hit enter)
 
 **Find USB Controller Renames**:</br>
-`ioreg -l -p IOService -w0 | grep -i EHC1`</br>
-`ioreg -l -p IOService -w0 | grep -i EHC2`</br>
-`ioreg -l -p IOService -w0 | grep -i XHC1`</br>
-`ioreg -l -p IOService -w0 | grep -i XHCI`</br>
+
+```
+ioreg -l -p IOService -w0 | grep -i EHC1
+ioreg -l -p IOService -w0 | grep -i EHC2
+ioreg -l -p IOService -w0 | grep -i XHC1
+ioreg -l -p IOService -w0 | grep -i XHCI
+```
 
 **Verifying if SMBus is working**:</br>
 `kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
@@ -145,38 +174,40 @@ Exanple: `log show --last boot | grep "ACPI"`
 `sysctl machdep.cpu | grep AVX`
 
 **Disable/Delete Metal Support**:</br>
-`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no`</br>
-`sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no`
 
-or
+```
+sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no
+sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no
+```
+or:
 
-`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal`</br>
-`sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP`
-
+```
+sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal
+sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
+```
 [**Source**](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
 **Change Update Seed to Developer**</br>
-`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll`</br>
-`sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed`
+
+```
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+```
 
 **Removing Network .plists (for troubleshooting**</br>
-`sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist`</br>
-`sudo rm /Library/Preferences/SystemConfiguration/preferences.plist`</br>
 
-**Listing ACPI Errors**</br>
-`log show --last boot | grep AppleACPIPlatform` </br>
-`log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log` (Saves Log to Desktop)
+```
+sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
+sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
+```
 
-**Checking for Wake Reasons**</br>
-`pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"`
+**List ACPI Errors**</br>
 
-**List of PMSET Commands**<br>
-https://www.dssw.co.uk/reference/pmset.html
-
-- **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
-
-**Find out current Bus and CPU Frequency** </br>
-`sysctl -a | grep freq`
+```
+log show --last boot | grep AppleACPIPlatform
+log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log
+```
+The 2nd Command saves a log on the desktop.
 
 **Dump Audio Codec** (in Linux)</br>
 `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
