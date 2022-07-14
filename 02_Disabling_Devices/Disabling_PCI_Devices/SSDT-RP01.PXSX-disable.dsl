@@ -1,4 +1,4 @@
-// disable RP01.PXSX (ReadCARD)
+// disable RP01.PXSX (SD Card Reader)
 DefinitionBlock ("", "SSDT", 2, "OCLT", "noRPxx", 0)
 {
     External (_SB.PCI0.RP01, DeviceObj)
