@@ -17,11 +17,9 @@ Unfortunately, this device can't be blocked via ACPI, but you can do the followi
 3. Mount your EFI folder
 4. Open your config.plist
 5. Add the Following Rule to Kernel/Bock:
-
 	|Identifier   |Comment   |  Enabled |  Strategy |  Arch |
 	|-------------|----------|:--------:|:---------:|:-----:|
 	|com.apple.driver.Apple16X50Serial| Blocks PCI Serial Adapter  |  True | Disable | Any  |
-
 6. Save your config.plist and reboot
 
 ## Testing
