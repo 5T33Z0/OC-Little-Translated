@@ -2,7 +2,7 @@
 
 On Hackintoshes, the Network Settings may contain a `PCI Serial Adapter` device which is not useful in terms of Network Connectivity:
 
-![1017872403_ScreenShot2022-07-13at10_59_55 png 69f527ea26990a547ffc5bdb044fe68e](https://user-images.githubusercontent.com/76865553/178971524-7d568d5c-3685-40a2-bc37-ebdcd23033ae.png)
+![PCI Serial](https://user-images.githubusercontent.com/76865553/179019541-b728d169-1675-4313-91a1-4288d6693ca1.png)
 
 Searching for "serial" in IO Registry Explorer reveals that it's related to `Apple16X50.kext` in S/L/E:
 
