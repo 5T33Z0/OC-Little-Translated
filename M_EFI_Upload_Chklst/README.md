@@ -20,5 +20,3 @@ Before sharing your OpenCore EFI and config.plist with the world, you should wor
 - Change the follwing settings in `UEFI/APFS` to enable backward compatible with macOS Catalina and older. Otherwise the APFS driver won't load and you won't see any drives in the Boot Picker:	
 	- `MinDate` = -1
 	- `Maxdate` = -1
-
-**NOTE**: There's also a Python script which can do most of this automatically (except for ACPT and kext-related tasks): [OC Anonymizer](https://github.com/5T33Z0/OC-Anonymizer)
