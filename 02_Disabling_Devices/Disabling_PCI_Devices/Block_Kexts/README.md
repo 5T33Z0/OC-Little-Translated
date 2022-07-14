@@ -30,4 +30,6 @@ Search for "serial" in IO Reg again. The `IOSerialBSDClient` should be gone:
 And the PCI Serial Adapter will be gone from Network Settings as wel.
 
 ## Notes
-If you notice any issues with the system after disabling this kext, re-enable it. So far I haven't noticed any problems.
+- I couldn't find much info about this kext but the `IOSerialBSDClient` seems to be related to to the [serial modem detection](https://developer.apple.com/forums/thread/116061).
+- If you notice any issues with the system after disabling this kext, re-enable it. So far I haven't noticed any problems.
+
