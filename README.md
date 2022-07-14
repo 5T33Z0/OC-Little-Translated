@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.07.14-blueviolet.svg)</br>![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.07.15-blueviolet.svg)</br>![](https://raw.githubusercontent.com/5T33Z0/OC-Little-Translated/main/A_Config_Tips_and_Tricks/maciasl.png)
 
 ## ABOUT
 Compendium of ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (containing `OCLT`in the table header) remain untouched except where indicated.
@@ -62,7 +62,7 @@ If you would like to contribute to the information provided in this repo in orde
 
 ## 5T33Z0's 5H0UT 0UT5
 
-- Thanks to [Baio1977](https://github.com/Baio1977) and [dreamwhite](https://github.com/dreamwhite) for their contributions to improve and expand this repo.
+- Thanks to the contributors for improving and expanding the repo.
 - sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
