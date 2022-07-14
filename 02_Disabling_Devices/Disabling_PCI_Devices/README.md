@@ -7,5 +7,5 @@ When to use which method depends on the situation. Using an SSDT is only prefere
 
 ## Methods
 
-- **Method 1**: via SSDT (recommended)
+- **Method 1**: [**via SSDT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices/ACPI) (recommended)
 - **Method 2**: by blocking Kexts
