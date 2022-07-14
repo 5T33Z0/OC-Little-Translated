@@ -50,7 +50,7 @@ These devices have the following characteristics:
   }
   ```
 
-## Caution
+## :warning: Caution
 
 - If there are multiple **child devices** to a **parent device**, please **use this method with caution**.
 - When using the SSDT, replace `RP01` in the example with the name of the **parent** device to which the disabled child device belongs to, as shown in the example.
