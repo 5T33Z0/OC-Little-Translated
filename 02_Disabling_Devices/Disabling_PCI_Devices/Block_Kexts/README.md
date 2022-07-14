@@ -8,6 +8,8 @@ Searching for "serial" in IO Registry Explorer reveals that it's related to `App
 
 ![IOreg01](https://user-images.githubusercontent.com/76865553/178971557-01f0158d-7ab8-41e8-b3fe-5193e2058670.png)
 
+Judging from the [source code](https://github.com/apple-oss-distributions/Apple16X50Serial), Apple16X50 appears to be a driver for serial ports, likely a leftover from the PPC days. Possibly left in for serial ports in internal devkits and unpopulated headers on production Macs. Looks like it only depends on the kernel and seemingly has no other dependents.
+
 ## Instructions
 
 Unfortunately, this device can't be blocked via ACPI, but you can do the following to block the kext from loading:
@@ -23,6 +25,7 @@ Unfortunately, this device can't be blocked via ACPI, but you can do the followi
 6. Save your config.plist and reboot
 
 ## Testing
+
 Search for "serial" in IO Reg again. The `IOSerialBSDClient` should be gone:
 
 ![IOreg02](https://user-images.githubusercontent.com/76865553/178971604-4446dffe-27d4-4524-8734-0d1078f25d99.png)
@@ -30,6 +33,6 @@ Search for "serial" in IO Reg again. The `IOSerialBSDClient` should be gone:
 And the PCI Serial Adapter will be gone from Network Settings as wel.
 
 ## Notes
+
 - I couldn't find much info about this kext but the `IOSerialBSDClient` seems to be related to to the [serial modem detection](https://developer.apple.com/forums/thread/116061).
 - If you notice any issues with the system after disabling this kext, re-enable it. So far I haven't noticed any problems.
-
