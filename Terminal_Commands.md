@@ -113,7 +113,7 @@ defaults write com.apple.sidecar.display hasShownPref -bool true
 **Find loaded Kexts** (excluding those from Apple)</br>
 `kextstat | grep -v com.apple`</br>
 
-**Rebuild Kext Cache**:</br>
+**Rebuild Kext Cache**: (Deprecated in macOS 13)</br>
 `sudo kextcache -i /`</br>
 
 **Update PreBoot Volume**:</br>
