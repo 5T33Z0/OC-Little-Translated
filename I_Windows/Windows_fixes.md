@@ -27,7 +27,4 @@ In order to use the same Bluetooth credentials in macOS and Windows, you can do 
 6. Double-click `Bluetooth.reg` to import it into your registry.
 7. Reboot.
 
-You should now be able to connect peripherals without having to re-couple your devices if you switch between macOS and Windows
-
-
-
+You should now be able to connect peripherals without having to re-couple your devices if you switch between macOS and Windows.
