@@ -62,7 +62,7 @@ If you would like to contribute to the information provided in this repo in orde
 
 ## 5T33Z0's 5H0UT 0UT5
 
-- Thanks to the [**contributors**](https://github.com/5T33Z0/OC-Little-Translated/graphs/contributors) for improving and expanding the repo.
+- Thanks to the [**contributors**](https://github.com/5T33Z0/OC-Little-Translated/graphs/contributors) for improving and expanding the repo. Additional credits for contributors outside of the github realm are listed in the respective sections of the repo.
 - sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
 - Apfelnico for introducing me to ASL/AML Basics
 - Bluebyte for having good conversations
