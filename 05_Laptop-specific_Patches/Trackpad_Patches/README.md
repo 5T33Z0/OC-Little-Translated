@@ -33,8 +33,6 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br>[**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Mostly seen on Dell laptops|
 	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
 
-
-
 ## Possible workflow
 1. Boot into Windows
 2. Run Device Manager 
@@ -50,6 +48,7 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 * Official VoodooI2C Documentation: **https://voodooi2c.github.io/**
 * VoodooI2C Official Forum Post: **https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/**
 * Additional TouchPad Patches: **https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch**
+* Fixing Trackpads Guide by Dortania: **https://github.com/dortania/Getting-Started-With-ACPI/blob/master/Laptops/trackpad-methods/manual.md**
 
 ### Kexts for PS/2, I2C and ELAN Touchpads
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2): Magic Trackpad II emulation
