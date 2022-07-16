@@ -7,7 +7,7 @@ In **DSDT**, search for:
 - Search for `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
 - Search for `PNP0C0E` and add ***SSDT-SLPB*** if missing, this part is needed for the `PNP0C0E Sleep Correction Method`.
 - In some cases (like HP or Lenovo), the `SLPB` is present in the `DSDT`, but may be disabled:
-    ```
+    ```asl
     Scope (_SB)
     {
         Device (SLPB)

@@ -41,7 +41,7 @@ Add the following Renames (if applicable) to config.plist:
   
 ## Part 2: Hotpatch ***SSDT-OC-XOSI***
 
-```swift
+```asl
 Method(XOSI, 1)
 	{
     If (_OSI ("Darwin"))
@@ -88,7 +88,7 @@ Some machines use methods indicated by underscores `_` with similar names to `_O
 ## Appendix: Origin of OS Patches
 When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems receive different parameters and ACPI executes different instructions. For example, if the system is **Win7**, this parameter is `Windows 2009`, and if the system is **Win8**, this parameter is `Windows 2012`. For example:
 
-```swift
+```asl
 If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
 {
       OperationRegion (PCF0, SystemMemory, 0xF0100000, 0x0200)

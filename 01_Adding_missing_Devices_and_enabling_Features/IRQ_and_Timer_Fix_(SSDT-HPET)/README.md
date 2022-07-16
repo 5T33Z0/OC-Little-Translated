@@ -68,7 +68,7 @@ Use ***SSDT-HPET_RTC_TIMR-fix*** to disable **HPET**, **RTC** and **TIMR**
 ### Disable **`HPET`**
 Usually, `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method by changing `HPAE`/`HPTE` to `0`:
 
-```swift
+```asl
 External (HPAE, IntObj) /* or External (HPTE, IntObj) */
 Scope (\)
     {
@@ -83,7 +83,7 @@ Scope (\)
 ### Disable **`RTC`**
 Older machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
 
-```swift
+```asl
 Method (_STA, 0, NotSerialized)
 {
 	If (_OSI ("Darwin"))

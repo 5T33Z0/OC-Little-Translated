@@ -16,7 +16,7 @@ In the `DSDT`, search for `ACPI0008`. If the device – usually named `ALSD` –
 ### Case 1: Ambient Light Sensor device interface exists
 As you can see in the code snippet below, Device `ALSD` exist in the system's `DSDT`:
 
-```swift
+```asl
 Device (ALSD)
 {
   Name (_HID, "ACPI0008" /* Ambient Light Sensor Device */)  // _HID: Hardware ID
@@ -70,7 +70,7 @@ Device (ALSD)
 ```
 In this case, `ALS0` can be enabled by using `_STA` method to return `0x0B` to enable the ambient sensor devices present in the original `ACPI`, as follows (use `SSDT-ALSD`):
 
-```swift
+```asl
 DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 {
     External (ALSE, IntObj)
@@ -87,7 +87,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "ALSD", 0)
 ### 2. No Ambient Light Sensor device interface exists
 In this case, we need a fake `ALS0` device:
 
-```swift
+```asl
 DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 {
     Scope (_SB)

@@ -38,7 +38,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 - Search for the name of your real EC controller (`EC0`, `H_EC`, etc.)  If the device is not present, you're done!
 - If the device is present (exact match!), you have to disable it. 
 - Open the previously used .dsl file and remove the comments `/*` and `*/ `from the following section, so it's no longer displayed in green in MaciASL:
-	```swift
+	```asl
     External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 
     Scope (\_SB.PCI0.LPCB.EC0)
@@ -85,7 +85,7 @@ Below you'll find the default USB power properties used in the SSDT-EC-USBX file
 
 **For PCs**:
 
-```swift
+```asl
 ...
 Return (Package (0x08)
 {	
@@ -102,7 +102,7 @@ Return (Package (0x08)
 ```
 **For Noetbooks/NUCs**:
 
-```swift
+```asl
 ...
 Return (Package (0x08)
 {	

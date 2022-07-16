@@ -7,7 +7,7 @@ For some 300-series motherboards, the `RTC` device is disabled by default and ca
 ## Usage
 In this example, `RTC` exists in the original `DSDT` but is disabled (return value for `_STA` is `0`):
 
-```swift
+```asl
 Device (RTC)
 {
   Name (_HID, EisaId ("PNP0B00"))
@@ -30,7 +30,7 @@ Device (RTC)
 ```
 Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
 
-```swift
+```asl
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)

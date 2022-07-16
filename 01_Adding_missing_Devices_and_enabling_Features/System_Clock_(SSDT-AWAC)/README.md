@@ -28,7 +28,7 @@ Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for 
 
 Below you'll find a code snippet of how `Device (RTC)` and `Device (AWAC)` might be defined in your `DSDT`:
 
-```swift
+```asl
 Device (RTC)
 {
     ...
@@ -65,7 +65,7 @@ Device (AWAC)
 As you can see, you can enable `RTC` and disable `AWAC` at the same time if `STAS=1`, using one of the following methods/hotpatches.
 
 ### Method 1: using `SSDT-AWAC`
-```Swift
+```asl
 External (STAS, IntObj)
 Scope (\)
 {
@@ -91,7 +91,7 @@ Appllicable to **SMBIOS**:
 
 Here's the code:
 
-```Swift
+```asl
 DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
@@ -171,7 +171,7 @@ Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA
 
 - Original Code:
 
-  ```Swift
+  ```asl
     Method (_STA, 0, NotSerialized)
     {
         If (HPTE)
@@ -184,7 +184,7 @@ Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA
 
 - Code after name change:
 
-  ```Swift
+  ```asl
     Method (_STA, 0, NotSerialized)
     {
           Return (0x0F)
@@ -202,7 +202,7 @@ Let's take the example of enabling `HPET`. We want it to return `0x0F` for `_STA
   
   Complete `Replace` post-code:
   
-  ```Swift
+  ```asl
     Method (_STA, 0, NotSerialized)
     Return (0x0F)
         Return (0x0F)
@@ -241,7 +241,7 @@ Usually, you can open the same `ACPI` file with binary software (e.g. `010 Edito
 
 When `Find` is stated in the Requirements, (any rewriting of a piece of code to find confirmed binary data from it is highly implausible)! However, `Replace` can do this. Following the example above, we write a piece of code.
 
-```Swift
+```asl
     DefinitionBlock ("", "SSDT", 2, "hack", "111", 0)
     {
         Method (_STA, 0, NotSerialized)
@@ -266,7 +266,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 - Original code
 
-  ```Swift
+  ```asl
     Method (_STA, 0, NotSerialized)
     {
           If (\H8DR)
@@ -279,7 +279,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 - Code after name change
 
-  ```Swift
+  ```asl
     Method (_STA, 0, NotSerialized)
     {
           Return (Zero)
@@ -310,7 +310,7 @@ Updating BIOS may cause the name change to be invalid. The higher the number of 
 
 A device _STA Original.
 
-```Swift
+```asl
 Method (_STA, 0, NotSerialized)
 {
     ECTP (Zero)
@@ -324,7 +324,7 @@ Method (_STA, 0, NotSerialized)
 
 We need to disable this device for some reason, and for that purpose `_STA` should return `Zero`. From the original text, we can see that as long as `SDS1` is not equal to `0x07`. Using the **prefix variable method**, we can do the following.
 
-```Swift
+```asl
 Scope (\)
 {
     External (SDS1, FieldUnitObj)
@@ -341,7 +341,7 @@ When using the I2C patch, you may need to enable `GPIO`. See ***SSDT-OCGPI0-GPEN
 
 An original article.
 
-```Swift
+```asl
 Method (_STA, 0, NotSerialized)
 {
     If ((GPEN == Zero))
@@ -354,7 +354,7 @@ Method (_STA, 0, NotSerialized)
 
 As you can see from the original, `GPIO` can be enabled as long as `GPEN` is not equal to `0`. Using the **prefix variable method** as follows.
 
-```Swift
+```asl
 External(GPEN, FieldUnitObj)
 Scope (\)
 {
@@ -373,7 +373,7 @@ When the `variable` is a read-only type, the solution is as follows.
 
 E.g., an original
 
-```Swift
+```asl
 OperationRegion (PNVA, SystemMemory, PNVB, PNVL)
 Field (PNVA, AnyAcc, Lock, Preserve)
 {
@@ -399,7 +399,7 @@ Replace: 58 4D 30 31 08
 
 **Patch**.
 
-```Swift
+```asl
 Name (IM01, 0x02)
 If (_OSI ("Darwin"))
 {
@@ -416,7 +416,7 @@ Change the enable bit of the device state using the assignment of the device's o
 
 Example of how this method can be used
 
-```Swift
+```asl
 Method (_STA, 0, NotSerialized)
 {
     If ((XXXX == Zero))
@@ -438,7 +438,7 @@ It can be seen that the above example of `_STA` method only contains  the enable
 
 Example of operation to disable a device:
 
-```Swift
+```asl
 External (_SB_.PCI0.XXXX._STA, IntObj)
 
 \_SB.PCI0.XXXX._STA = Zero 
@@ -450,7 +450,7 @@ The main reason why this method works in practice is that in the ACPI specificat
 
 An example of an operation that does not use this method:
 
-```Swift
+```asl
 Method (_STA, 0, NotSerialized)
 {
     ECTP (Zero)

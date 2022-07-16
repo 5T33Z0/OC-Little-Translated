@@ -30,7 +30,7 @@ The manual patchinf method described below is outdated, since the patching proce
 ### Example 1
 - In `DSDT`, search for `Processor`, e.g.:
 
-	```	swift 
+	```	asl 
       Scope (_PR)
       {
           Processor (CPU0, 0x01, 0x00001810, 0x06){}
@@ -48,7 +48,7 @@ The manual patchinf method described below is outdated, since the patching proce
 ### Example 2
 - In `DSDT`, search for `Processor`, e.g.:
 
-	```swift
+	```asl
       Scope (_SB)
       {
           Processor (PR00, 0x01, 0x00001810, 0x06){}
