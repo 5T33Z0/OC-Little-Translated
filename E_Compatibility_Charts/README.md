@@ -4,8 +4,8 @@ Listed below, you find some charts containing useful information about SMBIOS, H
 ## SMBIOS Compatibility Chart
 Check the attached spreadsheets to find out which SMBIOS is natively supported by which versions of macOS.
 
-- macOS 10.13 to macOS 13: Current.pdf
-- macOS 10.4 to 10.12: Legacy.pdf
+- macOS 10.13 to macOS 13: [**SMBIOS_Compat_Current.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Current.pdf)
+- macOS 10.4 to 10.12: [**SMBIOS_Compat_Legacy.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Legacy.pdf)
 
 **NOTES**
 
