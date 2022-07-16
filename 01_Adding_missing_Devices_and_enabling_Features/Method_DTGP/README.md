@@ -5,7 +5,7 @@ This SSDT injects the `DTGP` method. It's rarely needed since OpenCore heavily r
 
 Whenever you see something like this in a SSDT you need to add SSDT-DTGP (unless the method itself is defined in the SSDT itself):
 
-```swift
+```asl
 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
 Return (Local0)
 ```
