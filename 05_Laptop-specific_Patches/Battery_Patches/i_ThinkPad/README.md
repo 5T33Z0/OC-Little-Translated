@@ -73,7 +73,7 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
 
 > T580 original
 
-```Swift
+```asl
 Method (_Q22, 0, NotSerialized) /* _Qxx: EC Query, xx=0x00-0xFF */
 {
     CLPM ()
@@ -91,7 +91,7 @@ Method (_Q22, 0, NotSerialized) /* _Qxx: EC Query, xx=0x00-0xFF */
 
 > Rewrite
 
-```swift
+```asl
 /*
  * For ACPI Patch:
  * _Q22 to XQ22:

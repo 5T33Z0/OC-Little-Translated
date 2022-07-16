@@ -29,7 +29,7 @@ In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop bu
 ## Picking SSDTs to merge into one files
 - Create a new file in Xiasl
 - Paste the following Code into it:	
-	```
+	```asl
 	DefinitionBlock("", "SSDT", 2, "AUTHOR", "HACKSSDT", 0)
 	{
     	#include "SSDT-.dsl"

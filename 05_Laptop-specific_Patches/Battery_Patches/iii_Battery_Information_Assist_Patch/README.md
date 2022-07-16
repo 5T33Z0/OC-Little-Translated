@@ -22,6 +22,3 @@ The latest ***VirtualSMC.kext*** and its plugin ***kexts*** provide an interface
   
   **Note 1**: If you don't need to fill in anything, delete `PKG1 [Zero]=... ` to `PKG1 [0x06]=... `, see example  
   **Note 2**: The `CBSS` method cannot be deleted
-  
-  
-

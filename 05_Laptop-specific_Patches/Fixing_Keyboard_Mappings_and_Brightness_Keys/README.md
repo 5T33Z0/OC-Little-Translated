@@ -65,7 +65,7 @@ Keyboard (re-)mappings can be realized by modifying the `info.plist` file inside
 You can use either of the following mapping methods:
 
 #### PS2 Scan Code to PS2 Scan Code
-```swift
+```asl
     ...
       "Custom PS2 Map", Package()
       {
@@ -75,7 +75,7 @@ You can use either of the following mapping methods:
     ...
 ```
 #### PS2 Scan Code to ADB Scan Code
-```swift
+```asl
     ...
     "Custom ADB Map", Package()
     {
@@ -91,7 +91,7 @@ You can use either of the following mapping methods:
 - The variable `RMCF` is used in the patch. If `RMCF` is also used for other **keyboard patches**, both must be merged. See ***SSDT-RMCF-PS2Map-dell***. 
 - ***SSDT-RMCF-MouseAsTrackpad*** is used to force-enable the touchpad settings option.
 - In **VoodooPS2Controller**, the PS2 Scan Code corresponding to the `<kbd>PrtSc</kbd>` button is `e037`. You could map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
-	```swift
+	```asl
     ...
     "Custom ADB Map", Package()
     {

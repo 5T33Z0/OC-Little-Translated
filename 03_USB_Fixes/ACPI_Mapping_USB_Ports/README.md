@@ -131,7 +131,7 @@ In this case, it includes a Package (`PCKG`) with four values that are handed ov
 
 Now we have control over a port's status (on/off or available/unavailable) and what type it is. As a result, we get the following code snippet:
 
-```swift
+```asl
 Method (GUPC, 2, Serialized)
 {
 	Name (PCKG, Package (0x04)
@@ -178,7 +178,7 @@ Once all `_UPC` methods are deleted from the rest of the ports, there should be 
 
 Next, we hav to add the new`_UPC` method to each port (except for `USR1` and `USR2`):
 
-```swift
+```asl
 Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
 	{
 		Return (GUPC (0xFF, 0x03))
@@ -250,7 +250,7 @@ As you can see, `HS01` is not used in my case, so we deactivate it. But to keep 
 
 This is the Code snippet. As you can see, it is applies to `_UPC` and `_PLD` in this case
 
-```swift
+```asl
 Scope (\_SB.PCI0.XHC.RHUB.HS01)
 {
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
@@ -278,7 +278,7 @@ Scope (\_SB.PCI0.XHC.RHUB.HS01)
 ```
 **Example 3**: Port `HS03` deactivated for macOS Only. This utilizes the `If (_OSI ("Darwin"))` switch. This basically tells the system: "If the Darwin Kernel (aka macOS) is running, `HS03` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for Windows.
 
-```swift
+```asl
 Scope (HS03)
 {
 	Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
@@ -312,7 +312,7 @@ Continue mapping your ports this way: for those which you do use, declare the po
 
 Once you reach `USR1` and `USR2`, change `GUPC` to `Zero`, `Zero`. This to deactivates them (if you need these port in Windows, add the `If (_OSI ("Darwin"))` switch.
 
-```swift
+```asl
 Scope (USR1)
 {
 	Method (_UPC, 0, NotSerialized)	// _UPC: USB Port Capabilities
@@ -344,7 +344,7 @@ In this example, the system has more than one USB Controller. For the sake of th
 ### Assigning Physical Location of Device (`_PLD`) 
 This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
 
-```swift
+```asl
 Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
 {
     ToPLD (

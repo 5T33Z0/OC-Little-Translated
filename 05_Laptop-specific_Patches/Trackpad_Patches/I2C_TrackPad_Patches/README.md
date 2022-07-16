@@ -20,10 +20,10 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 ## Patch principle and process
 
 - Disable the original I2C device. Check "Binary renaming and preset variables" for details.
-	```swift
-  /*
-   * GPI0 enable
-   */
+	```asl
+	/*
+	* GPI0 enable
+	*/
   DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
   {
       External(GPEN, FieldUnitObj)
@@ -42,7 +42,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Fix `TPXX` related content.
   - Replace the original I2C device `name` with `TPXX` in its entirety.
   - **FIXED** `_STA` part to
-	```swift
+	```asl
     Method (_STA, 0, NotSerialized)
     {
         	If (_OSI ("Darwin"))
