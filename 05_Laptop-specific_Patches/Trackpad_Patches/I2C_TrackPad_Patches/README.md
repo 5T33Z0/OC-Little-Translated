@@ -62,7 +62,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 
 ### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
 - Disable ``TPD1`` using the Preset Variable Method.
-	```swift
+	```asl
   Scope (\)
   {
       If (_OSI ("Darwin"))
@@ -72,7 +72,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
   }
   	```
 - Create a new device `TPXX` and port all the contents of the original `TPD1` to `TPXX`.
-	```swift
+	```asl
   External(_SB.PCI0.I2C1, DeviceObj)
   Scope (_SB.PCI0.I2C1)
   {
@@ -85,7 +85,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Amend `TPXX` content:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
-	 ```swift
+	 ```asl
 	Method (_STA, 0, NotSerialized)
     	{
    		If (_OSI ("Darwin"))
@@ -101,7 +101,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
  - Look up `OSYS` and remove (comment out) the following.
 	
-	```swift
+	```asl
     //If (LLess (OSYS, 0x07DC))
     //{
     // SRXO (GPDI, One)
@@ -126,7 +126,7 @@ In the file list above you will also find `SSDT-USTP.dsl` (in 2 variants), which
 
 In this example, it is related to `I2C1`:
 
-```swift
+```asl
 If (USTP)
   {
       Scope (_SB.PCI0.I2C1)

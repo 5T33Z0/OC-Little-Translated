@@ -68,7 +68,7 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
 <details>
 <summary><strong>While PCIInfo contains 18:</strong></summary>
 
-```swift
+```asl
 1. Vendor ID: 0x8086, Device ID: 0x1E26, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
    DevicePath: PciRoot(0x0)/Pci(0x1D,0x0)
 2. Vendor ID: 0x8086, Device ID: 0x1E2D, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
@@ -121,7 +121,7 @@ With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup)
 <details>
 <summary><strong>The resulting output is much easier to read and also includes device names:</strong></summary>
 
-```swift
+```asl
 1: 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
 	Vendor ID: 8086
 	Device ID: 1e26

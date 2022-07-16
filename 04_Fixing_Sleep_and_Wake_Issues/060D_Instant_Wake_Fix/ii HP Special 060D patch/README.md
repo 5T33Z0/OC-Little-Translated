@@ -3,7 +3,7 @@
 - See `0D6D Patch` for more information about the `0D/6D Patch
 - Some HP machines with `_PRW` methods for some parts of `ACPI` (related to `0D6D`) are as follows:
 
-	```swift
+	```asl
 	Method (_PRW, 0, NotSerialized)
    {
       Local0 = Package (0x02)
@@ -22,7 +22,7 @@
 
   This case can be completed with the ``0D/6D patch`` using the ``preset variables method``, e.g.
 
-  ```swift
+  ```asl
   Scope (\)
   {
       If (_OSI ("Darwin"))

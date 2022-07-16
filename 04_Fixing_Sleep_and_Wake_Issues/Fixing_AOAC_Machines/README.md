@@ -10,7 +10,7 @@ A new technology, namely *Always On/Always Connected* (AOAC) was introduced by I
 - Click on "File > New From ACPI" and select `FACP.aml`
 - Search for `Low Power S0 Idle`. If it is = `1`, it is an `AOAC` machine. For example:
 
-  ```swift
+  ```asl
   Low Power S0 Idle (V5) : 1
   ```
 

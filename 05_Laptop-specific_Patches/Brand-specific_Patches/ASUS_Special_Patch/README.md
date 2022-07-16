@@ -11,7 +11,7 @@ Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict wi
 
 Rename **PNLF to XNLF**:
 
-```swift
+```text
 Find: 504E4C46
 Replace: 584E4C46
 ```

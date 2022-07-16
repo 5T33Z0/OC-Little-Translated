@@ -13,7 +13,7 @@ The integrated patch is a framework that includes:
 
 For example, add the following code to the brightness shortcut patch:
    
-```swift
+```asl
 /* A keystroke: */
 \RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
 \RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
@@ -28,28 +28,28 @@ The `_PTS` and `_WAK` must be renamed in order to use the integrated patch. Choo
 
 - `_PTS` to `ZPTS(1,N)` for:
 
-  ```swift
+  ```asl
     Method (_PTS, 1, NotSerialized) /* _PTS: Prepare To Sleep */
     {
   ```
 
 - `_WAK` to `ZWAK(1,N)` for:
 
-  ```swift
+  ```asl
     Method (_WAK, 1, NotSerialized) /* _WAK: Wake */
     {
   ```
 
 - `_PTS` to `ZPTS(1,S)` for:
 
-  ```swift
+  ```asl
     Method (_PTS, 1, Serialized) /* _PTS: Prepare To Sleep */
     {
   ```
 
 - `_WAK` to `ZWAK(1,S)` for:
 
-  ```swift
+  ```asl
     Method (_WAK, 1, Serialized) /* _WAK: Wake */
     {
   ```
@@ -58,14 +58,14 @@ If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don'
 
 - `_TTS` to `ZTTS(1,N)` for:
 
-  ```swift
+  ```asl
     Method (_TTS, 1, NotSerialized) /* _WAK: Wake */
     {
   ```
 
 - `_TTS` to `ZTTS(1,S)` for:
 
-  ```swift
+  ```asl
     Method (_TTS, 1, Serialized) /* _WAK: Wake */
     {
   ```
@@ -84,3 +84,4 @@ If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don'
 ## Caution
 
 Patches with the same extension name cannot be used at the same time. If there is a requirement to use them at the same time, they must be combined.
+asl

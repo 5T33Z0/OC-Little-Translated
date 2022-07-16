@@ -1,4 +1,4 @@
-## AOAC Wakeup Method
+# AOAC Wakeup Method
 
 ## Description
 
@@ -15,7 +15,7 @@ The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby 
 
 - ***SSDT-PCI0.LPCB-Wake-AOAC*** 
 
-  ```swift
+  ```asl
   ...
   Scope (_SB.PCI0.LPCB)
   {

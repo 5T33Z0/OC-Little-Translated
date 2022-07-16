@@ -59,7 +59,7 @@ One of the following methods can fix this problem:
 
 The following are the main contents of ***SSDT-LIDpatch***:
 
-```swift
+```asl
 Method (_LID, 0, NotSerialized)
 {
     if(\_SB.PCI9.FNOK==1)
@@ -74,7 +74,7 @@ Method (_LID, 0, NotSerialized)
 ```
 Here are the main contents of the ***Sleep Button Patch***:
 
-```swift
+```asl
 If (\_SB.PCI9.MODE == 1) /* PNP0C0E sleep */
 {
     \_SB.PCI9.FNOK =1 /* Press sleep button */
@@ -158,3 +158,4 @@ Else /* PNP0C0D sleep */
 ## Caution
 
 - `PNP0C0E` and `PNP0C0D` device name and path should be consistent with ACPI.
+asl

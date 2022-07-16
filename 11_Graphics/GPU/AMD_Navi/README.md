@@ -10,7 +10,7 @@ This SSDT enables Navi Cards (RX 5000/6000 series) in macOS. It renames `PEGP` t
 
 ## SSDT-NAVI Content
 
-```swift
+```asl
 External (_SB_.PCI0, DeviceObj)
 External (_SB_.PCI0.PEG0, DeviceObj)
 External (_SB_.PCI0.PEG0.PEGP, DeviceObj)

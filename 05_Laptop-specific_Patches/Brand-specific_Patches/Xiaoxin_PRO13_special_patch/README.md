@@ -4,7 +4,7 @@
 
 Rename `PNLF` to `XNLF`
 
-```swift
+```
 Find: 504E4C46
 Replace: 584E4C46
 ```

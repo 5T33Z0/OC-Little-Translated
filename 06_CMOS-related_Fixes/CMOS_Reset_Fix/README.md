@@ -13,7 +13,7 @@
 
 - Remove the **interrupt number** from **RTC `PNP0B00`** part `_CRS`.
 
-  ```swift
+  ```asl
   Device (RTC)
   {
       Name (_HID, EisaId ("PNP0B00"))
@@ -36,7 +36,7 @@
 - Disable the original part: **RTC**
   - If **RTC** does not exist ``_STA``, disable **RTC** using the following.
   
-    ```swift
+    ```asl
     External(_SB.PCI0.LPCB.RTC, DeviceObj)
     Scope (_SB.PCI0.LPCB.RTC)
     RTC) {
@@ -56,7 +56,7 @@
   
   - If `_STA` is present in **RTC**, use the preset variable method to disable **RTC**. The variable in the example is `STAS` and should be used with care about the effect of `STAS` on other devices and components.
   
-    ```swift
+    ```asl
     External (STAS, FieldUnitObj)
     Scope (\)
     {
@@ -73,7 +73,7 @@
 - The device name and path in the patch should be identical to the original ACPI.
 - If the machine itself has disabled the RTC for some reason, an fake RTC is required for it to work properly. In the case that a **"Boot self-test error"** occurs, remove the interrupt number of the impersonation patch:
 
-  ```swift
+  ```asl
     IRQNoFlags () /* delete this line */
         {8} /* Delete this line */
   ```
