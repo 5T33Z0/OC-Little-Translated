@@ -1,14 +1,18 @@
-# Adding DTGP Method
+# Adding the DTGP Method
 
 ## About
-This SSDT injects the `DTGP` method. It's rarely needed since OpenCore heavily relies on self-contained SSDT hotpatches to make devices work. But some SSDTs address this method (like tables for enabling Thunderbolt or SSDT-RX580). 
+This SSDT injects the `DTGP` method. It's rarely needed since OpenCore heavily utilizes self-contained SSDT hotpatches to make devices work. But some SSDTs (for enabling Thunderbolt or SSDT-RX580 for example) refer to this method with the following statement:
 
-Whenever you see something like this in a SSDT you need to add SSDT-DTGP (unless the method itself is defined in the SSDT itself):
+```asl
+External (DTGP, MethodObj)
+```
+Whenever you see this `External` reference and something like this down the line in a SSDT,
 
 ```asl
 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
 Return (Local0)
 ```
+you need to add `SSDT-DTGP.aml` (unless the DTGP method itself is contained within the SSDT itself).
 
 ## `DTGP` explained
 
