@@ -157,13 +157,13 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
 2. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
 
-   ```swift
+   ```asl
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
    ```
    and is ended by
 
-   ```swift
+   ```asl
    }
    ```
 
@@ -175,7 +175,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 2. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore, the example below is **invalid** because the Method is followed by a `DefinitionBlock`:
 
-   ```swift
+   ```asl
    Method (xxxx, 0, NotSerialized)
    {
        ...
@@ -198,7 +198,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
    - `Device (PCI0)` is placed inside `Scope (\_SB)`
 
-     ```swift
+     ```asl
      Scope (\_SB)
      {
          Device (PCI0)
@@ -213,7 +213,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
      > CPUs can have various scopes, for instance `_PR`,`_SB`,`_SCK0`
 
-     ```swift
+     ```asl
      Scope (_PR)
      {
          Processor (CPU0, 0x00, 0x00000410, 0x06)
@@ -226,7 +226,7 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
    - `Scope (_GPE)` places event handlers
 
-      ```swift
+      ```asl
       Scope (_GPE)
       {
           Method (_L0D, 0, NotSerialized)
@@ -259,19 +259,19 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 - Define Integer:
 
-  ```swift
+  ```asl
   Name (TEST, 0)
   ```
 
 - Define String:
   
-  ```swift
+  ```asl
   Name (MSTR,"ASL")
   ```
 
 - Define Package:
 
-  ```swift
+  ```asl
   Name (_PRW, Package (0x02)
   {
       0x0D,
@@ -294,14 +294,14 @@ The `xxxx` parameters refer to the `File Name`、`OEMID`、`Table ID` and `OEM V
 
 ### ASL Assignment
 
-```swift
+```asl
 Store (a,b) /* legacy ASL */
 b = a      /*   ASL+  */
 ```
 
 **Examples**:
 
-```swift
+```asl
 Store (0, Local0)
 Local0 = 0
 
@@ -349,7 +349,7 @@ Only two results from logical calculation - `0` or `1`
 
 1. Define a Method:
 
-   ```swift
+   ```asl
    Method (TEST)
    {
        ...
@@ -360,7 +360,7 @@ Only two results from logical calculation - `0` or `1`
 
    Numbers of parameters are defaulted to `0`
 
-   ```swift
+   ```asl
    Method (MADD, 2)
    {
        Local0 = Arg0
@@ -371,7 +371,7 @@ Only two results from logical calculation - `0` or `1`
 
 3. Define a method contains a return value:
   
-   ```swift
+   ```asl
    Method (MADD, 2)
    {
        Local0 = Arg0
@@ -382,7 +382,7 @@ Only two results from logical calculation - `0` or `1`
    }
    ```
 
-   ```swift
+   ```asl
    Local0 = 1 + 2            /* ASL+ */
    Store (MADD (1, 2), Local0)  /* Legacy ASL */
    ```
@@ -391,7 +391,7 @@ Only two results from logical calculation - `0` or `1`
 
    If not define `Serialized` or `NotSerialized`, default as `NotSerialized`
 
-   ```swift
+   ```asl
    Method (MADD, 2, Serialized)
    {
        Local0 = Arg0
@@ -403,7 +403,7 @@ Only two results from logical calculation - `0` or `1`
 
    It looks like `multi-thread synchronization`. In other words, only one instance can exist in the memory when the method is stated as `Serialized`. Normally the application creates one object, for example:
 
-   ```swift
+   ```asl
    Method (TEST, Serialized)
    {
        Name (MSTR,"I will succeed")
@@ -412,7 +412,7 @@ Only two results from logical calculation - `0` or `1`
 
    If we state `TEST` as shown above and call it from two different methods:
 
-   ```swift
+   ```asl
    Device (Dev1)
    {
         TEST ()
@@ -424,7 +424,7 @@ Only two results from logical calculation - `0` or `1`
    ```
    If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first one finalized. If we state:
 
-   ```swift
+   ```asl
    Method (TEST, NotSerialized)
    {
        Name (MSTR, "I will succeed")
@@ -453,7 +453,7 @@ It is easy to acquire the current operating system's name and version when apply
 
 When `_OSI`'s string matches the current system, it returns `1` since the `If` condition is valid.
 
-```swift
+```asl
 If (_OSI ("Darwin")) /* judge if the current system is macOS */
 ```
 
@@ -504,7 +504,7 @@ ASL also has methods to control flow.
 
    The following codes check if the system is `Darwin`, if yes then`OSYS = 0x2710`
 
-   ```swift
+   ```asl
    If (_OSI ("Darwin"))
    {
        OSYS = 0x2710
@@ -515,7 +515,7 @@ ASL also has methods to control flow.
 
    The following codes check if the system is `Darwin`, and if the system is not `Linux`, if yes then `OSYS = 0x07D0`
 
-   ```swift
+   ```asl
    If (_OSI ("Darwin"))
    {
        OSYS = 0x2710
@@ -532,7 +532,7 @@ ASL also has methods to control flow.
 
 #### `Switch`, `Case`, `Default`, `BreakPoint`
 
-   ```swift
+   ```asl
    Switch (Arg2)
    {
        Case (1) /* Condition 1 */
@@ -559,7 +559,7 @@ ASL also has methods to control flow.
 
 #### `While` & `Stall`
 
-```swift
+```asl
 Local0 = 10
 While (Local0 >= 0x00)
 {
@@ -574,7 +574,7 @@ While (Local0 >= 0x00)
 
 `For` from `ASL` is similar to `C`, `Java`
 
-```swift
+```asl
 for (local0 = 0, local0 < 8, local0++)
 {
     ...
@@ -583,7 +583,7 @@ for (local0 = 0, local0 < 8, local0++)
 
 `For` shown above and `While` shown below are equivalent
 
-```swift
+```asl
 Local0 = 0
 While (Local0 < 8)
 {
@@ -618,7 +618,7 @@ While (Local0 < 8)
 
 `CondRefOf` is useful to check the object is existed or not.
 
-```swift
+```asl
 Method (SSCN, 0, NotSerialized)
 {
     If (_OSI ("Darwin"))
@@ -813,7 +813,7 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
 
 - **Patch 1**：***SSDT-XXXX-1.aml***
   
-  ```swift
+  ```asl
   External (_SB.PCI0.LPCB, DeviceObj)
   Scope (_SB.PCI0.LPCB)
   {
@@ -825,7 +825,7 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
   ```
 - **Patch 2**：***SSDT-XXXX-2.aml***
 
-  ```swift
+  ```asl
   External (_SB.PCI0.LPCB.XXXX, DeviceObj)
   Scope (_SB.PCI0.LPCB.XXXX)
   {
