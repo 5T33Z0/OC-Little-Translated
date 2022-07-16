@@ -81,6 +81,7 @@ There's another [**method**](https://www.insanelymac.com/forum/topic/351276-rx-6
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+- Baio1977 for implementing device renames into the mattystonnie SSDTs
 - Toleda for `DAGPM.kext`
 - CMMMChris for PowerPlay Table Generators
 - [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
