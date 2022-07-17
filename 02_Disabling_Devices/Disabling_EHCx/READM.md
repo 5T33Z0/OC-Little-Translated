@@ -1,7 +1,7 @@
 # Disabling `EHCx` USB Controllers
 
 ## Description
-`EHC1` and `EHC2` buses need to be disabled in one of the following cases:
+`EHC1` and `EHC2` busses need to be disabled in one of the following cases:
 
 - The ACPI contains `EHC1` and/or `EHC2` controllers but the machine does not have the associated hardware.
 - ACPI contains `EHC1`and/or `EHC2` the actual hardware controllers exist, but no ports are mapped to it (external and internal).

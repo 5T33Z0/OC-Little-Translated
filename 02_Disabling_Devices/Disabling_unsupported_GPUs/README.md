@@ -1,13 +1,15 @@
 # How to disable incompatible discrete GPUs
 
-There are two main methods for disabling incompatible external GPUs:
+There are two main methods for disabling incompatible external GPUs.
 
 ## Method 1: via Config
+The easiest way to disable discrete CPUs is to do it via Config.plist. You can use either DeviceProperties or a boot argument to do so. If this doesn't work, you need to do it via ACPI.
 
-  - In `DeviceProperties`, add `PciRoot(0x0)/Pci(0x2,0x0)` 
-  - Add Key `disable-external-gpu`: `01000000`, Class: `DATA` 
-  - Add boot-arg `-wegnoegpu` to `NVRAM\Add\7C436110-AB2A-4BBB-A880-FE41995C9F82`
-    
+- **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
+	- Add `PciRoot(0x0)/Pci(0x2,0x0)` 
+  	- Add Key `disable-external-gpu`: `01000000`, Class: `DATA`
+- **Option 2:** using boot-arg: `-wegnoegpu`
+
 ## Method 2: with SSDT Hotpatches
 
 ### Patch principle
