@@ -1,6 +1,9 @@
 # Quirks
 Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 
+<details>
+<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+
 - [**Booter Quirks**](#booter-quirks)
 	- [High End Desktop](#high-end-desktop)
 		- [Intel Skylake X/W and Cascade Lake X/W (High End Desktop)](#intel-skylake-xw-and-cascade-lake-xw-high-end-desktop)
@@ -74,6 +77,7 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 	- [AMD](#amd-2)
 		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h-1)
 		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h) [HP]](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h-hp)
+</details>
 
 ## Booter Quirks
 
