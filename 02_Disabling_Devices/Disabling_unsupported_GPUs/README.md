@@ -38,4 +38,4 @@ The easiest way to disable discrete CPUs is to do it via Config.plist. You can u
 - For Method 2, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be combined to make the whole construct work.
 - If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** is preferred.
 - The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`. Correct the name and path according to your ACPI tables if necessary.
-- The above method was developed by [@RehabMan](https://github.com/rehabman)
+- The SSDT method was developed by [RehabMan](https://github.com/rehabman)
