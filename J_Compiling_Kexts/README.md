@@ -5,7 +5,7 @@ There are a couple of essential kexts which enable non-Apple devices like on-boa
 
 Below you will find links to guides to compile slimmed-down versions of kext which are known to be notoriously large in size by default.
 
-**NOTE**: Since I have almost no experience with coding besides following instruction, please don't ask me for support – I simply cannot provide it. Ask the respective author of the guide instead.
+**NOTE**: Since I have no experience with working with the source code of the listed kexts (besides AppleALC), please don't ask me for support – I simply cannot provide it. Ask the respective author of the guide instead.
 
 ## Requirements
 - Knowledge of working with Terminal and Source Code
@@ -34,4 +34,4 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
 ## Credits
-[@dreamwhite](https://github.com/dreamwhite) for the IntelBluetooth anf itlm slimming guides
+[dreamwhite](https://github.com/dreamwhite) for the IntelBluetooth anf itlm slimming guides
