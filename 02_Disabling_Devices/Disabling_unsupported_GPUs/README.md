@@ -8,7 +8,7 @@ The easiest way to disable discrete CPUs is to do it via Config.plist. You can u
 - **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
 	- Add `PciRoot(0x0)/Pci(0x2,0x0)` 
   	- Add Key `disable-external-gpu`: `01000000`, Class: `DATA`
-- **Option 2:** using boot-arg: `-wegnoegpu`
+- **Option 2:** using boot-arg: `-wegnoegpu` (requires `Whatevergreen.kext`)
 
 ## Method 2: with SSDT Hotpatches
 
