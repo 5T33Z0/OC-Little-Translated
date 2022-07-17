@@ -1,14 +1,13 @@
 # Compiling custom Kexts for reduced filesize
 
 ## About
-There are a couple of essential kexts which enable non-Apple devices like on-board Audio (AppleALC), Wifi and Bluetooth (OpenIntelWireless, IntelBluetoothFirmware, BrcmFirmwareData, etc.) in macOS that contain hundreds of different configurations and firmware variants to cover all sorts of device variants. Therefore, the size of these kexts grows bigger and bigger over time. But with a bit of knowledge you can compile custom variants of these kexts tailor-made for your hardware setup.
+There are a couple of essential kexts which enable non-Apple devices like on-board Audio (AppleALC), Wifi and Bluetooth (OpenIntelWireless, IntelBluetoothFirmware, BrcmFirmwareData, etc.) in macOS. These kexts can contain hundreds of different configurations and firmwares to cover all sorts of device variants. Therefore, the size of them grows bigger and bigger over time. But with a bit of effort, you can compile slimmed-down variants of these kexts tailor-made for your system.
 
 Below you will find links to guides to compile slimmed-down versions of kext which are known to be notoriously large in size by default.
 
-**NOTE**: Since I have no experience with working with the source code of the listed kexts (besides AppleALC), please don't ask me for support – I simply cannot provide it. Ask the respective author of the guide instead.
+**NOTE**: Please direct any support requests (besides slimming AppleALC) to the author of the respective guide instead.
 
 ## Requirements
-- Knowledge of working with Terminal and Source Code
 - [**XCode**](https://developer.apple.com/xcode/)
 - [**MacKernelSDK**](https://github.com/acidanthera/MacKernelSDK)
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer)
@@ -34,4 +33,4 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
 ## Credits
-[dreamwhite](https://github.com/dreamwhite) for the IntelBluetooth anf itlm slimming guides
+[dreamwhite](https://github.com/dreamwhite) for the IntelBluetoothFormware and itlwm slimming guides
