@@ -16,3 +16,6 @@ To prevent OpenCore from injecting it's SMBIOS data into Windows, change the fol
 
 - `Kernel/Quirks/CustomSMBIOSGuid` → Enabled
 - `PlatformInfo/SMBIOS/UpdateSMBIOSMode` &rarr; Custom
+
+## Resources
+For more technical details about booting Windows via OpenCore check the explanations in [this guide](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/multi-boot-options#detailed-technical-differences-of-the-four-options).
