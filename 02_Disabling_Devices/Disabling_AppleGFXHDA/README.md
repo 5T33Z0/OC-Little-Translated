@@ -10,14 +10,14 @@ This SSDT turns off the GFXHD audio device for macOS completely, so that it can 
 ## Methods
 There are 2 methods to disable the GFXHD audio device, one manual, one automated.
 
-### Method 1: Using AMD Mute
-- Download [**AMD Mute**](https://www.hackintosh-forum.de/forum/thread/55146-amd-mute-ssdt-zur-deaktivierung-von-gfx-hdmi-audio-erstellen/#post724320)
+### Method 1 (automated): Using AMD Mute
+- Download [**AMD Mute**](https://www.hackintosh-forum.de/forum/thread/55146-amd-mute-ssdt-zur-deaktivierung-von-gfx-hdmi-audio-erstellen/)
 - Open the app and click on "Generate SSDT"
-- This creates `SSDT-MUTE-GENERIC-RADEON.aml` on your Desktop
+- This generates `SSDT-MUTE-GENERIC-RADEON.aml` on your Desktop
 - Add this to the ACPI Folder and `config.plist`
 - Save and reboot
 
-### Method 2: Modifying the attached SSDT
+### Method 2 (manual): Modifying attached SSDT
 - Open `SSDT-RDN-HDAU-disable.aml`. You may have to adjust the following entries:</br>
 	![pasted-from-clipboard](https://user-images.githubusercontent.com/76865553/139533192-c23d384b-89b6-428e-a73d-f889df903930.png)
 - Find the name and path of your Graphics card in IORegistry Explorer:</br>
