@@ -442,9 +442,9 @@ It is easy to acquire the current operating system's name and version when apply
 `_OSI` requires a string which must be picked from the table below.
 
 |   OS                         |      String     |
-| :--------------------------: | :-------------: |
+| :-------------------------- | :------------- |
 | macOS                        | `"Darwin"`      |
-| Linux (other Linux-based OS) | `"Linux"`       |
+| Linux (and Linux-based OS) | `"Linux"`       |
 | FreeBSD                      | `"FreeBSD"`     |
 | Windows                      | `"Windows 20XX"`|
 
@@ -646,7 +646,6 @@ The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XS
 The following table can be regarded as the quasi dictionary for translating ASL to AML and vice versa. 
 
 Here's an Example: the well-known `_DSM` to `XDSM` binary rename consists of the "Find" value: `5F44534D` and the "Replace" value `5844534D`. This all seems kind of random at first, but in fact it is not. If you take a look in the binary column, you can see that the underscore "`_`" has a value of "5F" (we omit the leading zeros), "D" has "44", "S" is "3S" and "M" corresponds to "4d" – which equals "`_DSM`" in binary. And binary "58" "44" "53" "4D" equals to "`XDSM`" in ASL. And that's how you can read and translate between ASL and AML and create your own renames, if necessary.
-
 
 |          ASL           | Binary (AML)|
 | :--------------------: | :---------: |

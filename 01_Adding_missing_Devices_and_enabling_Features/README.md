@@ -4,11 +4,11 @@
 
 Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
 
-- Devices which can simply be enabled by renaming them, so macOS can detect and use them. OpenCore users should avoid using binary renames for this since they are applied system-wide which can break other OSes. Ideally, an SSDT shoud be used to renames the device/method in macOS only. Clover users don't need to worry about this since binary rename and SSDT hotpatches are applied to macOS only.
-- Devices which either do not exist in ACPI or have different names than expected by macOS to function properly. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect.
-- Fake Devices like Embedded Controllers or Ambient Light Sensors, so macOS is happy.
-- Patches which rename the original device or method to something else so a replacement SSDT can be written which redefines the device or method to address issues such as Sleep and Wake or Touchpads not working properly, for example.
-- Devices which are present in the `DSDT` but are disabled because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs – usually found on mainboards with 300-series chipsets and newer.
+- **Devices which can simply be enabled by renaming them**. OpenCore users should avoid using binary renames for enabling such devices since these renames will be applied system-wide which can break other OSes. Instead, an SSDT to rename these devices/methods for macOS only should be used. Clover users don't need to worry about this since binary rename and SSDT hotpatches are applied to macOS only.
+- **Devices which either do not exist in ACPI or have different names than expected by macOS to function properly**. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect.
+- **Fake Devices to keep macOS happy**, such as fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS works as expected.
+- **Patches which rename the original device or method** to something else so a replacement SSDT can be written which redefines the device or method to address issues such as Sleep and Wake or Touchpads not working properly, e.g.
+- **Devices which are present in the `DSDT` but are disabled** because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs. Usually found on mainboards with 300-series chipsets and newer.
 
 ### :warning: Don't inject already known Devices
 Sometimed I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
@@ -55,11 +55,22 @@ Although adding any of the missing parts listed below may improve performance, t
 ### Preparations
 In order to add/apply any of the Devices/Patches, it is necessary to research your machine's ACPI - more specifically, the `DSDT`. To obtain a copy of the DSDT, it is necessary to dump it from your system's ACPI Table. There are a few options to do this.
 
-#### Dumping the DSDT
+#### Obtaining ACPI Tables
+**Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables:
 
-- Using **Clover** (easiest way): hit `F4` in the Boot Menu. You don't even need a working configuration to do this. Just download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) as a .zip file, extract it to a USB stick. The Dump will be located at: `EFI\CLOVER\ACPI\origin`
-- Using **SSDTTime** (in Windows): if you use SSDTTime under Windows, you can dump the DSDT, which is not possible if you use it under macOS.
-- Using **OpenCore** (requires Debug version and working config): enable Misc > Debug > `SysReport` Quirk. The DSDT will be dumped during next boot.
+- Using **Clover** (easiest and fastest way): Clover can dump ACPI tables without a working config within seconds.
+	- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) and extract it 
+	- Put the `EFI` folder on the USB flash drive. 
+	- Start the system from the flash drive. 
+	- Hit `F4` in the Boot Menu. The dumped ACPI tables will be stored in: `EFI\CLOVER\ACPI\origin`.
+- Using **OpenCore**: Normally, you would need a working config to do this. But the guys from Utopia-Team have created a generic, pre-build Debug EFI which can do it *without* it.
+	- Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
+	- Put the `EFI` folder on the USB flash drive. 
+	- Start the system from the flash drive.
+	- Let the text run through until you reach the text-based boot menu. This takes about a minute
+	- Pull out the USB stick and reboot into a working OS.
+	- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
+- Using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) (Windows only): if you use SSDTTime under Windows, you can also dump the DSDT, which is not possible under macOS.
 
 ### Included Hotpatches
 Listed below are all SSDTs contained in this chapter. Use the listed search terms to check your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.

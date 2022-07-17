@@ -87,5 +87,5 @@ After rebooting, do the following:
 - Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions:</br>
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
-## Note
+## :bulb: Note
 You should only import tables with maciASL if you know these are not patched ones. Otherwise, dump the ACPI Tables from the Clover boot menu using `F4`.
