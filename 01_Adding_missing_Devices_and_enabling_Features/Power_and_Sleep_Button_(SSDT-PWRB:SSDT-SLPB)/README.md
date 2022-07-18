@@ -18,7 +18,7 @@ In **DSDT**, search for:
     }
     ```
     This is resolved with SSDT-SLPB_STA0B :
-    ```
+    ```asl
     Scope (\)
     {
         If (_OSI ("Darwin"))
