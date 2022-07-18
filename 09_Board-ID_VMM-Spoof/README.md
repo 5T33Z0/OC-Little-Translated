@@ -1,11 +1,9 @@
-![macOS](https://img.shields.io/badge/Supported_macOS:-macOS_11.4_to_12.5_beta-white.svg)
-
-# Using unsupported Board-IDs with macOS Big Sur/Monterey
+# Using unsupported Board-IDs with macOS 11.3 and newer
 A set of Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
 
 ## Use Cases
 1. Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
-2. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
+2. **Fixing update notifications**. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
 
 	- MacBookPro15,1 to 15,4
 	- MacBookPro16,1 to 16,4
