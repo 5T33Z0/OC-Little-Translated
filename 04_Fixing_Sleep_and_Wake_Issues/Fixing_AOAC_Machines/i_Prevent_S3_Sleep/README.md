@@ -2,7 +2,7 @@
 
 ## Description
 
-**Disable `S3` sleep** is used to solve the problem of **Sleep Failure** caused by some machines for some reasons. **Sleep Failure** means that the machine cannot be woken up normally after sleep, which is manifested as crashing, rebooting or shutting down after waking up, etc.
+This patch disables the `S3` sleep state. Useful in cases, where the system cannot return from sleep as expected, resulting in system crashes, reboots or shutdowns when trying to wake it.
 
 ## Patch method
 
@@ -13,9 +13,9 @@
   Find: 5F53335F
   Replace: 5853335F
   ```
-- **Patch**
+- **Patch** (use either or)
   - ***SSDT-NameS3-disable***: applies when `ACPI` defines `S3` sleep as a `Name` type. Most machines fall in this category.
   - ***SSDT-MethodS3-disable*** : applies when `ACPI` defines `S3` sleep as a `Method`.
 
-## Caution
-Adjust the `S3` method in the SSDT hotpatch according to the machine's original `ACPI` description `S3` method.
+## :warning: Caution
+Adjust the `S3` method in the SSDT hotpatch according to the machine's original `ACPI` description of the `S3` method.
