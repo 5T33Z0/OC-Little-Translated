@@ -72,13 +72,9 @@ If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don'
 ## Patches
 
 - ***SSDT-PTSWAKTTS*** – Integrated patch.
-
 - ***SSDT-EXT1-FixShutdown*** – `EXT1` Extension patch. Fixes the shutdown to reboot problem caused by the XHC controller by setting `XHC.PMEE` to 0 when the parameter passed in `_PTS` is `5`. This patch has the same effect as Clover's `FixShutdown`. Some XPS / ThinkPad machines will require this patch.
-
 - ***SSDT-EXT3-WakeScreen*** –`EXT3` Extension patch. Fixes the problem that some machines need to press any key to light up the screen after waking up. When using this patch, you should check if the `PNP0C0D` device name and path already exist in the patch file, such as `_SB.PCI0.LPCB.LID0`. If it does not exist add it yourself.
-
 - ***SSDT-EXT5-TP-LED*** – `EXT5` extension patch. Fixes an issue on ThinkPads where the breathing light of the Power Button LED will not return to normal after waking up. Also fixes an issue where the <kbd>F4</kbd> microphone indicator status is not normal after waking up on older ThinkPad models.
-
 - ***SSDT-ASUS-Shutdown*** – Shutdown Fix for ASUS systems. Combine with `_PTS` to `ZPTS` rename.
 
 ## :warning: Caution
