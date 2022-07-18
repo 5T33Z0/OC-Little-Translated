@@ -1,15 +1,15 @@
 # 0D/6D Instant Wake Fix
 
 ## Description
-There are some components (often it's USB or LAN, etc.) which create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep. This fix resolves this issue.
+There are some components (like USB, LAN, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep. This fix resolves this issue.
 
 ### Technical Backround
-In ACPI, there are GPE (General Purpose Events) which can be triggered by all sorts of things and events: Power Buttons, Sleep Buttons, Lids, etc. Every event has it's own number. Although these are not standardized, 06D is often used for LAN and USB. Devices contain `_PRW` methods which define their wake method by using packages which return 2 values if the corresponding event is triggered.
+The `DSDT` contains GPE (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each even has it's own number. Although these are not standardized, `06D` is often used for LAN and USB. 
 
-The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
+Some devices contain the method `_PRW` (Power Resource for Wake) which defines their wake method by using packages which return 2 power resource values if the corresponding GPE is triggered. The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
 
 - The 1st byte of the `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`.
-- The 2nd byte of `_PRW` packet is either `03` or `04`. But macOS expects a `0` here in order to not wake. And that's what this patch does: it set's packet 2 to `0` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
+- The 2nd byte of `_PRW` packet is either `03` or `04`. But macOS expects `0` here in order to not wake. And that's what this patch does: it set's packet 2 to `0` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`. But I ~~expect~~ hope that subsequent releases of OpenCore will address this issue.
 
@@ -110,10 +110,22 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 
 **Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analized before applying it.
 
-## Other methods: using `USBWakeFixup.kext`
+## Other methods
+
+### Using `USBWakeFixup.kext`
 Find out what's causing the wake by entering this in terminal:
 
 ``` pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"```
 
-If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I don't think this works for Laptops but you could try.
+If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I dout it'll work on Laptops but you could try.
+
+### Removing the `_PRW` method from DSDT completely
+The following approaches require using a patched DSDT which we are trying to avoid when using OpenCore, so they are not recommended. I also don't know if this causes negative side effects in other Operating System.
+
+There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/modified_dsdt_cleared_out_all_pwr_entries_sleep/) that removing the `_PRW` method from the `DSDT`completely solves this issue.
+
+### Changing `_PRW` to specific return values
+This approach (which also requires patching the `DSDT`) changes the power resource values for all occurances of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
+
+:bulb: If this approach could be implemented into an `SSDT` including the `_OSI` method, no more binary renames would be required so the changes would only affect macOS. This would probably the cleanest approach of fixing the issue.
 
