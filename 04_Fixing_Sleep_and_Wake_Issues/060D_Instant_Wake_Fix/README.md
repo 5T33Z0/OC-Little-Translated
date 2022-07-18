@@ -133,3 +133,6 @@ This approach (which also requires patching the `DSDT`) changes the power resour
 It would require the user to list all the Devices in the SSDT which have the `_PRW` method and return the values (`0x09`, `0x04`) for those instead of the original. 
 
 Maybe someone with more ACPI knowledge could write such a table. It's probably easier to reroute the GPE calls if the methods `GPRW/UPRW` exist in `DSDT` already. In my Laptop it's not the case though.
+
+## Resources
+- `_PWR` (PowerResource for Wake) [Specifications](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/device-power-management-objects.html#prw-power-resources-for-wake)

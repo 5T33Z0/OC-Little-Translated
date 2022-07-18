@@ -26,8 +26,8 @@ Different machines may define `_PRW` in different ways, and the contents and for
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, etc.
 
-**Note 1**: Looking up the names of devices in the DSDT is not unreliable. Search by `ADR address` or `_PRW` instead.  
-**Note 2**: Newly released machines may have new parts that require `0D/6D patch`.
+**Note 1**: Looking up the names of devices in the `DSDT` is unreliable. Search by `ADR address` or `_PRW` instead.  
+**Note 2**: Newer machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
 ```asl
@@ -57,7 +57,7 @@ Depending on your search results, pick either or of the following two `0D/6D` re
     	}
 	```
 
-  Most of the newer machines fall into this case. Just follow the usual method (rename-patch). The documentation package provides.
+  Most of the newer machines fall into this category. Just follow the usual method (rename-patch) as described.
 
   - ***SSDT-GPRW*** (patch file with binary rename data inside)
   - ***SSDT-UPRW*** (binary renaming data inside the patch file)
@@ -99,9 +99,8 @@ Depending on your search results, pick either or of the following two `0D/6D` re
 
 - Mixed `Name type`, `Method type` approach
 
-  For most TP machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
+	For most ThinkPad machines, both `Name type` and `Method type` parts are required to complete the `0D/6D patch`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused since some devices' `_PRW` methods do not require `0D/6D patches` or may may already be `0D` or `6D`. To prevent such errors, the system's DSDT` file should be extracted to verify and validate.
 
-## Caution
+## :warning: Caution
 
-- The method described in this article applies to Hotpatch.
-- Whenever a binary name change is used, the `System DSDT` file should be extracted and verified.
+- Whenever a binary name change is used, the `DSDT` file should be extracted and verified.

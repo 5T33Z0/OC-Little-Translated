@@ -81,7 +81,10 @@ If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don'
 
 - ***SSDT-ASUS-Shutdown*** – Shutdown Fix for ASUS systems. Combine with `_PTS` to `ZPTS` rename.
 
-## Caution
+## :warning: Caution
 
 Patches with the same extension name cannot be used at the same time. If there is a requirement to use them at the same time, they must be combined.
 asl
+
+## Resources
+- [Relation between `_PTS`, `_TTS` and `_WAK` methods](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/ospm-usage-of-_pts-_tts-and-_wak.html#working-sleeping-state-object-evaluation-flow)
