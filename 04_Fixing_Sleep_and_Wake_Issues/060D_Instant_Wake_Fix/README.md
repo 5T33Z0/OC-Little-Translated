@@ -127,5 +127,9 @@ There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/mo
 ### Changing `_PRW` to specific return values
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurances of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
 
-:bulb: If this approach could be implemented into an `SSDT` including the `_OSI` method, no more binary renames would be required so the changes would only affect macOS. This would probably the cleanest approach of fixing the issue.
+## Possible `SSDT` implementation
+:bulb: If changing `_PRW` to specific return values could be implemented via an `SSDT` including the `_OSI` method, no more binary renames would be required so the changes would only affect macOS. This would probably the cleanest implementation to fix the issue.
 
+It would require the user to list all the Devices in the SSDT which have the `_PRW` method and return the values (`0x09`, `0x04`) for those instead of the oriuginal. 
+
+Maybe someone with more ACPI knowledge could write such a table. It's probably easier to rerout the GPE calls if the methods `GPRW/UPRW` exist in `DSDT` already. In my Laptop it's not the case though.
