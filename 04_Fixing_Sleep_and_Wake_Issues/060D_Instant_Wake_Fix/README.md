@@ -3,7 +3,7 @@
 ## Description
 There are some components (like USB, LAN, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep. This fix resolves this issue.
 
-### Technical Backround
+### Technical Background
 The `DSDT` contains GPE (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each even has it's own number. Although these are not standardized, `06D` is often used for LAN and USB. 
 
 Some devices contain the method `_PRW` (Power Resource for Wake) which defines their wake method by using packages which return 2 power resource values if the corresponding GPE is triggered. The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
@@ -108,7 +108,7 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 
   For most ThinkPad machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
 
-**Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analized before applying it.
+**Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analyzed before applying it.
 
 ## Other methods
 
@@ -125,11 +125,11 @@ The following approaches require using a patched DSDT which we are trying to avo
 There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/modified_dsdt_cleared_out_all_pwr_entries_sleep/) that removing the `_PRW` method from the `DSDT`completely solves this issue.
 
 ### Changing `_PRW` to specific return values
-This approach (which also requires patching the `DSDT`) changes the power resource values for all occurances of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
+This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
 
 ## Outlook: possible `SSDT` implementation
 :bulb: If changing `_PRW` to specific return values could be implemented via an `SSDT` including the `_OSI` method, no more binary renames would be required so the changes would only affect macOS. This would probably the cleanest implementation to fix the issue.
 
-It would require the user to list all the Devices in the SSDT which have the `_PRW` method and return the values (`0x09`, `0x04`) for those instead of the oriuginal. 
+It would require the user to list all the Devices in the SSDT which have the `_PRW` method and return the values (`0x09`, `0x04`) for those instead of the original. 
 
-Maybe someone with more ACPI knowledge could write such a table. It's probably easier to rerout the GPE calls if the methods `GPRW/UPRW` exist in `DSDT` already. In my Laptop it's not the case though.
+Maybe someone with more ACPI knowledge could write such a table. It's probably easier to reroute the GPE calls if the methods `GPRW/UPRW` exist in `DSDT` already. In my Laptop it's not the case though.
