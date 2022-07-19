@@ -82,6 +82,9 @@ To re-enable Upgrade Notifications, enter:</br>
 
 `sudo / usr / sbin / softwareupdate --reset-ignored`
 
+**Enable Key Repeating**</br>
+`defaults write -g ApplePressAndHoldEnabled -bool false`
+
 ## CPU related
 
 **Show CPU Vendor**</br>
