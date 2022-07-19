@@ -75,7 +75,7 @@ defaults write com.apple.sidecar.display hasShownPref -bool true
 **Disable macOS Upgrade Notifications** (change "macOS name" as needed)</br> 
 
 ```
-sudo / usr / sbin / softwareupdate --ignore "macOS Big Sur"`</br>
+sudo / usr / sbin / softwareupdate --ignore "macOS Big Sur"
 defaults write com.apple.systempreferences AttentionPrefBundleIDs 0; killall dock
 ```
 To re-enable Upgrade Notifications, enter:</br>
