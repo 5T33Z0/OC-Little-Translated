@@ -35,6 +35,20 @@ It also integrates new keys/features added to the config.plist into the GUI auto
 
 Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
+## OCAT's different Modes
+In newer versions of OCAT, you can choose 4 variants and builds of OpenCore to install and update by combining settings in the "Edit" menu:
+
+![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
+
+The following combinations are possible: 
+
+- OpenCore Release (default, no check mark set)
+- OpenCoe DEBUG
+- OpenCore DEV (nightly builds)
+- OpenCore DEV DEBUG (Debug versions of nightly builds)
+
+For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
+
 ## How-to update your `config.plist`
 1. Run OCAT, check for Updates (Globe Icon)
 2. Mount your ESP (select Edit > MountESP) or (⌘+M)
@@ -53,18 +67,6 @@ Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io
 **NOTE**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ### Updating OpenCore Files, Drivers, Kexts and Resources
-In newer versions of OCAT, you can choose 4 variants and builds of OpenCore to install and update by combining settings in the "Edit" menu:
-
-![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
-
-The following combinations are possible: 
-
-- OpenCore Release (default, no check mark set)
-- OpenCoe DEBUG
-- OpenCore DEV (nightly builds)
-- OpenCore DEV DEBUG (Debug versions of nightly builds)
-
-For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo.
 
 To update OpenCore files and Kexts, do the following:
 
@@ -79,17 +81,11 @@ To update OpenCore files and Kexts, do the following:
 	![syncdone2](https://user-images.githubusercontent.com/76865553/140641897-c8f26c31-bb4c-47ae-be1f-fa8c1e0163a0.png)
 t. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
 
-## Release Mode vs Dev Mode
-OCAT can run in 2 main modes: RELEASE or DEV. Release mode downloads the official release versions of OpenCore. DEV downloads nightly builds from Dortania's Build Repo. On top of that you can choose to download DEBUG versions of both as well, depending on the settings selected in the "Edit" menu: 
-
-![](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
-
-- No checkmark set = Release Version will be downloaded (Default)
-- **OpenCore DEV** selected = OpenCore nightlies will be downloaded (Recommended when playing with the latest macOS betas)
-- **OpenCore Debug** selected = Downloads the Debug build of either the RELEASE or DEV version (depending on the mode it's currently running in)
+## Sync Window: Release Mode vs. Dev Mode
+As mentioned previously, the Sync Window looks different depending on the selected mode.
 
 ### Release Mode
-For the Release version (default), you can choose the Release builds you ant to install from a dropdown menu in the Sync Window. Obviously, selecting "Latest Version" will download the latest available Release build after clicking on "Get OpenCore":
+For the Release version (default), you can choose the Release builds you want to install from a dropdown menu in the Sync Window. Obviously, selecting "Latest Version" will download the latest available Release build after clicking on "Get OpenCore":
 
 ![LatestVersn](https://user-images.githubusercontent.com/76865553/179836491-9bc040c3-1d7a-4eb5-bf1a-f1fbda7f9eed.png)
 
