@@ -5,9 +5,10 @@
 - [About](#about)
 - [Tools and prerequisites](#tools-and-prerequisites)
 	- [For users updating from OpenCore 0.6.5 or lower](#for-users-updating-from-opencore-065-or-lower)
+- [OCAT's different Modes](#ocats-different-modes)
 - [How-to update your `config.plist`](#how-to-update-your-configplist)
 	- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
-- [Release Mode vs Dev Mode](#release-mode-vs-dev-mode)
+- [Sync Window: Release Mode vs. Dev Mode](#sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
@@ -92,7 +93,7 @@ For the Release version (default), you can choose the Release builds you want to
 Once the OpenCore Package has been downloaded and integrated into the database, the OC Version displayed in the top left of OCAT's main Window will be updated to reflect the used version!
 
 ### Dev Mode
-For downloading and syncing the latest **DEV** versions, you have to select `OpenCore DEV` in the "Edit" meni. This esults in a slightly different looking Sync window. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
+For downloading and syncing the latest **DEV** versions, you have to select `OpenCore DEV` in the "Edit" menu. This results in a slightly different looking Sync window. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
 
 ![devrepo](https://user-images.githubusercontent.com/76865553/177286293-1fbbf191-3af0-4751-8c84-5c878b58fd51.png)
 
