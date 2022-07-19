@@ -72,16 +72,6 @@ defaults write com.apple.sidecar.display hasShownPref -bool true
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
-**Disable macOS Upgrade Notifications** (change "macOS name" as needed)</br> 
-
-```
-sudo / usr / sbin / softwareupdate --ignore "macOS Big Sur"
-defaults write com.apple.systempreferences AttentionPrefBundleIDs 0; killall dock
-```
-To re-enable Upgrade Notifications, enter:</br>
-
-`sudo / usr / sbin / softwareupdate --reset-ignored`
-
 **Enable Key Repeating**</br>
 `defaults write -g ApplePressAndHoldEnabled -bool false`
 
