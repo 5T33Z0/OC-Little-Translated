@@ -312,7 +312,7 @@ Local1 = Local0
 ### ASL Calculation
 
 |  ASL+  |  Legacy ASL|  Examples        
-| :----: | :--------: |:----------------------------------------------------------- |
+| :----: | :--------: |:------------------------------------------------------------------------- |
 |   +    |    Add     | `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                                 |
 |   -    |  Subtract  | `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`                            |
 |   *    |  Multiply  | `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`                            |
@@ -332,7 +332,7 @@ Read `ACPI Specification` for more details
 ### ASL Logic
 
 |  ASL+  |   Legacy ASL  | Examples                                                         |
-| :----: | :-----------: | :-----------------------------------------------------------|
+| :----: | :-----------: | :----------------------------------------------------------------|
 |   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`                 |
 |   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                     |
 | &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`         |
@@ -594,7 +594,7 @@ While (Local0 < 8)
 ## `External` Quote
 
 |  Quote Types   | External SSDT Quote| Quoted                   |
-| :------------: | :-------------------------------------------- | :---------------------------------------------------------------------- |
+| :------------: | :----------------- | :----------------------- |
 |   UnknownObj   | `External (\_SB.EROR, UnknownObj`             | (avoid to use)                                                          |
 |     IntObj     | `External (TEST, IntObj`                      | `Name (TEST, 0)`                                                        |
 |     StrObj     | `External (\_PR.MSTR, StrObj`                 | `Name (MSTR,"ASL")`                                                     |

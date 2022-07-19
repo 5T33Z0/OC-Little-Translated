@@ -4,7 +4,7 @@
 
 `ACPI` can use the `_OSI` (=Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS Kernels) is running.
 
-But by simulating a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally are limited to windows `Windows`. This is useful to better support certain devices like touchpads, etc.
+But by simulating a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally are limited to  `Windows`. This is useful to better support certain devices like touchpads, etc.
 
 **The Patch consist of two elements**: 
 

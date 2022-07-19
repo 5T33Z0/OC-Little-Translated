@@ -1,6 +1,6 @@
 # Add PMCR Device (`SSDT-PMC`)
 ## About
-`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards qith Z390 chipsets so the system boots (see "Technical Background" for details).
+`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets so the system boots (see "Technical Background" for details).
 
 :warning: Mandatory for 390-series mainboards (optional for 400/500/600-series chipsets)!
 
@@ -19,7 +19,7 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 ## Technical Background
 > Starting from Z390 chipsets, PMC (D31:F2) is only available through MMIO. Since there is no standard device for PMC in ACPI, Apple introduced its own naming "APP9876" to access this device from AppleIntelPCHPMC driver. To avoid confusion we disable this device for all other operating systems, as they normally use another non-standard device with "PNP0C02" HID and "PCHRESV" UID.
 > 
-> On certain implementations, including APTIO V, PMC initialisation is required for NVRAM access. Otherwise it will freeze in SMM mode. The reason for this is rather unclear. Note, that PMC and SPI are located in separate memory regions and PCHRESV maps both, yet only PMC region is used by AppleIntelPCHPMC:
+> On certain implementations, including APTIO V, PMC initialization is required for NVRAM access. Otherwise it will freeze in SMM mode. The reason for this is rather unclear. Note, that PMC and SPI are located in separate memory regions and PCHRESV maps both, yet only PMC region is used by AppleIntelPCHPMC:
 > 
 > 0xFE000000~0xFE00FFFF - PMC MBAR</br>
 > 0xFE010000~0xFE010FFF - SPI BAR0</br>
@@ -29,5 +29,5 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 
 **CREDITS**:
 
-- Pleasecallmeofficial: who first found this patch
+- Pleasecallmeofficial: who discovered this patch
 - Acidathera for improving the SSDT sample.

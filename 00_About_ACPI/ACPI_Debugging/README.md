@@ -12,7 +12,7 @@ To enable ACPI Debugging, do the following:
 
 **Config NOTES**: 
 
-- Depending on the amount of paramaters/arguments you want to debug, you need to reference either Method P1 (for 1 Argumnet) to Method P7 (for 7 Arguments)
+- Depending on the amount of parameters/arguments you want to debug, you need to reference either Method P1 (for 1 Argument) to Method P7 (for 7 Arguments)
 - Check `SSDT-BKeyQxx-Debug.dsl` for examples.
 
 ## Debugging process
