@@ -80,27 +80,23 @@ To update OpenCore files and Kexts, do the following:
 t. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
 
 ## Release Mode vs Dev Mode
-OCAT can run in 2 main modes: RELEASE or DEV. Release mode downloads the official release versions of OpenCOre. DEV downloads nightly builds from Dortania's Build Repo. On top of that it can DEBUG versions of both, depending on the settings selected in the "Edit" menu: 
+OCAT can run in 2 main modes: RELEASE or DEV. Release mode downloads the official release versions of OpenCore. DEV downloads nightly builds from Dortania's Build Repo. On top of that you can choose to download DEBUG versions of both as well, depending on the settings selected in the "Edit" menu: 
 
 ![](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
 
 - No checkmark set = Release Version will be downloaded (Default)
 - **OpenCore DEV** selected = OpenCore nightlies will be downloaded (Recommended when playing with the latest macOS betas)
-- **OpenCore Debug** selected = Downloads the Debug build of either the RELEASE or DEV version (depending on the settings)
+- **OpenCore Debug** selected = Downloads the Debug build of either the RELEASE or DEV version (depending on the mode it's currently running in)
 
 ### Release Mode
-For the release version (default), you can only select the official release builds of OpenCore you want to install from a dropdown menu in the Sync Window. Obviously, selecting "Latest Version" will download the latest available release build after clicking on "Get OpenCore":
+For the Release version (default), you can choose the Release builds you ant to install from a dropdown menu in the Sync Window. Obviously, selecting "Latest Version" will download the latest available Release build after clicking on "Get OpenCore":
 
 ![LatestVersn](https://user-images.githubusercontent.com/76865553/179836491-9bc040c3-1d7a-4eb5-bf1a-f1fbda7f9eed.png)
 
-After the OpenCore Package has been downloaded and integrated into the database, the OC Version displayed in the top left of OCAT's main Window will be updated to reflect the used version!
+Once the OpenCore Package has been downloaded and integrated into the database, the OC Version displayed in the top left of OCAT's main Window will be updated to reflect the used version!
 
 ### Dev Mode
-The sync window looks different depending on the OpenCore variant you choose in the "View" menu: 
-
-![](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png) 
-
-For downloading and syncing the latest **Dev** versions, you have to change View to `Dev`, which results in a slightly different Sync menu. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
+For downloading and syncing the latest **DEV** versions, you have to select `OpenCore DEV` in the "Edit" meni. This esults in a slightly different looking Sync window. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
 
 ![devrepo](https://user-images.githubusercontent.com/76865553/177286293-1fbbf191-3af0-4751-8c84-5c878b58fd51.png)
 
