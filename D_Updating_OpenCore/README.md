@@ -82,9 +82,9 @@ The sync window looks different depending on the OpenCore variant you choose in 
 
 ![](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png) 
 
-For the release version (default), you can only select Release Versions of OpenCore version you want to install from a dropdown menu:
+For the release version (default), you can only select Release Versions of OpenCore version you want to install from a dropdown menu. Select "Latest Version" to get the latest available release build. After that, click on "Get OpenCore" to download it:
 
-![Sync_release](https://user-images.githubusercontent.com/76865553/155942200-876515cc-02c7-4144-830b-dfe266ad98d2.png)
+![Bildschirmfoto 2022-07-19 um 21 42 47](https://user-images.githubusercontent.com/76865553/179835330-25e62e94-262b-4813-94c7-04f19ccdc981.png)
 
 For downloading and syncing the latest **Dev** versions, you have to change View to `Dev`, which results in a slightly different Sync menu. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
 
