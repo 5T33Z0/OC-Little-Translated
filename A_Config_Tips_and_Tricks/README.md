@@ -66,10 +66,10 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 ## I. Updating config.plist and fixing errors
 
 ### Automated config upgrade (recommended)
-Eversince OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
+Since OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
 
 ### Manual upgrade and error correction (old)
-Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare with the latest sample.plist and upodate files. These included: OCConfigCompare (to compare config differences), KextUpdater (for downloading Kexts, Drivers, etc.), ProperTree (for creating snapshots editing the config) and OCValidate (for checking the config). This was a really time consuming process and I am glad, I don't have to do this any more.
+Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare with the latest sample.plist and update files. These included: OCConfigCompare (to compare config differences), KextUpdater (for downloading Kexts, Drivers, etc.), ProperTree (for creating snapshots editing the config) and OCValidate (for checking the config). This was a really time consuming process and I am glad, I don't have to do this any more.
 
 ## II. Quick fixes for Boot Problems
 
@@ -204,7 +204,7 @@ If you want to boot Windows *properly*, you should boot it via the BIOS Boot Men
 
 Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. Therefore, the OpenCore package also contains `CleanNvram.efi` under `Tools`, which should work better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
 
-* **AllowNvramReset** = `No` - Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entriy for CleanNVRAM
+* **AllowNvramReset** = `No` - Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entry for CleanNVRAM
 * Copy **CleanNvram.efi** to EFI > OC > Tools
 
 Next, create a new snapshot of the config or add the tool manually to the config. If you want you can hide the entry in the BootPicker so that it only appears after pressing the space bar:
@@ -240,7 +240,7 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 ### Manual method
 Exchanging existing SMBIOS data back and forth between an OpenCore and a Clover config can be a bit confusing since both use different names and locations for data fields. 
 
-Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. On top of that you have to re-enter and 2-way-authenticate the system every single time you switch betweeen OpenCore and Clover, which is incredibly annowying. So in order to prevent this, you have to do the following:
+Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. On top of that you have to re-enter and 2-way-authenticate the system every single time you switch between OpenCore and Clover, which is incredibly annoying. So in order to prevent this, you have to do the following:
 
 1. Copy the Data from the following fields to Clover Configurator's "SMBIOS" and "RtVariables" sections:
 
@@ -260,16 +260,16 @@ PlatformInfo/Generic (OpenCore)| SMBIOS (Clover)      |
 You know that the SMBIOS data has bee transferred correctly, if you don't have to re-enter your Apple-ID and password.
 
 #### Troubleshooting
-If you have to re-enter your Appple ID Password after changing from OpenCore to Clover or vice versa, the used SMBIOS Data is not oidentical, so you have to figure out where the mismmatch is. You can use Hackintool to do so:
+If you have to re-enter your Apple ID Password after changing from OpenCore to Clover or vice versa, the used SMBIOS Data is not identical, so you have to figure out where the mismatch is. You can use Hackintool to do so:
 
 - Mount the EFI
-- Open the config for the currently used Bootmanger
+- Open the config for the currently used Boot Manager
 - Run Hackintool. The "System" section shows the currently used SMBIOS Data: </br> ![SYSINFO](https://user-images.githubusercontent.com/76865553/166119425-8970d155-b546-4c91-8daf-ec308d16916f.png)
 - Check if the framed parameters match the ones in your config.
-- If they don't, correct them and use the ones from Hackintool 
+- If they don't, correct them and use the ones from Hackintool.
 - If they do mach the values used in your config, open the config from your other Boot Manager and compare the data from Hackintool again and adjust the data accordingly.
-- Save the config and reboot
-- Change to the other Boot Manager and start macOS
+- Save the config and reboot.
+- Change to the other Boot Manager and start macOS.
 - If the data is correct you won't have to enter your Apple ID Password again (double-check in Hackintool to verify).
 
 ### SMBIOS Data Import/Export with OCAT
@@ -279,8 +279,8 @@ Besides manually copying over SMBIOS data from your OpenCore to your Clover conf
 
 **IMPORTANT**
 
-- If you did everything correct, you won't have to enter your AppleID Password after switching bootloaders and macOS will let you know, that "This AppleID is now used with this device" or something like that.
-- But if macOS asks for your AppleID Password and Mail passwords etc. after switching bootloaders, you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
+- If you did everything correct, you won't have to enter your AppleID Password after switching Boot Managers and macOS will let you know, that "This AppleID is now used with this device" or something like that.
+- But if macOS asks for your AppleID Password and Mail passwords etc., you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
 
 ### 1-Click-Solution for Clover Users
 If you've used the real MAC Address of your Ethernet Controller ("ROM") when generating your SMBIOS Data for your OpenCore config, you can avoid possible SMBIOS conflicts altogether. In the "Rt Variables" section, click on "from System" and you should be fine!

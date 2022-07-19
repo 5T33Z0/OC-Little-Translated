@@ -27,5 +27,4 @@ Run either [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADe
 - The previously used, additional `SKLAsKBLGraphicsInfo.kext` is no longer required
 - PMheart for the Patch 
 - Acidanthera for OpenCore, Lilu and Whatevergreen
-- Lorys89 for SKLAsKBLGraphicsInfo.kext
 - Cyberdevs for the [settings](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2785675)

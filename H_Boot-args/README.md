@@ -37,7 +37,7 @@ For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 |:------:|-----------|
 **`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 **`amfi_get_out_of_my_way=1`**|Combines wit disabled SIP, this disables Apple Mobile File Integrity. AMFI is a macOS kernel module enforcing code-signing validation and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every app that is run and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
-**`-force_uni_control`**|Force-enables the Universal Control service in macOS Monteray 12.3+.
+**`-force_uni_control`**|Force-enables the Universal Control service in macOS Monterey 12.3+.
 
 ## Boot-args and device properties provided by kexts
 
@@ -54,7 +54,7 @@ Assorted Lilu boot-args. Remember that Lilu acts as a patch engine providing fun
 **`lilucpu=N`**|to let Lilu and plugins assume Nth CPUInfo::CpuGeneration.
 
 ### Whatevergreen.kext 
-Listed below you'll find a snall but useful assortion of WEG's boot args for everything graphics-related. Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
+Listed below you'll find a small but useful assertion of WEG's boot args for everything graphics-related. Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
 
 |Boot-arg|Description|
 |:------:|-----------|
@@ -65,7 +65,7 @@ Listed below you'll find a snall but useful assortion of WEG's boot args for eve
 **`-wegnoigpu`**|Disables internal GPU (or add `disable-gpu` property to iGPU)
 **`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without it you'll get a black screen. Although not necessary for Polaris or Vega Cards it can be used to fix black screen issues in multi-monitor setups.
 **`agdpmod=vit9696`**|Disables check for `board-id` (or add `agdpmod` property to external GPU).
-**`applbkl=0`**| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for IGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
+**`applbkl=0`**| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for iGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
 **`gfxrst=1`**|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
 **`ngfxgl=1`**|Disables Metal support on NVIDIA cards (or use `disable-metal` property)
 **`igfxgl=1`**|boot argument (and `disable-metal` property) to disable Metal support on Intel.

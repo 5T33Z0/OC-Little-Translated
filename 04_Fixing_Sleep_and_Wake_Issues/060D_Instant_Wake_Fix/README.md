@@ -34,7 +34,7 @@ Different machines may define `_PRW` in different ways, so the contents and form
 
 **NOTES**: 
 
-- Looking up the names of devices in the DSDT is not a reliable approch. Search by `ADR address` or `_PRW` instead.  
+- Looking up the names of devices in the DSDT is not a reliable approach. Search by `ADR address` or `_PRW` instead.  
 - Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
@@ -117,7 +117,7 @@ Find out what's causing the wake by entering this in terminal:
 
 ``` pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"```
 
-If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I dout it'll work on Laptops but you could try.
+If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I doubt it'll work on Laptops but you could try.
 
 ### Removing the `_PRW` method from DSDT completely
 The following approaches require using a patched DSDT which we are trying to avoid when using OpenCore, so they are not recommended. I also don't know if this causes negative side effects in other Operating System.

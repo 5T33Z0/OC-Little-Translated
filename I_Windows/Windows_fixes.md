@@ -3,7 +3,7 @@ You can use Hackintool to create some registry keys which you can import in Wind
 
 ## Correct time in Windows clock
 
-After installing macOS, the time displayed in the Windows clock is always runs an hour earlier or later than the actual time. That's because Windows uses GMT (Greenwhich Mean Time) while macOS uses UTC (Coordinated Universal Time). 
+After installing macOS, the time displayed in the Windows clock is always runs an hour earlier or later than the actual time. That's because Windows uses GMT (Greenwich Mean Time) while macOS uses UTC (Coordinated Universal Time). 
 
 And every time the other OS boots, it tries to "fix" the time in the BIOS/Firmware that the other OS changed previously. And since both OSes use different time references that's where the discrepancies come from. The solution is to change the Windows Clock to UTC using a registry key entry:
  

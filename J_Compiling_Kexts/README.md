@@ -33,4 +33,4 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
 ## Credits
-[dreamwhite](https://github.com/dreamwhite) for the IntelBluetoothFormware and itlwm slimming guides
+[dreamwhite](https://github.com/dreamwhite) for the IntelBluetoothFirmware and itlwm slimming guides.

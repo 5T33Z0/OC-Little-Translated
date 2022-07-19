@@ -4,7 +4,7 @@
 ## About
 This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
-**No AMD?** Since setting-up AMD systems depends a lot on the used combination of CPU and mainboard a lot of customization around MMIO are necessary. So based on this [**discussion**](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the equation, since generating a working EFI based on generic templates seems unrealistic as of now.
+**No AMD?** Since setting-up an AMD systems requires a lot of custom entries in the MMIO Whitelist section, working with generic, pre-made config.plists is hit or miss. Based on this [**discussion**](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the database. Fabiosun took care of the AMD templates since he has more experience in this field then me.
 
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the config included in the App's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.

@@ -27,7 +27,7 @@ There are two methods for setting/changing the ASPM mode: via DeviceProperties o
 	- Disable ASPM: `pci-aspm-default` = `00000000` [data]
 
 #### Example 1: Changing the ASPM mode of an NVMe Disk
-You can manuall set the ASPM mode of 3rd party SATA and NVMe drives if it's not detected corretly by macOS:
+You can manually set the ASPM mode of 3rd party SATA and NVMe drives if it's not detected correctly by macOS:
 
 - Open Hackintool
 - Click on the `PCIe` Tab

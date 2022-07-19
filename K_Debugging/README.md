@@ -14,7 +14,7 @@ Normally, you would need an already working config and the Debug version of Open
 1. Download the EFI.zip and extract it
 2. Copy the EFI folder to a FAT32 formatted flash drive
 3. Reboot your system from the flash drive
-4. The dumping process will beginn: 
+4. The dumping process will begin: 
 ![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
 
 Once you reach OpenCore's boot picker, you can remove the flash drive and reset the system. The files are stored on the flash drive now and you can check them out.
@@ -29,7 +29,7 @@ With `SysReport` enabled, ACPI tables will be dumped which then can be further a
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a prizeless asset when [creating Layout-IDs for AppleALC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
+With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a priceless asset when [creating Layout-IDs for AppleALC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
 
 ![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 
@@ -45,7 +45,7 @@ Users who already have Linux installed can skip this!
 5. Reboot from the flash drive
 6. In the Ventoy Menu, select the Linux ISO and hit enter
 7. From the GNU Grub, select "Try or Install Linux"
-8. Once Ubuntu has reached the Desktop environmen, select "Try Ubuntu"
+8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu"
 
 #### Dumping the Audio CODEC
 1. Once Linux is up and running, open Terminal and enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
@@ -108,12 +108,12 @@ Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in th
 ```
 </details>
 
-With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup), we can reformat the PCIInfo.txt to a more legible form:
+With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup), we can convert the PCIInfo.txt into a more legible form:
 
 - Install Python
-- Download and upack the Script
+- Download and unpack the Script
 - Run Terminal
-- Typce `cd`, hit space
+- Type `cd`, hit space
 - Drop the "PCILookup-master" folder in the terminal window and hit enter 
 - Next, type `python3 main.py` and hit space
 - Drag in the `PCIInfo.txt` and hit enter

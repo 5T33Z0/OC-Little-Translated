@@ -2,7 +2,7 @@
 
 ## Description
 
-The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby extending the standby time. However, it also makes waking up the machine more difficult and requires a special method. See "Power Idle Management" for more information on ***SSDTDeep-Idle***. **This method** resets the wake-up state via a custom patch.
+The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state thereby extending the standby time. However, it also makes waking up the machine more difficult and requires a special method. See "Power Idle Management" for more information on ***SSDTDeep-Idle***. **This method** resets the wake-up state via a custom patch.
 
 ## Wake-up Method: Power button
 
@@ -45,4 +45,3 @@ The ***SSDT-DeepIdle*** patch can put the machine into a deep idle state therby 
 
   - Find the name and path of the power device (`_HID` = `ACPI0003`), search by power name, and record the `Method` that contains `Notify (*** Power Name, 0x80)`. Add this `Method` to `_PS0` in ***SSDT-PCI0.LPCB-Wake-AOAC***.
   - `Notify (***Power Name, 0x80)` may exist in more than one `Method`, which must be confirmed by the ACPIDebug method. **Confirm method**: The `Method` that responds to plugging or unplugging power is the one we need.
-

@@ -12,7 +12,7 @@ It's complicated… well, actually it isn't: just don't buy them! ;)
 
 Although NVIDIA Cards ***were*** officially supported up to macOS High Sierra, you can no longer install Nvidia Web Drivers since [Nvidia revoked the certificates](https://twitter.com/khronokernel/status/1532545973372588033) shortly after Khronokernel figured out how to enable Nvidia Web Drivers in macOS Monterey. I don't know if this also affects previously installed Web Drivers (I guess you have to stay offline to not lose the Certs), but at this stage my advice would be to just move on and switch to AMD.
 
-Even though Kepler Cards are supported up to macOS Big Sur, it's not worth investing in them simply because these old NVIDIA cards start dying. This year alone, my GTX 760 which I had for 4 years died basically doing nothing. The replacement GTX 760 died a month later (while the prices for these $hitty old cards are still increasing). So do yourself a favor and don't even bother buying one of these old cards.
+Even though Kepler Cards are supported up to macOS Big Sur, it's not worth investing in them simply because these old NVIDIA cards start dying. This year alone, my GTX 760 which I had for 4 years died basically doing nothing. The replacement GTX 760 died a month later (while the prices for these old cards are still increasing). So do yourself a favor and don't even bother buying one of these old cards.
 
 And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes – so no need to flex with your RTX 3090! ;)
 

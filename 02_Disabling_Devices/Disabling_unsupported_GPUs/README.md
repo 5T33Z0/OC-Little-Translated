@@ -19,7 +19,7 @@ The easiest way to disable discrete CPUs is to do it via Config.plist. You can u
 
 ### Patch Requirements
 
-- Modified Preparte to Sleep/Wake Patch (***SSDT-PTSWAK***)
+- Modified Prepare to Sleep/Wake Patch (***SSDT-PTSWAK***)
 - GPU blocking patch: ***SSDT-NDGP_OFF*** or ***SSDT-NDGP_PS3***
 
 #### Example
@@ -28,7 +28,7 @@ The easiest way to disable discrete CPUs is to do it via Config.plist. You can u
 - Add eiher/or:
 	- ***SSDT-NDGP_OFF***
 		- In `DSDT`, query the name and path of `DGPU` and confirm the existence of the `_ON` and `_OFF` methods
-		- Refer to the example and change the name and path to match the device name and patch useed in the `DSDT`
+		- Refer to the example and change the name and path to match the device name and patch used in the `DSDT`
   	- ***SSDT-NDGP_PS3***
 		- Query the name and path of `DGPU` and confirm the existence of `_PS0`, `_PS3` and `_DSM` methods
 		- Refer to the example and change the name and path to match the query result

@@ -9,7 +9,7 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 	- `btrfs_x64.efi` and/or
 	- `ext4_x64.efi` based on the file system the chosen Linux Distribution uses (both included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
 2. Enable UEFI > Quirks > `RequestBootVarRouting`
-3. Enable Misc > Boot > `LauncherOption` to prevent Linux bootloader from taking over the first slot of the boot entries. Choose either/or:
+3. Enable Misc > Boot > `LauncherOption` to prevent Linux bootloaders from taking over the first slot of the boot entries. Choose either/or:
 	- `Full`: For AMI, Phoenix, and any other modern UEFI BIOS.
 	- `Short`: For older types of firmware, typically from Insyde, that are unable to manage full device paths.
 4. If you are using Misc > Entries or Misc > `BlessOverride` to boot Linux, delete the entries.
