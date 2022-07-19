@@ -10,7 +10,7 @@ In other words: adding this device is only necessary if you combine a 2nd Gen In
 To find out if you need this SSDT, do the following:
 
 - Ensure you have Lilu and Whatevergreen kexts present and enabled.
-- Enter `ioreg | grep IMEI` in Terminal to chheck if `IMEI` is present in IO Registry
+- Enter `ioreg | grep IMEI` in Terminal to check if `IMEI` is present in IO Registry
 - Terminal should report its device path and status, similar to this:</br>
 	`| |   +-o IMEI@16  <class IOPCIDevice, id 0x100000200, registered, matched, active, busy 0 (26 ms), retain 10>`
 

@@ -1,7 +1,7 @@
 # Intel PCH SPI Controller (`SSDT-XSPI`)
 Adds Platform Controller Hub (PCH) to IORegistry as `XSPI`. Research showed that `XSPI` is present in the IORegistries of some (not all) 9th Gen Intel Core machines and all 10th Gen Macs (Comet/Ice Lake).
 
-Appllicable to **SMBIOS**:
+Applicable to **SMBIOS**:
 
 - macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
 - macBookAir9,x (10th Gen)
@@ -25,7 +25,7 @@ Before adding `SSDT-XSPI`, it will look like this in IO Registry Explorer:
 
 After adding `SSDT-XSPI` to my system (iMac20,2) it is still located at the same address, but will now be called `XSPI` – just like on a real iMac20,X: 
 
-![IO_Reag_after](https://user-images.githubusercontent.com/76865553/166139780-554d5c20-6d92-4003-87fb-3bcc609b6128.png)
+![IO_Reg_after](https://user-images.githubusercontent.com/76865553/166139780-554d5c20-6d92-4003-87fb-3bcc609b6128.png)
 
 As you can see, the only difference seems to be that there's now a name assigned to the location.  Are there any benefits to it in performance? In don't know. Probably not.
 

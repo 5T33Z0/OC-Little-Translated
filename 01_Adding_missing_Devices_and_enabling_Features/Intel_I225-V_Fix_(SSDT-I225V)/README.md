@@ -4,15 +4,17 @@
 
 **TABLE of CONTENTS**
 
-- [About](#about)
-- [Adding SSDT-I225-V](#adding-ssdt-i225-v)
-- [Settings](#settings)
-- [Troubleshooting](#troubleshooting)
+- [Intel I225-V Ethernet Controller Fix](#intel-i225-v-ethernet-controller-fix)
+	- [About](#about)
+	- [Adding SSDT-I225-V](#adding-ssdt-i225-v)
+	- [Settings](#settings)
+	- [Troubleshooting](#troubleshooting)
+	- [Credits and Resources](#credits-and-resources)
 
 ## About
 The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos.[^1] The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver.
 
-Apply this fix to re-enable Intenet in macOS Monterey and newer.
+Apply this fix to re-enable Internet in macOS Monterey and newer.
 
 [^1]: Check [this thread](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786699) for details.
 
@@ -60,7 +62,7 @@ If you can't access the Internet after flashing the custom firmware, remove the 
 - `sudo rm /Library/Preferences/SystemConfiguration/preferences.plist`
 - `sudo kextcache -i /`
 
-After a few seconds, the connection should work. If you still can't access the Internet, delete the following prefeences followed by a reboot:
+After a few seconds, the connection should work. If you still can't access the Internet, delete the following preferences followed by a reboot:
 
 - `/Library/Preferences/com.apple.networkextension.necp.plist`
 - `/Library/Preferences/com.apple.networkextension.plist`

@@ -50,7 +50,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
   
 	RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following rename:
 
-	```asl
+	```text
 	Name: PNLF to XNLF  
 	Find: 504E4C46  
 	Replace: 584E4C46

@@ -81,6 +81,6 @@ Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CP
 ## Notes and Credits
 - The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM` for these CPUs instead to enable proper CPU Power Management.
 - Dortania for `SSDT-CPUR.aml` for AMD CPUs
-- Acidanthera for `SSDT-PLUG-ALT.dsl` for Intel Alderlake (requires [**Fake CPUID**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/using-alder-lake#kernel-greater-than-emulate)).
+- Acidanthera for `SSDT-PLUG-ALT.dsl` for Intel Alder Lake (requires [**Fake CPUID**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/using-alder-lake#kernel-greater-than-emulate)).
 - For Intel Xeon CPUs, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
 - With macOS 12.3 Beta 1, Apple dropped the 'plugin-type' check within `X86PlatformPlugin`. Because of this, X86PP will match onto the CPU instead of ACPI_SMC_PlatformPlugin. This causes power management to break on pre-Ivy Bridge CPUs as they don't have correct power management tables provided. More info [here](https://github.com/acidanthera/bugtracker/issues/2013).
