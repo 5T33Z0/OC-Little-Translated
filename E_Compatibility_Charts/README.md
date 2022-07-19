@@ -16,7 +16,7 @@ This list, although helpful and informative, is not as binding for hackintoshes 
 - …you can make use of macOS Monterey's virtualization capabilities to spoof a supported SMBIOS but let the hardware run on the intended SMBIOS for your CPU! Check my [**Boad-ID VMM spoof guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to find out how it works.
 
 ### Picking the right SMBIOS
-Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smooth running and efficiant system. You should chose your SMBIOS based on the following aspects:
+Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smooth running and efficient system. You should chose your SMBIOS based on the following aspects:
 
 - **CPU Vendor and product Family**: Intel? AMD? Mobile? Desktop? NUC? With or without iGPU support?
 - **Discrete GPU**: Vendor and Model (ATI/AMD?, NVIDIA?)
@@ -43,7 +43,7 @@ This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all ava
 - Find the .md file for your CODEC 
 - Click to open it
 
-Inside, you will find a list of all availabe Layout-IDs for the selected CODEC with additional info about the system/mainboard it has been created for.
+Inside, you will find a list of all available Layout-IDs for the selected CODEC with additional info about the system/mainboard it has been created for.
 
 So, if your mainboard uses [ALC1220](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC1220.md) for example, you could easily find out if someone already created a Layout ID for it.
 

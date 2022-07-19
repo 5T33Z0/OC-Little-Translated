@@ -11,4 +11,4 @@ This patch enables macOS'es own power idle management to extend the standby time
 ## Caution
 
 - ***SSDT-DeepIdle*** and `S3` sleep may have serious conflict, use ***SSDT-DeepIdle*** to avoid `S3` sleep, see "Disable S3 sleep
-- ***SSDT-DeepIdle*** may cause difficulties in waking up the machine, this can be solved by a patch, see "AOAC Wakeup Patch
+- ***SSDT-DeepIdle*** may cause difficulties in waking up the machine, this can be solved by a patch, see "AOAC Wakeup Patch".
