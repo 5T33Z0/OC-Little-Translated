@@ -48,7 +48,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 - [AOAC Wakeup Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv_AOAC_wake-up_method)
 - [Turning off Bluetooth and WIFI during Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/v_Sleep_automatically_turns_off_Bluetooth_WIFI)
 - Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
-- Enabling Device LI &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
+- Enabling `L1` power state &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
 
 ## Caution
 
