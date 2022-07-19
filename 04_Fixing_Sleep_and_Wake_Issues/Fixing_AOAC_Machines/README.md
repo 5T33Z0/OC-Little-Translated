@@ -9,11 +9,9 @@ A new technology, namely *Always On/Always Connected* (AOAC) was introduced by I
 - Open [MaciASL](https://github.com/acidanthera/MaciASL/releases)
 - Click on "File > New From ACPI" and select `FACP.aml`
 - Search for `Low Power S0 Idle`. If it is = `1`, it is an `AOAC` machine. For example:
-
   ```asl
   Low Power S0 Idle (V5) : 1
   ```
-
 For more information about `AOAC`, please refer to the search option of your choice and look for `AOAC`, `Lenovo AOAC`, `AOAC NIC`, etc.
 
 ## AOAC Problems
@@ -39,20 +37,16 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 
 ## AOAC Sleep, Wake
 
-- `AOAC` Sleep
-- The above scheme can make the machine sleep, this sleep is called `AOAC` sleep . The essence of `AOAC` sleep is that the system and hardware have entered an idle state, not `S3` sleep in the traditional sense.
-
-- `AOAC` Wakeup
-
-  Waking up a machine after it enters `AOAC` sleep can be difficult and usually requires the power button to wake it up. Some machines may require the power button + `PNP0C0D` method to wake up the machine.
+- `AOAC` Sleep – This scheme can put the machine to sleep. In essence, the system and hardware only enter an idle state, not a `S3` sleep in the traditional sense.
+- `AOAC` Wakeup – Waking up a machine after it enters `AOAC` sleep can be difficult and usually requires pressing the power button to wake it up. Some machines may require the power button and `PNP0C0D` method to wake it up.
 
 ## AOAC Patches
 
-- [Prevent S3 Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/i%20Prevent%20S3%20Sleep)
-- [Disabling Discrete GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/ii%20AOAC%20Disable%20Discrete%20GPU)
-- [Power Idle Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iii%20Power%20Management%20Deep%20Idle)
-- [AOAC Wakeup Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iiii%20AOAC%20wake-up%20method)
-- [Turning off Bluetooth and WIFI during Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv%20Sleep%20automatically%20turns%20off%20Bluetooth%20WIFI)
+- [Prevent S3 Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/i_Prevent_S3_Sleep)
+- [Disabling Discrete GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/ii_AOAC_Disable_Discrete_GPU)
+- [Deep Idle Power Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iii_Power_Management_Deep_Idle)
+- [AOAC Wakeup Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv_AOAC_wake-up_method)
+- [Turning off Bluetooth and WIFI during Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/v_Sleep_automatically_turns_off_Bluetooth_WIFI)
 - Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 - Enabling Device LI &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Setting_ASPM_Operating_Mode)
 
