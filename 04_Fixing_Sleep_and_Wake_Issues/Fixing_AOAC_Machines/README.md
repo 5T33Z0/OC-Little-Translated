@@ -33,7 +33,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 - Choose better quality SSD: SLC>MLC>TLC>QLC (not sure)
 - Update SSD firmware if possible to improve power management performance
 - Enable APST for SSDs using NVMeFix.kext
-- Enable ASPM (if you can't enable it in the BIOS directly, see Chapter 16 to patch it in)
+- Enable and configure ASPM (if you can't enable it in the BIOS/UEFI directly)
 
 ## AOAC Sleep, Wake
 
