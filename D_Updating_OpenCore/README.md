@@ -110,21 +110,16 @@ The latest update of OCAT introduced updating Kexts to nightly builds from Dorta
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
 
-This error occurs when opening a) `config.plist` which was created for a newer version of OpenCore or b) if the OpenCore variant you selected in the "Edit" menu is not present in the Database yet. Do the following to fix it:
+This error occurs when opening a `config.plist` which was created for a different/newer version of OpenCore which is not present in the Database yet. Do the following to fix it:
 
-1. Press "OK" 
-2. DON'T save the config!
-3. **Option 1**: 
-	- Click on "Help > Download Upgrade Packages":</br>![Err02](https://user-images.githubusercontent.com/76865553/172385089-28a836fb-c438-42da-bee8-2d9e7c3b489f.png)</br> This should fix the issue. If the config is even newer, use Option 2
-4. **Option 2**:	
-	- Download the latest OC release build from [Dortania's Repo](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
-	- Open the "Upgrade OpenCore an Kexts" Window
-	- Click on "Import"
-	- Navigate to the "OpenCore-0.8.X-RELEASE.zip" and open it
-	- Ignore the error messages (hit "OK" twice)
-5. Close the Syn Window. Now you have the latest available files in the database:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
+1. Open the "Upgrade OpenCore and Kext" Window
+2. Download the lasted version of OpenCore. Depending on the Mode OCAT is currently running in, the process differs.
+	- In Release mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
+	- In Dev Mode: select either "Get OpenCore" (or import a zip file of the latedt build) 
+3. It will download and integrade the latest version of OpenCore into the database
+4. Close the Syn Window. The version number displayed in the top left of the main window should have uodated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
-## NOTES
+## Notes
 
 - If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
