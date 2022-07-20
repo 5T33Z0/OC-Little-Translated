@@ -20,7 +20,7 @@ Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config 
 
 OCAT has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated which runs automatically and points to errors when a config.plist is opened.  Simply pressing  the "Save" button will migrate and update he config.plist to the latest version and feature-set. This will fix most of the errors already (unless there are actual configuration errors), without losing settings.
 
-So a process which previously took minutes to an hour can now be performed within a blink of an eye. It also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
+So a process which previously took minutes to an hour can now be performed within a blink of an eye. So fiddling around with OCConfigCompare, sample-config and PropTree is no lionger required to migrate your config.plist to the latest version. OCAT also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
 ## Tools and prerequisites
 - Working Internet Connection
