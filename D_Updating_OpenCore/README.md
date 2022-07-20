@@ -36,18 +36,20 @@ It also integrates new keys/features added to the config.plist into the GUI auto
 
 Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
-## OCAT's different Modes
-In newer versions of OCAT, you can choose 4 variants and builds of OpenCore to install and update by combining settings in the "Edit" menu:
+## OCAT's Different Modes
+In newer versions of OCAT, you can pick between 4 variants and builds of OpenCore to download, install and update by combining settings in the "Edit" menu:
 
 ![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
 
 The following combinations are possible: 
 
-- OpenCore Release (default, no check mark set)
-- OpenCoe DEBUG
-- OpenCore DEV (nightly builds)
-- OpenCore DEV DEBUG (Debug versions of nightly builds)
+- **OpenCore Release** (default, no check marks set)
+- **OpenCoe DEBUG** ("Debug" option checked)
+- **OpenCore DEV** (nightly builds, "Dev" option checked)
+- **OpenCore DEV DEBUG** (Debug versions of nightly builds, "Dev" and "Debug" options checked)
 
+If you switch from the default variant of OpenCore to any other, the displayed OC version may drop back to a lower number. That's because the selected variant of OpenCore is not present in the Database yet. In this case you just need to download the latest version from the Sync window. See &rarr; "Fixing 'Development version database does not exist' issue" for details.
+ 
 For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
 
 ## How-to update your `config.plist`
@@ -104,11 +106,11 @@ The latest update of OCAT introduced updating Kexts to nightly builds from Dorta
 
 - In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
-## Fixing "Development version database does not exist" issue
+## Fixing "Development/Debug version database does not exist" error
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
 
-This error usually appears when opening a config.plist which was created for a newer dev version of OpenCore. Do the following to fix it:
+This error occurs when opening a) config.plist which was created for a newer dev version of OpenCore or b) if the OpenCore variant you selected in the "Edit" menu is not present in the Database yet. Do the following to fix it:
 
 1. Press "OK" 
 2. DON'T save the config!
