@@ -110,7 +110,7 @@ The latest update of OCAT introduced updating Kexts to nightly builds from Dorta
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
 
-This error occurs when opening a) config.plist which was created for a newer dev version of OpenCore or b) if the OpenCore variant you selected in the "Edit" menu is not present in the Database yet. Do the following to fix it:
+This error occurs when opening a) `config.plist` which was created for a newer version of OpenCore or b) if the OpenCore variant you selected in the "Edit" menu is not present in the Database yet. Do the following to fix it:
 
 1. Press "OK" 
 2. DON'T save the config!
