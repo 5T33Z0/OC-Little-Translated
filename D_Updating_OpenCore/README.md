@@ -7,18 +7,18 @@
 	- [For users updating from OpenCore 0.6.5 or lower](#for-users-updating-from-opencore-065-or-lower)
 - [OCAT's Different Modes](#ocats-different-modes)
 - [How-to update your `config.plist`](#how-to-update-your-configplist)
-	- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
+- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
+	- [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
 - [Sync Window: Release Mode vs. Dev Mode](#sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
-- [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
 - [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
 - [Notes](#notes)
 
 ## About
-Currently, the easiest and fastes method for keeping OpenCore, Crivers, Config and Kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
+Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). 
 
-OCAT has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate) integrated and runs it automatically when opening the config.plist and points to errors. Simply pressing  the "Save" button will migrate and update he config.plist to the latest version and feature-set. This will fix most of the errors already (unless there are actual configuration errors), without losing settings.
+OCAT has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated which runs automatically and points to errors when a config.plist is opened.  Simply pressing  the "Save" button will migrate and update he config.plist to the latest version and feature-set. This will fix most of the errors already (unless there are actual configuration errors), without losing settings.
 
 So a process which previously took minutes to an hour can now be performed within a blink of an eye. It also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
@@ -69,7 +69,7 @@ For Kexts, you can also choose between Release and DEV builds in the Sync window
 
 **NOTE**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
-### Updating OpenCore Files, Drivers, Kexts and Resources
+## Updating OpenCore Files, Drivers, Kexts and Resources
 
 To update OpenCore files and Kexts, do the following:
 
@@ -82,6 +82,11 @@ To update OpenCore files and Kexts, do the following:
 6. You will be notified once it's done:</br>
 	![syncdone2](https://user-images.githubusercontent.com/76865553/140641897-c8f26c31-bb4c-47ae-be1f-fa8c1e0163a0.png)
 t. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+
+### Updating Kexts to Nightly Builds
+The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
+
+- In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
 ## Sync Window: Release Mode vs. Dev Mode
 As mentioned previously, the Sync Window looks different depending on the selected mode.
@@ -100,11 +105,6 @@ For downloading and syncing the latest **DEV** versions, you have to select `Ope
 
 Alternatively, you can click on "Import" to open a downloaded `.zip` containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
-## Updating Kexts to Nightly Builds
-The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
-
-- In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
-
 ## Fixing "Development/Debug version database does not exist" error
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
@@ -114,9 +114,9 @@ This error occurs when opening a `config.plist` which was created for a differen
 1. Open the "Upgrade OpenCore and Kext" Window
 2. Download the lasted version of OpenCore. Depending on the Mode OCAT is currently running in, the process differs.
 	- In Release mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
-	- In Dev Mode: select either "Get OpenCore" (or import a zip file of the latedt build) 
-3. It will download and integrade the latest version of OpenCore into the database
-4. Close the Syn Window. The version number displayed in the top left of the main window should have uodated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
+	- In Dev Mode: select either "Get OpenCore" (or import a zip file of the latest build) 
+3. It will download and integrate the latest version of OpenCore into the database
+4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
 ## Notes
 
