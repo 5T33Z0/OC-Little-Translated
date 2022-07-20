@@ -5,29 +5,29 @@
 - [About](#about)
 - [Tools and prerequisites](#tools-and-prerequisites)
 	- [For users updating from OpenCore 0.6.5 or lower](#for-users-updating-from-opencore-065-or-lower)
-- [OCAT's different Modes](#ocats-different-modes)
+- [OCAT's Different Modes](#ocats-different-modes)
 - [How-to update your `config.plist`](#how-to-update-your-configplist)
 	- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
 - [Sync Window: Release Mode vs. Dev Mode](#sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
-- [Fixing "Development version database does not exist" issue](#fixing-development-version-database-does-not-exist-issue)
-- [NOTES](#notes)
+- [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
+- [Notes](#notes)
 
 ## About
-Currently, the easiest method for keeping your OpenCore files, drivers, config and kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
+Currently, the easiest and fastes method for keeping OpenCore, Crivers, Config and Kexts up to date is to use [OpenCore Auxiliary Tools](https://github.com/ic005k/OCAuxiliaryTools) (OCAT). 
 
-OCAT has OCValidate integrated and runs it automatically when opening the config.plist and points to errors. Simply hitting the "save" button will merge any changes present in the config-sample into the config.plist, thereby updating it to the latest version and feature set, which will fix most of the errors already, without losing settings. This saves so much time compared to using OCConfigCompare and ProperTree where you had to do all of this manually.
+OCAT has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate) integrated and runs it automatically when opening the config.plist and points to errors. Simply pressing  the "Save" button will migrate and update he config.plist to the latest version and feature-set. This will fix most of the errors already (unless there are actual configuration errors), without losing settings.
 
-It also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
+So a process which previously took minutes to an hour can now be performed within a blink of an eye. It also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
 ## Tools and prerequisites
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 
 ### For users updating from OpenCore 0.6.5 or lower
-:warning: **ATTENTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
+:warning: **CAUTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
 
 - Disable `BootProtect` (set it to `None`)
 - Reboot
@@ -37,7 +37,7 @@ It also integrates new keys/features added to the config.plist into the GUI auto
 Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
 ## OCAT's Different Modes
-In newer versions of OCAT, you can pick between 4 variants and builds of OpenCore to download, install and update by combining settings in the "Edit" menu:
+OCAT lets you choose and switch between 4 variants and builds of OpenCore to download, install and update by combining settings in the "Edit" menu:
 
 ![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
 
