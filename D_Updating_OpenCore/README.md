@@ -75,8 +75,7 @@ To update OpenCore files and Kexts, do the following:
 
 1. Click on the `Sync` button (looks similar to a Recycle symbol):</br>
 	![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
-2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = link to repo is missing (add it to "Database" > "Kext Update URL"). Besides the displayed version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br> 
-	![Sync Window](https://user-images.githubusercontent.com/76865553/141829918-6118358f-904a-420c-b6b8-eed9b2a4b6d1.png)
+2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = link to repo is missing (add it to "Database" > "Kext Update URL"). Besides the displayed version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br>![SyncWinel01](https://user-images.githubusercontent.com/76865553/179932059-9820f53d-6666-429b-a447-fb2b60175bca.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
@@ -90,7 +89,7 @@ As mentioned previously, the Sync Window looks different depending on the select
 ### Release Mode
 For the Release version (default), you can choose the Release builds you want to install from a dropdown menu in the Sync Window. Obviously, selecting "Latest Version" will download the latest available Release build after clicking on "Get OpenCore":
 
-![LatestVersn](https://user-images.githubusercontent.com/76865553/179836491-9bc040c3-1d7a-4eb5-bf1a-f1fbda7f9eed.png)
+![Relmode01](https://user-images.githubusercontent.com/76865553/179932353-b6bc9700-3cf9-4e82-aa7f-5264116230b1.png)
 
 Once the OpenCore Package has been downloaded and integrated into the database, the OC Version displayed in the top left of OCAT's main Window will be updated to reflect the used version!
 
