@@ -1,5 +1,7 @@
 # Updating OpenCore and Kexts with OCAT
 
+![](/Users/steezonics/Desktop/noschemafor.jpeg)
+
 **TABLE of CONTENTS**
 
 - [About](#about)
@@ -16,9 +18,9 @@
 - [Notes](#notes)
 
 ## About
-Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). 
+Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). This way, you no longer have to work with tools like OCConfigCompare, the sample-config and PropTree to migrate and update your config.plist to the latest version manually, which is a tremendous time saver!
 
-OCAT has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated which runs automatically and points to errors when a config.plist is opened. Simply pressing the "Save" button will migrate and update he config.plist to the latest version and feature-set. This will fix most of the errors already (unless there are actual configuration errors), without losing settings. This way, you no longer have to work with tools like OCConfigCompare, the sample-config and PropTree to migrate and update your config.plist to the latest version manually, which is a tremendous time saver!
+**OCAT** has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated. It checks your config.plist for errors automatically and lists them. Simply pressing the "Save" button will migrate and update the config to the latest version and feature-set – without losing settings. This will also fix all "No schema for…" errors. Any remaining errors will most likely be actual configuration errors you will have to fix yourself.
 
 OCAT also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
