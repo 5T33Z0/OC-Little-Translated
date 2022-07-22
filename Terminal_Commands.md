@@ -199,7 +199,7 @@ sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unen
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
 ```
 
-**Removing Network .plists (for troubleshooting**</br>
+**Removing Network .plists (for troubleshooting)**</br>
 
 ```
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
