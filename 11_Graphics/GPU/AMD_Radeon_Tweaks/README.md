@@ -97,16 +97,16 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 - Mount your EFI
 - Open your `config.plist`
-- Add Key `PP,PP_WorkLoadPolicyMask` to the `DeviceProperties` of your GPU
+- Add Key `PP_WorkLoadPolicyMask` to the `DeviceProperties` of your GPU
 - Data Type: Number
 - Add the corresponding Number (Dec) of the Workload Policy you want to use.
 - Save your config.plist and reboot.
 
 **Example**: I use `4` since I use the GPU simply for running two displays. Occasionally, I might switch it to `8` if I need to render some video:
 
-![Workldpol](https://user-images.githubusercontent.com/76865553/180595466-05e0cf6b-4296-4e8a-a728-2e7e6ef635d2.png)
+![WorkloadPolicies](https://user-images.githubusercontent.com/76865553/180616763-35f3588f-02a4-441a-b2e6-3290643004d0.png)
 
-**NOTE**: I am uncertain if `PP,PP_…` is the correct notation of this property since all other PowerPlayTable-related properties I've seen so far all begin with `PP_` instead…
+**NOTE**: Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I don't think if this is the correct notation since all other PowerPlayTable-related properties I've come across so far _all_ begin with `PP_` instead. Therefore I think, `PP_` is the correct notation. But send me an "Issue"  report if you know more about this.
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
