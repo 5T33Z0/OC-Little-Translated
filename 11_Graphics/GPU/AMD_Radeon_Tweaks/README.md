@@ -85,4 +85,5 @@ There's another [**method**](https://www.insanelymac.com/forum/topic/351276-rx-6
 - Toleda for `DAGPM.kext`
 - CMMMChris for PowerPlay Table Generators
 - [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
+- [**AMD Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
 - [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
