@@ -104,7 +104,7 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 **Example**: I use `4` since I use the GPU simply for running two displays. Occasionally, I might switch it to `8` if I need to render some video:
 
-![](/Users/steezonics/Desktop/Workldpol.png)
+![Workldpol](https://user-images.githubusercontent.com/76865553/180595466-05e0cf6b-4296-4e8a-a728-2e7e6ef635d2.png)
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
