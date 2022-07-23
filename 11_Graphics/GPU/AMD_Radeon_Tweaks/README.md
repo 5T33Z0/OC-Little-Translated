@@ -106,6 +106,8 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 ![Workldpol](https://user-images.githubusercontent.com/76865553/180595466-05e0cf6b-4296-4e8a-a728-2e7e6ef635d2.png)
 
+**NOTE**: I am uncertain if `PP,PP_…` is the correct notation of this property since all other PowerPlayTable-related properties I've seen so far all begin with `PP_` instead…
+
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
