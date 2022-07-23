@@ -78,6 +78,34 @@ You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPower
 
 There's another [**method**](https://www.insanelymac.com/forum/topic/351276-rx-6600-xt-on-macos-zero-rpm-with-softpowerplaytable/#comment-2779094) for obtaining PowerPlay Tables for Navi Cards under Windows using Tools and Registry Editor.
 
+## Adjusting the `Workload policy`
+The Workload policy lets you select what type of workload or tasks the GPU is primarily used for. Depending on the selected policy, your GPU may require less power (Compute) or more (for 3D and VR Applications). 
+
+The Workload Policy can be added as a `DeviceProperty`. The following policies are available:
+
+Value (HEX)| Number (DEC) |Workload Policy
+:---------:|:------------:|---------------
+0x01       | 1            | DEFAULT_WORKLOAD (default)
+0x02       | 2            | FULLSCREEN3D_WORKLOAD 
+0x04       | 4            | POWERSAVING_WORKLOAD
+0x08       | 8            | VIDEO_WORKLOAD
+0x10       | 16           | VR_WORKLOAD
+0x20       | 32           | COMPUTE_WORKLOAD
+0x40       | 64           | CUSTOM_WORKLOAD
+
+**To specify a Workload policy, do the following**:
+
+- Mount your EFI
+- Open your `config.plist`
+- Add Key `PP,PP_WorkLoadPolicyMask` to the `DeviceProperties` of your GPU
+- Data Type: Number
+- Add the corresponding Number (Dec) of the Workload Policy you want to use.
+- Save your config.plist and reboot.
+
+**Example**: I use `4` since I use the GPU simply for running two displays. Occasionally, I might switch it to `8` if I need to render some video:
+
+![](/Users/steezonics/Desktop/Workldpol.png)
+
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
 - mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
