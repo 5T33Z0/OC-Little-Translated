@@ -14,7 +14,7 @@ Although NVIDIA Cards ***were*** officially supported up to macOS High Sierra, y
 
 Even though Kepler Cards are supported up to macOS Big Sur, it's not worth investing in them simply because these old NVIDIA cards start dying. This year alone, my GTX 760 which I had for 4 years died basically doing nothing. The replacement GTX 760 died a month later (while the prices for these old cards are still increasing). So do yourself a favor and don't even bother buying one of these old cards.
 
-And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes – so no need to flex with your RTX 3090! ;)
+And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. Here's a list of [(un)supported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
 
 ### Installing Webdrivers in 2022
 There's a [guide](https://www.reddit.com/r/hackintosh/comments/v960av/nvidia_web_driver_fix_for_high_sierra/) on reddit on how to install Webdrivers with removed code-signing so the installer won't quit.
