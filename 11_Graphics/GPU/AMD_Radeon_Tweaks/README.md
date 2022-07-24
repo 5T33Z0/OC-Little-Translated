@@ -106,7 +106,7 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 ![WorkLoadpPlcy](https://user-images.githubusercontent.com/76865553/180636520-2a147de1-d741-4913-8727-4f21a4a28633.png)
 
-**NOTE**: Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_` the property is listed alphabetically among other `PP_`entries, while using `PP_` puts the entry in a different position in the list. You can check this yourself: In IOReg, switch the mode to "IODeviceTree". Search for `GFX0`. The property is listed as `PP_WorkLoadPolicy` in both cases, it's just sorted differently.
+**NOTE**: Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_`, the property is listed alphabetically among other PowerPlay entries, while using `PP_` puts the entry in a different position in the list. You can check this yourself: in IOReg, switch the mode to "IODeviceTree". Search for `GFX0`. The property shoulbe listed as `PP_WorkLoadPolicy` in both cases, just sorted differently. It seems that the comma can be utilized as a modifier for sorting entries in the IO Registry. 
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
