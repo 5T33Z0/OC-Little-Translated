@@ -113,10 +113,10 @@ Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolic
 You can check this yourself: in IORegistryExplorer, search for `GFX0`. The property is listed as `PP_WorkLoadPolicy` in both cases, just sorted differently. It seems that the comma can be utilized as a modifier for sorting entries in the IO Registry.
 
 When using `PP,PP_WorkLoadPolicyMask`:</br>
-![](/Users/steezonics/Desktop/PP_comma.png)
+![PP_comma](https://user-images.githubusercontent.com/76865553/180637390-6833c6c1-bd70-4a2f-a9d9-6e2a902c509c.png)
 
 When using `PP_WorkLoadPolicyMask`:</br>
-![](/Users/steezonics/Desktop/PP_.png)
+![PP_](https://user-images.githubusercontent.com/76865553/180637402-c478a12a-86ec-4656-b2f2-ea0c5bba3a9a.png)
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
