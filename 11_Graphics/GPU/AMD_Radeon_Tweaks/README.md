@@ -97,16 +97,16 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 - Mount your EFI
 - Open your `config.plist`
-- Add Key `PP_WorkLoadPolicyMask` to the `DeviceProperties` of your GPU
+- Add Key `PP,PP_WorkLoadPolicyMask` to the `DeviceProperties` of your GPU
 - Data Type: Number
 - Add the corresponding Number (Dec) of the Workload Policy you want to use.
 - Save your config.plist and reboot.
 
 **Example**: I use `4` since I use the GPU simply for running two displays. Occasionally, I might switch it to `8` if I need to render some video:
 
-![WorkloadPolicies](https://user-images.githubusercontent.com/76865553/180616763-35f3588f-02a4-441a-b2e6-3290643004d0.png)
+![WorkLoadpPlcy](https://user-images.githubusercontent.com/76865553/180636520-2a147de1-d741-4913-8727-4f21a4a28633.png)
 
-**NOTE**: Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I don't think if this is the correct notation since all other PowerPlayTable-related properties I've come across so far _all_ begin with `PP_` instead. Therefore I think, `PP_` is the correct notation. But send me an "Issue"  report if you know more about this.
+**NOTE**: Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_` the property is listed alphabetically among other `PP_`entries, while using `PP_` puts the entry in a different position in the list. You can check this yourself: In IOReg, switch the mode to "IODeviceTree". Search for `GFX0`. The property is listed as `PP_WorkLoadPolicy` in both cases, it's just sorted differently.
 
 ## Credits & Resources
 - Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
