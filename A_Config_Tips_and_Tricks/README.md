@@ -97,15 +97,15 @@ You should deactivate the single user mode for security reasons, because it can 
    **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82** &rarr; change `csr-active-config` from `00000000`(SIP enabled) to:
 
    `FF030000` (for High Sierra)</br>
-   `FF070000` (for Mojave/Catalina)</br>
-   `67080000` (for Big Sur to Ventura)</br>
-   `EF0F0000` (for Big Sur to Ventura. Disables even more security features.)
+   `EF070000` (for Mojave/Catalina)</br>
+   `67080000` (for Big Sur and newer)</br>
+   `EF0F0000` (for Big Sur and newer. Disables even more security features.)
 
    **NOTES**
    
-   - Using `FF0F0000` as suggested by the Dortania Install Guide has been proven to not work well in Big Sur since it prevents System Update notifications. In Big Sur, *authenticated root* has been added to SIP, resulting in a different value of `0x867` for csr-active config. In OpenCore this translates to `67080000`.
-   - Using `EF0F0000` does give you System Updates but it will download the complete Installer every time not just incremental updates which is a drag.
-   - If you want to know how the csr-active-config value is calculated or if you want to calculate your own, check the [OpenCore Calcs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details.
+   - Using `FF0F0000` for Big Sur and as suggested by Dortania's OpenCore Install Guide is not recommended since it prevents System Update notifications. In Big Sur, *authenticated root* has been added to SIP, resulting in a different value of `0x867` for csr-active config. In OpenCore this translates to `67080000`.
+   - Using `EF0F0000` does notify you about System Updates. If the seal of the volume is broken however, it will download the complete installer (about 12 GB) instead of performing an incremetal update.
+   - If you want to know how `csr-active-config` is calculated or if you want to calculate your own, check the [OpenCore Calcs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details.
 
 2. To avoid the need of resetting NVRAM every time after you've changed  the csr value, add the following parameter to the config:
 
