@@ -3,7 +3,7 @@ This section contains a small collection of useful tips and tricks for working w
 
 **TABLE of CONTENTS**
 
-- [OpenCore Troubleshooting Workflow](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#opencore-troubleshooting-quick-tips)</br>
+- [OpenCore Troubleshooting Workflow](https://user-images.githubusercontent.com/76865553/180989260-3cf42cd8-a5cb-4482-9a54-240db9429264.png)</br>
 	- [MinDate / MinVersion settings explained](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver)</br>
 - I. [Updating config.plist and fixing errors](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#i-updating-configplist-and-fixing-errors)</br>
 	- [Automated method using OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#automated-config-upgrade-recommended)
