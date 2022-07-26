@@ -11,7 +11,7 @@ There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.
 
 **Screenshots**:
 
-![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134508275-c1722956-6e02-4ff0-a241-f1faefa5fe5e.png)
+![CSROC](https://user-images.githubusercontent.com/76865553/180944112-a6fbbf86-f613-4bf6-8076-a3845dc911e3.png)
 
 ![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134348928-ee19f359-c8fd-4e16-a99e-2cd652c9c64b.png)
 
