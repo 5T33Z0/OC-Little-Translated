@@ -7,7 +7,7 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
 > **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
 
 1. Select the SSDT corresponding to your GPU model located in the "mattystonnie" folder, export it as `.aml` and add it to add `EFI/OC/ACPI` and config.plist.
-    - For **RX 580**: add `SSDT-RX580.aml` and `SSDT-DTGP.aml`
+    - For **RX 580**: add `SSDT-RX580.aml`
     - For **RX 5500/5500XT**: add `SSDT-RX5500XT.aml` 
     - For **RX 5600/5700/5700XT**: add`SSDT-RX5700XT.aml`
     - For **RX Vega 64**: add `SSDT-RXVega64.aml`
@@ -15,14 +15,17 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
     - `DAGPM.kext` &rarr; Enables `AGPM` (Apple Graphics Power Management) Controller for AMD Cards which optimizes power consumption.
     - `Lilu.kext`
     - `Whatevergreen.kext`
-3. Add Boot-arg `agdpmod=pikera` (for Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
+3. Add Boot-arg `agdpmod=pikera` (Navi GPUs only!) &rarr; Fixes black screen issues on some GPUs.
 4. Save your config, reboot and run some benchmark tests for comparison.
 
-**NOTE**: These are slightly modified variants of mattystonnie's tables which have the `PEGP` to `EGP0` rename already integrated in the SSDT (where required), so you don't need to add any binary renames to your config.plist!
+**NOTE**: These are slightly modified and improved variants of mattystonnie's tables. The following has been added to them:
+
+- The `PEGP` to `EGP0` rename is integrated in the SSDTs (where required), so you don't need to add any binary renames. 
+- The `DTGP` method which is required by `SSDT-RX580` is contained within the table itself now, so you no longer need `SSDT-DTGP`. 
 
 ### Addendum: SSDT vs. Device Properties
 
-I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this is not really a requirement either (same applies to `AGPMInjector.kext` by Pavo-IM).   
+I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this kext is not required (same goes for `AGPMInjector.kext` by Pavo-IM).   
 
 Looking for a solution, I've gone through the whole thread (90+ pages). On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach utilizing Device Properties to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of the previously used 100). 
 
