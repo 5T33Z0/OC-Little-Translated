@@ -34,11 +34,11 @@ Do you know these posts on Forums or Reddit, when people post isolated patches f
 	<data></data>
 </dict>
 ```
-I hate if people post patches this way for several reasons:
+I hate if patches are posted this way for several reasons:
 
-1. It's a drag to integrate it into an existing `config.plist` and there's always a chance of messing up the structure of the .plist. And some plist editors don't even support pasting raw text.
-2. It's also hard to read if you want to create the entries manually. 
-3. If you paste this into an empty Plist usig Plist Edit Pro it won't work, because the rest of the tree/context is missing. 
+1. It's a drag to integrate it into an existing `config.plist` and there's always a chance to mess up the structure of it. Some plist editors don't even support pasting raw text.
+2. It's also hard to read if you want to create the entries/keys manually. 
+3. If you paste this into an empty Plist using Plist Edit Pro it won't work, because the rest of tree structure is missing. 
 
 In steps ProperTree to save the day… With ProperTree, you just copy the raw text with `[]+[c]` run the App, hit `[]+[v]` and boom, the `<Dict>` will be created:
 
