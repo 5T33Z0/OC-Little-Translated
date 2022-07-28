@@ -61,7 +61,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 		- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 to 12.1)
 		- `AirPortBrcm4360_Injector.kext` (compatible with macOS 10.8 to 10.15)
 - For Bluetooth, various kexts and combinations are necessary:
-	- `BlueToolFixup.kext`: is for macOS 12.x Monterey. Contains Firmware Data (MinKernel 21.x and newer only).
+	- `BlueToolFixup.kext`: For macOS 12 and newer. Contains Firmware Data (MinKernel 21.x and newer only).
 	- `BrcmFirmwareData.kext`: contains necessary firmware. Required for macOS up to 11.6.x (MaxKernel 20.9.9)
 	- `BrcmPatchRAM.kext`: For 10.10 or earlier.
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
