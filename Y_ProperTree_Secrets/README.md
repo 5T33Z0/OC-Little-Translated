@@ -42,7 +42,7 @@ I hate if people post patches this way for several reasons:
 
 In steps ProperTree to save the day… With ProperTree, you just copy the raw text with `[]+[c]` run the App, hit `[]+[v]` and boom, the `<Dict>` will be created:
 
-![](/Users/klasus/Desktop/singlepatch.png)
+![singlepatch](https://user-images.githubusercontent.com/76865553/181589762-0e30ea62-d792-4af5-8418-7c8f875d032b.png)
 
 Then you can right-click the dictionary, copy it and paste it into your config in the correct location as a child.
 
@@ -50,7 +50,7 @@ Then you can right-click the dictionary, copy it and paste it into your config i
 
 Just highlight the whole raw text, copy it into memory. Open ProperTree, paste it – boom, the config has been imported successfully:
 
-![](/Users/klasus/Desktop/config.png)
+![config](https://user-images.githubusercontent.com/76865553/181589787-a5643b48-a331-4d11-be5c-4357abc2a0e7.png)
 
 ## Credits
 corpnewt for [**ProperTree**](https://github.com/corpnewt/ProperTree)
