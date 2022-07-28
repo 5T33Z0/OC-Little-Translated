@@ -40,7 +40,7 @@ I hate if patches are posted this way for several reasons:
 2. It's also hard to read if you want to create the entries/keys manually. 
 3. If you paste this into an empty Plist using Plist Edit Pro it won't work, because the rest of tree structure is missing. 
 
-In steps ProperTree to save the day… With ProperTree, you just copy the raw text with `[]+[c]` run the App, hit `[]+[v]` and boom, the `<Dict>` will be created:
+In steps ProperTree to save the day… With ProperTree, you just copy the raw text with `[⌘]+[c]` run the App, hit `[⌘]+[v]` and boom, the `<Dict>` will be created:
 
 ![singlepatch](https://user-images.githubusercontent.com/76865553/181589762-0e30ea62-d792-4af5-8418-7c8f875d032b.png)
 
