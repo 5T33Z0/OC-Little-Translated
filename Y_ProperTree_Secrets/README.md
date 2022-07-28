@@ -1,6 +1,6 @@
 # The undocumented super power of ProperTree
 
-Do you know these posts on Forums or Reddit, when people post isolated patches for your plist withoout context as RAW text instead of a ready made .plist? You know, things like this:
+Do you know these posts on Forums or Reddit, when people post isolated patches for your plist without context as RAW text instead of a ready-made .plist? You know, things like this:
 
 ```xml
 <dict>
