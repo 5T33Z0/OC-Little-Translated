@@ -23,7 +23,7 @@ https://www.dssw.co.uk/reference/pmset.html
 
 ```
 setfile -a v ~/Library
-chflags nohidden ~/Library`
+chflags nohidden ~/Library
 ```
 **Disable/enable DMG Verification**:</br>
 
