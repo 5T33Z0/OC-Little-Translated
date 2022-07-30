@@ -16,6 +16,17 @@ Even though Kepler Cards are supported up to macOS Big Sur, it's not worth inves
 
 And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. Here's a list of [(un)supported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
 
+### Nvidia support via OpenCore Legacy Patcher (OCLP)
+GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
+
+- GT 710 (GK107 Kepler) (mostly for fun ;p)
+- Quadro K620 (GM107 Maxwell)
+- GTX 860M (GM107 Maxwell)
+- GTX 1050Ti (GP107 Pascal)
+- GT 1030 (GP107 Pascal)
+
+**Source**: [reddit](https://www.reddit.com/r/hackintosh/comments/uxz95u/nvidia_web_drivers_running_on_macos_monterey/)
+
 ### Installing Webdrivers in 2022
 There's a [guide](https://www.reddit.com/r/hackintosh/comments/v960av/nvidia_web_driver_fix_for_high_sierra/) on reddit on how to install Webdrivers with removed code-signing so the installer won't quit.
 
