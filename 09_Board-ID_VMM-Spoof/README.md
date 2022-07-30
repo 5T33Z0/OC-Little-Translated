@@ -1,8 +1,8 @@
 # Using unsupported Board-IDs with macOS 11.3 and newer
-A set of Booter and Kernel patches lifted from OCLP which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs and CPUs.
+A set of Booter and Kernel patches lifted from OCLP which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs.
 
 ## Use Cases
-1. Installing, running and updating macOS Monterey on unsupported CPUs with their respective SMBIOS.
+1. Installing, running and updating macOS Monterey on systems with unsupported CPUs and their respective SMBIOS.
 2. **Fixing update notifications**. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
 
 	- MacBookPro15,1 to 15,4
@@ -14,8 +14,8 @@ A set of Booter and Kernel patches lifted from OCLP which allow installing, boot
 	- iMacPro1,1
 	- MacPro7,1
 
-	This problem occurs when using one of the SMBIOSes listed above in combination with `SecureBootModel` set to `Disabled` instead of using the recommended value for the selected SMBIOS. While a lot of OpenCore users face this issue, it's not a problem in Clover, since you can enter a `HardwareTarget` under `RtVariables`.
-
+	The problem occurs when using one of the SMBIOSes listed above in combination with `SecureBootModel` set to `Disabled`. If you have to use GeForce Kepler Patcher (compatible up to macOS ≤ 12.4), you *have* to disable `SecureBootModel` in order to boot after you patched in the GPU Drivers in macOS Monterey. Otherwise the system crashes during boot. In this case, these patches are the only workaround to still receive System Updates when using OpenCore.
+	
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
 **CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
@@ -24,7 +24,7 @@ A set of Booter and Kernel patches lifted from OCLP which allow installing, boot
 - Ivy Bridge
 - Haswell (partially)
 
-Since this is a pretty new approach, I have to look into a bit more, but I am successfully using it on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
+Since this is a pretty new approach, I have to look into a bit more, but I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
 
 ## How it works
 **OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick macOS into "thinking" it is running in a Virtual Machine:
@@ -35,31 +35,31 @@ Since this is a pretty new approach, I have to look into a bit more, but I am su
 >
 > **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
-This is great, because it allows using the correct SMBIOS for a given CPU family even if it is not officially supported by macOS 12 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS on otherwise unsupported hardware.
+This is great, because it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 12 or newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Montereay and newer on otherwise unsupported hardware.
 
-I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them. The attached plist contains these patches.
+I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them. The attached plist contains the patches.
 
 ## Applying the Patches
 :warning: Before applying the patches, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
-- [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/09_Board-ID_VMM-Spoof/BoardIDSkip+VMMPatch.plist.zip?raw=true) and unzip the attached .plist
-- Open it with a plist Editor (e.g. ProperTree)
+- [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/09_Board-ID_VMM-Spoof/BoardIDSkip+VMMPatch.plist.zip?raw=true) and unzip the attached .plist.
+- Open it with a plist Editor (e.g. ProperTree).
 - Copy the patches located under Booter/Patch over to your OpenCore config to the same section.
 - Do the same for the Kernel Patches. Enable additional patches if required (SurPlus patches for Sandy Bridge for example).
 - Optional: add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
-- Save the config
-- Reboot
+- Save the config.
+- Reboot.
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
 Enjoy macOS Monterey+ with the correct SMBIOS for your CPU and Updates!
 
 ## About the Patches
 
-### About the Booter Patches
+### Booter Patches
 - **Patch 0**: Skips Hardware Board ID Check (enabled)
 - **Patch 1**: Reroutes Hardware Board-ID check to OpenCore (enabled)
 
-### About the Kernel Patches
+### Kernel Patches
 In the .plist, only 3 of the 6 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
 
 - **Patch 0**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
