@@ -146,8 +146,8 @@ Method (GUPC, 2, Serialized)
 	Return (PCKG) /* \GUPC.PCKG */
 }
 ```
-`Arg0`= represents the first value of the package. This sets the prot active (`0xff`) or inactive/disabled (`Zero`)</br>
-`Arg1`= declares the USB port type mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
+`Arg0`= addresse the first value in the package. It enables (`0xff`) or disables (`Zero`) the port</br>
+`Arg1`= addresses the second value in the package. It declares the USB port type as mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
 
 #### Deleting the existing `_UPC` method
 After changing these values, you will get a lot of compiler errors:
