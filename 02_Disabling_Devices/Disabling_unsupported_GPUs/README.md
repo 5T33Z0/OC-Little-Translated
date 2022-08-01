@@ -7,7 +7,7 @@ The easiest way to disable discrete GPUs is to do it via your config.plist. You 
 
 - **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
 	- In `DeviceProperties\Add\PciRoot(0x0)/Pci(0x2,0x0)`
-  	- Add Key `disable-external-gpu`: Value: `01000000`, Class: `DATA`</br>![](/Users/steezonics/Desktop/Disable-GPU.png)
+  	- Add Key `disable-external-gpu`: Value: `01000000`, Class: `DATA`</br>![Disable-GPU](https://user-images.githubusercontent.com/76865553/182168535-a51aca54-b23d-477f-8367-d07d2570bfb8.png)
 - **Option 2:** using boot-arg
 	- In  `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` 
 	- Add`-wegnoegpu` to boot-args (requires `Whatevergreen.kext`)
