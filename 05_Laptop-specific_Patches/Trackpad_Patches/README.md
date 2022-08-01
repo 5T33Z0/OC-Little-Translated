@@ -25,7 +25,7 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 	|Connection type|Plugin|Notes|
 	|---------------|------|-----|
 	|Atmel Multitouch Protocol|VoodooI2CAtmelMXT|Included in VoodooI2C Package.|
-	|ELAN Proprietary|VoodooI2CElan|ELAN1200+ require VoodooI2CHID instead. Both Included in VoodooI2C Package. Some ELAN Trackpads require force-enabling polling to work. To do so, either add `force-polling` to the DevicePropertis of the TouchPd or use boot-arg `-vi2c-force-polling`|
+	|ELAN Proprietary|VoodooI2CElan|ELAN1200+ require VoodooI2CHID instead. Both Included in VoodooI2C Package. Some ELAN Trackpads require force-enabling polling to work. To do so, either add `force-polling` to the DeviceProperties of the TouchPad or use boot-arg `-vi2c-force-polling`|
 	|FTE1001 touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
 	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Trackpads. Included in VoodooI2C Package.|
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode)|
