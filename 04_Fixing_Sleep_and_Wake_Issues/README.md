@@ -6,7 +6,7 @@ This section contains fixes for resolving common issues related to Sleep and Wak
 
 This is the center piece for fixing most sleep and wake issues and is used in conjunction with the other patches in this section. It consists of two components: binary renames and an ACPI Hotfix (SSDT).
 
-Basically, the `_PTS` (Prepare To Sleep), `_Wak`(Wake) and `_TSS` Methods are renamed to something else. And once any of these methods are triggered by entering sleep (either automatically, by pressing the sleep button or via the  Menu), the system fetches these request and reroutes them to the associated Hotpatch, ***SSDT-PTSWAKTTS*** which takes care of the rest.
+Basically, the `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TSS` Methods are renamed to something else. And once any of these methods are triggered by entering sleep (either automatically, by pressing the sleep button or via the  Menu), the system fetches these request and reroutes them to the associated Hotpatch, ***SSDT-PTSWAKTTS*** which takes care of the rest.
 
 ## 2. [Fixing `PNP0C0E` Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 
