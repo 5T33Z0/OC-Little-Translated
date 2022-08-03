@@ -57,7 +57,7 @@ DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
 - Run IORegistry Exlorer
 - Search for `SAT`
 - The output should look like this:</br>![SATA](https://user-images.githubusercontent.com/76865553/182600459-febd1490-585e-4a7a-9d7f-3dc966482c56.png)
-- :Warning: **CAUTION**: If you don't add the `Name (_ADR,0x000…)` portion to the code, the controller will still work, but you won't find it:</br>![SAD](https://user-images.githubusercontent.com/76865553/182600512-396acfb7-85da-4a40-85b4-f16cebb72cdc.png)
+- :warning: **CAUTION**: If you don't add the `Name (_ADR,0x000…)` portion to the code, the controller will still work, but you won't find it:</br>![SAD](https://user-images.githubusercontent.com/76865553/182600512-396acfb7-85da-4a40-85b4-f16cebb72cdc.png)
 
 To be continued…
 
