@@ -10,9 +10,9 @@ To be continued…
 The SSDT to rename a method or a device must conform to the following conditions in order to work:
 
 - Look for ("Scope") a Device (`DeviceObj`) or Method (`MethodObj`) in the DSDT at specific location(s) (PCI path(s) defined in the "External" Section of the SSDT
-- If the loaded Kernel is "Darmin" (= the macOS Kernel).
+- If the loaded Kernel is "Darwin" (= the macOS Kernel).
 - Disable Device/Method X (set Method `_STA` = `Zero`) and
-- Enable Devie/Method Y (set Method `_STA` = `0x0F`)
+- Enable Device/Method Y (set Method `_STA` = `0x0F`)
 
 **NOTE**: For each `Scope` expression you are using there has to be a corresponding `External` reference. See examples.
 
@@ -51,7 +51,7 @@ DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
 ```
 
 #### Testing and verifying
-- Mmake sure you have a backup of your working EFI folder on a FAT32 formatted flash drive
+- Make sure you have a backup of your working EFI folder on a FAT32 formatted flash drive
 - Export the SSDT as .aml file
 - Add it to `/EFI/OC/ACPI` and config.plist
 - Run IORegistry Exlorer
