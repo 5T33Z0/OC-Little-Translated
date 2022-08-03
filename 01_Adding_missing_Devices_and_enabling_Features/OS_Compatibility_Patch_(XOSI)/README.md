@@ -143,9 +143,10 @@ ACPI also defines `OSYS` which describes the used Windows Version in HEX code ba
   - `OSYS = 0x7E3`: Win10 1903, i.e. `Windows 2019`</br>
   - `OSYS = 0x7E5`: Win11 21H2, i.e. `Windows 2021`</br>
 
-**NOTES**:
+## NOTES
 
 - When the loaded OS is not recognized by ACPI, `OSYS` is given a default value which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
 - Different operating systems support different hardware, for example, I2C devices are only supported from `Win8` onwards.
 - When loading macOS, `_OSI` accepts parameters that are not recognized by ACPI, and `OSYS` is given a default value. This default value is usually smaller than the value required by Win8, and obviously I2C does not work. This requires a patch to correct this error, and OS patches are derived from this.
 - Some other components may also be related to `OSYS`.
+- Anoother Approach: [**SSDT-OSYS**](https://gist.github.com/rockavoldy/eeff232c932bf3eaa01b47c4d9253dd3)
