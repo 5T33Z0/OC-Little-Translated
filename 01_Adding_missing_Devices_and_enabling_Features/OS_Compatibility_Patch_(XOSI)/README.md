@@ -2,16 +2,14 @@
 
 ## About
 
-`ACPI` can use the `_OSI` (=Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS kernel) is running.
+`ACPI` can use the `_OSI` (= Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS kernel) is running.
 
 But by simulating a certain version of `Windows` while running the `Darwin` kernel, we can utilize system behaviors which normally are limited to `Windows`. This is useful to better support certain devices like I2C Touchpads, etc.
 
-**The Patch consist of two elements**: 
+**The patch consist of two parts**: 
 
 1. Binary renames and a
 2. SSDT Hotpatch
-
-**NOTE**: More info about to included more windows versions can be found here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems) 
 
 ## Part 1: Rename Method `_OSI` to `XOSI` 
 
@@ -82,9 +80,6 @@ Method(XOSI, 1)
 ### Usage
 
 - **Maximum Value**: For a single Windows installation, you can set the operating system parameter to the maximum value allowed by the DSDT. For example, if the maximum value of the DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
-
-  **Note**: **OS Patches** are not recommended for single systems.
-
 - **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
 
 ## Appendix: Origin of OS Patches
@@ -132,23 +127,26 @@ If ((_OSI ("Windows 2009") || _OSI ("Windows 2013")))
   }
   
 ```
-ACPI also defines `OSYS` which describes the used Windows Version in HEX code based on the year. The relationship between `OSYS` and the used Windows version is as follows:
-  - `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`</br>
-  - `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`</br>
-  - `OSYS = 0x07DD`: Win8.1 system, i.e. `Windows 2013`</br>
-  - `OSYS = 0x07DF`: Win10 system, i.e. `Windows 2015`</br>
-  - `OSYS = 0x07E0`: Win10 1607, i.e. `Windows 2016`</br>
-  - `OSYS = 0x07E1`: Win10 1703, i.e. `Windows 2017`</br>
-  - `OSYS = 0x07E1`: Win10 1709, i.e. `Windows 2017.2`</br>
-  - `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`</br>
-  - `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`</br>
-  - `OSYS = 0x7E3`: Win10 1903, i.e. `Windows 2019`</br>
-  - `OSYS = 0x7E5`: Win11 21H2, i.e. `Windows 2021`</br>
+ACPI also defines `OSYS` which describes the used Windows version by year (as hexadecimal value). The relationship between `OSYS` and the used Windows version is as follows:
+
+- `OSYS = 0x07D9`: Win7 system, i.e. `Windows 2009`</br>
+- `OSYS = 0x07DC`: Win8 systems, i.e. `Windows 2012`</br>
+- `OSYS = 0x07DD`: Win8.1 system, i.e. `Windows 2013`</br>
+- `OSYS = 0x07DF`: Win10 system, i.e. `Windows 2015`</br>
+- `OSYS = 0x07E0`: Win10 1607, i.e. `Windows 2016`</br>
+- `OSYS = 0x07E1`: Win10 1703, i.e. `Windows 2017`</br>
+- `OSYS = 0x07E1`: Win10 1709, i.e. `Windows 2017.2`</br>
+- `OSYS = 0x07E2`: Win10 1803, i.e. `Windows 2018`</br>
+- `OSYS = 0x07E2`: Win10 1809, i.e. `Windows 2018.2`</br>
+- `OSYS = 0x7E3`: Win10 1903, i.e. `Windows 2019`</br>
+- `OSYS = 0x7E5`: Win11 21H2, i.e. `Windows 2021`</br>
+- `OSYS = 0x7E6`: Win11 22H2, i.e. `Windows 2022`</br>
 
 ## NOTES
-
+- Additional OSI strings for other versions of Windows are available here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems)
+- OS Patche are not recommended for single systems.
 - When the loaded OS is not recognized by ACPI, `OSYS` is given a default value which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.
 - Different operating systems support different hardware, for example, I2C devices are only supported from `Win8` onwards.
 - When loading macOS, `_OSI` accepts parameters that are not recognized by ACPI, and `OSYS` is given a default value. This default value is usually smaller than the value required by Win8, and obviously I2C does not work. This requires a patch to correct this error, and OS patches are derived from this.
 - Some other components may also be related to `OSYS`.
-- Another Approach: [**SSDT-OSYS**](https://gist.github.com/rockavoldy/eeff232c932bf3eaa01b47c4d9253dd3)
+- Another approach for getting I2C Trackpads to work: [**SSDT-OSYS**](https://gist.github.com/rockavoldy/eeff232c932bf3eaa01b47c4d9253dd3)
