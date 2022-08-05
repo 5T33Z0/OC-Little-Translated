@@ -2,9 +2,9 @@
 
 ## About
 
-`ACPI` can use the `_OSI` (=Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS Kernels) is running.
+`ACPI` can use the `_OSI` (=Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS kernel) is running.
 
-But by simulating a certain version of `Windows` when running `Darwin`, we can utilize system behaviors which normally are limited to  `Windows`. This is useful to better support certain devices like touchpads, etc.
+But by simulating a certain version of `Windows` while running the `Darwin` kernel, we can utilize system behaviors which normally are limited to `Windows`. This is useful to better support certain devices like I2C Touchpads, etc.
 
 **The Patch consist of two elements**: 
 
@@ -18,7 +18,7 @@ But by simulating a certain version of `Windows` when running `Darwin`, we can u
 1. Search for `OSI` in the original `DSDT` 
 2. If you find it, add the `_OSI to XOSI` rename listed below.
 
-Add the following Renames (if applicable) to config.plist:
+Add the following Renames (if applicable) to `config.plist`:
 
 - **OSID to XSID** (only necessary if present in `DSDT` to avoid match with _OSI to XOSI Rename)
  
@@ -38,6 +38,11 @@ Add the following Renames (if applicable) to config.plist:
   Find: 5F4F5349
   Replace: 584F5349
   ```
+
+### ⚠️ Caution: order of operations
+Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors in Windows. Therefore, you need to rename these methods to something else (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) *prior* to applying the `_OSI to XOSI` rename rule. 
+
+In other words: renames rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *before* `_OSI to XOSI` in the `config.plist`.
   
 ## Part 2: Hotpatch ***SSDT-OC-XOSI***
 
@@ -81,9 +86,6 @@ Method(XOSI, 1)
   **Note**: **OS Patches** are not recommended for single systems.
 
 - **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
-
-## ⚠️ Important
-Some machines use methods indicated by underscores `_` with similar names to `_OSI` (e.g. some Dell machines use `_OSID`, some ThinkPads use `_OSIF`). If these methods contain the letters "O-S-I" and are located on the `_SB` level, they will accidentally be renamed to `XOSI` by binary renames, which causes ACPI Errors in Windows. Therefore, you need to rename methods like `OSID` and `OSIF` to something else (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) prior to applying the `_OSI to XOSI` rename to avoid ACPI errors. In other words, renames like `OSID to XSID` or `OSIF to XSIF` have to be listed before `_OSI to XOSI` in the `config.plist`.
 
 ## Appendix: Origin of OS Patches
 When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems receive different parameters and ACPI executes different instructions. For example, if the system is **Win7**, this parameter is `Windows 2009`, and if the system is **Win8**, this parameter is `Windows 2012`. For example:
@@ -149,4 +151,4 @@ ACPI also defines `OSYS` which describes the used Windows Version in HEX code ba
 - Different operating systems support different hardware, for example, I2C devices are only supported from `Win8` onwards.
 - When loading macOS, `_OSI` accepts parameters that are not recognized by ACPI, and `OSYS` is given a default value. This default value is usually smaller than the value required by Win8, and obviously I2C does not work. This requires a patch to correct this error, and OS patches are derived from this.
 - Some other components may also be related to `OSYS`.
-- Anoother Approach: [**SSDT-OSYS**](https://gist.github.com/rockavoldy/eeff232c932bf3eaa01b47c4d9253dd3)
+- Another Approach: [**SSDT-OSYS**](https://gist.github.com/rockavoldy/eeff232c932bf3eaa01b47c4d9253dd3)
