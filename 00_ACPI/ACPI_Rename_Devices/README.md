@@ -133,7 +133,7 @@ DefinitionBlock ("", "SSDT", 2, "STZ0", "EHCxRNME", 0x00001000)
 - Export the SSDT as .aml file
 - Add it to `/EFI/OC/ACPI` and config.plist
 - Save and reboot
-- Run Hackingtool and click on the "USB" Tab. The Controllers should be renamed to whatever device names you assigned to them when running macOS:</br>![](/Users/5t33z0/Desktop/ctrlrshcktl.png)
+- Run Hackingtool and click on the "USB" Tab. The Controllers should be renamed to whatever device names you assigned to them when running macOS:</br>![ctrlrshcktl](https://user-images.githubusercontent.com/76865553/183024743-b28f84c0-afa8-43b0-aa56-d23c28e9e401.png)
 
 **Note**: Since I am using a Laptop and the USB ports defined for the used USB 2 and USB 3 controllers stay within the 15 port limit of macOS, I am done at this stage. But for Desktop systems which usually define 26 ports for `XHCI`, you will have to map USB Ports afterwards. More about this in the section [**USB Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes).
 
