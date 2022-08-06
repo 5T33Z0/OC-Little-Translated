@@ -9,7 +9,7 @@ Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some feature
 - [Method 2: Dropping Tables based on Table Signature](#method-2-dropping-tables-based-on-table-signature)
 	- [Example 1: dropping the `DMAR` Table](#example-1-dropping-the-dmar-table)
 	- [Verifying that the table has been dropped/deleted](#verifying-that-the-table-has-been-droppeddeleted)
-	- [Example 2: replacing a dropped DMAR with a modified one](#example-2-replacing-a-dropped-dmar-with-a-modified-one)
+	- [Example 2: replacing a dropped `DMAR` with a modified one](#example-2-replacing-a-dropped-dmar-with-a-modified-one)
 	- [Modifying a table](#modifying-a-table)
 	- [Verifying that the Table has been replaced](#verifying-that-the-table-has-been-replaced)
 
