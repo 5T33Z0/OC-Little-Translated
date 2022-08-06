@@ -25,7 +25,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
 - Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
 - Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more instructions.
-- Export the file as .aml (ACPI Machine Language Binary) and add it to EFI > OC > ACPI and your Config
+- Export the file as .aml (ACPI Machine Language Binary) and add it to EFI/OC/ACPI and your Config
 - Save and Reboot.
 
 **Example**: existing EC device in a Laptop DSDT </br>
@@ -58,7 +58,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
     ```
 - Adjust the device name and PCI path accordingly to what's used in you `DSDT`
 - Export the file as .aml
-- Replace the existing file in EFI > OC > ACPI
+- Replace the existing file in EFI/OC/ACPI
 - Reboot
 - Check IORegistryExplorer again for `EC0`, `H_EC` or whatever the device is called in your `DSDT`.
 - If it's not present, you're done.
@@ -72,7 +72,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 2. Pres "D", drag in your system's DSDT and hit "ENTER"
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master`Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI > OC > ACPI and your Config using OpenCore Auxiliary Tools
+5. Copy the generated `SSDTs` to EFI/OC/ACPI and your Config using OpenCore Auxiliary Tools
 6. Open `patches_OC.plist` and copy the included patches to your `config.plist` (to the same section, of course).
 7. Save and Reboot. Done.
 
