@@ -4,7 +4,7 @@
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.
 
 ### Why do I need a fake EC?
-On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is good, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from loading. To work around this issue, we disable the device in the system's `DSDT` and add a fake `EC` for macOS to play with instead.
+On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is a good thing, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from connecting to an existing `EC`. To ensure thes, we disable the device in the system's `DSDT` and add a fake `EC` for macOS to play with instead.
 
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
 In order to get USB Power Management working properly on **Skylake and newer CPUs**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient (if required at all).
@@ -24,7 +24,7 @@ There are 2 methods for adding a fake EC: either by manually by adding the requi
 - In the `DSDT`, search for `PNP0C09` 
 - If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
 - Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
-- Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more info as well.
+- Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more instructions.
 - Export the file as .aml (ACPI Machine Language Binary) and add it to EFI > OC > ACPI and your Config
 - Save and Reboot.
 
