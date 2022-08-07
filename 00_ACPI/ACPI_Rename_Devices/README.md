@@ -56,8 +56,8 @@ DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
 
 :warning: **CAUTION**
 
-- If you don't add the `Name (_ADR,0x…)` portion to the code, the controller will still work, but you won't find it in the IO Regustry:</br>![SAD](https://user-images.githubusercontent.com/76865553/182600512-396acfb7-85da-4a40-85b4-f16cebb72cdc.png)
-- In general, if the device name you you want to change is used in other ACPI tables besides the `DSDT`, you have to change it there as well, so the device name is the same for all ACPI tables. If that's the case, using a binary rename which applies system-wide so all occurences are found and renamed is prefferable.
+- If you don't add the `Name (_ADR,0x…)` portion to the code, the controller will still work, but you won't find it in the IO Registry:</br>![SAD](https://user-images.githubusercontent.com/76865553/182600512-396acfb7-85da-4a40-85b4-f16cebb72cdc.png)
+- In general, if the device name you want to change is used in other ACPI tables besides the `DSDT`, you have to change it there as well, so the device name is the same for all ACPI tables. If that's the case, using a binary rename which applies system-wide so all occurrences are found and renamed is preferable.
 
 ### Example 2: Rename an Embedded Controller
 This SSDT renames an existing Embedded Controller `H_EC` to `EC` in macOS. It forllows the same patching principle explained earlier:
