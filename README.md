@@ -14,7 +14,7 @@ The methods and techniques presented in this repo are based on utilizing the off
 
 > MaLd0n's implications that you need a custom DSDT to add and remove (well, remove yes, but disabling is good enough in virtually all cases) devices is **incorrect**. Aside from those claims, most device rename changes (probably also things you considered „missing“) are also not needed, as they are performed by Lilu and its plug-ins. This approach is a lot safer than previous ACPI renames as dumb find-replace patches can yield false positives, the kext approach cannot. 
 
-Therefore, **OC-Little Translated does support nor promote patching DSDTs** (and the shady business practices behind it) as well as pre-patched ISOs or unofficial modified forks of OpenCore that prevents injecting ACPI tables into Windows, just because the guy running his "Real Vanilla Hackintosh" forum doesn't know how to write proper ACPI tables that don't cause a Blue Screen of Death in Windows!
+Therefore, **OC-Little Translated does nit support nor promote patching DSDTs** (and the shady business practices behind it) as well as pre-patched ISOs and unofficial modified forks of OpenCore that prevent injecting ACPI tables into Windows, just because the guy running his "Real Vanilla Hackintosh" forum doesn't know how to write proper ACPI tables that don't cause a Blue Screen of Death!
 
 <details>
 <summary><strong>About the translation</strong> (click to reveal content)</summary>
