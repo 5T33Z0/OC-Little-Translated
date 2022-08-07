@@ -10,7 +10,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 ## Disclaimer
 The methods and techniques presented in this repo are based on utilizing the official OpenCore release and its features along with Kexts, SSDTs, Device Properties and other tools to enable/disable devices and features in macOS to get a *proper* working system which is ACPI conform!
 
-**OC-Little Translated** does not consider patching the `DSDT` an *appropriate* measure to get a "Real Vanilla Hackintosh". In fact, it's quite the opposite, as discussed [here](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/). Therefore, OC-Little Translated does not support patching DSDTs (and the shady business practices behind it).
+**OC-Little Translated** does not consider patching the `DSDT` an *appropriate* measure to get a "Real Vanilla Hackintosh". In fact, it's quite the opposite, as discussed [here](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/?do=findComment&comment=2790870). Therefore, OC-Little Translated does not support patching DSDTs (and the shady business practices behind it).
 
 We also don't take shortcuts here, such as using using pre-patched ISOs or an unofficial modified fork of OpenCore that prevents injecting ACPI tables into Windows, just because the guy running his "Real Vanilla Hackintosh" forum doesn't know how to write proper ACPI tables that don't cause a BSOD in Windows!
 
