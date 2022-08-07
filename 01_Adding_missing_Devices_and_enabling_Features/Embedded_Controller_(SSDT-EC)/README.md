@@ -139,8 +139,7 @@ MacBookPro14,1|-|0x0BB8|-|0x0BB8
 MacBookPro13,x|-|0x0BB8|-|0x0BB8
 MacBookPro12,x and older|N/A|N/A|N/A|N/A
 ||||||
-**MacMini9,1**|?|?|?|?
-MacMini8,1|0x0C80|0x0834|0x0C80|0x0834
+**MacMini8,1**|0x0C80|0x0834|0x0C80|0x0834
 MacMini7,1 and older|N/A|N/A|N/A|N/A
 ||||||
 **MacPro7,1**|0x13EC|0x0834|0x13EC|0x0834|
