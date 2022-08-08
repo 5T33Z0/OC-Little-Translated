@@ -40,6 +40,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
 - [**freqVectorsEdit**](https://github.com/Piker-Alpha/freqVectorsEdit.sh) – Python Script for editing frequency Vectors of Board-ID plists contained in the X86PlatformPlugin.kext
+- [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer) – Python Script for removing sensitive data from a config.plist as well as restoring some default settings.
 
 ### Windows
 Suggest some. Otherwise refer to "Cross-Platform" Section.
