@@ -60,7 +60,7 @@ DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
 - In general, if the device name you want to change is used in other ACPI tables besides the `DSDT`, you have to change it there as well, so the device name is the same for all ACPI tables. If that's the case, using a binary rename which applies system-wide so all occurrences are found and renamed is preferable.
 
 ### Example 2: Rename an Embedded Controller
-This SSDT renames an existing Embedded Controller `H_EC` to `EC` in macOS. It forllows the same patching principle explained earlier:
+This example shows the content of `SSDT-Rename.aml` by Dortania. It renames an existing Embedded Controller `H_EC` to `EC` in macOS. It follows the same patching principle explained earlier:
 
 ```asl
 DefinitionBlock ("", "SSDT", 2, "Slav", "SsdtEC", 0x00001000)
@@ -92,7 +92,7 @@ DefinitionBlock ("", "SSDT", 2, "Slav", "SsdtEC", 0x00001000)
     }
 }
 ```
-**NOTE**: Renaming EC Devices is not recommended for desktop systems. Instead, a the existing EC should be disabled and replaced by a one. You can follow [this guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)#adding-a-fake-embedded-controller-ssdt-ec-or-ssdt-ec-usbx) to do so.
+**NOTE**: Renaming EC Devices is not recommended for desktop systems. Instead, the existing EC should be disabled and replaced by a virtual one. You can follow [this guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)#adding-a-fake-embedded-controller-ssdt-ec-or-ssdt-ec-usbx) to do so.
 
 ## Credits and Resources
 - Dortania for [**Rename-SSDT**](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Rename-SSDT.dsl)
