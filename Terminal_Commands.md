@@ -31,7 +31,12 @@ chflags nohidden ~/Library
 defaults write com.apple.frameworks.diskimages skip-verify TRUE 
 defaults write com.apple.frameworks.diskimages skip-verify FALSE
 ```
+**Disable/enable Notification Center**
 
+```
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+```
 **Add "Quit" option to Finder**:</br>
 `defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder`
 
