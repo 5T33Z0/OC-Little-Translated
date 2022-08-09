@@ -41,7 +41,7 @@ Isolated patches for your config in raw text format instead of a ready-made .pli
 - It's hard to "convert" the patch if you want to add it to your config manually. 
 - There's always a chance to mess up the structure of the plist file if you have to do it in text mode. 
 - Some plist editors don't even offer/allow pasting of raw text.
-- If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item because the the file heade and the rest of tree structure is missing. 
+- If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item because the the file header and the rest of tree structure is missing. 
 
 ## ProperTree for the win
 
