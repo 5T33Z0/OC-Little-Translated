@@ -57,5 +57,26 @@ Just highlight the whole raw text, copy it into memory. Open ProperTree, paste i
 
 ![config](https://user-images.githubusercontent.com/76865553/181589787-a5643b48-a331-4d11-be5c-4357abc2a0e7.png)
 
+## Converting a .plist file or sections of it to raw text
+Another feature I noticed is that you can use ProperTree to convert plists or sections of it into raw text really easy. And the best thing about it: it automatically creates a correct file header and structure required for .plist files, so if you share a patch as raw text, other user can easily use it.
+
+### Example 1: converting a `config.plist` to raw test
+- Open a config.plist with ProperTree
+- Select the `Root`dictionary:</br>![](/Users/steezonics/Desktop/Raw_01.png)
+- Press `[⌘]+[c]`
+- Open TextEdit
+- Change Format to raw text (CMD+SHIFT+T)
+- Press `[⌘]+[v]` and there's your config as raw text:</br>![](/Users/steezonics/Desktop/Raw_02.png)
+
+### Example 2: converting a specific section to raw test
+Same goes for specific sections like arrays and dictionaries. In this example Kernel/Quirks.
+
+- Open a .plist with ProperTree
+- Highlight the array or dictionary you want to copy:</br>![](/Users/steezonics/Desktop/Raw_03.png)
+- Press `[⌘]+[c]`
+- Open TextEdit
+- Change Format to raw text (CMD+SHIFT+T)
+- Press `[⌘]+[v]` and there's you have to copied section in raw text (file header and correct plist structure included):</br>![](/Users/steezonics/Desktop/Raw_04.png)
+
 ## Credits
 corpnewt for [**ProperTree**](https://github.com/corpnewt/ProperTree)
