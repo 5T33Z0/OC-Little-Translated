@@ -46,6 +46,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 Suggest some. Otherwise refer to "Cross-Platform" Section.
 
 ### Web-based applications
+- [**Sanity Checker**](https://sanitychecker.ocutils.me/) (beta) – The popular tool for checking the consistency of OpenCore configs online has returned!
 - [**Cloud Clover Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Online tool for generating and editing Clover, OpenCore, Ozmosis and Chameleon configs (templates included).
 - [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
 - [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/)
