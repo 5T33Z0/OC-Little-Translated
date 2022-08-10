@@ -1,15 +1,12 @@
-# OpenCore Calculators Spreadsheet
+# OpenCore Calculators
+This section calculator to generat correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided by OpenCore's `Documentation.pdf`.
 
-This section includes a spreadsheet for Apple Numbers and MS Excel to calculate correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided by OpenCore's `Documentation.pdf`. 
+## Spreadsheet
 
-If you are looking for an actual tool to calculate these things (and more), you should check out CorpNewt's [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode). Config Editors like OpenCore Auxiliary Tools and others have a lot of these calculators integrated nowadays, but never the one for csr-active-config. And they never show how the calculation works. So the spreadsheet may help you to understand how it works a bit better.
+This is my clumsy approach, using an Apple Numbers [Spreadsheet](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/OpenCoreCalcs.numbers?raw=true). Not fancy but you get a good understanding of how these bitmasks are actually calculated.
 
-There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.app/)
-
-**Supported OC Version:** 0.7.4+</br>
-**Included Calculators**: CSR Bitmask, ScanPolicy, PickerAttributes, ExposeSensitiveData and Darkwake
-
-**Screenshots**:
+<details>
+<summary><strong>Screenshots</strong> (click to reveal)</summary>
 
 ![CSROC](https://user-images.githubusercontent.com/76865553/180944112-a6fbbf86-f613-4bf6-8076-a3845dc911e3.png)
 
@@ -22,3 +19,19 @@ There's also an online [**ScanPolicy Calculator**](https://oc-scanpolicy.vercel.
 ![Bildschirmfoto 4](https://user-images.githubusercontent.com/76865553/134348958-481e2632-d417-416f-ad0b-14158137149f.png)
 
 ![Darkwake](https://user-images.githubusercontent.com/76865553/137449526-2d6ef0e4-f4da-47d1-b12a-18f03b3fc29e.png)
+</details>
+
+## Web Applications
+Some of these calculators are also wavailable as web applications:
+
+- **ScanPolicy Calculator**: https://oc-scanpolicy.vercel.app
+- **ExposeSensitiveData Generator**: https://dreamwhite-oc-esd.vercel.app/
+
+## Tools
+If you are looking for an actual tool to calculate these things, check the following:
+
+- **BitmaskDecode**: https://github.com/corpnewt/BitmaskDecode
+	- Can generate all of the mentioned bitmasks.
+	
+- **OCAuxiliaryTools**: https://github.com/ic005k/OCAuxiliaryTools
+	- Generates: ScanPolicy, PickerAttributes and ExposeSensitiveData
