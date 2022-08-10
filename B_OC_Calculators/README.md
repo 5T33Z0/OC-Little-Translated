@@ -1,5 +1,5 @@
 # OpenCore Calculators
-This section calculator to generat correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided by OpenCore's `Documentation.pdf`.
+This section calculator to generate correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided by OpenCore's `Documentation.pdf`.
 
 ## Spreadsheet
 
@@ -22,7 +22,7 @@ This is my clumsy approach, using an Apple Numbers [Spreadsheet](https://github.
 </details>
 
 ## Web Applications
-Some of these calculators are also wavailable as web applications:
+Some of these calculators are also available as web applications:
 
 - **ScanPolicy Calculator**: https://oc-scanpolicy.vercel.app
 - **ExposeSensitiveData Generator**: https://dreamwhite-oc-esd.vercel.app/
