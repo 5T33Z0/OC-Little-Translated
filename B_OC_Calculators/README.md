@@ -24,7 +24,7 @@ This is my clumsy approach, using an Apple Numbers [Spreadsheet](https://github.
 ## Web Applications
 Some of these calculators are also available as web applications:
 
-- **ScanPolicy Calculator**: https://oc-scanpolicy.vercel.app
+- **ScanPolicy Generator**: https://oc-scanpolicy.vercel.app
 - **ExposeSensitiveData Generator**: https://dreamwhite-oc-esd.vercel.app/
 
 ## Tools

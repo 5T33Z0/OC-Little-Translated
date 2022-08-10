@@ -47,9 +47,10 @@ Suggest some. Otherwise refer to "Cross-Platform" Section.
 
 ### Web-based applications
 - [**Sanity Checker**](https://sanitychecker.ocutils.me/) (beta) – The popular tool for checking the consistency of OpenCore configs online has returned!
-- [**Cloud Clover Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Online tool for generating and editing Clover, OpenCore, Ozmosis and Chameleon configs (templates included).
 - [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
-- [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/)
+- [**OpenCore ExposeSensitiveData Generator**](https://dreamwhite-oc-esd.vercel.app/)
+- [**Clover Cloud Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Although the name implies otherwise, this is for editing OpenCore Configs online.
+- [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/) – Compatible with OC ≤ 0.8.0
 - [**Big <> Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html)
 - [**Base64 Decoder/Encoder**](https://www.base64decode.org/)
 
