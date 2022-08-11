@@ -15,7 +15,7 @@ There are two main protocols used to communicate with the trackpad: PS/2 and I2C
 ### About PS/2 Trackpads (old)
 PS/2 trackpads are obsolete. They may support multitouch, but not as good as I2C due to limited bandwidth. 
 
-- Neccessary base kext: [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases)
+- Neccessary base kext: [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2)
 
 ### About I2C Trackpads (new)
 I2C trackpads are found on newer laptops, since they have better multitouch gesture support. I2C Trackpads support multitouch gestures pretty well and will improve in the future, thanks to spoofing Apple's Magic Trackpad 2 to enable native multitouch support under macOS.
@@ -29,7 +29,8 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 	|FTE1001 touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
 	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Trackpads. Included in VoodooI2C Package.|
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode)|
-	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br>[**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Mostly seen on Dell laptops|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br>VoodooPS2-ALPS (integrated in [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases)) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Often seen on Dell Laptops|
+	
 	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
 
 ## Possible workflow
