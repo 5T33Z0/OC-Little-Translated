@@ -29,7 +29,7 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 	|FTE1001 touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
 	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Trackpads. Included in VoodooI2C Package.|
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode)|
-	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br>VoodooPS2-ALPS (integrated in [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases)) (PS2) |Can be used with USB and I2C/PS2 Alps trackpads. Often seen on Dell Laptops|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Trackpads. Often seen on Dell Laptops|
 	
 	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
 
@@ -57,4 +57,4 @@ I2C trackpads are found on newer laptops, since they have better multitouch gest
 - [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
 - [**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan): ELAN Touchpad/Trackpoint driver for macOS over SMBus 
 - [**VoodooTrackpoint**](https://github.com/VoodooSMBus/VoodooTrackpoint): Generic Trackpoint/Pointer device handler kext for macOS (now merged into [**VoodooInput**](https://github.com/acidanthera/VoodooInput))
-- [**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS): New VoodooPS2 kext for ALPS touchpads. Adds support for Magic Trackpad 2 emulation in order to use macOS native driver instead of handling all gestures itself.
+- [**VoodooPS2-ALPS**](https://github.com/SkyrilHD/VoodooPS2-ALPS): New VoodooPS2 kext for ALPS touchpads. Adds support for Magic Trackpad 2 emulation in order to use macOS native driver instead of handling all gestures itself. **NOTE**: This kext is now obsolete since its functionality has been integrated into VoodooPS2Controller.kext!
