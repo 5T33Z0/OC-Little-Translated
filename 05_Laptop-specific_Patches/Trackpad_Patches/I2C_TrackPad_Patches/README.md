@@ -55,8 +55,8 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
         	}
     }
 	```
-- **Corrected** the ``relevant content`` of the variables used when the original I2C device was disabled, so that they are logically related.
-- **Corrected** the ``relevant content'' of the operating system variable OSYS to make it logical.
+- **Correct** the `relevant content` of the variables used when the original I2C device was disabled, so that they are logically related.
+- **Correct** thw `relevant content` of the operating system variable OSYS to make it logical.
 - Exclude errors
 - I2C patch
 
