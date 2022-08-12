@@ -43,3 +43,6 @@ To enable it, enter in Terminal:
 sudo pmset -a hibernatemode 25
 ```
 Please note that hibernatefile may only point to a file located on the root volume.
+
+## Notes
+- If you feel uncomfortable using the Terminal, you can also use Hackintool to check and change the `hibernatemode`. Simply click on the "Power" Tab and there you find all the currently set parameters.
