@@ -59,10 +59,11 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 **Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables:
 
 - Using **Clover** (easiest and fastest way): Clover can dump ACPI tables without a working config within seconds.
-	- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) and extract it 
+	- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) (CloverV2-51xx.zip) and extract it 
 	- Put the `EFI` folder on the USB flash drive. 
 	- Start the system from the flash drive. 
-	- Hit `F4` in the Boot Menu. The dumped ACPI tables will be stored in: `EFI\CLOVER\ACPI\origin`.
+	- Hit `F4` in the Boot Menu. 	- Pull the USB flash drive, reset the system, boot into macOS
+	- Put the USB flash drive back in. The dumped ACPI tables will be stored on the flash drive under: `EFI\CLOVER\ACPI\origin`.
 - Using **OpenCore**: Normally, you would need a working config to do this. But the guys from Utopia-Team have created a generic, pre-build Debug EFI which can do it *without* it.
 	- Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
 	- Put the `EFI` folder on the USB flash drive. 
