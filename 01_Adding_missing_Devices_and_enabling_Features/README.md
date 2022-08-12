@@ -62,7 +62,8 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 	- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) (CloverV2-51xx.zip) and extract it 
 	- Put the `EFI` folder on the USB flash drive. 
 	- Start the system from the flash drive. 
-	- Hit `F4` in the Boot Menu. 	- Pull the USB flash drive, reset the system, boot into macOS
+	- Hit `F4` in the Boot Menu. The screen should blink once.
+	- Pull the USB flash drive, reset the system and boot into macOS
 	- Put the USB flash drive back in. The dumped ACPI tables will be stored on the flash drive under: `EFI\CLOVER\ACPI\origin`.
 - Using **OpenCore**: Normally, you would need a working config to do this. But the guys from Utopia-Team have created a generic, pre-build Debug EFI which can do it *without* it.
 	- Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
