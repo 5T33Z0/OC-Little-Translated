@@ -41,17 +41,18 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Create a new I2C device `TPXX` and migrate all the contents of the original device to `TPXX`.
 - Fix `TPXX` related content.
 - Replace the original I2C device `name` by `TPXX` (all ocurrances).
-- Enable it for macOS only (set `_STA` to `0x0F`)	```asl
+- Enable it for macOS only (set `_STA` to `0x0F`)
+	```asl
     Method (_STA, 0, NotSerialized)
     {
-        	If (_OSI ("Darwin"))
-    	   	{
-          		Return (0x0F)
-          	}
-        	Else
-        	{
-        		Return (Zero)
-        	}
+        If (_OSI ("Darwin"))
+        {
+            Return (0x0F)
+        }
+        Else
+        {
+            Return (Zero)
+        }
     }
 	```
 - Continue adding the required I2C patch for your device
@@ -82,17 +83,17 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
 	 ```asl
-	Method (_STA, 0, NotSerialized)
-    	{
-   		If (_OSI ("Darwin"))
-        	{
-           		Return (0x0F)
-        	}
-        	Else
-        	{
-          		Return (Zero)
-        	}
-    	}
+    Method (_STA, 0, NotSerialized)
+    {
+        If (_OSI ("Darwin"))
+        {
+            Return (0x0F)
+        }
+        Else
+        {
+            Return (Zero)
+        }
+    }
 	```
  - Look up `SDS1` (the variable used when `TPD1` is disabled) and change the original `If (SDS1...) ` to `If (one)`.  
  - Look up `OSYS` and remove (comment out) the following.
