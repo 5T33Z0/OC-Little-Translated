@@ -23,8 +23,7 @@ PS/2 TouchPads are pretty much obsolete nowadays. They may support multitouch, b
 I2C (Inter-Integrated Circuit or eye-squared-C) Touchpads are found on current Laptops since they have better multitouch gesture support. I2C Touchpads support multitouch gestures pretty well and will improve in the future, thanks to spoofing Apple's Magic Touchpad 2 to enable native multitouch support under macOS. Usually used by Haswell and newer CPU families.
 
 - Necessary base kext: [**VoodooI2C**](https://github.com/VoodooI2C)
-- Addition VoodooI2C Plugins:
-
+- Additional VoodooI2C Plugins (**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices))
 	|Connection type|Plugin|Notes|
 	|---------------|------|-----|
 	|Atmel Multitouch Protocol|VoodooI2CAtmelMXT|Included in VoodooI2C Package.|
@@ -32,10 +31,8 @@ I2C (Inter-Integrated Circuit or eye-squared-C) Touchpads are found on current L
 	|FTE1001 Touchpad|VoodooI2CFTE|Included in VoodooI2C Package.|
 	|Multitouch HID|VoodooI2CHID|Can be used with I2C/USB Touchscreens and Touchpads. Included in VoodooI2C Package.|
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|I2C Synaptic Touchpads (Requires VoodooI2C ONLY for I2C mode)|
-	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops|</br>
 	
-	**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#i2c-usb-hid-devices)
-
 ## Possible workflow
 1. Determine which protocol the Touchpad uses (**PS/2**, **I2C** or **SMBUS**):
 	- Boot into Windows
