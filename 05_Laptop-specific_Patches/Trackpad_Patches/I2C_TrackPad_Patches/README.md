@@ -82,9 +82,9 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 - Amend `TPXX` content:
 	- All `TPD1` replaced with `TPXX`.
   	- Replace the `_STA` part of the patch with
-	 ```asl
-    Method (_STA, 0, NotSerialized)
-    {
+ 	```asl
+	Method (_STA, 0, NotSerialized)
+	{
         If (_OSI ("Darwin"))
         {
             Return (0x0F)
