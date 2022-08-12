@@ -63,7 +63,7 @@ I2C (Inter-Integrated Circuit or eye-squared-C) Touchpads are found on current L
 * Fixing Touchpads Guide by Dortania: **https://github.com/dortania/Getting-Started-With-ACPI/blob/master/Laptops/Touchpad-methods/manual.md**
 
 ### Kexts for PS/2, I2C and ELAN Touchpads
-- [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2): Magic Touchpad II emulation
+- [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2): Magic Touchpad 2 emulation
 - [**VoodooI2C**](https://github.com/VoodooI2C): Primary kext for I2C Touchpads
 - [**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI): Synaptic Touchpad driver over SMBus/I2C for macOS 
 - [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
