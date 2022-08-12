@@ -38,11 +38,10 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
       }
   }
 	```
-- Create a new I2C device `TPXX` and port all the contents of the original device to `TPXX`.
+- Create a new I2C device `TPXX` and migrate all the contents of the original device to `TPXX`.
 - Fix `TPXX` related content.
-  - Replace the original I2C device `name` with `TPXX` in its entirety.
-  - **FIXED** `_STA` part to
-	```asl
+- Replace the original I2C device `name` by `TPXX` (all ocurrances).
+- Enable it for macOS only (set `_STA` to `0x0F`)	```asl
     Method (_STA, 0, NotSerialized)
     {
         	If (_OSI ("Darwin"))
@@ -55,10 +54,7 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
         	}
     }
 	```
-- **Correct** the `relevant content` of the variables used when the original I2C device was disabled, so that they are logically related.
-- **Correct** thw `relevant content` of the operating system variable OSYS to make it logical.
-- Exclude errors
-- I2C patch
+- Continue adding the required I2C patch for your device
 
 ### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
 - Disable ``TPD1`` using the Preset Variable Method.
