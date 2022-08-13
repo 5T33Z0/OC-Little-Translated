@@ -24,7 +24,6 @@ I2C (Inter-Integrated Circuit or eye-squared-C) Touchpads are found on current L
 
 - Necessary base kext: [**VoodooI2C**](https://github.com/VoodooI2C)
 - Additional VoodooI2C Plugins (**Source**: [Dortania](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#laptop-input)
-	
 	|Connection type|Plugin|Notes|
 	|---------------|------|-----|
 	|Atmel Multitouch Protocol|VoodooI2CAtmelMXT|Included in VoodooI2C Package.|
