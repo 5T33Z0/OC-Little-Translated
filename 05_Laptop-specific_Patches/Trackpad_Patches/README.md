@@ -79,7 +79,7 @@ Which of these modes ban be used depends on the method defined in the `DSDT` and
 * [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
 * [**Fixing Touchpads Guide**](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad-methods/manual.html#fixing-trackpads-manual) by Dortania
 * [**VoodoI2C Touchpad Driver Tutorial**](https://www-penghubingzhou-cn.translate.goog/2019/01/06/VoodooI2C%20DSDT%20Edit/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) and [Supplement](https://www-penghubingzhou-cn.translate.goog/2019/07/24/VoodooI2C%20DSDT%20Edit%20FAQ/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) by Penghu Bingzhou
-* [**Assorted Touchpad Patches for various Notebook models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/I2C_Various_Brands_TrackPad_Patches)
+* [**Assorted Touchpad Patches for various Notebook models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/I2C_Touchpad_Hotfixes_Collection)
 
 ### Kexts for PS/2, I2C and ELAN Touchpads
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2): Magic Touchpad 2 emulation
