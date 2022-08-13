@@ -77,7 +77,7 @@ Which of these modes ban be used depends on the method defined in the `DSDT` and
 ### Documentation and Guides
 * [**Official VoodooI2C Documentation**](https://voodooi2c.github.io/)
 * [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
-* [**Fixing Touchpads Guide**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/Laptops/Touchpad-methods/manual.md) by Dortania
+* [**Fixing Touchpads Guide**](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad-methods/manual.html#fixing-trackpads-manual) by Dortania
 * [**VoodoI2C Touchpad Driver Tutorial**](https://www-penghubingzhou-cn.translate.goog/2019/01/06/VoodooI2C%20DSDT%20Edit/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) and [Supplement](https://www-penghubingzhou-cn.translate.goog/2019/07/24/VoodooI2C%20DSDT%20Edit%20FAQ/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) by Penghu Bingzhou
 * [**Additional Touchpad Patches**](https://github.com/GZXiaoBai/Hackintosh-Touchpad-Hotpatc) by GZXiaoBai
 

@@ -2,13 +2,15 @@
 
 ## About
 
-Among the many `SSDT` patches included in this repo, a significant number of them can be categorized as patches for enabling devices, services or features in macOS. These include:
+Among the many `SSDT` patches available in this repo, a significant number of them are for enabling devices, services or features in macOS. They can be divided into four main categories:
 
-- **Devices which can simply be enabled by renaming them**. OpenCore users should avoid using binary renames for enabling such devices since these renames will be applied system-wide which can break other OSes. Instead, an SSDT to rename these devices/methods for macOS only should be used. Clover users don't need to worry about this since binary rename and SSDT hotpatches are applied to macOS only.
-- **Devices which either do not exist in ACPI or have different names than expected by macOS to function properly**. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as defined in other OSes. Like USB and CPU Power Management, Backlight Control for Laptop Displays, ect.
 - **Fake Devices to keep macOS happy**, such as fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS works as expected.
-- **Patches which rename the original device or method** to something else so a replacement SSDT can be written which redefines the device or method to address issues such as Sleep and Wake or Touchpads not working properly, e.g.
-- **Devices which are present in the `DSDT` but are disabled** because they are considered legacy but macOS needs them to be enabled in order to work. A prime example for this is the Realtime Clock (RTC) which is disabled in favor of `AWAC` on Wintel machines following newer ACPI specs. Usually found on mainboards with 300-series chipsets and newer.
+- **Virtual Devices**, such as Fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS is happy and works as expected.
+- **Devices which exist in the `DSDT` but are disabled by the vendor.** These are usually devices considered "legacy" under Windows but are required by macOS to boot. They are still present in the system's `DSDT` and provide the same functionality but are disabled in favor of a newer device. A prime example for this is the Realtime Clock (`RTC`) which is disabled in favor of the `AWAC` clock on modern Wintel machines, like 300-series mainboards and newer. SSDT Hotfixes from this category disable the newer device and enable its "legacy" pendent for macOS only by inverting their statuses (`_STA`). 
+- **Devices which either do not exist in ACPI or use different names than expected by macOS in order to work**. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as intended in other OSes as well, such as: USB and CPU Power Management, Backlight Control for Laptop Displays, ect. 
+- **Patch combinations which work in stages to redefine a device or method so it works with macOS**. First, the original device/method is renamed so macOS doesn't detect it, like `_DSM` to `XDSM` for example. Then a replacement SSDT is written which redefines the device or method for macOS only. The redefined device/method is then injected back into the system, so it's working as expected in macOS. Examples: fixing Sleep and Wake issues or enabling Touchpads.
+
+:bulb: OpenCore users should avoid using binary renames for enabling devices and methods since these renames will be applied system-wide which can break other OSes. Instead, ACPI-compliant SSDTs making use of the `_OSI` method to rename these devices/methods for macOS only should be applied. Clover users don't have to worry about this since binary rename and SSDT hotpatches are not injected into other OSes (unless you tell it to do so).
 
 ### :warning: Don't inject already known Devices
 Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
@@ -17,7 +19,7 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 
 :bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features etc. So please: don't inject the same, unmodified properties into the system you got them from in the first place.
 
-## Properties of Fake ACPI Devices
+## Properties of Virtual ACPI Devices
 
 - **Features**:
   - The device already exists in ACPI, is relatively short, small and self-contained in code.  
