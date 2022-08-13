@@ -1,7 +1,7 @@
 # I2C Touchpad Hotfixes Collection
 Collection of I2C Toupad SSDTs for various Notebook Models.
 
-## Included Hotfixed
+## Included Hotfixes
 
 Vendor | Notebook Model
 -------|------
