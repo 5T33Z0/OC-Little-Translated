@@ -57,7 +57,7 @@ Which of these modes ban be used depends on the method defined in the `DSDT` and
 		- **I2C** Touchpads are located in the **Humand Interface Devices** (HID) section as "**I2C Device**".
  		- **PS/2** and **SMBUS** Touchpads can be found under "**Mice and other pointing devices**".
 	- Double-click the device to open its Device Properties
-	- From the "Property" dropdown menu, select "BIOS device name". This shows its ACPI path and device name used in the `DSDT`. Take a screenshot or take a note.</br></br>
+	- From the "Property" dropdown menu, select "BIOS device name". This shows its ACPI path and device name used in the `DSDT`. Take a screenshot or take a note.
 	**NOTE**: If your Touchpad uses the PS/2 protocol, you can reboot into macOS and continue at step 3.
 2. Reboot back into macOS, find the **APIC** Pin of your Touchpad:
 	- Open **IORegistryExplorer**
