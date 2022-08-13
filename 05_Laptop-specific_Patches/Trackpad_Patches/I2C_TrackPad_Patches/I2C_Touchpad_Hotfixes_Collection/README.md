@@ -7,19 +7,19 @@ Vendor | Notebook Model
 -------|------
 Acer   | SW512
 Acer   | TMX40-51 M 50Y5
-|
+||
 ASUS | I330FA-ADO-13FA
 ASUS | X51GT
-|
+||
 CHUWI| Corebook X (i5-8259U)
-|
+||
 Dell | XPS 13 9300
 Dell | XPS 13 9360
 Dell | Latitude 5480
-|
+||
 HP | HP 250 G8
 Huawei | MateBook 2020
-|
+||
 Lenovo | 330C-15IKB
 Lenovo | Chao 7000
 Lenovo | K43C-80
