@@ -1,4 +1,15 @@
-// TPxx is my new's device
+// For ASUS X51GT
+//
+// Required Renames:
+//
+// Change _OSI to XOSI 
+// Find: 5F4F5349
+// Replace: 584F5349
+//
+// Change I2C TPD0 to TPDX
+// Find: 54504430
+// Replace: 54504458
+
 DefinitionBlock ("", "SSDT", 2, "hack", "TPDX", 0x00000000)
 {
     External (_SB_.GNUM, MethodObj)    // 1 Arguments
