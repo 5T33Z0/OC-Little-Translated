@@ -76,7 +76,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
 ### New/refined method using `SSDT-PRW.aml` (no GPRW/UPRW)
-If case your `DSDT` doesn't use neither `GPRW` nor `UPRW`, you have to modify the `_PRW`method directly. See the .amd I created for my Lenovo T530, which doesn't have neither of the 2 methos.
+In case your `DSDT` doesn't use `GPRW` or `UPRW`, you have to modify the `_PRW`method of the affected devices directly. See the "SSDT-PRW_T530_Example.aml" I created for my Lenovo T530, which doesn't use neither of the two methods.
 
 1. Open your `config.plist`
 2. Add a rename rule to `ACPI/Patch` and rename `_PRW` to `XPRW`:
