@@ -80,7 +80,6 @@ In case your `DSDT` doesn't use neither `GPRW` or `UPRW`, you have to modify the
 
 1. Open your `config.plist`
 2. Add a rename rule to `ACPI/Patch` and rename `_PRW` to `XPRW`:
-	
 	```bash
 	Comment:  change _PRW to XPRW
 	Find:     5F505257
