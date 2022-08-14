@@ -13,7 +13,7 @@ Some devices contain the method `_PRW` (Power Resource for Wake) which defines t
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`. But I ~~expect~~ hope that subsequent releases of OpenCore will address this issue.
 
-### Components that may require a `0D/6D Patch`
+### Devices that may require a `0D/6D Patch`
 
 - **USB class devices**
   - `ADR` address: `0x001D0000`, part name: `EHC1`.
@@ -30,7 +30,7 @@ Different machines may define `_PRW` in different ways, so the contents and form
 - **Sound Card**
 
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
-  - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, etc.
+  - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, `HDEF`, etc.
 
 **NOTES**: 
 
@@ -38,6 +38,7 @@ Different machines may define `_PRW` in different ways, so the contents and form
 - Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
+Your `DSDT` may contain code like this:
 
 ```asl 
  Name (_PRW, Package (0x02)
@@ -47,13 +48,39 @@ Different machines may define `_PRW` in different ways, so the contents and form
         ...
     })
 ```
+
+### New/refined method using `SSDT-XPRW.aml`
+This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
+
+1. Open your `config.plist`
+2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
+	- `GPRW to XPRW` or 
+	- `UPRW to XPRW` 
+	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
+3. Open `SSDT-XPRW.dsl` in maciASL
+4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references:
+	```asl
+DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
+{
+    External (_SB_.PCI0, DeviceObj)
+    External (_SB_.PCI0.EHC1, DeviceObj)
+    External (_SB_.PCI0.EHC2, DeviceObj)
+    External (_SB_.PCI0.SAT1, DeviceObj)
+    External (_SB_.PCI0.XHCI, DeviceObj)
+    External (XPRW, MethodObj)
+    ```
+5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+6. Save and reboot.
+7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the old method explained below.
+
+### Old Method
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
 
   - Name-0D rename .plist
     - `Name-0D-03` to `00`
     - `Name-0D-04` to `00`
     
-  - Name-6D change of name .plist
+  - Name-6D rename .plist
     - `Name-6D-03` to `00`
     - `Name-6D-04` to `00`
 
@@ -65,10 +92,7 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
       		Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
     	}
   ```
-  Most of the newer machines fall into this case. Just follow the usual method (rename-patch). Depending on which method is used in your DSDT, chose the corresponding SSDT:
-
-  - ***SSDT-GPRW*** (patch file with binary rename data inside)
-  - ***SSDT-UPRW*** (patch file with binary rename data inside)
+  Most of the newer machines fall into this case. Just follow the usual method (rename-patch). Depending on which method is used in your DSDT, chose the corresponding SSDT: ***SSDT-XPRW*** (patch file with binary rename data inside). Depending on the method present in your DSDT (GPRW or UPRW), add the corresponding rename rule to the ACPI/Patch section of your config.plist.
 
 - ``Method type`` of two: ``Scope``
 
@@ -126,13 +150,6 @@ There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/mo
 
 ### Changing `_PRW` to specific return values
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
-
-## Outlook: possible `SSDT` implementation
-:bulb: If changing `_PRW` to specific return values could be implemented via an `SSDT` including the `_OSI` method, no more binary renames would be required so the changes would only affect macOS. This would probably the cleanest implementation to fix the issue.
-
-It would require the user to list all the Devices in the SSDT which have the `_PRW` method and return the values (`0x09`, `0x04`) for those instead of the original. 
-
-Maybe someone with more ACPI knowledge could write such a table. It's probably easier to reroute the GPE calls if the methods `GPRW/UPRW` exist in `DSDT` already. In my Laptop it's not the case though.
 
 ## Resources
 - `_PWR` (PowerResource for Wake) [Specifications](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/device-power-management-objects.html#prw-power-resources-for-wake)
