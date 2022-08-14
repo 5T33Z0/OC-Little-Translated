@@ -52,15 +52,14 @@ Your `DSDT` may contain code like this:
 For these packets, the 2nd byte needs to retur `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` to do so.
 
 ### New/refined method using `SSDT-XPRW.aml`
-This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
+This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This requires method `GPRW` or `UPRW` to be present in your `DSDT`. If it is not used, then you cannot use this method.
 
 1. Open your `config.plist`
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
-	- `GPRW to XPRW` or 
-	- `UPRW to XPRW` 
-	
+	- `GPRW to XPRW` or (see SSDT-XPRW.dsl for details)
+	- `UPRW to XPRW` (see SSDT-XPRW.dsl for details)
 	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
-3. Open `SSDT-XPRW.dsl` in maciASL (located in the "i_Common_060D_Patch" folder)
+3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
 	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
@@ -71,11 +70,38 @@ This approach tries to minimze the amount of necessary binary renames, to correc
     	External (_SB_.PCI0.SAT1, DeviceObj)
     	External (_SB_.PCI0.XHCI, DeviceObj)
     	External (XPRW, MethodObj)
-	```
-	
+	```	
 5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
-7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the old method explained below.
+7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
+
+### New/refined method using `SSDT-PRW.aml` (no GPRW/UPRW)
+In case your `DSDT` doesn't use neither `GPRW` or `UPRW`, you have to modify the `_PRW`method directly.
+
+1. Open your `config.plist`
+2. Add a rename rule to `ACPI/Patch` and rename `_PRW` to `XPRW`:
+	
+	```bash
+	Comment:  change _PRW to XPRW
+	Find:     5F505257
+	Replace:  58505257
+	```
+	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
+3. `SSDT-PRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
+4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
+	```asl
+	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
+	{
+    	External (_SB_.PCI0, DeviceObj)
+    	External (_SB_.PCI0.EHC1, DeviceObj)
+    	External (_SB_.PCI0.EHC2, DeviceObj)
+    	External (_SB_.PCI0.SAT1, DeviceObj)
+    	External (_SB_.PCI0.XHCI, DeviceObj)
+    	External (XPRW, MethodObj)
+	```	
+5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+6. Save and reboot.
+7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
 ### Old Method
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
