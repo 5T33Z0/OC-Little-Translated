@@ -71,7 +71,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
     	External (_SB_.PCI0.XHCI, DeviceObj)
     	External (XPRW, MethodObj)
 	```	
-5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+5. Export the file as `SSDT-XPRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
 7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
@@ -98,7 +98,7 @@ In case your `DSDT` doesn't use neither `GPRW` or `UPRW`, you have to modify the
     	External (_SB_.PCI0.XHCI, DeviceObj)
     	External (XPRW, MethodObj)
 	```	
-5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+5. Export the file as `SSDT-PRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
 7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
