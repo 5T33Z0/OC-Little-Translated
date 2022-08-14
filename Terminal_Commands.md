@@ -11,7 +11,9 @@
 - **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
 
 **Show macOS Version and Build Number**</br>
-`sw_vers`
+```shell
+sw_vers
+```
 
 **Show macOS Kernel Version**:</br>
 `uname -r`
