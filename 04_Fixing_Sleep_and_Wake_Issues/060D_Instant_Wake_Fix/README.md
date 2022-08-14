@@ -138,7 +138,7 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 
 **Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analyzed before applying it.
 
-## Other methods
+## Other approaches
 
 ### Using `USBWakeFixup.kext`
 Find out what's causing the wake by entering this in terminal:
