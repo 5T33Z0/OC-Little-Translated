@@ -239,12 +239,18 @@ ioreg -l -p IOService -w0 | grep -i XHCI
 kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 ```
 **Debug ACPI Hotpatches**:</br>
-`log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"`
+
+```shell
+log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"
+```
 
 **Display CPU Features**:</br>
-`sysctl -a | grep machdep.cpu.features` </br>
-`sysctl -a | grep machdep.cpu.leaf7_features` </br>
-`sysctl machdep.cpu | grep AVX`
+
+```shell
+sysctl -a | grep machdep.cpu.features
+sysctl -a | grep machdep.cpu.leaf7_features
+sysctl machdep.cpu | grep AVX
+```
 
 **Disable/Delete Metal Support**:</br>
 
