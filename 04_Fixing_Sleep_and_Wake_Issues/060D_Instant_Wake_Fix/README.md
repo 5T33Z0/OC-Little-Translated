@@ -56,19 +56,21 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
 	- `GPRW to XPRW` or 
 	- `UPRW to XPRW` 
+	
 	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
 3. Open `SSDT-XPRW.dsl` in maciASL
-4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references:
+4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
-DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
-{
-    External (_SB_.PCI0, DeviceObj)
-    External (_SB_.PCI0.EHC1, DeviceObj)
-    External (_SB_.PCI0.EHC2, DeviceObj)
-    External (_SB_.PCI0.SAT1, DeviceObj)
-    External (_SB_.PCI0.XHCI, DeviceObj)
-    External (XPRW, MethodObj)
-    ```
+	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
+	{
+    	External (_SB_.PCI0, DeviceObj)
+    	External (_SB_.PCI0.EHC1, DeviceObj)
+    	External (_SB_.PCI0.EHC2, DeviceObj)
+    	External (_SB_.PCI0.SAT1, DeviceObj)
+    	External (_SB_.PCI0.XHCI, DeviceObj)
+    	External (XPRW, MethodObj)
+	```
+	
 5. Export the file as `SSDT-XPRW.aml` and add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
 7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the old method explained below.
