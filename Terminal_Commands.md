@@ -6,7 +6,7 @@
 **https://macos-defaults.com/**
 
 **List of PMSET Commands**<br>
-https://www.dssw.co.uk/reference/pmset.html
+**https://www.dssw.co.uk/reference/pmset.html**
 
 - **Example**: `sudo pmset proximitywake 0` &rarr; disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
 
@@ -21,19 +21,19 @@ https://www.dssw.co.uk/reference/pmset.html
 
 **Show the User Library in Big Sur+**:</br>
 
-```
+```shell
 setfile -a v ~/Library
 chflags nohidden ~/Library
 ```
 **Disable/enable DMG Verification**:</br>
 
-```
+```shell
 defaults write com.apple.frameworks.diskimages skip-verify TRUE 
 defaults write com.apple.frameworks.diskimages skip-verify FALSE
 ```
 **Disable/enable Notification Center**
 
-```
+```shell
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 ```
@@ -51,7 +51,7 @@ launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.pl
 
 **Show all Files in Finder**:</br>
 
-```
+```shell
 defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
 defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
 ```
@@ -62,23 +62,33 @@ Alternatively, use a **Key Command**: ⌘⇧. (Command-Shift-Dot)
 
 **Rebuild DYLD and XPC caches** (≤ macOS 10.15)
 
-```
+```shell
 sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
 ```
 
 **Enable Sidecar**:</br>
 
-```
+```shell
 defaults write com.apple.sidecar.display AllowAllDevices -bool true
 defaults write com.apple.sidecar.display hasShownPref -bool true
 ```
-
 **Disable Logging:**</br>
 `sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist`
 
 **Enable Key Repeating**</br>
 `defaults write -g ApplePressAndHoldEnabled -bool false`
+
+**Disabling macOS from mastering iDevices**
+
+```shell
+defaults write com.apple.iTunesHelper ignore-devices -bool YES
+defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
+defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
+defaults write -g ignore-devices -bool true
+```
+**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/docs/USB_Modes.md)
+
 
 ## CPU related
 
@@ -139,7 +149,7 @@ Example: `log show --last boot | grep "ACPI"`
 
 **Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
 
-```
+```shell
 csrutil authenticated-root disable
 bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot
 ``` 
@@ -165,7 +175,7 @@ bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapsho
 
 **Find USB Controller Renames**:</br>
 
-```
+```shell
 ioreg -l -p IOService -w0 | grep -i EHC1
 ioreg -l -p IOService -w0 | grep -i EHC2
 ioreg -l -p IOService -w0 | grep -i XHC1
@@ -185,13 +195,13 @@ ioreg -l -p IOService -w0 | grep -i XHCI
 
 **Disable/Delete Metal Support**:</br>
 
-```
+```shell
 sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no
 sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no
 ```
 or:
 
-```
+```shell
 sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal
 sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
 ```
@@ -199,21 +209,21 @@ sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
 
 **Change Update Seed to Developer**</br>
 
-```
+```shell
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
 ```
 
 **Removing Network .plists (for troubleshooting)**</br>
 
-```
+```shell
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
 sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 ```
 
 **List ACPI Errors**</br>
 
-```
+```shell
 log show --last boot | grep AppleACPIPlatform
 log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log
 ```
