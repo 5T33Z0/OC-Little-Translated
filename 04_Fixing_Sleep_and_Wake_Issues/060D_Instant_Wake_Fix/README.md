@@ -4,14 +4,14 @@
 There are some components (like USB, LAN, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep. This fix resolves this issue.
 
 ### Technical Background
-The `DSDT` contains GPE (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each even has it's own number. Although these are not standardized, `06D` is often used for LAN and USB. 
+The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each even has it's own number. Although these are not standardized, `0x6D` is often used as an event in devices like Ethernet cards, USB Controllers or Soundcards. 
 
-Some devices contain the method `_PRW` (Power Resource for Wake) which defines their wake method by using packages which return 2 power resource values if the corresponding GPE is triggered. The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
+Some devices contain the method `_PRW` (Power Resource for Wake) which defines their wake method by using packages which return 2 power resource values if the corresponding `_GPE` is triggered. The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
 
-- The 1st byte of the `_PRW` packet is either `0D` or `6D`. Therefore, such patches are called `0D/6D Patches`.
-- The 2nd byte of `_PRW` packet is either `03` or `04`. But macOS expects `0` here in order to not wake. And that's what this patch does: it set's packet 2 to `0` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
+- The 1st byte of the `_PRW` packet is either `0x0D` or `0x6D`. Therefore, such patches are called `0D/6D Patches`.
+- The 2nd byte of `_PRW` packet is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake. And that's what this patch does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
 
-Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`. But I ~~expect~~ hope that subsequent releases of OpenCore will address this issue.
+Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
 
 ### Devices that may require a `0D/6D Patch`
 
@@ -49,6 +49,8 @@ Your `DSDT` may contain code like this:
     })
 ```
 
+For these packets, the 2nd byte needs to retur `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` to do so.
+
 ### New/refined method using `SSDT-XPRW.aml`
 This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
 
@@ -58,7 +60,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 	- `UPRW to XPRW` 
 	
 	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
-3. Open `SSDT-XPRW.dsl` in maciASL
+3. Open `SSDT-XPRW.dsl` in maciASL (located in the "i_Common_060D_Patch" folder)
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
 	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
