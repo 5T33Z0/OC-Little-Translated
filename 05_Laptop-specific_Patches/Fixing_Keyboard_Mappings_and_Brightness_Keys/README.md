@@ -1,11 +1,13 @@
 # Modifying PS2 Keyboard mappings and brightness shortcut keys
 
 ## Description
-Keyboard keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture `PS2 Scan Code` under macOS can be re-mapped!
+Keyboard keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture **PS2 Scan Code** under macOS can be re-mapped!
 
 ### Update [September 30, 2020]:
 
-**VoodooPS2Controller** now separates the brightness shortcut keys part from the standalone driver **BrightnessKeys** kext and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. So the previous brightness shortcut patches are no longer needed and should be disabled. If the BrightnessKeys kext does not work instantly, please refer to the "special cases" section on the github repo's Readme. If that doesn't fix it assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness. Required kexts:
+**VoodooPS2Controller** now separates the brightness shortcut keys part from the standalone driver **BrightnessKeys** kext and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. So the previous brightness shortcut patches are no longer needed and should be disabled. 
+
+If the BrightnessKeys kext does not work initially, please refer to the "[special cases](https://github.com/acidanthera/BrightnessKeys#special-cases)" section on the github repo's Readme. If that doesn't fix it assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness. Required kexts:
 
   - [**VoodooPS2Controller.kext**](https://github.com/acidanthera/VoodooPS2)
   - [**BrightnessKeys.kext**](https://github.com/acidanthera/BrightnessKeys)
@@ -27,7 +29,7 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 
 ### Enabling keyboard scan codes
 
-- Check the header file [ApplePS2ToADBMap.h](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/VoodooPS2Keyboard/ApplePS2ToADBMap.h), which lists the scan codes for most of the keys.
+- Check the header file [**ApplePS2ToADBMap.h**](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/blob/master/VoodooPS2Keyboard/ApplePS2ToADBMap.h), which lists the scan codes for most of the keys.
 - Get the keyboard scan codes from the console (use either or). There are 2 methods for enabling them (use either or).
 
 #### Method 1: Using Terminal
@@ -86,8 +88,8 @@ You can use either of the following mapping methods:
 ```
 
 ### NOTES
-- The keyboard path in the example file is `\_SB.PCI0.LPCB.PS2K`. Make sure the path used in the SSDT is identical to the path in your `DSDT`. 
-- Most ThinkPads use either `\_SB.PCI0.LPC.KBD` or `\_SB.PCI0.LPCB.KBD`.
+- The PCI path of the Keyboard used in the example SSDT is `_SB.PCI0.LPCB.PS2K`. Make sure the path(s) used in the SSDT match the ones used in your `DSDT`.
+- Most ThinkPads use either `_SB.PCI0.LPC.KBD` or `_SB.PCI0.LPCB.KBD`.
 - The variable `RMCF` is used in the patch. If `RMCF` is also used for other **keyboard patches**, both must be merged. See ***SSDT-RMCF-PS2Map-dell***. 
 - ***SSDT-RMCF-MouseAsTrackpad*** is used to force-enable the touchpad settings option.
 - In **VoodooPS2Controller**, the PS2 Scan Code corresponding to the `<kbd>PrtSc</kbd>` button is `e037`. You could map this key to `F13` and bind `F13` to the screenshot function in System Preferences:
@@ -100,8 +102,9 @@ You can use either of the following mapping methods:
     }
     ...
 	```
-	This result in F13 being used for Screenshots:
+	This results in `F13` being used for Screenshots:
 	![f13](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)
 
 ## Credits and Resources
-Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping)
+- Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping)
+- If you want to create custom keyboard shortcuts, you can try [Karabiner Elements](https://github.com/pqrs-org/Karabiner-Elements) 
