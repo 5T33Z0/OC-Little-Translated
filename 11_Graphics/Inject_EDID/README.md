@@ -52,7 +52,8 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 - Add Key `AAPL00,override-no-connect`, Type: `Data`
 - Press CMD+V to enter the EDID as hex in the `Value` field:</br>![EDID_07](https://user-images.githubusercontent.com/76865553/184684433-a53ba979-a0e1-4e91-b95b-4a0411f8e3ae.png)
 - Save your `config.plist` and reboot
-- Verify that the EDID has been applied. Open Terminal and enter:</br> `ioreg -lw0 | grep -i "IODisplayEDID" | sed -e 's/.*<//' -e 's/>//'`. The output should be identical to the value in your config.
+- Verify that the EDID has been applied. Open Terminal and enter:</br> `ioreg -lw0 | grep -i "IODisplayEDID" | sed -e 's/.*<//' -e 's/>//'`
+- The output should be identical to the value in your config.
 
 Hopefully this will resolve the issue!
  
