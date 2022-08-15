@@ -17,5 +17,6 @@ This section contains a collection of guides with laptop-specific patches for en
     - Asus Machine Special Patch 
 
 ## Further resources
-- [Laptop Guide](https://github.com/dortania/clover-laptop-guide) by Dortania
-- Updated [Battery Patching Guide](https://github.com/dreamwhite/acpi-battery-patching-guide) by Dreamwhite 
+- [**Extensive list of existing Laptop EFIs**](https://github-com.translate.goog/daliansky/Hackintosh?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp#%E7%AC%94%E8%AE%B0%E6%9C%AC%E9%83%A8%E5%88%86%E6%9C%BA%E5%9E%8B) by Daliansky. If an EFI folder for your Notebook already exists, it's probably listed in there!
+- [**Laptop Guide**](https://github.com/dortania/clover-laptop-guide) by Dortania
+- Updated [**Battery Patching Guide**](https://github.com/dreamwhite/acpi-battery-patching-guide) by Dreamwhite 
