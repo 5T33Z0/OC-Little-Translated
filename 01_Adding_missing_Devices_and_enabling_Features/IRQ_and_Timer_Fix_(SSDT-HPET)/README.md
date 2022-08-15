@@ -56,7 +56,7 @@ Some UEFI's ACPI implementations don't "understand" the way, the IRQ flags injec
 ...
 {	
 	IRQNoFlags ()
-		{0,8,11}
+	    {0,8,11}
 ...
 ```
 If you don't have sound after injecting **SSDT-HPET** and the required binary renames, change the formatting of this section to:
@@ -65,11 +65,11 @@ If you don't have sound after injecting **SSDT-HPET** and the required binary re
 ...
 {
 	IRQNoFlags ()
-		{0}
+	    {0}
 	IRQNoFlags ()
-		{8}
+	    {8}
 	IRQNoFlags ()
-		{11}
+	    {11}
 ...
 ``` 
 Save the file and reboot. Sound should work now.
