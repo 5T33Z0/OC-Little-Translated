@@ -107,19 +107,17 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
        
 }
 ```
-
 1. In your DSDT, search for `_PRW`
 2. Look for matches for `_PRW` inside of Devices only
 3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is not `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
-
 	```asl
 	Device (HDEF)
-  {
-	...
-      {
-          0x0D, // 1st byte of the package
-          0x04  // 2nd byte, should be 0x00
-      })
+	{
+		...
+		{
+			0x0D, // 1st byte of the package
+			0x04 // 2nd byte, should be 0x00
+    	})
 	```
 5. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
