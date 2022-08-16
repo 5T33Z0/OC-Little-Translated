@@ -25,20 +25,16 @@ Previously, a lot of binary name changes were required to fix this isssue, which
   - `ADR` Address: `0x00140000`, Part Name: `XHC`, `XHCI`, `XHC1`, etc.
   - `ADR` address: `0x00140001`, part name: `XDCI`.
   - `ADR` address: `0x00140003`, part name: `CNVW`.
-
 - **Ethernet**
-
   - Before Gen 6, `ADR` address: `0x00190000`, part name: `GLAN`, `IGBE`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0006`, part name: `GLAN`, `IGBE`, etc.
-
 - **Sound Card**
-
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, `HDEF`, etc.
 
 **NOTES**: 
 
-- Looking up the names of devices in the DSDT is not a reliable approach. Search by `ADR address` or `_PRW` instead.  
+- Looking up the names of devices in the DSDT is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
 - Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
@@ -52,17 +48,20 @@ Your `DSDT` may contain code like this:
         ...
     })
 ```
-For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`: if either `GPRW` or `UPRW` are present, use `SSDT-XPRW`, if only `_PRW` is present, use `SSDT-PRW0`.
+For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`:
 
-### Refined method using `SSDT-XPRW.aml`
-This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This fix requires method `GPRW` or `UPRW` to be present in your `DSDT`.
+-  if either `GPRW` or `UPRW` is present, follow **Method 1**, 
+-  if only `_PRW` is present, use `SSDT-PRW0`, follow **Method 2**.
 
-1. In your DSDT, searh for `GPRW` and `UPRW`. If either one of these methods is present, continue with the guide. If not, follow the guide for using `SSDT-PRW0` instead.
+### Method 1: using `SSDT-XPRW.aml`
+This approach minimzes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
+
+1. In your DSDT, searh for `GPRW` and `UPRW`. If either one of these methods is present, continue with the guide. If not, use Method 2.
 2. Open your `config.plist`
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
-	- `GPRW to XPRW` or (see SSDT-XPRW.dsl for details)
-	- `UPRW to XPRW` (see SSDT-XPRW.dsl for details)
-	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
+	- Rename `GPRW to XPRW` or 
+	- Rename `UPRW to XPRW` (see [**`SSDT-XPRW.dsl`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for instructions).
+	- :bulb: You may want to limit its reach by specifiying a CPI path under `base`, like `_SB_.PCI0` for example.
 3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
@@ -85,7 +84,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 - If it doesn't work, it will wake immedieately after entering sleep.
 - In this case, try the "old method" explained below.
 
-### New method using `SSDT-PRW0.aml` (no GPRW/UPRW)
+### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
 In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this (no additional binary rename required):
 
 ```asl
