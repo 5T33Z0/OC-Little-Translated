@@ -21,5 +21,5 @@ Nowadays, this approach feels pretty outdated since you simply can create a mobi
 - Once in the system again, open **Networks** in **System Preferences** again.
 - Add **Ethernet** and the other required networks in order, and click **Apply**.
 
-## Credits
-RehabMan for [NullEthernet.kext](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/README.md)
+## CREDIT
+**RehabMan** for [**NullEthernet.kext**](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/README.md)

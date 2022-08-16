@@ -3,9 +3,10 @@ Adds Platform Controller Hub (PCH) to IORegistry as `XSPI`. Research showed that
 
 Applicable to **SMBIOS**:
 
-- macBookPro15,x (9th Gen Intel Core), macBookPro16,x (9th Gen)
-- macBookAir9,x (10th Gen)
-- iMac20,x (10th Gen)
+- **macBookPro15,x** (9th Gen Intel Core)
+- **macBookPro16,x** (9th Gen)
+- **macBookAir9,x** (10th Gen)
+- **iMac20,x** (10th Gen)
 
 ## Checking if you need `SSDT-XSPI` 
 If your system has an existing PCH SPI Controller, it will be listed in Hackintool:

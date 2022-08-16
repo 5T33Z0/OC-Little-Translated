@@ -1,5 +1,5 @@
 # Fake Firmware Hub Device (`SSDT-FWHD`) 
-Adds `FWHD` device to the IO Registry in macOS – nothing more. My research of DSDT and .ioreg files showed that the Intel Firmware Hub Device is present in almost every Intel-based Mac model. It is listed in IORegistryExplorer as "FWHD" with the HID `INT0800`.
+Adds a virtual `FWHD` device to the IO Registry in macOS – nothing more. My research of DSDT and .ioreg files showed that the Intel Firmware Hub Device is present in almost every Intel-based Mac. It is listed in **IORegistryExplorer** as "**FWHD**" with the HID `INT0800`.
 
 Mac Models containing `FWHD`:
 
@@ -18,6 +18,6 @@ Mac Models containing `FWHD`:
 - Open IORegistryExplorer and search for `FWHD`
 - If the Device is present, it should look like this:</br></br>![fwhd](https://user-images.githubusercontent.com/76865553/152636354-76767c7b-5517-47da-a85d-5c9f35211488.png)
   
-## Notes and Credits
+## NOTES and CREDITS
 - When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
-- Thanks to Baio1977 for providing the SSDT
+- Thanks to Baio1977 for **SSDT-FWHD**

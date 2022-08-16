@@ -4,17 +4,17 @@
 
 To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding `SSDT-PNLF` to work.
 
-1. Common injection method:
+1. **Common injection method**:
 
 	- **Kext**: WhateverGreen.kext
 	- **Patch**: Custom brightness patch or RehabMan brightness patch
 
-2. ACPI injection method:
+2. **ACPI injection method**:
 
 	- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
 	- **Patch**: See "ACPI Brightness Patch" method
 
-3. Other methods: Follow the kext + patch principle and try for yourself.
+3. **Other methods:** Follow the kext + patch principle and try for yourself.
 
 **NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
 
@@ -56,7 +56,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 	Replace: 584E4C46
 	```
 
-## Caution
+## :warning: CAUTION
 - When choosing a certain injection method, you should clear the driver, patch, and settings related to other methods.
 - When using custom brightness patches, make sure that the `PNLF` device is injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect `Windows` boot. 
 - You can also use the SSDT-PNLF variants included in [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch).
