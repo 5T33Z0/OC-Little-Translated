@@ -114,7 +114,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 	{
 		...
 		{
-			0x0D, // 1st byte of the package
+			0x0D, // (or 0x6D), 1st byte of the package
 			0x04 // 2nd byte, should be 0x00
     	})
 	```
