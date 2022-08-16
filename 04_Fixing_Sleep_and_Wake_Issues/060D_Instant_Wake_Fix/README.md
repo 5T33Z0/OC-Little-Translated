@@ -39,7 +39,7 @@ Previously, a lot of binary name changes were required to fix this isssue, which
 **NOTES**: 
 
 - Looking up the names of devices in the DSDT is not a reliable approach. Search by `ADR address` or `_PRW` instead.  
-- Newly released machines may have new parts that require `0D/6D patch`.
+- Newly released machines may contain additional/differnet devices which may equire a `0D/6D fix`.
 
 ## Diversity of `_PRW` and the corresponding patch method
 Your `DSDT` may contain code like this:
