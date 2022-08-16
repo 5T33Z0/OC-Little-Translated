@@ -58,10 +58,10 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This fix requires method `GPRW` or `UPRW` to be present in your `DSDT`.
 
 1. Open your `config.plist`
-2. Add a binary rename to `ACPI/Patch`, depending on the method used in your `DSDT` (see [SSDT-XPRW.dsl](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for details): 
+2. Add a binary rename to `ACPI/Patch`, depending on the method used in your `DSDT` (see [SSDT-XPRW.dsl](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for intructions): 
 	- `GPRW to XPRW` or
-	- `UPRW to XPRW` (see SSDT-XPRW.dsl for details)
-	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
+	- `UPRW to XPRW`
+	- :bulb: You may want to limit the reach of the `XPRW` rename by specifiying a PCI under `base` depending on the location of the device(s). In my case, I limit it to `_SB_.PCI0`.
 3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
