@@ -14,7 +14,9 @@ Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedi
 ### 1. Check if you need this Fix
 Run Terminal and enter:
 
-`kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"`
+```shell
+kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
+```
 
 If the Terminal output contains the following 2 drivers, your SMBus is working correctly:
 
@@ -40,7 +42,9 @@ Depending on the results of your search, add the corresponding SSDT to your ACPI
 
 Run the GREP command again:
 
-`kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"` 
+```shell
+kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
+```
 
 If the Terminal output contains the following 2 drivers, your SMBus is working correctly:
 
