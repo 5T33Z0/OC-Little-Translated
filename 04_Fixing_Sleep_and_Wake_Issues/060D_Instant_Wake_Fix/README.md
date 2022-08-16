@@ -84,7 +84,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this (no additional binary rename required):
 
 ```asl
-// SSDT to set Arg1 (the 2nd byte of the packet) in _PRW method to 0
+// SSDT to set Package 1 (the 2nd byte of the packet) in _PRW method to 0 
 // as required by macOS to not wake instantly.
 // You need to reference all devices where _PRW needs to be modified.
 
@@ -103,8 +103,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
             _SB_.PCI0.EHC2._PRW [One] = 0x00
             _SB_.PCI0.HDEF._PRW [One] = 0x00
             ...
-        }
-       
+        }    
 }
 ```
 1. In your DSDT, search for `_PRW`
