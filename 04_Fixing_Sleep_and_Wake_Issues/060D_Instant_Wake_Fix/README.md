@@ -214,5 +214,6 @@ There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/mo
 ### Changing `_PRW` to specific return values
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
 
-## Resources
+## Notes and Resources
+- You could apply Method 2 for fixing DSDTs using `GPRE`/`UPRW` as well. In this case you wouldn't need the `XPRW` rename. Since I can't test this on your own.
 - `_PWR` (PowerResource for Wake) [Specifications](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/device-power-management-objects.html#prw-power-resources-for-wake)
