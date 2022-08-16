@@ -1,6 +1,6 @@
 # 0D/6D Instant Wake Fix
 ## Description
-There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve this instant wake issue.
+There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
 ### Technical Background
 The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each of these events has its own number assigend to it and can can be triggered by differend methods, such as `_PRW` (Power Resource for Wake). 
@@ -39,7 +39,7 @@ Previously, a lot of binary name changes were required to fix this isssue, which
 **NOTES**: 
 
 - Looking up the names of devices in the DSDT is not a reliable approach. Search by `ADR address` or `_PRW` instead.  
-- Newly released machines may contain additional/differnet devices which may equire a `0D/6D fix`.
+- Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
 Your `DSDT` may contain code like this:
@@ -57,11 +57,12 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 ### Refined method using `SSDT-XPRW.aml`
 This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This fix requires method `GPRW` or `UPRW` to be present in your `DSDT`.
 
-1. Open your `config.plist`
-2. Add a binary rename to `ACPI/Patch`, depending on the method used in your `DSDT` (see [SSDT-XPRW.dsl](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for intructions): 
-	- `GPRW to XPRW` or
-	- `UPRW to XPRW`
-	- :bulb: You may want to limit the reach of the `XPRW` rename by specifiying a PCI under `base` depending on the location of the device(s). In my case, I limit it to `_SB_.PCI0`.
+1. In your DSDT, searh for `GPRW` and `UPRW`. If either one of these methods is present, continue with the guide. If not, follow the guide for using `SSDT-PRW0` instead.
+2. Open your `config.plist`
+2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
+	- `GPRW to XPRW` or (see SSDT-XPRW.dsl for details)
+	- `UPRW to XPRW` (see SSDT-XPRW.dsl for details)
+	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
 3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
@@ -95,16 +96,16 @@ In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modif
 DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 {
 
-    External (_SB_.PCI0.EHC1._PRW, PkgObj) // External References to Devices and their _PRW method, where the 
-    External (_SB_.PCI0.EHC2._PRW, PkgObj) // first byte is either 0x0D or 0x6D but the 2nd byt is not 0.
-    External (_SB_.PCI0.HDEF._PRW, PkgObj) // Add or modify References as needed.
+    External (_SB_.PCI0.EHC1._PRW, PkgObj) // External Reference of Device and its _PRW method
+    External (_SB_.PCI0.EHC2._PRW, PkgObj) // These References are only examples. Modify them as needed
+    External (_SB_.PCI0.HDEF._PRW, PkgObj) // List every device where the 2nd byte of _PRW is not 0
     ...
     
  If (_OSI ("Darwin"))
 
         {
-            _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in for `0x0D` or 0x6D in the package to 0
-            _SB_.PCI0.EHC2._PRW [One] = 0x00 // Add/ Modify entries corresponding to the External References.
+            _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in the package to 0
+            _SB_.PCI0.EHC2._PRW [One] = 0x00
             _SB_.PCI0.HDEF._PRW [One] = 0x00
             ...
         }    
@@ -206,7 +207,7 @@ Find out what's causing the wake by entering this in terminal:
 
 If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I doubt it'll work on Laptops but you could try.
 
-### Removing the `_PRW` method from DSDT completely (not recommended)
+### Removing the `_PRW` method from DSDT completely
 The following approaches require using a patched DSDT which we are trying to avoid when using OpenCore, so they are not recommended. I also don't know if this causes negative side effects in other Operating System.
 
 There have been [reports](https://www.reddit.com/r/hackintosh/comments/7hl68w/modified_dsdt_cleared_out_all_pwr_entries_sleep/) that removing the `_PRW` method from the `DSDT`completely solves this issue.
