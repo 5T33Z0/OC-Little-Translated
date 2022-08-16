@@ -1,17 +1,21 @@
 # 0D/6D Instant Wake Fix
-
 ## Description
-There are some components (like USB, LAN, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep. This fix resolves this issue.
+There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each even has it's own number. Although these are not standardized, `0x6D` is often used as an event in devices like Ethernet cards, USB Controllers or Soundcards. 
+The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each of these events has its own number assigend to it and can can be triggered by differend methods, such as `_PRW` (Power Resource for Wake). 
 
-Some devices contain the method `_PRW` (Power Resource for Wake) which defines their wake method by using packages which return 2 power resource values if the corresponding `_GPE` is triggered. The `Return` value of `_PRW` is a packet consisting of 2 or more bytes:
+Used in Devices, the `_PRW` method describes their wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. This `Return` package consists of 2 bytes (or Package Objects):
 
-- The 1st byte of the `_PRW` packet is either `0x0D` or `0x6D`. Therefore, such patches are called `0D/6D Patches`.
-- The 2nd byte of `_PRW` packet is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake. And that's what this patch does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
+- The 1st byte of the `_PRW` package is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
+- The 2nd byte of `_PRW` package is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake immediately.
+
+And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
+
+### Refined fix
+Previously, a lot of binary name changes were required to fix this isssue, which could cause issues with other Operating Systems. Since then, the fis has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` "switch" has been implementd as well, so the changes only apply to macOS.
 
 ### Devices that may require a `0D/6D Patch`
 
@@ -128,6 +132,9 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 - If it doesn't work, it will wake immedieately after entering sleep.
 - In this case, try the "old method" explained below.
 
+<details>
+<summary><strong>Old method</strong> (Click to reveal)</summary>
+
 ### Old Method using binary renames (no longer required)
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
 
@@ -188,8 +195,9 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
   For most ThinkPad machines, there are both `Name type` and `Method type` parts involved in `0D/6D patches`. Just use the patch of each type. **It is important to note** that binary renaming patches should not be abused, some parts `_PRW` that do not require `0D/6D patches` may also be `0D` or `6D`. To prevent such errors, the `System DSDT` file should be extracted to verify and validate.
 
 **Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analyzed before applying it.
+</details>
 
-## Other approaches
+## Alternative approaches
 
 ### Using `USBWakeFixup.kext`
 Find out what's causing the wake by entering this in terminal:
