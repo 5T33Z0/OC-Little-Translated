@@ -81,7 +81,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 - In this case, try the "old method" explained below.
 
 ### New method using `SSDT-PRW0.aml` (no GPRW/UPRW)
-In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this:
+In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this (no additional binary rename required):
 
 ```asl
 // SSDT to set Arg1 (the 2nd byte of the packet) in _PRW method to 0
