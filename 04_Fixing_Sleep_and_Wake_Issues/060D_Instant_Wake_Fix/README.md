@@ -3,19 +3,19 @@
 There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each of these events has its own number assigend to it and can can be triggered by differend methods, such as `_PRW` (Power Resource for Wake). 
+The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each of these events has its own number assigned to it and can can be triggered by different methods, such as `_PRW` (Power Resource for Wake). 
 
 Used in Devices, the `_PRW` method describes their wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. This `Return` package consists of 2 bytes (or Package Objects):
 
 - The 1st byte of the `_PRW` package is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
-- The 2nd byte of `_PRW` package is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake immediately.
+- The 2nd byte of the `_PRW` package is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake immediately.
 
 And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
 
 ### Refined fix
-Previously, a lot of binary name changes were required to fix this isssue, which could cause issues with other Operating Systems. Since then, the fis has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` "switch" has been implementd as well, so the changes only apply to macOS.
+Previously, a lot of binary name changes were required to fix this issue, which could cause issues with other Operating Systems. Since then, the fis has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` "switch" has been implementd as well, so the changes only apply to macOS.
 
 ### Devices that may require a `0D/6D Patch`
 
@@ -61,7 +61,7 @@ This approach minimzes the amount of necessary binary renames to one to correct 
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
 	- Rename `GPRW to XPRW` or 
 	- Rename `UPRW to XPRW` (see [**`SSDT-XPRW.dsl`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for instructions).
-	- :bulb: You may want to limit its reach by specifiying a CPI path under `base`, like `_SB_.PCI0` for example.
+	- :bulb: You may want to limit its reach by specifying a CPI path under `base`, like `_SB_.PCI0` for example.
 3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
@@ -77,11 +77,11 @@ This approach minimzes the amount of necessary binary renames to one to correct 
 5. Export the file as `SSDT-XPRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
 
-#### Testing and veryfing
+#### Testing and verifying
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
 - Wait until the machine tries to enter sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
-- If it doesn't work, it will wake immedieately after entering sleep.
+- If it doesn't work, it will wake immediately after entering sleep.
 - In this case, try the "old method" explained below.
 
 ### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
@@ -125,11 +125,11 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 5. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
 
-#### Testing and veryfing
+#### Testing and verifying
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
 - Wait until the machine tries to enter sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
-- If it doesn't work, it will wake immedieately after entering sleep.
+- If it doesn't work, it will wake immediately after entering sleep.
 - In this case, try the "old method" explained below.
 
 <details>
