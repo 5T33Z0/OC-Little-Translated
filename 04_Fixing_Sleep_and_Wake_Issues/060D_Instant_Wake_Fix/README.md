@@ -95,16 +95,16 @@ In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modif
 DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 {
 
-    External (_SB_.PCI0.EHC1._PRW, PkgObj) // External Reference of Device and its _PRW method
-    External (_SB_.PCI0.EHC2._PRW, PkgObj) // These References are only examples. Modify them as needed
-    External (_SB_.PCI0.HDEF._PRW, PkgObj) // List every device where the 2nd byte of _PRW is not 0
+    External (_SB_.PCI0.EHC1._PRW, PkgObj) // External References to Devices and their _PRW method, where the 
+    External (_SB_.PCI0.EHC2._PRW, PkgObj) // first byte is either 0x0D or 0x6D but the 2nd byt is not 0.
+    External (_SB_.PCI0.HDEF._PRW, PkgObj) // Add or modify References as needed.
     ...
     
  If (_OSI ("Darwin"))
 
         {
-            _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in the package to 0
-            _SB_.PCI0.EHC2._PRW [One] = 0x00
+            _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in for `0x0D` or 0x6D in the package to 0
+            _SB_.PCI0.EHC2._PRW [One] = 0x00 // Add/ Modify entries corresponding to the External References.
             _SB_.PCI0.HDEF._PRW [One] = 0x00
             ...
         }    
