@@ -48,11 +48,10 @@ Your `DSDT` may contain code like this:
         ...
     })
 ```
+For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`: if either `GPRW` or `UPRW` are present, use `SSDT-XPRW`, if only `_PRW` is present, use `SSDT-PRW0`.
 
-For these packets, the 2nd byte needs to retur `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` to do so.
-
-### New/refined method using `SSDT-XPRW.aml`
-This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This requires method `GPRW` or `UPRW` to be present in your `DSDT`. If it is not used, then you cannot use this method.
+### Refined method using `SSDT-XPRW.aml`
+This approach tries to minimze the amount of necessary binary renames, to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner. This fix requires method `GPRW` or `UPRW` to be present in your `DSDT`.
 
 1. Open your `config.plist`
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
@@ -73,36 +72,66 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 	```	
 5. Export the file as `SSDT-XPRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
-7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
-### New/refined method using `SSDT-PRW.aml` (no GPRW/UPRW)
-In case your `DSDT` doesn't use `GPRW` or `UPRW`, you have to modify the `_PRW`method of the affected devices directly. See the "SSDT-PRW_T530_Example.aml" I created for my Lenovo T530, which doesn't use neither of the two methods.
+#### Testing and veryfing
+- Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
+- Wait until the machine treis to enter sleep on its own. That's important to trigger the General Purpose Event.
+- If the patch works, the system will enter and stay in sleep. 
+- If it doesn't work, it will wake immedieately after entering sleep.
+- In this case, try the "old method" explained below.
 
-1. Open your `config.plist`
-2. Add a rename rule to `ACPI/Patch` and rename `_PRW` to `XPRW`:
-	```bash
-	Comment:  change _PRW to XPRW
-	Find:     5F505257
-	Replace:  58505257
-	```
-	:bulb: You may want to limit its reach by specifiying an ACPI path in the `base` field – depends on the location of the device(s). In my case,I limit it to `_SB_.PCI0`.
-3. `SSDT-PRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
-4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
+### New method using `SSDT-PRW0.aml` (no GPRW/UPRW)
+In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this:
+
+```asl
+// SSDT to set Arg1 (the 2nd byte of the packet) in _PRW method to 0
+// as required by macOS to not wake instantly.
+// You need to reference all devices where _PRW needs to be modified.
+
+DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
+{
+
+    External (_SB_.PCI0.EHC1._PRW, PkgObj) // External Reference of Device and its _PRW method
+    External (_SB_.PCI0.EHC2._PRW, PkgObj) // These References are only examples. Modify them as needed
+    External (_SB_.PCI0.HDEF._PRW, PkgObj) // List every device where the 2nd byte of _PRW is not 0
+    ...
+    
+ If (_OSI ("Darwin"))
+
+        {
+            _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in the package to 0
+            _SB_.PCI0.EHC2._PRW [One] = 0x00
+            _SB_.PCI0.HDEF._PRW [One] = 0x00
+            ...
+        }
+       
+}
+```
+
+1. In your DSDT, search for `_PRW`
+2. Look for matches for `_PRW` inside of Devices only
+3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is not `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
+
 	```asl
-	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
-	{
-    	External (_SB_.PCI0, DeviceObj)
-    	External (_SB_.PCI0.EHC1, DeviceObj)
-    	External (_SB_.PCI0.EHC2, DeviceObj)
-    	External (_SB_.PCI0.SAT1, DeviceObj)
-    	External (_SB_.PCI0.XHCI, DeviceObj)
-    	External (XPRW, MethodObj)
-	```	
-5. Export the file as `SSDT-PRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+	Device (HDEF)
+  {
+	...
+      {
+          0x0D, // 1st byte of the package
+          0x04  // 2nd byte, should be 0x00
+      })
+	```
+5. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
 6. Save and reboot.
-7. Reduce the time until the machine enters sleep in System Preferences and wait until the machine enters sleep. If the patch works, the system enters sleep without issues. If it doesn't work. In this case, try the "old method" explained below.
 
-### Old Method
+#### Testing and veryfing
+- Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
+- Wait until the machine treis to enter sleep on its own. That's important to trigger the General Purpose Event.
+- If the patch works, the system will enter and stay in sleep. 
+- If it doesn't work, it will wake immedieately after entering sleep.
+- In this case, try the "old method" explained below.
+
+### Old Method using binary renames (no longer required)
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
 
   - Name-0D rename .plist
