@@ -75,7 +75,7 @@ This approach tries to minimze the amount of necessary binary renames, to correc
 
 #### Testing and veryfing
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
-- Wait until the machine treis to enter sleep on its own. That's important to trigger the General Purpose Event.
+- Wait until the machine tries to enter sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
 - If it doesn't work, it will wake immedieately after entering sleep.
 - In this case, try the "old method" explained below.
@@ -123,7 +123,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 
 #### Testing and veryfing
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
-- Wait until the machine treis to enter sleep on its own. That's important to trigger the General Purpose Event.
+- Wait until the machine tries to enter sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
 - If it doesn't work, it will wake immedieately after entering sleep.
 - In this case, try the "old method" explained below.
