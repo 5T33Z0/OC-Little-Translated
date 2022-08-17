@@ -28,7 +28,8 @@ ASPM (**Active State Power Management**), is a power link management scheme supp
 
 Terminal commanfs for changing settings related to system power management, such as  sleep/hibernation.
 
-## Notes
+## NOTES
 - Before applying any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package but rather modify them to fit your system requirements or generate custom ones using [SSDTTime](https://github.com/corpnewt/SSDTTime) instead. Doing this can prevent the occurrence of sleep and wake issues altogether. 
 - Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.
+- Acidanthera also provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup).
