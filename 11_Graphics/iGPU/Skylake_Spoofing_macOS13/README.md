@@ -10,7 +10,7 @@ Do the following to enabled Intel HD 530 on-board graphics in macOS 13:
 - Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
-- Add or modify the following Keys ([Plist Entry](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Plists/OC_SKL2KBL_Ventura.plist)):
+- Add or modify the following Keys ([Plist Entry](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13/OC_SKL2KBL_Ventura.plist)):
 	|Key Name                |Value     | Type
 	-------------------------|----------|:----:
 	AAPL,ig-platform-id      | 00001259 | Data
