@@ -59,8 +59,11 @@ Hopefully this will resolve the issue!
  
 **NOTE**: If you added additional resolutions, you need to install either the display override in `/System/Library/Displays/Overrides` or install `DisplayMergeNub.kext` in `/System/Library/Extensions`.
 
+## Alternatives
+If the above method doesn't work, you could try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
+
 ## Credits
-- Acidanthera for OpenCore and Whatevergreen
+- Acidanthera for OpenCore, Whatevergreen and HibernationFixup
 - Blackosx for DarwinDumper
 - andyvand for FixEDID
 - Daliansky for [original guide](https://blog-daliansky-net.translate.goog/Use-HIDPI-to-solve-sleep-wake-up-black-screen,-Huaping-and-connect-the-external-monitor-the-correct-posture.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
