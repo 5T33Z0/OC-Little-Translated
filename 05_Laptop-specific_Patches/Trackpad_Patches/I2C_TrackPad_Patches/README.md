@@ -7,7 +7,7 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 - [**Official VoodooI2C Documentation**](https://voodooi2c.github.io/)
 - [**TouchPad-Hotfix Example Library**](https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch) by GZXiaoBai
 - [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
-- [**VoodooI2C Support on Gitter**](https://gitter.im/alexandred/VoodooI2C)
+- [**VoodooI2C Support on Gitter**](https://gitter.im/alexandred/VoodooI2C) – Ask the  VoodooI2C dev for support directly
 
 ## Patching principle
 
