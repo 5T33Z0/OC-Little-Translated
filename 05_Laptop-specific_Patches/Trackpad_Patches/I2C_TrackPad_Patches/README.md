@@ -4,22 +4,19 @@
 
 This method provides a solution for implementing Hotpatch patches to I2C devices. This method does not cover the specific process and details of I2C patching. For more details on I2C, check:
 
-- [VoodooI2C official documentation](https://voodooi2c.github.io/)
-- GZXiaoBai's [TouchPad-Hotfix Example Library](https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch)
-- [VoodooI2C Official Forum Post](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
+- [**Official VoodooI2C Documentation**](https://voodooi2c.github.io/)
+- [**TouchPad-Hotfix Example Library**](https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch) by GZXiaoBai
+- [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
+- [**VoodooI2C Support on Gitter**](https://gitter.im/alexandred/VoodooI2C)
 
-## New kexts for I2C Synaptic and ELAN Touchpads
-If your touchpad is controlled via SMBus you could try one of these kexts:
+## Patching principle
 
-- [**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI): Synaptic Trackpad driver over SMBus/I2C for macOS 
-- [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
-- [**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan): ELAN Touchpad/Trackpoint driver for macOS over SMBus 
-- [**VoodooTrackpoint**](https://github.com/VoodooSMBus/VoodooTrackpoint):  Generic Trackpoint/Pointer device handler kext for macOS  
-
-
-## Patch principle and process
-
-- Disable the original I2C device. Check "Binary renaming and preset variables" for details.
+### 1. Enable GPI0
+> **SAMPLEs**: `SSDT-GPI0_GPEN` and `SSDT-GPI0_GPHD`
+  
+- If GPI0 is to be enabled, its `_STA` must be `Return (0x0F)`.
+- Make sure that `GPEN` or `GPHD` exists in `_STA` of `GPI0` device.
+- Disable the original I2C device. Check "Binary renaming and preset variables" for details:
 	```asl
 	/*
 	* GPI0 enable
@@ -38,6 +35,9 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
       }
   }
 	```
+
+### 2. Create a new I2C Device
+
 - Create a new I2C device `TPXX` and migrate all the contents of the original device to `TPXX`.
 - Fix `TPXX` related content.
 - Replace the original I2C device `name` by `TPXX` (all ocurrances).
@@ -57,7 +57,9 @@ If your touchpad is controlled via SMBus you could try one of these kexts:
 	```
 - Continue adding the required I2C patch for your device
 
-### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
+## Example: Dell Latitude 5480
+> Device path: `\_SB.PCI0.I2C1.TPD1`
+
 - Disable ``TPD1`` using the Preset Variable Method.
 	```asl
   Scope (\)
@@ -155,7 +157,8 @@ If (USTP)
       }
   }
 ```
-To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI > Patch`, add the following rename rule:
+To make the Hotpatch work, disable the original by renaming it from `USTP` to `XSTP`. In `ACPI/Patch`, add the following rename rule:
+
 ```text
 Comment: Change USTP to XSTP
 Find: 5553545008
@@ -168,3 +171,11 @@ Replace: 5853545008
 - When no matches are found add `SSDT-I2C_SPED` 
 
 **NOTE**: Make sure the PCI path used in the SSDT matches the one used in the DSDT to make the whol construct work.
+
+## New kexts for I2C Synaptic and ELAN Touchpads
+If your touchpad is controlled via SMBus you could try one of these kexts:
+
+- [**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI): Synaptic Trackpad driver over SMBus/I2C for macOS 
+- [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
+- [**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan): ELAN Touchpad/Trackpoint driver for macOS over SMBus 
+- [**VoodooTrackpoint**](https://github.com/VoodooSMBus/VoodooTrackpoint):  Generic Trackpoint/Pointer device handler kext for macOS  
