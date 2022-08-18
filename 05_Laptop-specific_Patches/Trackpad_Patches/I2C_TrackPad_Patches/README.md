@@ -15,27 +15,24 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 > **SAMPLEs**: `SSDT-GPI0_GPEN` and `SSDT-GPI0_GPHD`
   
 - If GPI0 is to be enabled, its `_STA` must be `Return (0x0F)`.
-- Make sure that `GPEN` or `GPHD` exists in `_STA` of `GPI0` device.
-- Disable the original I2C device. Check "Binary renaming and preset variables" for details:
+- Make sure that `GPEN` or `GPHD` exists in `_STA` of `GPI0` device (check "Binary renaming and preset variables" for details)
+- Disable the original I2C device:
 	```asl
-	/*
-	* GPI0 enable
-	*/
-  DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
-  {
-      External(GPEN, FieldUnitObj)
-      // External(GPHD, FieldUnitObj)
-      Scope (\)
-      {
-          If (_OSI ("Darwin"))
-          {
-              GPEN = 1
-              // GPHD = 2
-          }
-      }
-  }
+	DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
+	{
+		External(GPEN, FieldUnitObj)
+		//External(GPHD, FieldUnitObj)
+		
+		Scope (\)
+    	{
+			If (_OSI ("Darwin"))
+			{
+				GPEN = 1
+				//GPHD = 2
+			}
+		}
+	}
 	```
-
 ### 2. Create a new I2C Device
 
 - Create a new I2C device `TPXX` and migrate all the contents of the original device to `TPXX`.
