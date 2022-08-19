@@ -45,9 +45,9 @@ Some Touchpads support both protocols (mostly by Synaptics). In this case, you s
 	- **VoodooPS2Mouse** &rarr; for Mouse Buttons
 	- **VoodooPS2Trackpad** &rarr; for PS/2 Trackpads
 
-- **Additional Satellite kexts**: some of these are replacements for the plugin kexts included in VoodooPS2Controller, so you may need to deactivate the corresponding plugin for it to work. Read the instructions provided by the kext developer for details.
-	
-	|Device/Protocol|Kext|Notes|
+Depending on the Touchpad model (vendor and used protocol), there are additional kexts avaialable. Some of them are replacements for existing plugin kexts included in VoodooPS2Controller, so you may need to deactivate the corresponding plugin for it to work. Read the instructions provided by the kext developer for details.
+
+|Device/Protocol|Kext|Notes|
 |---------------|------|-----|
 Synaptics (via SMBUS)|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|A port for macOS of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID trackpads from Synaptic as well as Synaptic's SMBus trackpads. Read the [**instructions**](https://github.com/VoodooSMBus/VoodooRMI#installation) to configure it correctly.
  i801 SMBus|[**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus)|Check description on github.
@@ -129,7 +129,7 @@ Term    | Description
 The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. My guide basically follows this workflow. It might help to not get lost.
 
 ```mermaid
-graph TD
+graph LR
     A[Touchpad] ---> B{"Control</br> Method?"}
     B -->|IF| C(("I2C Protocol</br>(Haswell+)"))
     B -->|IF| G(("PS/2 Protocol</br>(≤ Ivy Bridge)"))
@@ -152,15 +152,15 @@ graph TD
 - In the "**General**" Tab, check the "**Location**". It contains the Device-ID of the I2C Controller (in this case `A339`):</br>![](https://raw.githubusercontent.com/ettingshausen/VoodooI2C-PreRelease/master/IMG/a369.png)
 - Check the chart below to find out if the Device-ID is supported. Ignore the `pci8086` part – only the 3 or 4 digits after the comma are relevant! ([**Source**](https://github.com/VoodooI2C/VoodooI2C/blob/master/Documentation/Installation.md#system-requirements)):
 	CPU Family | Supported Controller(s).
-:---------:|----------------------
-**Haswell** |`INT33C2` and `INT33C3`
-**Broadwell** |`INT3432` and `INT3433`
-**Skylake** | `pci8086,9d60`, `pci8086,9d61`, `pci8086,9d62`, `pci8086,9d63`
-**Kaby Lake** |`pci8086,a160`, `pci8086,a161`, `pci8086,a162`, `pci8086,a163` 
-**Cannon Lake Whiskey Lake**| `pci8086,9de8`, `pci8086,9de9`, `pci8086,9dea`, `pci8086,9deb`
-**Coffee Lake** | `pci8086,a368`, **`pci8086,a369`**, `pci8086,a36a`, `pci8086,a36b`
-**Comet Lake** | `pci8086,2e8`, `pci8086,2e9`, `pci8086,2ea`, `pci8086,2eb`, `pci8086,6e8`, `pci8086,6e9`, `pci8086,6ea`, `pci8086,6eb`
-**Ice Lake** | `pci8086,34e8`, `pci8086,34e9`, `pci8086,34ea`, `pci8086,34eb`
+	:---------:|----------------------
+	**Haswell** |`INT33C2` and `INT33C3`
+	**Broadwell** |`INT3432` and `INT3433`
+	**Skylake** | `pci8086,9d60`, `pci8086,9d61`, `pci8086,9d62`, `pci8086,9d63`
+	**Kaby Lake** |`pci8086,a160`, `pci8086,a161`, `pci8086,a162`, `pci8086,a163` 
+	**Cannon Lake Whiskey Lake**| `pci8086,9de8`, `pci8086,9de9`, `pci8086,9dea`, `pci8086,9deb`
+	**Coffee Lake** | `pci8086,a368`, **`pci8086,a369`**, `pci8086,a36a`, `pci8086,a36b`
+	**Comet Lake** | `pci8086,2e8`, `pci8086,2e9`, `pci8086,2ea`, `pci8086,2eb`, `pci8086,6e8`, `pci8086,6e9`, `pci8086,6ea`, `pci8086,6eb`
+	**Ice Lake** | `pci8086,34e8`, `pci8086,34e9`, `pci8086,34ea`, `pci8086,34eb`
 - As you can see, `a369` is supported.
 - Continue with Step 2.
 
@@ -182,7 +182,7 @@ graph TD
 ### 3. Finding the operating mode of the I2C Controller (macOS)
 - Boot into macOS
 - Run **IORegistryExploer**
-- Search for `IOInterruptSpecifiers`:</br>![](/Users/steezonics/Desktop/Ioreg01.png)
+- Search for `IOInterruptSpecifiers`:</br>![Ioreg01](https://user-images.githubusercontent.com/76865553/185639493-f9705634-9cb2-42f0-9031-d463533fca47.png)
 	- If its value is less or equal  `2F` (≤47), then you're blessed because the Touchpad supports **APIC Interrupt** mode: install VoodooI2C.kext (and additional plugin kexts, as needed) and you'r done.
 	- If the value is >`2F` (>47), we need to redirect the APIC Interrupt to a GPIO Interrupt to use GPIO Mode Instead. This technique is called GPIO Pinning.
 
