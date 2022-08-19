@@ -11,8 +11,10 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 
 ## Patching principle
 
-### 1. Enable GPI0
-> **SAMPLEs**: `SSDT-GPI0_GPEN` and `SSDT-GPI0_GPHD`
+### 1. Enable GPI0 Pin 
+
+#### Example 1
+> **Bases on SSDT Samples**: `SSDT-GPI0_GPEN` and `SSDT-GPI0_GPHD`
   
 - If GPI0 is to be enabled, its `_STA` must be `Return (0x0F)`.
 - Make sure that `GPEN` or `GPHD` exists in `_STA` of `GPI0` device (check "Binary renaming and preset variables" for details)
@@ -31,8 +33,15 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 				//GPHD = 2
 			}
 		}
-	}
-	```
+		```
+
+#### Example 2: uses a different Device in DSDT
+In `DSDT`, search for:
+
+- `SBFG`, present in a valid `GPIO` Pin
+- `CRS` return in methods `SBFB` and `SBFG`
+- &rarr; `GPIO` requires **VoodooGPIO.kext** (included in VoodooI2C as a PugIn) to enable the GPIO controller, and also requires additional SSDTs.
+
 ### 2. Create a new I2C Device
 
 - Create a new I2C device `TPXX` and migrate all the contents of the original device to `TPXX`.
@@ -169,10 +178,17 @@ Replace: 5853545008
 
 **NOTE**: Make sure the PCI path used in the SSDT matches the one used in the DSDT to make the whol construct work.
 
-## New kexts for I2C Synaptic and ELAN Touchpads
-If your touchpad is controlled via SMBus you could try one of these kexts:
+## I2C Kexts
+**Necessary base kext**: [**VoodooI2C**](https://github.com/VoodooI2C)</br>
+Depending on the Touchpad model (vendor and used protocol), you need additional [**Satellite kexts**](https://voodooi2c.github.io/#Satellite%20Kexts/Satellite%20Kexts):
 
-- [**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI): Synaptic Trackpad driver over SMBus/I2C for macOS 
-- [**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus): I2C-I801 driver port for macOS X + ELAN SMBus for Thinkpad T480s, L380, P52 
-- [**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan): ELAN Touchpad/Trackpoint driver for macOS over SMBus 
-- [**VoodooTrackpoint**](https://github.com/VoodooSMBus/VoodooTrackpoint):  Generic Trackpoint/Pointer device handler kext for macOS  
+|Device/Protocol|Kext|Notes|
+|---------------|------|-----|
+|HID over I2C |**VoodooI2CHID**</br>(included in VoodooI2C)|Implements support for I2C HID using Microsoft's HID over I2C protocol. Can be used with I2C/USB Touchscreens and Touchpads. Requires IC2 HID with property `PNP0C50` (check ACPI device ID in IORegistryExplorer). For I2C HID that have their own propriety protocol (Atmel, Synaptics, ELAN, FTE), a different Satellite kext may produce better results.
+|Atmel Multitouch Protocol|**VoodooI2CAtmelMXT**</br>(included in VoodooI2C)|Implements support for the propriety Atmel Multitouch Protocol.|
+|ELAN Proprietary|**VoodooI2CElan**</br>(included in VoodooI2C)|Implements support for the Elan protocol for Elan trackpads and touchscreens. Your Elan device may have better support with this kext than with VoodooI2CHID. :warning: some Elan devices (such as ELAN1200+) use a newer protocol which is proprietary. As such, those devices will not work with **VoodooI2CElan**, so you have to use  **VoodooI2CHID** instead. Some ELAN Touchpads require polling to work. Force-enable by adding `force-polling` to the DeviceProperties of the Touchpad or using boot-arg `-vi2c-force-polling`.|
+|FTE1001 Touchpad|**VoodooI2CFTE**</br>(included in VoodooI2C)|Implements support for the propriety FTE protocol found on the FTE1001 trackpad. Your FTE device may have better support with this kext than with **VoodooI2CHID**.|
+|Synaptics HID |**VoodooI2CSynaptics**</br>(included in VoodooI2C)|Implements support for the propriety Synaptics protocol found on many Synaptics trackpads and touchscreens. Your Synaptics device may have better support with this kext than with **VoodooI2CHID**. :warning: Newer Synaptics devices (such as some of those found on Dell laptops and branded with a Dell ID) use the **F12** protocol which this kext does not yet support. As such, those devices will not work with VoodooI2CSynaptics but may work with **VoodooI2CHID**.
+|**Third Party:**|
+|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from Synaptic as well as Synaptic's SMBus trackpads. Requires VoodooI2C **ONLY** if the I2C protocol is used instead of the SMBUS.|
+|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops|</br>
