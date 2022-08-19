@@ -7,6 +7,7 @@ Vendor | Notebook Model
 -------|------
 Acer   | SW512
 Acer   | TMX40-51 M 50Y5
+Acer   | Swift 3
 ||
 ASUS | I330FA-ADO-13FA
 ASUS | X51GT
