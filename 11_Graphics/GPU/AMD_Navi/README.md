@@ -1,6 +1,6 @@
 # Enabling AMD Navi GPUs in macOS
 
-This SSDT enables Navi Cards (RX 5000/6000 series) in macOS. It renames `PEGP` to `EGP0` so the GPU is recognized and adds an HDMI audio device (`HDAU`).
+This SSDT enables (Big) Navi Cards (RX 5000/6000 series) in macOS. It renames `PEGP` to `EGP0` so the GPU is recognized and adds an HDMI audio device (`HDAU`).
 
 1. Add `SSDT-NAVI.aml`
 2. Add the following Kexts to `EFI/OC/Kexts` and config.plist:
