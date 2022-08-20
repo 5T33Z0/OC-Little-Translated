@@ -1,6 +1,7 @@
 # SSDT Patching Guidelines and Examples
 > WORK IN PROGRESS…
 
+## Dos and Don'ts
 - **Avoid Binary Renames!** Although the binary rename method is especially effective on systems running macOS only, these patches should be used with **caution**. On multi-boot systems with different Operating Systems, they can cause issues since binary renames apply system-wide when using OpenCore. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether. Or use Clover instead, since it does not inject patches into other OSes by default.
 - **Use SSDTs!** Whenever possible, use SSDTs to inject preset variables and/or (virtual) Devices since this method is very reliable and ACPI conform (if done correctly). **Recommended approach**. 
 - **Use SSDTs to rename devices!** Instead of using binary renames to rename a device, you can write a simple SSDT which makes use of **External Reference**, **Scopes** and the  **`_STA`** method to disable the original device, add it under a new name for macOS only which is much cleaner. **Example**: &rarr; [**SSDT-NAVI.aml**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Navi/README.md#ssdt-navi-content)
@@ -9,19 +10,19 @@
 
 ## Requirments
 - Dump of unmodified ACPI tables from your system, mainly the `DSDT`. 
-- An app to open, edit and export ASL files, like [**maciASL**](https://github.com/acidanthera/MaciASL) or [**Xiasl**](https://github.com/ic005k/Xiasl)
+- An IDE to open, edit and export ASL files, like [**maciASL**](https://github.com/acidanthera/MaciASL) or [**Xiasl**](https://github.com/ic005k/Xiasl)
 
 ## Structure and components of a SSDT
 
-The examples used in this section are code snippes that showcase the structure and principle of an SSDT.
+The examples used in this section are code snippets that showcase the structure and principle of an SSDT.
 
 ### 1. The `DefinitionBlock`
 The foundation of every SSDT is its `DefinitionBlock`. All ASL code must reside
 inside of DefinitionBlock declarations. ASL code found outside of any DefinitionBlock will be regarded as invalid.
 
-The `DefinitionBlock` provides information aboout itself (in brackets):
+The `DefinitionBlock` provides information about itself (in brackets):
 
-Paramater | Description|
+Parameter | Description|
 ----------|--------------
 **AMLFileName**|Name of the AML file. Can be a null string.
 **TableSignature**|Signature of the AML file (can be `DSDT` or `SSDT`). 4-character string
@@ -48,7 +49,7 @@ and is ended by:
 - **AMLFileName** `""`,
 - **TableSignature**: `"SSDT"`,
 - **ComplianceRevision**: `2` (for 64 bit OSes)
-- **OEMID** (Autor name): `"hack"` is pretty common, OC Litte tables use `"OCLT"`. I use `"5T33Z0"`. 6 characters max!
+- **OEMID** (Author name): `"hack"` is pretty common, OC Little tables use `"OCLT"`. I use `"5T33Z0"`. 6 characters max!
 - **TableID**: Usually, we name the SSDT based on the Device or Method it addresses. This is not the filename but the name the SSDT is identified as in the ACPI environment. In this example `"CpuPlug"`. 8 Characters max!
 
 ### 2. `External` References
@@ -74,7 +75,7 @@ Listed below you find commonly used external References. The most used being `De
 |  BuffFieldObj  | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`                                        |
 
 ### 3. `_OSI` (Operating System Interfaces)
-The `_OSI` method is your best friend when it comes to hackintoshing. You should use it in every SSTD! 
+The `_OSI` method is your best friend when it comes to hackintoshing. You should use it in every SSDT! 
 
 When the `_OSI` string matches the current system, it returns `1` since the `If` condition is valid. In other words: this only applies the patch defined in the SSDT if macOS is running. The string looks like this:
 
@@ -82,7 +83,7 @@ When the `_OSI` string matches the current system, it returns `1` since the `If`
 If (_OSI ("Darwin"))
 ```
 ### 4. `_STA` (Status)
-This is another very useful method for hackintoshing. Unlike binary renames, you cannot simply change or delete text from the DSDT using SSDTs. Therefere, you have to apply other strategies. And one very important one is to disable a device (or enabling another one) when using macOS (set `_STA` to `Zero`) and replace it by another device instead that you inject via the SSDT.
+This is another very useful method for hackintoshing. Unlike binary renames, you cannot simply change or delete text from the DSDT using SSDTs. Therefore, you have to apply other strategies. And one very important one is to disable a device (or enabling another one) when using macOS (set `_STA` to `Zero`) and replace it by another device instead that you inject via the SSDT.
 
 It can be use
 5 types of bit can be returned via `_STA` method:
@@ -118,7 +119,7 @@ Method (_STA, 0, NotSerialized)
 ```
 
 #### Disable in macOS
-Naturall, you can also use this the other way around:
+Naturally, you can also use this the other way around:
 ```asl
 Method (_STA, 0, NotSerialized)  // _STA: Status
 {
@@ -152,7 +153,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "AWAC", 0x00000000)
     }
 }
 ```
-What it does: in the root of the `DSDT` (indictaed by `\`) it looks for the `FieldUnitObj` called `STAS` and changes it's value to `1` if the macOS Kernel is running. We can understand it better, by looking into the `DSDT`. We find the following:
+What it does: in the root of the `DSDT` (indicated by `\`) it looks for the `FieldUnitObj` called `STAS` and changes it's value to `1` if the macOS Kernel is running. We can understand it better, by looking into the `DSDT`. We find the following:
 
 ```asl
 Device (AWAC)
@@ -192,7 +193,7 @@ Device (RTC)
 ```
 As you can see, devices `RTC` and `AWAC` are switched on or off based on the value `_STA` has: if _STA is `0`, AWAC is enabled, and RTC is disabled. If the SSDT is `0x0F`, the switch is flipped and RTC is enabled instead.  
 
-:warning: This SSDT is conditional – if it works or not depends on the content of the DSDT. If the default STA values for RTC and AWAC were the other way around in the DSDT, you wouldn't need this patch, because RTC were active. And using it in this case actually would disable the RTC and enabled AWAC instaed and woud system wouldn't boot! So always cross reference with the DSDT bedore applying patches if you are uncertain.
+:warning: This SSDT is conditional – if it works or not depends on the content of the DSDT. If the default STA values for RTC and AWAC were the other way around in the DSDT, you wouldn't need this patch, because RTC were active. And using it in this case actually would disable the RTC and enable AWAC instead and the system wouldn't boot! So always cross reference with the DSDT before applying patches if you are uncertain.
 
 ### `_CRS` (Current Resource Settings)
 `_CRS` returns a `Buffer`, it is often utilized to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.

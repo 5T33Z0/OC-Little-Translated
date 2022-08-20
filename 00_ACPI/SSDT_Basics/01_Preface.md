@@ -15,7 +15,7 @@ Unlike Windows, macOS has no hardware detection capabilities because it doesn't 
 
 Although `kexts` handle a lot of patching tasks nowadays, it may be necessary to create additional patches to enable certain features (like enabling Thunderbolt or fixing Sleep issues, etc.). The preferred method to do so is **Hotpatching**.
 
-Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted, then patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain character in the text of ACPI tables (binary renaming) and 2) replacing or adding tables to existing ACPI tables, usually SSDTs.
+Hotpatching means that ACPI tables or parts of them are manipulated on the fly, during system start. The original ACPI tables are extracted, then patched on the fly and handed over to macOS for further processing. There are two main techniques for hotpatching which are often combined: 1) replacing certain characters in the text of ACPI tables (binary renaming) and 2) adding SSDTs.
 
 In order to create Hotpatches, we need to extract – or as we say, dump – the original ACPI tables from the BIOS. Some Tools can extract a machine's ACPI Form - like `SSDTTime` in Windows or Boot Managers like `OpenCore` and `Clover`.
 
@@ -34,8 +34,8 @@ Other relevant ACPI Tables are: `APIC`, `BGRT`, `DMAR`, `ECDT`, `FACP`.
 For more details about ACPI in general, please refer to the official [**ACPI Specification**](https://uefi.org/specs/ACPI/6.4/index.html) For an introduction to the ASL language, please refer to chapter [**ACPI Source Language Reference**](https://uefi.org/specs/ACPI/6.4/19_ASL_Reference/ACPI_Source_Language_Reference.html?highlight=asl%20syntax).
 
 The following sections will help you to get a deeper understanding about ACPI, ASL and Binary Renames, so you can edit SSDT files. Click on a triangle to unfold its content.
-### Why to prefer SSDTs over a patched DSDT
 
+### Why to prefer SSDTs over a patched DSDT
 A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.
 
 These issues stem from DSDTs made with Windows support in mind on one hand and Apple not sticking to ACPI tables which conform to the ACPI specs 100 % for their hardware on the other. These issues can be addressed by dumping, patching and injecting a patched DSDT during boot, replacing the original.
@@ -48,7 +48,7 @@ Since a DSDT can change when updating the BIOS, injecting an older DSDT on top o
 
 > ACPI tables can be and are patched dynamically during firmware execution. Changing various factors, hardware and software, thus may yield a DSDT different from the one you used as your template, and thus your patched DSDT will "rollback" exactly those differences. There is no amount of "knowledge" and "language comfortability" you can gain to make this safe, this is inherently unsafe. 
 
-**Source**: [Waybackmachine](https://web.archive.org/web/20220807100310/https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/) – Actually, this post is from August 2022 and was released on insanelymac.com. But MaLd0n didn't like what he read and decided to lock the post. And after he saw that I was referencing it, he even deleted the whole thread. Unfortunatly for him, it was already archived.
+**Source**: [**Waybackmachine**](https://web.archive.org/web/20220807100310/https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/). [Actually, this post is from August 2022 and was released on insanelymac.com. But MaLd0n didn't like what he read and decided to lock the thread after he posted his helpless reply. And when he saw that I was referencing it, he deleted the whole thread. Unfortunatly for him, it was already archived…].
 
 Therefore, dynamic patching with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that’s why you should avoid patched DSDTs – especially those from MaLDon/Olarila!
 

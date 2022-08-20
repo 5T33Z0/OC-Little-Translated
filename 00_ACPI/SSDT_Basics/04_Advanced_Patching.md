@@ -1,7 +1,7 @@
 # Advanced Patching Techniques
 
 ## Really hacky Binary Rename patches
-A usual application of using binary renams is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
+A usual application of using binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
 But besides that you can also use them in a rather unconventional way to enable or disable a device by literally breaking the section in such a way that only the desired parts of it remain intact. 
 
 ### Risks
@@ -88,7 +88,7 @@ The preset variable method is used to pre-assign some variables of ACPI to `Fiel
 
 ### Risks
 
-The variable being fixed may exist in multiple places, and fixing it may affect other components while achieving thes desired effect. The corrected variable may be from hardware information that can only be read but not written. In this case, a binary rename and SSDT patch are required. It should be noted that the renamed variable may not be recovered when the OC boots another system. See Example 4.
+The variable being fixed may exist in multiple places, and fixing it may affect other components while achieving the desired effect. The corrected variable may be from hardware information that can only be read but not written. In this case, a binary rename and SSDT patch are required. It should be noted that the renamed variable may not be recovered when the OC boots another system. See Example 4.
 
 ### Example 1
 
@@ -105,7 +105,7 @@ Method (_STA, 0, NotSerialized)
     Return (Zero)
 }
 ```
-Let's say, for some reason, we need to disable this device, so the `Return` of `_STA` is `Zero`. But as you can see, as long as `SDS1` is not equal to `0x07`, the return value `0x0F` is not triggered which in return triggers the second condition in this cascade, `Return (Zero)` Therefore, we cannot simply change the the return value to `Zero` – it wouldn't have any effect. Therefore we need to change `SDS1` to `0` for macOS insteead:
+Let's say, for some reason, we need to disable this device, so the `Return` of `_STA` is `Zero`. But as you can see, as long as `SDS1` is not equal to `0x07`, the return value `0x0F` is not triggered which in return triggers the second condition in this cascade, `Return (Zero)` Therefore, we cannot simply change the the return value to `Zero` – it wouldn't have any effect. Therefore we need to change `SDS1` to `0` for macOS instead:
 
 ```asl
 Scope (\)
@@ -191,7 +191,7 @@ External (STAS, IntObj)
 	}
 ```
 ### Example 3: GPIO Patch
-This patch is required for enabling the GPIO pin for using I2C Touchpads. See Chapter Trackpad Patches for details.
+This patch is required for enabling the GPIO pin for using I2C Touchpads. See Chapter [Trackpad Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches) for further details.
 
 An original text:
 
@@ -221,7 +221,7 @@ Scope (\)
 
 ### Example 4
 
-When the variabl read-only, the workaround is as follows:
+When the variable read-only, the workaround is as follows:
 
 1. Rename the original method
 2. Redefine it with an SSDT and return back the required value
@@ -261,7 +261,7 @@ If (_OSI ("Darwin"))
 }
 Else
 {
-      IM01 = XM01 /* The same path as the original ACPI variable */
+    IM01 = XM01 /* The same path as the original ACPI variable */
 }
 ```
 ### Example 5
