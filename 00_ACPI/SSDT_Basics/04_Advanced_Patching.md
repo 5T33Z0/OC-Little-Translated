@@ -1,4 +1,4 @@
-# Advanced Patching Strategies
+# Advanced Patching Techniques
 
 ## Really hacky Binary Rename patches
 A usual application of using binary renams is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
