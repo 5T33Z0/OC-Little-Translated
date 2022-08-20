@@ -77,7 +77,7 @@ Depending on the Touchpad model (vendor and used protocol), you need additional 
 
 ### Preface: the crux with I2C Touchpads and VoodooI2C
 
-Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply injecting the **VoodooI2C.kext** won't cut it. Only in rare cases this will actually work. Here`s why…
+Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply injecting the **VoodooI2C.kext** won't cut it. Only in rare cases this will actually work. Here's why…
 
 ### About VoodooI2C
 The **VoodooI2C** kext supports three operating modes: 
