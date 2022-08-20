@@ -13,7 +13,7 @@ ACPI binary renaming affects other Operating Systems when using OpenCore for boo
 Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. Here's the renaming rule:
 
 **Find**: `00 A0 08 48 50` &rarr; "00 = {; A0 = If ......"</br>
-**Replace**| `00 A4 0A 0F A3` &rarr; "00 = {; A4 0A 0F = Return(0x0F); A3 = Noop, added for completing the sequence of bytes, so both expressions have the same length.
+**Replace**: `00 A4 0A 0F A3` &rarr; "00 = {; A4 0A 0F = Return(0x0F); A3 = Noop, added for completing the sequence of bytes, so both expressions have the same length.
 
 **Original code**:
 
