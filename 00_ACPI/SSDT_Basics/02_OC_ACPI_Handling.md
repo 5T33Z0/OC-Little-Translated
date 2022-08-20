@@ -23,6 +23,8 @@ Quirk               | Affected Table(s) | Description | What it fixes
 
 **NOTE**: For more info about ACPI Tables in general, please refer to the official [ACPI Specs](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#acpi-system-description-tables).
 
+Now that we got that out the way, we can be looking at [**SSDT Guidelines**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/SSDT_Basics/03_SSDT_Guidelines.md)
+
 ## CREDITS & RESOURCES
 - Acidanthera for OpenCore and its [**Documantaion**](https://dortania.github.io/docs/latest/Configuration.html)
 - [**ACPI Specifications**](https://uefi.org/htmlspecs/ACPI_Spec_6_5_html/) by UEFI.org

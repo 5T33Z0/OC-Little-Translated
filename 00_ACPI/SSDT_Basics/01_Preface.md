@@ -27,4 +27,4 @@ Since a DSDT can change when updating the BIOS, injecting an older DSDT on top o
 
 Therefore, dynamic patching with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that’s why you should avoid patched DSDTs – especially those from MaLDon/Olarila!
 
-Anyway, back to the regular scheduled program…
+Anyway, [**back to the regular scheduled program…**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/SSDT_Basics/02_OC_ACPI_Handling.md)
