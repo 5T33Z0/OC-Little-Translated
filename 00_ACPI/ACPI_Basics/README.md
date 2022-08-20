@@ -27,7 +27,7 @@ These issues stem from DSDTs made with Windows support in mind on one hand and A
 
 Since a DSDT can change when updating the BIOS, injecting an older DSDT on top of a newer one can cause conflicts and break macOS functionalities. Therefore, *dynamic patching* with SSDTs is highly recommended over using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that's why you should avoid patched DSDTs.
 
-Continue to the next Chapter, **ASL Basics**.
+Continue to the next Chapter, [**ASL Basics**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ASL_Basics.md).
 
 ## CREDITS and RESOURCES
 - Original [**ASL Guide**](https://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1) by suhetao
