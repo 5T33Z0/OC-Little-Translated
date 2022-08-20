@@ -81,7 +81,6 @@ When the `_OSI` string matches the current system, it returns `1` since the `If`
 ```asl
 If (_OSI ("Darwin"))
 ```
-
 ### 4. `_STA` (Status)
 This is another very useful method for hackintoshing. Unlike binary renames, you cannot simply change or delete text from the DSDT using SSDTs. Therefere, you have to apply other strategies. And one very important one is to disable a device (or enabling another one) when using macOS (set `_STA` to `Zero`) and replace it by another device instead that you inject via the SSDT.
 
@@ -90,11 +89,11 @@ It can be use
 
 | Bit     | Explanation                          |
 | :-----: | :----------------------------------- |
-| Bit [0] | Set if the device is present. |
-| Bit [1] | Set if the device is enabled and decoding its resources. |
-| Bit [2] | Set if the device should be shown in the UI.|
-| Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).|
-| Bit [4] | Set if the battery is present.|
+| Bit [0] | Set if the device is present.
+| Bit [1] | Set if the device is enabled and decoding its resources.
+| Bit [2] | Set if the device should be shown in the UI.
+| Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).
+| Bit [4] | Set if the battery is present.
 
 These bits can be turned on by adding them and then converting them to Hex. So, if we want bits 1 to 4 to be enabled, we have to convert `1111` from binary to HEX which happens to be the well-known value `0x0F`. If we want none of the device to be disabled, we write `Zero`. In ASL, `Zero` and `One` are the only cases where you actual can use a word as a value.
 
@@ -153,9 +152,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "AWAC", 0x00000000)
     }
 }
 ```
-What it does: in the root of the `DSDT` (indictaed by (`\`)) it looks for the `FieldUnitObj` called `STAS` and changes it's value to `1` if the macOS Kernel is running.
-
-We understand it better, if we take a look in the `DSDT`. We find the following:
+What it does: in the root of the `DSDT` (indictaed by `\`) it looks for the `FieldUnitObj` called `STAS` and changes it's value to `1` if the macOS Kernel is running. We can understand it better, by looking into the `DSDT`. We find the following:
 
 ```asl
 Device (AWAC)
