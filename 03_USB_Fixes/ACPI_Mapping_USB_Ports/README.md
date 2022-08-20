@@ -31,7 +31,9 @@
 - [Credits](#credits)
 
 ## Background
-Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
+Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). 
+
+So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
 
 ## Approach
 In order to build our own USB Port map as SSDT, we will do the following:
@@ -43,7 +45,13 @@ In order to build our own USB Port map as SSDT, we will do the following:
 
 The method presented here is a slightly modified version of a guide by "Apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
-I broke it down in smaller sections so you won't be overwhelmed by a seemingly endless document. Open the collapsed sections to reveal their contents.
+## Patching requirments
+In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your system have to be met:
+
+1. The USB port are declared in a separate ACPI file, a SSDT, not inside the DSDT
+2. This SSDT contains `XHC` and `_UPC` method and a list of ports (primarily `HSXX` and `SSXX`)
+
+:warning: This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
 
 ## Preparations
 
@@ -110,12 +118,49 @@ You should have the correct rule for replacing the ACPI Table containing the USB
 Now that we have found the SSDT with the original USB port declarations, we can start modifying them. Almost. We still need more details, though…
 
 ### Modifying the original USB Table
-In general, two methods are relevant for declaring USB ports:
+Two methods are relevant for declaring USB ports: `_UPC` and `_PLD`. Both methods handle their values over to `GUPC` and `GPLD` inside the Root Hub (`RHUB`).
  
-1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)): defines the type of port and it's state (enabled/disabled)
-2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device)): defines the location of the physical port and its properties. 
+#### 1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities))
 
-Both values are handed over to (`GUPC` and `GPLD`) inside the Root Hub (`RHUB`).
+`_UPC` defines the type of port and it's state (enabled/disabled). Its structure looks as follows:
+
+```asl
+_UPC, Package ()
+{
+    xxxx,
+    yyyy,
+    0x00,
+    0x00
+}
+```
+##### Explanations
+
+1. **`xxxx`**
+   - `0x00` means the port does not exist
+   - Other values (usually `0x0F`) mean that the port exists and is enabled
+
+2. **`yyyy`** defines the type of the port. The following USB Port Types can be declared (we will come back to this later):
+
+   | **`yyyy`** | Port Type |
+   | :------: | ----------------------------- |
+   | `0X00` | USB Type `A` |
+   | `0x01` | USB `Mini-AB` |
+   | `0x02` | USB Smart Card |
+   | `0x03` | USB 3 Standard Type `A` |
+   | `0x04` | USB 3 Standard Type `B` |
+   | `0x05` | USB 3 `Micro-B` |
+   | `0x06` | USB 3 `Micro-AB` |
+   | `0x07` | USB 3 `Power-B` |
+   | `0x08` | USB Type `C` **(USB 2 only)** |
+   | `0x09` | USB Type `C` **(with switch)** | 
+   | `0x0A` | USB Type `C` **(w/o switch)** | 
+   | `0xFF` | Built-in |
+
+**UBS-C Switches**: if both sides of a USB-C connector are plugged into the same pysical port and hackintool uses the same port for it, than the connected device has a switch. In other words: 2 sides, 1 port = switch. Conversely, if both sides of the same connector occupy two ports, it has no switch
+
+#### 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device))
+
+Defines the location of the physical port and its properties (not covered by this guide)
 
 #### Adding `Arg1` to `GUPC`
 First, take a look at the routine `GUPC` inside of the `RHUB`:
