@@ -136,6 +136,9 @@ Method (_STA, 0, NotSerialized)  // _STA: Status
 
 **⚠️ CAUTION**: Two types of `_STA` exist! Do not confuse it with `_STA` from `PowerResource`! It can only return `One` or `Zero`. Please refer to the `ACPI Specification` for details.
 
+<details>
+<summary><strong>Excursion: your first SSDT</strong> (click to reveal)</summary>
+
 ## SSDT Example 1: disable a device in favor of another one
 With these four componens alone (`DefinitionBlock`, `External` reference, `_OSI` and `_STA` method), we can already write our first SSDT:
 
@@ -194,6 +197,29 @@ Device (RTC)
 As you can see, devices `RTC` and `AWAC` are switched on or off based on the value `_STA` has: if _STA is `0`, AWAC is enabled, and RTC is disabled. If the SSDT is `0x0F`, the switch is flipped and RTC is enabled instead.  
 
 :warning: This SSDT is conditional – if it works or not depends on the content of the DSDT. If the default STA values for RTC and AWAC were the other way around in the DSDT, you wouldn't need this patch, because RTC were active. And using it in this case actually would disable the RTC and enable AWAC instead and the system wouldn't boot! So always cross reference with the DSDT before applying patches if you are uncertain.
+</details>
+
+### 5.Device Identification Objects
+
+Device identification objects associate each platform device with a Plug and Play device ID for each device. All the device identification objects are listed in the table below:
+
+Object | Description
+------|---------
+`_ADR` |Object that evaluates to a device’s address on its parent bus.
+`_CID` | Object that evaluates to a device’s Plug and Play-compatible ID list.
+`_CLS`|Object that evaluates to a package of coded device-class information.
+`_DDN`|Object that associates a logical software name (for example, COM1) with a device.
+`_HID`|Object that evaluates to a device’s Plug and Play hardware ID.
+`_HRV`|Object that evaluates to an integer hardware revision number.
+`_MLS`|Object that provides a human readable description of a device in multiple languages.
+`_PLD`|Object that provides physical location description information.
+`_SUB`|Object that evaluates to a device’s Plug and Play subsystem ID.
+`_SUN`|Object that evaluates to the slot-unique ID number for a slot.
+`_STR`|Object that contains a Unicode identifier for a device. Can also be used for thermal zones.
+`_UID`|Object that specifies a device’s unique persistent ID, or a control method that generates it.
+
+**Source**: [**ACPI Specs**, Chpt. 6.1](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#device-identification-objects)
+
 
 ### `_CRS` (Current Resource Settings)
 `_CRS` returns a `Buffer`, it is often utilized to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.
