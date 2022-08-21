@@ -81,9 +81,7 @@ In **2008**, the Voodoo team (formerly the StageXNU team, which you may remember
 - emulating SMBIOS models, and 
 - GUI boot menus 
 
-The Voodoo team also developed several kext such as `VoodooPower`, `VoodooSDHCI`, and the familiar `VoodooHDA` and `VoodooPS2Controller` in Hackintosher.
-
-In 2008, the Voodoo team (the original StageXNU team, you should remember seeing this name in the last chapter) combined the "emulated UEFI" implementation developed by David Elliott with Apple's original Boot-132 to make the Chameleon project . With the continuous iterative update of Chameleon, many functions such as injecting Device Properties (device properties), loading Kernel Extension (kext), patching ACPI, simulating SMBIOS models, and graphical interface boot menus are all supported. The Voodoo team has also developed several kexts such as VoodooPower, VoodooSDHCI, and the well-known VoodooHDA and VoodooPS2Controller.
+The Voodoo team also developed several kext such as `VoodooPower`, `VoodooSDHCI`, and the familiar `VoodooHDA` and `VoodooPS2Controller`.
 
 >![](https://img10.360buyimg.com/ddimg/jfs/t1/90896/37/23405/7330/62579d5aEae4a64a6/4c26f564d20e3fca.png)</br>
 >Boot PureDarwin in a QEMU virtual machine with Chameleon 2.1.0, which already had a GUI.
