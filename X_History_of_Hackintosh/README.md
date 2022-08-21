@@ -44,7 +44,7 @@ At the time, there were three major obstacles to running OSX Tiger 10.4.1 on a r
 
 So Ironically, the most difficult obstacle to overcome was not the hardware or the security chip, but the instruction set!
 
-The first known documented Hackintosh of the X86 era known was documented on August 10, 2005, the day the [HardMac website](https://web.archive.org/web/20051018182314/http://hardmac.com/news/2005-08-10/) received two videos from an anonymous developer, which showed OSX 10.4.1 Tiger running on a Pentium M 735-powered Mitac 8050D laptop. It is worth mentioning that Apple released the MacBook Pro on January 10, 2006, which uses UEFI boot method instead of the x86 motherboards of that era that used BIOS boot (Legacy).
+The first known Hackintosh of the X86 era was documented on August 10, 2005, the day the [HardMac website](https://web.archive.org/web/20051018182314/http://hardmac.com/news/2005-08-10/) received two videos from an anonymous developer, which showed OSX 10.4.1 Tiger running on a Pentium M 735-powered Mitac 8050D laptop. It is worth mentioning that Apple released the MacBook Pro on January 10, 2006, which uses UEFI boot method instead of the x86 motherboards of that era that used BIOS boot (Legacy).
 
 On February 14, 2006, Maxxuss (crg92), a member of "The Guru" team, released the first patch. It patches the XNU kernel and removes boot and install restrictions, runs Mac OS X 10.4.4 on any Intel processor with SSE-2 support. The post is still available on InsanelyMac and is simply titled [**10.4.4 Security Broken**](https://www.insanelymac.com/forum/topic/9071-1044-security-broken/?page=1). A few hours later Apple released version 10.4.5 of OSX, and another two weeks later crg92 released a new patch for it.
 
