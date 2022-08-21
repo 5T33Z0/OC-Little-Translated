@@ -73,7 +73,7 @@ Back at **WWDC 2005**, the Intel DTK was released with a built-in UEFI bootloade
 
 In addition to Boot-dfe, David Elliott's work includes a preliminary version of [**NullCPUPowerManagement**](https://web.archive.org/web/20180724143621/http://www.tgwbd.org/darwin/extensions.html) for Apple-compatible CPU power Management (`AppleIntelCPUPowerManagement`).
 
-In **2008**, the Voodoo team (formerly the StageXNU team, which you may remember from the preivious paragraph) combined the "emulated UEFI" implementation developed by David Elliott with Apple's original Boot-132 to create the **Chameleon project**. As the developmen of Chameleon progressed, many features were implemented, such as: 
+In **2008**, the Voodoo team (formerly the StageXNU team, which you may remember from the preivious paragraph) combined the "emulated UEFI" implementation developed by David Elliott with Apple's original Boot-132 to create the **Chameleon project**. As the development of Chameleon progressed, many features were implemented, such as: 
 
 - injecting Device Properties, 
 - loading Kernel Extensions (kexts), 
