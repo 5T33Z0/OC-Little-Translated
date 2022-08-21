@@ -88,7 +88,7 @@ The Voodoo team also developed several kext such as `VoodooPower`, `VoodooSDHCI`
     
 Due to the emergence of **Chameleon**, fewer and fewer people choose to decompile and modify the XNU kernel, but to **replace DSDT** through the Bootloader, injecting device properties and kexts. 
 
-Considering that the Di**gital Millennium Copyright Act (DMCA)** prohibits modification and distribution of operating system code in non-open source parts of macOS, using the Bootloader to start the systems does not require direct modification of the operating system or the XNU kernel itself, thus successfully circumventing this law.
+Considering that the **Digital Millennium Copyright Act (DMCA)** prohibits modification and distribution of operating system code in non-open source parts of macOS, using the Bootloader to start the systems does not require direct modification of the operating system or the XNU kernel itself, thus successfully circumventing this law.
 
 In **2009**, OSX 10.6 **Snow Leopard** was released, the first version of OSX to completely abandon the PowerPC architecture. [**Netkas**](http://netkas.org/) from Russia was the first to release a modified version of the Chameleon EFI that could be used to boot OSX 10.6. The Voodoo team followed suit with an official 10.6 compatible update.
 
@@ -112,7 +112,7 @@ The rise of Clover in 2006 goes back to the emergence of **TrueOS**, a FreeBSD d
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/88415/26/27193/17896/62579d5bE7a0a4980/eb1ef8998338fcab.png)
 
-In **2011** Christoph Pfisterer discontinued the development of rEFIt. The following year, developer Roderick W. Smith Forked **rEFIt** and founded the rEFInd project. In the same year, **Slice** and the **OSx86** community discussed the development of a **UEFI bootloader**: in addition to supporting an EFI environment like Chameleon, it needed to be compatible with a real UEFI environment; it needed to be able to read HFS+ partitions correctly; it needed to be able to patch ACPI, load kexts, SMBIOS, have Quirk built in to boot macOS on a PC; and it was decided that the bootloader should be based on rEFIt. The community decided that the bootloader should be based on rEFInd. **2012** saw the release of OS X 10.8 Mountain Lion, and the same year the first version of Clover was released:
+In **2011** Christoph Pfisterer discontinued the development of rEFIt. The following year, developer Roderick W. Smith Forked **rEFIt** and founded the rEFInd project. In the same year, **Slice** and the **OSx86** community discussed the development of a **UEFI bootloader**: in addition to supporting an EFI environment like Chameleon, it needed to be compatible with a real UEFI environment; it needed to be able to read HFS+ partitions correctly; it needed to be able to patch ACPI, load kexts, SMBIOS, have Quirk built in to boot macOS on a PC. The community decided that the bootloader should be based on rEFInd. **2012** saw the release of OS X 10.8 Mountain Lion, and the same year the first version of Clover was released:
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/95165/1/27008/5694/62579d5bE96877840/93e868dcab41c679.png)
 
