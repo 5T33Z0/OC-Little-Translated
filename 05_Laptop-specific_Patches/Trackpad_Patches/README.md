@@ -197,12 +197,17 @@ This section also contains additional patches for Notebooks from various vendors
 :bulb: **TIPS**: Check the **Resources** section below for additional patching guides. If you are still facing issues getting your I2C Touchpad to work, look for existing EFI folders for your machine and check which combination of kexts, SSDT Hotfixes and/or binary renames have been used to get the Touchpad working and test them in your build.
 
 ## Resources
+### Documentation and Support
 * [**Official VoodooI2C Documentation**](https://voodooi2c.github.io/)
-* [**Official VoodooI2C Install Instructions**](https://github.com/VoodooI2C/VoodooI2C/blob/master/Documentation/Installation.md) – Outdated, requires patching the DSDT
-* [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
-* [**Fixing GPIO Touchpads**](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad-methods/manual.html#fixing-trackpads-manual) by Dortania
 * [**VoodooI2C Support on Gitter**](https://gitter.im/alexandred/VoodooI2C) – Ask the  VoodooI2C dev for support directly
+* [**Official VoodooI2C Support Thread**](https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/)
+* [**Basics of the I2C Communication Protocol**](https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/) by Circuit Basics
+
+### Guides and Patches
+* [**Fixing GPIO Touchpads**](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad-methods/manual.html#fixing-trackpads-manual) by Dortania
+* [**Official VoodooI2C Install Instructions**](https://github.com/VoodooI2C/VoodooI2C/blob/master/Documentation/Installation.md) – Outdated, requires patching the DSDT
+* [**Trackpad on Hackintosh with I2C protocol**](https://hackintosh-vn.translate.goog/trackpad-on-hackintosh-voi-giao-thu-i2c?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) - Informative but outdated as well, since the DSDT is patched
 * [**VoodoI2C Touchpad Driver Tutorial**](https://www-penghubingzhou-cn.translate.goog/2019/01/06/VoodooI2C%20DSDT%20Edit/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) and [Supplement](https://www-penghubingzhou-cn.translate.goog/2019/07/24/VoodooI2C%20DSDT%20Edit%20FAQ/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) by Penghu Bingzhou
 * [**Assorted Touchpad Patches for various Notebook models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/I2C_Touchpad_Hotfixes_Collection)
 * [**I2C Patching Principle and Example**](https://github-com.translate.goog/ettingshausen/VoodooI2C-PreRelease?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp#dsdt-%E8%A7%A6%E6%91%B8%E6%9D%BF%E9%83%A8%E5%88%86%E8%AF%A6%E8%A7%A3)
-* [**Trackpad on Hackintosh with I2C protocol**](https://hackintosh-vn.translate.goog/trackpad-on-hackintosh-voi-giao-thu-i2c?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+
