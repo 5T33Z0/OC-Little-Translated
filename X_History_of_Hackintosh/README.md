@@ -118,7 +118,7 @@ In **2011** Christoph Pfisterer discontinued the development of rEFIt. The follo
 
 OSX 10.10 **Yosemite** was released on October 16, 2014, and the following day the Voodoo team released the last official version of Chameleon, 2.2, which provides boot support for it. From OSX 10.10 Yosemite onwards the Hackintohs scene began to favor using the original OS X system images released by Apple, using as few kext and patches as possible to ensure system stability.
 
-On September 30, **2015**, OS X 10.11 El Capitan was released and **UniBeast**, the installation tool from tonymacx86, replaced the previously included Chimera bootloader by **Clover**, a branch of Chameleon, officially announcing the end of Chameleon.
+On September 30, **2015**, OS X 10.11 El Capitan was released and **UniBeast**, the installation tool from tonymacx86, replaced the previously included Chimera bootloader by **Clover**, officially marking the end of Chameleon.
 
 ## Epilogue: What will the furture hold?
 
