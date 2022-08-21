@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20200925 (538970405)
  */
-DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
+DefinitionBlock ("", "SSDT", 2, "5T33Z0", "SATA", 0x00001000)
 {
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.SAT1, DeviceObj)

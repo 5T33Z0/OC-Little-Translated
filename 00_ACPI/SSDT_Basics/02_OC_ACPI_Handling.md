@@ -28,5 +28,3 @@ Now that we got that out the way, we can be looking at [**SSDT Guidelines**](htt
 ## CREDITS & RESOURCES
 - Acidanthera for OpenCore and its [**Documantaion**](https://dortania.github.io/docs/latest/Configuration.html)
 - [**ACPI Specifications**](https://uefi.org/htmlspecs/ACPI_Spec_6_5_html/) by UEFI.org
-- ASL Tutorial by acpica.org ([**PDF**](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
-
