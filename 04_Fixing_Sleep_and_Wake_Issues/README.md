@@ -28,9 +28,13 @@ ASPM (**Active State Power Management**), is a power link management scheme supp
 
 Terminal commanfs for changing settings related to system power management, such as  sleep/hibernation.
 
-## Notes and further Resources
-- Before applying any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package but rather modify them to fit your system requirements or generate tailor made ones for your system using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) instead. Doing this can prevent sleep and wake issues altogether. 
+## :warning: Notes and further Resources
+- Before applying any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package. Instead modify them to match your system requirements or generate tailor made ones for your system using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). Doing this can prevent sleep and wake issues altogether. 
 - Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.
 - Acidanthera also provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup).
 - In-depth look into [**Darkwake**](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/), what it does (and what it doesn't).
+- While trying to understand how these fixes work, I found out that the SSDTs and binary renames used in this chapter are basically "reverse engineered" from DSDT patching rules created by RehabMan between 2014 to 2019. They are included in maciASL DSDT patching engine and are also still available on his [**Laptop DSDT Patch Repository**](https://github.com/RehabMan/Laptop-DSDT-Patch): 
+	- **Sleep and Wake** fixes &rarr; **here**: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/system
+	- **0D/6D** fixes &rarr; **here**: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/usb
+	- **Lid** fixes &rarr; **here**: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/misc
