@@ -131,7 +131,7 @@ Term    | Description
 The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. My guide basically follows this workflow. It might help to not get lost.
 
 ```mermaid
-graph TD
+graph LR
     A[Touchpad] ---> B{"Control</br> Method?"}
     B -->|IF| C(("I2C Protocol</br>(Haswell+)"))
     B -->|IF| G(("PS/2 Protocol</br>(≤ Ivy Bridge)"))
