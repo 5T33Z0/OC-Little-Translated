@@ -15,7 +15,7 @@ There are 2 methods to disable the GFXHD audio device, one manual, one automated
 - Open the app and click on "Generate SSDT"
 - This generates `SSDT-MUTE-GENERIC-RADEON.aml` on your Desktop
 - Add this to the ACPI Folder and `config.plist`
-- Save and reboot
+- Save, reboot and test it. If it doesn't work, use method 2 instead.
 
 ### Method 2 (manual): Modifying attached SSDT
 - Open `SSDT-RDN-HDAU-disable.aml`. You may have to adjust the following entries:</br>
