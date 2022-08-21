@@ -16,7 +16,7 @@ The SSDT to rename a device must conform to the following conditions in order to
 Renaming `SAT1` to `SATA` is not a requirement (it's purely cosmetic), but it's an easy to understand example (read the comments indicated by `//` for explanations):
 
 ```asl
-DefinitionBlock ("", "SSDT", 2, "STZ0", "SATA", 0x00001000)
+DefinitionBlock ("", "SSDT", 2, "5T33Z0", "SATA", 0x00001000)
 {
     External (_SB_.PCI0, DeviceObj)         // Adjust ACPI Paths according to your DSDT
     External (_SB_.PCI0.SAT1, DeviceObj)    // Adjust Device name as needed
