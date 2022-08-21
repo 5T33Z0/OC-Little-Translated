@@ -1,16 +1,41 @@
 # SSDT Patching Guidelines and Examples
-> WORK IN PROGRESS…
+In general, most SSDT requirements for hackintoshing are covered by the ACPI Samples included in the OpenCore Package as well by the ones provided in this repo. But there are edge cases, where a pre-made SSDT template doesn't resolve the issue. This is often the case when converting Laptops. The most common issues include Sleep and Wake issues as well getting I2C touchpads to work.
 
-## Dos and Don'ts
+This chapter is for users who want or need to understand how to create SSDTs to address issues with their systems on their own. 
+
+WORK IN PROGRESS…
+
+**TABLE of CONTENTS**
+
+- [SSDT Guidelines](#ssdt-guidelines)
+- [Requirements](#requirements)
+- [Structure and components of a SSDT](#structure-and-components-of-a-ssdt)
+  - [1. The `DefinitionBlock`](#1-the-definitionblock)
+  - [Common `DefinitionBlock` Example](#common-definitionblock-example)
+  - [2. `External` References](#2-external-references)
+  - [3. `_OSI` (Operating System Interfaces)](#3-_osi-operating-system-interfaces)
+  - [4. `_STA` (Status)](#4-_sta-status)
+    - [Enable in macOS](#enable-in-macos)
+    - [Disable in macOS](#disable-in-macos)
+  - [5.Device Identification Objects](#5device-identification-objects)
+  - [6. `_CRS` (Current Resource Settings)](#6-_crs-current-resource-settings)
+- [SSDT Examples](#ssdt-examples)
+  - [Example 1: disable a device in favor of another one](#example-1-disable-a-device-in-favor-of-another-one)
+- [SSDT Loading Sequence](#ssdt-loading-sequence)
+  - [Examples](#examples)
+- [CREDITS & RESOURCES](#credits--resources)
+
+## SSDT Guidelines
 - **Avoid Binary Renames!** Although the binary rename method is especially effective on systems running macOS only, these patches should be used with **caution**. On multi-boot systems with different Operating Systems, they can cause issues since binary renames apply system-wide when using OpenCore. The best way to avoid such issues is to bypass OpenCore when booting into a different OS altogether. Or use Clover instead, since it does not inject patches into other OSes by default.
 - **Use SSDTs!** Whenever possible, use SSDTs to inject preset variables and/or (virtual) Devices since this method is very reliable and ACPI conform (if done correctly). **Recommended approach**. 
 - **Use SSDTs to rename devices!** Instead of using binary renames to rename a device, you can write a simple SSDT which makes use of **External Reference**, **Scopes** and the  **`_STA`** method to disable the original device, add it under a new name for macOS only which is much cleaner. **Examples**: &rarr; [**SSDT-NAVI**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Navi/README.md#ssdt-navi-content), [**SSDT-SATA**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Rename_Devices)
-- **Combine Binary Renames and SSDTs!** If your have to use a binary rename to disable a method inside of a device (e.g. `_DSM` to `XDSM`), limit its reach by specifing the ACPI path (use the `base` parameter). Combine it with an SSDT (`SSDT-XDSM`) with **External References and Scopes** to modify the renamed method (here `XDSM`) and define some new for it: "when macOS is running do this, if it's not running return the orginal content of `_DSM`".
+- **Combine Binary Renames and SSDTs!** If your have to use a binary rename to disable a method inside of a device (e.g. `_DSM` to `XDSM`), limit its reach by specifing the ACPI path (use the `base` parameter). Combine it with an SSDT (`SSDT-XDSM`) with **External References and Scopes** to modify the renamed method (here `XDSM`) and define some new for it: "when macOS is running do this, if it's not running return the original content of `_DSM`".
 - Try new/different preset variables! There are more ways to modify the DSDT then just disabling devices and/or methods and redefining them. You can also address other parameters which can make patching even easier. **Example**: &rarr; [**SSDTT-PRW0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix#method-2-using-ssdt-prw0aml-no-gprwuprw)
 
-## Requirments
+## Requirements
 - Dump of unmodified ACPI tables from your system, mainly the `DSDT`. &rarr; [**Instructions**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#obtaining-acpi-tables)
 - An IDE to open, edit and export ASL files, like [**maciASL**](https://github.com/acidanthera/MaciASL) or [**Xiasl**](https://github.com/ic005k/Xiasl)
+- [**IORegistryExplorer**](https://github.com/khronokernel/IORegistryClone) for examining the [IO Registry](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/TheRegistry/TheRegistry.html)
 
 ## Structure and components of a SSDT
 The examples used in this section are code snippets that showcase the structure and principle of an SSDT.
@@ -54,7 +79,7 @@ and is ended by:
 - `""` &rarr; **AMLFileName** 
 - `"SSDT"` &rarr; **TableSignature**
 - `2` &rarr; **ComplianceRevision** (for 64 bit OSes)
-- `"hack"` &rarr; **OEM ID** (Author name): "hack" is pretty common bur genereic. OC Little tables use `"OCLT"`. For my own tables, I use `"5T33Z0"`. 
+- `"hack"` &rarr; **OEM ID** (Author name): "hack" is pretty common bur generic. OC Little tables use `"OCLT"`. For my own tables, I use `"5T33Z0"`. 
 - `"CpuPlug"` &rarr; **OEM Table ID**: Name the SSDT is identified as in the ACPI environment (not the file name). Usually, we name the SSDT based on the `Device` or `Method` it addresses. In this example `"CpuPlug"`.
 
 **NOTE**: If you write replacement tables (e.g. for USB port declarations), you need to use the same OEM Table ID as the table you want to replace. 
@@ -90,7 +115,7 @@ When the `_OSI` string matches the current system, it returns `1` since the `If`
 ```asl
 If (_OSI ("Darwin"))
 ```
-**NOTE**: More [`_OSI` variants](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) do exist, but for out puposes we only need this one.
+**NOTE**: More [`_OSI` variants](https://uefi.org/specs/ACPI/6.4/05_ACPI_Software_Programming_Model/ACPI_Software_Programming_Model.html#osi-operating-system-interfaces) do exist, but for out purposes we only need this one.
 
 ### 4. `_STA` (Status)
 This is another very useful method for hackintoshing. Unlike binary renames, you cannot simply delete or change text randomly in the DSDT when using SSDTs – you have to address locations and parameters specifically and find other ways to replace devices, methods and parameters. Therefore, you have to apply other strategies to do so. A very simple yet powerful technique is to just disable a device (set `_STA` to `Zero`) when macOS is running and replace it by another device instead that you inject via the SSDT.
@@ -108,7 +133,7 @@ It can be use
 
 These bits can be turned on (1) and off (0). So, if we want bits 1 to 4 to be enabled, you convert `1111` from binary to HEX which results in the well-known `0x0F`. If we want none of the device to be disabled, we write `Zero`. In ASL, `Zero` and `One` are the only cases where you actual can use a word as a value.
 
-We also encounter `0x0B` (= `1011`) and `0x1F` (= `11111`) sometimes. `0x0B` means the device is enabled but it is not allowed to decode its resources. `0x0B` is often utilized in ***`SSDT-PNLF`***. `0x1F` (`11111`) only appears to describe battery device in a laptop, the last bit is utilized to inform the Battery Controller `PNP0C0A` that the battery is present.
+We also encounter `0x0B` (= `1011`) and `0x1F` (= `11111`) sometimes. `0x0B` means the device is enabled but it is not allowed to decode its resources. `0x0B` is often utilized in [***`SSDT-PNLF`***](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)). `0x1F` (`11111`) only appears to describe battery device in a laptop, the last bit is utilized to inform the Battery Controller `PNP0C0A` that the battery is present.
 
 We can combine both the `_OSI` and `_STA` method to create the main building blocks for SSDTs which only apply their patches to macOS:
 
@@ -119,17 +144,18 @@ Method (_STA, 0, NotSerialized)
    {
         If (_OSI ("Darwin"))	// If the darwin kernel is running
         {
-            Return (0x0F)		// Enable the device defined in the SSDT
+            Return (0x0F)		// Enable the device defined (later) in the SSDT
         }
         Else					// If Darwin is not running,
         {
-            Return (Zero) // Disable it
+            Return (Zero)       // Disable it
         }
-    }
+    } 
 ```
 
 #### Disable in macOS
 Naturally, you can also use this the other way around:
+
 ```asl
 Method (_STA, 0, NotSerialized)  // _STA: Status
 {
@@ -145,8 +171,36 @@ Method (_STA, 0, NotSerialized)  // _STA: Status
 ```
 **⚠️ CAUTION**: Two types of `_STA` method exist. Do not confuse it with `_STA` from `PowerResource`! It can only return `One` or `Zero`. Please refer to the `ACPI Specification` for details.
 
-## SSDT Example 1: disable a device in favor of another one
-With these four componens alone (`DefinitionBlock`, `External` reference, `_OSI` and `_STA` method), we can already write our first SSDT:
+### 5.Device Identification Objects
+
+Device identification objects associate each platform device with a Plug and Play device ID for each device. The most commonly used ones in our context are `_ADR`, `_CID`, `_HID` and `_UID`:
+
+Object | Description
+------|---------
+`_ADR`|Object that evaluates to a device’s address on its parent bus.
+`_CID`| Object that evaluates to a device’s Plug and Play-compatible ID list.
+`_CLS`|Object that evaluates to a package of coded device-class information.
+`_DDN`|Object that associates a logical software name (for example, COM1) with a device.
+`_HID`|Object that evaluates to a device’s Plug and Play hardware ID.
+`_HRV`|Object that evaluates to an integer hardware revision number.
+`_MLS`|Object that provides a human readable description of a device in multiple languages.
+`_PLD`|Object that provides physical location description information.
+`_SUB`|Object that evaluates to a device’s Plug and Play subsystem ID.
+`_SUN`|Object that evaluates to the slot-unique ID number for a slot.
+`_STR`|Object that contains a Unicode identifier for a device. Can also be used for thermal zones.
+`_UID`|Object that specifies a device’s unique persistent ID, or a control method that generates it.
+
+**Source**: [**ACPI Specs**, Chpt. 6.1](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#device-identification-objects)
+
+### 6. `_CRS` (Current Resource Settings)
+`_CRS` returns a `Buffer`. It is often utilized to acquire touchable devices' `APIC Pin` or `GPIO Pin` for controlling the interrupt mode.
+
+[…]
+
+## SSDT Examples
+
+### Example 1: disable a device in favor of another one
+With four components alone (`DefinitionBlock`, `External` reference, `_OSI` and `_STA` method), we can already write our first SSDT:
 
 ```asl
 DefinitionBlock ("", "SSDT", 2, "OCLT", "AWAC", 0x00000000)
@@ -204,39 +258,15 @@ As you can see, devices `RTC` and `AWAC` are switched on or off based on the val
 
 :warning: This SSDT is conditional – if it works or not depends on the content of the DSDT. If the default STA values for RTC and AWAC were the other way around in the DSDT, you wouldn't need this patch, because RTC were active. And using it in this case actually would disable the RTC and enable AWAC instead and the system wouldn't boot! So always cross reference with the DSDT before applying patches if you are uncertain.
 
-### 5.Device Identification Objects
-
-Device identification objects associate each platform device with a Plug and Play device ID for each device. The most commonly used ones in our context are `_ADR`, `_CID`, `_HID` and `_UID`:
-
-Object | Description
-------|---------
-`_ADR`|Object that evaluates to a device’s address on its parent bus.
-`_CID`| Object that evaluates to a device’s Plug and Play-compatible ID list.
-`_CLS`|Object that evaluates to a package of coded device-class information.
-`_DDN`|Object that associates a logical software name (for example, COM1) with a device.
-`_HID`|Object that evaluates to a device’s Plug and Play hardware ID.
-`_HRV`|Object that evaluates to an integer hardware revision number.
-`_MLS`|Object that provides a human readable description of a device in multiple languages.
-`_PLD`|Object that provides physical location description information.
-`_SUB`|Object that evaluates to a device’s Plug and Play subsystem ID.
-`_SUN`|Object that evaluates to the slot-unique ID number for a slot.
-`_STR`|Object that contains a Unicode identifier for a device. Can also be used for thermal zones.
-`_UID`|Object that specifies a device’s unique persistent ID, or a control method that generates it.
-
-**Source**: [**ACPI Specs**, Chpt. 6.1](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#device-identification-objects)
-
-### `_CRS` (Current Resource Settings)
-`_CRS` returns a `Buffer`. It is often utilized to acquire touchable devices' `APIC Pin` or `GPIO Pin` for controlling the interrupt mode.
-
-[…]
-
 ## SSDT Loading Sequence
 
-Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-X and SSDT-Y), where SSDT-X defines a `device` which SSDT-Y is "cross-referencing" via a `Scope`, then these the two patches have to be loaded in the correct order/sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
+Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or other SSDTs). Since the original ACPI is loaded prior to SSDT patches, there is no need for SSDTs in the `Add` list to be loaded in a specific order. 
+
+But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-XXXX and SSDT-YYYY), where SSDT-XXXX defines a `device` which SSDT-YYYY is addressing via a `Scope` to change Method `_YYY`, then these the SSDTs have to be loaded in the correct sequence for the whole patch to work. Generally speaking, SSDTs being "scoped" into have to be loaded prior to the ones "scoping".
 
 ### Examples
 
-- **Patch 1**：***SSDT-XXXX-1.aml***
+- **Patch 1**：***SSDT-XXXX.aml***
   
   ```asl
   External (_SB.PCI0.LPCB, DeviceObj)
@@ -248,13 +278,13 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
       }
   }
   ```
-- **Patch 2**：***SSDT-XXXX-2.aml***
+- **Patch 2**：***SSDT-YYYY.aml***
 
   ```asl
   External (_SB.PCI0.LPCB.XXXX, DeviceObj)
   Scope (_SB.PCI0.LPCB.XXXX)
   {
-        Method (YYYY, 0, NotSerialized)
+        Method (_YYY, 0, NotSerialized)
        {
            /* do nothing */
        }
@@ -264,11 +294,13 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
 
   ```XML
   Item 1
-            path    <SSDT-XXXX-1.aml>
+            path    <SSDT-XXXX.aml>
   Item 2
-            path    <SSDT-XXXX-2.aml>
+            path    <SSDT-YYYY.aml>
   ```
   
+**NOTE**: I am aware that this example is kind of redundant since you could just change method `_YYY` in `SSDT-XXXX` instead so you wouldn't need to other SSDT altogether. But for the sake of illustrating the concept it works.
+
 **TO BE CONTINUED…**
 
 ## CREDITS & RESOURCES
