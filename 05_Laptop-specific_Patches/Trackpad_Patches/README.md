@@ -20,6 +20,8 @@
 	- [3. Finding the operating mode of the I2C Controller (macOS)](#3-finding-the-operating-mode-of-the-i2c-controller-macos)
 	- [4. Enabling a Touchpad's GPIO Pin](#4-enabling-a-touchpads-gpio-pin)
 - [Resources](#resources)
+	- [Documentation and Support](#documentation-and-support)
+	- [Guides and Patches](#guides-and-patches)
 
 ## Introduction
 PC-based Notebook Touchpads are not supported natively by macOS. Depending on the type of controller and protocol that is used to communicate with the Touchpad, you may need to combine kexts, binary renames as well as SSDT Hotfixes to enable it in macOS.
@@ -129,15 +131,15 @@ Term    | Description
 The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. My guide basically follows this workflow. It might help to not get lost.
 
 ```mermaid
-graph LR
+graph TD
     A[Touchpad] ---> B{"Control</br> Method?"}
     B -->|IF| C(("I2C Protocol</br>(Haswell+)"))
     B -->|IF| G(("PS/2 Protocol</br>(≤ Ivy Bridge)"))
     C --> |"Figure out supported Operating Mode:</br> 1. APIC, 2. GPIO or 3. Polling"|J{Check APIC Pin}
     J --> K["If value is </br>≤2F (≤47)"]------->|Use| D(APIC Interrupt Mode)-->|Install|L[VoodooI2C and </br>Satellite kexts]
-    J --> M("If value is</br> >2F (>47)")-->O{"GPIO Pin </br>activatable? </br>(SSDT)"}
-    O --> P[YES]---->|Use|R(GPIO Mode)-->|Install|L
-    O ---> Q[NO]--> N{"Interrupt assignable</br> manually? (SSDT)"}-.->F(YES)-.->|Use|R
+    J --> M("If value is</br> >2F (>47)")-->O{"GPIO Pin </br>available? </br>(SSDT)"}
+    O --> P["YES</br>(pre Skylake)"]---->|Use|R(GPIO Mode)-->|Install|L
+    O ---> Q["NO </br>(Skylake+)"]--> N{"Interrupt assignable</br> manually? (SSDT)"}-.->F(YES)-.->|Use|R
     N-->S(NO)-->|Use|T(Polling Mode)-->|Install|L
     G --> |Install|H(VoodooPS2Controller)
 ```    
