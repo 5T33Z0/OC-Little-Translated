@@ -23,18 +23,20 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**PinConfigurator**](https://github.com/headkaze/PinConfigurator) – App for importing and editing PinConfig Data for AppleALC Layout-IDs.
 - [**DevCleaner for Xcode**](https://github.com/vashpan/xcode-dev-cleaner) - App for clearing various Xcode caches to reclaim tens of gigabytes of storage.
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer. For Big Sur and newer.
+- [**GenI2C**](https://github.com/DogAndPot/GenI2C) (Info) – Helpfu tool for enabling VoodooI2C Touchpads ([**Download**](https://github.com/quynkk5/GenI2C/blob/main/GenI2C.zip?raw=true))
+
 
 ### macOS Monterey
 - [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS Monterey
 - [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – Tool for installing Intel HD 4000 iGPU drivers which have been removed from macOS 12.
 
 ### Cross-Platform
-- [**OpenCore Auxiliary Tools (OCAT)**](https://github.com/ic005k/QtOpenCoreConfig) – Recommended Configurator for editing the OpenCore `config.plist`. Migrates config.plist to the latest form when saving. So no more tedious manual updating of the config is required. Can update kexts and OpenCore files to the latest version. Basically, it's the only editor you need.
-- [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware Plist Editor
-- [**QtiASL**](https://github.com/ic005k/QtiASL) – ASL/AML Editor
 - [**Python Installer**](https://www.python.org/downloads/) – Necessary for running a lot of the python-based tools in this list
-- [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based config.plist Editor with unique features like snapshot generation
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
+- [**OpenCore Auxiliary Tools (OCAT)**](https://github.com/ic005k/QtOpenCoreConfig) – Recommended Configurator for editing the OpenCore `config.plist`. Migrates config.plist to the latest form when saving. So no more tedious manual updating of the config is required. Can update kexts and OpenCore files to the latest version. Basically, it's the only editor you need.
+- [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based .plist Editor with unique features like snapshot generation.
+- [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware .plist Editor
+- [**Xiasl**](https://github.com/ic005k/Xiasl) – ASL/AML Editor
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAttributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
