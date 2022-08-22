@@ -165,4 +165,4 @@ But there are still major differences between Apple's strategy now and 15 years 
 This timeline shows that every major version of macOS in the past 6 years will be compatible with devices released at least 7 years ago. So even if Apple does not release Macs with Intel processors starting in 2021, macOS may not end support for Intel processors until **2025**.
 
 ## Credits
-Original Blog Post published by [Sukka](https://blog.skk.moe/post/history-osx86/), 03-09-2020.
+Original Blog Post published by [Sukka](https://blog.skk.moe/post/history-osx86/), 03-09-2020. Translated from Chinese using DeepL and Google Translate. Some sections were redacted/rephrased for better legibility.
