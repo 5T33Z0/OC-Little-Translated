@@ -1,6 +1,6 @@
 # Adding a Windows entry to the OpenCore boot menu
 
-This guide is for adding an entry for booting Windows to the OpenCore boot menu, so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example (or [generate your own](https://oc-scanpolicy.vercel.app/)), which excludes a lot of file systems and interfaces from scanning.
+This guide is for adding an entry for booting Windows to the OpenCore boot menu, so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example (or [**generate your own**](https://oc-scanpolicy.vercel.app/)), which excludes a lot of file systems and interfaces from scanning.
 
 ## Prerequisites
 
@@ -40,6 +40,16 @@ Once you're back in macOS, do the following:
 ![win10flav](https://user-images.githubusercontent.com/76865553/148958994-60379e98-4b84-4e4b-b0d0-e2484813d06b.png)
 
 **Done**!
+
+## Notes for using QWERTZ keyboard layouts (with umlauts)
+If you run shell on a (german) "QWERTZ" keyboard, some keys are different:
+
+US Layout | DE Layout
+:--------:|:---------:
+`:`       | `SHIFT+Ö`
+`>`       | `SHIFT+.`
+`\`       | `#`
+`y`       | `z`
 
 ## :warning: Caution
 
