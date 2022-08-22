@@ -60,12 +60,12 @@ The `xxxx` parameters refer to the `File Name`, `OEMID`, `Table ID` and `OEM Ver
 
    ```asl
    Method (xxxx, 0, NotSerialized)
-   		{
-       	...
-   		}
+   	{
+    	...
+   	}
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
-       ...
+   		...
    }
    ```
 3. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.

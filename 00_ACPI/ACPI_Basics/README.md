@@ -13,12 +13,20 @@ Did you ever wonder what a `DSDT` or `SSDT` table is and what it does? Or how th
 
 In the ACPI, peripheral devices and system hardware features of the platform are described in the **`DSDT`** (Differentiated System Description Table), which is loaded at boot and in SSDTs (Secondary System Description Tables), which are loaded *dynamically* at run time. The ACPI Form describes a machine's hardware information in `.aml` format and does not have any driver capabilities of its own. ACPI is literally just a set of tables of texts (converted into binary code) to provide operating systems with some basic information about the used hardware. **`DSDTs`** and **`SSDTs`** are just *two* of many tables that make up a system's ACPI – but very important ones for us.
 
-Each computer mainboard ships with a set of ACPI Tables stored in the BIOS (or UEFI). ACPI serves as an interface layer between the operating system and system firmware, as shown below:
+Each computer mainboard ships with a set of ACPI Tables stored in the BIOS (or UEFI). The number and content of ACPI tables varies from used mainboard and chipset - it even *can* vary between different BIOS versions as well.
+
+ACPI serves as an interface layer between the operating system and system firmware, as shown below:
 
 ![](https://uefi.org/specs/ACPI/6.4/_images/acpi-overview.png)</br>
 **Source**: [**UEFI.org**](https://uefi.org/specs/ACPI/6.4/Frontmatter/Overview/Overview.html)
 
-The number and content of ACPI tables varies from used mainboard and chipset - it even *can* vary between different BIOS versions as well.
+The ACPI subsystem itself consists of 2 data structures: data tables and definition blocks (see figure below). These data structures are the primary communication mechanism between the firmware and the OS. Data tables store raw data and are consumed by device drivers. Definition blocks consist of byte code that is executable by an interpreter.
+
+![](https://uefi.org/specs/ACPI/6.4/_images/acpi-structure.png)
+
+**Source**: [**UEFI.org**](https://uefi.org/specs/ACPI/6.4/Frontmatter/Overview/Overview.html)
+
+We can make use of SSDTs to inject said Definintion Blocks into the system to change things as needed. We can add (virtual) devices, rename devices, change control methods (or redefine them), modify buffers, etc.) so macOS is happy.
 
 ### Why to prefer SSDTs over a patched DSDT
 A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.

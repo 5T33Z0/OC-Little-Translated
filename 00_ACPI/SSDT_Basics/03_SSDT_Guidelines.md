@@ -37,7 +37,7 @@ WORK IN PROGRESS…
 - An IDE to open, edit and export ASL files, like [**maciASL**](https://github.com/acidanthera/MaciASL) or [**Xiasl**](https://github.com/ic005k/Xiasl)
 - [**IORegistryExplorer**](https://github.com/khronokernel/IORegistryClone) for examining the [IO Registry](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/TheRegistry/TheRegistry.html)
 
-## Structure and components of a SSDT
+## Structure and building blocks of a SSDT
 The examples used in this section are code snippets that showcase the structure and principle of an SSDT.
 
 ### 1. The `DefinitionBlock`
@@ -84,7 +84,7 @@ and is ended by:
 
 **NOTE**: If you write replacement tables (e.g. for USB port declarations), you need to use the same OEM Table ID as the table you want to replace. 
 
-### 2. `External` References
+### 2. `External` References and `Scopes`
 
 External References (or Quotes) and Scopes are the backbone of an SSDT if you want to modify/replace content of the `DSDT`. You need them to tell the system, "Hey, look, I want you to check this location of the DSDT and change the following:…". 
 
@@ -106,6 +106,24 @@ PowerResObj  | `External (\_SB.PCI0.XDCI, PowerResObj)`       | `PowerResource (
 ProcessorObj | `External (\_SB.PR00, ProcessorObj)`           | `Processor (PR00, 0x01, 0x00001810, 0x06)`
 ThermalZoneObj| `External (\_TZ.THRM, ThermalZoneObj`         | `ThermalZone (THRM)`                                                    
 BuffFieldObj  | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`
+
+## 3. `Methods`
+
+
+1. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore, the example below is **invalid** because the Method is followed by a `DefinitionBlock`:
+	
+	```asl
+	Method (xxxx, 0, NotSerialized)
+	{
+		...
+	}
+   
+   DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
+   {
+       ...
+   }
+   ```
+2. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 
 ### 3. `_OSI` (Operating System Interfaces)
 The `_OSI` method is your best friend when it comes to hackintoshing. You should use it in every SSDT so the patch on applies when macOS is running. 
@@ -305,5 +323,5 @@ But there are exceptions to this rule. For example, if you have 2 SSDTs (SSDT-XX
 
 ## CREDITS & RESOURCES
 - Original [**ASL guide**](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1) by suhetao
-- [**ACPI Specifications**](https://uefi.org/htmlspecs/ACPI_Spec_6_5_html/) by UEFI.org
+- [**ACPI Specifications**](https://uefi.org/htmlspecs/ACPI_Spec_6_4_html/) by UEFI.org
 - ASL Tutorial by acpica.org ([**PDF**](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
