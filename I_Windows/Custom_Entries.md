@@ -1,6 +1,6 @@
 # Adding a Windows entry to the OpenCore boot menu
 
-This guide is for adding an entry for booting Windows to the OpenCore boot menu, so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example (or [generate your own](https://oc-scanpolicy.vercel.app/), which excludes a lot of file systems and interfaces from scanning
+This guide is for adding an entry for booting Windows to the OpenCore boot menu, so you don't have to use `0` as `ScanPolicy`. Instead, you can use `2687747` for example (or [generate your own](https://oc-scanpolicy.vercel.app/)), which excludes a lot of file systems and interfaces from scanning
 
 ## Prerequisites
 
