@@ -1,4 +1,7 @@
 # ACPI Source Language (ASL) Basics
+> This guide is quoted from a post on [PCBeta](<http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1>) by suhetao. Published 2011-11-21.</br>
+> Markdowned and proofreading by Bat.bat (williambj1) on 2020-2-14.
+
 **TABLE of CONTENTS**
 
 - [About ASL](#about-asl)
