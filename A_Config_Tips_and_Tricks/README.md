@@ -75,12 +75,12 @@ Prior to the advent of OCAT, I used to maintain and update my config with 4 addi
 
 If the system doesn't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
-- **Misc > Security > SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details.
-- **Misc > Security > Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
+- **Misc/Security/SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details.
+- **Misc/Security/Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
 
 If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
 
-- **UEFI > APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version of macOS you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
+- **UEFI/APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version of macOS you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
 
 **BACKGROUND**: If you use an OS older than Big Sur and both values are set to default (`0`) you won't see your macOS Partition, because the APFS driver won't load. This is a security feature which should ensure that your macOS boots using a verified APFS driver. To maximize compatibility with older macOS versions, I would disable it during Install.
 
@@ -96,10 +96,10 @@ You should deactivate the single user mode for security reasons, because it can 
 
    **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82** &rarr; change `csr-active-config` from `00000000`(SIP enabled) to:
 
-   `FF030000` (for High Sierra)</br>
-   `EF070000` (for Mojave/Catalina)</br>
-   `67080000` (for Big Sur and newer)</br>
-   `EF0F0000` (for Big Sur and newer. Disables even more security features.)
+   - `FF030000` (for High Sierra)
+   - `EF070000` (for Mojave/Catalina)
+   - `67080000` (for Big Sur and newer)
+   - `EF0F0000` (for Big Sur and newer. Disables even more security features.)
 
    **NOTES**
    
