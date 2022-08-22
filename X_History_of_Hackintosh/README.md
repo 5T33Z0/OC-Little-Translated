@@ -38,7 +38,7 @@ Soon, attempts were made to run a development version of Mac OS X on non-Apple h
 
 At the time, there were three major obstacles to running OSX Tiger 10.4.1 on a regular PC: 
 
-- Firstly, none of the common PCs CPUs around 2004 supported the **SSE-3** instruction set that DTK's built-in Intel [Pentium 4 660 CPU](https://ark.intel.com/content/www/cn/zh/ark/products/27484/intel-pentium-4-processor-660-supporting-ht-technology-2m-cache-3-60-ghz-800-mhz-fsb.html) used. 
+- Firstly, none of the common PCs CPUs around 2004 supported the **SSE-3** instruction set that DTK's built-in Intel [Pentium 4 660 CPU](https://ark.intel.com/content/www/us/en/ark/products/27484/intel-pentium-4-processor-660-supporting-ht-technology-2m-cache-3-60-ghz-800-mhz-fsb.html) used. 
 - Secondly, the OSX development version only supports the **Intel 915G/ICH6** chipset.
 - And finally, Apple's DTK at that time used an **Infineon TPM** security chip. 
 
