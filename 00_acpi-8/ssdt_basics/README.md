@@ -1,2 +1,0 @@
-# SSDT\_Basics
-

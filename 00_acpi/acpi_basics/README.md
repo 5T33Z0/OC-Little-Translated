@@ -1,2 +1,0 @@
-# ACPI\_Basics
-

@@ -1,2 +1,0 @@
-# Brand-specific\_Patches
-
