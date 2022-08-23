@@ -18,12 +18,12 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 
 :bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features etc. So please: don't inject the same, unmodified properties into the system you got them from in the first place.
 
-## Properties of Virtual ACPI Devices
+## Properties of Virtual Devices
 
 - **Features**:
-  - The device already exists in ACPI, is relatively short, small and self-contained in code.  
+  - The device already exists in ACPI, is relatively small and self-contained in code.  
   - The original device has a canonical `_HID` or `_CID` parameter.
-  - Even if the original device is not disabled, patching with a fake device will not harm ACPI.
+  - Even if the original device is not disabled, adding a virtual device while macOS is running will not harm ACPI.
 - **Requirements**:
   - The fake name **differs** from the original device name used in ACPI.
   - Patch content and original device main content are **identical**.
@@ -44,7 +44,6 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 - **Example**: [**Adding a fake Realtime Clock (RTC0)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))
   
   - ***SSDT-RTC0*** - Fake RTC
-  - Original device name: RTC
   - _HID: `PNP0B00`
 
 **Important**: The path and name of the Low Pin Configuration Bus used in a SSDT – either `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
@@ -53,10 +52,9 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 
 Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse through the folders above to find out which you may need.
 
-### Preparations
-In order to add/apply any of the Devices/Patches, it is necessary to research your machine's ACPI - more specifically, the `DSDT`. To obtain a copy of the DSDT, it is necessary to dump it from your system's ACPI Table. There are a few options to do this.
+### Obtaining ACPI Tables
+In order to add/apply any of the Patches, it is necessary to research your machine's ACPI - more specifically, the `DSDT`. To obtain a copy of the `DSDT`, it is necessary to dump it from your system's ACPI Table. There are a few options to do this.
 
-#### Obtaining ACPI Tables
 **Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables:
 
 - Using **Clover** (easiest and fastest way): Clover can dump ACPI tables without a working config within seconds.
@@ -75,7 +73,7 @@ In order to add/apply any of the Devices/Patches, it is necessary to research yo
 	- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
 - Using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) (Windows only): if you use SSDTTime under Windows, you can also dump the DSDT, which is not possible under macOS.
 
-### Included Hotpatches
+### Avaialable Hotpatches
 Listed below are all SSDTs contained in this chapter. Use the listed search terms to check your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.
 
 #### Functional SSDTs
@@ -105,18 +103,11 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Read for details.|–
 
 #### Cosmetic SSDTs (optional)
-The SSDTs listed below are considered cosmetic and non-essential. They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides _mimicking the look_ of the I/O registy of the Mac model selected in the SMBIOS/PlatformInfo section:
+The SSDTs listed below are considered cosmetic and non-essential: They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides mimicking the *look* of the I/O registy of the selected Mac model by the SMBIOS – they are not needed:
 
 > It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
 > 
 > [**– vit9696**](https://github.com/acidanthera/OpenCorePkg/pull/121#issuecomment-696825376)
-
-Basically, any SSDTs which define devices that are not already present in the system's DSDT have to be considered _fake_ or _virtual_. You can easily verfiy this by checking the added device(s) in I/O Registry: if the device in questions contains collapsed sections, they will snap close again as soon as you click on them because no data can be gathered for it.
-
-Nonetheless, I included them here for two reasons:
-
-1. It's your choice to use them or not
-2. For documentary purposes. Sometimes it can be strenuous to find out what a device listed in an `.ioreg` file actually is and does. 
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
@@ -126,6 +117,23 @@ Nonetheless, I included them here for two reasons:
 [**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds MEM2 Device to iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
 [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
 [**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
+
+## Converting `.dsl` files to `.aml`
+The hotfixes in this section are provided as Disassembled ASL Files (.dsl). In order to use them in your system, do the following.
+
+1. Click on the link to the .dsl file of your choice
+2. Click the `Raw`button
+3. Press `CMD+A` and `CMD+C`
+4. Open maciASL
+5. Press `CMD+V`
+6. Edit the file (if needed)
+7. Click on "File" > "Save As…"
+8. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
+9. Save it as "SSDT–…" (whatever the original file name is)
+10. Add the `.aml` file to `EFI/OC/ACPI` and to your config.plit (under `ACPI/Add`)
+11. Save and reboot to test it.
+
+**NOTE**: If you decide to simply download the whole repo, you can just open the .dsl files with maciASL insted.
 
 ## Resources
 [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) – IO Reg Collection by khronokernel
