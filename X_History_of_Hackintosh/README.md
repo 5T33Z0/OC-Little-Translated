@@ -20,19 +20,19 @@ On February 14, 1992, Apple launched **Star Trek,** a secret project to migrate 
 >![](https://img10.360buyimg.com/ddimg/jfs/t1/119151/34/24274/27904/62579d59Ebf4ff7a6/7139f6c2e2b1775e.png)</br>
 >Screenshot of the Macintosh System 7 interface
 
-Despite the cancellation of Star Trek, some Apple engineers continued to work on porting Mac OS to the x86 platform, most notably engineer John Kullman, who successfully ported Mac OS X to the x86 Quora PC in December 2001. Bertrand Serlet, known as the "father of Mac OS X" (who would go on to lead 10.4 Tiger, 10.5 Leopard and 10.6 Snow Leopard), learned of this and met with John Kullman to port Mac OS X to a Sony VAIO laptop. Kullman was done before dinner that day. The next day, Jobs flew to Tokyo with the VAIO to meet with Sony's then president, Kuniway Ando, to discuss running Mac OS X on Sony's VAIO, but the negotiations ended without a hitch.
+Despite the cancellation of Star Trek, some Apple engineers continued to work on porting Mac OS to the x86 platform, most notably engineer John Kullman, who successfully ported OSX to the x86 Quora PC in December 2001. Bertrand Serlet, known as the "father of OSX" (who would go on to lead 10.4 Tiger, 10.5 Leopard and 10.6 Snow Leopard), learned of this and met with John Kullman to port OSX to a Sony VAIO laptop. Kullman was done before dinner that day. The next day, Jobs flew to Tokyo with the VAIO to meet with Sony's then president, Kuniway Ando, to discuss running OSX on Sony's VAIO, but the negotiations ended without a hitch.
 
 Even though Steve Jobs failed to reach an agreement with Sony, a new secret project called **"Marklar"** was launched in 2002 to maintain the compatibility of OSX with x86. It wasn't until June 6, 2005, when Apple held **WWDC 2005** at the Moscone Expo Center in San Francisco, that Jobs officially [announced](https://www.youtube.com/watch?v=ghdTqnYnFyg&t=8s) that they would change their PC product line from [PowerPC architecture to Intel architecture](https://www.apple.com/newsroom/2005/06/06Apple-to-Use-Intel-Microprocessors-Beginning-in-2006/). At the same convention, Jobs also revealed that all versions of OSX have been secretely compiled for *both* PowerPC *and* Intel X86 simultaneously for the last 5 years.
 
-On January 10, 2006, Apple announced the first MacBook Pro with Intel Core, replacing the previous product line, the PowerBook. On April 5, 2007, Apple introduced Boot Camp, on April 24, Apple introduced the 17-inch MacBook Pro, on May 16, Apple introduced the 12-inch MacBook to replace the iBook line, on July 5, Apple introduced the iMac to replace the eMac line, and on August 7, Apple introduced the iMac to replace the eMac line. In August 2009, Apple introduced Mac OS X 10.6 Snow Leopard, the first x86-only Mac OSX, announcing that Apple had officially abandoned support for PowerPC.
+On January 10, 2006, Apple announced the first MacBook Pro with Intel Core, replacing the previous product line, the PowerBook. On April 5, 2007, Apple introduced Boot Camp, on April 24, Apple introduced the 17-inch MacBook Pro, on May 16, Apple introduced the 12-inch MacBook to replace the iBook line, on July 5, Apple introduced the iMac to replace the eMac line, and on August 7, Apple introduced the iMac to replace the eMac line. In August 2009, Apple introduced OSX 10.6 Snow Leopard, the first x86-only OSX, announcing that Apple had officially abandoned support for PowerPC.
 
 ## First light of things to come
 Back at **WWDC 2005**, Apple introduced the Intel processor-powered **DTK** (Dev Transition Kit) to developers with the Intel-compatible OSX 10.4.1.
 
 >![](https://img10.360buyimg.com/ddimg/jfs/t1/180764/25/23716/64734/62579d5aE81009096/b0951f5b084ee1f7.png)</br>
->Mac OS X 10.4.1 Tiger Development Edition runs on a DTK with an Intel processor.
+>OSX 10.4.1 Tiger Development Edition runs on a DTK with an Intel processor.
 
-Soon, attempts were made to run a development version of Mac OS X on non-Apple hardware, but the system refused to run on a regular PC. When trying to install a development version of Mac OSX Tiger 10.4.1 on a non-Mac platform myou will be greeted by the following message:
+Soon, attempts were made to run a development version of OSX on non-Apple hardware, but the system refused to run on a regular PC. When trying to install a development version of OSX Tiger 10.4.1 on a non-Mac platform myou will be greeted by the following message:
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/114645/37/23798/613/62579d5aE48e17ebd/cefe59b7ef6d9187.png)
 
@@ -46,11 +46,11 @@ So Ironically, the most difficult obstacle to overcome was not the hardware or t
 
 The first known Hackintosh of the X86 era was documented on August 10, 2005, the day the [HardMac website](https://web.archive.org/web/20051018182314/http://hardmac.com/news/2005-08-10/) received two videos from an anonymous developer, which showed OSX 10.4.1 Tiger running on a Pentium M 735-powered Mitac 8050D laptop. It is worth mentioning that Apple released the MacBook Pro on January 10, 2006, which uses UEFI boot method instead of the x86 motherboards of that era that used BIOS boot (Legacy).
 
-On February 14, 2006, Maxxuss (crg92), a member of "The Guru" team, released the first patch. It patches the XNU kernel and removes boot and install restrictions, runs Mac OS X 10.4.4 on any Intel processor with SSE-2 support. The post is still available on InsanelyMac and is simply titled [**10.4.4 Security Broken**](https://www.insanelymac.com/forum/topic/9071-1044-security-broken/?page=1). A few hours later Apple released version 10.4.5 of OSX, and another two weeks later crg92 released a new patch for it.
+On February 14, 2006, Maxxuss (crg92), a member of "The Guru" team, released the first patch. It patches the XNU kernel and removes boot and install restrictions, runs OSX 10.4.4 on any Intel processor with SSE-2 support. The post is still available on InsanelyMac and is simply titled [**10.4.4 Security Broken**](https://www.insanelymac.com/forum/topic/9071-1044-security-broken/?page=1). A few hours later Apple released version 10.4.5 of OSX, and another two weeks later crg92 released a new patch for it.
 
 Apple released **OSX 10.4.6** and 10.4.7 in the following months, and members of the OSx86 community managed to replace the new versions of the kernel in these systems with the older kernel from 10.4.4 and 10.4.5, enabling installation of these new versions on PCs. However, starting with 10.4.8, Apple began to use the **SSE-3** instruction set more extensively, meaning that it was no longer compatible with processors that only supported the SSE-2 instruction set (such as the earlier Pentium 4) by simply patching the XNU kernel. New Zealand-based macOS and iOS developer and reverse engineer [**Mfiki**](http://mifki.com/) (Vitaly Pronkin) released a new, more streamlined patch to make the XNU kernel compatible with SSE2 on December 24, 2006; and developer Semthex made an instruction set simulator that emulates SSE-3 through SSE-2.
 
-**OSX 10.5 Leopard** was officially released in **2007**, and BrazilMac released a generic patch. Users could purchase the installation CD for the retail version of OSX, apply the patch, and have the XNU kernel run on a regular Intel PC. Since then, several hackers and developers (such as Lorem, SynthetiX, ToH, and the StageXNU Team) have released kernel patches. At the same time, Mac OS X "distributions" based on these patches began to appear, such as iATKOS, [**KALYWAY**](https://www.insanelymac.com/forum/topic/77069-kalyway-1051-dvd-release-the-official/ ) and [**iPC**](http://ipcosx86.wikidot.com/). Later, as the EFI boot method became more popular, these distributions gradually switched to having either Boot-132 or Chameleon built into the system.
+**OSX 10.5 Leopard** was officially released in **2007**, and BrazilMac released a generic patch. Users could purchase the installation CD for the retail version of OSX, apply the patch, and have the XNU kernel run on a regular Intel PC. Since then, several hackers and developers (such as Lorem, SynthetiX, ToH, and the StageXNU Team) have released kernel patches. At the same time, OSX "distributions" based on these patches began to appear, such as iATKOS, [**KALYWAY**](https://www.insanelymac.com/forum/topic/77069-kalyway-1051-dvd-release-the-official/ ) and [**iPC**](http://ipcosx86.wikidot.com/). Later, as the EFI boot method became more popular, these distributions gradually switched to having either Boot-132 or Chameleon built into the system.
 
 ## Halftime: A Glimpse into U.S. Courts
 
@@ -64,7 +64,7 @@ In **April 2008,** a company called **Psystar** was registered in Florida, USA. 
 - On **February 5, 2009,** [Pystar won the first round of Apple's copyright lawsuit](http://www.computerworld.com/s/article/9127579/Mac_clone_maker_wins_legal_round_against_Apple). This case means that Apple's EULA clause "prohibiting the operation of an operating system developed by Apple on a computer without the Apple logo" may not be legally valid.
 - In **April 2009,** an Apple spokesperson stated that Pystar did not disclose any financial information (profits, assets, liabilities) as required by law; Pystar's CEO and founder declined to comment and still refuses to disclose any financial information.
 - On May **26, 2009,** Pystar filed for bankruptcy protection in an attempt to delay Apple's lawsuit through the Chapter 11 bankruptcy. On August 12, 2009, Pystar's Chapter 11 petition was dismissed by the Florida District Court.
-- On **November 13, 2009,** the California District Court ruled that Pystar violated the DMCA and infringed Apple's copyrights, and set a hearing for December 14, 2009. on December 15, 2009, the California court issued a permanent injunction prohibiting Pystar from manufacturing, distributing, or assisting anyone to install any version (including future versions) of Mac OS X. On January 16, 2010, Pystar filed an appeal. 
+- On **November 13, 2009,** the California District Court ruled that Pystar violated the DMCA and infringed Apple's copyrights, and set a hearing for December 14, 2009. on December 15, 2009, the California court issued a permanent injunction prohibiting Pystar from manufacturing, distributing, or assisting anyone to install any version (including future versions) of OSX. On January 16, 2010, Pystar filed an appeal. 
 - Finally, on **May 14, 2012**, the Supreme Court denied Pystar's appeal and Apple won the final lawsuit.
 
 ## Moving onwards: Chameleon
@@ -94,7 +94,7 @@ In **2009**, OSX 10.6 **Snow Leopard** was released, the first version of OSX to
 
 In addition to being the first to make Chameleon compatible with OSX 10.6, Netkas also developed **FakeSMC** and **HWSensors**. Netkas is now working on extending AMD graphics card compatibility (like enabling Metal support for Raedon RX560 on macOS 10.14 Mojave, preventing Raedon W5700 from causing Kernel Panic on macOS 10.15.5, etc.).
 
-In **2011**, Mac OS X 10.7 Lion was released. This is Apple's **first OSX version that no longer provides installation discs**, and the first Mac OS X version to support **SSD TRIM**. Michael Belyaev (usr-sse2) from Russia was the first to find the installation method, write the modified installation image to a USB storage device, and start the XNU kernel through the **XPC EFI Bootloader** (a DUET-based emulated EFI bootloader). **Usr-sse2** is now an active member of the **acidanthera** team, involved in the development of **OpenCore** and **VirtualSMC**, among others. As of this writing, usr-sse2 is working on Apple's **IO80211Family**.
+In **2011**, OSX 10.7 Lion was released. This is Apple's **first OSX version that no longer provides installation discs**, and the first OSX version to support **SSD TRIM**. Michael Belyaev (usr-sse2) from Russia was the first to find the installation method, write the modified installation image to a USB storage device, and start the XNU kernel through the **XPC EFI Bootloader** (a DUET-based emulated EFI bootloader). **Usr-sse2** is now an active member of the **acidanthera** team, involved in the development of **OpenCore** and **VirtualSMC**, among others. As of this writing, usr-sse2 is working on Apple's **IO80211Family**.
 
 In the same year, **MacMan** from **tonymacx86** developed [**Chimera**](https://tonymacx86.blogspot.com/2011/04/chimera-unified-chameleon-bootloader.html), which is a branch of **Chameleon**. The tonymacx86 community provided the tool **UniBeast** (and later **MultiBeast**) with Chimera built in, greatly simplifying the installation of macOS on Wintel systems.
 
@@ -136,9 +136,9 @@ It took only 2 years for Clover to go from releasing the first version to replac
 
 - On June 6, 2005, Apple held WWDC 2005 and announced that Apple would switch from PowerPC to Intel
 - January 10, 2006 Apple released the first MacBook Pro with Intel
-- On August 28, 2009, Apple released Mac OS X 10.6 Snow Leopard, which officially stopped supporting PowerPC.
+- On August 28, 2009, Apple released OSX 10.6 Snow Leopard, which officially stopped supporting PowerPC.
 
-That said, it took 4 years for Apple to go from *announcing* the switch to Intel to Mac OS X dropping PowerPC support completely.
+That said, it took 4 years for Apple to go from *announcing* the switch to Intel to OSX dropping PowerPC support completely.
 
 ## When will OpenCore replace Clover?
 
