@@ -73,7 +73,7 @@ In order to add/apply any of the Patches, it is necessary to research your machi
 	- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
 - Using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) (Windows only): if you use SSDTTime under Windows, you can also dump the DSDT, which is not possible under macOS.
 
-### Avaialable Hotpatches
+### Available Hotpatches
 Listed below are all SSDTs contained in this chapter. Use the listed search terms to check your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch.
 
 #### Functional SSDTs
@@ -88,8 +88,8 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX).|`PNP0C09`
 [**SSDT-GPIO**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch)|Enables GPIO device|–
 [**SSDT-HPET**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))|Fixes IRQ conflicts. Required for on-board sound to work|–
-[**SSDT-I225V**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Inte I225-V Ethernet Controller on Gigabyte Boards|–
-[**SSDT-HV-…**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...))|Set of SSDTs to enable Hyper-V in macOS. Requires addtional Kext and binary renames.|
+[**SSDT-I225V**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards|–
+[**SSDT-HV-…**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...))|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames.|
 [**SSDT-IMEI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms.|`0x00160000`
 [**SSDT-LAN**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-NAVI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)|Enables AMD Navi GPUs in macOS
@@ -119,21 +119,21 @@ The SSDTs listed below are considered cosmetic and non-essential: They add devic
 [**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 
 ## Converting `.dsl` files to `.aml`
-The hotfixes in this section are provided as Disassembled ASL Files (.dsl). In order to use them in your system, do the following.
+The Hotfixes in this section are provided as Disassembled ASL Files (.dsl). In order to use them in your system, do the following.
 
 1. Click on the link to the .dsl file of your choice
 2. Click the `Raw`button
-3. Press `CMD+A` and `CMD+C`
+3. Press `⌘+A` and `⌘+C`
 4. Open maciASL
-5. Press `CMD+V`
+5. Press `⌘+V`
 6. Edit the file (if needed)
 7. Click on "File" > "Save As…"
 8. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
 9. Save it as "SSDT–…" (whatever the original file name is)
-10. Add the `.aml` file to `EFI/OC/ACPI` and to your config.plit (under `ACPI/Add`)
+10. Add the `.aml` file to `EFI/OC/ACPI` and to your config.plist (under `ACPI/Add`)
 11. Save and reboot to test it.
 
-**NOTE**: If you decide to simply download the whole repo, you can just open the .dsl files with maciASL insted.
+**NOTE**: If you decide to simply download the whole repo, you can just open the .dsl files with maciASL instead.
 
 ## Resources
 [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) – IO Reg Collection by khronokernel
