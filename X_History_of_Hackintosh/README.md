@@ -32,7 +32,7 @@ Back at **WWDC 2005**, Apple introduced the Intel processor-powered **DTK** (Dev
 >![](https://img10.360buyimg.com/ddimg/jfs/t1/180764/25/23716/64734/62579d5aE81009096/b0951f5b084ee1f7.png)</br>
 >OSX 10.4.1 Tiger Development Edition runs on a DTK with an Intel processor.
 
-Soon, attempts were made to run a development version of OSX on non-Apple hardware, but the system refused to run on a regular PC. When trying to install a development version of OSX Tiger 10.4.1 on a non-Mac platform myou will be greeted by the following message:
+Soon, attempts were made to run a development version of OSX on non-Apple hardware, but the system refused to run on a regular PC. When trying to install a development version of OSX Tiger 10.4.1 on a non-Mac platform you will be greeted by the following message:
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/114645/37/23798/613/62579d5aE48e17ebd/cefe59b7ef6d9187.png)
 
