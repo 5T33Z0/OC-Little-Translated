@@ -6,7 +6,9 @@
 **Applicable to**: 4th to 7th Gen Intel mobile CPUs and integrated graphics only! 
 
 ## Instructions
-In **DSDT**, search for `MEM2` or `PNP0C01`. If missing you can add ***SSDT-MEM2***.
+- In **DSDT**, search for `MEM2` or `PNP0C01`. 
+- If missing, you can add ***SSDT-MEM2***. 
+- If `PNP0C01` is present but is called `MEM` instead, you don't need this patch either – IOReg will still pick it up.
 
 ## Notes
 The general applicability and necessity of this patch is questionable. In my test, adding `SSDT-MEM2` did not result in IOAccelMemoryInfoUserClient being present. So this has to be tested on a case-by-case basis. If you are uncertain, don't use this patch.
