@@ -124,6 +124,10 @@ Scope (\_SB)
     }
 }
 ```
+### Enabling RX 6900 with XTXH 
+
+The XTXH variant (Device-id: `0x73AF`) is supported with WhateverGreen and spoofing device-id to `0x73BF`
+
 ## Notes
 When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen and the boot-arg. This also redirects Quick-Sync Video and Background rendering which would otherwise be handled by the iGPU to the GPU. This also resolves issues with DRM.
 
