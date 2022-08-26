@@ -76,12 +76,19 @@ This transforms the original code into this:
 	- The number of `Find` and `Replace` bytes must be equal. For example, if `Find` is 10 bytes, then `Replace` ***must*** also contain 10 bytes. If Replace is less than 10 bytes, use A3 (empty operation) to make it up.
 	- :warning: If there's a mismatch in the size between the `Find` and `Replace` sequence, you will be greeted by a "Patch is borked!" message from OpenCore and the machine won't boot.
 
-## `Find` data lookup method
-This method combines viewing the `DSDT` in a text-based editor like maciASL with finding data patterns by viewing the table as raw data in a Hex Editor (Visual Studio Code has an extension for that). This way, you can find the relevant content in binary data and text, observe the context, and you will soon be able to determine the `Find` data.
+## `Find` and `Replace` data lookup method using Hex
+Let's assume you want one specific parameter to be changed but the renaming rules you create don't target the specific location alone. This method combines viewing the `DSDT` in a text-based IDE like maciASL with finding corresponding data pattern in `Hex` to target a specific location and limit the reach of a binary rename. 
 
-## Replace content
+This approach is a bit outdated since we now have modifiers like `base` to specify exact locations where to apply a patch. Anyway, this is how it works:
 
-The Requirements state that when `Find` is done, [any rewriting of a piece of code to find confirmed binary data from it is highly implausible! However, Replace can work this way. Following the example above, we write a piece of code.
+- Find the device, method or paramater you want to change in maciASL.
+- View the the DSDT in a Hex code (Visual Studio Code has an extension for it) and find the corresponding section
+- Look at the surrounding Code
+- Select and incorporate a few characters left and right of what you actually want to change and use that as your `Find` mask – since it's in hex already you can just copy it over.
+- Next, you change the "inside" of the mask (the parameter you actually want to change) and leave the surrounding code alone to create your `Replace` rule.
+- Apply and test.
+
+**NOTE**: You need to ensure that the sequence you want to change is a unique pattern, otherwise it will be applied in more than one section.
 
 ## Preset variable method techniques
 The preset variable method is used to pre-assign some variables of ACPI to `FieldUnitObj` to achieve the purpose of initialization. Although these variables are assigned values, they are not changed until their method is called. Modifying these variables through third-party patch Scope (\) files can achieve our expected patch effect.
