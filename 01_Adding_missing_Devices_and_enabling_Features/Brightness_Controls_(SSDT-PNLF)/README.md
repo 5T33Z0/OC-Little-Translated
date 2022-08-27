@@ -1,4 +1,4 @@
-# Injecting Brightness Control (`SSDT-PNLF`)
+# Brightness Controls (`SSDT-PNLF`)
 
 ## `PNLF` Injection Methods
 
@@ -6,7 +6,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 1. **Common injection method**:
 
-	- **Kext**: WhateverGreen.kext
+	- **Kext**: Lilu.kext + WhateverGreen.kext
 	- **Patch**: Custom brightness patch or RehabMan brightness patch
 
 2. **ACPI injection method**:
@@ -22,7 +22,7 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 
 **I. Kexts:** pick *one* of them, *not* all!
 
-- [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver. Requires [**Lilu**](https://github.com/acidanthera/Lilu/releases)) **or**
+- [**Lilu**](https://github.com/acidanthera/Lilu/releases) plus [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver **or**
 - [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
 - [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/) (Deprecated. Predecessor of IntelBacklight.kext.)
 
@@ -32,9 +32,10 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 - Modify the driver's settings (right-click on the kext and select "Show Package Contents"), open the `Info.plist` and look for: `\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
 
 **II. Patches:** (either or, based on the chosen injection method)
-
+  
+  - Acidanthera's Brightnes Patch:
+  	- ***SSDT-PNLF*** (included in OpenCore Package. Recommended.)
   - Custom Brightness Patches:
-
     - ***SSDT-PNLF-SNB_IVY***: For 2nd and 3rd Gen Intel CPUs
     - ***SSDT-PNLF-Haswell_Broadwell***: For 4th and 5th Gen
     - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
