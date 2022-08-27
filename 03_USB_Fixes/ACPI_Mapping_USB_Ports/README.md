@@ -57,7 +57,7 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 
 ### Required Tools
 - [**Clover Bootmanager**](https://github.com/CloverHackyColor/CloverBootloader/releases) for dumping your System's ACPI tables.
-- [**maciASL**](https://github.com/acidanthera/MaciASL) or [**XIASL**](https://github.com/ic005k/XIASL](https://github.com/ic005k/Xiasl/releases) (cross-platform) for editing `.aml` files.
+- [**maciASL**](https://github.com/acidanthera/MaciASL) or [**XIASL**](https://github.com/ic005k/Xiasl/releases) (cross-platform) for editing `.aml` files.
 - [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
 - [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports/Example_Files) (for following along)
