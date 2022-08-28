@@ -1,7 +1,7 @@
 # Mapping USB ports via ACPI without a replacement Table
 
 ## About
-In the previous chapter we replaced the original USB port mapping table by our own to enable and disable ports for macOS only. This approach requires to drop and replace the orginal table and takes a lot of effort.
+In the previous chapter we replaced the original USB port mapping table by our own to enable and disable ports for macOS only. This approach requires to drop and replace the ordinal table and takes a lot of effort.
 
 But there's a simpler method to achieve the same: instead of rewriting the whole USB port mapping table, we just use a binary rename to reroute calls to the `UPC` method to `XUPC` and add an SSDT to only modify the 2 relevant packets of the `UPC` for each port which are then 
 handed over to the `GUPC` method inside the Root Hub to enable/disable a port and the type of connection it has.
@@ -88,10 +88,10 @@ DefinitionBlock ("", "SSDT", 2, "INTEL", "GUPC", 0x00000000)
 :warning: Before attempting this method, make sure to disable any previously created replacement USB tables and corresponding drop rules and USBPort.kexts!
 
 ### 1. Prepare SSDT-GUPC.aml
-- Copy the code for SSDT-GUPC from aboove into maciASL
+- Copy the code for SSDT-GUPC from above into maciASL
 - Modify the `USBP += One` section as indicated
 - Export the file as `SSDT-GUPC.aml`
-- Add it to EFI/OC/ACPI and config.plist
+- Add it to `EFI/OC/ACPI` and config.plist under `ACPI/Add`
 
 ### 2. Add binary rename
 -  Under ACPI/Patch, add the following:
