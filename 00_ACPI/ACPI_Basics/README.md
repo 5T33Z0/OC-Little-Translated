@@ -38,5 +38,5 @@ Continue to the next Chapter, [**ASL Basics**](https://github.com/5T33Z0/OC-Litt
 
 ## CREDITS and RESOURCES
 - Original [**ASL Guide**](https://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1) by suhetao
-- ACPI [**Specifications**](https://uefi.org/specs/ACPI/6.5/index.html)
+- [**ACPI Specifications**](https://uefi.org/specifications)
 - ASL Tutorial by acpica.org ([**PDF**](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
