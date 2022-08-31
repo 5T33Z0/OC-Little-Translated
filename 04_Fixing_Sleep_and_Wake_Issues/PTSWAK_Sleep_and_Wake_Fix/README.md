@@ -9,20 +9,19 @@ The integrated patch is a framework that includes:
   - Controls for the dGPU: `_ON`, `_OFF`
   - Adds 6 extended patch interfaces: `EXT1`, `EXT2`, `EXT3`, `EXT4`, `EXT5` and `EXT6` 
   - Defines forced Sleep pass parameters `FNOK` and `MODE`, see `PNP0C0E Sleep Correction Method` for details.
-  - Defines debug parameters `TPTS` and `TWAK` for detecting and tracking `Arg0` changes during sleep and wake-up. For example, add the following code to the brightness shortcut patch:
-  
+  - Defines debug parameters `TPTS` and `TWAK` for detecting and tracking `Arg0` changes during sleep and wake-up. For example, add the following code to the brightness shortcut patch:  
 	```asl
-/* A keystroke: */
-\RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
-\RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
-```
+	/* A keystroke: */
+	\RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
+	\RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
+	```
 When pressing the brightness shortcut key, you can see the value of `Arg0` on the console after the previous sleep and wake up.
 
 **NOTE**: To debug ACPI, you need to install the driver `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging)for details.
 
 ## Required Renames
 
-The `_PTS` and `_WAK` must be renamed in order to use the integrated patch. Choose the correct name change based on the original DSDT content, e.g.
+The `_PTS` and `_WAK` must be renamed in order to use the integrated patch (see `PTS-TTS-WAK_Renames.plist`). Choose the correct name change based on the original DSDT content, e.g.
 
 - `_PTS` to `ZPTS(1,N)` for:
 
