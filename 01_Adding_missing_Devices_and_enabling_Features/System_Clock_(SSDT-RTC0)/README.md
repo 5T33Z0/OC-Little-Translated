@@ -28,7 +28,7 @@ Device (RTC)
   }
 }
 ```
-Another option is to use `SSDT-RTC0.aml` which adds a fake `RTC` for macOS, which uses a scope and the `_OSI` switch to set return value for `_STA` to `0x0F` for macOS, thus enabling the fake RTC only when the Darwin Kernel is detected:
+In this case, you can add `SSDT-RTC0.aml` which adds and enables a fake Real Time Clock (`RTC0`) device for macOS only:
 
 ```asl
 DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
