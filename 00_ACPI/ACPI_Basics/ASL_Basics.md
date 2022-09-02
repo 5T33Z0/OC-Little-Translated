@@ -6,7 +6,9 @@
 
 - [About ASL](#about-asl)
 - [ASL Guidelines](#asl-guidelines)
-  - [`DefinitonBlock`](#definitonblock)
+  - [The `DefinitionBlock`](#the-definitionblock)
+    - [`DefinitionBlock` Example](#definitionblock-example)
+  - [Control Methods](#control-methods)
   - [`External` References](#external-references)
   - [ACPI Preset Functions](#acpi-preset-functions)
     - [`_OSI` (Operating System Interfaces)](#_osi-operating-system-interfaces)
@@ -37,24 +39,51 @@ The following information is based on the documentation of the [ACPI Specificati
 A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines.
 
 ## ASL Guidelines
-### `DefinitonBlock`
 
-1. The variable defined in the `DefinitionBlock` must not exceed 4 characters, and not begin with digits. Just check any DSDT/SSDT – no exceptions.
-2. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with:
+### The `DefinitionBlock`
+The `DefinitionBlock` is the foundation of every SSDT. All ASL code must reside inside of DefinitionBlock declarations `{}` (this is called the `Root Scope`) to be valid. ASL code found outside of any DefinitionBlock will be regarded as invalid. 
 
-   ```asl
-   DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
-   {
-   ```
-   and is ended by
+General form of the `DefinitionBlock` (numbers indicate the amount of letters that can be used in each section):
 
-   ```asl
-   }
-   ```
-   This is called the `Root Scope`.
+```asl
+DefinitionBlock ("", "1234", 2, "123456", "12345678", 0x00000000)
+```
 
-The `xxxx` parameters refer to the `File Name`, `OEMID`, `Table ID` and `OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, the third parameter must be `0x02`. Other parameters are free to fill in.
+The `DefinitionBlock` provides information about itself (in brackets):
 
+Parameter | Description|
+----------|--------------
+**AMLFileName**| Name of the AML file. Can be a null string.
+**TableSignature**| Signature of the AML file (can be `DSDT` or `SSDT`). 4-character string
+**ComplianceRevision**| A value of `2` or greater enables 64-bit arithmetic (for 64 bit Systems)</br>A value of `1` or less enables 32-bit arithmetic (for 32 bit Systems)
+**OEM ID**| ID of the original equipment manufacturer (OEM) developing the ACPI table (6-character string)
+**OEM Table ID**| A specific identifier for the table (8-character string)
+**OEMRevision**| Revision number set by the OEM (32-bit number)
+
+#### `DefinitionBlock` Example
+:bulb: For hackintoshing, we usually use something like this. The SSDT begins with:
+
+```asl
+DefinitionBlock ("", "SSDT", 2, "Hack", "CpuPlug", 0x00000000)
+{
+	// Your code goes here!
+```
+and is ended by:
+
+```asl
+}
+```
+**Translation**:
+
+- `""` &rarr; **AMLFileName** 
+- `"SSDT"` &rarr; **TableSignature**
+- `2` &rarr; **ComplianceRevision** (for 64 bit OSes)
+- `"hack"` &rarr; **OEM ID** (Author name): "hack" is pretty common bur generic. OC Little tables use `"OCLT"`. For my own tables, I use `"5T33Z0"`. 
+- `"CpuPlug"` &rarr; **OEM Table ID**: Name the SSDT is identified as in the ACPI environment (not the file name). Usually, we name the SSDT based on the `Device` or `Method` it addresses. In this example `"CpuPlug"`.
+
+**NOTE**: If you write replacement tables (e.g. for USB port declarations), you need to use the same OEM Table ID as the table you want to replace. 
+
+### Control Methods
 1. Methods and variables beginning with an underscore `_` are reserved for operating systems. That's why some ASL tables contain `_T_X` trigger warnings after decompiling.
 2. A `Method` always contains either a `Device` or a `Scope`. As such, a `Method` _cannot_ be defined without a `Scope`. Therefore, the example below is **invalid** because the Method is followed by a `DefinitionBlock`:
 
@@ -127,21 +156,21 @@ The `xxxx` parameters refer to the `File Name`, `OEMID`, `Table ID` and `OEM Ver
 
 |  Quote Types   | External Reference | Addressed paramter
 | :------------: | :----------------- | :----------------------- 
-|   UnknownObj   | `External (\_SB.EROR, UnknownObj`             | (avoid to use)                                                          
-|     IntObj     | `External (TEST, IntObj`                      | `Name (TEST, 0)`                                                        
-|     StrObj     | `External (\_PR.MSTR, StrObj`                 | `Name (MSTR,"ASL")`                                                     
+|   UnknownObj   | `External (\_SB.EROR, UnknownObj`| (avoid to use)                                                          
+|     IntObj     | `External (TEST, IntObj`| `Name (TEST, 0)`                                                        
+|     StrObj     | `External (\_PR.MSTR, StrObj`| `Name (MSTR,"ASL")`                                                     
 |    BuffObj     | `External (\_SB.PCI0.I2C0.TPD0.SBFB, BuffObj` | `Name (SBFB, ResourceTemplate ()`<br/>`Name (BUF0, Buffer() {"abcde"})` |
 |     PkgObj     | `External (_SB.PCI0.RP01._PRW, PkgObj`        | `Name (_PRW, Package (0x02) { 0x0D, 0x03 })`
 |  FieldUnitObj  | `External (OSYS, FieldUnitObj`                | `OSYS,   16,`                                                           
 |   DeviceObj    | `External (\_SB.PCI0.I2C1.ETPD, DeviceObj`    | `Device (ETPD)`                                                         
 |    EventObj    | `External (XXXX, EventObj`                    | `Event (XXXX)`                                                          
 |   MethodObj    | `External (\_SB.PCI0.GPI0._STA, MethodObj`    | `Method (_STA, 0, NotSerialized)`                                       |
-|    MutexObj    | `External (_SB.PCI0.LPCB.EC0.BATM, MutexObj`  | `Mutex (BATM, 0x07)`                                                    
-|  OpRegionObj   | `External (GNVS, OpRegionObj`                 | `OperationRegion (GNVS, SystemMemory, 0x7A4E7000, 0x0866)`              |
-|  PowerResObj   | `External (\_SB.PCI0.XDCI, PowerResObj`       | `PowerResource (USBC, 0, 0)`                                            |
-|  ProcessorObj  | `External (\_SB.PR00, ProcessorObj`           | `Processor (PR00, 0x01, 0x00001810, 0x06)`                              |
+|    MutexObj    | `External (_SB.PCI0.LPCB.EC0.BATM, MutexObj`  | `Mutex (BATM, 0x07)`|
+OpRegionObj   | `External (GNVS, OpRegionObj`                 | `OperationRegion (GNVS, SystemMemory, 0x7A4E7000, 0x0866)`|
+|  PowerResObj   | `External (\_SB.PCI0.XDCI, PowerResObj`       | `PowerResource (USBC, 0, 0)`|
+|  ProcessorObj  | `External (\_SB.PR00, ProcessorObj`           | `Processor (PR00, 0x01, 0x00001810, 0x06)`|
 | ThermalZoneObj | `External (\_TZ.THRM, ThermalZoneObj`         | `ThermalZone (THRM)`                                                    
-|  BuffFieldObj  | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`                                        |
+|  BuffFieldObj  | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`|
 
 ### ACPI Preset Functions
 
