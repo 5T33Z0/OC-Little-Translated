@@ -1,61 +1,73 @@
-## Fixing PNP0C0E Sleep Method
-
-- ACPI Specification:
-
-  `PNP0C0E` - Sleep Button Device  
-  `PNP0C0D` - Lid Device
-
-  Please refer to the ACPI specification for details on `PNP0C0E` and `PNP0C0D`.
-
-- `PNP0C0E` Sleep conditions:
-
-  - Execute `Notify(***.SLPB, 0x80)`. `SLPB` is the `PNP0C0E` device name.
-  
-- `PNP0C0D` Sleep condition
-
-  - `_LID` returns `Zero` . `_LID` is the current state of the `PNP0C0D` device.
-  - Execute `Notify(***.LID0, 0x80)`. `LID0` is the `PNP0C0D` device name.
+# Fixing PNP0C0E Sleep
 
 ## Problem description
 
-Some machines provide a sleep button (small moon button), e.g. `Fn+F4` for some ThinkPads, Fn+Insert for Dell, etc. When this button is pressed, the system performs `PNP0C0E` sleep. However, ACPI incorrectly passes shutdown parameters to the system instead of sleep parameters, which causes the system to crash. Even if it is able to sleep it wakes up normally and the system's working state is destroyed.
+Some machines have a sleep button (half moon button), e.g. `Fn+F4` for some ThinkPads, `Fn+Insert` for Dell, etc. When this button is pressed, the system enters what's called `PNP0C0E` sleep. However, ACPI incorrectly passes shutdown instead of sleep parameters to the system, which causes it to crash/reset. Even if the system is able to sleep it resets on wake.
 
 One of the following methods can fix this problem:
 
 - Intercept the parameter passed by ACPI and correct it.
 - Convert `PNP0C0E` sleep to `PNP0C0D` sleep.
 
+## PNP0C0E/PNP0C0E Sleep method explained
+
+- **ACPI Specifications**:
+	- `PNP0C0E` &rarr; Hardware ID of Sleep Button Device `SLPB`
+	- `PNP0C0D` &rarr; Hardware ID of Lid Device `LID0`
+- `PNP0C0E` Sleep condition:
+	- If the Sleep Button is pressed
+	- `Notify(***.SLPB, 0x80)` is triggered
+- `PNP0C0D` Sleep condition:
+  - If the lid is closes, `_LID` method returns `Zero`. (`_LID` is the control method for the `PNP0C0D` device).
+  - `Notify(***.LID0, 0x80)` is triggered
+
+### `PNP0C0E` Sleep characteristics
+
+- The sleep process is slightly faster.
+- But it cannot be terminated/interrupted.
+- Enabled by setting `MODE` = `1` in ***SSDT-PTSWAKTTS***
+
+### `PNP0C0D` Sleep characteristics
+
+- Sleep process is terminated immediately by pressing the sleep button again.
+- When connected to an external display, pressing the sleep button does the following:
+	- Internal screen is switched off 
+	- Working screen siwtches to the external display
+	- Pressing the sleep button again restores the previous state.
+- Enabled by setting `MODE` = `0` (default) in ***SSDT-PTSWAKTTS***
+
+**NOTE**: Please refer to the ACPI specification for more details about `PNP0C0E` and `PNP0C0D`.
+
 ## Solution
 
 ### 3 Associated Patches
 
-- ***SSDT-PTSWAKTTS***: Defines `FNOK` and `MODE` variables to capture the change of `FNOK`. See the PTSWAK Integrated Extension Patch.
+- ***SSDT-PTSWAK***: define variables `FNOK` and `MODE` to capture changes in `FNOK`. See [**PTSWAK Comprehensive Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
+	- `FNOK` indicates the key state:  
+		- `FNOK` = `1`: Sleep button is pressed
+		- `FNOK` = `0`: After pressing the sleep button again or the machine is woken up
+	- `MODE` sets the sleep mode:
+		- `MODE` = `1`: `PNP0C0E` sleep
+		- `MODE` = `0`: `PNP0C0D` sleep
 
-	`FNOK` indicates keystroke status  
-	`FNOK` = 1: Sleep button is pressed  
-	`FNOK` = 0: Sleep button is pressed again or after the machine is woken up  
-	`MODE` sets the sleep mode  
-	`MODE` = 1: `PNP0C0E` sleep  
-	`MODE` = 0: `PNP0C0D` sleep
-
-  **Note**: Set `MODE` according to your needs, but do not change `FNOK`.
+:bulb: **NOTE**: Set `MODE` according to your needs, but do not change `FNOK`!
 
 - ***SSDT-LIDpatch*** : Capture `FNOK` changes
 
-  	If `FNOK` = 1, the current state of the cover device returns `Zero`.  
-  	If `FNOK` = 0, the current state of the lid device returns to the original value
+  	If `FNOK` = `1`, the current state of the cover device returns `Zero`.  
+  	If `FNOK` = `0`, the current state of the lid device returns to the original value
 
-  **Note**: `PNP0C0D` device name and path should be consistent with ACPI.
+  **NOTE**: `PNP0C0D` device name and path should be consistent with ACPI.
 
 - ***Sleep Button Patch***: When the button is pressed, make `FNOK` = `1` and perform the corresponding operation according to different sleep modes
 
-**Note**: `PNP0C0D` device name and path should be the same as ACPI.
+**NOTE**: `PNP0C0D` device name and path should be the same as in the `DSDT`.
 
 #### Description of the two Sleep Modes
 
-- `MODE` = 1: When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1`. ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
+- `MODE` = `1`: When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1` ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
 
-- `MODE` = 0: When the sleep button is pressed, in addition to completing the above process, ***SSDT-LIDpatch*** also pounces on `FNOK=1`, causing `_LID` to return to `Zero` and executing `PNP0C0D` sleep. Resume `FNOK=0` after wakeup. A complete `PNP0C0D` sleep and wake-up process is completed.
+- `MODE` = `0`: When the sleep button is pressed, in addition to completing the above process, ***SSDT-LIDpatch*** also catches `FNOK=1`, `_LID` return to `Zero` and executes `PNP0C0D` sleep. After waking up, `FNOK` returns to `0`, which completes the `PNP0C0D` sleep and wake cycle.
 
 The following are the main contents of ***SSDT-LIDpatch***:
 
@@ -94,10 +106,9 @@ Else /* PNP0C0D sleep */
 }
 ```
 
+## Name change and patch combination examples
 
-### Name change and patch combination examples
-
-#### Example 1: Dell Latitude 5480
+### Example 1: Dell Latitude 5480
 
 - **ACPI Renames**:
   - PTSWAK renamed: `_PTS` to `ZPTS`, `_WAK` to `ZWAK`
@@ -109,53 +120,36 @@ Else /* PNP0C0D sleep */
   - ***SSDT-LIDpatch***: Cover status patch.
   - ***SSDT-FnInsert_BTNV-dell***: Sleep button patch.
 
-#### Examples 2: ThinkPad X1C5th
-
+### Example 2: ThinkPad X1C5th
 - **ACPI Renames**:
 	- PTSWAK renames: `_PTS` to `ZPTS` and `_WAK` to `ZWAK`
 	- Cover Status rename: `_LID` to `XLID`
 	- Function Key rename: `_Q13 to XQ13` (TP-Fn+F4)
-  
 - **Patch combination**:
-  
   - ***SSDT-PTSWAK***: Combined patch. Set `MODE` according to your needs.
   - ***SSDT-LIDpatch***: Cover status patch. Modify `LID0` to `LID` within the patch.
   - ***SSDT-FnF4_Q13-X1C5th***: Sleep button patch.
-  
-  **Note 1**: The Sleep Button on X1C5th is `Fn+4`, on other ThinkPads it can be`Fn+F4`  
-  **Note 2**: On ThinkPads the `LPC` controller name could be `LPC` or `LPCB`.
 
-### Fix `PNP0C0E` Sleep on other machines
+**NOTES**:
 
-- Use patch: ***SSDT-PTSWAK***; rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See "PTSWAK Comprehensive Extension Patch" for more details.
+- The Sleep Button on X1C5th is `Fn+4`, on other ThinkPads it can be`Fn+F4`  
+- On ThinkPads the `LPC` controller name could be `LPC` or `LPCB`.
 
-  Modify `MODE` to suit your needs.
+## Fixing `PNP0C0E` Sleep on other machines
 
-- Use patch: ***SSDT-LIDpatch***; rename: `_LID` to `XLID` .
-
-  Note: `PNP0C0D` device name and path should be the same as ACPI.
-
+- Use patch: ***SSDT-PTSWAK***; 
+	- rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See "PTSWAK Comprehensive Extension Patch" for more details. 
+	- Modify `MODE` to suit your needs.
+- Use patch: ***SSDT-LIDpatch***; rename: `_LID` to `XLID`.
+	- Note: `PNP0C0D` device name and path should be the same as ACPI.
 - Find the location of the sleep button and make a ***Sleep button patch***.
+  - Usually, the sleep button is `_Qxx` under `EC`, and this `_Qxx` contains the `Notify(***.SLPB,0x80)` instruction. If you can't find it, search for `Notify(***.SLPB,0x80)` in the `DSDT`, find its location, and gradually work its way up to the initial location.
+  - Refer to the examples to create the sleep button patch and the necessary name change.
 
-  - Normally, the sleep button is `_Qxx` under `EC`, and this `_Qxx` contains the `Notify(***.SLPB,0x80)` instruction. If you can't find it, DSDT searches for `Notify(***.SLPB,0x80)`, finds its location, and gradually works its way up to the initial location.
-  - Refer to the example to create the sleep button patch and the necessary name change.
-
-  Note 1: SLPB is the `PNP0C0E` device name. If it is confirmed that there is no `PNP0C0E` device, add the patch: SSDT-SLPB (located in Adding Missing Parts).
-
-  Note 2: `PNP0C0D` device name and path should be the same as ACPI.
-
-### `PNP0C0E` Sleep characteristics
-
-- The sleep process is slightly fast.
-- The sleep process cannot be terminated.
-
-### `PNP0C0D` Sleep characteristics
-
-- Sleep process is terminated immediately by pressing the sleep button again.
-
-- When connected to external display, after pressing the sleep button, the working screen is external display (internal screen is off); press the sleep button again, the internal screen and external display are normal.
+**NOTES**:
+- `SLPB` is the `PNP0C0E` device name. If it is confirmed that there is no `PNP0C0E` device, add the ***SSDT-SLPB*** (located in Chapter 1).
+- `PNP0C0D` device name and path should be the same as in the `DSDT`.
 
 ## Caution
 
 - `PNP0C0E` and `PNP0C0D` device name and path should be consistent with ACPI.
-asl
