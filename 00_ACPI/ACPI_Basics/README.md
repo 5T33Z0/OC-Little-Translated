@@ -1,8 +1,4 @@
 # ACPI Basics
-- [A brief Introduction to ACPI](#a-brief-introduction-to-acpi)
-  - [What is ACPI?](#what-is-acpi)
-  - [Why to prefer SSDTs over a patched DSDT](#why-to-prefer-ssdts-over-a-patched-dsdt)
-
 ## A brief Introduction to ACPI
 "ACPI… the final frontier…". No, not really. But this is how overwhelmed most Hackintosh users feel the first time, they open an `.aml` file and look inside it. Understanding what to make of all of it seems like an expedition of epochal proportions impossible to grasp. And that's who this introduction is for.
 
