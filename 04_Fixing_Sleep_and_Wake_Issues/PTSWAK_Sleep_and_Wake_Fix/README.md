@@ -15,7 +15,7 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 	\RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
 	\RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
 	```
-When pressing the brightness shortcut key, you can trace changes for `Arg0` in the Console App after a previous sleep and wake cycle.
+	When pressing the brightness shortcut key, you can trace changes for `Arg0` in the Console App after a previous sleep and wake cycle.
 
 **NOTE**: To debug ACPI, you need to install `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) for details.
 
