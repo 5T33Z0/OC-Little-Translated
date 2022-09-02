@@ -2,22 +2,22 @@
 
 ## Description
 
-By renaming the `_PTS` (Prepare to Sleep) and `_WAK` (Wake) methods, adding a comprehensive SSDT hotfix (`SSDT-PTSWAKTTS`) which redefines them problems with sleep and wake can be fixed on certain machines.
+By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition to State) methods and redfining them via `SSDT-PTSWAKTTS`, problems with sleep and wake can be fixed on certain machines.
 
-The integrated patch is a framework that includes:
+***SSDT-PTSWAKTTS*** is an integrated patch which provides a framework with the following features:
 
   - Controls for the dGPU: `_ON`, `_OFF`
-  - Adds 6 extended patch interfaces: `EXT1`, `EXT2`, `EXT3`, `EXT4`, `EXT5` and `EXT6` 
-  - Defines forced Sleep pass parameters `FNOK` and `MODE`, see `PNP0C0E Sleep Correction Method` for details.
-  - Defines debug parameters `TPTS` and `TWAK` for detecting and tracking `Arg0` changes during sleep and wake-up. For example, add the following code to the brightness shortcut patch:  
+  - 6 extended patch interfaces: `EXT1`, `EXT2`, `EXT3`, `EXT4`, `EXT5` and `EXT6` 
+  - Defines forced Sleep pass parameters `FNOK` and `MODE` (see [**PNP0C0E Sleep Correction Method**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)).
+  - Defines debugging parameters `TPTS` and `TWAK` for tracking `Arg0` changes during sleep and wake. For example, add the following code to the brightness shortcut patch:  
 	```asl
 	/* A keystroke: */
 	\RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
 	\RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
 	```
-When pressing the brightness shortcut key, you can see the value of `Arg0` on the console after the previous sleep and wake up.
+When pressing the brightness shortcut key, you can trace changes for `Arg0` in the Console App after a previous sleep and wake cycle.
 
-**NOTE**: To debug ACPI, you need to install the driver `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging)for details.
+**NOTE**: To debug ACPI, you need to install `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) for details.
 
 ## Required Renames
 
@@ -51,7 +51,7 @@ The `_PTS` and `_WAK` must be renamed in order to use the integrated patch (see 
     {
   ```
 
-If `_TTS` exists in the DSDT, you need to rename it too; if it doesn't, you don't need to rename it. Choose the correct renaming based on the original DSDT content, e.g.
+If `_TTS` exists in the `DSDT`, you need to rename it too; if it doesn't, you don't need to rename it. Choose the correct renaming based on the original DSDT content, e.g.
 
 - `_TTS` to `ZTTS(1,N)` for:
 
