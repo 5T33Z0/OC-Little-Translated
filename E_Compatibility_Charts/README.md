@@ -5,7 +5,7 @@ Component | Compatibility Chart
 ----------|--------------------
 **CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
 **CPUs** used in real Macs| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0)
-**AMD GPUs**|[**AMD GPU Compatibility for macOS**](https://elitemacx86.com/threads/amd-gpu-compatibility-list-for-macos.617/)
+**AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
 **DRM** | [**DRM Compatibility Chart**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 **WiFi/BT** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI)
 **SSDs**| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0)
