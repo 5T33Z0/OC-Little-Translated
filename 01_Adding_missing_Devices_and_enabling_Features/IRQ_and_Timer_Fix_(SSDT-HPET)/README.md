@@ -124,18 +124,20 @@ Device (HPET)
 ```
 In this case you need to do the following:
 
-- Rename `WNTF` to `XXXX` in HPET:
-```Comment: HPET WNTF to XXXX
+- Rename `WNTF` to `XXXX` in `HPET`:
+	```text
+	Comment: HPET WNTF to XXXX
 	Find: 574E5446
 	Replace: 58585858
- 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
-```
-- Rename `WXPF` to `YYYY` in HPET:
-```Comment: HPET WXPF to YYYY
+	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
+	```
+- Rename `WXPF` to `YYYY` in `HPET`:
+	```text
+	Comment: HPET WXPF to YYYY
 	Find: 57585046
 	Replace: 59595959
 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
-```
+	```
 - Add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml`
 - Optional: Add `SSDT-IPIC` if sound doesn't work after reboot
 
