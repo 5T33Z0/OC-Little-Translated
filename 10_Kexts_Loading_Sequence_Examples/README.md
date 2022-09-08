@@ -1,16 +1,25 @@
 # Kext Loading Sequence Examples
 
-This Chapter contains a collection of `config.plist` examples to demonstrate the loading sequences of certain kexts and family of kexts. In contrast to Clover, where just drop required kexts to `Clover\kexts\other` folder, OpenCore loads kexts in the exact same order they are listed in the "Kernel > Add" section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot!
+This Chapter contains a collection of `config.plist` examples to demonstrate the loading sequences for certain kexts and family of kexts. 
 
-Basically, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the most essential kexts that are required by almost every Hackintosh to boot. These are:
+In contrast to Clover, where just drop required kexts to `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot!
+
+In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the most essential kexts that are required by almost every Hackintosh to boot. These are:
 
 1. **Lilu.kext**
 2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ Sensor Plugins)
-3. **Whatevergreen.kext**
+3. **Whatevergreen**
 
-The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because theses contain additional kexts nested inside them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. Same goes for having kexts in the list which aren't present in the "OC > kexts" Folder. So it's of utmost importance that the kexts are loaded in the correct order and that the content of the config.plist reflects what's inside the OC Folder 1:1. The examples listed below should provide you a good guideline on how to organize and combine kexts.
+The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because these contain additional kexts nested inside them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. 
+
+Same goes for having kexts in the list which aren't present in the `OC/Kexts` folder. So it's of utmost importance that the kexts are loaded in the correct order and that the content of the `config.plist` reflect the kexts present in the OC folder 1:1. The examples listed below provide a solid guideline on how to organize and combine kexts.
 
 For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
+
+## Lilu and VirtualSMC first?
+Although it is recommended to load **Lili** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, this is not a requirement per se. **Lilu** and **VirtualSMC** only need to load *before anything that relies on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct load order when creating a config snapshot.
+
+For reviewers of configs this complicates things. So when in doubt, either create a (new) snapshot in ProperTree or just put **Lilu** and **VirtualSMC** first to eliminate dependency issues altogether!
 
 ## Kernel Support Table
 Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for kext is very useful to set up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kext are loaded for which macOS by specifying the kernel range. It's basically the same feature Clover provides. But instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.) you specify the lower and upper limit which is a lot smarter because this way you don't create duplicate kexts (which you maybe forget to update later).
@@ -33,6 +42,7 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 10.15 Catalina    |19.0.0|	19.99.99
 11 Big Sur        |20.0.0| 20.99.99
 12 Monterey       |21.0.0|	21.99.99
+13 Ventura        |22.0.0| 22.99.99
 
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
