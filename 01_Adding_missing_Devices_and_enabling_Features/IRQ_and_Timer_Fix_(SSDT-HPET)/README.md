@@ -108,6 +108,37 @@ Scope (\)
 ```
 **NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
+#### If `HPAE/HPTE` does not exist
+On a lot of ThinkPads with Intel CPUs prior Skylake, `Device HPET` is disabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
+
+```asl
+Device (HPET)
+{
+    Name (_HID, EisaId ("PNP0103") /* HPET System Timer */)  // _HID: Hardware ID
+    Method (_STA, 0, NotSerialized)  // _STA: Status
+    {
+        If ((\WNTF && !\WXPF))
+        {
+            Return (0x00)
+        ...
+```
+In this case you need to do the following:
+
+- Rename `WNTF` to `XXXX` in HPET:
+```Comment: HPET WNTF to XXXX
+	Find: 574E5446
+	Replace: 58585858
+ 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
+```
+- Rename `WXPF` to `YYYY` in HPET:
+```Comment: HPET WXPF to YYYY
+	Find: 57585046
+	Replace: 59595959
+	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
+```
+- Add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml`
+- Optional: Add `SSDT-IPIC` if sound doesn't work after reboot
+
 ### Disable **`RTC`**
 Older machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
 
