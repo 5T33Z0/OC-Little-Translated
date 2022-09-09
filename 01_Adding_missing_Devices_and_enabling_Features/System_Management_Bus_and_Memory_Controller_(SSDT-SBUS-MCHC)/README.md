@@ -26,7 +26,7 @@ In order for the System Management Bus to work probably on macOS, Device `SMBUS`
 - If it's not present, you need a fix. Take a mental note.
 - Next, search for **SMBU** or **SBUS** respectively. If present, it looks like this:</br>![SMBU](https://user-images.githubusercontent.com/76865553/189326159-96b10b62-4d89-45c5-99b5-d975f51a6463.png)
 - In this case you don't need **SSDT-SMBU** nor **SSDT-SBUS**.
-- If it's not present, check your `DSDT` and figire out the device name: it's either called `SMBU` or `SBUS`. Take a note
+- If it's not present, continue with Step 2.
 
 ### 2. Finding the PCI name and path of your system's SMBus
 
