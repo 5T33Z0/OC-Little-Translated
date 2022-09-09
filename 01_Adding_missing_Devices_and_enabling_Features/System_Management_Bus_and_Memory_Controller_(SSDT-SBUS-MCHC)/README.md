@@ -32,17 +32,17 @@ In order for the SMBus to work properly under macOS, Device `SMBUS` (respectivel
 
 In **DSDT**, search for:
 
-- `0x001F0003` (Gen 6 and older) or `0x001F0004` (Gen 6 and later) 
+- `0x001F0003` (Broadwell and older) or `0x001F0004` (Skylake and newer) 
 - Find device name and location of the SMBus Device. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:</br>![sbusmchc](https://user-images.githubusercontent.com/76865553/177932530-f2190e85-17f2-4d15-9326-c37cd4c410e3.png)
 
 ### 3. Picking the correct SSDT[^1]
 Depending on the search results, add the following SSDT to your ACPI Folder and `config.plist`:
 
-- If `SMBU`/`SBUS` is present, but `MCHC` is missing, add ***SSDT-MCHC.aml***
+- If `SMBU`/`SBUS` is present, but `MCHC` is missing: add ***SSDT-MCHC.aml***
 - If `MCHC` is present (highly unlikely) but `SMBU`/`SBUS` is missing, add either:
 	- ***SSDT-SBUS.aml*** (if the Device name is `SBUS`) or
 	- ***SSDT-SMBU.aml*** (if the device name is `SMBU`)
-- If neither `SMBU`/`SBUS` nor `MCHC` are present or if you are in doubt, add ***SSDT-SBUS-MCHC.aml*** (adjust `SMBU`/`SBUS` path accordingly)
+- If neither `SMBU`/`SBUS` nor `MCHC` are present or if you are in doubt: add ***SSDT-SBUS-MCHC.aml*** (adjust `SMBU`/`SBUS` path accordingly)
 - Save and reboot.
 
 ### 4. Verify that it's working
