@@ -9,9 +9,8 @@
 ## Special Rename
 Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict with the same name as the brightness patch, so use the above name change to avoid it.
 
-Rename **PNLF to XNLF**:
-
 ```text
+Comment: Change PNLF to XNLF
 Find: 504E4C46
 Replace: 584E4C46
 ```
