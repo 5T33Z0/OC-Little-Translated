@@ -16,15 +16,15 @@ In order for the System Management Bus to work probably on macOS, Device `SMBUS`
 ### 1. Evaluating if you need this Fix
 - Run Terminal and enter:
 	```shell
-kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
-```
+	kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
+	```
 - If the Terminal output contains the following 2 drivers, your SMBus is working correctly:
 	![sbus_present](https://user-images.githubusercontent.com/76865553/140615883-3c8af435-b09a-4a3e-9746-28f8a05c9e37.png)
 	If non or only one of the drivers is listed, you need a fix.
 - Next, run **IORegistryExplorer**
-- Search for `MCHC`. If present, it looks like this:</br>![](/Users/5t33z0/Desktop/MCHC.png)
+- Search for `MCHC`. If present, it looks like this:</br>![MCHC](https://user-images.githubusercontent.com/76865553/189326100-0ee38b2b-942e-4379-bbba-c92cceb75ba4.png)
 - If it's not present, you need a fix. Take a mental note.
-- Next, search for **SMBU** or **SBUS** respectively. If present, it looks like this:</br>![](/Users/5t33z0/Desktop/SMBU.png)
+- Next, search for **SMBU** or **SBUS** respectively. If present, it looks like this:</br>![SMBU](https://user-images.githubusercontent.com/76865553/189326159-96b10b62-4d89-45c5-99b5-d975f51a6463.png)
 - In this case you don't need **SSDT-SMBU** nor **SSDT-SBUS**.
 - If it's not present, check your `DSDT` and figire out the device name: it's either called `SMBU` or `SBUS`. Take a note
 
@@ -33,7 +33,7 @@ kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 In **DSDT**, search for:
 
 - `0x001F0003` (Gen 6 and older) or `0x001F0004` (Gen 6 and later) 
-- Find device name and location of the SMBus Device. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:</br></br>![sbusmchc](https://user-images.githubusercontent.com/76865553/177932530-f2190e85-17f2-4d15-9326-c37cd4c410e3.png)
+- Find device name and location of the SMBus Device. It will either be called `SBUS` or `SMBU`. In this example, it's called `SMBU` and is located under `_SB/PCI0/`:</br>![sbusmchc](https://user-images.githubusercontent.com/76865553/177932530-f2190e85-17f2-4d15-9326-c37cd4c410e3.png)
 
 ### 3. Picking the correct SSDT[^1]
 Depending on the search results, add the following SSDT to your ACPI Folder and `config.plist`:
