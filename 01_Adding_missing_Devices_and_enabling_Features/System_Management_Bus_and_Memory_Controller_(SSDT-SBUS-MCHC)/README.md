@@ -7,9 +7,9 @@ What is AppleSMBus? Well, it mainly handles the System Management Bus, which has
 * **AppleSMBusPCI**: Same idea as AppleSMBusController except for low bandwidth PCI devices.
 * **Memory Reporting**: Aids in proper memory reporting and can aid in getting better memory-related kernel panic details.
 
-Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
+Other things the System Management Bus does can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
 
-In order for the System Management Bus to work probably on macOS, Device `SMBUS` (respectively `SBUS`) needs to be present in IOReg. Additionally, Memory Host Controller Device `MCHC` also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both to decide which SSDT(s) needs to be added.
+In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Host Controller Device `MCHC` which is serviceable in macOS also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both devices to decide which SSDT(s) needs to be added.
 
 ## Instructions
 
@@ -39,11 +39,11 @@ In **DSDT**, search for:
 Depending on the search results, add the following SSDT to your ACPI Folder and `config.plist`:
 
 - If `SMBU`/`SBUS` is present, but `MCHC` is missing, add ***SSDT-MCHC.aml***
-- If `MCHC` is present (which is highly unlikely) but `SMBU`/`SBUS` is missing, add either:
+- If `MCHC` is present (highly unlikely) but `SMBU`/`SBUS` is missing, add either:
 	- ***SSDT-SBUS.aml*** (if the Device name is `SBUS`) or
 	- ***SSDT-SMBU.aml*** (if the device name is `SMBU`)
-- If neither `SMBU`/`SBUS` nor `MCHC` are present, add ***SSDT-SBUS-MCHC.aml*** (adjust `SMBU`/`SBUS` path accordingly)
-- Save and reboot
+- If neither `SMBU`/`SBUS` nor `MCHC` are present or if you are in doubt, add ***SSDT-SBUS-MCHC.aml*** (adjust `SMBU`/`SBUS` path accordingly)
+- Save and reboot.
 
 ### 4. Verify that it's working
 
