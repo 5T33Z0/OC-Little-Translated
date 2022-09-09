@@ -9,7 +9,7 @@ What is AppleSMBus? Well, it mainly handles the System Management Bus, which has
 
 Other things SMBus does can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
 
-In order for the System Management Bus to work probably on macOS, Device `SMBUS` (respectivley `SBUS`) needs to be present in IOReg. Additionaly, Memory Host Controller Device `MCHC` also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both to decide which SSDT(s) needs to be added.
+In order for the System Management Bus to work probably on macOS, Device `SMBUS` (respectively `SBUS`) needs to be present in IOReg. Additionally, Memory Host Controller Device `MCHC` also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both to decide which SSDT(s) needs to be added.
 
 ## Instructions
 
