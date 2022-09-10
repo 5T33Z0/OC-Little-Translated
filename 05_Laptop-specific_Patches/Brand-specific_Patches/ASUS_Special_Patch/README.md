@@ -3,8 +3,7 @@ Most ASUS machines contain the `MSOS` method. The `MSOS` method assigns a value 
 
 For example, the ACPI brightness shortcut method works only when `MSOS` >= `0x0100`. In the default state, `MSOS` is locked to `OSME`.
 
-***SSDT-OCWork-asus*** changes `MSOS` by changing `OSME`. See DSDT's `Method (MSOS)` for details on the `MSOS` method. If `MSOS` >= `0x0100` it sets the Operating Mode to Windows 8 and the brightness shortcut works
-The return value of `MSOS` depends on the OS itself, if Darwin Kernel is runniing, you must use use **this patch** to meet specific requirements.
+***SSDT-OCWork-asus*** changes `MSOS` by changing `OSME`. See DSDT's `Method (MSOS)` for details on the `MSOS` method. If `MSOS` >= `0x0100` it sets the Operating Mode to Windows 8 and the brightness shortcut works. The return value of `MSOS` depends on the OS itself, if Darwin Kernel is runniing, you must use use **this patch** to meet specific requirements.
 
 ## Requirements
 - In `DSDT`, check for the following:
@@ -32,7 +31,7 @@ Method (MSOS, 0, NotSerialized)
     {
         OSFG = OSXP /* \OSXP */
     }
-            ElseIf ((OSYS == 0x07D0))
+    ElseIf ((OSYS == 0x07D0))
     {
         OSFG = OSME /* \OSME */
     }
@@ -44,7 +43,6 @@ Method (MSOS, 0, NotSerialized)
     {
         OSFG = OSW8 /* \OSW8 */
     }
-
     Return (OSFG) /* \OSFG */
 }
 ```
