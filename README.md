@@ -55,7 +55,7 @@ Therefore, **OC-Little Translated does not support nor promote patching DSDTs** 
 * [**Compatibility Charts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts)
 * [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#readme)
 * [**Create/modify a Layout-ID for AppleALC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#readme)
-* [**Adding Windows to the boot menu GUI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/I_Windows)
+* [**Windows-related Guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/I_Windows)
 * [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux#readme)
 * [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#readme)
 * [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
