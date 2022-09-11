@@ -10,7 +10,7 @@ You can use this to prevent Windows (or other) Volumes from auto-mounting under 
 7. Enter `cd /etc`
 8. Create/edit an `fstab` file. Enter: `sudo vifs`
 9. Press `o` to edit the file 
-10. Add the following line:
+10. Enter the following line:
 	- For "blocking" an **NTFS** Volume (Windows): `UUID=PASTE YOUR UUID none ntfs rw,noauto`
 	- For "blocking" an **APFS** Volume (macOS): `UUID=PASTE YOUR UUID none apfs rw,noauto`
 	- For "blocking" an **HFS** Volume (macOS): `UUID=PASTE YOUR UUID none hfs rw,noauto`
@@ -23,4 +23,3 @@ You can use this to prevent Windows (or other) Volumes from auto-mounting under 
 - To revert the changes, delete the `fstab` file located under `/private/etc/` and reset the auto mounter. Since this directory is hidden, you need to press `Shift` and `.` (dot/full stop) in Finder to reveal it or use the "Go to" menu instead.
 - You can also edit the file in Visual Studio Code if it exists already
 - Original Guide: https://discussions.apple.com/docs/DOC-7942
-
