@@ -9,9 +9,11 @@ This SSDT disabled the `GFX0` audio device of AMD GPUs in macOS, so that it can 
 
 ## Adjusting the SSDT
 - Open `SSDT-RADEON_GFX0-disable.aml`. You may have to adjust the `External` reference and `Scope` entries:</br>![RDNpci](https://user-images.githubusercontent.com/76865553/189613476-eea3b5d7-21ac-4ec1-be16-68526a70ad03.png)
-- Find the name and path of your Graphics card in IORegistry Explorer:</br>
-	![pasted-from-clipboard3](https://user-images.githubusercontent.com/76865553/139533202-9f11d658-07c0-4ab1-8e52-531475ca9f9c.png)
-- You can also use Terminal: `ioreg -p IODeviceTree -n GFX0 -r |grep "acpi-path"`
+- Find the name and path of your Graphics card in IORegistry Explorer:</br>![pasted-from-clipboard3](https://user-images.githubusercontent.com/76865553/139533202-9f11d658-07c0-4ab1-8e52-531475ca9f9c.png)
+- Or use Terminal to find the correct path: 
+	```terminal
+	ioreg -p IODeviceTree -n GFX0 -r |grep "acpi-path"
+	```
 - In this example the name differs from the one in the SSDT: it's `GFX0@0` instead of `PEGP@0`.
 - Adjust the path and name accordingly:</br>![Adjust](https://user-images.githubusercontent.com/76865553/189613414-2e2776b7-168a-4e98-935f-32a0909b3dc9.png)
 - Scroll down to `Device (GFX0)` and enter the name of your GPU model. Delete the value in the brackets for the Buffer `()`:</br>
