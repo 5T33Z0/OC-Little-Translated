@@ -19,8 +19,15 @@ This SSDT turns off the GFXHD audio device for macOS completely, so that it can 
 - Scroll down to `Device (GFX0)` and enter the name of your GPU model. Delete the value in the brackets for the Buffer `()`:</br>
 	![model](https://user-images.githubusercontent.com/76865553/139533226-0ae045b0-695d-4394-9ebb-946578985a16.png)
 - Save the file as .aml (ACPI Machine Language Binary)
-- Add it to the ACPI Folder and config.plist
-- Save, reboot and test
+- Add it to the ACPI Folder and `config.plist`
+- Save and reboot
 
-## Credits:
+## Verifying that the device is disabled
+- Run Hackintool
+- In the "System" tab, click on "Peripherals"
+- The `GFX0` audio device of your GPU should no longer be listed.
+- Alternative you can just try sending audio over your `HDMI`/`DP` cable
+
+## Notes and Credits
+- In [**cases**](https://www.reddit.com/r/hackintosh/comments/wu4pyv/help_failed_to_block_applegfxhdakext_with/), where the pci path of the GPU is not picked up by the IO Registry, this patch does not work.
 - Apfelnico for the [**SSDT Sample**](https://www.hackintosh-forum.de/forum/thread/55014-hdmi-audio-mittels-ssdt-entfernen-radeon-vii/?postID=721986#post721986)
