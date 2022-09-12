@@ -7,7 +7,8 @@ Incomplete collection of Intel iGPU related fixes. For general configuration of 
 - [Enabling Skylake Graphics in macOS Ventura ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13)
 - [Force-enabling graphics with a fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Fake_ig-platform-id.md)
 - [How to enable "GPU" Tab in Activity Monitor, Hardware Acceleration and Metal 3 Support in macOS Ventura](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab)
-- [Comet Lake and Z500-series mainboard iGPU issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Cometlake_Z590#comet-lake-igpu-issues-on-500-series-mainboards)  
+- [Comet Lake and Z500-series mainboard iGPU issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Cometlake_Z590#comet-lake-igpu-issues-on-500-series-mainboards)
+- [Disabling audio over HDMI/DisplayPort](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_disable_audio_over_HDMI-DP.md)
 
 ## Resources
 
