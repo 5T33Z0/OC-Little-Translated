@@ -479,5 +479,5 @@ On some X299 boards, the `RTC` device can be defective, so even if there's an `A
 
 ## Credits
 - **daliansky** for `SSDT-AWAC.dsl`
-- **Baio1977** for `SSDT-AWAC-ARTC`
+-[**Baio1977**](https://github.com/Baio1977) for `SSDT-AWAC-ARTC`
 - **dreamwhite** for additional information and guidance on keeping the tables conform to ACPI specs.
