@@ -9,3 +9,4 @@ Just a lose collection of links to fixes, guides, news and articles. Feel free t
 - [Virtualizing OpenCore and x86 macOS on Apple Silicon](https://khronokernel.github.io/apple/silicon/2021/01/17/QEMU-AS.html)
 - [Why you shouldn't use tonymacX86 tools](https://github.com/khronokernel/Tonymacx86-stance)
 - Old Hackintosh [Guides by Rampage Dev](https://web.archive.org/web/20170911113616/http://www.rampagedev.com/guides/). Excellent read. Might be useful for users on the  vintage tip. Definitely worth preservation.
+- [How to modify "About this Mac" section](https://www.idownloadblog.com/2017/01/13/how-to-modify-about-this-mac-hackintosh/)
