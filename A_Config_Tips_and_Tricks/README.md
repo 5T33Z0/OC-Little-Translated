@@ -209,39 +209,61 @@ If you want to boot Windows *properly*, you should boot it via the BIOS Boot Men
 
 ## VI. Resolving issues with NVRAM
 
-Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. Therefore, the OpenCore package also contains `CleanNvram.efi` under `Tools`, which should work better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
+### Resetting NVRAM
 
-* **AllowNvramReset** = `No` - Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entry for CleanNVRAM
-* Copy **CleanNvram.efi** to EFI > OC > Tools
+Certain BIOS variants can be badly affected by the integrated NVRAM reset tool of OpenCore. Symptoms: you can't get into the BIOS anymore or certain parameters in the NVRAM (like boot-args) are not applied or can't be deleted, etc. Older Lenovo Notebooks are affected by this a lot. 
 
-Next, create a new snapshot of the config or add the tool manually to the config. If you want you can hide the entry in the BootPicker so that it only appears after pressing the space bar:
+Therefore, the OpenCore package also contains an additional driver `ResetNvramEntry.efi` (since OC 0.8.4; was a tool called `CleanNvram.efi` previously) which works better with such problematic BIOSes. So if you have problems with NVRAM reset, do the following:
 
-* **HideAuxiliary** = Yes</br>
-* Under **Misc > Tools** find `CleanNvram` and set `Auxiliary` to **`Yes`**.
+#### OC ≤ 0.8.3
 
-Otherwise, check if there might be a BIOS update available that fixes general problems. Especially ASUS boards with a Z79/Z99 chipset have problems with the NVRAM, which can only be fixed with a patched BIOS.
+* Set **AllowNvramReset** to `No` &rarr; Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entry for "CleanNVRAM" in Boot Picker
+* Copy **CleanNvram.efi** to `EFI/OC/Tools`
+* Add it to the `Misc/Tools`section of the `config.plist` and enable it.
+* Set **HideAuxiliary** = `Yes` (under `Misc/Boot`)
+* Under **Misc/Tools**, find `CleanNvram` and change `Auxiliary` to `Yes`.
+* Save and reboot.
+* Press Space Bar in Boot Picker to show the "CleanNvram" entry.
+* Highlight the icon and press enter to reset NVRAM.
+
+**NOTE**: Since OC 0.8.4, the previous options for resetting NVRAM are deprecated. So delete: 
+
+- `AllowNvranReset` key from `config.plist`
+- `CleanNvramReset.efi` from `config.plist` (Misc/Tools)
+- `CleanNvramReset.efi` from `EFI/OC/Tools` 
+
+#### OC 0.8.4 and newer
+To enable NVRAM Reset on OC 0.8.4 and newer, do the following:
+
+* Add **ResetNvramEntry.efi** to `EFI/OC/Drivers`
+* Add **ResetNvramEntry.efi** to `config.plist` (under `UEFI/Drivers`) and enable it.
+* Save and reboot.
+* Press Space Bar in Boot Picker to show the "ResetNvram" entry.
+* Highlight the icon and press enter to reset NVRAM.
 
 ### Fixing falsely reported OpenCore version
 
 It can happen that the OpenCore version info stored in the NVRAM is not updated automatically and is therefore displayed incorrectly in Kext Updater or Hackintool. The problem was fixed in OC 0.6.7 by simply not writing the version info into NVRAM at all, but the wrong version will reside in NVRAM until deletion. To fix it, do the following:
 
-- Create a new child element under **NVRAM > Delete > 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**
+- Create a new child element under **NVRAM/Delete/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102**
 - call it `opencore-version` 
 - Save the config and reboot
 After restarting, the correct OC version should be displayed and you can delete the entry again.
 
 Alternatively, you can use Terminal to delete the key (no restart required):
 
-`sudo nvram -d 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version`
+```terminal
+sudo nvram -d 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+```
 
 ## VII. Prohibit SMBIOS injection in other OSes:
 
 To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing issues with the registration, change the following settings:
 
-**Kernel > Quirks > CustomSMBIOSGuid >** `True` (standard: `False`)</br>
-**Platforminfo > UpdateSMBIOSMode >** `Custom` (standard: `Create`)
+**Kernel/Quirks/CustomSMBIOSGuid**: `True` (standard: `False`)</br>
+**Platforminfo/UpdateSMBIOSMode**: `Custom` (standard: `Create`)
 
-[SOURCE](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
+**SOURCE**: [Avoiding SMBIOS injection into other OSes](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion#optional-avoiding-smbios-injection-into-other-oses)
 
 ## VIII. Exchanging SMBIOS Data between OpenCore and Clover
 ### Manual method
