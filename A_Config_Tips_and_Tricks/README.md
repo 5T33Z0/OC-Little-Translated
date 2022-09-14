@@ -130,15 +130,17 @@ You should deactivate the single user mode for security reasons, because it can 
 
    To test if the correct settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this:
 
-    	Configuration:
-    	 Apple Internal: enabled
-    	 Kext Signing: disabled
-    	 Filesystem Protections: disabled
-    	 Debugging Restrictions: disabled
-    	 DTrace Restrictions: disabled
-    	 NVRAM Protections: disabled
-    	 BaseSystem Verification: disabled
-   
+	```
+	Configuration:
+	Apple Internal: enabled
+	Kext Signing: disabled
+	Filesystem Protections: disabled
+	Debugging Restrictions: disabled
+	DTrace Restrictions: disabled
+	NVRAM Protections: disabled
+	BaseSystem Verification: disabled
+	```   
+
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
 With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having its own value/byte, which can be combined by simple adding them:
@@ -177,7 +179,7 @@ For more details check the `Configuration.pdf` included in the OpenCore package.
 
 If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case. 
 
-**CAUTION**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
+:warning: **CAUTION**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
 ### Boot variants (Selection)
 
@@ -225,7 +227,7 @@ Therefore, the OpenCore package also contains an additional driver `ResetNvramEn
 
 #### OC ≤ 0.8.3
 
-* Set **AllowNvramReset** to `No` &rarr; Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entry for "CleanNVRAM" in Boot Picker
+* Set **Misc/Security/AllowNvramReset** to `No` &rarr; Disables OpenCore's built-in NVRAM reset tool to avoid a duplicate entry for "CleanNVRAM" in Boot Picker
 * Copy **CleanNvram.efi** to `EFI/OC/Tools`
 * Add it to the `Misc/Tools`section of the `config.plist` and enable it.
 * Set **HideAuxiliary** = `Yes` (under `Misc/Boot`)
@@ -240,7 +242,7 @@ Therefore, the OpenCore package also contains an additional driver `ResetNvramEn
 - `CleanNvramReset.efi` from `config.plist` (Misc/Tools)
 - `CleanNvramReset.efi` from `EFI/OC/Tools` 
 
-#### OC 0.8.4 and newer
+#### OC ≥ 0.8.4
 To enable NVRAM Reset on OC 0.8.4 and newer, do the following:
 
 * Add **ResetNvramEntry.efi** to `EFI/OC/Drivers`
