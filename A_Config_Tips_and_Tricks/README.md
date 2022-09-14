@@ -1,33 +1,41 @@
 # OpenCore Config Tips and Tricks
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
+<details>
+<summary><strong>Table of Contents </strong>(click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
-- [OpenCore Troubleshooting Workflow](https://user-images.githubusercontent.com/76865553/180989260-3cf42cd8-a5cb-4482-9a54-240db9429264.png)</br>
-	- [MinDate / MinVersion settings explained](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver)</br>
-- I. [Updating config.plist and fixing errors](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#i-updating-configplist-and-fixing-errors)</br>
-	- [Automated method using OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#automated-config-upgrade-recommended)
-	- [Manual method (old)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-upgrade-and-error-correction-old)
-- II. [Fixing Boot Issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#ii-quick-fixes-for-boot-problems)</br>
-- III. [Security Settings](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#iii-security-settings)</br>
-	- [How to disable Single User Mode](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#how-to-disable-single-user-mode)
-	- [How to disable System Integrity Protection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#how-to-disable-system-integrity-protection-sip)
-- IV. [Adjusting Boot Picker Attributes](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#iv-adjust-boot-picker-attributes-enable-mouse-support)
-- V. [Customizing Boot Options](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#v-customizing-boot-options)
-	- [Defining the default Volume in Boot Picker](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#set-default-boot-drive-in-bootpicker)
-	- [Enabling Apple Hotkeys Support](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#enable-apple-hotkey-functions)
-	- [Accelerate Boot](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#accelerate-boot-results-will-vary)
-	- [Boot Variants](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-variants-selection)
-		- [GUI disabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-without-gui-default)
-		- [GUI enabled, manual drive selection](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
-		- [No GUI, automatic boot from default volume](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#boot-the-os-automatically-from-volume-defined-as-default-no-gui)
-		- [Boot macOS automatically, no GUI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#start-macos-automatically-no-gui-fast)
-- VI. [Resolving NVRAM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vi-resolving-issues-with-nvram)
-	- [Fixing falsely reported OpenCore Version ](#fixing-falsely-reported-opencore-version)
-- VII. [Prohibit SMBIOS Injection into other Operating Systems](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#vii-prohibit-smbios-injection-in-other-oses)
-- VIII. [Exchanging SMBIOS Data between OpenCore and Clover](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#viii-exchanging-smbios-data-between-opencore-and-clover)
-	- [Manual method ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#manual-method)
-	- [Automated method, using OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#smbios-data-importexport-with-ocat)
+- [OpenCore Troubleshooting Quick Tips](#opencore-troubleshooting-quick-tips)
+	- [`MinDate`/`MinVersion` settings for the APFS driver](#mindateminversion-settings-for-the-apfs-driver)
+- [I. Updating config.plist and fixing errors](#i-updating-configplist-and-fixing-errors)
+	- [Automated config upgrade (recommended)](#automated-config-upgrade-recommended)
+	- [Manual upgrade and error correction (old)](#manual-upgrade-and-error-correction-old)
+- [II. Quick fixes for Boot Problems](#ii-quick-fixes-for-boot-problems)
+- [III. Security Settings](#iii-security-settings)
+	- [How to disable Single User Mode](#how-to-disable-single-user-mode)
+	- [How to disable System Integrity Protection (SIP)](#how-to-disable-system-integrity-protection-sip)
+- [IV. Adjust Boot Picker Attributes, enable Mouse Support](#iv-adjust-boot-picker-attributes-enable-mouse-support)
+- [V. Customizing Boot Options](#v-customizing-boot-options)
+	- [Set default boot drive in BootPicker](#set-default-boot-drive-in-bootpicker)
+	- [Enable Apple Hotkey functions](#enable-apple-hotkey-functions)
+	- [Accelerate boot (results will vary)](#accelerate-boot-results-will-vary)
+	- [Boot variants (Selection)](#boot-variants-selection)
+		- [Manual selection of the OS without GUI (default)](#manual-selection-of-the-os-without-gui-default)
+		- [Manual selection of the OS with GUI (requires OpenCanopy and Resources folder)](#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
+		- [Boot the OS automatically from volume defined as "Default" (no GUI)](#boot-the-os-automatically-from-volume-defined-as-default-no-gui)
+		- [Start macOS automatically (no GUI, fast)](#start-macos-automatically-no-gui-fast)
+- [VI. Resolving issues with NVRAM](#vi-resolving-issues-with-nvram)
+	- [Resetting NVRAM](#resetting-nvram)
+		- [OC ≤ 0.8.3](#oc--083)
+		- [OC 0.8.4 and newer](#oc-084-and-newer)
+	- [Fixing falsely reported OpenCore version](#fixing-falsely-reported-opencore-version)
+- [VII. Prohibit SMBIOS injection in other OSes:](#vii-prohibit-smbios-injection-in-other-oses)
+- [VIII. Exchanging SMBIOS Data between OpenCore and Clover](#viii-exchanging-smbios-data-between-opencore-and-clover)
+	- [Manual method](#manual-method)
+		- [Troubleshooting](#troubleshooting)
+	- [SMBIOS Data Import/Export with OCAT](#smbios-data-importexport-with-ocat)
+	- [1-Click-Solution for Clover Users](#1-click-solution-for-clover-users)
 </details>
 
 ## OpenCore Troubleshooting Quick Tips
