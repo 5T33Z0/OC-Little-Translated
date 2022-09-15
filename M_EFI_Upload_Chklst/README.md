@@ -3,10 +3,12 @@
 ## About
 So you've created your perfectly working config and want to share your EFI folder online for helping other users? That's great! 
 
-But before doing so, you should remove any personalized settings which are *not part of the stock configuration of your system/mainboard* to maximize compatibility to the target system/mainboard. This includes removing any SSDTs, DeviceProperties and Kexts for 3rd party components that are not part of the stock configuration of the system/mainboard to guarantee maximum compatibility.
+But before you do, you should consider removing any personalized settings which are *not part of the stock configuration of your system/mainboard* to maximize compatibility with the stock config or the target system/mainboard. 
+
+Besides removing usual suspects like sensitive data like SMBIOS Infos, there are a bunch of other settings which should be removed. This includes any SSDTs, DeviceProperties and Kexts for 3rd party components that are not part of the stock configuration of the system/mainboard to guarantee maximum compatibility.
 
 ## Checklist
-**Work through the following checklist and adjust the settings accordingly:**
+**Work through the following checklist and adjust your config and EFI accordingly**
 
 - [ ] `ACPI/Add` Section: 
 	- [ ] Add proper comments!
