@@ -30,4 +30,5 @@ But before doing so, you should remove any personalized settings which are *not 
 	- [ ] `MaxDate` = -1
 - [ ] `UEFI/Quirks` &rarr; change `ResizeAppleGpuBars` to `-1` since you don't know which GPU will be used
 
-Dreamwhite wrote a Python Script which can do most of this automatically. It's called [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer).
+## Notes
+Dreamwhite wrote a Python Script which can do a lot of this automatically. It's called [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer).
