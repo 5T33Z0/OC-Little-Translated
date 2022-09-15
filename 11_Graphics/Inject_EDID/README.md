@@ -60,9 +60,10 @@ Hopefully this will resolve the issue!
 **NOTE**: If you added additional resolutions, you need to install either the display override in `/System/Library/Displays/Overrides` or install `DisplayMergeNub.kext` in `/System/Library/Extensions`.
 
 ## Alternatives
-If the above method doesn't work, you could try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
+If the above method doesn't work, try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
 
-## Credits
+## Credits and Resources
+- For fixing purple/magenta screen issues, try [this fix](https://github.com/dreamwhite/patch_edid)
 - Acidanthera for OpenCore, Whatevergreen and HibernationFixup
 - Blackosx for DarwinDumper
 - andyvand for FixEDID
