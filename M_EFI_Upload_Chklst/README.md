@@ -1,6 +1,6 @@
 ## OpenCore EFI Upload Checklist
 
-Before sharing your OpenCore EFI and config.plist with the world, you should remove any personalized settings which are not part of the stock configuration of the system/mainboard the EFI and config is developed for. This includes removing any SSDTs, DeviceProperties and Kexts for 3rd party components that are not part of the stock configuration of the system/mainboard to guarantee maximum compatibility.
+Before sharing your OpenCore EFI and config.plist with the world, you should remove any personalized settings which are not part of the stock configuration of the system/mainboard. This includes removing any SSDTs, DeviceProperties and Kexts for 3rd party components that are not part of the stock configuration of the system/mainboard to guarantee maximum compatibility.
 
 **Work through the following checklist and adjust the settings accordingly:**
 
@@ -17,9 +17,9 @@ Before sharing your OpenCore EFI and config.plist with the world, you should rem
 - `Misc/Security/ScanPolicy` &rarr; set it to `0`
 - `Misc/Security/ApECID` &rarr; set it to `0`
 - `Misc/Security/Vault` &rarr; set it to `Optional`
-- `Misc/Entries` &rarr; Delete Custom entries
 - `Misc/BlessOverride` &rarr; Delete entries 
-- `Misc/Security/SecureBootModel` &rarr; `Disabled`. :warning: Disables Apple Secure Boot hardware model to avoid issues during installation. Re-enable it in Post-Install so System Updates work when using an SMBIOS of a Mac model with a T2 Security Chip.
+- `Misc/Entries` &rarr; Delete Custom entries
+- `Misc/Security/SecureBootModel` &rarr; Set it to `Disabled`. :warning: Disables Apple Secure Boot to avoid issues during installation. Point users of your EFI to re-enable it in Post-Install so System Updates work when using an SMBIOS of a Mac model with a T2 Security Chip!
 - `PlatformInfo/Generic` &rarr; Delete Serials etc.
 - Change the follwing settings in `UEFI/APFS` to enable backward compatible with macOS Catalina and older. Otherwise the APFS driver won't load and you won't see any drives in the Boot Picker:	
 	- `MinDate` = -1
