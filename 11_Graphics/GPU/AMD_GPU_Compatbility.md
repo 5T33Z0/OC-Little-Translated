@@ -199,4 +199,4 @@ Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina�
 
 # Notes and Credits
 - All Mobile GPUs are unsupported at the moment under macOS.
-- Some officially unsupported AMD Cards can be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
+- Some unsupported R7/R9 cards an be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
