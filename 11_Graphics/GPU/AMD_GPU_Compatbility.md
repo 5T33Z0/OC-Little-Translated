@@ -195,6 +195,8 @@ Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina�
 - HD 4000 Series​
 - HD 5000 Series​
 
+**Source**: [**EliteMacX86**](https://elitemacx86.com/threads/amd-gpu-compatibility-list-for-macos.617/)
+
 # Notes and Credits
 - All Mobile GPUs are unsupported at the moment under macOS.
-- Source: [**EliteMacX86**](https://elitemacx86.com/threads/amd-gpu-compatibility-list-for-macos.617/)
+- Some officially unsupported AMD Cards can be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
