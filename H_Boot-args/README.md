@@ -18,14 +18,41 @@ Listed below you find an incomplete list of commonly used as well as rather unco
 ### GPU-specific boot arguments
 For more iGPU and dGPU-related boot args see the Whatevergreen topic.
 
+#### Intel on-board graphics
+
 |Boot-arg|Description|
 |:------:|-----------|
-**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000/6000 series). Without it, you'll get a black screen. Although not necessary for Polaris or Vega Cards, it can be resolve black screen issues in multi-monitor setups.
+**`-wegnoegpu`**|Disables all discrete GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
 **`igfxonln=1`**|Forces all displays online. Resolves screen wake issues after quitting sleep mode in macOS 10.15.4 and newer when using Coffee and Comet Lake's Intel UHD 630.
 **`-igfxvesa`** |Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
-**`-wegnoegpu`**|Disables all GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
-**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| Deprecated. macOS Siera and newer require an NVRAM key instead. In OpenCore, add **`NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31`** (**Type**: Data). Clover users: enable `NvidiaWeb` under System Parameters.
+**`-igfxnohdmi`**| Disables DisplayPort to HDMI Audio Conversion
+**`-cdfon`**| Performs numerous patches required for enabling HDMI 2.0 support
+**`igfxfw=2`**| Enables loading Apple's GUC firmware for iGPUs, requires a 9th Gen chipset or newer(ie Z390)
+
+#### AMD
+
+|Boot-arg|Description|
+|-------:|-----------|
+**`agdpmod=pikera`**| Disables Board-ID checks on AMD Navi (RX 5000/6000 series) to fix black screen issues due to the difference in framework with the x6000 drivers. Although not necessary for Polaris or Vega Cards, it can be used to resolve black screen issues in multi-monitor setups. 
+**`agdpmod=vit9696`** | Disables `board-id` check, may be needed for when screen turns black after finishing booting
+**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| Swaps boardID with `iMacPro1,1`. Allows for Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
+**`radpg=15`** | Fixes initialization for HD 7730/7750/7770/R7 250/R7 250X
+**`-raddvi`** | Fixes DVI connector-type for 290X, 370, etc
+**`-radvesa`**|Forces GPU into VESA mode(no GPU acceleration), useful for troubleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
+
+#### NVIDIA
+
+|Boot-arg|Description|
+|-------:|-----------|
+**`agdpmod=pikera`**| Swaps `board-id `for `board-ix`, needed for disabling string comparison which is useful for non-iMac13,2/iMac14,2 SMBIOS.
+**`agdpmod=vit9696`**| Disables `board-id` check, may be needed for when screen turns black after finishing booting
+**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| Deprecated. macOS Siera and newer require an NVRAM key instead. </br> **OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` under System Parameters.
 **`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
+**`shikigva=1`**| Needed if you want to use your iGPU's display out along with your dGPU, allows the iGPU to handle hardware decoding even when not using a connector-less framebuffer
+**`shikigva=4`**| Needed to support hardware accelerated video decoding on systems that are newer than Haswell. May needs to be combined with `shikigva=12` to patch the needed processes 
+**`shikigva=40`**| Swaps boardID with iMac14,2. Useful for SMBIOS that don't expect a Nvidia GPU, however WhateverGreen should handle patching by itself.
+
+**SOURCE**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html)
 
 ### Network-specific boot arguments
 |Boot-arg|Description|
