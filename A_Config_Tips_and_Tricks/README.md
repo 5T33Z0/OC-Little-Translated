@@ -28,7 +28,8 @@ This section contains a small collection of useful tips and tricks for working w
 - [VI. Resolving issues with NVRAM](#vi-resolving-issues-with-nvram)
 	- [Resetting NVRAM](#resetting-nvram)
 		- [OC ≤ 0.8.3](#oc--083)
-		- [OC 0.8.4 and newer](#oc-084-and-newer)
+		- [OC ≥ 0.8.4](#oc--084)
+		- [Keep Boot entries after NVRAM reset](#keep-boot-entries-after-nvram-reset)
 	- [Fixing falsely reported OpenCore version](#fixing-falsely-reported-opencore-version)
 - [VII. Prohibit SMBIOS injection in other OSes:](#vii-prohibit-smbios-injection-in-other-oses)
 - [VIII. Exchanging SMBIOS Data between OpenCore and Clover](#viii-exchanging-smbios-data-between-opencore-and-clover)
@@ -42,11 +43,11 @@ This section contains a small collection of useful tips and tricks for working w
 
 Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following Settings:
 
-- `ConnectDrivers` = true
-- `SecureBootModel` = Disabled
-- `Vault` = Optional
-- `MinDate` = -1
-- `MinVersion` = -1
+- `UEFI/ConnectDrivers` = true
+- `Misc/Security/SecureBootModel` = Disabled
+- `Misc/security/Vault` = Optional
+- `UEFI/APFS/MinDate` = -1
+- `UEF/APFS/MinVersion` = -1
 - Compare the structure of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
 - **OC Troubleshooting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 
@@ -169,7 +170,8 @@ In the BootPicker: Select drive/partition, hold [CTRL] and press [ENTER]. After 
 
 **PollAppleHotKeys** = `Yes`
 
-Enables keyboard shortcuts known from Macs to use different boot modes like Verbose, Safe or Single User Mode, etc. without having to set extra boot-args. For example, you can enter CMD+V before starting macOS and it will then boot in verbose mode. So no need to add `-v ` to the boot-args. 
+Enables keyboard shortcuts known from Macs to use different boot modes like Verbose, Safe or Single User Mode, etc. without having to set extra boot-args. For example, you can enter CMD+V before starting macOS and it will then boot in verbose mode. So no need to add `-v ` to the boot-args.
+
 
 For more details check the `Configuration.pdf` included in the OpenCore package.
 
@@ -196,6 +198,8 @@ Great for dual boot setups. Combine it with the`LauncherOption` `Full` or `Short
 
 **PickerMode** = `External`</br>
 **ShowPicker** = `Yes`
+
+**NOTE**: If `PollAppleHotkeys` is enabled, holding `X` after turning on the system skips the bootpicker and automatically boots into the default volume.
 
 #### Boot the OS automatically from volume defined as "Default" (no GUI)
 
@@ -250,6 +254,12 @@ To enable NVRAM Reset on OC 0.8.4 and newer, do the following:
 * Save and reboot.
 * Press Space Bar in Boot Picker to show the "ResetNvram" entry.
 * Highlight the icon and press enter to reset NVRAM.
+
+#### Keep Boot entries after NVRAM reset
+If you reset NVRAM, usually the order of the BIOS boot menu entries resets and Windows Boot Manager takes over the first slot or the boot section. To prevent this, do the following:
+
+- Go to `UEFI/Drivers/ResetNvramEntry.efi`
+- Add `--preserve-boot` to the `Arguments` field
 
 ### Fixing falsely reported OpenCore version
 
