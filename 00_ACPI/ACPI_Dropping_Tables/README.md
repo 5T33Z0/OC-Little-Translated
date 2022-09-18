@@ -5,13 +5,13 @@ Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some feature
 
 - [Preparations: Dumping the ACPI Tables](#preparations-dumping-the-acpi-tables)
 - [Method 1: Dropping Tables based on OEM Tabled ID](#method-1-dropping-tables-based-on-oem-tabled-id)
-	- [Verifying that the table has been dropped](#verifying-that-the-table-has-been-dropped)
+  - [Verifying that the table has been dropped](#verifying-that-the-table-has-been-dropped)
+  - [Note: Dropping "internal" tables that load other tables](#note-dropping-internal-tables-that-load-other-tables)
 - [Method 2: Dropping Tables based on Table Signature](#method-2-dropping-tables-based-on-table-signature)
-	- [Example 1: dropping the `DMAR` Table](#example-1-dropping-the-dmar-table)
-		- [Verifying that the table has been dropped/deleted](#verifying-that-the-table-has-been-droppeddeleted)
-	- [Example 2: replacing the `DMAR` table by a modified one](#example-2-replacing-the-dmar-table-by-a-modified-one)
-		- [Verifying that the `DMAR` Table has been replaced](#verifying-that-the-dmar-table-has-been-replaced)
-- [:warning: Note](#warning-note)
+  - [Example 1: dropping the `DMAR` Table](#example-1-dropping-the-dmar-table)
+    - [Verifying that the table has been dropped/deleted](#verifying-that-the-table-has-been-droppeddeleted)
+  - [Example 2: replacing the `DMAR` table by a modified one](#example-2-replacing-the-dmar-table-by-a-modified-one)
+    - [Verifying that the `DMAR` Table has been replaced](#verifying-that-the-dmar-table-has-been-replaced)
 
 ## Preparations: Dumping the ACPI Tables
 There are various ways of dumping ACPI Tables from your Firmware/BIOS. The most common way is to use either Clover or OpenCore:
@@ -38,7 +38,7 @@ This method is used to drop tables such as SSDTs and others which have a *distin
 ### Note: Dropping "internal" tables that load other tables
 Some SSDTs are "internal" tables that will only provide data to the primary or parent table that references them. If you drop the primary table, then the referenced secondary table(s) will not be loaded. 
 
-:bulb: Therefore, you don't need to create additional drop rules to drop these tables. If you still try to drop these "internal" tables which are not visible to the system – since they are not referenced in eiter the Root (`RSTD`) or Extended System Description Table (`XSTD`) – you will receive an error message from OpenCore:
+:bulb: Therefore, you don't need to create additional drop rules to drop these tables. If you still try to drop these "internal" tables which are not visible to the system – since they are not referenced in either the Root (`RSTD`) or Extended System Description Table (`XSTD`) – you will receive an error message from OpenCore:
 
 ```text
 OC: Failed to drop ACPI … – Not Found
@@ -126,5 +126,5 @@ This will disable the OEM DMAR table and inject the modified one instead but we 
 - Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions (which it doesn't):</br>
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
-## :warning: Note
+## :warning: Caution
 You should only import tables with maciASL if you know these are not patched ones. Otherwise, dump the OEM ACPI Tables.
