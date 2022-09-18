@@ -47,7 +47,7 @@ OC: Failed to drop ACPI … – Not Found
 
 Sometimes, you can already guess by the name of the tables alone which ones are subsequent tables to others. Look at this screenshot:
 
-![](/Users/5t33z0/Desktop/SubTables.png)
+![SubTables](https://user-images.githubusercontent.com/76865553/190889943-a3375ae1-a27f-4391-a21a-96cbdbf0a435.png)
 
 `SSTD-4-CpuPM` is followed by `SSDT-x4_0…`, `SSDT-x4_1…` and `SSDT-x4_2…` which indicates some type of hierarchy in regards to `SSDT-4…`.
 
