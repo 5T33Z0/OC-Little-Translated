@@ -35,6 +35,45 @@ This method is used to drop tables such as SSDTs and others which have a *distin
 - Select "File" > "New from ACPI" 
 - If you dropped the table successfully, "SSDT (CpuPm)" shouldn't be listed, unless you replaced it with a new table with the same OEM Table ID. If you created your own `SSDT-PM.aml` which is injected by OpenCore, this would be present, since it has the same OEM Table ID.
 
+### Note: Dropping "internal" tables that load other tables
+Some SSDTs are "internal" tables that will only provide data to the primary or parent table that references them. If you drop the primary table, then the referenced secondary table(s) will not be loaded. 
+
+:bulb: Therefore, you don't need to create additional drop rules to drop these tables. If you still try to drop these "internal" tables which are not visible to the system – since they are not referenced in eiter the Root (`RSTD`) or Extended System Description Table (`XSTD`) – you will receive an error message from OpenCore:
+
+```text
+OC: Failed to drop ACPI … – Not Found
+```
+**Example**:
+
+Sometimes, you can already guess by the name of the tables alone which ones are subsequent tables to others. Look at this screenshot:
+
+![](/Users/5t33z0/Desktop/SubTables.png)
+
+`SSTD-4-CpuPM` is followed by `SSDT-x4_0…`, `SSDT-x4_1…` and `SSDT-x4_2…` which indicates some type of hierarchy in regards to `SSDT-4…`.
+
+And if we have a look inside `SSTD-4-CpuPM`, you find the references:
+
+```asl
+Scope (\)
+    {
+        Name (SSDT, Package (0x0C)
+        {
+            "CPU0IST ",
+            0xD3322018, 
+            0x00000C31, 
+            "APIST   ", // Reference to SSDT-x4_0-ApIst
+            0xDAE3DA98, 
+            0x00000303, 
+            "CPU0CST ", // Reference to SSDT-x4_1-Cpu0Cst
+            0xDAE3C018, 
+            0x00000A01, 
+            "APCST   ", // Reference to SSDT-x4_2-ApCst
+            0xDAE3BD98, 
+            0x00000119
+        })
+```
+Find out more about "internal" tables [**here**](https://github.com/acidanthera/bugtracker/issues/969)
+
 ## Method 2: Dropping Tables based on Table Signature
 For tables other than SSDTs, OEM Table ID isn't a reliable source to detect and drop a table by because (based on vendor) the OEM Table IDs may only contain some letters followed by a lot of blanks or underscores, for example `AMI____`. In this case, we use the `Table Signature` and `Table Length` instead to clearly identify the table.
 
