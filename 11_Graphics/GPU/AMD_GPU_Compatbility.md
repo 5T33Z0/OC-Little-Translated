@@ -2,9 +2,9 @@
 
 ## Supported on macOS 10.12+
 
-### Radeon RX 6000 Series​
+### Radeon RX 6000 Series
 
- Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina​ | Big Sur​ | Monterey​ | Ventura |
+ Vendor| Model | Metal | Sierra | High Sierra | Mojave | Catalina | Big Sur | Monterey | Ventura |
 | :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | AMD​ | Radeon RX 6600​ | Yes​ | No​ | No​ | No​ | No​ | No​ | Yes​ | Yes |
 | AMD​ | Radeon RX 6600 XT​ | Yes​ | No​ | No​ | No​ | No​ | No​ | Yes​ | Yes |
@@ -70,6 +70,7 @@ Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina�
 | AMD​ | Radeon RX 480​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 
 ### Radeon R9​
+💡Some unsupported R7/R9 cards an be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
 
 Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina​ | Big Sur​ | Monterey​ | Ventura |
 | :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -95,6 +96,7 @@ Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina�
 | AMD​ | Radeon Pro Duo​ | ​   | ​   | ​   | ​   | ​   | ​   | ​   |     |
 
 ### Radeon R7​
+💡Some unsupported R7/R9 cards an be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
 
 Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina​ | Big Sur​ | Monterey​ | Ventura |
 | :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -199,4 +201,3 @@ Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​ | Catalina�
 
 # Notes and Credits
 - All Mobile GPUs are unsupported at the moment under macOS.
-- Some unsupported R7/R9 cards an be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
