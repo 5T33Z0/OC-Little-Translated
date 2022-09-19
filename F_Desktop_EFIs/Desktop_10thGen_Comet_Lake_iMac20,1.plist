@@ -42,6 +42,14 @@
                 </dict>
                 <dict>
                     <key>Comment</key>
+                    <string>Adds PMCR Device</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-PMC.aml</string>
+                </dict>
+                <dict>
+                    <key>Comment</key>
                     <string>Enables AppleSMBus and Memory Controller Support</string>
                     <key>Enabled</key>
                     <true/>
@@ -50,7 +58,7 @@
                 </dict>
                 <dict>
                     <key>Comment</key>
-                    <string>Only required for ASUS (and possibly) MSI Boards</string>
+                    <string>Fixes USB Root Hub on Asus and MSI boards.</string>
                     <key>Enabled</key>
                     <false/>
                     <key>Path</key>
@@ -569,11 +577,7 @@
             <array/>
             <key>Security</key>
             <dict>
-                <key>AllowNvramReset</key>
-                <true/>
                 <key>AllowSetDefault</key>
-                <true/>
-                <key>AllowToggleSip</key>
                 <true/>
                 <key>ApECID</key>
                 <integer>0</integer>
@@ -602,6 +606,33 @@
             </dict>
             <key>Serial</key>
             <dict>
+                <key>Custom</key>
+                <dict>
+                    <key>BaudRate</key>
+                    <integer>115200</integer>
+                    <key>ClockRate</key>
+                    <integer>1843200</integer>
+                    <key>DetectCable</key>
+                    <false/>
+                    <key>ExtendedTxFifoSize</key>
+                    <integer>64</integer>
+                    <key>FifoControl</key>
+                    <integer>7</integer>
+                    <key>LineControl</key>
+                    <integer>3</integer>
+                    <key>PciDeviceInfo</key>
+                    <data>/w==</data>
+                    <key>RegisterAccessWidth</key>
+                    <integer>8</integer>
+                    <key>RegisterBase</key>
+                    <integer>1016</integer>
+                    <key>RegisterStride</key>
+                    <integer>1</integer>
+                    <key>UseHardwareFlowControl</key>
+                    <false/>
+                    <key>UseMmio</key>
+                    <false/>
+                </dict>
                 <key>Init</key>
                 <false/>
                 <key>Override</key>
@@ -666,8 +697,6 @@
                     <string>csr-active-config</string>
                 </array>
             </dict>
-            <key>LegacyEnable</key>
-            <false/>
             <key>LegacyOverwrite</key>
             <false/>
             <key>LegacySchema</key>
@@ -817,6 +846,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>LoadEarly</key>
+                    <false/>
                     <key>Path</key>
                     <string>HfsPlus.efi</string>
                 </dict>
@@ -827,6 +858,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>LoadEarly</key>
+                    <false/>
                     <key>Path</key>
                     <string>OpenRuntime.efi</string>
                 </dict>
@@ -837,6 +870,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>LoadEarly</key>
+                    <false/>
                     <key>Path</key>
                     <string>OpenCanopy.efi</string>
                 </dict>
