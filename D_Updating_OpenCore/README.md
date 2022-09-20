@@ -69,7 +69,10 @@ For Kexts, you can also choose between Release and DEV builds in the Sync window
 	![Save_ok](https://user-images.githubusercontent.com/76865553/140640868-b76f0ca8-496f-42cb-9cb4-737ce03bca1a.png)
 8. You're already done with updating your config. On to updating files…
 
-**NOTE**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
+**NOTES**: 
+
+- :wanring: Make sure you have a working Backup of your EFI Folder stored on a FAT32 formatted USB drive before attampting updating your config and files!
+- Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ## Updating OpenCore Files, Drivers, Kexts and Resources
 
