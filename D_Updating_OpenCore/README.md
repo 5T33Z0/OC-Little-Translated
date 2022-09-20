@@ -56,7 +56,7 @@ If you switch from the default variant of OpenCore to any other, the displayed O
 For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
 
 ## How-to update your `config.plist`
-1. Run OCAT, check for Updates (Globe Icon)
+1. Run OCAT, check for Updates (Help > Update Check)
 2. Mount your ESP (select Edit > MountESP) or (⌘+M)
 3. Highlight your `config.plist` and create a duplicate as a backup (⌘+D)
 4. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
