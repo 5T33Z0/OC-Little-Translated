@@ -27,6 +27,7 @@ OCAT also integrates new keys/features added to the config.plist into the GUI au
 ## Tools and prerequisites
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
+- :warning: Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong!
 
 ### For users updating from OpenCore 0.6.5 or lower
 :warning: **CAUTION**: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
@@ -69,10 +70,7 @@ For Kexts, you can also choose between Release and DEV builds in the Sync window
 	![Save_ok](https://user-images.githubusercontent.com/76865553/140640868-b76f0ca8-496f-42cb-9cb4-737ce03bca1a.png)
 8. You're already done with updating your config. On to updating files…
 
-**NOTES**: 
-
-- :wanring: Make sure you have a working Backup of your EFI Folder stored on a FAT32 formatted USB drive before attampting updating your config and files!
-- Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
+**NOTES**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ## Updating OpenCore Files, Drivers, Kexts and Resources
 
