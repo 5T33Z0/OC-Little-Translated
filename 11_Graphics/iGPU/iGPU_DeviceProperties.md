@@ -137,7 +137,6 @@ When installing macOS Monterey, you will notice that the system feels super slug
 To bring them back, do the following:
 
 - Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Copy the OpenCore Legacy Patcher App from you USB Installer to the Desktop
 - Double-click it to run it 
 - In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
 - Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
@@ -418,7 +417,6 @@ When installing macOS Monterey, you will notice that the system feels super slug
 To bring them back, do the following:
 
 - Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Copy the OpenCore Legacy Patcher App from you USB Installer to the Desktop
 - Double-click it to run it 
 - In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
 - Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
