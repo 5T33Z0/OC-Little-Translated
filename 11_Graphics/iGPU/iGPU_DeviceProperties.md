@@ -304,9 +304,6 @@ Additionally ,you need one of the following sets of Connector patches so externa
 #### Connector Patches for `04006601`
 
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
 <dict>
 	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
@@ -339,9 +336,6 @@ Additionally ,you need one of the following sets of Connector patches so externa
 #### Connector Patches for `03006601`
 
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
 <dict>
 	<key>#PciRoot(0x0)/Pci(0x2,0x0) 1366x768 px</key>
 	<dict>
