@@ -34,7 +34,7 @@
 
 - Only add one `AAPL,ig-platform-id` key for your iGPU model!
 - The `device-id` property is only required if the iGPU model on the CPU is not natively supported by macOS and/or used SMBIOS.
-- `framebuffer-stolenmem` and `framebuffer-fbmem` are only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, they're configured for 32MB of DVMT-preallocated our BIOS which may result in a kernel panic. In this case,y you need to add these keys.
+- `framebuffer-stolenmem` and `framebuffer-fbmem` are only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, they're configured for 32MB of DVMT-preallocated our BIOS which may result in a kernel panic. In this case, you need to add these keys.
 
 ## Empty Framebuffers (for Desktop)
 List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
@@ -49,7 +49,7 @@ Kaby Lake | Data |`03001259`
 Skylake | Data |`01001219`
 Skylake (P530) | Data |`01001219`| `1B190000` | P530 is not natively supported so you need to add the device-id as well.
 Haswell | Data| `04001204`
-Haswell (HD 4400)| Data| `04001204`|`12040000` | HD 4400 is unsupported in macOS so the device id is needed to spoof it as HD 4600 instead.
+Haswell (HD 4400)| Data| `04001204`|`12040000` | HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
 Ivy Bridge | Data| `07006201`|
 
 CPU Family (Desktop)| Type | AAPL,snb-platform-id | device-id
@@ -72,7 +72,7 @@ Key | Type | Value| Notes
 `framebuffer-patch-enable`| Data | `01000000`
 `framebuffer-stolenmem` | Data | `00003001`
 
-**NOTE**: The following mainboard/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black afer booting in verbose mode: **B360, B365, H310, H370, Z390**
+**NOTE**: The following mainboards/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black afer booting in verbose mode: **B360, B365, H310, H370, Z390**.
 
 ### Kaby Lake
 For Intel HD-630.
@@ -154,6 +154,8 @@ The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/c
 You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
+>Intel HD 3000</br>
+>Supported from macOS 10.6.7 to macOS 10.13
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -434,8 +436,8 @@ The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/c
 You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
->For Intel HD 3000</br>
->Supported: macOS 10.6.7 to macOS 10.13
+>Intel HD 3000</br>
+>Supported from macOS 10.6.7 to macOS 10.13
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
