@@ -416,7 +416,7 @@ Additionally ,you need one of the following sets of Connector patches so externa
 
 - `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
-- You can disable keys by commenting them out (put `#` in front)
+- You can enable/disable keys by remvoing/putting `#` in front of them.
 
 #### Installing Intel HD4000 Drivers on macOS 12.5.x
 
