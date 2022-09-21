@@ -68,6 +68,8 @@ Key | Type | Value| Notes
 `framebuffer-patch-enable`| Data | `01000000`
 `framebuffer-stolenmem` | Data | `00003001`
 
+**NOTE**: The following mainboard/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black afer booting in verbose mode: **B360, B365, H310, H370, Z390**
+
 ### Kaby Lake
 For Intel HD-630.
 
