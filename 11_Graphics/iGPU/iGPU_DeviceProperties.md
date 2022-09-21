@@ -2,7 +2,7 @@
 
 **TABLE of CONTENTS**
 
-- [:bulb: General Configuration Notes](#bulb-general-configuration-notes)
+- [General Configuration Notes](#bulb-general-configuration-notes)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
 	- [Coffee and Comet Lake](#coffee-and-comet-lake)
