@@ -334,81 +334,87 @@ Additionally ,you need one of the following sets of Connector patches so externa
 
 #### Connector Patches for `04006601`
 
-```
+```swift
 <dict>
-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+	<key>DeviceProperties</key>
 	<dict>
-		<key>#framebuffer-stolenmem</key>
-		<data>AAAABA==</data>
-		<key>#igfxfw</key>
-		<data>AgAAAA==</data>
-		<key>AAPL,ig-platform-id</key>
-		<data>BABmAQ==</data>
-		<key>AAPL,slot-name</key>
-		<string>built-in</string>
-		<key>framebuffer-con1-alldata</key>
-		<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
-		<key>framebuffer-con1-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-memorycount</key>
-		<data>AgAAAA==</data>
-		<key>framebuffer-patch-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-pipecount</key>
-		<data>AgAAAA==</data>
-		<key>framebuffer-portcount</key>
-		<data>BAAAAA==</data>
-		<key>framebuffer-unifiedmem</key>
-		<data>AAAAgA==</data>
-		<key>model</key>
-		<string>Intel HD Graphics 4000</string>
-	</dict>
+		<key>Add</key>
+		<dict>
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>#framebuffer-stolenmem</key>
+				<data>AAAABA==</data>
+				<key>AAPL,ig-platform-id</key>
+				<data>BABmAQ==</data>
+				<key>AAPL,slot-name</key>
+				<string>built-in</string>
+				<key>#device-id</key>
+				<data>ZgEAAA==</data>
+				<key>framebuffer-con1-alldata</key>
+				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
+				<key>framebuffer-con1-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-memorycount</key>
+				<data>AgAAAA==</data>
+				<key>framebuffer-patch-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-pipecount</key>
+				<data>AgAAAA==</data>
+				<key>framebuffer-portcount</key>
+				<data>BAAAAA==</data>
+				<key>framebuffer-unifiedmem</key>
+				<data>AAAAgA==</data>
+				<key>model</key>
+				<string>Intel HD Graphics 4000</string>
+			</dict>
 ```
 #### Connector Patches for `03006601`
 
-```
+```swift
 <dict>
-	<key>#PciRoot(0x0)/Pci(0x2,0x0)</key>
+	<key>DeviceProperties</key>
 	<dict>
-		<key>#device-id</key>
-		<data>ZgEAAA==</data>
-		<key>#framebuffer-stolenmem</key>
-		<data>AAAABA==</data>		
-		<key>AAPL,ig-platform-id</key>
-		<data>AwBmAQ==</data>
-		<key>AAPL,slot-name</key>
-		<string>Internal</string>
-		<key>applbkl</key>
-		<integer>1</integer>
-		<key>framebuffer-con1-enable</key>
-		<integer>1</integer>
-		<key>framebuffer-con1-flags</key>
-		<data>BgAAAA==</data>
-		<key>framebuffer-con1-type</key>
-		<data>AAgAAA==</data>
-		<key>framebuffer-con2-enable</key>
-		<integer>1</integer>
-		<key>framebuffer-con2-flags</key>
-		<data>BgAAAA==</data>
-		<key>framebuffer-con2-type</key>
-		<data>AAgAAA==</data>
-		<key>framebuffer-con3-enable</key>
-		<integer>1</integer>
-		<key>framebuffer-con3-flags</key>
-		<data>BgAAAA==</data>
-		<key>framebuffer-con3-type</key>
-		<data>AAgAAA==</data>
-		<key>framebuffer-patch-enable</key>
-		<integer>1</integer>
-		<key>framebuffer-unifiedmem</key>
-		<data>AAAAgA==</data>
-		<key>model</key>
-		<string>Intel HD Graphics 4000</string>
-	</dict>
+		<key>Add</key>
+		<dict>
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>#device-id</key>
+				<data>ZgEAAA==</data>
+				<key>AAPL,ig-platform-id</key>
+				<data>AwBmAQ==</data>
+				<key>AAPL,slot-name</key>
+				<string>Internal</string>
+				<key>framebuffer-con1-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-con1-flags</key>
+				<data>BgAAAA==</data>
+				<key>framebuffer-con1-type</key>
+				<data>AAgAAA==</data>
+				<key>framebuffer-con2-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-con2-flags</key>
+				<data>BgAAAA==</data>
+				<key>framebuffer-con2-type</key>
+				<data>AAgAAA==</data>
+				<key>framebuffer-con3-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-con3-flags</key>
+				<data>BgAAAA==</data>
+				<key>framebuffer-con3-type</key>
+				<data>AAgAAA==</data>
+				<key>framebuffer-patch-enable</key>
+				<integer>1</integer>
+				<key>model</key>
+				<string>Intel HD Graphics 4000</string>
+				<key>framebuffer-unifiedmem</key>
+				<data>AAAAgA==</data>
+				<key>#framebuffer-stolenmem</key>
+				<data>AAAABA==</data>
+			</dict>
 ```
 **NOTES**:
 
-- `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
+- `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 - You can disable keys by commenting them out (put `#` in front)
 
