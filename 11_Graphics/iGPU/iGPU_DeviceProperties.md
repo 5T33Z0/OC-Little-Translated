@@ -37,7 +37,7 @@ List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-b
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
-CPU Family (iGPU Variant)| Type | AAPL,ig-platform-id | device-id | Notes
+CPU Family (iGPU variant)| Type | AAPL,ig-platform-id | device-id | Notes
 -------------------------|:----:|:-------------------:|-----------|------
 Comet Lake |Data|`0300C89B`
 Coffee Lake | Data |`0300913E`
