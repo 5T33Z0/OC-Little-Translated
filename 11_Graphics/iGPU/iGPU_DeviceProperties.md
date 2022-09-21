@@ -337,7 +337,7 @@ Additionally ,you need one of the following sets of Connector patches so externa
 
 ```
 <dict>
-	<key>#PciRoot(0x0)/Pci(0x2,0x0) 1366x768 px</key>
+	<key>#PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
 		<key>#device-id</key>
 		<data>ZgEAAA==</data>
