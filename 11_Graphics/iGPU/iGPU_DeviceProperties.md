@@ -2,7 +2,7 @@
 
 **TABLE of CONTENTS**
 
-- [General Configuration Notes](#bulb-general-configuration-notes)
+- [:bulb: General Configuration Notes](#bulb-general-configuration-notes)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
 	- [Coffee and Comet Lake](#coffee-and-comet-lake)
@@ -10,6 +10,8 @@
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
 	- [Ivy Bridge](#ivy-bridge)
+		- [Installing Intel HD4000 Drivers on macOS 12.5.x](#installing-intel-hd4000-drivers-on-macos-125x)
+		- [OCLP and System Updates](#oclp-and-system-updates)
 	- [Sandy Bridge](#sandy-bridge)
 - [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
 	- [Ice Lake](#ice-lake)
@@ -23,6 +25,8 @@
 	- [Ivy Bridge](#ivy-bridge-1)
 		- [Connector Patches for `04006601`](#connector-patches-for-04006601)
 		- [Connector Patches for `03006601`](#connector-patches-for-03006601)
+		- [Installing Intel HD4000 Drivers on macOS 12.5.x](#installing-intel-hd4000-drivers-on-macos-125x-1)
+		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
 - [Resources](#resources)
 
@@ -46,7 +50,7 @@ Skylake | Data |`01001219`
 Skylake (P530) | Data |`01001219`| `1B190000` | P530 is not natively supported so you need to add the device-id as well.
 Haswell | Data| `04001204`
 Haswell (HD 4400)| Data| `04001204`|`12040000` | HD 4400 is unsupported in macOS so the device id is needed to spoof it as HD 4600 instead.
-Ivy Bridge | Data| `07006201`
+Ivy Bridge | Data| `07006201`|
 
 CPU Family (Desktop)| Type | AAPL,snb-platform-id | device-id
 --------------------|:----:|:--------------------:|-----------
@@ -117,14 +121,38 @@ Key | Type | Value| Notes
 `device-id`| Data| `12040000` | :warining: Only needed when using HD Intel HD 4400!
 
 ### Ivy Bridge
->For Intel HD 2500/4000.</br>
->Supported from OS X 10.8.x to macOS 11.x.
+>For Intel HD 2500/4000</br>
+>Supported from OS X 10.8.x to macOS 11.x (officially), macOS 12 with Post-Install patches
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
 Key | Type | Value|
 ----|:----:|:----:|
 `AAPL,ig-platform-id`| Data | `0A006601`
+
+#### Installing Intel HD4000 Drivers on macOS 12.5.x
+
+When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
+
+To bring them back, do the following:
+
+- Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
+- Copy the OpenCore Legacy Patcher App from you USB Installer to the Desktop
+- Double-click it to run it 
+- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
+- Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
+- The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
+- You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
+- Once. it's donw you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+
+Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
+
+#### OCLP and System Updates
+The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
+
+![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
+
+You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
 
@@ -377,12 +405,35 @@ Additionally ,you need one of the following sets of Connector patches so externa
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
-
 **NOTES**:
 
 - `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 - You can disable keys by commenting them out (put `#` in front)
+
+#### Installing Intel HD4000 Drivers on macOS 12.5.x
+
+When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
+
+To bring them back, do the following:
+
+- Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
+- Copy the OpenCore Legacy Patcher App from you USB Installer to the Desktop
+- Double-click it to run it 
+- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
+- Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
+- The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
+- You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
+- Once. it's donw you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+
+Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
+
+#### OCLP and System Updates
+The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
+
+![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
+
+You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
 >For Intel HD 3000</br>
@@ -395,8 +446,9 @@ Key | Type | Value| Notes
 `AAPL,snb-platform-id`| Data | `00000100` | For Laptops
 `AAPL,snb-platform-id`| Data | `10000300` | For NUCs
 
-
 ## Resources
 
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
 - [**Intel Framebuffer Patching Guide**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
+- [**Patch HD4000 Monterey**](https://github.com/chris1111/Patch-HD4000-Monterey)
