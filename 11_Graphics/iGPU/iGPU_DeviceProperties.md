@@ -100,7 +100,7 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id` | Data | `1B190000` | :warining: Only needed when using Intel HD P530!
+`device-id` | Data | `1B190000` | ⚠️ Only needed when using Intel HD P530!
 
 For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
 
@@ -118,7 +118,7 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id`| Data| `12040000` | :warining: Only needed when using HD Intel HD 4400!
+`device-id`| Data| `12040000` | ⚠️ Only needed when using HD Intel HD 4400!
 
 ### Ivy Bridge
 >For Intel HD 2500/4000</br>
@@ -195,7 +195,7 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id` | Data | `9B3E0000` | :warning: Only required for UHD 620 and UHD 655!
+`device-id` | Data | `9B3E0000` | ⚠️ Only required for UHD 620 and UHD 655!
 
 ### Coffee Lake and Whiskeylake
 >For Intel UHD 620/630/655</br>
@@ -214,8 +214,8 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id`|Data|`9B3E0000`| For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Winodws, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
-`device-id`|Data|`9B3E0000`| Only required for Coffee Lalke CPUs with UHD 620.
+`device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Winodws, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
+`device-id`|Data|`9B3E0000`| ⚠️ Only required for Coffee Lalke CPUs with UHD 620.
 
 ### Kaby Lake and Amber Lake
 >For Intel HD 615/617/620/630/640/650</br>
@@ -236,7 +236,7 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id`|Data|`16590000`| All UHD 620 with Kaby Lake-R require a device-id spoof!
+`device-id`|Data|`16590000`| ⚠️ All UHD 620 with Kaby Lake-R require a device-id spoof!
 
 #### Connector Patches for HD 6XX models (not UHD!)
 HD 6xx users (UHD 6xx users are not concerned) may face some issues with the output where plugging in a display causes a lock up (kernel panic). Listed below are some patches to mitigate that (credits to RehabMan). If you're facing lock ups, try the following sets of patches (try both, but only one set at a time): 
@@ -279,8 +279,8 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id` |Data |`02190000` | Required for HD 510
-`device-id` |Data |`16190000` | Required for HD 550 and P530 
+`device-id` |Data |`02190000` | ⚠️ Required for HD 510
+`device-id` |Data |`16190000` | ⚠️ Required for HD 550 and P530 
 
 ### Broadwell
 >For Intel HD 5500/5600/6000 and Iris (Pro) 6100/6200</br>
