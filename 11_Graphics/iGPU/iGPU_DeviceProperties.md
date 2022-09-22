@@ -3,8 +3,6 @@
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
-**TABLE of CONTENTS**
-
 - [General Configuration Notes](#bulb-general-configuration-notes)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
