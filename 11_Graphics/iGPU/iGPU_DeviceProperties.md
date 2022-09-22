@@ -33,8 +33,9 @@
 ## :bulb: General Configuration Notes
 
 - Only add one `AAPL,ig-platform-id` key for your iGPU model!
-- The `device-id` property is only required if the iGPU model on the CPU is not natively supported by macOS and/or used SMBIOS.
-- `framebuffer-stolenmem` and `framebuffer-fbmem` are only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, they're configured for 32MB of DVMT-preallocated our BIOS which may result in a kernel panic. In this case, you need to add these keys.
+- The `device-id` property is only required if the iGPU model on the CPU is not natively supported by macOS and/or the used SMBIOS.
+- `framebuffer-stolenmem` and `framebuffer-fbmem` are only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, DVMT-preallocated is set to 32MB which may result in a kernel panic. In this case, you need to add these properties.
+- Most of the Framebuffer patches listed below (besides the empty ones) represent the bare minimun configuration. This means in cases where your display output does not work, you have to adjust the framebuffer with controller data using Hackintool and following a general framebuffer patching guide [such as this](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
 
 ## Empty Framebuffers (for Desktop)
 List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
