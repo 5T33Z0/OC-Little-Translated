@@ -241,7 +241,7 @@ Next, we need to figure out how the ports are attached to actually physical USB 
 ### How USB is structured in ACPI
 When it comes to USB, there is a Root Hub (RHUB) which defines ports. But a port can also function as Hub itself (Integrated Hub), as you can see in this illustration:
 
-![](https://uefi.org/specs/ACPI/6.4/_images/ACPIdefined_Devices_and_DeviceSpecificObjects-5.png)
+![ACPIdefined_Devices_and_DeviceSpecificObjects-5](https://user-images.githubusercontent.com/76865553/191863871-53de2612-590e-471f-8a8b-85f20f82ec63.png)
 
 This is an example of port characteristics object implemented for a USB host controller’s root hub where:
 
@@ -249,7 +249,7 @@ This is an example of port characteristics object implemented for a USB host con
 - Port 2 is located on the back panel
 - Port 3 has an integrated 2 port hub. Note that because this port hosts an integrated hub, it is therefore not sharable with another host controller (e.g. If the integrated hub is a USB2.0 hub, the port can never be shared with a USB1.1 companion controller). The ports available through the embedded hub are located on the front panel and are adjacent to one another.
 
-**SOURCE**: [UEFI.org](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)
+**SOURCE**: [UEFI.org](https://uefi.org/specs/ACPI/6.5/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)
 
 ### USB Port Types
 According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
