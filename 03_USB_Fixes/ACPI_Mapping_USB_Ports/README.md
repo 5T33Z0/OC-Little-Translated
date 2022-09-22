@@ -120,7 +120,7 @@ Now that we have found the SSDT with the original USB port declarations, we can 
 ### Modifying the original USB Table
 Two methods are relevant for declaring USB ports: `_UPC` and `_PLD`. Both methods handle their values over to `GUPC` and `GPLD` inside the Root Hub (`RHUB`).
  
-#### 1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities))
+#### 1. `_UPC` ([**USB Port Capabilities**](https://uefi.org/specs/ACPI/6.5/09_ACPI_Defined_Devices_and_Device_Specific_Objects.html?highlight=upc#upc-usb-port-capabilities))
 
 `_UPC` defines the type of port and it's state (enabled/disabled). Its structure looks as follows:
 
@@ -158,7 +158,7 @@ _UPC, Package ()
 
 **UBS-C Switches**: if both sides of a USB-C connector are plugged into the same pysical port and hackintool uses the same port for it, than the connected device has a switch. In other words: 2 sides, 1 port = switch. Conversely, if both sides of the same connector occupy two ports, it has no switch
 
-#### 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.4/06_Device_Configuration/Device_Configuration.html#pld-physical-location-of-device))
+#### 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.5/06_Device_Configuration.html#pld-physical-location-of-device))
 
 Defines the location of the physical port and its properties (not covered by this guide)
 
@@ -252,7 +252,7 @@ This is an example of port characteristics object implemented for a USB host con
 **SOURCE**: [UEFI.org](https://uefi.org/specs/ACPI/6.5/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-usb-port-capabilities)
 
 ### USB Port Types
-According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.4/09_ACPI-Defined_Devices_and_Device-Specific_Objects/ACPIdefined_Devices_and_DeviceSpecificObjects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
+According to the ACPI Specifications about [USB Port Capabilities](https://uefi.org/specs/ACPI/6.5/09_ACPI_Defined_Devices_and_Device_Specific_Objects.html#upc-return-package-values), the USB Types are declared by different bytes. Here are some common ones found on current mainboards:
 
 | Type   | Info                           | Comment |
 |:------:|--------------------------------|---------|
