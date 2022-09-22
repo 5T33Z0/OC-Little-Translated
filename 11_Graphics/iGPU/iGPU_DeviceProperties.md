@@ -16,7 +16,7 @@
 - [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
 	- [Ice Lake](#ice-lake)
 	- [Coffee Lake Plus and Comet Lake](#coffee-lake-plus-and-comet-lake)
-	- [Coffee Lake and Whiskeylake](#coffee-lake-and-whiskeylake)
+	- [Coffee Lake and Whiskey Lake](#coffee-lake-and-whiskey-lake)
 	- [Kaby Lake and Amber Lake](#kaby-lake-and-amber-lake)
 		- [Connector Patches for HD 6XX models (not UHD!)](#connector-patches-for-hd-6xx-models-not-uhd)
 	- [Skylake](#skylake-1)
@@ -28,14 +28,14 @@
 		- [Installing Intel HD4000 Drivers on macOS 12.5.x](#installing-intel-hd4000-drivers-on-macos-125x-1)
 		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
-- [Resources](#resources)
+- [Credits and Resources](#credits-and-resources)
 
 ## :bulb: General Configuration Notes
 
 - Only add one `AAPL,ig-platform-id` key for your iGPU model!
 - The `device-id` property is only required if the iGPU model on the CPU is not natively supported by macOS and/or the used SMBIOS.
 - `framebuffer-stolenmem` and `framebuffer-fbmem` are only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, DVMT-preallocated is set to 32MB which may result in a kernel panic. In this case, you need to add these properties.
-- Most of the Framebuffer patches listed below (besides the empty ones) represent the bare minimun configuration. This means in cases where your display output does not work, you have to adjust the framebuffer with controller data using Hackintool and following a general framebuffer patching guide [such as this](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
+- Most of the Framebuffer patches listed below (besides the empty ones) represent the bare minimum configuration. This means in cases where your display output does not work, you have to adjust the framebuffer with controller data using Hackintool and following a general framebuffer patching guide [such as this](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
 
 ## Empty Framebuffers (for Desktop)
 List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
@@ -58,7 +58,7 @@ CPU Family (Desktop)| Type | AAPL,snb-platform-id | device-id
 Sand Bridge| Data | `00000500`|`02010000`
 
 ## Framebuffers (Desktop)
-AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Propterties to add for these!
+AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
 
 ### Coffee and Comet Lake
 For Intel UHD-630.
@@ -73,7 +73,7 @@ Key | Type | Value| Notes
 `framebuffer-patch-enable`| Data | `01000000`
 `framebuffer-stolenmem` | Data | `00003001`
 
-**NOTE**: The following mainboards/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black afer booting in verbose mode: **B360, B365, H310, H370, Z390**.
+**NOTE**: The following mainboards/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black after booting in verbose mode: **B360, B365, H310, H370, Z390**.
 
 ### Kaby Lake
 For Intel HD-630.
@@ -143,7 +143,7 @@ To bring them back, do the following:
 - Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
 - The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
 - You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
-- Once. it's donw you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+- Once it's done, you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
 
@@ -199,7 +199,7 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data | `9B3E0000` | ⚠️ Only required for UHD 620 and UHD 655!
 
-### Coffee Lake and Whiskeylake
+### Coffee Lake and Whiskey Lake
 >For Intel UHD 620/630/655</br>
 >Supported since: Coffee Lake: macOS 10.13; Whiskey Lake: macOS 10.14.1
 
@@ -207,8 +207,8 @@ Key | Type | Value| Notes
 
 Key | Type | Value| Notes
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`|Data| `0900A53E` |For Laptos with UHD 630
-`AAPL,ig-platform-id`|Data| `00009B3E` |For Laptos with UHD 620
+`AAPL,ig-platform-id`|Data| `0900A53E` |For Laptops with UHD 630
+`AAPL,ig-platform-id`|Data| `00009B3E` |For Laptops with UHD 620
 `AAPL,ig-platform-id`|Data| `07009B3E` |For NUCs with UHD 620/630
 `AAPL,ig-platform-id`|Data| `0000A53E` |For NUCs with UHD 655
 ||||
@@ -216,8 +216,8 @@ Key | Type | Value| Notes
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Winodws, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
-`device-id`|Data|`9B3E0000`| ⚠️ Only required for Coffee Lalke CPUs with UHD 620.
+`device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Windows, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
+`device-id`|Data|`9B3E0000`| ⚠️ Only required for Coffee Lake CPUs with UHD 620.
 
 ### Kaby Lake and Amber Lake
 >For Intel HD 615/617/620/630/640/650</br>
@@ -227,7 +227,7 @@ Key | Type | Value| Notes
 
 Key | Type | Value| Notes
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`|Data| `00001B59`| For Laptos with HD 615, HD 620, HD 630, HD 640 and HD 650 UHD 630.
+`AAPL,ig-platform-id`|Data| `00001B59`| For Laptops with HD 615, HD 620, HD 630, HD 640 and HD 650 UHD 630.
 `AAPL,ig-platform-id`|Data| `00001659` |Alternative to `00001B59` if you have acceleration issues, and for all HD and UHD 620 NUCs.
 `AAPL,ig-platform-id`|Data| `0000C087`| For Laptops with Amber Lake's UHD 617 and Kaby Lake-R's UHD 620.
 `AAPL,ig-platform-id`|Data| `00001E59`| For NUCs with HD 615
@@ -431,7 +431,7 @@ To bring them back, do the following:
 - Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
 - The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
 - You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
-- Once. it's donw you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+- Once it's done, you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
 
