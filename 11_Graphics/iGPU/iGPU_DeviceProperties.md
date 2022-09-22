@@ -454,8 +454,8 @@ Key | Type | Value| Notes
 `AAPL,snb-platform-id`| Data | `10000300` | For NUCs
 
 ## Credits and Resources
-
-- Dortania for [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
 - Acidanthera for [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
-- Chris1111 for [**Patch HD4000 Monterey**](https://github.com/chris1111/Patch-HD4000-Monterey)
 - CaseySJ for [**Genral Framebuffer Patching Guide**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/)
+- Chris1111 for [**Patch HD4000 Monterey**](https://github.com/chris1111/Patch-HD4000-Monterey)
+- Dortania for [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
+- RehabMan for [**Laptop Framebuffer Patches**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config)
