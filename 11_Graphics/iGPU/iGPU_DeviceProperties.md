@@ -1,5 +1,8 @@
 # iGPU Framebuffer DeviceProperties
 
+<details>
+<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [General Configuration Notes](#bulb-general-configuration-notes)
@@ -29,6 +32,8 @@
 		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
 - [Credits and Resources](#credits-and-resources)
+
+</details>
 
 ## :bulb: General Configuration Notes
 
