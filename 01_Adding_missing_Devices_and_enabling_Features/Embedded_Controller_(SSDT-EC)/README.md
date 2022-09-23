@@ -6,6 +6,8 @@ An embedded controller (or `EC`) is a hardware microcontroller inside of compute
 ### Why do I need a virtual EC?
 On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is a good thing, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from connecting to an existing `EC`. To ensure thes, we disable the device in the system's `DSDT` and add a fake/virtual `EC` for macOS to play with instead.
 
+In macOS Catalina and newer, checks for varifying the presence of the EC have been implemented. So if it's not present, macOS will stall and you will receive status messages like `apfs_module_start…` or `Waiting for Root device` or `Waiting on…IOResources…` or `previous shutdown cause…`
+
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
 In order to get USB Power Management working properly on **Skylake and newer CPUs**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient (if required at all).
 
