@@ -319,7 +319,7 @@ Key | Type | Value| Notes
 `framebuffer-patch-enable`| Data | `01000000`
 `framebuffer-fbmem`| Data | `00009000`
 ||||
-`device-id` | Data |`26160000` | Required for HD 4200/4400/4600.
+`device-id` | Data |`12040000` | Required for HD 4200/4400/4600.
 
 ### Ivy Bridge
 >For Intel HD 4000</br>
