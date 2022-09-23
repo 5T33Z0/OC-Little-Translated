@@ -3,7 +3,7 @@
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
-- [General Configuration Notes](#bulb-general-configuration-notes)
+- [General Configuration Notes](#general-configuration-notes)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
 	- [Coffee and Comet Lake](#coffee-and-comet-lake)
@@ -11,7 +11,7 @@
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
 	- [Ivy Bridge](#ivy-bridge)
-		- [Installing Intel HD4000 Drivers on macOS 12.5.x](#installing-intel-hd4000-drivers-on-macos-125x)
+		- [Installing Intel HD4000 Drivers on macOS Monterey](#installing-intel-hd4000-drivers-on-macos-monterey)
 		- [OCLP and System Updates](#oclp-and-system-updates)
 	- [Sandy Bridge](#sandy-bridge)
 - [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
@@ -26,14 +26,14 @@
 	- [Ivy Bridge](#ivy-bridge-1)
 		- [Connector Patches for `04006601`](#connector-patches-for-04006601)
 		- [Connector Patches for `03006601`](#connector-patches-for-03006601)
-		- [Installing Intel HD4000 Drivers on macOS 12.5.x](#installing-intel-hd4000-drivers-on-macos-125x-1)
+		- [Installing Intel HD4000 Drivers on macOS Monterey](#installing-intel-hd4000-drivers-on-macos-monterey-1)
 		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
 - [Credits and Resources](#credits-and-resources)
 
 </details>
 
-## :bulb: General Configuration Notes
+## General Configuration Notes
 
 - Only add one `AAPL,ig-platform-id` key for your iGPU model!
 - The `device-id` property is only required if the iGPU model on the CPU is not natively supported by macOS and/or the used SMBIOS.
@@ -134,7 +134,7 @@ Key | Type | Value|
 ----|:----:|:----:|
 `AAPL,ig-platform-id`| Data | `0A006601`
 
-#### Installing Intel HD4000 Drivers on macOS 12.5.x
+#### Installing Intel HD4000 Drivers on macOS Monterey
 
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
 
@@ -422,8 +422,7 @@ Additionally ,you need one of the following sets of Connector patches so externa
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 - You can enable/disable keys by remvoing/putting `#` in front of them.
 
-#### Installing Intel HD4000 Drivers on macOS 12.5.x
-
+#### Installing Intel HD4000 Drivers on macOS Monterey
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
 
 To bring them back, do the following:
