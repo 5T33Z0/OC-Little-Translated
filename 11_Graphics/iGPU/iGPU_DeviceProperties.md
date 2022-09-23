@@ -46,7 +46,6 @@ About some of the used properties:
 - `framebuffer-stolenmem` and `framebuffer-fbmem`: Only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, DVMT-preallocated is set to 32MB by default which may result in a kernel panic. In this case, you need to add these properties.
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
-
 ## Empty Framebuffers (for Desktop)
 List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
 
