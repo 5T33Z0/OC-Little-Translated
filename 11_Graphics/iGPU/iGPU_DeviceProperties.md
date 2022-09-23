@@ -1,4 +1,4 @@
-# iGPU Framebuffer DeviceProperties
+ # iGPU Framebuffer DeviceProperties
 
 List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs.
 
@@ -6,6 +6,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
 - [General Configuration Notes](#general-configuration-notes)
+	- [About the used properties](#about-the-used-properties)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
 	- [Coffee and Comet Lake](#coffee-and-comet-lake)
@@ -36,7 +37,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 </details>
 
 ## General Configuration Notes
-Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [such as this](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
+Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
 
 ### About the used properties
 
@@ -46,7 +47,7 @@ Most of the Framebuffer patches listed below (besides empty framebuffers) repres
 `AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs only. 
 `device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
 `framebuffer-patch-enable` | Switch to enable framebuffer patching. Required when setting properties like `fbmem`, `stolenmem` or `unifiedmem`. 
-`framebuffer-fbmem` | Patches framebuffer memory, and is used if you cannot seet DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
+`framebuffer-fbmem` | Patches framebuffer memory, and is used if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-stolenmem` | Patches framebuffer stolen memory, and is used when you cannot configure DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
