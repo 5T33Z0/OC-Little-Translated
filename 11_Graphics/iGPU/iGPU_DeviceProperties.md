@@ -38,13 +38,17 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 ## General Configuration Notes
 Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [such as this](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
 
-About some of the used properties:
+### About the used properties
 
-- `AAPL,ig-platform-id`: Only add this key/property to the config once – no duplicates.
-- `AAPL,snb-platform-id`: Only required for Sandy Bridge CPUs.
-- `device-id`: Only required if the iGPU model on the used CPU is not natively supported by macOS and/or the used SMBIOS.
-- `framebuffer-stolenmem` and `framebuffer-fbmem`: Only required if you cannot adjust the DVMT-preallocated VRAM to 64MB or higher in the BIOS. Usually, DVMT-preallocated is set to 32MB by default which may result in a kernel panic. In this case, you need to add these properties.
-- Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
+ Key | Function |
+ ---------| -------- |
+`AAPL,ig-platform-id` |Platform identifier of the iGPU you are using/spoofing.
+`AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs only. 
+`device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
+`framebuffer-patch-enable` | Switch to enable framebuffer patching. Required when setting properties like `fbmem`, `stolenmem` or `unifiedmem`. 
+`framebuffer-fbmem` | Patches framebuffer memory, and is used if you cannot seet DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
+`framebuffer-stolenmem` | Patches framebuffer stolen memory, and is used when you cannot configure DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
+`framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
 ## Empty Framebuffers (for Desktop)
 List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
