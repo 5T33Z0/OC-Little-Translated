@@ -40,9 +40,10 @@ The easiest way to disable discrete GPUs is to do it via your config.plist. You 
 ## Disabling discrete Laptop GPUs
 &rarr; Follow [this guide](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/Laptops/laptop-disable.md) by Dortania.
  
-## NOTES
+## Notes and Resources
 
 - For Method 2, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***] must be combined to make the whole construct work.
 - If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the requirements, ***SSDT-NDGP_OFF*** is preferred.
 - The name and path of the GPU in the example is: `_SB.PCI0.RP13.PXSX`. Correct the name and path according to the name used in your ACPI tables if necessary.
 - The SSDT method was developed by [RehabMan](https://github.com/rehabman)
+- Another [**guide**](https://www.reddit.com/r/hackintosh/comments/bu1wf8/how_to_disable_your_unsupported_gpu_for_macos/) for disabling dGPUS making use of DeviceProperties
