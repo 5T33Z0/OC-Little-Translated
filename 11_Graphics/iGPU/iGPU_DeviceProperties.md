@@ -348,80 +348,72 @@ Key | Type | Value| Notes
 Additionally ,you need one of the following sets of Connector patches so external monitors work (including clamshell mode, etc.).
 
 #### Connector Patches for `04006601`
+Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
 ```swift
-<dict>
-	<key>DeviceProperties</key>
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
-		<key>Add</key>
-		<dict>
-			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>#framebuffer-stolenmem</key>
-				<data>AAAABA==</data>
-				<key>AAPL,ig-platform-id</key>
-				<data>BABmAQ==</data>
-				<key>framebuffer-con1-alldata</key>
-				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
-				<key>framebuffer-con1-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-memorycount</key>
-				<integer>2</integer>
-				<key>framebuffer-patch-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-pipecount</key>
-				<integer>2</integer>
-				<key>framebuffer-portcount</key>
-				<integer>4</integer>
-				<key>framebuffer-unifiedmem</key>
-				<data>AAAAgA==</data>
-				<key>model</key>
-				<string>Intel HD Graphics 4000</string>
-			</dict>
+		<key>#framebuffer-stolenmem</key>
+		<data>AAAABA==</data>
+		<key>AAPL,ig-platform-id</key>
+		<data>BABmAQ==</data>
+		<key>framebuffer-con1-alldata</key>
+		<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
+		<key>framebuffer-con1-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-memorycount</key>
+		<integer>2</integer>
+		<key>framebuffer-patch-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-pipecount</key>
+		<integer>2</integer>
+		<key>framebuffer-portcount</key>
+		<integer>4</integer>
+		<key>framebuffer-unifiedmem</key>
+		<data>AAAAgA==</data>
+		<key>model</key>
+		<string>Intel HD Graphics 4000</string>
+	</dict>
 ```
 #### Connector Patches for `03006601`
+Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
 ```swift
-<dict>
-	<key>DeviceProperties</key>
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
-		<key>Add</key>
-		<dict>
-			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>#device-id</key>
-				<data>ZgEAAA==</data>
-				<key>AAPL,ig-platform-id</key>
-				<data>AwBmAQ==</data>
-				<key>AAPL,slot-name</key>
-				<string>Internal</string>
-				<key>framebuffer-con1-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-con1-flags</key>
-				<data>BgAAAA==</data>
-				<key>framebuffer-con1-type</key>
-				<data>AAgAAA==</data>
-				<key>framebuffer-con2-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-con2-flags</key>
-				<data>BgAAAA==</data>
-				<key>framebuffer-con2-type</key>
-				<data>AAgAAA==</data>
-				<key>framebuffer-con3-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-con3-flags</key>
-				<data>BgAAAA==</data>
-				<key>framebuffer-con3-type</key>
-				<data>AAgAAA==</data>
-				<key>framebuffer-patch-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-unifiedmem</key>
-				<data>AAAAgA==</data>
-				<key>#framebuffer-stolenmem</key>
-				<data>AAAABA==</data>
-				<key>model</key>
-				<string>Intel HD Graphics 4000</string>
-			</dict>
+		<key>#device-id</key>
+		<data>ZgEAAA==</data>
+		<key>AAPL,ig-platform-id</key>
+		<data>AwBmAQ==</data>
+		<key>AAPL,slot-name</key>
+		<string>Internal</string>
+		<key>framebuffer-con1-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-con1-flags</key>
+		<data>BgAAAA==</data>
+		<key>framebuffer-con1-type</key>
+		<data>AAgAAA==</data>
+		<key>framebuffer-con2-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-con2-flags</key>
+		<data>BgAAAA==</data>
+		<key>framebuffer-con2-type</key>
+		<data>AAgAAA==</data>
+		<key>framebuffer-con3-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-con3-flags</key>
+		<data>BgAAAA==</data>
+		<key>framebuffer-con3-type</key>
+		<data>AAgAAA==</data>
+		<key>framebuffer-patch-enable</key>
+		<integer>1</integer>
+		<key>framebuffer-unifiedmem</key>
+		<data>AAAAgA==</data>
+		<key>#framebuffer-stolenmem</key>
+		<data>AAAABA==</data>
+		<key>model</key>
+		<string>Intel HD Graphics 4000</string>
+	</dict>
 ```
 **NOTES**:
 
