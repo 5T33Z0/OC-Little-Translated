@@ -257,7 +257,7 @@ Key | Type | Value| Notes
 #### Connector Patches for HD 6XX models (not UHD!)
 HD 6xx users (UHD 6xx users are not concerned) may face some issues with the output where plugging in a display causes a lock up (kernel panic). Listed below are some patches to mitigate that (credits to RehabMan). If you're facing lock ups, try the following sets of patches (try both, but only one set at a time): 
 
-- con1 as 105, con2 as 204, both HDMI
+- **con1** as 105, **con2** as 204, both HDMI:
 
 	Key | Type | Value
 	----|:----:|:----
@@ -266,7 +266,7 @@ HD 6xx users (UHD 6xx users are not concerned) may face some issues with the out
 	`framebuffer-con2-enable`| Data | `01000000`
 	`framebuffer-con2-alldata` |Data| `02040A00 00080000 87010000`
 
-- con1 as 105, con2 as 306, HDMI and DP
+- **con1** as 105, **con2** as 306, HDMI and DP:
 
 	Key | Type | Value
 	----|:----:|:----
@@ -334,7 +334,7 @@ Key | Type | Value| Notes
 
 ### Ivy Bridge
 >For Intel HD 4000</br>
->Supported: macOS 10.7 to macOS 11
+>Supported from OS X 10.8.x to macOS 11.x (officially), macOS 12 with Post-Install patches.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -342,8 +342,8 @@ Key | Type | Value| Notes
 ----|:----:|:----:|------
 `AAPL,ig-platform-id`|Data| `03006601` | For Laptop display panels with 1366x768 px or lower.
 `AAPL,ig-platform-id`|Data| `04006601` | For Laptop display panels with 1600x900 px or higher (Full HD)
-`AAPL,ig-platform-id`|Data| `09006601` | For Laptops that have eDP connected monitor (contrary to classical LVDS). Must be tested with `03006601` and `04006601` first before trying this!
-`AAPL,ig-platform-id`|Data| `0B006601` | For NUCs.
+`AAPL,ig-platform-id`|Data| `09006601` | For Laptops which use eDP to connect to the display (contrary to classical LVDS). Test with `03006601` and `04006601` first, before trying this!
+`AAPL,ig-platform-id`|Data| `0B006601` | For NUCs
 
 Additionally ,you need one of the following sets of Connector patches so external monitors work (including clamshell mode, etc.).
 
@@ -361,22 +361,18 @@ Additionally ,you need one of the following sets of Connector patches so externa
 				<data>AAAABA==</data>
 				<key>AAPL,ig-platform-id</key>
 				<data>BABmAQ==</data>
-				<key>AAPL,slot-name</key>
-				<string>built-in</string>
-				<key>#device-id</key>
-				<data>ZgEAAA==</data>
 				<key>framebuffer-con1-alldata</key>
 				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
 				<key>framebuffer-con1-enable</key>
-				<data>AQAAAA==</data>
+				<integer>1</integer>
 				<key>framebuffer-memorycount</key>
-				<data>AgAAAA==</data>
+				<integer>2</integer>
 				<key>framebuffer-patch-enable</key>
-				<data>AQAAAA==</data>
+				<integer>1</integer>
 				<key>framebuffer-pipecount</key>
-				<data>AgAAAA==</data>
+				<integer>2</integer>
 				<key>framebuffer-portcount</key>
-				<data>BAAAAA==</data>
+				<integer>4</integer>
 				<key>framebuffer-unifiedmem</key>
 				<data>AAAAgA==</data>
 				<key>model</key>
@@ -419,12 +415,12 @@ Additionally ,you need one of the following sets of Connector patches so externa
 				<data>AAgAAA==</data>
 				<key>framebuffer-patch-enable</key>
 				<integer>1</integer>
-				<key>model</key>
-				<string>Intel HD Graphics 4000</string>
 				<key>framebuffer-unifiedmem</key>
 				<data>AAAAgA==</data>
 				<key>#framebuffer-stolenmem</key>
 				<data>AAAABA==</data>
+				<key>model</key>
+				<string>Intel HD Graphics 4000</string>
 			</dict>
 ```
 **NOTES**:
