@@ -69,7 +69,7 @@ Ivy Bridge | Data| `07006201`|
 
 CPU Family (Desktop)| Type | AAPL,snb-platform-id | device-id
 --------------------|:----:|:--------------------:|-----------
-Sand Bridge| Data | `00000500`|`02010000`
+Sandy Bridge| Data | `00000500`|`02010000`
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
