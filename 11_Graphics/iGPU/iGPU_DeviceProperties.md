@@ -1,6 +1,6 @@
- # iGPU Framebuffer DeviceProperties
+# iGPU Framebuffer DeviceProperties
 
-List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs.
+List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide.
 
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
@@ -37,7 +37,9 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 </details>
 
 ## General Configuration Notes
-Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/).
+Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/). 
+
+For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md). But keep in mind the the Framebuffer Data in these FAQs is provided in Big Endian, so you can't use it as is – you have to [**convert it to Little Endian**](https://www.save-editor.com/tools/wse_hex.html#littleendian) first!
 
 ### About the used properties
 
@@ -47,8 +49,8 @@ Most of the Framebuffer patches listed below (besides empty framebuffers) repres
 `AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs only. 
 `device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
 `framebuffer-patch-enable` | Switch to enable framebuffer patching. Required when setting properties like `fbmem`, `stolenmem` or `unifiedmem`. 
-`framebuffer-fbmem` | Patches framebuffer memory, and is used if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
-`framebuffer-stolenmem` | Patches framebuffer stolen memory, and is used when you cannot configure DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
+`framebuffer-fbmem` | Patches framebuffer memory. Required if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
+`framebuffer-stolenmem` | Patches framebuffer stolen memory. Required if you cannot adjust DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
 ## Empty Framebuffers (for Desktop)
@@ -67,8 +69,8 @@ Haswell | Data| `04001204`
 Haswell (HD 4400)| Data| `04001204`|`12040000` | HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
 Ivy Bridge | Data| `07006201`|
 
-CPU Family (Desktop)| Type | AAPL,snb-platform-id | device-id
---------------------|:----:|:--------------------:|-----------
+CPU Family | Type | AAPL,snb-platform-id | device-id
+-----------|:----:|:--------------------:|-----------
 Sandy Bridge| Data | `00000500`|`02010000`
 
 ## Framebuffers (Desktop)
@@ -375,6 +377,12 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
+**NOTES**:
+
+- `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
+- You can enable/disable keys by removing/putting `#` in front of them.
+- Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
+
 #### Connector Patches for `03006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
@@ -418,8 +426,8 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 **NOTES**:
 
 - `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
+- You can enable/disable keys by removing/putting `#` in front of them.
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
-- You can enable/disable keys by remvoing/putting `#` in front of them.
 
 #### Installing Intel HD4000 Drivers on macOS Monterey
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
