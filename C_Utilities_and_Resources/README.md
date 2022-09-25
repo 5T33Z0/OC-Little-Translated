@@ -25,7 +25,6 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer. For Big Sur and newer.
 - [**GenI2C**](https://github.com/DogAndPot/GenI2C) (Info) – Helpfu tool for enabling VoodooI2C Touchpads ([**Download**](https://github.com/quynkk5/GenI2C/blob/main/GenI2C.zip?raw=true))
 
-
 ### macOS Monterey
 - [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS Monterey
 - [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – Tool for installing Intel HD 4000 iGPU drivers which have been removed from macOS 12.
@@ -37,6 +36,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) – Python-based .plist Editor with unique features like snapshot generation.
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware .plist Editor
 - [**Xiasl**](https://github.com/ic005k/Xiasl) – ASL/AML Editor
+- [**ACPI Rename**](https://github.com/corpnewt/ACPIRename) – Handy Python script to analyze a DSDT. It can list its Device, Method and Name Paths and can generate HEX values for binray renames.
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAttributes, etc.)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python-based Tool for downloading macOS
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
