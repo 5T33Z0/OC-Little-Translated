@@ -8,9 +8,10 @@
 
 ## Required Files
 
-You need the following SSDTs (included in the OpenCore Package under `Docs/AcpiSamples`). Make sure to check the .dsl version of this tables to read the comments and instructions and export your own tables as ACPI Machine Language Binare (.aml).
+You need the following SSDTs (included in the OpenCore Package under `Docs/AcpiSamples`). Check the .dsl version of these tables for additional comments and instructions.
 
 - **SSDT-HV-DEV.aml** &rarr; Disables unsupported devices under macOS.
+- **SSDT-HV-DEV-WS2022** &rarr; Disables additional virtual devices incompatible with macOS. Required on Windows 11, Windows Server 2022 and newer.
 - **SSDT-HV-PLUG.aml** &rarr; Enables VMPlatformPlugin on Big Sur and newer. Must be loaded after SSDT-HV-DEV.aml!
 - **SSDT-HV-VMBUS.aml** &rarr; Enables ACPI node identification.
 
@@ -19,4 +20,4 @@ Additionally, you need this kext:
 - **MacHyperVSupport.kext** &rarr; Download it [here](https://github.com/acidanthera/MacHyperVSupport/releases)
 
 ## Instructions
-&rarr; Please follow the detailed instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) Repo.
+&rarr; Please follow the detailed OpenCore Configuration instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) Repo.
