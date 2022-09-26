@@ -153,15 +153,14 @@ When installing macOS Monterey, you will notice that the system feels super slug
 
 To bring them back, do the following:
 
-- Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Double-click it to run it 
-- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
-- Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
-- The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
-- You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
-- Once it's done, you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
-
-Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
+- Download [**OpenCore Legacy Patcher App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
+- Run the App 
+- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch"
+- Next, click on "Start Root Patching"
+- The App has to relaunch with Admin Roots. Click "Yes"
+- You will have to enter your Admin Password and then the installation will begin.
+- Once it's done, reboot.
+- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM:</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 #### OCLP and System Updates
 The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
@@ -434,15 +433,14 @@ When installing macOS Monterey, you will notice that the system feels super slug
 
 To bring them back, do the following:
 
-- Download [OpenCore Legacy Patcher App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Double-click it to run it 
-- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
-- Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
-- The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
-- You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
-- Once it's done, you have to reboot and Graphics acceleration will work:</br>![2048](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
-
-Graphics Acceleration should work now and the system should feel as usual again and you can continue with the Post-Install process as described in the Repo.
+- Download [**OpenCore Legacy Patcher App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
+- Run the App 
+- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch"
+- Next, click on "Start Root Patching"
+- The App has to relaunch with Admin Roots. Click "Yes"
+- You will have to enter your Admin Password and then the installation will begin.
+- Once it's done, reboot.
+- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM:</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 #### OCLP and System Updates
 The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
