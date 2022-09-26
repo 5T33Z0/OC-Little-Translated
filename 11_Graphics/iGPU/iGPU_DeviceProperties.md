@@ -76,8 +76,8 @@ Sandy Bridge| Data | `00000500`|`02010000`
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
 
-### Coffee and Comet Lake
-For Intel UHD-630.
+### Coffee Lake and Comet Lake
+For Intel UHD-630. 8th to 10th Gen Intel Core CPUs
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -92,7 +92,7 @@ Key | Type | Value| Notes
 **NOTE**: The following mainboards/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black after booting in verbose mode: **B360, B365, H310, H370, Z390**.
 
 ### Kaby Lake
-For Intel HD-630.
+For Intel HD-630. 7th Gen Intel Core.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -104,7 +104,7 @@ Key | Type | Value
 `framebuffer-stolenmem` | Data | `00003001`
 
 ### Skylake
->For Intel HD-510-580 and Intel HD P530.</br>
+>For Intel HD-510-580 and Intel HD P530. 6th Gen Intel Core.</br>
 >Officially supported since macOS 10.11.4 to macOS 12.x.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -122,7 +122,7 @@ Key | Type | Value| Notes
 For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
 
 ### Haswell and Broadwell
-For HD 4400, HD 4600 and Iris Pro 6200.
+For HD 4400, HD 4600 and Iris Pro 6200. 4th and 5th Gen Intel Core.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -138,7 +138,7 @@ Key | Type | Value| Notes
 `device-id`| Data| `12040000` | ⚠️ Only needed when using HD Intel HD 4400!
 
 ### Ivy Bridge
->For Intel HD 2500/4000</br>
+>For Intel HD 2500/4000. 3rd Gen Intel Core</br>
 >Supported from OS X 10.8.x to macOS 11.x (officially), macOS 12 with Post-Install patches
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -171,7 +171,7 @@ The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/c
 You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
->Intel HD 3000</br>
+>Intel HD 3000. 2nd Gen Intel Core.</br>
 >Supported from macOS 10.6.7 to macOS 10.13
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -184,7 +184,7 @@ Key | Type | Value
 ## Framebuffers (Laptop/NUC)
 
 ### Ice Lake
->Intel Iris Plus Graphics</br>
+>Intel Iris Plus Graphics. 10th Gen Intel Core Mobile</br>
 >Supported since: macOS 10.15.4
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -198,7 +198,7 @@ Key | Type | Value
 `framebuffer-fbmem`| Data | `00009000`|
 
 ### Coffee Lake Plus and Comet Lake
->For Intel UHD-630
+>For Intel UHD-630. 8th to 10th Gen Intel Core Mobile.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -216,7 +216,7 @@ Key | Type | Value| Notes
 `device-id` | Data | `9B3E0000` | ⚠️ Only required for UHD 620 and UHD 655!
 
 ### Coffee Lake and Whiskey Lake
->For Intel UHD 620/630/655</br>
+>For Intel UHD 620/630/655. 8th and 9th Gen Intel Core Mobile.</br>
 >Supported since: Coffee Lake: macOS 10.13; Whiskey Lake: macOS 10.14.1
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -278,7 +278,7 @@ HD 6xx users (UHD 6xx users are not concerned) may face some issues with the out
 	`framebuffer-con2-alldata` |Data| `03060A00 00040000 87010000`
 
 ### Skylake
->For Intel HD 510/515/520/530/540/550/580 and P530</br>
+>For Intel HD 510/515/520/530/540/550/580 and P530. 6th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.11
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -301,7 +301,7 @@ Key | Type | Value| Notes
 `device-id` |Data |`16190000` | ⚠️ Required for HD 550 and P530 
 
 ### Broadwell
->For Intel HD 5500/5600/6000 and Iris (Pro) 6100/6200</br>
+>For Intel HD 5500/5600/6000 and Iris (Pro) 6100/6200. 5th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.10
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -318,7 +318,7 @@ Key | Type | Value| Notes
 `device-id` | Data |`26160000` | Required For HD 5600
 
 ### Haswell
->For Intel HD 4200/4400/4600 and HD 5000/5100/5200</br>
+>For Intel HD 4200/4400/4600 and HD 5000/5100/5200. 4th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.8
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -335,7 +335,7 @@ Key | Type | Value| Notes
 `device-id` | Data |`12040000` | Required for HD 4200/4400/4600.
 
 ### Ivy Bridge
->For Intel HD 4000</br>
+>For Intel HD 4000. 3rd Gen Intel Core Mobile.</br>
 >Supported from OS X 10.8.x to macOS 11.x (officially), macOS 12 with Post-Install patches.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -452,7 +452,7 @@ The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/c
 You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
 ### Sandy Bridge
->Intel HD 3000</br>
+>Intel HD 3000. 2nd Gen Intel Core Mobile.</br>
 >Supported from macOS 10.6.7 to macOS 10.13
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
