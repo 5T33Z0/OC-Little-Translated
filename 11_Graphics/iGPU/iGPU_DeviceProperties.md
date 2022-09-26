@@ -342,8 +342,8 @@ Key | Type | Value| Notes
 
 Key | Type | Value| Notes
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`|Data| `03006601` | For Laptop display panels with 1366x768 px or lower.
-`AAPL,ig-platform-id`|Data| `04006601` | For Laptop display panels with 1600x900 px or higher (Full HD)
+`AAPL,ig-platform-id`|Data| `03006601` | For Laptop display panels with 1366x768 px or lower (SD).
+`AAPL,ig-platform-id`|Data| `04006601` | For Laptop display panels with 1600x900 px or higher (HD+ and Full HD).
 `AAPL,ig-platform-id`|Data| `09006601` | For Laptops which use eDP to connect to the display (contrary to classical LVDS). Test with `03006601` and `04006601` first, before trying this!
 `AAPL,ig-platform-id`|Data| `0B006601` | For NUCs
 
