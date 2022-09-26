@@ -160,7 +160,7 @@ To bring them back, do the following:
 - The App has to relaunch with Admin Roots. Click "Yes"
 - You will have to enter your Admin Password and then the installation will begin.
 - Once it's done, reboot.
-- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM:</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 #### OCLP and System Updates
 The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
@@ -440,7 +440,7 @@ To bring them back, do the following:
 - The App has to relaunch with Admin Roots. Click "Yes"
 - You will have to enter your Admin Password and then the installation will begin.
 - Once it's done, reboot.
-- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM:</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 #### OCLP and System Updates
 The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
