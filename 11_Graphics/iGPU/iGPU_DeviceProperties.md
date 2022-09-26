@@ -77,7 +77,7 @@ Sandy Bridge| Data | `00000500`|`02010000`
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
 
 ### Coffee Lake and Comet Lake
-For Intel UHD-630. 8th to 10th Gen Intel Core CPUs
+>For Intel UHD-630. 8th to 10th Gen Intel Core CPUs
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -92,7 +92,7 @@ Key | Type | Value| Notes
 **NOTE**: The following mainboards/chipsets require [BusID patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) if the screen turns black after booting in verbose mode: **B360, B365, H310, H370, Z390**.
 
 ### Kaby Lake
-For Intel HD-630. 7th Gen Intel Core.
+>For Intel HD-630. 7th Gen Intel Core.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -122,7 +122,7 @@ Key | Type | Value| Notes
 For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
 
 ### Haswell and Broadwell
-For HD 4400, HD 4600 and Iris Pro 6200. 4th and 5th Gen Intel Core.
+>For HD 4400, HD 4600 and Iris Pro 6200. 4th and 5th Gen Intel Core.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
