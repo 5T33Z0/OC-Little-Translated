@@ -9,7 +9,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [About the used properties](#about-the-used-properties)
 - [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
 - [Framebuffers (Desktop)](#framebuffers-desktop)
-	- [Coffee and Comet Lake](#coffee-and-comet-lake)
+	- [Coffee Lake and Comet Lake](#coffee-lake-and-comet-lake)
 	- [Kaby Lake](#kaby-lake)
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
