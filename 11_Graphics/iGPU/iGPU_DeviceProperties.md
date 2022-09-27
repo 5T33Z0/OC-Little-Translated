@@ -234,6 +234,10 @@ Key | Type | Value| Notes
 `device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Windows, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
 `device-id`|Data|`9B3E0000`| ⚠️ Only required for Coffee Lake CPUs with UHD 620.
 
+**NOTES**:
+
+- For **Lenovo T490**: add and enable the patch located in the `UEFI/ReservedMemory` section of the sample.plist to fix black screen issues after waking from hibernation. 
+
 ### Kaby Lake and Amber Lake
 >For Intel HD 615/617/620/630/640/650</br>
 >Supported since: macOS 10.12
