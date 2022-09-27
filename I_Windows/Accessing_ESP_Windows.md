@@ -1,8 +1,6 @@
 # Accessing ESP Partition from within Windows
 
-In cases where you can no longer access your EFI folder from within macOS for whatever reason – because you were too lazy to store a backup of your working EFI folder on a FAT32 formatted USB stick *before* messing up your config so now you can't get into macOS any more – there is an easy method to access it via Windows.
-
-Usually, mounting the ESP Partition under Windows is a major pain in the ass. With OCAT however, it's super easy.
+In cases where you can no longer access your EFI folder from within macOS for whatever reason, there is an easy method to access it from within Windows. Usually, mounting the ESP Partition under Windows is a pain in the ass. With OCAT however, it's super easy.
 
 ## Instructions
 
