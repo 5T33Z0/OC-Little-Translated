@@ -3,35 +3,7 @@ DefinitionBlock ("", "SSDT", 1, "hack", "Matty", 0x00000000)
 {
     External (_SB_.PCI0.PEG0, DeviceObj)
     External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
-    Method (DTGP, 5, NotSerialized)
-    {
-        If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
-        {
-            If ((Arg1 == One))
-            {
-                If ((Arg2 == Zero))
-                {
-                    Arg4 = Buffer (One)
-                        {
-                             0x03                                             // .
-                        }
-                    Return (One)
-                }
-
-                If ((Arg2 == One))
-                {
-                    Return (One)
-                }
-            }
-        }
-
-        Arg4 = Buffer (One)
-            {
-                 0x00                                             // .
-            }
-        Return (Zero)
-    }
-
+    
     Scope (_SB.PCI0.PEG0)
     {
         Scope (PEGP)
@@ -111,7 +83,6 @@ DefinitionBlock ("", "SSDT", 1, "hack", "Matty", 0x00000000)
                             "Slot-1@0,1,0/0,0"
                         }
                     }
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
             }
 
@@ -168,7 +139,6 @@ DefinitionBlock ("", "SSDT", 1, "hack", "Matty", 0x00000000)
                             "onboard-2"
                         }
                     }
-                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
             }
 
