@@ -128,7 +128,7 @@ For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://githu
 
 Key | Type | Value| Notes 
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`| Data | `0300220D` | For Haswell CPUs
+`AAPL,ig-platform-id`| Data | `0300220D` | For Haswell/Haswell Refresh and Devil's Canyon CPUs
 `AAPL,ig-platform-id`| Data | `07002216` | For Broadwell CPUs
 ||||
 `framebuffer-patch-enable`| Data | `01000000`
