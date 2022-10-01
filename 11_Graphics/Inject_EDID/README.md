@@ -6,7 +6,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 ### Possible applications
 
 - Fixing Black Screen on Wake
-- Fixing 8 Apples Glitch
+- Fixing 8 Apples Glitch and scrambled screen.
 - Issues when a second Monitor is connected
 
 ## Patching Principle
