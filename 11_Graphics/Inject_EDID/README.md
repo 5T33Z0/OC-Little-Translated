@@ -41,7 +41,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 	- A modified `EDID.bin`
 	- `DisplayMergeNub.kext`
 	- `DisplayVendorID-XXX` folder, containing a display override file (without extension)
-- Enter the `DisplayVendorID-XXX`
+- Enter the `DisplayVendorID-XXX` folder
 - Open the `DisplayProductID-…` file with a Plist Editor like ProperTree
 - Copy the value under `IODisplayEDID` to the clipboard:</br>![EDID_06](https://user-images.githubusercontent.com/76865553/184684366-b1e575ee-6727-4fe8-88b5-4a6632b1f630.png)
 
