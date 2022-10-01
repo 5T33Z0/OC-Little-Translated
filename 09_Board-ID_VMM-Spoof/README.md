@@ -2,8 +2,8 @@
 A set of Booter and Kernel patches lifted from OCLP which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs.
 
 ## Use Cases
-1. Installing, running and updating macOS Monterey on systems with unsupported CPUs and their respective SMBIOS.
-2. **Fixing update notifications**. As a side effect, you can use these patches to workaround issues with System Update Notifications in macOS 12, since OC reports a special Board-ID for VMs to Apple Update servers – especially when using a SMBIOS of Mac models with a T2 security chip, such as:
+1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS.
+2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 12 and newer when using a SMBIOS of Mac models with a T1/T2 security chip, such as:
 
 	- MacBookPro15,1 to 15,4
 	- MacBookPro16,1 to 16,4
@@ -14,7 +14,7 @@ A set of Booter and Kernel patches lifted from OCLP which allow installing, boot
 	- iMacPro1,1
 	- MacPro7,1
 
-	The problem occurs when using one of the SMBIOSes listed above in combination with `SecureBootModel` set to `Disabled`. If you have to use GeForce Kepler Patcher (compatible up to macOS ≤ 12.4), you *have* to disable `SecureBootModel` in order to boot after you patched in the GPU Drivers in macOS Monterey. Otherwise the system crashes during boot. In this case, these patches are the only workaround to still receive System Updates when using OpenCore.
+	:bulb: The problem occurs when using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` as well as `SIP` disabled which is necessary if your iGPU/dGPU is no longer supported by macOS and you have to re-install removed graphics drivers. This is the case for Intel HD 4000 on-board graphics as well as NVIDIA Kepler cards which can be patched back in via OCLP and others (see Credits). Otherwise the system crashes on boot since re-installing of drivers to the system partition breaks the security seal of the volume. So in order to be able to boot the system ***and*** receive system updates, the Board-ID VMM spoof is the only workaround. You cannot apply these patches via Clover, btw!
 	
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
@@ -94,6 +94,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes and Credits
+- Chris1111 for [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) and [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey)
 - Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
 - parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281)
