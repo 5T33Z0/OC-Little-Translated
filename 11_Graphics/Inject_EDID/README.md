@@ -22,7 +22,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 - Download and unzip [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/)
 - Run the App
 - In "Save Path", select a path like "Documents"
-- Click on "Deselect All Sumps"
+- Click on "Deselect All Dumps"
 - Select "EDID":</br>![EDID_01](https://user-images.githubusercontent.com/76865553/184684084-f64b2f07-fa05-4718-9ee9-cec5940d355c.png)
 - Click on "Run"
 - Once the process is completed, a Finder Window will open and show the dumped files:</br>:![EDID_02](https://user-images.githubusercontent.com/76865553/184684157-5c54c023-15e7-411b-a8f8-154a94676a5f.png)
