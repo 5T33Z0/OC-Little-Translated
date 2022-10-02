@@ -61,7 +61,7 @@ This approach minimzes the amount of necessary binary renames to one to correct 
 2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
 	- Rename `GPRW to XPRW` or 
 	- Rename `UPRW to XPRW` (see [**`SSDT-XPRW.dsl`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for instructions).
-	- :bulb: You may want to limit its reach by specifying a CPI path under `base`, like `_SB_.PCI0` for example.
+	- :bulb: You may want to limit its reach by specifying a PCI path under `base`, like `_SB_.PCI0` for example.
 3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
 4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
 	```asl
