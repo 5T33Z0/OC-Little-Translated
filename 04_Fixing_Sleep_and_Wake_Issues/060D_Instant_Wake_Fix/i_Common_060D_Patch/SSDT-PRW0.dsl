@@ -11,7 +11,9 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
     External (_SB_.PCI0.SAT1._PRW, PkgObj)
     External (_SB_.PCI0.XHCI._PRW, PkgObj)
     
- If (_OSI ("Darwin"))
+    Scope (\)
+    {
+        If (_OSI ("Darwin"))
 
         {
             _SB_.PCI0.EHC1._PRW [One] = 0x00 // Changes second byte in the package to 0
@@ -20,7 +22,6 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
             _SB_.PCI0.IGBE._PRW [One] = 0x00
             _SB_.PCI0.SAT1._PRW [One] = 0x00
             _SB_.PCI0.XHCI._PRW [One] = 0x00
-
         }
-       
+    }       
 }
