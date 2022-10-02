@@ -11,12 +11,12 @@
 // to your config.plist under ACPI/Patch:
 //
 // Comment:  change GPRW to XPRW
-// Find:     47505257
-// Replace:  58505257
+// Find:     4750525702
+// Replace:  5850525702
 //
 // Comment:  change UPRW to XPRW
-// Find:     55505257
-// Replace:  58505257
+// Find:     5550525702
+// Replace:  5850525702
 
 DefinitionBlock("", "SSDT", 2, "5T33Z0", "XPRW", 0)
 {
