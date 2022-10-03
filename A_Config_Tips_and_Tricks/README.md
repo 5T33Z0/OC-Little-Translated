@@ -1,4 +1,4 @@
-OpenCore Config Tips and Tricks
+# OpenCore Config Tips and Tricks
 This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
 
 **TABLE of CONTENTS**
@@ -251,7 +251,7 @@ Alternatively, you can use Terminal to delete the key (no restart required):
 sudo nvram -d 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
-## VII. Prohibit SMBIOS injection in other OSes:
+## VII. Prohibit SMBIOS injection in other OSes
 
 To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing issues with the registration, change the following settings:
 
