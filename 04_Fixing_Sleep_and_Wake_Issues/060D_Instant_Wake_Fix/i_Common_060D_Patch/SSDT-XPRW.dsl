@@ -5,11 +5,11 @@
 // land here.
 // The purpose of this SSDT is to avoid "instant wake" by returning 
 // 0 in the second position (sleep state supported) of the return 
-// package. It covers both methods GPRW and UPRW.
+// package. It covers both methods/cases, GPRW and UPRW.
 //
 // INSTRUCTIONS:
 //
-// - Export as .aml 
+// - Export as .aml, add to EFI/OC/ACPI and config.plist
 // - Add the following renames (depending on the method used in your 
 // DSDT) to your config.plist under ACPI/Patch:
 //

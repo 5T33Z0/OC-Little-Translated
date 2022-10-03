@@ -1,4 +1,5 @@
 # 0D/6D Instant Wake Fix
+
 ## Description
 There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
@@ -10,19 +11,19 @@ Used in Devices, the `_PRW` method describes their wake method by using packages
 - The 1st byte of the `_PRW` package is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
 - The 2nd byte of the `_PRW` package is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake immediately.
 
-And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details on `_PRW`.
+And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details about `_PRW`.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
 
-### Refined fix
-Previously, a lot of binary name changes were required to fix this issue, which could cause issues with other Operating Systems. Since then, the fis has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` "switch" has been implementd as well, so the changes only apply to macOS.
+### Refined Fix
+Previously, a lot of binary name changes were required to fix this issue, which could cause issues with other Operating Systems. Since then, the fix has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` switch has been implemented as well, so the changes only apply to macOS.
 
 ### Devices that may require a `0D/6D Patch`
 
 - **USB class devices**
   - `ADR` address: `0x001D0000`, part name: `EHC1`.
   - `ADR` address: `0x001A0000`, part name: `EHC2`.
-  - `ADR` Address: `0x00140000`, Part Name: `XHC`, `XHCI`, `XHC1`, etc.
+  - `ADR` Address: `0x00140000`, part Name: `XHC`, `XHCI`, `XHC1`, etc.
   - `ADR` address: `0x00140001`, part name: `XDCI`.
   - `ADR` address: `0x00140003`, part name: `CNVW`.
 - **Ethernet**
@@ -34,7 +35,7 @@ Previously, a lot of binary name changes were required to fix this issue, which 
 
 **NOTES**: 
 
-- Looking up the names of devices in the DSDT is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
+- Looking up the names of devices in the `DSDT` is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
 - Newly released machines may have new parts that require `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
@@ -48,44 +49,33 @@ Your `DSDT` may contain code like this:
         ...
     })
 ```
-For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-XPRW.aml` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`:
+For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-GPRW`/`SSDT-UPRW` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`:
 
 -  if either `GPRW` or `UPRW` is present, follow **Method 1**, 
--  if only `_PRW` is present, use `SSDT-PRW0`, follow **Method 2**.
+-  if only `_PRW` is present, use `SSDT-PRW0` and follow **Method 2**.
 
-### Method 1: using `SSDT-XPRW.aml`
-This approach minimzes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
+### Method 1: using `SSDT-GPRW/UPRW`
+This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
 
-1. In your DSDT, searh for `GPRW` and `UPRW`. If either one of these methods is present, continue with the guide. If not, use Method 2.
-2. Open your `config.plist`
-2. Add a binary rule to `ACPI/Patch`, depending on the method used in your `DSDT`: 
+1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, use Method 2.
+2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
+3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
+4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
 	- Rename `GPRW to XPRW` or 
-	- Rename `UPRW to XPRW` (see [**`SSDT-XPRW.dsl`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/SSDT-XPRW.dsl) for instructions).
-	- :bulb: You may want to limit its reach by specifying a PCI path under `base`, like `_SB_.PCI0` for example.
-3. Open `SSDT-XPRW.dsl` (located in the "i_Common_060D_Patch" folder) in maciASL 
-4. Add the APCI paths of devices which require `0D/6D` patches and add them as "External" references, for example:
-	```asl
-	DefinitionBlock ("", "SSDT", 2, "ST33Z0", "XPRW", 0x00000000)
-	{
-    	External (_SB_.PCI0, DeviceObj)
-    	External (_SB_.PCI0.EHC1, DeviceObj)
-    	External (_SB_.PCI0.EHC2, DeviceObj)
-    	External (_SB_.PCI0.SAT1, DeviceObj)
-    	External (_SB_.PCI0.XHCI, DeviceObj)
-    	External (XPRW, MethodObj)
-	```	
-5. Export the file as `SSDT-XPRW.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
-6. Save and reboot.
+	- Rename `UPRW to XPRW`
+5. Save and reboot.
 
 #### Testing and verifying
-- Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
-- Wait until the machine tries to enter sleep on its own. That's important to trigger the General Purpose Event.
+- Reduce the time until the machine enters sleep automatically in the Energy Options to one minute.
+- Wait until the machine enters sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
 - If it doesn't work, it will wake immediately after entering sleep.
-- In this case, try the "old method" explained below.
+- In this case, enter `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"` in Terminal to find the culprit for the instant wake.
 
 ### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
-In case your `DSDT` doesn't use the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2). All you need to do is list the PCI paths of the devices where a change is necessary, like this (no additional binary rename required):
+In case your `DSDT` *doesn't* use the `GPRW` nor the `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the return package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2) – no additional binary renames are required. 
+
+But in order to make it work, we need to list all the PCI paths of devices where the change is necessary, as shown in this example:
 
 ```asl
 // SSDT to set Package 1 (the 2nd byte of the packet) in _PRW method to 0 
@@ -110,9 +100,9 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
         }    
 }
 ```
-1. In your DSDT, search for `_PRW`
+1. In your `DSDT`, search for `_PRW`
 2. Look for matches for `_PRW` inside of Devices only
-3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is not `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
+3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is *not* `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
 	```asl
 	Device (HDEF)
 	{
@@ -133,7 +123,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 - In this case, try the "old method" explained below.
 
 <details>
-<summary><strong>Old method</strong> (Click to reveal)</summary>
+<summary><strong>Previous Method</strong> (Click to reveal)</summary>
 
 ### Old Method using binary renames (no longer required)
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
