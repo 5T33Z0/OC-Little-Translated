@@ -10,7 +10,7 @@ This section contains a small collection of useful tips and tricks for working w
 - [IV. Adjust Boot Picker Attributes, enable Mouse Support](#iv-adjust-boot-picker-attributes-enable-mouse-support)
 - [V. Customizing Boot Options](#v-customizing-boot-options)
 - [VI. Resolving issues with NVRAM](#vi-resolving-issues-with-nvram)
-- [VII. Prohibit SMBIOS injection in other OSes:](#vii-prohibit-smbios-injection-in-other-oses)
+- [VII. Prohibit SMBIOS injection in other OSes](#vii-prohibit-smbios-injection-in-other-oses)
 - [VIII. Exchanging SMBIOS Data between OpenCore and Clover](#viii-exchanging-smbios-data-between-opencore-and-clover)
 - [Further Resources](#further-resources)
 
