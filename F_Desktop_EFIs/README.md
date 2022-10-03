@@ -1,6 +1,30 @@
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.8.0+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 
 # Pre-configured OpenCore Desktop Configs
+
+**TABLE of CONTENTS**
+
+- [About](#about)
+- [New approach: generating EFIs from `config.plist`](#new-approach-generating-efis-from-configplist)
+	- [Included Files and Settings](#included-files-and-settings)
+	- [Included Kexts (universal, config-based)](#included-kexts-universal-config-based)
+	- [Optional Kexts](#optional-kexts)
+		- [CPU](#cpu)
+		- [Audio](#audio)
+		- [Ethernet](#ethernet)
+		- [WiFi and Bluetooth](#wifi-and-bluetooth)
+		- [Other Kexts](#other-kexts)
+- [Generate EFI Folders using OpenCore Auxiliary Tools](#generate-efi-folders-using-opencore-auxiliary-tools)
+	- [1. Generate a base EFI Folder for the CPU of your choice](#1-generate-a-base-efi-folder-for-the-cpu-of-your-choice)
+	- [2. Modifying the `config.plist`](#2-modifying-the-configplist)
+	- [3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs](#3-post-install-fixing-cpu-power-management-on-sandy-and-ivy-bridge-cpus)
+- [Addtional Configuration Notes](#addtional-configuration-notes)
+	- [Additional `boot-args`](#additional-boot-args)
+		- [GPU-specific boot-args](#gpu-specific-boot-args)
+		- [Debugging](#debugging)
+- [Updating the config Templates manually](#updating-the-config-templates-manually)
+- [References](#references)
+
 ## About
 This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs and modified them so they work out of the box (hopefully).
 
@@ -27,9 +51,6 @@ Kext|Description
 [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases)|Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
 |[AppleALC](https://github.com/acidanthera/AppleALC/releases)|Kext for enabling native macOS HD audio for unsupported Audio CODECs without filesystem modifications.
 [CpuTscSync.kext](https://github.com/acidanthera/CpuTscSync/releases)|For syncing TSC on Intel HEDT and Server mainboards. Without it, macOS may run extremely slow or won't boot at all.
-
-<details>
-<summary><strong>Optional Kexts (click to reveal)</strong></summary>
 
 ### Optional Kexts
 Listed below, you'll find optional kexts for various features and hardware. Add as needed.
@@ -70,7 +91,6 @@ Kext|Description
 [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS.<br>We recommend testing without this first.
 [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs.<br>Recommended for dual-socket systems (ie. Intel Xeon).
 [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, Disable MacPro7,1 memory warnings and provide upgrade to macOS Monterey via Software Updates when available.
-</details>
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
 
@@ -84,15 +104,15 @@ Kext|Description
 After the base EFI has been generated, the `config.plist` *maybe* has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
 
 - Go to the Desktop
-- Open the `config.plist` included in `\EFI\OC\` with **OCAT**
+- Open the `config.plist` included in `\EFI\OC\` with **OCAT** or **ProperTree**
 - Check the following Settings:
-	- **ACPI > Add**: add additional ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
+	- **ACPI/Add**: add additional ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
 	- **DeviceProperties**:
 		- Check if the correct Framebuffer Patch is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
 		- Add additional PCI paths (if required for your hardware)
-	- **Kernel > Add**: Add additional kexts required for your hardware and features (a base-set required for the selected system is already included)
-	- **PlatformInfo > Generic**: Generate `SMBIOS` Data for the selected Mac model
-	- **NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82**: add additional boot-args if your hardware requires them (see next section)
+	- **Kernel/Add**: Add additional kexts required for your hardware and features (a base-set required for the selected system is already included)
+	- **PlatformInfo/Generic**: Generate `SMBIOS` Data for the selected Mac model
+	- **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**: add additional boot-args if your hardware requires them (see next section)
 - Save and deploy the EFI folder (put it on a FAT32 formatted USB flash drive and try booting from it)
 
 ### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
@@ -100,10 +120,21 @@ After the base EFI has been generated, the `config.plist` *maybe* has to be modi
 
 You can follow this [**guide**]( https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) to do so.
 
-## Additional `boot-args`
+## Addtional Configuration Notes
+Before deploying your newly generated EFI folder, check the following:
+
+- Open the `config.plist` in a Plist Editor to find additional info and notes
+- View `DeviceProperties` to check the included Framebuffer-Patches. Usually, 2 Frambuffer Patches are included ([**List ofavailable Framebuffer Patches**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md)):
+	- One for using the iGPU for driving a Display 
+	- One for using the iGPU for computational tasks only (if a supported discrete GPU is present). 
+- Depending on your hardware configuration (CPU, iGPU, dGPU, Mainboard, other peripherals) you may have to add additional SSDT Hotpatches, boot-args, DeviceProperties and/or Kexts!
+- Cross-Reference with Dortania's OpenCore Install Guide for your CPU family to double-check and verify the config.
+- For Troubleshooting, please consult Dortania's [**OC Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/kernel-issues.html#stuck-on-eb-log-exitbs-start)
+
+### Additional `boot-args`
 Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, additional `boot-args` may be required. These are not included in the configs and need to be added manually before deploying the EFI folder!
 
-### GPU-specific boot-args
+#### GPU-specific boot-args
 |Boot-arg|Description|
 |:------:|-----------|
 **`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this you'll get a black screen. Don't use on Navi Cards (i.e. Polaris and Vega).
@@ -112,7 +143,7 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`nvda_drv=1`**|Enable Web Drivers for NVIDIA Graphics Cards (supported up to macOS High Sierra only).
 **`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
 
-### Debugging
+#### Debugging
 |Boot-arg|Description|
 |:------:|-----------|
 **`-v`**|_V_erbose Mode. Replaces the progress bar with a terminal output with a bootlog which helps resolving issues. Combine with `debug=0x100` and `keepsyms=1`
@@ -123,25 +154,19 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`npci=0x2000`**/**`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
 **`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
 
-**NOTES**
+## Updating the config Templates manually
+Although these configs are included in OCAT now, they are maintained and updated by me, so the latest versions will always be present in my [**repo**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
 
-- Open the config.plist in a Plist Editor to find additional info
-- View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
-- Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add additional SSDT Hotpatches, boot-args, DeviceProperties and/or Kexts – check before deployment!
-- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings
-- For enabling Linux support, you can follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux).
+To manually update the config templates, do the following:
 
-## Manual Update
-Althogh these configs are included in OCAT now, they are maintained and updated by me, so the latest versions will always be present in my [**repo**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
-
-To manually update the config plists, do the following:
-
-- Download [**_BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/_BaseConfigs.zip?raw=true) and extract it
+- Download [**BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/BaseConfigs.zip?raw=true) and extract it
 - Copy the Files to the Database Folder inside of the **OCAuxiliaryTools** App:
-	- right-click the app and select "Show package contents"
+	- Right-click the app and select "Show package contents"
 	- browse to `/Contents/MacOS/Database/BaseConfigs/`
-	- paste the files
-	- restart OCAT
+	- Paste the files
+	- Restart OCAT
+
+**NOTE**: Although I tried to set up each config with the utmost precision in mind there might be errors in them. If you find one, please create an issue report and I will fix it and update the template.
 
 ## References
 - **OpenCore Auxiliary Tools**: https://github.com/ic005k/QtOpenCoreConfig
