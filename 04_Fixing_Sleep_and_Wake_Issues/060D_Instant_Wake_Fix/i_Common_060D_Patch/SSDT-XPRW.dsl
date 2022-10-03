@@ -9,8 +9,8 @@
 //
 // INSTRUCTIONS:
 //
-// - Export as .aml, add to EFI/OC/ACPI and config.plist
-// - Add the following renames (depending on the method used in your 
+// - Export as .aml, add it to EFI/OC/ACPI and config.plist
+// - Add the following rename(s) (depending on the method used in your 
 // DSDT) to your config.plist under ACPI/Patch:
 //
 // Comment:  Change GPRW to XPRW
