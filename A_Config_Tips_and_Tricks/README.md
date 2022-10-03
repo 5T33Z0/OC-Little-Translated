@@ -23,7 +23,7 @@ Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the fo
 - `Misc/security/Vault` = Optional
 - `UEFI/APFS/MinDate` = -1
 - `UEF/APFS/MinVersion` = -1
-- Compare the structure of `UEFI > Drivers` with sample.plist (format changed in OC 0.7.3)
+- Compare the structure of `UEFI/Drivers` with `sample.plist` from the OpenCore Package (format changed in OC 0.7.3).
 - **OC Troubleshooting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 
 ### `MinDate`/`MinVersion` settings for the APFS driver
