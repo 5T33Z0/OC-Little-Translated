@@ -24,6 +24,7 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**DevCleaner for Xcode**](https://github.com/vashpan/xcode-dev-cleaner) - App for clearing various Xcode caches to reclaim tens of gigabytes of storage.
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer. For Big Sur and newer.
 - [**GenI2C**](https://github.com/DogAndPot/GenI2C) (Info) – Helpfu tool for enabling VoodooI2C Touchpads ([**Download**](https://github.com/quynkk5/GenI2C/blob/main/GenI2C.zip?raw=true))
+- [**Meld for macOS**](https://yousseb.github.io/meld/) – Very useful app for comparing two config files with one another.
 
 ### macOS Monterey
 - [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS Monterey
