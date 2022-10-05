@@ -44,6 +44,8 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 12 Monterey       |21.0.0|	21.99.99
 13 Ventura        |22.0.0| 22.99.99
 
+:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software".
+
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)</br>
