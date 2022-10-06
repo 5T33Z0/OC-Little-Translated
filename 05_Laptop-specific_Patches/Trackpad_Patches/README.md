@@ -31,8 +31,8 @@ Getting Touchpads to work *smoothly* though, can be a tedious task. The wrong co
 ## Touchpad Types, Protocols and Kexts
 Two main protocols are used to communicate with a Touchpad: 
 
-- **PS/2** (including **SMBUS**)
-- **I2C**
+- **PS/2**
+- **I2C** (including **SMBUS**)
 
 Some Touchpads support both protocols (mostly by Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode.
 
@@ -51,9 +51,6 @@ Depending on the Touchpad model (vendor and used protocol), there are additional
 
 |Device/Protocol|Kext|Notes|
 |---------------|------|-----|
-Synaptics (via SMBUS)|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|A port for macOS of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID trackpads from Synaptic as well as Synaptic's SMBus trackpads. Read the [**instructions**](https://github.com/VoodooSMBus/VoodooRMI#installation) to configure it correctly.
- i801 SMBus|[**VoodooSMBUS**](https://github.com/VoodooSMBus/VoodooSMBus)|Check description on github.
- Elan proprietary|[**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan)| ELAN Touchpad/Trackpoint driver for macOS over SMBus. Needs to be compiled by user.
 PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| Generic Trackpoint/Pointer device handler kext for macOS. **NOTE**: Now merged into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
 PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native driver instead of handling all gestures itself. **NOTE**: Now fully integrated in **VoodooPS2Controller**.
 
@@ -72,8 +69,9 @@ Depending on the Touchpad model (vendor and used protocol), you need additional 
 |FTE1001 Touchpad|**VoodooI2CFTE**</br>(included in VoodooI2C)|Implements support for the propriety FTE protocol found on the FTE1001 trackpad. Your FTE device may have better support with this kext than with **VoodooI2CHID**.|
 |Synaptics HID |**VoodooI2CSynaptics**</br>(included in VoodooI2C)|Implements support for the propriety Synaptics protocol found on many Synaptics trackpads and touchscreens. Your Synaptics device may have better support with this kext than with **VoodooI2CHID**.</br>:warning: Newer Synaptics devices (such as some of those found on Dell laptops and branded with a Dell ID) use the **F12** protocol which this kext does not yet support. As such, those devices will not work with VoodooI2CSynaptics but may work with **VoodooI2CHID**.
 |**Third Party:**|
-|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from Synaptic as well as Synaptic's SMBus trackpads. Requires VoodooI2C **ONLY** if the I2C protocol is used instead of the SMBUS.|
-|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops|</br>
+|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from Synaptic as well as Synaptic's SMBus trackpads. Requires VoodooI2C **ONLY** if the I2C protocol is used instead of the SMBUS. Read the [**instructions**](https://github.com/VoodooSMBus/VoodooRMI#installation) to configure it correctly.
+|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops.|</br>
+ELAN proprietary|[**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan)| ELAN Touchpad/Trackpoint driver for macOS over SMBus. Needs to be compiled by user.
 
 ## Enabling I2C Touchpads
 
