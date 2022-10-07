@@ -40,7 +40,7 @@ Two main protocols are used to communicate with a Touchpad:
 - [**SMBUS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-smbus-touchpads)
 - [**I2C**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-i2c-touchpads-haswell-and-newer) 
  
-Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode.
+Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode from "Basic" (PS/2) to "Advanced" (I2C).
 
 :bulb: Most Laptops that come with **I2C** Touchpads also have a **PS/2** Controller which is used to control the Keyboard – so you have to use *both*, **VoodooI2C** for the Touchpad and **VoodooPS2Controller** for the keyboard!
 
