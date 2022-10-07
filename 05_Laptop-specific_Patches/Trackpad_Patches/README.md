@@ -4,6 +4,7 @@
 
 - [Introduction](#introduction)
 - [Touchpad Types, Protocols and Kexts](#touchpad-types-protocols-and-kexts)
+	- [Terminology](#terminology)
 	- [About PS/2 Touchpads (Ivy Bridge and older)](#about-ps2-touchpads-ivy-bridge-and-older)
 		- [Required Kexts](#required-kexts)
 	- [About I2C Touchpads (Haswell and newer)](#about-i2c-touchpads-haswell-and-newer)
@@ -13,12 +14,10 @@
 		- [SMBUs controlled Touchpads](#smbus-controlled-touchpads)
 - [Enabling I2C Touchpads](#enabling-i2c-touchpads)
 	- [Preface: the crux with I2C Touchpads and VoodooI2C](#preface-the-crux-with-i2c-touchpads-and-voodooi2c)
-	- [About VoodooI2C](#about-voodooi2c)
-- [Preparations](#preparations)
 	- [System Requirements](#system-requirements)
+	- [About VoodooI2C](#about-voodooi2c)
 	- [Required Tools](#required-tools)
-	- [Terminology](#terminology)
-- [General Workflow for enabling I2C Touchpads](#general-workflow-for-enabling-i2c-touchpads)
+	- [General Workflow for enabling I2C Touchpads](#general-workflow-for-enabling-i2c-touchpads)
 - [Instructions](#instructions)
 	- [1. Checking the I2C Controller for Compatibility](#1-checking-the-i2c-controller-for-compatibility)
 	- [2. Detecting the control protocol of the Touchpad (PS/2, SMBUS or I2C):](#2-detecting-the-control-protocol-of-the-touchpad-ps2-smbus-or-i2c)
@@ -43,6 +42,17 @@ Two main protocols are used to communicate with a Touchpad:
 Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode from "Basic" (PS/2) to "Advanced" (I2C).
 
 :bulb: Most Laptops that come with **I2C** Touchpads also have a **PS/2** Controller which is used to control the Keyboard – so you have to use *both*, **VoodooI2C** for the Touchpad and **VoodooPS2Controller** for the keyboard!
+
+### Terminology
+Term    | Description
+:------:|-----------
+**HID** | Human Interface Device. Allows humans to interact with the computer, usually by touching it with the hands.
+**PS/2** | No, not a PlayStation 2. It's for touchpad controlled via the PS/2 protocol and requires `VoodooPS2Controller.kext`.
+**I2C** | Touchpad for I2C (pronounced I-squared-C) channel, please use VoodooI2C.
+**ELAN**| Touchpads produced by ElanTech are referred to as ELAN. Commonly found in ASUS Laptops.
+**SYNA**| Touchpad manufactured by Synaptics
+**CRS** | "Method" in DSDT to return a value
+**ConcatenateResTemplate**| The resource descriptors from Source2 are appended to the resource descriptors from Source1. Then a new end tag and checksum are appended and the result is stored in Result, if specified. If either Source1 or Source2 is exactly 1 byte in length, a run-time error occurs. An empty buffer is treated as a resource template with only an end tag.
 
 ### About PS/2 Touchpads (Ivy Bridge and older)
 **PS/2** TouchPads are pretty much obsolete nowadays. They may support multitouch, but the implementation is not as refined as with I2C due to the limited bandwidth of PS/2. PS/2 Touchpads are usually found on Laptops with Ivy Bridge or older CPUs.
@@ -167,8 +177,13 @@ SYN3257 | HP Envy 13-ad105ng
 ## Enabling I2C Touchpads
 
 ### Preface: the crux with I2C Touchpads and VoodooI2C
+Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply injecting the **VoodooI2C.kext** won't cut it. Only in rare cases this will actually work.
 
-Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply injecting the **VoodooI2C.kext** won't cut it. Only in rare cases this will actually work. Here's why…
+### System Requirements
+- 4th Gen Intel Core CPU (Haswell) or newer (anything older uses PS/2 Touchpads).
+- macOS 10.10 or newer
+- Supported I2C Controller 
+- At least one supported I2C Device. For the vast majority of users, this will be an `I2C-HID` device.
 
 ### About VoodooI2C
 The **VoodooI2C** kext supports three operating modes: 
@@ -188,14 +203,6 @@ Which of these modes can be used depends on the Controller, the control method m
 
 **TL;DR**: you have 3 choices, one of which is practically non-existing, one which is complicated to implement and one you have to settle with if you don't have the know-how nor the patience to enable one of the other modes.
 
-## Preparations
-
-### System Requirements
-- 4th Gen Intel Core CPU (Haswell) or newer (anything older uses PS/2 Touchpads).
-- macOS 10.10 or newer
-- Supported I2C Controller 
-- At least one supported I2C Device. For the vast majority of users, this will be an `I2C-HID` device.
-
 ### Required Tools
 - [**Hackintool**](https://github.com/headkaze/Hackintool/releases) – for checking if your system has a compatible I2C Controller
 - [**MaciASL**](https://github.com/acidanthera/MaciASL/releases) – for viewing/editing on ACPI Tables
@@ -204,20 +211,8 @@ Which of these modes can be used depends on the Controller, the control method m
 - [**GenI2C**](https://github.com/DogAndPot/GenI2C) - An Automatic tool to get your DSDT ready for VoodooI2C ([**Download**](https://github.com/quynkk5/GenI2C/blob/main/GenI2C.zip?raw=true))
 - [**Maclog**](https://github.com/syscl/maclog/releases) – for viewing logs and troubleshooting
 
-### Terminology
-
-Term    | Description
-:------:|-----------
-**HID** | Human Interface Device. Allows humans to interact with the computer, usually by touching it with the hands.
-**PS/2** | No, not a PlayStation 2. It's for touchpad controlled via the PS/2 protocol and requires `VoodooPS2Controller.kext`.
-**I2C** | Touchpad for I2C (pronounced I-squared-C) channel, please use VoodooI2C.
-**ELAN**| Touchpads produced by ElanTech are referred to as ELAN. Commonly found in ASUS Laptops.
-**SYNA**| Touchpad manufactured by Synaptics
-**CRS** | "Method" in DSDT to return a value
-**ConcatenateResTemplate**| The resource descriptors from Source2 are appended to the resource descriptors from Source1. Then a new end tag and checksum are appended and the result is stored in Result, if specified. If either Source1 or Source2 is exactly 1 byte in length, a run-time error occurs. An empty buffer is treated as a resource template with only an end tag.
-
-## General Workflow for enabling I2C Touchpads
-The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. My guide basically follows this workflow. It might help to not get lost.
+### General Workflow for enabling I2C Touchpads
+The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. It might help you to not get lost.
 
 ```mermaid
 graph LR
