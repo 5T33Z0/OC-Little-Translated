@@ -54,13 +54,11 @@ Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this c
 	- **VoodooPS2Keyboard** &rarr; for Keyboards
 	- **VoodooPS2Mouse** &rarr; for Mouse Buttons
 	- **VoodooPS2Trackpad** &rarr; for PS/2 Trackpads
-
-Depending on the Touchpad model (vendor and used protocol), there are additional kexts avaialable. Some of them are replacements for existing plugin kexts included in VoodooPS2Controller, so you may need to deactivate the corresponding plugin for it to work. Read the instructions provided by the kext developer for details.
-
-|Device/Protocol|Kext|Notes|
-|---------------|------|-----|
-PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| Generic Trackpoint/Pointer device handler kext for macOS.</br>**NOTE**: Now merged into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
-PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native driver instead of handling all gestures itself.</br>**NOTE**: Now fully integrated into **VoodooPS2Controller**.
+- Deprecated Kexts:	
+	|Device/Protocol|Kext|Notes|
+	|:-------------:|------|-----|
+	PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| 	Generic Trackpoint/Pointer device handler kext for macOS.</br>**NOTE**: Now merged 	into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
+	PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS 	Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native 	driver instead of handling all gestures itself.</br>**NOTE**: Now fully integrated into **VoodooPS2Controller**.
 
 ### About I2C Touchpads (Haswell and newer)
 **I2C** (Inter-Integrated Circuit or eye-squared-C) Touchpads and Touchscreens are found on current Laptops since they have better multitouch gesture support. I2C Touchpads support multitouch gestures pretty well and will improve over time, thanks to spoofing Apple's Magic Touchpad 2 to enable native multitouch support under macOS. Usually used by Haswell and newer CPU families.
