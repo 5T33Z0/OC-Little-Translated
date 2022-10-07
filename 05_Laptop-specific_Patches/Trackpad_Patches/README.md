@@ -59,8 +59,8 @@ Depending on the Touchpad model (vendor and used protocol), there are additional
 
 |Device/Protocol|Kext|Notes|
 |---------------|------|-----|
-PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| Generic Trackpoint/Pointer device handler kext for macOS. **NOTE**: Now merged into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
-PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native driver instead of handling all gestures itself. **NOTE**: Now fully integrated in **VoodooPS2Controller**.
+PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| Generic Trackpoint/Pointer device handler kext for macOS.</br>**NOTE**: Now merged into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
+PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native driver instead of handling all gestures itself.</br>**NOTE**: Now fully integrated into **VoodooPS2Controller**.
 
 ### About I2C Touchpads (Haswell and newer)
 **I2C** (Inter-Integrated Circuit or eye-squared-C) Touchpads and Touchscreens are found on current Laptops since they have better multitouch gesture support. I2C Touchpads support multitouch gestures pretty well and will improve over time, thanks to spoofing Apple's Magic Touchpad 2 to enable native multitouch support under macOS. Usually used by Haswell and newer CPU families.
@@ -87,7 +87,7 @@ The HID devices will always be attached to the PS/2 interface due to how the dri
 #### Required Kexts
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2).
 - [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI) (Included in VoodooRMI package)
-- Kernel Patches do prevent Apple's kexts to attach to I2C and SMBUS Controllers ([Clover](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_Clover.plist) | [OpenCore](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_OC.plist))
+- Patches to prevent Apple's kexts to attach to the I2C and SMBUS Controller ([Clover](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_Clover.plist) | [OpenCore](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_OC.plist))
 - Additional Kexts (depending on the hardware):
 	|Device/Protocol|Kext|Notes|
 	|---------------|------|-----|
