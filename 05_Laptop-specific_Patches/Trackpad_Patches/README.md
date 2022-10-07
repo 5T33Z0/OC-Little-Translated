@@ -78,11 +78,11 @@ PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For AL
 	|Synaptics HID |**VoodooI2CSynaptics**</br>(included in VoodooI2C)|Implements support for the propriety Synaptics protocol found on many Synaptics trackpads and touchscreens. Your Synaptics device may have better support with this kext than with **VoodooI2CHID**.</br>:warning: Newer Synaptics devices (such as some of those found on Dell laptops and branded with a Dell ID) use the **F12** protocol which this kext does not yet support. As such, those devices will not work with VoodooI2CSynaptics but may work with **VoodooI2CHID**.
 
 ### About SMBus Touchpads
-**SMBus** Touchpads are not easy to detect. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have is an SMBus touchpad.
+**SMBus** Touchpads can be found on Laptops with Haswell and newer CPUs (although there are some Ivy Bridge Laptops that have them as well). Detecting if your Touchpad can be controlled via SMBus is not easy. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have is an SMBus touchpad.
 
 In Linux, enter `sudo dmesg` and search for `RMI4` or `Intertouch` in the results. If `RMI4` appears, then it's an SMBus trackpad. The Linux method though is not that accurate, as many trackpads have to be added manually to a list in the PS/2 Synaptics driver for SMBus support.
 
-The HID devices will always be attached to the PS/2 interface due to how the drivers work, but they really are using the higher bandwidth SMBus. In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry which mentions "Intertouch Support". 
+The HID devices will always be attached to the PS/2 interface due to how the drivers work, but they really are using the higher bandwidth SMBus. In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry which mentions `Intertouch Support`. 
 
 #### Required Kexts
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2).
