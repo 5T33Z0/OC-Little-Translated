@@ -78,7 +78,7 @@ Term    | Description
 - Depending on the Touchpad model (vendor and used protocol), you need additional [**Satellite kexts**](https://voodooi2c.github.io/#Satellite%20Kexts/Satellite%20Kexts):
 	|Device/Protocol|Kext|Notes|
 	|---------------|------|-----|
-	|I2C/USB HID|**VoodooI2CHID**</br>(included in VoodooI2C)|Implements support for I2C HID using Microsoft's HID over I2C protocol. Can be used with I2C/USB Touchscreens and Touchpads. I2C devices requires a device id of `PNP0C50` (check ACPI device ID in IORegistryExplorer). Most devices should use this, though some devices may work better using one of the satellites listed below.|
+	|I2C/USB HID|**VoodooI2CHID**</br>(included in VoodooI2C)|Implements support for I2C HID using Microsoft's HID over I2C protocol. Can be used with I2C/USB Touchscreens and Touchpads. I2C devices requires a device id of `PNP0C50` (check ACPI device ID in IORegistryExplorer).|
 	|Atmel Multitouch Protocol|**VoodooI2CAtmelMXT**</br>(included in VoodooI2C)|Implements support for the propriety Atmel Multitouch Protocol.|
 	|ELAN Proprietary|**VoodooI2CElan**</br>(included in VoodooI2C)|Implements support for the Elan protocol for Elan trackpads and touchscreens. Your Elan device may have better support with this kext than with **VoodooI2CHID**.</br> :warning: Some Elan devices (such as ELAN1200+) use a newer protocol which is proprietary. As such, those devices will not work with **VoodooI2CElan**, so you have to use  **VoodooI2CHID** instead. Some ELAN Touchpads require polling to work. Force-enable by adding `force-polling` to the DeviceProperties of the Touchpad or using boot-arg `-vi2c-force-polling`.|
 	|FTE1001 Touchpad|**VoodooI2CFTE**</br>(included in VoodooI2C)|Implements support for the propriety FTE protocol found on the FTE1001 trackpad. Your FTE device may have better support with this kext than with **VoodooI2CHID**.|
@@ -109,6 +109,75 @@ In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry name
 	|Elans|[**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooSMBus)|Port of the Linux i801 SMBus driver, as well as the Linux Elans SMBus driver.|
 
 More [info](https://github.com/5T33Z0/OC-Little-Translated/issues/57#issuecomment-1270539069) about SMBus Touchpads.
+
+<details>
+<summary>Known Synaptics SMBus Touchpads</summary>
+
+Touchpad ID | Laptop Model
+------------|-------------
+LEN0017 |
+LEN0018 |
+LEN0019 |
+LEN0023 |
+LEN002A |
+LEN002B |
+LEN002C |
+LEN002D |
+LEN002E |
+LEN0033 | Helix 
+LEN0034 | T431s L440 L540 T540 W540 X1 Carbon 2nd 
+LEN0035 | X240 
+LEN0036 | T440 
+LEN0037 | X1 Carbon 2nd 
+LEN0038 |
+LEN0039 | T440s 
+LEN0041 |
+LEN0042 | Yoga 
+LEN0045 |
+LEN0047 |
+LEN2000 | S540 
+LEN2001 | Edge E431 
+LEN2002 | Edge E531 
+LEN2003 |
+LEN2004 | L440 
+LEN2005 |
+LEN2006 | Edge E440/E540 
+LEN2007 |
+LEN2008 |
+LEN2009 |
+LEN200A | 
+LEN200B |
+LEN0048 | X1 Carbon 3 
+LEN0046 | X250 
+LEN0049 | Yoga 11e 
+LEN004a | W541 
+LEN005b | P50 
+LEN005e | T560 
+LEN006c | T470s 
+LEN007a | T470s 
+LEN0071 | T480 
+LEN0072 | X1 Carbon Gen 5 (2017) - Elan/ALPS trackpoint 
+LEN0073 | X1 Carbon G5 (Elantech) 
+LEN0091 | X1 Carbon 6 
+LEN0092 | X1 Carbon 6 
+LEN0093 | T480 
+LEN0096 | X280 
+LEN0097 | X280 -> ALPS trackpoint 
+LEN0099 | X1 Extreme Gen 1 / P1 Gen 1 
+LEN009b | T580 
+LEN0402 | X1 Extreme Gen 2 / P1 Gen 2 
+LEN200f | T450s 
+LEN2044 | L470  
+LEN2054 | E480 
+LEN2055 | E580 
+LEN2068 | T14 Gen 1 
+SYN3052 | HP EliteBook 840 G4 
+SYN3221 | HP 15-ay000 
+SYN323d | HP Spectre X360 13-w013dx
+SYN3257 | HP Envy 13-ad105ng
+
+**Source**: [**Linux**](https://github.com/torvalds/linux/blob/master/drivers/input/mouse/synaptics.c#L128-L194)
+</details>
 
 ## Enabling I2C Touchpads
 
