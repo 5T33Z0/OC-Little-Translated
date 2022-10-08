@@ -1,5 +1,5 @@
 # DMA Controller (`SSTD-DMAC`)
-Adds **Direct Memory Access Controller** [**(DMAC)**](https://binaryterms.com/direct-memory-access-dma.html) device to IO Registry. Altthough present in any SMBIOS of intel-based Macs, the necessity for this SSDT on Hackintoshes is uncertain. That's why it's categorized as "cosmetic".
+Adds **Direct Memory Access Controller** [**(DMAC)**](https://binaryterms.com/direct-memory-access-dma.html) device to IO Registry. Although present in any SMBIOS of intel-based Macs, the necessity for the SSDT on Hackintoshes is uncertain. 
 
 **DMAC** is present in the following SMBIOS variants:
 
@@ -13,15 +13,15 @@ Adds **Direct Memory Access Controller** [**(DMAC)**](https://binaryterms.com/di
 - **Xserve**: 1,3 to 3,1
 
 ## Use case
-Some Ethernet Controllers and/or Wifi Cards require `Vt-D` to be enabled in BIOS to address the Reserved Memory Regions defined in the `DMAR` table in order to work properly. Especially on Gigabyte Boards with Intel I225-V NICs and additional 3rd party cards from Fenvi or Anquatica.
+Some Ethernet Controllers and/or Wifi Cards require `Vt-D` to be enabled in BIOS to address the Reserved Memory Regions defined in the `DMAR` table in order to work properly. Especially on Gigabyte Boards with Intel I225-V NICs and additional 3rd party cards from Fenvi or Aquantia.
 
 Once Vt-D is enabled, it should be present in the IO Registry as `AppleVTD`:
 
 ![AppleVTD](https://user-images.githubusercontent.com/76865553/173662447-02328900-46a3-445f-aa39-205a8eecdff8.png)
 
-If `AppleVTD` is not present after enabling it, adding a DMAC device via `SSDT-DMAC` *might* resolve this issus. 
+If `AppleVTD` is not present after enabling it, adding a DMAC device via `SSDT-DMAC` *might* resolve this issus. It's supposed to be present so that macOS can access all memory regions in order for AppleVTD to work in combination with a modified DMAR table. However, AppleVTD works fine without DMAC in most cases, so that's why it's categorized as "cosmetic".
 
-In general, the `DisableIOMapper` Quirk should not be used when Vt-D is enabled, since it disables Vt-D in macOS and also blocks loading of the `DMAR` table which defeats the whole pupose of trying to get these Ethernet Controllers to work.
+In general, the `DisableIOMapper` Quirk must not be enabled in this case, since it disables Vt-D in macOS and also blocks loading of the `DMAR` table which defeats the whole pupose of trying to get these Ethernet Controllers to work.
 
 ## Instructions
 
