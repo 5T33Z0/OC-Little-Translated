@@ -132,21 +132,29 @@ With **PickerAttributes**, you can assign different properties and functions to 
 **PickerAttributes** = `19`–– Enables Custom Icons, Custom Titles and Mouse Cursor.
 
 ## V. Customizing Boot Options
+
 ### Set default boot drive in BootPicker
 
 To be able to set the boot drive in the BootPicker, enable the following options in the config:
 
-**ShowPicker** = `Yes`</br>
-**AllowSetDefault** = `Yes`
+- **ShowPicker** = `Yes`</br>
+- **AllowSetDefault** = `Yes`
 
-In the BootPicker: Select drive/partition, hold [CTRL] and press [ENTER]. After that this volume is always preselected.
+In **BootPicker**: 
+
+- Select drive/partition
+- Hold [CTRL] and press [ENTER]. 
+
+After that this volume is always preselected (until NVRAM is reset).
 
 ### Enable Apple Hotkey functions
 
-**PollAppleHotKeys** = `Yes`
+**PollAppleHotKeys** = `Yes` &rarr; Enables keyboard shortcuts known from Macs to use different boot modes like Verbose, Safe or Single User Mode, etc. without having to set extra boot-args. 
 
-Enables keyboard shortcuts known from Macs to use different boot modes like Verbose, Safe or Single User Mode, etc. without having to set extra boot-args. For example, you can enter CMD+V before starting macOS and it will then boot in verbose mode. So no need to add `-v ` to the boot-args.
+**Examples**:
 
+- Enter `CMD+V` before starting macOS boots macOS in Verbose mode. So no need to add `-v` to the boot-args.
+- Holding Shift (⇧) will boot macOS into Safe Mode
 
 For more details check the `Configuration.pdf` included in the OpenCore package.
 
