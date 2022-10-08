@@ -89,9 +89,10 @@ Term    | Description
 **SMBus** Touchpads can be found on Laptops with Haswell and newer CPUs (although there are some Ivy Bridge Laptops that have them as well). Detecting if your Touchpad can be controlled via SMBus is not easy. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have an SMBus touchpad. Drivers will still be attached to the PS/2 port, even if SMBus is being used.
 
 <details markdown="1">
-<summary><b>Device Manager Example</b></summary>
+<summary><b>SMBus Touchpad Example</b></summary>
 
-![SMBus example](https://github.com/dortania/OpenCore-Install-Guide/blob/master/images/finding-hardware-md/Windows-SMBus-Device.png)
+Notice the renamed SMBus driver, even though everything is attached to the PS/2 device.
+![SMBus example](smbus-device-manager.png)
 
 </details>
 
