@@ -70,7 +70,7 @@ Term    | Description
 	PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS 	Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native 	driver instead of handling all gestures itself.</br>**NOTE**: Now fully integrated into **VoodooPS2Controller**.
 
 ### About I2C and USB Touchpads (Haswell and newer)
-**I2C** (Inter-Integrated Circuit or eye-squared-C) and USB devices have gained widespread adoption due to Microsoft's Precision Trackpad requirements. 
+**I2C** (Inter-Integrated Circuit or eye-squared-C) and USB devices have gained widespread adoption due to Microsoft's Precision Trackpad requirements. Touchpads will usually be I2C, while touchscreens will usually be USB. VoodooI2C and it's satellites can be used for both I2C and USB devices, though I2C devices will usually require ACPI patching.
 
 #### Required Kexts
 
