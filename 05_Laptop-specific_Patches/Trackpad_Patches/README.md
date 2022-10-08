@@ -13,9 +13,8 @@
 		- [Required Kexts](#required-kexts-2)
 		- [SMBUs controlled Touchpads](#smbus-controlled-touchpads)
 - [Enabling I2C Touchpads](#enabling-i2c-touchpads)
-	- [Preface: the crux with I2C Touchpads and VoodooI2C](#preface-the-crux-with-i2c-touchpads-and-voodooi2c)
 	- [System Requirements](#system-requirements)
-	- [About VoodooI2C](#about-voodooi2c)
+	- [About I2C operating modes](#about-i2c-operating-modes)
 	- [Required Tools](#required-tools)
 	- [General Workflow for enabling I2C Touchpads](#general-workflow-for-enabling-i2c-touchpads)
 - [Instructions](#instructions)
@@ -88,7 +87,7 @@ Term    | Description
 ### About SMBus Touchpads
 **SMBus** Touchpads can be found on Laptops with Haswell and newer CPUs (although there are some Ivy Bridge Laptops that have them as well). Detecting if your Touchpad can be controlled via SMBus is not easy. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have an SMBus touchpad.
 
-In Linux, enter `sudo dmesg` and search for `RMI4` or `Intertouch` in the results. If `RMI4` appears, then it's an SMBus trackpad. The Linux method though is not that accurate, as many trackpads have to be added manually to a list in the PS/2 Synaptics driver for SMBus support.
+In Linux, enter `sudo dmesg` and search for `RMI4` or `Intertouch` in the results. If `RMI4` appears, then it's an SMBus touchpad. The Linux method though is not that accurate, as many touchpad have to be added manually to a list in the PS/2 Synaptics driver for SMBus support.
 
 The HID devices will always be attached to the PS/2 interface due to how the drivers work, but they really are using the higher bandwidth SMBus. In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry which mentions `Intertouch Support`. 
 
@@ -102,6 +101,8 @@ The HID devices will always be attached to the PS/2 interface due to how the dri
 	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of 	Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from 	Synaptic as well as Synaptic's SMBus trackpads. Requires VoodooI2C **ONLY** if the I2C 	protocol is used instead of the SMBUS. Read the [**instructions**](https://github.com/	VoodooSMBus/VoodooRMI#installation) to configure it correctly.
 	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> 	[**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be 	used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops.|</br>
 	ELAN proprietary|[**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan)| ELAN 	Touchpad/Trackpoint driver for macOS over SMBus. Needs to be compiled by user.
+
+More [info](https://github.com/5T33Z0/OC-Little-Translated/issues/57#issuecomment-1270539069) about SMBus Touchpads.
 
 #### SMBUs controlled Touchpads
 
@@ -176,7 +177,6 @@ SYN3257 | HP Envy 13-ad105ng
 
 ## Enabling I2C Touchpads
 
-### Preface: the crux with I2C Touchpads and VoodooI2C
 Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply injecting the **VoodooI2C.kext** won't cut it. Only in rare cases this will actually work.
 
 ### System Requirements
@@ -185,7 +185,7 @@ Enabling I2C Touchpads in Hackintoshes is no an easy task! In most cases, simply
 - Supported I2C Controller 
 - At least one supported I2C Device. For the vast majority of users, this will be an `I2C-HID` device.
 
-### About VoodooI2C
+### About I2C operating modes
 The **VoodooI2C** kext supports three operating modes: 
 
 1. **APIC** interrupt mode, 
@@ -196,12 +196,12 @@ These modes have their own characteristics:
 
 - **APIC** and **GPIO** are **hardware-driven** interrupt modes, while **polling** is **software-driven** only.
 - **APIC interrupt mode**: IC2 controllers which support APIC mode don't need to be modified and work perfectly fine with the `VooodooI2C.kext` alone. Unfortunately, only a few I2C controllers (less than 10%) support this mode. Whether or not your Touchpad can use this mode depends on the used **APIC Pin** (not ACPI!). More on that later…
-- **GPIO interrupt mode** support is relatively complete, but the amount of modifications required to enable the **GPIO Pin** is usually relatively high, requires more resources but is still preferred over Polling Mode.
-- **Polling Mode**: Polling requires more system resources (such as CPU and RAM), but it is more applicable than the interrupt modes. You can think of polling as the "safe boot" mode of VoodooI2C. As such, it is a suitable mode for use during installing macOS. If you wish to run VoodooI2C in polling mode, you do not need to apply any GPIO patches. It is also suitable for people who have Skylake or newer machines with buggy GPIO implementation (such as various ASUS Notebooks). 
+- **GPIO interrupt mode**: support is relatively complete, but the amount of modifications required to enable the **GPIO Pin** is usually relatively high, requires more resources but is still preferred over the software-based Polling Mode.
+- **Polling Mode**: Polling requires more system resources (such as CPU and RAM), doesn't work as well, but it is more applicable than the interrupt modes. You can think of it as the "safe boot" mode of VoodooI2C. As such, it is a suitable mode for installing macOS before enabling GPIO mode. If you wish to run VoodooI2C in polling mode, you do not need to apply any GPIO patches. It is also suitable for people who have Skylake or newer machines with buggy GPIO implementation (such as various ASUS Notebooks). 
 
-Which of these modes can be used depends on the Controller, the control method method defined in the `DSDT` and by the driver is used. At present, `VoodooI2CHID` is the only driver that supports GPIO and Polling mode at the same time.
+Which of these modes can be used depends on the Controller, the control method defined in the `DSDT` and by the driver that is used. At present, `VoodooI2CHID` is the only driver that supports GPIO and Polling mode at the same time.
 
-**TL;DR**: you have 3 choices, one of which is practically non-existing, one which is complicated to implement and one you have to settle with if you don't have the know-how nor the patience to enable one of the other modes.
+**TL;DR**: you have 3 choices, one of which is practically non-existing, one which is complicated to implement and one you have to settle with if you don't have the know-how nor the patience to enable GPIO mode.
 
 ### Required Tools
 - [**Hackintool**](https://github.com/headkaze/Hackintool/releases) – for checking if your system has a compatible I2C Controller
