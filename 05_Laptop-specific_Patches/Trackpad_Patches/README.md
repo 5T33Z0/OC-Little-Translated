@@ -35,7 +35,7 @@ Getting Touchpads to work *smoothly* though, can be a tedious task. The wrong co
 Four main protocols are used to communicate with a Touchpad: 
 
 - [**PS/2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-ps2-touchpads)
-- [**SMBUS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-smbus-touchpads)
+- [**SMBus**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-smbus-touchpads)
 - [**I2C and USB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-i2c-and-touchpads-haswell-and-newer) 
  
 Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode from "Basic" (PS/2) to "Advanced" (I2C).
