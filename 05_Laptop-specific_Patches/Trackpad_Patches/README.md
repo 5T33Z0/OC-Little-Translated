@@ -79,7 +79,7 @@ Term    | Description
 - Change view to "**Devices by Connection**"
 - Find the HID Devices located inside the "**PCI Root Complex**" tree.
 - The Touchpad should be attached as "**HID-compliant touch pad**" via PS/2
-- If the Touchpad can use the SMBus, there should be an additional Driver, either "**Elan SMBus Driver**" or "**Synaptics SMBus Driver**" (depending on the vendor) which replaces the generic **"Intel SMBus Driver**":</br>![SMBus example](smbus-device-manager.png)
+- If the Touchpad can use the SMBus, there should be an additional Driver, either "**Elan SMBus Driver**" or "**Synaptics SMBus Driver**" (depending on the vendor) which replaces the generic **"Intel SMBus Driver**":</br> ![smbus-device-manager](https://user-images.githubusercontent.com/76865553/194742218-caf1e681-9c4e-43a3-9924-e80914531666.png)
 
 #### Linux
 In Linux, enter `sudo dmesg` and search for `RMI4` or `Intertouch` in the results. If `RMI4` appears, then it's an SMBus touchpad. The Linux method though is not that accurate, as many touchpad have to be added manually to a list in the PS/2 Synaptics driver for SMBus support.
