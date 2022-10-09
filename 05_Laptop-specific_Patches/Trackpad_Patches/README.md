@@ -5,9 +5,9 @@
 - [Introduction](#introduction)
 - [Touchpad Types, Protocols and Kexts](#touchpad-types-protocols-and-kexts)
 	- [Terminology](#terminology)
-	- [About PS/2 Touchpads (Ivy Bridge and older)](#about-ps2-touchpads-ivy-bridge-and-older)
+	- [About PS/2 Touchpads](#about-ps2-touchpads)
 		- [Required Kexts](#required-kexts)
-	- [About I2C Touchpads (Haswell and newer)](#about-i2c-touchpads-haswell-and-newer)
+	- [About I2C and USB Touchpads (Haswell and newer)](#about-i2c-and-usb-touchpads-haswell-and-newer)
 		- [Required Kexts](#required-kexts-1)
 	- [About SMBus Touchpads](#about-smbus-touchpads)
 		- [Required Kexts](#required-kexts-2)
@@ -32,11 +32,11 @@ PC-based Notebook Touchpads are not supported natively by macOS. Depending on th
 Getting Touchpads to work *smoothly* though, can be a tedious task. The wrong combination of kexts, renames and SSDTs can cause Kernel Panics if they are not loaded in the correct order or if binary renames or device paths in SSDTs are incorrect.
 
 ## Touchpad Types, Protocols and Kexts
-Two main protocols are used to communicate with a Touchpad: 
+Four main protocols are used to communicate with a Touchpad: 
 
-- [**PS/2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-ps2-touchpads-ivy-bridge-and-older)
-- [**SMBUS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-smbus-touchpads)
-- [**I2C**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-i2c-touchpads-haswell-and-newer) 
+- [**PS/2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-ps2-touchpads)
+- [**SMBus**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-smbus-touchpads)
+- [**I2C and USB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches#about-i2c-and-touchpads-haswell-and-newer) 
  
 Some Touchpads support both PS/2 and I2C protocols (mostly Synaptics). In this case, you should switch to **I2C**. There should be an option in the BIOS to switch the mode from "Basic" (PS/2) to "Advanced" (I2C).
 
@@ -48,29 +48,29 @@ Term    | Description
 **HID** | Human Interface Device. Allows humans to interact with the computer, usually by touching it with the hands.
 **PS/2** | No, not a PlayStation 2. It's for touchpad controlled via the PS/2 protocol and requires `VoodooPS2Controller.kext`.
 **I2C** | Touchpad for I2C (pronounced I-squared-C) channel, please use VoodooI2C.
+**SMBus** | System Management Bus. It is very similar to I2C, though uses a different controller. This requires either VoodooSMBus or VoodooRMI.
 **ELAN**| Touchpads produced by ElanTech are referred to as ELAN. Commonly found in ASUS Laptops.
 **SYNA**| Touchpad manufactured by Synaptics
 **CRS** | "Method" in DSDT to return a value
 **ConcatenateResTemplate**| The resource descriptors from Source2 are appended to the resource descriptors from Source1. Then a new end tag and checksum are appended and the result is stored in Result, if specified. If either Source1 or Source2 is exactly 1 byte in length, a run-time error occurs. An empty buffer is treated as a resource template with only an end tag.
 
-### About PS/2 Touchpads (Ivy Bridge and older)
-**PS/2** TouchPads are pretty much obsolete nowadays. They may support multitouch, but the implementation is not as refined as with I2C due to the limited bandwidth of PS/2. PS/2 Touchpads are usually found on Laptops with Ivy Bridge or older CPUs.
+### About PS/2 Touchpads
+**PS/2** TouchPads are pretty much obsolete nowadays. They may support multitouch, but the implementation is not as refined as with I2C/SMBus due to the limited bandwidth of PS/2. PS/2 Touchpads are usually found on Laptops with Ivy Bridge or older CPUs, though can be somewhat common up to Skylake. VoodooPS2 supports Alps, Elans, and Synaptics PS/2 touchpads out of the box.
 
 #### Required Kexts
 
 - **Necessary base kext**: [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2). Contains 4 additional Kexts as PlugIns:
-	- **VoodooInput** &rarr; for [TrackPoints](https://en.wikipedia.org/wiki/Pointing_stick)
+	- **VoodooInput** &rarr; is used to emulate a Magic Trackpad 2
 	- **VoodooPS2Keyboard** &rarr; for Keyboards
 	- **VoodooPS2Mouse** &rarr; for Mouse Buttons
 	- **VoodooPS2Trackpad** &rarr; for PS/2 Trackpads
 - Deprecated Kexts:	
 	|Device/Protocol|Kext|Notes|
 	|:-------------:|------|-----|
-	PS/2 |[**~~VoodooTrackpoint~~**](https://github.com/VoodooSMBus/VoodooTrackpoint)| 	Generic Trackpoint/Pointer device handler kext for macOS.</br>**NOTE**: Now merged 	into [**VoodooInput**](https://github.com/acidanthera/VoodooInput).
 	PS/2|[**~~VoodooPS2-ALPS~~**](https://github.com/SkyrilHD/VoodooPS2-ALPS)|For ALPS 	Touchpads. Adds support for Magic Touchpad 2 emulation in order to use macOS native 	driver instead of handling all gestures itself.</br>**NOTE**: Now fully integrated into **VoodooPS2Controller**.
 
-### About I2C Touchpads (Haswell and newer)
-**I2C** (Inter-Integrated Circuit or eye-squared-C) Touchpads and Touchscreens are found on current Laptops since they have better multitouch gesture support. I2C Touchpads support multitouch gestures pretty well and will improve over time, thanks to spoofing Apple's Magic Touchpad 2 to enable native multitouch support under macOS. Usually used by Haswell and newer CPU families.
+### About I2C and USB Touchpads (Haswell and newer)
+**I2C** (Inter-Integrated Circuit or eye-squared-C) and USB devices have gained widespread adoption due to Microsoft's Precision Trackpad requirements. Touchpads will usually be I2C, while touchscreens will usually be USB. VoodooI2C and it's satellites can be used for both I2C and USB devices, though I2C devices will usually require ACPI patching.
 
 #### Required Kexts
 
@@ -78,36 +78,40 @@ Term    | Description
 - Depending on the Touchpad model (vendor and used protocol), you need additional [**Satellite kexts**](https://voodooi2c.github.io/#Satellite%20Kexts/Satellite%20Kexts):
 	|Device/Protocol|Kext|Notes|
 	|---------------|------|-----|
-	|HID over I2C |**VoodooI2CHID**</br>(included in VoodooI2C)|Implements support for I2C HID using Microsoft's HID over I2C protocol. Can be used with I2C/USB Touchscreens and Touchpads. Requires IC2 HID with property `PNP0C50` (check ACPI device ID in IORegistryExplorer). For I2C HID that have their own propriety protocol (Atmel, Synaptics, ELAN, FTE), a different Satellite kext may produce better results.
+	|I2C/USB HID|**VoodooI2CHID**</br>(included in VoodooI2C)|Implements support for I2C HID using Microsoft's HID over I2C protocol. Can be used with I2C/USB Touchscreens and Touchpads. I2C devices requires a device id of `PNP0C50` (check ACPI device ID in IORegistryExplorer).|
 	|Atmel Multitouch Protocol|**VoodooI2CAtmelMXT**</br>(included in VoodooI2C)|Implements support for the propriety Atmel Multitouch Protocol.|
 	|ELAN Proprietary|**VoodooI2CElan**</br>(included in VoodooI2C)|Implements support for the Elan protocol for Elan trackpads and touchscreens. Your Elan device may have better support with this kext than with **VoodooI2CHID**.</br> :warning: Some Elan devices (such as ELAN1200+) use a newer protocol which is proprietary. As such, those devices will not work with **VoodooI2CElan**, so you have to use  **VoodooI2CHID** instead. Some ELAN Touchpads require polling to work. Force-enable by adding `force-polling` to the DeviceProperties of the Touchpad or using boot-arg `-vi2c-force-polling`.|
 	|FTE1001 Touchpad|**VoodooI2CFTE**</br>(included in VoodooI2C)|Implements support for the propriety FTE protocol found on the FTE1001 trackpad. Your FTE device may have better support with this kext than with **VoodooI2CHID**.|
-	|Synaptics HID |**VoodooI2CSynaptics**</br>(included in VoodooI2C)|Implements support for the propriety Synaptics protocol found on many Synaptics trackpads and touchscreens. Your Synaptics device may have better support with this kext than with **VoodooI2CHID**.</br>:warning: Newer Synaptics devices (such as some of those found on Dell laptops and branded with a Dell ID) use the **F12** protocol which this kext does not yet support. As such, those devices will not work with VoodooI2CSynaptics but may work with **VoodooI2CHID**.
+	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)</br>|Implements support for the Synaptics protocol found on many Synaptics trackpads. Your Synaptics device may have better support with this kext than with **VoodooI2CHID**.|
+	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C/USB)|Can be used with USB and I2C Alps Touchpads. Often seen on Dell Laptops.|
 
 ### About SMBus Touchpads
-**SMBus** Touchpads can be found on Laptops with Haswell and newer CPUs (although there are some Ivy Bridge Laptops that have them as well). Detecting if your Touchpad can be controlled via SMBus is not easy. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have an SMBus touchpad.
+**SMBus** Touchpads can be found on Laptops with Haswell and newer CPUs (although there are some Ivy Bridge Laptops that have them as well). Detecting if your Touchpad can be controlled via SMBus is not easy. The simplest way is using Windows' Device Manager. Normally, the touchpad will be named "Intel SMBus Controller". When it is renamed to "Elan SMBus Controller" or "Synaptics SMBus Controller", you have an SMBus touchpad. Drivers will still be attached to the PS/2 port, even if SMBus is being used.
+
+<details markdown="1">
+<summary><b>SMBus Touchpad Example</b></summary>
+
+Notice the renamed SMBus driver, even though everything is attached to the PS/2 device.
+![SMBus example](smbus-device-manager.png)
+
+</details>
 
 In Linux, enter `sudo dmesg` and search for `RMI4` or `Intertouch` in the results. If `RMI4` appears, then it's an SMBus touchpad. The Linux method though is not that accurate, as many touchpad have to be added manually to a list in the PS/2 Synaptics driver for SMBus support.
 
-The HID devices will always be attached to the PS/2 interface due to how the drivers work, but they really are using the higher bandwidth SMBus. In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry which mentions `Intertouch Support`. 
+In macOS, Acidanthera's VoodooPS2Trackpad will put a property in IORegistry named `Intertouch Support`. 
 
 #### Required Kexts
 - [**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2).
-- [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI) (Included in VoodooRMI package)
-- Patches to prevent Apple's kexts to attach to the I2C and SMBUS Controller ([Clover](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_Clover.plist) | [OpenCore](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches/Trackpad_Patches_OC.plist))
 - Additional Kexts (depending on the hardware):
-	|Device/Protocol|Kext|Notes|
+	|Device Manufacturer|Kext|Notes|
 	|---------------|------|-----|
-	|Synaptics HID|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of 	Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from 	Synaptic as well as Synaptic's SMBus trackpads. Requires VoodooI2C **ONLY** if the I2C 	protocol is used instead of the SMBUS. Read the [**instructions**](https://github.com/	VoodooSMBus/VoodooRMI#installation) to configure it correctly.
-	|Alps HID|[**AlpsHID**](https://github.com/blankmac/AlpsHID/releases) (I2C) or</br> 	[**VoodooPS2Controller**](https://github.com/acidanthera/VoodooPS2/releases) (PS2) |Can be 	used with USB and I2C/PS2 Alps Touchpads. Often seen on Dell Laptops.|</br>
-	ELAN proprietary|[**VoodooElan**](https://github.com/VoodooSMBus/VoodooElan)| ELAN 	Touchpad/Trackpoint driver for macOS over SMBus. Needs to be compiled by user.
+	|Synaptics|[**VoodooRMI**](https://github.com/VoodooSMBus/VoodooRMI)|macOS port of Synaptic's RMI Trackpad driver from Linux. This works for both I2C HID Trackpads from Synaptic as well as Synaptic's SMBus trackpads. Also contains a copy of VoodooSMBus, which is needed for VoodooRMI to work.|
+	|Elans|[**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooSMBus)|Port of the Linux i801 SMBus driver, as well as the Linux Elans SMBus driver.|
 
 More [info](https://github.com/5T33Z0/OC-Little-Translated/issues/57#issuecomment-1270539069) about SMBus Touchpads.
 
-#### SMBUs controlled Touchpads
-
 <details>
-<summary>Click to reveal the List</summary>
+<summary>Known Synaptics SMBus Touchpads</summary>
 
 Touchpad ID | Laptop Model
 ------------|-------------
