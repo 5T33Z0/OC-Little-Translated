@@ -32,6 +32,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 		- [Installing Intel HD4000 Drivers on macOS Monterey](#installing-intel-hd4000-drivers-on-macos-monterey-1)
 		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
+- [About VGA](#about-vga)
 - [Credits and Resources](#credits-and-resources)
 
 </details>
@@ -463,6 +464,14 @@ Key | Type | Value| Notes
 ----|:----:|:----:|------
 `AAPL,snb-platform-id`| Data | `00000100` | For Laptops
 `AAPL,snb-platform-id`| Data | `10000300` | For NUCs
+
+## About VGA
+
+Whether or not your VGA port can be used depends on 2 factors: macOS and the CPU/iGPU.
+
+- VGA support was dropped from macOS since OSX 10.8.2.
+- On Ivy Bridge and others, you can try [these Connector Patches](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#vga-support) to enable it (if OSX is < 10.8.2).
+- With the release of the Skylake CPU family, Intel dropped VGA support from their iGPUs completely, but manufacturers continued to use it for their devices. In order to do so, they used a DisplayPort connection and a small digital-to-analog RAMDAC to convert the signal from digital to analog so the VGA connection could be utilized.
 
 ## Credits and Resources
 - Acidanthera for [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
