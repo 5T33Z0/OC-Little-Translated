@@ -24,23 +24,27 @@ Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config 
 
 OCAT also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
-## Tools and prerequisites
+## Tools and Prerequisites
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 - :warning: Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong!
 
 ### For users updating from OpenCore 0.6.5 or lower
-:warning: When updating OpenCore from version ≤ 0.6.5, disabling `Bootstrap` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset:
+:warning: When updating OpenCore from version ≤ 0.6.5, disabling `BootProtect` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset. If you don't use `BootProtect` you can skip this part:
 
-- Disable `BootProtect` (set it to `None`)
+- Change `Misc/Security/BootProtect` to `None`
+- Enable `Misc/Security/AllowNvramReset`
 - Reboot
-- Reset NVRAM 
+- Reset NVRAM from the BootPicker
 - Boot into macOS 
-- Update OpenCore and delete the Bootstrap folder
+- Update OpenCore, Config, Drivers and Kexts
+- Delete the `Bootstrap` folder
+- Set `Misc/Boot/LauncherOption` as needed (Refer to the [**Updating Bootstrao**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) and Configuration.pdf for more details)
 
-Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
+:bulb: **TIPS**:
 
-:bulb: In general, when updating from a very low version of OpenCore to the newest, it's wise to rebuild the config based on the latest Sample.plist. You could open both files in 2 ProperTree windows and copy over the existing settings (ACPI, Quirks, Device Properties, etc.).
+- When updating from a very low version of OpenCore to the newest, it's wise to rebuild the config based on the latest Sample.plist. You could open both files in 2 ProperTree windows and copy over the existing settings (ACPI, Quirks, Device Properties, etc.).
+- Avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, as Laptops often do.
 
 ## OCAT's Different Modes
 OCAT lets you choose and switch between 4 variants and builds of OpenCore to download, install and update by combining settings in the "Edit" menu:
