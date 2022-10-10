@@ -3,7 +3,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "FWHD", 0x00000000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
 
-    Scope (_SB.PCI0.LPCB)
+    Scope (\_SB.PCI0.LPCB)
     {
         Device (FWHD)
         {

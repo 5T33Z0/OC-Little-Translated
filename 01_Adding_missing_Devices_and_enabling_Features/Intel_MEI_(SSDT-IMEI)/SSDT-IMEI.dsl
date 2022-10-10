@@ -6,7 +6,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "IMEI", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
 
-    Scope (_SB.PCI0)
+    Scope (\_SB.PCI0)
     {
         Device (IMEI)
         {

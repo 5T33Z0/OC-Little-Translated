@@ -3,7 +3,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "XSPI", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
 
-    Scope (_SB.PCI0)
+    Scope (\_SB.PCI0)
     {
         Device (XSPI)
         {

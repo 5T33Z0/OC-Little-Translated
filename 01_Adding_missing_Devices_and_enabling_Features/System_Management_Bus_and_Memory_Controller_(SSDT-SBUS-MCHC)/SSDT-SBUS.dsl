@@ -5,7 +5,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "SBUS", 0)
 {
     External (_SB_.PCI0.SBUS, DeviceObj)
 
-    Scope (_SB.PCI0.SBUS)
+    Scope (\_SB.PCI0.SBUS)
     {
         Device (BUS0)
         {
