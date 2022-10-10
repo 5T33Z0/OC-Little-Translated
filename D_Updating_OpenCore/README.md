@@ -35,7 +35,8 @@ OCAT also integrates new keys/features added to the config.plist into the GUI au
 - Disable `BootProtect` (set it to `None`)
 - Reboot
 - Reset NVRAM 
-- Boot into macOS and then update OpenCore. 
+- Boot into macOS 
+- Update OpenCore and delete the Bootstrap folder
 
 Please refer to the [**OpenCore Post-Install Guide**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) for more details on the matter. I'd suggest to avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, like Laptops often do.
 
