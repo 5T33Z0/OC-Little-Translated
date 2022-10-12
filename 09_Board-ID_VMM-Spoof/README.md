@@ -43,12 +43,15 @@ I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Lega
 :warning: Before applying the patches, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 - [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/09_Board-ID_VMM-Spoof/BoardIDSkip+VMMPatch.plist.zip?raw=true) and unzip the attached .plist.
-- Open it with a plist Editor (e.g. ProperTree).
-- Copy the patches located under Booter/Patch over to your OpenCore config to the same section.
-- Do the same for the Kernel Patches. Enable additional patches if required (SurPlus patches for Sandy Bridge for example).
-- Optional: add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
-- Save the config.
-- Reboot.
+- Open it with a Plist Editor (e.g. ProperTree).
+- Copy the Booter Patches over to your config.plist to the same section and enable them.
+- Do the same for the Kernel Patches. The following need to be enabled:
+	- Reroute kern.hv_vmm_present patch (1)
+	- Reroute kern.hv_vmm_present patch (2)
+	- Force IOGetVMMPresent
+	- Enable additional Kernel patches if required (SurPlus patches for Sandy Bridge for example).
+	- Optinally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+- Save the config and reboot.
 - Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
 Enjoy macOS Monterey+ with the correct SMBIOS for your CPU and Updates!
