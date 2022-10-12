@@ -52,7 +52,7 @@ I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Lega
 	- Enable additional Kernel patches if required (SurPlus patches for Sandy Bridge for example).
 	- Optinally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
 - Save the config and reboot.
-- Verify that the the patches are working: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
+- Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
 
 Enjoy macOS Monterey+ with the correct SMBIOS for your CPU and Updates!
 
