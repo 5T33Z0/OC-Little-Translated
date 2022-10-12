@@ -66,7 +66,7 @@ Coffee Lake | Data |`0300913E`
 Kaby Lake | Data |`03001259`
 Skylake | Data |`01001219`
 Skylake (P530) | Data |`01001219`| `1B190000` | P530 is not natively supported so you need to add the device-id as well.
-Haswell | Data| `04001204`}
+Haswell | Data| `04001204`
 Haswell (HD 4400)| Data| `04001204`|`12040000` ||HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
 Ivy Bridge | Data| `07006201`|
 
