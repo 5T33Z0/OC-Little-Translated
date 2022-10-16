@@ -80,9 +80,9 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.6.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 
 ### Example 8: Intel WiFi and Bluetooth 
-![config8](https://user-images.githubusercontent.com/76865553/140813902-8f5cedb0-4fd6-4736-ab69-c5e6f3a63fdb.png)
+![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
 
-For macOS Monterey and newer, follow these [**instructions**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+For macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
