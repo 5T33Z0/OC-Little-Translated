@@ -1,5 +1,5 @@
 [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
-# How to enable "GPU" Tab in Activity Monitor (and Metal 3 in macOS Ventura)
+# How to enable "GPU" Tab in Activity Monitor (and Metal 3 Support in macOS Ventura)
 > :warning: **Disclaimer**: The Framebuffer Data used in this guide is for an Intel UHD 630 – don't use it to fix *your* iGPU (unless you have a Comet Lake CPU as well). Use the Framebuffer data required for your iGPU instead! 
 > 
 > If you are using a CPU without on-board graphics and/or an SMBIOS which utilizes the GPU for Quick Sync Video and other background tasks – like **iMacPro1,1** or **MacPro7,1** – don't add an iGPU. Use the defaults-write method explained in S[](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/README.md#5-shortcut-using-a-defaults-write-command)ection 5 instead!
