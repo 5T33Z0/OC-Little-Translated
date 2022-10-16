@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.5-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.10.10-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.5-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-22.10.16-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## ABOUT
 Compendium of Guides, ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese. All Binary Renames, ACPI Hotpatches (using `OCLT` as OEMID) remain untouched except where indicated.
@@ -10,7 +10,7 @@ This repo provides additional ACPI hotpatches and guides complementary to the on
 ### DISCLAIMER
 The methods and techniques presented in this repo are based on utilizing the official OpenCore release and its features alongside Kexts, SSDTs, Device Properties and other tools to enable/disable devices and features in macOS to get a *proper* working system which is ACPI conform!
 
-**OC-Little Translated** does not consider patching the `DSDT` an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, as explained [here](http://web.archive.org/web/20220807100310/https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/):
+**OC-Little Translated** does not consider patching the `DSDT` an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, as explained [here](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/):
 
 > MaLd0n's implications that you need a custom DSDT to add and remove (well, remove yes, but disabling is good enough in virtually all cases) devices is **incorrect**. Aside from those claims, most device rename changes (probably also things you considered „missing“) are also not needed, as they are performed by Lilu and its plug-ins. This approach is a lot safer than previous ACPI renames as dumb find-replace patches can yield false positives, the kext approach cannot. 
 
