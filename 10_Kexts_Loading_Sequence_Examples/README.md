@@ -86,6 +86,7 @@ For macOS Monterey and newer, [**read this**](https://openintelwireless.github.i
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
+
 Most Intel Desktop configs will at least contain `Lilu`, `VirtualSMC` (Plugins are optional), `WhateverGreen` and `AppleALC`. This example excludes USB Port, Ethernet and WiFi/BT kexts!
 
 ### Example 9b: Possible Laptop Kext Sequence
