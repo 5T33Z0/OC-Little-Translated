@@ -79,7 +79,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.6.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 
-:warning: CAUTION: Don't add `BrcmFirmwareRepo.kext` to EFI/OC/Kexts! It cannot be injected via Boot Managers and needs to be installed to `/System/Library/Extensions` (/Library/Extensions on 10.11 and later) instead. In this case, `BrcmFirmwareData.kext`is not required.
+:warning: **CAUTION**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers and needs to be installed to `/System/Library/Extensions` (/Library/Extensions on 10.11 and later) instead. In this case, `BrcmFirmwareData.kext`is not required.
 
 ### Example 8: Intel WiFi and Bluetooth 
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
