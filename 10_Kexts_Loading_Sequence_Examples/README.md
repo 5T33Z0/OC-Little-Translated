@@ -28,23 +28,23 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 
 |macOS |MinKernel |MaxKernel
 |-----:|---------:|--------:|
-10.4 Tiger        |8.0.0| 	8.99.99
-10.5 Leopard      |9.0.0| 	9.99.99
+10.4 Tiger        |8.0.0| 8.99.99
+10.5 Leopard      |9.0.0| 9.99.99
 10.6 Snow Leopard |10.0.0| 10.99.99
 10.7 Lion         |11.0.0| 11.99.99
-10.8 Mountain Lion|12.0.0|	12.99.99
+10.8 Mountain Lion|12.0.0| 12.99.99
 10.9 Mavericks    |13.0.0| 13.99.99
-10.10 Yosemite    |14.0.0|	14.99.99
-10.11 El Capitan  |15.0.0|	15.99.99
-10.12 Sierra      |16.0.0|	16.99.99
-10.13 High Sierra |17.0.0|	17.99.99
-10.14 Mojave      |18.0.0|	18.99.99
-10.15 Catalina    |19.0.0|	19.99.99
+10.10 Yosemite    |14.0.0| 14.99.99
+10.11 El Capitan  |15.0.0| 15.99.99
+10.12 Sierra      |16.0.0| 16.99.99
+10.13 High Sierra |17.0.0| 17.99.99
+10.14 Mojave      |18.0.0| 18.99.99
+10.15 Catalina    |19.0.0| 19.99.99
 11 Big Sur        |20.0.0| 20.99.99
-12 Monterey       |21.0.0|	21.99.99
+12 Monterey       |21.0.0| 21.99.99
 13 Ventura        |22.0.0| 22.99.99
 
-:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software".
+:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, in most cases using `X.9.9` is sufficient. So far, there hasn't been a version of macOS which uses a Kernel that is greater han `X.9.9`. 
 
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
