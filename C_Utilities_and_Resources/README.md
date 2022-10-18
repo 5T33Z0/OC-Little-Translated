@@ -46,7 +46,9 @@ Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 - [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer) – Python Script for removing sensitive data from a config.plist as well as restoring some default settings.
 
 ### Windows
-Suggest some. Otherwise refer to "Cross-Platform" Section.
+- [**CrystalDiskInfo**](https://crystalmark.info/en/software/crystaldiskinfo/) – Great tool for checking the health of hard disks, SSDs and NVMEs.
+- [**GPU-Z**](https://www.techpowerup.com/gpuz/) – Provides useful information about your GPU
+- [**HWiNFO**](https://www.hwinfo.com/) – Great Tool for getting in-depth info about your system and components
 
 ### Web-based applications
 - [**Sanity Checker**](https://sanitychecker.ocutils.me/) (beta) – The popular tool for checking the consistency of OpenCore configs online has returned!
