@@ -14,7 +14,7 @@ This patch is required if pressing the Power or Sleep button causes an instant r
 
 ## Fixing instant wake issues: [`0D/6D Patch`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 
-This patch is for fixing instant wake issues, where the system instantly wakes up which after entering sleep. This is usually caused by component(s)/device(s) prohibiting the system to enter sleep/hibernation mode.
+This patch is for fixing instant wake issues, where the system instantly wakes up which after entering sleep. This is usually caused by components/devices prohibiting the system to enter sleep/hibernation state.
 
 ## Fixing [`AOAC Sleep`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines)
 
