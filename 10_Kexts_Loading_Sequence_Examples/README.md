@@ -28,23 +28,23 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 
 |macOS |MinKernel |MaxKernel
 |-----:|---------:|--------:|
-10.4 Tiger        |8.0.0| 	8.99.99
-10.5 Leopard      |9.0.0| 	9.99.99
+10.4 Tiger        |8.0.0| 8.99.99
+10.5 Leopard      |9.0.0| 9.99.99
 10.6 Snow Leopard |10.0.0| 10.99.99
 10.7 Lion         |11.0.0| 11.99.99
-10.8 Mountain Lion|12.0.0|	12.99.99
+10.8 Mountain Lion|12.0.0| 12.99.99
 10.9 Mavericks    |13.0.0| 13.99.99
-10.10 Yosemite    |14.0.0|	14.99.99
-10.11 El Capitan  |15.0.0|	15.99.99
-10.12 Sierra      |16.0.0|	16.99.99
-10.13 High Sierra |17.0.0|	17.99.99
-10.14 Mojave      |18.0.0|	18.99.99
-10.15 Catalina    |19.0.0|	19.99.99
+10.10 Yosemite    |14.0.0| 14.99.99
+10.11 El Capitan  |15.0.0| 15.99.99
+10.12 Sierra      |16.0.0| 16.99.99
+10.13 High Sierra |17.0.0| 17.99.99
+10.14 Mojave      |18.0.0| 18.99.99
+10.15 Catalina    |19.0.0| 19.99.99
 11 Big Sur        |20.0.0| 20.99.99
-12 Monterey       |21.0.0|	21.99.99
+12 Monterey       |21.0.0| 21.99.99
 13 Ventura        |22.0.0| 22.99.99
 
-:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software".
+:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, in most cases using `X.9.9` is sufficient. So far, there hasn't been a version of macOS which uses a Kernel that is greater han `X.9.9`. 
 
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
@@ -70,7 +70,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 - `AirportBrcomFixup`:
 	- Is for enabling WiFi
 	- Contains 2 additional kexts as Plugins (only one of them should be enabled at any time):
-		- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 to 12.1)
+		- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 and newer)
 		- `AirPortBrcm4360_Injector.kext` (compatible with macOS 10.8 to 10.15)
 - For Bluetooth, various kexts and combinations are necessary:
 	- `BlueToolFixup.kext`: For macOS 12 and newer. Contains Firmware Data (MinKernel 21.0 and newer only).
@@ -79,11 +79,18 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.6.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 
+:warning: **CAUTION**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers and needs to be installed to `/System/Library/Extensions` (/Library/Extensions on 10.11 and later) instead. In this case, `BrcmFirmwareData.kext`is not required.
+
 ### Example 8: Intel WiFi and Bluetooth 
-![config8](https://user-images.githubusercontent.com/76865553/140813902-8f5cedb0-4fd6-4736-ab69-c5e6f3a63fdb.png)
+![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
+
+For macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
+
 Most Intel Desktop configs will at least contain `Lilu`, `VirtualSMC` (Plugins are optional), `WhateverGreen` and `AppleALC`. This example excludes USB Port, Ethernet and WiFi/BT kexts!
+
 ### Example 9b: Possible Laptop Kext Sequence
 ![config9b](https://user-images.githubusercontent.com/76865553/140829571-525840b9-f7e5-4abb-8cd9-3aa0e31867a9.png)
 This is how a possible sequence of kexts for a Laptop might look like. In this example, the Trackpad requires `VoodooPS2Controller`, WiFi and BT are by Intel and the Ethernet card is from Realtek. Depending on your Laptop components, Kexts 10 to 17 could be something else entirely.

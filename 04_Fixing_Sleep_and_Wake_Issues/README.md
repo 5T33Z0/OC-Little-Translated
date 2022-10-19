@@ -6,7 +6,7 @@ This section contains fixes for resolving common issues related to Sleep and Wak
 
 This is the center piece for fixing most sleep and wake issues and is used in conjunction with other patches in this section. It consists of two components: binary renames and an ACPI Hotfix (SSDT).
 
-Basically, the `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TSS` Methods are renamed to something else. And once any of these methods are triggered by entering sleep (either automatically, by pressing the sleep button or via the  Menu), ***SSDT-PTSWAKTTS*** fetches them and takes care of the rest (in conjunction with additinal opztional SSDTs).
+Basically, the `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TTS` (Transition to State) methods are renamed to something else. And once any of these methods are triggered by entering sleep (either automatically, by pressing the sleep button or via the  Menu), ***SSDT-PTSWAKTTS*** fetches them and takes care of the rest (in conjunction with additional SSDTs).
 
 ## Fixing [`PNP0C0E Sleep`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 
@@ -14,7 +14,7 @@ This patch is required if pressing the Power or Sleep button causes an instant r
 
 ## Fixing instant wake issues: [`0D/6D Patch`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 
-This patch is for fixing instant wake issues, where the system instantly wakes up which is usually caused by some device prohibiting the system to enter sleep/hibernation mode.
+This patch is for fixing instant wake issues, where the system instantly wakes up which after entering sleep. This is usually caused by components/devices prohibiting the system to enter sleep/hibernation state.
 
 ## Fixing [`AOAC Sleep`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines)
 
@@ -28,7 +28,7 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 
 Terminal commanfs for changing settings related to **system power management**, such as  sleep/hibernation.
 
-## :warning: Notes and further Resources
+## Notes and further Resources
 - Before applying any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package. Instead modify them to match your system requirements or generate tailor made ones for your system using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). Doing this can prevent sleep and wake issues altogether. 
 - Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.

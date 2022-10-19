@@ -1,4 +1,4 @@
-# Fixing PNP0C0E Sleep
+# Fixing `PNP0C0E` Sleep
 
 ## Problem description
 
@@ -9,7 +9,7 @@ One of the following methods can fix this problem:
 - Intercept the parameter passed by ACPI and correct it.
 - Convert `PNP0C0E` sleep to `PNP0C0D` sleep.
 
-## PNP0C0E/PNP0C0E Sleep method explained
+## `PNP0C0E`/`PNP0C0D` Sleep methods explained
 
 - **ACPI Specifications**:
 	- `PNP0C0E` &rarr; Hardware ID of Sleep Button Device `SLPB`
@@ -40,9 +40,9 @@ One of the following methods can fix this problem:
 
 ## Solution
 
-### 3 Associated Patches
+3 Associated Patches:
 
-- ***SSDT-PTSWAK***: define variables `FNOK` and `MODE` to capture changes in `FNOK`. See [**PTSWAK Comprehensive Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
+1. ***SSDT-PTSWAKTTS***: defines variables `FNOK` and `MODE` to capture changes in `FNOK`. See [**PTSWAK Comprehensive Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
 	- `FNOK` indicates the key state:  
 		- `FNOK` = `1`: Sleep button is pressed
 		- `FNOK` = `0`: After pressing the sleep button again or the machine is woken up
@@ -50,24 +50,22 @@ One of the following methods can fix this problem:
 		- `MODE` = `1`: `PNP0C0E` sleep
 		- `MODE` = `0`: `PNP0C0D` sleep
 
-:bulb: **NOTE**: Set `MODE` according to your needs, but do not change `FNOK`!
+	:bulb: **NOTE**: Set `MODE` according to your needs, but do not change `FNOK`!
 
-- ***SSDT-LIDpatch*** : Capture `FNOK` changes
+2. ***SSDT-LIDpatch*** : Captures `FNOK` changes
 
   	If `FNOK` = `1`, the current state of the cover device returns `Zero`.  
   	If `FNOK` = `0`, the current state of the lid device returns to the original value
 
-  **NOTE**: `PNP0C0D` device name and path should be consistent with ACPI.
+3. ***Sleep Button Patch***: When the button is pressed, make `FNOK` = `1` and perform the corresponding operation according to different sleep modes
 
-- ***Sleep Button Patch***: When the button is pressed, make `FNOK` = `1` and perform the corresponding operation according to different sleep modes
+### Description of the two Sleep Modes
 
-**NOTE**: `PNP0C0D` device name and path should be the same as in the `DSDT`.
+#### `MODE` = `1`: `PNP0C0E` sleep. 
+When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1` ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
 
-#### Description of the two Sleep Modes
-
-- `MODE` = `1`: When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1` ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
-
-- `MODE` = `0`: When the sleep button is pressed, in addition to completing the above process, ***SSDT-LIDpatch*** also catches `FNOK=1`, `_LID` return to `Zero` and executes `PNP0C0D` sleep. After waking up, `FNOK` returns to `0`, which completes the `PNP0C0D` sleep and wake cycle.
+#### `MODE` = `0`: `PNP0C0D` sleep
+When the sleep button is pressed, in addition to completing the above process, ***SSDT-LIDpatch*** also catches `FNOK=1`, `_LID` return to `Zero` and executes `PNP0C0D` sleep. After waking up, `FNOK` returns to `0`, which completes the `PNP0C0D` sleep and wake cycle.
 
 The following are the main contents of ***SSDT-LIDpatch***:
 
@@ -76,11 +74,11 @@ Method (_LID, 0, NotSerialized)
 {
     if(\_SB.PCI9.FNOK==1)
     {
-        Return (0) /* 返回 Zero, 满足 PNP0C0D 睡眠条件之一 */
+        Return (0) /*If FNOK is 1, the Return Value is 0, so the PNP0C0D sleep conditions is met*/
     }
     Else
     {
-        Return (\_SB.LID0.XLID()) /* 返回原始值 */
+        Return (\_SB.LID0.XLID()) /*Returns the original value*/
     }
 }
 ```
@@ -137,8 +135,8 @@ Else /* PNP0C0D sleep */
 
 ## Fixing `PNP0C0E` Sleep on other machines
 
-- Use patch: ***SSDT-PTSWAK***; 
-	- rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See "PTSWAK Comprehensive Extension Patch" for more details. 
+- Add ***SSDT-PTSWAKTTS*** 
+	- rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See [**PTSWAK Sleep and Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for instructions. 
 	- Modify `MODE` to suit your needs.
 - Use patch: ***SSDT-LIDpatch***; rename: `_LID` to `XLID`.
 	- Note: `PNP0C0D` device name and path should be the same as ACPI.

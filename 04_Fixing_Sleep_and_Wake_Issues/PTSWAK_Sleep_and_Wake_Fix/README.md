@@ -2,7 +2,7 @@
 
 ## Description
 
-By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition to State) methods and redfining them via `SSDT-PTSWAKTTS`, problems with sleep and wake can be fixed on certain machines.
+By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition to State) methods and redefining them via `SSDT-PTSWAKTTS`, problems with sleep and wake can be fixed on certain machines.
 
 ***SSDT-PTSWAKTTS*** is an integrated patch which provides a framework with the following features:
 

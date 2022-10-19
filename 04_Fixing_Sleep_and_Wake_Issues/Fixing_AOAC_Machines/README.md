@@ -50,7 +50,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 - Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 - Enabling `L1` power state &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
 
-## Caution
+## :warning: Caution
 
 - The `AOAC` fix is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
 - Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
