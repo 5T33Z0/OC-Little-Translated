@@ -57,14 +57,13 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 ### Method 1: using `SSDT-GPRW/UPRW`
 This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
 
-1. Add ***SSDT-PTSWAKTTS*** and binary renames. &rarr; See [**PTSWAK Sleep and Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for instructions. 
-2. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, use Method 2.
-3. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
-4. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
-5. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
+1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, use Method 2.
+2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
+3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
+4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
 	- Rename `GPRW to XPRW` or 
 	- Rename `UPRW to XPRW`
-6. Save and reboot.
+5. Save and reboot.
 
 #### Testing and verifying
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute.
@@ -102,10 +101,9 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 }
 ```
 
-1. Add ***SSDT-PTSWAKTTS*** and binary renames. &rarr; See [**PTSWAK Sleep and Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for instructions. 
-2. In your `DSDT`, search for `_PRW`
-3. Look for matches for `_PRW` inside of Devices only
-4. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is *not* `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
+1. In your `DSDT`, search for `_PRW`
+2. Look for matches for `_PRW` inside of Devices only
+3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is *not* `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
 	```asl
 	Device (HDEF)
 	{
@@ -115,9 +113,9 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 			0x04 // 2nd byte, should be 0x00
     	})
 	```
-5. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
-6. Add [**SSDT-PTSWAKTTS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) 
-7. Save and reboot.
+4. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
+5. Add [**SSDT-PTSWAKTTS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) 
+6. Save and reboot.
 
 #### Testing and verifying
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute
