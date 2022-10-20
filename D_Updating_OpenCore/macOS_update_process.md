@@ -7,13 +7,13 @@ Some users are confused by the way the macOS update works. So below the steps of
 	3. Receive Restart Notification
 	4. Press "Restart now" &rarr; you are logged-out and the macOS Installer is prepared (progress bar)
 	5. 1st Restart
-- Stage 2: Installing the Updtae:
-	6. New Entry "Install macOS" is shown in BootPicker
-	7. Select and run it
-	8. macOS Installation starts with progress bar
-	9. 2nd Restart
-	10. "macOS Installer" gone from BootPicker, select macOS disk
-	11. Installation continues
-	12. 3rd reboot
-	13. Select your macOS disk. Installation finishes with progress bar and estimated time.
-	14. Once you reach the Login-in Window, the macOS update is finished.
+- Stage 2: Installing the Updtae
+	1. New Entry "Install macOS" is shown in BootPicker
+	2. Select and run it
+	3. macOS Installation starts with progress bar
+	5. 2nd Restart
+	6. "macOS Installer" gone from BootPicker, select macOS disk
+	7. Installation continues
+	8. 3rd reboot
+	9. Select your macOS disk. Installation finishes with progress bar and estimated "Time remaining".
+	10. Once you reach the Login-in Window, the macOS update is finished.
