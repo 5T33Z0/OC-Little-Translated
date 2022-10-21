@@ -44,7 +44,7 @@ This is especially useful for Bluetooth and WiFi kexts where certain macOS versi
 12 Monterey       |21.0.0| 21.99.99
 13 Ventura        |22.0.0| 22.99.99
 
-:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, in most cases using `X.9.9` is sufficient. So far, there hasn't been a version of macOS which uses a Kernel that is greater han `X.9.9`. 
+:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, in most cases using `X.9.9` is sufficient. So far, there hasn't been a version of macOS which uses a Kernel that is greater than `X.9.9`. 
 
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
