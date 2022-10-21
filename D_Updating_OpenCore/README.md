@@ -5,13 +5,13 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-- [Tools and prerequisites](#tools-and-prerequisites)
+- [1. Tools and Prerequisites](#1-tools-and-prerequisites)
 	- [For users updating from OpenCore 0.6.5 or lower](#for-users-updating-from-opencore-065-or-lower)
-- [OCAT's Different Modes](#ocats-different-modes)
-- [How-to update your `config.plist`](#how-to-update-your-configplist)
-- [Updating OpenCore Files, Drivers, Kexts and Resources](#updating-opencore-files-drivers-kexts-and-resources)
+- [2. Pick an OpenCore variant](#2-pick-an-opencore-variant)
+- [3. Updating/migrating the `config.plist`](#3-updatingmigrating-the-configplist)
+- [4. Updating OpenCore Files, Drivers, Kexts and Resources](#4-updating-opencore-files-drivers-kexts-and-resources)
 	- [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
-- [Sync Window: Release Mode vs. Dev Mode](#sync-window-release-mode-vs-dev-mode)
+- [5. The Sync Window: Release Mode vs. Dev Mode](#5-the-sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
@@ -24,7 +24,7 @@ Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config 
 
 OCAT also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
 
-## Tools and Prerequisites
+## 1. Tools and Prerequisites
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 - :warning: Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong!
@@ -46,23 +46,23 @@ OCAT also integrates new keys/features added to the config.plist into the GUI au
 - When updating from a very low version of OpenCore to the newest, it's wise to rebuild the config based on the latest Sample.plist. You could open both files in 2 ProperTree windows and copy over the existing settings (ACPI, Quirks, Device Properties, etc.).
 - Avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, as Laptops often do.
 
-## OCAT's Different Modes
-OCAT lets you choose and switch between 4 variants and builds of OpenCore to download, install and update by combining settings in the "Edit" menu:
+## 2. Pick an OpenCore variant
+OCAT lets you choose and switch between 4 variants of OpenCore builds to update by combining settings in the "**Edit**" menu:
 
 ![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
 
 The following combinations are possible: 
 
-- **OpenCore Release** (default, no check marks set)
-- **OpenCoe DEBUG** ("Debug" option checked)
-- **OpenCore DEV** (nightly builds, "Dev" option checked)
-- **OpenCore DEV DEBUG** (Debug versions of nightly builds, "Dev" and "Debug" options checked)
+- **OpenCore Release** &rarr; Default, no check marks set. Downloads the lates official Build of OpenCore
+- **OpenCoe DEBUG** &rarr; "Debug" option checked. Downloads the Debug Version of OpenCore
+- **OpenCore DEV** &rarr; For nightly builds, "Dev" option checked. Downloads the latest nightly build of OpenCore
+- **OpenCore DEV DEBUG** &rarr; "Dev" and "Debug" options checked. Downloads the latest nightly build of the OpenCore Debug Version.
 
-If you switch from the default variant of OpenCore to any other, the displayed OC version may drop back to a lower number. That's because the selected variant of OpenCore is not present in the Database yet. In this case you just need to download the latest version from the Sync window. See &rarr; "Fixing 'Development version database does not exist' issue" for details.
+If you switch from the default variant of OpenCore to any other, the displayed OC version may drop back to a lower number. That's because the selected variant of OpenCore is not present in the Database yet. In this case you just need to download the latest version from the Sync window. See &rarr; [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error) for details.
  
-For Kexts, you can also choose between Release and DEV builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
+For Kexts, you can also choose between `Release` and `DEV` builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
 
-## How-to update your `config.plist`
+## 3. Updating/migrating the `config.plist`
 1. Run OCAT, check for Updates (Help > Update Check)
 2. Mount your ESP (select Edit > MountESP) or (⌘+M)
 3. Highlight your `config.plist` and create a duplicate as a backup (⌘+D)
@@ -79,7 +79,7 @@ For Kexts, you can also choose between Release and DEV builds in the Sync window
 
 **NOTES**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
-## Updating OpenCore Files, Drivers, Kexts and Resources
+## 4. Updating OpenCore Files, Drivers, Kexts and Resources
 
 To update OpenCore files and Kexts, do the following:
 
@@ -98,7 +98,7 @@ The latest update of OCAT introduced updating Kexts to nightly builds from Dorta
 
 - In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
-## Sync Window: Release Mode vs. Dev Mode
+## 5. The Sync Window: Release Mode vs. Dev Mode
 As mentioned previously, the Sync Window looks different depending on the selected mode.
 
 ### Release Mode
@@ -119,12 +119,12 @@ Alternatively, you can click on "Import" to open a downloaded `.zip` containing 
 
 ![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
 
-This error occurs when opening a `config.plist` which was created for a different/newer version of OpenCore which is not present in the Database yet. Do the following to fix it:
+This error occurs when opening a `config.plist` which was created for a different/newer version of OpenCore which is not present in the Database yet. Do the following to get rid of the error:
 
-1. Open the "Upgrade OpenCore and Kext" Window
+1. Click on "**Edit**" and select "**Upgrade OpenCore and Kext**" (or click on the symbol).
 2. Download the lasted version of OpenCore. Depending on the Mode OCAT is currently running in, the process differs.
-	- In Release mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
-	- In Dev Mode: select either "Get OpenCore" (or import a zip file of the latest build) 
+	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
+	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build) 
 3. It will download and integrate the latest version of OpenCore into the database
 4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
