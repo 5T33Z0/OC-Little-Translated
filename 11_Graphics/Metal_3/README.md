@@ -18,7 +18,7 @@
 - [3. Obtaining AAPL,slot-name for iGPU and GPU](#3-obtaining-aaplslot-name-for-igpu-and-gpu)
 	- [Method 1: using Hackintool](#method-1-using-hackintool)
 	- [Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)](#method-2-calculating-aaplslot-name-manually-for-advanced-users)
-	- [ADDENDUM](#addendum)
+	- [Addendum](#addendum)
 - [4. Verifying and Troubleshooting](#4-verifying-and-troubleshooting)
 - [5. Shortcut: Using a defaults-write command](#5-shortcut-using-a-defaults-write-command)
 - [Credits and Resources](#credits-and-resources)
@@ -54,9 +54,9 @@ From what I understand, the "GPU" Tab only appears if your system has *both* an 
 
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
-- [**XPlist**](https://github.com/ic005k/Xplist) or PlistEditPro to copy keys from one .plist file to another
-- [**metalgpu**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) for checking metal support of iGPU and GPU in macOS 13 (download and unzip)
-- [**VDADecoderChecker**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/VDADecoderChecker.zip?raw=true) for checking Hardware Acceleration is working (download and unzip)
+- [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy keys from one .plist file to another
+- [**metalgpu**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/metalgpu.zip?raw=true) Script for checking Metal 3 support (iGPU/dGPU) in macOS Ventura
+- [**VDADecoderChecker**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU_Tab/VDADecoderChecker.zip?raw=true) for checking if Hardware Acceleration is working
 - WhateverGreen's [**Intel HD Framebuffer Guide**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 - [**Big/Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html#littleendian) (online)
 
@@ -66,7 +66,7 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 
 **Example**: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends Framebuffer `07009B3E`. But if you compare this value with Whatevergreen's Intel HD Graphics FAQ, the recommended Framebuffer is `0x3E9B0007`. It's the same framebuffer just with a different Endianness.
 
-So when implementing data from the Intel HD Graphics FAQ into your config, such as `AAPL,ig-platform-id`, make sure to convert it to little Endian first using the converter listed above. The inverted principle applies when trying to find info about a framebuffer you are using in your config.plist: convert it to Big Endian and then paste it as a search term into the Intel HD Graphics FAQ to find it.
+:bulb: So when implementing data from the Intel HD Graphics FAQ into your config, such as `AAPL,ig-platform-id`, make sure to convert it to Little Endian first using the converter listed above. The inverted principle applies when trying to find info about a framebuffer you are using in your config.plist: convert it to Big Endian and then paste it as a search term into the Intel HD Graphics FAQ to find it.
 
 ## 2. Checking if you need this fix
 1. Checking if "GPU" Tab is present in Activity Monitor
