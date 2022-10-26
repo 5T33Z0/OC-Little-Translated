@@ -7,7 +7,7 @@ Unfortunately, macOS is not very clever when it comes to remembering the last us
 
 This SSDT disabled the `HDAU` audio device inside of AMD GPUs in macOS, so that it can no longer be selected. But you probably have to adjust the `External` reference, `Scope` and device name to your requirements.
 
-⚠️ **CAUTION**: In [**cases**](https://www.reddit.com/r/hackintosh/comments/wu4pyv/help_failed_to_block_applegfxhdakext_with/) where the ACPI path of the GPU is not picked up by the IO Registry because it's behind a bridge device and the terminal searches don't return any results, this patch is not for you!
+⚠️ **CAUTION**: In [**cases**](https://www.reddit.com/r/hackintosh/comments/wu4pyv/help_failed_to_block_applegfxhdakext_with/) where the GPU not deteced by macOS because it sits behind an intermediate PCI bridge without an ACPI path assigned to it, you need to add a `BRG0` devie via [**`SSDT-BRG0`**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-BRG0.dsl)!
 
 ## Adjusting the SSDT
 - Open `SSDT-RADEON_HDAU-disable.aml`. You may have to adjust the `External` reference and `Scope` entries:</br>![RDNpci](https://user-images.githubusercontent.com/76865553/189613476-eea3b5d7-21ac-4ec1-be16-68526a70ad03.png)
