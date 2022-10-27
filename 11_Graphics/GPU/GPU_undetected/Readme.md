@@ -14,7 +14,7 @@ In this case, you cannot you need to add `SSDT-BRG0` so that Properties for the 
 - Run IORegustryExplorer
 - Switch View to `IODeviceTree` (⌘5)
 - Search for `GFX0` Device
-- If it sits behind `pci-bridge@…` then you need a fix
+- If it sits behind a `pci-bridge@…` then you need a fix
 - Open `SSDT-BRG0.dsl`
 - Copy the raw text into maciASL
 - Adjust the ACPI path to your needs
