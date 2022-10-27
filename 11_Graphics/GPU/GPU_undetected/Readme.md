@@ -4,7 +4,7 @@
 
 If your macOS-compatible AMD GPU works fine in Windows but is not detected by macOS it's possible that your `GFX0` device is sitting behind an intermediate PCI bridge without an ACPI device name assigned to it, as in this example:
 
-![nobrige](https://user-images.githubusercontent.com/76865553/198371664-91262db3-3583-4825-8a63-cbac2f120b77.png)
+![nobrigee](https://user-images.githubusercontent.com/76865553/198371857-78f3e02a-6298-4aae-bfea-b49d4fc75839.png)
 
 In this case, you cannot you need to add `SSDT-BRG0` so that Properties for the devices behind the bridge can be assigned:  
 
