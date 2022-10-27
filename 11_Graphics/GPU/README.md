@@ -6,6 +6,7 @@ In general, please refer to Dortania's [GPU Buyer's Guide](https://dortania.gith
 - [AMD Compatibility Chart](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
 - [Enabling (Big) Navi Cards](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)
 - [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
+- [Enabling undetected AMD GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)
 - [Legacy AMD Cards and macOS](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300)
 
 ## NVIDIA GPU Support †
@@ -20,7 +21,7 @@ And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. H
 ### Nvidia support via OpenCore Legacy Patcher (OCLP)
 GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
 
-- GT 710 (GK107 Kepler) (mostly for fun ;p)
+- GT 710 (GK107 Kepler)
 - Quadro K620 (GM107 Maxwell)
 - GTX 860M (GM107 Maxwell)
 - GTX 1050Ti (GP107 Pascal)
