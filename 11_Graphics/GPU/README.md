@@ -20,7 +20,7 @@ And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. H
 ### Nvidia support via OpenCore Legacy Patcher (OCLP)
 GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
 
-- GT 710 (GK107 Kepler) (mostly for fun ;p)
+- GT 710 (GK107 Kepler)
 - Quadro K620 (GM107 Maxwell)
 - GTX 860M (GM107 Maxwell)
 - GTX 1050Ti (GP107 Pascal)
