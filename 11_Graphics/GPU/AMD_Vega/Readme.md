@@ -4,7 +4,7 @@ This SSDT is derived from analyzing the .ioireg file of an iMacPro1,1. It's a si
 
 ## Instructions
 
-- Download `SSDT-Vega56_64.aml` 
+- Download [**`SSDT-Vega56_64.aml`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Vega/SSDT-Vega56_64.aml?raw=true) 
 - Add it to `EFI/OC/ACPI`and your config.plist
 - Use SMBIOS `iMacPro1,1`
 - Save and reboot
