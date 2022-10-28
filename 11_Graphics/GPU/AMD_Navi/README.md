@@ -57,66 +57,11 @@ Scope (\_SB)
                     Device (GFX0)
                     {
                         Name (_ADR, Zero)  // _ADR: Address
-                        Name (_SUN, One)  // _SUN: Slot User Number
-                        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                        {
-                            If ((Arg2 == Zero))
-                            {
-                                Return (Buffer (One)
-                                {
-                                     0x03                                             // .
-                                })
-                            }
-
-                            Return (Package (0x02)
-                            {
-                                "hda-gfx", 
-                                Buffer (0x0A)
-                                {
-                                    "onboard-2"
-                                }
-                            })
-                        }
                     }
 
                     Device (HDAU)
                     {
                         Name (_ADR, One)  // _ADR: Address
-                        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                        {
-                            If ((Arg2 == Zero))
-                            {
-                                Return (Buffer (One)
-                                {
-                                     0x03                                             // .
-                                })
-                            }
-
-                            Return (Package (0x0A)
-                            {
-                                "AAPL,slot-name", 
-                                "Built In", 
-                                "device_type", 
-                                Buffer (0x13)
-                                {
-                                    "Controller HDMI/DP"
-                                }, 
-
-                                "name", 
-                                "High Definition Multimedia Interface", 
-                                "model", 
-                                Buffer (0x25)
-                                {
-                                    "High Definition Multimedia Interface"
-                                }, 
-
-                                "hda-gfx", 
-                                Buffer (0x0A)
-                                {
-                                    "onboard-2"
-                                }
-                            })
-                        }
                     }
                 }
             }
