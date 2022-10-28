@@ -1,4 +1,4 @@
-//SSDT-Fot ALL AMD GPU RX Series 5000\6000 XT and Vega 56\64
+//SSDT ALL AMD GPU RX Series 5000\6000 XT and Vega 56\64
 DefinitionBlock ("", "SSDT", 2, "HACK", "NAVI", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
@@ -59,4 +59,3 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "NAVI", 0x00000000)
         }
     }
 }
-
