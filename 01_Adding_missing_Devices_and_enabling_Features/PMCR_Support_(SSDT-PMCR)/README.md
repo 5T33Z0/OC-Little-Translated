@@ -1,6 +1,6 @@
 # Add PMCR Device (`SSDT-PMCR`)
 ## About
-`PMCRR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets so the system boots (see "Technical Background" for details).
+`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets so the system boots (see "Technical Background" for details).
 
 :warning: Mandatory for 390-series mainboards (optional for 400/500/600-series chipsets)!
 
