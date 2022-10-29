@@ -1,13 +1,17 @@
 # Add PMCR Device (`SSDT-PMCR`)
-## About
-`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets so the system boots (see "Technical Background" for details).
 
-:warning: Mandatory for 390-series mainboards (optional for 400/500/600-series chipsets)!
+## About
+`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets to enable NVRAM support so the system boots (see "Technical Background" for details).
+
+### Affected Chipsets/Mainboards
+
+- :warning: Mandatory for 390-series mainboards
+- Optional for 400/500/600-series (for cosmetics)
+- Users with 100 and 200-series mainboards can use [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!
 
 ### Instructions
 
-- Add ***SSDT-PMCR.aml***
-- **For**: 300/400/500/600-series mainboards (100 and 200-series Boards use [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!)
+- Add ***SSDT-PMCR.aml*** to `EFI/OC/ACPI` and config.plist
 
 **CAUTION**: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 
@@ -21,7 +25,7 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 > 
 > PMCR device has nothing to do to LPC bus, but is added to its scope for faster initialization. If we add it to PCI0, where it normally exists, it will start in the end of PCI configuration, which is too late for NVRAM support.
 
-**CREDITS**
+## Credits
 
-- Pleasecallmeofficial: who discovered this patch
-- Acidathera for improving the SSDT sample.
+- Pleasecallmeofficial who discovered this patch
+- Acidathera for improving the SSDT.
