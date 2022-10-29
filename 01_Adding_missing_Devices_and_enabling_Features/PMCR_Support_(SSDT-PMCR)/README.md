@@ -7,7 +7,7 @@
 ### Instructions
 
 - Add ***SSDT-PMCR.aml***
-- **For**: 300/400/500/600-series mainboards (100 and 200-series Boards use **SSDT-PPMC** instead!)
+- **For**: 300/400/500/600-series mainboards (100 and 200-series Boards use [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!)
 
 **CAUTION**: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 
