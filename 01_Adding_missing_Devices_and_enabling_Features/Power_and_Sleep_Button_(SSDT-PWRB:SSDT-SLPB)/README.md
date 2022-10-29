@@ -27,4 +27,5 @@ In **DSDT**, search for:
         }
     }
     ```
+
 :warning: **CAUTION:** When using the any of the included SSDTs, ensure that the PCI paths are consistent with the ones used in the original DSDT!
