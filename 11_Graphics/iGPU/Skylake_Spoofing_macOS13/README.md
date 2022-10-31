@@ -3,14 +3,14 @@
 
 With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated graphics on Skylake CPUs, you need to spoof Kaby Lake Framebuffers. The example below is from an i7 6700K.
 
-Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13: 
+Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desktop): 
 
 - [**Download**](https://dortania.github.io/builds/?product=Lilu&viewall=true) the latest version of Lilu from Dortania's Build Repo.
 - [**Download**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true) the latest version of Whatevergreen as well.
 - Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
-- Add/modify `DeviceProperties` for HD 530 (HD 520 might need different values, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
+- Add/modify `DeviceProperties` for HD 530 (HD 520 and Laptops might need different values. Refer to the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
 	|Key Name                |Value     | Type
 	-------------------------|----------|:----:
 	AAPL,ig-platform-id      | 00001259 | Data
