@@ -24,4 +24,3 @@ The `HEVC` decoder on the other hand works fine with an SMBIOS that supports iGP
 ## Credits and Resources
 
 - FishyFlower for his [explanations](https://github.com/dortania/bugtracker/issues/277)
-- Reddit: [Comet Lake UHD630 w/ 500-series mobos on Big Sur: blackscreen](https://www.reddit.com/r/hackintosh/comments/paypc7/comet_lake_uhd630_w_500series_mobos_on_big_sur/)
