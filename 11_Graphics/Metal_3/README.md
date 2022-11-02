@@ -150,6 +150,5 @@ To disable it, enter
 - [notjosh](https://github.com/notjosh) for the defaults-write command
 - Headkaze for Hackintool
 - Dortania for VDADecoderChecker
-- About [Apple GUC](https://www.reddit.com/r/hackintosh/comments/gbg5ms/oopencores_igfxfw_and_apples_guc/)
 - [Test](https://www.insanelymac.com/forum/topic/352523-imac191headless-vs-imacpro11-video-encoding-performance-test): iMac19,1 (Headless) vs iMacPro1,1 Video Encoding Performance
 - [Issues](https://github.com/acidanthera/bugtracker/issues/800) related to the `igfxfw=2` property 

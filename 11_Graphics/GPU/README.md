@@ -22,13 +22,15 @@ And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. H
 ### Nvidia support via OpenCore Legacy Patcher (OCLP)
 GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
 
-- GT 710 (GK107 Kepler)
-- Quadro K620 (GM107 Maxwell)
-- GTX 860M (GM107 Maxwell)
-- GTX 1050Ti (GP107 Pascal)
-- GT 1030 (GP107 Pascal)
+- GTX 650 (Kepler – GK104)
+- GTX 650 TI Boost (Kepler – GK106)
+- GT 710 (Kepler - GK107)
+- Quadro K620 (Maxwell - GM107)
+- GTX 860M (Maxwell - GM107)
+- GT 1030 (Pascal - GP107)
+- GTX 1050Ti (Pascal - GP107)
 
-**Source**: [reddit](https://www.reddit.com/r/hackintosh/comments/uxz95u/nvidia_web_drivers_running_on_macos_monterey/)
+**Source**: [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/993)
 
 ### Installing NVIDIA Webdrivers in 2022
 
