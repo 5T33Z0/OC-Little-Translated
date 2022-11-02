@@ -1,5 +1,6 @@
 # Using unsupported Board-IDs with macOS 11.3 and newer
-A set of Booter and Kernel patches lifted from OCLP which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs.
+
+OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
 
 ## Use Cases
 1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS.
@@ -18,16 +19,16 @@ A set of Booter and Kernel patches lifted from OCLP which allow installing, boot
 	
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
-**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
+**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
 - Sandy Bridge (need additional SurPlus patches)
 - Ivy Bridge
 - Haswell (partially)
 
-Since this is a pretty new approach, I have to look into a bit more, but I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore). 
+I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running Big Sur and newer. 
 
-## How it works
-**OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick macOS into "thinking" it is running in a Virtual Machine:
+## How this spoof works
+**OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick it into "thinking" it is running in a Virtual Machine:
 
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board ID while the rest of the OS will continue with the original ID.
 >
@@ -35,46 +36,49 @@ Since this is a pretty new approach, I have to look into a bit more, but I am su
 >
 > **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
-This is great, because it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 12 or newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Montereay and newer on otherwise unsupported hardware.
-
-I had a look at the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist) included in OCLP, copied the relevant patches Booter and Kernel patches (and a few others) into my config and tested them. The attached plist contains the patches.
+This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 12 or newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Montereay and newer on otherwise unsupported hardware.
 
 ## Applying the Patches
 :warning: Before applying the patches, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
-- [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/09_Board-ID_VMM-Spoof/BoardIDSkip+VMMPatch.plist.zip?raw=true) and unzip the attached .plist.
-- Open it with a Plist Editor (e.g. ProperTree).
-- Copy the Booter Patches over to your config.plist to the same section and enable them.
-- Do the same for the Kernel Patches. The following need to be enabled:
-	- Reroute kern.hv_vmm_present patch (1)
-	- Reroute kern.hv_vmm_present patch (2)
-	- Force IOGetVMMPresent
-	- Enable additional Kernel patches if required (SurPlus patches for Sandy Bridge for example).
-	- Optinally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [**Content Caching**](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
-- Save the config and reboot.
-- Verify: enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the patch is working.
+- Copy the raw text of the OCLP [config](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) to the clipboard
+- Paste it into ProperTree
+- Copy the entries from `Booter/Patch` over to your config.plist to the same section and enable them.
+- Do the same for entries under `Kernel/Patch`. You need the following:
+	- **"Force FileVault on Broken Seal"** (only required if you are using File Vault)
+	- **"Disable Library Validation Enforcement"** (enable it)
+ 	- **"Reroute kern.hv_vmm_present patch (1)"** (enable it)
+	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** (enable it)
+	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** (enable it)
+	- **"Force IOGetVMMPresent"** (enable it)
+	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
+	- Optionally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+- Save your config and reboot.
+- To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
 
-Enjoy macOS Monterey+ with the correct SMBIOS for your CPU and Updates!
+Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates! 
+
+### Notes
+After upgrading macOS, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
 
 ## About the Patches
 
 ### Booter Patches
-- **Patch 0**: Skips Hardware Board ID Check (enabled)
-- **Patch 1**: Reroutes Hardware Board-ID check to OpenCore (enabled)
+
+- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
+- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
 
 ### Kernel Patches
-In the .plist, only 3 of the 6 kernel patches are enabled by default. Enable additional one as needed. Here's what they do:
-
-- **Patch 0**: disables [Library Validation Enforcement](https://www.naut.ca/blog/2020/11/13/forbidden-commands-to-liberate-macos/). (disabled)
-- **Patches 1 and 2**: SurPlus patches for Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
-- **Patch 3 to 5**: Enable Board-ID spoof via VMM in macOS 12.0.1+ (enabled) &rarr; Allows booting, installing and updating macOS 12.x with unsupported Board-ID and SMBIOS
+- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
+- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
+- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
+- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
 
 **NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 <details>
-<summary><strong>Background Info: My test</strong> (Click to show content!)</summary>
+<summary><strong>My test</strong> (Click to show content!)</summary>
 
-## Testing
 I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
 ![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
@@ -97,8 +101,8 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes and Credits
-- Chris1111 for [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) and [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey)
-- Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
+- Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
+- Chris1111 for [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) and [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey)
 - parrotgeek1 for [**VMM Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/4a8f61a01da72b38a4b2250386cc4b497a31a839/payloads/Config/config.plist#L1222-L1281)
 - reenigneorcim for [**SurPlus**](https://github.com/reenigneorcim/SurPlus)
