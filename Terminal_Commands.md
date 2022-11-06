@@ -152,6 +152,12 @@ ioreg -rxn "CPU0@0"
 ```shell
 pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
 ```
+Alternative Connmand (searches in syslog):
+
+```shell
+log show --style syslog | fgrep "Wake reason"
+```
+
 **Currently used SMBIOS**:</br>
 
 ```shell

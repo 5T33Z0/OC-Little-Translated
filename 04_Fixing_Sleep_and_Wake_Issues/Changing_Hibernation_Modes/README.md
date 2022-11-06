@@ -40,3 +40,4 @@ Please note that hibernatefile may only point to a file located on the root volu
 - If you feel uncomfortable using the Terminal, you can also use Hackintool to check and change the `hibernatemode`. Simply click on the "Power" Tab and there you find all the currently set parameters.
 - For a more in-depth look into the subject matter, I recommend this article: [Power Management in detail using pmset](https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/)
 - For Sleep and wake issue in general, refer to [this article](https://eclecticlight.co/2019/05/09/tackling-sleep-and-wake-problems/)
+- A useful command line tool for prohibiting the system from wakimg up involuntarily is [Sleepwatcher](https://www.bernhard-baehr.de/) by Bernhard Baehr.
