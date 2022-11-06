@@ -65,8 +65,7 @@ For Kexts, you can also choose between `Release` and `DEV` builds in the Sync wi
 ## 3. Updating/migrating the `config.plist`
 1. Run OCAT, check for Updates (Help > Update Check)
 2. Mount your ESP (select Edit > MountESP) or (⌘+M)
-3. Highlight your `config.plist` and create a duplicate as a backup (⌘+D)
-4. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
+3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
 	![Warning](https://user-images.githubusercontent.com/76865553/140640760-8cafb9bd-3b4a-4681-8471-47443dd49c6e.png)
 4. Click on the warning symbol to see the errors: </br>
 	![Warning_details](https://user-images.githubusercontent.com/76865553/140640767-5e6de7f0-2309-42cf-9b42-099ddb3296d5.png)
@@ -83,20 +82,19 @@ For Kexts, you can also choose between `Release` and `DEV` builds in the Sync wi
 
 To update OpenCore files and Kexts, do the following:
 
-1. Click on the `Sync` button (looks similar to a Recycle symbol):</br>
-	![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
+1. Click on the `Sync` button (looks similar to a Recycle symbol):</br>![Sync_Button](https://user-images.githubusercontent.com/76865553/140640906-a3ba1ccd-157d-43a4-af51-12fa4ffbf80d.png)
 2. In the next dialog window, you can see which files will be updated. Green = up to date, Red = outdated, Gray = link to repo is missing (add it to "Database" > "Kext Update URL"). Besides the displayed version (left = available online, right = currently used), md5 checksums also help you to determine if it's the same file or a different one:</br>![SyncWinel01](https://user-images.githubusercontent.com/76865553/179932059-9820f53d-6666-429b-a447-fb2b60175bca.png)
 3. Mark the Checkboxes for Kexts you want to update (otherwise they will be ignored) and click on "Check Kexts Updates Online". This will download the latest available kexts. If some kext can't be found, add it's github URL to the Database "Kext Url" section and scan again.
 4. Click on "Update" to apply the new Kexts. 
 5. In the "OpenCore" list, select the OpenCore files, drivers you want to update and click on "Star Sync". The same color coding applies!
-6. You will be notified once it's done:</br>
-	![syncdone2](https://user-images.githubusercontent.com/76865553/140641897-c8f26c31-bb4c-47ae-be1f-fa8c1e0163a0.png)
-t. Done – Config OpenCore, Drivers, Kexts and Resources are up to date now.
+6. You will be notified once it's done:</br>![syncdone2](https://user-images.githubusercontent.com/76865553/140641897-c8f26c31-bb4c-47ae-be1f-fa8c1e0163a0.png)
+
+Config OpenCore, Drivers, Kexts and Resources are up to date now. The next time you reboot the updated files will be used.
 
 ### Updating Kexts to Nightly Builds
-The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier:
+The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier. In the Sync window, enable the "DEV" option:
 
-- In the Sync window, enable the "DEV" option:</br>![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
+![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
 ## 5. The Sync Window: Release Mode vs. Dev Mode
 As mentioned previously, the Sync Window looks different depending on the selected mode.
@@ -133,3 +131,4 @@ This error occurs when opening a `config.plist` which was created for a differen
 - If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#settings-for-mindateminversion) 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
+- A nice touch when updating kexts is that OCAT writes the version number of a kext into the comments section so you don't have keep track of it.
