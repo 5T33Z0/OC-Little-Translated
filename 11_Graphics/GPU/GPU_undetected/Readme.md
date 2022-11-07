@@ -18,11 +18,12 @@ In this case, you cannot you need to add `SSDT-BRG0` so that Properties for the 
 - Open `SSDT-BRG0.dsl`
 - Copy the raw text into maciASL
 - Adjust the ACPI path to your needs
-- Export it as .aml
-- Add it to you EFI/OC/ACPI folder and Config
+- Export it as `.aml`
+- Add it to you EFI/OC/ACPI folder and your config.plist
 - Save and reboot
 
 ## Notes, Credits and Resources
-- You may want to incorporate the `BRG0` device into other GPU-related SSDTs, such as the ones in the "AMD Radeon Tweaks" section.
-- Acidanthera for `SSDT-BRG0`
+- Lorys89 for `SSDT-BRG0`
+- You may need to incorporate the `BRG0` device into other GPU-related SSDTs, such as the 
+ones in the "AMD Radeon Tweaks" section.
 - More in-depth explanations: https://github.com/acidanthera/bugtracker/issues/1569
