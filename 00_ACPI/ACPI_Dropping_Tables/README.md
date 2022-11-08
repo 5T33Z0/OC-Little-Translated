@@ -109,7 +109,7 @@ After rebooting, do the following:
 
 ### Example 2: replacing the `DMAR` table by a modified one
 - Dump the ACPI Tables as explained at the beginning
-- Drop the OEM `DMAR` table as explained in "Example 1"
+- Drop the OEM `DMAR` table as explained in [Example 1](#example-1-dropping-the-dmar-table)
 - Modify the OEM `DMAR` Table:
 	- Open it in maciASL
 	- In this case we delete the `Reserved Memory Regions`:</br>
