@@ -45,6 +45,55 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "SATA", 0x00001000)
     }
 }
 ```
+
+### Example 2: Rename SATA Controller from `SAT1` to `SATA` (Multiboot)
+Renaming `SAT1` to `SATA` is not a requirement (it's purely cosmetic), but it's an easy to understand example (read the comments indicated by `//` for explanations):
+
+```asl
+DefinitionBlock ("", "SSDT", 2, "CpyPst", "SATA", 0x00001001)
+{
+    External (_SB_.PCI0, DeviceObj)
+    External (_SB_.PCI0.SAT0, DeviceObj)
+
+    Scope (\_SB)
+    {
+        Scope (PCI0)
+        {
+            Scope (SAT0)
+            {
+                Method (_STA, 0, NotSerialized)  // _STA: Status
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Return (Zero)		 // Cease device
+                    }
+                    Else			 // If other Othan macOS...
+                    {
+                        Return (0x0F)		 // Not cease
+                    }
+                }
+            }
+
+            Device (SATA)
+            {
+                Name (_ADR, 0x00170000)  // _ADR: Address
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    If (_OSI ("Darwin"))	 // If the macOS Kernel is running
+                    {
+                        Return (0x0F)		 // Rename in macOS
+                    }
+                    Else			 // If other Othan macOS...
+                    {
+                        Return (Zero)		 // Do not Rename
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 #### Testing and verifying
 - Make sure you have a backup of your working EFI folder on a FAT32 formatted flash drive
 - Export the SSDT as .aml file
