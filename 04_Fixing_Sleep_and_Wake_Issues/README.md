@@ -10,7 +10,7 @@ Basically, the `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TTS` (Transition t
 
 ## Fixing [`PNP0C0E Sleep`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 
-This patch is required if pressing the Power or Sleep button causes an instant reset or shutdown. In order for this to work, `SSDT-PTSWAKTTS.aml` is required as well. Requires  ***SSDT-PTSWAKTTS***.
+This patch is required if pressing the Power or Sleep button causes an instant reset or shutdown. In order for this to work, it must be used in conjunction with ***SSDT-PTSWAKTTS***.
 
 ## Fixing instant wake issues: [`0D/6D Patch`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 
