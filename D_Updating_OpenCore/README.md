@@ -51,14 +51,14 @@ OCAT lets you choose and switch between 4 variants of OpenCore builds to update 
 
 ![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
 
-The following combinations are possible: 
+The following 4 combinations are possible: 
 
-- **OpenCore Release** &rarr; Default, no check marks set. Downloads the lates official Build of OpenCore
-- **OpenCoe DEBUG** &rarr; "Debug" option checked. Downloads the Debug Version of OpenCore
-- **OpenCore DEV** &rarr; For nightly builds, "Dev" option checked. Downloads the latest nightly build of OpenCore
-- **OpenCore DEV DEBUG** &rarr; "Dev" and "Debug" options checked. Downloads the latest nightly build of the OpenCore Debug Version.
+- **No check marks set** &rarr; Downloads the current official "Release" build of OpenCore (Default)
+- **OpenCoe DEBUG** selected &rarr; Downloads the current "Debug" build
+- **OpenCore DEV** selected &rarr; Downloads the latest nightly "Release" build
+- **OpenCore DEBUG + OpenCore DEV** selected &rarr; Downloads the latest nightly "Debug" build.
 
-If you switch from the default variant of OpenCore to any other, the displayed OC version may drop back to a lower number. That's because the selected variant of OpenCore is not present in the Database yet. In this case you just need to download the latest version from the Sync window. See &rarr; [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error) for details.
+If you switch from the default variant of OpenCore to any other, the displayed OC version may drop back to a lower version. That's because the files for the selected variant of OpenCore are not present in OCAT's Database yet. In this case you just need to download the latest version from the "Help" menu by selecting "Donwload Upgrade Packages". See &rarr; [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error) for more details.
  
 For Kexts, you can also choose between `Release` and `DEV` builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
 
