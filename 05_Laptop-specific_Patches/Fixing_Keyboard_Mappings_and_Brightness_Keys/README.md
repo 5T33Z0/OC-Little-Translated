@@ -34,12 +34,12 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 
 #### Method 1: Using Terminal
 - Download `ioio` 
-- Make it excutable (if it isn't already). In terminal, enter `chmod +x`, drag in `ioio` and hit `Enter`
+- Make it excutable (if it isn't already). In Terminal, enter `chmod +x`, drag in `ioio` and hit <kbd>Enter</kbd>
 - Next, enter `ioio -s ApplePS2Keyboard LogScanCodes 1` to enable log scan codes (set to `0` to disable the logging again).
     
 #### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
 - Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
-- Next, browse Contents > Plugins 
+- Next, browse to Contents/Plugins 
 - Right-click on `VoodooPS2Keyboard.kext` and select "Show Package Contents"
 - Browse `Contents` and open `Info.plist` with a plist Editor
 - Search for **`LogScanCodes`** and change it to **`1`** (once you're done, change it back to **`0`** again!)

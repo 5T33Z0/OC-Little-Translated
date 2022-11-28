@@ -3,7 +3,7 @@
 ## Description
 Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** **`PNP0103`** to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is).
 
-In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **`PNP0B00`** or **TIMR** **`PNP0100`** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
+In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **(`PNP0B00`)** or **TIMR** **(`PNP0100`)** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
 But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from Intel's 6th Gen platform and is only present for backward compatibility with older Windows versions. If you use 7th Gen Intel Core CPU or newer with Windows 8.1+, HPET (High Precision Event Timer) is no longer present in Device Manager (the driver is unloaded).
 
@@ -39,7 +39,7 @@ The manual patching method described below is rather complicated, because the pa
 **HOW TO:**
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Pres "D", drag in your system's DSDT and hit "ENTER"
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>.
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated `SSDTs` to EFI/OC/ACPI

@@ -114,9 +114,9 @@ With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup)
 - Download and unpack the Script
 - Run Terminal
 - Type `cd`, hit space
-- Drop the "PCILookup-master" folder in the terminal window and hit enter 
-- Next, type `python3 main.py` and hit space
-- Drag in the `PCIInfo.txt` and hit enter
+- Drop the "PCILookup-master" folder in the terminal window and hit <kbd>Enter</kbd> 
+- Next, type `python3 main.py` and hit <kbd>Spacebar</kbd>
+- Drag in the `PCIInfo.txt` and hit <kbd>Enter</kbd>
 
 <details>
 <summary><strong>The resulting output is much easier to read and also includes device names:</strong></summary>

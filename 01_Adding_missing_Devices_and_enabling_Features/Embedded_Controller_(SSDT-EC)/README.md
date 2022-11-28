@@ -73,7 +73,7 @@ To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIE
 **HOW TO:**
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Pres "D", drag in your system's DSDT and hit "ENTER"
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit <kbd>Enter</kbd>
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master`Folder along with `patches_OC.plist`.
 5. Copy the generated `SSDTs` to EFI/OC/ACPI and your Config using OpenCore Auxiliary Tools
