@@ -61,6 +61,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 		- **RX6900** &rarr; `ATY,Carswell`
 		- **RX6800** &rarr; `ATY,Belknap`
  		- **RX6600/XT** &rarr; `ATY,Henbury`
+		- **Radeon 7**: `ATY,Donguil`
 		- **RX5700** &rarr; `ATY,Adder`
 		- **RX5500** &rarr; `ATY,Python`
 		- **RX570/580** &rarr; `ATY,Orinoco`
@@ -121,12 +122,15 @@ When using `PP,PP_WorkLoadPolicyMask`:</br>
 When using `PP_WorkLoadPolicyMask`:</br>
 ![PP_](https://user-images.githubusercontent.com/76865553/180637402-c478a12a-86ec-4656-b2f2-ea0c5bba3a9a.png)
 
-## Credits & Resources
-- Acidanthera for `Lilu.kext` and `WhateverGreen.kext`
-- mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+## Credits
+- Acidanthera for Lilu and WhateverGreen.kext
 - Baio1977 for implementing device renames into the mattystonnie SSDTs
+- mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
 - Toleda for `DAGPM.kext`
 - CMMMChris for PowerPlay Table Generators
-- [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
+- hush-vv for [**Radeon VII Device Properties**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/post-2315543)
+
+## Further Resources
 - [**AMD Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
-- [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
+- [**Video Bitrate Test Files**](https://jell.yfish.us/)
+- [**Enabling XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
