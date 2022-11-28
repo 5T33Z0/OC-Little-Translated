@@ -61,7 +61,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 		- **RX6900** &rarr; `ATY,Carswell`
 		- **RX6800** &rarr; `ATY,Belknap`
  		- **RX6600/XT** &rarr; `ATY,Henbury`
-		- **Radeon 7**: `ATY,Donguil`
+		- **Radeon 7** &rarr; `ATY,Donguil`
 		- **RX5700** &rarr; `ATY,Adder`
 		- **RX5500** &rarr; `ATY,Python`
 		- **RX570/580** &rarr; `ATY,Orinoco`
