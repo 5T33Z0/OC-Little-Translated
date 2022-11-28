@@ -7,11 +7,11 @@ In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop bu
 - Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it for batch convert `.aml` files to `.dsl`.
 - Right-click on the App and select "Show Package Contents"
 - Copy the `iasl` file located under `/Contents/MacOS/` to memory (CMD+C)
-- In Finder, press `CMD+SHIFT+.` to show hidden files and folders.
+- In Finder, press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> to show hidden files and folders.
 - Navigate to `/usr/local/bin/` and paste the `iasl` file. We need it there for running iasl in Terminal
-- Press `CMD+SHIFT+.`, to mask hidden files and folders again.
-- Mount your EFI partition and copy the `EFI/OC/ACPI` folder to your desktop
-- Unmount your EFI so you don't accidentally ruin your working ACPI tables
+- Press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> again, to mask hidden files and folders again.
+- Mount your EFI partition and copy the `EFI/OC/ACPI` folder to your desktop.
+- Unmount your EFI so you don't accidentally ruin your working ACPI tables.
 
 ## Batch decompiling .aml files
 - Run Xiasl

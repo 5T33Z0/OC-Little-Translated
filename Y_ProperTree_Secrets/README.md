@@ -1,9 +1,9 @@
-# The undocumented super power of ProperTree
+# The undocumented super powers of ProperTree
 
 ## The issue
 You probably have come across posts like these on Forums or Reddit:
 
-```xml
+```swift
 <dict>
 	<key>Base</key>
 	<string>\_SB.PCI0.LPCB.HPET</string>
@@ -45,7 +45,7 @@ Isolated patches for your config in raw text format instead of a ready-made .pli
 
 ## ProperTree for the win
 
-In steps ProperTree to save the day! With ProperTree, you just copy the raw text with `[⌘]+[c]` run the App, hit `[⌘]+[v]` and boom, the `<Dict>` will be created:
+In steps ProperTree to save the day! With ProperTree, you just copy the raw text with <kbd>⌘</kbd><kbd>c</kbd> run the App, hit <kbd>⌘</kbd><kbd>v</kbd> and boom, the `<Dict>` will be created:
 
 ![singlepatch](https://user-images.githubusercontent.com/76865553/181589762-0e30ea62-d792-4af5-8418-7c8f875d032b.png)
 
@@ -63,20 +63,20 @@ Another feature I noticed is that you can use ProperTree to convert plists or se
 ### Example 1: converting a `config.plist` to raw test
 - Open a config.plist with ProperTree
 - Select the `Root`dictionary:</br>![Raw_01](https://user-images.githubusercontent.com/76865553/183616793-1cfa06ab-dc13-4378-80c9-04b0638fd77a.png)
-- Press `[⌘]+[c]`
+- Press <kbd>⌘</kbd><kbd>c</kbd>
 - Open TextEdit
 - Change Format to raw text (CMD+SHIFT+T)
-- Press `[⌘]+[v]` and there's your config as raw text:</br>![Raw_02](https://user-images.githubusercontent.com/76865553/183616846-8da43d18-3590-447a-ae6c-79e498ef2b99.png)
+- Press <kbd>⌘</kbd><kbd>v</kbd> and there's your config as raw text:</br>![Raw_02](https://user-images.githubusercontent.com/76865553/183616846-8da43d18-3590-447a-ae6c-79e498ef2b99.png)
 
 ### Example 2: converting a specific section to raw test
 Same goes for specific sections like arrays and dictionaries. In this example Kernel/Quirks.
 
 - Open a .plist with ProperTree
 - Highlight the array or dictionary you want to copy:</br>![Raw_03](https://user-images.githubusercontent.com/76865553/183616931-b98baf5d-3647-4d8e-8df7-a5de034a0a6e.png)
-- Press `[⌘]+[c]`
+- Press <kbd>⌘</kbd><kbd>c</kbd>
 - Open TextEdit
-- Change Format to raw text (CMD+SHIFT+T)
-- Press `[⌘]+[v]` and there's you have to copied section in raw text (file header and correct plist structure included):</br>![Raw_04](https://user-images.githubusercontent.com/76865553/183616982-7d5f295f-d7b3-40f8-aa9f-177edabe7419.png)
+- Change Format to raw text (<kbd>⌘</kbd><kbd>Shift</kbd><kbd>t</kbd>)
+- Press <kbd>⌘</kbd><kbd>v</kbd> and there's you have to copied section in raw text (file header and correct plist structure included):</br>![Raw_04](https://user-images.githubusercontent.com/76865553/183616982-7d5f295f-d7b3-40f8-aa9f-177edabe7419.png)
 
 ## Credits
 corpnewt for [**ProperTree**](https://github.com/corpnewt/ProperTree)

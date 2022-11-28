@@ -64,7 +64,7 @@ Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you ex
 :bulb: For suggestions on which parameters to modify, you can check out the BIOS mods presented in this [thread](https://forums.macrumors.com/threads/sapphire-pulse-rx580-8gb-vbios-study.2133607/). But don't flash the actual modified ROM(s) as suggested  in that guide – this is only necessary on real Macs, not Hackintoshes! We will inject `DeviceProperties` instead.
 
 ### Locating the `PowerPlayInfo` inside the modded .rom file
-1. Run `ATOMBIOSReader.exe`</br>:![AtomBIOS01](https://user-images.githubusercontent.com/76865553/178274627-7efa0663-c93a-40bf-bcd8-076443f99663.png)
+1. Run `ATOMBIOSReader.exe`:</br>![AtomBIOS01](https://user-images.githubusercontent.com/76865553/178274627-7efa0663-c93a-40bf-bcd8-076443f99663.png)
 2. Open you `BIOS_Mod.rom` file &rarr; this will generate a .txt file. It contains a list of all the Command Tables of the ROM ass well as the addresses they are located at in memory.
 3. Open the `BIOS_Mod.rom.txt` file and search for "PowerPlayInfo":</br>![txtfile](https://user-images.githubusercontent.com/76865553/178274713-c22c7e4e-5892-46cd-9c0b-b496e2fbf865.png)
 4. It says **9bba  Len 0341** in my case.
