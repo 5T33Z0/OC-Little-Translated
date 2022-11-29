@@ -14,19 +14,7 @@ In this case, you cannot you need to add `SSDT-BRG0` so that Properties for the 
 
 ### Patching method 1: automated, using SSDTTime
 
-Luckily the patching process can now be automated using **SSDTTime** which can generate the following SSDTs by analyzing your system's `DSDT`:
-
-* ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
-* ***SSDT-BRG0*** – ACPI device for missing PCI bridges for passed device path
-* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
-* ***SSDT-USBX*** – Adds USB power properties for Skylake and newer SMBIOS
-* ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
-* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
-* ***SSDT-PNLF*** – PNLF device for laptop backlight control
-* ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
-
-**NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
+Luckily the patching process can now be automated using **SSDTTime** which can generate  `SSDT-BRG0` for you by analyzing your system's `DSDT`.
 
 **HOW TO:**
 
