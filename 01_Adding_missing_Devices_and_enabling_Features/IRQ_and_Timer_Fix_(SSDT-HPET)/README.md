@@ -159,8 +159,8 @@ Use ***SSDT-IPIC***.
 
 If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device, adds a fake one instead and removes `IRQNoFlags{2}`. Adjust the scopes, device names and PCI paths according to your `DSDT`.
 
-## Notes
-- The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in the original `DSDT`.
+## NOTES
+- The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
 - The IRQ and RTC fixes used here cannot be combined with other RTC fixes, such as:
   - ***SSDT-AWAC*** and ***SSDT-AWAC-ARTC***
   - ***SSDT-RTC0*** and ***SSDT-RTC0-NoFlags***

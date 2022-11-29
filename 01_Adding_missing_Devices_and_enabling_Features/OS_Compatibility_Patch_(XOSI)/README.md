@@ -8,10 +8,26 @@ But by simulating a certain version of `Windows` while running the `Darwin` kern
 
 **The patch consist of two parts**: 
 
-1. Binary renames and a
+1. Binary rename(s) and a
 2. SSDT Hotpatch
 
-## Part 1: Rename Method `_OSI` to `XOSI` 
+## Patching methods
+There are 2 methods for enabling the XOSI patch construct – use either or.
+
+### Method 1: automated patching using SSDTTime
+
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Press <kbd>D</kbd>, drag in your system's `DSDT` and hit <kbd>Enter</kbd>
+3. Next, type <kbd>A</kbd> and hit <kbd>Enter</kbd> to generate `SSDT-XOSI` and necessary binary renames
+4. In the next screen, select Windows build you are running and hit <kbd>Enter</kbd>
+4. The generated SSDT will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Save and Reboot.
+
+### Method 2: manual patching
+
+#### Part 1: Rename Method `_OSI` to `XOSI` 
 
 1. Search for `OSI` in the original `DSDT` 
 2. If you find it, add the `_OSI to XOSI` rename listed below.
@@ -37,12 +53,12 @@ Add the following Renames (if applicable) to `config.plist`:
   Replace: 584F5349
   ```
 
-### ⚠️ Caution: order of operations
-Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors in Windows. Therefore, you need to rename these methods to something else (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) *prior* to applying the `_OSI to XOSI` rename rule. 
+#### ⚠️ Caution: Order of Operations
+Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors under Windows. 
 
-In other words: renames rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *before* `_OSI to XOSI` in the `config.plist`.
+Therefore, you need to rename these methods to something else *first* (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) before applying the `_OSI to XOSI` rename. In other words: rename rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *before* `_OSI to XOSI` in the `config.plist`!
   
-## Part 2: Hotpatch ***SSDT-OC-XOSI***
+#### Part 2: Hotpatch ***SSDT-OC-XOSI***
 
 ```asl
 Method(XOSI, 1)
@@ -143,6 +159,7 @@ ACPI also defines `OSYS` which describes the used Windows version by year (as he
 - `OSYS = 0x7E6`: Win11 22H2, i.e. `Windows 2022`</br>
 
 ## NOTES
+- Remember to update your XOSI hotfix when updating/upgrading Windows! Otherwise the patch won't mach the Windows build number and won't work.
 - Additional OSI strings for other versions of Windows are available here: [OSI Strings for Windows Operating Systems](https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi#_osi-strings-for-windows-operating-systems)
 - OS Patche are not recommended for single systems.
 - When the loaded OS is not recognized by ACPI, `OSYS` is given a default value which varies from machine to machine, some for `Linux`, some for `Windows 2003`, and some for other values.

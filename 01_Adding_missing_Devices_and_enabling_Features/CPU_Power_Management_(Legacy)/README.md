@@ -52,7 +52,7 @@ Although ssdtPRGen supports Sandy Bridge to Kabylake CPUs, nowadays it's only us
 
 Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly. 
 
-## Notes
+## NOTES
 
 - ssdtPRGen includes lists with settings for specific CPU models sorted by CPU families. These can be found under /Users/YOURUSERNAME/Library/ssdtPRGen/Data. They are in .cfg format which can be viewed with TextEdit.
 - If your CPU is listed in one of these .cfg files, you can generate a SSDT-PM for your specific CPU model. Enter: `sudo ~/ssdtPRGen.sh -p 'MODELNAME'` (for example `'i7-3630QM'`). The advantage of generating the SSDT-PM that it includes additional info and workarounds for the CPU

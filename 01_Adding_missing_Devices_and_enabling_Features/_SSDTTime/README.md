@@ -11,13 +11,14 @@ With the python script **SSDTTime**, you can generate the following SSDTs by ana
 * ***[SSDT-PMC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR))*** – Enables Native NVRAM on true 300-Series Boards and newer
 * ***[SSDT-PNLF](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))*** – PNLF device for laptop backlight control
 * ***SSDT-USB-Reset*** – Resets USB controllers to allow USB port mapping
+* ***[SSDT-XOSI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))*** – SSDT hotfix and and binary rename(s) which makes macOS "believe" that it's currently running Windows on a Mac &rarr; Mainly required to improve I2C TouchPad support on Laptops.
 
 **NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
 
 **HOW TO:**
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
+2. Press <kbd>D</kbd>, drag in your system's `DSDT` and hit <kbd>Enter</kbd>
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated SSDTs to `EFI/OC/ACPI`

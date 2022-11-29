@@ -74,7 +74,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 	Replace: 584E4C46
 	```
 
-## Notes
+## NOTES
 - When choosing an injection method, you should clear the driver, patch, and settings related to other methods.
 - When using custom brightness patches, make sure that the `PNLF` device is injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect Windows boot process. 
 - You can also use the SSDT-PNLF variants included in [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch).

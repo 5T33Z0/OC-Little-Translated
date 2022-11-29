@@ -69,5 +69,5 @@ After a few seconds, the connection should work. If you still can't access the I
 - `/Library/Preferences/com.apple.networkextension.plist`
 - `/Library/Preferences/com.apple.networkextension.uuidcache.plist`
 
-## Credits and Resources
+## Credits
 - [**MacAbe**](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786836) for SSDT-I225-V.aml
