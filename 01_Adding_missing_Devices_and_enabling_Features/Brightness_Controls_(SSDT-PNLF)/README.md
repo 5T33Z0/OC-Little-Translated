@@ -4,7 +4,7 @@
 
 To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding **`SSDT-PNLF`** to work. If you are using macOS Catalina or newer, you also need a Fake Ambient Light Sensor **([`SSDT-ALS0`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)))** so that the brightness level doesn't reset to maximum after rebooting.
 
-## 1. **Using SSDTTime** (automated process):
+### Method 1: **Using SSDTTime** (automated process)
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
 3. Generate all the SSDTs you need.
@@ -14,17 +14,19 @@ To inject Brightness Control, there are several ways to do so. But no matter whi
 7. Add Lilu and WhateverGreen kexts to `EFI/OC/Kexts` and your `config.plist`
 8. Save and Reboot.
 
-## 2. **Common injection method**:
+**NOTE**: In my test on an Ivy Bridge Notebook, the maximum brightness was not as bright as what I get when using the SSDT-PNLF sample included in the OpenCore Package. So I would recommend using method 2 instead.
+
+### Method 2: **Common injection method**
 
 - **Kexts**: Lilu.kext + WhateverGreen.kext
 - **Patch**: Custom brightness patch or RehabMan brightness patch
 
-### 3. **ACPI injection method**:
+### Method 3: **ACPI injection method**:
 
 - **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
 - **Patch**: See "ACPI Brightness Patch" method
 
-### 4. **Other methods:** Follow the kext + patch principle and try for yourself.
+### **Other methods:** Follow the kext + patch principle and try for yourself.
 
 **NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
 
@@ -67,7 +69,7 @@ By default, `WhateverGreen.kext` will load the brightness driver. If you want to
 	Replace: 584E4C46
 	```
 
-## :warning: CAUTION
-- When choosing a certain injection method, you should clear the driver, patch, and settings related to other methods.
-- When using custom brightness patches, make sure that the `PNLF` device is injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect `Windows` boot. 
+## Notes
+- When choosing an injection method, you should clear the driver, patch, and settings related to other methods.
+- When using custom brightness patches, make sure that the `PNLF` device is injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, you need to rename it, otherwise it will affect Windows boot process. 
 - You can also use the SSDT-PNLF variants included in [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch).
