@@ -3,7 +3,7 @@
 ## About Embedded Controllers
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.
 
-### Why do I need a virtual EC?
+### Why do I need a fake/virtual EC?
 On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is a good thing, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from connecting to an existing `EC`. To ensure thes, we disable the device in the system's `DSDT` and add a fake/virtual `EC` for macOS to play with instead.
 
 In macOS Catalina and newer, checks for varifying the presence of the EC have been implemented. So if it's not present, macOS will stall and you will receive status messages like `apfs_module_start…` or `Waiting for Root device` or `Waiting on…IOResources…` or `previous shutdown cause…`
@@ -41,12 +41,12 @@ Use either one method or the other, not both! :warning: DON'T rename `EC0`, `H_E
 **Tip**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ### Method 2: Manual patching method
-- In the `DSDT`, search for `PNP0C09` 
-- If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
-- Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
-- Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more instructions.
-- Export the file as .aml (ACPI Machine Language Binary) and add it to EFI/OC/ACPI and your Config
-- Save and Reboot.
+1. In the `DSDT`, search for `PNP0C09` 
+2. If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
+3. Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
+4. Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more instructions.
+5. Export the file as .aml (ACPI Machine Language Binary) and add it to EFI/OC/ACPI and your Config
+6. Save and Reboot.
 
 **Example**: existing EC device in a Laptop DSDT</br>
 ![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
@@ -151,3 +151,7 @@ MacMini7,1 and older|N/A|N/A|N/A|N/A
 MacPro6,1 and older|N/A|N/A|N/A|N/A
 
 As you can see, desktop machines (iMac, iMacPro and MacPrp) use the same values, whereas the values for notebooks and MacMinis differ.
+
+## Credits
+- Apple for IORegistryExplorer
+- CorpNewt for SSDTTime
