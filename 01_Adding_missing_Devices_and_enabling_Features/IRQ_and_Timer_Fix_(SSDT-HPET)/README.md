@@ -1,6 +1,7 @@
 # Sound Card IRQ Patches (`SSDT-HPET`)
 
 ## Description
+
 Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** **`PNP0103`** to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is).
 
 In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **(`PNP0B00`)** or **TIMR** **(`PNP0100`)** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
@@ -30,15 +31,15 @@ Two methods for fixing **HPET** and **IRQs** exist:
 
 The manual patching method described below is rather complicated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
-* ***SSDT-BRG0*** – ACPI device for missing PCI bridges for passed device path
-* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
-* ***SSDT-USBX*** – Adds USB power properties for Skylake and newer SMBIOS
-* ***SSDT-HPET*** – Patches out IRQ Conflicts
-* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
-* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
-* ***SSDT-PNLF*** – PNLF device for laptop backlight control
-* ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
+* ***[SSDT-AWAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))*** – Context-aware AWAC and Fake RTC
+* ***[SSDT-BRG0](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)*** – ACPI device for missing PCI bridges for passed device path
+* ***[SSDT-EC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))*** – OS-aware fake EC for Desktops and Laptops
+* ***[SSDT-USBX](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))*** – Adds USB power properties for Skylake and newer SMBIOS
+* ***[SSDT-HPET](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))*** – Patches out IRQ Conflicts
+* ***[SSDT-PLUG](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG))*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***[SSDT-PMC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR))*** – Enables Native NVRAM on true 300-Series Boards and newer
+* ***[SSDT-PNLF](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))*** – PNLF device for laptop backlight control
+* ***SSDT-USB-Reset*** – Resets USB controllers to allow USB port mapping
 
 **NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
 
