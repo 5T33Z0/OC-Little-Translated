@@ -30,22 +30,27 @@ Two methods for fixing **HPET** and **IRQs** exist:
 
 The manual patching method described below is rather complicated, because the patching process can now be automated using **SSDTTime** which can generate the following SSDTs based on analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** &rarr; Context-Aware AWAC and Fake RTC
-* ***SSDT-EC*** &rarr; OS-aware fake EC for Desktops and Laptops
-* ***SSDT-PLUG*** &rarr; Sets plugin-type to 1 on `CPU0`/`PR00`
-* ***SSDT-HPET*** &rarr; Patches out IRQ Conflicts
-* ***SSDT-PMC*** &rarr; Enables Native NVRAM on true 300-Series Boards
+* ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
+* ***SSDT-BRG0*** – ACPI device for missing PCI bridges for passed device path
+* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
+* ***SSDT-USBX*** – Adds USB power properties for Skylake and newer SMBIOS
+* ***SSDT-HPET*** – Patches out IRQ Conflicts
+* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
+* ***SSDT-PNLF*** – PNLF device for laptop backlight control
+* ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
+
+**NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
 
 **HOW TO:**
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>.
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI/OC/ACPI
-6. Open `patches_OC.plist` and copy the included patches to your `config.plist` (to the same section, of course).
-7. Save your config
-8. Save. Reboot. Done. 
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Save and Reboot.
 
 Audio should work now (assuming AppleALC.kext is present along with the correct layout-id for your on-board audio card).
 

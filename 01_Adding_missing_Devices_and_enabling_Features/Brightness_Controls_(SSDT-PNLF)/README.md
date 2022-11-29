@@ -2,19 +2,29 @@
 
 ## `PNLF` Injection Methods
 
-To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding `SSDT-PNLF` to work.
+To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding **`SSDT-PNLF`** to work. If you are using macOS Catalina or newer, you also need a Fake Ambient Light Sensor **([`SSDT-ALS0`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)))** so that the brightness level doesn't reset to maximum after rebooting.
 
-1. **Common injection method**:
+## 1. **Using SSDTTime** (automated process):
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
+3. Generate all the SSDTs you need.
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Add Lilu and WhateverGreen kexts to `EFI/OC/Kexts` and your `config.plist`
+8. Save and Reboot.
 
-	- **Kext**: Lilu.kext + WhateverGreen.kext
-	- **Patch**: Custom brightness patch or RehabMan brightness patch
+## 2. **Common injection method**:
 
-2. **ACPI injection method**:
+- **Kexts**: Lilu.kext + WhateverGreen.kext
+- **Patch**: Custom brightness patch or RehabMan brightness patch
 
-	- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
-	- **Patch**: See "ACPI Brightness Patch" method
+### 3. **ACPI injection method**:
 
-3. **Other methods:** Follow the kext + patch principle and try for yourself.
+- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
+- **Patch**: See "ACPI Brightness Patch" method
+
+### 4. **Other methods:** Follow the kext + patch principle and try for yourself.
 
 **NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
 

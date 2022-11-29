@@ -3,23 +3,29 @@
 Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
 
 ## Automated SSDT generation: using SSDTTime
-With the python script **SSDTTime**, you can generate the following SSDTs from analyzing your system's `DSDT`:
+With the python script **SSDTTime**, you can generate the following SSDTs by analyzing your system's `DSDT`:
 
-* ***SSDT-AWAC*** &rarr; Context-Aware AWAC and Fake RTC
-* ***SSDT-EC*** &rarr; OS-aware fake EC for Desktops and Laptops
-* ***SSDT-PLUG*** &rarr; Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
-* ***SSDT-HPET*** &rarr; Patches out IRQ and Timer conflicts to enable on-board Sound Cards
-* ***SSDT-PMC*** &rarr; Enables native NVRAM on True 300/400/500/600-Series Mainboards
+* ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
+* ***SSDT-BRG0*** – ACPI device for missing PCI bridges for passed device path
+* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
+* ***SSDT-USBX*** – Adds USB power properties for Skylake and newer SMBIOS
+* ***SSDT-HPET*** – Patches out IRQ Conflicts
+* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
+* ***SSDT-PNLF*** – PNLF device for laptop backlight control
+* ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
+
+**NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
 
 **HOW TO:**
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Pres "D", drag in your system's DSDT and hit "ENTER"
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
 3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside the `SSDTTime-master`Folder along with `patches_OC.plist`.
-5. Copy the generated `SSDTs` to EFI > OC > ACPI and your Config using OpenCore Auxiliary Tools
-6. Open `patches_OC.plist` and copy the included patches to your `config.plist` (to the same section, of course).
-7. Save and Reboot. Done. 
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Save and Reboot.
 
 **NOTE**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 

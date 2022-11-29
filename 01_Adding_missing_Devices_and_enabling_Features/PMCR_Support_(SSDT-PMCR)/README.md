@@ -10,10 +10,41 @@
 - Users with 100 and 200-series mainboards can use [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!
 
 ### Instructions
+There are 2 methods to add the PMCR device – choose either or
 
-- Add ***SSDT-PMCR.aml*** to `EFI/OC/ACPI` and config.plist
+#### Method 1: automated, using SSDTTime
 
-**CAUTION**: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
+You can use **SSDTTime** which can generate the following SSDTs by analyzing your system's `DSDT`:
+
+* ***SSDT-AWAC*** – Context-aware AWAC and Fake RTC
+* ***SSDT-BRG0*** – ACPI device for missing PCI bridges for passed device path
+* ***SSDT-EC*** – OS-aware fake EC for Desktops and Laptops
+* ***SSDT-USBX*** – Adds USB power properties for Skylake and newer SMBIOS
+* ***SSDT-HPET*** – Patches out IRQ Conflicts
+* ***SSDT-PLUG*** – Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management
+* ***SSDT-PMC*** – Enables Native NVRAM on true 300-Series Boards and newer
+* ***SSDT-PNLF*** – PNLF device for laptop backlight control
+* ***SSDT-USB-Reset*** – Resets USB controllers to allow hardware mapping
+
+**NOTE**: When used in Windows, SSDTTime also can dump the `DSDT`.
+
+**HOW TO:**
+
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
+3. Generate all the SSDTs you need.
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Save and Reboot.
+
+#### Method 2: manual patching
+
+- Download ***SSDT-PMCR.aml*** 
+- Open it in maciASL 
+- Verify that the name and path of the LPC Bus (either `LPC` or `LPCB`) matches the one used in your system's `DSDT`. Adjust it if necessary.
+- Copy the file to `EFI/OC/ACPI` and `config.plist`
+- Save and reboot.
 
 ### Verifying that the patch is working
 Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should find it:</br>
@@ -29,3 +60,14 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 
 - Pleasecallmeofficial who discovered this patch
 - Acidathera for improving the SSDT.
+- CorpNewt for SSDTTime
+
+**HOW TO:**
+
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
+2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
+3. Generate all the SSDTs you need.
+4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
+5. Copy the generated SSDTs to `EFI/OC/ACPI`
+6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+7. Save and Reboot.
