@@ -49,10 +49,9 @@ If you use the ACPIBatteryManager.kext, it also links the battery to the `AppleS
 
 If it's not present, then you did something wrong, so start over.
 
-## NOTES & CREDITS
+## NOTES and CREDITS
 - Ensure that the PCI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 - In Clover, you can use the DSDT patch `FixADP1` instead to attach the AC device in IOReg.
 - SSDT Patches by [**Baio 1977**](https://github.com/Baio1977)
 - `ACPIBatteryManager.kext` by [**RehabMan**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/).
 - `VirtualSMC` and `SMCBatteryManager` by [**Acidanthera**](https://github.com/acidanthera/VirtualSMC)
-
