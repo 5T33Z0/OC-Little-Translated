@@ -484,6 +484,7 @@ From the above example, we can see that the original `_STA` method contains othe
 On some X299 boards, the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, booting macOS still fails. In this case, leaving AWAC enabled (so RTC won't be available) and adding a fake [**`RTC0`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) is the solution.
 
 ## Credits
+- [**Baio1977**](https://github.com/Baio1977) for `SSDT-AWAC-ARTC`
+- CorpNewt for SSDTTime
 - **daliansky** for `SSDT-AWAC.dsl`
--[**Baio1977**](https://github.com/Baio1977) for `SSDT-AWAC-ARTC`
 - **dreamwhite** for additional information and guidance on keeping the tables conform to ACPI specs.
