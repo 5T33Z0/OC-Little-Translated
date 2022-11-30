@@ -74,11 +74,11 @@ In order to add/apply any of the Patches, it is necessary to research your machi
 	- Pull out the USB stick and reboot into a working OS.
 	- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
 - Using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) (Windows only): if you use SSDTTime under Windows, you can also dump the DSDT, which is not possible under macOS.
-
+ 
 ### Available Hotpatches
 Listed below are all SSDTs contained in this chapter. Use the listed search terms to check your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case, read the instructions first, to find out if you really need it and how to apply it. If there's no search term listed further analysis of the `DSDT` is required to apply the hotpatch. 
 
-**NOTE**: You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes autonatically. 
+**NOTE**: You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
 
 #### Functional SSDTs
 Listed below are SSDTs which add or enable devices and features in macOS.
@@ -125,21 +125,21 @@ The SSDTs listed below are considered cosmetic and non-essential: They add devic
 [**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 
 ## Converting `.dsl` files to `.aml`
-The Hotfixes in this section are provided as Disassembled ASL Files (.dsl). In order to use them in your system, do the following.
+The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In order to use them in your system, do the following:
 
-1. Click on the link to the .dsl file of your choice
-2. Click the `Raw`button
-3. Press `⌘+A` and `⌘+C`
-4. Open maciASL
-5. Press `⌘+V`
-6. Edit the file (if needed)
-7. Click on "File" > "Save As…"
+1. Click on the link to the `.dsl` file of your choice.
+2. Click the `Raw` button.
+3. Press <kbd>⌘</kbd><kbd>A</kbd> (select all), followed by <kbd>⌘</kbd><kbd>C</kbd> (copy).
+4. Open maciASL.
+5. Press <kbd>⌘</kbd><kbd>V</kbd> (paste).
+6. Edit the file (if necessary).
+7. Click on "File" > "Save As…".
 8. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
-9. Save it as "SSDT–…" (whatever the original file name is)
-10. Add the `.aml` file to `EFI/OC/ACPI` and to your config.plist (under `ACPI/Add`)
+9. Save it as "SSDT–…" (whatever the original file name is).
+10. Add the `.aml` file to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`).
 11. Save and reboot to test it.
 
-**NOTE**: If you decide to simply download the whole repo, you can just open the .dsl files with maciASL instead.
+**NOTE**: If you download the whole repo, you can just open the .dsl files with maciASL instead.
 
 ## Resources
-[**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) – IO Reg Collection by khronokernel
+[**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) – IORegistry collection of almost any Mac model by khronokernel
