@@ -1,7 +1,7 @@
 # Boot arguments explained
-Listed below you find an incomplete list of commonly used as well as rather uncommon boot-args which can be injected by OpenCore and Clover.
+Listed below you find an incomplete list of commonly used as well as rather uncommon boot-args which can be injected by OpenCore, Clover and Kexts.
 
-### Debugging
+## Debugging
 |Boot-arg|Description|
 |:------:|-----------|
 **`-v`**|_V_erbose Mode. Replaces the progress bar with a terminal output with a bootlog which helps resolving issues. Combine with `debug=0x100` and `keepsyms=1`
@@ -15,107 +15,170 @@ Listed below you find an incomplete list of commonly used as well as rather unco
 **`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
 **`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
 
-### GPU-specific boot arguments
-For more iGPU and dGPU-related boot args see the Whatevergreen topic.
-
-#### Intel on-board graphics
-
-|Boot-arg|Description|
-|:------:|-----------|
-**`-wegnoegpu`**|Disables all discrete GPUs but the integrated graphics on Intel CPU. Use if GPU is incompatible with macOS. Doesn't work all the time.
-**`igfxonln=1`**|Forces all displays online. Resolves screen wake issues after quitting sleep mode in macOS 10.15.4 and newer when using Coffee and Comet Lake's Intel UHD 630.
-**`-igfxvesa`** |Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
-**`-igfxnohdmi`**| Disables DisplayPort to HDMI Audio Conversion
-**`-cdfon`**| Performs numerous patches required for enabling HDMI 2.0 support
-**`igfxfw=2`**| Enables loading Apple's GUC firmware for iGPUs, requires a 9th Gen chipset or newer(ie Z390)
-
-#### AMD
-
-|Boot-arg|Description|
-|-------:|-----------|
-**`agdpmod=pikera`**| Disables Board-ID checks on AMD Navi (RX 5000/6000 series) to fix black screen issues due to the difference in framework with the x6000 drivers. Although not necessary for Polaris or Vega Cards, it can be used to resolve black screen issues in multi-monitor setups. 
-**`agdpmod=vit9696`** | Disables `board-id` check, may be needed for when screen turns black after finishing booting
-**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| Swaps boardID with `iMacPro1,1`. Allows for Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
-**`radpg=15`** | Fixes initialization for HD 7730/7750/7770/R7 250/R7 250X
-**`-raddvi`** | Fixes DVI connector-type for 290X, 370, etc
-**`-radvesa`**|Forces GPU into VESA mode(no GPU acceleration), useful for troubleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
-
-#### NVIDIA
-
-|Boot-arg|Description|
-|-------:|-----------|
-**`agdpmod=pikera`**| Swaps `board-id `for `board-ix`, needed for disabling string comparison which is useful for non-iMac13,2/iMac14,2 SMBIOS.
-**`agdpmod=vit9696`**| Disables `board-id` check, may be needed for when screen turns black after finishing booting
-**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| Deprecated. macOS Siera and newer require an NVRAM key instead. </br> **OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` under System Parameters.
-**`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
-**`shikigva=1`**| Needed if you want to use your iGPU's display out along with your dGPU, allows the iGPU to handle hardware decoding even when not using a connector-less framebuffer
-**`shikigva=4`**| Needed to support hardware accelerated video decoding on systems that are newer than Haswell. May needs to be combined with `shikigva=12` to patch the needed processes 
-**`shikigva=40`**| Swaps boardID with iMac14,2. Useful for SMBIOS that don't expect a Nvidia GPU, however WhateverGreen should handle patching by itself.
-
-**SOURCE**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html)
-
-### Network-specific boot arguments
+## Network-specific boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
 **`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and use `AppleIntelI210Ethernet.kext` instead. This is optional since most boards with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Venture, since the .kext version was removed from the `IONetworkingFamily.kext` located under /S/L/E/!
 
-### Other useful boot arguments
+## Other useful boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
 **`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 **`amfi_get_out_of_my_way=1`**|Combines wit disabled SIP, this disables Apple Mobile File Integrity. AMFI is a macOS kernel module enforcing code-signing validation and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every app that is run and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
 **`-force_uni_control`**|Force-enables the Universal Control service in macOS Monterey 12.3+.
 
-## Boot-args and device properties provided by kexts
+## Boot-args and device properties provided by Kexts
 
 ### Lilu.kext
-Assorted Lilu boot-args. Remember that Lilu acts as a patch engine providing functionality for other kexts in the hackintosh universe, so you got to be aware of that if you use any of these commands!
+Lilu boot-args. Remember that Lilu acts as a patch engine providing functionality for other kexts in the hackintosh universe, so you got to be aware of that if you use any of these commands!
 
-|Boot-arg|Description|
-|:-------:|-----------|
+| Boot-arg | Description |
+|----------|-------------|
 **`-liluoff`**| Disables Lilu.
-**`-lilubeta`**| Enables Lilu on unsupported macOS versions (macOS 12 and below are supported by default).
+**`-lilubeta`**| Enables Lilu on unsupported macOS versions (macOS 13 and below are supported by default).
 **`-lilubetaall`**| Enables Lilu and *all* loaded plugins on unsupported macOS (use _very_ carefully).
-**`-liluforce`**| Enables Lilu regardless of the mode, OS, installer, or recovery.
+**`-liluforce`** | Enables Lilu regardless of the mode, OS, installer, or recovery.
+**`-liludbg`** | Enables debug printing (requires DEBUG version of Lilu).
 **`liludelay=1000`**| Adds a 1 second (1000 ms) delay after each print for troubleshooting.
-**`lilucpu=N`**|to let Lilu and plugins assume Nth CPUInfo::CpuGeneration.
+**`lilucpu=N`**| Lets Lilu and plugins assume Nth CPUInfo::CpuGeneration.
+**`liludump=N`** | Lets Lilu DEBUG version dump log to `/var/log/Lilu_VERSION_KERN_MAJOR.KERN_MINOR.txt` after N seconds
+**`-liluuseroff`** | Disables Lilu user patcher (for e.g. dyld_shared_cache manipulations).
+**`-liluslow`** | Enables legacy user patcher.
+**`-lilulowmem`** | Disables kernel unpack (disables Lilu in recovery mode).
+**`liludelay=1000`** | Enables 1 second delay after each print for troubleshooting.
+
+### VirtualSMC.kext
+| Boot-arg | Description |
+|----------|-------------|
+**`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC).
+**`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default).
+**`-vsmcoff`** | Disables all Lilu enhancements.
+**`-vsmcrpt`** | Reports missing SMC keys to the system log.
+**`-vsmccomp`** | Prefer existing hardware SMC implementation if found.
+**`vsmcgen=X`** | Forces exposing X-gen SMC device (1 and 2 are supported).
+**`vsmchbkp=X`** | Sets HBKP dumping mode (0 = off, 1 = normal, 2 = without encryption).
+**`vsmcslvl=X`** | Sets value serialisation level (0 = off, 1 = normal, 2 = with sensitive data (default)).
+**`smcdebug=0xff`** | Enables AppleSMC debug information printing.
+**`watchdog=0`** | Disables WatchDog timer (if you get accidental reboots).
 
 ### Whatevergreen.kext 
-Listed below you'll find a small but useful assertion of WEG's boot args for everything graphics-related. Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
+The following boot-args are provided by and require Whatevergreen.kext to work! Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
 
-|Boot-arg|Description|
-|:------:|-----------|
-**`-wegoff`**| Disables WhateverGreen.
-**`-wegbeta`**| Enables WhateverGreen on unsupported OS versions.
-**`-wegswitchgpu`**|Disables th iGPU if a discrete GPU is detected (or use `switch-to-external-gpu` property to iGPU)
-**`-wegnoegpu`**|Disables all discrete GPUs (or add `disable-gpu` property to each GFX0).
-**`-wegnoigpu`**|Disables internal GPU (or add `disable-gpu` property to iGPU)
-**`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without it you'll get a black screen. Although not necessary for Polaris or Vega Cards it can be used to fix black screen issues in multi-monitor setups.
-**`agdpmod=vit9696`**|Disables check for `board-id` (or add `agdpmod` property to external GPU).
-**`applbkl=0`**| Boot argument (and `applbkl` property) to disable `AppleBacklight.kext` patches for iGPU. In case of custom AppleBacklight profile, read [this](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
-**`gfxrst=1`**|Prefers drawing the Apple logo at the 2nd boot stage instead of framebuffer copying. Makes the transition between the progress bar and the desktop/login screen smoother if an external monitor is attached.
-**`ngfxgl=1`**|Disables Metal support on NVIDIA cards (or use `disable-metal` property)
-**`igfxgl=1`**|boot argument (and `disable-metal` property) to disable Metal support on Intel.
-**`igfxmetal=1`**|boot argument (and `enable-metal` property) to force enable Metal support on Intel for offline rendering.
-**`-igfxvesa`**|Disable Intel Graphics acceleration in favor of software rendering (aka VESA mode). Useful when installing never macOS lacking graphics drivers for legacy hardware.
-**`-igfxnohdmi`**| boot argument (and `disable-hdmi-patches` property) to disable DP to HDMI conversion patches for digital sound.
-**`-cdfon`**| Boot-arg (and `enable-hdmi20` property) to enable HDMI 2.0 patches.
-**`-igfxhdmidivs`**| boot argument (and `enable-hdmi-dividers-fix` property) to fix the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on SKL, KBL and CFL platforms.
-**`-igfxlspcon`**|boot argument (and `enable-lspcon-support` property) to enable the driver support for onboard LSPCON chips. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
-**`igfxonln=1`**| boot argument (and `force-online` device property) to force online status on all displays.
-**`-igfxdvmt`**| boot argument (and `enable-dvmt-calc-fix` property) to fix the kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel ICL platforms.
-**`-igfxblr`**| boot argument (and `enable-backlight-registers-fix` property) to fix backlight registers on KBL, CFL and ICL platforms.
-**`-igfxbls`**| boot argument (and `enable-backlight-smoother` property) to make brightness transitions smoother on IVB+ platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
-**`applbkl=3`**| boot argument (and `applbkl` property) to enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
+#### Global
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`-cdfon`** | `enable-hdmi20`| Enables HDMI 2.0 patches on iGPU and dGPU (not implemented in macOS 11+)
+**`-wegbeta`**| N/A| Enables WhateverGreen on unsupported versions of macOS (macOS 13 and below are enabled by default) 
+**`-wegdbg`** | N/A | Enables debug printing (requires DEBUG version of WEG)
+**`-wegoff`** | N/A | Disables WhateverGreen
+
+#### Board-id related
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`agdpmod=ignore`** | `agdpmod`| Disables AGDP patches (`vit9696,pikera` value is implicit default for external GPUs) 
+**`agdpmod=pikera`** | `agdpmod`| Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi (RX 5000/6000 series) to fix black screen issues due to the difference in framework with the x6000 drivers. Although not necessary for Polaris or Vega Cards, it can be used to resolve black screen issues in multi-monitor setups.
+**`agdpmod=vit9696`** | `agdpmod` | Disables check for `board-id`. Useful if screen turns black after booting macOS.
+
+#### Switching GPUs
+
+boot-arg | DeviceProperty | Description 
+---------|----------------|------------
+**`-wegnoegpu`** | `disable-gpu` | Disables all external GPUs but the integrated graphics on Intel CPUS. Use if GPU is incompatible with macOS. Doesn't work all the time. Using an SSDT to disable it in macOS is the recommended procedure.
+**`-wegnoigpu`** | `disable-gpu` | Disables internal GPU
+**`-wegswitchgpu`** | `switch-to-external-gpu`| Disables internal GPU when external GPU is detected.
+
+#### Intel HD Graphics
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
+**`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
+**`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
+**`-igfxdbeo`** | `enable-dbuf-early-optimizer` | Fix Display Data Buffer (DBUF) issues on Ice Lake and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#fix-the-issue-that-the-builtin-display-remains-garbled-after-the-system-boots-on-icl-platforms)
+**`-igfxdump`** | N/A | Dump IGPU framebuffer kext to `/var/log/AppleIntelFramebuffer_X_Y` (requires in DEBUG version of WEG)
+**`-igfxdvmt`** | `enable-dvmt-calc-fix`  | Fix the kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel Ice Lake platforms
+**`-igfxfbdump`** | N/A | Dump native and patched framebuffer table to ioreg at `IOService:/IOResources/WhateverGreen`
+**`-igfxhdmidivs`** | `enable-hdmi-dividers-fix`  | Fix the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on SKL, KBL and CFL platforms
+**`-igfxi2cdbg`** | N/A | Enable verbose output in I2C-over-AUX transactions (only for debugging purposes)
+**`-igfxlspcon`** | `enable-lspcon-support`  | Enable the driver support for onboard LSPCON chips.<br> [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
+**`-igfxmlr`** | `enable-dpcd-max-link-rate-fix`  | Apply the maximum link rate fix
+**`-igfxmpc`** | `enable-max-pixel-clock-override` and `max-pixel-clock-frequency` | Increase max pixel clock (as an alternative to patching `CoreDisplay.framework`
+**`-igfxnohdmi`** | `disable-hdmi-patches` | Disables DP to HDMI conversion patches for digital audio
+**`-igfxsklaskbl`** | N/A | Enforce Kaby Lake (KBL) graphics kext being loaded and used on Skylake models (KBL `device-id` and `ig-platform-id` are required. Not required on macOS 13 and above)
+**`-igfxtypec`** | N/A | Force DP connectivity for Type-C platforms
+**`-igfxvesa`** | N/A | Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
+**`igfxagdc=0`** | `disable-agdc`  | Disables AGDC
+**`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
+**`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
+**`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
+**`igfxfw=2`** | `igfxfw` | Force loading of Apple GuC firmware 
+**`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
+**`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
+**`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
+**`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
+**`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
+**`igfxrpsc=1`** | `rps-control`  | Enable RPS control patch (improves IGPU performance)
+**`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
+
+#### AMD Radeon
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`-rad24`** | N/A | Forces 24-bit display mode
+**`-radcodec`** | N/A | Forces the spoofed PID to be used in AMDRadeonVADriver 
+**`-raddvi`** | N/A | Enables DVI transmitter correction (required for 290X, 370, etc.)
+**`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
+**`radpg=15`** | N/A | Disables several power-gating modes. Required for Cape Verde GPUs: Radeon HD 7730/7750/7770, R7 250/250X  (see [Radeon FAQ](https://github.com/dreamwhite/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
+**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows for Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
+
+#### NVIDIA
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| N/A |Deprecated. macOS Siera and newer require an NVRAM key instead. </br>**OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` in the System Parameters section.
+**`-ngfxdbg`** | N/A | Enables NVIDIA driver error logging 
+**`ngfxcompat=1`** | `force-compat` 	| Ignore compatibility check in NVDAStartupWeb
+**`ngfxgl=1`** | `disable-metal` 	| Disable Metal support on NVIDIA 
+**`ngfxsubmit=0`** | `disable-gfx-submit` | Disable interface stuttering fix on 10.13
+**`nv_disable=1`**| N/A | Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
+**`agdpmod=pikera`**|`agdpmod` |Swaps `board-id `for `board-ix`, needed for disabling string comparison which is useful for non-iMac13,2/iMac14,2 SMBIOS.
+**`agdpmod=vit9696`**|`agdpmod` |Disables `board-id` check, may be needed for when screen turns black after finishing booting
+**`shikigva=1`**| N/A |Needed if you want to use your iGPU's display out along with your dGPU, allows the iGPU to handle hardware decoding even when not using a connector-less framebuffer
+**`shikigva=4`**| N/A |Needed to support hardware accelerated video decoding on systems that are newer than Haswell. May needs to be combined with `shikigva=12` to patch the needed processes 
+**`shikigva=40`**| N/A |Swaps boardID with iMac14,2. Useful for SMBIOS that don't expect a Nvidia GPU, however WhateverGreen should handle patching by itself.
+
+#### Backlight
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`applbkl=3`** | `applbkl` | Enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md) 
+**`applbkl=0`** | `applbkl` | Disable AppleBacklight.kext patches for IGPU. <br>In case of custom AppleBacklight profile [read here](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
+
+#### 2nd Boot stage
+
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`gfxrst=1`** | N/A | Prefer drawing Apple logo at 2nd boot stage instead of framebuffer copying
+**`gfxrst=4`** | N/A | Disables framebuffer init interaction during 2nd boot stage
+
+#### Misc
+
+boot-arg | DeviceProperty | Description 
+---------|----------------|------------
+**`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
+
+**SOURCES**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html) and [Whatevergreen](https://github.com/acidanthera/WhateverGreen)
 
 ### AppleALC
 Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affect AppleALC as well.
 
-|Boot-arg|Description|
-|:------:|-----------|
-**`alcid=layout`**| To select a layout-id, for example alcid=1
-**`-alcoff`**| Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
-**`-alcbeta`**| Enables AppleALC on unsupported systems (usually unreleased or old ones)
-**`alcverbs=1`**| Enables alc-verb support (also alc-verbs device property)
+boot-arg | DeviceProperty | Description 
+---------|:--------------:|------------
+**`alcid=layout`**| `layout-id` |To select a layout-id, for example alcid=1
+**`-alcoff`**| N/A |Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
+**`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
+**`alcverbs=1`**| N/A |Enables alc-verb support (also alc-verbs device property)
 
 To be continued…
