@@ -176,7 +176,7 @@ Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affe
 
 boot-arg | DeviceProperty | Description 
 ---------|:--------------:|------------
-**`alcid=X`**| `layout-id` |To select a layout-id, where `X` stands for the number of the Layout ID, for example alcid=1. A list with all estisting layout-ids sorted by vendor and codec model can be found [here](https://github.com/dreamwhite/ChonkyAppleALC-Build).
+**`alcid=X`**| `layout-id` |To select a layout-id, where `X` stands for the number of the Layout ID, e.g. `alcid=1`. A list with all existing layout-ids sorted by vendor and codec model can be found [here](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 **`-alcoff`**| N/A |Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
 **`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
 **`alcverbs=1`**| N/A |Enables alc-verb support (also alc-verbs device property)
