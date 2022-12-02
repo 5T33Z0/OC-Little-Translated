@@ -2,7 +2,7 @@
 
 ## Really hacky Binary Rename patches
 A usual application of using binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
-But besides that you can also use them in a rather unconventional way to enable or disable a device by literally breaking the section in such a way that only the desired parts of it remain intact. 
+But besides that you can also use binary renames in a rather unconventional way to enable or disable a device by literally breaking the section in such a way that only the desired parts of it remain intact. 
 
 ### Risks
 
@@ -27,7 +27,7 @@ Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. 
       Return (Zero)
   }
 ```
-**Code after find and replace has been applied**:
+**Code after find and replace rules has been applied**:
 
 ```asl
   Method (_STA, 0, NotSerialized)
@@ -40,7 +40,7 @@ Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. 
 ```
 ### Explanation
 
-What happened here? There is an obvious error after renaming, but this error does not cause harm. First, the content after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content. 
+What happened here? There is an obvious error after applying the find and replacs masks, but this error does not cause harm. First, the content after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content. 
 
 In practice, we should try our best to ensure the integrity of the grammar after the name change.
 
@@ -65,7 +65,7 @@ This transforms the original code into this:
       Noop
   }
 ```
-**NOTE**: I (5T33Z0) have never come across in a config and also haven't fully grasped it yet. I wouldn't recommend this type of hack when using OpenCore.
+So basically, you overwrite everything undesirable in the method with `Noop`.
 
 ### Requirements
 - Unpatched `DSTD` (or other ACPI table you want to patch)
@@ -82,7 +82,7 @@ Let's assume you want one specific parameter to be changed but the renaming rule
 This approach is a bit outdated since we now have modifiers like `base` to specify exact locations where to apply a patch. Anyway, this is how it works:
 
 - Find the device, method or paramater you want to change in maciASL.
-- View the the DSDT in a Hex code (Visual Studio Code has an extension for it) and find the corresponding section
+- View the the `DSDT` as Hex code (Visual Studio Code has an extension for it) and find the corresponding section
 - Look at the surrounding Code
 - Select and incorporate a few characters left and right of what you actually want to change and use that as your `Find` mask – since it's in hex already you can just copy it over.
 - Next, you change the "inside" of the mask (the parameter you actually want to change) and leave the surrounding code alone to create your `Replace` rule.
@@ -94,11 +94,9 @@ This approach is a bit outdated since we now have modifiers like `base` to speci
 The preset variable method is used to pre-assign some variables of ACPI to `FieldUnitObj` to achieve the purpose of initialization. Although these variables are assigned values, they are not changed until their method is called. Modifying these variables through third-party patch Scope (\) files can achieve our expected patch effect.
 
 ### Risks
-
 The variable being fixed may exist in multiple places, and fixing it may affect other components while achieving the desired effect. The corrected variable may be from hardware information that can only be read but not written. In this case, a binary rename and SSDT patch are required. It should be noted that the renamed variable may not be recovered when the OC boots another system. See Example 4.
 
 ### Example 1
-
 A device's original `_STA` method:
 
 ```asl
@@ -112,7 +110,7 @@ Method (_STA, 0, NotSerialized)
     Return (Zero)
 }
 ```
-Let's say, for some reason, we need to disable this device, so the `Return` of `_STA` is `Zero`. But as you can see, as long as `SDS1` is not equal to `0x07`, the return value `0x0F` is not triggered which in return triggers the second condition in this cascade, `Return (Zero)` Therefore, we cannot simply change the the return value to `Zero` – it wouldn't have any effect. Therefore we need to change `SDS1` to `0` for macOS instead:
+Let's say, for some reason, we need to disable this device, so the `Return` of `_STA` is `Zero`. But as you can see, as long as `SDS1` is not equal to `0x07`, the return value `0x0F` is not triggered which in return triggers the second condition in this cascade, `Return (Zero)` Therefore, we cannot simply change the the return value to `Zero` – it wouldn't have any effect. Therefore, we need to change `SDS1` to `0` for macOS instead:
 
 ```asl
 Scope (\)
@@ -260,7 +258,7 @@ This translates as follows: unless `IM01` is not equal to `0x02`, the content of
 
 2. **SSDT Patch**: 
 
-```asl
+	```asl
 Name (IM01, 0x02)
 If (_OSI ("Darwin"))
 {
@@ -271,10 +269,9 @@ Else
     IM01 = XM01 /* The same path as the original ACPI variable */
 }
 ```
+
 ### Example 5
 Change the enable bit of the device state using an assignment operation that references the device's original `_STA` method as an `IntObj`.
-
-Example:
 
 ```asl
 Method (_STA, 0, NotSerialized)
@@ -293,9 +290,9 @@ Method (_STA, 0, NotSerialized)
 
 Name (_STA, 0x0F)
 ```
-It can be seen that the above example of the `_STA` method contains only the enable bit to return the state of the device and the enable bit returned according to the conditions, if you do not want to use the rename and change the conditions of the preset variables can be in the custom SSDT can directly refer to the `_STA` method as `IntObj`.
+As shown in this example the `_STA` method contains only the enable bit to return the state of the device and the enable bit returned according to the conditions. If you don't want to use the rename rules you can also change the conditions of the preset variables via a custom SSDT which can directly refer to the `_STA` method as an `IntObj`.
 
-Example of operation to disable a device.
+**Example**:
 
 ```asl
 External (_SB_.PCI0.XXXX._STA, IntObj)
@@ -303,11 +300,11 @@ External (_SB_.PCI0.XXXX._STA, IntObj)
 \_SB.PCI0.XXXX._STA = Zero 
 ```
 
-Please refer to the ASL language basics for the specific setting of the enable bit of the `_STA` method.
+Please refer to the ASL basics for the specific setting of the enable bit of the `_STA` method.
 
 The main reason why this method works in practice is that in the ACPI specification the `_STA` method has a higher priority than `_INI`, `_ADR` of `_HID` in the OS OSPM module for device state evaluation and initialization and the return value of `_STA` itself is an integer.
 
-Example of an operation that cannot use this method:
+**Example** of an operation that cannot use this method:
 
 ```asl
 Method (_STA, 0, NotSerialized)
@@ -327,6 +324,6 @@ Method (_STA, 0, NotSerialized)
     Return (Zero)
 }
 ```
-From the above example, we can see that the original `_STA` method contains other operations besides setting the conditional device status enable bit.
+The original `_STA` method contains other operations besides setting the conditional device status enable bit so that's why this approach cna't be applied in this case.
 
 **Risk**: XM01 may not be recovered when OC boots other systems.
