@@ -56,7 +56,7 @@ Parameter | Form | Description|
 ----------|:----:|--------
 **AMLFileName**| `""` | Name of the AML file. Can be a null string. Usually left empty.
 **TableSignature**| `"1234"` | Signature of the AML file (can be `DSDT` or `SSDT`). 4-character string.
-**ComplianceRevision**| `"X"` | Defines whether to use the 32-bit or 64-bit arithmetic. A value of `1` or less is for 32 bit systems, while a value of `2` or greater is for 64 bit systems. So for current systems, the default is value is `2`.
+**ComplianceRevision**| `X` | Defines whether to use the 32-bit or 64-bit arithmetic. A value of `1` or less is for 32 bit systems, while a value of `2` or greater is for 64 bit systems. So for current systems, the default is value is `2`.
 **OEM ID**| `"123456"` |ID of the original equipment manufacturer (OEM) developing the ACPI table (6-character string)
 **OEM Table ID**| `"12345678"` |A specific identifier for the table (8-character string)
 **OEMRevision**| `0x00000000` | Revision number set by the OEM (32-bit number)
