@@ -43,22 +43,23 @@ A notable feature of `ACPI` is a specific proprietary language to compile ACPI t
 ### The `DefinitionBlock`
 The `DefinitionBlock` is the foundation of every SSDT. All ASL code must reside inside of DefinitionBlock declarations `{}` (this is called the `Root Scope`) to be valid. ASL code found outside of any DefinitionBlock will be regarded as invalid. 
 
-General form of the `DefinitionBlock` (numbers indicate the amount of letters that can be used in each section):
+#### **General form of the `DefinitionBlock`** 
+Numbers indicate the amount of characters that can be used in each section):
 
 ```asl
-DefinitionBlock ("", "1234", 2, "123456", "12345678", 0x00000000)
+DefinitionBlock ("", "1234", X, "123456", "12345678", 0x00000000)
 ```
 
-The `DefinitionBlock` provides information about itself (in brackets):
+The `DefinitionBlock` provides information about itself in the brackets `()`. These are:
 
-Parameter | Description|
-----------|--------------
-**AMLFileName**| Name of the AML file. Can be a null string.
-**TableSignature**| Signature of the AML file (can be `DSDT` or `SSDT`). 4-character string
-**ComplianceRevision**| A value of `2` or greater enables 64-bit arithmetic (for 64 bit Systems)</br>A value of `1` or less enables 32-bit arithmetic (for 32 bit Systems)
-**OEM ID**| ID of the original equipment manufacturer (OEM) developing the ACPI table (6-character string)
-**OEM Table ID**| A specific identifier for the table (8-character string)
-**OEMRevision**| Revision number set by the OEM (32-bit number)
+Parameter | Form | Description|
+----------|:----:|--------
+**AMLFileName**| `""` | Name of the AML file. Can be a null string. Usually left empty.
+**TableSignature**| `"1234"` | Signature of the AML file (can be `DSDT` or `SSDT`). 4-character string.
+**ComplianceRevision**| `"X"` | Defines whether to use the 32-bit or 64-bit arithmetic. A value of `1` or less is for 32 bit systems, while a value of `2` or greater is for 64 bit systems. So for current systems, the default is value is `2`.
+**OEM ID**| `"123456"` |ID of the original equipment manufacturer (OEM) developing the ACPI table (6-character string)
+**OEM Table ID**| `"12345678"` |A specific identifier for the table (8-character string)
+**OEMRevision**| `0x00000000` | Revision number set by the OEM (32-bit number)
 
 #### `DefinitionBlock` Example
 :bulb: For hackintoshing, we usually use something like this. The SSDT begins with:
@@ -78,8 +79,8 @@ and is ended by:
 - `""` &rarr; **AMLFileName** 
 - `"SSDT"` &rarr; **TableSignature**
 - `2` &rarr; **ComplianceRevision** (for 64 bit OSes)
-- `"hack"` &rarr; **OEM ID** (Author name): "hack" is pretty common bur generic. OC Little tables use `"OCLT"`. For my own tables, I use `"5T33Z0"`. 
-- `"CpuPlug"` &rarr; **OEM Table ID**: Name the SSDT is identified as in the ACPI environment (not the file name). Usually, we name the SSDT based on the `Device` or `Method` it addresses. In this example `"CpuPlug"`.
+- `"hack"` &rarr; **OEM ID** (Author name): "hack" is pretty common but generic. OC Little tables use `"OCLT"`. For my own tables, I use `"5T33Z0"` or `"5TZ0"`. 
+- `"CpuPlug"` &rarr; **OEM Table ID**: Name the SSDT is identified as in the ACPI environment (not the file name). Usually, an SSDT is named by the `Device` or `Method` it addresses. In this example `"CpuPlug"`.
 
 **NOTE**: If you write replacement tables (e.g. for USB port declarations), you need to use the same OEM Table ID as the table you want to replace. 
 
@@ -153,6 +154,7 @@ and is ended by:
 10. Local variables in ASL can accept up to 8 arguments represented by `Local0`~`Local7`. Definitions are not necessary, but should be initialized, in other words, assignment is needed.
 
 ### `External` References
+External references must be used used to address objects in the `DSDT`, where they are defined. In other words: you need to tell your SSDT where the Device, Method or whatever object you want to change is located inside the structure of the `DSDT`.
 
 |  Quote Types   | External Reference | Addressed paramter
 | :------------: | :----------------- | :----------------------- 
