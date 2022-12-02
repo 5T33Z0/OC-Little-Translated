@@ -20,11 +20,13 @@ Luckily the patching process can now be automated using **SSDTTime** which can g
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
-3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
-5. Copy the generated SSDTs to `EFI/OC/ACPI`
-6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
-7. Save and Reboot.
+3. Type <kbd>m</kbd> and press <kbd>Enter</kbd> to return to the main menu.
+4. Select option <kbd>9</kbd> and hit <kbd>Enter</kbd>
+5. Next, enter the PCI path of the PCI bridge device and hit <kbd>Enter</kbd>
+6. The generated SSDT will be stored under `Results` inside the `SSDTTime-master` folder along with `patches_OC.plist`.
+7. Copy it to `EFI/OC/ACPI`
+8. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+9. Save and Reboot.
 
 ### Patching method 2: manual patching
 
