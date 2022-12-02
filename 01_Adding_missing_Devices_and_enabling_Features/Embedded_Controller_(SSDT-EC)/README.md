@@ -41,7 +41,7 @@ With the python script **SSDTTime**, you can generate SSDT-EC and SSDT-USBX.
 
 **Tip**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
-### Method 2: Manual patching method
+### Method 2: Manual patching method (recommended)
 1. In the `DSDT`, search for `PNP0C09` 
 2. If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
 3. Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
