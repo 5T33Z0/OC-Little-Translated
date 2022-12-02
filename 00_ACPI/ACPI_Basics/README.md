@@ -21,7 +21,7 @@ The ACPI subsystem itself consists of 2 data structures: data tables and definit
 ![acpi-structure](https://user-images.githubusercontent.com/76865553/187380905-e325398d-e65a-4db3-85c2-0d2cdb0b2934.png)</br>
 **Source**: **UEFI.org**
 
-We can make use of SSDTs to inject said Definintion Blocks into the system to change things as needed. We can add (virtual) devices, rename devices, change control methods (or redefine them), modify buffers, etc.) so macOS is happy.
+We can make use of SSDTs to inject said Definintion Blocks into the system to change things as needed. We can add (virtual) devices, rename devices, change control methods (or redefine them), modify buffers, etc. so macOS is happy.
 
 ### Why to prefer SSDTs over a patched DSDT
 A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working and so on.
