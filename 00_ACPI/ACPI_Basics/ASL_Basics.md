@@ -36,7 +36,7 @@
 ## About ASL
 The following information is based on the documentation of the [ACPI Specifications](https://uefi.org/specs/ACPI/6.4/) provided by the Unified Extensible Firmware Interface Forum (UEFI.org). Since I am not a developer, it is possible that there could be mistakes in the provided ASL examples.
 
-A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (ACPI Source Language), which is at the center of this article. After an ASL is compiled, it becomes AML (ACPI Machine Language), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines.
+A notable feature of `ACPI` is a specific proprietary language to compile ACPI tables. This language is called `ASL` (**A**CPI **S**ource **L**anguage), which is at the center of this article. After an ASL is compiled, it becomes `AML` (**A**CPI **M**achine **L**anguage), which can be executed by the operating system. Since ASL is a language, it has its own rules and guidelines.
 
 ## ASL Guidelines
 
