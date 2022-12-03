@@ -1,15 +1,23 @@
 # CMOS Reset Fix
 
-## Description
+- Some machines will report a **"Boot Self Test Error"** when shutting down or rebooting, due to a CMOS Reset triggered by macOS.
+- When using Clover, checking `ACPI/DSDT/Fixes/FixRTC` will resolve this issue.
+- When using OpenCore, there are 2 Methods available – use either or.
 
-- Some machines will report a  **"Boot Self Test Error"** when shutting down or rebooting, due to a CMOS Reset.
-- When using Clover, checking `ACPI\FixRTC` will resolve this issue.
-- When using OpenCore however, the following official solution is provided, see ***Sample.plist***.
-  - Install **RTCMemoryFixup.kext**
-  - `Kernel\Patch` patch: **__ZN11BCM5701Enet14getAdapterInfoEv**
-- This chapter provides an SSDT patch method to solve the above problem. This SSDT patch is essentially an impersonation of the RTC, see the section "01. Adding Fake Devices".
+## Method 1: Using a Kext and a Kernel Patch 
+This is the official method suggested by the OpenCore developers.
 
-## Solution
+- Add **RTCMemoryFixup.kext** to `EFI/OC/Kexts` and `config.plist`
+- Enable `Kernel\Patch` **__ZN11BCM5701Enet14getAdapterInfoEv** (copy it over from the ***Sample.plist*** included in the OpenCore Package if it's missing.)
+- Save and reboot. 
+
+The problem should be gone, the next time you reboot or shutdown the system.
+
+## Method 2: Fixing the Real Time Clock via SSDT 
+  
+This section provides an SSDT hotfix to solve the CMOS reset issue. It adds a fake RTC for macOS to play with (see [**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) for details).
+
+## Instructions
 
 - Remove the **interrupt number** from **RTC `PNP0B00`** part `_CRS`.
 
@@ -33,8 +41,8 @@
 
 ## Patch: SSDT-RTC0-NoFlags
 
-- Disable the original part: **RTC**
-  - If **RTC** does not exist ``_STA``, disable **RTC** using the following.
+- Disable the original **RTC** device
+- If **RTC** does not include the `_STA` method, disable **RTC** using the following:
   
     ```asl
     External(_SB.PCI0.LPCB.RTC, DeviceObj)
@@ -67,11 +75,9 @@
     }
     ```
 
-- Counterfeit **RTC0** , see sample.
-
-## Notes
+## NOTES
 - The device name and path in the patch should be identical to the original ACPI.
-- If the machine itself has disabled the RTC for some reason, an fake RTC is required for it to work properly. In the case that a **"Boot self-test error"** occurs, remove the interrupt number of the impersonation patch:
+- If the machine itself has disabled the RTC for some reason, a fake RTC is required for it to work properly. In the case that a **"Boot self-test error"** occurs, remove the interrupt from the SSDT:
 
   ```asl
     IRQNoFlags () /* delete this line */
