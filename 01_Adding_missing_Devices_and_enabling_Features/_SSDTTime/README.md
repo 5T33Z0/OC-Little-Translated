@@ -25,5 +25,5 @@ With the python script **SSDTTime**, you can generate the following SSDTs by ana
 8. Save and Reboot.
 
 ## NOTES
-- When used in Windows, SSDTTime also can dump the `DSDT`.
-- If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective section of the GUI to add them to the EFI/OC folder (.aml, .kext, .efi) and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
+- The Windoos version of SSDTTime (.bat) can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
+- If you using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can jsut copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.
