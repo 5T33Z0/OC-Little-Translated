@@ -26,7 +26,7 @@ There are 2 methods of applying this patch: either via kext or via SSDT.
 #### ACPIBatteryManager vs. SMCBatteryManager
 `SMCBatteryManager` is a virtual controller, which implements a complete emulation layer of `AppleSmartBattery` and its SMC and SMBus protocols. Although it is able to find all AC Adapters and Batteries just fine, it doesn't attach them to `ACPIACAdapter` and `AppleSmartBattery` services like `ACPIBatteryManager` does. 
 
-Basically, this is all cosmetics. If you want to be on the safe side, use `SMCBatteryManager` since it is in active development, whereas `ACPIBatteryManager` is from 2018, no longer in active development.
+Basically, this is all cosmetics. If you want to be on the safe side, use `SMCBatteryManager` since it is in active development, whereas `ACPIBatteryManager` hasn't been updated since 2018.
 
 ### Method 2: Using a SSDT (for advanced users)
 If `AppleACPIACAdapter` is not loaded, you can use one of the included SSDT hotpatches to attach it to the AC Adapter. Do the following, to figure out which SSDT is applicable:

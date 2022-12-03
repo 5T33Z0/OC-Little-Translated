@@ -2,7 +2,7 @@
 
 ## About the ThinkPad Battery System
 
-The ThinkPad Battery system consists of 2 categories: `single` and `dual`  battery systems.
+The ThinkPad Battery system consists of 2 categories: `single` and `dual` battery systems.
 
 - A single battery system is a machine equipped with one battery and only one battery in defined in ACPI.
 - A dual battery system is a machine is equipped with up to two batteries. The second battery is optional and can be installed later. A dual battery system may have one battery or two batteries.
@@ -13,10 +13,8 @@ For example, the T470/T470s belongs in the dual battery systems category whereas
 In order to get your battery percentage indicator working correctly, you have to do the following: 
 
 1. Determine if you have a single or dual battery system:
-
 	* Single battery systems only have `BAT0` in ACPI, no `BAT1`
 	* Dual battery systems have both `BAT0` and `BAT1` in ACPI
-
 2. Combine the correct name changes and Battery Patch(es) required for your system. See the samples below for more details.
 
 **CAUTION**: Make sure the `Battery Path` used in the SSDT patch matches the one used in the DSDT.  
@@ -37,12 +35,11 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
   - TP Battery `Mutex` Place `0` Rename
   - `BAT1` Disable renaming `_STA to XSTA` 
   
-    **Note**: Please use `Count`, `Skip`, `TableSignature` correctly and verify the correct location of `_STA to XSTA` by system-DSDT.
-
 - Required Patches:
-  
   - `Main Battery` patch -- ***SSDT-OCBAT0-TP****** 
   - `BAT1` disable patch -- ***SSDT-OCBAT1-disable-`LPC`*** [or ***SSDT-OCBAT1-disable-`LPCB`***]
+
+**Note**: Please use `Count`, `Skip`, `TableSignature` correctly and verify the correct location of `_STA to XSTA` by system-DSDT.
 
 ### Example 3: Dual battery system with two physical batteries
 
@@ -54,10 +51,11 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
   - `Main Battery` Patch -- ***SSDT-OCBAT0-TP******
   - `BATC` patch -- ***SSDT-OCBATC-TP-`LPC`*** [or ***SSDT-OCBATC-TP-`LPCB`*** , ***SSDT-OCBATC-TP-`_BIX`***]
   - `Notify` patch -- ***SSDT-Notify-`LPC`*** [or ***SSDT-Notify-`LPCB`***]
-   
-  **NOTE**:
-  - When `BATC` patch is selected, use ***SSDT-OCBATC-TP-`_BIX`*** for Gen 7+ machines 
-    - When you select the `Notify` patch, you should **Check carefully** if the `_Q22`, `_Q24`, `_Q25`, `_Q4A`, `_Q4B`, `_Q4C`, `_Q4D`, `BATW`, `BFCC`, etc. in the patch are consistent with the original `ACPI` counterparts, if not, please fix the patch accordingly. If not, please fix the corresponding content of the patch. For example: the content of `_Q4C` of Gen 3 machine is different from the sample content; Gen 4, Gen 5, Gen 6, Gen 7 machines do not have `_Q4C`; Gen 7+ machines have `BFCC`. Wait for ....... Sample file ***SSDT-Notify-`LPCB`*** for T580 only .
+
+**NOTES**:
+
+- When `BATC` patch is selected, use ***SSDT-OCBATC-TP-_BIX*** for Gen 7+ machines 
+- When you select the `Notify` patch, you should **Check carefully** if the `_Q22`, `_Q24`, `_Q25`, `_Q4A`, `_Q4B`, `_Q4C`, `_Q4D`, `BATW`, `BFCC`, etc. in the patch are consistent with the original `ACPI` counterparts, if not, please fix the patch accordingly. If not, please fix the corresponding content of the patch. For example: the content of `_Q4C` of Gen 3 machine is different from the sample content; Gen 4, Gen 5, Gen 6, Gen 7 machines do not have `_Q4C`; Gen 7+ machines have `BFCC`. Wait for ....... Sample file ***SSDT-Notify-`LPCB`*** for T580 only.
 - Loading order:
   - `Main Battery` patch
   - `BATC` patch
@@ -120,7 +118,7 @@ Method (_Q22, 0, NotSerialized) /* _Qxx: EC Query, xx=0x00-0xFF */
 }
 ```
 
-See `Notify` patch for details -- ***SSDT-Notify-`BFCC`*** 
+See `Notify` patch for details – ***SSDT-Notify-`BFCC`*** 
 
 > Verified machine is `ThinkPad T580`, patch and rename as follows.
 
