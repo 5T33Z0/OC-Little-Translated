@@ -4,7 +4,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "RTCfix", 0)
     External(_SB.PCI0.LPCB, DeviceObj)
 
     /*
-    //Example 1;;disable RTC
+    //Example 1; Disable RTC if _STA method is used in DSDT
     External(_SB.PCI0.LPCB.RTC, DeviceObj)
     Scope (_SB.PCI0.LPCB.RTC)
     {
@@ -23,7 +23,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "RTCfix", 0)
     */
 
     
-    //Example 2;;disable RTC
+    //Example 2; Disable RTC if STAS method is used in DSDT
     External (STAS, FieldUnitObj)
     Scope (\)
     {
@@ -33,7 +33,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "RTCfix", 0)
         }
     }
     
-    //Fake RTC0
+    //Add Fake RTC0
     Scope (_SB.PCI0.LPCB)
     {
         Device (RTC0)
