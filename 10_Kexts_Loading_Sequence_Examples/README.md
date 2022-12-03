@@ -17,32 +17,32 @@ Same goes for having kexts in the list which aren't present in the `OC/Kexts` fo
 For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Lilu and VirtualSMC first?
-Although it is recommended to load **Lili** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, this is not a requirement per se. **Lilu** and **VirtualSMC** only need to load *before anything that relies on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct load order when creating a config snapshot.
+Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***. **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct load order when creating a config snapshot. For reviewers of configs who try to assist others in fixing config issues this complicates troubleshooting.
 
-For reviewers of configs this complicates things. So when in doubt, either create a (new) snapshot in ProperTree or just put **Lilu** and **VirtualSMC** first to eliminate dependency issues altogether!
+:bulb: **Tip**: When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** first to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
 
 ## Kernel Support Table
 Listed below, you will find the Kernel ranges of macOS 10.4 to macOS 12. Setting `MinKernel` and `MaxKernel` for kext is very useful to set up your `config.plist` to be compatible with various versions of macOS without having to create multiple configs, since you can control which kext are loaded for which macOS by specifying the kernel range. It's basically the same feature Clover provides. But instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.) you specify the lower and upper limit which is a lot smarter because this way you don't create duplicate kexts (which you maybe forget to update later).
 
 This is especially useful for Bluetooth and WiFi kexts where certain macOS versions require different sets of kexts. So you can leave them all enabled but control which kexts will be loaded for the specified Kernel range (aka the chosen macOS version). See "Example 7" which makes use of this feature extensively.
 
-|macOS |MinKernel |MaxKernel
-|-----:|---------:|--------:|
-10.4 Tiger        |8.0.0| 8.99.99
-10.5 Leopard      |9.0.0| 9.99.99
-10.6 Snow Leopard |10.0.0| 10.99.99
-10.7 Lion         |11.0.0| 11.99.99
-10.8 Mountain Lion|12.0.0| 12.99.99
-10.9 Mavericks    |13.0.0| 13.99.99
-10.10 Yosemite    |14.0.0| 14.99.99
-10.11 El Capitan  |15.0.0| 15.99.99
-10.12 Sierra      |16.0.0| 16.99.99
-10.13 High Sierra |17.0.0| 17.99.99
-10.14 Mojave      |18.0.0| 18.99.99
-10.15 Catalina    |19.0.0| 19.99.99
-11 Big Sur        |20.0.0| 20.99.99
-12 Monterey       |21.0.0| 21.99.99
-13 Ventura        |22.0.0| 22.99.99
+|macOS            | MinKernel | MaxKernel
+|----------------:|:---------:|:--------:|
+10.4 Tiger        | 8.0.0     | 8.99.99
+10.5 Leopard      | 9.0.0     | 9.99.99
+10.6 Snow Leopard | 10.0.0    | 10.99.99
+10.7 Lion         | 11.0.0    | 11.99.99
+10.8 Mountain Lion| 12.0.0    | 12.99.99
+10.9 Mavericks    | 13.0.0    | 13.99.99
+10.10 Yosemite    | 14.0.0    | 14.99.99
+10.11 El Capitan  | 15.0.0    | 15.99.99
+10.12 Sierra      | 16.0.0    | 16.99.99
+10.13 High Sierra | 17.0.0    | 17.99.99
+10.14 Mojave      | 18.0.0    | 18.99.99
+10.15 Catalina    | 19.0.0    | 19.99.99
+11 Big Sur        | 20.0.0    | 20.99.99
+12 Monterey       | 21.0.0    | 21.99.99
+13 Ventura        | 22.0.0    | 22.99.99
 
 :bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, in most cases using `X.9.9` is sufficient. So far, there hasn't been a version of macOS which uses a Kernel that is greater than `X.9.9`. 
 
