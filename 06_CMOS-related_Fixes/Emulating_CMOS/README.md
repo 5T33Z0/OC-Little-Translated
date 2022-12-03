@@ -1,15 +1,14 @@
-# CMOS Memory and RTCMemoryFixup
+# Emulating CMOS Memory
 
 ## Description
 
-- When a conflict occurs between **AppleRTC** and **BIOS**, use **RTCMemoryFixup.kext** to emulate **CMOS** memory to avoid the conflict.
-- Download **RTCMemoryFixup** here: <https://github.com/acidanthera/RTCMemoryFixup>
+When a conflict occurs between **AppleRTC** and **BIOS**, use [**RTCMemoryFixup.kext**](https://github.com/acidanthera/RTCMemoryFixup) to emulate **CMOS** memory to avoid the conflict.
 
-## **CMOS** Memory
+## About **CMOS** Memory
 
 - **CMOS** memory holds important data such as date, time, hardware configuration information, auxiliary setup information, boot settings, hibernation information, etc.
 
-- Some **CMOS** memory space definitions.
+- Some **CMOS** memory space definitions are:
   - Date, time, hardware configuration: `00-0D` 
   - Hibernation information storage interval: `80-AB` 
   - Power management: `B0-B4` 
@@ -17,19 +16,24 @@
 
 ## View CMOS memory
 
-- `EFI\OC\Tools` install ***RtcRw.efi*** 
-- config add `items` of ***RtcRw.efi*** 
-- boot screen to `Shell` [make sure ***OpenShell.efi*** is installed], go to the directory tools, type rtcrw read XX and enter. Where XX is the CMOS memory address. For example, rtcrw read 08 can view the current month. If this month is May, check the result as 0x05 (BCD code).
+- Add ***RtcRw.efi*** (included in the OpenCore package) to `EFI\OC\Tools` and your config.plist 
+- Add ***OpenShell.efi*** as well
+- Save and reboot
+- Run the Shell from the BootPicker
+- Go to the directory tools
+- Type `rtcrw read XX` and hit <kbd>Enter</kbd>. Where XX is the CMOS memory address. For example, `rtcrw read 08` can view the current month. If this month is May, check the result as 0x05 (BCD code).
 
+## Emulating **CMOS** memory
 
-## Simulate **CMOS** memory
+- Install **RTCMemoryFixup** to `OC\Kexts` 
+- Add it to the list of `UEFI/Drivers` in the config.plist.
+- Add `rtcfx_exclude=…` to **`boot-args`**.
 
-- Install **RTCMemoryFixup** to `OC\Kexts` and add the driver list.
-- Boot **`boot-args`** Add `rtcfx_exclude=…` 
+**Examples**: 
 
-   **Format**: `rtcfx_exclude=offset1,offset2,start_offset-end_offset,…` </br>
-   **For example**: `rtcfx_exclude=0D`, `rtcfx_exclude=40-AF`, `rtcfx_exclude=2A,2D,80-AB`, etc.
-
+- `rtcfx_exclude=0D`, 
+- `rtcfx_exclude=40-AF`, 
+- `rtcfx_exclude=2A,2D,80-AB`, etc.
 
 ## Caution
 Emulating **CMOS** memory will erase the originally defined functions, please **use with caution**. For example: `rtcfx_exclude=00-0D` will cause the date and time of the machine to stop updating during sleep.
