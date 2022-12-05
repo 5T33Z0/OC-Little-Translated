@@ -48,7 +48,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 ### Config Edits
 - Mount your EFI
 - For Navi Cards, add `SSDT-NAVI.aml` to `EFI/OC/ACPI` and the config.plist
-- Disable Whatevergreen.kext
+- Disable `Whatevergreen.kext`
 - Disable boot-arg `agdpmod=pikera`
 - Under `DeviceProperties/Add` create a new child
 - Set it to "Dictionary"
