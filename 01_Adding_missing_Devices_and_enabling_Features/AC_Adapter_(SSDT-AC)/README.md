@@ -24,9 +24,11 @@ There are 2 methods of applying this patch: either via kext or via SSDT.
 `ACPIBatteryManager.kext` attaches the AC Adapter device to the `AppleACPIACAdapter` service. Additionally, it also applies some settings related to power management and attaches `BAT0` to `AppleSmartBatteryManger` in **IORegistryExplorer**.
 
 #### ACPIBatteryManager vs. SMCBatteryManager
-`SMCBatteryManager` is a virtual controller, which implements a complete emulation layer of `AppleSmartBattery` and its SMC and SMBus protocols. Although it is able to find all AC Adapters and Batteries just fine, it doesn't attach them to `ACPIACAdapter` and `AppleSmartBattery` services like `ACPIBatteryManager` does. 
+`SMCBatteryManager` is a virtual controller, which implements a complete emulation layer of `AppleSmartBattery` and its SMC and SMBus protocols. Although it is able to find all AC Adapters and Batteries just fine, it doesn't attach them to `ACPIACAdapter` and `AppleSmartBattery` services like `ACPIBatteryManager` does which is all cosmetic.
 
-Basically, this is all cosmetics. If you want to be on the safe side, use `SMCBatteryManager` since it is in active development, whereas `ACPIBatteryManager` hasn't been updated since 2018.
+And: in order for `ACPIBatteryManager` to work properly, additional battery patches are required to enable the Battery Status indicator in macOS. Nowadays you can use [**`ECEnabler.kext`**](https://github.com/1Revenger1/ECEnabler) to enable it without additional battery patches but it's not guaranteed to work on every system.
+
+If you want to be on the safe side, use `SMCBatteryManager` since it is in active development, whereas `ACPIBatteryManager` hasn't been updated since 2018.
 
 ### Method 2: Using a SSDT (for advanced users)
 If `AppleACPIACAdapter` is not loaded, you can use one of the included SSDT hotpatches to attach it to the AC Adapter. Do the following, to figure out which SSDT is applicable:
@@ -53,5 +55,5 @@ If it's not present, then you did something wrong, so start over.
 - Ensure that the PCI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
 - In Clover, you can use the DSDT patch `FixADP1` instead to attach the AC device in IOReg.
 - SSDT Patches by [**Baio 1977**](https://github.com/Baio1977)
-- `ACPIBatteryManager.kext` by [**RehabMan**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/).
+- [**ACPIBatteryManager.kext**](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/src/master/) by RehabMan.
 - `VirtualSMC` and `SMCBatteryManager` by [**Acidanthera**](https://github.com/acidanthera/VirtualSMC)
