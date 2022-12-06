@@ -50,7 +50,7 @@ Hexadecimal | Decimal
 	```MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 1```
 	```MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 1```
 - As you can see, these 2 MMIO regions are now skipped which means, that they are now available to the UEFI again.
-- Once you are done with creating the MMIO Whitelist and testing, you can disable the `DevirtualiseMmio` quirk and logging again (change `Misc/Debug/Target` to `3`)
+- Once you are done with creating the MMIO Whitelist and testing, you can disable logging and switch back to the Release version of OpenCore again (change `Misc/Debug/Target` to `3`)
 - Save and reboot
 
 ## Resources
