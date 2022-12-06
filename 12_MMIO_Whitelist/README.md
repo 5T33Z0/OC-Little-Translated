@@ -54,4 +54,4 @@ Hexadecimal | Decimal
 - Save and reboot
 
 ## Resources
-- [Devirtualise MMIO and MMIO Whitelist](https://www.macos86.it/topic/5511-let-talk-aboutdevirtualise-mmio-quirk-and-mmio-whitelist/)
+- [DevirtualiseMmio and MMIO Whitelist](https://www.macos86.it/topic/5511-let-talk-aboutdevirtualise-mmio-quirk-and-mmio-whitelist/)
