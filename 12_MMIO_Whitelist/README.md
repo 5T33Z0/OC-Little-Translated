@@ -30,7 +30,7 @@ The Bootlog will be stored in the `EFI` folder as a .txt file (even if boot fail
 ### 3. Converting Hex to Decimal
 In order to add the found addresses (here: `0xF80F8000` and `0xFED1C000`) to the MMIO Whitelist, we need to convert them to decimal:
 
-- Convert all the hex values of "MMIO Devirt" mathces which are not skipped (`skip 0`). You can use Hackintool for this.
+- Convert all the hex values of "MMIO Devirt" matches which are not skipped (`skip 0`). You can use Hackintool for this.
 - Run Hackintool
 - Click on the "Calc" Tab
 - Use the "Value" section to convert the hex to decimal values.
@@ -44,7 +44,7 @@ Hexadecimal | Decimal
 
 ### 4. Populating the MMIO Whitelist
 - Open `config.plist`
-- Add the decimal values of the address you found in the bootlog to `Booter/MmioWhitelist`, like so:</br>![](/Users/5t33z0/Desktop/MMIOWhitelist01.png)
+- Add the decimal values of the address you found in the bootlog to `Booter/MmioWhitelist`, like so:</br>![MMIOWhitelist01](https://user-images.githubusercontent.com/76865553/205931912-fee2d569-3265-47fb-a493-4c9556658805.png)
 - Save and reboot
 - Back in macOS, check the newly created bootlog:
 	```MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 1```
