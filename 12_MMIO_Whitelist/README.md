@@ -9,7 +9,7 @@ This guide assists you in finding these specifi MMIO regions and adding then to 
 ## Instructions
 
 ### 1. Generating a bootlog
-- Backup your current EFI Folder 
+- Backup your current EFI Folder on a FAT32 formatted USB flash drive!
 - Switch OpenCore from the RELEASE to the DEBUG version (if's pretty easy when using OCAT)
 - In `config.plist`, change the following:
 	- Enable `DevirtualiseMmio` (in `Booter/Quirks`)
