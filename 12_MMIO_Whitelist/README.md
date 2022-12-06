@@ -10,7 +10,10 @@ This guide assists you in finding these specifi MMIO regions and adding then to 
 
 ### 1. Generating a bootlog
 - Backup your current EFI Folder on a FAT32 formatted USB flash drive!
-- Switch OpenCore from the RELEASE to the DEBUG version (if's pretty easy when using OCAT)
+- Switch OpenCore from the RELEASE to the DEBUG version using OCAT:
+	- Mount your EFI and open your `config.plist`
+	- In OCAT, select "Edit > OpenCore DEBUG" from the menu bar
+	- Update OpenCore files and Drivers
 - In `config.plist`, change the following:
 	- Enable `DevirtualiseMmio` (in `Booter/Quirks`)
 	- `Misc/Debug/Target` to: `67`
@@ -42,7 +45,7 @@ Hexadecimal | Decimal
 0xF80F8000 | 4161765376
 0xFED1C000 | 4275159040
 
-### 4. Populating the MMIO Whitelist
+### 4. Populating and verifying the MMIO Whitelist
 - Open `config.plist`
 - Add the decimal values of the address you found in the bootlog to `Booter/MmioWhitelist`, like so:</br>![MMIOWhitelist01](https://user-images.githubusercontent.com/76865553/205931912-fee2d569-3265-47fb-a493-4c9556658805.png)
 - Save and reboot
@@ -50,8 +53,17 @@ Hexadecimal | Decimal
 	```MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 1```
 	```MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 1```
 - As you can see, these 2 MMIO regions are now skipped which means, that they are now available to the UEFI again.
-- Once you are done with creating the MMIO Whitelist and testing, you can disable logging and switch back to the Release version of OpenCore again (change `Misc/Debug/Target` to `3`)
+
+### 5. Finishing touches
+Once you are done with creating the MMIO Whitelist and testing, do the following:
+
+- Disable logging (change `Misc/Debug/Target` to `3`)
+- Switch OpenCore back to the Release version:
+	- Mount your EFI and open your `config.plist`
+	- In OCAT, select "Edit > OpenCore DEBUG" again, to uncheck it
+	- Update OpenCore files and Drivers
 - Save and reboot
 
 ## Resources
-- [DevirtualiseMmio and MMIO Whitelist](https://www.macos86.it/topic/5511-let-talk-aboutdevirtualise-mmio-quirk-and-mmio-whitelist/)
+- [**Using `DevirtuliseMmio`**](https://caizhiyuan.gitee.io/opencore-install-guide/extras/kaslr-fix.html#using-devirtualisemmio)
+- [**DevirtualiseMmio and MMIO Whitelist**](https://www.macos86.it/topic/5511-let-talk-aboutdevirtualise-mmio-quirk-and-mmio-whitelist/)
