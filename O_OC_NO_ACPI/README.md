@@ -1,11 +1,11 @@
 # Switching from official OpenCore to OpenCore_NO_ACPI_Build
 
 ## About
-**OpenCore_NO_ACPI_Build** is an unofficial fork of OpenCore by [btwise](https://gitee.com/btwise/OpenCore_NO_ACPI), not endorsed by Acidanthera, the dev team behind OpenCore. The main and only difference between this and the official OpenCore version is that it allows to NOT inject ACPI Tables and boot parameters into other OSes besides macOS like the official release does.
+**OpenCore_NO_ACPI_Build** is an unofficial fork of OpenCore by [btwise](https://gitee.com/btwise/OpenCore_NO_ACPI), not endorsed by Acidanthera (the dev team behind OpenCore) nor by me. I just want to provide some info about it. The main (and only) difference between this fork and the official OpenCore version is that it allows to ***not*** inject ACPI patches, tables, and boot parameters into other OSes besides macOS like the official release does.
 
-It is useful in cases where injecting ACPI tables and settings might cause issues in other Operating Systems such as Microsoft Windows, where injecting non-ACPI conform SSDTs are the #1 reason for the dreaded "Blue Screen of Death". So basically, this build of OpenCore is for n00b users (and so-called Hackintosh "veterans") who don't know how to add 3 lines of code to SSDTs to disable code injection into Windows (we know who you are).
+It might be useful in cases where injecting ACPI tables and settings cause issues in other Operating Systems such as Microsoft Windows, where injecting non-ACPI conform SSDTs are the #1 reason for the dreaded "Blue Screen of Death". So basically, it's aimed at  n00b users (and so-called Hackintosh "Veterans") who don't know how to add 3 lines of code to their SSDTs to disable code injection into Windows. If your EFI is configured correctly, you don't need this fork of OpenCore.
 
-So, how does it work? It has one more Quirk added to `ACPI/Quirks` and the `Booter/Quirks` Section called `EnableForAll`. And if it is set to `false`, no SSDTs and Booter parameters will be injected into other OSes besides macOS.
+So, how does it work? It has one more Quirk added to the `ACPI/Quirks` and `Booter/Quirks` section called `EnableForAll`. If this is set to `false`, no ACPI patches, SSDTs and Booter parameters will be injected into other OSes besides macOS.
 
 ## Prerequisites
 1. An already working EFI folder and config.plist
