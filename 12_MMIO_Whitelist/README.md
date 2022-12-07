@@ -26,9 +26,9 @@ The Bootlog will be stored in the `EFI` folder as a .txt file (even if boot fail
 - Open the `OpenCore-xxxx-xx-xx.txt` file
 - Press <kbd>CMD</kbd> + <kbd>F</kbd> to open the Find dialog
 - Search for "**MMIO devirt**" or just "**devirt**"
-- You might get something like this: 
-	```MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 0```
-	```MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 0```
+- You might get something like this: </br>
+	`MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 0` </br>
+	`MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 0`
 
 ### 3. Converting Hex to Decimal
 In order to add the found addresses (here: `0xF80F8000` and `0xFED1C000`) to the MMIO Whitelist, we need to convert them to decimal:
@@ -49,9 +49,9 @@ Hexadecimal | Decimal
 - Open `config.plist`
 - Add the decimal values of the address you found in the bootlog to `Booter/MmioWhitelist`, like so:</br>![MMIOWhitelist01](https://user-images.githubusercontent.com/76865553/205931912-fee2d569-3265-47fb-a493-4c9556658805.png)
 - Save and reboot
-- Back in macOS, check the newly created bootlog:
-	```MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 1```
-	```MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 1```
+- Back in macOS, check the newly created bootlog:</br>
+	`MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 1`</br>
+	`MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 1`
 - As you can see, these 2 MMIO regions are now skipped which means, that they are now available to the UEFI again.
 
 ### 5. Finishing touches
