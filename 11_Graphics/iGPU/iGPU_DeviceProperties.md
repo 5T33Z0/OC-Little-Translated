@@ -55,7 +55,7 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
 ## Empty Framebuffers (for Desktop)
-List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU used for displaying graphics.
+List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU is used for displaying graphics.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
