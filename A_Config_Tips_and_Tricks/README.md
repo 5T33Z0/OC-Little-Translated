@@ -200,9 +200,9 @@ The following settings will boot macOS from first APFS volume it finds. Combine 
 
 **NOTE**: Hold `X` after turning on the system to directly boot into macOS
 
-This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WIndowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
+This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WindowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
 
-:bulb: If you want to bypass all the SSDTs injections into Windows, you need to boot it via the BIOS Boot Menu. Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
+:bulb: If you want to bypass all the SSDTs injections into Windows, you either need to boot it via the BIOS Boot Menu or use [OpenCore_NO_ACPI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI). Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
 
 ## VI. Resolving issues with NVRAM
 
