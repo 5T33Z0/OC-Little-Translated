@@ -2,11 +2,10 @@
 Incomplete list of useful freeware Apps, Tools and resources for hackintoshing.
 
 ## Boot Managers
-- [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases)
-- [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true)
-- [**Clover Boot Manager**](https://github.com/CloverHackyColor/CloverBootloader/releases)
-- [**Clover Suite Builder**](https://www.insanelymac.com/forum/topic/347872-introducing-clover-suite-builder/) – Tool for compiling Clover from Source
-- [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser) – A pre-bootloader which lets you pick the actual Boot Manager you want to run. This way you can have multiple "Clover" and/or "OC" folders with different configs.
+- [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases) – Official RELEASE and DEBUG versions of OpenCore
+- [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true) – Latest Nightly Builds from Dortania's Repo
+- [**OpenCore_NO_ACPI_Build**](https://github.com/wjz304/OpenCore_NO_ACPI_Build/releases) – Unofficial fork of OpenCore which allows to not inject ACPI Tables in other Operating Systems
+- [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser) – A pre-bootloader which lets you pick the actual Boot Manager you want to run. This way, you can switch between "Clover" and "OC" easily.
 
 ## Apps and Tools
 ### macOS (General)
