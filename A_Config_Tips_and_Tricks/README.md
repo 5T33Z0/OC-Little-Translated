@@ -275,16 +275,14 @@ Exchanging existing SMBIOS data back and forth between an OpenCore and a Clover 
 Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. On top of that you have to re-enter and 2-way-authenticate the system every single time you switch between OpenCore and Clover, which is incredibly annoying. So in order to prevent this, you have to do the following:
 
 1. Copy the Data from the following fields to Clover Configurator's "SMBIOS" and "RtVariables" sections:
-
-PlatformInfo/Generic (OpenCore)| SMBIOS (Clover)      |
-|------------------------------|----------------------|
-| SystemProductName            | ProductName          |
-| SystemUUID                   | SmUUID               |
-| ROM                          | ROM (under `RtVariables`). Select "from SMBIOS" and paste the ROM address|
-| N/A in "Generic"             | Board-ID             |
-| SystemSerialNumber           | Serial Number        |
-| MLB                          | 1. Board Serial Number (under `SMBIOS`)</br>2. MLB (under `RtVariables`)|
-
+	PlatformInfo/Generic (OpenCore)| SMBIOS (Clover)      |
+	|------------------------------|----------------------|
+	| SystemProductName            | ProductName          |
+	| SystemUUID                   | SmUUID               |
+	| ROM                          | ROM (under `RtVariables`). Select "from SMBIOS" and paste the ROM address|
+	| N/A in "Generic"             | Board-ID             |
+	| SystemSerialNumber           | Serial Number        |
+	| MLB                          | 1. Board Serial Number (under `SMBIOS`)</br>2. MLB (under `RtVariables`)|
 2. Next, tick the "Update Firmware Only" box.
 3. From the Dropdown Menu next to it to, select the Mac model you used for "ProductName". This updates other fields like BIOS and Firmware.
 4. Save config and reboot with Clover.
