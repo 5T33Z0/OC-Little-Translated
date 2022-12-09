@@ -13,7 +13,7 @@ So, how does it work? It has one more Quirk added to the `ACPI/Quirks` and `Boot
 
 ## Instructions
 1. :warning: Backup your current EFI folder on a FAT32 formatted USB flash drive!
-2. Download the appropriate build [**OpenCore_NO_ACPI_Build**](https://github.com/wjz304/OpenCore_NO_ACPI_Build/releases) matching your OpenCore version and unzip it
+2. Download the correct [**OpenCore_NO_ACPI_Build**](https://github.com/wjz304/OpenCore_NO_ACPI_Build/releases) that matches your OpenCore version and unzip it
 3. Replace the following files in your `EFI` Folder:
 	- **BootX64.efi** (in EFI/Boot)
 	- **OpenCore.efi** (in EFI/OC)
