@@ -1,5 +1,5 @@
 # OpenCore Config Tips and Tricks
-This section contains a small collection of useful tips and tricks for working with OpenCore's `config.plist`. For updating OpenCore easy and reliably to the latest version, follow my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore).
+This section contains a small collection of useful configuration tips for OpenCore's `config.plist`.
 
 **TABLE of CONTENTS**
 
@@ -16,7 +16,7 @@ This section contains a small collection of useful tips and tricks for working w
 
 ## OpenCore Troubleshooting Quick Tips
 
-Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following Settings:
+Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following settings:
 
 - `UEFI/ConnectDrivers` = true
 - `Misc/Security/SecureBootModel` = Disabled
@@ -25,6 +25,8 @@ Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the fo
 - `UEF/APFS/MinVersion` = -1
 - Compare the structure of `UEFI/Drivers` with `sample.plist` from the OpenCore Package (format changed in OC 0.7.3).
 - **OC Troubleshooting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
+
+For extensive troubleshooting please refer to Dortania's [Troubleshooting Guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents).
 
 ### `MinDate`/`MinVersion` settings for the APFS driver
 OpenCore introduced a new security feature in version 0.7.2 which prohibits the APFS driver from loading if it doesn't comply to a specific Date and Version (`MinDate` and `MinVersion`).
