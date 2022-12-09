@@ -1,17 +1,19 @@
 # Compatibility charts
 Listed below, you find some charts containing useful information about SMBIOS, Hardware and DRM compatibility as well as NVRAM variables.
 
+## Hardware and macOS Compatibility
+
 Component | Compatibility Chart
 ----------|--------------------
 **CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
-**CPUs** used in real Macs| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0)
+**CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Spreadsheet)
 **AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
-**DRM** | [**DRM Compatibility Chart**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 **WiFi/BT** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI)
-**SSDs**| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0)
-**SMBIOS** | [**SMBIOS_Current.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Current.pdf)</br> [**SMBIOS_Legacy.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Legacy.pdf)
+**SSDs**| [**Compaitible WiFi Device IDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Spreadsheet)
+**SMBIOS** | [**SMBIOS_Current.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf)</br> [**SMBIOS_Full.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf)
+**DRM** | [**DRM Compatibility Chart**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 **NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0)
-**SMC Keys** | [**SMC keys knowledge database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
+**SMC Keys** | [**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
 
 ## Picking the right SMBIOS
 Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smooth running and efficient system. You should chose your SMBIOS based on the following aspects:
