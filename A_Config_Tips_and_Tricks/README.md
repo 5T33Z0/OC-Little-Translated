@@ -37,35 +37,42 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 
 | `MinDate`| `MinVersion`     | Description                                  |
 |:--------:|:----------------:|:---------------------------------------------|
-| 0        | 0                | Auto. Allows APFS driver in macOS ≥ Big Sur) |
+| 0        | 0                | Default. Loads APFS driver for Big Sur+ only |
 | -1       | -1               | Disabled. Allows any APFS driver             |
-| 20210101 | 1600000000000000 | Default                                      |
-| 20210508 | 1677120009000000 | req. macOS ≥ Big Sur (11)                    |
-| 20200306 | 1412101001000000 | req. macOS ≥ Catalina (10.15)                |
-| 20190820 | 9452750070000000 | req. macOS ≥ Mojave (10.14)                  |
-| 20180621 | 7480770080000000 | req. macOS ≥ High Sierra (10.13)             |
+| 20210508 | 1677120009000000 | req. macOS ≥ Big Sur (11.4+)                 |
+| 20200306 | 1412101001000000 | req. macOS ≥ Catalina (10.15.4+)             |
+| 20190820 | 9452750070000000 | req. macOS ≥ Mojave (10.14.6)                |
+| 20180621 | 7480770080000000 | req. macOS ≥ High Sierra (10.13.6)           |
 
 **Source**: [Acidanthera](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h)
 
-**IMPORTANT**: For security reasons, you should change these values according to the version of macOS you are using.
+**IMPORTANT**: For security concerns, you should change these values according to the version of macOS you are using.
 
 ## I. Updating config.plist and fixing errors
 
 ### Automated config upgrade (recommended)
-Since OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
+Since OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become so much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
 
 ### Manual upgrade and error correction (old)
-Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare with the latest sample.plist and update files. These included: 
+Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare it with the latest sample.plist and update files. These included: 
 
-- OCConfigCompare (to compare config differences), 
-- KextUpdater (for downloading Kexts, Drivers, etc.), 
-- ProperTree (for creating snapshots editing the config) and 
-- OCValidate (for checking the config). 
+- **OCConfigCompare** – To compare config differences between OpenCore's `sample.plist` and your `config.plist` 
+- **KextUpdater** – For updating Kexts, Drivers, etc. 
+- **ProperTree** – For editing the config and creating OC Snapshots 
+- **OCValidate** – For checking the config for formal errors
 
-This was a really time consuming process and I am glad, I don't have to do this any more.
+Manually upgrading the config and files can be a really time consuming process. Since OCAT can do all of this with a few clicks now, I am glad I don't to do it any more – and you shouldn't either. 
+
+### A personal note on using Configurator Apps
+The recommendatio "Don't use Configurators" has turned into a prejudice against all Configurator Apps which is wrong, imo. It stems from an era when the config.plist's structure underwent constant changes and developers of Configurator Apps had a hard time keeping up to implement the new features. This resulted in a lot of messed up configs and unbootable systems. So it was recommended to not use them.
+
+Over time, this recommendation turned into a mindlessly repeated and blindly followed slogan without knowing what's going on in terms of development of these Apps. People quickly adopted the "*Don't*" part of the recommendation but forgot about the *Why* part even quicker. Since then, this recommendation has become a tabu – it's propagated by the most outspoken opinion leaders of the scene on places like forums, reddit and discord. On some discord servers you will even be discredited for even using screenshots of settings that show a Configurator App… this scene is great, isn't it?
+
+While this recommendation remains true for Apps like OpenCore Configurator for example, OCAT is much more flexible when it comes to dealing with config changes. It can integrate new keys added to an existing section/array of the config automatically. No other Configurator App can do this as of yet! And since OCAT downloads the latest version of the sample.plist and OCValidate when updtaing, there's always a verification process in place that checks and ensures that the formal structure of the config is consistent. It also creates an automatic backup of your current config that you can always revert back to. 
+
+So putting OCAT in the same category as other Configurator Apps doesn't do it justice and these so-called opinion leaders need to finally acknowledge it!
 
 ## II. Quick fixes for Boot Problems
-
 If the system doesn't boot despite correct boot and kernel settings and hangs directly at the boot logo without a progress bar, you should change the following settings:
 
 - **Misc/Security/SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details.
@@ -323,3 +330,4 @@ If you've used the real MAC Address of your Ethernet Controller ("ROM") when gen
 
 ## Further Resources
 - Check Dortania's excellent OpenCore [Post-Install Guide](https://github.com/dortania/OpenCore-Post-Install) for fixing all sorts of issues.
+- The **Documentation.pdf** contained in the OpenCore Package also contains a Tips & Tricks chapter
