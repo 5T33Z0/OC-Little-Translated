@@ -16,12 +16,12 @@ There are 2 methods for enabling the XOSI patch construct – use either or.
 
 ### Method 1: automated patching using SSDTTime
 
-1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Press <kbd>D</kbd>, drag in your system's `DSDT` and hit <kbd>Enter</kbd>
-3. Next, type <kbd>A</kbd> and hit <kbd>Enter</kbd> to generate `SSDT-XOSI` and necessary binary renames
-4. In the next screen, select Windows build you are running and hit <kbd>Enter</kbd>
-4. The generated SSDT will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
-5. Copy the generated SSDTs to `EFI/OC/ACPI`
+1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it.
+2. Press <kbd>D</kbd>, drag in your system's `DSDT` and hit <kbd>Enter</kbd>.
+3. Next, type <kbd>A</kbd> and hit <kbd>Enter</kbd> to generate `SSDT-XOSI` and necessary binary renames.
+4. Select the Windows version supported by your `DSDT` (type <kbd>A</kbd> for auto-detection) and hit <kbd>Enter</kbd>.
+4. The generated `SSDT-XOSI` will be stored under `Results` inside the `SSDTTime-master` folder along with `patches_OC.plist`.
+5. Copy the generated SSDT to `EFI/OC/ACPI`.
 6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
 7. Save and Reboot.
 
@@ -56,7 +56,7 @@ Add the following Renames (if applicable) to `config.plist`:
 #### ⚠️ Caution: Order of Operations
 Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors under Windows. 
 
-Therefore, you need to rename these methods to something else *first* (e.g. `OSID` to `XSID` or `OSID` to `XSIF`) before applying the `_OSI to XOSI` rename. In other words: rename rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *before* `_OSI to XOSI` in the `config.plist`!
+Therefore, you need to rename these methods to something else *before* applying the `_OSI to XOSI` rename. In other words: rename rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *prior* to `_OSI to XOSI` in the `config.plist`!
   
 #### Part 2: Hotpatch ***SSDT-OC-XOSI***
 
@@ -95,8 +95,8 @@ Method(XOSI, 1)
 
 ### Usage
 
-- **Maximum Value**: For a single Windows installation, you can set the operating system parameter to the maximum value allowed by the DSDT. For example, if the maximum value of the DSDT is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit for the part.
-- **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is win7, set Arg0 == "Windows 2009".
+- **Maximum Value**: For a single Windows installation, you can set the operating system parameter to the maximum value supported by your `DSDT`. For example, if the maximum value of the `DSDT` is `Windows 2018`, then set `Arg0 == "Windows 2018"`. Usually `Arg0 == "Windows 2013"` above will unlock the system limit.
+- **Matching values**: For dual boot system, the set OS parameters should be the same as the Windows system version. For example, if the Windows system is `WIN8`, set `Arg0 == "Windows 2012"`.
 
 ## Appendix: Origin of OS Patches
 When the system is loaded, ACPI's `_OSI` receives a parameter. Different systems receive different parameters and ACPI executes different instructions. For example, if the system is **Win7**, this parameter is `Windows 2009`, and if the system is **Win8**, this parameter is `Windows 2012`. For example:
