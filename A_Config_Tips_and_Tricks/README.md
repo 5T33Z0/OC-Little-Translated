@@ -64,7 +64,7 @@ Prior to the advent of OCAT, I used to maintain and update my config with 4 addi
 Manually upgrading the config and files can be a really time consuming process. Since OCAT can do all of this with a few clicks now, I am glad I don't to do it any more – and you shouldn't either. 
 
 ### A personal note on using Configurator Apps
-The recommendatio "Don't use Configurators" has turned into a prejudice against all Configurator Apps which is wrong, imo. It stems from an era when the config.plist's structure underwent constant changes and developers of Configurator Apps had a hard time keeping up to implement the new features. This resulted in a lot of messed up configs and unbootable systems. So it was recommended to not use them.
+The recommendation "Don't use Configurators" has turned into a prejudice against all Configurator Apps which is wrong, imo. It stems from an era when the config.plist's structure underwent constant changes and developers of Configurator Apps had a hard time keeping up to implement the new features. This resulted in a lot of messed up configs and unbootable systems. So it was recommended to not use them.
 
 Over time, this recommendation turned into a mindlessly repeated and blindly followed slogan without knowing what's going on in terms of development of these Apps. People quickly adopted the "*Don't*" part of the recommendation but forgot about the *Why* part even quicker. Since then, this recommendation has become a tabu – it's propagated by the most outspoken opinion leaders of the scene on places like forums, reddit and discord. On some discord servers you will even be discredited for even using screenshots of settings that show a Configurator App… this scene is great, isn't it?
 
