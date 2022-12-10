@@ -10,7 +10,7 @@ This section contains a small collection of useful configuration tips for OpenCo
 - [IV. Adjust Boot Picker Attributes, enable Mouse Support](#iv-adjust-boot-picker-attributes-enable-mouse-support)
 - [V. Customizing Boot Options](#v-customizing-boot-options)
 - [VI. Resolving issues with NVRAM](#vi-resolving-issues-with-nvram)
-- [VII. Prohibit SMBIOS injection in other OSes](#vii-prohibit-smbios-injection-in-other-oses)
+- [VII. Prohibit SMBIOS injection into other OSes](#vii-prohibit-smbios-injection-into-other-oses)
 - [VIII. Exchanging SMBIOS Data between OpenCore and Clover](#viii-exchanging-smbios-data-between-opencore-and-clover)
 - [Further Resources](#further-resources)
 
@@ -121,17 +121,21 @@ You should deactivate the single user mode for security reasons, because it can 
 
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
-With **PickerAttributes**, you can assign different properties and functions to the BootPicker. There are 5 parameters, each having its own value/byte, which can be combined by simple adding them:
+With **PickerAttributes**, you can customize the look and feel of the BootPicker. There are currently 8 parameters which can be combined by simple adding their values:
 
-`1` = Custom Icons for Boot Entries </br>
-`2` = Custom Titles for Boot Entries </br>
+`1` = Enables custom icon support for Boot entries </br>
+`2` = Enables custom titles for Boot Entries </br>
 `4` = Predefined Label Images for Boot entries without custom entries </br>
-`8` = Prefers Builtin icons for certain icon categories to match the theme style </br> `16` = Enable Mouse Cursor
+`8` = Prefers Builtin icons for certain icon categories to match the theme style </br> `16` = Enables mouse cursor</br>
+`32` = Enables additional timing and debug information in Builtin picker (DEBUG and NOOPT builds only)</br>
+`64` = Minimal GUI (no Shutdown and Restart buttons)</br>
+`128` = Enables "Flavor Icons" which provide flexible boot entry content description (refer to `Documentation.pdf` for details)
 
-**For Example:**
+**Examples:**
 
-**PickerAttributes** = `17` –– Enables Custom Icons and Mouse Cursor (New default setting since OpenCore 0.6.7)</br>
-**PickerAttributes** = `19`–– Enables Custom Icons, Custom Titles and Mouse Cursor.
+`17` &rarr; Enables custom icons and the mouse cursor (bew default since OpenCore 0.6.7)</br>
+`19` &rarr; Enables custom icons, custom titles and the mouse cursor</br>
+`147` &rarr; Enables custom icons, custom titles, the mouse cursor and Flavour Icons. Recommended setting when using custom themes.
 
 ## V. Customizing Boot Options
 
@@ -145,7 +149,7 @@ To be able to set the boot drive in the BootPicker, enable the following options
 In **BootPicker**: 
 
 - Select drive/partition
-- Hold [CTRL] and press [ENTER]. 
+- Hold <kbd>Ctrl</kbd> and press <kbd>Enter</kbd> 
 
 After that this volume is always preselected (until NVRAM is reset).
 
@@ -155,8 +159,8 @@ After that this volume is always preselected (until NVRAM is reset).
 
 **Examples**:
 
-- Enter `CMD+V` before starting macOS boots macOS in Verbose mode. So no need to add `-v` to the boot-args.
-- Holding Shift (⇧) will boot macOS into Safe Mode
+- Enter <kbd>CMD</kbd><kbd>V</kbd> before starting macOS boots macOS in Verbose mode. So no need to add `-v` to the boot-args.
+- Holding Shift (<kbd>⇧</kbd>) will boot macOS in Safe Mode
 
 For more details check the `Configuration.pdf` included in the OpenCore package.
 
@@ -164,13 +168,13 @@ For more details check the `Configuration.pdf` included in the OpenCore package.
 
 **ConnectDrivers** = `No`
 
-If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver AudioDxe.efi is not started in this case. 
+If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver `AudioDxe.efi` is not started in this case. 
 
-:warning: **CAUTION**: Before updating macOS via USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
+:warning: **CAUTION**: Before installing macOS from USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
 ### Boot variants (Selection)
 
-Change the following settings in the config to influence the boot process of OpenCore. There are certainly more options, but these seem to me to be the most common/useful.
+Change the following settings in the config to influence the boot process. There are certainly more options, but these seem to me to be the most common/useful.
 
 #### Manual selection of the OS without GUI (default)
 
@@ -179,7 +183,7 @@ Change the following settings in the config to influence the boot process of Ope
 
 #### Manual selection of the OS with GUI (requires OpenCanopy and [Resources folder](https://github.com/acidanthera/OcBinaryData))
 
-Great for dual boot setups. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over your system.
+Great for dual boot setups. Combine with `LauncherOption` `Full` or `Short`to protect you against Windows Boot Manager taking over the first slot of the bootmenu.
 
 **PickerMode** = `External`</br>
 **ShowPicker** = `Yes`
@@ -193,7 +197,7 @@ Great for dual boot setups. Combine it with the`LauncherOption` `Full` or `Short
 
 #### Start macOS automatically (no GUI, fast)
 
-The following settings will boot macOS from first APFS volume it finds. Combine it with the`LauncherOption` `Full` or `Short`to protect you against Windows taking over the bootloader.
+The following settings will boot macOS from first APFS volume it finds. Combine it with `LauncherOption` `Full` or `Short`to protect you against Windows Boot Manager taking over the first slot of the bootmenu.
 
 **Prerequisites**: enabled `PollAppleHotkeys` 
 
@@ -261,7 +265,7 @@ Alternatively, you can use Terminal to delete the key (no restart required):
 sudo nvram -d 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
-## VII. Prohibit SMBIOS injection in other OSes
+## VII. Prohibit SMBIOS injection into other OSes
 
 To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing issues with the registration, change the following settings:
 
