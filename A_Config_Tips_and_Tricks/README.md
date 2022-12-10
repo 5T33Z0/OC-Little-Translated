@@ -78,7 +78,7 @@ If the system doesn't boot despite correct boot and kernel settings and hangs di
 - **Misc/Security/SecureBootModel** = `Disabled`. If you have problems with booting using the`Default` value. For security concerns you should check if the chosen mac Model in `SystemProductName`supports Apple's Secure Boot feature, once your system is working. Refer to the Documentation.pdf for more details.
 - **Misc/Security/Vault** = `Optional` Disables File Vault. Can prevent system boot if it is set to "Secure" but File Vault encryption is not configured at all. Because it needs the generation of a key and a hash.
 
-If your macOS Partion (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
+If your macOS Partition (APFS) is not displayed in Bootpicker, do the following (OpenCore 0.7.2 and newer):
 
 - **UEFI/APFS**: Change `MinDate` and `MinVersion` to `-1`. This disables APFS driver verification, so it loads no matter which version of macOS you are using (from macOS High Sierra onwards, because that's when APFS was introduced).
 
@@ -103,8 +103,8 @@ You should deactivate the single user mode for security reasons, because it can 
 
    **NOTES**
    
-   - Using `FF0F0000` for Big Sur and as suggested by Dortania's OpenCore Install Guide is not recommended since it prevents System Update notifications. In Big Sur, *authenticated root* has been added to SIP, resulting in a different value of `0x867` for csr-active config. In OpenCore this translates to `67080000`.
-   - Using `EF0F0000` does notify you about System Updates. If the seal of the volume is broken however, it will download the complete installer (about 12 GB) instead of performing an incremetal update.
+   - Using `FF0F0000` for Big Sur (as suggested by Dortania's OpenCore Install Guide) is not recommended because it breaks System Update Notifications. For Big Sur and newer, use `67080000` instead.
+   - Using `EF0F0000` does notify you about System Updates. But if the seal of the volume is broken however, it will download the complete installer (about 12 GB), instead of performing an incremental update which is not really desireable.
    - If you want to know how `csr-active-config` is calculated or if you want to calculate your own, check the [OpenCore Calcs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details.
 
 2. To avoid the need of resetting NVRAM every time after you've changed  the csr value, add the following parameter to the config:
