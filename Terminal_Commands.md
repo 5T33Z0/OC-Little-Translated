@@ -90,6 +90,8 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 defaults write com.apple.sidecar.display AllowAllDevices -bool true
 defaults write com.apple.sidecar.display hasShownPref -bool true
 ```
+**NOTE**: Requires Intel CPU with working Intel on-board graphics!
+
 **Disable Logging:**</br>
 
 ```shell
@@ -100,7 +102,7 @@ sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist
 ```shell
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
-**Disabling macOS from mastering iDevices**:
+**Prohibit macOS from mastering iDevices**:
 
 ```shell
 defaults write com.apple.iTunesHelper ignore-devices -bool YES
@@ -108,7 +110,7 @@ defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
 defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
 defaults write -g ignore-devices -bool true
 ```
-**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/docs/USB_Modes.md)
+**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
 
 ## CPU related
 
