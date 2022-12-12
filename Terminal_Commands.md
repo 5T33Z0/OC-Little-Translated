@@ -16,6 +16,12 @@ sw_vers
 ```shell
 uname -r
 ```
+**Change Update Seed to Developer**:</br>
+
+```shell
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+```
 **Disable Gatekeeper**:</br>
 
 ```shell
@@ -59,28 +65,25 @@ sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.pl
 ```shell
 networksetup -listallhardwareports
 ```
-
-**Show all Files in Finder**:</br>
+**Show all Files and Folders in Finder**:</br>
 
 ```shell
 defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
 defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
 ```
-Alternatively, use a **Key Command**: ⌘⇧. (Command-Shift-Dot)
+Alternatively, use **Key Command** <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
 
 **Rebuild Launch Services**:</br>
 
 ```shell
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 ```
-
 **Rebuild DYLD and XPC caches** (≤ macOS 10.15):
 
 ```shell
 sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
 ```
-
 **Enable Sidecar**:</br>
 
 ```shell
@@ -144,9 +147,29 @@ sysctl -a | grep machdep.cpu.leaf7_features
 ```shell
 ioreg -rxn "CPU0@0"
 ```
-**NOTE**: Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG/SSDT-PM` to find the correct name.
+**NOTE**: Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
 
 ## Hackintosh specific
+**Check currently used SMBIOS**:</br>
+
+```shell
+system_profiler SPHardwareDataType | grep 'Model Identifier'
+```
+**Check OpenCore version**:</br>
+
+```shell
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+```
+**Check currently active csr-active-config**:</br>
+
+```shell
+nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
+```
+**Check the status of System Integrity Protection**:</br>
+
+```shell
+csrutil status
+```
 **Checking Reasons for Wake**:</br>
 
 ```shell
@@ -156,22 +179,6 @@ Alternative Connmand (searches in syslog):
 
 ```shell
 log show --style syslog | fgrep "Wake reason"
-```
-
-**Currently used SMBIOS**:</br>
-
-```shell
-system_profiler SPHardwareDataType | grep 'Model Identifier'
-```
-**Check OpenCore version set in NVRAM**:</br>
-
-```shell
-nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
-```
-**Check currently active csr-active-config set in NVRAM**:</br>
-
-```shell
-nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
 ```
 **Find loaded Kexts** (excluding those from Apple):</br>
 
@@ -187,11 +194,6 @@ sudo kextcache -i /
 
 ```shell
 sudo diskutil apfs updatePreboot /
-```
-**Check the status of System Integrity Protection**:</br>
-
-```shell
-csrutil status
 ```
 **Show last boot log**:</br>
 
@@ -257,7 +259,6 @@ sysctl -a | grep machdep.cpu.features
 sysctl -a | grep machdep.cpu.leaf7_features
 sysctl machdep.cpu | grep AVX
 ```
-
 **Disable/Delete Metal Support**:</br>
 
 ```shell
@@ -272,12 +273,6 @@ sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
 ```
 [**Source**](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
-**Change Update Seed to Developer**:</br>
-
-```shell
-sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
-sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
-```
 **Removing Network .plists (for troubleshooting)**:</br>
 
 ```shell
@@ -308,4 +303,4 @@ ___
 
 # Keyboard Shorcuts
 
-**Show hidden Files and Folders in Finder**: ⌘⇧. (Command-Shift-Dot)
+**Show hidden Files and Folders in Finder**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
