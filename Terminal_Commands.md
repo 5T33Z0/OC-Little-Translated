@@ -246,6 +246,8 @@ ioreg -l -p IOService -w0 | grep -i XHCI
 ```shell
 kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 ```
+**NOTE**: The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. If only one is present, SMBus isn't fully working!
+
 **Debug ACPI Hotpatches**:</br>
 
 ```shell
