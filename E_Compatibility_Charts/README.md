@@ -32,7 +32,7 @@ Things you can do on Hackintoshes that you can't do on real Macs:
 - You can make use of macOS Monterey's virtualization capabilities to spoof a supported SMBIOS but let the hardware use the intended SMBIOS for your CPU! Check my [**Boad-ID VMM spoofing**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) guide to find out how it works.
 
 ## AppleALC Layout IDs sorted by CODEC
-This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available AppleALC Layout IDs based on the name of the CODEC.
+This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available AppleALC Layout IDs based on the name of the CODEC, while the official AppleALC repo [lists](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs) them all on one page.
 
 - Click on the folder for your vendor
 - Find the .md file for your CODEC 
