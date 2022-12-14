@@ -126,6 +126,24 @@ This error occurs when opening a `config.plist` which was created for a differen
 3. It will download and integrate the latest version of OpenCore into the database
 4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
+## Switching between Release and Debug build
+To switch from the RELEASE to the DEBUG version of OpenCore, do the following:
+
+- In OCAT, select "Edit > OpenCore DEBUG" from the menu bar (set checkmark)
+- Mount your EFI and open your `config.plist`
+- Backup your current EFI Folder on a FAT32 formatted USB flash drive!
+- Set `Misc/Debug/Target` to: `67`
+- Update OpenCore files and Drivers
+- Save and reboot
+
+To revert back to the RELEASE build:
+
+- In OCAT, select "Edit > OpenCore DEBUG" again, to uncheck it
+- Mount your EFI and open your `config.plist`
+- Disable logging (change `Misc/Debug/Target` to `3`)
+- Update OpenCore files and Drivers
+- Save and reboot
+
 ## Notes
 
 - If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver) 
