@@ -204,7 +204,7 @@ Key | Type | Value
 
 Key | Type | Value| Notes
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`| Data | `0900A53E` | F Laptops with UHD 630
+`AAPL,ig-platform-id`| Data | `0900A53E` | For Laptops with UHD 630
 `AAPL,ig-platform-id`| Data | `00009B3E` | For Laptops with UHD 620
 `AAPL,ig-platform-id`| Data | `07009B3E` | For NUCs with UHD 620/630
 `AAPL,ig-platform-id`| Data | `0000A53E` | For NUCs with UHD 655
