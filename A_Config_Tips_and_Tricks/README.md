@@ -103,7 +103,7 @@ You should deactivate the single user mode for security reasons, because it can 
 
    **NOTES**
    
-   - Using `FF0F0000` for Big Sur (as suggested by Dortania's OpenCore Install Guide) is not recommended because it breaks System Update Notifications. For Big Sur and newer, use `67080000` instead.
+   - Using `FF0F0000` for Big Sur (as suggested by Dortania's OpenCore Install Guide) is not recommended because it breaks System Update Notifications and incremental updates. For Big Sur and newer, use `67080000` instead.
    - Using `EF0F0000` does notify you about System Updates. But if the seal of the volume is broken however, it will download the complete installer (about 12 GB), instead of performing an incremental update which is not really desireable.
    - If you want to know how `csr-active-config` is calculated or if you want to calculate your own, check the [OpenCore Calcs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details.
 
