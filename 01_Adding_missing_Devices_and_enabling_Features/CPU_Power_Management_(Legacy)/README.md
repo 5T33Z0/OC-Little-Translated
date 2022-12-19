@@ -54,13 +54,13 @@ You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to 
 Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
 
 ## Modifiers
-Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [modifiers](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how to apply them.
+Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [overrides](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how and when to use them.
 
 Here's a table of commonly used modifiers which can be combined. Use `ark.intel.com` to look-up the specs of your CPU.
 
 Modifier | Description/Example
 :-------:|--------------------
-`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and frequencies. This is also useful if you want to generate a SSDT-PM for someone else who uses a different CPU than you. You can also add missing CPU data to `User Defined.cfg` </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
+`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and frequencies. The advantage of generating the SSDT-PM that it includes additional info and workarounds for the CPU. It's also useful for generatin a SSDT-PM for someone else who uses a different CPU. You can also add missing CPU data to `User Defined.cfg` </br></br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
 `-target X` | Target Intel CPU family, where `X` stands for a number from  0 to 5: </br></br> 0 = Sandy Bridge </br> 1 = Ivy Bridge </br> 2 = Haswell </br> 3 = Broadwell </br> 4 = Skylake </br> 5 = Kabylake</br></br> **Example**: `sudo ~/ssdtPRGen.sh -target 1`
 `-x Y`| Enables/Disables XCPM mode (Plugin Type), where `Y` can be:</br></br> `0` = XCPM disabled </br>`1` = XCPM enabled </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -x 1`
 `-c X` | Compatibility workarounds, where `X` must be a number between 0 to 3. </br></br> 0 = No workarounds </br> 1 = Inject extra (turbo) P-State at the top with maximum (turbo) frequency + 1 MHz</br> 2 = Inject extra P-States at the bottom</br> 3 = Both </br></br> **Example**: `sudo ~/ssdtPRGen.sh -c 3`
@@ -71,13 +71,10 @@ Modifier | Description/Example
 `-f` | Sets the clock frequency of the CPU in mHz (the one before the turbo). You shouldn't really mess with that as well.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -f 2333`
 `-m` | Add model (Board-id). I guess this is useful when generating SSDTs for PluginType 1 which extracts the frequency vectors from the SMBIOS of the selected Mac model. </br></br>**Example**: `sudo ~/ssdtPRGen.sh -m MacBookPro10,1`
 
-To be continued…
-
 ## NOTES
 
-- ssdtPRGen includes lists with settings for specific CPU models sorted by CPU families. These can be found under /Users/YOURUSERNAME/Library/ssdtPRGen/Data. They are in .cfg format which can be viewed with TextEdit.
-- If your CPU is listed in one of these .cfg files, you can generate a SSDT-PM for your specific CPU model. Enter: `sudo ~/ssdtPRGen.sh -p 'MODELNAME'` (for example `'i7-3630QM'`). The advantage of generating the SSDT-PM that it includes additional info and workarounds for the CPU
-- ssdtPRGen also has additional modifiers which. Check the ["Help"](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information) section of his repo for details. You can experiment with those but make sure to have a working backup of you EFI folder on a FAT32 formatted USB flash drive at hand – just in case the system won't boot afterwards.
+- ssdtPRGen includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
+- macOS Ventura dropped the `AppleIntelCPUPowerManagement.kext`, so the CPU will be stuck in base frequency (no turbo) if the SSDT is generated for PluginType 0. As a workaround, [**force-enable XCPM**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/tree/main/ACPI/Enable_XCPM) (Ivy Bridge only) and regenerate the SSDT for PluginType 1 and replace the exiting SSDT-PM.
 
 ## Credits
 - Intel for Intel Power Gadget
