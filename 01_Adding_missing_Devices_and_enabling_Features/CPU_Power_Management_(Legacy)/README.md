@@ -50,7 +50,20 @@ Although ssdtPRGen supports Sandy Bridge to Kabylake CPUs, nowadays it's only us
 - Under `ACPI/Delete`, disable `Delete CpuPm` and `Delete Cpu0Ist`
 - Save the config and reboot
 
-Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly. 
+Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
+
+## Modifiers
+Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [modifiers](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how to apply them.
+
+So here's a table of commonly used modifiers:
+
+Modifier | Description/Example
+---------|--------------------
+`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and freqencies. </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
+`-target X` | Target Intel CPU family, where `X` stands for a number from  0 to 5: </br></br> 0 = Sandy Bridge </br> 1 = Ivy Bridge </br> 2 = Haswell </br> 3 = Broadwell </br> 4 = Skylake </br> 5 = Kabylake</br></br> **Example**: `sudo ~/ssdtPRGen.sh -target 1`
+`-x`| Enables/Disables XCPM mode (Plugin Type): `0` = disabled, `1` = enabled. </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -x 1`
+
+To be continued…
 
 ## NOTES
 
