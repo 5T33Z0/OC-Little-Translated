@@ -20,9 +20,11 @@
 ## About
 Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). This way, you no longer have to work with tools like OCConfigCompare, the sample-config and PropTree to migrate and update your config.plist to the latest version manually, which is a tremendous time saver!
 
-**OCAT** has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated. It checks your config.plist for errors automatically and lists them. Simply pressing the "Save" button will migrate and update the config to the latest version and feature-set – without losing settings. This will also fix all "No schema for…" errors. Any remaining errors will most likely be actual configuration errors you will have to fix yourself.
+**OCAT** has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated. It checks your config.plist for syntactical and semantic consistency automatically and lists formal errors. Simply pressing the "Save" button will migrate and update the config to the latest version and feature-set – without losing settings. This will also fix all "No schema for…" errors. Any remaining errors will most likely be actual configuration errors which you will have to on your own using the OpenCore Install Guide, for example. 
 
-OCAT also integrates new keys/features added to the config.plist into the GUI automatically – no other Configurator App can do this.
+For Quirks, OCAT also provides dropdown menus which include sets of recommended Quirks for various Intel and AMD CPU families. Selecting a preset will highlight the recommended Quirks in ***bold italics*** – you still have to enable them on your own.
+
+Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/features added to the config.plist into the GUI automatically and verifies it afterwards. This way, OCAT is much more future proof and secure than the rest of them.
 
 ## 1. Tools and Prerequisites
 - Working Internet Connection
