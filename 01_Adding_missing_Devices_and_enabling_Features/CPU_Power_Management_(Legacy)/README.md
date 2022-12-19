@@ -3,9 +3,9 @@
 ## About
 SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older). 
 
-You can tell if the CPU Power Management is working correctly or not by monitoring the behavior of the CPU. You can use [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the specified turbo frequency when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
+You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the specified turbo frequency when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
 
-##  ACPI Power Management vs. XNU CPU Power Management
+## ACPI Power Management vs. XNU CPU Power Management
 Up to Big Sur, macOS supports two plugins for handling CPU Power Management: 
 
 - `ACPI_SMC_PlatformPlugin` (plugin-type=0) &rarr; For Ivy Bridge (3rd Gen) and older Intel CPUs
@@ -15,6 +15,7 @@ Up to Big Sur, macOS supports two plugins for handling CPU Power Management:
 
 For Haswell and newer, you simple add [**`SSDT-PLUG`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG)) to enable `plugin-type 1` (aka the `X86PlatformPlugin`), which then takes care of CPU Power Management by using the `FrequencyVectors` provided by the selected SMBIOS (or more specifically, the board-id).
 
+Although ssdtPRGen supports Sandy Bridge to Kabylake CPUs, nowadays it's only used for 1st to 3rd Gen Intel CPUs. But it might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the X86PlatfromPlugin to optimize performance (&rarr; see "Modifiers" section for details).
 <details>
 <summary><strong>Additional info</strong> (click to reveal)</summary>
 
@@ -25,14 +26,14 @@ On macOS Monterey and newer, the `ACPI_SMC_PlatformPlugin` has been dropped comp
 
 ### ACPI Power Management
 
-For Ivy Bridge and older, you have to create an SSDT which includes the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI Power Management". You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing when you had to use a patched DSDT to run macOS since hotpatching wasn't a thing yet, this table was simply named and referred to as "SSDT" since it usually was the only one injected into the system besides the DSDT.
+For Ivy Bridge and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI Power Management". 
 
-Although ssdtPRGen supports Sandy Bridge to Kabylake CPUs, nowadays it's only used for 1st to 3rd Gen Intel CPUs.
+You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing when you had to use a patched DSDT to run macOS since hotpatching wasn't a thing yet, this table was simply referred as "SSDT.aml" since it usually was the only SSDT injected into the system besides the DSDT.
 
 ## Prerequisites
 
 - Mount your EFI folder
-- Open your config.plist
+- Open your `config.plist`
 - Under `ACPI/Delete`, enable the following drop rules (if they don't exist, copy them over from the `Sample.plist` included in the OpenCore Package):
 	- `Delete CpuPm`
 	- `Delete Cpu0Ist`
@@ -42,7 +43,7 @@ Although ssdtPRGen supports Sandy Bridge to Kabylake CPUs, nowadays it's only us
 
 - Open Terminal
 - Enter the following command to download the ssdtPRGen Script: `curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh`
-- Next, enter `chmod +x ~/ssdtPRGen.sh` to make it executable
+- Make it executable: `chmod +x ~/ssdtPRGen.sh` 
 - Now, run the script: `sudo ~/ssdtPRGen.sh`
 - The generated `SSDT.aml` will be located at `/Users/YOURUSERNAME/Library/ssdtPRGen`
 - Rename it to `SSDT-PM.aml` 
@@ -55,18 +56,21 @@ Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping t
 ## Modifiers
 Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [modifiers](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how to apply them.
 
-Here's a table of commonly used modifiers which can be combined:
+Here's a table of commonly used modifiers which can be combined. Use `ark.intel.com` to look-up the specs of your CPU.
 
 Modifier | Description/Example
 :-------:|--------------------
-`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and freqencies. This is also useful if you want to generate a SSDT-PM for someone else who uses a different CPU than you. </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
+`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and frequencies. This is also useful if you want to generate a SSDT-PM for someone else who uses a different CPU than you. You can also add missing CPU data to `User Defined.cfg` </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
 `-target X` | Target Intel CPU family, where `X` stands for a number from  0 to 5: </br></br> 0 = Sandy Bridge </br> 1 = Ivy Bridge </br> 2 = Haswell </br> 3 = Broadwell </br> 4 = Skylake </br> 5 = Kabylake</br></br> **Example**: `sudo ~/ssdtPRGen.sh -target 1`
 `-x Y`| Enables/Disables XCPM mode (Plugin Type), where `Y` can be:</br></br> `0` = XCPM disabled </br>`1` = XCPM enabled </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -x 1`
-`-c X` | Compatibility workarounds, where `X` must be a number between 0 to 3. </br></br> 0 = No workarounds </br> 1 = inject extra (turbo) P-State at the top with maximum (turbo) frequency + 1 MHz</br> 2 = inject extra P-States at the bottom</br> 3 = both </br></br> **Example**: `sudo ~/ssdtPRGen.sh -c 3`
-`-d X` | Debug output, where `X` must be a number from 0 to 3.</br></br> 0 = no debug injection/debug output</br> 1 = inject debug statements in: ssdt_pr.dsl </br> 2 = show debug output </br> 3 = both</br></br> **Example**: `sudo ~/ssdtPRGen.sh -d 1`
+`-c X` | Compatibility workarounds, where `X` must be a number between 0 to 3. </br></br> 0 = No workarounds </br> 1 = Inject extra (turbo) P-State at the top with maximum (turbo) frequency + 1 MHz</br> 2 = Inject extra P-States at the bottom</br> 3 = Both </br></br> **Example**: `sudo ~/ssdtPRGen.sh -c 3`
+`-d X` | Debug output, where `X` must be a number from 0 to 3.</br></br> 0 = No debug injection/debug output</br> 1 = Inject debug statements in: ssdt_pr.dsl </br> 2 = Show debug output </br> 3 = Both</br></br> **Example**: `sudo ~/ssdtPRGen.sh -d 1`
 `-lfm` | Sets the Low frequency mode in mHz. Describes the lowest frequency a CPU can clock down to. Very useful for laptops and saving energy in general. Add the corresponding frequency as a number as shown in the example. If you set the LFM too low, the system will crash on boot. In my experience, 900 mHz is a stable value, which is about 300 mHz lower than stock for the i7-3630QM I am using in my laptop. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -lfm 900`
 `-turbo` | Sets the Maximum Turbo Frequency supported by the CPU in mHz. Add the frequency to the command as shown in the example. If your CPU is included in one of the .cfg files, then you don't have to set this since it already contains the correct value. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -turbo 3000`
- 
+`-bclk` | Sets the base clock (or bus frequency) in mHz of the CPU. The default is 100 mHz and you really shouldn't mess with this at all since it influences CPU multipliers and can cause instabilities of the system.</br></br>**Example**: `sudo ~/ssdtPRGen.sh -bclk 133`
+`-f` | Sets the clock frequency of the CPU in mHz (the one before the turbo). You shouldn't really mess with that as well.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -f 2333`
+`-m` | Add model (Board-id). I guess this is useful when generating SSDTs for PluginType 1 which extracts the frequency vectors from the SMBIOS of the selected Mac model. </br></br>**Example**: `sudo ~/ssdtPRGen.sh -m MacBookPro10,1`
+
 To be continued…
 
 ## NOTES
