@@ -56,20 +56,25 @@ Monitor the behavior of the CPU in Intel Power Gadget. Check if it is stepping t
 ## Modifiers
 Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [overrides](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how and when to use them.
 
-Here's a table of commonly used modifiers which can be combined. Use `ark.intel.com` to look-up the specs of your CPU.
+Fortunately, you can enter `sudo ~/ssdtPRGen.sh -h` to display the "Help" menu which lists all the available commands. The actual letter(s) you have to enter to execute one of them are highlighted in **bold**.
+
+Here's a table of modifiers which can be combined. Use `ark.intel.com` to look-up the specs of your CPU.
 
 Modifier | Description/Example
 :-------:|--------------------
-`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and frequencies. The advantage of generating the SSDT-PM that it includes additional info and workarounds for the CPU. It's also useful for generatin a SSDT-PM for someone else who uses a different CPU. You can also add missing CPU data to `User Defined.cfg` </br></br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
+`-p 'CPU model'` | Add your CPU model if it is listed in the `.cfg` file located inside the `ssdtPRGen/Data` folder. The config files are organized by Intel CPU families and contain data like model, TDP and frequencies. The advantage of generating the SSDT-PM that it includes additional info and workarounds for the CPU. It's also useful for generating a SSDT-PM for someone else who uses a different CPU. You can also add missing CPU data to `User Defined.cfg` </br></br> **Example**: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM'`
 `-target X` | Target Intel CPU family, where `X` stands for a number from  0 to 5: </br></br> 0 = Sandy Bridge </br> 1 = Ivy Bridge </br> 2 = Haswell </br> 3 = Broadwell </br> 4 = Skylake </br> 5 = Kabylake</br></br> **Example**: `sudo ~/ssdtPRGen.sh -target 1`
-`-x Y`| Enables/Disables XCPM mode (Plugin Type), where `Y` can be:</br></br> `0` = XCPM disabled </br>`1` = XCPM enabled </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -x 1`
 `-c X` | Compatibility workarounds, where `X` must be a number between 0 to 3. </br></br> 0 = No workarounds </br> 1 = Inject extra (turbo) P-State at the top with maximum (turbo) frequency + 1 MHz</br> 2 = Inject extra P-States at the bottom</br> 3 = Both </br></br> **Example**: `sudo ~/ssdtPRGen.sh -c 3`
+`-x Y`| Enables/Disables XCPM mode (Plugin Type), where `Y` can be:</br></br> `0` = XCPM disabled </br>`1` = XCPM enabled </br> </br> **Example**: `sudo ~/ssdtPRGen.sh -x 1`
 `-d X` | Debug output, where `X` must be a number from 0 to 3.</br></br> 0 = No debug injection/debug output</br> 1 = Inject debug statements in: ssdt_pr.dsl </br> 2 = Show debug output </br> 3 = Both</br></br> **Example**: `sudo ~/ssdtPRGen.sh -d 1`
 `-lfm` | Sets the Low frequency mode in mHz. Describes the lowest frequency a CPU can clock down to. Very useful for laptops and saving energy in general. Add the corresponding frequency as a number as shown in the example. If you set the LFM too low, the system will crash on boot. In my experience, 900 mHz is a stable value, which is about 300 mHz lower than stock for the i7-3630QM I am using in my laptop. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -lfm 900`
 `-turbo` | Sets the Maximum Turbo Frequency supported by the CPU in mHz. Add the frequency to the command as shown in the example. If your CPU is included in one of the .cfg files, then you don't have to set this since it already contains the correct value. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -turbo 3000`
 `-bclk` | Sets the base clock (or bus frequency) in mHz of the CPU. The default is 100 mHz and you really shouldn't mess with this at all since it influences CPU multipliers and can cause instabilities of the system.</br></br>**Example**: `sudo ~/ssdtPRGen.sh -bclk 133`
 `-f` | Sets the clock frequency of the CPU in mHz (the one before the turbo). You shouldn't really mess with that as well.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -f 2333`
 `-m` | Add model (Board-id). I guess this is useful when generating SSDTs for PluginType 1 which extracts the frequency vectors from the SMBIOS of the selected Mac model. </br></br>**Example**: `sudo ~/ssdtPRGen.sh -m MacBookPro10,1`
+`-b` | Add specific Board-ID. Useful if you want to use frequency vectors from the SMBIOS of another MacModel (I guess). I've never used this.</br></br>**Eample**: `sudo ~/ssdtPRGen.sh -b Mac-F60DEB81FF30ACF`
+`-a` | Set the ACPI device name of the CPU. Usually unnecessary, since it should be auto-detected.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -a CPU0`
+`-t` | For manually setting your CPU's TDP (thermal design power), aka the maximum power consumption of your CPU in Watts. Only required if the CPU's specs are not present in the database already. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -t 45`
 
 ## NOTES
 
