@@ -78,4 +78,3 @@ Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CP
 ## Credits
 - Acidanthera for `SSDT-PLUG-ALT.dsl` for Intel Alder Lake (requires [**Fake CPUID**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/using-alder-lake#kernel-greater-than-emulate)).
 - Dortania for `SSDT-CPUR.aml` for AMD CPUs
-
