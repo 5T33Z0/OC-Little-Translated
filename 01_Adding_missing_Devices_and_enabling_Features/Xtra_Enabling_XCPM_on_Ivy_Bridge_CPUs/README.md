@@ -21,8 +21,8 @@ So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch 
 ### 1. Enable `XCPM` for Ivy Bridge:
 
 * Add the Kernel Patch inside "XCPM_IvyBridge.plist" to your `config.plist`
-* Enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs` under Kernel > Quirks.
-* Save.
+* Under `Kernel/Quirks`, enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs`
+* Save your config.
 
 ### 2. Generate a modified `SSDT-PM` for Plugin Type `1`
 
