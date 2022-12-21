@@ -1,5 +1,5 @@
 # Enabling `XCPM` for Ivy Bridge CPUs
-> By 5T33Z0. Compatibility: macOS Catalina (10.15.5+) to Big Sur (11.3+)
+> By 5T33Z0. Compatibility: macOS Catalina (10.15.5+) to Ventura
 
 ## Background
 Apple deactivated the `X86PlatformPlugin` support for Ivy Bridge CPUs in macOS a few years back. Instead, the `ACPI_SMC_PlatformPlugin` is used for CPU power management, although `XCPM` is supported by Ivy Bridge CPUs natively. But there isn't much info about how to re-enable it in OpenCore's documentation:
@@ -45,7 +45,7 @@ A look into the ssdt.aml file list a summary of all settings for the SSDT. If th
 
 If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
 
-## NOTE for mac Big Sur/Monterey Users
+## For mac Big Sur/Monterey Users
 Since Big Sur requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate SSDT-PM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you can either:
 
 * Use `SSDTTime` to generate a `SSDT-PLUG.aml` **or** 
@@ -70,3 +70,7 @@ Since Big Sur requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate S
  	- Check for and install Updates
  	- After the Updates are installed, revert to SMBIOS `MacBookPro10,1`
  	- Set `csr-active-config` to `FF070000` (For Catalina) 
+
+## macOS Ventura and legacy CPUs
+
+Since macOS Ventura removed the `AppleIntelCPUPowerManagement.kext` which housed the `ACPI_SMC_PlatformPlugin`, `SSDT-PM` tables generated for 'plugin-type' 0 can no longer attach to the now mising plugin. Therefore, CPU Power management won't work corectly (no turbo states). So when switching to macOS Ventura, force-enabling XCPM and re-generating your `SSDT-PM` with 'plugin type' 1 enabled is mandatory!
