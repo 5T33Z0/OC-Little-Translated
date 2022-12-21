@@ -89,6 +89,8 @@ Modifier | Description/Example
 `-a` | Set the ACPI device name of the CPU. Usually unnecessary, since it should be auto-detected.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -a CPU0`
 `-t` | For manually setting your CPU's TDP (thermal design power), aka the maximum power consumption of your CPU in Watts. Only required if the CPU's specs are not present in the database already. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -t 45`
 
+**Example** for running ssdtPRGen with more than one modifiers: `sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1` &rarr; Generates an SSDT with Plugin Type 1 enabled for an Intel i7 3630QM with a lowered idle CPU frequency of 900 mHz (instead of the default 1200 mHz).
+
 ## Notes
 
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
