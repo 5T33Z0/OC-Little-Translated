@@ -145,8 +145,9 @@ Else /* PNP0C0D sleep */
   - Refer to the examples to create the sleep button patch and the necessary name change.
 
 **NOTES**:
-- `SLPB` is the `PNP0C0E` device name. If it is confirmed that there is no `PNP0C0E` device, add the ***SSDT-SLPB*** (located in Chapter 1).
-- `PNP0C0D` device name and path should be the same as in the `DSDT`.
+
+- `SLPB` refers to hardware id `PNP0C0E`. If it is not present in your `DSDT`, add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
+- The name and path of the `LID` device (`PNP0C0D`) should be the same as in the `DSDT`.
 
 ## Caution
 
