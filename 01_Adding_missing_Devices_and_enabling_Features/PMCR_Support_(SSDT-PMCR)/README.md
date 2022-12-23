@@ -1,7 +1,7 @@
 # Add PMCR Device (`SSDT-PMCR`)
 
 ## About
-`PMCR` or `APP9876` is an Apple exclusive device which won't be present in your DSDT. It's required for mainboards with Z390 chipsets to enable NVRAM support so the system boots (see "Technical Background" for details).
+`PMCR` or `APP9876` is an Apple-only ACPI device not present in DSDTs of Wintel systems. It's required for mainboards with Z390 chipsets to enable NVRAM support so the system boots (see "Technical Background" for details).
 
 ### Affected Chipsets/Mainboards
 
