@@ -46,6 +46,8 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 > Starting from Z390 chipsets, PMCR (D31:F2) is only available through MMIO. Since there is no standard device for PMCR in ACPI, Apple introduced its own naming "APP9876" to access this device from AppleIntelPCHPMCR driver. To avoid confusion we disable this device for all other operating systems, as they normally use another non-standard device with "PNP0C02" HID and "PCHRESV" UID. […]
 > 
 > PMCR device has nothing to do to LPC bus, but is added to its scope for faster initialization. If we add it to PCI0, where it normally exists, it will start in the end of PCI configuration, which is too late for NVRAM support.
+>
+>– Acidanthera
 
 ## Credits
 
