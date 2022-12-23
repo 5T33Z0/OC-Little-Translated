@@ -24,15 +24,18 @@ You can use **SSDTTime** to generate `SSDT-PMC` for you.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated SSDTs to `EFI/OC/ACPI`
 6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
-7. Save and Reboot.
+7. Save and reboot
 
 #### Method 2: manual patching
 
-- Download ***SSDT-PMCR.aml*** 
-- Open it in maciASL 
-- Verify that the name and path of the LPC Bus (either `LPC` or `LPCB`) matches the one used in your system's `DSDT`. Adjust it if necessary.
-- Copy the file to `EFI/OC/ACPI` and `config.plist`
-- Save and reboot.
+1. Download ***SSDT-PMCR.aml*** 
+2. Open it in maciASL 
+3. Verify that the name and path of the LPC Bus (either `LPC` or `LPCB`) matches the one used in your system's `DSDT`. Adjust it if necessary.
+4. Copy the .aml file to `EFI/OC/ACPI` 
+5. Add its path to `ACPI/Add` in `config.plist`
+6. Save and reboot into macOS
+
+If the patch was applied correctly, it should be possible to boot into macOS.
 
 ### Verifying that the patch is working
 Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should find it:</br>
@@ -49,13 +52,3 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 - Pleasecallmeofficial who discovered this patch
 - Acidathera for improving the SSDT.
 - CorpNewt for SSDTTime
-
-**HOW TO:**
-
-1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
-2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
-3. Generate all the SSDTs you need.
-4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
-5. Copy the generated SSDTs to `EFI/OC/ACPI`
-6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
-7. Save and Reboot.
