@@ -5,7 +5,7 @@
 //
 DefinitionBlock("", "SSDT", 2, "OCLT", "LIDpatch", 0)
 {
-    //note:_LID 's path
+    //note:_LID's path
     //path:_SB.LID0._LID
     External(_SB.LID0, DeviceObj)
     External(_SB.LID0.XLID, MethodObj)
