@@ -2,7 +2,7 @@
 
 ## Problem description
 
-Some machines have a sleep button (half moon button), e.g. `Fn+F4` for some ThinkPads, `Fn+Insert` for Dell, etc. When this button is pressed, the system enters what's called `PNP0C0E` sleep. However, ACPI incorrectly passes shutdown instead of sleep parameters to the system, which causes it to crash/reset. Even if the system is able to sleep it resets on wake.
+Some machines have an extra sleep button (with a half moon symbol) or a keyboard shortcut for entering sleep state, e.g. `Fn+F4` on some ThinkPads, `Fn+Insert` for Dell, etc. When this button/keyboard shortcut is pressed, the system enters what's called `PNP0C0E` sleep. However, on some systems ACPI incorrectly passes shutdown parameters over to the system instead, which causes it to crash/reset. Even if the system is able to enter sleep state it resets when trying to wake it.
 
 One of the following methods can fix this problem:
 
@@ -18,21 +18,21 @@ One of the following methods can fix this problem:
 	- If the Sleep Button is pressed
 	- `Notify(***.SLPB, 0x80)` is triggered
 - `PNP0C0D` Sleep condition:
-  - If the lid is closes, `_LID` method returns `Zero`. (`_LID` is the control method for the `PNP0C0D` device).
+  - If the lid is closed, `_LID` method returns `Zero`. (`_LID` is the control method for the `PNP0C0D` device).
   - `Notify(***.LID0, 0x80)` is triggered
 
 ### `PNP0C0E` Sleep characteristics
 
-- The sleep process is slightly faster.
-- But it cannot be terminated/interrupted.
+- Entering sleep state is slightly faster than using `PNP0C0D` sleep.
+- But it cannot be interrupted.
 - Enabled by setting `MODE` = `1` in ***SSDT-PTSWAKTTS***
 
 ### `PNP0C0D` Sleep characteristics
 
-- Sleep process is terminated immediately by pressing the sleep button again.
-- When connected to an external display, pressing the sleep button does the following:
+- Entering sleep can be interrupred immediately by pressing the sleep button again.
+- When connected to an external display, pressing the sleep button has the following effect:
 	- Internal screen is switched off 
-	- Working screen siwtches to the external display
+	- Main screen siwtches over to the external display
 	- Pressing the sleep button again restores the previous state.
 - Enabled by setting `MODE` = `0` (default) in ***SSDT-PTSWAKTTS***
 
@@ -62,7 +62,7 @@ One of the following methods can fix this problem:
 ### Description of the two Sleep Modes
 
 #### `MODE` = `1`: `PNP0C0E` sleep. 
-When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1` ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
+When the sleep button is pressed, ***Sleep button patch*** sets `FNOK=1`, ***SSDT-PTSWAK*** captures `FNOK` as `1` and forces `Arg0=3` (otherwise `Arg0=5`). Restore `FNOK=0` after wakeup. A complete `PNP0C0E` sleep and wakeup process is finished.
 
 #### `MODE` = `0`: `PNP0C0D` sleep
 When the sleep button is pressed, in addition to completing the above process, ***SSDT-LIDpatch*** also catches `FNOK=1`, `_LID` return to `Zero` and executes `PNP0C0D` sleep. After waking up, `FNOK` returns to `0`, which completes the `PNP0C0D` sleep and wake cycle.
@@ -144,11 +144,6 @@ Else /* PNP0C0D sleep */
   - Usually, the sleep button is `_Qxx` under `EC`, and this `_Qxx` contains the `Notify(***.SLPB,0x80)` instruction. If you can't find it, search for `Notify(***.SLPB,0x80)` in the `DSDT`, find its location, and gradually work its way up to the initial location.
   - Refer to the examples to create the sleep button patch and the necessary name change.
 
-**NOTES**:
-
-- `SLPB` refers to hardware id `PNP0C0E`. If it is not present in your `DSDT`, add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
-- The name and path of the `LID` device (`PNP0C0D`) should be the same as in the `DSDT`.
-
 ## Caution
-
-- `PNP0C0E` and `PNP0C0D` device name and path should be consistent with ACPI.
+- If your DSDT doen't contain sleep button device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
+- `PNP0C0E` and `PNP0C0D` device names and paths should be consistent with the paths used in your `DSDT`.
