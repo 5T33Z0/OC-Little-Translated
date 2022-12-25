@@ -6,14 +6,14 @@ Apple deactivated the `X86PlatformPlugin` support for Ivy Bridge CPUs in macOS a
 
 >Note that the following configurations are unsupported by XCPM (at least out of the box): Consumer Ivy Bridge (0x0306A9) as Apple disabled XCPM for Ivy Bridge and recommends legacy power management for these CPUs. `_xcpm_bootstrap` should manually be patched to enforce XCPM on these CPUs […].
 
-So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch and a modified Hotpatch (***SSDT-PM,aml*** or ***SSDT-PLUG.aml***) to use the `X86PlatformPlugin` (i.e. setting Plugin Type to `1`).
+So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch and a modified Hotpatch (***SSDT-PM.aml*** or ***SSDT-PLUG.aml***) to use the `X86PlatformPlugin` (i.e. setting Plugin Type to `1`).
 
 **NOTE**: I developed and tested this guide using a Laptop. If you're on a desktop you have to use a different System Definition – `iMac13,1`/`iMac13,2` for Ivy Bridge and `14,1` for Haswell, I guess.
 
 ## Requirements
 
 * 3rd gen Intel CPU (Codename **Ivy Bridge**)
-* Tools: Terminal, [ssdtPRGEN](https://github.com/Piker-Alpha/ssdtPRGen.sh), [Plist Editor](https://github.com/corpnewt/ProperTree), [MaciASL](https://github.com/acidanthera/MaciASL), [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone), [SSDTTime](https://github.com/corpnewt/SSDTTime), [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend), [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
+* Tools: Terminal, [ssdtPRGEN](https://github.com/Piker-Alpha/ssdtPRGen.sh), [ProperTree](https://github.com/corpnewt/ProperTree), [MaciASL](https://github.com/acidanthera/MaciASL), [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone), [SSDTTime](https://github.com/corpnewt/SSDTTime), [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend), [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
 * SMBIOS supporting Ivy Bridge CPUs (like MacBookPro9,x or 10,x for Laptops and iMac13,1 for Desktops)
 
 ## How-To
