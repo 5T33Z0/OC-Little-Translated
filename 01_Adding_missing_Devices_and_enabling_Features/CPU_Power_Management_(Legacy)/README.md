@@ -1,4 +1,4 @@
-CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
+# CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
 
 **TABLE of CONTENTS**
 
@@ -26,19 +26,19 @@ Up to Big Sur, macOS supports two plugins for handling CPU Power Management:
 
 ### XCPM (= XNU CPU Power Management)
 
-Prior to the release of macOS 10.13, boot-arg `-xcpm` could be used to enable XCPM for unsupported CPUs. Since then, the boot-arg does no longer work. So for Haswell and newer, you simple add [**`SSDT-PLUG`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG)) to enable `plugin-type 1` (aka the `X86PlatformPlugin`), which then takes care of CPU Power Management using the `FrequencyVectors` provided by the selected SMBIOS (or more specifically, the board-id).
+Prior to the release of macOS 10.13, boot-arg `-xcpm` could be used to enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) for unsupported CPUs. Since then, the boot-arg does no longer work. So for Haswell and newer, you simple add [**`SSDT-PLUG`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG)) to select `plugin-type 1` (`X86PlatformPlugin.kext` and `X86PlatformShim.kext`), which then takes care of CPU Power Management using the `FrequencyVectors` provided by the selected SMBIOS (or more specifically, the board-id). The Frequency Vectors can be modified by using [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to optimize the CPU Power Management for your specific CPU model which is recommended.  
 
-Although the Ivy Bridge CPU family is totally capable of utilizing XCPM, it has been disabled in macOS for a long time (since OSX 10.11?). But you can [force-enable](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs) it. 
+Although the **Ivy Bridge(-E)** CPU family is totally capable of utilizing XCPM, it has been disabled in macOS for a long time (since OSX 10.11?). But you can [**force-enable**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs) it (which is mandatory if you want to have proper CPU Power Management in macOS Ventura).
 
 On macOS Monterey and newer, the `ACPI_SMC_PlatformPlugin` has been dropped completely. Instead, the `X86PlatformPlugin` is now always loaded automatically, since Apple disabled the `plugin-type` check, so you don't even need `SSDT-PLUG` for Haswell and newer.
 
 ### ACPI Power Management
 
-For Ivy Bridge and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
+For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
 You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing, when you had to use a patched DSDT to run macOS since hotpatching wasn't a thing yet, this table was simply referred as "SSDT.aml" since it usually was the only SSDT injected into the system besides the DSDT.
 
-Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatfromPlugin` to optimize performance (&rarr; see "Modifiers" section for details).
+Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatfromPlugin` to optimize performance (check the [Modifiers](#modifiers) section for details).
 
 ## Prerequisites
 
@@ -88,7 +88,7 @@ Modifier | Description/Example
 `-bclk` | Sets the base clock (or bus frequency) in mHz of the CPU. The default is 100 mHz and you really shouldn't mess with this at all since it influences CPU multipliers and can cause instabilities of the system.</br></br>**Example**: `sudo ~/ssdtPRGen.sh -bclk 133`
 `-f` | Sets the clock frequency of the CPU in mHz (the one before the turbo). You shouldn't really mess with that as well.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -f 2333`
 `-m` | Add model (Board-id). I guess this is useful when generating SSDTs for PluginType 1 which extracts the frequency vectors from the SMBIOS of the selected Mac model. </br></br>**Example**: `sudo ~/ssdtPRGen.sh -m MacBookPro10,1`
-`-b` | Add specific Board-ID. Useful if you want to use frequency vectors from the SMBIOS of another MacModel (I guess). I've never used this.</br></br>**Eample**: `sudo ~/ssdtPRGen.sh -b Mac-F60DEB81FF30ACF`
+`-b` | Add specific Board-ID. Useful if you want to use frequency vectors from the SMBIOS of another MacModel (I guess). I've never used this.</br></br>**Example**: `sudo ~/ssdtPRGen.sh -b Mac-F60DEB81FF30ACF`
 `-a` | Set the ACPI device name of the CPU. Usually unnecessary, since it should be auto-detected.</br></br> **Example**: `sudo ~/ssdtPRGen.sh -a CPU0`
 `-t` | For manually setting your CPU's TDP (thermal design power), aka the maximum power consumption of your CPU in Watts. Only required if the CPU's specs are not present in the database already. </br></br> **Example**: `sudo ~/ssdtPRGen.sh -t 45`
 
