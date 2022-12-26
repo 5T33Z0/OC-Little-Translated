@@ -3,9 +3,6 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-- [ACPI Power Management vs. XNU CPU Power Management](#acpi-power-management-vs-xnu-cpu-power-management)
-	- [XCPM (= XNU CPU Power Management)](#xcpm--xnu-cpu-power-management)
-	- [ACPI Power Management](#acpi-power-management)
 - [Prerequisites](#prerequisites)
 - [Instructions](#instructions)
 	- [macOS Ventura and Ivy Bridge](#macos-ventura-and-ivy-bridge)
@@ -14,25 +11,9 @@
 - [Credits](#credits)
 
 ## About
-SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older). 
+SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older) using the `ACPI_SMC_PlatformPlugin`. 
 
 You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the turbo frequency specified for your CPU model when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
-
-## ACPI Power Management vs. XNU CPU Power Management
-Up to Big Sur, macOS supports two plugins for handling CPU Power Management: 
-
-- `ACPI_SMC_PlatformPlugin` (plugin-type=0) &rarr; For Ivy Bridge (3rd Gen) and older Intel CPUs
-- `X86PlatformPlugin` (plugin-type=1) &rarr; Enables XCPM (= XNU CPU Power Management) on Haswell (4th Gen) and newer
-
-### XCPM (= XNU CPU Power Management)
-
-Prior to the release of macOS 10.13, boot-arg `-xcpm` could be used to enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) for unsupported CPUs. Since then, the boot-arg does no longer work. So for Haswell and newer, you simple add [**`SSDT-PLUG`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(SSDT-PLUG)) to select `plugin-type 1` (`X86PlatformPlugin.kext` and `X86PlatformShim.kext`), which then takes care of CPU Power Management using the `FrequencyVectors` provided by the selected SMBIOS (or more specifically, the board-id). The Frequency Vectors can be modified by using [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to optimize the CPU Power Management for your specific CPU model which is recommended.  
-
-Although the **Ivy Bridge(-E)** CPU family is totally capable of utilizing XCPM, it has been disabled in macOS for a long time (since OSX 10.11?). But you can [**force-enable**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Xtra_Enabling_XCPM_on_Ivy_Bridge_CPUs) it (which is mandatory if you want to have proper CPU Power Management in macOS Ventura).
-
-On macOS Monterey and newer, the `ACPI_SMC_PlatformPlugin` has been dropped completely. Instead, the `X86PlatformPlugin` is now always loaded automatically, since Apple disabled the `plugin-type` check, so you don't even need `SSDT-PLUG` for Haswell and newer.
-
-### ACPI Power Management
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
