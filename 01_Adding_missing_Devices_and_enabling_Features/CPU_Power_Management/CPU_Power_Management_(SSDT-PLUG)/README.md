@@ -75,9 +75,12 @@ Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and ne
 Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 
 **`Cpuid1Data`**: 55060A00000000000000000000000000 </br>
-**`Cpuid1Mask`**: FFFFFFFF000000000000000000000000
+**`Cpuid1Mask`**: FFFFFFFF000000000000000000000000 </br>
+**`MinKernel`**: 19.0.0
 
-12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the Docs section of the OpenCore Package as well.
+Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is 19.0.0. This also means that this fake CPUID is only appliad for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
+
+12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the **Docs** folder of the OpenCore Package as well.
 
 ## What about AMD?
 Since Apple designed macOS Leopard and newer around Intel CPUs, AMD CPUs support is not implemented so the `X86PlatformPlugin` cannot be utilized by AMD CPUs. Therefore, `AppleIntelCpuPowerManagement` has to be disabled. In OpenCore, enable the `DummyPowerManagement` Quirk located in the `Kernel/Emulate` section of the `config.plist` to do so.
@@ -95,3 +98,4 @@ For **B550** or **A520** mainboards, you also need [**SSDT-CPUR.aml**](https://g
 ## Credits
 - Acidanthera for `SSDT-PLUG-ALT.dsl` for Intel Alder Lake (requires [**Fake CPUID**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/using-alder-lake#kernel-greater-than-emulate)).
 - Dortania for `SSDT-CPUR.aml` for AMD CPUs
+- Trulypsinach for SMCAMDProcessor.kext
