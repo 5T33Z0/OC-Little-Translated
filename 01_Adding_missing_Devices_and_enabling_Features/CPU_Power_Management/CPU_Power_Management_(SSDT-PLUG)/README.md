@@ -70,14 +70,14 @@ To check if Speedstep and turbo work correctly, run Intel Power Gadget and monit
 Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
 
 ## 11th Gen Intel and newer
-Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and newer Intel CPUs require a fake CPUID ("disguising" it as a Comet Lake CPU) in order to run macOS. Otherwise the system won't boot. 
+Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and newer Intel CPUs require ***SSDT-PLUG*** and a fake CPUID ("disguising" it as a Comet Lake CPU) in order to run macOS. Otherwise the system won't boot. 
 
 Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 
 **`Cpuid1Data`**: 55060A00000000000000000000000000 </br>
 **`Cpuid1Mask`**: FFFFFFFF000000000000000000000000
 
-12th Gen Intel Core (Codename "Alder Lake") also requires [***SSDT-PLUG-ALT.aml***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU%20Power%20Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) contained in the Docs section of the OpenCore Package as well.
+12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the Docs section of the OpenCore Package as well.
 
 ## What about AMD?
 Since Apple designed macOS Leopard and newer around Intel CPUs, AMD CPUs support is not implemented so the `X86PlatformPlugin` cannot be utilized by AMD CPUs. Therefore, `AppleIntelCpuPowerManagement` has to be disabled. In OpenCore, enable the `DummyPowerManagement` Quirk located in the `Kernel/Emulate` section of the `config.plist` to do so.
@@ -87,7 +87,7 @@ In 2020 a new Kext called [**SMCAMDProcessor**](https://github.com/trulyspinach/
 For **B550** or **A520** mainboards, you also need [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml).
 
 ## Notes
-- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [`SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
+- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [**`SSDT-PM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
 - For **Intel Xeon**, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
 - From **macOS 12.3 Beta 1** onward, Apple dropped the `plugin-type` check within the `X86PlatformPlugin` which means that the X86 Platform Plugin is enabled by default. So you  no longer need `SSDT-PLUG.aml` to enable it in macOS Monterey and newer. It also means that power management is broken on pre-Ivy Bridge CPUs as they don't have correct power management tables provided. More info [**here**](https://github.com/acidanthera/bugtracker/issues/2013).
 - If you are using [**CPUFriend**](https://github.com/acidanthera/CPUFriend) and a CPUFriendDataProvider Kext, you also don't need SSDT-PLUG. CPUFriend somehow enables the X86PlaformPlugin on its own.
