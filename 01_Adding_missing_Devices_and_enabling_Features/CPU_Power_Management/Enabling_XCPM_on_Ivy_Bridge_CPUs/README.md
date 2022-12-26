@@ -13,8 +13,9 @@ So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch 
 ## Requirements
 
 * 3rd gen Intel CPU (Codename **Ivy Bridge**)
-* Tools: Terminal, [ssdtPRGEN](https://github.com/Piker-Alpha/ssdtPRGen.sh), [ProperTree](https://github.com/corpnewt/ProperTree), [MaciASL](https://github.com/acidanthera/MaciASL), [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone), [SSDTTime](https://github.com/corpnewt/SSDTTime), [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend), [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
 * SMBIOS supporting Ivy Bridge CPUs (like MacBookPro9,x or 10,x for Laptops and iMac13,1 for Desktops)
+* Tools: Terminal, [ssdtPRGEN](https://github.com/Piker-Alpha/ssdtPRGen.sh), [ProperTree](https://github.com/corpnewt/ProperTree), [MaciASL](https://github.com/acidanthera/MaciASL), [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone), [SSDTTime](https://github.com/corpnewt/SSDTTime), [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend), [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
+
 
 ## How-To
 
@@ -100,9 +101,12 @@ So when switching to macOS Ventura, force-enabling XCPM and re-generating your `
 
 You also need the following files and settings in order to install and run macOS Ventura on Ivy Bridge without major issues:
 
-- OCLP App to prepare a USB installer and install Intel HD4000 iGPU drivers
-- Aforementioned board-id VMM spoof to run macOS Ventura with an Ivy Bridge SMBIOS/board-id and install updates
-- `CryptexFixup.kext` &rarr; required to be able to install macOS 13 at all
-- `RestrictEvents.kext` and `revblock=media` boot-arg &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
+- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) to prepare a USB installer and install Intel HD4000 iGPU drivers
+- [**Board-id VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to run macOS Ventura with an Ivy Bridge SMBIOS/board-id and install updates
+- [**CryptexFixup.kext**](https://github.com/acidanthera/CryptexFixup) &rarr; required to be able to install macOS 13 at all
+- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) and `revblock=media` boot-arg &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
 - `ipc_control_port_options=0` boot-arg &rarr; Fixes crashes with Electron apps like Discord
-- `amfi_get_out_of_my_way=1` boot-arg &rarr; Required to execute the Intel HD4000 iGPU driver installation with OCLP
+- `amfi_get_out_of_my_way=1` boot-arg &rarr; Required to execute the Intel HD4000 iGPU driver installation with OpenCore Patcher App.
+
+## Credits
+- Acidanthera for OpenCore Legacy Patcher, CryptexFixup and RestrictEvents kexts.
