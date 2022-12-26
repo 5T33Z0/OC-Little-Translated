@@ -77,7 +77,7 @@ Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 **`Cpuid1Data`**: 55060A00000000000000000000000000 </br>
 **`Cpuid1Mask`**: FFFFFFFF000000000000000000000000
 
-12th Gen Intel Core (Codename "Alder Lake") also require ***SSDT-PLUG-ALT.aml*** contained in the Docs section of the OpenCore Package as well.
+12th Gen Intel Core (Codename "Alder Lake") also requires [***SSDT-PLUG-ALT.aml***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU%20Power%20Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) contained in the Docs section of the OpenCore Package as well.
 
 ## What about AMD?
 Since Apple designed macOS Leopard and newer around Intel CPUs, AMD CPUs support is not implemented so the `X86PlatformPlugin` cannot be utilized by AMD CPUs. Therefore, `AppleIntelCpuPowerManagement` has to be disabled. In OpenCore, enable the `DummyPowerManagement` Quirk located in the `Kernel/Emulate` section of the `config.plist` to do so.
