@@ -6,14 +6,14 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS.
 2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 12 and newer when using a SMBIOS of Mac models with a T1/T2 security chip, such as:
 
-	- MacBookPro15,1 to 15,4
-	- MacBookPro16,1 to 16,4
-	- MacBookAir8,1/8,2
-	- MacBookAir9,1
-	- Macmini8,1
-	- iMac20,1/20,2
-	- iMacPro1,1
-	- MacPro7,1
+	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
+	- MacBookPro16,1 (`J152F`), 16,2 (`J214K`), 16,3 (`J223`), 16,4 (`J215`)
+	- MacBookAir8,1 (`J140K`), 8,2 (`J140A`)
+	- MacBookAir9,1 (`J230K`)
+	- Macmini8,1 (`J174`)
+	- iMac20,1 (`J185`), 20,2 (`J185F`)
+	- iMacPro1,1 (`J137`)
+	- MacPro7,1 (`J160`)
 
 	:bulb: The problem occurs when using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` as well as `SIP` disabled which is necessary if your iGPU/dGPU is no longer supported by macOS and you have to re-install removed graphics drivers. This is the case for Intel HD 4000 on-board graphics as well as NVIDIA Kepler cards which can be patched back in via OCLP and others (see Credits). Otherwise the system crashes on boot since re-installing of drivers to the system partition breaks the security seal of the volume. So in order to be able to boot the system ***and*** receive system updates, the Board-ID VMM spoof is the only workaround. You cannot apply these patches via Clover, btw!
 	
