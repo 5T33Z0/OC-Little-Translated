@@ -227,6 +227,7 @@ boot-arg | NVRAM Variable| Description
 `revblock=none`|YES| Disables all blocking
 
 **NOTE**: NVRAM variables work the same as the boot arguments, but have lower priority.
-They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102` as a String: </br> ![](/Users/5t33z0/Desktop/revpatch.png)
+They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102` as a String: </br> 
+![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
 
 **To be continued…**
