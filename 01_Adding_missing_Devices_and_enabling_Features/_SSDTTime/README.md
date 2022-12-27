@@ -17,15 +17,15 @@ With the python script **SSDTTime**, you can generate the following SSDTs by ana
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it.
 2. Press <kbd>D</kbd>, drag your system's `DSDT` into the Terminal Window and hit <kbd>Enter</kbd>.
-3. Generate the required SSDTs for your system. If in doubt, check Dortania's OpenCore Install Guide to figure out which ones you need.
+3. Generate the required SSDTs for your system. If in doubt, check Dortania's OpenCore Install Guide for details.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` folder alongside `patches_Clover.plist` and `patches_OC.plist`. 
 5. Copy the generated SSDTs to `EFI/OC/ACPI`
 6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`. 
-7. Add required Kexts to `EFI/OC/Kexts` and your `config.plist` if they are not present already. Usually: Lilu, VirtualSMC, WhateverGreen (for Graphics) and AppleALC (for Audio).
+7. Add required Kexts to `EFI/OC/Kexts` and your `config.plist` if they are not present already. Usually Lilu, VirtualSMC, WhateverGreen (for Graphics) and AppleALC (for Audio).
 8. Save and Reboot.
 
-Alternatively to step 6, you can run the `PatchMerge.command` and follow the instructions to merge the content of `patches_OC.plist` with your config automatically. A new `config.plist` file will be created in the `Results` folder which you have to copy over to `EFI/OC`, replacing the existing one. I am not a fan of this approach – not because it's automated – but because it's *not automated enough*. I fear that a lot of users will simply forget to replace the existing `config.plist` by the new one.
+Alternatively to step 6, you can run the `PatchMerge.command` and follow the instructions to merge the content of `patches_OC.plist` with your config automatically. A new `config.plist` file will be created in the `Results` folder which you have to copy over to `EFI/OC`, replacing the existing one. I am not a fan of this approach because I worry that a lot of users might miss this step.
 
-## NOTES
+## Notes
 - The Windows version of SSDTTime (.bat) can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
 - If you using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can jsut copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.
