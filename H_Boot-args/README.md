@@ -1,6 +1,26 @@
 # Boot arguments explained
 Listed below you find an incomplete list of commonly used as well as rather uncommon boot-args which can be injected by OpenCore, Clover and Kexts.
 
+**TABLE of CONTENTS**
+
+- [Debugging](#debugging)
+- [Network-specific boot arguments](#network-specific-boot-arguments)
+- [Other useful boot arguments](#other-useful-boot-arguments)
+- [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
+	- [Lilu.kext](#lilukext)
+	- [VirtualSMC.kext](#virtualsmckext)
+	- [Whatevergreen.kext](#whatevergreenkext)
+		- [Global](#global)
+    	- [Board-id related](#board-id-related)
+    	- [Switching GPUs](#switching-gpus)
+    	- [Intel HD Graphics](#intel-hd-graphics)
+    	- [AMD Radeon](#amd-radeon)
+    	- [NVIDIA](#nvidia)
+    	- [Backlight](#backlight)
+    	- [2nd Boot stage](#2nd-boot-stage)
+    	- [Misc](#misc)
+    - [AppleALC](#applealc)
+
 ## Debugging
 |Boot-arg|Description|
 |:------:|-----------|
@@ -18,7 +38,7 @@ Listed below you find an incomplete list of commonly used as well as rather unco
 ## Network-specific boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
-**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and use `AppleIntelI210Ethernet.kext` instead. This is optional since most boards with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Venture, since the .kext version was removed from the `IONetworkingFamily.kext` located under /S/L/E/!
+**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and use `AppleIntelI210Ethernet.kext` instead. This is optional since most boards with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` located under /S/L/E/!
 
 ## Other useful boot arguments
 |Boot-arg|Description|
@@ -181,4 +201,32 @@ boot-arg | DeviceProperty | Description
 **`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
 **`alcverbs=1`**| N/A |Enables alc-verb support (also alc-verbs device property)
 
-To be continued…
+### RestrictEvents
+boot-arg | NVRAM Variable| Description 
+---------|:--------------:|------------
+`-revoff`| –| Disables the kext
+`-revdbg`| – | Enables verbose logging (in DEBUG builds)
+`-revbeta`| – | Enables the kext on macOS < 10.8 or greater than 13
+`-revproc`|–| Enables verbose process logging (in DEBUG builds)
+`revpatch=value` |–| Enables patching as comma separated options. Default value is `auto`.
+`revpatch=auto` |YES| Enables `memtab,pci,cpuname`, without `memtab` and `pci` patches being applied on a real Mac.
+`revpatch=memtab` |YES|Enables memory tab in System Information on `MacBookAir` and `MacBookPro10,x`.
+`revpatch=pci`|YES|Prevents PCI configuration warnings in System Settings on `MacPro7,1`
+`revpatch=cpuname`|YES| Allows Custom CPU name in System Information
+`revpatch=diskread` |YES| Disables "Uninitialized disk" warning in Finder
+`revpatch=asset` |YES| Allows Content Caching when `sysctl kern.hv_vmm_present` returns `1` on macOS 11.3 or newer
+`revpatch=sbvmm` |YES| Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer
+`revpatch=none` |YES| Disables all patching
+`revcpu=value` |YES| Enables or disables CPU brand string patching. `1` = non-Intel default, `0` = Intel default
+`revcpuname=value` |YES| Custom CPU brand string (max 48 characters, 20 or less recommended, taken from CPUID otherwise)
+`revblock=value` |–| To block processes as comma separated options. Default value is `auto`.
+`revblock=pci`|YES| Prevents PCI and RAM configuration notifications on `MacPro7,1`
+`revblock=gmux` |YES| Blocks `displaypolicyd` on Big Sur+ (for genuine MacBookPro9,1/10,1)
+`revblock=media` |YES| Block `mediaanalysisd` on Ventura+ (for Metal 1 GPUs)
+`revblock=auto` |YES| Same as `pci`
+`revblock=none`|YES| Disables all blocking
+
+**NOTE**: NVRAM variables work the same as the boot arguments, but have lower priority.
+They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102` as a String: </br> ![](/Users/5t33z0/Desktop/revpatch.png)
+
+**To be continued…**
