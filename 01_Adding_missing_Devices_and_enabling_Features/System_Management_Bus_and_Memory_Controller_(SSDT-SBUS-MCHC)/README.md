@@ -7,9 +7,9 @@ What is AppleSMBus? Well, it mainly handles the System Management Bus, which has
 * **AppleSMBusPCI**: Same idea as AppleSMBusController except for low bandwidth PCI devices.
 * **Memory Reporting**: Aids in proper memory reporting and can aid in getting better memory-related kernel panic details.
 
-Other things the System Management Bus does can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
+Other things the System Management Bus handles can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
 
-In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Host Controller Device `MCHC` which is serviceable in macOS also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both devices to decide which SSDT(s) needs to be added.
+In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Controller Hub (`MCHC`) which is serviceable in macOS also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both devices to decide which SSDT(s) needs to be added.
 
 ## Instructions
 
