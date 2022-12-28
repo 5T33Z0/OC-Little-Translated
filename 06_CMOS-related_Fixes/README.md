@@ -1,9 +1,11 @@
 # CMOS-related Fixes
-**CMOS** memory holds important data such as date, time, hardware configuration information, auxiliary setup information, boot settings, hibernation information, etc. 
+**CMOS** (complementary metal-oxide-semiconductor) memory holds important data such as date, time, hardware configuration information, auxiliary setup information, boot settings, hibernation information, etc. 
 
-macOS can cause issues on X86 based systems like resetting the CMOS when shutting down the system. Below you find a list of CMOS-related fixes.
+On a Mac, non-volatile RAM (NVRAM) is used for this instead, which stores similar information. Just like CMOS, NVRAM is also powered by a small battery, which allows it to retain its data even when the power is off.
 
-**TABLE of CONTENTS**
+When running macOS on Wintel systems, it can sometimes trigger a CMOS-reset on some BIOSes/Firmwares when shutting down or restarting the system.
+
+You can use one of the following fixes to resolve the issue:
 
 - [**CMOS Reset Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes/CMOS_Reset_Fix) – For fixing CMOS resets triggered by macOS after shutting down or rebooting.
 - [**Emulating CMOS Memory**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes/Emulating_CMOS) – For fixing conflicts between `AppleRTC` and the BIOS/UEFI Firmware
