@@ -5,7 +5,7 @@
 Under one of the following conditions (or combinations thereof), System Update Notifications won't work so you can't install any OTA System Updates/Upgrades:
 
 1. When using `-no_compat_check` boot-arg. This disables System Updates *by design*
-2. When adding Bit 5 "Allow Apple Internal" (and in some cases bit 12 "Allow Unathenticated Root") to the `csr-active-config` value in macOS Big Sur and newer (&rarr; see chapter "[OpenCore Calculators](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)" for details)
+2. When adding Bit 5 "Allow Apple Internal" (and in some cases bit 12 "Allow Unauthenticated Root") to the `csr-active-config` value in macOS Big Sur and newer (&rarr; see chapter "[OpenCore Calculators](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)" for details)
 3. When using an SMBIOS of Mac models with a T1/T2 security chip with `SecureBootModel` set to `Disabled` instead of using the correct value (in brackets):
 	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
 	- MacBookPro16,1 (`J152F`), 16,2 (`J214K`), 16,3 (`J223`), 16,4 (`J215`)
@@ -30,7 +30,7 @@ Which approach to use is up to you, but for ease of use I would give the kext an
 
 ## Limitations
 
-Since the fix utilizes virtualization capabilies only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+) you can't use it in macOS Catalina and older.
+Since the fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+) you can't use it in macOS Catalina and older.
 
 But since the issue only started to occur on Big Sur and newer, it's not really an issue on older versions of macOS – unless you have to use `-no_compat_check` or added bit 5 to your `csr-active-config`, of course.
 
@@ -40,9 +40,9 @@ This fix only works partially in Clover since you can't add the Booter patches r
 
 For some reason, `RestrictEvents.kext` (and the `revpatch=sbvmm` boot-arg) doesn't fully enable the board-id spoof either, so you will get the "forbidden" sign in this case as well. You still have to use `-no_compat_check` to boot macOS with an unsupported board-id which normally disables system updates, of course.
 
-However, when I was boooting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which left me happy but baffled at the same time because I have no real explanation for it. 
+However, when I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which left me happy but baffled at the same time because I had no explanation for why this worked. 
 
-My hypothesis is: the kext can apply the kernel patches part of the board-id vmm spoof but not the booter patches since OpenCore is required to reroute and "obfuscate" the real board-id internally. This is the part that Clover cannot do, so you can't boot without `-no_compat_check`. But since the Kernel Patches *can be applied by the kext*, you are offered system updates anyway – even with `-no_compat_check` enabled – which is pretty cool.
+My guess is: the kext can apply the kernel patches part of the board-id vmm spoof but not the booter patches since OpenCore is required to skip the board-id check and then reroute and "obfuscate" the real board-id internally. This is the part that Clover cannot do, so you can't boot without `-no_compat_check`. But since the Kernel Patches *can be applied by the kext* which enable the vmm board-id, you are offered system updates – even with `-no_compat_check` enabled – which is pretty cool.
 
 ## Credits
-- Acidanthera for OCLP and RestricEvents.kext
+- Acidanthera for OCLP and RestrictEvents.kext
