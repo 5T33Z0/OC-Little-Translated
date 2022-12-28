@@ -2,9 +2,9 @@
 
 ## Description
 
-Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** **`PNP0103`** to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is).
+Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is).
 
-In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** **(`PNP0B00`)** or **TIMR** **(`PNP0100`)** respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
+In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
 But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from Intel's 6th Gen platform and is only present for backward compatibility with older Windows versions. If you use 7th Gen Intel Core CPU or newer with Windows 8.1+, HPET (High Precision Event Timer) is no longer present in Device Manager (the driver is unloaded).
 
@@ -20,10 +20,10 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be b
 
 Two methods for fixing **HPET** and **IRQs** exist:
 
-1. **Automated method** using the python script SSDTTime (simple, for Novice Users).</br>
+1. **Automated method** using the python script SSDTTime (simple, for novice users).</br>
 **Advantage**: No ACPI skills required.</br>
 **Disadvantage**: Requires binary renames, so it's not as clean as using method 2, which is completely ACPI-based.
-2. **Manual method** (complicated, for Advanced Users)</br>
+2. **Manual method** (complicated, aimed at advanced users)</br>
 **Advantages**: Doesn't require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
 **Disadvantage**: Requires analysis of the DSDT and adjustments of the SSDT sample.
 
@@ -74,8 +74,8 @@ Save the file and reboot. Sound should work now. If it's not working, then the i
 ## 2. Manual Method
 Below you will find the guide for fixing IRQ issues manually if you don't want to use SSDTTime.
 
-- The sound card on earlier machines require **HPET** **`PNP0103`** to provide interrupt numbers `0` & `8`, otherwise the sound card would not work properly. In reality, almost all machines have **HPET** without any interrupt number provided. Usually, interrupt numbers `0` & `8` are occupied by **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`** respectively
-- To solve the above problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
+- The sound card on earlier machines require **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card would not work properly. In reality, almost all machines have **HPET** without any interrupt provided. Usually, interrupts `0` and `8` are occupied by **RTC** (`PNP0B00`), **TIMR** (`PNP0100`) respectively
+- To solve the problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
 ## Patching principle
 To fix this issue, we use ***SSDT-HPET_RTC_TIMR-fix***, which does the following:
@@ -116,7 +116,7 @@ Device (HPET)
             Return (0x00)
         ...
 ```
-In this case you need to do the following:
+In this case you need to add the following binary renames to your config.plist under `ACPI/Patch`:
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
