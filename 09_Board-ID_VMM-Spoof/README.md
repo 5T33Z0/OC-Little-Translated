@@ -3,8 +3,8 @@
 OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
 
 ## Use Cases
-1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS.
-2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 12 and newer when using a SMBIOS of Mac models with a T1/T2 security chip, such as:
+1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
+2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 11.3 and newer when using an SMBIOS of a Mac model with a T1/T2 security chip, such as:
 
 	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
 	- MacBookPro16,1 (`J152F`), 16,2 (`J214K`), 16,3 (`J223`), 16,4 (`J215`)
@@ -15,7 +15,14 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 	- iMacPro1,1 (`J137`)
 	- MacPro7,1 (`J160`)
 
-	:bulb: The problem occurs when using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` as well as `SIP` disabled which is necessary if your iGPU/dGPU is no longer supported by macOS and you have to re-install removed graphics drivers. This is the case for Intel HD 4000 on-board graphics as well as NVIDIA Kepler cards which can be patched back in via OCLP and others (see Credits). Otherwise the system crashes on boot since re-installing of drivers to the system partition breaks the security seal of the volume. So in order to be able to boot the system ***and*** receive system updates, the Board-ID VMM spoof is the only workaround. You cannot apply these patches via Clover, btw!
+Under the following circumstanes you won't get System Update Notifications and therefore you won't be able to download OTA System Updates:
+
+- Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
+- Using `csr-active-config` value containing bit 5 "Allow Apple Internal" and bit 12 "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
+
+Disabling `SecureBootModel` and `SIP` is mandatory if your iGPU/dGPU is no longer supported by macOS 11.3 and newer in order to re-install removed graphics drivers using OCLP or other tools (see Credits for details). This is the case for Intel HD 4000 on-board graphics and NVIDIA Kepler cards which have been removed from macOS 12+. Otherwise you can't install (nor load) the drivers and the system will crash on boot since re-installing the drivers breaks the security seal of the system partition and conflicts with the security policy of `SecureBootModel`. 
+
+So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
@@ -56,15 +63,11 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 - Save your config and reboot.
 - To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
 
-Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates! 
-
-### Notes
-After upgrading macOS, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
+Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
 
 ## About the Patches
 
 ### Booter Patches
-
 - **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
 - **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
 
@@ -100,7 +103,11 @@ Installation went smoothly and macOS 12.1 booted without issues:
 ![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
 </details>
 
-## Notes and Credits
+## Notes
+- Alternatively to adding the Kernel patches, you could use `RestrictEvents.kext` combined with `revpatch=sbvmm` boot-arg instead which does the same thing. You still need the Booter patches to bypass the board-id check, though.
+- After upgrading macOS 11.3+, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
+
+## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
 - Dortania for [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
 - Chris1111 for [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) and [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey)
