@@ -12,7 +12,7 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be b
 
 ## Patching Principle
 
-- Disable **HPET**, **RTC**, **TIMR**.
+- Disable **HPET**, **RTC**, **TIMR** and **PIC/IPIC** (optional)
 - Create fake **HPE0**, **RTC0**, **TIM0**.
 - Remove `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and add them to **HPE0**.
 
@@ -116,7 +116,7 @@ Device (HPET)
             Return (0x00)
         ...
 ```
-In this case you need to add the following binary renames to your config.plist under `ACPI/Patch`:
+In this case you need to add the following binary renames to your `config.plist` under `ACPI/Patch`:
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
@@ -133,17 +133,17 @@ In this case you need to add the following binary renames to your config.plist u
 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
 	```
 - Add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml`
-- Optional: Add `SSDT-IPIC` if sound still doesn't work after rebooting
+- Optional: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting
 
 ### Disable **`RTC`**
-Older machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
+Disable the Realtime Clock by changening it's status (`_STA`) to zero if macOS is running:
 
 ```asl
 Method (_STA, 0, NotSerialized)
 {
 	If (_OSI ("Darwin"))
 	{
-		Return (0)
+		Return (ZERO)
 	}
 	Else
 	{
@@ -152,12 +152,13 @@ Method (_STA, 0, NotSerialized)
 }
 ```
 ### Disable **`TIMR`**
-(same as **RTC**)
+(same as **Disable `RTC`**)
 
-### Disable **`IPIC`**/ **`PIC`** (optional)
-Use ***SSDT-IPIC***. 
+### Disable **`PIC`**/ **`IPIC`** (optional)
 
-If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device, adds a fake one instead and removes `IRQNoFlags{2}`. Adjust the scopes, device names and PCI paths according to your `DSDT`.
+If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also removes `IRQNoFlags{2}`. Adjust the device names and paths according to the paths used in your `DSDT`.
+
+Tthe Programmable Interrupt Controller (PIC) is a hardware device that is responsible for managing interrupts. The PIC receives these interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
 
 ## NOTES
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
