@@ -4,17 +4,36 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 
 **TABLE of CONTENTS**
 
-- [Use Cases](#use-cases)
-- [System Requirements](#system-requirements)
 - [How the spoof works](#how-the-spoof-works)
-	- [About the Patches](#about-the-patches)
-		- [Booter Patches](#booter-patches)
-		- [Kernel Patches](#kernel-patches)
+- [System Requirements](#system-requirements)
+- [Use Cases](#use-cases)
+- [About the Patches](#about-the-patches)
 - [Adding the Patches](#adding-the-patches)
-	- [Booter Patches](#booter-patches-1)
-	- [Kernel Patches](#kernel-patches-1)
+	- [Booter Patches](#booter-patches)
+	- [Kernel Patches](#kernel-patches)
 - [Notes](#notes)
 - [Credits](#credits)
+
+## How the spoof works
+**OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick it into "thinking" it is running in a Virtual Machine:
+
+> Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
+>
+> - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
+>
+> **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
+
+This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
+
+## System Requirements
+**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
+**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
+
+- Sandy Bridge (need additional SurPlus patches)
+- Ivy Bridge
+- Haswell (partially)
+
+I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
 ## Use Cases
 1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
@@ -38,40 +57,17 @@ Disabling `SecureBootModel` and `SIP` is mandatory if your iGPU/dGPU is no longe
 
 So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
-## System Requirements
-**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
-**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
-
-- Sandy Bridge (need additional SurPlus patches)
-- Ivy Bridge
-- Haswell (partially)
-
-I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
-
-## How the spoof works
-**OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick it into "thinking" it is running in a Virtual Machine:
-
-> Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
->
-> - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
->
-> **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
-
-This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
-
-### About the Patches
-
+## About the Patches
 Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
 
-#### Booter Patches
-- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
-- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
-
-#### Kernel Patches
-- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
-- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
-- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
-- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
+- **Booter Patches**
+	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
+	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
+- **Kernel Patches**
+	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
+	- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
+	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
+	- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
 
 **NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
@@ -79,7 +75,6 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 :warning: Before adding the patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 ### Booter Patches
-
 - Copy the raw text of the OCLP [config](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) to the clipboard
 - Paste it into ProperTree
 - Copy the entries from `Booter/Patch` to your config.plist to the same section (and enable them)
