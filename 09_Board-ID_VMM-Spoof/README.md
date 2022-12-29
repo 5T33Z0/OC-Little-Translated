@@ -32,36 +32,50 @@ So in order to be able to boot the system with patched-in drivers ***and*** rece
 - Ivy Bridge
 - Haswell (partially)
 
-I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running Big Sur and newer. 
+I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
-## How this spoof works
+## How the spoof works
 **OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick it into "thinking" it is running in a Virtual Machine:
 
-> Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board ID while the rest of the OS will continue with the original ID.
+> Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
 >
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
 >
 > **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
-This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 12 or newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Montereay and newer on otherwise unsupported hardware.
+This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
 
 ## Adding the Patches
 :warning: Before adding the patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
-- Copy the raw text of the OCLP [config](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) to the clipboard
+### Booter Patches
+
+- Copy the raw text of the OCLP [config](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) to the clipboard
 - Paste it into ProperTree
-- Copy the entries from `Booter/Patch` over to your config.plist to the same section and enable them.
-- Do the same for entries under `Kernel/Patch`. You need the following:
+- Copy the entries from `Booter/Patch` to your config.plist to the same section (and enable them)
+- Leave ProperTree open an continue reading
+
+**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-arg `-no_compat_check` instead.
+
+### Kernel Patches
+To apply the Kernel patches, you have 2 options:
+
+- **Option 1**: Copy the followin entries from `Kernel/Patch` section your to config.plist::
 	- **"Force FileVault on Broken Seal"** (only required if you are using File Vault)
 	- **"Disable Library Validation Enforcement"** (enable it)
  	- **"Reroute kern.hv_vmm_present patch (1)"** (enable it)
 	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** (enable it)
 	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** (enable it)
 	- **"Force IOGetVMMPresent"** (enable it)
+	- **"Disable Root Hash validation"** (enable it)
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
+- **Option 2**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
+	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
+	- Add boot-arg `revpatch=sbvmm`
 	- Optionally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
-- Save your config and reboot.
-- To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
+	- Save your config and reboot.
+
+To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
 
 Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
 
@@ -104,8 +118,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes
-- Alternatively to adding the Kernel patches, you could use `RestrictEvents.kext` combined with `revpatch=sbvmm` boot-arg instead which does the same thing. You still need the Booter patches to bypass the board-id check, though.
-- After upgrading macOS 11.3+, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
+After upgrading macOS 11.3+, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
