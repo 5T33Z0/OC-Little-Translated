@@ -1,10 +1,12 @@
-# Merging all SSDT Hotpatches into one file
-You can use this guide to merge all of your SSDT Hotpatches into one big file semi-automatically. With this approach, you lose all the modularity individual SSDTs provide – either *all* patches are active or *none*, which makes it harder to troubleshoot. You should only consider doing this if your ACPI tables work correctly and don't contain any errors. But even then it's not guaranteed that the system will boot afterwards.
+# Merging SSDT Hotpatches into one file
+You can use this guide to merge all (or some) of your SSDT Hotpatches into one SSDT semi-automatically. With this approach, you lose all the modularity individual SSDTs provide – either *all* patches are active or *none*, which makes it harder to troubleshoot. So you should only consider doing this if your ACPI tables work correctly and don't contain any errors. 
 
-In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop but my Desktop wouldn't boot at all. Even disabling automatic Compiler "Optimizations" couldn't fix this. So this method has to be regarded as "experimental". I am not really a fan of it but it exists and if you want to try it, this is how it's done.
+But even then it's not guaranteed that the system will boot afterwards. In my tests, I got mixed results: the all-in-one SSDT worked fine on my Laptop but my Desktop wouldn't boot with it. Even disabling automatic Compiler "Optimizations" couldn't fix this. So this method has to be regarded as "experimental". I am not really a fan of it but it exists and if you want to try it, this is how it's done.
+
+Before attempting this, you should also consider which SSDTs to merge together. It doesn't make much sense to include SSDTs for the CPU and 3rd party devices that are not part of the stock system configuration if you want to share your EFI folder with others!
 
 ## Preparations
-- Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it for batch convert `.aml` files to `.dsl`.
+- Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it for batch convert `.aml` files to `.dsl` automatically.
 - Right-click on the App and select "Show Package Contents"
 - Copy the `iasl` file located under `/Contents/MacOS/` to memory (CMD+C)
 - In Finder, press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> to show hidden files and folders.
@@ -70,12 +72,11 @@ This will merge all the listed files into a new `SSDT-ALL.aml` file, containing 
 In cases where you're getting compiler errors like "Existing object has invalid type for Scope operator (_SB.PCI0 [Untyped])", add it as an "External" reference as shown below:</br>![xiasl05](https://user-images.githubusercontent.com/76865553/176115716-3fd315ae-43ef-4f06-8dcf-a3ddf7a933bc.png)
 
 ## Notes
-- After combining single SSDTs into one SSDT-ALL, you may notice that the resulting table is not organized well in terms of the tree stucture.
-- Manually edit the file to clean it up and reduce clutter.
+- After merging your SSDTs into a new file, you may notice that the resulting table is not organized well in terms of the tree stucture. Manually edit the file to clean it up and reduce clutter.
 - Maybe sorting the SSDTs based on their PCI paths prior to merging them results in a cleaner output.
 - If you know a method to improve the merging process so that everything is organized perfectly, let me know.
 
 ## Credits & Resources
 - [ASL Compiler User Reference](https://www.acpica.org/sites/acpica/files/aslcompiler_11.pdf) (PDF)
+- [dreamwhite](https://github.com/dreamwhite/dreamwhite) for the suggesting the "#include" method and compiler instructions
 - [ic005k](https://github.com/ic005k) for Xiasl
-- [dreamwhite](https://github.com/dreamwhite/dreamwhite) for the "#include" method and compiler instructions
