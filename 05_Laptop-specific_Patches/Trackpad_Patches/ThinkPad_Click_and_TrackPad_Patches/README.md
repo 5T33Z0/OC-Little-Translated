@@ -17,7 +17,9 @@ On older ThinkPad models (3rd to 5th generation), the brightness shortcut keys (
 It changes `NBCF` to `1` for macOS so the brightness shortcut keys work properly when using ACPI methods or the new [**BrightnessKeys.kext**](https://github.com/acidanthera/BrightnessKeys) (which is recommended).
 
 ### ThinkPad TouchPad property injection and TouchPoint anti-drift patch
-ThinkPad's TouchPads and the TouchPoints Mouse pointer are ELAN type devices connected via SMBus using the `Synaptics` protocol. Since there is no stable SMBus driver for macOS, you can only use VoodooPS2, and to enable the ThinkPad optimization built into VoodooPS2, you need to inject properties via SSDT.
+ThinkPad's TouchPads and the TouchPoints Mouse pointer are ELAN type devices connected via SMBus using the `Synaptics` protocol. Recently, the Synaptics PS2 driver in VoodooPS2 was updated. This changes some of the properties which the driver looks for, and removes the need for the Clickpad/Trackpad SSDTs. These are still somewhat useful if you want to change trackpoint cursor and scroll speed, or want an example of setting properties for VoodooPS2.
+
+Some older ThinkPad trackpads don't support Intertouch (Synaptic's term for operating over SMBus instead of PS/2), in which case VoodooPS2Trackpad is still useful.
 
 **SSDT-ThinkPad_ClickPad**
 
