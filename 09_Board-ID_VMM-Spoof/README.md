@@ -2,6 +2,20 @@
 
 OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
 
+**TABLE of CONTENTS**
+
+- [Use Cases](#use-cases)
+- [System Requirements](#system-requirements)
+- [How the spoof works](#how-the-spoof-works)
+	- [About the Patches](#about-the-patches)
+		- [Booter Patches](#booter-patches)
+		- [Kernel Patches](#kernel-patches)
+- [Adding the Patches](#adding-the-patches)
+	- [Booter Patches](#booter-patches-1)
+	- [Kernel Patches](#kernel-patches-1)
+- [Notes](#notes)
+- [Credits](#credits)
+
 ## Use Cases
 1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
 2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 11.3 and newer when using an SMBIOS of a Mac model with a T1/T2 security chip, such as:
@@ -15,7 +29,7 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 	- iMacPro1,1 (`J137`)
 	- MacPro7,1 (`J160`)
 
-Under the following circumstanes you won't get System Update Notifications and therefore you won't be able to download OTA System Updates:
+Under the following circumstances you won't get System Update Notifications and therefore you won't be able to download OTA System Updates:
 
 - Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 - Using `csr-active-config` value containing bit 5 "Allow Apple Internal" and bit 12 "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
@@ -45,6 +59,22 @@ I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T3
 
 This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
 
+### About the Patches
+
+Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
+
+#### Booter Patches
+- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
+- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
+
+#### Kernel Patches
+- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
+- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
+- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
+- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
+
+**NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
+
 ## Adding the Patches
 :warning: Before adding the patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
@@ -60,7 +90,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 ### Kernel Patches
 To apply the Kernel patches, you have 2 options:
 
-- **Option 1**: Copy the followin entries from `Kernel/Patch` section your to config.plist::
+- **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
 	- **"Force FileVault on Broken Seal"** (only required if you are using File Vault)
 	- **"Disable Library Validation Enforcement"** (enable it)
  	- **"Reroute kern.hv_vmm_present patch (1)"** (enable it)
@@ -78,20 +108,6 @@ To apply the Kernel patches, you have 2 options:
 To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
 
 Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
-
-## About the Patches
-
-### Booter Patches
-- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
-- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
-
-### Kernel Patches
-- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
-- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
-- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
-- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
-
-**NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 <details>
 <summary><strong>My test</strong> (Click to show content!)</summary>
