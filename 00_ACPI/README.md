@@ -7,7 +7,7 @@
 	- [**List of ACPI Device IDs**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ACPI_Device_IDs.md)
 	- [**List of Predefined ACPI Names**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Predefined_ACPI_Names%20.md)
 	- [**Advanced Patching Techniques**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Advanced_Patching_Techniques.md) – some unusual and lesser known ways to apply binary renames and SSDTs.
-
+	- [**Utilizing AI to understand SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/Utilizing_AI_to_understand_ACPI.md)
 - **Guides**
 	- [**Dropping ACPI tables in OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#dropping-acpi-tables)
 	- [**Renaming Devices via ACPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Rename_Devices)
