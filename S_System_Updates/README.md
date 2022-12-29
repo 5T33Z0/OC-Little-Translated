@@ -26,6 +26,8 @@ All of the issues can be eliminated in macOS 11.3+ by removing `-no_compat_check
 
 You only need the Booter patches not the Kernel patches, though! These can be substituted by the [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer.
 
+Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable:</br>![](https://user-images.githubusercontent.com/76865553/209689694-8b3fe03d-0eea-4261-bf68-1042e201f30b.png)
+
 ## Limitations
 
 Since the fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+) you can't use it in macOS Catalina and older.
