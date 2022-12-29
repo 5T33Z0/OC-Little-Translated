@@ -133,7 +133,7 @@ In this case you need to add the following binary renames to your config.plist u
 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
 	```
 - Add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml`
-- Optional: Add `SSDT-IPIC` if sound doesn't work after reboot
+- Optional: Add `SSDT-IPIC` if sound still doesn't work after rebooting
 
 ### Disable **`RTC`**
 Older machines have RTCs without `_STA`, disable RTCs by pressing the `_STA` method. e.g.:
