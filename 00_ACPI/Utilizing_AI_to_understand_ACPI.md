@@ -1,7 +1,7 @@
 # Utilizing AI to understand what an SSDT does
 
 ## ChatGPT and Hackintoshing
-I rescently discovered **ChatGPT**, which is
+I recently discovered **ChatGPT**, which is
 
 >[…] a language model trained to produce text. ChatGPT was optimized for dialogue by using Reinforcement Learning with Human Feedback (RLHF) – a method that uses human demonstrations to guide the model toward desired behavior.
 
@@ -13,9 +13,9 @@ It may even be possible to use ChatGPT to assist you in writing your own ACPI ta
 
 ### Example 1: Asking what `SSDT-HPET_RTC_TIMR_WNTF_WXPF` does
 
-**ME**: "What does this SSDT do?" (Ffollowed by the Source of the table)
+**ME**: "What does this SSDT do?" (Followed by the Source of the table)
 
-**ChatGPT's Anwer**: 
+**ChatGPT's Answer**: 
 > This is an ACPI System Description Table (SSDT). It is a data structure that contains information about the hardware and configuration of a computer system. In this specific SSDT, there are several devices defined, including a High Precision Event Timer (HPE0), a Real-Time Clock (RTC0), and a System Timer (TIM0). Each of these devices has a hardware ID (_HID), a unique ID (_UID), and current resource settings (_CRS). The SSDT also includes several methods for each device, including a method to retrieve the device's status (_STA).
 
 >The SSDT also includes several external references to other objects, such as SB.PCI0.LPC_.RTC_, SB.PCI0.LPC_.TIMR, WNTF, and WXPF. These objects are likely defined in other ACPI tables or in the system firmware.
@@ -24,14 +24,14 @@ It may even be possible to use ChatGPT to assist you in writing your own ACPI ta
 
 >Finally, the SSDT includes a method for each of the HPE0, RTC0, and TIM0 devices that returns a status of 0x0F if the system is running the Darwin operating system, or 0 if it is running any other operating system.
 
-**ME**: "This SSDT is combined with binary renames which change WNTF to XXXX and WXPF to YYYYY in the DSDT so the original HPET device can be disabled and redfined."
+**ME**: "This SSDT is combined with binary renames which change WNTF to XXXX and WXPF to YYYYY in the DSDT so the original HPET device can be disabled and redefined."
 
 **ChatGPT**: 
 > Correct. It appears that this SSDT is intended to be used in conjunction with a Differentiated System Description Table (DSDT), which is another type of ACPI table that contains information about the system hardware and configuration. The DSDT may include references to the WNTF and WXPF objects, which are then replaced with references to XXXX and YYYY, respectively, when the SSDT is loaded.
 
 >The purpose of this appears to be to disable the original High Precision Event Timer (HPET) device and redefine it with new resource settings and methods. This may be done for a variety of reasons, such as to fix a bug or issue with the original HPET device, or to customize its behavior for a specific system or operating system.
 
-**ME**: "It's used to fix IRQ issues when running macOS on wintel systems with an Ivy bridge cpu"
+**ME**: "It's used to fix IRQ issues when running macOS on Wintel systems with an Ivy bridge cpu"
 
 **ChatGPT**:
 >Yes, it looks like this SSDT is intended to be used as a workaround for issues with the High Precision Event Timer (HPET) on systems running macOS on Intel CPUs with Ivy Bridge microarchitecture.
@@ -62,7 +62,7 @@ It may even be possible to use ChatGPT to assist you in writing your own ACPI ta
 
 >This SSDT also includes several external references to other objects, such as ZPTS, ZWAK, ZTTS, EXT1, EXT2, EXT3, EXT4, EXT5, and EXT6. These objects are likely defined in other ACPI tables or in the system firmware. Additionally, the SSDT includes references to the DGPU._ON and DGPU._OFF methods, which are likely used to control the power state of a discrete graphics processing unit (GPU).
 
-**ME**: "This ssdt is used to fix sleep and wake issues when running macos on wintel systems"
+**ME**: "This ssdt is used to fix sleep and wake issues when running macos on Wintel systems"
 
 **ChatGPT**:
 >Yes, it appears that this SSDT is intended to be used as a workaround for issues with power management (sleep and wake) on systems running macOS on Intel CPUs. The methods defined in the SSDT, such as _PTS, _WAK, and _TTS, are part of the Advanced Configuration and Power Interface (ACPI) standard and are used by the operating system to control the power state of the system.
