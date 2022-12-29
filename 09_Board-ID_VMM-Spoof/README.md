@@ -45,8 +45,8 @@ I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T3
 
 This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 12 or newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Montereay and newer on otherwise unsupported hardware.
 
-## Applying the Patches
-:warning: Before applying the patches, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
+## Adding the Patches
+:warning: Before adding the patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 - Copy the raw text of the OCLP [config](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) to the clipboard
 - Paste it into ProperTree
