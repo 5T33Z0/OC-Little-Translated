@@ -26,7 +26,7 @@ In my tests I got mixed results: the all-in-one SSDT worked fine on my Laptop bu
 - Delete the `DefinitionBlock` (curly brackets of the 1st level included) from each table:</br>**Before**:</br>![xiasl02](https://user-images.githubusercontent.com/76865553/176115380-29d3cd77-eff8-45f0-863a-e22b25f0f8a7.png)</br>**After**:</br>![xiasl03](https://user-images.githubusercontent.com/76865553/176115472-5285e051-bf6b-4cf7-b6ec-533fef2c6136.png)
 - Save the file(s) (CMD+S)
 
-## Picking SSDTs to merge into one files
+## Picking SSDTs to merge into one file
 - Create a new file in Xiasl
 - Paste the following Code into it:	
 	```asl
@@ -57,7 +57,7 @@ Don't merge the following tables into the SSDT-ALL file if you plan to share you
 
 This will merge all the listed files into a new `SSDT-ALL.aml` file, containing all the content of the included SSDTs:</br>![xiasl06](https://user-images.githubusercontent.com/76865553/176115651-a23562bd-8271-4490-965b-6521fd0abbe0.png)
 
-## Adding SSDT-ALL.aml to EFI and Config
+## Adding `SSDT-ALL.aml` to EFI and Config
 :warning: Have a working backup of your EFI folder on a FAT32 formatted USB flash drive just in case the system won't boot 
 
 - Mount your EFI partition
