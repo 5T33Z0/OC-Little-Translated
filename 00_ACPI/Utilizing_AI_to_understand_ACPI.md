@@ -7,7 +7,7 @@ I rescently discovered **ChatGPT**, which is
 
 >**Source**: https://help.openai.com/en/articles/6783457-chatgpt-faq
 
-Just for fun and testing the algorithm, I threw Source Code of several SSDTs at it, to get its response. And it's mind-boggling what it can do. Below are the transcripts from my conversations with ChatGPT which proof that you can really use this AI can be utilized in order to understand an .aml file. 
+Just for fun and testing the algorithm, I threw Source Code of several SSDTs at it, to get its response. And it's mind-boggling what it can do. Below are the transcripts from my conversations with ChatGPT which proof that you can really use this AI in order to understand an .aml file. 
 
 It may even be possible to use ChatGPT to assist you in writing your own ACPI tables by "cooperating" with it. This is a possibility I haven't explored yet but maybe you will?
 
