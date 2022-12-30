@@ -98,9 +98,10 @@ Most Intel Desktop configs will at least contain `Lilu`, `VirtualSMC` (Plugins a
 
 ### Example 9b: Possible Laptop Kext Sequence
 ![config9b](https://user-images.githubusercontent.com/76865553/140829571-525840b9-f7e5-4abb-8cd9-3aa0e31867a9.png)
-This is how a possible sequence of kexts for a Laptop might look like. In this example, the Trackpad requires `VoodooPS2Controller`, WiFi and BT are by Intel and the Ethernet card is from Realtek. Depending on your Laptop components, Kexts 10 to 17 could be something else entirely.
+
+This is how a possible sequence of kexts for a Laptop might look. In this example, the Trackpad requires `VoodooPS2Controller`, WiFi and BT are by Intel and the Ethernet card is from Realtek. Depending on your Laptop components, Kexts 10 to 17 could be something else entirely.
 
 ## Notes
-- :warning: The configs included in this section ARE NOT configured for use with any system. It's only about the order of the kexts listed in "Kernel > Add" section!
+- :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
 - Ignore the red dots in the screenshots. 
-- The kexts listed in Config 2 to 6 are for PS2 Controllers (Keyboards, Mice, Trackpads). We recommend to use `config-2-PS2-Controller`list as a starting point.
+- The kexts listed in Examples 2 to 6 are for PS2 Controllers (Keyboards, Mice, Trackpads). We recommend to use `config-2-PS2-Controller` plist as a starting point.
