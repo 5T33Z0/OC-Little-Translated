@@ -1,16 +1,30 @@
 # Configuring Active State Power Management (ASPM)
 
-## Description
+## About ASPM
 
-ASPM, **Active State Power Management**, is a power link management scheme supported at system level. Under ASPM management, PCI devices attempt to enter power saving mode when they are idle.
+**Active State Power Management** (ASPM) is a power management technique that allows a computer to reduce the power consumption of its hardware components when they are not in use. It is used to extend the battery life of portable devices and to reduce power consumption in desktop and server systems.
 
-- ASPM operates in several modes or states:
-  - **`L0`** = Active state: All PCIe transactions and operations are enabled.
-  - **`L0s`** = Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption.
-  - **`L1`** = Higher latency, lower power standby state. L1 further reduces power consumption compared to L0s. However, the time to enter and exit this state takes longer than in L0s.
-  - **`L2`** = Auxiliary-powered link, deep-energy-saving state: in L2, the component’s main power supply inputs and reference clock inputs are shut off. Not covered here.
-- For machines using [**AOAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) technology, try to change the ASPM mode of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption of the machine.
-- Changing the ASPM mode of PCI devices can solve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
+ASPM works by putting certain hardware components into a low-power state when they are not being used, and then waking them up when they are needed. This allows the system to reduce its overall power consumption while still maintaining the necessary performance and functionality.
+
+ASPM is typically implemented at the hardware level and is controlled by the system BIOS or operating system. It is supported by a number of hardware components, including the PCI Express (PCIe) bus, the system memory, and the processor.
+
+ASPM is an important part of power management in modern computers and is used to reduce energy consumption and improve system efficiency. It is often used in conjunction with other power management techniques, such as CPU idle states and power-saving modes, to further reduce power consumption.
+
+### ASPM States
+
+ASPM supports a number of different power states, depending on the specific hardware components and system configurations. Some common ASPM power states include:  
+
+- **`L0`** = Active state: All PCIe transactions and operations are enabled.
+- **`L0s`** = Standby mode. L0s mode enables fast entry and exit from the idle state, and after entering the idle state, the device is placed at a lower power consumption. 
+- **`L1`**: This is a low-power state in which the hardware component is partially powered down. It may have reduced clock frequencies or may be placed in a sleep state, but it is still able to respond to requests and perform basic functions. However, the time to enter and exit this state takes longer than in L0s.
+- **`L2`**: This is a deeper low-power state in which the hardware component is almost completely powered down. It may take longer to wake up from this state, but it consumes significantly less power.
+- **`L3`**: This is the deepest low-power state, in which the hardware component is powered off and is not able to perform any functions.
+
+Changing the ASPM mode of PCI devices can resolve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
+
+### AOAC Devices and ASPM
+
+For machines using Always-On Always-Connected technology [(**AOAC**)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines), try changing the ASPM modes of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption.
 
 ## Injecting ASPM operation mode
 There are two methods for setting/changing the ASPM mode: via DeviceProperties or with SSDTs.
