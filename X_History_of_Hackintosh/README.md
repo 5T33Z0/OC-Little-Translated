@@ -11,6 +11,8 @@ Mac OS 8 didn't bring a revolutionary update – initially it was supposed to be
 >![](https://img10.360buyimg.com/ddimg/jfs/t1/98099/31/19892/76135/62579d59Ebcfe4e01/4287ff5a034227cd.png)</br>
 > StarMax compatible machine made by Motorola, which can directly install System 7.
 
+Another powerful Mac clone of this era was the [DayStar Genesis MP](https://www.youtube.com/watch?v=RX_LqLhL-YI), which came with 4 PPC 604 CPUs – Multi-Processor Computing that was unheard of in the home PC market in 1996.
+
 ## From PowerPC to x86
 
 It's a bit tricky to interpret the Macintosh System 7 license agreement as a Hackintosh. To talk about the modern Black Apple, you can't ignore Apple's path to x86, so let's go back five years.
