@@ -19,6 +19,8 @@ Even though Kepler Cards are supported up to macOS Big Sur, it's not worth inves
 
 And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. Here's a list of [(un)supported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
 
+To install **NVIDIA Web Drivers** with OpenCore Legacy Patcher on macOS Big Sur and newer, [follow this guide](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/).
+
 ### Nvidia support via OpenCore Legacy Patcher (OCLP)
 GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
 
