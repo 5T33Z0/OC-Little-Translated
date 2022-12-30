@@ -479,3 +479,4 @@ Whether or not your VGA port can be used depends on 2 factors: macOS and the CPU
 - Chris1111 for [**Patch HD4000 Monterey**](https://github.com/chris1111/Patch-HD4000-Monterey)
 - Dortania for [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
 - RehabMan for [**Laptop Framebuffer Patches**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config)
+- List of [**GPU/iGPU drivers installed by OCLP**](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches)
