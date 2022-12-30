@@ -20,7 +20,7 @@ ASPM supports a number of different power states, depending on the specific hard
 - **`L2`**: This is a deeper low-power state in which the hardware component is almost completely powered down. It may take longer to wake up from this state, but it consumes significantly less power.
 - **`L3`**: This is the deepest low-power state, in which the hardware component is powered off and is not able to perform any functions.
 
-Changing the ASPM mode of PCI devices can resolve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
+Changing the ASPM operatio modes of PCI devices can resolve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
 
 ### AOAC Devices and ASPM
 
