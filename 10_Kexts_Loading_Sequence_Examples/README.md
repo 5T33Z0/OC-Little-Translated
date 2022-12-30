@@ -17,14 +17,19 @@ Same goes for having kexts in the list which aren't present in the `OC/Kexts` fo
 For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Lilu and VirtualSMC first?
-Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***. **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct load order when creating a config snapshot. For reviewers of configs who try to assist others in fixing config issues this complicates troubleshooting.
+Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***. **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot.  For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
 
 :bulb: **Tip**: When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** first to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
 
 ## Kernel Support Table
-Listed below, you will find the Kernel version ranges for macOS 10.4 to macOS 13. Setting `MinKernel` and `MaxKernel` for kexts is very useful to maximize the compatibility of your `config.plist` with various versions of macOS without having to create multiple configs with different sets of kexts. This way, you can control which kexts are enabled for which macOS version by specifying the kernel range. It's basically the same feature Clover provides, just a lot smarter: instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.), you specify the lower and upper kernel version limit. This way you don't have to create duplicates of kexts (which you maybe forget to update later).
+Listed below, you will find the Kernel version ranges for macOS 10.4 to macOS 13. Setting `MinKernel` and `MaxKernel` for kexts is very useful to maximize the compatibility of your `config.plist` with various versions of macOS without having to create multiple configs with different sets of kexts. This way, you can control which kexts are enabled for which macOS version by specifying the kernel range. It's basically the same feature Clover provides, just a lot smarter: instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.), you specify the lower and upper kernel limit. This way you don't have to create duplicates of kexts (which you maybe forget to update later).
 
-This is especially useful for Bluetooth and WiFi kexts where certain macOS versions require different sets of kexts. So you can leave them all enabled but control which kexts will be loaded for the specified Kernel range (aka the chosen macOS version). See "Example 7" which makes use of this feature extensively.
+This is especially useful for:
+
+- Bluetooth and WiFi kexts where certain macOS versions require different sets of kexts
+- Kexts which are only required by certain versions of macOS, like CryptexFixup (Ventura only) or NoTouchID.kext (High Sierra to Mojave only)
+
+This way, you can leave all kexts enabled but control which ones will be loaded by setting the Kernel range. Check "Example 7" which makes use of this technique extensively.
 
 |macOS            | MinKernel | MaxKernel
 |----------------:|:---------:|:--------:|
