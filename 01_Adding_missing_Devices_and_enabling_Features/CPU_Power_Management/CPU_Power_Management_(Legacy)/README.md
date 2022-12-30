@@ -55,7 +55,7 @@ Besides simply generating the ssdt by running the script, you can add modifiers 
 
 Fortunately, you can enter `sudo ~/ssdtPRGen.sh -h` to display the "Help" menu which lists all the available commands. The actual letter(s) you have to enter to execute one of them are highlighted in **bold**.
 
-Here's a table of modifiers which can be combined. Use `ark.intel.com` to look-up the specs of your CPU.
+Here's a table of modifiers which can be combined. Use [ark.intel.com](https://ark.intel.com/content/www/us/en/ark.html) to look-up the specs of your CPU model. 
 
 Modifier | Description/Example
 :-------:|--------------------
