@@ -4,7 +4,7 @@
 There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be triggered by all sorts of things and actions: pressing the Power/Sleep Button, opening/closing the Lid, etc. Each of these events has its own number assigned to it and can can be triggered by different methods, such as `_PRW` (Power Resource for Wake). 
+The `DSDT` contains `_GPE` (General Purpose Events) which can be used to signal various types of events, such as power management events to the operating system. GPE registers are memory locations that contain bits that can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the Lid, for example, etc. Each of these events has its own number assigned to it and can can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
 
 Used in Devices, the `_PRW` method describes their wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. This `Return` package consists of 2 bytes (or Package Objects):
 
