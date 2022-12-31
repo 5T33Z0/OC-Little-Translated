@@ -1,10 +1,12 @@
 # How to populate the MMIO Whitelist
 
-MMIO stands for Memory-Mapped I/O is a method of to perform I/O processes between the CPU and peripheral devices of a computer. The memory and registers of the I/O devices are mapped to (associated with) address values. 
+MMIO stands for Memory-Mapped Input/Output. It's a method to perform I/O processes between the CPU and peripheral devices of a computer. The memory and registers of the I/O devices are mapped to (and associated with) address values. 
 
-On some systems (like AMD Threadripper and Intel Ice Lake), these MMIO areas need to be whitelisted in OpenCore's `config.plist` in order to boot successfully. There's also a Booter Quirk called `DevirtualszeMmmio` associated with it which can be used to find the the MMIO regions which need to be whitelisted.
+MMIO whitelist is a security feature that controls access to certain memory addresses in a computer system, allowing access only to specific processes or devices that have been explicitly granted permission and denying access to all others.
 
-This guide assists you in finding these specifi MMIO regions and adding then to the MMIO Whitelist.
+On some systems (like AMD Threadripper and Intel Ice Lake), these MMIO region need to be whitelisted in OpenCore's `config.plist` in order to boot macOS successfully. There's also a Booter Quirk called `DevirtualiseMmmio` associated with it which can be used to find the the MMIO regions which need to be whitelisted.
+
+This guide assists you in finding the specific MMIO regions in your system and adding then to the MMIO Whitelist.
 
 ## Instructions
 
@@ -60,7 +62,7 @@ Once you are done with creating the MMIO Whitelist and testing, do the following
 - In OCAT, select "Edit > OpenCore DEBUG" again, to uncheck it
 - Mount your EFI and open your `config.plist`
 - Disable logging (change `Misc/Debug/Target` to `3`)
-- Update OpenCore files and Drivers
+- Update OpenCore files and Drivers to switch back to the RELEASE build
 - Save and reboot
 
 ## Resources
