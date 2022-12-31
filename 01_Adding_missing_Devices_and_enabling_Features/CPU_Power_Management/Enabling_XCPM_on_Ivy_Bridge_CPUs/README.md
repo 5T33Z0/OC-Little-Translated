@@ -64,8 +64,8 @@ A look into the ssdt.aml file list a summary of all settings for the SSDT. If th
 
 If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
 
-## Big Sur/Monterey
-Since Big Sur+ usually requirer a newer SMBIOS to boot, `ssdtPRGen` fails to generate SSDT-XCPM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you have 2 options:
+## Big Sur and Monterey
+Since Big Sur and newer usually require a newer SMBIOS to boot, `ssdtPRGen` fails to generate SSDT-XCPM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you have 2 options:
 
 - **Option 1**: Add a Board-ID spoof utilizing Big Sur's virtualization capabilities to spoof a different board-id to macOS than the one which the hardware uses. This is made possible by [Booter and Kernel Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) from OpenCore Legacy Patcher. Add them to your config in order to install macOS 11.3 and newer on unsupported SMBIOSes and install System Updates as well (Recommended) **or**
 - **Option 2**: Stay on an Ivy Bridge SMBIOS but add `-no_compat_check` boot-arg
