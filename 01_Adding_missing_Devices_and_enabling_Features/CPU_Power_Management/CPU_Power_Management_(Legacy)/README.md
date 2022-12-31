@@ -83,7 +83,7 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 ## Notes
 
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
-- macOS Ventura dropped the `AppleIntelCPUPowerManagement.kext`, so the CPU will be stuck in base frequency (no turbo states) if the SSDT is generated for PluginType 0. As a workaround, [**force-enable XCPM**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/tree/main/ACPI/Enable_XCPM) (Ivy Bridge only) and regenerate the SSDT for PluginType 1 and replace the exiting SSDT-PM.
+- macOS Ventura dropped the `AppleIntelCPUPowerManagement.kext`, so the CPU will be stuck in base frequency (no turbo states) if the SSDT is generated for PluginType 0. As a workaround, [**force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) and regenerate the SSDT for PluginType 1 and replace the exiting SSDT-PM.
 
 ## Credits
 - Intel for Intel Power Gadget
