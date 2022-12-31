@@ -36,7 +36,7 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 - Enter the following command to download the ssdtPRGen Script: `curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh`
 - Make it executable: `chmod +x ~/ssdtPRGen.sh` 
 - Run the script: `sudo ~/ssdtPRGen.sh`
-- The generated `SSDT.aml` will be located at `/Users/YOURUSERNAME/Library/ssdtPRGen`
+- The generated `SSDT.aml` will be located at `~/Library/ssdtPRGen`
 - Rename it to `SSDT-PM.aml` 
 - Copy it to `EFI/OC/ACPI` and list it in the `ACPI/Add` section of your config.plist
 - Under `ACPI/Delete`, disable `Delete CpuPm` and `Delete Cpu0Ist`
@@ -46,9 +46,9 @@ Monitor the behavior of the CPU in [**Intel Power Gadget**](https://www.intel.co
 
 ### macOS Ventura and Ivy Bridge
 
-With the release of macOS Ventura, Apple removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself (previously located under `S/L/E/IOPlatformPluginFamily.kext/Contents/PlugIns/ACPI_SMC_PlatformPlugin.kext/Contents/MacOS/`), rendering SSDT-PM generated for 'plugin-type' 0 useless, since it can no longer attach to the now missing plugin. Therefore, CPU Power Management won't work correctly (no turbo states). 
+With the release of macOS Ventura, Apple removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering SSDT-PM generated for 'plugin-type' 0 useless. Therefore, CPU Power Management won't work correctly (no Turbo states). 
 
-So when switching to macOS Ventura, force-enabling XCPM and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory in order to get proper CPU Power Management. 
+So when switching to macOS Ventura, force-enabling `XCPM` and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory in order to get proper CPU Power Management. Additional kexts and boot-args/NVRAM parameters are required as well. For more details, click [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#macos-ventura-and-ivy-bridge)
 
 ## Modifiers
 Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [overrides](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how and when to use them.
