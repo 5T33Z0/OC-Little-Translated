@@ -16,14 +16,17 @@ So that's exactly what we are going to do: re-enable `XPCM` with a kernel patch 
 * SMBIOS supporting Ivy Bridge CPUs (like MacBookPro9,x or 10,x for Laptops and iMac13,1 for Desktops)
 * Tools: Terminal, [ssdtPRGEN](https://github.com/Piker-Alpha/ssdtPRGen.sh), [ProperTree](https://github.com/corpnewt/ProperTree), [MaciASL](https://github.com/acidanthera/MaciASL), [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone), [SSDTTime](https://github.com/corpnewt/SSDTTime), [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend), [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
 
-
 ## How-To
 
 ### 1. Enable `XCPM` for Ivy Bridge:
 
-* Add the Kernel Patch inside "XCPM_IvyBridge.plist" to your `config.plist`
-* Under `Kernel/Quirks`, enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs`
-* Save your config.
+- Mount the ESP
+- Open `config.plist`
+- Under `ACPI/Add`, disable `SSDT-PM.aml` (if present)
+- Under `ACPI/Delete`, enable rules "Drop CpuPm" and "Drop Cpu0Ist"
+- Add the Kernel Patch inside "XCPM_IvyBridge.plist" to your config and enable it 
+- Under `Kernel/Quirks`, enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs`
+- Save your config and reboot
 
 ### 2. Generate a modified `SSDT-PM` for Plugin Type `1`
 
@@ -49,9 +52,9 @@ If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
 ## For mac Big Sur/Monterey Users
 Since Big Sur+ requires `MacBookPro11,x` to boot, `ssdtPRGen` fails to generate SSDT-PM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you have 3 options:
 
-- Option 1: Use `SSDTTime` to generate a `SSDT-PLUG.aml` and modify Frequency Vectors using CPUFriendFriend (requires a board-id cointaining Frequency Vectors) **or** 
-- Option 2: Add a Board-ID spoof utilizing Big Sur's virtualization capabilities to spoof a different board-id to macOS than the one which the hardware uses. This is made possible by [Booter and Kernel Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) from OpenCore Legacy Patcher. Add them to your config in order to install macOS 11.3 and newer on unsupported SMBIOSes and install System Updates as well (Recommended) **or**
-- Option 3. Stay on an Ivy Bridge SMBIOS but add `-no_compat_check` boot-arg
+- **Option 1:** Use `SSDTTime` to generate a `SSDT-PLUG.aml` and modify Frequency Vectors using CPUFriendFriend (requires a board-id cointaining Frequency Vectors) **or** 
+- **Option 2**: Add a Board-ID spoof utilizing Big Sur's virtualization capabilities to spoof a different board-id to macOS than the one which the hardware uses. This is made possible by [Booter and Kernel Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) from OpenCore Legacy Patcher. Add them to your config in order to install macOS 11.3 and newer on unsupported SMBIOSes and install System Updates as well (Recommended) **or**
+- **Option 3**. Stay on an Ivy Bridge SMBIOS but add `-no_compat_check` boot-arg
 
 ### PROS and CONS
 Listed below are the advantages and disadvantages of options 2 and 3.
