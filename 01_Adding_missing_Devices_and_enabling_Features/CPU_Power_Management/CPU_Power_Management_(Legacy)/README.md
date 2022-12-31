@@ -23,7 +23,7 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 
 ## Prerequisites
 
-- Mount your EFI folder
+- Mount your ESP
 - Open your `config.plist`
 - Under `ACPI/Delete`, enable the following drop rules (if they don't exist, copy them over from the `Sample.plist` included in the OpenCore Package):
 	- `Delete CpuPm`
