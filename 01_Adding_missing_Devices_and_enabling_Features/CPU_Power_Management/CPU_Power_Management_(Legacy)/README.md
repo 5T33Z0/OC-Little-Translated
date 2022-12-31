@@ -5,8 +5,8 @@
 - [About](#about)
 - [Prerequisites](#prerequisites)
 - [Instructions](#instructions)
-	- [macOS Ventura and Ivy Bridge](#macos-ventura-and-ivy-bridge)
-- [Modifiers](#modifiers)
+	- [Modifiers](#modifiers)
+- [macOS Monterey and newer](#macos-monterey-and-newer)
 - [Notes](#notes)
 - [Credits](#credits)
 
@@ -44,13 +44,7 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 
 Monitor the behavior of the CPU in [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
 
-### macOS Ventura and Ivy Bridge
-
-With the release of macOS Ventura, Apple removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering SSDT-PM generated for 'plugin-type' 0 useless. Therefore, CPU Power Management won't work correctly (no Turbo states). 
-
-So when switching to macOS Ventura, force-enabling `XCPM` and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory in order to get proper CPU Power Management. Additional kexts and boot-args/NVRAM parameters are required as well. For more details, click [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#macos-ventura-and-ivy-bridge)
-
-## Modifiers
+### Modifiers
 Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [overrides](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how and when to use them.
 
 Fortunately, you can enter `sudo ~/ssdtPRGen.sh -h` to display the "Help" menu which lists all the available commands. The actual letter(s) you have to enter to execute one of them are highlighted in **bold**.
@@ -80,10 +74,17 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 ``` 
 &rarr; Generates an SSDT for an Intel i7 3630QM with compatibility workarounds, lowered idle CPU frequency (900 instead of the default 1200 mHz) and support for Plugin Type 1 (XCPM).
 
+## macOS Monterey and newer
+
+With the release of macOS Monterey, Apple dropped support for the `ACPI_SMC_PlatformPlugin`, rendering SSDT-PM generated for 'plugin-type' `0` useless. Therefore, CPU Power Management won't work correctly (no Turbo states). 
+
+So when installing/upgrading to macOS Monterey, force-enabling `XCPM` and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory in order to get proper CPU Power Management. MacOS Vemtura also requires additional kexts and boot-args/NVRAM parameters are. 
+
+For instructions, see chapter [**Enabling XCPM on Ivy Bridge CPUs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs).
+
 ## Notes
 
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
-- macOS Ventura dropped the `AppleIntelCPUPowerManagement.kext`, so the CPU will be stuck in base frequency (no turbo states) if the SSDT is generated for PluginType 0. As a workaround, [**force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) and regenerate the SSDT for PluginType 1 and replace the exiting SSDT-PM.
 
 ## Credits
 - Intel for Intel Power Gadget
