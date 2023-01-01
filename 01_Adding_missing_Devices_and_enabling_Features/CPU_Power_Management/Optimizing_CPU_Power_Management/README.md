@@ -20,6 +20,9 @@ Doing this is recommended for all systems where the CPU is different model than 
 If you run CPUFriendFriend on a system with any other SMBIOS than the ones listed above, you will get an error similar to this:
 
 >FrequencyVectors not found in Mac-C3EC7CD22292981F.plist!
+
+### How it works
+Basically, the CPUFriendFriend script extracts the Frequency Vectors stored inside a plist file associated with the board-id of currently set SMBIOS and lets you modify them. CPUFriendFriend then generates a helper kext containing the modified Frequency Vectors and other settings. These are handed over to CPUFriend.kext which injects them into macOS on boot.
  
 ## Generating a `CpuFriendDataProvider.kext` with CPUFriendFriend
 
