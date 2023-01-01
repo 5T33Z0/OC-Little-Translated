@@ -2,6 +2,48 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ACPI</key>
+	<dict>
+		<key>Delete</key>
+		<array>
+			<dict>
+				<key>All</key>
+				<true/>
+				<key>Comment</key>
+				<string>Drop CpuPm (enable for generating SSDT-PM.aml but disable afterwards)</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>
+				Q3B1UG0AAAA=
+				</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>
+				U1NEVA==
+				</data>
+			</dict>
+			<dict>
+				<key>All</key>
+				<true/>
+				<key>Comment</key>
+				<string>Drop Cpu0Ist (enable for generating SSDT-PM.aml but disable afterwards)</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>
+				Q3B1MElzdAA=
+				</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>
+				U1NEVA==
+				</data>
+			</dict>
+		</array>
+	</dict>
 	<key>Kernel</key>
 	<dict>
 		<key>Patch</key>

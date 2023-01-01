@@ -43,11 +43,10 @@ Since macOS Ventura removed the `ACPI_SMC_PlatformPlugin` binary completely, `SS
 - Mount the ESP
 - Open `config.plist`
 - Under `ACPI/Add`, disable `SSDT-PM.aml` (if present)
-- Under `ACPI/Delete`, enable rules "Drop CpuPm" and "Drop Cpu0Ist" (get them from Sample.plist included in OpenCore Package if missing)
-- Under `Kernel/Patch`, enable "XCPM for Ivy Bridge" (copy it over from XCPM_IvyBridge.plist)
+- Under `ACPI/Delete`, enable rules "Drop CpuPm" and "Drop Cpu0Ist" (If missing, copy them over from [XCPM_IvyBridge.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs/XCPM_IvyBridge.plist))
+- Under `Kernel/Patch`, enable "XCPM for Ivy Bridge" (copy it over from [XCPM_IvyBridge.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs/XCPM_IvyBridge.plist))
 - Optional: Adjust `MinKernel` to only enable XCPM for a specific version of macOS (for example Kernel 21.0.0 for Monterey and newer).
 - Under `Kernel/Quirks`, enable `AppleXcpmCfgLock` and `AppleXcpmExtraMsrs`
-- Under `PlatformInfo`, change `SystemProductName` to `MacBookPro11,4`
 - Save and reboot
 
 After a successful reboot, run Terminal and enter: 
@@ -59,24 +58,25 @@ If the output is `1`, XCPM is working, if the output is `0`, it is not.
 
 ### 2. Generate `SSDT-XCPM` for Plugin Type `1`
 
-Next, we need to set the plugin type of SSDT-PM.aml to "1". To do this, we generate a new SSDT-PM with ssdtPRGen. Since it generates SSDTs without XCPM support by default, we have to modify the command line in terminal.
+Next, we generate a new SSDT containing the correct C-States and P-States but with plugin-type 1 enabled:
 
-Terminal command for ssdtPRGen: `sudo /Users/YOUR_USERNAME/ssdtPRGen.sh -x 1`
+- Open Terminal
+- Enter the following command to download the ssdtPRGen Script: `curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh`
+- Make it executable: `chmod +x ~/ssdtPRGen.sh` 
+- Run the script: `sudo ~/ssdtPRGen.sh -x 1`
+- The generated `SSDT.aml` will be located in `~/Library/ssdtPRGen`
 
-The finished ssdt.aml and ssdt.dsl are located in `/Users/YOUR_USERNAME/Library/ssdtPRGen`
-
-A look into the ssdt.aml file list a summary of all settings for the SSDT. If there is a "1" in the last line, everything is correct:
+The ssdt.aml file contains a summary of all the set parameters. If there is a "1" in the last line, everything is correct:
 
 > Debug = "machdep.xcpm.mode.....: 1"
 
-- Rename the newly generated `ssdt.aml` to `SSDT-XCPM.aml`
-- Copy it to `EFI/OC/ACPI`
-- Update your config.plist
-- Disable `SSDT-PM.aml` or any equivalent thereof, if present.
+- Rename `ssdt.aml` to `SSDT-XCPM.aml`
+- Copy it to `EFI/OC/ACPI` 
+- Add the file to your config.plist in the `ACPI/Add` section
+- Under `ACPI/Delete`, disable "Drop CpuPm" and "Drop Cpu0Ist"
 - Save and reboot
-- Enter in terminal: `sysctl machdep.xcpm.mode`
 
-If the output is `1`, the `X86PlatformPlugin` is active, otherwise it is not.
+Monitor the behavior of the CPU using Intel Power Gadget. If the CPU Power Management is working correctly, the CPU should step through the whole range of frequencies according to its specs – from the lowest (in idle) to its maximum (when running cpu-intense tasks).
 
 ## Big Sur and Monterey
 Since Big Sur and newer usually require a newer SMBIOS to boot, `ssdtPRGen` fails to generate SSDT-XCPM in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you have 2 options:
@@ -102,7 +102,7 @@ Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board
 - No major disadvantages. But read the [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283) for more info.
 
 #### 2. Ivy Bridge SMBIOS with `-no_compat_check`
-Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board-ID supporting Ivy Bridge) with `-no_compat_check`.
+Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board-ID supporting Ivy Bridge) with the `-no_compat_check` boot-arg. This is mainly required when using Clover since it cannot apply the Booter Patches OpenCore uses to bypass the board-id checks.
 
 **PROS**:
 
@@ -116,7 +116,7 @@ Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board
 
 **NOTE**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
 
-- Add the Booter Patched mentioned in the board-id VMM spoofing guide to your config
+- Add the Booter Patches mentioned in the board-id VMM spoofing guide to your config
 - Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
 - Add boot-arg `revpatch=sbvmm`
 - Save your config and reboot.
