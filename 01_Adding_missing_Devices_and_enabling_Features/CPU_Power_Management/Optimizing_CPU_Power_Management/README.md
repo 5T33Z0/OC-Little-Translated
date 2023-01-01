@@ -2,7 +2,7 @@
 
 >**Compatibility**: 4th Gen Intel Core and newer supporting XCPM (Plugin-Type: 1)
 
-## Background
+## About
 This guide is for optimizing CPU Power Management of Intel CPUs supporting XCPM. It can be used to reduce the lowest frequency of the CPU and change the overall bias of the system in terms of performance and power consumption by generating a helper kext for CPUFriend which injects Frequency Vectors into macOS.
 
 Doing this is recommended for all systems where the CPU is different model than the one used in the real Mac. For example, the iMac20,2 comes in 2 variants: with an i7-10700K or an i9-10910. So if you are using and i9-10850K with the iMac20,2 SMBIOS, the frequency vectors stored in the SMBIOS don't match 100% with your CPU model which is not ideal. Therefore, using Python Script **CPUFriendFriend** is a great way to improve CPU compatibility and Power Management.
