@@ -3,6 +3,22 @@
 ## Description
 Enables `X86PlatformPlugin` to implement XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake need `SSDT-PLUG-ALT.aml`.
 
+### SMBIOSes supporting XCPM
+
+- MacBook8,1+
+- MacBookAir6,x+
+- MacBookPro11,x+
+- Macmini7,1+
+- iMac14,x+
+- iMacPro1,1
+- MacPro7,1
+
+The actual frequency vectors for each board-id are stored in .plists located under:
+
+```
+/System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources
+```
+
 ## Patching method 1: automated, using SSDTTime
 The manual patching method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the SSDT-PLUG for you by analyzing your system's `DSDT`.
 
