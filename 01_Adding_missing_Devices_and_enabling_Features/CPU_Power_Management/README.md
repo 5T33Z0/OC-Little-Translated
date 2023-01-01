@@ -1,5 +1,5 @@
 # Enabling CPU Power Management
-This chapter contains guides for enabling CPU Power Management for Intel and AMD CPUs in macOS.
+This chapter contains guides for enabling (and optimizing) CPU Power Management for Intel and AMD CPUs in macOS.
 
 ## CPU Power Managegement in macOS
 
