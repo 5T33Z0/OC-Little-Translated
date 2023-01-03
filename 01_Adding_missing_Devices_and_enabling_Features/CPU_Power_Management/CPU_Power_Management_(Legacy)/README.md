@@ -92,7 +92,7 @@ Additionally to the pre-requisites, you also need:
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
 	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
 - A BIOS where CFG lock can be disabled so the **MSR 0x2E** are **unlocked**. This is necessary since the `AppleCpuPmCfgLock` Quirk doesn't seem to work on all systems when injecting the required kexts into macOS Ventura, causing kernel panics (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). So flashing a modified BIOS may be required if your BIOS doesn't provide an option to disable CFG lock. Since I am using a Lenovo T530 with a custom BIOS (1vyrain), CFG lock was already disabled so I don't need `AppleCpuPmCfgLock` to boot.
-- Disable the `XCPM` Kernel Patch to force-enable `XCPM` (if enabled)
+- Disable the `XCPM` Kernel Patch to (if enabled)
 
 Once the 2 Kexts are injected, ACPI Power Management will work in Ventura and you can use your `SSDT-PM` like before. For tests, enter in Terminal:
 
