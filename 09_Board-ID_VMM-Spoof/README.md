@@ -36,7 +36,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
 ## Use Cases
-1. Installing, running and updating macOS Monterey and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
+1. Installing, running and updating macOS 11.3 and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
 2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 11.3 and newer when using an SMBIOS of a Mac model with a T1/T2 security chip, such as:
 
 	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
