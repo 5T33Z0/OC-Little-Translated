@@ -82,7 +82,7 @@ With the release of macOS Monterey, Apple dropped support for the `ACPI_SMC_Plat
 So when installing/upgrading to macOS Monterey, [**force-enabling XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory on Ivy Bridge CPUs in order to get proper CPU Power Management. 
 
 ## Re-enabling ACPI Power Management in macOS Ventura
-Alternatively to force-enabling XCPM, you can also inject the required kexts for legacy Power Management (Plugin-Type 0) using OpenCore which just works better for Ivy Bridge and older CPUs. 
+Alternatively to force-enabling XCPM, you can also inject the required kexts for legacy ACPI CPU Power Management (Plugin-Type 0) using OpenCore which just works better for Ivy Bridge and older CPUs. 
 
 Running macOS Vemtura on legacy systems requires additional kexts, NVRAM parameters and boot arguments in order to be able to boot, install drivers and prevent app crashes as explained [**here**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#macos-ventura-and-ivy-bridges).
 

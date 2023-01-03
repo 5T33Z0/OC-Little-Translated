@@ -31,7 +31,7 @@ Looking for a solution, I've gone through the whole thread (90+ pages). On Page 
 
 I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and `DAGPM.kext` when using this method. 
 
-[^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab#3-obtaining-aaplslot-name-for-igpu-and-gpu) to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
+[^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/Metal_3#3-obtaining-aaplslot-name-for-igpu-and-gpu) to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
 ## Method 2: Selecting specific AMD Framebuffers via `DeviceProperties`
 
