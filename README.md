@@ -18,9 +18,14 @@ Besides the original translated guides, this repo contains additional guides com
 Check the table of contents for more. Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques are applicable to Clover as well.
 
 ### DISCLAIMER
-The material presented in this repo is designed to empower users to create a *proper* working system running macOS which is ACPI conform! Therefore, **OC-Little Translated** does not support methods which do not hold up to this premise, such as patching the `DSDT` since it's not an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, as explained [here](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870):
-
-> MaLd0n's implications that you need a custom DSDT to add and remove […] devices is **incorrect**. Aside from those claims, most device rename changes (probably also things you considered "missing") are also not needed, as they are performed by Lilu and its plug-ins. This approach is a lot safer than previous ACPI renames as dumb find-replace patches can yield false positives, the kext approach cannot. 
+1. This repo is not an installation guide for getting your system up and running with macOS – use Dortania's excellent [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) for that! Instead, it's meant as an additional source for guides and fixes, providing more context and insights about how these things really work.
+2. The material presented in this repo is designed to empower users to create a *proper* working system running macOS without breaking ACPI-compliancy! Therefore, **OC-Little Translated** does not support methods which do not hold up to this premise – such as patching the `DSDT` – since it's not an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, as explained [**here**](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870):
+	
+	> […] If you have the mental image that [the] `DSDT` is a static table that just exists somewhere as a blob - no. It and other ACPI tables can be and are patched *dynamically* during firmware execution. Changing various factors, hardware and software, thus may yield a DSDT different from the one you used as your template, and thus your patched DSDT will "rollback" exactly those differences.
+	
+	>[…] Changes to DSDT are inherently unsafe and anyone who tells you otherwise demonstrates nothing but their cluelessness about firmware internals. This does not mean this never works, but the point is you unlikely verified your systems behaviour for all edge cases (resuming from all sleep states, resetting CMOS, potential recovery procedures from failed boots, etc, etc). There are way too many variables, really. You also restrain yourself from updating your firmware or performing any configuration changes (hardware or software) without risking having to re-do your DSDT. […] 
+	
+	> MaLd0n's implications that you need a custom DSDT to add and remove […] devices is **incorrect**. Aside from those claims, most device rename changes (probably also things you considered "missing") are also not needed, as they are performed by Lilu and its plug-ins. This approach is a lot safer than previous ACPI renames as dumb find-replace patches can yield false positives, the kext approach cannot.
 
 <details>
 <summary><strong>About the translation</strong> (click to reveal content)</summary>
