@@ -4,7 +4,7 @@ MMIO stands for Memory-Mapped Input/Output. It's a method to perform I/O process
 
 MMIO whitelist is a security feature that controls access to certain memory addresses in a computer system, allowing access only to specific processes or devices that have been explicitly granted permission and denying access to all others.
 
-On some systems (like AMD Threadripper and Intel Ice Lake), these MMIO region need to be whitelisted in OpenCore's `config.plist` in order to boot macOS successfully. There's also a Booter Quirk called `DevirtualiseMmmio` associated with it which can be used to find the the MMIO regions which need to be whitelisted.
+On some systems (like AMD Threadripper and Intel Ice Lake), these MMIO regions need to be whitelisted in OpenCore's `config.plist` in order to boot macOS successfully. There's also a Booter Quirk called `DevirtualiseMmmio` which needs to be enabled in order to find the MMIO regions which need to be whitelisted.
 
 This guide assists you in finding the specific MMIO regions in your system and adding then to the MMIO Whitelist.
 
