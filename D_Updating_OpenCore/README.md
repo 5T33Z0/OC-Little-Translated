@@ -15,10 +15,13 @@
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
+- [Switching between Release and Debug build](#switching-between-release-and-debug-build)
+- [Epilogue: OCAT vs. updating OpenCore manually](#epilogue-ocat-vs-updating-opencore-manually)
 - [Notes](#notes)
 
 ## About
-Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). This way, you no longer have to work with tools like OCConfigCompare, the sample-config and PropTree to migrate and update your config.plist to the latest version manually, which is a tremendous time saver!
+
+Currently, the easiest and fastest method for keeping OpenCore, Drivers, Config and Kexts up to date is to use **OpenCore Auxiliary Tools** (OCAT). This way, you no longer have to work with tools like OCConfigCompare, the sample-config and PropTree to migrate and update your config.plist to the latest version manually, which is a tremendous time saver! Now upgrading the config literally seconds, instead of half an hour when updating manually.
 
 **OCAT** has [**OCValidate**](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/ocvalidate#readme) integrated. It checks your config.plist for syntactical and semantic consistency automatically and lists formal errors. Simply pressing the "Save" button will migrate and update the config to the latest version and feature-set – without losing settings. This will also fix all "No schema for…" errors. Any remaining errors will most likely be actual configuration errors which you will have to on your own using the OpenCore Install Guide, for example. 
 
@@ -27,11 +30,13 @@ For Quirks, OCAT also provides dropdown menus which include sets of recommended 
 Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/features added to the config.plist into the GUI automatically and verifies it afterwards. This way, OCAT is much more future proof and secure than the rest of them.
 
 ## 1. Tools and Prerequisites
+
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
 - :warning: Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong!
 
 ### For users updating from OpenCore 0.6.5 or lower
+
 :warning: When updating OpenCore from version ≤ 0.6.5, disabling `BootProtect` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset. If you don't use `BootProtect` you can skip this part:
 
 - Change `Misc/Security/BootProtect` to `None`
@@ -49,6 +54,7 @@ Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/feat
 - Avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, as Laptops often do.
 
 ## 2. Pick an OpenCore variant
+
 OCAT lets you choose and switch between 4 variants of OpenCore builds to update by combining settings in the "**Edit**" menu:
 
 ![EDIT](https://user-images.githubusercontent.com/76865553/155941606-84f4366d-c245-4797-8a77-2dae2f777f9e.png)
@@ -65,6 +71,7 @@ If you switch from the default variant of OpenCore to any other, the displayed O
 For Kexts, you can also choose between `Release` and `DEV` builds in the Sync window. When "DEV" is checked, Kexts will be updated to the latest builds available on Dortania's build repo. Depending on the selected Mode, the Sync Window looks different.
 
 ## 3. Updating/migrating the `config.plist`
+
 1. Run OCAT, check for Updates (Help > Update Check)
 2. Mount your ESP (select Edit > MountESP) or (⌘+M)
 3. Open your `config.plist`. If it is outdated, should see some OC Validate warnings (indicated by red warning icon): </br>
@@ -94,11 +101,13 @@ To update OpenCore files and Kexts, do the following:
 Config OpenCore, Drivers, Kexts and Resources are up to date now. The next time you reboot the updated files will be used.
 
 ### Updating Kexts to Nightly Builds
+
 The latest update of OCAT introduced updating Kexts to nightly builds from Dortania's repo as well. This makes updating kexts for macOS Ventura a lot easier. In the Sync window, enable the "DEV" option:
 
 ![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
 ## 5. The Sync Window: Release Mode vs. Dev Mode
+
 As mentioned previously, the Sync Window looks different depending on the selected mode.
 
 ### Release Mode
@@ -129,6 +138,7 @@ This error occurs when opening a `config.plist` which was created for a differen
 4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
 ## Switching between Release and Debug build
+
 To switch from the RELEASE to the DEBUG version of OpenCore, do the following:
 
 - In OCAT, select "Edit > OpenCore DEBUG" from the menu bar (set checkmark)
@@ -145,6 +155,18 @@ To revert back to the RELEASE build:
 - Disable logging (change `Misc/Debug/Target` to `3`)
 - Update OpenCore files and Drivers
 - Save and reboot
+
+## Epilogue: OCAT vs. updating OpenCore manually
+
+If you don't believe me how easy updating and maintaining OpenCore with OCAT actually is, just try it for yourself. And then have a look at the convoluted update procedure provided by Dortania again. [**Their method**](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) requires at least 7 different tools to get the job done: one for mounting the ESP, one for downloading kexts, one for copying them over to the EFI folder (if you won't do it manually), one for comparing the config with the sample.plist, one for editing it and one for validating it. 
+
+But that's not even the whole story. Even with all these tools you still have to sink a lot of time into manually updating OpenCore and drivers, repeatedly editing and (re-)checking the config over and over again to bring it up to par with the sample.plist. This process takes at least 10 to 15 minutes every time – just to update from one incremental release to the next – imagine how long it would take if the increment was  0.0.5 or more…
+
+The manual "method" is old-fashioned, anachronistic and feels disconnected from the aspirations of whole the OpenCore project: at the top, you have this self-proclaimed gold standard, always-on-the-edge-of-technology Boot Manager which is steadily improving. But at the bottom, users you have to deal with a plethora of disconnected, "low-tech" tools that make them jump through hoops, following outdated, user-unfriendly procedures for updating OpenCore and maintaining the config.plist – it doesn't make any sense!
+
+Yet, this this ass-backwards approach is promoted and forced upon users while at the same time, configurator tools like OCAT which can simplify the upgrade process are condemned from support and their users are being discriminated on places like reddit and discord. 
+
+If Acidanthera would actually come up with a better all-in-one solution (or any solution at all), I would highly appreciate and embrace it. Until then, I feel sorry for every user who still updates OpenCore manually because he/she doesn't know better.
 
 ## Notes
 
