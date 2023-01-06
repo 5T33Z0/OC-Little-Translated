@@ -2,7 +2,7 @@
 
 ## Problem Description
 
-Under one of the following conditions (or combinations thereof), System Update Notifications won't work so you can't install any OTA System Updates/Upgrades:
+Under one of the following conditions (or combinations thereof), System Update Notifications won't work in Big Sur and newer, so you can't install any OTA System Updates/Upgrades:
 
 1. When using `-no_compat_check` boot-arg. This disables System Updates *by design*
 2. When adding Bit 5 "Allow Apple Internal" (and in some cases bit 12 "Allow Unauthenticated Root") to the `csr-active-config` value in macOS Big Sur and newer (&rarr; see chapter "[OpenCore Calculators](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)" for details)
@@ -32,19 +32,21 @@ Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable:</b
 
 Since the fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+) you can't use it in macOS Catalina and older.
 
-But since the issue only started to surface on Big Sur and newer, it's not really an issue on older versions of macOS – unless you have to use `-no_compat_check` or added bit 5 to your `csr-active-config`, of course.
+But this can simply be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.)
+
+Once macOS 11.3 or newer is installed, the board-id spoof is working works and you can revert back to the SMBIOS best suited for your CPU.
 
 ### What about Clover?
 
-This fix also works in Clover but it requires a slightly different approach, since you  cannot apply OpenCore's Booter patches needed for the board-id skip with Clover. Therefore you still need `-no_compat_check` to boot macOS with an unsupported SMBIOS/board-id. Otherwise, you will be greeted with the "forbidden" sign instead of the Apple logo.
+This fix also works in Clover but it requires a slightly different approach, since you  cannot apply OpenCore's Booter patches needed for the board-id skip with Clover. Therefore you need `-no_compat_check` to boot macOS using an unsupported SMBIOS/board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. 
 
-Since `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) only applies the kernel patches to force-enable the `VMM-x86_64` board-id, you will get the "forbidden" sign in this case as well. But with `-no_compat_check` and the board-id set to `VMM-x86_64` by the kext, you can now finally:
+But as mentioned in the beginning, using `-no_compat_check` disables system updates. Therefore we add `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) to force-enable the `VMM-x86_64` board-id and now you finally can get:
 
 - Boot macOS with an unsupported SMBIOS/board-id,
 - Have proper CPU Power Management since you can use the correct SMBIOS for your CPU and 
 - Get System Updates with Clover – which was impossible before!
 
-When I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which is pretty cool.
+When I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which is pretty damn cool.
 
 ## Credits
 - Acidanthera for OCLP and RestrictEvents.kext
