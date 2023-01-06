@@ -128,12 +128,15 @@ Scope (\_SB)
 
 The XTXH variant (Device-id: `0x73AF`) is supported with WhateverGreen and spoofing device-id to `0x73BF`
 
-## Notes
-When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen and the boot-arg. This also redirects Quick-Sync Video and Background rendering which would otherwise be handled by the iGPU to the GPU. This also resolves issues with DRM.
+## AMD and DRM
+When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen and the `agdpmod=pikera` boot-arg. 
+
+This also redirects Quick-Sync Video and Background rendering to the GPU which would otherwise be handled by the iGPU. This can also help to resolves issues with DRM on macOS 11+ as explained in [**WhateverGreen's FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md#drm-compatibility-on-macos-11). For more in-depth explanations about the `unfairgva` boot-arg and how to use it, [**check this post**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/).
 
 ## Credits & Resources
 - **Acidanthera** for `Lilu.kext` and `WhateverGreen.kext`
 - **Baio1977** for `SSDT-NAVI.aml`
+- **rafale77** for `unfairgva` explanations
 - [**Video Bitrate Test Files**](https://jell.yfish.us/) by Jellyfish
 - [**XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
 - [**AMD Boot Flags**](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html#amd-boot-arguments)
