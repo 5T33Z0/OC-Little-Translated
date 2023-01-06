@@ -162,11 +162,11 @@ If you don't believe me how easy updating and maintaining OpenCore with OCAT act
 
 But that's not even the whole story. Even with all these tools you still have to sink a lot of time into manually updating OpenCore and drivers, repeatedly editing and (re-)checking the config over and over again to bring it up to par with the sample.plist. This process takes at least 10 to 15 minutes every time – just to update from one incremental release to the next – imagine how long it would take if the increment was  0.0.5 or more…
 
-The manual "method" is old-fashioned, anachronistic and feels disconnected from the aspirations of whole the OpenCore project: at the top, you have this self-proclaimed gold standard, always-on-the-edge-of-technology Boot Manager which is steadily improving. But at the bottom, users you have to deal with a plethora of disconnected, "low-tech" tools that make them jump through hoops, following outdated, user-unfriendly procedures for updating OpenCore and maintaining the config.plist – it doesn't make any sense!
+The manual "method" is old-fashioned, anachronistic and feels disconnected from the aspirations of the OpenCore project: at the top, you have this self-proclaimed gold standard, always-on-the-edge-of-technology Boot Manager which is steadily improving. At the bottom, users you have to deal with a plethora of disconnected, "low-tech" tools that make them jump through hoops, following outdated, user-unfriendly procedures for updating OpenCore and maintaining the config.plist,
 
-Yet, this this ass-backwards approach is promoted and forced upon users while at the same time, configurator tools like OCAT which can simplify the upgrade process are condemned from support and their users are being discriminated on places like reddit and discord. 
+Yet, the manual approach is heavily promoted on reddit and discord by instituting and enforcing rules denying support to anyone using configurator apps like OCAT. They are singled out and discriminated against just for mentioning these tools - it doesn't make sense. And it also leaves me with a bitter taste as far as tolerance and empathy within the Hackintosh scene are concerned.
 
-If Acidanthera would actually come up with a better all-in-one solution (or any solution at all), I would highly appreciate and embrace it. Until then, I feel sorry for every user who still updates OpenCore manually because he/she doesn't know better.
+If Acidanthera would actually come up with a better all-in-one solution than OCAT (or any one at all), I would highly appreciate and embrace it. Until then, I feel sorry for every user who still updates OpenCore manually because he/she doesn't know better.
 
 ## Notes
 
