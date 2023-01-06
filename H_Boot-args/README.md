@@ -33,7 +33,7 @@ Listed below you find an incomplete list of commonly used as well as rather unco
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled.
+**`-no_compat_check`**|Disables macOS compatibility checks. Allows installing and booting macOS with unsupported SMBIOS/board-ids. Downside: you can't install system updates if this boot-arg is active. But this restriction can be worked around by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` ([requires macOS 11.3 or newer](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates))
 
 ## Network-specific boot arguments
 |Boot-arg|Description|
