@@ -10,10 +10,10 @@ Utility | Description
 **FindSerialPort** | Script to find PCIe serial ports and their paths (cf. Chpt. 8.6.1: "Serial Custom Properties").
 **icnspack** |Tool for generating `.icns` files for items displayed in BootPicker (cf. Chpt. 11.4: "OpenCanopy").
 **kpdescribe** | Tool to print the stack trace from an OS X kernel panic diagnostic report, along with as much symbol translation as your mach_kernel version provides (cf. Chpt. 8.4: "Debug Properties").
-**LegacyBoot** | Tools for [setting up OpenCore on non-UEF systems](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/mac-install.md#legacy-setup) (32 and 64 bit).
+**LegacyBoot** | Tools for [**setting up OpenCore on legacy/Non-UEFI systems**](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/mac-install.md#legacy-setup) (32 and 64 bit).
 **LogoutHook** | For troubleshooting NVRAM. Installs as launch daemon on Yosemite and newer, which allows to read NVRAM parameters on shutdown after macOS installer vars are set (cf. Chpt. 11.9: "OpenVariableRuntimeDxe").
-**macrecovery** | Python Script to download the macOS online Recovery partition (cf. Chpt. 12.5: "Tips and Tricks").
-**macserial** | Tool to generate SMBIOS data (cf. Chpt. 10.6: "SMBIOS Properties").
+**macrecovery** | Python Script to download the macOS online Recovery partition (cf. Chpt. 12.5: "Tips and Tricks"). There's also a [**gibMacRecovery**](https://github.com/corpnewt/gibMacRecovery) available which provides a GUI for this script.
+**macserial** | Tool to generate SMBIOS data (cf. Chpt. 10.6: "SMBIOS Properties"). Also availably as python script called [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) which provides a GUI.
 **ocpasswordgen** | Tool for generating a password which has to be entered on boot prior to reaching the BootPicker (cf. Chpt. 8.5: "Security Properties").
 **ocvalidate** | Utility to validate whether a `config.plist` matches requirements and conventions imposed by OpenCore (cf. Chpt. 2.3 "Configuration Structure").
 **Shim-To-Cert** | Utility to extract the public key needed to boot a Linux distro’s kernel directly, as done when using OpenCore with `OpenLinuxBoot`, rather than via GRUB shim (cf. Chpt. 11.6: "OpenLinuxBoot").
