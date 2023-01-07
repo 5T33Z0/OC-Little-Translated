@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.7-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.1_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.01.06-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.7-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.1_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.01.07-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## TABLE of CONTENTS
 
@@ -49,7 +49,7 @@
 ___
 
 ## DISCLAIMER
-1. This repo is not an installation guide for getting your system up and running with macOS – use Dortania's excellent [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) for that! Instead, it's meant as an additional source for guides and fixes, providing more context and insights about how these things really work.
+1. OC-Little Translated is not an installation guide for getting your system up and running with macOS – use Dortania's excellent [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) for that! Instead, it is a supplementary resource that offers guides and fixes for various issues related to hackintosh systems, along with explanations and context about how they work. It is regularly updated to reflect the latest discoveries and developments in the hackintosh community.
 2. The material presented in this repo is designed to empower users to create a *proper* working system running macOS without breaking ACPI-compliancy! Therefore, **OC-Little Translated** does not support methods which do not hold up to this premise – such as patching the `DSDT` – since it's not an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, as explained [**here**](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870):
 	
 	> […] If you have the mental image that [the] `DSDT` is a static table that just exists somewhere as a blob - no. It and other ACPI tables can be and are patched *dynamically* during firmware execution. Changing various factors, hardware and software, thus may yield a DSDT different from the one you used as your template, and thus your patched DSDT will "rollback" exactly those differences.
