@@ -11,14 +11,14 @@ Among the many `SSDT` patches available in this repo, a significant number of th
 
 :bulb: OpenCore users should avoid using binary renames for enabling devices and methods since these renames will be applied system-wide which can break other OSes. Instead, ACPI-compliant SSDTs making use of the `_OSI` method to rename these devices/methods for macOS only should be applied. 
 
-Clover users don't have to worry about this since binary rename and SSDT hotpatches are not injected into other OSes (unless you tell it to do so). But if you are a Clover user switching over to OpenCore you have to adjust your SSDTs since they most likely don't contain the `_OSI` method!
+Clover users don't have to worry about this since binary renames and SSDT hotpatches are not injected into other OSes (unless you tell it to do so). But if you are a Clover user switching over to OpenCore, you have to adjust your SSDTs since they most likely don't contain the `_OSI` method!
 
 ### :warning: Don't inject already known Devices
 Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
 
 The only reason for doing this is to have installed PCIe cards listed in the "PCI" section of System Profiler. Apart from that, all detected devices will be listed in the corresponding category they belong to automatically. So there's really no need to do this.
 
-:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features etc. So please: don't inject the same, unmodified properties into the system you got them from in the first place.
+:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
 
 ## Properties of Virtual Devices
 
