@@ -1,7 +1,7 @@
 # Enabling CPU Power Management (`SSDT-PLUG`)
 
 ## Description
-Enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake need `SSDT-PLUG-ALT.aml`.
+Enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake reuqires `SSDT-PLUG-ALT.aml` instead.
 
 ## Patching method 1: automated, using SSDTTime
 The manual patching method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the SSDT-PLUG for you by analyzing your system's `DSDT`.
@@ -83,14 +83,18 @@ Since the Comet Lake CPU family is only supported on macOS Catalina and newer, t
 12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the **Docs** folder of the OpenCore Package as well.
 
 ## What about AMD?
-Since Apple designed macOS Leopard and newer around Intel CPUs, AMD CPUs support is not implemented so the `X86PlatformPlugin` cannot be utilized by AMD CPUs. Therefore, `AppleIntelCpuPowerManagement` has to be disabled. In OpenCore, enable the `DummyPowerManagement` Quirk located in the `Kernel/Emulate` section of the `config.plist` to do so.
+Since Apple designed macOS Leopard and newer around Intel CPUs, AMD CPUs cannot utilize the `X86PlatformPlugin`. Therefore, `AppleIntelCpuPowerManagement` has to be disabled. To do so, enable the `DummyPowerManagement` Quirk located in the `Kernel/Emulate` section of the `config.plist`.
 
 In 2020 a new Kext called [**SMCAMDProcessor**](https://github.com/trulyspinach/SMCAMDProcessor) was introduced which enables CPU Power Management for AMD Ryzen CPUs. It  also allows using AMD Power Gadget and modifying P-States with AMD Power Tool. Follow the install instructions on the SMCAMDProcessor repo to use it.
 
 For **B550** or **A520** mainboards, you also need [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml).
 
+AMD CPU families 15h, to 17h as well as 19h also require [**additional Kernel Patches**](https://github.com/AMD-OSX/AMD_Vanilla) to work in macOS. 
+
+On macOS 12.3+, you also need [**AppleMCEReporterDisabler**](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) kext when using the following SMBIOSes: `iMacPro1,1`, `MacPro6,1` or `MacPro7,1`.
+
 ## Notes
-- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [**`SSDT-PM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
+- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [**`SSDT-PM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
 - For **Intel Xeon**, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
 - From **macOS 12.3 Beta 1** onward, Apple dropped the `plugin-type` check within the `X86PlatformPlugin` which means that the X86 Platform Plugin is enabled by default. So you  no longer need `SSDT-PLUG.aml` to enable it in macOS Monterey and newer. It also means that power management is broken on pre-Ivy Bridge CPUs as they don't have correct power management tables provided. More info [**here**](https://github.com/acidanthera/bugtracker/issues/2013).
 - If you are using [**CPUFriend**](https://github.com/acidanthera/CPUFriend), you also don't need SSDT-PLUG – CPUFriend enables the X86PlaformPlugin on its own. **CPUFriend** can be used to optimize CPU Power Management. This requires an additional CPUFriendDataProvider.kext that can be generated with [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend).

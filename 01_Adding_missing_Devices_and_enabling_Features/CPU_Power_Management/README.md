@@ -1,7 +1,18 @@
 # Enabling CPU Power Management
 This chapter contains guides for enabling (and optimizing) CPU Power Management for Intel and AMD CPUs in macOS.
 
-## CPU Power Managegement in macOS
+## Available SSDTs
+Clicking on an SSDT's name in the table below takes you to the corresponding guide or file to enable CPU power management for the listed CPU family.
+
+CPU Family | Used Plugin | Required SSDT |Configuration Notes
+----------------------|:-----------:|:-------------:|-----------
+12th Gen Intel (Alder Lake) | **`X86PlatformPlugin`** | [**SSDT-PLUG-ALT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#11th-gen-intel-and-newer)| • Requires Comet Lake CPUID </br> • Enable `ProvideCurrentCpuInfo` Quirk </br> • Optional: [**CpuToplogyRebuild**](https://github.com/b00t0x/CpuTopologyRebuild) kext
+11th Gen Intel (Ice/Rocket Lake)| **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#11th-gen-intel-and-newer)| • Not needed in macOS 12+</br> • Requires Comet Lake CPUID
+4th to 10th Gen Intel (Haswell to Comet Lake) | **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#readme)| Not needed in macOS 12+
+≤ 3rd Gen Intel (Ivy Bridge and older) | **`ACPI_SMC_PlatformPlugin`** | [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme)| • Plugin dropped from macOS 13 <br>• [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) or [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) for proper CPU Power Management in macOS 13 
+AMD (17h)| **N/A**|[**SSDT-CPUR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#what-about-amd)| :warning: Only needed for B550 and A520 mainboards!</br> • Enable `DummyPowerManagement` Quirk</br> • Add [**AMDRyzenCPUPowerManagement**](https://github.com/trulyspinach/SMCAMDProcessor) kext (AMD Ryzen only)
+
+## About CPU Power Managegement in macOS
 
 Up to macOS Big Sur, macOS uses 2 different kexts for handling CPU Power Management: 
 
@@ -14,7 +25,7 @@ The **X86PlatformPlugin** provides support for the x86 architecture on Apple com
 
 In summary, the ACPI_SMC_PlatformPlugin kext is used to manage hardware components in the system through the SMC, while the X86PlatformPlugin kext is used to interact with x86-based hardware components in the system.
 
-### About ACPI Power Management
+### ACPI Power Management
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
@@ -22,7 +33,7 @@ You have to use **ssdtPRGen** to generate this table, which is now called `SSDT-
 
 Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatformPlugin` to optimize performance.
 
-### About XCPM (= XNU CPU Power Management)
+### XCPM (= XNU CPU Power Management)
 
 In OSX 10.11 and older, boot-arg `-xcpm` could be used to enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) for unsupported CPUs. 
 
@@ -33,17 +44,6 @@ Although the **Ivy Bridge** CPU family is capable of utilizing **XCPM**, it has 
 On macOS Monterey and newer, the `ACPI_SMC_PlatformPlugin` has been dropped completely. Instead, the `X86PlatformPlugin` is now always loaded automatically, since Apple disabled the `plugin-type` check, so you don't even need `SSDT-PLUG` for Haswell and newer.
 
 Since Apple dropped Intel CPU support after 10th Gen Comet Lake, newer Intel CPUs require a fake CPUID ("impersonating" a Comet Lake) in order to run macOS.
-
-## Pick your SSDT
-Clicking on an SSDT's name in the table below takes you to the corresponding guide or file to enable CPU power management for the listed CPU family.
-
-CPU Family | Used Plugin | Required SSDT |Configuration Notes
-----------------------|:-----------:|:-------------:|-----------
-12th Gen Intel (Alder Lake) | **`X86PlatformPlugin`** | [**SSDT-PLUG-ALT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#11th-gen-intel-and-newer)| • Requires Comet Lake CPUID </br> • Enable `ProvideCurrentCpuInfo` Quirk </br> • Add [**CpuToplogyRebuild**](https://github.com/b00t0x/CpuTopologyRebuild) kext to configure cores (read kext documentation)
-11th Gen Intel (Ice/Rocket Lake)| **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#11th-gen-intel-and-newer)| • Not needed in macOS 12+</br> • Requires Comet Lake CPUID
-4th to 10th Gen Intel | **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#readme)| Not needed in macOS 12+
-≤ 3rd Gen Intel (Ivy Bridge and older) | **`ACPI_SMC_PlatformPlugin`** | [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme)| • Plugin dropped from macOS 13 <br>• [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) or [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) for proper CPU Power Management in macOS 13 
-AMD (17h)| **N/A**|[**SSDT-CPUR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#what-about-amd)| :warning: Only needed for B550 and A520 mainboards!</br> • Enable `DummyPowerManagement` Quirk</br> • Add [**AMDRyzenCPUPowerManagement**](https://github.com/trulyspinach/SMCAMDProcessor) kext (AMD Ryzen only)
 
 ## Further Resources
 - **CPU Support list**: https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support
