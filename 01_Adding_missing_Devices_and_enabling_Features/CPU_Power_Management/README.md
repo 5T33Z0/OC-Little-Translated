@@ -12,7 +12,7 @@ CPU Family | Used Plugin | Required SSDT |Configuration Notes
 ≤ 3rd Gen Intel (Ivy Bridge and older) | **`ACPI_SMC_PlatformPlugin`** | [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme)| • Plugin dropped from macOS 13 <br>• [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) or [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) for proper CPU Power Management in macOS 13 
 AMD (17h)| **N/A**|[**SSDT-CPUR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#what-about-amd)| :warning: Only needed for B550 and A520 mainboards!</br> • Enable `DummyPowerManagement` Quirk</br> • Add [**AMDRyzenCPUPowerManagement**](https://github.com/trulyspinach/SMCAMDProcessor) kext (AMD Ryzen only)
 
-## About CPU Power Managegement in macOS
+## About CPU Power Management in macOS
 
 Up to macOS Big Sur, macOS uses 2 different kexts for handling CPU Power Management: 
 
@@ -25,7 +25,7 @@ The **X86PlatformPlugin** provides support for the x86 architecture on Apple com
 
 In summary, the ACPI_SMC_PlatformPlugin kext is used to manage hardware components in the system through the SMC, while the X86PlatformPlugin kext is used to interact with x86-based hardware components in the system.
 
-### ACPI Power Management
+### ACPI CPU Power Management
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
