@@ -144,7 +144,11 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 8. In maciASL the `HPET` should also not be present.
 
 #### To HPET, or not to HPET?
-Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. It might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
+Since the release of the Skylake X and Kaby Lake CPU families, `HPET` &rarr; `AppleHPET` ("PNP0103") is an optional legacy device kept for backward compatibility. 
+
+In Windows 10 and newer, `HPET` is a legacy device and is not used as the primary timer for the system. Instead, Windows 10 uses a combination of the `TSC` (Time Stamp Counter) and the ACPI (Advanced Configuration and Power Interface) `PM` timer to keep track of time.
+
+Enabling `HPET` might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. I suggest you perform some CPU/GPU Benchmark tests to find out what works best for you. Who is gaming on macOS anyway?
 
 <details>
 <summary><strong>Other Methods</strong> (kept for educational purposes)</summary>
