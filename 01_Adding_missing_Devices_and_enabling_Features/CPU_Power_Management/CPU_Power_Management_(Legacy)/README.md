@@ -81,11 +81,11 @@ With the release of macOS Monterey, Apple dropped the Plugin-Type check, so that
 ## Re-enabling ACPI Power Management in macOS Ventura
 When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states).
 
-So when switching to macOS Ventura, you either have to [**force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) or inject kexts to re-enable ACPI CPU Power Management instead which is recommended, since it just works better on Ivy Bridge than XCPM does.
+So when switching to macOS Ventura, you either have to [**force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) or inject kexts to re-enable ACPI CPU Power Management instead which is recommended, since it just works better on Ivy Bridge than XCPM does. 
 
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
 
-- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise have to force-enable `XCPM` instead.
+- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise have to follow the aforementioned guide force-enable `XCPM` instead.
 - [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/board-ids
 - [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
@@ -115,3 +115,5 @@ The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded 
 ## Credits
 - Intel for Intel Power Gadget
 - Piker Alpha for ssdtPRGen
+
+
