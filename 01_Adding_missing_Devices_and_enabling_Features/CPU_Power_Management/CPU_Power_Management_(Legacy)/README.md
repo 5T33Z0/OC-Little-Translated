@@ -6,7 +6,7 @@
 - [Prerequisites](#prerequisites)
 - [Instructions](#instructions)
 	- [Modifiers](#modifiers)
-- [macOS Monterey an newer](#macos-monterey-an-newer)
+- [macOS Monterey](#macos-monterey)
 - [Re-enabling ACPI Power Management in macOS Ventura](#re-enabling-acpi-power-management-in-macos-ventura)
 - [Notes](#notes)
 - [Credits](#credits)
