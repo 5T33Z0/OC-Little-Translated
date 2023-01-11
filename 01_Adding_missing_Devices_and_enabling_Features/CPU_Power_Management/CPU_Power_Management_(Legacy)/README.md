@@ -85,11 +85,18 @@ So when switching to macOS Ventura, you either have to [**force-enable XCPM**](h
 
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
 
-- [**Kexts from OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
+- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise have to force-enable `XCPM` instead.
+- [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/board-ids
+- [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
 	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
 - [**CrytexFixup** ](https://github.com/acidanthera/CryptexFixup) &rarr; required for installing/booting macOS Ventura an pre-Haswell systems
-- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to force-enable `XCPM` instead.
+- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
+- Additional boot-args:
+	- `sbvmm` &rarr; Enables `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
+	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
+	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
+	- `amfi_get_out_of_my_way=1` &rarr; Required to execute the Intel HD4000 iGPU driver installation with OpenCore Patcher App.
 - Disable Kernel/Patch: `_xcpm_bootstrap` (if enabled)
 - Disable Kernel/Quirks: `AppleXcmpCfgLock` and `AppleXcpmExtraMsrs` (if enabled)
 - Save and reboot

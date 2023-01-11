@@ -9,7 +9,7 @@
   - [1. Enable `XCPM` for Ivy Bridge](#1-enable-xcpm-for-ivy-bridge)
   - [2. Generate `SSDT-XCPM` for Plugin Type `1`](#2-generate-ssdt-xcpm-for-plugin-type-1)
 - [Big Sur and Monterey](#big-sur-and-monterey)
-  - [PROS and CONS](#pros-and-cons)
+  - [Pros and Cons](#pros-and-cons)
     - [1. Using Ivy Bridge SMBIOS with Board-ID\_VMM-Spoof](#1-using-ivy-bridge-smbios-with-board-id_vmm-spoof)
     - [2. Ivy Bridge SMBIOS with `-no_compat_check`](#2-ivy-bridge-smbios-with--no_compat_check)
 - [macOS Ventura and Ivy Bridge](#macos-ventura-and-ivy-bridge)
@@ -84,7 +84,7 @@ Since Big Sur and newer usually require a newer SMBIOS to boot, `ssdtPRGen` fail
 - **Option 1**: Add a Board-ID spoof utilizing Big Sur's virtualization capabilities to spoof a different board-id to macOS than the one which the hardware uses. This is made possible by [Booter and Kernel Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) from OpenCore Legacy Patcher. Add them to your config in order to install macOS 11.3 and newer on unsupported SMBIOSes and install System Updates as well (Recommended) **or**
 - **Option 2**: Stay on an Ivy Bridge SMBIOS but add `-no_compat_check` boot-arg
 
-### PROS and CONS
+### Pros and Cons
 Listed below are the advantages and disadvantages of both options.
 
 #### 1. Using Ivy Bridge SMBIOS with Board-ID_VMM-Spoof
@@ -122,19 +122,49 @@ Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board
 - Save your config and reboot.
 
 ## macOS Ventura and Ivy Bridge
+When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states).
 
-With the release of macOS Ventura, Apple removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself (previously located under "S/L/E/IOPlatformPluginFamily.kext/Contents/PlugIns/ACPI_SMC_PlatformPlugin.kext/Contents/MacOS/"), rendering SSDT-PM generated for 'plugin-type' 0 useless, since it can no longer attach to the now missing plugin. Therefore, CPU Power Management won't work correctly (no turbo states). 
+So when switching to macOS Ventura, you either have to force-enable `XCPM` (Ivy Bridge only) or inject kexts to re-enable ACPI CPU Power Management instead which is recommended, since it just works better on Ivy Bridge than XCPM does.
 
-So when switching to macOS Ventura, force-enabling XCPM and re-generating your `SSDT-PM` for 'plugin type' 1 is mandatory in order to get proper CPU Power Management.
+### Option 1: Force-enabling XCPM 
 
-You also need the following files and settings in order to install and run macOS Ventura on Ivy Bridge without major issues:
+You need the following files and settings in order to install and run macOS Ventura on Ivy Bridge without major issues:
 
 - [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) to prepare a USB installer and install Intel HD4000 iGPU drivers
-- [**Board-id VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to run macOS Ventura with an Ivy Bridge SMBIOS/board-id and install updates
+- [**Booter Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to skip Board-id checks to run macOS Ventura with an Ivy Bridge SMBIOS/board-id and install updates
 - [**CryptexFixup.kext**](https://github.com/acidanthera/CryptexFixup) &rarr; required to be able to install macOS 13 at all
-- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) and `revblock=media` boot-arg &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
-- `ipc_control_port_options=0` boot-arg &rarr; Fixes crashes with Electron apps like Discord
-- `amfi_get_out_of_my_way=1` boot-arg &rarr; Required to execute the Intel HD4000 iGPU driver installation with OpenCore Patcher App.
+- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
+- Additional boot-args:
+	- `sbvmm` &rarr; Forces `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
+	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
+	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
+	- `amfi_get_out_of_my_way=1` &rarr; Required to execute the Intel HD4000 iGPU driver installation with OpenCore Patcher App.
+
+### Option 2: Re-enabling ACPI Power Management in macOS Ventura (recommended)
+
+In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
+
+- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise have to force-enable `XCPM` instead.
+- [**Kexts from OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
+	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
+	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
+- [**CrytexFixup** ](https://github.com/acidanthera/CryptexFixup) &rarr; required for installing/booting macOS Ventura an pre-Haswell systems
+- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
+- Additional boot-args:
+	- `sbvmm` &rarr; Enables `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
+	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
+	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
+	- `amfi_get_out_of_my_way=1` &rarr; Required to execute the Intel HD4000 iGPU driver installation with OpenCore Patcher App.
+- Disable Kernel/Patch: `_xcpm_bootstrap` (if enabled)
+- Disable Kernel/Quirks: `AppleXcmpCfgLock` and `AppleXcpmExtraMsrs` (if enabled)
+- Save and reboot
+
+Once the 2 Kexts are injected, ACPI Power Management will work in Ventura and you can use your `SSDT-PM` like before. For tests, enter in Terminal:
+
+```shell
+sysctl machdep.xcpm.mode
+```
+The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU.
 
 ## Credits
 - Acidanthera for maciASL, OpenCore Legacy Patcher, CryptexFixup and RestrictEvents kexts.
