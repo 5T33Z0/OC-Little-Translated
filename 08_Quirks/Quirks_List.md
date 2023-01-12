@@ -4,12 +4,13 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
-- [**Booter Quirks**](#booter-quirks)
+- [Booter Quirks](#booter-quirks)
 	- [High End Desktop](#high-end-desktop)
 		- [Intel Skylake X/W and Cascade Lake X/W (High End Desktop)](#intel-skylake-xw-and-cascade-lake-xw-high-end-desktop)
 		- [Intel Skylake X/W and Cascade Lake X/W (ASUS HEDT)](#intel-skylake-xw-and-cascade-lake-xw-asus-hedt)
 		- [Intel Haswell-E, Broadwell-E, Sandy Bridge-E and Ivy Bridge-E (HEDT)](#intel-haswell-e-broadwell-e-sandy-bridge-e-and-ivy-bridge-e-hedt)
 	- [Intel Core i5/i7/i9](#intel-core-i5i7i9)
+		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop)
 		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-dektopmobilenuc)
 		- [Intel 8th and 9th Gen Coffee Lake (Desktop)](#intel-8th-and-9th-gen-coffee-lake-desktop)
@@ -22,7 +23,7 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [AMD Ryzen (17h)](#amd-ryzen-17h)
 		- [AMD Threadripper TRx 40 (19h)](#amd-threadripper-trx-40-19h)
 		- [AMD Bulldozer (15h) and Jaguar (16h)](#amd-bulldozer-15h-and-jaguar-16h)
-- [**Kernel Quirks**](#kernel-quirks)
+- [Kernel Quirks](#kernel-quirks)
 	- [High End Desktop](#high-end-desktop-1)
 		- [Intel Skylake X/W and Cascade Lake X/W (High End Desktop)](#intel-skylake-xw-and-cascade-lake-xw-high-end-desktop-1)
 		- [Intel Skylake X/W and Cascade Lake X/W (HP HEDT)](#intel-skylake-xw-and-cascade-lake-xw-hp-hedt)
@@ -31,6 +32,7 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel Sandy Bridge-E and Ivy Bridge-E (HEDT)](#intel-sandy-bridge-e-and-ivy-bridge-e-hedt)
 		- [Intel Sandy Bridge-E and Ivy Bridge-E (HP HEDT)](#intel-sandy-bridge-e-and-ivy-bridge-e-hp-hedt)
 	- [Intel Core i5/i7i9](#intel-core-i5i7i9-1)
+		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop-1)
 		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop-1)
 		- [Intel 11th Gen Rocket Lake (Dektop/Mobile/Nuc)](#intel-11th-gen-rocket-lake-dektopmobilenuc)
 		- [Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)](#intel-10th-gen-comet-lake-dektopmobilenuc)
@@ -50,16 +52,17 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP)](#intel-2nd-gen-sandy-bridge-and-3rd-gen-ivy-bridge-hp)
 	- [AMD](#amd-1)
 		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h)
-- [**UEFI Quirks**](#uefi-quirks)
+- [UEFI Quirks](#uefi-quirks)
 	- [High End Desktop](#high-end-desktop-2)
 		- [Intel Skylake X/W, Cascade Lake X/W, Broadwell-E, Haswell-E, Ivy Bridge-E and Sandy Bridge-E  (High End Desktop)](#intel-skylake-xw-cascade-lake-xw-broadwell-e-haswell-e-ivy-bridge-e-and-sandy-bridge-e--high-end-desktop)
 		- [Intel Skylake X/W, Cascade Lake X/W, Broadwell-E, Haswell-E, Ivy Bridge-E and Sandy Bridge-E  (HP High End Desktop)](#intel-skylake-xw-cascade-lake-xw-broadwell-e-haswell-e-ivy-bridge-e-and-sandy-bridge-e--hp-high-end-desktop)
 	- [Intel Core i5/i7/i9](#intel-core-i5i7i9-2)
+		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop-2)
 		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop-2)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-dektop)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-mobilenuc)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Desktop)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-desktop)
-	- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-mobilenuc)
+		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-mobilenuc)
 		- [Intel 8th and 9th Gen Coffee Lake (Desktop)](#intel-8th-and-9th-gen-coffee-lake-desktop-1)
 		- [Intel 8th and 9th Gen Coffee Lake (HP Desktop)](#intel-8th-and-9th-gen-coffee-lake-hp-desktop)
 		- [Intel 8th and 9th Gen Coffee Lake (Mobile/NUC)](#intel-8th-and-9th-gen-coffee-lake-mobilenuc-1)
@@ -76,12 +79,15 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP Mobile/NUC)](#intel-2nd-gen-sandy-bridge-and-3rd-gen-ivy-bridge-hp-mobilenuc)
 	- [AMD](#amd-2)
 		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h-1)
-		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h) [HP]](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h-hp)
+		- [AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h) \[HP\]](#amd-ryzen-17h-threadripper-19h-bulldozer-15h-jaguar-16h-hp)
 </details>
 
 ## Booter Quirks
 
 ### High End Desktop
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
 
 #### Intel Skylake X/W and Cascade Lake X/W (High End Desktop)
 - AvoidRuntimeDefrag
@@ -110,7 +116,15 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - SetupVirtualMap
 - ProvideMaxSlide: 0
 
+</details>
+
 ### Intel Core i5/i7/i9
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
+
+#### Intel 13th Gen Raptor Lake (Desktop)
+&rarr; Same as Comet Lake
 
 #### Intel 12th Gen Alder Lake (Desktop)
 - AvoidRuntimeDefrag
@@ -187,7 +201,12 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - SetupVirtualMap
 - ProvideMaxSlide: 0
 
-### AMD 
+</details>
+
+### AMD
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
 
 #### AMD Ryzen (17h)
 - AvoidRuntimeDefrag
@@ -213,9 +232,14 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - SetupVirtualMap
 - MaxSlide: 0
 
+</details>
+
 ## Kernel Quirks
 
 ### High End Desktop
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
 
 #### Intel Skylake X/W and Cascade Lake X/W (High End Desktop)
 - AppleXcpmCfgLock
@@ -278,9 +302,32 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - SetApfsTrimTimeout: -1
 - XhciPortLimit
 
+</details>
+
 ### Intel Core i5/i7i9
 
+<details>
+<summary><strong>Click to reveal</strong></summary>
+
+#### Intel 13th Gen Raptor Lake (Desktop)
+Usupported CPU. Requires Comet Lake CPU-ID
+
+- Kernel > Emulate
+	- **Cpuid1Data**: 55060A00000000000000000000000000
+	- **Cpuid1Mask**: FFFFFFFF000000000000000000000000
+	- **MinKernel**: 20.0.0
+- AppleXcpmCfgLock
+- DisableIoMapper
+- DisableLinkeditJettison
+- PanicNoKextDump
+- PowerTimeoutKernelPanic
+- SetApfsTrimTimeout: -1
+- ProvideCurrentCpuInfo
+- XhciPortLimit (up to macOS Catalina only)
+
 #### Intel 12th Gen Alder Lake (Desktop)
+Usupported CPU. Requires Fake CPU-ID
+
 - Kernel > Emulate
 	- **Cpuid1Data**: 55060A00000000000000000000000000
 	- **Cpuid1Mask**: FFFFFFFF000000000000000000000000
@@ -298,8 +345,9 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 Usupported CPU. Requires Fake CPU-ID
 
 - Kernel > Emulate
-	- **Cpuid1Data**: EB060900000000000000000000000000
+	- **Cpuid1Data**: 55060A00000000000000000000000000
 	- **Cpuid1Mask**: FFFFFFFF000000000000000000000000
+ 	- **MinKernel**: 20.0.0
 - AppleXcpmCfgLock
 - DisableIoMapper
 - DisableLinkeditJettison
@@ -316,7 +364,7 @@ Usupported CPU. Requires Fake CPU-ID
 - PanicNoKextDump
 - PowerTimeoutKernelPanic
 - SetApfsTrimTimeout: -1
-- XhciPortLimit
+- XhciPortLimit (up to macOS Catalina only)
 
 #### Intel 10th Gen Comet Lake (Dell/Sony VAIO)
 - AppleXcpmCfgLock
@@ -455,7 +503,12 @@ Usupported CPU. Requires Fake CPU-ID
 - SetApfsTrimTimeout: -1
 - XhciPortLimit
 
+</details>
+
 ### AMD
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
 
 #### AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
 - PanicNoKextDump
@@ -469,9 +522,14 @@ Usupported CPU. Requires Fake CPU-ID
 - AMD CPUs require `Kernel` > `Emulate`: `DummyPowerManagement`
 - AMD CPUs also require additional [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to run macOS.
 
+</details>
+
 ## UEFI Quirks
 
 ### High End Desktop
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
 
 #### Intel Skylake X/W, Cascade Lake X/W, Broadwell-E, Haswell-E, Ivy Bridge-E and Sandy Bridge-E  (High End Desktop)
 - EnableVectorAcceleration
@@ -482,7 +540,16 @@ Usupported CPU. Requires Fake CPU-ID
 - RequestBootVarRouting
 - UnblockFsConnect
 
+</details>
+
 ### Intel Core i5/i7/i9
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
+
+#### Intel 13th Gen Raptor Lake (Desktop)
+- EnableVectorAcceleration
+- RequestBootVarRouting
 
 #### Intel 12th Gen Alder Lake (Desktop)
 - EnableVectorAcceleration
@@ -573,7 +640,13 @@ Usupported CPU. Requires Fake CPU-ID
 - RequestBootVarRouting
 - UnblockFsConnect
 
+</details>
+
 ### AMD
+
+<details>
+<summary><strong>Click to reveal</strong></summary>
+
 #### AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
 - EnableVectorAcceleration
 - RequestBootVarRouting
@@ -582,3 +655,5 @@ Usupported CPU. Requires Fake CPU-ID
 - EnableVectorAcceleration
 - RequestBootVarRouting
 - UnblockFsConnect
+
+</details>
