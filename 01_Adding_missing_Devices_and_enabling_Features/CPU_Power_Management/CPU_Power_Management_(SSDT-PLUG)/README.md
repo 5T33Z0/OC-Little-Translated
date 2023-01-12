@@ -89,7 +89,7 @@ In 2020 a new Kext called [**SMCAMDProcessor**](https://github.com/trulyspinach/
 
 For **B550** or **A520** mainboards, you also need [**SSDT-CPUR.aml**](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml).
 
-AMD CPU families 15h, to 17h as well as 19h also require [**additional Kernel Patches**](https://github.com/AMD-OSX/AMD_Vanilla) to work in macOS. 
+AMD CPU families 15h, to 17h and 19h also require [**additional Kernel Patches**](https://github.com/AMD-OSX/AMD_Vanilla) to work in macOS. 
 
 On macOS 12.3+, you also need [**AppleMCEReporterDisabler**](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) kext when using the following SMBIOSes: `iMacPro1,1`, `MacPro6,1` or `MacPro7,1`.
 
