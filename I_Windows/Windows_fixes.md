@@ -15,7 +15,7 @@ And every time the other OS boots, it tries to "fix" the time in the BIOS/Firmwa
 7. Double-click `WinUTCOn.reg` to import it into your registry.
 8. Reboot.
 
-The displayled time should bow be correct.
+The displayed time should now be correct.
 
 ## Sharing Bluetooth Credentials between macOS and Windows
 
