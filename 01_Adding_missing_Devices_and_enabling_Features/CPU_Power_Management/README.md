@@ -37,13 +37,24 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 
 In OSX 10.11 and older, boot-arg `-xcpm` could be used to enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) for unsupported CPUs. 
 
-Since macOS Sierra, this boot-arg does no longer work. Instead, you have to add [***SSDT-PLUG***](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#readme) to select the `X86PlatformPlugin.kext`, which takes care of CPU Power Management on Haswell and newer Intel CPUs based on the `FrequencyVectors` stored in the selected SMBIOS (or more specifically, the board-id). These Frequency Vectors can be modified to optimize the performance and CPU Power Management for your CPU model using [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend).  
+Since macOS Sierra, this boot-arg does no longer work. Instead, you have to add [***SSDT-PLUG***](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#readme) to select the `X86PlatformPlugin.kext`, which takes care of CPU Power Management on Haswell and newer Intel CPUs based on the `FrequencyVectors` stored in the selected SMBIOS (or more specifically, the board-id). These Frequency Vectors can be modified to optimize the performance and CPU Power Management for your CPU model using [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to generate a `CpuFriendDataProvider.kext` which must be injected alongside [**CPUFriend**](https://github.com/acidanthera/CPUFriend) into macOS. 
 
-Although the **Ivy Bridge** CPU family is capable of utilizing **XCPM**, it has been disabled in macOS for a long time (since macOS 10.12). But you can [**force-enable**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) it. This is mandatory if you want to have proper CPU Power Management in macOS Ventura!
+Although the **Ivy Bridge** CPU family is capable of utilizing **XCPM**, it has been disabled in macOS for a long time (since macOS 10.12). But you can [**force-enable**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) it.
 
-On macOS Monterey and newer, the `ACPI_SMC_PlatformPlugin` has been dropped completely. Instead, the `X86PlatformPlugin` is now always loaded automatically, since Apple disabled the `plugin-type` check, so you don't even need `SSDT-PLUG` for Haswell and newer.
+Since Apple dropped Intel CPU support after 10th Gen Comet Lake, newer Intel CPUs also require a fake CPUID ("impersonating" a Comet Lake CPU) in order to run macOS.
 
-Since Apple dropped Intel CPU support after 10th Gen Comet Lake, newer Intel CPUs require a fake CPUID ("impersonating" a Comet Lake) in order to run macOS.
+#### macOS Monterey
+
+In macOS Monterey, Apple disabled the Plugin-Type check for CPU Power Management, so the `X86PlatformPlugin` is always loaded automatically by default. This is great for users of Haswell and newer: now they don't need `SSDT-PLUG` for picking Plugin-Type `1` any more. But for Ivy Bridge and older, `SSDT-PM` is required which sets the Plugin-Type to `0`. 
+
+#### macOS Ventura, `XCPM` and ACPI CPU Power Management
+
+In macOS Verntura, Apple deleted the actual *binary* from the `ACPI_SMC_PlatformPlugin.kext` so it's basically a useless, empty stub now. For Haswell and newer it's not an issue since they support `XCPM` by design but for Ivy Bridge and older it is. In order to get proper CPU Manangement on Ivy Bridge and older you have 2 options now:
+
+- [**Force-enable `XCPM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (which doesn't work well on Ivy Bridge) or
+- [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) (Recommended. Requires CFG Lock to be disabled in BIOS)
+
+If you cannot disable CFG Lock for your Ivy Bridge CPU in BIOS (or by flashing a custom BIOS with the MSR 0xE2 register unlocked), force-enabling `XCPM` is mandatory if you want to have decent CPU Power Management in macOS Ventura.
 
 ## Further Resources
 - **CPU Support list**: https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support
