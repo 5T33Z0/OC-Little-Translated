@@ -14,7 +14,7 @@
 ## About
 SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older) using the `ACPI_SMC_PlatformPlugin` (Plugin-Type 0). 
 
-You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the turbo frequency specified for your CPU model when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
+You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the turbo frequency specified for your CPU model when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
@@ -110,7 +110,7 @@ In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you ne
 	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
 - [**CrytexFixup** ](https://github.com/acidanthera/CryptexFixup) &rarr; required for installing/booting macOS Ventura an pre-Haswell systems
 - [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
-- Additional boot-args:
+- Additional **boot-args**:
 	- `sbvmm` &rarr; Enables `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
 	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
 	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
@@ -133,7 +133,6 @@ The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded 
 
 
 ## Credits
+- Acidanthera for OpenCore Legacy Patcher, Kexts, Booter- and Kernel Patches
 - Intel for Intel Power Gadget
 - Piker Alpha for ssdtPRGen
-
-
