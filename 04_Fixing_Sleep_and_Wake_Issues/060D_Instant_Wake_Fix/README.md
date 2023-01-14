@@ -23,7 +23,7 @@ Previously, a lot of binary name changes were required to fix this issue, which 
 - **USB class devices**
   - `ADR` address: `0x001D0000`, part name: `EHC1`.
   - `ADR` address: `0x001A0000`, part name: `EHC2`.
-  - `ADR` Address: `0x00140000`, part Name: `XHC`, `XHCI`, `XHC1`, etc.
+  - `ADR` Address: `0x00140000`, part name: `XHC`, `XHCI`, `XHC1`, etc.
   - `ADR` address: `0x00140001`, part name: `XDCI`.
   - `ADR` address: `0x00140003`, part name: `CNVW`.
 - **Ethernet**
