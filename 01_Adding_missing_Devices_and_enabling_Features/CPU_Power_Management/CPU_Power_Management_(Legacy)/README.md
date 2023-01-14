@@ -104,7 +104,7 @@ So when switching to macOS Ventura, you either have to:
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
 
 - A BIOS where the **MSR 0x2E** register is **unlocked** so CFG Lock is disabled (run `ControlMsrE2.efi` from BootPicker to check if it is unlocked or not). This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the necessary kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [**here**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to stop right here and force-enable `XCPM` instead.
-- [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/board-ids
+- [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
 - [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
 	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
