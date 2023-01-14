@@ -196,14 +196,15 @@ Find out what's causing the wake by entering this in terminal:
 
 ``` pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"```
 
-If your wake issues are only caused by USB, you could try this combination of a kext and SSDT instead: https://github.com/osy/USBWakeFixup. This has been reported working on PCs at least. I doubt it'll work on Laptops but you could try.
+If your wake issues are caused by USB devices only, you could try [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) intsead. It's combination of a kext and an SSDT. It has been reported as working on PCs at least. I doubt it'll work on Laptops but you could try your luck.
 
 ### Removing the `_PRW` method from DSDT completely
 The following approaches require using a patched DSDT which we are trying to avoid when using OpenCore, so they are not recommended. I also don't know if this has negative effects in other Operating System.
 
 ### Changing `_PRW` to specific return values
-This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [here](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
+This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [**here**](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
 
 ## Notes and Resources
+- A handy Python script for finding Name Paths of Devices containing `_PRW` packages is [**ACPIRename**](https://github.com/corpnewt/ACPIRename)
+- [**_PWR (Power Resource for Wake**)](https://uefi.org/specs/ACPI/6.5/07_Power_and_Performance_Mgmt.html#prw-power-resources-for-wake) in ACPI Specs
 - You could apply Method 2 for fixing DSDTs using `GPRE`/`UPRW` as well. In this case you wouldn't need the `XPRW` rename. Since I can't test this on your own.
-- `_PWR` (PowerResource for Wake) [Specifications](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/device-power-management-objects.html#prw-power-resources-for-wake)
