@@ -26,10 +26,10 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 
 - Mount your ESP
 - Open your `config.plist`
-- Under `ACPI/Delete`, enable the following drop rules (if they don't exist, copy them over from the `Sample.plist` included in the OpenCore Package):
+- Under `ACPI/Delete`, enable the following drop rules (if they don't exist, copy them over from the `Sample.plist` included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg/releases)):
 	- `Delete CpuPm`
 	- `Delete Cpu0Ist`
-- Save and reboot.
+- Save and reboot
 
 ## Instructions
 
@@ -75,6 +75,21 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 ``` 
 &rarr; Generates an SSDT for an Intel i7 3630QM with compatibility workarounds, lowered idle CPU frequency (900 instead of the default 1200 mHz) and support for Plugin Type 1 (XCPM).
 
+## Technical Background
+`SSDT-PM` injects the following parameters:
+
+- `APSS` (Apple Processor Sleep States) allows the CPU to enter low-power states to conserve energy while the system is idle. The processor can transition to different sleep states depending on the system's usage and power requirements. Each sleep state has a different power consumption and wake-up latency. This feature is specific to macOS and it is not part of the standard ACPI specification. APSS is used to provide more granular control over power management on macOS systems, and it can be used in conjunction with other power management features such as `APLF` and `APSN` to further reduce power consumption.
+
+- `APSN` (Apple Processor Sleep Number) is used to specify the sleep state that the processor should enter when it is not needed. Processor sleep states are low-power modes that allow the processor to enter a dormant state in order to conserve power and extend battery life in portable devices.
+
+	In general, the lower the sleep state number, the lower the power consumption and the longer the wake-up latency. So, the more aggressive sleep state is the one with the lower number. The operating system will choose the most appropriate sleep state depending on the system's usage and power requirements.
+
+- `APLF` (Apple Low Frequency Mode) is used to enable or disable a low-frequency mode for the processor. When low-frequency mode is enabled, the processor's clock speed is reduced in order to conserve power and reduce heat generation. 
+	
+	MacOS uses APSN and APSS to configure the specific C-states that the processor can enter, and uses APLF to reduce the frequency of components such as the CPU and GPU.
+
+- CPU Power Management Plugin: by default, plugin-type `0` is injected for using the `ACPI_SMC_PlatformPlugin`.
+
 ## macOS Monterey
 With the release of macOS Monterey, Apple dropped the Plugin-Type check, so that the `X86PlatformPlugin` is loaded by default. For Haswell and newer this is great, since you no longer need `SSDT-PLUG` to enable Plugin-Type `1`. But for Ivy Bridge and older, you now need to select Plugin-Type `0`. If you've previously generated an `SSDT-PM` with ssdtPRGen, it's already configured to use Plugin-Type `0`, so ACPI CPU Power Management is still working. For macOS Ventura, it's a different story…
 
@@ -84,11 +99,11 @@ When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlu
 So when switching to macOS Ventura, you either have to:
 
 - [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) or 
-- Re-enable ACPI CPU Power Management (**recommended**)
+- Re-enable ACPI CPU Power Management (**recommended**, requires disabled CFG Lock)
 
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
 
-- A BIOS where CFG Lock can be disabled, so the **MSR 0x2E** register is **unlocked**. This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the 2 kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [here](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise have to follow the aforementioned guide to force-enable `XCPM` instead.
+- A BIOS where the **MSR 0x2E** register is **unlocked** so CFG Lock is disabled (run `ControlMsrE2.efi` from BootPicker to check if it is unlocked or not). This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the necessary kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [**here**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to stop right here and force-enable `XCPM` instead.
 - [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/board-ids
 - [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
