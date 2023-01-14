@@ -129,6 +129,8 @@ The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded 
 ## Notes
 
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
+- ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)). 
+
 
 ## Credits
 - Intel for Intel Power Gadget
