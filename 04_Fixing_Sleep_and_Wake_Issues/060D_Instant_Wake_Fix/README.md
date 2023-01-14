@@ -101,7 +101,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 }
 ```
 
-1. In your `DSDT`, search for `_PRW`
+1. In your `DSDT`, search for `Name (_PRW`
 2. Look for matches for `_PRW` inside of Devices only
 3. If the first byte of the package is either `0x0D` or `0x6D` but the second byte is *not* `0x00`, then add the device path to `SSDT-PRW0.dsl`. This would be a match: 
 	```asl
