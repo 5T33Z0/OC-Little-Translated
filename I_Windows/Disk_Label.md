@@ -15,7 +15,7 @@
 The disk label files will be stored in the "disklabel" folder but they are hidden.
 
 ## 2. Moving the files to the correct location
-- In Finder, press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> to revela hidden files:</br>![](/Users/5t33z0/Desktop/disklabel01.png)
+- In Finder, press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> to revela hidden files:</br>![disklabel01](https://user-images.githubusercontent.com/76865553/212529706-99c6f186-b527-44e6-bf2f-4ec7aed53609.png)
 - Copy `.disk_label` and `.disk_label_x2`
 - Mount the EFI containing the "Microsoft" Folder
 - Paste/Move the disk label files into the `Microsoft/Boot` folder. It should look like this:</br>![](https://user-images.githubusercontent.com/76865553/174456629-b915ee78-ee62-412a-acd5-d424cbd7b27e.png)
