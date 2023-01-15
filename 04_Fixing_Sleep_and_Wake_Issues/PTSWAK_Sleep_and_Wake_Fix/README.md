@@ -79,4 +79,4 @@ If `_TTS` exists in the `DSDT`, you need to rename it too; if it doesn't, you do
 You cannot have more than one SSDT that uses the same extension (e.g. `EXT1`) at a time. If there is a need to patch 2 things using the same extension, then these patches must be integrated into the same SSDT.
 
 ## Notes
-- For the relation between `_PTS`, `_TTS` and `_WAK` methods, refer to [Chapter 7.5 or the ACPI Specs](https://uefi.org/specs/ACPI/6.4/07_Power_and_Performance_Mgmt/ospm-usage-of-_pts-_tts-and-_wak.html#working-sleeping-state-object-evaluation-flow)
+- For the relation between `_PTS`, `_TTS` and `_WAK` methods, refer to chapter 7.5 of the [**ACPI Specs**](https://uefi.org/specs/ACPI/6.5/07_Power_and_Performance_Mgmt.html#ospm-usage-of-pts-tts-and-wak)
