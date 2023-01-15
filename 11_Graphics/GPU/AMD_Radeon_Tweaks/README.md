@@ -35,7 +35,7 @@ I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You
 
 ## Method 2: Selecting specific AMD Framebuffers via `DeviceProperties`
 
-With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMac1,1` or `MacPro7,1`. 
+With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMacPro1,1` or `MacPro7,1`. 
 
 :warning: Before attempting this, ensure you have a backup of your current EFI folder on a FAT32 formatted USB flash drive to boot from in case something goes wrong.
 
