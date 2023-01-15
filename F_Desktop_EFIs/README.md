@@ -28,7 +28,7 @@
 ## About
 This section includes OpenCore configs for Intel CPUs based on the work of **Gabriel Luchina** who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. 
 
-I took his base configs, modified and impreoved them so they work out of the box (hopefully). However, you should consider them as starting points only for getting you up and running with OpenCore – that's why they are called *base* configs and not "the perfect config for every system ever"!
+I took his base configs, modified and improved them so they work out of the box (hopefully). However, you should consider them as starting points only for getting you up and running with OpenCore – that's why they are called *base* configs and not "the perfect config for every system ever"!
 
 **No AMD?** Since configuring an AMD systems requires a lot of custom entries in the MMIO Whitelist section, working with generic, pre-made configs is hit or miss. Based on this [**discussion**](https://github.com/ic005k/QtOpenCoreConfig/issues/88), I decided to remove AMD templates from the database. Fabiosun took care of the AMD templates since he has more experience in this field than me.
 
