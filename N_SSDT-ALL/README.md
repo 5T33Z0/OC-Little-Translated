@@ -48,9 +48,9 @@ Before attempting this, you should also consider which SSDTs to merge together. 
 Don't merge the following tables into the SSDT-ALL file if you plan to share your EFI and config online:
 
 - SSDTs related to CPU Power Management, such as: `SSDT-PM` (for Sandy/Ivy Bridge) and `SSDT-PLUG` – especially if they contain Frequency Vectors for specific CPUs
-- Any SSDT for 3rd party devices which are not part of the default configuration of Mainboard/Laptop
+- Any SSDT for 3rd party devices which are not part of the default configuration of the system
 - Any other ACPI Table which is **NOT** an SSDT! These are separate entities!
-- Add excluded SSDTs as separate, individual files to the EFI/OC/ACPI folder instead.
+- Add excluded SSDTs as separate, individual files to the `EFI/OC/ACPI` folder instead.
 
 ## Compiling the new, unified SSDT
 1. Open Terminal
