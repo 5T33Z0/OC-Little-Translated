@@ -4,19 +4,33 @@
 There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be used to signal various types of events, such as power management events to the operating system. GPE registers are memory locations that contain bits that can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the Lid, for example, etc. Each of these events has its own number assigned to it and can can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
+The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events, such as power management events to the operating system. GPE registers are memory locations that contain bits that can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the Lid, for example, etc. Each of these events has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
 
-Used in Devices, the `_PRW` method describes their wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. This `Return` package consists of 2 bytes (or Package Objects):
+Used in Devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-field (or Package Objects):
 
-- The 1st byte of the `_PRW` package is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
-- The 2nd byte of the `_PRW` package is either `0x03` or `0x04`. But macOS expects `0x00` here in order to not wake immediately.
+- The 1st bit-field of the `_PRW` package we are interested in is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
+- The 2nd bit-field of the `_PRW` package is either `0x03` or `0x04`. It describes the wake capabilities of the device (see below). MacOS expects `0x00` here in order to not wake immediately.
 
-And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. See the ACPI Specs for further details about `_PRW`.
+And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. Refer to the ACPI specs for further details about the `_PRW` method.
 
 Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
 
+#### Wake Capabilities
+Here is a list of the most common bit-fields that can be used to describe the wake capabilities of a device:
+
+- `0x00`: Wake disabled
+- `0x01`: Wake on power button
+- `0x02`: Wake on mouse or keyboard input
+- `0x03`: Wakes on power button, mouse or keyboard input (Bitmask combining `0x01` and `0x02`).
+- `0x04`: Wake on LAN (WOL)
+- `0x08`: Wake on RTC (real-time clock) alarm
+- `0x10`: Wake on PCI (peripheral component interconnect) PME (power management event)
+- `0x20`: Wake on USB (universal serial bus) PME
+- `0x40`: Wake on fixed feature button
+- `0x80`: Wake on power button or fixed feature button 
+
 ### Refined Fix
-Previously, a lot of binary name changes were required to fix this issue, which could cause issues with other Operating Systems. Since then, the fix has been refined so it requires only 1 binary rename (if at all) while the rest of the fix is handled by simple SSDTs which are easy to edit. The `_OSI` switch has been implemented as well, so the changes only apply to macOS.
+Previously, a lot of binary name changes were necessary to fix instant-wake issues, which could cause problems in other Operating Systems. Since then, the fix has been refined so it requires only 1 binary rename (if at all) while the rest of it is handled by simple SSDTs which are easy to edit which replace the 2nd bit-field with `0x00` for macOS only.
 
 ### Devices that may require a `0D/6D Patch`
 
@@ -36,7 +50,7 @@ Previously, a lot of binary name changes were required to fix this issue, which 
 **NOTES**: 
 
 - Looking up the names of devices in the `DSDT` is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
-- Newly released machines may have new parts that require `0D/6D patch`.
+- Newly released machines may have new parts that require the `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
 Your `DSDT` may contain code like this:
@@ -57,7 +71,7 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 ### Method 1: using `SSDT-GPRW/UPRW`
 This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
 
-1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, use Method 2.
+1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow Method 2.
 2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
 3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
 4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
@@ -73,7 +87,7 @@ This approach minimizes the amount of necessary binary renames to one to correct
 - In this case, enter `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"` in Terminal to find the culprit for the instant wake.
 
 ### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
-In case your `DSDT` *doesn't* use the `GPRW` nor the `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd byte of the return package (package `[One]`) to `0` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2) – no additional binary renames are required. 
+In case your `DSDT` *doesn't* have the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd bit-field of the return package (package `[One]`) to `0x00` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2) – no additional binary renames are required. 
 
 But in order to make it work, we need to list all the PCI paths of devices where the change is necessary, as shown in this example:
 
@@ -205,6 +219,7 @@ The following approaches require using a patched DSDT which we are trying to avo
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [**here**](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
 
 ## Notes and Resources
+- If you are using any of the SSDTs to change any of the `_PRW` bit-fields, these changes won't be reflected in the `DSDT` nor in IORegistryExplorer so you have to just test it.
 - A handy Python script for finding Name Paths of Devices containing `_PRW` packages is [**ACPIRename**](https://github.com/corpnewt/ACPIRename)
 - [**_PWR (Power Resource for Wake**)](https://uefi.org/specs/ACPI/6.5/07_Power_and_Performance_Mgmt.html#prw-power-resources-for-wake) in ACPI Specs
 - You could apply Method 2 for fixing DSDTs using `GPRE`/`UPRW` as well. In this case you wouldn't need the `XPRW` rename. Since I can't test this on your own.
