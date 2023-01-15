@@ -34,7 +34,7 @@ Since the fix utilizes virtualization capabilities only supported by macOS Big S
 
 But this can simply be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.)
 
-Once macOS 11.3 or newer is installed, the board-id spoof is working works and you can revert back to the SMBIOS best suited for your CPU.
+Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
 
 ### What about Clover?
 
