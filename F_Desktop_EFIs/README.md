@@ -124,7 +124,7 @@ After the base EFI has been generated, the `config.plist` has to be modified bas
 ### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
 
-You can follow this [**guide**]( https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) to do so.
+You can follow [**my guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to do so.
 
 ## Addtional Configuration Notes
 Before deploying your newly generated EFI folder, check the following:
