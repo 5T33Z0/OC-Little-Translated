@@ -90,7 +90,7 @@ Kext|Description
 [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)|Used for fixing power management and initialization on non-Apple NVMe.
 [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS.<br>We recommend testing without this first.
 [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs.<br>Recommended for dual-socket systems (ie. Intel Xeon).
-[RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, Disable MacPro7,1 memory warnings and provide upgrade to macOS Monterey via Software Updates when available.
+[RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, disables MacPro7,1 memory warnings. Can also fix issues with System Update notifications.
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
 
@@ -108,7 +108,7 @@ After the base EFI has been generated, the `config.plist` *maybe* has to be modi
 - Check the following Settings:
 	- **ACPI/Add**: add additional ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
 	- **DeviceProperties**:
-		- Check if the correct Framebuffer Patch is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
+		- Check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
 		- Add additional PCI paths (if required for your hardware)
 	- **Kernel/Add**: Add additional kexts required for your hardware and features (a base-set required for the selected system is already included)
 	- **PlatformInfo/Generic**: Generate `SMBIOS` Data for the selected Mac model
