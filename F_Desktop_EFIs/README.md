@@ -33,7 +33,7 @@ This section includes OpenCore configs for Intel CPUs based on the work of **Gab
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the net or github, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the configs included in the app's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
 
-Included are about 40 configs for Intel CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets.
+Included are about 40 configs for Intel CPUs, covering a wide range of supported Desktop CPUs, vendors and chipsets. Laptop configs are not inclused simply because there are way too many variables to consider which is beyond the scope of what's possible here.
 
 ### Included Files and Settings
 - **Base configs** for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets (no Laptops!)
@@ -89,8 +89,8 @@ Kext|Description
 :----|:----
 [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)|Used for fixing power management and initialization on non-Apple NVMe.
 [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS.<br>We recommend testing without this first.
-[AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs.<br>Recommended for dual-socket systems (ie. Intel Xeon).
-[RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, disables MacPro7,1 memory warnings. Can also fix issues with System Update notifications.
+[AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting a to disable the AppleMCEReporter kext on macOS Catalina and newer which will cause kernel panics on AMD CPUs. Also recommended for dual-socket systems (ie. Intel Xeon).
+[RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, disables memory warnings when using SMBIOS `MacPro7,1`. Can also [fix issues with System Update notifications](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates) (requires boot-arg `revpatch=sbvmm`)
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
 
@@ -101,19 +101,25 @@ Kext|Description
 - An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes and the `config.plist`.
 
 ### 2. Modifying the `config.plist` 
-After the base EFI has been generated, the `config.plist` *maybe* has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
+After the base EFI has been generated, the `config.plist` has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
 
 - Go to the Desktop
 - Open the `config.plist` included in `\EFI\OC\` with **OCAT** or **ProperTree**
-- Check the following Settings:
-	- **ACPI/Add**: add additional ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
-	- **DeviceProperties**:
-		- Check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled in `PciRoot(0x0)/Pci(0x2,0x0)` (Configs for Intel Core CPUs usually contain two, one enabled)
-		- Add additional PCI paths (if required for your hardware)
-	- **Kernel/Add**: Add additional kexts required for your hardware and features (a base-set required for the selected system is already included)
-	- **PlatformInfo/Generic**: Generate `SMBIOS` Data for the selected Mac model
-	- **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**: add additional boot-args if your hardware requires them (see next section)
-- Save and deploy the EFI folder (put it on a FAT32 formatted USB flash drive and try booting from it)
+- Check the following Sections and Settings:
+	Section |Setting
+--------|---------
+**ACPI/Add** |Add extra ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
+**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled.
+**Kernel/Add** | Add extra kexts required for your hardware and features (WiFi and Bluetooth come to mind). A base-set required for the selected system is already included.
+**PlatformInfo/Generic** |Generate `SMBIOS` Data for the selected Mac model
+**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (see next section)
+- Save the config.plist
+- Copy the EFI folder to a FAT32 formatted USB flash drive
+- Reboot from the flash drive and test if it works
+- If it does, mount your system's EFI and put the EFI folder in there.
+- If it doesn't you have to check the config again, following Dortania's OpenCore Install Guide.
+- If all settings are correct, check the [troubleshooting guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html)
+- If you find a config error in the config template itself, please create an issue report.
 
 ### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
