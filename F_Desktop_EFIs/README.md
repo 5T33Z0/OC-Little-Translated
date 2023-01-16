@@ -107,19 +107,19 @@ After the base EFI has been generated, the `config.plist` has to be modified bas
 - Open the `config.plist` included in `\EFI\OC\` with **OCAT** or **ProperTree**
 - Check the following Sections and Settings:
 	Section |Setting
---------|---------
-**ACPI/Add** |Add extra ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
-**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled.
-**Kernel/Add** | Add extra kexts required for your hardware and features (WiFi and Bluetooth come to mind). A base-set required for the selected system is already included.
-**PlatformInfo/Generic** |Generate `SMBIOS` Data for the selected Mac model
-**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (see next section)
+	--------|---------
+	**ACPI/Add** |Add extra ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create in Post-Install)
+	**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled (&rarr; see "Additional Configuration Notes").
+	**Kernel/Add** | Add extra kexts required for your hardware and features (WiFi and Bluetooth come to mind). A base-set required for the selected system is already included.
+	**PlatformInfo/Generic** |Generate `SMBIOS` Data for the selected Mac model
+	**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (&rarr; see "Additional Configuration Notes").
 - Save the config.plist
 - Copy the EFI folder to a FAT32 formatted USB flash drive
 - Reboot from the flash drive and test if it works
 - If it does, mount your system's EFI and put the EFI folder in there.
-- If it doesn't you have to check the config again, following Dortania's OpenCore Install Guide.
+- If it doesn't you have to check the config again, following Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/).
 - If all settings are correct, check the [troubleshooting guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html)
-- If you find a config error in the config template itself, please create an issue report.
+- If you find a config error in the config template itself, please create an issue report and I will fix it.
 
 ### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
