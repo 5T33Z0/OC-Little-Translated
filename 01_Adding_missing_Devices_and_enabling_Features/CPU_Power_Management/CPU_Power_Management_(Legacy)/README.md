@@ -12,7 +12,7 @@
 - [Credits](#credits)
 
 ## About
-SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older) using the `ACPI_SMC_PlatformPlugin` (Plugin-Type 0). 
+SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older) using the `ACPI_SMC_PlatformPlugin` (plugin-type `0`). 
 
 You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the turbo frequency specified for your CPU model when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
 
@@ -129,8 +129,8 @@ The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded 
 ## Notes
 
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
-- ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)). 
-
+- ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)).
+- Check the **Configuration.pdf** included in the OpenCorePkg for details about unlocking the MSR 0xE2 register (&rarr; Chapter 7.8: "AppleCpuPmCfgLock").
 
 ## Credits
 - Acidanthera for OpenCore Legacy Patcher, Kexts, Booter- and Kernel Patches
