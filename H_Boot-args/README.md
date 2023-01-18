@@ -133,7 +133,8 @@ boot-arg | DeviceProperty | Description
 **`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
-**`igfxfw=2`** | `igfxfw` | Force loading of Apple GuC firmware 
+**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics Unit Control (GUC) firmware. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Combine with `wegtree=1`
+**`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
 **`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
