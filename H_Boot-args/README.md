@@ -141,7 +141,9 @@ boot-arg | DeviceProperty | Description
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
 **`igfxrpsc=1`** | `rps-control`  | Enable RPS control patch (improves IGPU performance)
-**`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
+**`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs
+
+**NOTE**: If a boot-arg contains "=number", this number needs to be represented as a `<DATA>` value. So a boot-arg like `igfxfw=2` becomes the property `igfxfw` with a value of `02000000` (Type: DATA) 
 
 #### AMD Radeon
 
