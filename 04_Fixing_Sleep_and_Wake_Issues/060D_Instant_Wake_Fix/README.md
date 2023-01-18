@@ -71,7 +71,7 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 ### Method 1: using `SSDT-GPRW/UPRW`
 This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
 
-1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow Method 2.
+1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow the instructions of "Method 2" instead.
 2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
 3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
 4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
