@@ -3,23 +3,25 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 
 **TABLE of CONTENTS**
 
-- [Debugging](#debugging)
-- [Network-specific boot arguments](#network-specific-boot-arguments)
-- [Other useful boot arguments](#other-useful-boot-arguments)
-- [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
-	- [Lilu.kext](#lilukext)
-	- [VirtualSMC.kext](#virtualsmckext)
-	- [Whatevergreen.kext](#whatevergreenkext)
-		- [Global](#global)
-    	- [Board-id related](#board-id-related)
-    	- [Switching GPUs](#switching-gpus)
-    	- [Intel HD Graphics](#intel-hd-graphics)
-    	- [AMD Radeon](#amd-radeon)
-    	- [NVIDIA](#nvidia)
-    	- [Backlight](#backlight)
-    	- [2nd Boot stage](#2nd-boot-stage)
-    	- [Misc](#misc)
-    - [AppleALC](#applealc)
+- [Boot arguments explained](#boot-arguments-explained)
+	- [Debugging](#debugging)
+	- [Network-specific boot arguments](#network-specific-boot-arguments)
+	- [Other useful boot arguments](#other-useful-boot-arguments)
+	- [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
+		- [Lilu.kext](#lilukext)
+		- [VirtualSMC.kext](#virtualsmckext)
+		- [Whatevergreen.kext](#whatevergreenkext)
+			- [Global](#global)
+			- [Board-id related](#board-id-related)
+			- [Switching GPUs](#switching-gpus)
+			- [Intel HD Graphics](#intel-hd-graphics)
+			- [AMD Radeon](#amd-radeon)
+			- [NVIDIA](#nvidia)
+			- [Backlight](#backlight)
+			- [2nd Boot stage](#2nd-boot-stage)
+		- [AppleALC](#applealc)
+		- [RestrictEvents](#restrictevents)
+	- [Credits](#credits)
 
 ## Debugging
 |Boot-arg|Description|
@@ -133,14 +135,14 @@ boot-arg | DeviceProperty | Description
 **`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
-**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics unit Control (GUC) firmware to make use of Apple's firmware scheduler which improves performance. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Combine with `wegtree=1`.
+**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics Unit Control (GUC) firmware. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Combine with `wegtree=1`
 **`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
-**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch. The graphics accelerator uses host preemptive scheduler (improves IGPU performance). `igfxfw=2` takes precedence when both properties are enabled. RPS-control is preferable over `igfxfw=2` in Big Sur and newer due to a bug in the Apple GUC firmware. 
 **`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
+**`igfxrpsc=1`** | `rps-control`  | Enable RPS control patch (improves IGPU performance)
 **`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
 
 #### AMD Radeon
