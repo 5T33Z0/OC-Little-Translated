@@ -231,5 +231,5 @@ They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B
 **To be continued…**
 
 ## Credits
-- Acidanthera for Whatevergreen and other Kext
+- Acidanthera for Lilu, VirtalSMC, Whatevergreen, AppleALC and other Kexts
 - Miliuco for additional details about `igfxfw` and `rps-control=01` properties
