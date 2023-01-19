@@ -1,5 +1,5 @@
 # Boot arguments explained
-Listed below you find an incomplete list of commonly used as well as rather uncommon boot-args which can be injected by OpenCore, Clover and Kexts.
+Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it.
 
 **TABLE of CONTENTS**
 
@@ -133,14 +133,14 @@ boot-arg | DeviceProperty | Description
 **`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
-**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics Unit Control (GUC) firmware. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Combine with `wegtree=1`
+**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics unit Control (GUC) firmware to make use of Apple's firmware scheduler which improves performance. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Combine with `wegtree=1`.
 **`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
+**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch. The graphics accelerator uses host preemptive scheduler (improves IGPU performance). `igfxfw=2` takes precedence when both properties are enabled. RPS-control is preferable over `igfxfw=2` in Big Sur and newer due to a bug in the Apple GUC firmware. 
 **`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
-**`igfxrpsc=1`** | `rps-control`  | Enable RPS control patch (improves IGPU performance)
 **`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
 
 #### AMD Radeon
@@ -185,12 +185,6 @@ boot-arg | DeviceProperty | Description
 **`gfxrst=1`** | N/A | Prefer drawing Apple logo at 2nd boot stage instead of framebuffer copying
 **`gfxrst=4`** | N/A | Disables framebuffer init interaction during 2nd boot stage
 
-#### Misc
-
-boot-arg | DeviceProperty | Description 
----------|----------------|------------
-**`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
-
 **SOURCES**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html) and [Whatevergreen](https://github.com/acidanthera/WhateverGreen)
 
 ### AppleALC
@@ -233,3 +227,7 @@ They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B
 ![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
 
 **To be continued…**
+
+## Credits
+- Acidanthera for Whatevergreen and other Kext
+- Miliuco for additional details about `igfxfw` and `rps-control=01` properties

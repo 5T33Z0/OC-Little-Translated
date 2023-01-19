@@ -1,7 +1,37 @@
 # AMD Radeon Performance Tweaks
 
+**TABLE of CONTENTS**
+
+- [About](#about)
+	- [SSDTs vs. `DeviceProperties` – some considerations](#ssdts-vs-deviceproperties--some-considerations)
+- [Method 1: Using AMD Radeon Patches by mattystonnie](#method-1-using-amd-radeon-patches-by-mattystonnie)
+- [Method 2a: Selecting specific AMD Framebuffers via `DeviceProperties`](#method-2a-selecting-specific-amd-framebuffers-via-deviceproperties)
+	- [Finding the PCIe path](#finding-the-pcie-path)
+	- [Config Edits](#config-edits)
+- [Method 2b: Using PowerPlay Tables](#method-2b-using-powerplay-tables)
+	- [Creating PowerPlay Tables for AMD Polaris Cards (RX 500-series)](#creating-powerplay-tables-for-amd-polaris-cards-rx-500-series)
+	- [PowerPlay Table Generators for Radeon RX5700, Radeon VII and Vega 64](#powerplay-table-generators-for-radeon-rx5700-radeon-vii-and-vega-64)
+	- [Adjusting the `Workload policy`](#adjusting-the-workload-policy)
+	- [`PP,PP_WorkLoadPolicyMask` vs. `PP_WorkLoadPolicyMask`](#pppp_workloadpolicymask-vs-pp_workloadpolicymask)
+- [Addendum: SSDT vs. `DeviceProperties`](#addendum-ssdt-vs-deviceproperties)
+- [Credits](#credits)
+- [Further Resources](#further-resources)
+
+
 ## About
-This chapter contains 3 approaches for improving the performance of AMD Radeon Graphics Cards when running macOS. The 1st method uses SDDTs and DeviceProperties to inject PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the power consumption. This method tries to mimic how the card would operate in a real Mac. Methods 2 and 3 utilize `DeviceProperties` to select specific Framebuffers (method 2) and inject PowerPlayInfo tables (method 3). Both methods can be combined. In my experience using a RX 580, combining methods 2 and 3 gives the best results.
+This chapter contains 2 methods for improving the performance of AMD Radeon Graphics Cards when running macOS:
+
+- **Method 1**: Utilizes **SDDTs** to inject GPU Properties and PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the overall power consumption of the card. This method tries to mimic how the GPU would operate in a real Mac. 
+- **Method 2**: Utilizes **`DeviceProperties`** to select specific Framebuffers (method 2a) and inject PowerPlayInfo tables (method 2b). Methods 2a and b can be combined. 
+
+### SSDTs vs. `DeviceProperties` – some considerations
+- Combining methods 1 and 2 can be problematic *if* the SSDT also injects values for the same device properties as the config.plist.
+- At best, the value(s) injected via the SSDT would be overwritten by the one(s) defined by `DeviceProperties` in the config.plist.
+- In the worst case, you could inject conflicting settings.
+- However, if you only need the SSDT to inject the correct ACPI path into macOS to get the card working, you can combine both. 
+- If you want to inject properties into macOS *only*, doing it via `config.plist` is the way to go. Because injecting variables via ACPI affects the whole system and could affect other Operating Systems and in some cases does have no effect in Catalina and newer (&rarr; See "Addendum")
+ 
+In my experience using an AMD RX 580 card, combining methods 2a and 2b give he best results.
 
 ## Method 1: Using AMD Radeon Patches by mattystonnie
 > **Disclaimer**: Use at your own risk! In general, these patches have to be regarded as "experimental". They may work as intended but that's not guaranteed.
@@ -21,19 +51,9 @@ This chapter contains 3 approaches for improving the performance of AMD Radeon G
 **NOTE**: These are slightly modified and improved variants of mattystonnie's tables. The following has been added to them:
 
 - The `PEGP` to `EGP0` rename is integrated in the SSDTs (where required), so you don't need to add any binary renames. 
-- The `DTGP` method which is required by `SSDT-RX580` is contained within the table itself now, so you no longer need `SSDT-DTGP`. 
+- The `DTGP` method which is required by `SSDT-RX580` is contained within the table itself now, so you no longer need `SSDT-DTGP`.
 
-### Addendum: SSDT vs. Device Properties
-
-I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't optimized as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry without `DAGPM.kext`, so this kext is not required (same goes for `AGPMInjector.kext` by Pavo-IM).   
-
-Looking for a solution, I've gone through the whole thread (90+ pages). On Page [35](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578) and following, I found another approach utilizing Device Properties to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of the previously used 100). 
-
-I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and `DAGPM.kext` when using this method. 
-
-[^1]: Follow this [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/Metal_3#3-obtaining-aaplslot-name-for-igpu-and-gpu) to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
-
-## Method 2: Selecting specific AMD Framebuffers via `DeviceProperties`
+## Method 2a: Selecting specific AMD Framebuffers via `DeviceProperties`
 
 With this method, you don't need Whatevergreen and DRM works when using SMBIOS `iMacPro1,1` or `MacPro7,1`. 
 
@@ -70,7 +90,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
-## Method 3: Using PowerPlay Tables
+## Method 2b: Using PowerPlay Tables
 With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to optimize the performance of your AMD card under macOS.
 
 ### Creating PowerPlay Tables for AMD Polaris Cards (RX 500-series)
@@ -82,7 +102,7 @@ You can use PowerPlay Table Generators by MMChris to generate a `PP_PhmSoftPower
 
 There's another [**method**](https://www.insanelymac.com/forum/topic/351276-rx-6600-xt-on-macos-zero-rpm-with-softpowerplaytable/#comment-2779094) for obtaining PowerPlay Tables for Navi Cards under Windows using Tools and Registry Editor.
 
-## Adjusting the `Workload policy`
+### Adjusting the `Workload policy`
 The Workload policy lets you select what type of workload or tasks the GPU is primarily used for. Depending on the selected policy, your GPU may require less power (Compute) or more (for 3D and VR Applications). 
 
 The Workload Policy can be added as a `DeviceProperty`. The following policies are available:
@@ -110,7 +130,7 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 ![WorkLoadpPlcy](https://user-images.githubusercontent.com/76865553/180636520-2a147de1-d741-4913-8727-4f21a4a28633.png)
 
-## `PP,PP_WorkLoadPolicyMask` vs. `PP_WorkLoadPolicyMask`
+### `PP,PP_WorkLoadPolicyMask` vs. `PP_WorkLoadPolicyMask`
 
 Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs and guides which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_`, the property is listed alphabetically among other PowerPlay Table entries, while using `PP_` puts the entry in a different position in the list. 
 
@@ -121,6 +141,16 @@ When using `PP,PP_WorkLoadPolicyMask`:</br>
 
 When using `PP_WorkLoadPolicyMask`:</br>
 ![PP_](https://user-images.githubusercontent.com/76865553/180637402-c478a12a-86ec-4656-b2f2-ea0c5bba3a9a.png)
+
+## Addendum: SSDT vs. `DeviceProperties`
+
+I've noticed that **SSDT-RX580** doesn't work as expected in macOS Catalina and beyond. In my tests, the performance didn't improve noticeably and power consumption wasn't reduced as well – around 100 Watts in idle which seems too high, imo. Also, `AGPMController` was present in IO Registry already without `DAGPM.kext`, so it's not a requirement (same goes for `AGPMInjector.kext` by Pavo-IM).   
+
+On page [35 and following](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/page-35#post-2114578), I found another approach utilizing `DeviceProperties` to inject the data into macOS instead. This worked. It improves performance and reduces power consumption as well (70 Watts in idle instead of 100). 
+
+I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You can copy the included properties to the corresponding section of your config.plist. Ensure that the PCI paths and `AAPL,slot-name`[^1] match the ones used in your system and adjust them accordingly. Disable/delete the SSDTs and `DAGPM.kext` when using this method. 
+
+[^1]: Follow this [**guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/Metal_3#3-obtaining-aaplslot-name-for-igpu-and-gpu) to obtain the PCI path of a device and its `AAPL,slot-name` using Hackintool.
 
 ## Credits
 - Acidanthera for Lilu and WhateverGreen.kext
