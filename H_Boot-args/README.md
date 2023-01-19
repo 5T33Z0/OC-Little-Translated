@@ -135,14 +135,14 @@ boot-arg | DeviceProperty | Description
 **`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
-**`igfxfw=2`** | `igfxfw` | Forces loading of Apple Graphics Unit Control (GUC) firmware. Requires (true) 300-series or newer chipset, so realistically 9th and 10th gen Intel Core CPUs with iGPU only. It's [bugged](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. `igfxfw` takes precedence over `igfxrpsc=1` when both are set. Combine with `wegtree=1`
-**`wegtree=1`** | `rebuild-device-tree` | Forces device renaming on Apple FW
+**`igfxfw=2`** | `igfxfw` | Forces loading of Apple's Graphics Unit Control (GUC) firmware. Improves Intel Quick Sync Video performance. Requires chipset supporting Intel ME v12 or newer (Z390, B360, H370, H310, Q370, C246, Z490, etc.). It's [buggy](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Should be tested on a case by case basis. `igfxfw` takes precedence over `igfxrpsc=1` when both are set.
+**`wegtree=1`** | `rebuild-device-tree` | Forces WEG to rename the device tree of the iGPU after Apple GUC Firmware is loaded. Useful if the iGPU doesn't work after applying `igfxfw=2` (on a compatible CPU and chipset, of course). 
 **`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
-**`igfxrpsc=1`** | `rps-control`  | Enables RPS control patch which improves iGPU performance. RPS control seems preferable over `igfxfw` in Big Sur and newer because of a bug in the Apple GUC firmware. 
+**`igfxrpsc=1`** | `rps-control`  | Enables RPS control patch which improves iGPU performance on KBL+ using older chipsets without ME v11 support (Z370 and others) 
 **`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
 
 #### AMD Radeon
