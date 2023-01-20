@@ -1,5 +1,5 @@
 # Boot arguments explained
-Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it. I also used tables instead of lists to separate boot-args, properties and descriptions more clearly.
+Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it. I also used tables instead of lists to separate boot-args, properties and descriptions more clearly, which makes it easier to copy entries and identify additional parameters associated with a boot-arg/property (such as switches and bitmasks).
 
 **TABLE of CONTENTS**
 
