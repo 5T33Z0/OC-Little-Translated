@@ -1,5 +1,5 @@
 # Boot arguments explained
-Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it.
+Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it. I also used tables instead of lists to separate boot-args, properties and descriptions more clearly.
 
 **TABLE of CONTENTS**
 
@@ -7,9 +7,9 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 - [Network-specific boot arguments](#network-specific-boot-arguments)
 - [Other useful boot arguments](#other-useful-boot-arguments)
 - [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
-	- [Lilu.kext](#lilukext)
-	- [VirtualSMC.kext](#virtualsmckext)
-	- [Whatevergreen.kext](#whatevergreenkext)
+	- [Lilu](#lilu)
+	- [VirtualSMC](#virtualsmc)
+	- [Whatevergreen](#whatevergreen)
 		- [Global](#global)
 		- [Board-id related](#board-id-related)
 		- [Switching GPUs](#switching-gpus)
@@ -19,7 +19,13 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 		- [NVIDIA](#nvidia)
 		- [Backlight](#backlight)
 		- [2nd Boot stage](#2nd-boot-stage)
+	- [AirportBrcmFixup](#airportbrcmfixup)
 	- [AppleALC](#applealc)
+	- [BrightnessKeys](#brightnesskeys)
+	- [CPUFriend](#cpufriend)
+	- [CpuTscSync](#cputscsync)
+	- [DebugEnhancer](#debugenhancer)
+	- [HibernationFixup](#hibernationfixup)
 	- [RestrictEvents](#restrictevents)
 - [Credits](#credits)
 
@@ -46,13 +52,13 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 |Boot-arg|Description|
 |:------:|-----------|
 **`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
-**`amfi_get_out_of_my_way=1`**|Combines wit disabled SIP, this disables Apple Mobile File Integrity. AMFI is a macOS kernel module enforcing code-signing validation and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every app that is run and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
-**`-force_uni_control`**|Force-enables the Universal Control service in macOS Monterey 12.3+.
+**`amfi_get_out_of_my_way=1`**| Disables Apple Mobile File Integrity. **Requirement**: disabled `SIP`. AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every running app and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
+**`-force_uni_control`**| Force-enables Universal Control service in macOS Monterey 12.3+
 
 ## Boot-args and device properties provided by Kexts
 
-### Lilu.kext
-Lilu boot-args. Remember that Lilu acts as a patch engine providing functionality for other kexts in the hackintosh universe, so you got to be aware of that if you use any of these commands!
+### Lilu
+Lilu boot-args. Remember that Lilu operates as a patch engine providing functionality for a lot of other kexts in the hackintosh universe. So be aware of that if you use any of these commands, especially `-liluoff`!
 
 | Boot-arg | Description |
 |:----------:|-------------|
@@ -70,21 +76,23 @@ Lilu boot-args. Remember that Lilu acts as a patch engine providing functionalit
 **`lilucpu=N`**| Lets Lilu and plugins assume Nth CPUInfo::CpuGeneration.
 **`liludump=N`** | Lets Lilu DEBUG version dump log to `/var/log/Lilu_VERSION_KERN_MAJOR.KERN_MINOR.txt` after N seconds
 
-### VirtualSMC.kext
+### VirtualSMC
 | Boot-arg | Description |
 |:--------:|-------------|
-**`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC).
-**`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default).
+**`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC)
+**`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default)
 **`-vsmcoff`** | Disables all Lilu enhancements.
-**`-vsmcrpt`** | Reports missing SMC keys to the system log.
-**`-vsmccomp`** | Prefer existing hardware SMC implementation if found.
-**`vsmcgen=X`** | Forces exposing X-gen SMC device (1 and 2 are supported).
-**`vsmchbkp=X`** | Sets HBKP dumping mode (0 = off, 1 = normal, 2 = without encryption).
-**`vsmcslvl=X`** | Sets value serialisation level (0 = off, 1 = normal, 2 = with sensitive data (default)).
-**`smcdebug=0xff`** | Enables AppleSMC debug information printing.
-**`watchdog=0`** | Disables WatchDog timer (if you get accidental reboots).
+**`-vsmcrpt`** | Reports missing SMC keys to the system log
+**`-vsmccomp`** | Prefer existing hardware SMC implementation if found
+**`vsmcgen=X`** | Forces exposing X-gen SMC device (1 and 2 are supported)
+**`vsmchbkp=X`** | Sets HBKP dumping mode (0 = off, 1 = normal, 2 = without encryption)
+**`vsmcslvl=X`** | Sets value serialisation level (0 = off, 1 = normal, 2 = with sensitive data (default))
+**`smcdebug=0xff`** | Enables AppleSMC debug information printing
+**`watchdog=0`** | Disables WatchDog timer (if you get accidental reboots)
 
-### Whatevergreen.kext 
+[**Source**](https://github.com/acidanthera/VirtualSMC)
+
+### Whatevergreen
 The following boot-args are provided by and require Whatevergreen.kext to work! Check the [complete list](https://github.com/acidanthera/WhateverGreen/blob/master/README.md#boot-arguments) to find many, many more.
 
 #### Global
@@ -204,44 +212,125 @@ boot-arg | DeviceProperty | Description
 
 **SOURCES**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html) and [Whatevergreen](https://github.com/acidanthera/WhateverGreen)
 
+### AirportBrcmFixup
+Open source kext providing patches required for non-native Airport Broadcom WiFi cards.
+
+boot-arg | NVRAM Variable| Description 
+:-------:|:--------------:|------------
+**`-brcmfxdbg`** |N/A| Enables debugging output
+**`-brcmfxbeta`** |N/A| Enables loading on unsupported macOS
+**`-brcmfxoff`** |N/A| Disables kext
+**`-brcmfxwowl`** |N/A| Enables WOWL (Wake on WLAN) - disabled by default
+**`-brcmfx-alldrv`** |N/A| Allows patching for all supported drivers, disregarding current system version (&rarr; See [Matching device-id and kext name in different macOS versions](https://github.com/acidanthera/AirportBrcmFixup#matching-device-id-and-kext-name-in-different-macos-versions))
+**`brcmfx-country=XX`** |`brcmfx-country=XX`| Changes the country code to `XX` (can be US, CN, DE, etc. or #a for generic)
+**`brcmfx-aspm`** | |Overrides value used for pci-aspm-default
+**`brcmfx-wowl`** | |Enables/disables WoWLAN patch
+**`brcmfx-delay`** | |Delays start of native broadcom driver for specified amount of milliseconds. Can solve panics or missing Wi-Fi device in Monterey. Start with 15 seconds (`brcmfx-delay=15000`) and successively reduce the delay until you notice instability in boot.
+**`brcmfx-alldrv`** | |Allows patching for all supported drivers, disregarding current system version (&rarr; See [Matching device-id and kext name in different macOS versions](https://github.com/acidanthera/AirportBrcmFixup#matching-device-id-and-kext-name-in-different-macos-versions))
+**`brcmfx-driver=0|1|2|3`** |same| Enables only one kext for loading: </br> `0` = AirPortBrcmNIC-MFG </br> `1` = AirPortBrcm4360 </br> `2` = AirPortBrcmNIC </br> `3` = AirPortBrcm4331
+
+[**Source**](https://github.com/acidanthera/AirportBrcmFixup)
+
 ### AppleALC
-Boot-args for your favorite audio-enabler kext. All the Lilu boot arguments affect AppleALC as well.
+Boot-args for your favorite audio-enabler kext. Note that all Lilu boot arguments affect AppleALC as well.
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:--------:|:--------------:|------------
 **`alcid=X`**| `layout-id` |To select a layout-id, where `X` stands for the number of the Layout ID, e.g. `alcid=1`. A list with all existing layout-ids sorted by vendor and codec model can be found [here](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 **`-alcoff`**| N/A |Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
 **`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
-**`alcverbs=1`**| N/A |Enables alc-verb support (also alc-verbs device property)
+**`-alcdbg`** |N/A | Print the debugging information (requires DEBUG version)
+**`alcverbs=1`**| `alc-verbs` |Enables alc-verb support
+
+[**Source**](https://github.com/acidanthera/AppleALC/wiki/Installation-and-usage)
+
+### BrightnessKeys
+Automatic handling of brightness key shortcuts based on ACPI Specification, Appendix B: Video Extensions. Requires Lilu 1.2.0 or newer.
+
+`-brkeysdbg` &rarr; Enables debug printing (available in DEBUG binaries only)
+
+[**Source**](https://github.com/acidanthera/BrightnessKeys)
+
+### CPUFriend
+Kext for optimizing CPU Power Management for Intel CPUs supporting XCPM (Haswell and newer).
+
+boot-arg | Description 
+:-------:|:------------
+**`-cpufdbg`** | Enables debug logging (only available in DEBUG binaries)
+**`-cpufoff`** | Disables CPUFriend entirely
+**`-cpufbeta`** | Enables CPUFriend on unsupported macOS versions
+
+[**Source**](https://github.com/acidanthera/CPUFriend/)
+
+### CpuTscSync
+Lilu plugin combining functionality of VoodooTSCSync and disabling xcpm_urgency if TSC is not in sync. It should solve some kernel panics after wake.
+
+boot-arg | Description 
+:-------:|:------------
+**`-cputsdbg`** | Enable debugging output
+**`-cputsbeta`** | Enables loading on unsupported macOS 
+**`-cputsoff`** | Disables kext loading
+**`-cputsclock`** | Forces using of method clock_get_calendar_microtime to sync TSC (the same method is used when boot-arg `TSC_sync_margin` is specified)
+
+[**Source**](https://github.com/acidanthera/CpuTscSync)
+
+### DebugEnhancer
+Lilu plugin intended to enable debug output in the macOS kernel.
+
+boot-arg | Description 
+:-------:|:------------
+**`-dbgenhdbg`** | Enables debugging output
+**`-dbgenhbeta`** | Enables loading on unsupported macOS
+**`-dbgenhoff`** | Disables kext loading
+**`-dbgenhiolog`** | Redirects IOLog output to kernel vprintf (the same as for kdb_printf and kprintf)
+
+[**Source**](https://github.com/acidanthera/DebugEnhancer)
+
+### HibernationFixup
+Kext to address issues with Sleep/Hibernation. It's pretty complex in terms of configuration, so you're best to read the info provided in the repo!
+
+boot-arg | Description 
+:-------:|:------------
+`-hbfx-dump-nvram` | Saves NVRAM to a file nvram.plist before hibernation and after kernel panic (with panic info)
+`-hbfx-disable-patch-pci` | Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
+`hbfx-patch-pci=XHC,IMEI,IGPU` | Allows to specify explicit device list (and restoreMachineState won't  be called only for these devices). Also supports values `none`, `false`, `off`.
+`-hbfxdbg` | Enables debugging output
+`-hbfxbeta` | Enables loading on unsupported osx
+`-hbfxoff` | Disables kext loading
+`hbfx-ahbm=abhm_value` | Controls auto-hibernation feature, where "abhm_value" represenst an *arithmetic sum* (bitmask) of the following values: </br></br> `1` = `EnableAutoHibernation`: If this flag is set, system will hibernate instead of regular sleep (flags below can be used to limit this behavior)</br>  `2` = `WhenLidIsClosed` : Auto hibernation can happen when lid is closed (if bit is not set - no matter which status lid has)</br> `4` = `WhenExternalPowerIsDisconnected`: Auto hibernation can happen when external power is disconnected (if bit is not set - no matter whether it is connected) </br> `8` = `WhenBatteryIsNotCharging`: Auto hibernation can happen when battery is not charging (if bit is not set - no matter whether it is charging) </br> `16` = `WhenBatteryIsAtWarnLevel`: Auto hibernation can happen when battery is at warning level (macOS and battery kext are responsible for this level)</br> `32` = `WhenBatteryAtCriticalLevel`: Auto hibernation can happen when battery is at critical level (macOS and battery kext are responsible for this level) </br> `64` = `DoNotOverrideWakeUpTime`:	Do not alter next wake up time, macOS is fully responsible for sleep maintenance dark wakes </br> `128` = `DisableStimulusDarkWakeActivityTickle`:	Disable power event kStimulusDarkWakeActivityTickle in kernel, so this event cannot trigger a switching from dark wake to full wake </br></br> **EXAMPLE**: `hbfx-ahbm=135`  would enable options associated with values `1`, `2`, `4` and `128`.
+
+[**Source**](https://github.com/acidanthera/HibernationFixup)
 
 ### RestrictEvents
 boot-arg | NVRAM Variable| Description 
----------|:--------------:|------------
-`-revoff`| –| Disables the kext
-`-revdbg`| – | Enables verbose logging (in DEBUG builds)
-`-revbeta`| – | Enables the kext on macOS < 10.8 or greater than 13
-`-revproc`|–| Enables verbose process logging (in DEBUG builds)
-`revpatch=value` |–| Enables patching as comma separated options. Default value is `auto`.
-`revpatch=auto` |YES| Enables `memtab,pci,cpuname`, without `memtab` and `pci` patches being applied on a real Mac.
-`revpatch=memtab` |YES|Enables memory tab in System Information on `MacBookAir` and `MacBookPro10,x`.
-`revpatch=pci`|YES|Prevents PCI configuration warnings in System Settings on `MacPro7,1`
-`revpatch=cpuname`|YES| Allows Custom CPU name in System Information
-`revpatch=diskread` |YES| Disables "Uninitialized disk" warning in Finder
-`revpatch=asset` |YES| Allows Content Caching when `sysctl kern.hv_vmm_present` returns `1` on macOS 11.3 or newer
-`revpatch=sbvmm` |YES| Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer
-`revpatch=none` |YES| Disables all patching
-`revcpu=value` |YES| Enables or disables CPU brand string patching. `1` = non-Intel default, `0` = Intel default
-`revcpuname=value` |YES| Custom CPU brand string (max 48 characters, 20 or less recommended, taken from CPUID otherwise)
-`revblock=value` |–| To block processes as comma separated options. Default value is `auto`.
-`revblock=pci`|YES| Prevents PCI and RAM configuration notifications on `MacPro7,1`
-`revblock=gmux` |YES| Blocks `displaypolicyd` on Big Sur+ (for genuine MacBookPro9,1/10,1)
-`revblock=media` |YES| Block `mediaanalysisd` on Ventura+ (for Metal 1 GPUs)
-`revblock=auto` |YES| Same as `pci`
-`revblock=none`|YES| Disables all blocking
+:---------:|:--------------:|------------
+**`-revoff`**| –| Disables the kext
+**`-revdbg`**| – | Enables verbose logging (in DEBUG builds)
+**`-revbeta`**| – | Enables the kext on macOS < 10.8 or greater than 13
+**`-revproc`**|–| Enables verbose process logging (in DEBUG builds)
+**`revpatch=value`** |–| Enables patching as comma separated options. Default value is `auto`. See available values below.
+**`revpatch=auto`** |YES| Enables `memtab,pci,cpuname`, without `memtab` and `pci` patches being applied on a real Mac.
+**`revpatch=memtab`** |YES|Enables memory tab in System Information on `MacBookAir` and `MacBookPro10,x`.
+**`revpatch=pci`**|YES|Prevents PCI configuration warnings in System Settings on `MacPro7,1`
+**`revpatch=cpuname`**|YES| Allows Custom CPU name in System Information
+**`revpatch=diskread`** |YES| Disables "Uninitialized disk" warning in Finder
+**`revpatch=asset`** |YES| Allows Content Caching when `sysctl kern.hv_vmm_present` returns `1` on macOS 11.3 or newer
+**`revpatch=sbvmm`** |YES| Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer
+**`revpatch=none`** |YES| Disables all patching
+**`revcpu=value`** |YES| Enables or disables CPU brand string patching. `1` = non-Intel default, `0` = Intel default
+**`revcpuname=value`** |YES| Custom CPU brand string (max 48 characters, 20 or less recommended, taken from CPUID otherwise)
+**`revblock=value`** |–| To block processes as comma separated options. Default value is `auto`.
+**`revblock=pci`**|YES| Prevents PCI and RAM configuration notifications on `MacPro7,1`
+**`revblock=gmux`** |YES| Blocks `displaypolicyd` on Big Sur+ (for genuine MacBookPro9,1/10,1)
+**`revblock=media`** |YES| Block `mediaanalysisd` on Ventura+ (for Metal 1 GPUs)
+**`revblock=auto`** |YES| Same as `pci`
+**`revblock=none`**|YES| Disables all blocking
 
-**NOTE**: NVRAM variables work the same as the boot arguments, but have lower priority.
-They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102` as a String: </br> 
+**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config in: `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`
+ 
 ![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
+
+[**Source**](https://github.com/acidanthera/RestrictEvents)
 
 **To be continued…**
 
