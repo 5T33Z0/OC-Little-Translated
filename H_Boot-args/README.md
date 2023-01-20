@@ -3,25 +3,25 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 
 **TABLE of CONTENTS**
 
-- [Boot arguments explained](#boot-arguments-explained)
-	- [Debugging](#debugging)
-	- [Network-specific boot arguments](#network-specific-boot-arguments)
-	- [Other useful boot arguments](#other-useful-boot-arguments)
-	- [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
-		- [Lilu.kext](#lilukext)
-		- [VirtualSMC.kext](#virtualsmckext)
-		- [Whatevergreen.kext](#whatevergreenkext)
-			- [Global](#global)
-			- [Board-id related](#board-id-related)
-			- [Switching GPUs](#switching-gpus)
-			- [Intel HD Graphics](#intel-hd-graphics)
-			- [AMD Radeon](#amd-radeon)
-			- [NVIDIA](#nvidia)
-			- [Backlight](#backlight)
-			- [2nd Boot stage](#2nd-boot-stage)
-		- [AppleALC](#applealc)
-		- [RestrictEvents](#restrictevents)
-	- [Credits](#credits)
+- [Debugging](#debugging)
+- [Network-specific boot arguments](#network-specific-boot-arguments)
+- [Other useful boot arguments](#other-useful-boot-arguments)
+- [Boot-args and device properties provided by Kexts](#boot-args-and-device-properties-provided-by-kexts)
+	- [Lilu.kext](#lilukext)
+	- [VirtualSMC.kext](#virtualsmckext)
+	- [Whatevergreen.kext](#whatevergreenkext)
+		- [Global](#global)
+		- [Board-id related](#board-id-related)
+		- [Switching GPUs](#switching-gpus)
+		- [Intel HD Graphics](#intel-hd-graphics)
+		- [AMD Radeon](#amd-radeon)
+			- [`unfairgva` Overrides](#unfairgva-overrides)
+		- [NVIDIA](#nvidia)
+		- [Backlight](#backlight)
+		- [2nd Boot stage](#2nd-boot-stage)
+	- [AppleALC](#applealc)
+	- [RestrictEvents](#restrictevents)
+- [Credits](#credits)
 
 ## Debugging
 |Boot-arg|Description|
@@ -45,7 +45,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 ## Other useful boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
-**`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
+**`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
 **`amfi_get_out_of_my_way=1`**|Combines wit disabled SIP, this disables Apple Mobile File Integrity. AMFI is a macOS kernel module enforcing code-signing validation and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every app that is run and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
 **`-force_uni_control`**|Force-enables the Universal Control service in macOS Monterey 12.3+.
 
@@ -55,23 +55,24 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 Lilu boot-args. Remember that Lilu acts as a patch engine providing functionality for other kexts in the hackintosh universe, so you got to be aware of that if you use any of these commands!
 
 | Boot-arg | Description |
-|----------|-------------|
-**`-liluoff`**| Disables Lilu.
-**`-lilubeta`**| Enables Lilu on unsupported macOS versions (macOS 13 and below are supported by default).
-**`-lilubetaall`**| Enables Lilu and *all* loaded plugins on unsupported macOS (use _very_ carefully).
-**`-liluforce`** | Enables Lilu regardless of the mode, OS, installer, or recovery.
-**`-liludbg`** | Enables debug printing (requires DEBUG version of Lilu).
-**`liludelay=1000`**| Adds a 1 second (1000 ms) delay after each print for troubleshooting.
+|:----------:|-------------|
+**`-liludbg`** | Enables debug printing (requires DEBUG version of Lilu)
+**`-liludbgall`** | Enables debug printing in Lilu and all loaded plugins (available in DEBUG binaries only)
+**`-liluoff`**| Disables Lilu
+**`-liluuseroff`** | Disables Lilu user patcher (for e.g. dyld_shared_cache manipulations).
+**`-liluslow`** | Enables legacy user patcher
+**`-lilulowmem`** | Disables kernel unpack (disables Lilu in recovery mode)
+**`-lilubeta`**| Enables Lilu on unsupported macOS versions (macOS 13 and below are supported by default)
+**`-lilubetaall`**| Enables Lilu and *all* loaded plugins on unsupported macOS (use _very_ carefully)
+**`-liluforce`** | Enables Lilu regardless of the mode, OS, installer, or recovery
+**`liludelay=1000`**| Adds a 1 second (1000 ms) delay after each print for troubleshooting
+**`liludelay=1000`** | Enables 1 second delay after each print for troubleshooting
 **`lilucpu=N`**| Lets Lilu and plugins assume Nth CPUInfo::CpuGeneration.
 **`liludump=N`** | Lets Lilu DEBUG version dump log to `/var/log/Lilu_VERSION_KERN_MAJOR.KERN_MINOR.txt` after N seconds
-**`-liluuseroff`** | Disables Lilu user patcher (for e.g. dyld_shared_cache manipulations).
-**`-liluslow`** | Enables legacy user patcher.
-**`-lilulowmem`** | Disables kernel unpack (disables Lilu in recovery mode).
-**`liludelay=1000`** | Enables 1 second delay after each print for troubleshooting.
 
 ### VirtualSMC.kext
 | Boot-arg | Description |
-|----------|-------------|
+|:--------:|-------------|
 **`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC).
 **`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default).
 **`-vsmcoff`** | Disables all Lilu enhancements.
@@ -89,7 +90,7 @@ The following boot-args are provided by and require Whatevergreen.kext to work! 
 #### Global
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:--------:|:--------------:|------------
 **`-cdfon`** | `enable-hdmi20`| Enables HDMI 2.0 patches on iGPU and dGPU (not implemented in macOS 11+)
 **`-wegbeta`**| N/A| Enables WhateverGreen on unsupported versions of macOS (macOS 13 and below are enabled by default) 
 **`-wegdbg`** | N/A | Enables debug printing (requires DEBUG version of WEG)
@@ -106,7 +107,7 @@ boot-arg | DeviceProperty | Description
 #### Switching GPUs
 
 boot-arg | DeviceProperty | Description 
----------|----------------|------------
+:-------:|----------------|------------
 **`-wegnoegpu`** | `disable-gpu` | Disables all external GPUs but the integrated graphics on Intel CPUS. Use if GPU is incompatible with macOS. Doesn't work all the time. Using an SSDT to disable it in macOS is the recommended procedure.
 **`-wegnoigpu`** | `disable-gpu` | Disables internal GPU
 **`-wegswitchgpu`** | `switch-to-external-gpu`| Disables internal GPU when external GPU is detected.
@@ -114,7 +115,7 @@ boot-arg | DeviceProperty | Description
 #### Intel HD Graphics
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:--------:|:--------------:|------------
 **`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
 **`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
 **`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
@@ -148,14 +149,28 @@ boot-arg | DeviceProperty | Description
 #### AMD Radeon
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:-------:|:--------------:|------------
 **`-rad24`** | N/A | Forces 24-bit display mode
 **`-radcodec`** | N/A | Forces the spoofed PID to be used in AMDRadeonVADriver 
 **`-raddvi`** | N/A | Enables DVI transmitter correction (required for 290X, 370, etc.)
 **`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
 **`radpg=15`** | N/A | Disables several power-gating modes. Required for Cape Verde GPUs: Radeon HD 7730/7750/7770, R7 250/250X  (see [Radeon FAQ](https://github.com/dreamwhite/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
-**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows for Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Not supported in macOS 11+ More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
-**'unfairgva=x'** (x = number from 1 to 7 )| N/A| Replaces `shikigva` in macOS 11+ to address issues with [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md). It's a bitmask with 3 bits (1, 2 and 4) which can be combined to enable/select different features as [explained here](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/)
+**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Obsolete in macOS 11+. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
+**'unfairgva=x'** (x = number from 1 to 7 )| N/A| Replaces `shikigva` in macOS 11+ to address issues with [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md). It's a bitmask with 3 bits (1, 2 and 4) which can be combined to enable/select different features as [**explained here**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/)
+
+##### `unfairgva` Overrides
+
+The `unfairgva` boot-arg supports verrides to configure the video decoder preferences of AMD GPUs for different types of content using [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (e.g. Apple TV and iTunes movie streaming). These prefs may not always be compatible with the rest of the operating system and may cause problems with other ways of hardware media decoding and encoding. Therefore, using override is not recommended for daily use and should only be enabled on demand.
+
+Command | Description  
+--------|------------
+`defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes` |Forces AMD DRM decoder for streaming services (like Apple TV and iTunes movie streaming)
+`defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean yes` | Forces AMD AVC accelerated decoder
+`defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean yes` |Forces AMD AVC accelerated encoder
+`defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean yes`| Forces AMD HEVC accelerated decoder
+`defaults write com.apple.AppleGVA disableGVAEncryption -string yes`| Forces AMD HEVC accelerated decoder
+`defaults write com.apple.coremedia hardwareVideoDecoder -string force` | Forces hardware accelerated video decoder (any resolution)
+`defaults write com.apple.coremedia hardwareVideoDecoder -string disable`| Disables hardware accelerated video decoder (in QuickTime / Apple TV)
 
 #### NVIDIA
 
