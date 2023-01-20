@@ -156,7 +156,7 @@ boot-arg | DeviceProperty | Description
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
-**`igfxrpsc=1`** | `rps-control`  | Enables RPS control patch which improves iGPU performance on KBL+ using older chipsets without ME v11 support (Z370 and others) 
+**`igfxrpsc=1`** | `rps-control`  | Enables RPS control patch which improves iGPU performance on KBL+ using older chipsets without ME v12 support (Z370 and others) 
 **`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
 
 #### AMD Radeon
