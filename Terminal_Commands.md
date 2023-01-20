@@ -3,8 +3,9 @@
 ## macOS related
 
 - **List of [defaults commands](https://macos-defaults.com/)** for modifying macOS default settings/behavior.
-- **List of [PMSET Commands](https://www.dssw.co.uk/reference/pmset.html)** for modifying power management paramters.
-	- **Example**: `sudo pmset proximitywake 0` &rarr; Disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar).
+- **List of [PMSET Commands](https://www.dssw.co.uk/reference/pmset.html)** for modifying power management paramters. **Examples**:
+	- `sudo pmset proximitywake 0` &rarr; Disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar)
+	- `pmset restoredefaults` &rarr; Restores default values. Or click the "Restore Defaults" in System Preferences > Energy Saver.
 
 **Show macOS Version and Build Number**:</br>
 
