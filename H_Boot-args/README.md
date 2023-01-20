@@ -21,17 +21,20 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 		- [2nd Boot stage](#2nd-boot-stage)
 	- [AirportBrcmFixup](#airportbrcmfixup)
 	- [AppleALC](#applealc)
+	- [BrcmPatchRAM](#brcmpatchram)
 	- [BrightnessKeys](#brightnesskeys)
 	- [CPUFriend](#cpufriend)
 	- [CpuTscSync](#cputscsync)
 	- [DebugEnhancer](#debugenhancer)
 	- [HibernationFixup](#hibernationfixup)
+	- [NVMeFix](#nvmefix)
 	- [RestrictEvents](#restrictevents)
+	- [RTCMemoryFixup](#rtcmemoryfixup)
 - [Credits](#credits)
 
 ## Debugging
-|Boot-arg|Description|
-|:------:|-----------|
+|Boot-arg | Description|
+|:-------:|-----------|
 **`-v`**|_V_erbose Mode. Replaces the progress bar with a terminal output with a bootlog which helps resolving issues. Combine with `debug=0x100` and `keepsyms=1`
 **`-f`**|_F_orce-rebuild kext cache on boot.
 **`-s`**|_S_ingle User Mode. This mode will start the terminal mode, which can be used to repair your system. Should be disabled with a Quirk since you can use it to bypass the Admin account password.
@@ -77,6 +80,8 @@ Lilu boot-args. Remember that Lilu operates as a patch engine providing function
 **`liludump=N`** | Lets Lilu DEBUG version dump log to `/var/log/Lilu_VERSION_KERN_MAJOR.KERN_MINOR.txt` after N seconds
 
 ### VirtualSMC
+Advanced Apple SMC emulator kext. Requires Lilu for full functionality. Included additional [**Sensor plugins**](https://github.com/acidanthera/VirtualSMC/tree/master/Sensors)
+
 | Boot-arg | Description |
 |:--------:|-------------|
 **`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC)
@@ -157,7 +162,7 @@ boot-arg | DeviceProperty | Description
 #### AMD Radeon
 
 boot-arg | DeviceProperty | Description 
-:-------:|:--------------:|------------
+:-------|:--------------:|------------
 **`-rad24`** | N/A | Forces 24-bit display mode
 **`-radcodec`** | N/A | Forces the spoofed PID to be used in AMDRadeonVADriver 
 **`-raddvi`** | N/A | Enables DVI transmitter correction (required for 290X, 370, etc.)
@@ -244,6 +249,22 @@ boot-arg | DeviceProperty | Description
 
 [**Source**](https://github.com/acidanthera/AppleALC/wiki/Installation-and-usage)
 
+### BrcmPatchRAM
+BrcmPatchRAM kext is a macOS driver which applies PatchRAM updates for Broadcom RAMUSB based devices. It will apply the firmware update to your Broadcom Bluetooth device on every startup/wakeup. Since this kext includes different kexts which need to be [combined in different ways](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) – depending on the hardware and macOS version used – please follow the instrunctions on the repo to configure it correctly.
+
+boot-arg | Description  
+---------|------------
+**`-btlfxallowanyaddr`** | Disables address check in macOS 12.4 and newer. Apple introduced a new address check in `bluetoothd`, which will trigger an error if *two* Bluetooth devices have the same address.
+**`bpr_initialdelay=X`** | Changes the `mInitialDelay`, where `X` describes delay in ms before any communication with the device happems. Default value is `100`.</br> </br> **Example**: `bpr_initialdelay=300`
+**`bpr_handshake=X`** | Overrides `mSupportsHandshake`. 2 options are avaialable: </br> `0` means wait `bpr_preresetdelay` ms after uploading firmware, and then reset the device. </br>`1` means wait for a specific response from the device and then reset the device. Default value depends on the device identifier. 
+**`bpr_preresetdelay=X`** | Changes `mPreResetDelay`. X describes the delay in ms assumed to be needed for the device to accept the firmware. The value is unused when `bpr_handshake` is `1` (passed manually or applied automatically based on the device identifier). Default value is `250`. </br></br> **Example**: `bpr_preresetdelay=500`
+**`bpr_postresetdelay=X`** | Changes `mPostResetDelay`, where `X` describes the delay in ms assumed to be needed for the firmware to initialise after reseting the device upon firmware upload. Default value is `100`. </br></br> **Example**: `bpr_postresetdelay=400`
+**`bpr_probedelay=X`** | Changes `mProbeDelay` (removed in BrcmPatchRAM3), where X describes the delay in ms before probing the device. Default value is `0`.
+
+**TIP**: Some users with the typical "wake from sleep" problems are reporting success with `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or slightly longer delays: `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400`
+
+[**Source**](https://github.com/acidanthera/BrcmPatchRAM)
+
 ### BrightnessKeys
 Automatic handling of brightness key shortcuts based on ACPI Specification, Appendix B: Video Extensions. Requires Lilu 1.2.0 or newer.
 
@@ -287,22 +308,42 @@ boot-arg | Description
 [**Source**](https://github.com/acidanthera/DebugEnhancer)
 
 ### HibernationFixup
-Kext to address issues with Sleep/Hibernation. It's pretty complex in terms of configuration, so you're best to read the info provided in the repo!
+Lilu plugin kext intended to fix hibernation compatibility issues. It's pretty complex in terms of configuration, so you're best to read the info provided in the repo!
 
 boot-arg | Description 
-:-------:|:------------
+:-------:|:----------|
 `-hbfx-dump-nvram` | Saves NVRAM to a file nvram.plist before hibernation and after kernel panic (with panic info)
-`-hbfx-disable-patch-pci` | Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
+`-hbfx-disable-patch-pci`| Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
 `hbfx-patch-pci=XHC,IMEI,IGPU` | Allows to specify explicit device list (and restoreMachineState won't  be called only for these devices). Also supports values `none`, `false`, `off`.
 `-hbfxdbg` | Enables debugging output
 `-hbfxbeta` | Enables loading on unsupported osx
 `-hbfxoff` | Disables kext loading
 `hbfx-ahbm=abhm_value` | Controls auto-hibernation feature, where "abhm_value" represenst an *arithmetic sum* (bitmask) of the following values: </br></br> `1` = `EnableAutoHibernation`: If this flag is set, system will hibernate instead of regular sleep (flags below can be used to limit this behavior)</br>  `2` = `WhenLidIsClosed` : Auto hibernation can happen when lid is closed (if bit is not set - no matter which status lid has)</br> `4` = `WhenExternalPowerIsDisconnected`: Auto hibernation can happen when external power is disconnected (if bit is not set - no matter whether it is connected) </br> `8` = `WhenBatteryIsNotCharging`: Auto hibernation can happen when battery is not charging (if bit is not set - no matter whether it is charging) </br> `16` = `WhenBatteryIsAtWarnLevel`: Auto hibernation can happen when battery is at warning level (macOS and battery kext are responsible for this level)</br> `32` = `WhenBatteryAtCriticalLevel`: Auto hibernation can happen when battery is at critical level (macOS and battery kext are responsible for this level) </br> `64` = `DoNotOverrideWakeUpTime`:	Do not alter next wake up time, macOS is fully responsible for sleep maintenance dark wakes </br> `128` = `DisableStimulusDarkWakeActivityTickle`:	Disable power event kStimulusDarkWakeActivityTickle in kernel, so this event cannot trigger a switching from dark wake to full wake </br></br> **EXAMPLE**: `hbfx-ahbm=135`  would enable options associated with values `1`, `2`, `4` and `128`.
 
+The following options can be stored in NVRAM (**GUID**: `E09B9297-7928-4440-9AAB-D1F8536FBF0A`) and can be used instead of respective boot-args: 
+
+NVRAM Key |Type  
+:--------|:---:
+**`hbfx-dump-nvram`** | Boolean
+**`hbfx-disable-patch-pci`** | Boolean
+**`hbfx-patch-pci=XHC,IMEI,IGPU,none,false,off`**| String
+**`hbfx-ahbm`** | Number
+
 [**Source**](https://github.com/acidanthera/HibernationFixup)
 
+### NVMeFix
+A set of patches for the Apple NVMe storage driver, IONVMeFamily. Its goal is to improve compatibility with non-Apple SSDs.
+
+boot-arg | Description 
+:-------:|------------
+**`-nvmefdbg`** | Enables detailed logging for `DEBUG` build
+**`-nvmefoff`** | Disables the kext
+**`-nvmefaspm`** | forces ASPM L1 on all the devices. This argument is recommended exclusively for testing purposes!  For daily usage, inject `pci-aspm-default` device property with `<02 00 00 00>` value into SSD and bridge devices they are connected to instead. &rarr; &rarr; See [**Configuration**](https://github.com/acidanthera/NVMeFix/blob/master/README.md#configuration) for more details.
+
+[**Source**](https://github.com/acidanthera/NVMeFix)
+
 ### RestrictEvents
-boot-arg | NVRAM Variable| Description 
+boot-arg | NVRAM Key| Description 
 :---------:|:--------------:|------------
 **`-revoff`**| –| Disables the kext
 **`-revdbg`**| – | Enables verbose logging (in DEBUG builds)
@@ -326,11 +367,22 @@ boot-arg | NVRAM Variable| Description
 **`revblock=auto`** |YES| Same as `pci`
 **`revblock=none`**|YES| Disables all blocking
 
-**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config in: `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`
+**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config in: `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`
  
 ![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
 
 [**Source**](https://github.com/acidanthera/RestrictEvents)
+
+### RTCMemoryFixup
+Kext providing a way to emulate some offsets in your CMOS (RTC) memory. 
+More details about CMOS-related isses fan be found [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes).
+
+boot-arg | Description 
+:-------:|------------
+`rtcfx_exclude=` | The `=` is followed by values for offsets ranging from `00` to `FF` &rarr; Check repo description for details
+`-rtcfxdbg` | Turns on debugging output
+
+[**Source**](https://github.com/acidanthera/RTCMemoryFixup)
 
 **To be continued…**
 
