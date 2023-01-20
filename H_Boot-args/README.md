@@ -232,4 +232,4 @@ They have be added to the config under `NVRAM/Add/D1FDA02-38C7-4A6A-9CC6-4BCCA8B
 
 ## Credits
 - Acidanthera for Lilu, VirtalSMC, Whatevergreen, AppleALC and other Kexts
-- Miliuco for additional details about `igfxfw` and `rps-control=01` properties
+- Miliuco and Andrey1970AppleLife for additional details about `igfxfw` and `rps-control` properties
