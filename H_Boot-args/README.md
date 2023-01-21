@@ -64,10 +64,10 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 Lilu boot-args. Remember that Lilu operates as a patch engine providing functionality for a lot of other kexts in the hackintosh universe. So be aware of that if you use any of these commands, especially `-liluoff`!
 
 | Boot-arg | Description |
-|:----------:|-------------|
+|----------|-------------|
 **`-liludbg`** | Enables debug printing (requires DEBUG version of Lilu)
 **`-liludbgall`** | Enables debug printing in Lilu and all loaded plugins (available in DEBUG binaries only)
-**`-liluoff`**| Disables Lilu
+**`-liluoff`**| Disables Lilu (and all plugin kexts that make use of it as well)
 **`-liluuseroff`** | Disables Lilu user patcher (for e.g. dyld_shared_cache manipulations).
 **`-liluslow`** | Enables legacy user patcher
 **`-lilulowmem`** | Disables kernel unpack (disables Lilu in recovery mode)
@@ -83,7 +83,7 @@ Lilu boot-args. Remember that Lilu operates as a patch engine providing function
 Advanced Apple SMC emulator kext. Requires Lilu for full functionality. Included additional [**Sensor plugins**](https://github.com/acidanthera/VirtualSMC/tree/master/Sensors)
 
 | Boot-arg | Description |
-|:--------:|-------------|
+|----------|-------------|
 **`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC)
 **`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default)
 **`-vsmcoff`** | Disables all Lilu enhancements.
@@ -103,7 +103,7 @@ The following boot-args are provided by and require Whatevergreen.kext to work! 
 #### Global
 
 boot-arg | DeviceProperty | Description 
-:--------:|:--------------:|------------
+:--------|:--------------:|------------
 **`-cdfon`** | `enable-hdmi20`| Enables HDMI 2.0 patches on iGPU and dGPU (not implemented in macOS 11+)
 **`-wegbeta`**| N/A| Enables WhateverGreen on unsupported versions of macOS (macOS 13 and below are enabled by default) 
 **`-wegdbg`** | N/A | Enables debug printing (requires DEBUG version of WEG)
@@ -120,7 +120,7 @@ boot-arg | DeviceProperty | Description
 #### Switching GPUs
 
 boot-arg | DeviceProperty | Description 
-:-------:|----------------|------------
+:-------|----------------|------------
 **`-wegnoegpu`** | `disable-gpu` | Disables all external GPUs but the integrated graphics on Intel CPUS. Use if GPU is incompatible with macOS. Doesn't work all the time. Using an SSDT to disable it in macOS is the recommended procedure.
 **`-wegnoigpu`** | `disable-gpu` | Disables internal GPU
 **`-wegswitchgpu`** | `switch-to-external-gpu`| Disables internal GPU when external GPU is detected.
@@ -128,7 +128,7 @@ boot-arg | DeviceProperty | Description
 #### Intel HD Graphics
 
 boot-arg | DeviceProperty | Description 
-:--------:|:--------------:|------------
+:--------|:--------------:|------------
 **`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
 **`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
 **`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
@@ -175,20 +175,48 @@ boot-arg | DeviceProperty | Description
 
 The `unfairgva` boot-arg supports verrides to configure the video decoder preferences of AMD GPUs for different types of content using [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (e.g. Apple TV and iTunes movie streaming). These prefs may not always be compatible with the rest of the operating system and may cause problems with other ways of hardware media decoding and encoding. Therefore, using override is not recommended for daily use and should only be enabled on demand.
 
-Command | Description  
---------|------------
-`defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes` |Forces AMD DRM decoder for streaming services (like Apple TV and iTunes movie streaming)
-`defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean yes` | Forces AMD AVC accelerated decoder
-`defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean yes` |Forces AMD AVC accelerated encoder
-`defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean yes`| Forces AMD HEVC accelerated decoder
-`defaults write com.apple.AppleGVA disableGVAEncryption -string yes`| Forces AMD HEVC accelerated decoder
-`defaults write com.apple.coremedia hardwareVideoDecoder -string force` | Forces hardware accelerated video decoder (any resolution)
-`defaults write com.apple.coremedia hardwareVideoDecoder -string disable`| Disables hardware accelerated video decoder (in QuickTime / Apple TV)
+
+- **Force AMD DRM decoder for streaming services (like Apple TV and iTunes movie streaming)**:
+ 
+	```shell
+defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+``` 
+- **Force AMD AVC accelerated decoder**:
+
+	```shell
+defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean yes
+```
+- **Force AMD AVC accelerated encoder**:
+
+	```shell
+defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean yes
+```
+- **Force AMD HEVC accelerated decoder**:
+	
+	```shell
+defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean yes
+```
+- **Force AMD HEVC accelerated encodrer**:
+
+	```shell
+defaults write com.apple.AppleGVA disableGVAEncryption -string yes
+```
+- **Force hardware accelerated video decoder** (any resolution):
+
+	```shell
+defaults write com.apple.coremedia hardwareVideoDecoder -string force
+``` 
+
+- **Disable hardware accelerated video decoder** (in QuickTime / Apple TV):
+
+	```shell 
+defaults write com.apple.coremedia hardwareVideoDecoder -string disable
+```
 
 #### NVIDIA
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:---------|:--------------:|------------
 **~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| N/A |Deprecated. macOS Siera and newer require an NVRAM key instead. </br>**OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` in the System Parameters section.
 **`-ngfxdbg`** | N/A | Enables NVIDIA driver error logging 
 **`ngfxcompat=1`** | `force-compat` 	| Ignore compatibility check in NVDAStartupWeb
@@ -204,14 +232,14 @@ boot-arg | DeviceProperty | Description
 #### Backlight
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:---------|:--------------:|------------
 **`applbkl=3`** | `applbkl` | Enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md) 
 **`applbkl=0`** | `applbkl` | Disable AppleBacklight.kext patches for IGPU. <br>In case of custom AppleBacklight profile [read here](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
 
 #### 2nd Boot stage
 
 boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+:---------|:--------------:|------------
 **`gfxrst=1`** | N/A | Prefer drawing Apple logo at 2nd boot stage instead of framebuffer copying
 **`gfxrst=4`** | N/A | Disables framebuffer init interaction during 2nd boot stage
 
@@ -221,7 +249,7 @@ boot-arg | DeviceProperty | Description
 Open source kext providing patches required for non-native Airport Broadcom WiFi cards.
 
 boot-arg | NVRAM Variable| Description 
-:-------:|:--------------:|------------
+:-------|:--------------:|------------
 **`-brcmfxdbg`** |N/A| Enables debugging output
 **`-brcmfxbeta`** |N/A| Enables loading on unsupported macOS
 **`-brcmfxoff`** |N/A| Disables kext
@@ -240,7 +268,7 @@ boot-arg | NVRAM Variable| Description
 Boot-args for your favorite audio-enabler kext. Note that all Lilu boot arguments affect AppleALC as well.
 
 boot-arg | DeviceProperty | Description 
-:--------:|:--------------:|------------
+:--------|:--------------:|------------
 **`alcid=X`**| `layout-id` |To select a layout-id, where `X` stands for the number of the Layout ID, e.g. `alcid=1`. A list with all existing layout-ids sorted by vendor and codec model can be found [here](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 **`-alcoff`**| N/A |Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
 **`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
@@ -276,7 +304,7 @@ Automatic handling of brightness key shortcuts based on ACPI Specification, Appe
 Kext for optimizing CPU Power Management for Intel CPUs supporting XCPM (Haswell and newer).
 
 boot-arg | Description 
-:-------:|:------------
+:-------|:------------
 **`-cpufdbg`** | Enables debug logging (only available in DEBUG binaries)
 **`-cpufoff`** | Disables CPUFriend entirely
 **`-cpufbeta`** | Enables CPUFriend on unsupported macOS versions
@@ -287,19 +315,32 @@ boot-arg | Description
 Lilu plugin combining functionality of VoodooTSCSync and disabling xcpm_urgency if TSC is not in sync. It should solve some kernel panics after wake.
 
 boot-arg | Description 
-:-------:|:------------
-**`-cputsdbg`** | Enable debugging output
+:--------|:------------
+**`-cputsdbg`** | Enable debugging output[](https://github.com/acidanthera/CryptexFixup)
 **`-cputsbeta`** | Enables loading on unsupported macOS 
 **`-cputsoff`** | Disables kext loading
 **`-cputsclock`** | Forces using of method clock_get_calendar_microtime to sync TSC (the same method is used when boot-arg `TSC_sync_margin` is specified)
 
 [**Source**](https://github.com/acidanthera/CpuTscSync)
 
+### CryptexFixup
+Lilu Kernel extension for installing Rosetta Cryptex in macOS Ventura. Applicable for both OS installation and updates. It's required for installing and booting macOS 13 on legacy Intel (Ivy Bridge and older) and AMD (Bulldozer/Piledriver/Steamroller and older) CPUs.
+
+boot-arg | Description 
+:-------|:------------
+`-cryptoff` | Disables the kext
+`-cryptdbg` | Enables verbose logging (in DEBUG builds only)
+`-cryptbeta`| Enable on macOS newer than 13
+`-crypt_allow_hash_validation` | Disables `APFS.kext` patching
+`-crypt_force_avx` | Force installs Rosetta Cryptex on AVX2.0 systems
+
+[**Source**](https://github.com/acidanthera/CryptexFixup)
+
 ### DebugEnhancer
 Lilu plugin intended to enable debug output in the macOS kernel.
 
 boot-arg | Description 
-:-------:|:------------
+:-------|:------------
 **`-dbgenhdbg`** | Enables debugging output
 **`-dbgenhbeta`** | Enables loading on unsupported macOS
 **`-dbgenhoff`** | Disables kext loading
@@ -311,14 +352,14 @@ boot-arg | Description
 Lilu plugin kext intended to fix hibernation compatibility issues. It's pretty complex in terms of configuration, so you're best to read the info provided in the repo!
 
 boot-arg | Description 
-:-------:|:----------|
-`-hbfx-dump-nvram` | Saves NVRAM to a file nvram.plist before hibernation and after kernel panic (with panic info)
-`-hbfx-disable-patch-pci`| Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
-`hbfx-patch-pci=XHC,IMEI,IGPU` | Allows to specify explicit device list (and restoreMachineState won't  be called only for these devices). Also supports values `none`, `false`, `off`.
-`-hbfxdbg` | Enables debugging output
-`-hbfxbeta` | Enables loading on unsupported osx
-`-hbfxoff` | Disables kext loading
-`hbfx-ahbm=abhm_value` | Controls auto-hibernation feature, where "abhm_value" represenst an *arithmetic sum* (bitmask) of the following values: </br></br> `1` = `EnableAutoHibernation`: If this flag is set, system will hibernate instead of regular sleep (flags below can be used to limit this behavior)</br>  `2` = `WhenLidIsClosed` : Auto hibernation can happen when lid is closed (if bit is not set - no matter which status lid has)</br> `4` = `WhenExternalPowerIsDisconnected`: Auto hibernation can happen when external power is disconnected (if bit is not set - no matter whether it is connected) </br> `8` = `WhenBatteryIsNotCharging`: Auto hibernation can happen when battery is not charging (if bit is not set - no matter whether it is charging) </br> `16` = `WhenBatteryIsAtWarnLevel`: Auto hibernation can happen when battery is at warning level (macOS and battery kext are responsible for this level)</br> `32` = `WhenBatteryAtCriticalLevel`: Auto hibernation can happen when battery is at critical level (macOS and battery kext are responsible for this level) </br> `64` = `DoNotOverrideWakeUpTime`:	Do not alter next wake up time, macOS is fully responsible for sleep maintenance dark wakes </br> `128` = `DisableStimulusDarkWakeActivityTickle`:	Disable power event kStimulusDarkWakeActivityTickle in kernel, so this event cannot trigger a switching from dark wake to full wake </br></br> **EXAMPLE**: `hbfx-ahbm=135`  would enable options associated with values `1`, `2`, `4` and `128`.
+:-------|:----------|
+**`-hbfx-dump-nvram`** | Saves NVRAM to a file nvram.plist before hibernation and after kernel panic (with panic info)
+**`-hbfx-disable-patch-pci`**| Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
+**`hbfx-patch-pci=XHC,IMEI,IGPU`** | Allows to specify explicit device list (and restoreMachineState won't  be called only for these devices). Also supports values `none`, `false`, `off`.
+**`-hbfxdbg`**| Enables debugging output
+**`-hbfxbeta`** | Enables loading on unsupported osx
+**`-hbfxoff`** | Disables kext loading
+**`hbfx-ahbm=abhm_value`** | Controls auto-hibernation feature, where "abhm_value" represenst an *arithmetic sum* (bitmask) of the following values: </br></br> `1` = `EnableAutoHibernation`: If this flag is set, system will hibernate instead of regular sleep (flags below can be used to limit this behavior)</br>  `2` = `WhenLidIsClosed` : Auto hibernation can happen when lid is closed (if bit is not set - no matter which status lid has)</br> `4` = `WhenExternalPowerIsDisconnected`: Auto hibernation can happen when external power is disconnected (if bit is not set - no matter whether it is connected) </br> `8` = `WhenBatteryIsNotCharging`: Auto hibernation can happen when battery is not charging (if bit is not set - no matter whether it is charging) </br> `16` = `WhenBatteryIsAtWarnLevel`: Auto hibernation can happen when battery is at warning level (macOS and battery kext are responsible for this level)</br> `32` = `WhenBatteryAtCriticalLevel`: Auto hibernation can happen when battery is at critical level (macOS and battery kext are responsible for this level) </br> `64` = `DoNotOverrideWakeUpTime`:	Do not alter next wake up time, macOS is fully responsible for sleep maintenance dark wakes </br> `128` = `DisableStimulusDarkWakeActivityTickle`: Disable power event kStimulusDarkWakeActivityTickle in kernel, so this event cannot trigger a switching from dark wake to full wake </br></br> **EXAMPLE**: `hbfx-ahbm=135`  would enable options associated with values `1`, `2`, `4` and `128`.
 
 The following options can be stored in NVRAM (**GUID**: `E09B9297-7928-4440-9AAB-D1F8536FBF0A`) and can be used instead of respective boot-args: 
 
@@ -335,7 +376,7 @@ NVRAM Key |Type
 A set of patches for the Apple NVMe storage driver, IONVMeFamily. Its goal is to improve compatibility with non-Apple SSDs.
 
 boot-arg | Description 
-:-------:|------------
+---------|------------
 **`-nvmefdbg`** | Enables detailed logging for `DEBUG` build
 **`-nvmefoff`** | Disables the kext
 **`-nvmefaspm`** | forces ASPM L1 on all the devices. This argument is recommended exclusively for testing purposes!  For daily usage, inject `pci-aspm-default` device property with `<02 00 00 00>` value into SSD and bridge devices they are connected to instead. &rarr; &rarr; See [**Configuration**](https://github.com/acidanthera/NVMeFix/blob/master/README.md#configuration) for more details.
@@ -344,7 +385,7 @@ boot-arg | Description
 
 ### RestrictEvents
 boot-arg | NVRAM Key| Description 
-:---------:|:--------------:|------------
+:--------|:--------:|------------
 **`-revoff`**| –| Disables the kext
 **`-revdbg`**| – | Enables verbose logging (in DEBUG builds)
 **`-revbeta`**| – | Enables the kext on macOS < 10.8 or greater than 13
@@ -378,9 +419,9 @@ Kext providing a way to emulate some offsets in your CMOS (RTC) memory.
 More details about CMOS-related isses fan be found [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes).
 
 boot-arg | Description 
-:-------:|------------
-`rtcfx_exclude=` | The `=` is followed by values for offsets ranging from `00` to `FF` &rarr; Check repo description for details
-`-rtcfxdbg` | Turns on debugging output
+:-------|------------
+**`rtcfx_exclude=`** | The `=` is followed by values for offsets ranging from `00` to `FF` &rarr; Check repo description for details
+**`-rtcfxdbg`** | Turns on debugging output
 
 [**Source**](https://github.com/acidanthera/RTCMemoryFixup)
 
