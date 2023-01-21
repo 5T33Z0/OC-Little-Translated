@@ -136,7 +136,7 @@ boot-arg | Property | Description
 #### Intel HD Graphics
 
 boot-arg | Property | Description 
----------|:---------|-------------
+---------|:---------:|-------------
 **`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
 **`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
 **`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
