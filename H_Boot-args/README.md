@@ -256,7 +256,7 @@ boot-arg | Description
 Open source kext providing patches required for non-native Airport Broadcom WiFi cards.
 
 boot-arg | NVRAM Variable| Description 
-:-------|:--------------:|------------
+---------|:--------------:|------------
 **`-brcmfxdbg`** |N/A| Enables debugging output
 **`-brcmfxbeta`** |N/A| Enables loading on unsupported macOS
 **`-brcmfxoff`** |N/A| Disables kext
@@ -267,7 +267,7 @@ boot-arg | NVRAM Variable| Description
 **`brcmfx-wowl`** | |Enables/disables WoWLAN patch
 **`brcmfx-delay`** | |Delays start of native broadcom driver for specified amount of milliseconds. Can solve panics or missing Wi-Fi device in Monterey. Start with 15 seconds (`brcmfx-delay=15000`) and successively reduce the delay until you notice instability in boot.
 **`brcmfx-alldrv`** | |Allows patching for all supported drivers, disregarding current system version (&rarr; See [Matching device-id and kext name in different macOS versions](https://github.com/acidanthera/AirportBrcmFixup#matching-device-id-and-kext-name-in-different-macos-versions))
-**`brcmfx-driver=0|1|2|3`** |same| Enables only one kext for loading: </br> `0` = AirPortBrcmNIC-MFG </br> `1` = AirPortBrcm4360 </br> `2` = AirPortBrcmNIC </br> `3` = AirPortBrcm4331
+**`brcmfx-driver=0/1/2/3`** |Same| Enables only one kext for loading: </br> `0` = AirPortBrcmNIC-MFG </br> `1` = AirPortBrcm4360 </br> `2` = AirPortBrcmNIC </br> `3` = AirPortBrcm4331
 
 [**Source**](https://github.com/acidanthera/AirportBrcmFixup)
 
@@ -296,7 +296,10 @@ boot-arg | Description
 **`bpr_postresetdelay=X`** | Changes `mPostResetDelay`, where `X` describes the delay in ms assumed to be needed for the firmware to initialise after reseting the device upon firmware upload. Default value is `100`. </br></br> **Example**: `bpr_postresetdelay=400`
 **`bpr_probedelay=X`** | Changes `mProbeDelay` (removed in BrcmPatchRAM3), where X describes the delay in ms before probing the device. Default value is `0`.
 
-**TIP**: Some users with the typical "wake from sleep" problems are reporting success with `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or slightly longer delays: `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400`
+:bulb: **TIP**: Some users with typical "wake from sleep" problems reported success with the following settings:
+
+- `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or
+- `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400` (slightly longer delays)
 
 [**Source**](https://github.com/acidanthera/BrcmPatchRAM)
 
