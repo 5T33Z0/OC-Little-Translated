@@ -185,41 +185,40 @@ The `unfairgva` boot-arg supports verrides to configure the video decoder prefer
 
 
 - **Force AMD DRM decoder for streaming services (like Apple TV and iTunes movie streaming)**:
- 
+	
 	```shell
-defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
-``` 
+	defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+	``` 
 - **Force AMD AVC accelerated decoder**:
-
+	
 	```shell
-defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean yes
-```
+	defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean yes
+	```
 - **Force AMD AVC accelerated encoder**:
-
+	
 	```shell
-defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean yes
-```
+	defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean yes
+	```
 - **Force AMD HEVC accelerated decoder**:
 	
 	```shell
-defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean yes
-```
+	defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean yes
+	```
 - **Force AMD HEVC accelerated encodrer**:
-
+	
 	```shell
-defaults write com.apple.AppleGVA disableGVAEncryption -string yes
-```
+	defaults write com.apple.AppleGVA disableGVAEncryption -string yes
+	```
 - **Force hardware accelerated video decoder** (any resolution):
 
 	```shell
-defaults write com.apple.coremedia hardwareVideoDecoder -string force
-``` 
-
+	defaults write com.apple.coremedia hardwareVideoDecoder -string force
+	``` 
 - **Disable hardware accelerated video decoder** (in QuickTime / Apple TV):
-
+	
 	```shell 
-defaults write com.apple.coremedia hardwareVideoDecoder -string disable
-```
+	defaults write com.apple.coremedia hardwareVideoDecoder -string disable
+	```
 
 #### NVIDIA
 
