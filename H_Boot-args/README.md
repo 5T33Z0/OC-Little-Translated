@@ -137,34 +137,34 @@ boot-arg | Property | Description
 
 boot-arg | Property | Description 
 ---------|:---------:|-------------
-**`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
-**`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
-**`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
-**`-igfxdbeo`** | `enable-dbuf-early-optimizer` | Fix Display Data Buffer (DBUF) issues on Ice Lake and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#fix-the-issue-that-the-builtin-display-remains-garbled-after-the-system-boots-on-icl-platforms)
+**`-igfxblr`** | `enable-backlight-registers-fix` | Fixes backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
+**`-igfxbls`** | `enable-backlight-smoother` | Smoothens brightness transitions on Ivy Bridge and newer. [Check the manual for details](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
+**`-igfxcdc`** | `enable-cdclk-frequency-fix` |Enables support for all valid Core Display Clock (CDCLK) supported by the Ice Lake CPU family. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
+**`-igfxdbeo`** | `enable-dbuf-early-optimizer` | Fixes Display Data Buffer (DBUF) issues on Ice Lake. [Check the manual for details](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#fix-the-issue-that-the-builtin-display-remains-garbled-after-the-system-boots-on-icl-platforms)
 **`-igfxdump`** | N/A | Dump IGPU framebuffer kext to `/var/log/AppleIntelFramebuffer_X_Y` (requires in DEBUG version of WEG)
-**`-igfxdvmt`** | `enable-dvmt-calc-fix`  | Fix the kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel Ice Lake platforms
+**`-igfxdvmt`** | `enable-dvmt-calc-fix`  | Fixes kernel panic caused by an incorrectly calculated amount of DVMT pre-allocated memory on Intel Ice Lake platforms
 **`-igfxfbdump`** | N/A | Dump native and patched framebuffer table to ioreg at `IOService:/IOResources/WhateverGreen`
-**`-igfxhdmidivs`** | `enable-hdmi-dividers-fix`  | Fix the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on SKL, KBL and CFL platforms
-**`-igfxi2cdbg`** | N/A | Enable verbose output in I2C-over-AUX transactions (only for debugging purposes)
-**`-igfxlspcon`** | `enable-lspcon-support`  | Enable the driver support for onboard LSPCON chips.<br> [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
-**`-igfxmlr`** | `enable-dpcd-max-link-rate-fix`  | Apply the maximum link rate fix
-**`-igfxmpc`** | `enable-max-pixel-clock-override` and `max-pixel-clock-frequency` | Increase max pixel clock (as an alternative to patching `CoreDisplay.framework`
+**`-igfxhdmidivs`** | `enable-hdmi-dividers-fix`  | Fixes the infinite loop on establishing Intel HDMI connections with a higher pixel clock rate on Skylake, Kaby Lake and Coffee Lake platforms
+**`-igfxi2cdbg`** | N/A | Enables verbose output in I2C-over-AUX transactions (only for debugging purposes)
+**`-igfxlspcon`** | `enable-lspcon-support`  | Enables driver support for onboard LSPCON chips.<br> [Check the manual for details](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#lspcon-driver-support-to-enable-displayport-to-hdmi-20-output-on-igpu)
+**`-igfxmlr`** | `enable-dpcd-max-link-rate-fix`  | Applies the maximum link rate fix
+**`-igfxmpc`** | `enable-max-pixel-clock-override` and `max-pixel-clock-frequency` | Increases max pixel clock (as an alternative to patching `CoreDisplay.framework`
 **`-igfxnohdmi`** | `disable-hdmi-patches` | Disables DP to HDMI conversion patches for digital audio
-**`-igfxsklaskbl`** | N/A | Enforce Kaby Lake (KBL) graphics kext being loaded and used on Skylake models (KBL `device-id` and `ig-platform-id` are required. Not required on macOS 13 and above)
+**`-igfxsklaskbl`** | N/A | Enforces Kaby Lake graphics kext to be used on Skylake platforms (KBL `device-id` and `ig-platform-id` are required. Not required on macOS 13+)
 **`-igfxtypec`** | N/A | Force DP connectivity for Type-C platforms
 **`-igfxvesa`** | N/A | Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
-**`igfxagdc=0`** | `disable-agdc`  | Disables AGDC
-**`igfxfcms=1`** | `complete-modeset`  | Force complete modeset on Skylake or Apple firmwares
-**`igfxfcmsfbs=`** | `complete-modeset-framebuffers`  | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
-**`igfxframe=frame`** | `AAPL,ig-platform-id` or `AAPL,snb-platform-id`  | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
+**`igfxagdc=0`** | `disable-agdc`  | Disables AGDC 
+**`igfxfcms=1`** | `complete-modeset` | Forces complete modeset on Skylake or Apple firmwares
+**`igfxfcmsfbs=`** | `complete-modeset-framebuffers` | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
+**`igfxframe=frame`** | `AAPL,ig-platform-id` (Ivy Bridge+) or `AAPL,snb-platform-id` (Sandy Bridge only) | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
 **`igfxfw=2`** | `igfxfw` | Forces loading of Apple's Graphics Unit Control (GUC) firmware. Improves Intel Quick Sync Video performance. Requires chipset supporting Intel ME v12 or newer (Z390, B360, H370, H310, Q370, C246, Z490, etc.). It's [buggy](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Should be tested on a case by case basis. `igfxfw` takes precedence over `igfxrpsc=1` when both are set.
+**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch which improves iGPU performance on Kaby Lake+ using chipsets without ME v12 support (Z370 and others) 
 **`wegtree=1`** | `rebuild-device-tree` | Forces WEG to rename the device tree of the iGPU after Apple GUC Firmware is loaded. Useful if the iGPU doesn't work after applying `igfxfw=2` (on a compatible CPU and chipset, of course). 
-**`igfxgl=1`** | `disable-metal` 	| Disable Metal support on Intel
+**`igfxgl=1`** | `disable-metal` | Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
 **`igfxonln=1`** | `force-online` | Forces all displays online. Resolves screen wake issues after quitting sleep in macOS 10.15.4 and newer when using Intel UHD 630.
 **`igfxonlnfbs=MASK`** | `force-online-framebuffers` | Specify indices of connectors for which online status is enforced. Format is similar to `igfxfcmsfbs`
 **`igfxpavp=1`** | `igfxpavp`  | Force enable PAVP output 
-**`igfxrpsc=1`** | `rps-control`  | Enables RPS control patch which improves iGPU performance on KBL+ using older chipsets without ME v12 support (Z370 and others) 
 **`igfxsnb=0`** | N/A | Disable IntelAccelerator name fix for Sandy Bridge CPUs 
 
 #### AMD Radeon
@@ -214,7 +214,7 @@ The `unfairgva` boot-arg supports verrides to configure the video decoder prefer
 	```shell
 	defaults write com.apple.coremedia hardwareVideoDecoder -string force
 	``` 
-- **Disable hardware accelerated video decoder** (in QuickTime / Apple TV):
+- **Disable hardware accelerated video decoder** (in QuickTime/Apple TV):
 	
 	```shell 
 	defaults write com.apple.coremedia hardwareVideoDecoder -string disable
