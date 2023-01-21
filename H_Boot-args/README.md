@@ -49,7 +49,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 ## Network-specific boot arguments
 |Boot-arg|Description|
 |:------:|-----------|
-**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and use `AppleIntelI210Ethernet.kext` instead. This is optional since most boards with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` located under /S/L/E/!
+**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and uses `AppleIntelI210Ethernet.kext` instead. This is optional since most 400-series mainboards (and newer) with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` (located under /S/L/E/)!
 
 ## Other useful boot arguments
 |Boot-arg|Description|
