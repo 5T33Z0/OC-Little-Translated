@@ -25,7 +25,9 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 	- [BrightnessKeys](#brightnesskeys)
 	- [CPUFriend](#cpufriend)
 	- [CpuTscSync](#cputscsync)
+	- [CryptexFixup](#cryptexfixup)
 	- [DebugEnhancer](#debugenhancer)
+	- [ECEnabler](#ecenabler)
 	- [HibernationFixup](#hibernationfixup)
 	- [NVMeFix](#nvmefix)
 	- [RestrictEvents](#restrictevents)
@@ -35,25 +37,31 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 ## Debugging
 |Boot-arg | Description|
 |:-------:|-----------|
-**`-v`**|_V_erbose Mode. Replaces the progress bar with a terminal output with a bootlog which helps resolving issues. Combine with `debug=0x100` and `keepsyms=1`
+**`-v`**|_V_erbose Mode. Replaces the progress bar with a text output of the boot process which helps identifying issues. Combine with `debug=0x100` and `keepsyms=1`
 **`-f`**|_F_orce-rebuild kext cache on boot.
 **`-s`**|_S_ingle User Mode. This mode will start the terminal mode, which can be used to repair your system. Should be disabled with a Quirk since you can use it to bypass the Admin account password.
 **`-x`**|Safe Mode. Boots macOS with a minimal set of system extensions and features. It can also check your startup disk to find and fix errors like running First Aid in Disk Utility. Can be triggered from OC's Boot Picker by holding a key combination if `PollAppleHotkeys` is enabled.
-**`debug=0x100`**|Disables macOS'es watchdog. Prevents the machine from restarting on a kernel panic. That way you can hopefully glean some useful info and follow the breadcrumbs to get past the issues.
-**`keepsyms=1`**|Companion setting to `debug=0x100` that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+**`debug=0x100`**|Disables WatchDog. Prevents the machine from restarting after a kernel panic so you can check the errors on screen (if verbose mode is enabled).
+**`keepsyms=1`**|Companion setting to `debug=0x100` that tells the OS to also print the symbols on a kernel panic. This can give some more helpful insight as to what's causing the panic.
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
-**`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility checks. Allows installing and booting macOS with unsupported SMBIOS/board-ids. Downside: you can't install system updates if this boot-arg is active. But this restriction can be worked around by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` ([requires macOS 11.3 or newer](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates))
+**`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to kIOPCIConfiguratorPFM64. Alternatively, use `npci=0x3000` which also disables debugging of gIOPCITunnelledKey. Required when stuck at **`PCI Start Configuration`** as there are IRQ conflicts related to PCI Lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
+**`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**: </br> • For installing macOS, you still need a supported SMBIOS temporarily.</br> • You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
+**`-liludbgall`** | For debugging Lilu kext and plugins (requires DEBUG build of Lilu and asociated plugins)
+
+:bulb: **TIPS**
+
+- Recommended boot-arg for installing macOS the first time: `-v`, `keepsyms=1` and `debug=0x100`
+- A more in-depth debugging guide can be found [**here**](https://caizhiyuan.gitee.io/opencore-install-guide/troubleshooting/kernel-debugging.html#efi-setup) 
 
 ## Network-specific boot arguments
 |Boot-arg|Description|
-|:------:|-----------|
+|------|-----------|
 **`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and uses `AppleIntelI210Ethernet.kext` instead. This is optional since most 400-series mainboards (and newer) with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` (located under /S/L/E/)!
 
 ## Other useful boot arguments
 |Boot-arg|Description|
-|:------:|-----------|
+|--------|-----------|
 **`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
 **`amfi_get_out_of_my_way=1`**| Disables Apple Mobile File Integrity. **Requirement**: disabled `SIP`. AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every running app and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
 **`-force_uni_control`**| Force-enables Universal Control service in macOS Monterey 12.3+
@@ -64,7 +72,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 Lilu boot-args. Remember that Lilu operates as a patch engine providing functionality for a lot of other kexts in the hackintosh universe. So be aware of that if you use any of these commands, especially `-liluoff`!
 
 | Boot-arg | Description |
-|----------|-------------|
+|----------|--------------|
 **`-liludbg`** | Enables debug printing (requires DEBUG version of Lilu)
 **`-liludbgall`** | Enables debug printing in Lilu and all loaded plugins (available in DEBUG binaries only)
 **`-liluoff`**| Disables Lilu (and all plugin kexts that make use of it as well)
@@ -83,7 +91,7 @@ Lilu boot-args. Remember that Lilu operates as a patch engine providing function
 Advanced Apple SMC emulator kext. Requires Lilu for full functionality. Included additional [**Sensor plugins**](https://github.com/acidanthera/VirtualSMC/tree/master/Sensors)
 
 | Boot-arg | Description |
-|----------|-------------|
+|---------|------------|
 **`-vsmcdbg`** | Enables debug printing (requires DEBUG version of VirtualSMC)
 **`-vsmcbeta`** | Enables Lilu enhancements on unsupported OS (13 and below are enabled by default)
 **`-vsmcoff`** | Disables all Lilu enhancements.
@@ -102,8 +110,8 @@ The following boot-args are provided by and require Whatevergreen.kext to work! 
 
 #### Global
 
-boot-arg | DeviceProperty | Description 
-:--------|:--------------:|------------
+boot-arg | Property | Description 
+:--------|:--------:|:------------
 **`-cdfon`** | `enable-hdmi20`| Enables HDMI 2.0 patches on iGPU and dGPU (not implemented in macOS 11+)
 **`-wegbeta`**| N/A| Enables WhateverGreen on unsupported versions of macOS (macOS 13 and below are enabled by default) 
 **`-wegdbg`** | N/A | Enables debug printing (requires DEBUG version of WEG)
@@ -111,24 +119,24 @@ boot-arg | DeviceProperty | Description
 
 #### Board-id related
 
-boot-arg | DeviceProperty | Description 
----------|:--------------:|------------
+boot-arg | Property | Description 
+--------|:---------:|------------
 **`agdpmod=ignore`** | `agdpmod`| Disables AGDP patches (`vit9696,pikera` value is implicit default for external GPUs) 
 **`agdpmod=pikera`** | `agdpmod`| Replaces `board-id` with `board-ix`. Disables Board-ID checks on AMD Navi (RX 5000/6000 series) to fix black screen issues due to the difference in framework with the x6000 drivers. Although not necessary for Polaris or Vega Cards, it can be used to resolve black screen issues in multi-monitor setups.
 **`agdpmod=vit9696`** | `agdpmod` | Disables check for `board-id`. Useful if screen turns black after booting macOS.
 
 #### Switching GPUs
 
-boot-arg | DeviceProperty | Description 
-:-------|----------------|------------
+boot-arg | Property | Description 
+---------|:--------:|------------
 **`-wegnoegpu`** | `disable-gpu` | Disables all external GPUs but the integrated graphics on Intel CPUS. Use if GPU is incompatible with macOS. Doesn't work all the time. Using an SSDT to disable it in macOS is the recommended procedure.
 **`-wegnoigpu`** | `disable-gpu` | Disables internal GPU
 **`-wegswitchgpu`** | `switch-to-external-gpu`| Disables internal GPU when external GPU is detected.
 
 #### Intel HD Graphics
 
-boot-arg | DeviceProperty | Description 
-:--------|:--------------:|------------
+boot-arg | Property | Description 
+---------|:---------|-------------
 **`-igfxblr`** | `enable-backlight-registers-fix` | Fix backlight registers on Kaby Lake, Coffee Lake and Ice Lake 
 **`-igfxbls`** | `enable-backlight-smoother` | Make brightness transitions smoother on Ivy Bridge and newer. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#customize-the-behavior-of-the-backlight-smoother-to-improve-your-experience)
 **`-igfxcdc`** | `enable-cdclk-frequency-fix` |Support all valid Core Display Clock (CDCLK) frequencies on ICL platforms. [Read the manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#support-all-possible-core-display-clock-cdclk-frequencies-on-icl-platforms)
@@ -161,14 +169,14 @@ boot-arg | DeviceProperty | Description
 
 #### AMD Radeon
 
-boot-arg | DeviceProperty | Description 
-:-------|:--------------:|------------
+boot-arg | Property | Description 
+:---------|:--------:|------------
 **`-rad24`** | N/A | Forces 24-bit display mode
 **`-radcodec`** | N/A | Forces the spoofed PID to be used in AMDRadeonVADriver 
 **`-raddvi`** | N/A | Enables DVI transmitter correction (required for 290X, 370, etc.)
 **`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
 **`radpg=15`** | N/A | Disables several power-gating modes. Required for Cape Verde GPUs: Radeon HD 7730/7750/7770, R7 250/250X  (see [Radeon FAQ](https://github.com/dreamwhite/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
-**`shikigva=40`** +</br>**`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Obsolete in macOS 11+. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
+**`shikigva=40`** + **`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Obsolete in macOS 11+. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
 **'unfairgva=x'** (x = number from 1 to 7 )| N/A| Replaces `shikigva` in macOS 11+ to address issues with [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md). It's a bitmask with 3 bits (1, 2 and 4) which can be combined to enable/select different features as [**explained here**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/)
 
 ##### `unfairgva` Overrides
@@ -215,12 +223,12 @@ defaults write com.apple.coremedia hardwareVideoDecoder -string disable
 
 #### NVIDIA
 
-boot-arg | DeviceProperty | Description 
-:---------|:--------------:|------------
+boot-arg | Property | Description 
+---------|:--------:|------------
 **~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| N/A |Deprecated. macOS Siera and newer require an NVRAM key instead. </br>**OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` in the System Parameters section.
 **`-ngfxdbg`** | N/A | Enables NVIDIA driver error logging 
 **`ngfxcompat=1`** | `force-compat` 	| Ignore compatibility check in NVDAStartupWeb
-**`ngfxgl=1`** | `disable-metal` 	| Disable Metal support on NVIDIA 
+**`ngfxgl=1`** | `disable-metal` 	| Disable Metal suppoPropertyrt on NVIDIA 
 **`ngfxsubmit=0`** | `disable-gfx-submit` | Disable interface stuttering fix on 10.13
 **`nv_disable=1`**| N/A | Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
 **`agdpmod=pikera`**|`agdpmod` |Swaps `board-id `for `board-ix`, needed for disabling string comparison which is useful for non-iMac13,2/iMac14,2 SMBIOS.
@@ -231,19 +239,19 @@ boot-arg | DeviceProperty | Description
 
 #### Backlight
 
-boot-arg | DeviceProperty | Description 
-:---------|:--------------:|------------
+boot-arg | Property | Description 
+---------|:--------:|-------------
 **`applbkl=3`** | `applbkl` | Enable PWM backlight control of AMD Radeon RX 5000 series graphic cards [read here.](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md) 
 **`applbkl=0`** | `applbkl` | Disable AppleBacklight.kext patches for IGPU. <br>In case of custom AppleBacklight profile [read here](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.OldPlugins.en.md)
 
 #### 2nd Boot stage
 
-boot-arg | DeviceProperty | Description 
-:---------|:--------------:|------------
-**`gfxrst=1`** | N/A | Prefer drawing Apple logo at 2nd boot stage instead of framebuffer copying
-**`gfxrst=4`** | N/A | Disables framebuffer init interaction during 2nd boot stage
+boot-arg | Description 
+---------|------------
+**`gfxrst=1`** | Prefer drawing Apple logo at 2nd boot stage instead of framebuffer copying
+**`gfxrst=4`** | Disables framebuffer init interaction during 2nd boot stage
 
-**SOURCES**: [Dortania](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html) and [Whatevergreen](https://github.com/acidanthera/WhateverGreen)
+**SOURCES**: [**Dortania**](https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html) and [**Whatevergreen**](https://github.com/acidanthera/WhateverGreen)
 
 ### AirportBrcmFixup
 Open source kext providing patches required for non-native Airport Broadcom WiFi cards.
@@ -267,8 +275,8 @@ boot-arg | NVRAM Variable| Description
 ### AppleALC
 Boot-args for your favorite audio-enabler kext. Note that all Lilu boot arguments affect AppleALC as well.
 
-boot-arg | DeviceProperty | Description 
-:--------|:--------------:|------------
+boot-arg | Property | Description 
+---------|:--------:|------------
 **`alcid=X`**| `layout-id` |To select a layout-id, where `X` stands for the number of the Layout ID, e.g. `alcid=1`. A list with all existing layout-ids sorted by vendor and codec model can be found [here](https://github.com/dreamwhite/ChonkyAppleALC-Build).
 **`-alcoff`**| N/A |Disables AppleALC (Bootmode `-x` and `-s` will also disable it)
 **`-alcbeta`**| N/A |Enables AppleALC on unsupported systems (usually unreleased or old ones)
@@ -304,7 +312,7 @@ Automatic handling of brightness key shortcuts based on ACPI Specification, Appe
 Kext for optimizing CPU Power Management for Intel CPUs supporting XCPM (Haswell and newer).
 
 boot-arg | Description 
-:-------|:------------
+---------|------------
 **`-cpufdbg`** | Enables debug logging (only available in DEBUG binaries)
 **`-cpufoff`** | Disables CPUFriend entirely
 **`-cpufbeta`** | Enables CPUFriend on unsupported macOS versions
@@ -315,7 +323,7 @@ boot-arg | Description
 Lilu plugin combining functionality of VoodooTSCSync and disabling xcpm_urgency if TSC is not in sync. It should solve some kernel panics after wake.
 
 boot-arg | Description 
-:--------|:------------
+---------|------------
 **`-cputsdbg`** | Enable debugging output[](https://github.com/acidanthera/CryptexFixup)
 **`-cputsbeta`** | Enables loading on unsupported macOS 
 **`-cputsoff`** | Disables kext loading
@@ -327,7 +335,7 @@ boot-arg | Description
 Lilu Kernel extension for installing Rosetta Cryptex in macOS Ventura. Applicable for both OS installation and updates. It's required for installing and booting macOS 13 on legacy Intel (Ivy Bridge and older) and AMD (Bulldozer/Piledriver/Steamroller and older) CPUs.
 
 boot-arg | Description 
-:-------|:------------
+---------|------------
 `-cryptoff` | Disables the kext
 `-cryptdbg` | Enables verbose logging (in DEBUG builds only)
 `-cryptbeta`| Enable on macOS newer than 13
@@ -340,7 +348,7 @@ boot-arg | Description
 Lilu plugin intended to enable debug output in the macOS kernel.
 
 boot-arg | Description 
-:-------|:------------
+---------|------------
 **`-dbgenhdbg`** | Enables debugging output
 **`-dbgenhbeta`** | Enables loading on unsupported macOS
 **`-dbgenhoff`** | Disables kext loading
@@ -348,11 +356,22 @@ boot-arg | Description
 
 [**Source**](https://github.com/acidanthera/DebugEnhancer)
 
+### ECEnabler
+Allows reading Embedded Controller fields over 1 byte long, vastly reducing the amount of ACPI modification needed (if any) for working battery status of Laptops. 
+
+boot-arg | Description 
+---------|------------
+**`-eceoff`** | Disables ECEnabler  
+**`-ecedbg`** | Enables debug logs  
+**`-ecebeta`**| Removes upper macoOS limit (for macOS betas)  
+
+[**Source**](https://github.com/1Revenger1/ECEnabler)
+
 ### HibernationFixup
 Lilu plugin kext intended to fix hibernation compatibility issues. It's pretty complex in terms of configuration, so you're best to read the info provided in the repo!
 
 boot-arg | Description 
-:-------|:----------|
+---------|------------
 **`-hbfx-dump-nvram`** | Saves NVRAM to a file nvram.plist before hibernation and after kernel panic (with panic info)
 **`-hbfx-disable-patch-pci`**| Disables patching of IOPCIFamily (this patch helps to avoid hang & black screen after resume (restoreMachineState won't be called for all devices)
 **`hbfx-patch-pci=XHC,IMEI,IGPU`** | Allows to specify explicit device list (and restoreMachineState won't  be called only for these devices). Also supports values `none`, `false`, `off`.
@@ -361,10 +380,12 @@ boot-arg | Description
 **`-hbfxoff`** | Disables kext loading
 **`hbfx-ahbm=abhm_value`** | Controls auto-hibernation feature, where "abhm_value" represenst an *arithmetic sum* (bitmask) of the following values: </br></br> `1` = `EnableAutoHibernation`: If this flag is set, system will hibernate instead of regular sleep (flags below can be used to limit this behavior)</br>  `2` = `WhenLidIsClosed` : Auto hibernation can happen when lid is closed (if bit is not set - no matter which status lid has)</br> `4` = `WhenExternalPowerIsDisconnected`: Auto hibernation can happen when external power is disconnected (if bit is not set - no matter whether it is connected) </br> `8` = `WhenBatteryIsNotCharging`: Auto hibernation can happen when battery is not charging (if bit is not set - no matter whether it is charging) </br> `16` = `WhenBatteryIsAtWarnLevel`: Auto hibernation can happen when battery is at warning level (macOS and battery kext are responsible for this level)</br> `32` = `WhenBatteryAtCriticalLevel`: Auto hibernation can happen when battery is at critical level (macOS and battery kext are responsible for this level) </br> `64` = `DoNotOverrideWakeUpTime`:	Do not alter next wake up time, macOS is fully responsible for sleep maintenance dark wakes </br> `128` = `DisableStimulusDarkWakeActivityTickle`: Disable power event kStimulusDarkWakeActivityTickle in kernel, so this event cannot trigger a switching from dark wake to full wake </br></br> **EXAMPLE**: `hbfx-ahbm=135`  would enable options associated with values `1`, `2`, `4` and `128`.
 
-The following options can be stored in NVRAM (**GUID**: `E09B9297-7928-4440-9AAB-D1F8536FBF0A`) and can be used instead of respective boot-args: 
+The following options can be stored in NVRAM and can be used instead of respective boot-args:
+
+**GUID**: `NVRAM/Add/E09B9297-7928-4440-9AAB-D1F8536FBF0A`
 
 NVRAM Key |Type  
-:--------|:---:
+----------|:---:
 **`hbfx-dump-nvram`** | Boolean
 **`hbfx-disable-patch-pci`** | Boolean
 **`hbfx-patch-pci=XHC,IMEI,IGPU,none,false,off`**| String
@@ -385,7 +406,7 @@ boot-arg | Description
 
 ### RestrictEvents
 boot-arg | NVRAM Key| Description 
-:--------|:--------:|------------
+---------|:--------:|------------
 **`-revoff`**| –| Disables the kext
 **`-revdbg`**| – | Enables verbose logging (in DEBUG builds)
 **`-revbeta`**| – | Enables the kext on macOS < 10.8 or greater than 13
@@ -408,7 +429,7 @@ boot-arg | NVRAM Key| Description
 **`revblock=auto`** |YES| Same as `pci`
 **`revblock=none`**|YES| Disables all blocking
 
-**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config in: `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`
+**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config under `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`:
  
 ![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
 
@@ -428,5 +449,6 @@ boot-arg | Description
 **To be continued…**
 
 ## Credits
-- Acidanthera for Lilu, VirtalSMC, Whatevergreen, AppleALC and other Kexts
+- 1Revenger1 for ECEnabler
+- Acidanthera for Lilu, VirtalSMC, Whatevergreen and others
 - Miliuco and Andrey1970AppleLife for additional details about `igfxfw` and `rps-control` properties
