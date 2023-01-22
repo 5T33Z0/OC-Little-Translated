@@ -29,10 +29,10 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 Terminal commanfs for changing settings related to **system power management**, such as  sleep/hibernation.
 
 ## Notes and further Resources
-- Before applying any of these patches, ensure that you don't just use generic ACPI tables from Dortania or the OpenCore Package. Instead modify them to match your system requirements or generate tailor made ones for your system using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). Doing this can prevent sleep and wake issues altogether. 
-- Since sleep and wake issues are usually no singular, isolated but rather inter-related issues, these patches have to be combined to fix all the sources for issues. Therefore, the loading order of the SSDTs is important as well.
+- Check Dortania's Post-Install guide fore additional info about [Fixing SLeep](https://github.com/dortania/OpenCore-Post-Install/blob/master/universal/sleep.md#irq-conflicts)
+- Before applying any hotfixes, ensure that you do not simply use generic ACPI tables from Dortania or the OpenCore Package as is, as they often contain additional devices and device paths to cover various scenarios. A good example of this is SSDT-PLUG. Instead, tailor them to your system's specific requirements or generate your own using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). This alone can prevent sleep and wake issues.
 - ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.
-- Acidanthera also provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) you can try.
+- Acidanthera provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup).
 - In-depth look into [**Darkwake**](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/), what it does (and what it doesn't).
 - While researching how these fixes work, I found out that the SSDTs and binary renames used in this chapter are basically "reverse engineered" `DSDT` patches created by RehabMan included in maciASL's DSDT patching engine. They are also available on his "Laptop DSDT Patch" Repo:
 	- **Sleep and Wake** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/system
