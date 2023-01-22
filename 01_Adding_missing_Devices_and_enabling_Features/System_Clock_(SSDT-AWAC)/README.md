@@ -1,6 +1,6 @@
 # Fixing the System Clock (`SSDT-AWAC`)
 
-Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS.
+Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time. Required For 300-series chipsets and newer, since `AWAC` is not supported by macOS. The OpenCore Package contains a similiar patch (`SSDT-AWAC-DISABLE`), but it uses the `_INI` method instead.
 
 ## Automated SSDT generation: using SSDTTime
 With the python script **SSDTTime**, you can generate SSDT-AWAC by analyzing your system's `DSDT`.
@@ -69,7 +69,7 @@ Scope (\)
     }
 }
 ``` 
-**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`. This hotpatch is identical to `SSDT-AWAC-DISABLE.aml` included in the OpenCorePkg.
+**Explanation**: This changes `STAS` to `One` for macOS which will enable Device `RTC`, since the following conditions are met: if `STAS` is `One` enable RTC (set it to `0x0F`). On the other hand, changing `STAS` to `One` will disable `AWAC`. Because `STAS` is *not* `Zero`, the Else condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn off `AWAC`.
 ___
 
 ### Method 2: using `SSDT-AWAC-ARTC`

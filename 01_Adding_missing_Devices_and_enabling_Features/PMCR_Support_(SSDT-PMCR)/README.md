@@ -1,7 +1,7 @@
 # Add PMCR Device (`SSDT-PMCR`)
 
 ## About
-`PMCR` or `APP9876` is an Apple-only ACPI device not present in DSDTs of Wintel systems. It's required for mainboards with Z390 chipsets to enable NVRAM support so the system boots (see "Technical Background" for details).
+`PMCR` or `APP9876` is an Apple-only ACPI device not present in DSDTs of Wintel systems. It's required for mainboards with Z390 chipsets to enable NVRAM support so the system boots (&rarr; see ["Technical Background"](#technical-background) for details). Also contained in the OpenCore Package (as `SSDT-PMC`).
 
 ### Affected Chipsets/Mainboards
 
@@ -52,5 +52,5 @@ Open IORegistryExplorer and search for `PCMR`. If the SSDT works, you should fin
 ## Credits
 
 - Pleasecallmeofficial who discovered this patch
-- Acidathera for improving the SSDT.
+- Acidathera for improving the SSDT
 - CorpNewt for SSDTTime
