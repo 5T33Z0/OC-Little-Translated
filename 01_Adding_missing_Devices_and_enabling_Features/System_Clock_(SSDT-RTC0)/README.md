@@ -66,9 +66,20 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "RTC0", 0x00000000)
     }
 }
 ```
+
+## 2nd Variant: [`SSDT-RTC0-RANGE`](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-RTC0-RANGE.dsl)
+
+This variant of the fake RTC is required if the RTC device in your DSDT has an incorrect `_CSR` range which might cause macOS boot to halt early (usually around the "PCI Configuration" stage). Analyzing the `DSDT` is required to figure out if you need this fix. Manual edits of the SSDT are required.
+
+**Affected maiboards**: mainly Asus X299
+
+### Instructions
+
+You can follow [Dortania's Guide](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac-methods/manual-hedt.html#seeing-if-you-need-ssdt-rtc0-range) for instructions.
+
 ## NOTES and CREDITS
 
-- This patch only applies to 300-series chipsets.
-- This is only needed when ***`SSDT-AWAC`*** is not used and the return value for the `_STA` method of the `RTC` device in your `DSDT` is `0`.
+- This patch only applies to 300-series and X299 chipsets.
+- This is only needed when ***`SSDT-AWAC`*** is not used and the return value foe the `_STA` method of the `RTC` device in your `DSDT` is `0`.
 - The device path used in the sample patch is `LPCB`, please adjust it accordingly to the name used in your `DSDT` (either `LPC` or `LPCB`).
-- ***SSDT-RTC0*** by Acidanthera (included in OpenCorePkg)
+- ***SSDT-RTC0*** and ***SSDT-RTC0-RANGE*** by Acidanthera (included in OpenCorePkg)
