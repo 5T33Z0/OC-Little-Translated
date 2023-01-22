@@ -153,7 +153,7 @@ boot-arg | Property | Description
 **`-igfxsklaskbl`** | N/A | Enforces Kaby Lake graphics kext to be used on Skylake platforms (KBL `device-id` and `ig-platform-id` are required. Not required on macOS 13+)
 **`-igfxtypec`** | N/A | Force DP connectivity for Type-C platforms
 **`-igfxvesa`** | N/A | Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
-**`igfxagdc=0`** | `disable-agdc`  | Disables AGDC for the iGPU to fix wake issues with 4K displays.
+**`igfxagdc=0`** | `disable-agdc`  | Disables AGDC (Apple Automatic Device Gating Control) for the iGPU to fix wake issues with 4K displays.
 **`igfxfcms=1`** | `complete-modeset` | Forces complete modeset on Skylake or Apple firmwares
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers` | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` (Ivy Bridge+) or `AAPL,snb-platform-id` (Sandy Bridge only) | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
@@ -177,7 +177,7 @@ boot-arg | Property | Description
 **`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
 **`radpg=15`** | N/A | Disables several power-gating modes. Required for Cape Verde GPUs: Radeon HD 7730/7750/7770, R7 250/250X  (see [Radeon FAQ](https://github.com/dreamwhite/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
 **`shikigva=40`** + **`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Obsolete in macOS 11+. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
-**–** | `CFG,CFG_USE_AGDC` (Type: Data; Value: 00)| Disables AGDC for the AMD GPUs to fix wake issues when using 4K displays.
+**–** | `CFG,CFG_USE_AGDC` (Type: Data; Value: 00)| Disabbles AGDC (Apple Automatic Device Gating Control) for the AMD GPUs to fix wake issues when using 4K displays.
 **'unfairgva=x'** (x = number from 1 to 7 )| N/A| Replaces `shikigva` in macOS 11+ to address issues with [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md). It's a bitmask with 3 bits (1, 2 and 4) which can be combined to enable/select different features as [**explained here**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/)
 
 ##### `unfairgva` Overrides
