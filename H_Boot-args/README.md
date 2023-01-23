@@ -38,9 +38,9 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 |Boot-arg | Description|
 |:-------:|-----------|
 **`-v`**|Verbose Mode. Replaces the progress bar with a text output of the boot process which helps identifying issues. Combine with `debug=0x100` and `keepsyms=1`
-**`-f`**|Enables cacheless booting in Clover. OpenCore uses a different option: Under `Kernel/Scheme/KernelCache`, set the entry to `Cacheless`. macOS 10.6 to 10.9 Only!
 **`-s`**|Single User Mode. This mode will start the terminal mode, which can be used to repair your system. Should be disabled with a Quirk since you can use it to bypass the Admin account password.
 **`-x`**|Safe Mode. Boots macOS with a minimal set of system extensions and features. It can also check your startup disk to find and fix errors like running First Aid in Disk Utility. Can be triggered from OC's Boot Picker by holding a key combination if `PollAppleHotkeys` is enabled.
+**`-f`**| Enables cacheless booting in Clover. OpenCore uses a different option: change `Kernel/Scheme/KernelCache` from `Auto` to `Cacheless`. Only applicable to macOS 10.6 to 10.9!
 **`debug=0x100`**|Disables WatchDog. Prevents the machine from restarting after a kernel panic so you can check the errors on screen (if verbose mode is enabled).
 **`keepsyms=1`**|Companion setting to `debug=0x100` that tells the OS to also print the symbols on a kernel panic. This can give some more helpful insight as to what's causing the panic.
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
