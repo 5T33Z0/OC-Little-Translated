@@ -45,7 +45,8 @@ OS X 10.11 (El Capitan     | 15.0.0    | 15.99.99 |"
 macOS 10.12 (Sierra)       | 16.0.0    | 16.99.99 |"
 macOS 10.13 (High Sierra)  | 17.0.0    | 17.99.99 |"
 macOS 10.14 (Mojave)       | 18.0.0    | 18.99.99 |"
-macOS 10.15 (Catalina)     | 19.0.0    | 19.99.99 |Intel (64-bit)
+||
+macOS 10.15 (Catalina)     | 19.0.0    | 19.99.99 |Intel (64-bit only)
 ||
 macOS 11 (Big Sur) | 20.0.0    | 20.99.99 |Intel (64-bit)</br>Apple Silicon (ARM)
 macOS 12 (Monterey)| 21.0.0    | 21.99.99 |"
