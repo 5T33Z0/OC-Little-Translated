@@ -108,7 +108,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |**EnableVectorAcceleration**|x|x||||Enables AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
 |**ExitBootServicesDelay**||||||Adds delay in microseconds after `EXIT_BOOT_SERVICES` event.
 |**ForceOcWriteFlash**||||||Enables writing to flash memory for all OpenCore system variables.
-|**ForgeUefiSupport**||||||Implements partial UEFI 2.x support on EFI 1.x firmware.
+|**ForceUefiSupport**||||||Implements partial UEFI 2.x support on EFI 1.x firmware.
 |**IgnoreInvalidFlexRatio**||||||Fixes invalid values in the MSR_FLEX_RATIO (0x194) MSR register.
 |**ReleaseUsbOwnership**||x|||x|Attempt to detach USB controller ownership from the firmware driver.
 |**ReloadOptionRoms**||||||Query PCI devices and reload their Option ROMs if available
@@ -211,7 +211,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |EnableVectorAcceleration||||
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
-|ForgeUefiSupport||||
+|ForceUefiSupport||||
 |IgnoreInvalidFlexRatio||||
 |ReleaseUsbOwnership||||
 |ReloadOptionRoms||||
@@ -316,7 +316,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |EnableVectorAcceleration||||
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
-|ForgeUefiSupport||||
+|ForceUefiSupport||||
 |IgnoreInvalidFlexRatio||x|x|x
 |ReleaseUsbOwnership||x||x|
 |ReloadOptionRoms||||
@@ -423,7 +423,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |EnableVectorAcceleration||||
 |ExitBootServicesDelay||||
 |ForceOcWriteFlash||||
-|ForgeUefiSupport||||
+|ForceUefiSupport||||
 |IgnoreInvalidFlexRatio|x|x|x|x
 |ReleaseUsbOwnership||x||x
 |ReloadOptionRoms||||
@@ -525,7 +525,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |EnableVectorAcceleration|x|
 |ExitBootServicesDelay||
 |ForceOcWriteFlash||
-|ForgeUefiSupport||
+|ForceUefiSupport||
 |IgnoreInvalidFlexRatio||
 |ReleaseUsbOwnership||
 |ReloadOptionRoms||
@@ -624,7 +624,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |EnableVectorAcceleration|x|
 |ExitBootServicesDelay||
 |ForceOcWriteFlash||
-|ForgeUefiSupport||
+|ForceUefiSupport||
 |IgnoreInvalidFlexRatio||
 |ReleaseUsbOwnership||
 |ReloadOptionRoms||
