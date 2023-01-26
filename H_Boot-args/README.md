@@ -335,7 +335,7 @@ boot-arg | Description
 [**Source**](https://github.com/acidanthera/CpuTscSync)
 
 ### CryptexFixup
-Lilu Kernel extension for installing Rosetta Cryptex in macOS Ventura. Applicable for both OS installation and updates. It's required for installing and booting macOS 13 on legacy Intel (Ivy Bridge and older) and AMD (Bulldozer/Piledriver/Steamroller and older) CPUs.
+Lilu Kernel extension for installing Rosetta Cryptex in macOS Ventura. It's required for installing and booting macOS 13 on legacy Intel (Ivy Bridge and older) and AMD (Bulldozer/Piledriver/Steamroller and older) CPUs. [More details](https://dortania.github.io/OpenCore-Install-Guide/extras/ventura.html#dropped-cpu-support)
 
 boot-arg | Description 
 ---------|------------
