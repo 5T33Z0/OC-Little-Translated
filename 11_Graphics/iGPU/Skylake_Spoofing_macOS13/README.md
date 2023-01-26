@@ -8,7 +8,7 @@ Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desk
 - [**Download**](https://dortania.github.io/builds/?product=Lilu&viewall=true) the latest version of Lilu from Dortania's Build Repo.
 - [**Download**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true) the latest version of Whatevergreen as well.
 - Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
-- Change the SMBIOS to `iMac18,1` (Not required when using the Board-ID VMM spoof)
+- Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add/modify `DeviceProperties` for HD 530 (HD 520 and Laptops might need different values. Refer to the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
 	|Key Name                |Value     | Type
