@@ -32,7 +32,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 - Sandy Bridge (need additional SurPlus patches)
 - Ivy Bridge
 - Haswell (partially)
-- Skylake (to continue using `iMac17,1` SMBIOS on macOS 13)
+- Skylake (to continue using `iMac17,1` SMBIOS on macOS 13. Requires additional [iGPU spoof on Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
 
 I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
