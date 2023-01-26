@@ -10,11 +10,12 @@ Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desk
 - Add the kexts to your `EFI/OC/Kexts` folder and config.plist.
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
-- Add/modify `DeviceProperties` for HD 530 (HD 520 and Laptops might need different values. Refer to the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
-	|Key Name                |Value     | Type
-	-------------------------|----------|:----:
-	AAPL,ig-platform-id      | 00001259 | Data
-	device-id                | 12590000 | Data
+- Add/modify `DeviceProperties` for HD 530 (HD 520 and Laptops might need different values. Refer to the [**Intel HD Graphics FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
+	|Key Name                |Value     | Type. | Notes
+	-------------------------|----------|:----:| -----
+	AAPL,ig-platform-id      | 00001259 | Data | 
+	device-id                | 12590000 | Data |
+	AAPL,GfxYTile            | 01000000 | Data | Optional. If your having glitches.
 - Save and reboot
 
 ## Verifying
