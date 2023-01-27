@@ -33,7 +33,7 @@ With the release of the Skylake family, `EHCI` was dropped, since `XHCI` is back
 
 USB Standard | Speed | Controller | macOS support 
 ------------:|-------|:----------:|:---------------:
-USB 1.1      | 12 Mbps | EHCI |  ≤ macOS 12
+USB 1.1      | 12 Mbps | UHCI/OHCI |  ≤ macOS 12
 USB 2.0      | 480 Mbps |EHCI | OSX 10.2+ 
 USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
 USB 3.1 Gen 2| 10 Gbps | XHCI | –

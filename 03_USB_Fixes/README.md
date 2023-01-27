@@ -2,13 +2,25 @@
 
 ## Background
 
-In macOS, the number of available USB ports is limited to 15. But since modern mainboards provide up to 26 ports per Controller, this can become a problem when trying to get USB ports working properly. If the ports are not assigned correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also true for Bluetooth since it's basically "wireless" USB 2.0 and therefore depends on properly mapped USB ports.
+In macOS, the number of available USB ports is limited to 15. But since modern mainboards with XHIC controllers provide up to 26 ports (per controller), this can become an issue when trying to get USB ports working properly in macOS. If the ports are not mapped correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also true for Bluetooth since it's basically "wireless" USB 2.0 and therefore depends on properly mapped USB ports.
 
-Since a physical USB 3 connector (the blue ones) actually supports 2 USB protocols, it requires 2 ports: one called "HS" for "high speed" – which is actually USB 2.0 – and one called "SS" for "super speed", which is USB 3.0. In other words: you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols – and that's about it. USB 3.2 is not even in the equation at this point as far as Apple is concerned. So you have to decide which ports you are going to use and map them manually.
+Since a physical USB 3 connector (the blue ones) actually supports two USB protocols, it requires 2 ports: one called "HS" for "High Speed" – which is actually USB 2.0 – and one called "SS" for "Super Speed", which is USB 3.0. So in reality, you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols and one that's either or – and that's about it. USB 3.2 is not even in the equation at this point as far as Apple is concerned – they use Thunderbolt for this. So you have to decide which ports you are going to use and map them accordingly.
+
+## USB Specs
+
+USB Standard | Speed | Controller | macOS support 
+------------:|-------|:----------:|:---------------:
+USB 1.1      | 12 Mbps | UHCI/OHCI |  ≤ macOS 12 (officially)</br>([**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/0.6.1) brings it to Ventura)
+USB 2.0      | 480 Mbps |EHCI | OSX 10.2+ 
+USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
+USB 3.1 Gen 2| 10 Gbps | XHCI | –
+USB 4        | 40 Gbps | PCIe | –
+
+**NOTE**: Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 instead which provide similar transfer rates.
 
 ## Removing the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable 26 Ports and inject them and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
+The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable all 26 ports and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
 
 ## Method 1: Mapping USB Ports with Tools
 
