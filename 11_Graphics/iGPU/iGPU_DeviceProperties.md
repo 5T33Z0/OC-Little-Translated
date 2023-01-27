@@ -480,3 +480,4 @@ Whether or not your VGA port can be used depends on 2 factors: macOS and the CPU
 - Dortania for [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/)
 - RehabMan for [**Laptop Framebuffer Patches**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config)
 - List of [**GPU/iGPU drivers installed by OCLP**](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches)
+- More details about [**DVMT, stolenmem, fbmem, unifiedmem, etc.**](https://osxlatitude.com/forums/topic/17804-what-are-dvmt-stolenmem-fbmem-cursormem-why-do-we-patch-these-for-broadwell-and-later/)
