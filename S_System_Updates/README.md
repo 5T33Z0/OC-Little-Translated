@@ -38,7 +38,7 @@ Once macOS 11.3 or newer is installed, the board-id spoof is working and you can
 
 ### What about Clover?
 
-This fix also works in Clover but it requires a slightly different approach, since you  cannot apply OpenCore's Booter patches needed for the board-id skip with Clover. Therefore you need `-no_compat_check` to boot macOS using an unsupported SMBIOS/board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. 
+This fix also works in Clover but it requires a slightly different approach, since you cannot apply OpenCore's Booter patches needed for the board-id skip with Clover. Therefore you need `-no_compat_check` to boot macOS with an unsupported Board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. Installing macOS still requires a supported SMBIOS, though.
 
 But as mentioned in the beginning, using `-no_compat_check` disables system updates. Therefore we add `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) to force-enable the `VMM-x86_64` board-id and now you finally can get:
 
