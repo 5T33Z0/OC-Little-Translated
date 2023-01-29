@@ -22,7 +22,7 @@ But re-installing (graphics) drivers breaks the security seal of the system volu
 
 ## Fix
 
-All of the issues can be eliminated in macOS 11.3+ by removing `-no_compat_check` and adding the Board-id VMM spoof to your config. This allows using an unsupported SMBIOS, have proper CPU Power Management and get System Updates. [**Follow the instructions here**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to add the necessary patches to your config. 
+All of these issues can be eliminated in macOS 11.3+ by removing `-no_compat_check` and adding the Board-id VMM spoof to your config. This allows using an unsupported SMBIOS, have proper CPU Power Management and get System Updates. [**Follow the instructions here**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to add the necessary patches to your config. 
 
 You only need the Booter patches not the Kernel patches, though! These can be substituted by the [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer.
 
@@ -38,9 +38,9 @@ Once macOS 11.3 or newer is installed, the board-id spoof is working and you can
 
 ### What about Clover?
 
-This fix also works in Clover but it requires a slightly different approach, since you cannot apply OpenCore's Booter patches needed for the board-id skip with Clover. Therefore you need `-no_compat_check` to boot macOS with an unsupported Board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. Installing macOS still requires a supported SMBIOS, though.
+This fix also works in Clover but it requires a slightly different approach, since Clover cannot apply OpenCore's Booter patches needed for the board-id skip. Therefore you need `-no_compat_check` to boot macOS with an unsupported Board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. Installing macOS still requires a supported SMBIOS, though.
 
-But as mentioned in the beginning, using `-no_compat_check` disables system updates. Therefore we add `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) to force-enable the `VMM-x86_64` which somehow cancels out the side-effects of no_compat_check. So now you can:
+But as mentioned earlier, using `-no_compat_check` disables system updates. Therefore we add `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) to force-enable the `VMM-x86_64` which somehow cancels out the side-effects of no_compat_check. So now you can:
 
 1. Boot macOS with an unsupported SMBIOS/board-id,
 2. Get proper CPU Power Management (XCPM) with the correct/native SMBIOS for your CPU. (Enabling legacy [ACPI CPU Power Management in macOS 13](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) requires additional measures)
