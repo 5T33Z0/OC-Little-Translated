@@ -1,5 +1,13 @@
 # OpenCore Calculators
-This section calculator to generate correct values for `csr-active-config`, `PickerAttributes`, `ScanPolicy`, `ExposeSensitiveData` and `Target` based on the data provided by OpenCore's `Documentation.pdf`.
+This section calculator to generate the correct values for the following bitmasks:
+
+Bitmask | Description
+------|-----------
+`csr-active-config` | Bitmask to configure (or disable) System Integrity Protection
+`PickerAttributes` | Bitmask to configure the look and feel of the BootPicker
+`ScanPolicy` | Bitmask to configure the device types and file systems shown in OpenCore's BootPicker 
+`ExposeSensitiveData` | Bitmask to configure Sensitive data exposure to the OS
+`Target` | Bitmask to configure logging capabilities
 
 ## Spreadsheet
 
@@ -30,8 +38,5 @@ Some of these calculators are also available as web applications:
 ## Tools
 If you are looking for an actual tool to calculate these things, check the following:
 
-- **BitmaskDecode**: https://github.com/corpnewt/BitmaskDecode
-	- Can generate all of the mentioned bitmasks.
-	
-- **OCAuxiliaryTools**: https://github.com/ic005k/OCAuxiliaryTools
-	- Generates: ScanPolicy, PickerAttributes and ExposeSensitiveData
+- [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode): Python script which generate all of the mentioned bitmasks.
+- [**OCAuxiliaryTools**](https://github.com/ic005k/OCAuxiliaryTools): OpenCore Configurator App which can generate `ScanPolicy`, `PickerAttributes` and `ExposeSensitiveData`
