@@ -6,13 +6,13 @@ Listed below, you find some charts containing useful information about SMBIOS, H
 Component | Compatibility Chart
 ----------|--------------------
 **CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
-**CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Spreadsheet)
-**AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
-**WiFi/BT** | [**Spreadsheet**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/WiFi_Compatibility.pdf) (PDF)
-**SSDs**| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0)
-**SMBIOS** | [**SMBIOS_Current**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) (PDF)</br> [**SMBIOS_Full.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf) (PDF)
-**DRM** | [**DRM Compatibility Chart**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
-**NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0)
+**CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Google Spreadsheet)
+**AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md) (md)
+**WiFi/BT** | [**WiFi Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/WiFi_Compatibility.pdf) (PDF)
+**SSDs**| [**SSDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Google Spreadsheet)
+**SMBIOS** | [**SMBIOS_Current**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) (PDF)</br> [**SMBIOS_Full**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf) (PDF)
+**DRM** | [**DRM Compatibility**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (md)
+**NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0) (Google Spreadsheet)
 **SMC Keys** | [**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
 
 ## Picking the right SMBIOS
