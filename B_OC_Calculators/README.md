@@ -1,5 +1,5 @@
 # OpenCore Calculators
-This section calculator to generate the correct values for the following bitmasks:
+This is my clumsy approach to calculate the correct values for the following bitmasks, using an Apple Numbers [Spreadsheet](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/OpenCoreCalcs.numbers?raw=true):
 
 Bitmask | Description
 ------|-----------
@@ -8,10 +8,7 @@ Bitmask | Description
 `ScanPolicy` | Bitmask to configure the device types and file systems shown in OpenCore's BootPicker 
 `ExposeSensitiveData` | Bitmask to configure Sensitive data exposure to the OS
 `Target` | Bitmask to configure logging capabilities
-
-## Spreadsheet
-
-This is my clumsy approach, using an Apple Numbers [Spreadsheet](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/OpenCoreCalcs.numbers?raw=true). Not fancy but you get a good understanding of how these bitmasks are actually calculated.
+`Darkwake` | For calculating a value for darkwake
 
 <details>
 <summary><strong>Screenshots</strong> (click to reveal)</summary>
