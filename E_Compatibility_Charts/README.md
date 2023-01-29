@@ -1,16 +1,16 @@
 # Compatibility charts
 Listed below, you find some charts containing useful information about SMBIOS, Hardware and DRM compatibility as well as NVRAM variables.
 
-## Hardware and macOS Compatibility
+## Hardware and macOS compatibility
 
 Component | Compatibility Chart
 ----------|--------------------
 **CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
 **CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Spreadsheet)
 **AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
-**WiFi/BT** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI)
-**SSDs**| [**Compaitible WiFi Device IDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Spreadsheet)
-**SMBIOS** | [**SMBIOS_Current.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf)</br> [**SMBIOS_Full.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf)
+**WiFi/BT** | [**Spreadsheet**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/WiFi_Compatibility.pdf) (PDF)
+**SSDs**| [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0)
+**SMBIOS** | [**SMBIOS_Current**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) (PDF)</br> [**SMBIOS_Full.pdf**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf) (PDF)
 **DRM** | [**DRM Compatibility Chart**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 **NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0)
 **SMC Keys** | [**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
@@ -43,7 +43,7 @@ Inside, you will find a list of all available Layout-IDs for the selected CODEC 
 So, if your mainboard uses [ALC1220](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC1220.md) for example, you could easily find out if someone already created a Layout ID for it.
 
 ## Credits
-- Dreamwhite for Wifi/BT, SATA and NVRAM variables spreadsheets
+- Dreamwhite for [**Wifi/BT**](https://docs.google.com/spreadsheets/d/1CNrDxBsmCbCTL_y9ZB7m3q3jHw5X2N8YaYb7IonQ3MI), **SATA** and **NVRAM** variables spreadsheets
 - Acidanthera for Whatevergreen FAQs
 - Dortania for SMBIOS Support Guide
 - Slice for SMC Keys Database
