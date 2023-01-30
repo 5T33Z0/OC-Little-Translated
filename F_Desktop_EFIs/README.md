@@ -130,7 +130,7 @@ You can follow [**my guide**](https://github.com/5T33Z0/OC-Little-Translated/tre
 Before deploying your newly generated EFI folder, check the following:
 
 - Open the `config.plist` in a Plist Editor to find additional info and notes
-- View `DeviceProperties` to check the included Framebuffer-Patches. Usually, 2 Frambuffer Patches are included ([**List ofavailable Framebuffer Patches**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md)):
+- View `DeviceProperties` to check the included Framebuffer-Patches. Usually, 2 Frambuffer Patches are included ([**List of available Framebuffer Patches**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md)):
 	- One for using the iGPU for driving a Display 
 	- One for using the iGPU for computational tasks only (if a supported discrete GPU is present). 
 - Depending on your hardware configuration (CPU, iGPU, dGPU, Mainboard, other peripherals) you may have to add additional SSDT Hotpatches, boot-args, DeviceProperties and/or Kexts!
