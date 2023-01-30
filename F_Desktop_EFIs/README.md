@@ -146,7 +146,7 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`agdpmod=pikera`**|Disables Board-ID checks on AMD Navi GPUs (RX 5000 & 6000 series). Without this you'll get a black screen. Don't use on Navi Cards (i.e. Polaris and Vega).
 **`-igfxvesa`**|Disables graphics acceleration in favor of software rendering. Useful if iGPU and dGPU are incompatible or if you are using an NVIDIA GeForce Card and the WebDrivers are outdated after updating macOS, so the display won't turn on during boot.
 **`-wegnoegpu`**|Disables all external/discrete GPUs except integrated graphics. Use if your GPU is incompatible with macOS. Doesn't work all the time.
-**`nvda_drv=1`**|Enable Web Drivers for NVIDIA Graphics Cards (supported up to macOS High Sierra only).
+**~~`nvda_drv=1`~~**|Enables Web Drivers for NVIDIA Graphics Cards (supported up to macOS High Sierra only). In OpenCore you have to add the following key to **NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82** instead:</br>![](/Users/5t33z0/Desktop/webdrv.png)
 **`nv_disable=1`**|Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
 
 #### Debugging
