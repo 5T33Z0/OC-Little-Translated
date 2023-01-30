@@ -88,7 +88,7 @@ Kext|Description
 Kext|Description
 :----|:----
 [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)|Used for fixing power management and initialization on non-Apple NVMe.
-[SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS.<br>We recommend testing without this first.
+[SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)|Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. Try without it first to see if your system needs it. 
 [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)|Useful starting a to disable the AppleMCEReporter kext on macOS Catalina and newer which will cause kernel panics on AMD CPUs. Also recommended for dual-socket systems (ie. Intel Xeon).
 [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)|Better experience with unsupported processors like AMD, disables memory warnings when using SMBIOS `MacPro7,1`. Can also [fix issues with System Update notifications](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates) (requires boot-arg `revpatch=sbvmm`)
 
