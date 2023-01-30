@@ -2,8 +2,7 @@
 
 List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide.
 
-<details>
-<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+**TABLE of CONTENTS**
 
 - [General Configuration Notes](#general-configuration-notes)
 	- [About the used properties](#about-the-used-properties)
@@ -34,8 +33,6 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Sandy Bridge](#sandy-bridge-1)
 - [About VGA](#about-vga)
 - [Credits and Resources](#credits-and-resources)
-
-</details>
 
 ## General Configuration Notes
 Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/). 
