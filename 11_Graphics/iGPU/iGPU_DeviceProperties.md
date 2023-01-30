@@ -13,7 +13,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
 	- [Ivy Bridge](#ivy-bridge)
-		- [Installing Intel HD4000 Drivers on macOS Monterey](#installing-intel-hd4000-drivers-on-macos-monterey)
+		- [Installing Intel HD4000 Drivers on macOS 12 and newer](#installing-intel-hd4000-drivers-on-macos-12-and-newer)
 		- [OCLP and System Updates](#oclp-and-system-updates)
 	- [Sandy Bridge](#sandy-bridge)
 - [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
@@ -28,7 +28,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Ivy Bridge](#ivy-bridge-1)
 		- [Connector Patches for `04006601`](#connector-patches-for-04006601)
 		- [Connector Patches for `03006601`](#connector-patches-for-03006601)
-		- [Installing Intel HD4000 Drivers on macOS Monterey](#installing-intel-hd4000-drivers-on-macos-monterey-1)
+		- [Installing Intel HD4000 Drivers on macOS 12 and newer](#installing-intel-hd4000-drivers-on-macos-12-and-newer-1)
 		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
 - [About VGA](#about-vga)
@@ -52,7 +52,8 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
 ## Empty Framebuffers (for Desktop)
-List of empty Framebuffers for Intel CPUs with on-board graphics. For using on-board graphics for computational tasks only (like QuickSync Video, etc.) when a discrete GPU is used for displaying graphics.
+
+List of Framebuffers for Intel CPUs with integrated graphics that are used for computing purposes only (e.g. QuickSync Video, HEVC), when a separate GPU is utilized for display.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -145,7 +146,7 @@ Key | Type | Value|
 ----|:----:|:----:|
 `AAPL,ig-platform-id`| Data | `0A006601`
 
-#### Installing Intel HD4000 Drivers on macOS Monterey
+#### Installing Intel HD4000 Drivers on macOS 12 and newer
 
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
 
@@ -430,7 +431,7 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 - You can enable/disable keys by removing/putting `#` in front of them.
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
-#### Installing Intel HD4000 Drivers on macOS Monterey
+#### Installing Intel HD4000 Drivers on macOS 12 and newer
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
 
 To bring them back, do the following:
