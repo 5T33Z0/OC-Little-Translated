@@ -28,6 +28,12 @@ sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enro
 ```shell
 sudo spctl --master-disable
 ```
+**Disable `.DS_Store` file creation on network storages**
+
+```shell
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
+```
 **Show the User Library in Big Sur+**:</br>
 
 ```shell
