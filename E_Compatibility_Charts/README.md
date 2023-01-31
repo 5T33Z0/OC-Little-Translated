@@ -10,7 +10,7 @@ Component | Compatibility Chart
 **AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md) (md)
 **WiFi/BT** | [**WiFi Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/WiFi_Compatibility.pdf) (PDF)
 **SSDs**| [**SSDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Google Spreadsheet)
-**SMBIOS** | [**SMBIOS_Current**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) (PDF)</br> [**SMBIOS_Full**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Full.pdf) (PDF)
+**SMBIOS** | [**SMBIOS_Current**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit?usp=sharing) (Google Spreadsheet)</br> [**SMBIOS_Full**](https://docs.google.com/spreadsheets/d/1_TNfBpDFt4Q5JWGxLN1r3DWm0UVMooB6SiscN6vt6-E/edit?usp=sharing) (Google Spreadsheet)
 **DRM** | [**DRM Compatibility**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (md)
 **NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0) (Google Spreadsheet)
 **SMC Keys** | [**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
