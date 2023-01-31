@@ -3,17 +3,17 @@ Listed below, you find some charts containing useful information about SMBIOS, H
 
 ## Hardware and macOS compatibility
 
-Component | Compatibility Chart
-----------|--------------------
-**CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
-**CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Google Spreadsheet)
-**AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md) (md)
-**WiFi/BT** | [**WiFi Compatibility Chart**](https://docs.google.com/spreadsheets/d/15gZttFfqgtE9ALhXSrLACh1wnjuevvTJim_vc33kuWI/edit?usp=sharing) (Google Spreadsheet)
-**SSDs**| [**SSDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Google Spreadsheet)
-**SMBIOS** | [**SMBIOS_Current**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit?usp=sharing) (Google Spreadsheet)</br> [**SMBIOS_Full**](https://docs.google.com/spreadsheets/d/1_TNfBpDFt4Q5JWGxLN1r3DWm0UVMooB6SiscN6vt6-E/edit?usp=sharing) (Google Spreadsheet)
-**DRM** | [**DRM Compatibility**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (md)
-**NVRAM Variables** | [**Spreadsheet**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0) (Google Spreadsheet)
-**SMC Keys** | [**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/)
+| Component |
+|:-----------|
+|[**CPU Compatibility List for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/) (Link)
+|[**CPUs used in Apple Macs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Google Spreadsheet)
+|[**AMD GPU Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md) (md)
+| [**WiFi Compatibility Chart**](https://docs.google.com/spreadsheets/d/15gZttFfqgtE9ALhXSrLACh1wnjuevvTJim_vc33kuWI/edit?usp=sharing) (Google Spreadsheet)
+|[**SSD Compatibility**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Google Spreadsheet)
+|[**SMBIOS Compatibility** (short)](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit?usp=sharing) (Google Spreadsheet)</br> [**SMBIOS Compatibility** (full)](https://docs.google.com/spreadsheets/d/1_TNfBpDFt4Q5JWGxLN1r3DWm0UVMooB6SiscN6vt6-E/edit?usp=sharing) (Google Spreadsheet)
+|[**DRM Compatibility**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (md)
+|[**NVRAM Variables**](https://docs.google.com/spreadsheets/d/1HTCBwfOBkXsHiK7os3b2CUc6k68axdJYdGl-TyXqLu0/edit#gid=0) (Google Spreadsheet)
+|[**SMC Keys Knowledge Database**](https://www.insanelymac.com/forum/topic/328814-smc-keys-knowledge-database/) (Link)
 
 ## Picking the right SMBIOS
 Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smooth running and efficient system. You should chose your SMBIOS based on the following aspects:
