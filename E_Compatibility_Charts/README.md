@@ -8,7 +8,7 @@ Component | Compatibility Chart
 **CPU** (Intel/AMD)| [**CPU Compatibility for macOS**](https://elitemacx86.com/threads/cpu-compatibility-list-for-macos-intel-amd.863/)
 **CPUs** used in real Macs| [**Apple CPUs**](https://docs.google.com/spreadsheets/d/1x09b5-DGh8ozNwN5ZjAi7TMnOp4TDm6DbmrKu86i_bQ/edit#gid=0) (Google Spreadsheet)
 **AMD GPUs**|[**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md) (md)
-**WiFi/BT** | [**WiFi Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/WiFi_Compatibility.pdf) (PDF)
+**WiFi/BT** | [**WiFi Compatibility Chart**](https://docs.google.com/spreadsheets/d/15gZttFfqgtE9ALhXSrLACh1wnjuevvTJim_vc33kuWI/edit?usp=sharing) (Google Spreadsheet)
 **SSDs**| [**SSDs**](https://docs.google.com/spreadsheets/d/1B27_j9NDPU3cNlj2HKcrfpJKHkOf-Oi1DbuuQva2gT4/edit#gid=0) (Google Spreadsheet)
 **SMBIOS** | [**SMBIOS_Current**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit?usp=sharing) (Google Spreadsheet)</br> [**SMBIOS_Full**](https://docs.google.com/spreadsheets/d/1_TNfBpDFt4Q5JWGxLN1r3DWm0UVMooB6SiscN6vt6-E/edit?usp=sharing) (Google Spreadsheet)
 **DRM** | [**DRM Compatibility**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (md)
