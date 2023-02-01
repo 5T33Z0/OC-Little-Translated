@@ -16,4 +16,8 @@ If you install Xcode on a Hackintosh it's usually for compiling kexts. Unfortuna
 	- WatchSimulator.platform
 5. Empty the trash bin
 
-Once I removed the unnecessary platforms the Xcode.app was only about 5 GB:</br>![Grandperspective](https://user-images.githubusercontent.com/76865553/216173092-967f5609-ae3a-4fa5-9ab4-28da21624882.png)
+Once I removed the unnecessary platforms the Xcode.app was only about 5 GB.
+
+**Before**:</br>![before](https://user-images.githubusercontent.com/76865553/216173933-43d9bf47-2238-4218-8261-9de8bc6ad8d6.png)
+
+**After**:</br>![after](https://user-images.githubusercontent.com/76865553/216174032-5dad4393-bffe-4df3-80d9-e29102d34640.png)
