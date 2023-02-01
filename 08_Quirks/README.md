@@ -33,7 +33,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 |**NormalizeHeaders** ||||||Cleans up ACPI headers to avoid boot crashes in macOS 10.13. 
 |**RebaseRegions**    ||||||Relocates ACPI memory regions. Not recommended!
 |**ResetHwSig**       ||||||Resets FACS table Hardware Signature to 0. Fixes firmware-based issues with waking from hibernation.|
-|**ResetLogoStatus**°|(x)|(x)|(x)|(x)|(x)|This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
+|**ResetLogoStatus**°|(x)|(x)|(x)|(x)|(x)|Sets `Displayed` to `0` (false) in `BRGT` table. Workaround for firmwares containing a `BGRT` table but fail to handle screen updates after displaying the logo. 
 |**SyncTableIDs**     ||||||Fixes tables for compatibility with in older Windows versions
 
 `°`Enabled by fefault in `sample.plist`. This Quirk didn't exist at the time the OpenCore Install Guide was written, so it's unknown if it's a requirement. Most likely it's not.
