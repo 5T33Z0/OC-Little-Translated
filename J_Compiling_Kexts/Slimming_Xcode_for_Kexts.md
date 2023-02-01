@@ -6,7 +6,7 @@ If you install Xcode on a Hackintosh it's usually for compiling kexts. Unfortuna
 
 1. Quit Xcode if it is running 
 2. Right-click on the Xcode app and select "Show Package Contents"
-3. Navigate to Contents/Developer/Platforms: </br>![](/Users/5t33z0/Desktop/xcode_dev.png)
+3. Navigate to Contents/Developer/Platforms:</br>![xcode_dev](https://user-images.githubusercontent.com/76865553/216172977-6bb0b379-1254-40ce-80f9-76e42d10522e.png)
 4. Delete the following folders:
 	- AppleTVOS.platform
 	- AppleTVSimulator.platform
@@ -16,6 +16,4 @@ If you install Xcode on a Hackintosh it's usually for compiling kexts. Unfortuna
 	- WatchSimulator.platform
 5. Empty the trash bin
 
-Once I removed the unnecessary platforms the Xcode.app was only about 5 GB:</br>![](/Users/5t33z0/Desktop/Grandperspective.png)
-
-
+Once I removed the unnecessary platforms the Xcode.app was only about 5 GB:</br>![Grandperspective](https://user-images.githubusercontent.com/76865553/216173092-967f5609-ae3a-4fa5-9ab4-28da21624882.png)
