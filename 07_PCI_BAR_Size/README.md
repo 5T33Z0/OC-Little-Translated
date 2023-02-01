@@ -88,7 +88,7 @@ The `ResizeAppleGPUBars` quirk limits the GPU PCI BAR sizes for macOS up to the 
 
 ## Enabling Resizable BAR on unsupported systems
 
-OpenCore 0.8.9 nightly introduced a new UEFI quirk called `ResizeUsePciRbIo` which is needed on older systems which have been modified with [**ReBarUEFI**](https://github.com/xCuri0/ReBarUEFI). The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo.
+OpenCore 0.8.9 nightly introduced a new UEFI quirk called `ResizeUsePciRbIo` which is needed on older systems which have been modified with [**ReBarUEFI**](https://github.com/xCuri0/ReBarUEFI#readme). The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo.
 
 With ReBarEUFI it is possible to enable Resizable BAR on some mainboards which don't support it officially. But it requires patching of the UEFI firmware. Visit the repo to find out more details about it.
 
