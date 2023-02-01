@@ -11,7 +11,7 @@
 - Enanble Resizable BAR in BIOS
 - Save and reboot into macOS
 
-**⚠️ WARNING**
+:warning: **WARNING**
 
 1. Before enabling this feature, ensure that your GPU supports Resizable BARs with tools like [**HWiNFO**](https://metager.de/meta/meta.ger3?eingabe=HWiNFO) in Windows. 
 2. Make sure you have a working backup of your EFI folder on a flash drive. Because if this is not working, the graphics output will get stuck at the progress bar while the system will be booting fine in the background. In this scenario you have to perform a hard reset, revert the changes in BIOS, boot from your EFI backup and then revert the changes in the main config as well!
@@ -20,7 +20,7 @@
 OpenCore 0.7.5 introduced GPU Resize BAR quirks to reduce BARs on per-OS basis, namely `ResizeGPUBars` and `ResizeAppleGPUBars`.
 
 ### ResizeGPUBars
-With this UEFI Quirk you change the GPU BAR Size of the system. ***This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB.*** `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
+With the `ResizeGPUBars` UEFI Quirk you can change the GPU BAR Size of the system. ***This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB.*** `ResizeAppleGpuBars` should be used instead. While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap.
   
  **Formula**: 2^n = PCI BAR Size in MB
   
@@ -51,9 +51,9 @@ With this UEFI Quirk you change the GPU BAR Size of the system. ***This quirk sh
 `°`Maximum for macOS IOPCIFamily.
 
 ### ResizeAppleGPUBars
-This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB. `ResizeGpuBars` must be an integer value between `-1` to `19`.
+The `ResizeAppleGPUBars` quirk limits the GPU PCI BAR sizes for macOS up to the specified value or lower if it is unsupported. When the bit of Capabilities Set, it indicates that the Function supports operating with the BAR sized to (2^Bit) MB. `ResizeGpuBars` must be an integer value between `-1` to `19`.
 
- ⚠️ **WARNING**
+:warning: **WARNING**
 > Do not set `ResizeAppleGpuBars` to anything but `0` if you have resize bar enabled in BIOS. `9` and `10` will cause sleep wake crashes, and 8 will cause excessive memory usage on some GPUs without any useful benefit. It shall always be `0`. It does not matter which GPU you have, they all support this feature since early 2010s, just give no performance gain.
 > 
 > **Source**: [Vit9696](https://www.insanelymac.com/forum/topic/349485-how-to-opencore-074-075-differences/?do=findComment&comment=2770810)
@@ -85,3 +85,12 @@ This quirk limits the GPU PCI BAR sizes for macOS up to the specified value or l
 | 512 GB|19|
 
 `°`Maximum for macOS.
+
+## Enabling Resizable BAR on unsupported systems
+
+OpenCore 0.8.9 nightly introduced a new UEFI quirk called `ResizeUsePciRbIo` which is needed on older systems which have been modified with [**ReBarUEFI**](https://github.com/xCuri0/ReBarUEFI). The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo.
+
+With ReBarEUFI it is possible to enable Resizable BAR on some mainboards which don't support it officially. But it requires patching of the UEFI firmware. Visit the repo to find out more details about it.
+
+:warning: **Disclaimer**: Flashing a custom/modfied BIOS/UEFI firmware involves risks and may potentially cause damage to your system. You are solely responsible for any actions taken with your device and for ensuring that the custom firmware is compatible with your mainboard. I will not be held liable for any damages or losses that may occur as a result of flashing a custom/modified firmware.
+
