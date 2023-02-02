@@ -32,5 +32,8 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Filesize reduction**: From approx. 15 MB to 2 MB </br>
 **Guide**: https://github.com/dreamwhite/Chonky-itlwm-Build
 
+## Slimming Xcode
+You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
+
 ## Credits
 [dreamwhite](https://github.com/dreamwhite) for the IntelBluetoothFirmware and itlwm slimming guides.
