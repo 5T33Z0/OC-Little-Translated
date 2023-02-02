@@ -1,6 +1,6 @@
 # Slimming Xcode for compiling Kexts
 
-If you install Xcode on a Hackintosh it's usually for compiling kexts. Unfortunately, the Xcode app is pretty hefty in terms of size – about 30 GB. That's because it contains code for building Apps for the whole line-up of Apple devices: AppleTV OS, iPhone OS, WatchOS and macOS, of course. Since you only need the macOS part for compiling Kexts, you can delete the rest and then you are left with about 5 GB. Needless to say you shouldn't delete platforms you are a actually developing for…
+If you install Xcode on a Hackintosh it's usually for compiling Kexts. Unfortunately, the Xcode app is pretty hefty in terms of size – about 30 GB. That's because it contains code for building Apps for the whole line-up of Apple devices: AppleTV OS, iPhone OS, WatchOS and macOS, of course. Since you only need the macOS part for compiling Kexts, you can delete the rest and then you are left with about 5 GB. Needless to say you shouldn't delete platforms you are a actually developing for…
 
 ## Instructions
 
