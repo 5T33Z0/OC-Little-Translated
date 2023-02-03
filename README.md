@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.9-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.2-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.02.02-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-≤0.8.9-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS-≤13.2-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.02.03-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## TABLE of CONTENTS
 
@@ -32,7 +32,7 @@
 * [**Fixing issues with System Update Notifications**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#readme)
 * [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#readme)
 * [**Compatibility Charts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts)
-* [**Desktop EFIs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#readme)
+* [**Generating EFIs with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#readme)
 * [**Create/modify a Layout-ID for AppleALC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#readme)
 * [**Windows-related Guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/I_Windows)
 * [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux#readme)
