@@ -104,10 +104,10 @@ After the base EFI has been generated, the `config.plist` has to be modified bas
 	Section |Setting(s)
 	--------|---------
 	**ACPI/Add** |Add extra ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create it in Post-Install).
-	**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled (&rarr; see "Additional Configuration Notes").
+	**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled (&rarr; see [Additional Configuration Notes](#additional-configuration-notes)).
 	**Kernel/Add** | Add extra kexts required for your hardware and features (WiFi and Bluetooth come to mind). A base-set required for the selected system is already included.
 	**PlatformInfo/Generic** |Generate `SMBIOS` Data for the selected Mac model
-	**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (&rarr; see "Additional Configuration Notes").
+	**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (&rarr; see [Additional Configuration Notes](#additional-configuration-notes)).
 - Save the config.plist
 - Copy the EFI folder to a FAT32 formatted USB flash drive
 - Reboot from the flash drive and test if it works
