@@ -1,20 +1,23 @@
-CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
-Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
+CPU:Intel Core 13th Gen Raptor Lake (Requires Fake CPU-ID)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:Intel Core 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
+CPU:Intel Core 11th Gen and 12th Gen Alder Lake (Desktop) (Requires Fake CPU-ID)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
 CPU:Intel Core 10th Gen Comet Lake (Dektop/Mobile/Nuc)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel Core 8th and 9th Gen Coffee Lake (Desktop)
-Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+CPU:Intel 9th Gen Coffee Lake (Desktop)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide SetupVirtualMap RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel Core 9th Gen Coffee Lake (Z390 Chipset)
-Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+CPU:Intel Core 9th Gen Coffee Lake (Desktop: Z390)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide SetupVirtualMap RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel Core 8th and 9th Gen Coffee Lake (Mobile/Nuc)
+CPU:Intel 9th Gen Coffee Lake (Mobile/Nuc)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:Intel Core 8th Gen Kaby Lake(-R) (Desktop/Mobile/Nuc)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
 
 CPU:Intel Core 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
