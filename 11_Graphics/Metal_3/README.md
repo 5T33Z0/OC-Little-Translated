@@ -1,4 +1,4 @@
-[![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.0_beta-white.svg)](https://www.apple.com/macos/macos-ventura-preview/)
+[![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.2-white.svg)](https://www.apple.com/macos/ventura/)
 
 # Enabling Metal 3 Support and "GPU" Tab in Activity Monitor
 
@@ -35,13 +35,12 @@ You can follow this guide not only to enable the "GPU" Tab in Activity Monitor b
 ## 1. Requirements
 
 ### Hardware Requirements
-- System with both Intel (U)HD on-board Graphics and a discrete GPU
-- SMBIOS which utilized the iGPU &rarr; **iMacPro1,1** or **MacPro7,1** users: don't add an iGPU!
+- System with both Intel (U)HD 630 on-board Graphics and a compatible discrete GPU
 - iGPU must be enabled in BIOS
 - iGPU must be configured headless, using an [empty Framebuffer](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#empty-framebuffers-for-desktop)
-- GPU must be supported by macOS (obviously)
+- SMBIOS that utilizes the iGPU (iMac) &rarr; **iMacPro1,1** or **MacPro7,1** users: don't add an iGPU!
 
-From what I understand, the "GPU" Tab only appears if your system has *both* an iGPU and a dedicated GPU (especially on macOS Ventura). So unless your system matches these specs, skip to [Section 5](#5-shortcut-using-a-defaults-write-command) to enable the GPU Tab via a defaults-write command.
+From what I understand, the "GPU" Tab only appears if your system has *both* an iGPU and a dedicated GPU. So unless your system matches these specs, skip to [Section 5](#5-shortcut-using-a-defaults-write-command) to enable the GPU Tab via a defaults-write command.
 
 ### `config.plist` Requirements
 - Device Property entries for both iGPU and dGPU
