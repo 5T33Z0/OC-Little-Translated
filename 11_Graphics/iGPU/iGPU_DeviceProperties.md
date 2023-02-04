@@ -1,6 +1,6 @@
 # iGPU Framebuffer DeviceProperties
 
-List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide.
+List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. They Framebuffer Data is allready converted to Little Endian so you can use it as is.
 
 **TABLE of CONTENTS**
 
@@ -37,7 +37,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 ## General Configuration Notes
 Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/). 
 
-For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md). But keep in mind the the Framebuffer Data in these FAQs is provided in Big Endian, so you can't use it as is – you have to [**convert it to Little Endian**](https://www.save-editor.com/tools/wse_hex.html#littleendian) first!
+For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md). But keep in mind that the Framebuffer Data in WEG's FAQs is provided in Big Endian, so you can't use it as is – you have to [**convert it to Little Endian**](https://www.save-editor.com/tools/wse_hex.html#littleendian) first!
 
 ### About the used properties
 
