@@ -72,17 +72,15 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 	- If it is not, follow the Guide to fix your Framebuffer patch via `DeviceProperties`
 2. Double-click **metalgpu** to check Metal 3 supüort (macOS 13 only): 
 	- If Metal 3 is available for either iGPU or dGPU, you don't need a fix
-	- If Metal 3 is not availabe for either iGPU/dGPU, it means that your dGPU does not support Metal 3 and it is not enabled for the iGPU either. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU (Intel (U)HD 630 only).
+	- If Metal 3 is not availabe for either iGPU/dGPU, it means that your dGPU does not support Metal 3 and it is not enabled for the iGPU either. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU (works on Intel (U)HD 630 only).
+
+**NOTE**: The Metal capabilities of dGPUs are limited by the used hardware. AMD GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
 
 ## 2b. Check presence of "GPU" tab (optional)
-1. Check if "GPU" Tab is present in Activity Monitor:
-	- Run Activity Monitor (located under Programs/Utilities)
-	- Check if it contains a Tab called "GPU" (as shown in the "About" section)
-	- If it is present, you don't have to fix it
-	- If it is not present you can follow the guide to fix your DeviceProperties or skip straight to section 5 to use a defaults-write command to enable the GPU Tab instead.
-2. Checking Hardware Acceleration and Metal Support
-
-**NOTE**: The Metal capabilities of GPUs are limited by the used hardware. GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
+- Run Activity Monitor (located under Programs/Utilities)
+- Check if it contains a Tab called "GPU" (as shown in the "About" section)
+- If it is present, you don't have to fix it
+- If it is not present you can follow the guide to fix your DeviceProperties or skip straight to section 5 to use a defaults-write command to enable the GPU Tab instead.
 
 ## 3. Obtaining AAPL,slot-name for iGPU and GPU
 In order to get the "GPU" Tab to display in macOS Ventura you need to add AAPL,slot-name to the DeviceProperties of the iGPU and dGPU. Follow either Method 1 or 2 to do so:
