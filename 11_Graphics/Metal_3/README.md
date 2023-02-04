@@ -8,11 +8,12 @@
 
 - [About](#about)
 - [1. Requirements](#1-requirements)
-	- [Hardware Requirements](#hardware-requirements)
-	- [`config.plist` Requirements](#configplist-requirements)
+	- [Hardware and Software](#hardware-and-software)
+	- [`config.plist` adjustments](#configplist-adjustments)
 	- [Required Software and Resources](#required-software-and-resources)
 		- [A note on Big Endian and Little Endian](#a-note-on-big-endian-and-little-endian)
-- [2. Checking if you need this fix](#2-checking-if-you-need-this-fix)
+- [2a. Test Hardware Acceleration and Metal 3 support](#2a-test-hardware-acceleration-and-metal-3-support)
+- [2b. Check presence of "GPU" tab (optional)](#2b-check-presence-of-gpu-tab-optional)
 - [3. Obtaining AAPL,slot-name for iGPU and GPU](#3-obtaining-aaplslot-name-for-igpu-and-gpu)
 	- [Method 1: using Hackintool](#method-1-using-hackintool)
 	- [Method 2: "calculating" `AAPL,slot-name` manually (for Advanced Users)](#method-2-calculating-aaplslot-name-manually-for-advanced-users)
@@ -70,9 +71,9 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 1. Double-click **VDADecoderChecker** to check if Hardware Acceleration is working 
 	- If it is working, you don't need a fix
 	- If it is not, follow the Guide to fix your Framebuffer patch via `DeviceProperties`
-2. Double-click **metalgpu** to check Metal 3 supüort (macOS 13 only): 
+2. Double-click **metalgpu** to check Metal 3 support (macOS 13 only): 
 	- If Metal 3 is available for either iGPU or dGPU, you don't need a fix
-	- If Metal 3 is not availabe for either iGPU/dGPU, it means that your dGPU does not support Metal 3 and it is not enabled for the iGPU either. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU (works on Intel (U)HD 630 only).
+	- If Metal 3 is not available for either iGPU/dGPU, it means that your dGPU does not support Metal 3 and it is not enabled for the iGPU either. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU (works on Intel (U)HD 630 only).
 
 **NOTE**: The Metal capabilities of dGPUs are limited by the used hardware. AMD GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
 
