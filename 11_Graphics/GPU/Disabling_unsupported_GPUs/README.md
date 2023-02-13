@@ -3,14 +3,17 @@
 There are two main methods for disabling incompatible external GPUs.
 
 ## Method 1: via Config
-The easiest way to disable discrete GPUs is to do it via your config.plist. You can use either DeviceProperties or a boot argument to do so. If this doesn't work, you need to do it via ACPI (Method 2)
+The easiest way to disable an incompatible discrete GPU is via your config.plist. You can use either DeviceProperties or a boot argument to do so (both require [**`WhateverGreen.kext`**](https://github.com/acidanthera/WhateverGreen)). If this doesn't work, you need to disable it via ACPI (Method 2)
 
 - **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
-	- In `DeviceProperties\Add\PciRoot(0x0)/Pci(0x2,0x0)`
-  	- Add Key `disable-external-gpu`: Value: `01000000`, Class: `DATA`</br>![Disable-GPU](https://user-images.githubusercontent.com/76865553/182168535-a51aca54-b23d-477f-8367-d07d2570bfb8.png)
-- **Option 2:** using boot-arg
-	- In  `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` 
-	- Add`-wegnoegpu` to boot-args (requires `Whatevergreen.kext`)
+	- Figure out the PCI Address of the GPU you want to deatcivate (for example with Hackintool)
+	- Add the PCI Address of the GPU you want to deaactivate to `DeviceProperties\Add\`
+  	- Add Key `disable-gpu`: Value: `01000000`, Class: `DATA`to your GPU's PCI Address to disable it. Note that the actual PCI path can vary from system to system:</br>![](/Users/5t33z0/Desktop/DisableGPU.png)
+- **Option 2**: using boot-arg
+	- In `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` 
+	- Add`-wegnoegpu` to boot-args (disables *all* external GPUs!)
+- **Option 3**: Multiple GPUs
+	- In case you are using more than one GPU but only one of them is compatible with macOS, disable the incompatible GPU via Device Property `disable-gpu` or SSDT (&rarr; see Method 2), don't use the boot-arg!
 
 ## Method 2: with SSDT Hotpatches
 
