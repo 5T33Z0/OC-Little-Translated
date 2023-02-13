@@ -3,17 +3,19 @@
 There are two main methods for disabling incompatible external GPUs.
 
 ## Method 1: via Config
-The easiest way to disable an incompatible discrete GPU is via your config.plist. You can use either DeviceProperties or a boot argument to do so (both require [**`WhateverGreen.kext`**](https://github.com/acidanthera/WhateverGreen)). If this doesn't work, you need to disable it via ACPI (Method 2)
-
-- **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
-	- Figure out the PCI Address of the GPU you want to deatcivate (for example with Hackintool)
-	- Add the PCI Address of the GPU you want to deaactivate to `DeviceProperties\Add\`
-  	- Add Key `disable-gpu`: Value: `01000000`, Class: `DATA`to your GPU's PCI Address to disable it. Note that the actual PCI path can vary from system to system:</br>![](/Users/5t33z0/Desktop/DisableGPU.png)
+The easiest way to disable an incompatible discrete GPU is via your config.plist. You can use either DeviceProperties or a boot argument to do so (both require [**`WhateverGreen.kext`**](https://github.com/acidanthera/WhateverGreen)). :warning: This method only works on CPUs with integrated graphics since the device property/booot-arg instructs the iGPU to disable the dGPU. Otherwise, you need to disable it via ACPI (Method 2).
+ 
+- **Option 1**: using `DeviceProperties`.
+	- Open your config.plist
+	- Go to `DeviceProperties/Add/PciRoot(0x0)/Pci(0x2,0x0)` 
+  	- Add Key `disable-gpu`: Value: `01000000`, Class: `DATA`to your GPU's PCI Address to disable it:</br>![](/Users/5t33z0/Desktop/DisableGPU.png)
+  	- Add `WhateverGreen.kext` (if not present already)
 - **Option 2**: using boot-arg
 	- In `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` 
 	- Add`-wegnoegpu` to boot-args (disables *all* external GPUs!)
+	- Add `WhateverGreen.kext` (if not present already)
 - **Option 3**: Multiple GPUs
-	- In case you are using more than one GPU but only one of them is compatible with macOS, disable the incompatible GPU via Device Property `disable-gpu` or SSDT (&rarr; see Method 2), don't use the boot-arg!
+	- In case you are using more than one GPU but only one of them is compatible with macOS, disable the incompatible GPU via SSDT (&rarr; see Method 2), don't use the boot-arg!
 
 ## Method 2: with SSDT Hotpatches
 
