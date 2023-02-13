@@ -1,6 +1,6 @@
 # iGPU Framebuffer DeviceProperties
 
-List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. They Framebuffer Data is allready converted to Little Endian so you can use it as is.
+List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. They Framebuffer Data is already converted to Little Endian so you can use it as is.
 
 **TABLE of CONTENTS**
 
@@ -20,7 +20,7 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Ice Lake](#ice-lake)
 	- [Coffee Lake Plus and Comet Lake](#coffee-lake-plus-and-comet-lake)
 	- [Coffee Lake and Whiskey Lake](#coffee-lake-and-whiskey-lake)
-	- [Kaby Lake and Amber Lake](#kaby-lake-and-amber-lake)
+	- [Kaby Lake and Amber Lake Y](#kaby-lake-and-amber-lake-y)
 		- [Connector Patches for HD 6XX models (not UHD!)](#connector-patches-for-hd-6xx-models-not-uhd)
 	- [Skylake](#skylake-1)
 	- [Broadwell](#broadwell)
@@ -59,18 +59,18 @@ List of Framebuffers for Intel CPUs with integrated graphics that are used for c
 
 CPU Family (iGPU variant)| Type | AAPL,ig-platform-id | device-id | Notes
 -------------------------|:----:|:-------------------:|-----------|------
-Comet Lake |Data|`0300C89B`
-Coffee Lake | Data |`0300913E`
-Kaby Lake | Data |`03001259`
-Skylake | Data |`01001219`
+[Comet Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html?wapkw=comet%20lake#@Desktop) |Data|`0300C89B`
+[Coffee Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html?wapkw=coffee%20lake#@Desktop) | Data |`0300913E`
+[Kaby Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/82879/products-formerly-kaby-lake.html?wapkw=kaby%20lake#@Desktop) | Data |`03001259`
+[Skylake](https://ark.intel.com/content/www/us/en/ark/products/codename/37572/products-formerly-skylake.html?wapkw=Skylake#@Desktop) | Data |`01001219`
 Skylake (P530) | Data |`01001219`| `1B190000` | P530 is not natively supported so you need to add the device-id as well.
-Haswell | Data| `04001204`
-Haswell (HD 4400)| Data| `04001204`|`12040000` ||HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
-Ivy Bridge | Data| `07006201`|
+[Haswell](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=Haswell#@Desktop) | Data| `04001204`
+Haswell (HD 4400)| Data| `04001204`|`12040000`|HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
+[Ivy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Desktop) | Data| `07006201`|
 
 CPU Family | Type | AAPL,snb-platform-id | device-id
 -----------|:----:|:--------------------:|-----------
-Sandy Bridge| Data | `00000500`|`02010000`
+[Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=sandy%20bridge#@Desktop)| Data | `00000500`|`02010000`
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
@@ -127,7 +127,7 @@ For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://githu
 
 Key | Type | Value| Notes 
 ----|:----:|:----:|------
-`AAPL,ig-platform-id`| Data | `0300220D` | For Haswell/Haswell Refresh and Devil's Canyon CPUs
+`AAPL,ig-platform-id`| Data | `0300220D` | For Haswell, Haswell Refresh and [Devil's Canyon](https://ark.intel.com/content/www/us/en/ark/products/codename/81246/products-formerly-devils-canyon.html?wapkw=Devil%27s%20Canyon#@Desktop) CPUs
 `AAPL,ig-platform-id`| Data | `07002216` | For Broadwell CPUs
 ||||
 `framebuffer-patch-enable`| Data | `01000000`
@@ -159,7 +159,7 @@ To bring them back, do the following:
 - The App has to relaunch with Admin Roots. Click "Yes"
 - You will have to enter your Admin Password and then the installation will begin.
 - Once it's done, reboot.
-- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
+- Check "About this Mac…" section to verify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
 
 #### OCLP and System Updates
 The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
@@ -181,7 +181,7 @@ Key | Type | Value
 
 ## Framebuffers (Laptop/NUC)
 
-### Ice Lake
+### [Ice Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/74979/products-formerly-ice-lake.html?wapkw=Ice%20Lake#@Mobile)
 >Intel Iris Plus Graphics. 10th Gen Intel Core Mobile</br>
 >Supported since: macOS 10.15.4
 
@@ -195,7 +195,7 @@ Key | Type | Value
 `framebuffer-stolenmem` | Data | `00003001`
 `framebuffer-fbmem`| Data | `00009000`|
 
-### Coffee Lake Plus and Comet Lake
+### Coffee Lake Plus and [Comet Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html?wapkw=comet%20lake#@Mobile)
 >For Intel UHD-630. 8th to 10th Gen Intel Core Mobile.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
@@ -213,7 +213,7 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data | `9B3E0000` | ⚠️ Only required for UHD 620 and UHD 655!
 
-### Coffee Lake and Whiskey Lake
+### [Coffee Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html?wapkw=coffee%20lake#@Mobile) and [Whiskey Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/135883/products-formerly-whiskey-lake.html?wapkw=whiskey%20lake#@Mobile)
 >For Intel UHD 620/630/655. 8th and 9th Gen Intel Core Mobile.</br>
 >Supported since: Coffee Lake: macOS 10.13; Whiskey Lake: macOS 10.14.1
 
@@ -237,7 +237,7 @@ Key | Type | Value| Notes
 
 - For **Lenovo T490**: add and enable the patch located in the `UEFI/ReservedMemory` section of the sample.plist to fix black screen issues after waking from hibernation. 
 
-### Kaby Lake and Amber Lake
+### [Kaby Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/82879/products-formerly-kaby-lake.html?wapkw=kaby%20lake#@Mobile) and [Amber Lake Y](https://ark.intel.com/content/www/us/en/ark/products/codename/186968/products-formerly-amber-lake-y.html?wapkw=amber%20lake#@Mobile)
 >For Intel HD 615/617/620/630/640/650</br>
 >Supported since: macOS 10.12
 
@@ -279,7 +279,7 @@ HD 6xx users (UHD 6xx users are not concerned) may face some issues with the out
 	`framebuffer-con2-enable`| Data | `01000000`
 	`framebuffer-con2-alldata` |Data| `03060A00 00040000 87010000`
 
-### Skylake
+### [Skylake](https://ark.intel.com/content/www/us/en/ark/products/codename/37572/products-formerly-skylake.html?wapkw=Skylake#@Mobile)
 >For Intel HD 510/515/520/530/540/550/580 and P530. 6th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.11
 
@@ -302,7 +302,7 @@ Key | Type | Value| Notes
 `device-id` |Data |`02190000` | ⚠️ Required for HD 510
 `device-id` |Data |`16190000` | ⚠️ Required for HD 550 and P530 
 
-### Broadwell
+### [Broadwell](https://ark.intel.com/content/www/us/en/ark/products/codename/38530/products-formerly-broadwell.html?wapkw=Broadwell#@Mobile)
 >For Intel HD 5500/5600/6000 and Iris (Pro) 6100/6200. 5th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.10
 
@@ -319,7 +319,7 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data |`26160000` | Required For HD 5600
 
-### Haswell
+### [Haswell](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=haswell#@Mobile)
 >For Intel HD 4200/4400/4600 and HD 5000/5100/5200. 4th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.8
 
@@ -336,7 +336,7 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data |`12040000` | Required for HD 4200/4400/4600.
 
-### Ivy Bridge
+### [Ivy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Mobile)
 >For Intel HD 4000. 3rd Gen Intel Core Mobile.</br>
 >Supported from OS X 10.8.x to macOS 11.x (officially), macOS 12 with Post-Install patches.
 
@@ -452,7 +452,7 @@ The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/c
 
 You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
 
-### Sandy Bridge
+### [Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=Sandy%20Bridge#@Mobile)
 >Intel HD 3000. 2nd Gen Intel Core Mobile.</br>
 >Supported from macOS 10.6.7 to macOS 10.13
 
