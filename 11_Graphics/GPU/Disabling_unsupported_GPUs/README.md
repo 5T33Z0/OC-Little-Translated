@@ -8,7 +8,7 @@ The easiest way to disable an incompatible discrete GPU is via your config.plist
 - **Option 1**: using `DeviceProperties`. This only works for CPUs with integrated graphics since this property instructs the iGPU to disable the dGPU.
 	- Figure out the PCI Address of the GPU you want to deatcivate (for example with Hackintool)
 	- Add the PCI Address of the GPU you want to deaactivate to `DeviceProperties\Add\`
-  	- Add Key `disable-gpu`: Value: `01000000`, Class: `DATA`to your GPU's PCI Address to disable it. Note that the actual PCI path can vary from system to system:</br>![](/Users/5t33z0/Desktop/DisableGPU.png)
+  	- Add Key `disable-gpu`: Value: `01000000`, Class: `DATA`to your GPU's PCI Address to disable it. Note that the actual PCI path can vary from system to system:</br>![DisableGPU](https://user-images.githubusercontent.com/76865553/218483856-b3a48849-bf39-4901-b288-79f8bb5e556e.png)
 - **Option 2**: using boot-arg
 	- In `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` 
 	- Add`-wegnoegpu` to boot-args (disables *all* external GPUs!)
