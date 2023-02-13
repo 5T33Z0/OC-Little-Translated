@@ -3,7 +3,7 @@
 There are two main methods for disabling incompatible external GPUs.
 
 ## Method 1: via Config
-The easiest way to disable an incompatible discrete GPU is via your config.plist. You can use either DeviceProperties or a boot argument to do so (both require [**`WhateverGreen.kext`**](https://github.com/acidanthera/WhateverGreen)). :warning: This method only works on CPUs with integrated graphics since the device property/booot-arg instructs the iGPU to disable the dGPU. Otherwise, you need to disable it via ACPI (Method 2).
+The easiest way to disable an incompatible discrete GPU is via your config.plist. You can use either DeviceProperties or a boot argument to do so (both require [**`WhateverGreen.kext`**](https://github.com/acidanthera/WhateverGreen)). :warning: This method only works on CPUs with integrated graphics since the device property/boot-arg instructs the iGPU to disable the dGPU. Otherwise, you need to disable it via ACPI (Method 2).
  
 - **Option 1**: using `DeviceProperties`.
 	- Open your config.plist
