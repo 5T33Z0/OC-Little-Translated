@@ -64,6 +64,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 ### Web-based applications
 - [**Sanity Checker**](https://sanitychecker.ocutils.me/) – The popular tool for checking the consistency of OpenCore configs online has returned!
 - [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
+- [**AnyPlist**](https://www.anyplist.com/#/) – Online Plist Editor
 - [**OpenCore ExposeSensitiveData Generator**](https://dreamwhite-oc-esd.vercel.app/)
 - [**Clover Cloud Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Although the name implies otherwise, this is for editing OpenCore Configs online.
 - [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/) – Compatible with OC ≤ 0.8.0
