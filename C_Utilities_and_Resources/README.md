@@ -15,7 +15,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**ANYmacOS**](https://www.sl-soft.de/en/anymacos/) – App for downloading macOS High Sierra and newer. Can create USB Installer. Allows switching Update Seeds (Customer/Developer/Public).
 - [**Create macOS Install**](https://github.com/LAbyOne/Create-MacOS-Install) – App for downloading macOS (10.7.5 to 13). Can create USB Installer as well. (Downloads are stored under `private/tmp`)
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python script for downloading macOS (10.13 to 13). Only tool that can be used from within Windows to create an Internet Recovery USB installer!
-- [**MIST**](https://github.com/ninxsoft/Mist) (macOS Installer Super Tool) – So far the only App that can download ipsw Firmwares (ARM) as well as macOS Installers (Intel). Check the "Settings…" to select the diplayed seed(s) of the Software Update Catalog. etc. Requires macOS 12+.
+- [**MIST**](https://github.com/ninxsoft/Mist) (macOS Installer Super Tool) – So far the only App that can download ipsw Firmwares (ARM) as well as macOS Installers (Intel). Check the "Settings…" menu to select the diplayed seed(s) of the Software Update Catalog, etc. Requires macOS 12+.
 - [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) – App for patching macOS so it can run on unsupported systems. Can download macOS (Big Sur and newer) and create a USB Installer.
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer (Big Sur and newer).
 
