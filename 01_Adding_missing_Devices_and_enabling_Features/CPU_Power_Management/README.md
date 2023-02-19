@@ -1,7 +1,9 @@
 # Enabling CPU Power Management
+
 This chapter contains guides for enabling (and optimizing) CPU Power Management for Intel and AMD CPUs in macOS. 
 
 ## Available SSDTs
+
 Clicking on an SSDT's name in the table below takes you to the corresponding guide or file to enable CPU power management for the listed CPU family.
 
 CPU Family | Used Plugin(s) | Required SSDT |Configuration Notes
@@ -10,7 +12,7 @@ CPU Family | Used Plugin(s) | Required SSDT |Configuration Notes
 11th Gen Intel (Ice/Rocket Lake)| **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#11th-gen-intel-and-newer)| • Not needed in macOS 12+</br> • Requires Comet Lake CPUID </br>• Optional: [**CPUFriend**](https://github.com/acidanthera/CPUFriend) kext and [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to optimize CPU Power Management
 4th to 10th Gen Intel (Haswell to Comet Lake) | **`X86PlatformPlugin`**| [**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#readme)| Not needed in macOS 12+ </br>• Optional: [**CPUFriend**](https://github.com/acidanthera/CPUFriend) kext and [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to optimize CPU Power Management
 ≤ 3rd Gen Intel (Ivy Bridge and older) | **`ACPI_SMC_PlatformPlugin`**</br>**`AppleIntelCPUPowerManagement.kext`** | [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme)| • Plugin dropped from macOS 13 <br>• [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) or [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) for proper CPU Power Management in macOS 13
-AMD (17h)| **N/A**|[**SSDT-CPUR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#what-about-amd)| :warning: Only needed for B550 and A520 mainboards!</br> • Enable `DummyPowerManagement` Quirk</br> • Add [**AMDRyzenCPUPowerManagement**](https://github.com/trulyspinach/SMCAMDProcessor) kext (AMD Ryzen only)</br> • Enable `ProvideCurrentCpuInfo` to apply AMD-specfic [**Kernel Patches**](https://github.com/AMD-OSX/AMD_Vanilla) 
+AMD (17h)| **N/A**|[**SSDT-CPUR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#what-about-amd)| :warning: Only needed for B550 and A520 mainboards!</br> • Enable `DummyPowerManagement` Quirk</br> • Add [**AMDRyzenCPUPowerManagement**](https://github.com/trulyspinach/SMCAMDProcessor) kext (AMD Ryzen only)</br> • Enable `ProvideCurrentCpuInfo` to apply AMD-specific [**Kernel Patches**](https://github.com/AMD-OSX/AMD_Vanilla) 
 
 ## About CPU Power Management in macOS
 
@@ -21,7 +23,7 @@ Up to macOS Big Sur, macOS uses 2 different kexts for handling CPU Power Managem
 
 The **ACPI_SMC_PlatformPlugin** provides support for ACPI and the System Management Controller (SMC). It allows macOS to interact with the SMC and access information about the hardware components it controls. It loads `AppleIntelCPUPowerManagement.kext`, which handles the actual ACPI CPU Power Management.
 
-The **X86PlatformPlugin** provides support for the x86 architecture on Apple computers. It allows the operating system to interact with the hardware components of the system such as the processor, memory, and nainboard.
+The **X86PlatformPlugin** provides support for the x86 architecture on Apple computers. It allows the operating system to interact with the hardware components of the system such as the processor, memory, and mainboard.
 
 In summary, the ACPI_SMC_PlatformPlugin kext is used to manage hardware components in the system through the SMC, while the X86PlatformPlugin kext is used to interact with x86-based hardware components in the system.
 
@@ -29,7 +31,7 @@ In summary, the ACPI_SMC_PlatformPlugin kext is used to manage hardware componen
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". If this plugin is selected (plugin-type 0) it loads the actual `AppleIntelCPUPowerManagement.kext` which then handles the CPU Power Management on Ivy Bridge and older Intel CPUs.
 
-You have to use **ssdtPRGen** to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing, when you had to use a patched DSDT to run macOS since hotpatching wasn't a thing yet, this table was simply referred to as "SSDT.aml" since it usually was the only SSDT injected into the system besides the DSDT.
+You have to use **ssdtPRGen** to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing, when running macOS required a patched DSDT (because hotpatching via Boot Loader wasn't possible), this table was simply referred to as "SSDT" since it was the only other table injected into the system besides the DSDT. You can still find references to this in Clover's configuration file which has a dedicated "SSDT" sub-section for configuring CPU Power Management.
 
 Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatformPlugin` to optimize performance.
 
@@ -49,9 +51,9 @@ In macOS Monterey, Apple disabled the plugin-type check for CPU Power Management
 
 #### macOS Ventura, `XCPM` and ACPI CPU Power Management
 
-In macOS Ventura, Apple deleted the actual *binary* from the `ACPI_SMC_PlatformPlugin.kext` – it's an empty stub now. So selecting plugin-type `0` with SSDT-PM doesn't work. On top of that, `AppleIntelCPUPowerManagement.kext` was deleted as well. So ACPI CPU Power Management is basically non-existant in macOS 13+.
+In macOS Ventura, Apple deleted the actual *binary* from the `ACPI_SMC_PlatformPlugin.kext` – it's an empty stub now. So selecting plugin-type `0` with SSDT-PM doesn't work. On top of that, `AppleIntelCPUPowerManagement.kext` was deleted as well. So ACPI CPU Power Management is basically non-existent in macOS 13+.
 
-For Ivy Bridge and older that's a problem. In order to get proper CPU Manangement on Ivy Bridge and older you have 2 options now:
+For Ivy Bridge and older that's a problem. In order to get proper CPU Management on Ivy Bridge and older you have 2 options now:
 
 - **Option 1**: [**Force-enable `XCPM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only. Doesn't work well) or
 - **Option 2**: [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) (Recommended. Requires CFG Lock to be disabled in BIOS)
@@ -59,5 +61,6 @@ For Ivy Bridge and older that's a problem. In order to get proper CPU Manangemen
 If you cannot disable CFG Lock for your Ivy Bridge CPU in BIOS (or by flashing a custom BIOS with the MSR 0xE2 register unlocked), force-enabling `XCPM` is mandatory if you want to have decent CPU Power Management in macOS Ventura.
 
 ## Further Resources
+
 - Check OpenCore's documentation for unlocking the MSR 0xE2 register (&rarr; see [**Chapter 7.8**](https://dortania.github.io/docs/latest/Configuration.html#quirks-properties2): "AppleCpuPmCfgLock").
 - [**CPU Support list**](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support) by Dortania
