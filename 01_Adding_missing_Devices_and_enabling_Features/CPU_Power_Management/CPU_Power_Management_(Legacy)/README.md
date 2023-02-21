@@ -94,7 +94,7 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 With the release of macOS Monterey, Apple dropped the Plugin-Type check, so that the `X86PlatformPlugin` is loaded by default. For Haswell and newer this is great, since you no longer need `SSDT-PLUG` to enable Plugin-Type `1`. But for Ivy Bridge and older, you now need to select Plugin-Type `0`. If you've previously generated an `SSDT-PM` with ssdtPRGen, it's already configured to use Plugin-Type `0`, so ACPI CPU Power Management is still working. For macOS Ventura, it's a different story…
 
 ## Re-enabling ACPI Power Management in macOS Ventura
-When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states, incorrect LFM frequency).
+When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states, incorrect LFM frequency). Additionally, the AppleIntelCPUPowerManagement kexts that handle ACPI CPU Power Management were removed as well.
 
 So when switching to macOS Ventura, you either have to:
 
@@ -103,7 +103,7 @@ So when switching to macOS Ventura, you either have to:
 
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
 
-- A BIOS where the **MSR 0x2E** register is **unlocked** so CFG Lock is disabled (run `ControlMsrE2.efi` from BootPicker to check if it is unlocked or not). This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the necessary kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [**here**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to stop right here and force-enable `XCPM` instead.
+- A **BIOS** where the **MSR 0x2E** register is **unlocked** so CFG Lock is disabled (run `ControlMsrE2.efi` from BootPicker to check if it is unlocked or not). This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work when injecting the necessary kexts for CPU Power Management into macOS Ventura, causing a kernel panic (as discussed [**here**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to stop right here and force-enable `XCPM` instead.
 - [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
 - [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
