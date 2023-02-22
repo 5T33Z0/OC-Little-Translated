@@ -7,6 +7,7 @@ Utility | Description
 **ACPIe** | For debugging ACPI tables (cf. Chpt. 4.5: "Patch Properties").
 **CreateVault** | For creating a secure vault (cf. Chpt. 8.5: "Security Properties").
 **disklabel** | Tool for changing the disk label displayed in BootPicker (cf. Chpts. 8.3 and 11.4).
+[**EnableGop**](https://github.com/acidanthera/OpenCorePkg/tree/master/Staging/EnableGop)| Provides standalone GOP driver for EFI era Mac Pro and iMac.
 **FindSerialPort** | Script to find PCIe serial ports and their paths (cf. Chpt. 8.6.1: "Serial Custom Properties").
 **icnspack** |Tool for generating `.icns` files for items displayed in BootPicker (cf. Chpt. 11.4: "OpenCanopy").
 **kpdescribe** | Tool to print the stack trace from an OS X kernel panic diagnostic report, along with as much symbol translation as your mach_kernel version provides (cf. Chpt. 8.4: "Debug Properties").
