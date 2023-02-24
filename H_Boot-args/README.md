@@ -46,7 +46,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to kIOPCIConfiguratorPFM64. Alternatively, use `npci=0x3000` which also disables debugging of gIOPCITunnelledKey. Required when stuck at **`PCI Start Configuration`** as there are IRQ conflicts related to PCI Lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**: </br> • For installing macOS, you still need a supported SMBIOS temporarily.</br> • You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
+**`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**:<ul><li>For installing macOS, you still need a supported SMBIOS temporarily</li><li>You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)</li></ul>
 **`-liludbgall`** | For debugging Lilu kext and plugins (requires DEBUG build of Lilu and asociated plugins)
 
 :bulb: **TIPS**
@@ -57,13 +57,13 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 ## Network-specific boot arguments
 |Boot-arg|Description|
 |------|-----------|
-**`dk.e1000=0`/`e1000=0`** (Big Sur and Monterey only)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and uses `AppleIntelI210Ethernet.kext` instead. This is optional since most 400-series mainboards (and newer) with an I225-V NIC are compatible with the .dext version of the driver. It's required on some Gigabyte boards which can only use the .kext driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` (located under /S/L/E/)!
+**`dk.e1000=0`** (Big Sur)</br> **`e1000=0`** (Monterey)| Prohibits Intel I225-V Ethernet Controller from using `com.apple.DriverKit-AppleEthernetE1000.dext` (Apple's new Driver Extension) and uses `AppleIntelI210Ethernet.kext` instead. This is optional since most 400-series mainboards (and newer) with an I225-V NIC are compatible with the `.dext` version of the driver. It's required on some Gigabyte boards which can only use the `.kext` driver.</br>:warning: These boot-args no longer work in macOS Ventura, since the .kext version was removed from the `IONetworkingFamily.kext` (located under /S/L/E/)!
 
 ## Other useful boot arguments
 |Boot-arg|Description|
 |--------|-----------|
-**`alcid=1`**|For selecting a layout-id for AppleALC, whereas the numerical value specifies the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
-**`amfi_get_out_of_my_way=1`**| Disables Apple Mobile File Integrity. **Requirement**: disabled `SIP`. AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every running app and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
+**`alcid=X`**|For selecting a layout-id for AppleALC, where `X` needs to be a numerical value specifying the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
+**`amfi_get_out_of_my_way=1`**| Disables Apple Mobile File Integrity (AMFI). **Requirement**: disabled `SIP`. AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every running app and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
 **`-force_uni_control`**| Force-enables Universal Control service in macOS Monterey 12.3+
 
 ## Boot-args and device properties provided by Kexts
