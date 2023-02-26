@@ -46,6 +46,13 @@ chflags nohidden ~/Library
 defaults write com.apple.frameworks.diskimages skip-verify TRUE 
 defaults write com.apple.frameworks.diskimages skip-verify FALSE
 ```
+
+**Install Command Line Developer Tools**:</br>
+
+```shell
+xcode-select --install
+```
+
 **Disable/enable Notification Center**:
 
 ```shell
