@@ -76,7 +76,7 @@ Check the table of contents for more. Although aimed primarily at OpenCore users
 - Added further explanations where necessary
 - Added new content (added USB Port Mapping via ACPI to Chapter 3, Chapters 7 to 11 as well as the whole "Appendix" section)
 
-**NOTE**: Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
+> **Note**: Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
 
 ## CONTRIBUTIONS
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
