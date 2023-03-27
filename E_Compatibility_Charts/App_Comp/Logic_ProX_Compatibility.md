@@ -3,8 +3,8 @@
 App Version(s) | macOS Requirement
 :-------------:|----------------------
 10.7.5+        | macOS 12.3 or newer
-10.7.3 - 10.7.4| macOS 11.5 or newer
-10.7.0 - 10.7.2| macOS 11.0 or newer
+10.7.3–10.7.4| macOS 11.5 or newer
+10.7.0–10.7.2| macOS 11.0 or newer
 10.6.3         | macOS 10.15.7 or newer
 10.5.x         | macOS 10.14.6	
 10.4.8         | macOS 10.13.6
