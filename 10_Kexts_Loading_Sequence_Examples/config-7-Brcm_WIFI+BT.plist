@@ -189,7 +189,7 @@
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/BrcmFirmwareData</string>
                     <key>MaxKernel</key>
-                    <string>20.9.9</string>
+                    <string></string>
                     <key>MinKernel</key>
                     <string>12.0.0</string>
                     <key>PlistPath</key>
