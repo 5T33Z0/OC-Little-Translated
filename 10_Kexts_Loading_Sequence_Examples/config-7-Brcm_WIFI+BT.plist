@@ -165,7 +165,7 @@
                     <key>BundlePath</key>
                     <string>BrcmBluetoothInjector.kext</string>
                     <key>Comment</key>
-                    <string>V2.6.1 | Req. for macO 10.15 to 11.x</string>
+                    <string>V2.6.1 | Req. for macO 10.11 to 11.x</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -173,7 +173,7 @@
                     <key>MaxKernel</key>
                     <string>20.9.9</string>
                     <key>MinKernel</key>
-                    <string>19.0.0</string>
+                    <string>15.0.0</string>
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
@@ -237,13 +237,13 @@
                     <key>BundlePath</key>
                     <string>BrcmPatchRAM3.kext</string>
                     <key>Comment</key>
-                    <string>V2.6.1 |  For macOS 10.15 to 11.6.x</string>
+                    <string>V2.6.1 |  For macOS 10.15 to later</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/BrcmPatchRAM3</string>
                     <key>MaxKernel</key>
-                    <string>20.9.9</string>
+                    <string></string>
                     <key>MinKernel</key>
                     <string>19.0.0</string>
                     <key>PlistPath</key>
