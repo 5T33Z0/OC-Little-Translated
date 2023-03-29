@@ -17,3 +17,6 @@ Waves v6      | 10.4.11–10.5.6  | Windows XP and Vista
 As you can see, Windows 10 users can install and run Waves plugins all the way down from v14 to v9 while macOS users steadily had to pay for plugin upgrades if they wanted to continue using Waves plugins on current versions of macOS.
 
 Since Waves didn't like that Windows users can't be forced into upgrading their plugins as easily as macOS users, they decided to change their business model from selling perpetual licenses to a subscription-only model on March 26th, 2023. So everybody has to pay for using their plugins every month now…
+
+**UPDATE**:
+After the immense backlash Waves received from social media, [Waves decided to bring perpetual license back](https://www.waves.com/news/perpetual-waves-licenses-are-back).
