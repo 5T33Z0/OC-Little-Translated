@@ -33,6 +33,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Python Script to generate a SSDT for Power Management (for older Intel CPUs)
 - [**unpkg**](https://www.timdoug.com/unpkg/) – Utility to unpack .pkg files into a folder instead of installing them on the system.
 - [**Meld for macOS**](https://yousseb.github.io/meld/) – Useful app for comparing two config files with one another.
+- [**FindMask**](https://www.insanelymac.com/forum/topic/343572-for-hackers-an-utility-to-search-a-masked-string/) – CLI to search byte sequences in a file containing masked code.
 
 ### Patcher Apps
 Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
