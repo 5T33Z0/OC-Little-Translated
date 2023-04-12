@@ -16,6 +16,16 @@ Same goes for having kexts in the list which aren't present in the `OC/Kexts` fo
 
 For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
+## General Kernel and Kext handling by OpenCore
+OpenCore handles the `Kernel` section of the `config.plist` in the following order (since version 0.9.2, Commit 6a65dd1):
+
+- `Block` is processed
+- `Add` and `Force` are processed
+- `Emulate` and `Quirks` are processed
+- `Patch` is processed
+
+**NOTE**: Prior to this commit, `Add` and `Force` where last in the chain which made it impossible to patch force-injected kexts.
+
 ## Lilu and VirtualSMC first?
 Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***. **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot.  For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
 
