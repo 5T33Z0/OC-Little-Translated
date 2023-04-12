@@ -21,7 +21,7 @@ Unfortunately, this device can't be blocked via ACPI, but you can do the followi
 5. Add the Following Rule to Kernel/Bock:
 	|Identifier   |Comment   |  Enabled |  Strategy |  Arch |
 	|-------------|----------|:--------:|:---------:|:-----:|
-	|com.apple.driver.Apple16X50Serial| Blocks PCI Serial Adapter  |  True | Disable | Any  |
+	|com.apple.driver.Apple16X50Serial| Blocks PCI Serial Adapter | True | Disable | Any  
 6. Save your config.plist and reboot
 
 ## Testing
@@ -36,3 +36,4 @@ And the PCI Serial Adapter will be gone from Network Settings as wel.
 
 - I couldn't find much info about this kext but the `IOSerialBSDClient` seems to be related to to the [serial modem detection](https://developer.apple.com/forums/thread/116061).
 - If you notice any issues with the system after disabling this kext, re-enable it. So far I haven't noticed any problems.
+- In Big Sur this does no longer work for me. The kext is loaded anyway.
