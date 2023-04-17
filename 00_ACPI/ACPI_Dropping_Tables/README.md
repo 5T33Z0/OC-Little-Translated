@@ -103,9 +103,7 @@ After rebooting, do the following:
 - Select "File" > "New from ACPI"
 - If you dropped the table successfully, it shouldn't be listed. As you can see, it's not present:</br>
 	![nodmar](https://user-images.githubusercontent.com/76865553/139952877-ef7d0f85-378d-4c6b-ac9a-efb7118ac4b6.png)</br>
-- The table has been dropped successfully.
-
-**NOTE**: If the table is still present, you either did something wrong or a table of the same name is present in ACPI folder and is injected by OpenCore.
+- The DMAR table has been dropped successfully. If it's table is still present, you either did something wrong or a table of the same name is present in OpenCore's ACPI folder and is injected by OpenCore.
 
 ### Example 2: replacing the `DMAR` table by a modified one
 - Dump the ACPI Tables as explained at the beginning
@@ -126,5 +124,6 @@ This will disable the OEM DMAR table and inject the modified one instead but we 
 - Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions (which it doesn't):</br>
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
-## :warning: Caution
-You should only import tables with maciASL if you know these are not patched ones. Otherwise, dump the OEM ACPI Tables.
+## NOTES
+- You should only import tables with maciASL if you know they are unmodified. Otherwise, dump the OEM ACPI Tables using the debug version of OpenCore and enabling the `SysReport` Quirk and work with those.
+- OpenCore 0.9.2 introduced a new Kernel Quirk called `DisableIoMapperMapping` which removes the Reserved Memory Regions from memory, so dropping and replacing the `DMAR` table is no longer a necessity. Refer to OpenCore's Documentation for more details.
