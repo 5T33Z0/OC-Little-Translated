@@ -35,6 +35,10 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**Meld for macOS**](https://yousseb.github.io/meld/) – Useful app for comparing two config files with one another.
 - [**FindMask**](https://www.insanelymac.com/forum/topic/343572-for-hackers-an-utility-to-search-a-masked-string/) – CLI to search byte sequences in a file containing masked code.
 
+### macOS Virtualization
+
+- [**Create macOS VM Install**](https://github.com/rtrouton/create_macos_vm_install_dmg) – Script to prepare macOS installer disk images for use with virtualization software like VMware Fusion or Parallels Desktop.
+
 ### Patcher Apps
 Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 
