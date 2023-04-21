@@ -54,7 +54,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**SSDTTime**](https://github.com/corpnewt/SSDTTime) – Python-based Tool for dumping DSDT and automated ACPI Hotpatch generation
 - [**PlistEDPlus**](https://github.com/ic005k/PlistEDPlus) – Freeware .plist Editor
 - [**Xiasl**](https://github.com/ic005k/Xiasl) – ASL/AML Editor
-- [**ACPI Rename**](https://github.com/corpnewt/ACPIRename) – Handy Python script to analyze a `DSDT`. It can list its Device, Method and Name Paths and can generate HEX values for binray renames.
+- [**ACPI Rename**](https://github.com/corpnewt/ACPIRename) – Handy Python script to analyze a `DSDT`. It can list Devices, Methods and Name Paths and can generate HEX values for binray renames.
 - [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python-based bitmask Calculator for OpenCore (CsrActiveConfig, ScanPolicy, PickerAttributes, etc.)
 - [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
