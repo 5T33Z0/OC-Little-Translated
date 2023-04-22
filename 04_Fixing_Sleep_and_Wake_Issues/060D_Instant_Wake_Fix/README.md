@@ -1,12 +1,12 @@
 # 0D/6D Instant Wake Fix
 
 ## Description
-There are some components (like USB Controllers, LAN cards, Audio Codecs, etc.) which can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. The fixes below resolve the instant wake issue.
+Some components (like USB Controllers, LAN cards, Audio Codecs, etc.) can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. This guide describes how to fix this so-called instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events, such as power management events to the operating system. GPE registers are memory locations that contain bits that can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the Lid, for example, etc. Each of these events has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
+The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events in the operating system, including power management events. GPE registers are memory locations that contain bits that can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the lid of a laptop, etc. Each of these events has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
 
-Used in Devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-field (or Package Objects):
+Used in devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-fields (or Package Objects):
 
 - The 1st bit-field of the `_PRW` package we are interested in is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
 - The 2nd bit-field of the `_PRW` package is either `0x03` or `0x04`. It describes the wake capabilities of the device (see below). MacOS expects `0x00` here in order to not wake immediately.
@@ -87,7 +87,7 @@ This approach minimizes the amount of necessary binary renames to one to correct
 - In this case, enter `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"` in Terminal to find the culprit for the instant wake.
 
 ### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
-In case your `DSDT` *doesn't* have the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd bit-field of the return package (package `[One]`) to `0x00` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2) – no additional binary renames are required. 
+In case your `DSDT` *doesn't* contain the `GPRW` or `UPRW` method, we can simply modify the `_PWR` method by changing the 2nd bit-field of the return package (package `[One]`) to `0x00` where necessary, as [suggested by antoniomcr96](https://github.com/5T33Z0/OC-Little-Translated/issues/2) – no additional binary renames are required. 
 
 But in order to make it work, we need to list all the PCI paths of devices where the change is necessary, as shown in this example:
 
