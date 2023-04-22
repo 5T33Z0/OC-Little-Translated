@@ -103,7 +103,7 @@ Scope (\)
 **NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
 #### If `HPAE/HPTE` does not exist
-On a lot of ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is disabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
+On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is disabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
 
 ```asl
 Device (HPET)
@@ -115,8 +115,8 @@ Device (HPET)
         {
             Return (0x00)
         ...
-```
-In this case you need to add the following binary renames to your `config.plist` under `ACPI/Patch`:
+```    
+In this case, you can't disbale `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the conditions that turns it off first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you need to add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variabled are renamed and have no matches any more:
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
@@ -132,8 +132,23 @@ In this case you need to add the following binary renames to your `config.plist`
 	Replace: 59595959
 	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
 	```
-- Add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml`
-- Optional: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting
+- Next, you need to add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml` to fix the RTC, TIMER, HPET restore the 2 variables `WNTF` and `WXPF` for when macOS is NOT running. This is handled by the following bit:
+
+	```asl    
+    Scope (\)
+    {
+        Name (XXXX, One)
+        Name (YYYY, Zero)
+        If (!_OSI ("Darwin"))
+        {
+            XXXX = WNTF /* External reference */
+            YYYY = WXPF /* External reference */
+        }
+    } ...
+	```
+	> **Note** The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables WNTF instead of XXXX and WXPF instead of YYYY. This restores the 2 variables for any other kernel than macOS so everything is back to normal.
+
+- Optional: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 ### Disable **`RTC`**
 Disable the Realtime Clock by changening it's status (`_STA`) to zero if macOS is running:
