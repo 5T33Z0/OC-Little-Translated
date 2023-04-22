@@ -56,9 +56,7 @@ In macOS Ventura, Apple deleted the actual *binary* from the `ACPI_SMC_PlatformP
 For Ivy Bridge and older that's a problem. In order to get proper CPU Management on Ivy Bridge and older you have 2 options now:
 
 - **Option 1**: [**Force-enable `XCPM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only. Doesn't work well) or
-- **Option 2**: [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) (Recommended. Requires CFG Lock to be disabled in BIOS)
-
-If you cannot disable CFG Lock for your Ivy Bridge CPU in BIOS (or by flashing a custom BIOS with the MSR 0xE2 register unlocked), force-enabling `XCPM` is mandatory if you want to have decent CPU Power Management in macOS Ventura.
+- **Option 2**: [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) (Recommended)
 
 ## Further Resources
 

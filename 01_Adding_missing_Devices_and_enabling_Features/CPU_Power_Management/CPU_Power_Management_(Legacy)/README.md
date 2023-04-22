@@ -127,8 +127,9 @@ sysctl machdep.xcpm.mode
 ```
 The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU.
 
-## Notes
+> **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock was [skipped based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) in macOS 13 (Kernel 22.x). So injecting the required kext to re-enable legacy CPU Power Management resulted in a kernel panic unless CFG Lock could be disabled (either by changing the setting or by flashing a modified BIOS if there is no setting available).
 
+## Notes
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
 - ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)).
 - Check the **Configuration.pdf** included in the OpenCorePkg for details about unlocking the MSR 0xE2 register (&rarr; Chapter 7.8: "AppleCpuPmCfgLock").
