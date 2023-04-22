@@ -94,18 +94,18 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 With the release of macOS Monterey, Apple dropped the Plugin-Type check, so that the `X86PlatformPlugin` is loaded by default. For Haswell and newer this is great, since you no longer need `SSDT-PLUG` to enable Plugin-Type `1`. But for Ivy Bridge and older, you now need to select Plugin-Type `0`. If you've previously generated an `SSDT-PM` with ssdtPRGen, it's already configured to use Plugin-Type `0`, so ACPI CPU Power Management is still working. For macOS Ventura, it's a different story…
 
 ## Re-enabling ACPI Power Management in macOS Ventura
-When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states, incorrect LFM frequency). Additionally, the AppleIntelCPUPowerManagement kexts that handle ACPI CPU Power Management were removed as well.
+When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useless since it cannot utilize a plugin which is longer present. Instead, the `X86PlaformPlugin` is loaded by default. Therefore, CPU Power Management doesn't work correctly on legacy Intel CPUs out of the box (no turbo states, incorrect LFM frequency, higher average clock). Additionally, the AppleIntelCPUPowerManagement kexts that handle ACPI CPU Power Management were removed from macOS as well. 
 
 So when switching to macOS Ventura, you either have to:
 
 - [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) or 
-- Re-enable ACPI CPU Power Management (**recommended**, requires disabled CFG Lock)
+- Re-enable ACPI CPU Power Management (**recommended**)
 
-In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you need:
+In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you have to do the following:
 
-- ~~A **BIOS** where the **MSR 0x2E** register is **unlocked** so CFG Lock is disabled (run `ControlMsrE2.efi` from BootPicker to check if it is unlocked or not). This is mandatory since the `AppleCpuPmCfgLock` Quirk doesn't work in macOS Ventura, causing a kernel panic (as discussed [**here**](https://github.com/5T33Z0/Lenovo-T530-Hackintosh-OpenCore/issues/31#issuecomment-1368409836)). Otherwise you have to stop right here and force-enable `XCPM` instead.~~ Quirk fixed in OC 0.9.2!
-- Enable `AppleCpuPmCfgLock` Quirk (if you can disable CFG Lock, you don't need to enable it)
-- [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
+- Use OpenCore 0.9.2 or newer (**Mandatory unless you can disable CFG Lock in BIOS!**)
+- Enable `AppleCpuPmCfgLock` Quirk (not needed if CFG Lock is disabled)
+- Add [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
 - [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
 	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
@@ -127,7 +127,7 @@ sysctl machdep.xcpm.mode
 ```
 The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU.
 
-> **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock was [skipped based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) in macOS 13 (Kernel 22.x). So injecting the required kexts to re-enable legacy CPU Power Management resulted in a kernel panic unless CFG Lock could be disabled in the BIOS menu (or by flashing a modified BIOS if there is no setting available).
+> **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock is [skipped in macOS 13 based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c). So injecting the required kexts to re-enable legacy CPU Power Management results in a kernel panic unless CFG Lock can be disabled in the BIOS menu (or by flashing a modified BIOS if there is no setting available).
 
 ## Notes
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
