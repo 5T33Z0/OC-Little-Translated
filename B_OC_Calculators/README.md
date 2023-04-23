@@ -35,5 +35,6 @@ Some of these calculators are also available as web applications:
 ## Tools
 If you are looking for an actual tool to calculate these things, check the following:
 
-- [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode): Python script which generate all of the mentioned bitmasks.
-- [**OCAuxiliaryTools**](https://github.com/ic005k/OCAuxiliaryTools): OpenCore Configurator App which can generate `ScanPolicy`, `PickerAttributes` and `ExposeSensitiveData`
+- [**OC ToolBox**](https://github.com/webfalter/OCToolBox) – App for calculating csr-active-config etc.
+- [**BitmaskDecode**](https://github.com/corpnewt/BitmaskDecode) – Python script which can generate all of the mentioned bitmasks (except Darkwake).
+- [**OCAuxiliaryTools**](https://github.com/ic005k/OCAuxiliaryTools) – OpenCore Configurator App which can generate `ScanPolicy`, `PickerAttributes` and `ExposeSensitiveData`
