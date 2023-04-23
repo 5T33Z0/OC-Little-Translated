@@ -28,6 +28,13 @@ sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enro
 ```shell
 sudo spctl --master-disable
 ```
+
+**Reset all Privacy Settings**:</br>
+
+```sheel
+tccutil reset All
+```
+
 **Disable `.DS_Store` file creation on network storages**
 
 ```shell
