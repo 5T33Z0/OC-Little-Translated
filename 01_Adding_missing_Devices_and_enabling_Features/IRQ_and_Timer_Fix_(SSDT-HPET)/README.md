@@ -160,7 +160,7 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
             WXPF = YYYY
         }
     } ...
-```
+	```
 - **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 ### Disable **`RTC`**
