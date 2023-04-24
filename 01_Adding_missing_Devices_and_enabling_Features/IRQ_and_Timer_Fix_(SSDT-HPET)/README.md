@@ -103,7 +103,7 @@ Scope (\)
 **NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
 #### If `HPAE/HPTE` does not exist
-On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
+On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (applies to Lenovo T430/T530 to T450/550): 
 
 ```asl
 Device (HPET)
