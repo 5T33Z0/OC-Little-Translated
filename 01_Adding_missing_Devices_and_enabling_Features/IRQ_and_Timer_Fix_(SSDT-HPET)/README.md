@@ -103,7 +103,7 @@ Scope (\)
 **NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
 #### If `HPAE/HPTE` does not exist
-On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is disabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
+On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (example from a Lenovo T530): 
 
 ```asl
 Device (HPET)
@@ -116,7 +116,7 @@ Device (HPET)
             Return (0x00)
         ...
 ```    
-In this case, you can't disbale `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the conditions that turns it off first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you need to add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variabled are renamed and have no matches any more:
+In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the conditions that turns it on first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed `XXXX` and `YYYY` so they have no matches any more. (There's a method that doesn't require binary renames, that I will discuss later):
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
@@ -146,12 +146,25 @@ In this case, you can't disbale `HPET` simply by setting it to `0x00`. Instead, 
         }
     } ...
 	```
-	> **Note** The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables WNTF instead of XXXX and WXPF instead of YYYY. This restores the 2 variables for any other kernel than macOS so everything is back to normal.
+	> **Note** The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
+- I was wondering if it would be possible to achieve the same without using binary renames because it feels a bit redundant to rename 2 parameters system-wide and then restore them for every other OS instead of renaming them *only for* macOS. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. This also worked and looks like this:
 
-- Optional: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+	```asl
+    Scope (_SB.PCI0.LPC.HPET)
+    {
+        Name (XXXX, One)
+        Name (YYYY, Zero)
+        If (_OSI ("Darwin"))
+        {
+            WNTF = XXXX 
+            WXPF = YYYY
+        }
+    } ...
+```
+- **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 ### Disable **`RTC`**
-Disable the Realtime Clock by changening it's status (`_STA`) to zero if macOS is running:
+Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
 
 ```asl
 Method (_STA, 0, NotSerialized)
