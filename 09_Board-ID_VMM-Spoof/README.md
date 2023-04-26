@@ -101,7 +101,7 @@ To apply the Kernel patches, you have 2 options:
 	- Optionally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
 	- Save your config and reboot.
 
-To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working. Remember: these patches have no effect below macOS 11.3.
+To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
 
 Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
 
