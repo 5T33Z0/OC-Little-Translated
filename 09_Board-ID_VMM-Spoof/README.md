@@ -1,6 +1,6 @@
 # Using unsupported Board-IDs with macOS 11.3 and newer
 
-OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
+OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
 
 **TABLE of CONTENTS**
 
