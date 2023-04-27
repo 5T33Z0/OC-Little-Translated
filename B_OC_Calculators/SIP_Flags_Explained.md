@@ -3,8 +3,8 @@
 ## About
 OSX 10.11 (El Capitan) introduced a new security feature called **System Integrity Protection** (or SIP) to improve system security. It's designed to protect the core operating system files and processes from unauthorized access and modification, even by users with administrative privileges. SIP currently provides 12 flags which can be set by calculating a bitmask which can be injected by Boot Managers such as Clover an OpenCore to control the level of SIP. Below you will find the flags and what they do. If you want to calculate your own csr-active-config value, [have a look here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators).
 
-## Flags
-Originally, the bitmask consisted 8 bits. Since macOS Sierra 4 more bits followed, so currbently the bitmask consist of 12 bits:
+## Available Flags
+Originally, the bitmask consisted of 8 bits. Since the release macOS 10.12, 4 more bits followed. Currently the CSR bitmask consist of 12 bits providing the following flags:
 
 Flag | Bit | macOS req.
 -----|-----|------------:
@@ -24,7 +24,7 @@ CSR_ALLOW_UNAUTHENTICATED_ROOT       | 11 | 11+
 
 **Source** https://github.com/apple/darwin-xnu/blob/main/bsd/sys/csr.h
 
-## Explanation
+## Explanation of the flags
 
 ### CSR_ALLOW_UNTRUSTED_KEXTS
 Allows the loading of unsigned kernel extensions (kexts) that have not been explicitly approved by Apple. By default, macOS only allows the loading of kexts that have been signed by Apple or approved by the user through a special process. This flag can be useful for developers or power users who need to use kexts that have not been signed or approved.
@@ -66,4 +66,3 @@ Allows loading of unsigned kernel extensions (kexts) that have not been explicit
 
 ### CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE
 Allows running of executable files that have been blocked by macOS's Gatekeeper. Setting this flag is required when using OCLP or other Post Install patchers which reinstall legacy drivers for video cards that have been removed from macOS Monterey and newer. Once this flag is enabled, you won't be able to download incremental (or delta) system updates. Only the full installer will be avaialable.
-  

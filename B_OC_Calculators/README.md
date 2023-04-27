@@ -3,7 +3,7 @@ This is my clumsy approach to calculate the correct values for the following bit
 
 Bitmask | Description
 ------|-----------
-`csr-active-config` | Bitmask to configure (or disable) System Integrity Protection
+[`csr-active-config`](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) | Bitmask to configure (or disable) System Integrity Protection
 `PickerAttributes` | Bitmask to configure the look and feel of the BootPicker
 `ScanPolicy` | Bitmask to configure the device types and file systems shown in OpenCore's BootPicker 
 `ExposeSensitiveData` | Bitmask to configure Sensitive data exposure to the OS
