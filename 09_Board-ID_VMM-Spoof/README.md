@@ -37,7 +37,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
 ## Use Cases
-1. Installing, running and updating macOS 11.3 and newer on systems with unsupported CPUs and their respective SMBIOS/board-id.
+1. **Installing macOS 11.3+** on systems with unsupported CPUs and their respective SMBIOS/board-id.
 2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 11.3 and newer when using an SMBIOS of a Mac model with a T1/T2 security chip, such as:
 
 	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
@@ -64,11 +64,15 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 - **Booter Patches**
 	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
 	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
+	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
 - **Kernel Patches**
-	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to Enable Board-ID spoof via VMM in macOS 12.0.1+ that allow booting, installing and updating macOS 12.x and newer with an unsupported Board-ID and SMBIOS
-	- **"Force FileVault on Broken Seal"** &rarr; Since installing Drivers back into the system in post-install breaks the security seal, File Vault wouldn't work otherwise
-	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it.
-	- **SurPlus Patches 1 and 2**: Race to condition Fix on Sandy Bridge and older. Fixes issues for macOS 11.3+, where Big Sur often wouldn't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
+	- **"Reroute kern.hv_vmm_present patch (1)"**, 
+	- **"Reroute kern.hv_vmm_present patch (2) Legacy"**, 
+	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** and 
+	- **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
+	- **"Force FileVault on Broken Seal"** &rarr; Mandatory if you are using FileVault since installing Drivers back into the system's root breaks the security seal. 
+	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it. In this case it's needed because root patches for Non-Metal GPUs won't pass library validation tests otherwise.
+	- **SurPlus Patches 1 and 2**: Race to condition fixes for Sandy Bridge and older. Fixes issues in macOS 11.3+, where Big Sur often won't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
 
 **NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
@@ -130,7 +134,12 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes
-After upgrading macOS 11.3+, you probably need to re-install drivers which have been removed from macOS to get graphics acceleration working. For this you can either use the [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or Chris1111's Patchers for [Intel HD 4000](https://github.com/chris1111/Geforce-Kepler-patcher) or [Nvidia Kepler Cards](https://github.com/chris1111/Geforce-Kepler-patcher).
+- After upgrading to macOS 12+, you may have to re-install graphics drivers for legacy iGPU/dGPU which are not supported by macOS any more (like Intel HD 4000 or Nvdia Kepler Cards). To do so, you can use: 
+	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or 
+	- Chris1111's patchers:
+		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) 
+		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher)
+- OCLP's Root Patches [explained](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html)
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
