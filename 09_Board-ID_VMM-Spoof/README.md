@@ -27,7 +27,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
-**CPU**: Basically, every outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
+**CPU**: Basically, any outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
 
 - Sandy Bridge (need additional SurPlus patches)
 - Ivy Bridge
@@ -37,7 +37,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
 ## Use Cases
-1. **Installing macOS 11.3+** on systems with unsupported CPUs and their respective SMBIOS/board-id.
+1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOS/board-id.
 2. **Enabling System Updates**. As a side effect, you can use these patches to workaround issues with System Updates in macOS 11.3 and newer when using an SMBIOS of a Mac model with a T1/T2 security chip, such as:
 
 	- MacBookPro15,1 (`J680`), 15,2 (`J132`), 15,3 (`J780`), 15,4 (`J213`)
@@ -49,12 +49,12 @@ I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T3
 	- iMacPro1,1 (`J137`)
 	- MacPro7,1 (`J160`)
 
-Under the following circumstances you won't get System Update Notifications and therefore you won't be able to download OTA System Updates:
+In the following cases you won't receive System Update Notifications and therefore you won't be able to download OTA System Updates:
 
-- Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
-- Using `csr-active-config` value containing bit 5 "Allow Apple Internal" and bit 12 "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
+1. Using `csr-active-config` value containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
+2. Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 
-Disabling `SecureBootModel` and `SIP` is mandatory if your iGPU/dGPU is no longer supported by macOS 11.3 and newer in order to re-install removed graphics drivers using OCLP or other tools (see Credits for details). This is the case for Intel HD 4000 on-board graphics and NVIDIA Kepler cards which have been removed from macOS 12+. Otherwise you can't install (nor load) the drivers and the system will crash on boot since re-installing the drivers breaks the security seal of the system partition and conflicts with the security policy of `SecureBootModel`. 
+Disabling SIP is necessary in order to re-install [components which have been removed from macOS](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) because they cannot be injected by Bootloaders. But if these 2 SIP flags are set, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled for the mentioned SMBIOSes to boot the system afterwards.
 
 So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
@@ -77,7 +77,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 **NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 ## Adding the Patches
-:warning: Before adding the patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
+> **warning**: Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 ### Booter Patches
 - Copy the raw text of the OCLP [config](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) to the clipboard
@@ -135,11 +135,10 @@ Installation went smoothly and macOS 12.1 booted without issues:
 
 ## Notes
 - After upgrading to macOS 12+, you may have to re-install graphics drivers for legacy iGPU/dGPU which are not supported by macOS any more (like Intel HD 4000 or Nvdia Kepler Cards). To do so, you can use: 
-	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (recommended) or 
+	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (highly recommended) or 
 	- Chris1111's patchers:
 		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) 
 		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher)
-- OCLP's Root Patches [explained](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html)
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
