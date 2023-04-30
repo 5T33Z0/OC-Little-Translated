@@ -33,8 +33,8 @@ I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.c
 
 - Sandy Bridge (need SurPlus patches)
 - Ivy Bridge
-- Haswell (partially)
-- Skylake (to continue using `iMac17,1` SMBIOS on macOS 13. Requires additional [iGPU spoof on Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
+- Haswell
+- Skylake (to continue using SMBIOS `iMac17,1` on macOS 13). Requires additional [iGPU spoof for Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
 
 ## Use Cases
 1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOS/board-id.
@@ -134,11 +134,11 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes
-- After upgrading to macOS 12+, you may have to re-install graphics drivers for legacy iGPU/dGPU which are not supported by macOS any more (like Intel HD 4000 or Nvdia Kepler Cards). To do so, you can use: 
+- After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use: 
 	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (highly recommended) or 
 	- Chris1111's patchers:
-		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) 
-		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher)
+		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) (for Intel HD 4000)
+		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher)(for NVIDIA Kepler Cards)
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
