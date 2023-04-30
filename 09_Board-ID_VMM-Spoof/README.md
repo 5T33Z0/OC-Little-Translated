@@ -25,16 +25,16 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 
 This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
 
+I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
+
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
-**CPU**: Basically, any outdated SMBIOS that supports your CPU but is no longer supported by macOS Monterey and newer. This affects processors of the following Intel CPU families (newer ones don't need this since they are still supported):
+**CPU**: The following Intel CPU families and corresponding SMBIOSes (newer ones don't need this since they are still supported): 
 
-- Sandy Bridge (need additional SurPlus patches)
+- Sandy Bridge (need SurPlus patches)
 - Ivy Bridge
 - Haswell (partially)
 - Skylake (to continue using `iMac17,1` SMBIOS on macOS 13. Requires additional [iGPU spoof on Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
-
-I am successfully using them on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Ventura. 
 
 ## Use Cases
 1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOS/board-id.
@@ -54,7 +54,7 @@ In the following cases you won't receive System Update Notifications and therefo
 1. Using `csr-active-config` value containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
 2. Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 
-Disabling SIP is necessary in order to re-install [components which have been removed from macOS](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) because they cannot be injected by Bootloaders. But if these 2 SIP flags are set, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled for the mentioned SMBIOSes to boot the system afterwards.
+Disabling SIP is necessary in order to re-install [components which have been removed from macOS](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) because they cannot be injected by Bootloaders. But if these 2 SIP flags are set, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled to boot the system afterwards.
 
 So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
@@ -77,7 +77,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 **NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 ## Adding the Patches
-> **warning**: Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
+> **Warning**: Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 ### Booter Patches
 - Copy the raw text of the OCLP [config](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) to the clipboard
