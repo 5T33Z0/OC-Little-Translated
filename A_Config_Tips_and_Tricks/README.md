@@ -4,14 +4,37 @@ This section contains a small collection of useful configuration tips for OpenCo
 **TABLE of CONTENTS**
 
 - [OpenCore Troubleshooting Quick Tips](#opencore-troubleshooting-quick-tips)
+	- [`MinDate`/`MinVersion` settings for the APFS driver](#mindateminversion-settings-for-the-apfs-driver)
 - [I. Updating config.plist and fixing errors](#i-updating-configplist-and-fixing-errors)
+	- [Automated config upgrade (recommended)](#automated-config-upgrade-recommended)
+	- [Manual upgrade and error correction (old)](#manual-upgrade-and-error-correction-old)
+	- [A personal note on using Configurator Apps](#a-personal-note-on-using-configurator-apps)
 - [II. Quick fixes for Boot Problems](#ii-quick-fixes-for-boot-problems)
 - [III. Security Settings](#iii-security-settings)
+	- [How to disable Single User Mode](#how-to-disable-single-user-mode)
+	- [How to disable System Integrity Protection (SIP)](#how-to-disable-system-integrity-protection-sip)
 - [IV. Adjust Boot Picker Attributes, enable Mouse Support](#iv-adjust-boot-picker-attributes-enable-mouse-support)
 - [V. Customizing Boot Options](#v-customizing-boot-options)
+	- [Set default boot drive in BootPicker](#set-default-boot-drive-in-bootpicker)
+	- [Enable Apple Hotkey functions](#enable-apple-hotkey-functions)
+	- [Accelerate boot (results will vary)](#accelerate-boot-results-will-vary)
+	- [Boot variants (Selection)](#boot-variants-selection)
+		- [Manual selection of the OS without GUI (default)](#manual-selection-of-the-os-without-gui-default)
+		- [Manual selection of the OS with GUI (requires OpenCanopy and Resources folder)](#manual-selection-of-the-os-with-gui-requires-opencanopy-and-resources-folder)
+		- [Boot the OS automatically from the "Default" volume (no GUI)](#boot-the-os-automatically-from-the-default-volume-no-gui)
+		- [Skip the BootPicker to load macOS automatically](#skip-the-bootpicker-to-load-macos-automatically)
 - [VI. Resolving issues with NVRAM](#vi-resolving-issues-with-nvram)
+	- [Resetting NVRAM](#resetting-nvram)
+		- [OC ≤ 0.8.3](#oc--083)
+		- [OC ≥ 0.8.4](#oc--084)
+		- [Keep Boot entries after NVRAM reset](#keep-boot-entries-after-nvram-reset)
+	- [Fixing falsely reported OpenCore version](#fixing-falsely-reported-opencore-version)
 - [VII. Prohibit SMBIOS injection into other OSes](#vii-prohibit-smbios-injection-into-other-oses)
 - [VIII. Exchanging SMBIOS Data between OpenCore and Clover](#viii-exchanging-smbios-data-between-opencore-and-clover)
+	- [Manual method](#manual-method)
+		- [Troubleshooting](#troubleshooting)
+	- [SMBIOS Data Import/Export with OCAT](#smbios-data-importexport-with-ocat)
+	- [1-Click-Solution for Clover Users](#1-click-solution-for-clover-users)
 - [Further Resources](#further-resources)
 
 ## OpenCore Troubleshooting Quick Tips
@@ -197,23 +220,28 @@ Great for dual boot setups. Combine with `LauncherOption` `Full` or `Short`to pr
 
 **NOTE**: If `PollAppleHotkeys` is enabled, holding `X` after turning on the system skips the bootpicker and automatically boots into the default volume.
 
-#### Boot the OS automatically from volume defined as "Default" (no GUI)
+#### Boot the OS automatically from the "Default" volume (no GUI)
 
 **PickerMode** = `Default`</br> 
 **ShowPicker** = `No`
 
-#### Start macOS automatically (no GUI, fast)
+> **Warning** This option can be problematic if have Windows installed. Beecaus if you perform an NVRAM reset and `LauncherPath` is not enabled, Windows might take over the first slot of boot order and then you cannot enter OC's BootPicker any more.
 
-The following settings will boot macOS from first APFS volume it finds. Combine it with `LauncherOption` `Full` or `Short`to protect you against Windows Boot Manager taking over the first slot of the bootmenu.
+#### Skip the BootPicker to load macOS automatically
+
+The following settings will boot macOS from first APFS volume it finds. Combine it with `LauncherOption` `Full` or `Short`to prohobit Windows Boot Manager from taking over the first slot of the bootmenu.
 
 **Prerequisites**: enabled `PollAppleHotkeys` 
 
-**PickerMode** = `Apple`</br>
-**ShowPicker** = `No`
+**PickerMode** = `Builtin`</br>
+**ShowPicker** = `Yes`
 
-**NOTE**: Hold `X` after turning on the system to directly boot into macOS
+**NOTE**: Hold `X` after turning on the system to directly boot into macOS – even if you get a black screen instead of the BootPicker.
 
-This is a great option for Laptop users who run Windows and macOS from the same disk, but use macOS most of the time. It also prevents the pesky *WindowsBootManager* from hi-jacking the top slot of the boot order which would give you a hard time trying to get back into macOS later on, if the BootPicker is disabled and you forgot to declare the macOS disk as the default boot volume – happens all the time…
+This is a reliably workaround for this issue:
+
+- Instead of the BootPicker, there's only a black screen (seems to be related to GOP Rendering)
+- 5 secends later (default delay) the system boots into Windows becasue it inhibits the first Slot in the BootPicker
 
 :bulb: If you want to bypass all the SSDTs injections into Windows, you either need to boot it via the BIOS Boot Menu or use [OpenCore_NO_ACPI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI). Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
 
