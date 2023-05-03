@@ -4,7 +4,7 @@
 
 To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding **`SSDT-PNLF`** to work. If you are using macOS Catalina or newer, you also need a Fake Ambient Light Sensor **([`SSDT-ALS0`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)))** so that the brightness level doesn't reset to maximum after rebooting.
 
-### Method 1: **Using SSDTTime** (automated process)
+### Method 1: **Using SSDTTime** (automated process, recommended)
 
 With the python script **SSDTTime**, you can generate `SSDT-PNLF` by analyzing your system's `DSDT`.
 
@@ -28,20 +28,20 @@ With the python script **SSDTTime**, you can generate `SSDT-PNLF` by analyzing y
 
 ### Method 3: **ACPI injection method**:
 
-- **Kext**: ACPIBacklight.kext (Disable WhateverGreen's built-in brightness driver.)
+- **Kext**: ACPIBacklight.kext (disable WhateverGreen's built-in brightness driver)
 - **Patch**: See "ACPI Brightness Patch" method
 
 ### **Other methods:** Follow the kext + patch principle and try for yourself.
 
-**NOTE**: The official OpenCore package contains pre-compiled `SSDT-PNFL.aml` patches under "Docs". So in case you're not sure what to do you can use these instead.
+**NOTE**: The official OpenCore package contains a pre-compiled `SSDT-PNFL.aml` under "Docs". When in doubt, use this.
 
 ## Required Kexts
 
-**I. Kexts:** pick *one* of them, *not* all!
+**I. Kexts:** pick *one* option, *not* all of them!
 
-- [**Lilu**](https://github.com/acidanthera/Lilu/releases) plus [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver **or**
-- [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
-- [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/) (Deprecated. Predecessor of IntelBacklight.kext.)
+- Option 1: [**Lilu**](https://github.com/acidanthera/Lilu/releases) plus [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver) **or**
+- Option 2: [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
+- Option 3: [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/) (Deprecated. Predecessor of IntelBacklight.kext.)
 
 By default, `WhateverGreen.kext` will load the brightness driver. If you want to use other brightness drivers you should disable Whatevergreen's built-in backlight control. To disable it, do the following:
 
