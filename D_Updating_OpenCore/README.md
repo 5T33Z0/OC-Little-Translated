@@ -15,8 +15,9 @@
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
-- [Switching between Release and Debug build](#switching-between-release-and-debug-build)
-- [Epilogue: OCAT vs. updating OpenCore manually](#epilogue-ocat-vs-updating-opencore-manually)
+- [Integrating Drivers from OcBinaryData](#integrating-drivers-from-ocbinarydata)
+- [Switching between Release and Debug builds](#switching-between-release-and-debug-builds)
+- [Thoughts on updating OpenCore with OCAT vs. updating manually](#thoughts-on-updating-opencore-with-ocat-vs-updating-manually)
 - [Notes](#notes)
 
 ## About
@@ -137,7 +138,18 @@ This error occurs when opening a `config.plist` which was created for a differen
 3. It will download and integrate the latest version of OpenCore into the database
 4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
 
-## Switching between Release and Debug build
+## Integrating Drivers from OcBinaryData
+
+OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo automatically, so you have add them to the database manually. Usually, this only concerns the HFS+ driver, so it's not really a big deal:
+
+- Go to the [**OcBinaryData**](https://github.com/acidanthera/OcBinaryData/) repo
+- Click on "Code", select "Download ZIP" and unpack it
+- Place the Drivers here (Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files and folders):
+  - `.ocat/Database/EFI/OC/Drivers/` (for the "Release" version)
+  - `.ocat/Database/EFI/OC/Drivers/` (for the "Dev" version)
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
+
+## Switching between Release and Debug builds
 
 To switch from the RELEASE to the DEBUG version of OpenCore, do the following:
 
@@ -156,15 +168,21 @@ To revert back to the RELEASE build:
 - Update OpenCore files and Drivers
 - Save and reboot
 
-## Epilogue: OCAT vs. updating OpenCore manually
+## Thoughts on updating OpenCore with OCAT vs. updating manually
 
-If you don't believe me how easy updating and maintaining OpenCore with OCAT actually is, just try it for yourself. And then have a look at the convoluted update procedure provided by Dortania again. [**Their method**](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) requires at least 7 different tools to get the job done: one for mounting the ESP, one for downloading kexts, one for copying them over to the EFI folder (if you won't do it manually), one for comparing the config with the sample.plist, one for editing it and one for validating it. 
+If you don't believe how easy updating and maintaining OpenCore with OCAT actually is, just try it for yourself. And then have a look at the convoluted manual update procedure provided by Dortania again. [**Their method**](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) requires at least 7 different tools to get the job done:
+- one for mounting the ESP, 
+- one for downloading Kexts, 
+- one for copying them over to the EFI folder, 
+- one for comparing the config with the sample.plist, 
+- one for editing it,
+- one for validating it 
 
-But that's not even the whole story. Even with all these tools you still have to sink a lot of time into manually updating OpenCore and drivers, repeatedly editing and (re-)checking the config over and over again to bring it up to par with the sample.plist. This process takes at least 10 to 15 minutes every time – just to update from one incremental release to the next – imagine how long it would take if the increment was  0.0.5 or more…
+ Even with all these tools you still have to sink a lot of time into manually updating OpenCore and drivers, repeatedly editing and (re-)checking the config over and over again to bring it up to par with the sample.plist. This process takes at least 10 to 15 minutes every time – just to update from one incremental release to the next – imagine how long it would take if the increment was  0.0.5 or more…
 
 The manual "method" is old-fashioned, anachronistic and feels disconnected from the aspirations of the OpenCore project: at the top, you have this self-proclaimed gold standard, always-on-the-edge-of-technology Boot Manager which is steadily improving. At the bottom, users you have to deal with a plethora of disconnected, "low-tech" tools that make them jump through hoops, following outdated, user-unfriendly procedures for updating OpenCore and maintaining the config.plist.
 
-Yet, manually updating OpenCore is heavily promoted on reddit and discord by instituting and enforcing rules denying support to anyone using configurator apps like OCAT. They are singled out and discriminated against just for mentioning configurator tools - it doesn't make sense. And it also leaves me with a bitter taste as far as tolerance and empathy within the Hackintosh scene is concerned.
+Yet, manually updating OpenCore is heavily promoted on reddit and discord by instituting and enforcing rules denying support to anyone using configurator apps like OCAT. They are singled out and discriminated against just for mentioning them - it doesn't make sense. And it also leaves me with a bitter taste as far as **tolerance** and **empathy** within the Hackintosh scene is concerned.
 
 If Acidanthera would actually come up with a better all-in-one solution than OCAT, I would highly appreciate and embrace it. [**HackUpdate**](https://github.com/corpnewt/HackUpdate) is a step in the right direction, but in terms of user-friendliness it's not there yet.  
 
