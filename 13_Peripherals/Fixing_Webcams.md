@@ -42,6 +42,8 @@ Once SIP has been re-enabled, the prompts for granting access to the cam/mic wil
 
 If you can't boot with SIP enabled, you must add permissions to the SQL3 database manually, as explained here: [Unable to grant special permissions to apps](https://dortania.github.io/OpenCore-Legacy-Patcher/ACCEL.html#unable-to-grant-special-permissions-to-apps-ie-camera-access-to-zoom)
 
+> **Note** This guide is applicable to *any* 3rd party app which requires access to the microphone and/or camera – Digital Audio Workstations and Video Editing Software included!
+
 ## Furter Resources
 
 - **More about tcc**: [What tcc does and doesn't](https://eclecticlight.co/2023/02/10/privacy-what-tcc-does-and-doesnt)
