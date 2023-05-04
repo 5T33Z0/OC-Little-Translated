@@ -1,12 +1,12 @@
 # Brightness Controls (`SSDT-PNLF`)
 
-## `PNLF` Injection Methods
+In order to enable backlight controls on laptops, there are several ways to do so. It requires a combination of one or two kexts and a corresponding **`SSDT-PNLF`** to work. If you are using macOS Catalina or newer, you also need a Fake Ambient Light Sensor ([**`SSDT-ALS0`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))) so that the brightness level doesn't reset to maximum after rebooting.
 
-To inject Brightness Control, there are several ways to do so. But no matter which one you choose, it requires the combination of a kext and a corresponding **`SSDT-PNLF`** to work. If you are using macOS Catalina or newer, you also need a Fake Ambient Light Sensor **([`SSDT-ALS0`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)))** so that the brightness level doesn't reset to maximum after rebooting.
+## **Using SSDTTime** (automated process, recommended)
 
-### Method 1: **Using SSDTTime** (automated process, recommended)
+The python script **SSDTTime** can analyze your system's `DSDT` and generate a working custom `SSDT-PNLF` automatically. This is the easiest method which also produces the smallest amount of code. You don't need to make any manual edits to make it work. 
 
-With the python script **SSDTTime**, you can generate `SSDT-PNLF` by analyzing your system's `DSDT`.
+**Required Kexts**: Lilu.kext + WhateverGreen.kext
 
 **HOW TO:**
 
@@ -19,60 +19,58 @@ With the python script **SSDTTime**, you can generate `SSDT-PNLF` by analyzing y
 7. Add Lilu and WhateverGreen kexts to `EFI/OC/Kexts` and your `config.plist`
 8. Save and Reboot.
 
-**NOTE**: In my test on an Ivy Bridge Notebook, the maximum brightness was not as bright as what I get when using the SSDT-PNLF sample included in the OpenCore Package. So I would recommend using method 2 instead.
+### Modifiying max brightness
 
-### Method 2: **Common injection method**
+SSDTTime's `Results` folder also contains the disassembled ASL file `SSDT-PNLF.dsl`. If you open it in maciASL, you see a section which is commented out:
 
-- **Kexts**: Lilu.kext + WhateverGreen.kext
-- **Patch**: Custom brightness patch or RehabMan brightness patch
+```asl
+// _UID |     Supported Platform(s)       | PWMMax
+// ----------------------------------------------
+//  14  | Arrandale, Sandy/Ivy Bridge     | 0x0710
+//  15  | Haswell/Broadwell               | 0x0AD9
+//  16  | Skylake/Kaby Lake, some Haswell | 0x056C
+//  17  | Custom LMAX                     | 0x07A1
+//  18  | Custom LMAX                     | 0x1499
+//  19  | CoffeeLake and newer            | 0xFFFF
+//  99  | Other (requires custom applbkl-name/applbkl-data dev props)
 
-### Method 3: **ACPI injection method**:
+Name (_UID, 14)  // _UID: Unique ID: 19 
+```
 
-- **Kext**: ACPIBacklight.kext (disable WhateverGreen's built-in brightness driver)
-- **Patch**: See "ACPI Brightness Patch" method
+This `_UID` can be used to select different brightness curves stored in Whatevergreen with different levels of max brightness. In my test on an Ivy Bridge Notebook, the maximum brightness was not bright enough when using `_UID` 14, so I changed it to 15 for Haswell/Broadwell which allowed it to be brighter.
 
-### **Other methods:** Follow the kext + patch principle and try for yourself.
+> **Note** When working with the .dsl file, the _UID is presented in decimal. Once you export the SSDT-PNLF as .aml, the value will be converted to hex, so `14` will become `0x0E`, for example. So keep in mind that you have to convert the value to hex when changing it in the .aml directly.
 
-**NOTE**: The official OpenCore package contains a pre-compiled `SSDT-PNFL.aml` under "Docs". When in doubt, use this.
+## Other Methods
 
-## Required Kexts
+Listed below are manual approaches for fixing Laptop backlight controls. Try either or, not all!
 
-**I. Kexts:** pick *one* option, *not* all of them!
+### Acidanthera's Brightnes Patch
 
-- Option 1: [**Lilu**](https://github.com/acidanthera/Lilu/releases) plus [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver) **or**
-- Option 2: [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/) **or**
-- Option 3: [**ACPIBacklight.kext**](https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/) (Deprecated. Predecessor of IntelBacklight.kext.)
+- Add ***SSDT-PNLF*** (included in OpenCore Package)
+- Add [**Lilu**](https://github.com/acidanthera/Lilu/releases) plus [**WhateverGreen.kext**](https://github.com/acidanthera/WhateverGreen/releases) (has a built-in brightness driver)
+- Follow [Dortania's guide](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight-methods/manual.html#on-windows) to edit it
 
-By default, `WhateverGreen.kext` will load the brightness driver. If you want to use other brightness drivers you should disable Whatevergreen's built-in backlight control. To disable it, do the following:
-
-- Add the boot-arg: `applbkl=0`
-- Modify the driver's settings (right-click on the kext and select "Show Package Contents"), open the `Info.plist` and look for: `\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
-
-**II. Patches:** (either or, based on the chosen injection method)
-  
-  - Acidanthera's Brightnes Patch:
-  	- ***SSDT-PNLF*** (included in OpenCore Package. Recommended.)
-  - Custom Brightness Patches:
-    - ***SSDT-PNLF-SNB_IVY***: For 2nd and 3rd Gen Intel CPUs
-    - ***SSDT-PNLF-Haswell_Broadwell***: For 4th and 5th Gen
-    - ***SSDT-PNLF-SKL_KBL***: 6th and 7th Gen
-    - ***SSDT-PNLF-CFL***: 8th gen and newer
-
-    The above patches are inserted in `_SB.PCI0.GFX0`(Fixes starting WIN from OpenCore).
-
-  - RehabMan Brightness Patches from his [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):
-  
+### IntelBacklight Patch (outdated)
+- Add [**IntelBacklight.kext**](https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/)
+- Disable `WhateverGreens` brightness driver:
+	- Add the boot-arg: `applbkl=0` or add DeviceProperty `applbkl` and set it to 0.
+	- Modify the driver's settings (right-click on the kext and select "Show Package Contents"), open the `Info.plist` and look for: `\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
+- Add Brightness Patch from [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):  
     - [**SSDT-PNLF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl) 
     - [**SSDT-PNLFCFL.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
     - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Cofiguration File)
-  
-	RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following rename:
+- Edit `SSDT-RMCF` to configure the actual `SSDT-PNLF` file. 
 
-	```text
-	Name: PNLF to XNLF  
-	Find: 504E4C46  
-	Replace: 584E4C46
-	```
+RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following binary rename:
+
+```text
+Name: PNLF to XNLF  
+Find: 504E4C46  
+Replace: 584E4C46
+```
+
+### [ACPI Brightness Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch#acpi-brightness-patch) (deprecated)
 
 ## NOTES
 - When choosing an injection method, you should clear the driver, patch, and settings related to other methods.

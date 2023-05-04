@@ -23,6 +23,7 @@ You can try this method if the common injection methods do not work. It requires
 ![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch/Example.jpg?raw=true.jpg)
 
 ## Notes and Credits
+- [**Guide by Rehabman**](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/)
 - If `ACPIBacklight.kext` is used, you need to disable the built-in brightness driver of `Whatevergreen.kext` by adding `applbkl=0` to boot-args.
 - This method is pretty much deprecated now. You may use the `SSDT-PNLF` sample included in the OpenCore package instead. But maybe this does work better on some legacy notebooks.
 - `ACPIBacklight.kext` by RehabMan: https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/
