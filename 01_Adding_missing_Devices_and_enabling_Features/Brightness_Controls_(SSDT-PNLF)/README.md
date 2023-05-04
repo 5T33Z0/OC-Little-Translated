@@ -59,7 +59,7 @@ Listed below are manual approaches for fixing Laptop backlight controls. Try eit
 - Add Brightness Patch from [RehabMan's Laptop Hotpatch Collection](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch):  
     - [**SSDT-PNLF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl) 
     - [**SSDT-PNLFCFL.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl) (For Coffee Lake+)
-    - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Cofiguration File)
+    - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Configuration File)
 - Edit `SSDT-RMCF` to configure the actual `SSDT-PNLF` file. 
 
 RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following binary rename:
