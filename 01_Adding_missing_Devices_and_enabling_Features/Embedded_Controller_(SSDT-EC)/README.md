@@ -1,28 +1,36 @@
 # Adding a fake Embedded Controller (`SSDT-EC`) or (`SSDT-EC-USBX`) 
 
-## About Embedded Controllers
+## What's an EC?
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.
 
 ### Why do I need a fake/virtual EC?
-On Desktop PCs, the Embedded Controller usually isn't named correctly for macOS, so it can't attach to the `AppleACPIEC` driver. In this case this is a good thing, since `EC` devices from PCs are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from connecting to an existing `EC`. To ensure thes, we disable the device in the system's `DSDT` and add a fake/virtual `EC` for macOS to play with instead.
 
-In macOS Catalina and newer, checks for varifying the presence of the EC have been implemented. So if it's not present, macOS will stall and you will receive status messages like `apfs_module_start…` or `Waiting for Root device` or `Waiting on…IOResources…` or `previous shutdown cause…`
+Since macOS Catalina, the way devices are handled by the Embedded Controller has changed and checks for verifying its presence have been implemented ([more details](https://github.com/khronokernel/EC-fix-guide#so-why-do-i-get-these-errors)). So if it's not present, macOS boot will stall and you will receive status messages including:
+
+- `apfs_module_start…` or 
+- `Waiting for Root device` or 
+- `Waiting on…IOResources…` or 
+- `previous shutdown cause…`
+
+On most wintel systems (some Lenovo Laptops excluded), the Embedded Controller is not named `EC__` but `EC0_`, `H_EC`, `ECDV` or `PGEC` so macOS doesn't detect it and can't attach the required `AppleACPIEC` driver to it.
+
+For Desktop PCs this is a good thing, since Embedded Controllers of PC mainboards are usually incompatible with macOS and may break at any time. In other words: on Desktops, `AppleACPIEC` kext must be prevented from connecting to an existing `EC`. To ensure this, we disable the device when macOS is running add a fake/virtual `EC` so macOS is happy.
+
+On Laptops, the `EC` microcontroller actually really exists but may not be detected because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
-In order to get USB Power Management working properly on **Skylake and newer CPUs**, we have to add a fake `EC` as well as a `USBX` device to supply USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient (if required at all).
+In order to get USB Power Management working properly on **Skylake and newer**, we have to add a fake `EC` as well as a `USBX` device to inject USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient.
 
-On Laptops, the `EC` microcontroller actually really exists but may be not detected because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
+### SSDT-EC in a nutshell
 
-#### SSDT-EC vs SSDT-EC-USBX in a nutshell
-
-- On **Desktops**, an existing `EC` has to be disabled and a fake EC has to be added.
-- On **Laptops**, we just need an additional fake EC to be present (not always required).
-- **Skylake** and newer Intel CPUs require `SSDT-EC-USBX`, older CPUs only require `SSDT-EC`.
+- On **Desktops**, an existing `EC` has to be disabled and a fake one has to be added.
+- On **Laptops**, we just need an additional fake `EC` if the ACPI name of the Embedded Controller isn't `EC__` already.
+- **Skylake** and newer Intel CPUs require `SSDT-EC-USBX`, older CPUs require `SSDT-EC`.
 
 ## Adding a fake EC Device
-There are 2 methods for adding a fake or virtual EC: either by manually editing the required SSDT sample (Method 1) or by using SSDTTime, which can generate the required SSDT-EC automatically based on analyzing the DSDT (Method 2).
+There are 2 methods for adding a fake or virtual EC: automated (Method 1) or manual (Method 2).
 
-Use either one method or the other, not both! :warning: DON'T rename `EC0`, `H_EC`, etc. to `EC` with binary renames. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
+Use either one method or the other, not both! :warning: DON'T rename `EC0`, `H_EC`, etc. to `EC` desktop systems. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
 
 ### Method 1: automated SSDT generation using SSDTTime
 
@@ -36,8 +44,8 @@ With the python script **SSDTTime**, you can generate SSDT-EC and SSDT-USBX.
 4. For Skylake and newer CPUs you also need to generate "USBX" as well
 5. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 6. Copy them to `EFI/OC/ACPI`
-6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
-7. Save and Reboot.
+7. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+8. Save and Reboot.
 
 **Tip**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
@@ -45,11 +53,11 @@ With the python script **SSDTTime**, you can generate SSDT-EC and SSDT-USBX.
 1. In the `DSDT`, search for `PNP0C09` 
 2. If multiple devices with the EisaID `PNP0C09` are discovered, confirm that it belongs to an EC Device (`EC`, `H_EC`, `EC0`, etc.).
 3. Depending on the type of system you are using, open either `SSDT-EC.dsl`, `SSDT-EC-USBX_Desktop.dsl` or `SSDT-EC-USBX_Laptop.dsl`
-4. Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for more instructions.
-5. Export the file as .aml (ACPI Machine Language Binary) and add it to EFI/OC/ACPI and your Config
+4. Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for further instructions.
+5. Export the file as .aml (ACPI Machine Language Binary) and add it to `EFI/OC/ACPI` and your Config
 6. Save and Reboot.
 
-**Example**: existing EC device in a Laptop DSDT</br>
+**Screenshot**: `EC` device in a Lenovo Laptop which does't require `SSDT-EC` because it already has the correct name so macOS detects it:</br>
 ![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
 
 #### Additional Steps (Desktop PCs only)
@@ -119,7 +127,7 @@ Return (Package (0x08)
 })
 ...
 ```
-Depending on the SMBIOS you are using, you may have to adjust these values accordingly. You find the values used in the real Macs in the following table.
+Depending on the SMBIOS you are using, you may have to adjust these values accordingly. The table below lists values used in real Macs:.
 
 |SMBIOS|kUSBSleepPowerSupply|kUSBSleepPortCurrentLimit|kUSBWakePowerSupply|kUSBWakePortCurrentLimit|
 |-------|:----:|:----:|:----:|:----:|
@@ -155,4 +163,5 @@ As you can see, desktop machines (iMac, iMacPro and MacPrp) use the same values,
 
 ## Credits
 - Apple for IORegistryExplorer
+- khronokernel for explanations about how EC works in macOS 
 - CorpNewt for SSDTTime
