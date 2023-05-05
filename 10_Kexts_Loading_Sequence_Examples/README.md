@@ -118,10 +118,10 @@ Most Intel Desktop configs will at least contain `Lilu`, `VirtualSMC` (Plugins a
 
 This is how a possible sequence of kexts for a Laptop might look. In this example, the Trackpad requires `VoodooPS2Controller`, WiFi and BT are by Intel and the Ethernet card is from Realtek. Depending on your Laptop components, Kexts 10 to 17 could be something else entirely.
 
-**Note about VirtzalSMC sensor plugins**
-
-- Dell users can add `SMCDellSensors` for temperature monitoring and fan control.
-- If your laptop has a built-in compatible brightness sensor, you can add `SMCLightSensor` 
+> **Note**: VirtualSMC sensor plugins
+>
+>- Dell users can add `SMCDellSensors` for temperature monitoring and fan control.
+>- If your laptop has a built-in compatible brightness sensor, you can add `SMCLightSensor` 
 
 ## Notes
 - :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
