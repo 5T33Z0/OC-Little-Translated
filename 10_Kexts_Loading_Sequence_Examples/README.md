@@ -97,11 +97,11 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 
 > **Warning**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.
 
-:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
+#### :bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
 
-I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture).
+I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
 
-This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect resolves this issue.
+This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
 
 ### Example 8: Intel WiFi and Bluetooth 
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
