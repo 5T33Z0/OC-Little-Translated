@@ -18,6 +18,11 @@ For Desktop PCs this is a good thing, since Embedded Controllers of PC mainboard
 
 On Laptops, the `EC` microcontroller actually really exists but may not be detected because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
+| ![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
+|:--| 
+| **Screensot**: `EC` device in a Lenovo Laptop which does't require `SSDT-EC` because it already has the correct name so macOS detects it 
+
+
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
 In order to get USB Power Management working properly on **Skylake and newer**, we have to add a fake `EC` as well as a `USBX` device to inject USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient.
 
@@ -56,9 +61,6 @@ With the python script **SSDTTime**, you can generate SSDT-EC and SSDT-USBX.
 4. Modify the chosen SSDT as needed so the PCI paths and name of the Low Pin Configuration Bus according to what's used in your `DSDT` (either `LPCB`or `LPC`). Read the comments in the .dsl files for further instructions.
 5. Export the file as .aml (ACPI Machine Language Binary) and add it to `EFI/OC/ACPI` and your Config
 6. Save and Reboot.
-
-**Screenshot**: `EC` device in a Lenovo Laptop which does't require `SSDT-EC` because it already has the correct name so macOS detects it:</br>
-![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
 
 #### Additional Steps (Desktop PCs only)
 To ensure that the existing EC in your `DSDT` does not attach to the `AppleACPIEC` driver, do the following after rebooting:
