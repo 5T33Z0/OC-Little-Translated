@@ -83,19 +83,25 @@ Any additional kexts must be placed after the mandatory kexts.
 
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
-- Kexts have to be loaded in the correct order/sequence (otherwise boot crashes)
-- You have to make use of `MinKernel` and `MaxKernel` sections to control which kexts are loaded for different versions of macOS 
-- `AirportBrcomFixup` is for enabling WiFi. It contains 2 additional kexts as Plugins (only one of them should be enabled at any time):
+1. Kexts have to be loaded in the correct order/sequence (otherwise boot crashes). When in doubt, create an OC Snapshot in ProperTree – it can fix the order if it's incorrect.
+2. You have to make use of `MinKernel` and `MaxKernel` settings to control which kexts are loaded for different versions of macOS
+3. `AirportBrcomFixup` is for enabling WiFi. It contains 2 additional kexts as Plugins (only one of them should be enabled at any time):
 	- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 and newer)
 	- `AirPortBrcm4360_Injector.kext` (compatible with macOS 10.8 to 10.15)
-- For Bluetooth, various kexts and combinations are necessary:
-	- `BlueToolFixup.kext`: For macOS 12 and newer. Contains Firmware Data (MinKernel 21.0 and newer only).
+4. For Bluetooth, various kexts and combinations are necessary:
+	- `BlueToolFixup.kext`: For macOS 12 and newer. Contains Firmware Data (MinKernel 21.0).
 	- `BrcmFirmwareData.kext`: contains necessary firmware. Required for macOS 10.8 to 11.x (MaxKernel 20.9.9)
-	- `BrcmPatchRAM.kext`: For 10.10 or earlier.
+	- `BrcmPatchRAM.kext`: For 10.10 or earlier
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 
-:warning: **CAUTION**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers and needs to be installed to `/System/Library/Extensions` (/Library/Extensions on 10.11 and later) instead. In this case, `BrcmFirmwareData.kext`is not required.
+> **Warning**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.
+
+:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
+
+I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture).
+
+This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect resolves this issue.
 
 ### Example 8: Intel WiFi and Bluetooth 
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
