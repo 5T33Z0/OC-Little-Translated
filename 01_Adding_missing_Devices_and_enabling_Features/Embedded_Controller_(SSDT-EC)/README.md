@@ -18,7 +18,7 @@ For Desktop PCs this is a good thing, since Embedded Controllers of PC mainboard
 
 On Laptops, the `EC` microcontroller actually really exists but may not be detected because macOS expects a different name than what's provided by the system's `DSDT`. In this case we just use a fake EC to keep macOS happy.
 
-| ![EC](https://user-images.githubusercontent.com/76865553/164182710-cd33bf84-68e1-4b1c-bc23-ad039adcb16a.png)
+| ![EC](https://user-images.githubusercontent.com/76865553/236379168-dad17c9e-da01-4162-865b-a754a438ba83.png)
 |:--| 
 | **Screensot**: `EC` device in a Lenovo Laptop which does't require `SSDT-EC` because it already has the correct name so macOS detects it 
 
