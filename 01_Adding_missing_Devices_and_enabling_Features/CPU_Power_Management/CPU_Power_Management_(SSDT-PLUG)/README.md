@@ -1,7 +1,7 @@
 # Enabling CPU Power Management (`SSDT-PLUG`)
 
 ## Description
-Enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake reuqires `SSDT-PLUG-ALT.aml` instead.
+Enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake requires `SSDT-PLUG-ALT.aml` instead.
 
 ## Patching method 1: automated, using SSDTTime
 The manual patching method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the SSDT-PLUG for you by analyzing your system's `DSDT`.
