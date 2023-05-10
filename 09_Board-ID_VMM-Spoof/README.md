@@ -15,7 +15,7 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 - [Credits](#credits)
 
 ## How the spoof works
-**OpenCore Legacy Patcher** (OCLP) v0.3.2 introduced a set of new booter and kernel patches which make use of macOS'es virtualization capabilities (VMM) to trick it into "thinking" it is running in a Virtual Machine:
+**OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of new booter and kernel patches which utilize macOS'es virtualization capabilities (VMM) to trick it into "believing" that it's running in a Virtual Machine:
 
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
 >
@@ -91,7 +91,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 To apply the Kernel patches, you have 2 options:
 
 - **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
-	- **"Force FileVault on Broken Seal"** (only required if you are using File Vault)
+	- **"Force FileVault on Broken Seal"** (only required when using File Vault)
 	- **"Disable Library Validation Enforcement"** (enable it)
  	- **"Reroute kern.hv_vmm_present patch (1)"** (enable it)
 	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** (enable it)
@@ -101,8 +101,7 @@ To apply the Kernel patches, you have 2 options:
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
 - **Option 2**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
 	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
-	- Add boot-arg `revpatch=sbvmm` (substitutes "kern.hv_vmm_present" and "Force IOGetVMMPresent" Kernel patches)
-	- Optionally, add [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock) to enable [Content Caching](https://support.apple.com/en-ca/guide/mac-help/mchl9388ba1b/mac)
+	- Add `revpatch=sbvmm` to boot-args or as an NVRAM parameter (check RestrictEvents' documentation for more details). This substitues "kern.hv_vmm_present" and "Force IOGetVMMPresent" Kernel patches. 
 	- Save your config and reboot.
 
 To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
