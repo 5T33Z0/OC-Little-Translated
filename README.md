@@ -26,6 +26,7 @@
 * [**Graphics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics) (integrated/discrete)
 * [**MMIO Whitelist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_MMIO_Whitelist)
 * [**Fixing Peripherals**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Peripherals)
+* [**Using OCLP on Wintel systems**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware) 
 
 **APPENDIX**
 
