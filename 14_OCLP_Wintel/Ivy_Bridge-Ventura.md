@@ -65,11 +65,14 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 7. `Misc/Security`: 
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
 8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
-	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
+	- `revpatch=sbvmm,f16c` &rarr; For enabling OTA updates and addressing graphics issues in macOS 13
 	- `ipc_control_port_options=0` &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord.
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
 	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. Disables hardware acceleration and puts the card in VESA mode. Once you've installed the GPU drivers with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
 	- `nv_disable=1` &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers in with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
+	- `-wegnoigpu` &rarr; **ONLY** required if both conditions apply:
+		-  Using a discrete GPU and
+		-  Using a CPU with on-board graphics but the SMBIOS is for a CPU without on-board graphics (like `MacPro6,1` which is for IvyBridge EP).
 9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 10. Save and reboot
 
