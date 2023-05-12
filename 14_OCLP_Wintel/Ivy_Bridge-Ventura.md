@@ -16,7 +16,7 @@
 	- [Installing Drivers for other GPUs](#installing-drivers-for-other-gpus)
 	- [Verifying SMC CPU Power Management](#verifying-smc-cpu-power-management)
 		- [Optimizing CPU Power Management](#optimizing-cpu-power-management)
-	- [Removing boot-args](#removing-boot-args)
+	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
 - [OCLP and System Updates](#oclp-and-system-updates)
 - [Notes](#notes)
 - [Credits](#credits)
@@ -196,13 +196,15 @@ If the 2 kexts are not present. They were not injected. So check your config and
 #### Optimizing CPU Power Management
 Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
 
-### Removing boot-args
-After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove the following boot-args:
+### Removing/Disabling boot-args
+After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
 
-- `ipc_control_port_options=0`
-- `amfi_get_out_of_my_way=0x1` 
+- `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps work.
+- `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it.
 - Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using AMD GPUs, since it disables the GPU's hardware acceleration if active.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using NVIDIA GPUs, since it disables the GPU's hardware acceleration if active.
+
+> **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
 ## OCLP and System Updates
 The major advantage of using OCLP over the previously used Chris1111s HD4000 Patcher is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
