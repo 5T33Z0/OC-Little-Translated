@@ -13,8 +13,10 @@
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
 - [Post-Install](#post-install)
 	- [Installing Intel HD4000 Drivers](#installing-intel-hd4000-drivers)
-	- [Installing Drivers for other legacy GPUs](#installing-drivers-for-other-legacy-gpus)
+	- [Installing Drivers for other GPUs](#installing-drivers-for-other-gpus)
 	- [Verifying SMC CPU Power Management](#verifying-smc-cpu-power-management)
+		- [Optimizing CPU Power Management](#optimizing-cpu-power-management)
+	- [Removing boot-args](#removing-boot-args)
 - [OCLP and System Updates](#oclp-and-system-updates)
 - [Notes](#notes)
 - [Credits](#credits)
@@ -39,7 +41,7 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 - Check if your GPU is compatible with macOS Ventura. Drivers for Intel iGPU and GPU drivers for NVIDIA Kepler and AMD cards can be re-installed in Post using OpenCore Legacy Patcher ([supported cards](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches))
 
 ## Preparations
-I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only addidtional steps required to install and boot macOS Ventura. 
+I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Ventura. 
 
 1. Update OpenCore to 0.9.2 or newer &rarr; Mandatory. Prior to OC 0.9.2, the required `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the system won't boot unless you have a BIOS where CFG Lock can be disabled.
 2. `ACPI/Add`: Disable `SSDT-PLUG` or `SSDT-XCPM` if present
@@ -61,12 +63,13 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- Disable `AppleXcmpCfgLock` 
 	- Disable `AppleXcpmExtraMsrs`
 7. `Misc/Security`: 
-	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVDIA GPUs)
+	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
 8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
 	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
-	- `-amd_no_dgpu_accel` &rarr; **For AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
+	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
+	- `nv_disable=1` &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers in post, **delete the boot-arg**!
 9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 10. Save and reboot
 
@@ -164,8 +167,12 @@ To bring them back, do the following:
 
 ### Installing Drivers for other GPUs
 - Works the same way as installing iGPU drivers
-- OCLP detects GPUs and if it has drivers or non-AVX2 patch they can be installed and afterwards GPU Hardware Acceleration should work
-- You will need to remove `-amd_no_dgpu_accel` from boot-args after applying root patches on AMD GPUs to get hardware acceleration
+- OCLP detects GPUs and if it has drivers or a non-AVX2 patch for them, they can be installed. Afterwards, GPU Hardware Acceleration should work.
+- After the drivers have been installed and before rebooting, do the following:
+  - AMD GPUs: disable `-amd_no_dgpu_accel`  to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
+  - NVIDIA GPUs: Disable `nv_disable=1` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
+
+> **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
 ### Verifying SMC CPU Power Management
 To verify that SMC CPU Power Management is working, enter the following command in Terminal:
@@ -190,15 +197,12 @@ If the 2 kexts are not present. They were not injected. So check your config and
 Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
 
 ### Removing boot-args
-After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, you can remove the following boot-args:
+After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove the following boot-args:
 
-- `ipc_control_port_options=0` 
+- `ipc_control_port_options=0`
 - `amfi_get_out_of_my_way=0x1` 
-
-if the following Kernel Patches are present and enabled: 
-
-- **"Disable Library Validation Enforcement"** 
-- **"Disable _csr_check() in _vnode_check_signature"** &rarr; This solves issues caused by disabling AMFI.
+- Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using AMD GPUs, since it disables the GPU's hardware acceleration if active.
+- Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using NVIDIA GPUs, since it disables the GPU's hardware acceleration if active.
 
 ## OCLP and System Updates
 The major advantage of using OCLP over the previously used Chris1111s HD4000 Patcher is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
