@@ -52,7 +52,10 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 		- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to `22.0.0`)
 		- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to `22.0.0`)
 5. `Kernel/Patch` Section: 
-	- `_xcpm_bootstrap` (if present)
+	- Disable `_xcpm_bootstrap` (if present)
+	- Add and enable the following Kernel Patches from the [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof):
+		- **"Disable Library Validation Enforcement"** 
+		- **"Disable _csr_check() in _vnode_check_signature"** 
 6. `Kernel/Quirks` Section:
 	- Enable `AppleCpuPmCfgLock` if it isn't already. Unnecessary if you can disable CFG Lock in BIOS.
 	- Disable `AppleXcmpCfgLock` 
@@ -64,17 +67,10 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- `-amd_no_dgpu_accel` &rarr; **For AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
-<<<<<<< Updated upstream
 
-	After OCLP root patches are applied you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
-
-
-7. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
-8. Save and reboot
-=======
+	> **Note**: After OCLP's root patches are applied in Post-Install, you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 10. Save and reboot
->>>>>>> Stashed changes
 
 ### Adjusting the SMBIOS
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
@@ -192,6 +188,17 @@ If the 2 kexts are not present. They were not injected. So check your config and
 
 #### Optimizing CPU Power Management
 Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
+
+### Removing boot-args
+After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, you can remove the following boot-args:
+
+- `ipc_control_port_options=0` 
+- `amfi_get_out_of_my_way=0x1` 
+
+if the following Kernel Patches are present and enabled: 
+
+- **"Disable Library Validation Enforcement"** 
+- **"Disable _csr_check() in _vnode_check_signature"** &rarr; This solves issues caused by disabling AMFI.
 
 ## OCLP and System Updates
 The major advantage of using OCLP over the previously used Chris1111s HD4000 Patcher is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
