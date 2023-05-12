@@ -65,7 +65,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
 	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
 	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
-- **Kernel Patches**
+- **Kernel Patches** (see "Comment" section)
 	- **"Reroute kern.hv_vmm_present patch (1)"**, 
 	- **"Reroute kern.hv_vmm_present patch (2) Legacy"**, 
 	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** and 
