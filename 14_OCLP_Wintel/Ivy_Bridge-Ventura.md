@@ -60,10 +60,11 @@ I assume you already have a working OpenCore Config for your Ivy Bridge system. 
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVDIA GPUs)
 6. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
 	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
+	- `-amd_no_dgpu_accel` &rarr; **For AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
 
-	- After OCLP root patches are applied you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
+	After OCLP root patches are applied you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 
 
 7. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
@@ -159,9 +160,10 @@ To bring them back, do the following:
 - Once. it's done, you have to reboot and Graphics acceleration will work
 - Continue with the Post-Install process as described in the Repo.
 
-### Installing Drivers for other legacy GPUs
+### Installing Drivers for other GPUs
 - Works the same way as installing iGPU drivers
-- OCLP detects legacy GPUs and if it has drivers for they can be installed and afterwards GPU Hardware Acceleration should work
+- OCLP detects GPUs and if it has drivers or non-AVX2 patch they can be installed and afterwards GPU Hardware Acceleration should work
+- You will need to remove `-amd_no_dgpu_accel` from boot-args after applying root patches on AMD GPUs to get hardware acceleration
 
 ### Verifying SMC CPU Power Management
 To verify that SMC CPU Power Management is working, enter the following command in Terminal:
