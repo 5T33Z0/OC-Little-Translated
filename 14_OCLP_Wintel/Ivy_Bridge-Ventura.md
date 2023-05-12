@@ -165,17 +165,18 @@ To verify that SMC CPU Power Management is working, enter the following command 
 ```shell
 sysctl machdep.xcpm.mode
 ```
-If the is  `0`, the `X86PlatformPlugin` is not loaded, which is good because it means that the kext for SMC Power Management – which we injected – are used instead.
-
-If the output is `1` , this means XCPM is used which is not good because XCPM doesn't work well on Ivy Bridge CPUs on macOS. Enter in Terminal:
+If the output is `0`, the legacy `ACPI_SMC_PlatformPlugin` is used for CPU Power Management and everything is ok. If the output is `1`, the `X86PlatformPlugin` for `XCPM` is used, which is not good since XCPM doesn't work well on Ivy Bridge CPUs in macOS. In this case, check if the necessary kexts for SMC CPU Power Management were injected by OpenCore. Enter in Terminal:
 
 ```shell
 kextstat | grep -v com.apple
 ```
- Check if the list of loaded kexts contains both  `AppleIntelCPUPowerManagement.kext` and `AppleIntelCPUPowerManagementClient.kext` 
+The output should include:
 
-Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled in config.
-
+```
+com.apple.driver.AppleIntelCPUPowerManagement (222.0.0)
+com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) 
+```
+If the 2 kexts are not present. They were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled in config.
 
 ## OCLP and System Updates
 The major advantage of using OCLP over the previously used Chris1111s HD4000 Patcher is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
