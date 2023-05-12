@@ -174,7 +174,7 @@ boot-arg | Property | Description
 **`-rad24`** | N/A | Forces 24-bit display mode
 **`-radcodec`** | N/A | Forces the spoofed PID to be used in AMDRadeonVADriver 
 **`-raddvi`** | N/A | Enables DVI transmitter correction (required for 290X, 370, etc.)
-**`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is `-amd_no_dgpu_accel`
+**`-radvesa`** | N/A | Disable ATI/AMD video acceleration completely and forces the GPU into VESA mode. Useful if the card is not supported by macOS and for trouleshooting. Apple's built in version of this flag is called `-amd_no_dgpu_accel`
 **`radpg=15`** | N/A | Disables several power-gating modes. Required for Cape Verde GPUs: Radeon HD 7730/7750/7770, R7 250/250X  (see [Radeon FAQ](https://github.com/dreamwhite/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
 **`shikigva=40`** + **`shiki-id=Mac-7BA5B2D9E42DDD94`**| N/A |Swaps boardID with `iMacPro1,1`. Allows Polaris, Vega and Navi GPUs to handle all types of rendering, useful for SMBIOS which expect an iGPU. Obsolete in macOS 11+. More info: [**Fixing DRM**](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html#testing-hardware-acceleration-and-decoding)
 **–** | `CFG,CFG_USE_AGDC` (Type: Data; Value: 00)| Disabbles AGDC (Apple Automatic Device Gating Control) for the AMD GPUs to fix wake issues when using 4K displays.
@@ -225,12 +225,12 @@ The `unfairgva` boot-arg supports verrides to configure the video decoder prefer
 
 boot-arg | Property | Description 
 ---------|:--------:|------------
-**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| N/A |Deprecated. macOS Siera and newer require an NVRAM key instead. </br>**OpenCore**: Add `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data).</br> **Clover**: enable `NvidiaWeb` in the System Parameters section.
+**~~`nvda_drv=1`~~**</br>(≤ macOS 10.11)| N/A | Deprecated. macOS Siera and newer require an NVRAM key instead.<ul><li>**OpenCore**: `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82/nvda_drv: 31` (**Type**: Data)</li><li>**Clover**: Enable `NvidiaWeb` under `System Parameters`</li></ul>
 **`-ngfxdbg`** | N/A | Enables NVIDIA driver error logging 
 **`ngfxcompat=1`** | `force-compat` 	| Ignore compatibility check in NVDAStartupWeb
 **`ngfxgl=1`** | `disable-metal` 	| Disable Metal suppoPropertyrt on NVIDIA 
 **`ngfxsubmit=0`** | `disable-gfx-submit` | Disable interface stuttering fix on 10.13
-**`nv_disable=1`**| N/A | Disables NVIDIA GPUs (***don't*** combine this with `nvda_drv=1`)
+**`nv_disable=1`**| N/A | Disables hardware acceleration and enables VESA mode instead. Required when upgrading macOS so the card will display an image before drivers are reinstalled. ***Don't*** combine with `nvda_drv=1`.
 **`agdpmod=pikera`**|`agdpmod` |Swaps `board-id `for `board-ix`, needed for disabling string comparison which is useful for non-iMac13,2/iMac14,2 SMBIOS.
 **`agdpmod=vit9696`**|`agdpmod` |Disables `board-id` check, may be needed for when screen turns black after finishing booting
 **`shikigva=1`**| N/A |Needed if you want to use your iGPU's display out along with your dGPU, allows the iGPU to handle hardware decoding even when not using a connector-less framebuffer
