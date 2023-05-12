@@ -66,14 +66,12 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
 8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
 	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
-	- `ipc_control_port_options=0` 
+	- `ipc_control_port_options=0` &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord.
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
-	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
-	- `nv_disable=1` &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers in post, **delete the boot-arg**!
+	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. Disables hardware acceleration and puts the card in VESA mode. Once you've installed the GPU drivers with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
+	- `nv_disable=1` &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers in with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
 9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 10. Save and reboot
-
-> **Note**: After OCLP's root patches are applied in Post-Install, you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 
 ### Adjusting the SMBIOS
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
@@ -169,8 +167,8 @@ To bring them back, do the following:
 - Works the same way as installing iGPU drivers
 - OCLP detects GPUs and if it has drivers or a non-AVX2 patch for them, they can be installed. Afterwards, GPU Hardware Acceleration should work.
 - After the drivers have been installed and before rebooting, do the following:
-  - AMD GPUs: disable `-amd_no_dgpu_accel`  to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
-  - NVIDIA GPUs: Disable `nv_disable=1` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
+  - **AMD GPUs**: disable `-amd_no_dgpu_accel` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
+  - **NVIDIA GPUs**: Disable `nv_disable=1` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
 
 > **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
@@ -199,7 +197,7 @@ Once you've verified that SMC CPU Power Management (plugin-type `0`) is working,
 ### Removing/Disabling boot-args
 After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
 
-- `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps work.
+- `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
 - `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it.
 - Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using AMD GPUs, since it disables the GPU's hardware acceleration if active.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using NVIDIA GPUs, since it disables the GPU's hardware acceleration if active.
@@ -213,7 +211,7 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 
 ## Notes
 - Installing drivers on the system partition breaks its security seal. This affects System Updates: every time a System Update is available, the FULL Installer (about 12 GB) will be downloaded.
-- After each System Update, the iGPU drivers have to be re-installed. OCLP will take care of this.
+- After each System Update, the iGPU/GPU drivers have to be re-installed. OCLP will take care of this. Just make sure to re-enable the appropriate boot-args to put AMD/NVIDIA GPUs in VESA mode prior to updating/upgrading macOS.
 - ⚠️ You cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)). 
 
 ## Credits
