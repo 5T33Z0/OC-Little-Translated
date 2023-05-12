@@ -2,6 +2,7 @@
 
 **TABLE of CONTENTS**
 
+- [About](#about)
 - [Before you begin](#before-you-begin)
 - [Preparations](#preparations)
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
@@ -21,17 +22,20 @@
 - [Notes](#notes)
 - [Credits](#credits)
 
-Although installing macOS Ventura on Ivy Bridge (and older) systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented for Wintel systems – only for legacy Macs by Apple. So there is no official guide on how to do it. The guide below is based on my experiences trying to get macOS 13 running on a Lenovo ThinkPad T530.
+## About
 
-This guide allows you to: 
+Although installing macOS Ventura on Ivy Bridge (and older) systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented for Wintel systems – only for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences in getting macOS 13 installed on an Ivy Bridge Laptop but it should be applicable to desktops as well.
+
+**This guide allows you to**: 
+
 - Install or upgrade to macOS Ventura
-- Re-Instal iGPU/GPU drivers in Post so Hardware Acceleration is working
-- Use a native SMBIOS for Ivy Bridge CPUs (no more spoofing)
-- Re-enabler SMC CPU Power Management and have proper CPU Power Management using `SSDT-PM`
-- Allows installing of OTA updates which wouldn't be possible otherwise since the "Unrestricted Root" flag in SIP disables System Update Notifications.
+- Re-Instal iGPU/GPU drivers in Post-Install so hardware graphics acceleration is working
+- Re-enable SMC CPU Power Management so you have proper CPU Power Management using `SSDT-PM`
+- Use a native SMBIOS for Ivy Bridge CPUs for optimal performance (no more spoofing required)
+- Install OTA updates which wouldn't be possible otherwise
 
 > **Warning**
-This guide is not for beginners! There are a lot of things to consider when trying to get newer versions of macOS working on unsupported hardware. DON'T upgrade from an existing working version of macOS. You won't be able to downgrade if something goes wrong. Perform a clean install on a spare internal disk or create a new volume on your current one. 
+This guide is not for beginners! There are a lot of things to consider when trying to get newer versions of macOS working on unsupported hardware. DON'T upgrade from an existing working version of macOS. You won't be able to downgrade afterwards if something goes wrong. Perform a clean install on a spare internal disk or create a new volume on your current one. 
 
 ## Before you begin
 - Make sure to have a backup of your working EFI folder stored on a FAT32 formatted USB Flash Drive to boot from – just in case something goes wrong.
