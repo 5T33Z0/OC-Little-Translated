@@ -62,6 +62,10 @@ I assume you already have a working OpenCore Config for your Ivy Bridge system. 
 	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
+
+	- After OCLP root patches are applied you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
+
+
 7. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 8. Save and reboot
 
