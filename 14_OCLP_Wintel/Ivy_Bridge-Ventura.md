@@ -67,10 +67,10 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- `-amd_no_dgpu_accel` &rarr; **For AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
-
-	> **Note**: After OCLP's root patches are applied in Post-Install, you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 10. Save and reboot
+
+> **Note**: After OCLP's root patches are applied in Post-Install, you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 
 ### Adjusting the SMBIOS
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
