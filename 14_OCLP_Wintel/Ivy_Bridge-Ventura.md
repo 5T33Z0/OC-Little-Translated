@@ -36,42 +36,48 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 - Before you start modifying your config and EFI, make sure to check if any peripherals you are using are still compatible with macOS Ventura (Wifi and BlueTooth come to mind).
 - When using Broadcom Wifi/Bluetooth Cards, you will need different [combinations of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) which need to be controlled via `MinKernel` and `MaxKernel` settings
 - Same might be true for Intel Wireless Cards
-- Check if your GPU is compatible with macOS Ventura. Drivers for Intel iGPU and GPU drivers for NVIDIA Kepler and AMD cards can be re-installed in Post using OpenCore Legacy Patcher ([more details about supported cards](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches))
+- Check if your GPU is compatible with macOS Ventura. Drivers for Intel iGPU and GPU drivers for NVIDIA Kepler and AMD cards can be re-installed in Post using OpenCore Legacy Patcher ([supported cards](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches))
 
 ## Preparations
-I assume you already have a working OpenCore Config for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create a working config for your system. The adjustments below are required to install and boot macOS Ventura. 
+I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only addidtional steps required to install and boot macOS Ventura. 
 
 1. Update OpenCore to 0.9.2 or newer &rarr; Mandatory. Prior to OC 0.9.2, the required `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the system won't boot unless you have a BIOS where CFG Lock can be disabled.
-2. `Booter/Patch` Section (in your config.plist):
+2. `ACPI/Add`: Disable `SSDT-PLUG` or `SSDT-XCPM` if present
+3. `Booter/Patch` Section (in your config.plist):
 	- Add and enable both Booter Patches from OpenCore Legacy Patcher's [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
-3. `Kernel/Add` Section and `EFI/OC/Kexts`:
+4. `Kernel/Add` Section and `EFI/OC/Kexts`:
 	- Add [CryptexFixup](https://github.com/acidanthera/CryptexFixup) &rarr; Required for booting macOS Ventura (set `MinKernel` to `22.0.0`).
 	- Add [RestrictEvents](https://github.com/acidanthera/RestrictEvents) &rarr; Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional boot-arg/NVRAM parameter (Step 7).
 	- Add [Kexts from OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
 		- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to `22.0.0`)
 		- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to `22.0.0`)
-3. `Kernel/Patch` Section: 
+5. `Kernel/Patch` Section: 
 	- `_xcpm_bootstrap` (if present)
-4. `Kernel/Quirks` Section:
+6. `Kernel/Quirks` Section:
 	- Enable `AppleCpuPmCfgLock` if it isn't already. Unnecessary if you can disable CFG Lock in BIOS.
 	- Disable `AppleXcmpCfgLock` 
 	- Disable `AppleXcpmExtraMsrs`
-5. `Misc/Security`: 
+7. `Misc/Security`: 
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVDIA GPUs)
-6. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
+8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
 	- `revpatch=sbvmm,f16c` &rarr; for enabling OTA updates and addressing graphics issues in macOS 13
 	- `-amd_no_dgpu_accel` &rarr; **For AMD GPUs only**. This option will be used temporarily so we can install root patches for GPU, afterwards it must be removed to get working hardware acceleration.
 	- `ipc_control_port_options=0` 
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
+<<<<<<< Updated upstream
 
 	After OCLP root patches are applied you can remove `ipc_control_port_options=0` and `amfi_get_out_of_my_way=0x1` from boot-args if kernel patches **"Disable Library Validation Enforcement"** and **"Disable _csr_check() in _vnode_check_signature"** are enabled. This solves issues caused by disabling AMFI.
 
 
 7. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
 8. Save and reboot
+=======
+9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
+10. Save and reboot
+>>>>>>> Stashed changes
 
 ### Adjusting the SMBIOS
-If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version currently installed.
+If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
 
 #### When Upgrading from macOS Big Sur 11.3+
 When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capabilities to trick it into thinking that it is running in a VM so spoofing a compatible SMBIOS is no longer a requirement.
@@ -182,7 +188,10 @@ The output should include:
 com.apple.driver.AppleIntelCPUPowerManagement (222.0.0)
 com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) 
 ```
-If the 2 kexts are not present. They were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled in config.
+If the 2 kexts are not present. They were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled.
+
+#### Optimizing CPU Power Management
+Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
 
 ## OCLP and System Updates
 The major advantage of using OCLP over the previously used Chris1111s HD4000 Patcher is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
