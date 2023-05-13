@@ -48,6 +48,7 @@ Depending on the search results, add the following SSDT to your ACPI Folder and 
 ### 4. Verify that it's working
 
 Run the GREP command again:
+
 ```shell
 kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 ```
@@ -57,3 +58,7 @@ If the Terminal output contains the following 2 drivers, your SMBus is working c
 ![sbus_present](https://user-images.githubusercontent.com/76865553/140615883-3c8af435-b09a-4a3e-9746-28f8a05c9e37.png)
 
 [^1]: Additional information about `AppleSMBus` as well as the `GREP` command for testing  were taken from Dortania's Post-Install Guide, since the original Guide by DalianSky was lacking in this regard. The SSDT sample included in the OpenCore package combines `SSDT-SBUS/SMBUS` and `SSDT-MCHC` into one file (`SSDT-SBUS-MCHC.aml`), so I suggest you use this instead.
+
+## Notes and Further Resources
+- The latest version of **SSDT-SBUS-MCHC** by Acidanthera has the Diagsvault Device `DVL0` disabled by default followed by a comment which raises some questions: "Uncomment **replacing `0x57` with your own value which might be found in SMBus section of Intel datasheet for your motherboard** […]". Well I couldn't find that value at all.
+- **SMBUS Specifications**: http://www.smbus.org/specs/
