@@ -189,15 +189,15 @@ sysctl machdep.xcpm.mode
 If the output is `0`, the legacy `ACPI_SMC_PlatformPlugin` is used for CPU Power Management and everything is ok. If the output is `1`, the `X86PlatformPlugin` for `XCPM` is used, which is not good since XCPM doesn't work well on Ivy Bridge CPUs in macOS. In this case, check if the necessary kexts for SMC CPU Power Management were injected by OpenCore. Enter in Terminal:
 
 ```shell
-kextstat | grep -v com.apple
+kextstat
 ```
-The output should include:
+This will list all the kexts that are loaded. It's a long list so you might want to use the search function. The output should include:
 
 ```
 com.apple.driver.AppleIntelCPUPowerManagement (222.0.0)
 com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) 
 ```
-If the 2 kexts are not present. They were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled.
+If the 2 kexts are not present, they were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled.
 
 #### Optimizing CPU Power Management
 Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
