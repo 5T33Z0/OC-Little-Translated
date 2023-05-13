@@ -416,23 +416,24 @@ boot-arg | NVRAM Key| Description
 **`-revproc`**|–| Enables verbose process logging (in DEBUG builds)
 **`revpatch=value`** |–| Enables patching as comma separated options. Default value is `auto`. See available values below.
 **`revpatch=auto`** |YES| Enables `memtab,pci,cpuname`, without `memtab` and `pci` patches being applied on a real Mac.
-**`revpatch=memtab`** |YES|Enables memory tab in System Information on `MacBookAir` and `MacBookPro10,x`.
-**`revpatch=pci`**|YES|Prevents PCI configuration warnings in System Settings on `MacPro7,1`
+**`revpatch=none`** |YES| Disables all patching 
+**`revpatch=asset`** |YES| Allows Content Caching when `sysctl kern.hv_vmm_present` returns `1` on macOS 11.3 or newer
 **`revpatch=cpuname`**|YES| Allows Custom CPU name in System Information
 **`revpatch=diskread`** |YES| Disables "Uninitialized disk" warning in Finder
-**`revpatch=asset`** |YES| Allows Content Caching when `sysctl kern.hv_vmm_present` returns `1` on macOS 11.3 or newer
+**`revpatch=f16c`** |YES| Resolves CoreGraphics crashing on Ivy Bridge CPUs by disabling f16c instruction set reporting in macOS 13.3 or newer
+**`revpatch=memtab`** |YES|Enables memory tab in System Information on `MacBookAir` and `MacBookPro10,x`.
+**`revpatch=pci`**|YES|Prevents PCI configuration warnings in System Settings on `MacPro7,1`
 **`revpatch=sbvmm`** |YES| Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer
-**`revpatch=none`** |YES| Disables all patching
 **`revcpu=value`** |YES| Enables or disables CPU brand string patching. `1` = non-Intel default, `0` = Intel default
 **`revcpuname=value`** |YES| Custom CPU brand string (max 48 characters, 20 or less recommended, taken from CPUID otherwise)
 **`revblock=value`** |–| To block processes as comma separated options. Default value is `auto`.
+**`revblock=auto`** |YES| Same as `pci`
+**`revblock=none`**|YES| Disables all blocking
 **`revblock=pci`**|YES| Prevents PCI and RAM configuration notifications on `MacPro7,1`
 **`revblock=gmux`** |YES| Blocks `displaypolicyd` on Big Sur+ (for genuine MacBookPro9,1/10,1)
 **`revblock=media`** |YES| Block `mediaanalysisd` on Ventura+ (for Metal 1 GPUs)
-**`revblock=auto`** |YES| Same as `pci`
-**`revblock=none`**|YES| Disables all blocking
 
-**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They have be added to the config under `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`:
+**NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They need to be added to the config under `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`:
  
 ![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
 

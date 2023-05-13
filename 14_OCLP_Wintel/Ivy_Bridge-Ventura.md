@@ -68,7 +68,7 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- Disable `AppleXcpmExtraMsrs`
 7. `Misc/Security`: 
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
-8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
+8. `NVRAM/Add` Section: Add the following boot-args or corresponding NVRAM parameters (&rarr; see [Screenshot](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png))
 	- `revpatch=sbvmm,f16c` &rarr; For enabling OTA updates and addressing graphics issues in macOS 13
 	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ (for Metal 1 GPUs)
 	- `ipc_control_port_options=0` &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord.
