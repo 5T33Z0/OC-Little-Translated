@@ -29,10 +29,10 @@ Although installing macOS Ventura on Ivy Bridge (and older) systems can be achie
 **This guide allows you to**: 
 
 - Install or upgrade to macOS Ventura
-- Re-Instal iGPU/GPU drivers in Post-Install so hardware graphics acceleration is working
+- Re-Install iGPU/GPU drivers in Post-Install so hardware graphics acceleration is working
 - Re-enable SMC CPU Power Management so you have proper CPU Power Management using `SSDT-PM`
 - Use a native SMBIOS for Ivy Bridge CPUs for optimal performance (no more spoofing required)
-- Install OTA updates which wouldn't be possible otherwise
+- Install OTA updates [which wouldn't be possible otherwise](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#fixing-issues-with-system-update-notifications-in-macos-113-and-newer)
 
 > **Warning**
 This guide is not for beginners! There are a lot of things to consider when trying to get newer versions of macOS working on unsupported hardware. DON'T upgrade from an existing working version of macOS. You won't be able to downgrade afterwards if something goes wrong. Perform a clean install on a spare internal disk or create a new volume on your current one. 
@@ -70,6 +70,7 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
 8. `NVRAM/Add` Section: Add the following boot-args (or corresponding NVRAM parameters):
 	- `revpatch=sbvmm,f16c` &rarr; For enabling OTA updates and addressing graphics issues in macOS 13
+	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ (for Metal 1 GPUs)
 	- `ipc_control_port_options=0` &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord.
 	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
 	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. Disables hardware acceleration and puts the card in VESA mode. Once you've installed the GPU drivers with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
@@ -206,8 +207,8 @@ After macOS Ventura is installed and OCLP's root patches have been applied in Po
 
 - `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
 - `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it.
-- Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using AMD GPUs, since it disables the GPU's hardware acceleration if active.
-- Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg. Disabling this boot-arg is a MUST when using NVIDIA GPUs, since it disables the GPU's hardware acceleration if active.
+- Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
+- Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
 > **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
