@@ -434,8 +434,8 @@ boot-arg | NVRAM Key| Description
 **`revblock=media`** |YES| Block `mediaanalysisd` on Ventura+ (for Metal 1 GPUs)
 
 **NOTE**: NVRAM variables work the same way as the boot arguments, but have lower priority. They need to be added to the config under `NVRAM/Add/4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102`:
- 
-![revpatch](https://user-images.githubusercontent.com/76865553/209659515-14579ada-85b0-4e89-8443-c5047ee5d828.png)
+
+![revpatchrevblock](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/dcfad4c5-f646-4463-b6dc-2248d23c49cf)
 
 [**Source**](https://github.com/acidanthera/RestrictEvents)
 
