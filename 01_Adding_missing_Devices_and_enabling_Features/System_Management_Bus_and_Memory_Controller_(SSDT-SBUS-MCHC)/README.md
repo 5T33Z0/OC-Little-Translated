@@ -11,6 +11,17 @@ Other things the System Management Bus handles can be found in the [**SMBus WIKI
 
 In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Controller Hub (`MCHC`) which is serviceable in macOS also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both devices to decide which SSDT(s) needs to be added.
 
+**Update (May 14th, 2023)**:
+
+Recently, it has been discovered that the "Diagsvault" device `DVL0` which was injected by SSDT-SBUS as well is an apple-only device that writes to SMBus addresses 50h - 57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series. So there's no point in injecting `DVL0` on Wintel systems at all. Therefore I removed it from the corresponding SSDTs.
+
+:bulb: So if you are still using a previous version of `SSDT-SBUS-MCHC`, please remove the `DVL0` device from it.
+
+**SOURCES**:
+
+- OpenCorePkg Pull Request #442: [Comment DVL0 device in SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/pull/442)
+- Discussion on [Hackintosh Paaradise Discord](https://discord.com/channels/186648463541272576/1106976787172425880)
+
 ## Instructions
 
 ### 1. Evaluating if you need this Fix
@@ -59,6 +70,5 @@ If the Terminal output contains the following 2 drivers, your SMBus is working c
 
 [^1]: Additional information about `AppleSMBus` as well as the `GREP` command for testing  were taken from Dortania's Post-Install Guide, since the original Guide by DalianSky was lacking in this regard. The SSDT sample included in the OpenCore package combines `SSDT-SBUS/SMBUS` and `SSDT-MCHC` into one file (`SSDT-SBUS-MCHC.aml`), so I suggest you use this instead.
 
-## Notes and Further Resources
-- The latest version of **SSDT-SBUS-MCHC** by Acidanthera has the Diagsvault Device `DVL0` disabled by default followed by a comment which raises some questions: "Uncomment **replacing `0x57` with your own value which might be found in SMBus section of Intel datasheet for your motherboard** […]". Well I couldn't find that value at all.
+## Further Resources
 - **SMBUS Specifications**: http://www.smbus.org/specs/
