@@ -9,11 +9,11 @@ What is AppleSMBus? Well, it mainly handles the System Management Bus, which has
 
 Other things the System Management Bus handles can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
 
-In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Controller Hub (`MCHC`) which is serviceable in macOS also needs to be present to wire it to the power management of the PCI bus. So we need to verify the presence/absence of both devices to decide which SSDT(s) needs to be added.
+In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Controller Hub Controller (`MCHC`) has to be present as well. The Memory Controller Hub (usually present in older Intel chipsets) is responsible for managing the communication between the CPU and the memory subsystem. It provides the necessary control and coordination for accessing system memory, including functions such as memory addressing, data transfer, and memory timings. It is serviceable in macOS and needs to be present for proper power management of the PCI bus. So we need to verify the presence/absence of *both* devices to decide which SSDT(s) need(s) to be added.
 
 **Update (May 14th, 2023)**:
 
-Recently, it has been discovered that the "Diagsvault" device `DVL0` which was injected by SSDT-SBUS as well is an apple-only device that writes to SMBus addresses 50h - 57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series. So there's no point in injecting `DVL0` on Wintel systems at all. Therefore I removed it from the corresponding SSDTs.
+Recently, it has been discovered that the "Diagsvault" device `DVL0` which was injected by SSDT-SBUS as well is an apple-only device that writes to SMBus addresses 50h - 57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series chipsets. So there's no point in injecting `DVL0` on Wintel systems at all. Therefore I removed it from the corresponding SSDTs.
 
 :bulb: So if you are still using a previous version of `SSDT-SBUS-MCHC`, please remove the `DVL0` device from it.
 
