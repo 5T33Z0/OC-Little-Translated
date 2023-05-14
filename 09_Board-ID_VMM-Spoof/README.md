@@ -86,7 +86,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 - Copy the entries from `Booter/Patch` to your config.plist to the same section (and enable them)
 - Leave ProperTree open an continue reading
 
-**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-arg `-no_compat_check` instead.
+**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents kexts instead to workaround issues with System Update Notifications.
 
 ### Kernel Patches
 To apply the Kernel patches, you have 2 options:
