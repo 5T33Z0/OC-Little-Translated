@@ -1,7 +1,7 @@
 # Fixing AppleSMBus (`SSDT-SBUS-MCHC`)
 
 ## Description
-What is AppleSMBus? Well, it mainly handles the System Management Bus, which has various functions, such as:
+AppleSMBus is Apple's variiant of the System Management Bus which has various functions, such as:
 
 * **AppleSMBusController**: Aids with correct Temperature, Fan, Voltage, ICH, and other readings.  
 * **AppleSMBusPCI**: Same idea as AppleSMBusController except for low bandwidth PCI devices.
@@ -9,15 +9,35 @@ What is AppleSMBus? Well, it mainly handles the System Management Bus, which has
 
 Other things the System Management Bus handles can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
 
-In order for the SMBus to work properly under macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. Additionally, the Memory Controller Hub Controller (`MCHC`) has to be present as well. The Memory Controller Hub (usually present in older Intel chipsets) is responsible for managing the communication between the CPU and the memory subsystem. It provides the necessary control and coordination for accessing system memory, including functions such as memory addressing, data transfer, and memory timings. It is serviceable in macOS and needs to be present for proper power management of the PCI bus. So we need to verify the presence/absence of *both* devices to decide which SSDT(s) need(s) to be added.
+In order for the SMBus to work properly in macOS, Device `SMBUS` (respectively `SBUS`) has to be present in the IO Registry. 
+
+Additionally, the Memory Controller Hub Controller (`MCHC`) has to be present as well. It is responsible for managing the communication between the CPU and the memory subsystem and provides the necessary control and coordination for accessing system memory, including functions such as memory addressing, data transfer, and memory timings. It is serviceable in macOS and needs to be present for proper power management of the PCI bus. So we need to verify the presence/absence of *both* devices to decide which SSDT(s) need(s) to be added.
+
+## About the SSDT
+
+This SSDT injects two devices into macOS: `MCHC` and `SMBUS` (or `SBUS`, depending on your system). Please note that `MCHC` is only present in the IO Registries of the following SMBIOSes:
+
+Product Line | SMBIOS
+-------------|------
+**iMac**     | iMac7,1 to iMac20,x
+**MacBook**  | MacBook3,1 to MacBook9,1
+**MacBookAir**| MacBookAir1,1 to MacBookAir9,1
+**MacBooPro** | MacBookPro3,1 to MacBookPro16,x
+**MacMini** | MacMini3,1 to MacMini8,1
+||
+**iMacPro** | –
+**MacPro** | –
+**Xserve** | –
+
+> **Note**: `MCHC` is not present in SMBIOSes for **iMacPro**, **MacPro** and **Xserve** so don't add it in this case!
 
 **Update (May 14th, 2023)**:
 
-Recently, it has been discovered that the "Diagsvault" device `DVL0` which was injected by SSDT-SBUS as well is an apple-only device that writes to SMBus addresses 50h - 57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series chipsets. So there's no point in injecting `DVL0` on Wintel systems at all. Therefore I removed it from the corresponding SSDTs.
+Recently, it has been discovered that the 3rd device – `DVL0` ("Diagsvault") – injected by previous versions SSDT-SBUS is an apple-only device. It writes to SMBus addresses 50h - 57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series. So there's no point in injecting `DVL0` on Wintel systems. Therefore, I removed it from the corresponding SSDTs.
 
 :bulb: So if you are still using a previous version of `SSDT-SBUS-MCHC`, please remove the `DVL0` device from it.
 
-**SOURCES**:
+**Background**:
 
 - OpenCorePkg Pull Request #442: [Comment DVL0 device in SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/pull/442)
 - Discussion on [Hackintosh Paaradise Discord](https://discord.com/channels/186648463541272576/1106976787172425880)
