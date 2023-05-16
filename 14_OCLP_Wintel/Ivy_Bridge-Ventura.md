@@ -48,7 +48,7 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Ventura. 
 
 1. Update OpenCore to 0.9.2 or newer &rarr; Mandatory. Prior to OC 0.9.2, the required `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the system won't boot unless you have a BIOS where CFG Lock can be disabled.
-2. `ACPI/Add`: Disable `SSDT-PLUG` or `SSDT-XCPM` if present
+2. `ACPI/Add`: Disable `SSDT-PLUG` and `SSDT-XCPM` if present
 3. `Booter/Patch` Section (in your config.plist):
 	- Add and enable both Booter Patches from OpenCore Legacy Patcher's [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 4. `Kernel/Add` Section and `EFI/OC/Kexts`:
