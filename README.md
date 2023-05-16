@@ -19,7 +19,6 @@
 * [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
 * [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
 * [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
-* [**PCI BAR Size**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_PCI_BAR_Size#readme) (OC 0.7.5+)
 * [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 * [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 * [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#readme)
