@@ -45,11 +45,11 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 - Check if your GPU is compatible with macOS Ventura. Drivers for Intel iGPU and GPU drivers for NVIDIA Kepler and AMD cards can be re-installed in Post using OpenCore Legacy Patcher ([supported cards](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches))
 
 ## Preparations
-I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Ventura. 
+I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Ventura.
 
 1. Update OpenCore to 0.9.2 or newer &rarr; Mandatory. Prior to OC 0.9.2, the required `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the system won't boot unless you have a BIOS where CFG Lock can be disabled.
-2. `ACPI/Add`: Disable `SSDT-PLUG`/`SSDT-XCPM` if present
-3. `Booter/Patch` Section (in your config.plist):
+2. `ACPI/Add`Section: Disable `SSDT-PLUG`/`SSDT-XCPM` if present
+3. `Booter/Patch` Section:
 	- Add and enable both Booter Patches from OpenCore Legacy Patcher's [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 4. `Kernel/Add` Section and `EFI/OC/Kexts`:
 	- Add [CryptexFixup](https://github.com/acidanthera/CryptexFixup) &rarr; Required for booting macOS Ventura (set `MinKernel` to `22.0.0`).
