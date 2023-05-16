@@ -11,6 +11,7 @@ Collection of GPU and Intel iGPU related guides and fixes not covered in the Ope
 	- [Disabling unsupported GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/Disabling_unsupported_GPUs)
 	- [Disabling audio over HDMI/DisplayPort](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/Disabling_AppleGFXHDA)
 	- [Enabling undetected AMD GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)
+	- [GPU BAR Soze in OpenCore](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU-BAR_Size)
 
 - [**AMD/Intel iGPU Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU)
 	- [Enabling AMD Vega iGPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/AMD) 
