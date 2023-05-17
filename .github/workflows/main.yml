@@ -1,2 +1,0 @@
-- name: Lychee Broken Link Checker
-  uses: lycheeverse/lychee-action@v1.8.0
