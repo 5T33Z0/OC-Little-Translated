@@ -47,40 +47,17 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 ## Preparations
 I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Ventura.
 
-1. Update OpenCore to 0.9.2 or newer &rarr; Mandatory. Prior to OC 0.9.2, the required `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the system won't boot unless you have a BIOS where CFG Lock can be disabled.
-2. `ACPI/Add`Section: 
-	- Disable `SSDT-PLUG`/`SSDT-XCPM` if present
-3. `Booter/Patch` Section:
-	- Add and enable both Booter Patches from OpenCore Legacy Patcher's [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
-4. `Kernel/Add` Section and `EFI/OC/Kexts`:
-	- Add [CryptexFixup](https://github.com/acidanthera/CryptexFixup) &rarr; Required for booting macOS Ventura (set `MinKernel` to `22.0.0`).
-	- Add [RestrictEvents](https://github.com/acidanthera/RestrictEvents) &rarr; Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional boot-arg/NVRAM parameter (Step 7).
-	- Add [Kexts from OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
-		- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to `22.0.0`)
-		- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to `22.0.0`)
-5. `Kernel/Patch` Section: 
-	- Disable `_xcpm_bootstrap` (if present)
-	- Add and enable the following Kernel Patches from the [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof):
-		- **"Disable Library Validation Enforcement"** 
-		- **"Disable _csr_check() in _vnode_check_signature"** 
-6. `Kernel/Quirks` Section:
-	- Enable `AppleCpuPmCfgLock` if it isn't already. Unnecessary if you can disable CFG Lock in BIOS.
-	- Disable `AppleXcmpCfgLock` 
-	- Disable `AppleXcpmExtraMsrs`
-7. `Misc/Security`: 
-	- Set `SecureBootModel` to `Disabled` (required when using root patches to re-install missing drivers, especially for NVIDIA GPUs)
-8. `NVRAM/Add` Section: Add the following boot-args or corresponding NVRAM parameters (&rarr; This [screenshot](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/dcfad4c5-f646-4463-b6dc-2248d23c49cf) shows where and how to add NVRAM parameters for RestrictEvents so you don't have to add them as boot-args)
-	- `revpatch=sbvmm,f16c` &rarr; For enabling OTA updates and addressing graphics issues in macOS 13
-	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ (for Metal 1 GPUs)
-	- `ipc_control_port_options=0` &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord.
-	- `amfi_get_out_of_my_way=0x1` &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
-	- `-amd_no_dgpu_accel` &rarr; **AMD GPUs only**. Disables hardware acceleration and puts the card in VESA mode. Once you've installed the GPU drivers with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
-	- `nv_disable=1` &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers in with OCLP in Post-Install, **disable the boot-arg** so graphics acceleration works!
-	- `-wegnoigpu` &rarr; **ONLY** required if you have issues with DRM and the following conditions apply:
-		-  Using a discrete GPU and
-		-  Using a CPU with on-board graphics but the SMBIOS is for a CPU without on-board graphics (like `MacPro6,1` which is for IvyBridge EP).
-9. Change `csr-active-config` to `03080000` &rarr; Required for booting a system with patched-in drivers
-10. Save and reboot
+ Step | Config Section | Action 
+:----:|--------|---------
+ 1 | – | Update OpenCore to 0.9.2 or newer (mandatory). Because prior to 0.9.2, the `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the kexts required for re-enabling SMC CPU Power Management can't be patched and the system won't boot unless you have a (modded) BIOS where CFG Lock can be disabled.
+ 2 | **`ACPI/Add`** | Disable/Delete **`SSDT-PLUG`** or **`SSDT-XCPM`** if present. We don't want the system to use XCPM! 
+ 3 | **`Booter/Patch`**| Add and enable both Booter Patches from OpenCore Legacy Patcher's [**Board-ID VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li> **"Skip Board ID check"** <li> **"Reroute HW_BID to OC_BID"**
+ 4 | **`Kernel/Add`** and <br>**`EFI/OC/Kexts`** | Add the following Kexts:<ul> <li> [**CryptexFixup**](https://github.com/acidanthera/CryptexFixup) &rarr; Required for booting macOS Ventura (set `MinKernel` to `22.0.0`). It forces the macOS installer/updater to install the Apple Silicon Cryptex (OS.dmg) which doesn't require AVX 2.0 support. Additionally, it kext will disable Cryptex hash verification in APFS.kext (&rarr; Check [OCLP Support Issue 998](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) for more details). <li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) &rarr; Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional boot-arg/NVRAM parameter (Step 8). <li>  [**AppleIntelCPUPowerManagement**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagement-v1.0.0.zip) (set `MinKernel` to `22.0.0`) <li> [**AppleIntelCPUPowerManagementClient**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagementClient-v1.0.0.zip) (set `MinKernel` to `22.0.0`) |
+| 5 |**`Kernel/Patch`** | <ul> <li>Disable **`_xcpm_bootstrap`** (if present). <li>Add and enable the following Kernel Patches from the [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li>**"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** 
+| 6 | **`Kernel/Quirks`** | <ul><li> Enable **`AppleCpuPmCfgLock`**. Not required if you can disable CFG Lock in BIOS. <li> Disable **`AppleXcmpCfgLock`** (if enabled) <li> Disable **`AppleXcpmExtraMsrs`** (if enabled)
+| 7 | **`Misc/Security`** | Set `SecureBootModel` to `Disabled`. 
+| 8 | **`NVRAM/Add`** | Add the following `boot-args` (or corresponding NVRAM parameters): <ul><li> **`revpatch=sbvmm,f16c`** &rarr; Enables OTA updates and addresses graphics issues in macOS 13 <li> **`revblock=media`** &rarr; Blocks `mediaanalysisd` service on Ventura+ (for Metal 1 GPUs) <li> **`ipc_control_port_options=0`** &rarr; Required for iGPU. Fixes issue with Firefox and electron-based apps like Discord. <li> **`amfi_get_out_of_my_way=0x1`** &rarr; Required for booting macOS 13 and applying Root Patches with OpenCore Legacy Patcher. Can cause issues with [granting 3rd party apps access to Mic/Camera](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md) <li> **`-radvesa`** &rarr; **AMD GPUs only**. Disables hardware acceleration and puts the card in VESA mode. Once you've installed the GPU drivers with OCLP in Post-Install, **disable it** so graphics acceleration works! <li> **`nv_disable=1`** &rarr; **NVIDIA GPUs only**. Disables hardware acceleration and puts the card in VESA mode so you have a picture and not a black screen. Once you've installed the GPU drivers with OCLP in Post-Install, **disable it** so graphics acceleration works!<li> **`-wegnoigpu`** &rarr; Disables the iGPU in macOS. **ONLY** required when using an SMBIOS for a CPU without on-board graphics (i.e. `iMacPro1,1` or `MacPro7,1`) to let the GPU handle background rendering and other tasks. Requires Polaris, Vega or Navi GPU to work properly. Combine with `unfairgva=x` bitmask (x= 1 to 7) to [Address DRM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#unfairgva-overrides) <li> Change **`csr-active-config`** to **`03080000`** &rarr; Required for installing root patches with OCLP and booting with patched-in drivers.
+9 | **config.plist** | Save and reboot.
 
 ### Adjusting the SMBIOS
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
@@ -176,7 +153,7 @@ To bring them back, do the following:
 - Works the same way as installing iGPU drivers
 - OCLP detects GPUs and if it has drivers or a non-AVX2 patch for them, they can be installed. Afterwards, GPU Hardware Acceleration should work.
 - After the drivers have been installed and before rebooting, do the following:
-  - **AMD GPUs**: disable `-amd_no_dgpu_accel` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
+  - **AMD GPUs**: disable `-radvesa` to get hardware acceleration (put a `#` in front of it: `#-radvesa`)
   - **NVIDIA GPUs**: Disable `nv_disable=1` to get hardware acceleration (put a `#` in front of it: `#-amd_no_dgpu_accel`)
 
 > **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
@@ -208,7 +185,7 @@ After macOS Ventura is installed and OCLP's root patches have been applied in Po
 
 - `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
 - `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it.
-- Change `-amd_no_dgpu_accel` to `#-amd_no_dgpu_accel` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
+- Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
 > **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!

@@ -183,8 +183,7 @@ boot-arg | Property | Description
 
 ##### `unfairgva` Overrides
 
-The `unfairgva` boot-arg supports verrides to configure the video decoder preferences of AMD GPUs for different types of content using [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (e.g. Apple TV and iTunes movie streaming). These prefs may not always be compatible with the rest of the operating system and may cause problems with other ways of hardware media decoding and encoding. Therefore, using override is not recommended for daily use and should only be enabled on demand.
-
+The `unfairgva` boot-arg supports overrides to configure the video decoder preferences of AMD GPUs for different types of content using [**DRM**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md) (e.g. Apple TV and iTunes movie streaming). These prefs may not always be compatible with the rest of the operating system and may cause problems with other ways of hardware media decoding and encoding. Therefore, using override is not recommended for daily use and should only be enabled on demand.
 
 - **Force AMD DRM decoder for streaming services (like Apple TV and iTunes movie streaming)**:
 	
