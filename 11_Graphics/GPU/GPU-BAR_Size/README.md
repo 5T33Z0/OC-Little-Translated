@@ -93,7 +93,7 @@ OpenCore 0.8.9 introduced a new UEFI quirk called `ResizeUsePciRbIo` which is ne
 
 The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo. This is needed on systems with a buggy PciIo implementation where trying to configure Resizable BAR results in a Capability I/O Error. Typically, firmwares prior to Aptio V are affected (Haswell and older). 
 
-> **Disclamer**: Flashing a custom/modfied BIOS/UEFI firmware involves risks and may potentially cause damage to your system. You are solely responsible for any actions taken with your device and for ensuring that the custom firmware is compatible with your mainboard. I will not be held liable for any damages or losses that may occur as a result of flashing a custom/modified BIOS/UEFI firmware.
+> **Disclamer**: Flashing a custom/modified BIOS/UEFI firmware involves risks and may potentially cause damage to your system. You are solely responsible for any actions taken with your device and for ensuring that the custom firmware is compatible with your mainboard. I will not be held liable for any damages or losses that may occur as a result of flashing a custom/modified BIOS/UEFI firmware.
 
 ## How to enable Resizable BAR Support in OpenCore
 
@@ -102,7 +102,7 @@ The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo ins
 - In `UEFI/Quirks` set `ResizeGpuBars` to `-1` &rarr; Prevents OpenCore from injecting its ReBAR settings into Windows
 - Save your config and reboot
 - Enter BIOS
-- Enanble Resizable BAR in BIOS
+- Enable Resizable BAR in BIOS
 - Save and reboot into macOS
 
 > **Warning**:
