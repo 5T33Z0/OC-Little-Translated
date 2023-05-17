@@ -89,11 +89,11 @@ With the `ResizeGPUBars` UEFI Quirk you can change the GPU BAR Size of the syste
 
 ### ResizeUsePciRbIo
 
-OpenCore 0.8.9 nightly introduced a new UEFI quirk called `ResizeUsePciRbIo` which is needed on older systems which have been modified with [**ReBarUEFI**](https://github.com/xCuri0/ReBarUEFI#readme). The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo.
+OpenCore 0.8.9 introduced a new UEFI quirk called `ResizeUsePciRbIo` which is needed on older systems using a custom UEFI firmware which has been modified with [**ReBarUEFI**](https://github.com/xCuri0/ReBarUEFI#readme) to enable Resizable BAR on some mainboards which don't support it officially.
 
-With ReBarEUFI it is possible to enable Resizable BAR on some mainboards which don't support it officially. But it requires patching of the UEFI firmware. Visit the repo to find out more details about it.
+The quirk makes `ResizeGpuBars` and `ResizeAppleGpuBars` use PciRootBridgeIo instead of PciIo. This is needed on systems with a buggy PciIo implementation where trying to configure Resizable BAR results in a Capability I/O Error. Typically, firmwares prior to Aptio V are affected (Haswell and older). 
 
-> **Disclamer**: Flashing a custom/modfied BIOS/UEFI firmware involves risks and may potentially cause damage to your system. You are solely responsible for any actions taken with your device and for ensuring that the custom firmware is compatible with your mainboard. I will not be held liable for any damages or losses that may occur as a result of flashing a custom/modified firmware.
+> **Disclamer**: Flashing a custom/modfied BIOS/UEFI firmware involves risks and may potentially cause damage to your system. You are solely responsible for any actions taken with your device and for ensuring that the custom firmware is compatible with your mainboard. I will not be held liable for any damages or losses that may occur as a result of flashing a custom/modified BIOS/UEFI firmware.
 
 ## How to enable Resizable BAR Support in OpenCore
 
