@@ -150,7 +150,8 @@ To bring them back, do the following:
 - Continue with the Post-Install process as described in the Repo.
 
 ### Installing Drivers for other GPUs
-- Works the same way as installing iGPU drivers
+- Works basically the same way as installing iGPU drivers
+- Getting NVIDIA GPUs [require additional steps](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) so OCLP can install the root patches.
 - OCLP detects GPUs and if it has drivers or a non-AVX2 patch for them, they can be installed. Afterwards, GPU Hardware Acceleration should work.
 - After the drivers have been installed and before rebooting, do the following:
   - **AMD GPUs**: disable `-radvesa` to get hardware acceleration (put a `#` in front of it: `#-radvesa`)
