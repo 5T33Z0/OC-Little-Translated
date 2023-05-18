@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤0.9.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.4-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.05.17-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤0.9.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.4-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.05.18-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## TABLE of CONTENTS
 
@@ -19,6 +19,7 @@
 * [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
 * [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
 * [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
+* [**BOOT Folder**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_BOOT_Folder#adding-and-configuring-contentflavour-and-contentvisibility)
 * [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 * [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 * [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#readme)
