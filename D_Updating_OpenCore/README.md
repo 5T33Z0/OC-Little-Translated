@@ -14,9 +14,11 @@
 - [5. The Sync Window: Release Mode vs. Dev Mode](#5-the-sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
-- [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
-- [Integrating Drivers from OcBinaryData](#integrating-drivers-from-ocbinarydata)
 - [Switching between Release and Debug builds](#switching-between-release-and-debug-builds)
+- [Shortcomings of OCAT](#shortcomings-of-ocat)
+	- [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
+	- [Integrating Drivers from OcBinaryData](#integrating-drivers-from-ocbinarydata)
+	- [Adding `.contentFlavour` and `.contentVisibility`](#adding-contentflavour-and-contentvisibility)
 - [Thoughts on updating OpenCore with OCAT vs. updating manually](#thoughts-on-updating-opencore-with-ocat-vs-updating-manually)
 - [Notes](#notes)
 
@@ -125,30 +127,6 @@ For downloading and syncing the latest **DEV** versions, you have to select `Ope
 
 Alternatively, you can click on "Import" to open a downloaded `.zip` containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
-## Fixing "Development/Debug version database does not exist" error
-
-![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
-
-This error occurs when opening a `config.plist` which was created for a different/newer version of OpenCore which is not present in the Database yet. Do the following to get rid of the error:
-
-1. Click on "**Edit**" and select "**Upgrade OpenCore and Kext**" (or click on the symbol).
-2. Download the lasted version of OpenCore. Depending on the Mode OCAT is currently running in, the process differs.
-	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
-	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build) 
-3. It will download and integrate the latest version of OpenCore into the database
-4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
-
-## Integrating Drivers from OcBinaryData
-
-OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo automatically, so you have add them to the database manually. Usually, this only concerns the HFS+ driver, so it's not really a big deal:
-
-- Go to the [**OcBinaryData**](https://github.com/acidanthera/OcBinaryData/) repo
-- Click on "Code", select "Download ZIP" and unpack it
-- Place the Drivers here (Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files and folders):
-  - `.ocat/Database/EFI/OC/Drivers/` (for the "Release" version)
-  - `.ocat/Database/EFI/OC/Drivers/` (for the "Dev" version)
-- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
-
 ## Switching between Release and Debug builds
 
 To switch from the RELEASE to the DEBUG version of OpenCore, do the following:
@@ -167,6 +145,44 @@ To revert back to the RELEASE build:
 - Disable logging (change `Misc/Debug/Target` to `3`)
 - Update OpenCore files and Drivers
 - Save and reboot
+
+## Shortcomings of OCAT
+As useful as OCAT is, it has some shortcomings. The ones that come to mind are database issues, downloading drivers from OcBinaryData and copying the hidden files `.contentFlavour` and `.contentVisibility` which were added in OC 0.8.8 into the EFI/OC/Boot folder.
+
+### Fixing "Development/Debug version database does not exist" error
+
+![Err01](https://user-images.githubusercontent.com/76865553/172384859-682df123-eecf-4d1b-8586-df02d99be268.png)
+
+This error occurs when opening a `config.plist` which was created for a different/newer version of OpenCore which is not present in the Database yet. Do the following to get rid of the error:
+
+1. Click on "**Edit**" and select "**Upgrade OpenCore and Kext**" (or click on the symbol).
+2. Download the lasted version of OpenCore. Depending on the Mode OCAT is currently running in, the process differs.
+	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
+	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build) 
+3. It will download and integrate the latest version of OpenCore into the database
+4. Close the Syn Window. The version number displayed in the top left of the main window should have outdated as well:</br>![Err04](https://user-images.githubusercontent.com/76865553/172385405-630062a5-4108-4269-b8bb-d1a7cf8fe6cd.png)
+
+### Integrating Drivers from OcBinaryData
+
+OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo automatically, so you have add them to the database manually. Usually, this only concerns the HFS+ driver, so it's not really a big deal:
+
+- Go to the [**OcBinaryData**](https://github.com/acidanthera/OcBinaryData/) repo
+- Click on "Code", select "Download ZIP" and unpack it
+- Place the Drivers here (Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files and folders):
+  - `.ocat/Database/EFI/OC/Drivers/` (for the "Release" version)
+  - `.ocat/Database/EFI/OC/Drivers/` (for the "Dev" version)
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
+
+### Adding `.contentFlavour` and `.contentVisibility`
+- Mount your EFI
+- Download OpenCore Package
+- Extract it
+- Navigate to Downloads/OpenCore-0.9.X-RELEASE/X64/EFI/BOOT
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files
+- Copy `.contentFlavour` and `.contentVisibility` to EFI/OC/Boot
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
+
+> **Note**: Refer to OpenCore's Documentation.pdf to find out how to configure these files.
 
 ## Thoughts on updating OpenCore with OCAT vs. updating manually
 
