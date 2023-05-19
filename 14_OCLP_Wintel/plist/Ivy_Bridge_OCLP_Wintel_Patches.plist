@@ -69,15 +69,25 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Intel HD4000 Desktop)</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Empty)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>BwBiAQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>CgBmAQ==</data>
+				<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Alt.)</key>
+				<dict>
+					<key>AAPL,ig-platform-id</key>
+					<data>BQBiAQ==</data>
+				</dict>
 			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Intel HD4000 Ultra Slim Desktop)</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC/USDT)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>BQBiAQ==</data>
+				<data>CwBmAQ==</data>
 				<key>enable-hdmi20</key>
 				<data>AQAAAA==</data>
 				<key>framebuffer-con2-enable</key>
@@ -87,12 +97,7 @@
 				<key>framebuffer-patch-enable</key>
 				<data>AQAAAA==</data>
 			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Intel HD4000 Headless)</key>
-			<dict>
-				<key>AAPL,ig-platform-id</key>
-				<data>BwBiAQ==</data>
-			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Intel H4000 Laptop) SD</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, SD)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>AwBmAQ==</data>
@@ -121,7 +126,7 @@
 				<key>model</key>
 				<string>Intel HD Graphics 4000</string>
 			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Intel HD 4000 Laptop)  HD+ and FullHD</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, HD+ and FullHD)</key>
 			<dict>
 				<key>#disable-telemetry-load</key>
 				<data>AQAAAA==</data>
