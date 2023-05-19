@@ -194,7 +194,7 @@ Once you've verified that SMC CPU Power Management (plugin-type `0`) is working,
 After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
 
 - `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
-- `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it.
+- `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it. You also needed for re-applying root patches with OCLP after applying Root Patches
 - Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
