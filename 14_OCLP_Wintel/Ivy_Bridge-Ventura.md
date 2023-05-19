@@ -27,7 +27,7 @@
 
 ## About
 
-Although installing macOS Ventura on Ivy Bridge (and older) systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented for Wintel systems – only for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences in getting macOS 13 installed on an Ivy Bridge Laptop but it should be applicable to desktops as well.
+Although installing macOS Ventura on Ivy Bridge (and older) systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented for Wintel systems – only for legacy Macs by Apple. So there is no official guide on how to do it. Although I developed this guide based on my experiences trying to get macOS 13 running on my Lenovo T530 Laptop it is applicable to desktop systems as well since I factored in the necessary changes for those, too.
 
 **This guide allows you to**: 
 
