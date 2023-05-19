@@ -3,7 +3,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-- [Before you begin](#before-you-begin)
+- [Precautions and Limitations](#precautions-and-limitations)
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
 	- [Config Edits](#config-edits)
@@ -40,12 +40,16 @@ Although installing macOS Ventura on Ivy Bridge (and older) systems can be achie
 > **Warning**
 This guide is not for beginners! There are a lot of things to consider when trying to get newer versions of macOS working on unsupported hardware. DON'T upgrade from an existing working version of macOS. You won't be able to downgrade afterwards if something goes wrong. Perform a clean install on a spare internal disk or create a new volume on your current one. 
 
-## Before you begin
-- Make sure to have a backup of your working EFI folder stored on a FAT32 formatted USB Flash Drive to boot from – just in case something goes wrong.
-- Before you start modifying your config and EFI, make sure to check if any peripherals you are using are still compatible with macOS Ventura (Wifi and BlueTooth come to mind).
-- When using Broadcom Wifi/Bluetooth Cards, you will need different [combinations of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) which need to be controlled via `MinKernel` and `MaxKernel` settings
-- Same might be true for Intel Wireless Cards
-- Check if your GPU is compatible with macOS Ventura. Drivers for Intel iGPU and GPU drivers for NVIDIA Kepler and AMD cards can be re-installed in Post using OpenCore Legacy Patcher ([supported cards](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches))
+## Precautions and Limitations
+This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
+
+- Backup your working EFI folder on a FAT32 formatted USB Flash Drive – just in case something goes wrong.
+- Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list of supported GPUs](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) is limited.
+- AMD Polaris Cards (Radeon 4xx/5xx, etc.) can't be used with Ivy Bridge CPUs because they rely on the AVX2 instruction set which is only supported by Haswell and newer.
+- Check if any peripherals you are using are compatible with macOS 12+ (Wifi and BlueTooth come to mind).
+- When using Broadcom Wifi/BT Cards, you may need different [combinations of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) which need to be controlled via `MinKernel` and `MaxKernel` settings. Same applies to Intel Wifi/BT Cards
+- Incremental (or delta) System Updates won't work after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 12 GB)!
+- Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
 
 ## Preparations
 I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Monterey and newer.
@@ -54,13 +58,13 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 Update OpenCore to 0.9.2 or newer (mandatory). Because prior to 0.9.2, the `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the kexts required for re-enabling SMC CPU Power Management can't be patched and the system won't boot unless you have a (modded) BIOS where CFG Lock can be disabled. Update your kexts to the latest versions as well to avoid compatibility issues.
 
 ### Config Edits
-Listed below, you find the required modifications to prepare your config.plis and EFI folder for installing macOS Monterey or newer on Ivy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Ivy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
+Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Ivy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Ivy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
 
 Section | Action | Description
 ----------------|-------- | ---------
  **`ACPI/Add`** | Disable/Delete **`SSDT-PLUG`** or **`SSDT-XCPM`** if present. | We don't want the system to use XCPM on Ivy Bridge CPUs! 
  **`Booter/Patch`**| Add and enable both Booter Patches from OpenCore Legacy Patcher's [**Board-ID VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li> **"Skip Board ID check"** <li> **"Reroute HW_BID to OC_BID"** | Skips board-id checks in macOS &rarr; Allows booting macOS with unsupported, native SMBIOS best suited for your CPU.
-**DeviceProperties/Add**| Adjust `AAPL,ig-platform-id` in **PciRoot(0x0)/Pci(0x2,0x0)** (optional): <ul><li> **Desktops**: <ul><li> **07006201** (Empty Framebuffer) <li> **0A006601** (Default) <li> **05006201** (Alternative, if default causes issues) </ul> <li> **Laptops**: <ul><li> **04006601** (1600x900 px or more)<li> **03006601** (1366x769 px or less) <li> **09006601** (Alternative if the other 2 don't work) <li> **0B006601** (for Intel NUCs) | <ul> <li>**Empty Framebuffer**: For Desktops. Use this if (a) your CPU has an iGPU, (b) if a dedicated GPU is used for graohics and (c) if you are using an iMac SMBIOS. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display <li> **Alternative**: use if the default framebuffer patch causes graphical glitches. **05006201** can help when using Ultra Slim Desktops (USDT) such as HP 6300 Pro, HP 8300 Elite, etc.</ul> Refer to [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-25004000-ivy-bridge-processors) for more details. Remember: the Intel HD FAQ displays the platform-ids in Big Endian but for the config you need Little Endian…
+**DeviceProperties/Add**| Adjust `AAPL,ig-platform-id` in **PciRoot(0x0)/Pci(0x2,0x0)** (optional): <ul><li> **Desktops**: <ul><li> **07006201** (Empty Framebuffer) <li> **0A006601** (Default) <li> **05006201** (Alternative, if default causes issues) </ul> <li> **Laptops**: <ul><li> **04006601** (1600x900 px or more)<li> **03006601** (1366x769 px or less) <li> **09006601** (Alternative if the other 2 don't work) <li> **0B006601** (for Intel NUCs) | <ul> <li>**Empty Framebuffer**: For Desktops. Use this if (a) your CPU has an iGPU, (b) if a dedicated GPU is used for graphics and (c) if you are using an iMac SMBIOS. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display <li> **Alternative**: use if the default framebuffer patch causes graphical glitches. **05006201** can help when using Ultra Slim Desktops (USDT) such as HP 6300 Pro, HP 8300 Elite, etc.</ul> Refer to [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-25004000-ivy-bridge-processors) for more details. Remember: the Intel HD FAQ displays the platform-ids in Big Endian but for the config you need Little Endian…
 **`Kernel/Add`** and <br>**`EFI/OC/Kexts`** |**Add the following Kexts**:<ul><li> [**CryptexFixup**](https://github.com/acidanthera/CryptexFixup) (`MinKernel`: `22.0.0`)<li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) (`MinKernel`: `20.4.0`) <li>  [**AppleIntelCPUPowerManagement**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagement-v1.0.0.zip) (`MinKernel`: `22.0.0`)<li> [**AppleIntelCPUPowerManagementClient**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagementClient-v1.0.0.zip) (`MinKernel`: `22.0.0`)</ul> **Delete the following Kexts** from EFI/OC/Kexts and config (if present): <ul><li> **CPUFriend** <li> **CPUFriendDataProvider**| <ul> <li>**Cryptexfixup**: Required for installing and booting macOS Ventura on systems without AVX 2.0 support (see [OCLP Support Issue #998](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)) <li> **RestrictEvents**: Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional NVRAM parameters. <li> **AppleIntelCPUPowerManagement** kexts: Required for re-enabling SMC CPU Power Management ([more details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura))
 **`Kernel/Patch`** | <ul> <li>Disable **`_xcpm_bootstrap`** (if present) <li>Add and enable the following Kernel Patches from the [Board-ID VMM spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li>**"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** | `_xcpm_bootstrap`: We don’t want the system to use XCPM on Ivy Bridge CPUs! The other Kernel Patches are for OCLP, so Root Patches can be applied. On my Laptop, they are not needed but on some desktops they are. Try for yourself.
 **`Kernel/Quirks`** | <ul><li> Enable **`AppleCpuPmCfgLock`**. Not required if you can disable CFG Lock in BIOS. <li> Disable **`AppleXcmpCfgLock`** (if enabled) <li> Disable **`AppleXcpmExtraMsrs`** (if enabled) | Again, we want to make sure, XCPM is not utilized for Ivy Bridge CPUs!
@@ -163,9 +167,9 @@ To bring them back, do the following:
 ### Installing Drivers for other GPUs
 - Works basically the same way as installing iGPU drivers
 - OCLP detects the GPU and if it has drivers for it, they can be installed. Afterwards, GPU Hardware Acceleration should work. Note that additional settings in OCLP may be required based on the GPU you are using.
-- After the drivers have been installed, disable the following `boot-args` prior to reboooting to re-enable GPU graphics acceleration:
-  - `-radvesa` (put a `#` in front of it: `#-radvesa`) to disable it
-  - `nv_disable=1` (put a `#` in front of it: `#-amd_no_dgpu_accel`) to disable it
+- After the drivers have been installed, disable the following `boot-args` prior to rebooting to re-enable GPU graphics acceleration:
+  - `-radvesa` – put a `#` in front to disable it: `#-radvesa`
+  - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
 
 > **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
