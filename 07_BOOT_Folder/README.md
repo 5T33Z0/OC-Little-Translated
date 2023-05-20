@@ -21,3 +21,6 @@ OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentV
 - You can open and edit these files in TextEdit (switch "Format" to "RAW text"), Visual Studio Code or Xcode.
 
 **To be continued…**
+
+## Resources
+OpenCorePkg [Pull Request #446](https://github.com/acidanthera/OpenCorePkg/pull/446): Add Optional contentVisibility Qualification 
