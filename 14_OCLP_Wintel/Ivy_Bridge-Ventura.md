@@ -220,6 +220,7 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 - Acidanthera for OpenCore, OCLP and numerous Kexts
 - Corpnewt for MountEFI, GenSMBIOS and ProperTree
 - Dortania for OpenCore Legacy Patcher and Guide
+- Rehabman for Laptop framebuffer patches
 
 ## Further Resources
 - [How to Enable NVIDIA WebDrivers on macOS Big Sur and Monterey](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
