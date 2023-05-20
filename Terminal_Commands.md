@@ -133,6 +133,10 @@ defaults write -g ignore-devices -bool true
 ```
 **Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
 
+**List of Keyboard Shortcuts**
+
+https://support.apple.com/en-us/HT201236
+
 ## CPU related
 
 **Show CPU Vendor**:</br>
