@@ -520,5 +520,23 @@
 		<key>WriteFlash</key>
 		<true/>
 	</dict>
+	<key>UEFI</key>
+	<dict>
+		<key>Drivers</key>
+		<array>
+			<dict>
+				<key>Arguments</key>
+				<string>--preserve-boot</string>
+				<key>Comment</key>
+				<string>Adds NVRAM reset to Bootpicker</string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ResetNvramEntry.efi</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>

@@ -685,6 +685,18 @@
 				<key>Path</key>
 				<string>OpenRuntime.efi</string>
 			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string>--preserve-boot</string>
+				<key>Comment</key>
+				<string>Adds NVRAM reset to Bootpicker</string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ResetNvramEntry.efi</string>
+			</dict>
 		</array>
 		<key>Input</key>
 		<dict>

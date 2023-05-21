@@ -6,14 +6,14 @@
 	<dict>
 		<key>By 5T33Z0</key>
 		<string>https://github.com/5T33Z0</string>
-		<key>SMBIOS: iMac11,1</key>
-		<string>For 1st Gen Intel Core i5/i7 CPUs. dGPU required.</string>
-		<key>macOS Support</key>
-		<string>macOS Snow Leopard to High Sierra</string>
 		<key>Note 1</key>
 		<string>Requires UEFI BIOS</string>
 		<key>Note 2</key>
 		<string>Generate a SSDT-PM using ssdtPRGen in Post-Install to for proper CPU Power Management</string>
+		<key>SMBIOS: iMac11,1</key>
+		<string>For 1st Gen Intel Core i5/i7 CPUs. dGPU required.</string>
+		<key>macOS Support</key>
+		<string>macOS Snow Leopard to High Sierra</string>
 	</dict>
 	<key>ACPI</key>
 	<dict>
@@ -385,33 +385,6 @@
 		</dict>
 		<key>Serial</key>
 		<dict>
-			<key>Custom</key>
-			<dict>
-				<key>BaudRate</key>
-				<integer>115200</integer>
-				<key>ClockRate</key>
-				<integer>1843200</integer>
-				<key>DetectCable</key>
-				<false/>
-				<key>ExtendedTxFifoSize</key>
-				<integer>64</integer>
-				<key>FifoControl</key>
-				<integer>7</integer>
-				<key>LineControl</key>
-				<integer>3</integer>
-				<key>PciDeviceInfo</key>
-				<data>/w==</data>
-				<key>RegisterAccessWidth</key>
-				<integer>8</integer>
-				<key>RegisterBase</key>
-				<integer>1016</integer>
-				<key>RegisterStride</key>
-				<integer>1</integer>
-				<key>UseHardwareFlowControl</key>
-				<false/>
-				<key>UseMmio</key>
-				<false/>
-			</dict>
 			<key>Init</key>
 			<false/>
 			<key>Override</key>
@@ -674,6 +647,18 @@
 				<false/>
 				<key>Path</key>
 				<string>OpenUsbKbDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string>--preserve-boot</string>
+				<key>Comment</key>
+				<string>Adds NVRAM reset to Bootpicker</string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ResetNvramEntry.efi</string>
 			</dict>
 		</array>
 		<key>Input</key>
