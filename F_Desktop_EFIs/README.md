@@ -1,4 +1,4 @@
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.8.0+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version-0.9.2+-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 
 # Generating an OpenCore EFI folder with OpenCore Auxiliary Tools
 

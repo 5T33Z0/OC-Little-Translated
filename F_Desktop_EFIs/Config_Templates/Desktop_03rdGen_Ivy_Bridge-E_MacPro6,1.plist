@@ -7,11 +7,11 @@
 		<key>By 5T33Z0</key>
 		<string>https://github.com/5T33Z0</string>
 		<key>macOS Support</key>
-		<string>macOS Snow Leopard to Catalina</string>
-		<key>SMBIOS: iMac12,2</key>
-		<string>For 2nd Gen Intel Core i5/i7 CPUs using the iGPU for driving a display</string>
+		<string>macOS 10.9 to 12.x</string>
+		<key>SMBIOS: MacPro6,1</key>
+		<string>For 3rd Gen Xeons with a dGPU for driving a display.</string>
 		<key>Notes</key>
-		<string>Generate a SSDT-PM using ssdtPRGen in Post-Install to enable proper CPU Power Management</string>
+		<string>Generate SSDT-PM in POST with ssdtPRGen for proper CPU Power Management</string>
 	</dict>
 	<key>ACPI</key>
 	<dict>
@@ -137,24 +137,12 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x16,0x0)</key>
+			<key>#PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)</key>
 			<dict>
 				<key>device-id</key>
-				<data>OhwAAA==</data>
-			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>AAPL,snb-platform-id</key>
-				<data>AAAFAA==</data>
-				<key>device-id</key>
-				<data>AgEAAA==</data>
-			</dict>
-			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>AAPL,snb-platform-id</key>
-				<data>EAADAA==</data>
-				<key>device-id</key>
-				<data>JgEAAA==</data>
+				<data>MxUAAA==</data>
+				<key>model</key>
+				<string>Intel I350 NIC</string>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -260,7 +248,7 @@
 				<key>BundlePath</key>
 				<string>AppleALC.kext</string>
 				<key>Comment</key>
-				<string></string>
+				<string>V1.6.6</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -339,7 +327,7 @@
 			<key>ThirdPartyDrives</key>
 			<false/>
 			<key>XhciPortLimit</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Scheme</key>
 		<dict>
@@ -483,8 +471,6 @@
 			<dict>
 				<key>DefaultBackgroundColor</key>
 				<data>AAAAAA==</data>
-				<key>UIScale</key>
-				<data>AQ==</data>
 			</dict>
 			<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
 			<dict>
@@ -521,7 +507,6 @@
 		<dict>
 			<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
 			<array>
-				<string>UIScale</string>
 				<string>DefaultBackgroundColor</string>
 			</array>
 			<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
@@ -532,6 +517,7 @@
 			<array>
 				<string>boot-args</string>
 				<string>ForceDisplayRotationInEFI</string>
+				<string>csr-active-config</string>
 			</array>
 		</dict>
 		<key>LegacyOverwrite</key>
@@ -590,7 +576,7 @@
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>SystemProductName</key>
-			<string>iMac12,2</string>
+			<string>MacPro6,1</string>
 			<key>SystemSerialNumber</key>
 			<string></string>
 			<key>SystemUUID</key>
@@ -686,13 +672,13 @@
 				<key>Arguments</key>
 				<string></string>
 				<key>Comment</key>
-				<string>HfsPlusLegacy.efi</string>
+				<string>HfsPlus.efi</string>
 				<key>Enabled</key>
 				<true/>
 				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
-				<string>HfsPlusLegacy.efi</string>
+				<string>HfsPlus.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>
@@ -717,18 +703,6 @@
 				<false/>
 				<key>Path</key>
 				<string>OpenRuntime.efi</string>
-			</dict>
-			<dict>
-				<key>Arguments</key>
-				<string></string>
-				<key>Comment</key>
-				<string>OpenUsbKbDxe.efi</string>
-				<key>Enabled</key>
-				<true/>
-				<key>LoadEarly</key>
-				<false/>
-				<key>Path</key>
-				<string>OpenUsbKbDxe.efi</string>
 			</dict>
 		</array>
 		<key>Input</key>
@@ -738,7 +712,7 @@
 			<key>KeyForgetThreshold</key>
 			<integer>5</integer>
 			<key>KeySupport</key>
-			<false/>
+			<true/>
 			<key>KeySupportMode</key>
 			<string>Auto</string>
 			<key>KeySwap</key>
