@@ -13,14 +13,14 @@ USB Standard | Speed | Controller | macOS support
 USB 1.1      | 12 Mbps | UHCI/OHCI |  ≤ macOS 12 (officially)</br>([**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/0.6.1) brings it to Ventura)
 USB 2.0      | 480 Mbps |EHCI | OSX 10.2+ 
 USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
-USB 3.1 Gen 2| 10 Gbps | XHCI | –
-USB 4        | 40 Gbps | PCIe | –
+USB 3.1 Gen 2| 10 Gbps | XHCI | via Thunderbolt only
+USB 4        | 40 Gbps | PCIe | via Thunderbolt only
 
 **NOTE**: Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 instead which provide similar transfer rates.
 
 ## Removing the USB port limit and mapping USB ports
 
-The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable all 26 ports and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this:
+The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable all 26 ports and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this.
 
 ## Method 1: Mapping USB Ports with Tools
 
@@ -56,7 +56,7 @@ Up to macOS 11.2, you can use tools to create a USBPorts.kext. To do so, follow 
 
 Personally, I prefer [**Hackintool**](https://github.com/headkaze/Hackintool) for mapping. This method only works for Intel systems, though. But on AMD systems it's not really an issue, since these boards usually only have about 10 USB ports per controller which stays well within the limit of 15 ports per controller in macOS.
 
-## Method 2: [mapping USB Ports via ACPI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) (OS-independent). Advanced users only!
+## Method 2: [Mapping USB Ports via ACPI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) (OS-independent). Advanced users only!
 Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which removes the USB port limit no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap`. 
 
 So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
