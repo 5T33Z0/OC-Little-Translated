@@ -21,7 +21,7 @@
 ## About
 This chapter contains 2 methods for improving the performance of AMD Radeon Graphics Cards when running macOS:
 
-- **Method 1**: Utilizes **SDDTs** to inject GPU Properties and PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the overall power consumption of the card. This method tries to mimic how the GPU would operate in a real Mac. 
+- **Method 1**: Utilizes **SSDTs** to inject GPU Properties and PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the overall power consumption of the card. This method tries to mimic how the GPU would operate in a real Mac. 
 - **Method 2**: Utilizes **`DeviceProperties`** to select specific Framebuffers (method 2a) and inject PowerPlayInfo tables (method 2b). Methods 2a and b can be combined. 
 
 ### SSDTs vs. `DeviceProperties` – some considerations
@@ -85,7 +85,7 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 		- **RX5700** &rarr; `ATY,Adder`
 		- **RX5500** &rarr; `ATY,Python`
 		- **RX570/580** &rarr; `ATY,Orinoco`
-	- In this example, we use `ATI,Henbury` (without blankspace):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
+	- In this example, we use `ATI,Henbury` (without blank space):</br>![DevProps02](https://user-images.githubusercontent.com/76865553/174430822-f63c0cf0-c8a1-463f-901d-9053e8c7a981.png)
 - Save and reboot.
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
@@ -132,7 +132,7 @@ Value (HEX)| Number (DEC) |Workload Policy
 
 ### `PP,PP_WorkLoadPolicyMask` vs. `PP_WorkLoadPolicyMask`
 
-Acidantehra's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs and guides which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_`, the property is listed alphabetically among other PowerPlay Table entries, while using `PP_` puts the entry in a different position in the list. 
+Acidanthera's AMD Radeon FAQs suggests calling the property `PP,PP_WorkLoadPolicyMask`, but I have seen configs and guides which use `PP_WorkLoadPolicyMask` instead. It seems that both methods work. The only difference is that when using `PP,PP_`, the property is listed alphabetically among other PowerPlay Table entries, while using `PP_` puts the entry in a different position in the list. 
 
 You can check this yourself: in IORegistryExplorer, search for `GFX0`. The property is listed as `PP_WorkLoadPolicy` in both cases, just sorted differently. It seems that the comma can be utilized as a modifier for sorting entries in the IO Registry.
 
@@ -154,13 +154,13 @@ I've added plists for both Clover and OpenCore to the "mattystonnie" folder. You
 
 ## Credits
 - Acidanthera for Lilu and WhateverGreen.kext
-- Baio1977 for implementing device renames into the mattystonnie SSDTs
 - mattystonnie for the SSDTs and original [**Guide**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/)
+- Baio1977 for implementing device renames into the mattystonnie SSDTs
 - Toleda for `DAGPM.kext`
 - CMMMChris for PowerPlay Table Generators
 - hush-vv for [**Radeon VII Device Properties**](https://www.tonymacx86.com/threads/amd-radeon-performance-enhanced-ssdt.296555/post-2315543)
 
 ## Further Resources
-- [**AMD Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)
+- [**AMD Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md) (Very informative)
 - [**Video Bitrate Test Files**](https://jell.yfish.us/)
 - [**Enabling XFX RX 6600 XT in macOS Monterey**](https://github.com/perez987/rx6600xt-on-macos-monterey)
