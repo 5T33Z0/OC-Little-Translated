@@ -18,7 +18,9 @@ OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentV
 ### Usage
 Simply place the `.contentVisibility` file in the folder containing the bootloader of the Operating System you want to hide from the BootPicker.
 
-The `.contentVisibility` file can be opened and edited with TextEdit, Visual Studio Code and Xcode, of course. It basically contains one word (ASCII): `Disabled`: </br>![](/Users/5t33z0/Desktop/visibility.png)
+The `.contentVisibility` file can be opened and edited with TextEdit, Visual Studio Code and Xcode, of course. It basically contains one word (ASCII): `Disabled`:
+
+![visibility](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/101f23b6-06b2-4938-b741-468e27ffe6ac)
 
 **Options**:
 You can change its behaviour by using these words:
