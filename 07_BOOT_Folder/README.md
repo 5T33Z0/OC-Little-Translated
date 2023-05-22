@@ -1,7 +1,6 @@
 # Adding and configuring `.contentFlavour` and `.contentVisibility`
 
-## About
-OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentVisibility` to further control the behavior of the BootPicker. If you have been using OpenCore prior to 0.8.8 and use OCAT to update it, these files are most likely missing from your EFI/OC/BOOT folder.
+OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentVisibility` to further control the behavior of the BootPicker. If you have been using OpenCore prior to 0.8.8 and use OCAT to update it, these files are most likely missing from your `EFI/OC/BOOT` folder.
 
 ## How to add `.contentFlavour` and `.contentVisibility` 
 
@@ -13,14 +12,33 @@ OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentV
 - Copy `.contentFlavour` and `.contentVisibility` to EFI/OC/Boot
 - Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
 
-## What are these files for?
-- **`.contentFlavour`** is related to the `PickerAttributes` used by OpenCanopy, more specifically, the `OC_ATTR_USE_FLAVOUR_ICON` flag
-- **`.contentVisibility`** can be used to hide and/or disable boot entries in the BootPicker. For example, if you have two physical disks in your systems with two different versions of macOS which require two different configs to boot, you can hide their EFI folders from one another.
+## About `.contentVisibility`
+**`.contentVisibility`** is used to hide boot entries from OpenCore's Boot Menu. This makes it a lot easier to hide entries then in previous versions where you had to calculate a `ScanPolicy` and in some cases combine it with `CustomEntries` to make it work.
 
-## How to configure?
-- You can open and edit these files in TextEdit (switch "Format" to "RAW text"), Visual Studio Code or Xcode.
+### Usage
+Simply place the `.contentVisibility` file in the folder containing the bootloader of the Operating System you want to hide from the BootPicker.
 
-**To be continued…**
+The `.contentVisibility` file can be opened and edited with TextEdit, Visual Studio Code and Xcode, of course. It basically contains one word (ASCII): `Disabled`: </br>![](/Users/5t33z0/Desktop/visibility.png)
+
+**Options**:
+You can change its behaviour by using these words:
+
+- `Disabled` &rarr; Hides the entry from OpenCore's BootPicker.
+- `Enabled` &rarr; Shows the entry.
+- `Auxiliary` &rarr; Treats the entry as an Auxiliary, so it's only reveled after pressing the space bar.
+
+**Examples**:
+
+- To hide the EFI folder, put in `EFI/OC/BOOT`
+- To hide Windows, put it in the EFI containing the `Microsoft/Boot` folder
+- For any other OS, the same principle applies.
+
+## About `.contentFlavour`
+
+**`.contentFlavour`** is used to modify the look and feel of entries in OpenCore's BootPicker (Audio Assist included). In order to enable it, the `OC_ATTR_USE_FLAVOUR_ICON` flag has to be added to the `PickerAtributes` bitmask. Check out the [OpenCore Calculators](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section to figure out how to generate it.
+
+### Configuration
+To configure the `.contentFlavour` file, please follow the extensive [OpenCore Content Flavor](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Flavours.md) guide provided by Acidanthera.
 
 ## Resources
-OpenCorePkg [Pull Request #446](https://github.com/acidanthera/OpenCorePkg/pull/446): Add Optional contentVisibility Qualification 
+OpenCorePkg [Pull Request #446](https://github.com/acidanthera/OpenCorePkg/pull/446): Add Optional .contentVisibility Qualification 
