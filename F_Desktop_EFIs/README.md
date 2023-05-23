@@ -97,7 +97,7 @@ Kext|Description
 - Go to `PlatformInfo/Generic` and click the `Generate` button (next to the SMBIOS dropdown menu)
 - Select "Edit" > "Create EFI Folder on Desktop"
 
-> **Notes**: <ul><li>Each config.plist contains notes (`#Info`). You can see them if you open the config with a plist editor. <li> There's also a [zipped version](https://github.com/5T33Z0/OC-Little-Translated/raw/main/F_Desktop_EFIs/Config_Templates/Config_Templates.zip) which contains all configs templates.
+> **Notes**: <ul><li>Each config.plist contains notes (`#Info`). You can see them if you open the config with a plist editor. <li> There's also a [zipped version](https://github.com/5T33Z0/OC-Little-Translated/raw/main/F_Desktop_EFIs/Config_Templates/Config_Templates.zip) which contains all config templates.
 
 ### 2. Modifying the `config.plist` 
 After the base EFI has been generated, the `config.plist` has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
