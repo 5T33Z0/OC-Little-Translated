@@ -42,7 +42,7 @@ Luckily the patching process can now be automated using **SSDTTime** which can g
 - Run `gfxutil` (double-click)
 - This will list all the addresses of plists it finds
 - Look (or search) for `GFX0@0`. In this example it's listed in line `03:00.0 1002:73bf /PCI0@0/PEG1@1/PEGP@0/BRG0@0/GFX0@0 = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)`: </br> ![](https://github.com/TylerLyczak/Unsupported-6900XT-Hackintosh-Fix/blob/master/assets/gfxutil_pic.png?raw=true)
-- Take note of the PCI path (delete the `@` and number). In this example, GPU is located under: **`PCI0/PEG1/PEGP/BRG0/GFX0`**
+- Take note of the PCI path (delete the `@` and number). In this example, the GPU is pysically located at: **`PCI0/PEG1/PEGP/BRG0/GFX0`**
 
 #### Cross-reference in IO Registry
 
