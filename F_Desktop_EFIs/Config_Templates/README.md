@@ -6,6 +6,7 @@ Well, the developer of OCAT removed direct access to the config templates stored
 
 ## Instructions
 
+- Open the "plist" folder (or download the [**Config_Templates.zip**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/F_Desktop_EFIs/Config_Templates/Config_Templates.zip) to save time)
 - Select a config for your CPU family and click on it
 - On the toolbar above the code, click on the button that says "Download raw file"
 - Open the .plist in OCAT (or drag it into the main window)
