@@ -92,11 +92,10 @@ Kext|Description
 - Open the **Database** <kbd>CMD</kbd>+<kbd>D</kbd>
 - Click on the Link 
 - Select a config for your CPU family and click on it
-- On the toolbar of the page, click on the button that says "Download raw file"
+- On the toolbar above the code, click on the button that says "Download raw file"
 - Open the .plist in OCAT (or drag it into the main window)
 - Go to `PlatformInfo/Generic` and click the `Generate` button (next to the SMBIOS dropdown menu)
 - Select "Edit" > "Create EFI Folder on Desktop",
-- An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes and the `config.plist`.
 
 **NOTE**: Each config.plist contains notes (#Info). You can see them if you open the config with a plist editor.
 
