@@ -6,6 +6,3 @@ Well, the developer of OCAT removed direct access to the config templates stored
 
 ## Instructions
 &rarr; The Instructions are covered in the main article: [**Generating an OpenCore EFI folder with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
-
-
-
