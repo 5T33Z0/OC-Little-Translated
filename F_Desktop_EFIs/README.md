@@ -35,7 +35,7 @@ I've created about 40 base configs for Intel systems, covering a wide range of s
 **No AMD?** Since configs for AMD systems also require many customizations before deployment (Kernel Patches, MMIO Whitelist, etc.), AMD templates have been removed from OCAT's database entirely.
 
 ### Included Files and Settings
-- [**Config Templates**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/Config_Templates) for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets (no Laptops!)
+- **Config Templates** for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets (no Laptops!)
 - **Required SSDT** Hotpatches for each CPU family (some are disabled – check before deployment!)
 - **Necessary Quirks** for each CPU Family (also available as Presets inside of OCAT)
 - **Device Properties** for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
