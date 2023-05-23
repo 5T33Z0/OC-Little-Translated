@@ -124,9 +124,10 @@ Scope (\_SB)
     }
 }
 ```
-### Enabling RX 6900 with XTXH 
+### Enabling RX 6900XT Cards
 
-The XTXH variant (Device-id: `0x73AF`) is supported with WhateverGreen and spoofing device-id to `0x73BF`
+- Cards RX 6900XT from XTXH (device-id: `0x73AF`) is supported with WhateverGreen and spoofing the device-id: use `0x73BF`
+- If your RX 6900XT is unsupported, you can follow [this guide](https://github.com/TylerLyczak/Unsupported-6900XT-Hackintosh-Fix) to enable it in macOS.
 
 ## AMD and DRM
 When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen and the `agdpmod=pikera` boot-arg. 
