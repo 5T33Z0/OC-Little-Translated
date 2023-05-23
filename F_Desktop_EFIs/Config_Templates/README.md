@@ -5,4 +5,4 @@ So, you've clicked on the "Database" button in OCAT in order to generate a pre-c
 Well, the developer of OCAT removed direct access to the config templates stored in the database and instead redirected you here, since I am the maintainer of these config files. This makes it easier to keep maintain the config files and keep them up to date.
 
 ## Instructions
-&rarr; The Instructions are covered in the main article: [**Generating an OpenCore EFI folder with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+&rarr; For Instructions please refer to [**Generating an OpenCore EFI folder with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
