@@ -28,14 +28,14 @@
 This section contains generic OpenCore configs for Intel systems based on the work of **Gabriel Luchina** who created EFI folders following the instructions of Dortania's OpenCore install guide. I took his concept of base configs, modified and improved it so they work out of the box (hopefully). Nevertheless, it's crucial to understand that these configs serve only as a starting point for your system to get up and running with OpenCore.
 
 ## New approach: generating EFIs from `config.plist`
-Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the internet, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the config.plists included in the app's database. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
+Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the internet, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the a config.plist alone. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
 
-Included are about 40 base configs for Intel systems, covering a wide range of supported Desktop CPUs (1st to 10th Gen), vendors and chipsets. Laptop configs are omitted because there are way too many variables to consider to get it working flawlessly which is beyond the scope of what's possible here.
+I've created about 40 base configs for Intel systems, covering a wide range of supported Desktop CPUs (1st to 10th Gen), vendors and chipsets. Laptop configs are omitted because there are way too many variables to consider to get it working flawlessly which is beyond the scope of what's possible with this method.
 
 **No AMD?** Since configs for AMD systems also require many customizations before deployment (Kernel Patches, MMIO Whitelist, etc.), AMD templates have been removed from OCAT's database entirely.
 
 ### Included Files and Settings
-- **Base configs** for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets (no Laptops!)
+- [**Config Templates**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/Config_Templates) for Intel Desktop and High End Desktop CPUs with variations for Dell, Sony, HP and other Board/Chipsets (no Laptops!)
 - **Required SSDT** Hotpatches for each CPU family (some are disabled – check before deployment!)
 - **Necessary Quirks** for each CPU Family (also available as Presets inside of OCAT)
 - **Device Properties** for each platform (mostly Framebuffer Patches for: iGPU only, iGPU+dGPU and GPU only)
@@ -95,9 +95,9 @@ Kext|Description
 - On the toolbar above the code, click on the button that says "Download raw file"
 - Open the .plist in OCAT (or drag it into the main window)
 - Go to `PlatformInfo/Generic` and click the `Generate` button (next to the SMBIOS dropdown menu)
-- Select "Edit" > "Create EFI Folder on Desktop",
+- Select "Edit" > "Create EFI Folder on Desktop"
 
-**NOTE**: Each config.plist contains notes (#Info). You can see them if you open the config with a plist editor.
+> **Notes**: <ul><li>Each config.plist contains notes (`#Info`). You can see them if you open the config with a plist editor. <li> There's also a zipped version that contains all configs templates.
 
 ### 2. Modifying the `config.plist` 
 After the base EFI has been generated, the `config.plist` has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
@@ -158,20 +158,6 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/</br>**`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
 **`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled. A better solution is to add Booter Patches to enable the board-id skip and add RestrictEvents to enable system updates as explained [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
-
-## Updating the config Templates manually
-Although these configs are included in OCAT now, they are maintained and updated by me, so the latest versions will always be present in my [**repo**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
-
-To manually update the config templates, do the following:
-
-- Download [**BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/BaseConfigs.zip?raw=true) and extract it
-- Copy the Files to the Database Folder inside of the **OCAuxiliaryTools** App:
-	- Right-click the app and select "Show package contents"
-	- browse to `/Contents/MacOS/Database/BaseConfigs/`
-	- Paste the files
-	- Restart OCAT
-
-**NOTE**: Although I tried to set up each config with the utmost precision in mind there might be errors in them. If you find one, please create an issue report and I will fix it and update the template.
 
 ## References
 - **OpenCore Bootloader**: https://github.com/acidanthera/OpenCorePkg
