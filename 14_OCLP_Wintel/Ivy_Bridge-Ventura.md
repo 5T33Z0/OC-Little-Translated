@@ -158,9 +158,9 @@ Once you reach the set-up assistant (where you select your language, time zone, 
 To bring them back, do the following:
 
 - Run the OpenCore Patcher App 
-- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![menu](https://user-images.githubusercontent.com/76865553/181920348-21a3abad-311f-49c6-b4d9-25e6560b6150.png)
-- Next, click on "Start Root Patching":</br>![menu2](https://user-images.githubusercontent.com/76865553/181920368-bdfff312-6390-40a5-9af8-8331569fbe17.png)
-- The App has to relaunch with Admin Roots. Click Yes:</br>![yes](https://user-images.githubusercontent.com/76865553/181920381-2b6a4194-60c3-472e-81bb-c5478e3298f9.png)
+- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![Post_Root_Patches](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/15fe5dc1-793c-465c-9252-1ee6e503c680)
+- Next, click on "Start Root Patching":</br>![startpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a3e96078-6a66-4db4-99a5-5edf31c9fc8f)
+- The App has to relaunch with Admin Roots. Click Yes:</br>![reeeelaunch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/25df894b-f943-4720-83ab-04c35c685043)
 - You will have to enter your Admin Password and then the installation will begin:</br>![Install](https://user-images.githubusercontent.com/76865553/181920398-38ddf7c5-0dfd-428e-9d7a-5646010d3c08.png)
 - Once. it's done, you have to reboot and Graphics acceleration will work
 - Continue with the Post-Install process as described in the Repo.
