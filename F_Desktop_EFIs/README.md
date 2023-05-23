@@ -90,10 +90,15 @@ Kext|Description
 ### 1. Generate a base EFI Folder for the CPU of your choice
 - [Download](https://github.com/ic005k/OCAuxiliaryTools/releases) and run OCAuxiliaryTools (OCAT)
 - Open the **Database** <kbd>CMD</kbd>+<kbd>D</kbd>
-- Double-click on the comfig.plist for your CPU family.
+- Click on the Link 
+- Select a config for your CPU family and click on it
+- On the toolbar of the page, click on the button that says "Download raw file"
+- Open the .plist in OCAT (or drag it into the main window)
+- Go to `PlatformInfo/Generic` and click the `Generate` button (next to the SMBIOS dropdown menu)
+- Select "Edit" > "Create EFI Folder on Desktop",
 - An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes and the `config.plist`.
 
-**NOTE**: Each config.plist contains additional notes. You can see it if you open the config with a plist editor.
+**NOTE**: Each config.plist contains notes (#Info). You can see them if you open the config with a plist editor.
 
 ### 2. Modifying the `config.plist` 
 After the base EFI has been generated, the `config.plist` has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.

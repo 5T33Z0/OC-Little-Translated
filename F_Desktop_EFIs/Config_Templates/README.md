@@ -13,8 +13,7 @@ Well, the developer of OCAT removed direct access to the config templates stored
 5. Select "Edit" > "Create EFI Folder on Desktop",
 6. The EFI folder will be populated on your desktop
 7. Put the folder on a FAT32 formatted USB flash drive and test it
-
-> **Note**: For more info about configs and the process itself, read the main article "[Generating and OpenCore EFI folder with OpenCore Auxiliary Tools](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)".
+8. If it doesn't work right away yo have to adjust it as explained in the main article: [**Generating and OpenCore EFI folder with OpenCore Auxiliary Tools**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
 
 
 
