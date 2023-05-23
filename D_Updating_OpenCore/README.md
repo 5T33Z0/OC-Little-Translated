@@ -184,6 +184,20 @@ OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo auto
 
 > **Note**: Refer to OpenCore's Documentation.pdf to find out how to configure these files.
 
+## Refreshing the OCAT Database
+
+If you want to reset OCATs preferences and its Database (after an update for example), do the folling:
+
+- In Finder, navigate to your Home folder.
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files
+- Delete the `.ocat` folder 
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again.
+- Next, run OCAT
+- Fix Database errors downloading the lasted version of OpenCore from the Sync Window:
+	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
+	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build)
+- Once the download has finished, the latest files will be integrated into the database so you can continue using OCAT as usual.
+
 ## Thoughts on updating OpenCore with OCAT vs. updating manually
 
 If you don't believe how easy updating and maintaining OpenCore with OCAT actually is, just try it for yourself. And then have a look at the convoluted manual update procedure provided by Dortania again. [**Their method**](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) requires at least 7 different tools to get the job done:
