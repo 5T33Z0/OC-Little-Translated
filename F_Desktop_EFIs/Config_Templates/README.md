@@ -12,4 +12,4 @@ Well, the developer of OCAT removed direct access to the config templates stored
 - Open the .plist in OCAT (or drag it into the main window)
 - Go to `PlatformInfo/Generic` and click the `Generate` button (next to the SMBIOS dropdown menu)
 - Select "Edit" > "Create EFI Folder on Desktop"
-- [**Further Modify/adjust the config before deplpoyment**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#2-modifying-the-configplist)
+- [**Further adjust/modify the config before deplpoyment**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
