@@ -4,9 +4,9 @@
 <dict>
 	<key>#Info</key>
 	<dict>
-		<key>Settings for running macOS 12+ on Wintel Systems</key>
-		<string></string>
 		<key>CPU Family: Ivy Bridge</key>
+		<string></string>
+		<key>Required additions for running macOS 12+ on Wintel Systems</key>
 		<string></string>
 		<key>Systems: Desktops/Laptops</key>
 		<string></string>
@@ -69,33 +69,40 @@
 	<dict>
 		<key>Add</key>
 		<dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>CgBmAQ==</data>
+			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Empty)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>BwBiAQ==</data>
 			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop)</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, HD+ and FullHD)</key>
 			<dict>
-				<key>AAPL,ig-platform-id</key>
-				<data>CgBmAQ==</data>
-				<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Alt.)</key>
-				<dict>
-					<key>AAPL,ig-platform-id</key>
-					<data>BQBiAQ==</data>
-				</dict>
-			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC/USDT)</key>
-			<dict>
-				<key>AAPL,ig-platform-id</key>
-				<data>CwBmAQ==</data>
-				<key>enable-hdmi20</key>
+				<key>#disable-telemetry-load</key>
 				<data>AQAAAA==</data>
-				<key>framebuffer-con2-enable</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-con2-flags</key>
-				<data>EQAAAA==</data>
+				<key>AAPL,ig-platform-id</key>
+				<data>BABmAQ==</data>
+				<key>AAPL,slot-name</key>
+				<string>built-in</string>
+				<key>framebuffer-con1-alldata</key>
+				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
+				<key>framebuffer-con1-enable</key>
+				<integer>1</integer>
+				<key>framebuffer-memorycount</key>
+				<integer>2</integer>
 				<key>framebuffer-patch-enable</key>
-				<data>AQAAAA==</data>
+				<integer>1</integer>
+				<key>framebuffer-pipecount</key>
+				<integer>2</integer>
+				<key>framebuffer-portcount</key>
+				<integer>4</integer>
+				<key>framebuffer-unifiedmem</key>
+				<data>AAAAgA==</data>
+				<key>model</key>
+				<string>Intel HD Graphics 4000</string>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, SD)</key>
 			<dict>
@@ -126,30 +133,18 @@
 				<key>model</key>
 				<string>Intel HD Graphics 4000</string>
 			</dict>
-			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, HD+ and FullHD)</key>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC/USDT)</key>
 			<dict>
-				<key>#disable-telemetry-load</key>
-				<data>AQAAAA==</data>
 				<key>AAPL,ig-platform-id</key>
-				<data>BABmAQ==</data>
-				<key>AAPL,slot-name</key>
-				<string>built-in</string>
-				<key>framebuffer-con1-alldata</key>
-				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
-				<key>framebuffer-con1-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-memorycount</key>
-				<integer>2</integer>
+				<data>CwBmAQ==</data>
+				<key>enable-hdmi20</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con2-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con2-flags</key>
+				<data>EQAAAA==</data>
 				<key>framebuffer-patch-enable</key>
-				<integer>1</integer>
-				<key>framebuffer-pipecount</key>
-				<integer>2</integer>
-				<key>framebuffer-portcount</key>
-				<integer>4</integer>
-				<key>framebuffer-unifiedmem</key>
-				<data>AAAAgA==</data>
-				<key>model</key>
-				<string>Intel HD Graphics 4000</string>
+				<data>AQAAAA==</data>
 			</dict>
 		</dict>
 	</dict>
@@ -161,31 +156,13 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>RestrictEvents.kext</string>
+				<string>AppleIntelCPUPowerManagementClient.kext</string>
 				<key>Comment</key>
-				<string>Process Blocker</string>
+				<string>Legacy Power Management (pre-XCPM) Helper</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/RestrictEvents</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string>20.4.0</string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>x86_64</string>
-				<key>BundlePath</key>
-				<string>CryptexFixup.kext</string>
-				<key>Comment</key>
-				<string>Required for installing/booting macOS 13</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/CryptexFixup</string>
+				<string>Contents/MacOS/AppleIntelCPUPowerManagementClient</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -215,17 +192,35 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>AppleIntelCPUPowerManagementClient.kext</string>
+				<string>CryptexFixup.kext</string>
 				<key>Comment</key>
-				<string>Legacy Power Management (pre-XCPM) Helper</string>
+				<string>Required for installing/booting macOS 13</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/AppleIntelCPUPowerManagementClient</string>
+				<string>Contents/MacOS/CryptexFixup</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>22.0.0</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>RestrictEvents.kext</string>
+				<key>Comment</key>
+				<string>Process Blocker</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/RestrictEvents</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>20.4.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -257,6 +252,66 @@
 				<string>20.4.0</string>
 				<key>Replace</key>
 				<data>uAEAAADD</data>
+				<key>ReplaceMask</key>
+				<data></data>
+				<key>Skip</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>Base</key>
+				<string>_authenticate_root_hash</string>
+				<key>Comment</key>
+				<string>Disable Root Hash validation</string>
+				<key>Count</key>
+				<integer>0</integer>
+				<key>Enabled</key>
+				<false/>
+				<key>Find</key>
+				<data></data>
+				<key>Identifier</key>
+				<string>com.apple.filesystems.apfs</string>
+				<key>Limit</key>
+				<integer>0</integer>
+				<key>Mask</key>
+				<data></data>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>22.0.0</string>
+				<key>Replace</key>
+				<data>uAAAAADD</data>
+				<key>ReplaceMask</key>
+				<data></data>
+				<key>Skip</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>Base</key>
+				<string>__ZL22_vnode_check_signatureP5vnodeP5labeliP7cs_blobPjS5_ijPPcPm</string>
+				<key>Comment</key>
+				<string>Disable _csr_check() in _vnode_check_signature</string>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Enabled</key>
+				<true/>
+				<key>Find</key>
+				<data>AQAAAOgAAAAAhcB1</data>
+				<key>Identifier</key>
+				<string>com.apple.driver.AppleMobileFileIntegrity</string>
+				<key>Limit</key>
+				<integer>0</integer>
+				<key>Mask</key>
+				<data>//////8AAAAA////</data>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>22.0.0</string>
+				<key>Replace</key>
+				<data>AQAAALgBAAAAhcB1</data>
 				<key>ReplaceMask</key>
 				<data></data>
 				<key>Skip</key>
@@ -412,66 +467,6 @@
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>x86_64</string>
-				<key>Base</key>
-				<string>_authenticate_root_hash</string>
-				<key>Comment</key>
-				<string>Disable Root Hash validation</string>
-				<key>Count</key>
-				<integer>0</integer>
-				<key>Enabled</key>
-				<false/>
-				<key>Find</key>
-				<data></data>
-				<key>Identifier</key>
-				<string>com.apple.filesystems.apfs</string>
-				<key>Limit</key>
-				<integer>0</integer>
-				<key>Mask</key>
-				<data></data>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string>22.0.0</string>
-				<key>Replace</key>
-				<data>uAAAAADD</data>
-				<key>ReplaceMask</key>
-				<data></data>
-				<key>Skip</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>x86_64</string>
-				<key>Base</key>
-				<string>__ZL22_vnode_check_signatureP5vnodeP5labeliP7cs_blobPjS5_ijPPcPm</string>
-				<key>Comment</key>
-				<string>Disable _csr_check() in _vnode_check_signature</string>
-				<key>Count</key>
-				<integer>1</integer>
-				<key>Enabled</key>
-				<true/>
-				<key>Find</key>
-				<data>AQAAAOgAAAAAhcB1</data>
-				<key>Identifier</key>
-				<string>com.apple.driver.AppleMobileFileIntegrity</string>
-				<key>Limit</key>
-				<integer>0</integer>
-				<key>Mask</key>
-				<data>//////8AAAAA////</data>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string>22.0.0</string>
-				<key>Replace</key>
-				<data>AQAAALgBAAAAhcB1</data>
-				<key>ReplaceMask</key>
-				<data></data>
-				<key>Skip</key>
-				<integer>0</integer>
-			</dict>
 		</array>
 	</dict>
 	<key>NVRAM</key>
@@ -522,6 +517,8 @@
 	</dict>
 	<key>UEFI</key>
 	<dict>
+		<key>ConnectDrivers</key>
+		<true/>
 		<key>Drivers</key>
 		<array>
 			<dict>
