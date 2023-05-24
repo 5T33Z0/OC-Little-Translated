@@ -27,15 +27,13 @@ For macOS 13, you also need to inject `AppleIntel210Ethernet.kext`, since it has
 ### Instructions
 
 - [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/SSDT-I225V.aml?raw=true) `SSDT-I225V.aml`
-- Add it to `EFI/OC/ACPI` and config.plist (OCAT users can just drag it into the ACPI/Add section)
-- macOS 13 only: 
-	- [**Download**](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786214) the `AppleIntel210Ethernet.kext` and unzip it. Or get it from previous versions of macOS. It's located under /`System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/AppleIntelI210Ethernet.kext`
-	- Add it to `EFI/OC/Kexts` and config.plist (OCAT users can just drag it into the `Kernel/Add` section)
+- Add it to `EFI/OC/ACPI` and config.plist 
+- **macOS 13 only**: 
+	- Add [**this kext**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
 	- Change `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
 - Add boot-arg `dk.e1000=0` (macOS Big Sur) or `e1000=0` (macOS Monterey/Ventura)
 - Apply the correct Settings shown below
-- Save the config
-- Reboot
+- Save the config and Reboot.
 
 Since I have flashed a modded firmware months ago I can't test this fix, but it has been reported as [working successfully](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786756).
 
