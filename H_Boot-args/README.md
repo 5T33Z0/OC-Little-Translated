@@ -64,7 +64,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 |Boot-arg|Description|
 |--------|-----------|
 **`alcid=X`**|For selecting a layout-id for AppleALC, where `X` needs to be a numerical value specifying the layout-id. See [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your system's audio CODEC.
-**`amfi_get_out_of_my_way=1`**| Disables Apple Mobile File Integrity (AMFI). **Requirement**: disabled `SIP`. AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. Even after disabling these services, AMFI is still checking the signatures of every running app and will cause non-Apple apps to crash when they touch extra-sensitive areas of the system. There's also a [kext](https://github.com/osy/AMFIExemption) which does this on a per-app-basis.
+**`amfi=0x80`** or <br> **`amfi_get_out_of_my_way=1`**| Both args are identical. It's [actually a bitmask](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/data/amfi_data.py). Setting it to `0x80` disables Apple Mobile File Integrity (AMFI). AMFI is a macOS kernel module enforcing code-signing and library validation which strengthens security. **Requires `SIP` to be disabled as well!**
 **`-force_uni_control`**| Force-enables Universal Control service in macOS Monterey 12.3+
 
 ## Boot-args and device properties provided by Kexts
