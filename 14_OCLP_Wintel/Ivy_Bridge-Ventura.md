@@ -219,6 +219,7 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 ## Credits
 - Acidanthera for OpenCore, OCLP and numerous Kexts
 - Corpnewt for MountEFI, GenSMBIOS and ProperTree
+- dhinakg for AMFIPass
 - Dortania for OpenCore Legacy Patcher and Guide
 - Rehabman for Laptop framebuffer patches
 
