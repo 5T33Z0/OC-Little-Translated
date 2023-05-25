@@ -20,7 +20,7 @@ For macOS 13, you also need to inject `AppleIntel210Ethernet.kext`, since it has
 
 :warning: Before deploying this SSDT, verify the ACPI path of the I225-V is matching the one used in your `DSDT` – otherwise adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
 
-> **Note**: Location of the kext in previous versions of macOS: `/S/L/E/IONetworkingFamily.kext/Contents/PlugIns/AppleIntelI210Ethernet.kext`
+> **Note**: Location of AppleIntelI210Ethernet.kext in previous versions of macOS: `System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/`
 
 ### Instructions
 
@@ -30,10 +30,10 @@ For macOS 13, you also need to inject `AppleIntel210Ethernet.kext`, since it has
 - Add it to `EFI/OC/ACPI` and config.plist 
 - **macOS 13 only**: 
 	- Add [**this kext**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
-	- Change `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
-- Add boot-arg `dk.e1000=0` (macOS Big Sur) and/or `e1000=0` (macOS Monterey/Ventura)
-- Apply the correct Settings as shown below
-- Save the config and Reboot.
+	- Set `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
+- Add boot-arg `dk.e1000=0` (macOS 11) and/or `e1000=0` (macOS 12+)
+- Apply the correct **Settings** from the table below.
+- Save the config and reboot.
 
 ## Settings
 Listed below are the required BIOS and config Settings for various versions of macOS.
