@@ -11,11 +11,10 @@
 - Prompts for granting permissions to 3rd party apps don't pop-up if Apple Mobile File Integrity (AMFI) is disabled. 
 
 ## Solutions
-Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 3 different approaches for fixing this issue…
+Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
-### Solution 0: Add `AMFIPass.kext`
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass`
-which allows booting macOS with AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not yet publicly available yet, you have to extrac it from OCLP itself.
+### Solution 0: Add `AMFIPass.kext` (best)
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not yet publicly available yet, you have to extract it from OCLP itself.
 
 **Extracting the kext from OpenCore Patcher**:
 
