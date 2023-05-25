@@ -16,7 +16,7 @@ Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desk
 	AAPL,ig-platform-id      | 00001259 | Data | 
 	device-id                | 12590000 | Data |
 	AAPL,GfxYTile            | 01000000 | Data | Optional. If your having glitches.
-- Optional: add boot-arg `-igfxsklaskbl` (when using macOS 12 or older)
+- Optional: add boot-arg `-igfxsklaskbl` (when using macOS 12)
 - Save and reboot
 
 ## Verifying
