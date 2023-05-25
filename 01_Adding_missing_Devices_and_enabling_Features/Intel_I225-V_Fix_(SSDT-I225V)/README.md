@@ -16,9 +16,9 @@ The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte
 ## Adding SSDT-I225-V
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. 
 
-For macOS 13, you also need to inject `AppleIntel210Ethernet.kext`, since it has been removed from the `IONetworkingFamily.kext` and you can't use the .dext version unless you flash a modded firmware.
+For macOS 13, you also need to inject AppleIntel210Ethernet.kext, since it has been removed from the IONetworkingFamily.kext and you can't use the .dext version unless you flash a modded firmware.
 
-:warning: Before deploying this SSDT, verify the ACPI path of the I225-V is matching the one used in your `DSDT` – otherwise adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
+:warning: Before adding this SSDT, verify the ACPI path of the I225-V is matching the one used in your `DSDT` and adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
 
 > **Note**: Location of AppleIntelI210Ethernet.kext in previous versions of macOS: `System/Library/Extensions/IONetworkingFamily.kext/Contents/PlugIns/`
 
@@ -47,7 +47,7 @@ macOS |Vt-D|DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^1]| I225-V / 3rd
 
 [^1]: Check my guide for [dropping ACPI tables](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
 [^2]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me in regards to enabling the I225-V in macOS but that's what the user reported as working.
-[^3]: Enabling the I225-V in macOS Catalina requires modified DeviceProperties as well as a Kernel Patch since it's not supported natively. With this, the Controller will be spoofed as an Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the DeviceProperties for anything newer than macOS 11.3!
+[^3]: Enabling the I225-V in macOS Catalina requires modified `DeviceProperties` as well as a Kernel Patch since it's not supported natively. With this, the I225-V will be spoofed as Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the spoof for macOS 11.4 and newer!
 
 > **Note**: OpenCore 0.9.2 introduced a new Quirk called `DisableIoMapperMapping`. It works independently of `DisableIoMapper` and removes Reserved Memory Regions defined in the DMAR table from memory in macOS, so dropping and replacing the DMAR table is no longer required. Refer to OpenCore's Documentation.pdf for more details.
 
