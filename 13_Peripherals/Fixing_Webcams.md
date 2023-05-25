@@ -10,10 +10,36 @@
 ## Cause
 - Prompts for granting permissions to 3rd party apps don't pop-up if Apple Mobile File Integrity (AMFI) is disabled. 
 
-## Solution
+## Solutions
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 3 different approaches for fixing this issue…
 
-### Method 1: Re-enable SIP (not always possible)
+### Solution 0: Add `AMFIPass.kext`
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass`
+which allows booting macOS with AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not yet publicly available yet, you have to extrac it from OCLP itself.
+
+**Extracting the kext from OpenCore Patcher**:
+
+- Download [OCLP 0.6.7 beta](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
+- Run the App. Leave it open
+- Navigate to the temporary folder it creates: `/private/var/folders/91/9zkgbj5n1p55r5y6dp_r7fv80000gn/T/tmpa6ff045r`
+- There will be a mounted image: "OpenCore Patcher Resources (Base)"
+- Navigate to `Kexts/Acidanthera`. There will you will find "AMFIPass-v1.2.1-RELEASE.zip"
+- Copy it to the desktop and extract it
+- Close the app again. This will delete the temporary folder
+
+**Add AMFIPass to your EFI and Config**:
+
+- Mount your EFI
+- Add the kext to `EFI/OC/Kexts` 
+- Open your config.plist
+- Add the kext to Kernel/Add manually or create a new OC Snapshot in ProperTree
+- **Optional**: Adjust `MinKernel` to the kernel version which would require AMFI to be disable in order to boot. For example: `20.0.0` for Big Sur, `21.0.0` for Monterey, `22.0.0` for Ventura, etc.
+- Delete boot-arg `amfi_get_out_of_my_way=0x1` or `AMFI=0x80` (if present)
+- Save your config and reboot
+
+Voilà: Now, you can now boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
+
+### Solution 1: Re-enable SIP (not always possible)
 
 - Change `csr-active-config` to `00000000` to re-enable SIP
 - Save your config
@@ -23,7 +49,7 @@ Once SIP has been re-enabled, the prompts for granting access to the cam/mic wil
 
 **Problem**: If you are using legacy hardware which requires booting with SIP and/or AMFI disabled you cannot use this method. So you either have to upgrade macOS from an existing previous install where you already granted these permissions so they are carried over to the new OS or use Method 3 instead.
 
-### Method 2: Grant permissions in Safe Mode (if SIP is disabled)
+### Solution 2: Grant permissions in Safe Mode (if SIP is disabled)
 
 - Enable `PollAppleHotkeys` (under Misc/Boot)in your config.plist
 - Reboot into Safe Mode (in BootPicker, hold Shift and Press Enter)
@@ -38,7 +64,7 @@ Once SIP has been re-enabled, the prompts for granting access to the cam/mic wil
 - This works fine for Zoom but Microsoft Teams won't run in Safe Mode. There's no GUI so the prompts for granting the app access to the mic/cam are not triggered.
 - Only applicable if you can boot into Safe Mode with SIP disabled. If you did apply any Root Patches with OpenCore Legacy Patcher (like re-installing iGPU/GPU drivers), booting in Safe Mode will get stuck since the graphics drivers can't be loaded. In this case you have to resort to Option 3 as well.
 
-### Method 3: Add permissions manually (requires command line skills)
+### Solution 3: Add permissions manually (requires command line skills)
 
 If you can't boot with SIP enabled, you must add permissions to the SQL3 database manually, as explained here: [Unable to grant special permissions to apps](https://dortania.github.io/OpenCore-Legacy-Patcher/ACCEL.html#unable-to-grant-special-permissions-to-apps-ie-camera-access-to-zoom)
 
