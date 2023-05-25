@@ -14,7 +14,7 @@
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
 ### Solution 0: Add `AMFIPass.kext` (best)
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not yet publicly available yet, you have to extract it from OCLP itself.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available, you have to extract it from OCLP itself.
 
 **Extracting the kext from OpenCore Patcher**:
 
