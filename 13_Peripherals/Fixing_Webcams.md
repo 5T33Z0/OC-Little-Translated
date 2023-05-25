@@ -20,8 +20,9 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 
 - Download [OCLP 0.6.7 beta](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
 - Run the App. Leave it open
-- Navigate to the temporary folder it creates: `/private/var/folders/91/9zkgbj5n1p55r5y6dp_r7fv80000gn/T/tmpa6ff045r`
-- There will be a mounted image: "OpenCore Patcher Resources (Base)"
+- Navigate to the temporary folder it creates: `/private/var/folders/91/9zkgbj5n1p55r5y6dp_r7fv80000gn/T/`
+- The 2nd to last folder should be called "tmp…" something (it's created dynamically so I can't provide an exact path)
+- This folder will contain a mounted image: "OpenCore Patcher Resources (Base)"
 - Navigate to `Kexts/Acidanthera`. There will you will find "AMFIPass-v1.2.1-RELEASE.zip"
 - Copy it to the desktop and extract it
 - Close the app again. This will delete the temporary folder
