@@ -26,13 +26,15 @@ For macOS 13, you also need to inject `AppleIntel210Ethernet.kext`, since it has
 
 ### Instructions
 
+- Disable/Delete `FakePCIID.kext` (if present)
+- Disable/Delete `FakePCIID_Intel_I225-V.kext` (if present)
 - [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/SSDT-I225V.aml?raw=true) `SSDT-I225V.aml`
 - Add it to `EFI/OC/ACPI` and config.plist 
 - **macOS 13 only**: 
 	- Add [**this kext**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
 	- Change `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
-- Add boot-arg `dk.e1000=0` (macOS Big Sur) or `e1000=0` (macOS Monterey/Ventura)
-- Apply the correct Settings shown below
+- Add boot-arg `dk.e1000=0` (macOS Big Sur) and/or `e1000=0` (macOS Monterey/Ventura)
+- Apply the correct Settings as shown below
 - Save the config and Reboot.
 
 Since I have flashed a modded firmware months ago I can't test this fix, but it has been reported as [working successfully](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786756).
@@ -40,16 +42,18 @@ Since I have flashed a modded firmware months ago I can't test this fix, but it 
 ## Settings
 Listed below are the required BIOS and config Settings for various versions of macOS.
 
-macOS          |Vt-D    |DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^2]| I225-V / 3rd Party working|
-:--------------|:------:|:-------------:|:--------:|:---------------------:|:--------------------------:
-12.5+ (with SSDT)  | ON     |**OFF**        | **YES**  | **NO / NO**           | **YES / YES**
-12.5+ (stock fw)  | ON     | OFF           | YES      | NO / NO               | **NO / YES**
-11.4 to 11.6.7 | ON     | ON [^3]       | NO       | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
-10.15 to 11.3 [^4]| OFF/ON |OFF/ON         | YES      | NO / NO               | **YES / NO**
+macOS |Vt-D|DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^2]| I225-V / 3rd Party working|
+:-----|:------:|:----------:|:--------:|:-----------------:|:--------------------------:
+12.5+ (with SSDT)| ON |**OFF**| **YES** | **NO / NO**| **YES / YES**
+12.5+ (stock fw) | ON | OFF | YES| NO / NO | **NO / YES**
+11.4 to 11.6.7 | ON | ON [^3]| NO | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
+10.15 to 11.3 [^4]| OFF/ON |OFF/ON | YES | NO / NO | **YES / NO**
 
 [^2]: Check my guide for [dropping ACPI tables](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
 [^3]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me in regards to enabling the I225-V in macOS but that's what the user reported as working.
 [^4]: Enabling the I225-V in macOS Catalina requires modified DeviceProperties as well as a Kernel Patch since it's not supported natively. With this, the Controller will be spoofed as an Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the DeviceProperties for anything newer than macOS 11.3!
+
+> **Note**: OpenCore 0.9.2 introduced a new Quirk called `DisableIoMapperMapping`. It works independently of `DisableIoMapper` and removes Reserved Memory Regions defined in the DMAR table from memory in macOS, so dropping and replacing the DMAR table is no longer required. Refer to OpenCore's Documentation.pdf for more details.
 
 ## Troubleshooting
 
