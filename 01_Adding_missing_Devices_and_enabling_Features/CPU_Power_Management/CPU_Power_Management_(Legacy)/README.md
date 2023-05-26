@@ -125,8 +125,17 @@ Once the 2 Kexts are injected, ACPI Power Management will work in Ventura and yo
 ```shell
 sysctl machdep.xcpm.mode
 ```
-The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU.
+The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU. Additionally, you could check if the 2 kext are loader:
 
+```shell
+kextstat | grep com.apple.driver.AppleIntelCPUPowerManagement
+```
+This should return something like this:
+
+```
+57    0 0xffffff800439a000 0x3e000    0x3e000    com.apple.driver.AppleIntelCPUPowerManagement (222.0.0) 20DD89B4-45CE-3E56-A484-15B74E79ACDD <9 8 7 6 3 1>
+88    0 0xffffff80043d8000 0xf000     0xf000     com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) B3E52B58-0634-333C-9A71-E99BE79F8283 <9 8 7 6 3 1>
+```
 > **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock is [skipped in macOS 13 based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c). So injecting the required kexts to re-enable legacy CPU Power Management results in a kernel panic unless CFG Lock can be disabled in the BIOS menu (or by flashing a modified BIOS if there is no setting available).
 
 ## Notes
