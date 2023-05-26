@@ -58,6 +58,16 @@ I assume you already have a working OpenCore configuration for your Ivy Bridge s
 ### Update OpenCore and kexts
 Update OpenCore to 0.9.2 or newer (mandatory). Because prior to 0.9.2, the `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the kexts required for re-enabling SMC CPU Power Management can't be patched and the system won't boot unless you have a (modded) BIOS where CFG Lock can be disabled. Update your kexts to the latest versions as well to avoid compatibility issues.
 
+To check which version of OpenCore and the OpenCore Patcher you're currently using, run the following commands in the Terminal:
+
+```shell
+OpenCore Version
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+
+Patcher Version
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:OCLP-Version
+```
+
 ### Config Edits
 Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Ivy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Ivy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
 
@@ -95,14 +105,15 @@ Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Ope
 #### When Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older, the Booter Patches don't work so changing to an SMBIOS supported by macOS Ventura temporarily is necessary in order to be able to install macOS Ventura – otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot. 
 
-Supported SMBIOSes:
+**Supported SMBIOSes**:
 
 - For Desktops: 
 	- **iMac18,1** or newer
 	- **MacPro7,1** (High End Desktops)
 - For Laptops: **MacBookPro14,1** or **MacBookAir8,1**
 - For NUCs: **Macmini8,1**
-- Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
+
+Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
 > **Note**: Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so revert to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. You may want to generate a new [SSDT-PM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to optimize CPU Power Management.
 
@@ -129,7 +140,7 @@ Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or
 Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this in Post-Install.
 
 ### Option 2: Upgrading from macOS Catalina or older
-When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended To create a USB Installer, you can use OpenCore Legacy Patcher:
+When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
 
 - Run Disk utility
 - Create a new APFS Volume on your internal HDD/SSD or use a separate internal disk (at least 60 GB in size) for installing macOS 13 – DON'T install it on an external drive – it won't boot!
@@ -150,7 +161,7 @@ When upgrading from macOS Catalina or older a clean install from USB flash drive
 After the installation is completed and the system boots it will run without hardware graphics acceleration if you only have an iGPU or if you GPU is no longer supported by macOS. We will address this in Post-Install. 
 
 ## Post-Install
-OpenCore Legacy patcher can re-install components which were from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems We will make use of it to install iGPU and GPU drivers primarily.
+OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.
 
 ### Installing Intel HD4000 Drivers
 Once you reach the set-up assistant (where you select your language, time zone, etc), you will notice that the system feels super sluggish – that's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
