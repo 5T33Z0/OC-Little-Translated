@@ -332,4 +332,10 @@ ___
 
 # Keyboard Shorcuts
 
-**Show hidden Files and Folders in Finder**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+**Show hidden Files and Folders in Finder**: 
+
+<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+
+**Starting Ternibal in macOS Setup-Assistant**:
+
+Cmd + Option + Control + T
