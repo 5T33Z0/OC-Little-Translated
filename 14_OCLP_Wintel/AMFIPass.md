@@ -1,7 +1,7 @@
 # Obtaining `AMFIPass.kext`
 
 ## About
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Having AMFI working is required in order to grant 3rd party apps access to external Webcams and Mics. So this is a pretty relevant kext to have.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Having AMFI working is required in order to grant 3rd party apps access to external Webcams and Mics. So this is a pretty relevant kext to have if you applied any root patches to your system.
 
 Since AMFIPass is not publicly available yet, we have to extract it from OCLP itself which is a bit of a pain. Once the App is started, it will create a temporary folder with a somewhat dynamic path in the hidden `privat/var/` folder which contains all the files it needs for patching macOS, etc. So it takes a bit of effort to get to the kext…
 
