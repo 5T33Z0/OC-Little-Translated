@@ -28,7 +28,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 8. Click on it to start building OpenCore
 9. Once building has finished a pop-up will appear: <br> ![oclp03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35aa5103-38fc-432c-918e-81927e4593f9)
 10. :warning: Click on "View build log"! **DON'T** click on "Install to disk"!
-11. In the log, scroll down to the end of the log
+11. Scroll down to the end of the log
 12. Select the path and copy it to the clipboard. This path is created *dynamically*, so we have to it the complicated way in order to find the location of the kext: <br>![oclp04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1298b71a-bcf0-465a-bde7-4b7555993533)
 13. Open Finder
 14. From the menu bar, select "Go to" > "Go to folder…"
