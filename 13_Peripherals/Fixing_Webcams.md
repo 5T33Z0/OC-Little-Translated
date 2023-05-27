@@ -22,9 +22,9 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 2. Run the App. It generates a temporary folder on the system that we need to locate. And since this folder has no fixed address it's a bit of a pita to locate it…
 3. In the main window, check if you can select the option to "Build and install OpenCore". On Wintel Systems, it will be greyed-out: <br> ![oclp01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e842dd0a-987f-4f3b-8d1e-bc25d8d75804)
 4. Click on "Settings"
-5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one.
+5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one. In this case, I selected Xserve3,1.
 6. Next, click on "Return"
-7. Back in the main Window, the option to "Build and install OpenCore" will nowbe available:<br> ![oclp02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/204fc1ee-ac1c-49af-8537-174c1279b18e)
+7. Back in the main Window, the option to "Build and install OpenCore" will now be available:<br> ![oclp02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/204fc1ee-ac1c-49af-8537-174c1279b18e)
 8. Click on it to start building OpenCore
 9. Once building has finished a pop-up will appear: <br> ![oclp03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35aa5103-38fc-432c-918e-81927e4593f9)
 10. :warning: Click on "View build log"! **DON'T** click on "Install to disk"!
