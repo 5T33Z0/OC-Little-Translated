@@ -16,17 +16,29 @@ Since disabling AMFI requires System Integrity Protection (SIP) to be disabled i
 ### Solution 0: Add `AMFIPass.kext` (best)
 The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself.
 
-**Extracting the kext from OpenCore Patcher**:
+**Extracting AMFIPass from OpenCore Patcher**:
 
-- Download [OCLP 0.6.7 beta](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
-- Run the App. Leave it open. It generates a temporary folder on the system which we have to locate
-- In Finder, press `CMD` + `.` (dot) to show hidden files and folders.
-- Navigate to `/private/var/folders/[something]/[something]/T/` (the folder is generated _dynamically_ so the path is not fixed)
-- The 2nd to last folder in the "T" folder should be called "tmp…" something.
-- It will contain a mounted image: "OpenCore Patcher Resources (Base)"
-- Navigate to `Kexts/Acidanthera`. There you you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
-- Copy it to the desktop and extract it
-- Close the app again. This will delete the temporary folder
+1. Download [**OCLP 0.6.7 beta**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
+2. Run the App. It generates a temporary folder on the system which we need to locate.
+3. In the main window, check if you can select the option to "Build and install OpenCore". On Wintel Systems, it will be greyed-out: <br> ![](/Users/stunner/Desktop/oclp01.png)
+4. Click on "Settings"
+5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one.
+6. Next, click on "Return"
+7. Back in the main Window, the option to "Build and install OpenCore" will nowbe available:<br> ![](/Users/stunner/Desktop/oclp02.png)
+8. Click on it to start building OpenCore
+9. Once building has finished a pop-up will appear: <br>![](/Users/stunner/Desktop/oclp03.png)
+10. :warning: Click on "View build log"! **DON'T** click on "Install to disk"!
+11. In the log, scroll down to the end of the log
+12. Select the path and copy it to the clipboard. This path is created *dynamically*, so we have to it the complicated way in order to find the location of the kext: <br>![](/Users/stunner/Desktop/oclp04.png)
+13. Open Finder
+14. Select "Go to" > "Go to folder…"
+15. Paste in the address and hit enter to get to the location
+16. Next, click on **"OpenCore Patcher Resources (Base)"**
+17. Navigate to `Kexts/Acidanthera`.There you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
+18. Copy it to the desktop.
+19. Close the Patcher App.
+
+**NOTE**: Once AMFIPass is release on it's own repo, this laborious process will no longer be required.
 
 **Add AMFIPass to your EFI and Config**:
 
@@ -38,7 +50,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 - Delete boot-arg `amfi_get_out_of_my_way=0x1` or `AMFI=0x80` (if present)
 - Save your config and reboot
 
-Voilà: Now, you can now boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
+**Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
 ### Solution 1: Re-enable SIP (not always possible)
 
