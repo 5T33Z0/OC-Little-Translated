@@ -38,7 +38,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 18. Copy it to the desktop.
 19. Close the Patcher App.
 
-**NOTE**: Once AMFIPass is release on it's own repo, this laborious process will no longer be required.
+**NOTE**: Once AMFIPass is released on it's own repo, this laborious process will no longer be required.
 
 **Add AMFIPass to your EFI and Config**:
 
