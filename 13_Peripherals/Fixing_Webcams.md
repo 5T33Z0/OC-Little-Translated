@@ -50,7 +50,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 - Delete boot-arg `amfi_get_out_of_my_way=0x1` or `AMFI=0x80` (if present)
 - Save your config and reboot
 
-**Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
+**Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again! Once you have to apply root patches again (usually after installing macOS updates), you have to temporarily enable `AMFI=0x80` again so OpenCore patcher can do its thing.
 
 ### Solution 1: Re-enable SIP (not always possible)
 
