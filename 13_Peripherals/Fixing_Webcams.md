@@ -14,12 +14,12 @@
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
 ### Solution 0: Add `AMFIPass.kext` (best)
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself which  it's a bit of a pita because the file will be located in temporary folder with a dynamic path once the app is started.
 
 **Extracting AMFIPass from OpenCore Patcher**:
 
 1. Download [**OCLP 0.6.7 beta**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
-2. Run the App. It generates a temporary folder on the system that we need to locate. And since this folder has no fixed address it's a bit of a pita to locate it…
+2. Run the App. It generates a temporary folder on the system that we need to locate.
 3. In the main window, check if you can select the option to "Build and install OpenCore". On Wintel Systems, it will be greyed-out: <br> ![oclp01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e842dd0a-987f-4f3b-8d1e-bc25d8d75804)
 4. Click on "Settings"
 5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one. In this case, I selected Xserve3,1.
