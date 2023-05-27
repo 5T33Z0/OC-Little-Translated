@@ -34,7 +34,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 14. From the menu bar, select "Go to" > "Go to folder…"
 15. Paste in the address and hit enter to get to the location
 16. Next, click on **"OpenCore Patcher Resources (Base)"**
-17. Navigate to `Kexts/Acidanthera`.There you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
+17. Navigate to `Kexts/Acidanthera`. There you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
 18. Copy it to the desktop.
 19. Close the Patcher App.
 
