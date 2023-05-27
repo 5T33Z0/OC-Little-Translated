@@ -1,15 +1,17 @@
 # Obtaining `AMFIPass.kext`
 
 ## About
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself which  it's a bit of a pita because the file will be located in temporary folder with a dynamic path once the app is started.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Having AMFI working is required in order to grant 3rd party apps access to external Webcams and Mics. So this is a pretty relevant kext to have.
+
+Since AMFIPass is not publicly available yet, we have to extract it from OCLP itself which is a bit of a pain. Once the App is started, it will create a temporary folder with a somewhat dynamic path in the hidden `privat/var/` folder which contains all the files it needs for patching macOS, etc. So it takes a bit of effort to get to the kext…
 
 ### Extracting AMFIPass from OpenCore Patcher
 
 1. Download [**OCLP 0.6.7 beta**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
-2. Run the App. It generates a temporary folder on the system that we need to locate.
+2. Run the App.
 3. In the main window, check if you can select the option to "Build and install OpenCore". On Wintel Systems, it will be greyed-out: <br> ![oclp01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e842dd0a-987f-4f3b-8d1e-bc25d8d75804)
 4. Click on "Settings"
-5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one. In this case, I selected Xserve3,1.
+5. In the "Target" dropdown menu, change the selection from "Host Model" to any other model in the list. It doesn't matter which one. In this example, I selected Xserve3,1.
 6. Next, click on "Return"
 7. Back in the main Window, the option to "Build and install OpenCore" will now be available:<br> ![oclp02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/204fc1ee-ac1c-49af-8537-174c1279b18e)
 8. Click on it to start building OpenCore
@@ -31,7 +33,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 - Add the kext to `EFI/OC/Kexts` 
 - Open your config.plist
 - Add the kext to Kernel/Add manually or create a new OC Snapshot in ProperTree
-- **Optional**: Adjust `MinKernel` to the kernel version which would require AMFI to be disable in order to boot. For example: `20.0.0` for Big Sur, `21.0.0` for Monterey, `22.0.0` for Ventura, etc.
+- **Optional**: Adjust `MinKernel` to the kernel version which would require AMFI to be disabled in order to boot. For example: `20.0.0` for Big Sur, `21.0.0` for Monterey, `22.0.0` for Ventura, etc.
 - Delete boot-arg `amfi_get_out_of_my_way=0x1` or `AMFI=0x80` (if present)
 - Save your config and reboot
 
