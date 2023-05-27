@@ -1,7 +1,8 @@
 # Installing macOS Ventura on Sandy Bridge systems
 
 ## About
-Although installing macOS Ventura on Sandy Bridge systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented – only for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge sytsem, I developed this guide based on analyzing the changelog, config and EFI folder structure after building OpenCore with (OCLP) for the following systems:
+Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge family
+can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented – only for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge sytsem, I developed this guide based on analyzing the changelog, config and EFI folder structure after building OpenCore with (OCLP) for the following systems:
 
 - **Desktop**: iMac12,x 
 - **Laptop**: MacBookPro8,x (`8,1` = 13" Core i5; `8,2` = 15" i5; `8,3` = 17" i7)
@@ -27,12 +28,105 @@ I assume you already have a working OpenCore configuration for your Sandy Bridge
 ### Update OpenCore and kexts
 Update OpenCore to 0.9.2 or newer (mandatory). Because prior to 0.9.2, the `AppleCpuPmCfgLock` Quirk is [skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the kexts required for re-enabling SMC CPU Power Management can't be patched and the system won't boot unless you have a (modded) BIOS where CFG Lock can be disabled. Update your kexts to the latest versions as well to avoid compatibility issues.
 
+To check which version of OpenCore and OpenCore Patcher you're currently using, run the following commands in the Terminal:
+
+```shell
+OpenCore Version
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+
+Patcher Version
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:OCLP-Version
+```
+
 ## Config Edits
 Section | Setting | Description
 :------:| ------- | ---------
  **`Booter/Patch`**| Add and enable both Booter Patches from OpenCore Legacy Patcher's [**Board-ID VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li> **"Skip Board ID check"** <li> **"Reroute HW_BID to OC_BID"** | Skips board-id checks in macOS &rarr; Allows booting macOS with unsupported, native SMBIOS best suited for your CPU.
 **`DeviceProperties/Add`**|**PciRoot(0x0)/Pci(0x2,0x0)** <ul><li> **Desktop** (Headless): <ul> <li> **AAPL,snb-platform-id**: 00000500 <li> **device-id**: 02010000 </ul></ul><ul><li>**Desktop** (Default): <ul><li> **AAPL,snb-platform-id**: 10000300 <li> **device-id**: 26010000 </ul> </ul><ul> <li> **Laptop**: <ul><li> **AAPL,snb-platform-id**: 00000100 <li> **AAPL00,DualLink**: 01000000 </ul></ul><ul><li> **Intel NUC** (or other USDT): <ul><li> **AAPL,snb-platform-id**: 10000300 </ul>| **iGPU Support**: :warning: Intel HD 3000 only!<ul> <li>**Headless**: For systems with an iMac SMBIOS, iGPU and a GPU which is used for graphics. The example in the OC Install Guide is actually wrong. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display. The example in the OC Install Guide is actually wrong. <li> **AAPL00,DualLink**: Only required for DualLink laptop displays with 1600x900 pixels or more.<li> **NUCs**: For Intels NUCs and other Ultra Slim Desktops (USDT), such as: HP 6300 Pro, HP 8300 Elite, etc.</ul> Refer to [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-25004000-ivy-bridge-processors) for more details. Remember: the FAQ displays the ig-platform-ids in Big Endian but for the config you need Little Endian!
+<<<<<<< Updated upstream
 **`Kernel/Add`** and <br>**`EFI/OC/Kexts`** |**Add the following Kexts**:<ul><li>**AMFIPass** (`MinKernel`: `21.0.0`) ([Must to be optained from OpenCore Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/AMFIPass.md)) <li>[**ASPP-Override.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/ASPP-Override-v1.0.1.zip) (`MinKernel`: `21.0.0`)<li> [**CryptexFixup**](https://github.com/acidanthera/CryptexFixup) (`MinKernel`: `22.0.0`)<li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) (`MinKernel`: `20.4.0`) <li> [**AppleIntelCPUPowerManagement**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagement-v1.0.0.zip) (`MinKernel`: `22.0.0`)<li> [**AppleIntelCPUPowerManagementClient**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagementClient-v1.0.0.zip) (`MinKernel`: `22.0.0`)</ul> **Delete the following Kexts** from EFI/OC/Kexts and config (if present):<ul><li> **CPUFriend** <li> **CPUFriendDataProvider**|<ul><li> **AMFIPass**: Beta kext from OCLP 0.6.7. Allows booting macOS 12+ without disabling AMFI.<li>**ASPP-Override.kext**: Codeless kext from OCLP. Forces `ACPI_SMC_PlatformPlugin` to outmatch `X86PlatformPlugin`. May be required on real Macs only. Monitor CPU behavior in Intel Power Gadget with and without it.<li>**Cryptexfixup**: Required for installing and booting macOS Ventura on systems without AVX 2.0 support (see [OCLP Support Issue #998](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)). <li> **RestrictEvents**: Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional NVRAM parameters. <li> **AppleIntelCPUPowerManagement** kexts: Required for re-enabling SMC CPU Power Management ([more details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura)).
+=======
+**`Kernel/Add`** and <br>**`EFI/OC/Kexts`** |**Add the following Kexts**:<ul><li>[**AMFIPass**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md#solution-0-add-amfipasskext) (`MinKernel`: `21.0.0`)<li>[**ASPP-Override.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/ASPP-Override-v1.0.1.zip) (`MinKernel`: `21.0.0`)<li> [**CryptexFixup**](https://github.com/acidanthera/CryptexFixup) (`MinKernel`: `22.0.0`)<li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) (`MinKernel`: `20.4.0`) <li> [**AppleIntelCPUPowerManagement**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagement-v1.0.0.zip) (`MinKernel`: `22.0.0`)<li> [**AppleIntelCPUPowerManagementClient**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagementClient-v1.0.0.zip) (`MinKernel`: `22.0.0`)</ul> **Delete the following Kexts** from EFI/OC/Kexts and config (if present):<ul><li> **CPUFriend** <li> **CPUFriendDataProvider**|<ul><li> **AMFIPass**: Beta kext from OCLP 0.6.7. Allows booting macOS 12+ without disabling AMFI.<li>**ASPP-Override.kext**: Codeless kext from OCLP. Forces `ACPI_SMC_PlatformPlugin` to outmatch `X86PlatformPlugin`. May be required on real Macs only. Monitor CPU behavior in Intel Power Gadget with and without it.<li>**Cryptexfixup**: Required for installing and booting macOS Ventura on systems without AVX 2.0 support (see [OCLP Support Issue #998](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)). <li> **RestrictEvents**: Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional NVRAM parameters. <li> **AppleIntelCPUPowerManagement** kexts: Required for re-enabling SMC CPU Power Management ([more details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura)).
+**`Kernel/Patch`** | Add and enable the following Kernel Patches from the [**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) (click on "Download RAW File"): <ul> <li> **"SurPlus v1 - PART 1 of 2"** <li> **"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** | Kernel Patches from OCLP, so Sandy Bridge CPUs can Root Patches can be applied.
+
+### Adjusting the SMBIOS
+If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
+
+#### When Upgrading from macOS Big Sur 11.3+
+
+When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capabilities to trick it into thinking that it is running in a VM so spoofing a compatible SMBIOS is no longer a requirement.
+
+Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Open your config.plist and change the SMBIOS in the `PlatformInfo/Generic` section.
+
+- **For Desktops**: 
+
+- **For Laptops**:
+
+- **For NUCs**:
+
+#### When Upgrading from macOS Catalina or older
+
+When upgrading from macOS Catalina or older, the Booter Patches don’t work so changing to an SMBIOS supported by macOS Ventura temporarily is necessary in order to be able to install macOS Ventura – otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
+
+**Supported SMBIOSes**:
+
+- For Desktops: 
+- For Laptops:
+- For NUCs: 
+
+Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
+
+> **Note**: Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so revert to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. You may want to generate a new [SSDT-PM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to optimize CPU Power Management.
+
+## macOS Ventura Installation
+With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
+
+### Getting macOS
+- Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
+- Click on "Create macOS Installer"
+- Click on "Download macOS Installer"
+- Select macOS 13.x (whatever the latest available version is)  
+- Once the download is finished the "Install macOS Ventura" app will be located in your "Programs" folder
+
+> **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+
+### Option 1: Upgrading from macOS 11.3 or newer 
+
+Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
+
+- Run the "Install macOS Ventura" App
+- There will be a few reboots
+- Boot from the new macOS Partition until it's no longer present in the Boot Picker
+
+Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this in Post-Install.
+
+### Option 2: Upgrading from macOS Catalina or older
+When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
+
+- Run Disk utility
+- Create a new APFS Volume on your internal HDD/SSD or use a separate internal disk (at least 60 GB in size) for installing macOS 13 – DON'T install it on an external drive – it won't boot!
+- Attach an empty USB flash drive for creating the installer (16 GB+)
+- Run OCLP and follow the [**instructions**](https://dortania.github.io/OpenCore-Legacy-Patcher/INSTALLER.html#creating-the-installer)
+- Once the USB Installer has been created, do the following:
+	- Copy the OpenCore-Patcher App to the USB Installer
+	- Add Optional tools (Optional, in case internet is not working): 
+		- Add Python Installer
+		- Add MountEFI
+		- Add ProperTree
+- Reboot 
+- Select "Install macOS Ventura" from the BootPicker
+- Install macOS Ventura on the volume you prepared earlier 
+- There will be a few reboots during installation. Boot from the new "Install macOS" Partition until it's no longer present in the Boot Picker
+- Once the macOS Ventura installation is finished, switch back to an SMBIOS best suited for your Ivy Bridge CPU mentioned earlier.
+
+After the installation is completed and the system boots it will run without hardware graphics acceleration if you only have an iGPU or if you GPU is no longer supported by macOS. We will address this in Post-Install. 
+
+## Post-Install
+OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.
+
+### Installing Intel HD 2000/3000 drivers
+
+>>>>>>> Stashed changes
 
 **TO BE CONTINUED…**
 
