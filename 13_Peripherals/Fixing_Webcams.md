@@ -14,16 +14,17 @@
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
 ### Solution 0: Add `AMFIPass.kext` (best)
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available, you have to extract it from OCLP itself.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself.
 
 **Extracting the kext from OpenCore Patcher**:
 
 - Download [OCLP 0.6.7 beta](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
-- Run the App. Leave it open because the app creates a temporary folder _dynmamically_ somewhere in `/private/var/folders/[something]/[something]/T/`
-- In Finder, press CMD + . (dot) to show hidden files and folder
-- The 2nd to last folder in the "T" foldeer should be called "tmp…" something
+- Run the App. Leave it open. It generates a temporary folder on the system which we have to locate
+- In Finder, press `CMD` + `.` (dot) to show hidden files and folders.
+- Navigate to `/private/var/folders/[something]/[something]/T/` (the folder is generated _dynamically_ so the path is not fixed)
+- The 2nd to last folder in the "T" folder should be called "tmp…" something.
 - It will contain a mounted image: "OpenCore Patcher Resources (Base)"
-- Navigate to `Kexts/Acidanthera`. There will you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
+- Navigate to `Kexts/Acidanthera`. There you you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
 - Copy it to the desktop and extract it
 - Close the app again. This will delete the temporary folder
 
