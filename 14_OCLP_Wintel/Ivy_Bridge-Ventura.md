@@ -51,6 +51,7 @@ This is what you need to know before attempting to install macOS Monterey and ne
 - Incremental (or delta) System Updates won't work after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 12 GB)!
 - Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
 - In my experience, macOS Ventura not suited as a "daily driver" on Ivy Bridge – at least on Laptops.
+- Check out this [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems.
 
 ## Preparations
 I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Monterey and newer.
