@@ -22,8 +22,8 @@
 	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
 - [OCLP and System Updates](#oclp-and-system-updates)
 - [Notes](#notes)
-- [Credits](#credits)
 - [Further Resources](#further-resources)
+- [Credits](#credits)
 
 ## About
 

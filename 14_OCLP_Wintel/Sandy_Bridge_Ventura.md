@@ -16,6 +16,7 @@
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
 - [Post-Install](#post-install)
 	- [Installing Intel HD 2000/3000 drivers](#installing-intel-hd-20003000-drivers)
+- [Further Resources](#further-resources)
 - [Credits](#credits)
 
 
