@@ -40,3 +40,10 @@ Since AMFIPass is not publicly available yet, we have to extract it from OCLP it
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
 > **Note**: Once AMFIPass is released on it's own repo, this laborious process will no longer be required.
+
+## Furter Resources
+
+- **More about TCC**: [What TCC does and doesn't](https://eclecticlight.co/2023/02/10/privacy-what-tcc-does-and-doesnt)
+- **More about AMFI**: [AMFI: checking file integrity on your Mac](https://eclecticlight.co/2018/12/29/amfi-checking-file-integrity-on-your-mac/)
+- **AMFI in macOS 13**: [How does Ventura check an app's security](https://eclecticlight.co/2023/03/09/how-does-ventura-check-an-apps-security/)
+- **Another tool to add permissions**: https://github.com/jacobsalmela/tccutil
