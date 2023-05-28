@@ -105,32 +105,34 @@ Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Ope
 #### When Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older, the Booter Patches don't work so changing to an SMBIOS supported by macOS Ventura temporarily is necessary in order to be able to install macOS Ventura – otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot. 
 
-**Supported SMBIOSes**:
+**Supported SMBIOSes**
 
-- For Desktops: 
+- **Desktop**: 
 	- **iMac18,1** or newer
 	- **MacPro7,1** (High End Desktops)
-- For Laptops: **MacBookPro14,1** or **MacBookAir8,1**
-- For NUCs: **Macmini8,1**
+- **Laptop**: 
+	- **MacBookPro14,1** or 
+	- **MacBookAir8,1**
+- **NUC**: 
+	- **Macmini8,1**
 
 Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
-> **Note**: Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so revert to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. You may want to generate a new [SSDT-PM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to optimize CPU Power Management.
+> **Note**: Once macOS Ventura is up and running, the VMM Board-ID spoof will be functional, so revert to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. You may want to generate a new [SSDT-PM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to optimize CPU Power Management.
 
 ## macOS Ventura Installation
-With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
+With all the prep work out of the way, you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
 - Click on "Download macOS Installer"
-- Select macOS 13.x (whatever the latest available version is)  
-- Once the download is finished the "Install macOS Ventura" app will be located in your "Programs" folder
+- Select macOS 13.x (whatever the latest available build is)  
+- Once the download is completed the "Install macOS Ventura" app will be located in your "Programs" folder
 
 > **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer 
-
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
 - Run the "Install macOS Ventura" App
@@ -143,12 +145,12 @@ Once the installation has finished and the system boots it will run without grap
 When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
 
 - Run Disk utility
-- Create a new APFS Volume on your internal HDD/SSD or use a separate internal disk (at least 60 GB in size) for installing macOS 13 – DON'T install it on an external drive – it won't boot!
+- Create a new APFS Volume on your internal SSD or use a separate internal disk (at least 60 GB in size) for installing macOS 13. DON'T install it on an external drive – it won't boot!
 - Attach an empty USB flash drive for creating the installer (16 GB+)
 - Run OCLP and follow the [**instructions**](https://dortania.github.io/OpenCore-Legacy-Patcher/INSTALLER.html#creating-the-installer)
 - Once the USB Installer has been created, do the following:
 	- Copy the OpenCore-Patcher App to the USB Installer
-	- Add Optional tools (Optional, in case internet is not working): 
+	- Add additional tools (optional, in case internet is not working): 
 		- Add Python Installer
 		- Add MountEFI
 		- Add ProperTree

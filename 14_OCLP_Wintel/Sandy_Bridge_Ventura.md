@@ -91,11 +91,16 @@ Based on your system, use one of the following SMBIOSes for Sandy Bridge CPUs. O
 
 When upgrading from macOS Catalina or older, the Booter Patches don’t work so changing to an SMBIOS supported by macOS Ventura temporarily is necessary in order to be able to install macOS Ventura – otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
 
-**Supported SMBIOSes**:
+**Supported SMBIOSes**
 
-- For Desktops: 
-- For Laptops:
-- For NUCs: 
+- **Desktop**: 
+	- **iMac18,1** or newer
+	- **MacPro7,1** (High End Desktops)
+- **Laptop**: 
+	- **MacBookPro14,1** or 
+	- **MacBookAir8,1**
+- **NUC**: 
+	- **Macmini8,1**
 
 Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
