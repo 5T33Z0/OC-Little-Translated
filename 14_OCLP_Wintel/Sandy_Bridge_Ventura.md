@@ -1,4 +1,6 @@
-Installing macOS Ventura on Sandy Bridge systems
+# Installing macOS Ventura on Sandy Bridge systems
+
+**TABLE of CONTENTS**
 
 - [About](#about)
 - [Precautions and Limitations](#precautions-and-limitations)
