@@ -21,7 +21,7 @@ Since AMFIPass is not publicly available yet, we have to extract it from OCLP it
 12. Select the path and copy it to the clipboard. This path is created *dynamically*, so we have to it the complicated way in order to find the location of the kext: <br>![oclp04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1298b71a-bcf0-465a-bde7-4b7555993533)
 13. In Finder, select "Go to" > "Go to folder…" (or press CMD+SHIFT+G)
 14. Paste in the address and hit enter to get to the location
-15. Next, click on **"OpenCore Patcher Resources (Base)"**: <br> ![resources](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1ee2d9f4-aa65-4378-88d9-6fbac1655595)
+15. Next, click on **"OpenCore Patcher Resources (Base)"**: <br> ![location](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/25939167-f7aa-4be3-b0c9-bef50ab58983)
 16. Navigate to `Kexts/Acidanthera`. There you will finally find "AMFIPass-v1.2.1-RELEASE.zip"
 17. Copy it to the desktop.
 18. Close the Patcher App.
