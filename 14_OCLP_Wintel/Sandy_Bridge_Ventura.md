@@ -152,13 +152,13 @@ After the installation is completed and the system boots it will run without har
 ## Post-Install
 OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.
 
-### Installing Intel HD 2000/3000 drivers
+### Installing Intel HD 3000 drivers
 
 **TO BE CONTINUED…**
 
 ## Further Resources
-- [How to Enable NVIDIA WebDrivers on macOS Big Sur and Monterey](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 - [**Non-Metal Wiki**](https://moraea.github.io/) by Moraea
+- [**Enabling NVIDIA WebDrivers on macOS 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 
 ## Credits
 - Acidanthera for OpenCore, OCLP and numerous Kexts
