@@ -591,5 +591,46 @@
 			</dict>
 		</array>
 	</dict>
+	<key>DeviceProperties</key>
+	<dict>
+		<key>Add</key>
+		<dict>
+			<key>#PciRoot(0x0)/Pci(0x16,0x0)</key>
+			<dict>
+				<key>device-id</key>
+				<data>OhwAAA==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,snb-platform-id</key>
+				<data>AAAFAA==</data>
+				<key>device-id</key>
+				<data>AgEAAA==</data>
+			</dict>
+			<key>##PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,snb-platform-id</key>
+				<data>EAADAA==</data>
+				<key>device-id</key>
+				<data>JgEAAA==</data>
+			</dict>
+			<key>###PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,snb-platform-id</key>
+				<data>AAABAA==</data>
+				<key>device-id</key>
+				<data>AQAAAA==</data>
+				<key>#AAPL00,DualLink</key>
+				<data>AQAAAA==</data>
+			</dict>
+			<key>####PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,snb-platform-id</key>
+				<data>EAADAA==</data>
+			</dict>
+		</dict>
+		<key>Delete</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
