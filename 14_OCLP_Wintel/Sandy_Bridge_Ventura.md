@@ -161,12 +161,12 @@ To bring them back, do the following:
 - Run the OpenCore Patcher App 
 - In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![Post_Root_Patches](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/15fe5dc1-793c-465c-9252-1ee6e503c680)
 
-
 **TO BE CONTINUED…**
 
 ## Further Resources
 - [**Non-Metal Wiki**](https://moraea.github.io/) by Moraea
-- [**Enabling NVIDIA WebDrivers on macOS 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
+- [**SMBIOS Compatibility Chart**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit#gid=483826077)
+- [**Enabling NVIDIA WebDrivers in 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 
 ## Credits
 - Acidanthera for OpenCore, OCLP and numerous Kexts

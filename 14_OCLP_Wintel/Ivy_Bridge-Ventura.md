@@ -232,9 +232,10 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 - ⚠️ You cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)). 
 
 ## Further Resources
-- [How to Enable NVIDIA WebDrivers on macOS Big Sur and Monterey](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 - [**Non-Metal Wiki**](https://moraea.github.io/) by Moraea
-
+- [**SMBIOS Compatibility Chart**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit#gid=483826077)
+- [**Enabling NVIDIA WebDrivers in 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
+ 
 ## Credits
 - Acidanthera for OpenCore, OCLP and numerous Kexts
 - Corpnewt for MountEFI, GenSMBIOS and ProperTree
