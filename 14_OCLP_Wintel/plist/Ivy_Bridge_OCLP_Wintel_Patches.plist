@@ -146,6 +146,11 @@
 				<key>framebuffer-patch-enable</key>
 				<data>AQAAAA==</data>
 			</dict>
+			<key>#PciRoot(0x0)/Pci(0x16,0x0) (IMEI)</key>
+			<dict>
+				<key>device-id</key>
+				<data>OhwAAA==</data>
+			</dict>
 		</dict>
 	</dict>
 	<key>Kernel</key>
