@@ -72,13 +72,20 @@ CPU Family | Type | AAPL,snb-platform-id | device-id
 -----------|:----:|:--------------------:|-----------
 [Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=sandy%20bridge#@Desktop)| Data | `00000500`|`02010000`
 
-If you are using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77) you need to spoof the device ID of the `IMEI` device: 
+**Address**: PciRoot(0x0)/Pci(0x16,0x0)	
 
-**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+- If you are using a **Sandy Bridge CPU with a 7-series mainboard** (ie. B75, Q75, Z75, H77, Q77, Z77), you need to spoof the device ID of the `IMEI` device: 
 
-Key | Type | Value
-----|:----:|:----:
-`device-id` | Data | `3A1C0000`
+	CPU Family | PCI Address|Key | Type | Value
+	-----------|-----|----|:----:|:----:
+	Sandy Bridge|PciRoot(0x0)/Pci(0x16,0x0)|`device-id` | Data | `3A1C0000`
+
+- If you are using an **Ivy Bridge CPU with a 6-series mainboard** (ie. H61, B65, Q65, P67, H67, Q67, Z68), you need to spoof the device ID of the `IMEI` device: 
+
+	CPU Family | PCI Address|Key | Type | Value
+	-----------|-----|----|:----:|:----:
+	Ivy Bridge|PciRoot(0x0)/Pci(0x16,0x0)|`device-id` | Data | `3A1C0000`
+
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
@@ -154,6 +161,14 @@ Key | Type | Value|
 ----|:----:|:----:|
 `AAPL,ig-platform-id`| Data | `0A006601`
 
+If you are using an **Ivy Bridge CPU with a 6-series mainboard** (ie. H61, B65, Q65, P67, H67, Q67, Z68), you also need to spoof the device ID of the `IMEI` device: 
+
+**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+
+Key | Type | Value
+----|:----:|:----:
+`device-id` | Data | `3A1C0000`
+
 #### Installing Intel HD4000 Drivers on macOS 12 and newer
 
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
@@ -187,13 +202,13 @@ Key | Type | Value
 `AAPL,snb-platform-id`| Data | `10000300`
 `device-id` | Data | `26010000`
 
+If you are using a **Sandy Bridge CPU with a 7-series mainboard** (ie. B75, Q75, Z75, H77, Q77, Z77), you also need to spoof the device ID of the `IMEI` device: 
+
 **Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
 
 Key | Type | Value
 ----|:----:|:----:
 `device-id` | Data | `3A1C0000`
-
-Spoofed `IMEI` device. Only required when using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).
 
 ## Framebuffers (Laptop/NUC)
 
@@ -365,7 +380,15 @@ Key | Type | Value| Notes
 `AAPL,ig-platform-id`|Data| `09006601` | For Laptops which use eDP to connect to the display (contrary to classical LVDS). Test with `03006601` and `04006601` first, before trying this!
 `AAPL,ig-platform-id`|Data| `0B006601` | For NUCs
 
-Additionally ,you need one of the following sets of Connector patches so external monitors work (including clamshell mode, etc.).
+If you are using an **Ivy Bridge CPU with a 6-series mainboard** (ie. H61, B65, Q65, P67, H67, Q67, Z68) you also need to spoof the device ID of the `IMEI` device: 
+
+**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+
+Key | Type | Value
+----|:----:|:----:
+`device-id` | Data | `3A1C0000`
+
+Additionally, you need one of the following sets of Connector patches so external monitors work (including clamshell mode, etc.).
 
 #### Connector Patches for `04006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
@@ -479,13 +502,13 @@ Key | Type | Value| Notes
 `AAPL,snb-platform-id`| Data | `00000100` | For Laptops
 `AAPL,snb-platform-id`| Data | `10000300` | For NUCs
 
+If you are using a **Sandy Bridge CPU with a 7-series mainboard** (ie. B75, Q75, Z75, H77, Q77, Z77), you also need to spoof the device ID of the `IMEI` device: 
+
 **Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
 
 Key | Type | Value
 ----|:----:|:----:
 `device-id` | Data | `3A1C0000`
-
-Spoofed `IMEI` device. Only required when using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).
 
 ## About VGA
 
