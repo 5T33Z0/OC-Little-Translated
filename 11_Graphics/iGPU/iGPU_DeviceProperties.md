@@ -72,6 +72,14 @@ CPU Family | Type | AAPL,snb-platform-id | device-id
 -----------|:----:|:--------------------:|-----------
 [Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=sandy%20bridge#@Desktop)| Data | `00000500`|`02010000`
 
+If you are using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77) you need to spoof the device ID of the `IMEI` device: 
+
+**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+
+Key | Type | Value
+----|:----:|:----:
+`device-id` | Data | `3A1C0000`
+
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
 
@@ -178,6 +186,14 @@ Key | Type | Value
 ----|:----:|:----:
 `AAPL,snb-platform-id`| Data | `10000300`
 `device-id` | Data | `26010000`
+
+**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+
+Key | Type | Value
+----|:----:|:----:
+`device-id` | Data | `3A1C0000`
+
+Spoofed `IMEI` device. Only required when using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).
 
 ## Framebuffers (Laptop/NUC)
 
@@ -462,6 +478,14 @@ Key | Type | Value| Notes
 ----|:----:|:----:|------
 `AAPL,snb-platform-id`| Data | `00000100` | For Laptops
 `AAPL,snb-platform-id`| Data | `10000300` | For NUCs
+
+**Address**: `PciRoot(0x0)/Pci(0x16,0x0)`
+
+Key | Type | Value
+----|:----:|:----:
+`device-id` | Data | `3A1C0000`
+
+Spoofed `IMEI` device. Only required when using a Sandy Bridge CPU with a 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).
 
 ## About VGA
 
