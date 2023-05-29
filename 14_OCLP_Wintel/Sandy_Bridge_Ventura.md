@@ -19,7 +19,6 @@
 - [Further Resources](#further-resources)
 - [Credits](#credits)
 
-
 ## About
 Although installing macOS Ventura on systems with Intel CPUs of the Sandy Bridge family
 can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented – only for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge system, I developed this guide based on analyzing the changelog, config and EFI folder structure after building OpenCore with OCLP for the following systems:
