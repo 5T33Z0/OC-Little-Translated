@@ -49,7 +49,7 @@ macOS |Vt-D|DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^1]| I225-V / 3rd
 [^2]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me in regards to enabling the I225-V in macOS but that's what the user reported as working.
 [^3]: Enabling the I225-V in macOS Catalina requires modified `DeviceProperties` as well as a Kernel Patch since it's not supported natively. With this, the I225-V will be spoofed as Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the spoof for macOS 11.4 and newer!
 
-> **Note**: OpenCore 0.9.2 introduced a new Quirk called `DisableIoMapperMapping`. It works independently of `DisableIoMapper` and removes Reserved Memory Regions defined in the DMAR table from memory in macOS, so dropping and replacing the DMAR table is no longer required. Refer to OpenCore's Documentation.pdf for more details.
+> **Note**: OpenCore 0.9.2 introduced a new Quirk called `DisableIoMapperMapping`. It works independently of `DisableIoMapper` and addresses reoccurring connectivity issues in macOS 13.3+ which weren't there before. If your configuration required to drop/replace the DMAR table before it still does now!
 
 ## Troubleshooting
 
