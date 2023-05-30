@@ -23,7 +23,7 @@ You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to 
 Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatfromPlugin` to optimize performance (check the [Modifiers](#modifiers) section for details).
 
 ## Prerequisites
-
+- Hardware Requirements: 3rd Gen Intel Core or older CPU (Ivy Bridge and older) 
 - Mount your ESP
 - Open your `config.plist`
 - Under `ACPI/Delete`, enable the following drop rules (if they don't exist, copy them over from the `Sample.plist` included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg/releases)):
@@ -32,7 +32,6 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 - Save and reboot
 
 ## Instructions
-
 - Open Terminal
 - Enter the following command to download the ssdtPRGen Script: `curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh`
 - Make it executable: `chmod +x ~/ssdtPRGen.sh` 

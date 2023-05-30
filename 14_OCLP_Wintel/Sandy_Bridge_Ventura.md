@@ -16,7 +16,13 @@
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
 - [Post-Install](#post-install)
-	- [Installing Intel HD 3000 drivers](#installing-intel-hd-3000-drivers)
+	- [Installing Intel HD 2000/3000 drivers](#installing-intel-hd-20003000-drivers)
+	- [Installing Drivers for other GPUs](#installing-drivers-for-other-gpus)
+	- [Verifying SMC CPU Power Management](#verifying-smc-cpu-power-management)
+		- [Optimizing CPU Power Management](#optimizing-cpu-power-management)
+	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
+- [OCLP and System Updates](#oclp-and-system-updates)
+- [Notes](#notes)
 - [Further Resources](#further-resources)
 - [Credits](#credits)
 
@@ -25,7 +31,7 @@ Although installing macOS Ventura on systems with Intel CPUs of the Sandy Bridge
 can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented – only for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge system, I developed this guide based on analyzing the changelog, config and EFI folder structure after building OpenCore with OCLP for the following systems:
 
 - **Desktop**: iMac12,x
-- **HEDT**: MacPro6,1 (**NOTE**: Apple never released a MacPro model with a Sandy Bridge EP CPUs. This SMBIOS is for the 2013 "Trash Can" which uses Ivy Bridge EP.)
+- **HEDT**: MacPro6,1 (**NOTE**: Apple never released a MacPro model with a CPU of the Sandy Bridge family. This SMBIOS is for the 2013 "Trash Can", which uses Ivy Bridge EP.)
 - **Laptop**: MacBookPro8,x 
 - **NUC/USDT**: Macmini5,x
 
@@ -34,7 +40,7 @@ can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not o
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
 
-- :warning: Backup your working EFI folder on a FAT32 formatted USB Flash Drive juest in case something goes because we have to modify the config and content of the EFI folder.
+- :warning: Backup your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes because we have to modify the config and content of the EFI folder.
 - Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list of supported GPUs](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) is limited.
 - AMD Polaris Cards (Radeon 4xx/5xx, etc.) can't be used with Sandy Bridge CPUs because they rely on the AVX2 instruction set which is only supported by Haswell and newer.
 - Check if any peripherals you are using are compatible with macOS 12+ (Wifi and BlueTooth come to mind).
@@ -54,12 +60,12 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 Update your kexts to the latest version as well to avoid compatibility issues with macOS!
 
 ## Config Edits
-Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Ivy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sandy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
+Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Sandy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sandy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
 
 Section | Setting | Description
 :------:| ------- | ---------
  **`Booter/Patch`**| Add and enable both Booter Patches from OpenCore Legacy Patcher's [**Board-ID VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof): <ul> <li> **"Skip Board ID check"** <li> **"Reroute HW_BID to OC_BID"** | Skips board-id checks in macOS &rarr; Allows booting macOS with unsupported, native SMBIOS best suited for your CPU.
-**`DeviceProperties/Add`**|**PciRoot(0x0)/Pci(0x2,0x0)** – Verify/Adjust `AAPL,snb-platform-id` (optional) <ul><li> **Desktop** (Headless): <ul> <li> **AAPL,snb-platform-id**: 00000500 <li> **device-id**: 02010000 </ul></ul><ul><li>**Desktop** (Default): <ul><li> **AAPL,snb-platform-id**: 10000300 <li> **device-id**: 26010000 </ul> </ul><ul> <li> **Laptop**: <ul><li> **AAPL,snb-platform-id**: 00000100 <li> **AAPL00,DualLink**: 01000000 </ul></ul><ul><li> **Intel NUC** (or other USDT): <ul><li> **AAPL,snb-platform-id**: 10000300 </ul></ul>**PciRoot(0x0)/Pci(0x16,0x0)** – Check requirement for spoofed **IMEI** device <ul> <li> **device-id**: 3A1C0000| **iGPU Support**: :warning: Intel HD 3000 only!<ul> <li>**Headless**: For systems with an iMac SMBIOS, iGPU and a GPU which is used for graphics. The example in the OC Install Guide is actually wrong. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display. The example in the OC Install Guide is actually wrong. <li> **AAPL00,DualLink**: Only required for DualLink laptop displays with 1600x900 pixels or more.<li> **NUCs**: For Intel NUCs and other Ultra Slim Desktops (USDT), such as: HP 6300 Pro, HP 8300 Elite, etc. <li> **IMEI**: Only needed if you are using a Sandy Bridge CPU with 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).</ul> Refer to [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-20003000-sandy-bridge-processors) for more details. Remember: the FAQ displays ig-platform-ids in Big Endian but for the config you need Little Endian!
+**`DeviceProperties/Add`**|**PciRoot(0x0)/Pci(0x2,0x0)** – Verify/Adjust `AAPL,snb-platform-id` (optional) <ul><li> **Desktop** (Headless): <ul> <li> **AAPL,snb-platform-id**: 00000500 <li> **device-id**: 02010000 </ul></ul><ul><li>**Desktop** (Default): <ul><li> **AAPL,snb-platform-id**: 10000300 <li> **device-id**: 26010000 </ul> </ul><ul> <li> **Laptop**: <ul><li> **AAPL,snb-platform-id**: 00000100 <li> **AAPL00,DualLink**: 01000000 </ul></ul><ul><li> **Intel NUC** (or other USDT): <ul><li> **AAPL,snb-platform-id**: 10000300 </ul></ul>**PciRoot(0x0)/Pci(0x16,0x0)** – Check requirement for spoofed **IMEI** device <ul> <li> **device-id**: 3A1C0000| **iGPU Support**: Intel HD 2000/3000. <ul> <li>**Headless**: For systems with an iMac SMBIOS, iGPU and a GPU which is used for graphics. The example in the OC Install Guide is actually wrong. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display. The example in the OC Install Guide is actually wrong. <li> **AAPL00,DualLink**: Only required for DualLink laptop displays with 1600x900 pixels or more.<li> **NUCs**: For Intel NUCs and other Ultra Slim Desktops (USDT), such as: HP 6300 Pro, HP 8300 Elite, etc. <li> **IMEI**: Only needed if you are using a Sandy Bridge CPU with 7-series mainboard (ie. B75, Q75, Z75, H77, Q77, Z77).</ul> Refer to [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-20003000-sandy-bridge-processors) for more details. Remember: the FAQ displays ig-platform-ids in Big Endian but for the config you need Little Endian!
 **`Kernel/Add`** and <br>**`EFI/OC/Kexts`** |**Add the following Kexts**:<ul><li>**AMFIPass** (`MinKernel`: `21.0.0`) ([How to get it](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/AMFIPass.md)) <li>[**ASPP-Override.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/ASPP-Override-v1.0.1.zip) <br>`MinKernel`: `21.0.0` <br> `MaxKernel`: `21.99.99`<li> [**CryptexFixup**](https://github.com/acidanthera/CryptexFixup) (`MinKernel`: `22.0.0`)<li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) (`MinKernel`: `20.4.0`) <li> [**AppleIntelCPUPowerManagement**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagement-v1.0.0.zip) (`MinKernel`: `22.0.0`)<li> [**AppleIntelCPUPowerManagementClient**](https://github.com/dortania/OpenCore-Legacy-Patcher/raw/main/payloads/Kexts/Misc/AppleIntelCPUPowerManagementClient-v1.0.0.zip) (`MinKernel`: `22.0.0`) <li> [**FeatureUnlock**](https://github.com/acidanthera/FeatureUnlock) (optional)</ul> **Delete the following Kexts** from EFI/OC/Kexts and config (if present):<ul><li> **CPUFriend** <li> **CPUFriendDataProvider**|<ul><li> **AMFIPass**: Beta kext from OCLP 0.6.7. Allows booting macOS 12+ without disabling AMFI.<li>**ASPP-Override.kext**: Only needed for macOS 12 so the `ACPI_SMC_PlatformPlugin` is used instead of the `X86PlatformPlugin` <li> **Cryptexfixup**: Required for installing and booting macOS Ventura on systems without AVX 2.0 support (see [OCLP Support Issue #998](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)). <li> **RestrictEvents**: Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional NVRAM parameters. <li> **AppleIntelCPUPowerManagement** kexts: Required for re-enabling SMC CPU Power Management ([more details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura)).<li> **FeatureUnlock**: Unlocks NightShift and AirPlay to Mac
 **`Kernel/Patch`** | Add and enable the following Kernel Patches from the [**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) (click on "Download RAW File"): <ul> <li> **"SurPlus v1 - PART 1 of 2"** <li> **"SurPlus v1 - PART 2 of 2"** <li> **"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** <li> **Force FileVault on Broken Seal** (optional)| Kernel Patches from OCLP, so Sandy Bridge CPUs can boot macOS 12+.
 **`Kernel/Quirks`** | <ul><li> Enable **`AppleCpuPmCfgLock`**. Not required if you can disable CFG Lock in BIOS. <li> Disable **`AppleXcmpCfgLock`** (if enabled) <li> Disable **`AppleXcpmExtraMsrs`** (if enabled) | Apple SMC CPU Management requirements.
@@ -153,15 +159,65 @@ After the installation is completed and the system boots it will run without har
 ## Post-Install
 OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.
 
-### Installing Intel HD 3000 drivers
-Once you reach the set-up assistant (where you select your language, time zone, etc), you will notice that the system feels super sluggish – that's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 3000 drivers.
+### Installing Intel HD 2000/3000 drivers
+Once you reach the set-up assistant (where you select your language, time zone, etc), you will notice that the system feels super sluggish – that's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 2000/3000 drivers from macOS.
 
 To bring them back, do the following:
 
 - Run the OpenCore Patcher App 
 - In the OpenCore Legacy Patcher menu, select "Post Install Root Patch":</br>![Post_Root_Patches](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/15fe5dc1-793c-465c-9252-1ee6e503c680)
+- Follow the instructions of the Patcher App (I don't have a Sandy Bridge so I can't capture screenshots. I also couldn't find any online.)
 
-**TO BE CONTINUED…**
+### Installing Drivers for other GPUs
+- Works basically the same way as installing iGPU drivers
+- OCLP detects the GPU and if it has drivers for it, they can be installed. Afterwards, GPU Hardware Acceleration should work. Note that additional settings in OCLP may be required based on the GPU you are using.
+- After the drivers have been installed, disable the following `boot-args` prior to rebooting to re-enable GPU graphics acceleration:
+  - `-radvesa` – put a `#` in front to disable it: `#-radvesa`
+  - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
+
+> **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
+
+### Verifying SMC CPU Power Management
+To verify that SMC CPU Power Management is working, enter the following command in Terminal:
+
+```shell
+sysctl machdep.xcpm.mode
+```
+If the output is `0`, the legacy `ACPI_SMC_PlatformPlugin` is used for CPU Power Management and everything is ok. If the output is `1`, the `X86PlatformPlugin` for `XCPM` is active, which is not good since Sandy Bridge CPUs don't support XCPM. In this case, check if the necessary kexts for SMC CPU Power Management were injected by OpenCore. Enter in Terminal:
+
+```shell
+kextstat | grep com.apple.driver.AppleIntelCPUPowerManagement
+```
+This should result in the following output:
+
+```
+com.apple.driver.AppleIntelCPUPowerManagement (222.0.0)
+com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) 
+```
+If the 2 kexts are not present, they were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled.
+
+#### Optimizing CPU Power Management
+Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
+
+### Removing/Disabling boot-args
+After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
+
+- `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
+- `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it. You also needed for re-applying root patches with OCLP after applying Root Patches
+- Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
+- Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
+
+> **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
+
+## OCLP and System Updates
+The major advantage of using OCLP over other Patchers is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again, as shown in ths example:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
+
+You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
+
+## Notes
+- Installing drivers on the system partition breaks its security seal. This affects System Updates: every time a System Update is available, the FULL Installer (about 12 GB) will be downloaded.
+- After each System Update, the iGPU/GPU drivers have to be re-installed. OCLP will take care of this. Just make sure to re-enable the appropriate boot-args to put AMD/NVIDIA GPUs in VESA mode prior to updating/upgrading macOS.
+- ⚠️ You cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)). 
 
 ## Further Resources
 - [**Non-Metal Wiki**](https://moraea.github.io/) by Moraea

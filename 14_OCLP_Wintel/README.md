@@ -9,5 +9,5 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 As of now, I only finished the guide for Ivy Bridge systems which has been tested and confirmed working by other users. Currently, I am working on the one for Sandy Bridge. Next will be Haswell, then Skylake (which takes the least amount of effort and changes).
 
 ## Available Guides
-- [Installing macOS Ventura on Sandy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md) (WIP)
+- [Installing macOS Ventura on Sandy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md)
 - [Installing macOS Ventura on Ivy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-macos-ventura-on-ivy-bridge-systems)
