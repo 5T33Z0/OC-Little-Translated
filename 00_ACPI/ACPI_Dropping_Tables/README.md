@@ -125,5 +125,5 @@ This will disable the OEM DMAR table and inject the modified one instead but we 
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
 ## NOTES
+- OpenCore 0.9.2 introduced a new Kernel Quirk called [`DisableIoMapperMapping`](https://github.com/acidanthera/bugtracker/issues/2278#issuecomment-1542657515) which can be used to address new connectivity issues in macOS 13.3+ (if they weren't there before).
 - You should only import tables with maciASL if you know they are unmodified. Otherwise, dump the OEM ACPI Tables using the debug version of OpenCore and enabling the `SysReport` Quirk and work with those.
-- OpenCore 0.9.2 introduced a new Kernel Quirk called `DisableIoMapperMapping` which removes the Reserved Memory Regions from memory, so dropping and replacing the `DMAR` table is no longer a necessity in macOS 13.3+. Refer to OpenCore's Documentation for more details.
