@@ -198,9 +198,9 @@ sysctl machdep.xcpm.mode
 If the output is `0`, the legacy `ACPI_SMC_PlatformPlugin` is used for CPU Power Management and everything is ok. If the output is `1`, the `X86PlatformPlugin` for `XCPM` is used, which is not good since XCPM doesn't work well on Ivy Bridge CPUs in macOS. In this case, check if the necessary kexts for SMC CPU Power Management were injected by OpenCore. Enter in Terminal:
 
 ```shell
-kextstat
+kextstat | grep com.apple.driver.AppleIntelCPUPowerManagement
 ```
-This will list all the kexts that are loaded. It's a long list so you might want to use the search function. The output should include:
+This should result in the following output:
 
 ```
 com.apple.driver.AppleIntelCPUPowerManagement (222.0.0)
