@@ -21,6 +21,7 @@
 	- [Verifying SMC CPU Power Management](#verifying-smc-cpu-power-management)
 		- [Optimizing CPU Power Management](#optimizing-cpu-power-management)
 	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
+	- [Verifying AMFI is enabled](#verifying-amfi-is-enabled)
 - [OCLP and System Updates](#oclp-and-system-updates)
 - [Notes](#notes)
 - [Further Resources](#further-resources)
@@ -203,11 +204,23 @@ Once you've verified that SMC CPU Power Management (plugin-type `0`) is working,
 After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
 
 - `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
-- `amfi_get_out_of_my_way=0x1`: ONLY when using a dedicated GPU. If your system won't boot afterwards, re-enable it. You also needed for re-applying root patches with OCLP after applying Root Patches
+- `amfi_get_out_of_my_way=0x1`: ONLY needed for re-applying root patches with OCLP after System Updates
 - Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
 > **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
+
+### Verifying AMFI is enabled
+We can check whether or not AMFI is enabled by entering the following command in Terminal:
+
+```shell
+sudo /usr/sbin/nvram -p | /usr/bin/grep -c "amfi_get_out_of_my_way=1"
+```
+
+- The desired output is `0`: this means, the `amfi_get_out_of_my_way=1` boot-arg which disables AMFI is not present in NVRAM which indicates that AMFI is enabled. This is good.
+- If the output is `1`: this means, the `amfi_get_out_of_my_way=1` boot-arg which disables AMFI is present in NVRAM which indicates that AMFI is disabled. 
+
+Since the new `AMFIPass.kext` allows booting macOS with applied root patches and SIP as well as SecureBootModel disabled but AMFI enabled, we want the output to be `0`!
 
 ## OCLP and System Updates
 The major advantage of using OCLP over other Patchers is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again, as shown in ths example:</br>![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
