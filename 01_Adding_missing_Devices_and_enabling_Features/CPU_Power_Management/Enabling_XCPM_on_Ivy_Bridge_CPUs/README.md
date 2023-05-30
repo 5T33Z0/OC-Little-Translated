@@ -6,13 +6,16 @@
 - [Background](#background)
 - [Requirements](#requirements)
 - [How-To](#how-to)
-  - [1. Enable `XCPM` for Ivy Bridge](#1-enable-xcpm-for-ivy-bridge)
-  - [2. Generate `SSDT-XCPM` for Plugin Type `1`](#2-generate-ssdt-xcpm-for-plugin-type-1)
+	- [1. Enable `XCPM` for Ivy Bridge](#1-enable-xcpm-for-ivy-bridge)
+	- [2. Generate `SSDT-XCPM` for Plugin Type `1`](#2-generate-ssdt-xcpm-for-plugin-type-1)
 - [Big Sur and Monterey](#big-sur-and-monterey)
-  - [Pros and Cons](#pros-and-cons)
-    - [1. Using Ivy Bridge SMBIOS with Board-ID\_VMM-Spoof](#1-using-ivy-bridge-smbios-with-board-id_vmm-spoof)
-    - [2. Ivy Bridge SMBIOS with `-no_compat_check`](#2-ivy-bridge-smbios-with--no_compat_check)
+	- [Pros and Cons](#pros-and-cons)
+		- [1. Using Ivy Bridge SMBIOS with Board-ID\_VMM-Spoof](#1-using-ivy-bridge-smbios-with-board-id_vmm-spoof)
+		- [2. Ivy Bridge SMBIOS with `-no_compat_check`](#2-ivy-bridge-smbios-with--no_compat_check)
+	- [Plugin Type 1 becomes the new default in macOS 12](#plugin-type-1-becomes-the-new-default-in-macos-12)
 - [macOS Ventura and Ivy Bridge](#macos-ventura-and-ivy-bridge)
+	- [Option 1: Re-enabling ACPI Power Management in macOS Ventura (recommended)](#option-1-re-enabling-acpi-power-management-in-macos-ventura-recommended)
+	- [Option 2: Force-enabling XCPM (not recommended)](#option-2-force-enabling-xcpm-not-recommended)
 - [Credits](#credits)
 
 ## Background
@@ -127,7 +130,7 @@ With the release of macOS Monterey, Apple dropped support for CPUs pre-Haswell w
 So compared to previous versions of macOS, the whole process of selecting a plugin for CPU Management is reversed.
 
 ## macOS Ventura and Ivy Bridge
-When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useles since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states).
+When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself, rendering `SSDT-PM` generated for Plugin-Type 0 useless since it cannot enable a plugin that does no longer exist. As in macOS Monterey, the `X86PlaformPlugin` is loaded by default as well. Therefore, CPU Power Management doesn't work correctly out of the box (no Turbo states).
 
 So when switching to macOS Ventura, you either have to force-enable `XCPM` (Ivy Bridge only) or inject kexts to re-enable ACPI CPU Power Management instead which is recommended, since it just works better on Ivy Bridge than XCPM does.
 
