@@ -9,7 +9,7 @@ Since AMFIPass is not publicly available yet, we have to extract it from the Ope
 1. Download and unzip [**OCLP 0.6.7 beta**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
 2. Download and unzip [**AMFIPass-v1.2.1-Extract.zip**](https://github.com/5T33Z0/OC-Little-Translated/files/11607793/AMFIPass-v1.2.1-Extract.zip)
 3. Right-click the OpenCore-Patcher app to bring up the context menu
-4. Hold ALT to get additional options. 
+4. Hold <kbd>Alt</kbd> to show additional options. This changes the option "Copy" to "Copy as path"
 5. Select "Copy OpenCore-Patcher as path name" (or similar)
 6. Now run AMFIPass-v1.2.1-Extract
 7. Press <kbd>CMD</kbd>+<kbd>V</kbd> to paste in the path to the OpenCore-Patcher.app and hit Enter.
