@@ -12,7 +12,7 @@ Since AMFIPass is not publicly available yet, we have to extract it from the Ope
 4. Hold <kbd>Alt</kbd> to show additional options. This changes the option "Copy" to "Copy as path"
 5. Select "Copy OpenCore-Patcher as path name" (or similar)
 6. Now run AMFIPass-v1.2.1-Extract
-7. Press <kbd>CMD</kbd>+<kbd>V</kbd> to paste in the path to the OpenCore-Patcher.app and hit Enter.
+7. Press <kbd>CMD</kbd>+<kbd>V</kbd> to paste in the path to the OpenCore-Patcher.app and hit <kbd>Enter</kbd>.
 8. Once the extraction is done, AMFIPass-v1.2.1-RELEASE.zip will be available on your desktop  
 
 ### Add AMFIPass to your EFI and Config:
