@@ -238,7 +238,7 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 - [**Enabling NVIDIA WebDrivers in 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 
 ## Credits
-- Acidanthera for OpenCore, OCLP and numerous Kexts
+- Acidanthera for OpenCore and numerous Kexts
 - Corpnewt for MountEFI, GenSMBIOS and ProperTree
 - dhinakg for AMFIPass
 - Dortania for OpenCore Legacy Patcher and Guide
