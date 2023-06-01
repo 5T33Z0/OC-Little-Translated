@@ -66,6 +66,7 @@ Besides the original translated guides, this repo contains additional guides com
 - Fixing Laptop-specific issues
 - Fixing graphics-related issues and tweaks
 - Config-related tips
+- Guides for using OpenCore Legacy Patcher on Wintel Systems
 
 Check the table of contents for more. Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques are applicable to Clover as well.
 
