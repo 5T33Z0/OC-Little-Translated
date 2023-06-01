@@ -254,6 +254,10 @@ bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapsho
 **Show currently used Board-ID**:<br>
 `ioreg -l | grep -i board-id`
 
+or
+
+`var_ID=$(ioreg -p IODeviceTree -r -n / -d 1 | grep board-id);var_ID=${var_ID##*<\"};var_ID=${var_ID%%\">};echo $var_ID`
+
 **Check Hibernation Settings**:</br>
 `pmset -g`
 
