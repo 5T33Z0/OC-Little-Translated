@@ -11,3 +11,4 @@ As of now, I only finished the guide for Ivy Bridge systems which has been teste
 ## Available Guides
 - [Installing macOS Ventura on Sandy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md)
 - [Installing macOS Ventura on Ivy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-macos-ventura-on-ivy-bridge-systems)
+- [Installing macOS Ventura on Skylake systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Skylake_Ventura.md#installing-macos-ventura-on-skylake-systems)
