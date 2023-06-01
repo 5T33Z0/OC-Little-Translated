@@ -82,7 +82,7 @@ While an iGPU spoof works well for systems which use a dedicated GPU for display
 - **Cons**:
 	- Takes more effort
 	- AMFI, SIP and SecureBootModel have to be disabled
-	- Incremental System Updates won't works. Instead, the full installer (about 12 GB) is downloaded every time a System Update is available.
+	- Incremental System Updates won't work. Instead, the full installer (about 12 GB) is downloaded every time a System Update is available.
 
 ### Config Edits
 Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Skylake systems.
