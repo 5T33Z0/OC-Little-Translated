@@ -38,6 +38,6 @@ Since AMFIPass is not publicly available yet, we have to extract it from the Ope
 - **AMFI in macOS 13**: [How does Ventura check an app's security](https://eclecticlight.co/2023/03/09/how-does-ventura-check-an-apps-security/)
 
 ## Credits
-- Dortania for OpenCore Legacy Patcher and Guide
+- Dortania for [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and [Guide](https://dortania.github.io/OpenCore-Legacy-Patcher/)
 - dhinakg for AMFIPass
 - Chriss1111 for AMFIPass Extract

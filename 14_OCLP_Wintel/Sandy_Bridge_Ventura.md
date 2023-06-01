@@ -242,5 +242,5 @@ You just click on "Okay" and the drivers will be re-installed. After the obligat
 - Acidanthera for OpenCore and numerous Kexts
 - Corpnewt for MountEFI, GenSMBIOS and ProperTree
 - dhinakg for AMFIPass
-- Dortania for OpenCore Legacy Patcher and Guide
+- Dortania for [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and [Guide](https://dortania.github.io/OpenCore-Legacy-Patcher/)
 - Rehabman for Laptop framebuffer patches
