@@ -68,9 +68,76 @@
 	<key>DeviceProperties</key>
 	<dict>
 		<key>Add</key>
-		<dict/>
-		<key>Delete</key>
-		<dict/>
+		<dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Headless)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAASGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Default)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AQASGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Default, P530)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AQASGQ==</data>
+				<key>device-id</key>
+				<data>GxkAAA==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, Recomm.for HD 515/520/530/540/550 and P530)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAWGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, Alt. for HD 515)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAeGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, Recomm. for HD 510)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAbGQ==</data>
+				<key>device-id</key>
+				<data>AhkAAA==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC, Recomm. for HD 515)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAeGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC, Recomm. for HD 520/530)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AgAWGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC, Recomm. for HD 540)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AgAmGQ==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC, Recomm. for HD 550 + Dev-id)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AgAmGQ==</data>
+				<key>device-id</key>
+				<data>FhkAAA==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop. Recomm. for P530)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AAAWGQ==</data>
+				<key>device-id</key>
+				<data>FhkAAA==</data>
+			</dict>
+			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC, Recomm. for HD 580)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>BQA7GQ==</data>
+			</dict>
+		</dict>
 	</dict>
 	<key>Kernel</key>
 	<dict>
