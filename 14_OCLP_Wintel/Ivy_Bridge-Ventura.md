@@ -45,15 +45,17 @@ This guide is not for beginners! There are a lot of things to consider when tryi
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
 
-- :warning: Backup your working EFI folder on a FAT32 formatted USB Flash Drive juest in case something goes because we have to modify the config and content of the EFI folder.
+-  ⚠️ Backup your working EFI folder on a FAT32 formatted USB Flash Drive juest in case something goes because we have to modify the config and content of the EFI folder.
 - Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list of supported GPUs](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) is limited.
 - AMD Polaris Cards (Radeon 4xx/5xx, etc.) can't be used with Ivy Bridge CPUs because they rely on the AVX2 instruction set which is only supported by Haswell and newer.
 - Check if any peripherals you are using are compatible with macOS 12+ (Wifi and BlueTooth come to mind).
 - When using Broadcom Wifi/BT Cards, you may need different [combinations of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) which need to be controlled via `MinKernel` and `MaxKernel` settings. On macOS 12.4 and newer, a new address check has been introduced in bluetoothd, which will trigger an error if two Bluetooth devices have the same address. This can be circumvented by adding boot-arg `-btlfxallowanyaddr` (provided by [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) kext).
-- Incremental (or delta) System Updates won't work after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 12 GB)!
+- Incremental (or delta) System Updates won't work after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time an update is availabe (approx. 12 GB)!
+- ⚠️ Don't install Security Response Updates (RSR) introduced in macOS 13! They will fail to install on pre-Haswell systems. More info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019).
 - Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
 - In my experience, macOS Ventura not suited as a "daily driver" on Ivy Bridge – at least on Laptops.
 - Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't apply to Wintel systems.
+
 
 ## Preparations
 I assume you already have a working OpenCore configuration for your Ivy Bridge system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Monterey and newer.
