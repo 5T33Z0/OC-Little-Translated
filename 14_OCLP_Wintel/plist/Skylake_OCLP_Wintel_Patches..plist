@@ -608,11 +608,6 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
-			<dict>
-				<key>DefaultBackgroundColor</key>
-				<data>AAAAAA==</data>
-			</dict>
 			<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
 			<dict>
 				<key>OCLP-Settings</key>
@@ -629,15 +624,9 @@
 				<key>csr-active-config</key>
 				<data>AwgAAA==</data>
 			</dict>
-			<key>FA4CE28D-B62F-4C99-9CC3-6815686E30F9</key>
-			<dict/>
 		</dict>
 		<key>Delete</key>
 		<dict>
-			<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
-			<array>
-				<string>DefaultBackgroundColor</string>
-			</array>
 			<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
 			<array>
 				<string>OCLP-Settings</string>
@@ -649,39 +638,12 @@
 				<string>boot-args</string>
 				<string>csr-active-config</string>
 			</array>
-			<key>FA4CE28D-B62F-4C99-9CC3-6815686E30F9</key>
-			<array/>
 		</dict>
 		<key>WriteFlash</key>
 		<true/>
 	</dict>
 	<key>UEFI</key>
 	<dict>
-		<key>Audio</key>
-		<dict>
-			<key>AudioCodec</key>
-			<integer>0</integer>
-			<key>AudioDevice</key>
-			<string></string>
-			<key>AudioOutMask</key>
-			<integer>1</integer>
-			<key>AudioSupport</key>
-			<false/>
-			<key>DisconnectHda</key>
-			<false/>
-			<key>MaximumGain</key>
-			<integer>-15</integer>
-			<key>MinimumAssistGain</key>
-			<integer>-30</integer>
-			<key>MinimumAudibleGain</key>
-			<integer>-55</integer>
-			<key>PlayChime</key>
-			<string>Disabled</string>
-			<key>ResetTrafficClass</key>
-			<false/>
-			<key>SetupDelay</key>
-			<integer>0</integer>
-		</dict>
 		<key>ConnectDrivers</key>
 		<true/>
 		<key>Drivers</key>
