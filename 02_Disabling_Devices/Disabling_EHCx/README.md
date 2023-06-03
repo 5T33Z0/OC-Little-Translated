@@ -39,7 +39,7 @@ USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
 USB 3.1 Gen 2| 10 Gbps | XHCI | –
 USB 4        | 40 Gbps | PCIe | –
 
-Instead of USB 3.1 Gen 2 and USB 4, Apple offers Thunderbolt 3 and 4 which provide similar transfer rates.
+> **Note**: Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 which utilize the PCIe protocol to achieve these high transfer rates.
 
 ## Notes
 - If your system is a pre 6th Gen Laptop and supports a docking station which offers additional USB 2 and USB 3 ports, it's most likely that both `EHCI` controllers are used on your machine so don't disable them!
