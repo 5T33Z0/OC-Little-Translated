@@ -124,7 +124,7 @@ Based on your system, use one of the following SMBIOSes for Skylake CPUs. Open y
 - **For NUC and USDTs**: `iMac17,1` (Apple never released a MacMini with Skylake CPUs)
 
 #### When Upgrading from macOS Catalina or older
-Since macOS Catalina and older lack the virtualization capabilities required to execute the Booter Patches which contain the board-id skip, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
+Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
 
 **Supported SMBIOSes**:
 

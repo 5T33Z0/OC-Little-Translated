@@ -93,28 +93,26 @@ When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capab
 
 Based on your system, use one of the following SMBIOSes for Sandy Bridge CPUs. Open your config.plist and change the SMBIOS in the `PlatformInfo/Generic` section.
 
-- **For Desktops**: `iMac12,1` or `iMac12,2` 
+- **For Desktops**: **`iMac12,1`** or **`iMac12,2`** 
 - **For Laptops**: 
-	- `MacBookPro8,1` (= 13″ Display, Core i5)
-	- `MacBookPro8,2` (= 15″ Display, Core i5) 
-	- `MacBookPro8,3` (= 17″ Display, Core i7)
-
-- **For NUCs**: `Macmini5,x`
+	- **`MacBookPro8,1`** (= 13″ Display, Core i5)
+	- **`MacBookPro8,2`** (= 15″ Display, Core i5) 
+	- **`MacBookPro8,3`** (= 17″ Display, Core i7)
+- **For NUCs**: **`Macmini5,x`**
 
 #### When Upgrading from macOS Catalina or older
-
-Since macOS Catalina and older lack the virtualization capabilities required to execute the Booter Patches which contain the board-id skip, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
+Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
 
 **Supported SMBIOSes**:
 
 - **Desktop**: 
-	- **iMac18,1** or newer
-	- **MacPro7,1** or **iMacPro1,1** (High End Desktops)
+	- **`iMac18,1`** or newer
+	- **`MacPro7,1`** or **`iMacPro1,1`** (High End Desktops)
 - **Laptop**: 
-	- **MacBookPro14,1** or 
-	- **MacBookAir8,1**
+	- **`MacBookPro14,1`** or 
+	- **`MacBookAir8,1`**
 - **NUC**: 
-	- **Macmini8,1**
+	- **`Macmini8,1`** 
 
 Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
