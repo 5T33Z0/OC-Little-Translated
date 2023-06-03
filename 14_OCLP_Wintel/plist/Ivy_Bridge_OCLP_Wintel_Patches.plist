@@ -23,15 +23,11 @@
 				<key>Enabled</key>
 				<true/>
 				<key>OemTableId</key>
-				<data>
-				Q3B1UG0AAAA=
-				</data>
+				<data>Q3B1UG0AAAA=</data>
 				<key>TableLength</key>
 				<integer>0</integer>
 				<key>TableSignature</key>
-				<data>
-				U1NEVA==
-				</data>
+				<data>U1NEVA==</data>
 			</dict>
 			<dict>
 				<key>All</key>
@@ -41,15 +37,11 @@
 				<key>Enabled</key>
 				<true/>
 				<key>OemTableId</key>
-				<data>
-				Q3B1MElzdAA=
-				</data>
+				<data>Q3B1MElzdAA=</data>
 				<key>TableLength</key>
 				<integer>0</integer>
 				<key>TableSignature</key>
-				<data>
-				U1NEVA==
-				</data>
+				<data>U1NEVA==</data>
 			</dict>
 		</array>
 		<key>Quirks</key>
@@ -82,25 +74,17 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
-				<data>
-				AFAAbABhAHQAZgBvAHIAbQBTAHUAcABwAG8AcgB0AC4A
-				cABsAGkAcwB0
-				</data>
+				<data>AFAAbABhAHQAZgBvAHIAbQBTAHUAcABwAG8AcgB0AC4AcABsAGkAcwB0</data>
 				<key>Identifier</key>
 				<string>Apple</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Replace</key>
-				<data>
-				AC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAuAC4A
-				LgAuAC4ALgAu
-				</data>
+				<data>AC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAuAC4ALgAu</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -114,23 +98,17 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
-				<data>
-				SABXAF8AQgBJAEQA
-				</data>
+				<data>SABXAF8AQgBJAEQA</data>
 				<key>Identifier</key>
 				<string>Apple</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Replace</key>
-				<data>
-				TwBDAF8AQgBJAEQA
-				</data>
+				<data>TwBDAF8AQgBJAEQA</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -143,34 +121,23 @@
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>
-				CgBmAQ==
-				</data>
+				<data>CgBmAQ==</data>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop, Empty)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>
-				BwBiAQ==
-				</data>
+				<data>BwBiAQ==</data>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, HD+ and FullHD)</key>
 			<dict>
 				<key>#disable-telemetry-load</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>AAPL,ig-platform-id</key>
-				<data>
-				BABmAQ==
-				</data>
+				<data>BABmAQ==</data>
 				<key>AAPL,slot-name</key>
 				<string>built-in</string>
 				<key>framebuffer-con1-alldata</key>
-				<data>
-				AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACB
-				AAAA
-				</data>
+				<data>AgUAAAAEAAAHBAAAAwQAAAAEAACBAAAABAYAAAAEAACBAAAA</data>
 				<key>framebuffer-con1-enable</key>
 				<integer>1</integer>
 				<key>framebuffer-memorycount</key>
@@ -182,86 +149,56 @@
 				<key>framebuffer-portcount</key>
 				<integer>4</integer>
 				<key>framebuffer-unifiedmem</key>
-				<data>
-				AAAAgA==
-				</data>
+				<data>AAAAgA==</data>
 				<key>model</key>
 				<string>Intel HD Graphics 4000</string>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop, SD)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>
-				AwBmAQ==
-				</data>
+				<data>AwBmAQ==</data>
 				<key>framebuffer-con1-enable</key>
 				<integer>1</integer>
 				<key>framebuffer-con1-flags</key>
-				<data>
-				BgAAAA==
-				</data>
+				<data>BgAAAA==</data>
 				<key>framebuffer-con1-type</key>
-				<data>
-				AAgAAA==
-				</data>
+				<data>AAgAAA==</data>
 				<key>framebuffer-con2-enable</key>
 				<integer>1</integer>
 				<key>framebuffer-con2-flags</key>
-				<data>
-				BgAAAA==
-				</data>
+				<data>BgAAAA==</data>
 				<key>framebuffer-con2-type</key>
-				<data>
-				AAgAAA==
-				</data>
+				<data>AAgAAA==</data>
 				<key>framebuffer-con3-enable</key>
 				<integer>1</integer>
 				<key>framebuffer-con3-flags</key>
-				<data>
-				BgAAAA==
-				</data>
+				<data>BgAAAA==</data>
 				<key>framebuffer-con3-type</key>
-				<data>
-				AAgAAA==
-				</data>
+				<data>AAgAAA==</data>
 				<key>framebuffer-patch-enable</key>
 				<integer>1</integer>
 				<key>framebuffer-unifiedmem</key>
-				<data>
-				AAAAgA==
-				</data>
+				<data>AAAAgA==</data>
 				<key>model</key>
 				<string>Intel HD Graphics 4000</string>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC/USDT)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>
-				CwBmAQ==
-				</data>
+				<data>CwBmAQ==</data>
 				<key>enable-hdmi20</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>framebuffer-con2-enable</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 				<key>framebuffer-con2-flags</key>
-				<data>
-				EQAAAA==
-				</data>
+				<data>EQAAAA==</data>
 				<key>framebuffer-patch-enable</key>
-				<data>
-				AQAAAA==
-				</data>
+				<data>AQAAAA==</data>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x16,0x0) (IMEI)</key>
 			<dict>
 				<key>device-id</key>
-				<data>
-				OhwAAA==
-				</data>
+				<data>OhwAAA==</data>
 			</dict>
 		</dict>
 	</dict>
@@ -374,26 +311,21 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Identifier</key>
 				<string>com.apple.filesystems.apfs</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
-				<data>
-				uAEAAADD
-				</data>
+				<data>uAEAAADD</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -409,26 +341,21 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Identifier</key>
 				<string>com.apple.filesystems.apfs</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>22.0.0</string>
 				<key>Replace</key>
-				<data>
-				uAAAAADD
-				</data>
+				<data>uAAAAADD</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -444,28 +371,21 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
-				<data>
-				AQAAAOgAAAAAhcB1
-				</data>
+				<data>AQAAAOgAAAAAhcB1</data>
 				<key>Identifier</key>
 				<string>com.apple.driver.AppleMobileFileIntegrity</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				//////8AAAAA////
-				</data>
+				<data>//////8AAAAA////</data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>22.0.0</string>
 				<key>Replace</key>
-				<data>
-				AQAAALgBAAAAhcB1
-				</data>
+				<data>AQAAALgBAAAAhcB1</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -481,26 +401,21 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Find</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Identifier</key>
 				<string>kernel</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>20.0.0</string>
 				<key>Replace</key>
-				<data>
-				uAAAAADD
-				</data>
+				<data>uAAAAADD</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -516,29 +431,21 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				AGRpcmVjdF9oYW5kb2ZmAEVuYWJsZSBkaXJlY3QgaGFu
-				ZG9mZiBmb3IgcmVhbHRpbWUgdGhyZWFkcwA=
-				</data>
+				<data>AGRpcmVjdF9oYW5kb2ZmAEVuYWJsZSBkaXJlY3QgaGFuZG9mZiBmb3IgcmVhbHRpbWUgdGhyZWFkcwA=</data>
 				<key>Identifier</key>
 				<string>kernel</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
-				<data>
-				AGh2X3ZtbV9wcmVzZW50AEVuYWJsZSBkaXJlY3QgaGFu
-				ZG9mZiBmb3IgcmVhbHRpbWUgdGhyZWFkcwA=
-				</data>
+				<data>AGh2X3ZtbV9wcmVzZW50AEVuYWJsZSBkaXJlY3QgaGFuZG9mZiBmb3IgcmVhbHRpbWUgdGhyZWFkcwA=</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -554,27 +461,21 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				AGh2X2Rpc2FibGUAaHZfdm1tX3ByZXNlbnQA
-				</data>
+				<data>AGh2X2Rpc2FibGUAaHZfdm1tX3ByZXNlbnQA</data>
 				<key>Identifier</key>
 				<string>kernel</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string>21.99.99</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
-				<data>
-				AGh2X2Rpc2FibGUAZGlyZWN0X2hhbmRvZmYA
-				</data>
+				<data>AGh2X2Rpc2FibGUAZGlyZWN0X2hhbmRvZmYA</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -590,27 +491,21 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				Ym9vdCBzZXNzaW9uIFVVSUQAaHZfdm1tX3ByZXNlbnQA
-				</data>
+				<data>Ym9vdCBzZXNzaW9uIFVVSUQAaHZfdm1tX3ByZXNlbnQA</data>
 				<key>Identifier</key>
 				<string>kernel</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>22.0.0</string>
 				<key>Replace</key>
-				<data>
-				Ym9vdCBzZXNzaW9uIFVVSUQAZGlyZWN0X2hhbmRvZmYA
-				</data>
+				<data>Ym9vdCBzZXNzaW9uIFVVSUQAZGlyZWN0X2hhbmRvZmYA</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
@@ -626,30 +521,37 @@
 				<key>Enabled</key>
 				<false/>
 				<key>Find</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Identifier</key>
 				<string>kernel</string>
 				<key>Limit</key>
 				<integer>0</integer>
 				<key>Mask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
-				<data>
-				uAEAAADD
-				</data>
+				<data>uAEAAADD</data>
 				<key>ReplaceMask</key>
-				<data>
-				</data>
+				<data></data>
 				<key>Skip</key>
 				<integer>0</integer>
 			</dict>
 		</array>
+	</dict>
+	<key>Misc</key>
+	<dict>
+		<key>Security</key>
+		<dict>
+			<key>ScanPolicy</key>
+			<integer>0</integer>
+			<key>SecureBootModel</key>
+			<string>Disabled</string>
+			<key>Vault</key>
+			<string>Optional</string>
+		</dict>
 	</dict>
 	<key>NVRAM</key>
 	<dict>
@@ -669,9 +571,7 @@
 				<key>boot-args</key>
 				<string>amfi_get_out_of_my_way=0x1 ipc_control_port_options=0</string>
 				<key>csr-active-config</key>
-				<data>
-				CAMAAA==
-				</data>
+				<data>CAMAAA==</data>
 			</dict>
 		</dict>
 		<key>Delete</key>
