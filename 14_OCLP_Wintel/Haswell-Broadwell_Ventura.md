@@ -27,7 +27,7 @@
 - [Credits](#credits)
 
 ## About
-Although installing macOS Ventura on [Wintel machines](https://en.wikipedia.org/wiki/Wintel#Modern_usage_of_the_term) with Intel CPUs of the Haswell and Broadwell family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented since only legacy Macs by Apple are officially supported by OCLP. So there is no official guide on how to do it. So I created this workflow in order to bridge the gap. I wrote it based on my experiences working with OpenCore, getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP.
+Although installing macOS Ventura on [Wintel machines](https://en.wikipedia.org/wiki/Wintel#Modern_usage_of_the_term) with Intel CPUs of the Haswell and Broadwell family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented since only legacy Macs by Apple are officially supported by OCLP. Since no guide exists, I created this workflow in order to bridge the gap. I wrote it based on my experiences working with OpenCore, getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP.
 
 ### How Haswell/Broadwell systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config for installing and running macOS Ventura and then install iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
@@ -53,7 +53,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
 ## Config Edits
-Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Haswell/Broadwell systems.
+Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Haswell/Broadwell systems. You can use this [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Haswell-Broadwell_OCLP_Wintel_Patches.plist) which contains all the necessary settings for cross-referencing.
 
 Config Section | Setting | Description
 ---------------| ------- | ------------
