@@ -1,5 +1,8 @@
 # Installing macOS Ventura on Haswell/Broadwell systems
 
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [About](#about)
@@ -25,6 +28,8 @@
 - [Notes](#notes)
 - [Further Resources](#further-resources)
 - [Credits](#credits)
+
+</details>
 
 ## About
 Although installing macOS Ventura on [Wintel machines](https://en.wikipedia.org/wiki/Wintel#Modern_usage_of_the_term) with Intel CPUs of the Haswell and Broadwell family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented since only legacy Macs by Apple are officially supported by OCLP. Since no guide exists, I created this workflow in order to bridge the gap. I wrote it based on my experiences working with OpenCore, getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP.

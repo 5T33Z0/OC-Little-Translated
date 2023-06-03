@@ -1,5 +1,8 @@
 # Installing macOS Ventura on Ivy Bridge systems
 
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [About](#about)
@@ -26,6 +29,9 @@
 - [Notes](#notes)
 - [Further Resources](#further-resources)
 - [Credits](#credits)
+
+</details>
+
 
 ## About
 

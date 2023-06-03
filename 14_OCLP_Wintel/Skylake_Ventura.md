@@ -1,5 +1,8 @@
 # Installing macOS Ventura on Skylake systems
 
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [About](#about)
@@ -29,6 +32,8 @@
 - [Notes](#notes)
 - [Further Resources](#further-resources)
 - [Credits](#credits)
+
+</details>
 
 ## About
 Although installing macOS Ventura on systems with Intel CPUs of the Skylake family
