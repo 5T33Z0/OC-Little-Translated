@@ -29,7 +29,7 @@ Since AMFIPass is not publicly available yet, we have to extract it from the Ope
 
 > **Note**: 
 > <ul><li> You will still need AMFI=0x80 before re-applying root patches after installing system updates
-> <li> Once AMFIPass is released on it's own repo, this laborious process will no longer be required.
+> <li> Once AMFIPass is released on it's own repo, this laborious process will no longer be required
 
 ## Furter Resources
 
