@@ -214,7 +214,7 @@ Bit [4] | Set if the battery is present.
 
 We need to transfer these bits from hexadecimal to binary. `0x0F` transferred to `1111`, meaning enable it(the first four bits); while `Zero` means disable. 
 
-We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the device is enabled and not is not allowed to decode its resources. `0X0B` often utilized in ***`SSDT-PNLF`***. `0x1F` (`11111`)only appears to describe battery device from laptop, the last bit is utilized to inform Control Method Battery Device `PNP0C0A` that the battery is present.
+We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the device is enabled and not is not allowed to decode its resources. `0X0B` often utilized in ***`SSDT-PNLF`***. `0x1F` (`11111`) only appears to describe battery devices in Laptops, the last bit is utilized to inform Control Method Battery device `PNP0C0A` that a battery is present.
 
 > In terms of `_STA` from `PowerResource`
 >

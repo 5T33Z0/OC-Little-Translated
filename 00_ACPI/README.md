@@ -5,7 +5,7 @@
 - [**ACPI Basics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Basics#acpi-basics) – An introduction to ACPI in regards to hackintoshing.
 	- [**Introduction to ACPI Source Language (ASL)**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ASL_Basics.md)
 	- [**List of ACPI Device IDs**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ACPI_Device_IDs.md)
-	- [**List of Predefined ACPI Names**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Predefined_ACPI_Names%20.md)
+	- [**List of Predefined ACPI Names**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Predefined_ACPI_Name.md)
 	- [**Advanced Patching Techniques**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Advanced_Patching_Techniques.md) – some unusual and lesser known ways to apply binary renames and SSDTs.
 	- [**Utilizing AI to understand SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/Utilizing_AI_to_understand_ACPI.md)
 - **Guides**
