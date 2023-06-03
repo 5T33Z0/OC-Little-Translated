@@ -97,29 +97,32 @@ When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlu
 
 So when switching to macOS Ventura, you either have to:
 
-- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) or 
+- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) (not recommended) or 
 - Re-enable ACPI CPU Power Management (**recommended**)
 
 In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you have to do the following:
 
-- Use OpenCore 0.9.2 or newer (**Mandatory unless you can disable CFG Lock in BIOS!**)
-- Enable `AppleCpuPmCfgLock` Quirk (not needed if CFG Lock is disabled)
-- Add [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
-- [**Kexts from OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
-	- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
-	- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
-- [**CrytexFixup** ](https://github.com/acidanthera/CryptexFixup) &rarr; required for installing/booting macOS Ventura an pre-Haswell systems
-- [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
-- Additional **boot-args**:
+- Update OpenCore to 0.9.2 or newer (**Mandatory unless you can disable CFG Lock in BIOS!**)
+- `Booter/Patch`: Add [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
+- `Kernel/Add` (and EFI/OC/Kexts):
+	- Add [**CrytexFixup** ](https://github.com/acidanthera/CryptexFixup) &rarr; required for installing/booting macOS Ventura an pre-Haswell systems
+	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) 
+	- Add [**Kexts from OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc):
+		- `AppleIntelCPUPowerManagement.kext` (set `MinKernel` to 22.0.0)
+		- `AppleIntelCPUPowerManagementClient.kext` (set `MinKernel` to 22.0.0)
+		- `ASPP-Override.kext` (set `MinKernel` to `21.4.0`) (:warning: Sandy Bridge and older only!)
+- `Kernel/Quirks`: 
+	- Enable `AppleCpuPmCfgLock` (not needed if CFG Lock is disabled)
+	- Disable `AppleXcmpCfgLock` and `AppleXcpmExtraMsrs` (if enabled)
+- `Kernel/Patch`: Disable `_xcpm_bootstrap` (if enabled)
+- Add **boot-args**:
 	- `revpatch=sbvmm` &rarr; Enables `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
 	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
 	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
 	- `amfi_get_out_of_my_way=1` &rarr; Required to re-install legacy drivers (iGPU, GPU, etc.) with the OpenCore Patcher App in Post-Install.
-- Disable Kernel/Patch: `_xcpm_bootstrap` (if enabled)
-- Disable Kernel/Quirks: `AppleXcmpCfgLock` and `AppleXcpmExtraMsrs` (if enabled)
 - Save and reboot
 
-Once the 2 Kexts are injected, ACPI Power Management will work in Ventura and you can use your `SSDT-PM` like before. For tests, enter in Terminal:
+Once the 3 Kexts from OCLP are injected, ACPI Power Management will work in Ventura and you can use your `SSDT-PM` like before. For tests, enter in Terminal:
 
 ```shell
 sysctl machdep.xcpm.mode
