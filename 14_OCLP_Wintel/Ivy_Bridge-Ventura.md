@@ -101,16 +101,23 @@ If your system reboots successfully, we need to edit the config one more time an
 #### When Upgrading from macOS Big Sur 11.3+
 When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capabilities to trick it into thinking that it is running in a VM so spoofing a compatible SMBIOS is no longer a requirement.
 
-Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Open your config.plist and change the SMBIOS in the `PlatformInfo/Generic` section.
+Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Open your config.plist and change the `SystemProductName` in the `PlatformInfo/Generic` section. The processor numbers mentioned in brackets are CPUs used in actual Mac machines. 
 
 - **For Desktops**: 
-	- **iMac13,1** (Core i5), **iMac13,2** (Core i5) or **iMac13,3** (Core i3)
-	- **MacPro 6,1** (Xeon E)
+	- **`iMac13,1`** (i5-3330S, i5-3470S, i7-3770S)
+	- **`iMac13,2`** (i5-3470S, i5-3470, i7-3770)
+	- **`iMac13,3`** (i3-3225)
+	- **`MacPro6,1`** (E5-1620v2, E5-1650v2, E5-1680v2, E5-2697v2)
 - **For Laptops**:
-	- **MacBookPro10,1** (Core i7), **MacBookPro10,2** (Core i5) or
-	- **MacBookPro9,1** (Core i7), **MacBookPro9,2** (Core i5)
+	- **`MacBookPro10,1`** (i7-3615QM, i7-3635QM, i7-3720QM, i7-3740QM, i7-3820QM, i7-3840QM)
+	- **`MacBookPro10,2`** (i5-3210M, i7-3520M, i5-3230M, i7-3540M)
+	- **`MacBookPro9,1`** (i7-3615QM, i7-3720QM, i7-3820QM)
+	- **`MacBookPro9,2`** (I5-3210M, I7-3520M)
+	- **`MacBookAir5,1`** (i5-3317U, i7-3667U)
+	- **`MacBookAir5,2`** (i5-3317U, i5-3427U or i7-3667U)
 - **For NUCs**:
-	- **Macmini6,1** (Core i5), **Macmini6,2** (Core i7)
+	- **`Macmini6,1`** (i5-3210M)
+	- **`Macmini6,2`** (i7-3615QM, i7-3720QM)
 - Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
  	
 #### When Upgrading from macOS Catalina or older
@@ -119,13 +126,13 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 **Supported SMBIOSes**
 
 - **Desktop**: 
-	- **iMac18,1** or newer
-	- **MacPro7,1** (High End Desktops)
+	- **`iMac18,1`** or newer
+	- **`MacPro7,1`** (High End Desktops)
 - **Laptop**: 
-	- **MacBookPro14,1** or 
-	- **MacBookAir8,1**
+	- **`MacBookPro14,1`** or 
+	- **`MacBookAir8,1`**
 - **NUC**: 
-	- **Macmini8,1**
+	- **`Macmini8,1`**
 
 Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
