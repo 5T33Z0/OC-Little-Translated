@@ -23,7 +23,7 @@ uname -r
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
 ```
-**NOTE**: In macOS 13, [switching seeds via seedutil in terminal is no longer supported](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
+**NOTE**: In macOS 13, [switching update seeds via seedutil is no longer possible](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
 
 **Disable Gatekeeper**:</br>
 
