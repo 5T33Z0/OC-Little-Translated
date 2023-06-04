@@ -125,6 +125,9 @@ Based on your system, use one of the following SMBIOSes for Skylake CPUs. Open y
 	- `MacBookPro13,2` = 13″ Display, Core i5, iGPU: Iris 550
 	- `MacBookPro13,3` = 15″ Display, Core i7, iGPU: HD 530 + GPU: Radeon Pro 450/45
 - **For NUC and USDTs**: `iMac17,1` (Apple never released a MacMini with Skylake CPUs)
+- Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
+
+> **Note**: Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
 #### When Upgrading from macOS Catalina or older
 Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
@@ -139,10 +142,9 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 	- **MacBookAir8,1**
 - **NUC**:
 	- **Macmini8,1**
+- Generate new Serials with [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
-
-> **Note**: Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so you can revert to an SMBIOS best suited for your Skylake CPU for optimal CPU Power Management.
+> **Note**: <li> Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. <li> You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
 ## macOS Ventura Installation
 With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
