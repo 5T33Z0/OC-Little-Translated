@@ -44,21 +44,6 @@
 				<data>U1NEVA==</data>
 			</dict>
 		</array>
-		<key>Quirks</key>
-		<dict>
-			<key>FadtEnableReset</key>
-			<false/>
-			<key>NormalizeHeaders</key>
-			<false/>
-			<key>RebaseRegions</key>
-			<false/>
-			<key>ResetHwSig</key>
-			<false/>
-			<key>ResetLogoStatus</key>
-			<true/>
-			<key>SyncTableIds</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>Booter</key>
 	<dict>
