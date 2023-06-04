@@ -17,12 +17,14 @@ sw_vers
 ```shell
 uname -r
 ```
-**Change Update Seed to Developer**:</br>
+**Change Update Seed to Developer** (≤ macOS 12 only):</br>
 
 ```shell
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
 ```
+**NOTE**: In macOS 13, [switching update seeds via seedutil is no longer possible](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
+
 **Disable Gatekeeper**:</br>
 
 ```shell
