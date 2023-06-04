@@ -11,3 +11,6 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 - [Installing macOS Ventura on Ivy Bridge systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-macos-ventura-on-ivy-bridge-systems)
 - [Installing macOS Ventura on Haswell/Broadwell systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-macos-ventura-on-haswellbroadwell-systems)
 - [Installing macOS Ventura on Skylake systems](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Skylake_Ventura.md#installing-macos-ventura-on-skylake-systems)
+
+## Contribute?
+Although I've created these guides with a lot of attention to details, there's always room for improvement – especially since I only have an Ivy Bridge Notebook so I cannot test all them myself. So if you have any suggestions or updated instructions to improve the workflow, feel free to create an issue and let me know!
