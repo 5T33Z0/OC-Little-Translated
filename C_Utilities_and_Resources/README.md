@@ -20,6 +20,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer (Big Sur and newer).
 
 ### macOS (General)
+- [**About this Hack**](https://github.com/0xCUB3/About-This-Hack) – Simple app to view your exact hardware in macOS. Similar to how the "About This Mac" window looked prior to macOS 13 but with more features. 
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP partition
 - [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
