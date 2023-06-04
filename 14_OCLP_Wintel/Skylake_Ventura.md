@@ -1,5 +1,7 @@
 # Installing macOS Ventura on Skylake systems
 
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-≤0.9.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.4-white.svg)
+
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
 
