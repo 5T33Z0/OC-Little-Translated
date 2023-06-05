@@ -7,6 +7,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
+	- [How Ivy Bridge systems are affected](#how-ivy-bridge-systems-are-affected)
 - [Precautions and Limitations](#precautions-and-limitations)
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
@@ -35,8 +36,12 @@
 
 
 ## About
+Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania – the only provide support for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences trying to get macOS 13 running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary changes for those, too.
 
-Although installing macOS Ventura on Ivy Bridge (and older) systems can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented for Wintel systems – only for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences trying to get macOS 13 running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary changes for those, too.
+### How Ivy Bridge systems are affected
+In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Ivy Bridge systems this affects CPU Instructions (missing AVX 2.0 instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+
+> **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 **This guide allows you to**: 
 

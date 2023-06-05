@@ -7,6 +7,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
+	- [How Sandy Bridge systems are affected](#how-sandy-bridge-systems-are-affected)
 - [Precautions and Limitations](#precautions-and-limitations)
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
@@ -34,14 +35,12 @@
 </details>
 
 ## About
-Although installing macOS Ventura on systems with Intel CPUs of the Sandy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented – only for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge system, I developed this guide based on analyzing the changelog, config and EFI folder structure after building OpenCore with OCLP for the following systems:
+Although installing macOS Ventura on systems with Intel CPUs of the Sandy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania – the only provide support for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge system, I developed this guide based on my experience getting an Ivy Bridge laotop to work and by analyzing the changelog, config and EFI folder structure after building OpenCore with OCLP.
 
-- **Desktop**: iMac12,x
-- **HEDT**: MacPro6,1 (**NOTE**: Apple never released a MacPro model with a CPU of the Sandy Bridge family. This SMBIOS is for the 2013 "Trash Can", which uses Ivy Bridge EP.)
-- **Laptop**: MacBookPro8,x 
-- **NUC/USDT**: Macmini5,x
+### How Sandy Bridge systems are affected
+In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge systems this affects CPU Instructions (missing AVX 2.0 instructions, Race Condition issues), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
-**Mac Models**: https://dortania.github.io/OpenCore-Legacy-Patcher/MODELS.html
+> **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:

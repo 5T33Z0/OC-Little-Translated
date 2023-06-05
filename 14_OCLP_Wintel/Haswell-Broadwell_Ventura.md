@@ -34,10 +34,10 @@
 </details>
 
 ## About
-Although installing macOS Ventura on [Wintel machines](https://en.wikipedia.org/wiki/Wintel#Modern_usage_of_the_term) with Intel CPUs of the Haswell and Broadwell family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented since only legacy Macs by Apple are officially supported by OCLP. Since no guide exists, I created this workflow in order to bridge the gap. I wrote it based on my experiences working with OpenCore, getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP.
+Although installing and running macOS Ventura on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented nor officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP for a Haswell system.
 
 ### How Haswell/Broadwell systems are affected
-In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config for installing and running macOS Ventura and then install iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
 > **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 

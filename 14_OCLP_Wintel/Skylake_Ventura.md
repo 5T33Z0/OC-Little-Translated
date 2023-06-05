@@ -8,6 +8,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
+	- [How Skylake systems are affected](#how-skylake-systems-are-affected)
 - [Precautions and Limitations](#precautions-and-limitations)
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
@@ -38,7 +39,12 @@
 </details>
 
 ## About
-Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, their might be things I am missing.
+Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, their might be something I am missing.
+
+### How Skylake systems are affected
+In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Skylake CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+
+> **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Ventura on unsupported systems:
