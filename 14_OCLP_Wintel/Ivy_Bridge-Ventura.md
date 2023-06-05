@@ -34,7 +34,6 @@
 
 </details>
 
-
 ## About
 Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania – the only provide support for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences trying to get macOS 13 running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary changes for those, too.
 
@@ -60,7 +59,7 @@ This is what you need to know before attempting to install macOS Monterey and ne
 -  ⚠️ **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
 - **iGPU/GPU**: 
 	- Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list is limited](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches)
-	- AMD Navi Cards (Radeon 5xxx and 6xxx) can't be used since they require AVX 2.0 instruction set which is only available on Haswell and newer.
+	- AMD Navi Cards (Radeon 5xxx and 6xxx) can't be used with Sandy Beidge and Ivy Bridge CPUs since they require the AVX 2.0 instruction set which is only available on Haswell and newer.
 - **Networking**:
 	- When using Broadcom Wifi/BT Cards, you will need a different [set of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) to load which need to be controlled via `MinKernel` and `MaxKernel` settings. On macOS 12.4 and newer, a new address check has been introduced in `bluetoothd`, which will trigger an error if two Bluetooth devices have the same address. This can be circumvented by adding boot-arg `-btlfxallowanyaddr` (provided by [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) kext).
 	- Same applies to [Intel WiFi/BT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8-intel-wifi-and-bluetooth) cards using [OpenIntelWirless](https://github.com/OpenIntelWireless) kexts
