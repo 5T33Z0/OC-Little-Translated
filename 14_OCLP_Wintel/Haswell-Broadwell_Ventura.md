@@ -1,6 +1,6 @@
 # Installing macOS Ventura on Haswell/Broadwell systems
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-≤0.9.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.4-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-≤0.9.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.5-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -23,7 +23,7 @@
 - [Post-Install](#post-install)
 	- [Installing Intel Haswell/Broadwell Graphics Acceleration Patches](#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 	- [Installing Drivers for other GPUs](#installing-drivers-for-other-gpus)
-	- [Revert SMBIOS (after upgrading from macOS Catlina or older only)](#revert-smbios-after-upgrading-from-macos-catlina-or-older-only)
+	- [Revert SMBIOS (after upgrading from macOS Catalina or older only)](#revert-smbios-after-upgrading-from-macos-catalina-or-older-only)
 	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
 	- [Verifying AMFI is enabled](#verifying-amfi-is-enabled)
 - [OCLP and System Updates](#oclp-and-system-updates)
@@ -44,13 +44,15 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For H
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Ventura on unsupported systems:
 
-- :warning: Backup your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes because we have to modify the config and content of the EFI folder.
-- Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
-- Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list of supported GPUs](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) is limited.
-- Check if any peripherals you are using are compatible with macOS 12+ (Printers, Ethernet, Wifi/Bluetooth come to mind)
-- When using Broadcom Wifi/BT Cards, you may need different [sets of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) which need to be controlled via `MinKernel` and `MaxKernel` settings. On macOS 12.4 and newer, a new address check has been introduced in `bluetoothd`, which will trigger an error if two Bluetooth devices have the same address. This can be circumvented by adding boot-arg `-btlfxallowanyaddr` (provided by [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) kext).
-- Similar considerations apply to Intel Wifi/BT
-- Incremental (or delta) System Updates won't be available after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time an update is available (approx. 12 GB)!
+- :warning: **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
+- **iGPU/GPU**: Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list is limited](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) 
+- Check if any peripherals you are using are compatible with macOS 12+ (Printers, WiFi and BlueTooth come to mind).
+- **Networking**:
+	- When using Broadcom Wifi/BT Cards, you will need a different [set of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) to load which need to be controlled via `MinKernel` and `MaxKernel` settings. On macOS 12.4 and newer, a new address check has been introduced in `bluetoothd`, which will trigger an error if two Bluetooth devices have the same address. This can be circumvented by adding boot-arg `-btlfxallowanyaddr` (provided by [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) kext).
+	- Same applies to [Intel WiFi/BT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8-intel-wifi-and-bluetooth) cards using [OpenIntelWirless](https://github.com/OpenIntelWireless) kexts
+- **Security**: Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
+- **System Updates**: Incremental (or delta) updates won't be available after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 12 GB)!
+- **Other**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't apply to Wintel systems.
 
 ### Update OpenCore and kexts
 Update OpenCore and kexts to the latest version to maximize compatibility with macOS. To check which version of OpenCore you're currently using, run the following commands in Terminal:
@@ -195,7 +197,7 @@ To bring them back, do the following:
 
 > **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put 
 
-### Revert SMBIOS (after upgrading from macOS Catlina or older only)
+### Revert SMBIOS (after upgrading from macOS Catalina or older only)
 Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so you can now revert to one of the "native" SMBIOSes mentioned in the "When Upgrading from macOS Big Sur 11.3+" section that suits for your Haswell/Broadwell CPU for optimal CPU/GPU Power Management. To further adjust/optimize CPU Power Management, generate a new `CPUFriendDataProvider.kext` with [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) or [One-Key-CPUFriend](https://github.com/stevezhengshiqi/one-key-cpufriend) and add it to your config and EFI.
 
 ### Removing/Disabling boot-args
