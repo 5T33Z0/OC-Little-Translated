@@ -1,5 +1,25 @@
 # Kext Loading Sequence Examples
 
+**TABLE of CONTENTS**
+
+- [General Kernel and Kext handling by OpenCore](#general-kernel-and-kext-handling-by-opencore)
+- [Lilu and VirtualSMC first?](#lilu-and-virtualsmc-first)
+- [Kernel Support Table](#kernel-support-table)
+- [Examples](#examples)
+	- [Example 1: Mandatory kexts (Minimal Requirements)](#example-1-mandatory-kexts-minimal-requirements)
+	- [Example 2: ApplePS2SmartTouchPad + Plugins (Laptop)](#example-2-appleps2smarttouchpad--plugins-laptop)
+	- [Example 3: VoodooPS2 + TrackPad (Laptop)](#example-3-voodoops2--trackpad-laptop)
+	- [Example 4: VoodooPS2 + I2C (Laptop)](#example-4-voodoops2--i2c-laptop)
+	- [Example 5: VoodooPS2 + VoodooRMI (Laptop)](#example-5-voodoops2--voodoormi-laptop)
+	- [Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)](#example-6-voodoops2--voodoormi--i2c-laptop)
+	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
+		- [:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports](#bulb-fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
+	- [Example 8: Intel WiFi and Bluetooth](#example-8-intel-wifi-and-bluetooth)
+	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
+	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
+- [Notes](#notes)
+
+
 This Chapter contains a collection of `config.plist` examples to demonstrate the loading sequences for certain kexts and family of kexts. 
 
 In contrast to Clover, where just drop required kexts to `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot!
@@ -7,7 +27,7 @@ In contrast to Clover, where just drop required kexts to `Clover\kexts\other` fo
 In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the most essential kexts that are required by almost every Hackintosh to boot. These are:
 
 1. **Lilu.kext**
-2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ Sensor Plugins)
+2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ optional Sensor Plugins)
 3. **Whatevergreen**
 
 The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because these contain additional kexts nested inside them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. 
@@ -95,7 +115,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 
-> **Warning**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.
+> **Warning**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.  You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext on the system directly.
 
 #### :bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
 
