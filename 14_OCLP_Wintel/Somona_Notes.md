@@ -11,7 +11,7 @@
 <details>
 <summary><b>Source</b></summary>
 
-![](/Users/5t33z0/Desktop/Somona_SMBIOS.jpg)
+![Somona_SMBIOS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9ebc9596-5f1a-4a63-9758-a89018501372)
 
 </details>
 
