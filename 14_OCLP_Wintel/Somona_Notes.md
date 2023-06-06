@@ -1,6 +1,6 @@
 # macOS Somona Notes
 
-## Supportes SMBIOS
+## Supported SMBIOS (Intel)
 - **iMac**: iMac19,x, iMac20,x
 - **iMacPro1,1**
 - **MacBookAir**: MacBookAir9,1
