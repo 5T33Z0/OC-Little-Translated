@@ -16,7 +16,7 @@ This method provides a solution for implementing Hotpatch patches to I2C devices
 #### Example 1
 > **Based on SSDT Samples**: `SSDT-GPI0_GPEN` and `SSDT-GPI0_GPHD`
   
-- For `GPI0` to be enabled, its `_STA` must `Return` value must be `(0x0F)`.
+- For `GPI0` to be enabled, `_STA` must be set to `Return (0x0F)`.
 - Make sure that `GPEN` or `GPHD` exists in `_STA` of `GPI0` device (check "Binary renaming and preset variables" for details)
 - Disable the original I2C device:
 	```asl
