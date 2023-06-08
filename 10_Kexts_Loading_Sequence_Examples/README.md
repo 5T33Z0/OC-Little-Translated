@@ -2,6 +2,7 @@
 
 **TABLE of CONTENTS**
 
+- [About](#about)
 - [General Kernel and Kext handling by OpenCore](#general-kernel-and-kext-handling-by-opencore)
 - [Lilu and VirtualSMC first?](#lilu-and-virtualsmc-first)
 - [Kernel Support Table](#kernel-support-table)
@@ -10,8 +11,8 @@
 	- [Example 2: ApplePS2SmartTouchPad + Plugins (Laptop)](#example-2-appleps2smarttouchpad--plugins-laptop)
 	- [Example 3: VoodooPS2 + TrackPad (Laptop)](#example-3-voodoops2--trackpad-laptop)
 	- [Example 4: VoodooPS2 + I2C (Laptop)](#example-4-voodoops2--i2c-laptop)
-	- [Example 5: VoodooPS2 + VoodooRMI (Laptop)](#example-5-voodoops2--voodoormi-laptop)
-	- [Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)](#example-6-voodoops2--voodoormi--i2c-laptop)
+	- [Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)](#example-5-voodoops2--voodoormi--voodoosmbus-laptop)
+	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
 		- [:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports](#bulb-fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
 	- [Example 8: Intel WiFi and Bluetooth](#example-8-intel-wifi-and-bluetooth)
@@ -19,6 +20,7 @@
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 - [Notes](#notes)
 
+## About
 
 This Chapter contains a collection of `config.plist` examples to demonstrate the loading sequences for certain kexts and family of kexts. 
 
