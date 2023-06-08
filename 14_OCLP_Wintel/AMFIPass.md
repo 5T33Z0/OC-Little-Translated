@@ -27,9 +27,10 @@ Since AMFIPass is not publicly available yet, we have to extract it from the Ope
 
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
-> **Note**: 
-> <ul><li> You will still need AMFI=0x80 before re-applying root patches after installing system updates
-> <li> Once AMFIPass is released on it's own repo, this laborious process will no longer be required
+**Notes**:
+
+- ~~You will still need AMFI=0x80 before re-applying root patches after installing system updates~~
+- Once AMFIPass is released on it's own repo, this laborious process will no longer be required
 
 ## Furter Resources
 
