@@ -97,14 +97,14 @@ Any additional kexts must be placed after the mandatory kexts.
 ### Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)
 For Synaptics TrackPads which are controlled via SMBus, the kext order is:
 
-![Config 5](/Users/stunner/Desktop/Voodoo_RMI_SMBUS.png)
+![Voodoo_RMI_SMBUS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/5bcb3370-2094-4c91-b813-c9eab5cd2901)
 
 **SOURCE**: [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI#installation)
 
 ### Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)
 For Synaptics TrackPads which are controlled via I2C, the kext order is:
 
-![Config 6](/Users/stunner/Desktop/Voodoo_RMI_I2C.png)
+![Voodoo_RMI_I2C](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d7010ea1-89f3-4a10-b9ab-acb920bd180b)
 
 **SOURCE**: [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI#installation)
 
