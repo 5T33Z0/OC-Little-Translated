@@ -1,4 +1,4 @@
-# macOS Somona Notes
+# macOS Sonoma Notes
 
 ## Supported SMBIOS (Intel)
 - **iMac**: iMac19,x, iMac20,x
