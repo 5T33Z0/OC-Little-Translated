@@ -15,7 +15,7 @@
 
 </details>
 
-## Create USB Installer: 
+## Create USB Installer
 
 ```text
 sudo /Applications/Install\ macOS\ 14\ beta.app/Contents/Resources/createinstallmedia --volume /Volumes/yourdiskname
@@ -25,6 +25,12 @@ sudo /Applications/Install\ macOS\ 14\ beta.app/Contents/Resources/createinstall
 
 - `IO80211FamilyLegacy.kext` has been removed &rarr; renders ALL Broadcom WiFi/BT cards useless (for now?)
 - Kaby Lake iGPU drivers are still present in beta 1
+
+## boot-args
+For kext that haven't been updated for macOS 14 support
+
+**`-wegbeta`** &rarr; so Whatevergreen works <br>
+**-`revbeta`** &rarr; so RestrichEvents works 
 
 ## OCLP Status
 - **OCLP 067**: currently not working (which was expected)
