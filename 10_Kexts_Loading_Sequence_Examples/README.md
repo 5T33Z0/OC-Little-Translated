@@ -94,10 +94,20 @@ Any additional kexts must be placed after the mandatory kexts.
 ![config3](https://user-images.githubusercontent.com/76865553/140813775-eb6ff60f-9ec3-4c9b-a768-f5e5a9e6868e.png)
 ### Example 4: VoodooPS2 + I2C (Laptop)
 ![config4](https://user-images.githubusercontent.com/76865553/140813798-a403f299-e85d-4fed-90f7-bea045384db5.png)
-### Example 5: VoodooPS2 + VoodooRMI (Laptop)
-![Config 5](https://user-images.githubusercontent.com/76865553/140813835-d9cd3e9c-ee55-43f1-b33f-2ae292b53b17.png)
-### Example 6: VoodooPS2 + VoodooRMI + I2C (Laptop)
-![Config6](https://user-images.githubusercontent.com/76865553/140813861-4ffce7a5-d636-4bec-a496-cefe85b2a9a0.png)
+### Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)
+For Synaptics TrackPads which are controlled via SMBus, the kext order is:
+
+![Config 5](/Users/stunner/Desktop/Voodoo_RMI_SMBUS.png)
+
+**SOURCE**: [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI#installation)
+
+### Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)
+For Synaptics TrackPads which are controlled via I2C, the kext order is:
+
+![Config 6](/Users/stunner/Desktop/Voodoo_RMI_I2C.png)
+
+**SOURCE**: [**VoodooSMBus**](https://github.com/VoodooSMBus/VoodooRMI#installation)
+
 ### Example 7: Broadcom WiFi and Bluetooth 
 ![Brcmkexts](https://user-images.githubusercontent.com/76865553/161415791-dbe0356d-a5d5-4bb5-9cad-98efbbaf782a.png)
 
