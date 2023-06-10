@@ -1,4 +1,4 @@
-DefinitionBlock ("", "SSDT", 2, "Younix", "B460", 0x00002000)
+DefinitionBlock ("", "SSDT", 2, "Younix", "SAMPLE", 0x00002000)
 {
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.WMI1, DeviceObj)
