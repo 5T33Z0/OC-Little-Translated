@@ -2,4 +2,4 @@
 
 Listed below you will find guides for fixing issues with peripherals not working under macOS.
 
-- [External Webcam not working in 3rd party apps](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md)
+- [External Webcam not working in 3rd party apps](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Peripherals.md)

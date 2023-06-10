@@ -1,11 +1,14 @@
-# Fixing issues with external USB webcams
+# Fixing issues with peripherals
 
-- Affected OS: macOS with support for Apple Mobile File Integrity (Sierra and newer)
+- **Affected OS**: macOS with support for Apple Mobile File Integrity (Sierra and newer).
 
-## Symptoms
-- Webcam is supported by macOS and is working fine in Facetime and/or Photobooth but not in 3rd party apps
-- No Audio: You can't get audio from the webcam Mic or Headset
-- No Video: Webcam won't turn on in 3rd party conferencing apps like Zoom, Microsoft Teams, Skype, etc. 
+## Affected devices and Syptoms
+- **Webcams**:
+	- Webcam is supported by macOS and is working fine in Facetime and/or Photobooth but not in 3rd party apps
+	- No Audio: You can't get audio from the webcam Mic or Headset
+	- No Video: Webcam won't turn on in 3rd party conferencing apps like Zoom, Microsoft Teams, Skype, etc. 
+- **Wireless Mice**:
+	- Pairing Logitech Wireless Mice via Logitech Unifying Software might not be possible. If the mouse can also be paired via BT, then it's not an issue.
 
 ## Cause
 - Prompts for granting permissions to 3rd party apps don't pop-up if Apple Mobile File Integrity (AMFI) is disabled. 
