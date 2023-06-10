@@ -33,18 +33,18 @@ DefinitionBlock ("", "SSDT", 2, "Younix", "B460", 0x00002000)
 
     If (_OSI ("Darwin"))
     {
+        Method (_INI, 0, NotSerialized)  // _INI: Initialize
+        {
+            STAS = One
+        }
+
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            Return (0x0F)
+        }
+        
         Scope (\_SB)
         {
-            Method (_INI, 0, NotSerialized)  // _INI: Initialize
-            {
-                STAS = One
-            }
-
-            Method (_STA, 0, NotSerialized)  // _STA: Status
-            {
-                Return (0x0F)
-            }
-
             Method (GPRW, 2, NotSerialized)
             {
                 If ((0x04 == Arg1))
