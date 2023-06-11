@@ -345,3 +345,5 @@ ___
 **Starting Ternibal in macOS Setup-Assistant**:
 
 Cmd + Option + Control + T
+
+dmesg|grep -i firmware
