@@ -1,5 +1,7 @@
 # Fixing USB issues
 
+> **IMPORTANT** **Update** (2023-06-12): `XhciPortLimit` Quirk is working again in OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur to Sonoma. Generating a USB Port Map kext is still recommended!
+
 ## Background
 
 In macOS, the number of available USB ports is limited to 15. But since modern mainboards with XHIC controllers provide up to 26 ports (per controller), this can become an issue when trying to get USB ports working properly in macOS. If the ports are not mapped correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also true for Bluetooth since it's basically "wireless" USB 2.0 and therefore depends on properly mapped USB ports.
