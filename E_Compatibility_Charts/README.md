@@ -20,23 +20,25 @@ Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smoo
 
 - **CPU Vendor and product Family**: Intel? AMD? Mobile? Desktop? NUC? With or without iGPU support?
 - **Discrete GPU**: Vendor and Model (ATI/AMD?, NVIDIA?)
-- **macOS Version**: the used CPU family determines the optimal SMBIOS. But the latest macOS version is most likely only supported by more recent SMBIOSes.
-
+- **macOS Version**: 
+	- The used CPU family determines the optimal SMBIOS. 
+	- Newest macOS versions most likely only support more recent SMBIOSes.
+	
 For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
 
 ### Notes regarding SMBIOS
 Things you can do on Hackintoshes that you can't do on real Macs:
 
-- You can use higher/newer SMBIOSes to run newer versions of macOS on officially unsupported CPUs.
-- You can run older versions of macOS with newer/unknown CPUs by utilizing fake CPU-IDs.
-- You can make use of macOS Monterey's virtualization capabilities to spoof a supported SMBIOS but let the hardware use the intended SMBIOS for your CPU! Check my [**Boad-ID VMM spoofing**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) guide to find out how it works.
+- Use higher/newer SMBIOSes to run newer versions of macOS on officially unsupported CPUs.
+- Run older versions of macOS with newer/unknown CPUs by utilizing fake CPU-IDs.
+- Make use of macOS 11.3+ virtualization capabilities to spoof a supported SMBIOS but let the hardware use the intended SMBIOS for your CPU! Check my [**Boad-ID VMM spoofing**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) guide to find out how it works.
 
 ## AppleALC Layout IDs sorted by CODEC
 This [repo](https://github.com/dreamwhite/ChonkyAppleALC-Build) contains all available AppleALC Layout IDs based on the name of the CODEC, while the official AppleALC repo [lists](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs) them all on one page.
 
-- Click on the folder for your vendor
-- Find the .md file for your CODEC 
-- Click to open it
+1. Click on the folder for your vendor
+2. Find the .md file for your CODEC 
+3. Click to open it
 
 Inside, you will find a list of all available Layout-IDs for the selected CODEC with additional info about the system/mainboard it has been created for.
 
