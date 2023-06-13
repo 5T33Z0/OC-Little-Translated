@@ -60,8 +60,8 @@ Booting with this hack will take much longer (up to 2 minutes), only about 5 MB 
 	framebuffer-patch-enable | 01000000 |Data
 	
 	The entry should look like this:</br>
-![](/Users/5t33z0/Dropbox/igpu/OC_fakeid.png)
-	
+![OC_fakeid](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b9b77d6f-1caf-46d3-9616-0debc83f855d)
+
 #### Enabling fake Platform-ID in Clover
 - Open your config.plist in Clover Configurator
 - Click on "Graphics"
@@ -69,7 +69,7 @@ Booting with this hack will take much longer (up to 2 minutes), only about 5 MB 
 - In ig-platforrm-id, enter `0x12345678` (you can omit the `0x`)
 
 	This is how it should look in Clover Configurator:</br>
-![](/Users/5t33z0/Dropbox/igpu/FakeID.png)
+![FakeID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/6ee45bfd-7d20-4d09-a61e-8bc165eb0a93)
 
 **NOTE**: Make sure to delete/disable the fake Platform-ID once you have generated your Framebuffer patch!
 </details>
@@ -82,17 +82,17 @@ Booting with this hack will take much longer (up to 2 minutes), only about 5 MB 
 Select the correct Framebuffer for your CPU's on-board Graphics as recommended by the OpenCore Install Guide and/or the Intel HD Graphics FAQs (mind the "Endianness").
 
 1. Run Hackintool
-2. In the menu bar, choose the "Framebuffer" type. Select either **≤ macOS 10.13** (High Sierra and older) or **≥ macOS 10.14** (Mojave and newer): </br>![](/Users/5t33z0/Dropbox/igpu/Menubar.png)
-3. Next, click on "Patch". You will be presented with the following window which can be a bit confusing since it's pretty convoluted:</br>![](/Users/5t33z0/Dropbox/igpu/Patch0.png)</br> 
+2. In the menu bar, choose the "Framebuffer" type. Select either **≤ macOS 10.13** (High Sierra and older) or **≥ macOS 10.14** (Mojave and newer): </br> ![Menubar](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3e425067-557c-4418-88d1-02c5f64c9aea)
+3. Next, click on "Patch". You will be presented with the following window which can be a bit confusing since it's pretty convoluted:</br> ![Patch0](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/fff0b1f6-94d0-4f8b-b238-ed92424617ad)
 
 ### The "Patch" Section
 The "Patch" section contains 5 sub-sections: **Info**, **VRAM**, **Framebuffer**, **Connectors** and a **Patch** tab. 
 
 ### The "Info" section 
 "Info" lets you select the framebuffer you want to work on as well as a summary of the active Framebuffer. If you click the eye icon, the currently used Framebuffer will be selected which is practical if you want to edit it but cant remember which one it was. Since I wrote this guide on my Laptop, it's `0x01666004`.
-4. From the dropdown menu "Intel Generation", select the CPU family your CPU belongs to (search your CPU model on Intel Ark if you are unsure):</br>![](/Users/5t33z0/Dropbox/igpu/CPUFam.png)</br>
+4. From the dropdown menu "Intel Generation", select the CPU family your CPU belongs to (search your CPU model on Intel Ark if you are unsure):</br>![CPUFam](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b586d468-a75b-4339-8984-27c186d81ec7)
 	As you can see, "Comet Lake" is not in the list. That's because Comet Lake uses last-gen Coffee Lake Framebuffers.
-5. Next, select the Platform-ID you want to work with. In this example, we use `AAPL,ig-platform-id`: `0x3E9B0007` as [recommended](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html#deviceproperties) for 10th gen Intel CPUs. Below that you will see the summary for the selected Framebuffer.:</br>![](/Users/5t33z0/Dropbox/igpu/Patch1.png)
+5. Next, select the Platform-ID you want to work with. In this example, we use `AAPL,ig-platform-id`: `0x3E9B0007` as [recommended](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html#deviceproperties) for 10th gen Intel CPUs. Below that you will see the summary for the selected Framebuffer.:</br> ![Patch1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f2795b76-3aa6-48a6-81b9-3364d48fd860)
 
 ### II. Patching Connectors and enabling features
 Now that the correct Framebuffer is selected, we want to modify it, so we can route outputs of the iGPU to physical connectors on the back panel I/O of your mainboard. But before we do let's understand what makes up a connector patch.
@@ -120,7 +120,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
 The screenshot below lists the same data for the 3 connectors this framebuffer provides but with some color coding applied:
 
-![](/Users/5t33z0/Dropbox/igpu/BUSID/BUSIDS.png)
+![BUSIDS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e45d41a1-53a8-47c7-b803-5a356c56600e)
 
 **In table form**:
 
@@ -145,25 +145,25 @@ The "Connectors" tab consists of a list with five columns:
 
 |Parameter|Description|
 |:-------:|-----------|
-**Index**| An Index represents a physical output on the I/O panel of your mainboard. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes 1 to 3). Index `-1` has no physical connector:</br>![](/Users/5t33z0/Dropbox/igpu/Connectors.png)</br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are usually used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![](/Users/5t33z0/Dropbox/igpu/headless.png)|
+**Index**| An Index represents a physical output on the I/O panel of your mainboard. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes 1 to 3). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are usually used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
 |**BusID**|Every `con` must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical ports. Unique means each BusID must only be used ones! But only certain combinations of BusIDs and connector Types are allowed.</br> </br> For **DisplayPort**: `0x02`, `0x04`, `0x05`, `0x06`</br>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary)</br>For **DVI**: same as HDMI <br> For **VGA**: N/A|
 **Pipe**| to do
 |**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc)
-|**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![](/Users/5t33z0/Dropbox/igpu/Flags.png)
+|**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac)
 
 ### III. Step by Step guide
 
 1. Keep your primary monitor connected at all times!
 2. 
-99. Once you're done configuring your Framebuffer Patch, click on "Generate Patch". A raw text version of the plist containing the DeviceProperties will be created:</br>![](/Users/5t33z0/Dropbox/igpu/Generate.png)
-100. Select the text (CMD+A) and copy it to the clipboard (CMD+C)
-101. Open ProperTree
-102. Paste in the text
-103. Leave the window open
-102. Mount your ESP partition
-103. Open your config.plist
-102. Copy over the Device Properties for `PCIPciRoot(0x0)/Pci(0x2,0x0)` and other PCI devices (if present) into your config in the same location 
-103. Save your config and reboot
+99. Once you're done configuring your Framebuffer Patch, click on "Generate Patch". A raw text version of the plist containing the DeviceProperties will be created:</br>![Generate](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/42718d67-be93-416a-83e6-d1334e504bb4)
+101. Select the text (CMD+A) and copy it to the clipboard (CMD+C)
+102. Open ProperTree
+103. Paste in the text
+104. Leave the window open
+105. Mount your ESP partition
+106. Open your config.plist
+107. Copy over the Device Properties for `PCIPciRoot(0x0)/Pci(0x2,0x0)` and other PCI devices (if present) into your config in the same location 
+108. Save your config and reboot
 
 If anything was done correct your iGPU should work as supposed now. If not, start over.
 
