@@ -1,6 +1,6 @@
 # Patching Intel iGPU Framebuffers with Hackintool
 
-:warning: WORK IN PROGRESS
+:warning: :construction: WORK IN PROGRESS… Don't use yet
 
 ## About
 This is a guide for modifying Framebuffer patches for Intel iGPUs and generating `DeviceProperties` for connector types with Hackintool, so you can connect a monitor to the `HDMI` or `DisplayPort` of your mainboard and operate it successfully. It's an updated version of CaseySJ's guide from 2019. Since then, Hackintool has changed quite a bit so using the old guide with the new software might be confusing. 
@@ -32,7 +32,7 @@ Long story short: just keep in mind that whenever you work with values presented
 - [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) 
 - A Plist Editor like [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing framebuffers)
-- [**Intel Ark**](https://ark.intel.com/content/www/us/en/ark.html) (for researching CPU specs such as DeviceID)
+- [**Intel Ark**](https://ark.intel.com/content/www/us/en/ark.html) (for researching CPU specs such as used on-board graphics and device-id)
 - [**Intel HD Graphics FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors) for Framebuffers and Device-IDs and additional info.
 - [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
 - Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
@@ -148,7 +148,7 @@ The "Connectors" tab consists of a list with five columns:
 **Index**| An Index represents a physical output on the I/O panel of your mainboard. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes 1 to 3). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are usually used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
 |**BusID**|Every `con` must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical ports. Unique means each BusID must only be used ones! But only certain combinations of BusIDs and connector Types are allowed.</br> </br> For **DisplayPort**: `0x02`, `0x04`, `0x05`, `0x06`</br>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary)</br>For **DVI**: same as HDMI <br> For **VGA**: N/A|
 **Pipe**| to do
-|**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc)
+|**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc) 
 |**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac)
 
 ### III. Step by Step guide
@@ -169,6 +169,6 @@ If anything was done correct your iGPU should work as supposed now. If not, star
 
 ## CREDITS & RESOURCES
 - CaseySJ for his [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/)
-- Dortania for [busid-patching guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html) 
+- Dortania for [Bus ID patching guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html) 
 - - Headkaze for Hackintool
 - Acidanthera for OpenCore, Kexts and Intel Framebuffer Patching guide
