@@ -3,10 +3,8 @@
 :warning: :construction: WORK IN PROGRESS… Don't use yet
 
 ## About
-This is a guide for modifying Framebuffer patches for Intel iGPUs and generating `DeviceProperties` for connector types with Hackintool, so you can connect a monitor to the `HDMI` or `DisplayPort` of your mainboard and operate it successfully. It's an updated version of CaseySJ's guide from 2019. Since then, Hackintool has changed quite a bit so using the old guide with the new software might be confusing. 
+This is a guide for modifying Framebuffer patches for Intel iGPUs and generating `DeviceProperties` for connector types with Hackintool, so you can connect a monitor to the `HDMI` or `DisplayPort` of your mainboard and operate it successfully. It's an updated version of CaseySJ's guide from 2019. Since then, Hackintool has changed quite a bit so using the old guide with the new software might be confusing.
  
-Although Dortania's OpenCore Install Guide provides an in-depth guide on [Patching Connector Types](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#parsing-the-framebuffer) for Framebuffer patches (`AAPL,ig-platform-id`) for various Intel CPU families, it does all of this manually. 
-
 This guide helps to fix common framebuffer-related issues:
 
 - Graphics acceleration not working: no transparency effects, only 7 MB of VRAM
@@ -16,19 +14,15 @@ This guide helps to fix common framebuffer-related issues:
 
 These issues can be addressed and resolve by injecting additional properties into the selected framebuffer.
 
-### A note about Big Endian and Little Endian
+Although Dortania's excellent OpenCore Post Install Guide provides an in-depth look into Patching [Connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids), it does all of it manually which can be a bit overwhelming.
 
-When working with different sources of framebuffer data for your config.plist, you have to mind the byte order (or "Endianness") of Framebuffers and Device-IDs. 
+## Prerequisites
+### Where to start?
+Before you begin tweaking your Framebuffer patch with Hackintool, please use Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are using with the correct `AAPL,ig-platform-id` for your CPU and iGPU to begin with!
 
-An example: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends Framebuffer `07009B3E`. But if you compare this value with Whatevergreen's Intel HD Graphics FAQ which is referenced in the guide, the recommended Framebuffer is `0x3E9B0007`. What happened here?
+In general, the OC install guide should provide all the *basic* settings you need to get a signal from your display.
 
-Although it's not obvious, both values represent the same framebuffer – just in a different manner. The first is Little Endian and the second Big Endian. Big-Endian is an order in which the "big end" (most significant value in the sequence) is stored first (at the lowest storage address). Little-endian is an order in which the "little end" (least significant value in the sequence) is stored first. 
-
-If you split this sequence of digits into pairs of two (07 00 9B 3E) and re-arrange them by moving them from the back to the left/front until the first pair has become last and vice versa, you have converted it to Big Endian (3E 9B 00 07) (we omit the leading "0x").
-
-Long story short: just keep in mind that whenever you work with values presented as `0x4321` it's in Big-endian so you have to convert it unless you use tools like Hackintool which does this automatically!
-
-## Required Tools and Resources
+### Required Tools and Resources
 - [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) 
 - A Plist Editor like [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing framebuffers)
@@ -37,6 +31,18 @@ Long story short: just keep in mind that whenever you work with values presented
 - [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
 - Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
 - Lilu and Whatevergreen kexts (mandatory)
+
+### A note about Big Endian and Little Endian
+
+When working with different sources for framebuffer data, you have to mind the byte order (or "Endianness") of Framebuffers and Device-IDs. 
+
+An example: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends Framebuffer `07009B3E`. But if you compare this value with Whatevergreen's [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs), you will notice that the recommended Framebuffer is `0x3E9B0007`. What happened here?
+
+Although it's not obvious, both values represent the same framebuffer – just in a different manner. The first is Little Endian and the second Big Endian. Big-Endian is an order in which the "big end" (most significant value in the sequence) is stored first (at the lowest storage address). Little-endian is an order in which the "little end" (least significant value in the sequence) is stored first. 
+
+If you split this sequence of digits into pairs of twos (07 00 9B 3E) and re-arrange them by moving them from the back to the left/front until the first pair has become last and vice versa, you have converted it to Big Endian (3E 9B 00 07) (we omit the leading "0x").
+
+Long story short: just keep in mind that whenever you work with values presented as `0x4321` it's in Big-endian so you have to convert it. Hackintool has a build in converter for this loocated in the "Calcs" tab!
 
 <details><summary><strong>No picture at all?</strong> (click to reveal)</summary>
 
@@ -94,7 +100,8 @@ The "Patch" section contains 5 sub-sections: **Info**, **VRAM**, **Framebuffer**
 	As you can see, "Comet Lake" is not in the list. That's because Comet Lake uses last-gen Coffee Lake Framebuffers.
 5. Next, select the Platform-ID you want to work with. In this example, we use `AAPL,ig-platform-id`: `0x3E9B0007` as [recommended](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html#deviceproperties) for 10th gen Intel CPUs. Below that you will see the summary for the selected Framebuffer.:</br> ![Patch1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f2795b76-3aa6-48a6-81b9-3364d48fd860)
 
-### II. Patching Connectors and enabling features
+### II. Patching Connectors and enabling features: "Connectors" Section
+
 Now that the correct Framebuffer is selected, we want to modify it, so we can route outputs of the iGPU to physical connectors on the back panel I/O of your mainboard. But before we do let's understand what makes up a connector patch.
 
 #### Excurse: Understanding Connector Patches in the Intel HD FAQs
