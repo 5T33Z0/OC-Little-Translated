@@ -120,7 +120,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
 The screenshot below lists the same data for the 3 connectors this framebuffer provides but with some color coding applied:
 
-![BUSIDS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e45d41a1-53a8-47c7-b803-5a356c56600e)
+![busidsexpl](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3938fedc-2227-4398-b1f1-bdfc3aa77a72)
 
 **In table form**:
 
