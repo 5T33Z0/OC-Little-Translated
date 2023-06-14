@@ -33,8 +33,7 @@ In general, the OC install guide should provide all the *basic* settings you nee
 - Lilu and Whatevergreen kexts (mandatory)
 
 ### A note about Big Endian and Little Endian
-
-When working with different sources for framebuffer data, you have to mind the byte order (or "Endianness") of Framebuffers and Device-IDs. 
+When working with different sources of framebuffer data, you have to mind the byte order (or "Endianness") of Framebuffers and Device-IDs. 
 
 An example: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends Framebuffer `07009B3E`. But if you compare this value with Whatevergreen's [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs), you will notice that the recommended Framebuffer is `0x3E9B0007`. What happened here?
 
