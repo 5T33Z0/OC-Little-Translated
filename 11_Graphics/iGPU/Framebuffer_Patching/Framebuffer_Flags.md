@@ -36,6 +36,10 @@ These are the same flags you can select in Hackintool's "Patch" section to gener
 23 |**`FBUnknownFlag_400000`** | N/A |0x400000
 24 |**`FBSupport5KSourceSize`** | Setting this bit increases the maximum source size from 4096x4096 px to 5120x5120 px. Most likely this enables 5K support via Intel HD. |0x800000
 
+In Hackintool, they are located here:
+
+![fb_flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b5dfa501-4751-4de8-8781-e2ea9ff31d63)
+
 ## Connector Flags
 > Flags for device property `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.).
 
@@ -57,5 +61,9 @@ These are the same flags you can select in Hackintool's "Patch" section to gener
 14 | **`CNUnknownFlag_2000`** |N/A|0x2000
 15 | **`CNUnknownFlag_4000`** |N/A|0x4000
 16 | **`CNUnknownFlag_8000`** |N/A|0x8000
+
+In Hackintool, they are located here:
+
+![connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a71fc439-8518-45e0-90bd-8b7cab55bde4)
 
 **SOURCE**: [**IntelFramebuffer.bt**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/IntelFramebuffer.bt)
