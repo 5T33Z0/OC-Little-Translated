@@ -1,10 +1,11 @@
 # Intel Framebuffer and Connector Flags
 
-:warning: :construction: WORK IN PROGRESS… 
+Listed below, you find available/known Framebuffer and Connector flags and their Hex values for Intel iGPU framebuffers. Thes are the same flags located in Hackintool's "Patch" section. 
 
-Listed below, you find available/known Connector Framebuffer flags and their corresponding Hex values. These values can be used to calculate a bitmask for the properties `framebuffer-flags` and `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.). But the value has to be converted to Little Endian first. See &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details. 
+These flags can be combined to calculate a bitmask for the device properties `framebuffer-flags` and `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.) to modify/adjust an existing Framebuffer patch.
 
-These are the same flags you can select in Hackintool's "Patch" section to generate/modify your framebuffer patch.
+f you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)). 
+
 
 ## Framebuffer Flags
 > Flags for device property `framebuffer-flags`
