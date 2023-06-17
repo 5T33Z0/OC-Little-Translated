@@ -1,14 +1,17 @@
 # Intel Framebuffer and Connector Flags
 
-Listed below, you find available/known Framebuffer and Connector flags and their Hex values for Intel iGPU framebuffers. Thes are the same flags located in Hackintool's "Patch" section. 
+Listed below, you find available/known Framebuffer and Connector flags and their Hex values for Intel iGPU framebuffers. These are the same flags located in Hackintool's "Patch" section. 
 
 These flags can be combined to calculate a bitmask for the device properties `framebuffer-flags` and `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.) to modify/adjust an existing Framebuffer patch.
 
-f you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)). 
-
+If you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)). 
 
 ## Framebuffer Flags
 > Flags for device property `framebuffer-flags`
+
+Framebuffer flags are used to configure various settings related to the framebuffer, such as display timings, color depth, memory allocation, and other display-related parameters. These flags can affect the initialization and communication between the graphics card and the display during the handshake process. 
+
+Listed below, you find the available/known framebuffer flags for Intel framebuffers in macOS. They might not provide all of the mentioned functions.
 
 `#`|Name                        | Description | Hex Value
 :-:|----------------------------|-------------|-----------:
@@ -43,6 +46,16 @@ For reference: in Hackintool, these flags are located here:
 
 ## Connector Flags
 > Flags for device property `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.).
+
+Connector flags can serve various purposes and provide configuration options for display connectors. Here are some common functions that connector flags can perform:
+
+- Specify display connection types: Connector flags can indicate the type of display connection being used, such as LVDS (Low-Voltage Differential Signaling), HDMI (High-Definition Multimedia Interface), DisplayPort, DVI (Digital Visual Interface), etc. These flags help the system identify and configure the appropriate settings for the specific connection type.
+- Enable/disable display features: Certain flags might enable or disable features like audio support, HDCP (High-bandwidth Digital Content Protection), deep color support, or specific display modes.
+- Define display characteristics: Connector flags can define various display characteristics, such as resolution, refresh rate, color depth, color space, and other parameters that determine the visual output on the display.
+- Configure power and signal requirements: Flags may control power management settings, signal detection thresholds, or other parameters related to power and signal requirements for the display connection.
+- Optimize display performance: Some flags can be used to optimize the display performance, such as reducing latency, enabling specific display timing settings, or fine-tuning the communication between the graphics card and the display.
+
+Listed below, you find the available/known connector flags for Intel framebuffers in macOS. They might not provide all of the mentioned functions.
 
 `#`|Name                         | Description | Hex Value
 :-:|-----------------------------|-------------|----------:
