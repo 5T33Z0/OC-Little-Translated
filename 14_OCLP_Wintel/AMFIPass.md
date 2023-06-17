@@ -1,7 +1,7 @@
 # Obtaining `AMFIPass.kext`
 
 ## About
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if [root patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) have been applied to Wintel systems – which would be impossible otherwise. Having AMFI working is required in order to [grant 3rd party apps access to peripherals like Webcams and Mics](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md). So this is a pretty relevant kext to have if you applied any root patches to your system.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if [root patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) have been applied to Wintel systems – which would be impossible otherwise. Having AMFI working is required in order to [grant 3rd party apps access to peripherals like Webcams and Mics](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Peripherals.md). So this is a pretty relevant kext to have if you applied any root patches to your system.
 
 Since AMFIPass is not publicly available yet, we have to extract it from the OpenCore Patcher itself. This used to be a real drag but Chris1111 has written a [bash script](https://gist.github.com/chris1111/781e9324bcd9657af294462c0b3f6582) which makes the process a lot easier.
 
