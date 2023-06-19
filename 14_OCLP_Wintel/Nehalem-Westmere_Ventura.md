@@ -5,8 +5,6 @@
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary
 
-**TABLE of CONTENTS**
-
 - [About](#about)
 - [CPU Requirements](#cpu-requirements)
 	- [Potential Candidates](#potential-candidates)
