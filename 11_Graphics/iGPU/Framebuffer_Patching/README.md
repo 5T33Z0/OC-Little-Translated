@@ -49,6 +49,8 @@ This it the tl;dr version of what we are going to do basically.
 - Consult Intel HD FAQs for Framebuffer data and alternative AAPL,ig-platform-ids
 - Adjust the framebuffer patch
 - Test
+- Add finished fb patch to config on internal disk
+- Done
 
 ## Preparations
 Since we will have to do a lot of testing and rebooting, we will not work with the config.plist stored on the internal disk. Instead, we will work with a copy of the EFI folder and config stored on a FAT32 formatted USB flash drive. This way, we can ensure that the system always has a working config to boot from. Another benefit is that we don't need to mount the EFI partition every time we want to edit the config.plist since it's readily available on the USB flash drive which saves a lot of time.
@@ -70,8 +72,8 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 5. Now attach your external display to your notebook
 6. Observe what happens:
 	- In **Hackintool**:
-		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: 
-		- If it does turn red: take note of the **Index**. We need it for configuring the framebuffer patch
+		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: <br>![](/Users/stunner/Desktop/display-red.png)
+		- If it does turn red: take note of the **Index** (in this example: Index 2). We need it for configuring the framebuffer patch
 		- If it doesn't turn red, you might have an incorrect `AAPL,ig-platform-id` to begin with
 	- Observe the system's behavior:
 		- **If your display turns on**, how long does the handshake take? 
@@ -87,9 +89,25 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 
 ## Verifying `AAPL-ig-platform-id`
 
-1. Check the CPU specs by googling your CPU model. Find out which CPU family it belongs to and which model of on-board graphics it is using.
-2. Next, consult Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are startin with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with! In general, the OC install guide should provide all the *basic* settings you need to get a signal from your display.
-2. If the recommended settings don't work, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs) instead. But keep in mind that the Intel HD FAQs use Big Endian instead of Little Endian which is required for the config.plist.
+1. Find the CPU used in your machine. If you don't know, you can enter in Terminal: 
+
+	```
+	sysctl machdep.cpu.brand_string
+	```
+2. In my case it's an `i5-8265U`. Search your model number on https://ark.intel.com/ to find its specs.
+
+3. Take note of the the CPU family it belongs to (in this case "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use google or check in Windows. In my case, it's using Intel Graphics UHD 620.
+
+4. Next, consult Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are starting with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with:
+	- Find the Install guide for your CPU Famiy
+	- Click on the `DeviceProperties` secction 
+	- Find the recommended `AAPL,ig-platform-id` 
+	- Check if your iGPU requires a device-id to spoof a different iGPU model!
+	- Compare the properties with those used in your config
+
+> **Note**: In general, the OC Install Guide should provide all the *basic* settings you need to get a signal from your display. 
+
+5. If the recommended settings don't work, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs) instead. But keep in mind that the Intel HD FAQs use Big Endian instead of Little Endian which is required for the config.plist.
 
 ## Technical Background
 The picture below shows the basic Processor Display Architecture design of Intel iGPUs.
