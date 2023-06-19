@@ -34,7 +34,7 @@
 - [Further Resources](#further-resources)
 - [Credits](#credits)
 
-</details
+</details>
 
 ## About
 Besides installing macOS Ventura on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it might also be possible to install it on even older platforms using OpenCore and the OpenCore Legacy Patcher (OCLP). 
