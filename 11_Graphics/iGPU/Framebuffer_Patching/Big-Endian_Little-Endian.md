@@ -10,4 +10,4 @@ If you split this sequence of digits into pairs of twos (07 00 9B 3E) and re-arr
 
 **In a nutshell**: just keep in mind that whenever you work with values presented as `0x87654321` it's in Big Endian so you have to convert it to Little Endian (in this case `21436587`). Luckily, Hackintool handles this conversion automatically when genereating a framebuffer patch. But for finding the correct platform-id in the Intel HD FAQs, you still have to make that Big Endian/Little conversation in your mind, to find and select the correct framebuffer. You can use the  built-in "Calcs" tab if uncertain:
 
-![](/Users/5t33z0/Desktop/Calc.png)
+![Calc](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/85ed7b18-ab22-4325-a0cc-0eab21a26acc)
