@@ -3,7 +3,7 @@
 
 With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated graphics on Skylake CPUs, you need to spoof Kaby Lake Framebuffers. The example below is from an i7 6700K.
 
-Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desktop): 
+Do the following to enabled Intel HD 520/530 or P530 on-board graphics in macOS 13: 
 
 - [**Download**](https://dortania.github.io/builds/?product=Lilu&viewall=true) the latest version of Lilu from Dortania's Build Repo.
 - [**Download**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true) the latest version of Whatevergreen as well.
@@ -11,10 +11,14 @@ Do the following to enabled Intel HD 520/530 on-board graphics in macOS 13 (Desk
 - Change the SMBIOS to `iMac18,1`
 - Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` if it doesn't exist already.
 - Add/modify `DeviceProperties` for HD 530 (HD 520 and Laptops might need different values. Refer to the [**Intel HD Graphics FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details):
-	|Key Name                |Value     | Type. | Notes
-	-------------------------|----------|:----:| -----
-	AAPL,ig-platform-id      | 00001259 | Data | 
-	device-id                | 12590000 | Data |
+	|Key Name                |Value     | Type | Notes
+	-------------------------|----------|:----:| :-----:
+	AAPL,ig-platform-id      | 00001259 | Data | For Intel HD 520/530
+	device-id                | 12590000 | Data | "
+	||
+	AAPL,ig-platform-id      | 00001B59 | Data | For [Intel P530](https://www.insanelymac.com/forum/topic/354495-solved-intel%C2%AE-hd-p530-no-graphics-acceleration-on-ventura/?do=findComment&comment=2796368)
+	device-id                | 26590000 | Data | "
+	||
 	AAPL,GfxYTile            | 01000000 | Data | Optional. If your having glitches.
 - Optional: add boot-arg `-igfxsklaskbl` (when using macOS 12)
 - Save and reboot
