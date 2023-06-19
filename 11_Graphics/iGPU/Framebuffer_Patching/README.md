@@ -65,7 +65,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 
 1. Open Hackintool
 2. Click on the Tab "Patch", then on "Connectors" and then on the Eye icon
-3. This will show the currently used Framebuffer. In this example it's **0x3E9B0000** (Big Endian), which is the recommended framebuffer for the Intel HD 620 by Dortania's OpenCore Install guide: <br>![](/Users/5t33z0/Desktop/preps_01.png)
+3. This will show the currently used Framebuffer. In this example it's **0x3E9B0000** (Big Endian), which is the recommended framebuffer for the Intel HD 620 by Dortania's OpenCore Install guide: <br> ![preps_01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/0d39a616-3cae-4485-87c5-4cfd1ccee095)
 4. The line highlited in green (**Index 0**) represents your internal display (LVDS)
 5. Now attach your external display to your notebook
 6. Observe what happens:
