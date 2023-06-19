@@ -101,7 +101,7 @@ This is what you need to know before attempting to install macOS Monterey and ne
 - **Other**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't apply to Wintel systems.
 
 ## Preparations
-I assume you already have a working OpenCore configuration for your legacy system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only additional steps required to install and boot macOS Monterey and newer.
+I assume you already have a working OpenCore configuration for your legacy system. Otherwise follow Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/prerequisites.html) to create one. The instructions below are only *additional* steps required to be able to install and boot macOS Monterey and newer.
 
 ### Update OpenCore and kexts
 Update OpenCore to 0.9.2 or newer (mandatory). Because prior to 0.9.2, [`AppleCpuPmCfgLock` Quirk is skipped when macOS Ventura is running](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c) so the kexts required for re-enabling SMC CPU Power Management can't be injected and the system won't boot unless you have a (modded) BIOS where CFG Lock can be disabled. To check which version of OpenCore you're currently using, run the following commands in Terminal:
@@ -128,7 +128,7 @@ Config Section | Setting | Description
 `UEFI/Drivers` and <br> `EFI/OC/Drivers`| <ul> <li> Add `ResetNvramEntry.efi` to `EFI/OC/Drivers` <li> And to your config:<br> ![resetnvram](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/8d955605-fb27-401f-abdd-2c616b233418) | Adds a boot menu entry to perform an NVRAM reset but without resetting the order of the boot drives. Requires a BIOS with UEFI support.
 
 ## Testing the changes
-Once you've added the required kexts and made the necessary changes to your config.plist, save, reboot and perform an NVRAM Reset. If your system still boots fine after that, you can now prepare the system for installing macOS 13.
+Once you've added the required kexts and made the necessary changes to your config.plist, save, reboot and perform an NVRAM Reset. Your system must boot successfully with the applied changes – otherwise don't continue! If it does still boot, you can now prepare your system for installing macOS 13.
 
 ### Adjusting the SMBIOS
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
