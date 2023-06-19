@@ -1,98 +1,124 @@
-# Patching Intel iGPU Framebuffers with Hackintool
+# Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
-:warning: :construction: WORK IN PROGRESS… Don't use yet
+warning: :construction: WORK IN PROGRESS… Don't use yet
 
 ## About
-This is a guide for modifying Framebuffer patches for integrated graphic units (iGPUs) of Intel processors and generating `DeviceProperties` for connector types with Hackintool, so you can connect a monitor to the `HDMI` or `DisplayPort` of your computer and operate it successfully. It's an updated version of CaseySJ's guide from 2019. Since then, Hackintool has changed quite a bit so using the old guide with the new software might be confusing.
- 
-This guide assists you in fixing common framebuffer-related issues, such as:
+This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
 
-- Graphics acceleration not working: no transparency effects, only 7 MB of VRAM
-- Monitor turning off after macOS has reached the Desktop/Login Screen (Black Screen)
-- HDMI 2.0 and Audio over HDMI not working
-- External Monitors not turning on (Laptops)
+### Supported Connections
+- **HDMI** &rarr; **HDMI**
+- **DP** &rarr; **DP** (DisplayPort)
+- **HDMI** &rarr; **DVI**
+- **DP** &rarr; **DVI**
 
-These issues can be addressed and resolved by injecting additional Properties for the iGPU into macOS.
+:warning: **Important**: You cannot use **VGA** or any other analog video signal with modern macOS for that matter. So if this was your plan, you can stop right here!
 
-Although Dortania's excellent OpenCore Post Install Guide provides an in-depth look into Patching [Connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids), it does all of it manually which can be a bit overwhelming.
+> **Note**: Although the example used throughout this guide is for getting the Intel UHD 620 to work in macOS since I recently acquired a new laptop where I had to do all of this as well. But the basic principle applies to any other iGPU model supported by macOS.
 
-## Prerequisites
-### Where to start?
+## Problem description
+Your Laptop boots into macOS and the internal screen works, but:
 
-1. Before you begin tweaking your Framebuffer patch with Hackintool, please use Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are startin with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with! In general, the OC install guide should provide all the *basic* settings you need to get a signal from your display.
-2. If the recommended settings don't work, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs) instead. But keep in mind that the FAQs use Big Endian instead of Little Endian which is required for the config.plist.
+1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
+2. the handshake beteen the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
-<details>
-<summary><strong>Big Endian vs Little Endian</strong> (Click for more details)</summary>
+> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
 
-#### Big Endian vs Little Endian
-When working with different sources of framebuffer data, you have to mind the byte order (or "Endianness") of Framebuffers and Device-IDs. 
+## Possible causes
+- Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your device/purpose 
+- Misconfigured frambuffer patch with incorrect flags for the used connector
 
-**Example**: For 10th Gen Intel Core Desktop CPUs, the OpenCore Install Guide recommends `AAPL,ig-platform-id` `07009B3E`. But if you compare this value with Whatevergreen's [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs), you will notice that the recommended platform-id is `0x3E9B0007`. What happened here?
-
-Although it's not obvious at first glance, both values represent the same platform-id just in a different manner. The first is Little Endian and the second Big Endian. Big-Endian is an order in which the "big end" (most significant value in the sequence) is stored first (at the lowest storage address). Little-endian is an order in which the "little end" (least significant value in the sequence) is stored first. 
-
-If you split this sequence of digits into pairs of twos (07 00 9B 3E) and re-arrange them by moving them from the back to the left/front until the first pair has become last and vice versa, you have converted it to Big Endian (3E 9B 00 07) (we omit the leading "0x").
-
-Long story short: just keep in mind that whenever you work with values presented as `0x87654321` it's in Big Endian so you have to convert it to Little Endian (in this case `21436587`). Luckily, Hackintool handles this conversion automaticall when genereating your framebuffer patch. But for selecting the correct platform-id, you still have to make that Big Endian/Little switch in your mind, so select the correct framebuffer. Use th built-in "Calcs" tab if uncertain!
-</details>
-
-### Required Tools and Resources
-- [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) 
-- A Plist Editor like [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
-- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing framebuffers)
+## Required Tools and Resources
+- A FAT32 formatted USB Flash drive
+- External Monitor and a cable to connect it to your system (obviously)
+- [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) for creating/modifying framebuffer  properties
+- [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
 - [**Intel Ark**](https://ark.intel.com/content/www/us/en/ark.html) (for researching CPU specs such as used on-board graphics and device-id)
+- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing default/recommended framebuffers)
 - [**Intel HD Graphics FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors) for Framebuffers and Device-IDs and additional info.
 - [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
 - Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
-- Lilu and Whatevergreen kexts (mandatory)
+- Lilu and Whatevergreen kexts enabled (mandatory)
 
-<details><summary><strong>No picture at all?</strong> (click to reveal)</summary>
+## Basic workflow outline
+This it the tl;dr version of what we are going to do basically.
 
-## Force-enabling graphics with a fake Platform-ID (optional)
-⚠️ This is only for users who don't have graphics output at all. It's only a temporary solution to force-enable software rendering of graphics in macOS, so you can at least  follow the instructions on-screen to generate a proper framebuffer patch. If your display is working already, skip this step!
+- Find CPU model details on Intel ARK
+- Check used iGPU model
+- Add default/recommended frambuffer for from OpenCore install guide for used iGPU       
+- Check if you need to spoof a device-id
+- Consult Intel HD FAQs for Framebuffer data and alternative AAPL,ig-platform-ids
+- Adjust the framebuffer patch
+- Test
 
-First try adding `-igfxvesa` boot-arg to the config.plist and reboot. This will enable VESA mode for graphics which bypasses any GPU and uses software rendering instead.
+## Preparations
+Since we will have to do a lot of testing and rebooting, we will not work with the config.plist stored on the internal disk. Instead, we will work with a copy of the EFI folder and config stored on a FAT32 formatted USB flash drive. This way, we can ensure that the system always has a working config to boot from. Another benefit is that we don't need to mount the EFI partition every time we want to edit the config.plist since it's readily available on the USB flash drive which saves a lot of time.
 
-If this doesn't work, we can inject a non-existing `AAPL,ig-platform-id` via `DeviceProperties` into macOS, which in return will fall back to using the software renderer for displaying graphics since it can't find the Platform-ID.
+**So do the following**:
 
-Booting with this hack will take much longer (up to 2 minutes), only about 5 MB of VRAM will be available and everything will be running slow and sluggish – but at least you have a video signal. 
+- Mount your system's EFI partition 
+- Copy your EFI folder to a FAT32 formatted USB flash drive
+- Unmount the EFI partition again – from now on, We will work with the config stored on the USB flash drive!
+- **Optional**: change the boot order of your drives in the BIOS temporarily so that the USB flash drives takes the first slot. Otherwise you have to select the USB flash drive manually after each reboot
 
-#### Enabling a fake Platform-ID in OpenCore
-- Open your config.plist
-- Under `DeviceProperties/Add`, create the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)`
-- Add the following Keys as children:</br>
+## Testing
+Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working.
 
-	|Key Name                |Value     | Type
-	-------------------------|----------|:---:
-	AAPL,ig-platform-id      | 78563412 |Data
-	framebuffer-patch-enable | 01000000 |Data
-	
-	The entry should look like this:</br>
-![OC_fakeid](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b9b77d6f-1caf-46d3-9616-0debc83f855d)
+1. Open Hackintool
+2. Click on the Tab "Patch", then on "Connectors" and then on the Eye icon
+3. This will show the currently used Framebuffer. In this example it's **0x3E9B0000** (Big Endian), which is the recommended framebuffer for the Intel HD 620 by Dortania's OpenCore Install guide: <br>![](/Users/5t33z0/Desktop/preps_01.png)
+4. The line highlited in green (**Index 0**) represents your internal display (LVDS)
+5. Now attach your external display to your notebook
+6. Observe what happens:
+	- In **Hackintool**:
+		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: 
+		- If it does turn red: take note of the **Index**. We need it for configuring the framebuffer patch
+		- If it doesn't turn red, you might have an incorrect `AAPL,ig-platform-id` to begin with
+	- Observe the system's behavior:
+		- **If your display turns on**, how long does the handshake take? 
+			- **Short**: 
+				- If it does turn on and the screens only take 2 to 3 cylces until a stable connection is established, then you're probably good. 
+				- Connections between the same connector types (HDMI to HDMI, DP to DP) are negotiated faster than between 2 different types of connectors (HDMI to DP, HDMI to DVI, etc.)! 
+				- If the handshake behaves similarly if the ext. display is already connected prior to booting then you're probably good as well.
+			- **Long**: 
+				- If it does turn on (late) and the handshake takes more than 3 or 4 cycles, then there's room for improvement.
+		- **If your display does not turn on**:
+			- Does your mouse start to lag? If your mouse pointer starts to lag the screen is most likely detected but the busid and flags used for the connectors are possibly incorrect for the used connectors. 
+			- Disconnect the external monitor for now so you can work with your Laptop again
 
-#### Enabling fake Platform-ID in Clover
-- Open your config.plist in Clover Configurator
-- Click on "Graphics"
-- Enable `Inject Intel`
-- In ig-platforrm-id, enter `0x12345678` (you can omit the `0x`)
+## Verifying `AAPL-ig-platform-id`
 
-	This is how it should look in Clover Configurator:</br>
-![FakeID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/6ee45bfd-7d20-4d09-a61e-8bc165eb0a93)
-
-**NOTE**: Make sure to delete/disable the fake Platform-ID once you have generated your Framebuffer patch!
-</details>
-
+1. Check the CPU specs by googling your CPU model. Find out which CPU family it belongs to and which model of on-board graphics it is using.
+2. Next, consult Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are startin with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with! In general, the OC install guide should provide all the *basic* settings you need to get a signal from your display.
+2. If the recommended settings don't work, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs) instead. But keep in mind that the Intel HD FAQs use Big Endian instead of Little Endian which is required for the config.plist.
 
 ## Technical Background
-The picture below shows the basic principle of how the video signal gets from the iGPU
+The picture below shows the basic Processor Display Architecture design of Intel iGPUs.
+
 ![](https://pikeralpha.files.wordpress.com/2013/08/processor-display-architecture.png)
 **SOURCE**: [Processor Display Architecture](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/) by PikerAlpha
+
+It shows the number of pipes (03) framebuffers (03) and DDI ports (03) – according to the  datasheet, it works as follows:
+
+“The DDI (Digital Display Interface) ports B,C and D on the processor *can be configured to support DP/eDP/HDMI and DVI*. For desktop designs, DDI port D can be configured as eDPx4 (4 lanes) in addition to dedicated x2 (2 lanes) port for Intel FDI (Flexible Display Interface) for (analog) VGA." (VGA is no longer supported by macOS).
+
+The next picture shows how these components are linked together:
+
+![](https://www.tonymacx86.com/attachments/port-to-index-mapping-png.381014/)
+
+**The takeaway from this is this**:
+
+- There are fixed "Indexes" `0` to `3` (max). These are hard-coded with ports 05, 06 and 07 to the physcial connectors. We can ignore this since we can't change those anyway
+- There "Pipes" to transport data internally
+- There are "BusIDs" used to transport the graphics data to physical "Connectors" on the the outside 
+- These connnectors can be of different "Types" (HDMI, DisplayPort, etc.) and require specific "Ports" to be declared in order to work. In macOS these are Ports are hardcoded in, so only specific BusIDs can be used. More on that later
 
 ## Instructions
 
 ### I. Choosing the correct Framebuffer for macOS and your iGPU
-⚠️ **DISCLAIMER**: The values used in the given example are for a 10th Gen Intel Core CPU (Comet Lake) which uses Intel UHD 630 on-board graphics. Don't use these values for your Framebuffer Patch!
+⚠️ **DISCLAIMER**: The values used in the given example are for an 8th Gen Whiskey Lake CPU
+
+
+10th Gen Intel Core CPU (Comet Lake) which uses Intel UHD 630 on-board graphics. Don't use these values for your Framebuffer Patch!
 
 Select the correct Framebuffer for your CPU's on-board Graphics as recommended by the OpenCore Install Guide and/or the Intel HD Graphics FAQs (mind the "Endianness").
 
@@ -183,11 +209,8 @@ The "Connectors" tab consists of a list with five columns:
 
 If anything was done correct your iGPU should work as supposed now. If not, start over.
 
-## Credits
-- CaseySJ for his [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/)
+## Credits and further resources
+- [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) by CaseySJ
+- AppleIntelFramebufferAzul.kext ([Part 1](https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/) and [Part 2](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/)) by Piker Alpha 
+- [Patching connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids) by Dortania
 - benbaker76 for [Hackintool](https://github.com/benbaker76/Hackintool/releases)
-- Dortania for [Bus ID patching guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html) 
-
-## Further Resources
-- **AppleIntelFramebufferAzul.kext** (Pt. 1): https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/
-- **AppleIntelFramebufferAzul.kext** (Pt. 2): https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/
