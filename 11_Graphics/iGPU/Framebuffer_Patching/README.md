@@ -94,9 +94,9 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	```
 	sysctl machdep.cpu.brand_string
 	```
-2. In my case it's an `i5-8265U`. Search your model number on https://ark.intel.com/ to find its specs.
+2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (in this case "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use google or check in Windows. In my case, it's using Intel Graphics UHD 620.
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows. In my case, it's using Intel Graphics UHD 620.
 
 4. Next, consult Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are starting with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with:
 	- Find the Install guide for your CPU Famiy
