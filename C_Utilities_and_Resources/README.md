@@ -16,6 +16,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) – App for patching macOS so it can run on unsupported systems. Can download macOS (Big Sur and newer) and create a USB Installer.
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python script for downloading macOS (10.13 to 13). Only tool that can be used from within Windows to create an Internet Recovery USB installer!
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer (Big Sur and newer).
+- [**ISO Image Creator**](https://macmeup.com/create-iso-images/) – App to convert macOS Installers to .iso images.
 
 ### macOS (General)
 - [**About this Hack**](https://github.com/0xCUB3/About-This-Hack) – Simple app to view your exact hardware in macOS. Similar to how the "About This Mac" window looked prior to macOS 13 but with more features. 
