@@ -262,7 +262,15 @@ Key | Type | Value| Notes
 `framebuffer-fbmem`| Data | `00009000`
 ||||
 `device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Windows, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
-`device-id`|Data|`9B3E0000`| ⚠️ Only required for Coffee Lake CPUs with UHD 620.
+`device-id`|Data|`9B3E0000`| ⚠️ Required for Coffee Lake CPUs with UHD 620 to spoof the as Intel UHD 630.
+
+:bulb: The recommendet settings for **Intel UHD 620** listed in the Intel HD FAQs differ from those in Dortania's guide and worked better for me:
+
+Key | Type | Value| Notes
+----|:----:|:----:|------
+`AAPL,ig-platform-id`|Data| `0900A53E ` |For Laptops with UHD 620
+||||
+`device-id `| Data|`A53E0000` | Spoof Intel UHD 620 as Intel Iris 655
 
 **NOTES**:
 
