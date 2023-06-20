@@ -265,7 +265,7 @@ Key                    | Type | Value| Notes
 
 **This is how your config should look like after transferring the framebuffer data to your config.plist**:
 
-![](/Users/stunner/Desktop/config.png)
+![config](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9da5bfda-93d9-45e0-8dfc-4b35eabddf78)
 
 ## Testing Round 2
 
