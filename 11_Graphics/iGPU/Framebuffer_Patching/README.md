@@ -1,6 +1,32 @@
-# Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
+Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
 warning: :construction: WORK IN PROGRESS… Don't use yet
+
+**TABLE of CONTENTS**
+
+- [About](#about)
+	- [Supported Connections](#supported-connections)
+- [Problem description](#problem-description)
+- [Possible causes](#possible-causes)
+- [Required Tools and Resources](#required-tools-and-resources)
+- [Basic workflow outline](#basic-workflow-outline)
+- [Preparations](#preparations)
+- [Testing](#testing)
+- [Verifying/adjusting the `AAPL-ig-platform-id`](#verifyingadjusting-the-aapl-ig-platform-id)
+- [Adding Connectors](#adding-connectors)
+	- [Gathering data for your framebuffer (Example 1)](#gathering-data-for-your-framebuffer-example-1)
+	- [Gathering data for your framebuffer (Example 2)](#gathering-data-for-your-framebuffer-example-2)
+	- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
+	- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
+	- [I. Choosing the correct Framebuffer for macOS and your iGPU](#i-choosing-the-correct-framebuffer-for-macos-and-your-igpu)
+	- [The "Patch" Section](#the-patch-section)
+	- [The "Info" section](#the-info-section)
+	- [II. Patching Connectors and enabling features: "Connectors" Section](#ii-patching-connectors-and-enabling-features-connectors-section)
+		- [Excurse: Understanding Connector Patches in the Intel HD FAQs](#excurse-understanding-connector-patches-in-the-intel-hd-faqs)
+		- [Connectors, BusIDs, Indexes, etc](#connectors-busids-indexes-etc)
+	- [III. Step by Step guide](#iii-step-by-step-guide)
+- [Credits and further resources](#credits-and-further-resources)
+
 
 ## About
 This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
@@ -19,13 +45,13 @@ This guide is for modifying framebuffers for Intel iGPUs and modifying `DevicePr
 Your Laptop boots into macOS and the internal screen works, but:
 
 1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
-2. the handshake beteen the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
+2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
 > **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
 
 ## Possible causes
 - Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your device/purpose 
-- Misconfigured frambuffer patch with incorrect flags for the used connector
+- Misconfigured framebuffer patch with incorrect flags for the used connector
 
 ## Required Tools and Resources
 - A FAT32 formatted USB Flash drive
@@ -40,14 +66,15 @@ Your Laptop boots into macOS and the internal screen works, but:
 - Lilu and Whatevergreen kexts enabled (mandatory)
 
 ## Basic workflow outline
-This it the tl;dr version of what we are going to do basically.
+This it the tl;dr version of what we are going to do basically:
 
 - Find CPU model details on Intel ARK
 - Check used iGPU model
-- Add default/recommended frambuffer for from OpenCore install guide for used iGPU       
+- Add default/recommended framebuffer for from OpenCore install guide for used iGPU       
 - Check if you need to spoof a device-id
 - Consult Intel HD FAQs for Framebuffer data and alternative AAPL,ig-platform-ids
-- Adjust the framebuffer patch
+- Verify/adjust the framebuffer patch
+- Add Connectors, BusIDs and flags
 - Test
 - Add finished fb patch to config on internal disk
 - Done
@@ -68,7 +95,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 1. Open Hackintool
 2. Click on the Tab "Patch", then on "Connectors" and then on the Eye icon
 3. This will show the currently used Framebuffer. In this example it's **0x3E9B0000** (Big Endian), which is the recommended framebuffer for the Intel HD 620 by Dortania's OpenCore Install guide: <br> ![preps_01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/0d39a616-3cae-4485-87c5-4cfd1ccee095)
-4. The line highlited in green (**Index 0**) represents your internal display (LVDS)
+4. The line highlighted in green (**Index 0**) represents your internal display (LVDS)
 5. Now attach your external display to your notebook
 6. Observe what happens:
 	- In **Hackintool**:
@@ -78,16 +105,16 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	- Observe the system's behavior:
 		- **If your display turns on**, how long does the handshake take? 
 			- **Short**: 
-				- If it does turn on and the screens only take 2 to 3 cylces until a stable connection is established, then you're probably good. 
+				- If it does turn on and the screens only take 2 to 3 cycles until a stable connection is established, then you're probably good. 
 				- Connections between the same connector types (HDMI to HDMI, DP to DP) are negotiated faster than between 2 different types of connectors (HDMI to DP, HDMI to DVI, etc.)! 
 				- If the handshake behaves similarly if the ext. display is already connected prior to booting then you're probably good as well.
 			- **Long**: 
 				- If it does turn on (late) and the handshake takes more than 3 or 4 cycles, then there's room for improvement.
 		- **If your display does not turn on**:
-			- Does your mouse start to lag? If your mouse pointer starts to lag the screen is most likely detected but the busid and flags used for the connectors are possibly incorrect for the used connectors. 
+			- Does your mouse start to lag? If your mouse pointer starts to lag the screen is most likely detected but the BusID and flags used for the connectors are possibly incorrect for the used connectors. 
 			- Disconnect the external monitor for now so you can work with your Laptop again
 
-## Verifying the `AAPL-ig-platform-id`
+## Verifying/adjusting the `AAPL-ig-platform-id`
 
 1. Find the CPU used in your machine. If you don't know, you can enter in Terminal: 
 
@@ -96,48 +123,160 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	```
 2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows Device Manager. In my case, it's using Intel Graphics UHD 620: <br> ![igpu](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2f2449c0-1927-4699-aa3e-503f697bf063)
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case, use sites like netbookcheck.net or check in Windows Device Manager to find the exact model. In my case, it uses Intel UHD Graphics 620: <br> ![](/Users/stunner/Desktop/devmanigp.png)
 
 4. Next, verify that you are using the recommended `AAPL,ig-platform-id` for your CPU and iGPU:
-	- Find the recommended framebuffer for your CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
+	- Find the recommended framebuffer for your mobile CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
 	- Check if your iGPU requires a device-id to spoof a different iGPU model!
 	- Compare the data with the `DeviceProperties` used in your config.plist
 
-5. Mak sure to cross-reference the default/recommended framebuffer for your iGPU against the ones listed in the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs). But keep in mind that the Intel HD FAQs uses [Big Endian instead of Little Endian](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Big-Endian_Little-Endian.md) which is required for the config.plist.
+5. Make sure to cross-reference the default/recommended framebuffer for your iGPU against the ones listed in the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs). But keep in mind that the Intel HD FAQs uses [Big Endian instead of Little Endian](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Big-Endian_Little-Endian.md) which is required for the config.plist.
+
+6. If necessary, adjust the framebuffer patch (mainly `AAPL,ig-platform-id`) in the config.plist stored on your USB flash drive according to the data you gathered in steps 4 or 5. If you are already using the correct/recommended `AAPL,ig-platform-id`, then you can skip to the next chapter "Adding Connectors".
+
+7. If you have to change the `AAPL,ig-platform-id` but your framebuffer patch already contains connector patches (everything with `framebuffer-con…`), disable the whole device property entry by placing `#` in front of the dictionary `#PciRoot(0x0)/Pci(0x2,0x0)` and create a new one: `PciRoot(0x0)/Pci(0x2,0x0)` to start with a clean slate. Then add the recommended data you found. If your system requires additional properties so that the internal display works correctly (like backlight register fixes, etc.), copy them over from your previous framebuffer patch.
+
+8. Save your config and reboot from the USB flash drive. If the system boots and the internal display works, we can now add data for the external. If it doesn't boot, reset the system, boot from the internal disk and start over.
 
 **NOTES**:
 
 - The OpenCore Install Guide only provided the *basic* settings you need to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptop).
 -  In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
 
-## Technical Background
-The picture below shows the basic Processor Display Architecture design of Intel iGPUs.
+## Adding Connectors
+Now that we have verified that we are using the recommended framebuffer, we need to gather the connectors data associated with the selected framebuffer in the Intel HD FAQs. Since there are 2 different recommendations for my iGPU, I will look at both.
 
-![](https://pikeralpha.files.wordpress.com/2013/08/processor-display-architecture.png)
-**SOURCE**: [Processor Display Architecture](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/) by PikerAlpha
+### Gathering data for your framebuffer (Example 1)
+The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-platform-id `00009B3E`. Now we need to find the connector data for this framebuffer in the Intel HD FAQs:
 
-It shows the number of pipes (03) framebuffers (03) and DDI ports (03) – according to the  datasheet, it works as follows:
+1. Convert the value for framebuffer `00009B3E` into Big Endian. Here it': `0x3E9B0000`
+2. Visit the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+3. Press CMD+F to search within the site
+4. Enter your framebuffer (converted to Big Endian, without the leading 0x): `3E9B0000`
+5. You should find your value in a table with other framebuffers
+6. Scroll down past the table until you see "Spoiler: … connectors". Click on it to reveal the data
+7. Hit forward in the search function to find the next mach and then you will finally find the data belonging to your framebuffer ID!
 
-“The DDI (Digital Display Interface) ports B,C and D on the processor *can be configured to support DP/eDP/HDMI and DVI*. For desktop designs, DDI port D can be configured as eDPx4 (4 lanes) in addition to dedicated x2 (2 lanes) port for Intel FDI (Flexible Display Interface) for (analog) VGA." (VGA is no longer supported by macOS).
+**Here's the Data for ID: 3E9B0000**
 
-The next picture shows how these components are linked together:
+```
+ID: 3E9B0000, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x0000130B
+TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
+Model name: Intel HD Graphics CFL CRB
+Camellia: CamelliaDisabled (0), Freq: 0 Hz, FreqMax: 0 Hz
+Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
-![](https://www.tonymacx86.com/attachments/port-to-index-mapping-png.381014/)
+[0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
+[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x00000187 - ConnectorDP
 
-**The takeaway from this is this**:
+00000800 02000000 98000000
+01050900 00040000 87010000
+02040A00 00040000 87010000
+```
 
-- There are fixed "Indexes" `0` to `3` (max). These are hard-coded with ports 05, 06 and 07 to the physcial connectors. We can ignore this since we can't change those anyway
-- There "Pipes" to transport data internally
-- There are "BusIDs" used to transport the graphics data to physical "Connectors" on the the outside 
-- These connnectors can be of different "Types" (HDMI, DisplayPort, etc.) and require specific "Ports" to be declared in order to work. In macOS these are Ports are hardcoded in, so only specific BusIDs can be used. More on that later
+The picture below lists the same data for the 3 connectors this framebuffer provides but with some additional color coding:
 
-## Instructions
+![](/Users/stunner/Desktop/FBADATA02.png)
 
+<details>
+<summary><strong>More Examples</strong> (click to reveal)</summary>
+
+### Gathering data for your framebuffer (Example 2)
+Since the Intel HD FAQs recommends a different framebuffer in certain cases you should double-check this, too. So look-up the data for your CPU family in the document and scroll down to where it says ***"Recommended framebuffers"***. In my case the Intel HD FAQs suggests 0x3EA50009 instead.
+
+**Here's the Data for ID: 3E9B0000**
+ 
+```
+ID: 3EA50009, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00830B0A
+TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
+Model name: Intel HD Graphics CFL CRB
+Camellia: CamelliaV3 (3), Freq: 0 Hz, FreqMax: 0 Hz
+Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
+
+[0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
+[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x000001C7 - ConnectorDP
+[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x000001C7 - ConnectorDP
+
+00000800 02000000 98000000
+01050900 00040000 C7010000
+02040A00 00040000 C7010000
+```
+### Gathering data for your framebuffer (Example 3)
+In the end, I settled with framebuffer `0x3EA50004` instead and in the end you will understand why.
+
+```
+ID: 3EA50004, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00E30B0A
+TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
+Model name: Intel Iris Plus Graphics 655
+Camellia: CamelliaV3 (3), Freq: 0 Hz, FreqMax: 0 Hz
+Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
+
+[0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000498 - ConnectorLVDS
+[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x000003C7 - ConnectorDP
+[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x000003C7 - ConnectorDP
+
+00000800 02000000 98040000
+01050900 00040000 C7030000
+02040A00 00040000 C7030000`
+```
+</details>
+
+Next, we need to translate this data into `DeviceProperties` for our config.plist so we can inject it into macOS.
+
+### Translating the data into `DeviceProperties`
+
+**Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
+
+These entries you should have already – just with the values recommended for your iGPU:
+
+Key | Type | Value| Notes
+----|:----:|:----:|------
+`AAPL,ig-platform-id`|Data| `00009B3E` |For Laptops with UHD 620
+||||
+`framebuffer-patch-enable`| Data | `01000000` | Enables Framebuffer patching via Whatevergreen
+`framebuffer-stolenmem` | Data | `00003001` | Only needed if "About this Mac" section shows 7mb or less after patching 
+`framebuffer-fbmem`| Data | `00009000` | Only needed if "About this Mac" section shows 7mb or less after patching 
+||||
+`device-id`|Data|`9B3E0000`| Device-ID is required for UHD 620
+
+**And these we need for the Connectors:**
+
+Key                    | Type | Value| Notes
+-----------------------|:----:|:----:|------
+`AAPL,slot-name` | String | Internal@0,2,0 | Internal location of the iGPU (optional). This lists the iGPU in the "Graphics" category of System Profiler
+`device-id` | Data |  9B3E0000 |  For spoofing Intel UHD 620 as Intel UHD 630. Only add it if required for your iGPU model
+`device_type` | String | VGA compatible controller | Optional
+`disable-external-gpu` |Data| 01000000 | Optional. Only required if your Laptop has an incompatible dGPU
+`framebuffer-con1-busid` |Data | 05000000 | BusID used to transmit data to the physical  port # 1 on your machine
+`framebuffer-con1-enable` | Data | 01000000 | Enables Patching Connector #2 via Whatevergreen
+`framebuffer-con1-flags` | Data | 87010000 | Default flags for connector 3
+`framebuffer-con1-index` | Data | 01000000 | Connector 3 has Index 2
+`framebuffer-con1-pipe`| Data| 09000000| Pipe 9
+`framebuffer-con2-busid` | Data | 04000000 | BusID used to transmit data to physical port #2 of your machine
+`framebuffer-con2-enable` | Data | 01000000 | Enables Patching Connector #3 via Whatevergreen
+`framebuffer-con2-flags` | Data| 87010000 | Default flags for connector 3
+`framebuffer-con2-index` | Data | 02000000 | Connector 3 has Index 2
+`framebuffer-con2-pipe` | Data | 0A000000| Pipe 10, converted to hex = 0A
+`framebuffer-patch-enable` | Data | 0100000| Enables Framebuffer patching via Whatevergreen
+`model` | String | Intel UHD Graphics 620 | Optional
+
+> **Note**: We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
+
+**This is how your config should look like after transferring the framebuffer data to your config.plist**:
+
+![](/Users/stunner/Desktop/config.png)
+
+## Testing Round 2
+
+
+
+
+
+
+_____
 ### I. Choosing the correct Framebuffer for macOS and your iGPU
-⚠️ **DISCLAIMER**: The values used in the given example are for an 8th Gen Whiskey Lake CPU
-
-
-10th Gen Intel Core CPU (Comet Lake) which uses Intel UHD 630 on-board graphics. Don't use these values for your Framebuffer Patch!
+⚠️ **DISCLAIMER**: The values used in the given example are for an 8th Gen Whiskey Lake CPU. 
 
 Select the correct Framebuffer for your CPU's on-board Graphics as recommended by the OpenCore Install Guide and/or the Intel HD Graphics FAQs (mind the "Endianness").
 
