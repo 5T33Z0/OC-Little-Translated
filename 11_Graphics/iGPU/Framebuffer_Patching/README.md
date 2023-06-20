@@ -99,7 +99,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 5. Now attach your external display to your notebook
 6. Observe what happens:
 	- In **Hackintool**:
-		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: <br>![](/Users/stunner/Desktop/display-red.png)
+		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: <br>![display-red](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f671908c-ae2f-4241-a782-f35ccaa6c918)
 		- If it does turn red: take note of the **Index** (in this example: Index 2). We need it for configuring the framebuffer patch
 		- If it doesn't turn red, you might have an incorrect `AAPL,ig-platform-id` to begin with
 	- Observe the system's behavior:
@@ -123,7 +123,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	```
 2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case, use sites like netbookcheck.net or check in Windows Device Manager to find the exact model. In my case, it uses Intel UHD Graphics 620: <br> ![](/Users/stunner/Desktop/devmanigp.png)
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case, use sites like netbookcheck.net or check in Windows Device Manager to find the exact model. In my case, it uses Intel UHD Graphics 620: <br> ![devmanigp](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1844b3a0-01fa-4655-9cf8-ab771388512f)
 
 4. Next, verify that you are using the recommended `AAPL,ig-platform-id` for your CPU and iGPU:
 	- Find the recommended framebuffer for your mobile CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
@@ -177,7 +177,7 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
 The picture below lists the same data for the 3 connectors this framebuffer provides but with some additional color coding:
 
-![](/Users/stunner/Desktop/FBADATA02.png)
+![FBADATA02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/91a78db5-ec2a-4a1f-8eba-df6720787ed3)
 
 <details>
 <summary><strong>More Examples</strong> (click to reveal)</summary>
