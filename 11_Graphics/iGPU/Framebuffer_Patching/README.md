@@ -278,13 +278,14 @@ Now that we have added the default connectors for the selected framebuffer reboo
 Observe the behavior of the system:
 
 - Does the external monitor turn on?
-  - If YES:
+  - If **YES**:
     - Does it turn on *soon* after reaching the desktop
-      - If yes: you are finished with configuring!
-      - If no: does the handshake take long or very long until the handshake between both displays is completed? If so, we need to modify the framebuffer patch
-  - If NO:
-    - Does Hackintool detect the external display (red line in)
-
+      - If **YES**: you are finished with configuring!
+      - If **NO**: does the handshake take long or very long until the handshake between both displays is completed? If so, we need to modify the framebuffer patch
+  - If **NO**:
+    - Does Hackintool detect the external display (red line)
+    - If **YES**: take note of the Index and BusID
+    - If **NO**: We need to find the correct BusID
 
 ## Terminology: Connectors, BusIDs, Indexes, etc.
 The "Connectors" tab is where the *software* outputs of the iGPU for the selected framebuffer can be modified and routed to *physical* outputs:
