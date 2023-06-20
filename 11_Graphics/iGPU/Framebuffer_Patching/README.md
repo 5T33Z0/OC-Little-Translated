@@ -87,7 +87,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 			- Does your mouse start to lag? If your mouse pointer starts to lag the screen is most likely detected but the busid and flags used for the connectors are possibly incorrect for the used connectors. 
 			- Disconnect the external monitor for now so you can work with your Laptop again
 
-## Verifying `AAPL-ig-platform-id`
+## Verifying the `AAPL-ig-platform-id`
 
 1. Find the CPU used in your machine. If you don't know, you can enter in Terminal: 
 
@@ -96,18 +96,19 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	```
 2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows. In my case, it's using Intel Graphics UHD 620.
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows Device Manager. In my case, it's using Intel Graphics UHD 620.
 
-4. Next, consult Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/) to verify that you are starting with the correct/recommended `AAPL,ig-platform-id` for your CPU and iGPU to begin with:
-	- Find the Install guide for your CPU Famiy
-	- Click on the `DeviceProperties` secction 
-	- Find the recommended `AAPL,ig-platform-id` 
+4. Next, verify that you are using the recommended `AAPL,ig-platform-id` for your CPU and iGPU:
+	- Find the recommended framebuffer for your CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
 	- Check if your iGPU requires a device-id to spoof a different iGPU model!
-	- Compare the properties with those used in your config
+	- Compare the data with the `DeviceProperties` used in your config.plist
 
-> **Note**: In general, the OC Install Guide should provide all the *basic* settings you need to get a signal from your display. 
+5. Mak sure to cross-reference the default/recommended framebuffer for your iGPU against the ones listed in the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs). But keep in mind that the Intel HD FAQs uses [Big Endian instead of Little Endian](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Big-Endian_Little-Endian.md) which is required for the config.plist.
 
-5. If the recommended settings don't work, check the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs) instead. But keep in mind that the Intel HD FAQs use Big Endian instead of Little Endian which is required for the config.plist.
+**NOTES**:
+
+- The OpenCore Install Guide only provided the *basic* settings you need to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptop).
+-  In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
 
 ## Technical Background
 The picture below shows the basic Processor Display Architecture design of Intel iGPUs.
