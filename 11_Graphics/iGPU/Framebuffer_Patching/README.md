@@ -5,13 +5,14 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-	- [Supported Connections](#supported-connections)
-	- [Basic workflow outline](#basic-workflow-outline)
-- [Problem description](#problem-description)
+	- [Problem description](#problem-description)
 	- [Possible causes](#possible-causes)
+	- [Solution](#solution)
+	- [Supported Connection Types](#supported-connection-types)
+	- [Workflow overview](#workflow-overview)
 - [Preparations](#preparations)
 	- [Required Tools and Resources](#required-tools-and-resources)
-	- [Creating a bootable USB flash drive](#creating-a-bootable-usb-flash-drive)
+	- [Create a bootable USB flash drive](#create-a-bootable-usb-flash-drive)
 - [Testing your current configuration](#testing-your-current-configuration)
 - [Verifying/adjusting the `AAPL-ig-platform-id`](#verifyingadjusting-the-aapl-ig-platform-id)
 	- [Adding Connectors](#adding-connectors)
@@ -20,21 +21,36 @@
 		- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
 	- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
 - [Testing Round 2](#testing-round-2)
-- [Terminology: Connectors, BusIDs, Indexes, etc.](#terminology-connectors-busids-indexes-etc)
+- [Modifying the framebuffer patch](#modifying-the-framebuffer-patch)
+	- [Terminology: Connectors, BusIDs, Indexes, etc.](#terminology-connectors-busids-indexes-etc)
 - [I. Choosing the correct Framebuffer for macOS and your iGPU](#i-choosing-the-correct-framebuffer-for-macos-and-your-igpu)
 	- [The "Patch" Section](#the-patch-section)
 	- [The "Info" section](#the-info-section)
 	- [II. Patching Connectors and enabling features: "Connectors" Section](#ii-patching-connectors-and-enabling-features-connectors-section)
-		- [Excurse: Understanding Connector Patches in the Intel HD FAQs](#excurse-understanding-connector-patches-in-the-intel-hd-faqs)
+		- [Excursus: Understanding Connector Patches in the Intel HD FAQs](#excursus-understanding-connector-patches-in-the-intel-hd-faqs)
 		- [Connectors, BusIDs, Indexes, etc](#connectors-busids-indexes-etc)
 	- [III. Step by Step guide](#iii-step-by-step-guide)
 - [Credits and further resources](#credits-and-further-resources)
 
-
 ## About
 This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
 
-### Supported Connections
+### Problem description
+Your Laptop boots into macOS and the internal screen works, but:
+
+1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
+2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
+
+> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
+
+### Possible causes
+- Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your iGPU
+- Misconfigured framebuffer patch with incorrect flags for the used cable/connector
+
+### Solution
+- Add/adjust framebuffer patch for your iGPU
+
+### Supported Connection Types
 - **HDMI** &rarr; **HDMI**
 - **DP** &rarr; **DP** (DisplayPort)
 - **HDMI** &rarr; **DVI**
@@ -42,9 +58,9 @@ This guide is for modifying framebuffers for Intel iGPUs and modifying `DevicePr
 
 :warning: **Important**: You cannot use **VGA** or any other analog video signal with modern macOS for that matter. So if this was your plan, you can stop right here!
 
-> **Note**: Although the example used throughout this guide is for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well.
+> **Note**: Although the examples used throughout this guide is for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well. Just make sure to use the framebuffer data required for your iGPU.
 
-### Basic workflow outline
+### Workflow overview
 This it the tl;dr version of what we are going to do basically:
 
 - Find CPU model details on Intel ARK
@@ -57,18 +73,6 @@ This it the tl;dr version of what we are going to do basically:
 - Test
 - Add finished fb patch to config on internal disk
 - Done
-
-## Problem description
-Your Laptop boots into macOS and the internal screen works, but:
-
-1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
-2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
-
-> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
-
-### Possible causes
-- Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your device/purpose 
-- Misconfigured framebuffer patch with incorrect flags for the used connector
 
 ## Preparations
 
@@ -154,15 +158,15 @@ Now that we have verified that we are using the recommended framebuffer, we need
 #### Gathering data for your framebuffer (Example 1)
 The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-platform-id `00009B3E`. Now we need to find the connector data for this framebuffer in the Intel HD FAQs:
 
-1. Convert the value for framebuffer `00009B3E` into Big Endian. Here it': `0x3E9B0000`
+1. Convert the value for framebuffer to Big Endian. You can use Hackintool's calculator to do this. In my case it's `0x3E9B0000`.
 2. Visit the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-3. Press CMD+F to search within the site
-4. Enter your framebuffer (converted to Big Endian, without the leading 0x): `3E9B0000`
+3. Press <kbd>CMD</kbd>+<kbd>F</kbd> to search within the site
+4. Enter your framebuffer (converted to Big Endian, without the leading 0x), here: `3E9B0000`
 5. You should find your value in a table with other framebuffers
 6. Scroll down past the table until you see "Spoiler: … connectors". Click on it to reveal the data
-7. Hit forward in the search function to find the next mach and then you will finally find the data belonging to your framebuffer ID!
+7. Hit forward in the search function to find the next match. This will be the framebuffer data for your AAPL,ig-platform-id!
 
-**Here's the Data for ID: 3E9B0000**
+**Here's the Data for ID 3E9B0000:**
 
 ```
 ID: 3E9B0000, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x0000130B
@@ -288,7 +292,7 @@ Observe the behavior of the system:
     		- If **NO**: We need to find the correct BusID first
 
 ## Modifying the framebuffer patch
-Depennding on the test results, we need to modify the framebuffer patch with hackintool. But before we can do that, we need to better understand the parameters we are dealing with.
+Depending on the test results, we need to modify the framebuffer patch with hackintool. But before we can do that, we need to better understand the parameters we are dealing with.
 
 ### Terminology: Connectors, BusIDs, Indexes, etc.
 Hackintool's "Connectors" tab is where the *software* outputs of the iGPU for the selected framebuffer can be modified and routed to *physical* outputs:
@@ -335,7 +339,7 @@ The "Patch" section contains 5 sub-sections: **Info**, **VRAM**, **Framebuffer**
 
 Now that the correct Framebuffer is selected, we want to modify it, so we can route outputs of the iGPU to physical connectors on the back panel I/O of your mainboard. But before we do let's understand what makes up a connector patch.
 
-#### Excurse: Understanding Connector Patches in the Intel HD FAQs
+#### Excursus: Understanding Connector Patches in the Intel HD FAQs
 
 **iGPU**: Intel UHD 630 <br>
 **Framebuffer**: `0x3E9B0007`
