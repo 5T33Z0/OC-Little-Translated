@@ -1,24 +1,27 @@
 Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
-warning: :construction: WORK IN PROGRESS… Don't use yet
+:warning: :construction: WORK IN PROGRESS… Don't use yet
 
 **TABLE of CONTENTS**
 
 - [About](#about)
 	- [Supported Connections](#supported-connections)
+	- [Basic workflow outline](#basic-workflow-outline)
 - [Problem description](#problem-description)
-- [Possible causes](#possible-causes)
-- [Required Tools and Resources](#required-tools-and-resources)
-- [Basic workflow outline](#basic-workflow-outline)
+	- [Possible causes](#possible-causes)
 - [Preparations](#preparations)
-- [Testing](#testing)
+	- [Required Tools and Resources](#required-tools-and-resources)
+	- [Creating a bootable USB flash drive](#creating-a-bootable-usb-flash-drive)
+- [Testing your current configuration](#testing-your-current-configuration)
 - [Verifying/adjusting the `AAPL-ig-platform-id`](#verifyingadjusting-the-aapl-ig-platform-id)
-- [Adding Connectors](#adding-connectors)
-	- [Gathering data for your framebuffer (Example 1)](#gathering-data-for-your-framebuffer-example-1)
-	- [Gathering data for your framebuffer (Example 2)](#gathering-data-for-your-framebuffer-example-2)
-	- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
+	- [Adding Connectors](#adding-connectors)
+		- [Gathering data for your framebuffer (Example 1)](#gathering-data-for-your-framebuffer-example-1)
+		- [Gathering data for your framebuffer (Example 2)](#gathering-data-for-your-framebuffer-example-2)
+		- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
 	- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
-	- [I. Choosing the correct Framebuffer for macOS and your iGPU](#i-choosing-the-correct-framebuffer-for-macos-and-your-igpu)
+- [Testing Round 2](#testing-round-2)
+- [Terminology: Connectors, BusIDs, Indexes, etc.](#terminology-connectors-busids-indexes-etc)
+- [I. Choosing the correct Framebuffer for macOS and your iGPU](#i-choosing-the-correct-framebuffer-for-macos-and-your-igpu)
 	- [The "Patch" Section](#the-patch-section)
 	- [The "Info" section](#the-info-section)
 	- [II. Patching Connectors and enabling features: "Connectors" Section](#ii-patching-connectors-and-enabling-features-connectors-section)
@@ -41,31 +44,7 @@ This guide is for modifying framebuffers for Intel iGPUs and modifying `DevicePr
 
 > **Note**: Although the example used throughout this guide is for getting the Intel UHD 620 to work in macOS since I recently acquired a new laptop where I had to do all of this as well. But the basic principle applies to any other iGPU model supported by macOS.
 
-## Problem description
-Your Laptop boots into macOS and the internal screen works, but:
-
-1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
-2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
-
-> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
-
-## Possible causes
-- Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your device/purpose 
-- Misconfigured framebuffer patch with incorrect flags for the used connector
-
-## Required Tools and Resources
-- A FAT32 formatted USB Flash drive
-- External Monitor and a cable to connect it to your system (obviously)
-- [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) for creating/modifying framebuffer  properties
-- [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
-- [**Intel Ark**](https://ark.intel.com/content/www/us/en/ark.html) (for researching CPU specs such as used on-board graphics and device-id)
-- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing default/recommended framebuffers)
-- [**Intel HD Graphics FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors) for Framebuffers and Device-IDs and additional info.
-- [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
-- Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
-- Lilu and Whatevergreen kexts enabled (mandatory)
-
-## Basic workflow outline
+### Basic workflow outline
 This it the tl;dr version of what we are going to do basically:
 
 - Find CPU model details on Intel ARK
@@ -79,7 +58,33 @@ This it the tl;dr version of what we are going to do basically:
 - Add finished fb patch to config on internal disk
 - Done
 
+## Problem description
+Your Laptop boots into macOS and the internal screen works, but:
+
+1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
+2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
+
+> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
+
+### Possible causes
+- Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your device/purpose 
+- Misconfigured framebuffer patch with incorrect flags for the used connector
+
 ## Preparations
+
+### Required Tools and Resources
+- A FAT32 formatted USB Flash drive
+- External Monitor and a cable to connect it to your system (obviously)
+- [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) for creating/modifying framebuffer  properties
+- [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
+- [**Intel Ark**](https://ark.intel.com/content/www/us/en/ark.html) (for researching CPU specs such as used on-board graphics and device-id)
+- [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing default/recommended framebuffers)
+- [**Intel HD Graphics FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors) for Framebuffers and Device-IDs and additional info.
+- [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
+- Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
+- Lilu and Whatevergreen kexts enabled (mandatory)
+
+### Creating a bootable USB flash drive
 Since we will have to do a lot of testing and rebooting, we will not work with the config.plist stored on the internal disk. Instead, we will work with a copy of the EFI folder and config stored on a FAT32 formatted USB flash drive. This way, we can ensure that the system always has a working config to boot from. Another benefit is that we don't need to mount the EFI partition every time we want to edit the config.plist since it's readily available on the USB flash drive which saves a lot of time.
 
 **So do the following**:
@@ -89,7 +94,7 @@ Since we will have to do a lot of testing and rebooting, we will not work with t
 - Unmount the EFI partition again – from now on, We will work with the config stored on the USB flash drive!
 - **Optional**: change the boot order of your drives in the BIOS temporarily so that the USB flash drives takes the first slot. Otherwise you have to select the USB flash drive manually after each reboot
 
-## Testing
+## Testing your current configuration
 Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working.
 
 1. Open Hackintool
@@ -143,10 +148,10 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 - The OpenCore Install Guide only provided the *basic* settings you need to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptop).
 -  In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
 
-## Adding Connectors
+### Adding Connectors
 Now that we have verified that we are using the recommended framebuffer, we need to gather the connectors data associated with the selected framebuffer in the Intel HD FAQs. Since there are 2 different recommendations for my iGPU, I will look at both.
 
-### Gathering data for your framebuffer (Example 1)
+#### Gathering data for your framebuffer (Example 1)
 The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-platform-id `00009B3E`. Now we need to find the connector data for this framebuffer in the Intel HD FAQs:
 
 1. Convert the value for framebuffer `00009B3E` into Big Endian. Here it': `0x3E9B0000`
@@ -182,7 +187,7 @@ The picture below lists the same data for the 3 connectors this framebuffer prov
 <details>
 <summary><strong>More Examples</strong> (click to reveal)</summary>
 
-### Gathering data for your framebuffer (Example 2)
+#### Gathering data for your framebuffer (Example 2)
 Since the Intel HD FAQs recommends a different framebuffer in certain cases you should double-check this, too. So look-up the data for your CPU family in the document and scroll down to where it says ***"Recommended framebuffers"***. In my case the Intel HD FAQs suggests 0x3EA50009 instead.
 
 **Here's the Data for ID: 3E9B0000**
@@ -202,7 +207,7 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 01050900 00040000 C7010000
 02040A00 00040000 C7010000
 ```
-### Gathering data for your framebuffer (Example 3)
+#### Gathering data for your framebuffer (Example 3)
 In the end, I settled with framebuffer `0x3EA50004` instead and in the end you will understand why.
 
 ```
@@ -268,14 +273,43 @@ Key                    | Type | Value| Notes
 ![config](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9da5bfda-93d9-45e0-8dfc-4b35eabddf78)
 
 ## Testing Round 2
+Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
 
+Observe the behavior of the system:
+
+- Does the external monitor turn on?
+  - If YES:
+    - Does it turn on *soon* after reaching the desktop
+      - If yes: you are finished with configuring!
+      - If no: does the handshake take long or very long until the handshake between both displays is completed? If so, we need to modify the framebuffer patch
+  - If NO:
+    - Does Hackintool detect the external display (red line in)
+
+
+## Terminology: Connectors, BusIDs, Indexes, etc.
+The "Connectors" tab is where the *software* outputs of the iGPU for the selected framebuffer can be modified and routed to *physical* outputs:
+
+- Each row in the list represents a software connector
+- Depending on the chosen `AAPL,ig-platform-id` ("Platform-ID"), the number of available *physical* outputs may vary. 
+- Signal flow is: `con` (software) &rarr; via `BusID` (# of the "Data Highway") &rarr; `Index` (physical connector).
+
+The "Connectors" tab consists of a list with five columns:
+
+|Parameter|Description|
+|:-------:|-----------|
+**Index**| An Index represents a physical output on the I/O panel of your mainboard. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes 1 to 3). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are usually used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
+|**BusID**|Every `con` must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical ports. Unique means each BusID must only be used ones! But only certain combinations of BusIDs and connector Types are allowed.</br> </br> For **DisplayPort**: `0x02`, `0x04`, `0x05`, `0x06`</br>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary)</br>For **DVI**: same as HDMI <br> For **VGA**: N/A|
+**Pipe**| to do
+|**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc) 
+|**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac)
 
 
 
 
 
 _____
-### I. Choosing the correct Framebuffer for macOS and your iGPU
+
+## I. Choosing the correct Framebuffer for macOS and your iGPU
 ⚠️ **DISCLAIMER**: The values used in the given example are for an 8th Gen Whiskey Lake CPU. 
 
 Select the correct Framebuffer for your CPU's on-board Graphics as recommended by the OpenCore Install Guide and/or the Intel HD Graphics FAQs (mind the "Endianness").
