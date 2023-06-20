@@ -96,7 +96,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 	```
 2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows Device Manager. In my case, it's using Intel Graphics UHD 620.
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case use sites like netbookcheck.net or check in Windows Device Manager. In my case, it's using Intel Graphics UHD 620: <br> ![igpu](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2f2449c0-1927-4699-aa3e-503f697bf063)
 
 4. Next, verify that you are using the recommended `AAPL,ig-platform-id` for your CPU and iGPU:
 	- Find the recommended framebuffer for your CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
