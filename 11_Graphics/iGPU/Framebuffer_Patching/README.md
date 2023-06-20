@@ -1,4 +1,4 @@
-Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
+# Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
 :warning: :construction: WORK IN PROGRESS… Don't use yet
 
@@ -42,7 +42,7 @@ This guide is for modifying framebuffers for Intel iGPUs and modifying `DevicePr
 
 :warning: **Important**: You cannot use **VGA** or any other analog video signal with modern macOS for that matter. So if this was your plan, you can stop right here!
 
-> **Note**: Although the example used throughout this guide is for getting the Intel UHD 620 to work in macOS since I recently acquired a new laptop where I had to do all of this as well. But the basic principle applies to any other iGPU model supported by macOS.
+> **Note**: Although the example used throughout this guide is for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well.
 
 ### Basic workflow outline
 This it the tl;dr version of what we are going to do basically:
@@ -84,7 +84,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 - Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
 - Lilu and Whatevergreen kexts enabled (mandatory)
 
-### Creating a bootable USB flash drive
+### Create a bootable USB flash drive
 Since we will have to do a lot of testing and rebooting, we will not work with the config.plist stored on the internal disk. Instead, we will work with a copy of the EFI folder and config stored on a FAT32 formatted USB flash drive. This way, we can ensure that the system always has a working config to boot from. Another benefit is that we don't need to mount the EFI partition every time we want to edit the config.plist since it's readily available on the USB flash drive which saves a lot of time.
 
 **So do the following**:
@@ -145,8 +145,8 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 
 **NOTES**:
 
-- The OpenCore Install Guide only provided the *basic* settings you need to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptop).
--  In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
+- The OpenCore Install Guide only provides *basic* settings to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
+- In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
 
 ### Adding Connectors
 Now that we have verified that we are using the recommended framebuffer, we need to gather the connectors data associated with the selected framebuffer in the Intel HD FAQs. Since there are 2 different recommendations for my iGPU, I will look at both.
@@ -279,16 +279,19 @@ Observe the behavior of the system:
 
 - Does the external monitor turn on?
   - If **YES**:
-    - Does it turn on *soon* after reaching the desktop
-      - If **YES**: you are finished with configuring!
+    - Does it turn on *soon* after reaching the desktop?
+      - If **YES**: you are done with configuring!
       - If **NO**: does the handshake take long or very long until the handshake between both displays is completed? If so, we need to modify the framebuffer patch
-  - If **NO**:
-    - Does Hackintool detect the external display (red line)
-    - If **YES**: take note of the Index and BusID
-    - If **NO**: We need to find the correct BusID
+	- If **NO**:
+		- Does Hackintool detect the external display (red line)?
+    		- If **YES**: take note of the Index and BusID
+    		- If **NO**: We need to find the correct BusID first
 
-## Terminology: Connectors, BusIDs, Indexes, etc.
-The "Connectors" tab is where the *software* outputs of the iGPU for the selected framebuffer can be modified and routed to *physical* outputs:
+## Modifying the framebuffer patch
+Depennding on the test results, we need to modify the framebuffer patch with hackintool. But before we can do that, we need to better understand the parameters we are dealing with.
+
+### Terminology: Connectors, BusIDs, Indexes, etc.
+Hackintool's "Connectors" tab is where the *software* outputs of the iGPU for the selected framebuffer can be modified and routed to *physical* outputs:
 
 - Each row in the list represents a software connector
 - Depending on the chosen `AAPL,ig-platform-id` ("Platform-ID"), the number of available *physical* outputs may vary. 
