@@ -48,7 +48,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 - Misconfigured framebuffer patch with incorrect flags for the used cable/connector
 
 ### Solution
-- Add/adjust framebuffer patch for your iGPU
+- Modify framebuffer patch for your iGPU
 
 ### Supported Connection Types
 - **HDMI** &rarr; **HDMI**
@@ -63,18 +63,27 @@ Your Laptop boots into macOS and the internal screen works, but:
 ### Workflow overview
 This it the tl;dr version of what we are going to do basically:
 
-- Find CPU model details on Intel ARK
-- Check used iGPU model
-- Add default/recommended framebuffer for from OpenCore install guide for used iGPU       
-- Check if you need to spoof a device-id
-- Consult Intel HD FAQs for Framebuffer data and alternative AAPL,ig-platform-ids
-- Verify/adjust the framebuffer patch
-- Add Connectors, BusIDs and flags
-- Test
-- Add finished fb patch to config on internal disk
-- Done
+1. Copy working EFI to FAT32 formatted USB flash drive
+2. Find a suitable Framebuffer
+	- Find your iGPU
+	- Add recommended `AAPL,ig-platform-id` to `DeviceProperties`
+	- Add default Connector Data to config.plist
+3. Test if ext. Monitor is working
+4. Adjust/modify connector data to optmize handshake
+5. Test again
+6. Repeat steps 4 and 5 until you think it's optimal
+7. Add framebuffer patch to to config.plist on system disk.
 
-## Preparations
+## 1. Preparations
+
+### Create a bootable USB flash drive
+- Mount your system's EFI partition 
+- Copy your EFI folder to a FAT32 formatted USB flash drive
+- Unmount the EFI partition again – from now on, We will work with the config stored on the USB flash drive!
+- Reboot
+- Change the boot order of your drives in the BIOS so that the USB flash drives takes the first slot. Otherwise you have to select the USB flash drive manually after each reboot
+
+**Explanation**: Since we will probably have to do a lot of rebooting to test the framebuffer, we will not work with the config.plist stored on the internal disk because a) we don't want to mess up our working configuration and b) we don't have mount the EFI partition every time to access the config.plist since  it's stored on a flash drive. This really speeds up the workflow.
 
 ### Required Tools and Resources
 - A FAT32 formatted USB Flash drive
@@ -88,42 +97,28 @@ This it the tl;dr version of what we are going to do basically:
 - Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
 - Lilu and Whatevergreen kexts enabled (mandatory)
 
-### Create a bootable USB flash drive
-Since we will have to do a lot of testing and rebooting, we will not work with the config.plist stored on the internal disk. Instead, we will work with a copy of the EFI folder and config stored on a FAT32 formatted USB flash drive. This way, we can ensure that the system always has a working config to boot from. Another benefit is that we don't need to mount the EFI partition every time we want to edit the config.plist since it's readily available on the USB flash drive which saves a lot of time.
+## 2. Test your current configuration
+Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working. Observe what happens after attaching our external display to your Laptop:
 
-**So do the following**:
+Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
+:---------------------:|:---------------------------------------:|------------------
+No | No| <ul> <li> Verify/adjust used `AAPL,ig-platform-id` <li> Add Connectors to framebuffer patch <li> Change Bus ID for both **`con1`** and **`con2`**  
+No | Yes (Index?)| Adjust flags for the connector detected at Index X (X= con1 or con2)
 
-- Mount your system's EFI partition 
-- Copy your EFI folder to a FAT32 formatted USB flash drive
-- Unmount the EFI partition again – from now on, We will work with the config stored on the USB flash drive!
-- **Optional**: change the boot order of your drives in the BIOS temporarily so that the USB flash drives takes the first slot. Otherwise you have to select the USB flash drive manually after each reboot
+If the display is detected in Hackintool, either **Index 1** or **Index 2** should turn redl: 
 
-## Testing your current configuration
-Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working.
+![display-red](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f671908c-ae2f-4241-a782-f35ccaa6c918)
 
-1. Open Hackintool
-2. Click on the Tab "Patch", then on "Connectors" and then on the Eye icon
-3. This will show the currently used Framebuffer. In this example it's **0x3E9B0000** (Big Endian), which is the recommended framebuffer for the Intel HD 620 by Dortania's OpenCore Install guide: <br> ![preps_01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/0d39a616-3cae-4485-87c5-4cfd1ccee095)
-4. The line highlighted in green (**Index 0**) represents your internal display (LVDS)
-5. Now attach your external display to your notebook
-6. Observe what happens:
-	- In **Hackintool**:
-		- If the monitor is detected, either **Index 1** or **Index 2** should turn red: <br>![display-red](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f671908c-ae2f-4241-a782-f35ccaa6c918)
-		- If it does turn red: take note of the **Index** (in this example: Index 2). We need it for configuring the framebuffer patch
-		- If it doesn't turn red, you might have an incorrect `AAPL,ig-platform-id` to begin with
-	- Observe the system's behavior:
-		- **If your display turns on**, how long does the handshake take? 
-			- **Short**: 
-				- If it does turn on and the screens only take 2 to 3 cycles until a stable connection is established, then you're probably good. 
-				- Connections between the same connector types (HDMI to HDMI, DP to DP) are negotiated faster than between 2 different types of connectors (HDMI to DP, HDMI to DVI, etc.)! 
-				- If the handshake behaves similarly if the ext. display is already connected prior to booting then you're probably good as well.
-			- **Long**: 
-				- If it does turn on (late) and the handshake takes more than 3 or 4 cycles, then there's room for improvement.
-		- **If your display does not turn on**:
-			- Does your mouse start to lag? If your mouse pointer starts to lag the screen is most likely detected but the BusID and flags used for the connectors are possibly incorrect for the used connectors. 
-			- Disconnect the external monitor for now so you can work with your Laptop again
+If the display is detected and turns on:
 
-## Verifying/adjusting the `AAPL-ig-platform-id`
+Ext. Display detected <br> in Hackintool?| Handshake| Symptoms | Action
+:---------------------------------------:|:--------:|----------|--------
+Yes (Index?)| Slow| <ul> <li>Mouse Cursor lagging <li> System feels unresponsive <li> Display turns on late after completing boot sequence <li> Displays turn on and off more than 3 times during handshake|Adjust connector flags for the connector at detected Index. In this example for **con2**
+Yes (Index?)| Fast| Everything feels normal|Congrats. Nothing to do!
+
+Take note of your test results. Depending on the results you might be able to skip sections.
+
+## 3. Verify/adjust the `AAPL-ig-platform-id`
 
 1. Find the CPU used in your machine. If you don't know, you can enter in Terminal: 
 
