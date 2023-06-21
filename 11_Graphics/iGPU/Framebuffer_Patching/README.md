@@ -120,37 +120,41 @@ Take note of your test results. Depending on the results you might be able to sk
 
 ## 3. Verify/adjust the `AAPL-ig-platform-id`
 
-1. Find the CPU used in your machine. If you don't know, you can enter in Terminal: 
+1. Find the CPU used in your Notebook. If you don't know, you can enter in Terminal: 
 
 	```
 	sysctl machdep.cpu.brand_string
 	```
 2. Search your model number on https://ark.intel.com/ to find its specs. In my case it's an `i5-8265U`.
 
-3. Take note of the the CPU family it belongs to (for example "Whisky Lake") and which type of on-board graphics it is using. In my case it does not list the actual model of the iGPU but only states "Intel® UHD Graphics for 8th Generation Intel® Processors" which doesn't help. In this case, use sites like netbookcheck.net or check in Windows Device Manager to find the exact model. In my case, it uses Intel UHD Graphics 620: <br> ![devmanigp](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1844b3a0-01fa-4655-9cf8-ab771388512f)
+3. Take note of the the CPU family it belongs to (for example "Whisky Lake") 
+
+4. Identify the iGPU model of the CPU. If the actual model of the iGPU is not specified (i.e. if it says "Intel® UHD Graphics for xth Generation Intel® Processors"), use sites like netbookcheck.net or check in Windows Device Manager to find the exact model. In my case, it's an Intel UHD Graphics 620: <br> ![devmanigp](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1844b3a0-01fa-4655-9cf8-ab771388512f)
 
 4. Next, verify that you are using the recommended `AAPL,ig-platform-id` for your CPU and iGPU:
-	- Find the recommended framebuffer for your mobile CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data provided by OpenCore Install Guide)
+	- Find the recommended framebuffer for your mobile CPU family [in this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md#framebuffers-laptopnuc) (based on data from the OpenCore Install Guide)
 	- Check if your iGPU requires a device-id to spoof a different iGPU model!
 	- Compare the data with the `DeviceProperties` used in your config.plist
 
-5. Make sure to cross-reference the default/recommended framebuffer for your iGPU against the ones listed in the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs). But keep in mind that the Intel HD FAQs uses [Big Endian instead of Little Endian](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Big-Endian_Little-Endian.md) which is required for the config.plist.
+5. Make sure to cross-reference the default/recommended framebuffer for your iGPU against the ones listed in the [Intel HD Graphics FAQs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-faqs). But keep in mind that the Intel HD FAQs uses [Big Endian instead of Little Endian](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Big-Endian_Little-Endian.md) which is required for the `config.plist`.
 
 6. If necessary, adjust the framebuffer patch (mainly `AAPL,ig-platform-id`) in the config.plist stored on your USB flash drive according to the data you gathered in steps 4 or 5. If you are already using the correct/recommended `AAPL,ig-platform-id`, then you can skip to the next chapter "Adding Connectors".
 
-7. If you have to change the `AAPL,ig-platform-id` but your framebuffer patch already contains connector patches (everything with `framebuffer-con…`), disable the whole device property entry by placing `#` in front of the dictionary `#PciRoot(0x0)/Pci(0x2,0x0)` and create a new one: `PciRoot(0x0)/Pci(0x2,0x0)` to start with a clean slate. Then add the recommended data you found. If your system requires additional properties so that the internal display works correctly (like backlight register fixes, etc.), copy them over from your previous framebuffer patch.
+7. If you have to change the `AAPL,ig-platform-id` but your framebuffer patch already contains connector patches (entries containing `framebuffer-con…`), disable the whole device property entry by placing `#` in front of the dictionary `#PciRoot(0x0)/Pci(0x2,0x0)` and create a new one: `PciRoot(0x0)/Pci(0x2,0x0)` to start with a clean slate. 
 
-8. Save your config and reboot from the USB flash drive. If the system boots and the internal display works, we can now add data for the external. If it doesn't boot, reset the system, boot from the internal disk and start over.
+8. Add the recommended data you found. If your system requires additional properties so that the internal display works correctly (like backlight register fixes, etc.), copy them over from your previous framebuffer patch.
+
+8. Save your config and reboot from the USB flash drive. If the system boots and the internal display works, we can now add data to connect to an external display. If it doesn't boot, reset the system, boot from the internal disk and start over.
 
 **NOTES**:
 
-- The OpenCore Install Guide only provides *basic* settings to get a signal from your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
-- In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630 while the Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better in the end.
+- The OpenCore Install Guide only provides *basic* settings to enable your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
+- In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630, while Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better for me in the end.
 
-### Adding Connectors
+## 4. Adding Connectors
 Now that we have verified that we are using the recommended framebuffer, we need to gather the connectors data associated with the selected framebuffer in the Intel HD FAQs. Since there are 2 different recommendations for my iGPU, I will look at both.
 
-#### Gathering data for your framebuffer (Example 1)
+### Gather data for your framebuffer (Example 1)
 The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-platform-id `00009B3E`. Now we need to find the connector data for this framebuffer in the Intel HD FAQs:
 
 1. Convert the value for framebuffer to Big Endian. You can use Hackintool's calculator to do this. In my case it's `0x3E9B0000`.
@@ -186,7 +190,7 @@ The picture below lists the same data for the 3 connectors this framebuffer prov
 <details>
 <summary><strong>More Examples</strong> (click to reveal)</summary>
 
-#### Gathering data for your framebuffer (Example 2)
+### Gather data for your framebuffer (Example 2)
 Since the Intel HD FAQs recommends a different framebuffer in certain cases you should double-check this, too. So look-up the data for your CPU family in the document and scroll down to where it says ***"Recommended framebuffers"***. In my case the Intel HD FAQs suggests 0x3EA50009 instead.
 
 **Here's the Data for ID: 3E9B0000**
@@ -206,7 +210,7 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 01050900 00040000 C7010000
 02040A00 00040000 C7010000
 ```
-#### Gathering data for your framebuffer (Example 3)
+### Gathering data for your framebuffer (Example 3)
 In the end, I settled with framebuffer `0x3EA50004` instead and in the end you will understand why.
 
 ```
@@ -226,7 +230,18 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 ```
 </details>
 
-Next, we need to translate this data into `DeviceProperties` for our config.plist so we can inject it into macOS.
+Next, we need to "translate" this data into `DeviceProperties` for our config.plist so we can inject it into macOS. But before we do we should look at what all of these paramaters mean…
+
+### Understanding the Parameters
+Let's have a look inside Hackintools "Connectors" tab to get to know the parameters we are working with:
+
+|Parameter|Description|
+|:-------:|-----------|
+**Index**| An **Index** represents a *physical* graphics output on the your Laptop. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes `1` to `3`). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
+|**BusID**| The bus ID is used to select the buss or pathways available for connecting displays. Every `con` must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical port(s). Unique means each BusID can only be assigned to one connector at a time! But only certain combinations of BusIDs and connector Types are allowed.</br> </br> For **DisplayPort**: BusID `0x02`, `0x04`, `0x05`, `0x06`</br>For **HDMI**: BusID `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary)</br>For **DVI**: same as HDMI <br> For **VGA**: N/A|
+**Pipe**| Responsible for taking the graphics data from the iGPU and converting it into a format that can be displayed on a monitor or screen. It performs tasks such as scaling, color correction, and synchronization to ensure that the visual output appears correctly on the connected display. This is fixed for each framebuffer
+|**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc) 
+|**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac)
 
 ### Translating the data into `DeviceProperties`
 
@@ -271,20 +286,16 @@ Key                    | Type | Value| Notes
 
 ![config](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9da5bfda-93d9-45e0-8dfc-4b35eabddf78)
 
-## Testing Round 2
+## 4. Testing, Round two
 Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
 
 Observe the behavior of the system:
 
-- Does the external monitor turn on?
-  - If **YES**:
-    - Does it turn on *soon* after reaching the desktop?
-      - If **YES**: you are done with configuring!
-      - If **NO**: does the handshake take long or very long until the handshake between both displays is completed? If so, we need to modify the framebuffer patch
-	- If **NO**:
-		- Does Hackintool detect the external display (red line)?
-    		- If **YES**: take note of the Index and BusID
-    		- If **NO**: We need to find the correct BusID first
+Ext. Display <br>ON? | Handshake | Action
+:-------------------:|:---------:|---------
+**YES** | **Fast** | You're done. Transfer the DeviceProperties to your main config.plist
+**YES** | **Slow** | Modify connector flags and test again
+**NO** | – | Is it detected in Hackintool? <ul> <li> If **YES**: take note of the Index and BusID <li> If **NO**: We need to find the correct BusID first
 
 ## Modifying the framebuffer patch
 Depending on the test results, we need to modify the framebuffer patch with hackintool. But before we can do that, we need to better understand the parameters we are dealing with.
@@ -296,15 +307,6 @@ Hackintool's "Connectors" tab is where the *software* outputs of the iGPU for th
 - Depending on the chosen `AAPL,ig-platform-id` ("Platform-ID"), the number of available *physical* outputs may vary. 
 - Signal flow is: `con` (software) &rarr; via `BusID` (# of the "Data Highway") &rarr; `Index` (physical connector).
 
-The "Connectors" tab consists of a list with five columns:
-
-|Parameter|Description|
-|:-------:|-----------|
-**Index**| An Index represents a physical output on the I/O panel of your mainboard. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes 1 to 3). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are usually used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
-|**BusID**|Every `con` must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical ports. Unique means each BusID must only be used ones! But only certain combinations of BusIDs and connector Types are allowed.</br> </br> For **DisplayPort**: `0x02`, `0x04`, `0x05`, `0x06`</br>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary)</br>For **DVI**: same as HDMI <br> For **VGA**: N/A|
-**Pipe**| to do
-|**Type**| Type of the physical connector (DP, HDMI, DVi, LVDS, etc) 
-|**Flags**| A bitmask representing parameters set in "Flags" section for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac)
 
 
 
