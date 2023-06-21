@@ -45,7 +45,7 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For S
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
 
--  ⚠️ **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
+- ⚠️ **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
 - **iGPU/GPU**: 
 	- Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list is limited](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches)
 	- AMD Navi Cards (Radeon 5xxx and 6xxx) can't be used with Sandy Bridge CPUs since they require the AVX 2.0 instruction set which is only available on Haswell and newer.
