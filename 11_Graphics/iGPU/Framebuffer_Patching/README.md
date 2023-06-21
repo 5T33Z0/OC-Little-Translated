@@ -102,7 +102,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 
 Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
 :---------------------:|:---------------------------------------:|------------------
-No | No| <ul> <li> Verify/adjust used `AAPL,ig-platform-id` <li> Add Connectors to framebuffer patch <li> Change Bus ID for both **`con1`** and **`con2`**  
+No | No| <ul> <li> [Verify/adjust used `AAPL,ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id) <li> [Add Connectors to framebuffer patch](#adding-connectors) <li> Change Bus ID for both **`con1`** and **`con2`**  
 No | Yes (Index?)| Adjust flags for the connector detected at Index X (X= con1 or con2)
 
 If the display is detected in Hackintool's "Patch" section, either **Index 1** or **Index 2** should turn redl 
@@ -113,7 +113,7 @@ If the display is detected and turns on:
 
 Ext. Display detected <br> in Hackintool?| Handshake| Symptoms | Action
 :---------------------------------------:|:--------:|----------|--------
-Yes (Index?)| Slow| <ul> <li>Mouse Cursor lagging <li> System feels unresponsive <li> Display turns on late after completing boot sequence <li> Displays turn on and off more than 3 times during handshake|Adjust connector flags for the connector at detected Index. In this example for **con2**
+Yes (Index?)| Slow| <ul> <li> Mouse Cursor lagging <li> System feels unresponsive <li> Display turns on late after completing boot sequence <li> Displays turn on and off more than 3 times during handshake|Adjust connector flags for the connector at detected Index. In this example for **con2**
 Yes (Index?)| Fast| Everything feels normal|Congrats. Nothing to do!
 
 Take note of your test results. Depending on the results you might be able to skip sections.
