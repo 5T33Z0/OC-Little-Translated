@@ -105,7 +105,7 @@ Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
 No | No| <ul> <li> Verify/adjust used `AAPL,ig-platform-id` <li> Add Connectors to framebuffer patch <li> Change Bus ID for both **`con1`** and **`con2`**  
 No | Yes (Index?)| Adjust flags for the connector detected at Index X (X= con1 or con2)
 
-If the display is detected in Hackintool, either **Index 1** or **Index 2** should turn redl: 
+If the display is detected in Hackintool's "Patch" section, either **Index 1** or **Index 2** should turn redl 
 
 ![display-red](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f671908c-ae2f-4241-a782-f35ccaa6c918)
 
