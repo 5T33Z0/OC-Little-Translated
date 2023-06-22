@@ -1,4 +1,4 @@
-Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
+# Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
 :warning: :construction: WORK IN PROGRESS… Don't use yet
 
@@ -20,11 +20,13 @@ Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 	- [Gather data for your framebuffer (Example 2)](#gather-data-for-your-framebuffer-example-2)
 	- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
 	- [Understanding the Parameters](#understanding-the-parameters)
-	- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
-- [5. Testing, Round two](#5-testing-round-two)
-- [6. Modifying the framebuffer patch](#6-modifying-the-framebuffer-patch)
-	- [The "Patch" Section](#the-patch-section)
-	- [The "Info" section](#the-info-section)
+	- [Translating the data into `DeviceProperties` (manually)](#translating-the-data-into-deviceproperties-manually)
+- [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
+	- [If case 1 occurs](#if-case-1-occurs)
+	- [If case 2 occurs](#if-case-2-occurs)
+	- [If case 3 occurs](#if-case-3-occurs)
+	- [If case 4 occurs](#if-case-4-occurs)
+- [6. Final Steps](#6-final-steps)
 - [Credits and further resources](#credits-and-further-resources)
 
 ## About
@@ -36,7 +38,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
 2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
-> **Note**: if you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes) or follow CaseyJ's General Framebuffer Patching guide instead.
+> **Note**: If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systsems, follow CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
 
 ### Possible causes
 - Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your iGPU
@@ -64,7 +66,7 @@ This it the tl;dr version of what we are going to do basically:
 	- Add recommended `AAPL,ig-platform-id` to `DeviceProperties`
 	- Add default Connector Data to config.plist
 3. Test if ext. Monitor is working
-4. Adjust/modify connector data to optmize handshake
+4. Adjust/modify connector data to optimize handshake
 5. Test again
 6. Repeat steps 4 and 5 until you think it's optimal
 7. Add framebuffer patch to to config.plist on system disk.
@@ -232,17 +234,36 @@ Let's have a look inside Hackintools "Connectors" tab to get to know the paramet
 
 |Parameter|Description|
 |:-------:|-----------|
-**Index**| An **Index** represents a *physical* graphics output on the your Laptop. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes `1` to `3`). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
+**Index**| An **Index** represents a *physical* graphics output on your Laptop. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes `1` to `3`). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
 |**BusID**| ![](/Users/stunner/Desktop/BUSIDs.png) </br> The **Bus ID** is used to select the busses or pathways available for connecting displays. Every connector (`con`) must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical port(s). Unique means each Bus ID can only be assigned to one connector at a time! And: only certain combinations of BusIDs and connector Types are allowed: <ul> <li> For **DisplayPort**: `0x02`, `0x04`, `0x05` or `0x06`<li>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary) <li> For **DVI**: same as HDMI <li> For **VGA**: N/A|
 **Pipe**| Responsible for taking the graphics data from the iGPU and converting it into a format that can be displayed on a monitor or screen. It performs tasks such as scaling, color correction, and synchronization to ensure that the visual output appears correctly on the connected display. This is fixed for each framebuffer
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
-|**Flags**| A bitmask representing connector "Flags" for the selected connector:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
+|**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
 
-### Translating the data into `DeviceProperties`
+### Translating the data into `DeviceProperties` (manually)
+
+**Recap**: here is the suitable framebuffer patch we found earlier:
+
+```
+ID: 3E9B0000, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x0000130B
+TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
+Model name: Intel HD Graphics CFL CRB
+Camellia: CamelliaDisabled (0), Freq: 0 Hz, FreqMax: 0 Hz
+Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
+
+[0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
+[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+
+00000800 02000000 98000000
+01050900 00040000 87010000
+02040A00 00040000 87010000
+```
+No we need to to "translate" this into `DeviceProperties`
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
-These entries you should have already – just with the values recommended for your iGPU:
+You probably have these entries already – just with the values recommended for your iGPU:
 
 Key | Type | Value| Notes
 ----|:----:|:----:|------
@@ -256,58 +277,177 @@ Key | Type | Value| Notes
 
 **And these we need for the Connectors:**
 
+For now, we will leave every value as is, except connector type, since most modern systems use `HDMI` instead of `DisplayPort`.
+
 Key                    | Type | Value| Notes
 -----------------------|:----:|:----:|------
-`AAPL,slot-name` | String | Internal@0,2,0 | Internal location of the iGPU (optional). This lists the iGPU in the "Graphics" category of System Profiler
-`device-id` | Data |  9B3E0000 |  For spoofing Intel UHD 620 as Intel UHD 630. Only add it if required for your iGPU model
-`device_type` | String | VGA compatible controller | Optional
-`disable-external-gpu` |Data| 01000000 | Optional. Only required if your Laptop has an incompatible dGPU
-`framebuffer-con1-busid` |Data | 05000000 | BusID used to transmit data to the physical  port # 1 on your machine
-`framebuffer-con1-enable` | Data | 01000000 | Enables Patching Connector #2 via Whatevergreen
-`framebuffer-con1-flags` | Data | 87010000 | Default flags for connector 3
-`framebuffer-con1-index` | Data | 01000000 | Connector 3 has Index 2
-`framebuffer-con1-pipe`| Data| 09000000| Pipe 9
-`framebuffer-con2-busid` | Data | 04000000 | BusID used to transmit data to physical port #2 of your machine
-`framebuffer-con2-enable` | Data | 01000000 | Enables Patching Connector #3 via Whatevergreen
-`framebuffer-con2-flags` | Data| 87010000 | Default flags for connector 3
-`framebuffer-con2-index` | Data | 02000000 | Connector 3 has Index 2
-`framebuffer-con2-pipe` | Data | 0A000000| Pipe 10, converted to hex = 0A
-`framebuffer-patch-enable` | Data | 0100000| Enables Framebuffer patching via Whatevergreen
-`model` | String | Intel UHD Graphics 620 | Optional
+`AAPL,slot-name` | String | `Internal@0,2,0`| Internal location of the iGPU (optional). This lists the iGPU in the "Graphics" category of System Profiler
+`device-id` | Data | `9B3E0000` | For spoofing Intel UHD 620 as Intel UHD 630. Only add if required for your iGPU model.
+`device_type` | String | `VGA compatible controller` | Optional. If you are installing macOS on a legacy system which doesn't have drivers for your iGPU, you should disable it so the display can run in VESA mode. Otherwise it might just turn off.
+`disable-external-gpu` |Data| `01000000` | Optional. Only required if your Laptop has an incompatible dGPU
+`framebuffer-con1-busid` |Data | `05000000` | BusID used to transmit data to the physical  port # 1 on your machine
+`framebuffer-con1-enable` | Data | `01000000` | Enables Patching Connector #2 via Whatevergreen
+`framebuffer-con1-flags` | Data | `87010000` | Default flags for connector 3
+`framebuffer-con1-index` | Data | `01000000` | Connector 3 has Index 2
+`framebuffer-con1-pipe`| Data| `09000000`| Pipe 9
+`framebuffer-con1-type` | Data | `00080000` | HDMI. If you have DisplayPort use `00040000` instead
+`framebuffer-con2-busid` | Data | `04000000` | BusID used to transmit data to physical port #2 of your machine
+`framebuffer-con2-enable` | Data | `01000000` | Enables Patching Connector #3 via Whatevergreen
+`framebuffer-con2-flags` | Data| `87010000` | Default flags for connector 3
+`framebuffer-con2-index` | Data | `02000000` | Connector 3 has Index 2
+`framebuffer-con2-pipe` | Data | `0A000000` | Pipe 10, converted to hex = 0A
+`framebuffer-con2-type` | Data | `00080000` | HDMI. If you have DisplayPort use `00040000` instead
+`framebuffer-con3-busid` | Data | `00000000` | BusID used to transmit data to physical port #2 of your machine
+`framebuffer-con3-enable` | Data | `01000000` | Optional. Enables Patching Connector #4 via Whatevergreen
+`framebuffer-con3-index` | Data | `FFFFFFFF` | Optional. Disables the dummy con3
+`framebuffer-con3-pipe` | Data | `00000000` | Optional. Selects Pipe 0 which takes con3 offline 
+`framebuffer-patch-enable` | Data | `0100000` | Enables Framebuffer patching via Whatevergreen
+`model` | String | Intel UHD Graphics 620 | Optional property
 
 > **Note**: We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
 
-**This is how your config should look like after transferring the framebuffer data to your config.plist**:
+**This is how the DevicyProperties for your iGPU should look like now**:
 
-![config](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9da5bfda-93d9-45e0-8dfc-4b35eabddf78)
+![](/Users/stunner/Desktop/cfg-step1.png)
 
-## 5. Testing, Round two
+## 5. Testing and modifying the framebuffer patch
 Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
 
 Observe the behavior of the system:
 
-Ext. Display <br>ON? | Handshake | Action
-:-------------------:|:---------:|---------
-**YES** | **Fast** | You're done. Transfer the DeviceProperties to your main config.plist
-**YES** | **Slow** | Modify connector flags and test again
-**NO** | – | Is it detected in Hackintool? <ul> <li> If **YES**: take note of the Index and BusID <li> If **NO**: We need to find the correct BusID first
+Case | Ext. Display <br>ON? |Detected in <br> Hackintool | Handshake | Action
+:---:|:--------------------:|:--------------------------:|:----------:|---------
+1 | **NO** | **NO** | – | Change the BusIDs for **con1** and **con2** and test again
+2 | **NO** | **YES** | – | Take note of the Index and BusID and adjust the connector flags and test again
+3 | **YES** | **YES** | **Slow** | Modify connector flags and test again
+4 | **YES** | **YES** | **Fast** | You're done. Transfer the DeviceProperties to your main config.plist
 
-## 6. Modifying the framebuffer patch
-Depending on the test results, we need to modify the framebuffer patch. We can do it manuapllywith hackintool. But before we can do that, we need to better understand the parameters we are dealing with.
+### If case 1 occurs
+Since the external display has not been detected yet, it's most likely that the BusIDs for both connectors is incorrectc. And since we don't know which connector is actually used we need to change the Bus ID for both. 
 
-1. Run Hackintool
-2. In the menu bar, choose the "Framebuffer" type. Select either **≤ macOS 10.13** (High Sierra and older) or **≥ macOS 10.14** (Mojave and newer): </br> ![Menubar](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3e425067-557c-4418-88d1-02c5f64c9aea)
-3. Next, click on "Patch". You will be presented with the following window which can be a bit confusing since it's pretty convoluted:</br> ![Patch0](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/fff0b1f6-94d0-4f8b-b238-ed92424617ad)
+- Possible BusIDs are: `1`, `2`, `4`, `5`, or `6`
+- The same BusID can only be used for one con at a time!
+- Listed below you find all possible unique combinations of connectors and BusIDs.
+- If you are lucky, you don't need to run all the tests until the monitor is detected and/or turns on!
 
-### The "Patch" Section
-The "Patch" section contains 5 sub-sections: **Info**, **VRAM**, **Framebuffer**, **Connectors** and a **Patch** tab. 
+**Original values**
 
-### The "Info" section 
-"Info" lets you select the framebuffer you want to work on as well as a summary of the active Framebuffer. If you click the eye icon, the currently used Framebuffer will be selected which is practical if you want to edit it but cant remember which one it was. Since I wrote this guide on my Laptop, it's `0x01666004`.
-4. From the dropdown menu "Intel Generation", select the CPU family your CPU belongs to (search your CPU model on Intel Ark if you are unsure):</br>![CPUFam](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b586d468-a75b-4339-8984-27c186d81ec7)
-	As you can see, "Comet Lake" is not in the list. That's because Comet Lake uses last-gen Coffee Lake Framebuffers.
-5. Next, select the Platform-ID you want to work with. In this example, we use `AAPL,ig-platform-id`: `0x3E9B0007` as [recommended](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html#deviceproperties) for 10th gen Intel CPUs. Below that you will see the summary for the selected Framebuffer.:</br> ![Patch1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f2795b76-3aa6-48a6-81b9-3364d48fd860)
+Key                      | Type | Value
+-------------------------|:----:|:----:
+`framebuffer-con1-busid` | Data | `05000000`
+`framebuffer-con2-busid` | Data | `04000000`
 
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|---------------
+`framebuffer-con1-busid` | Data | `01000000` | 5 
+`framebuffer-con2-busid` | Data | `02000000` | 4 
+
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|---------------
+`framebuffer-con1-busid` | Data | `02000000` | 5, 1 
+`framebuffer-con2-busid` | Data | `01000000` | 4, 2 
+
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|---------------
+`framebuffer-con1-busid` | Data | `04000000` | 5, 1, 2
+`framebuffer-con2-busid` | Data | `06000000` | 4, 2, 1
+
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|----------------------
+`framebuffer-con1-busid` | Data | `06000000` | 5, 1, 2, 4 
+`framebuffer-con2-busid` | Data | `05000000` | 4, 2, 1, 6
+
+If the external display still won't be detected, there must be another issue. Check AAPL,ig-platform-id again.
+
+### If case 2 occurs
+
+The testing procedure is the same as for case one. But you only have to test the BusIDs for **con1** or **con2** (depending on which con is detected). In this example, the external display has been detected on **con1**
+
+**Original values**
+
+Key                      | Type | Value
+-------------------------|:----:|:----:
+`framebuffer-con1-busid` | Data | `05000000`
+`framebuffer-con2-busid` | Data | `04000000`
+
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|---------------
+`framebuffer-con1-busid` | Data | `01000000` | 5 
+
+**Next test**
+
+Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value      | Tested BusIDs
+-------------------------|:----:|:----------:|---------------
+`framebuffer-con1-busid` | Data | `02000000` | 5, 1,
+
+**Next test**
+
+Key                      | Type | Value     | Tested BusIDs
+-------------------------|:----:|:---------:|---------------
+`framebuffer-con1-busid` | Data | `04000000`| 5, 1, 2,
+`framebuffer-con2-busid` | Data | `05000000`| Needs to be changed once because default BusID is `4`!
+
+**Next test**
+
+Key                      | Type | Value     | Tested BusIDs
+-------------------------|:----:|:---------:|---------------
+`framebuffer-con1-busid` | Data | `06000000`| 5, 1, 2, 4
+
+If the external display still won't be detected, there must be another issue. Check AAPL,ig-platform-id again.
+
+### If case 3 occurs
+Modify the connector flags for the connector(s):
+
+Key                      | Type | Value     | Tested BusIDs
+-------------------------|:----:|:---------:|---------------
+`framebuffer-con1-flags` | Data| `C7030000` | Works well when using HDMI to HDMI and HDMI to DVI
+`framebuffer-con2-flags` | Data| `C7030000` | Works well when using HDMI to HDMI and HDMI to DVI
+
+Safe your config.plist, reboot from USB flash drive and observe if the handshake improves now. When using Adapters like HDMI to DVI the handshake takes a bit longer than using HDMI to HDMI but it should improve nonetheless. 
+
+### If case 4 occurs
+Congratulations. Continue with step 6.
+
+## 6. Final Steps
+
+Once you've found a framebuffer patch you are happy with, do the following:
+
+- Open the config.plist containing your framebuffer patch with ProperTree
+- Copy the Dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard (<kbd>CMD</kbd>+<kbd>c</kbd>)
+- Mount your system's EFI 
+- Open your config.plist with ProperTree
+- Go to `DeviceProperties/Add` 
+- Delete Dictionary `PciRoot(0x0)/Pci(0x2,0x0)`
+- Press <kbd>CMD</kbd>+<kbd>v</kbd> to paste the new framebuffer patch
+- Save and reboot
+- In BIOS, change the boot order, so that the internal disk takes the firs slot again.
+- Save and exit
+- Boot macOS from internal drive
+- Done
+ 
 ## Credits and further resources
 - [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) by CaseySJ
 - AppleIntelFramebufferAzul.kext ([Part 1](https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/) and [Part 2](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/)) by Piker Alpha 
