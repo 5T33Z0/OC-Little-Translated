@@ -308,7 +308,7 @@ Key                    | Type | Value| Notes
 
 **This is how the DevicyProperties for your iGPU should look like now**:
 
-![](/Users/stunner/Desktop/cfg-step1.png)
+![cfg-step1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/760bd4d0-e2de-493b-8fb0-aee52caf15c0)
 
 ## 5. Testing and modifying the framebuffer patch
 Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
