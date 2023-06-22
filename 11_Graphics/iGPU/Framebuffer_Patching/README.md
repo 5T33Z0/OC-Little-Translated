@@ -53,10 +53,12 @@ Your Laptop boots into macOS and the internal screen works, but:
 - **DP** &rarr; **DP** (DisplayPort)
 - **HDMI** &rarr; **DVI**
 - **DP** &rarr; **DVI**
+- **VGA** (Skylake and newer only)
 
-:warning: **Important**: You cannot use **VGA** or any other analog video signal with modern macOS for that matter. So if this was your plan, you can stop right here!
+**NOTES**:
 
-> **Note**: Although the examples used throughout this guide is for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well. Just make sure to use the framebuffer data required for your iGPU.
+- :bulb: Although the examples used throughout this guide are for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well. Just make sure to use the framebuffer data required for your iGPU.
+- VGA supposedly works out of the box on Skylake and newer but since I have no machine to test this you are on your own in this case. Disabling `ADGC` via device properties seems to be required as well.
 
 ### Workflow overview
 This it the tl;dr version of what we are going to do basically:
