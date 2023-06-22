@@ -36,7 +36,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
 2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
-> **Note**: If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systsems, follow CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
+> **Note**: If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systems, try CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
 
 ### Possible causes
 - Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your iGPU
