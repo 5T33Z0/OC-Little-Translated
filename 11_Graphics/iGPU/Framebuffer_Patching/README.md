@@ -97,7 +97,7 @@ Before we do any editing we will run a basic test. You can skip this if you alre
 
 Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
 :---------------------:|:---------------------------------------:|------------------
-No | No| <ul> <li> [Verify/adjust used `AAPL,ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id) <li> [Add Connectors to framebuffer patch](#adding-connectors) <li> Change Bus ID for both **`con1`** and **`con2`**  
+No | No| <ul> <li> [Verify/adjust used `AAPL,ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id) <li> [Add Connectors to framebuffer patch](#4-adding-connectors) <li> Change Bus ID for both **`con1`** and **`con2`**  
 No | Yes (Index?)| Adjust flags for the connector detected at Index X (X= con1 or con2)
 
 If the display is detected in Hackintool's "Patch" section, either **Index 1** or **Index 2** should turn red: 
