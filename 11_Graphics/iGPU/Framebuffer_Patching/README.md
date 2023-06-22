@@ -1,6 +1,7 @@
 # Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
-**TABLE of CONTENTS**
+<details>
+<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
 
 - [About](#about)
 	- [Problem description](#problem-description)
@@ -19,6 +20,7 @@
 	- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
 	- [Understanding the Parameters](#understanding-the-parameters)
 	- [Translating the data into `DeviceProperties` (manually)](#translating-the-data-into-deviceproperties-manually)
+		- [Additional Propteries (optional)](#additional-propteries-optional)
 - [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
 	- [If case 1 occurs](#if-case-1-occurs)
 	- [If case 2 occurs](#if-case-2-occurs)
@@ -26,6 +28,7 @@
 	- [If case 4 occurs](#if-case-4-occurs)
 - [6. Final Steps](#6-final-steps)
 - [Credits and further resources](#credits-and-further-resources)
+</details>
 
 ## About
 This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
@@ -307,6 +310,13 @@ Key                    | Type | Value| Notes
 **This is how the DevicyProperties for your iGPU should look like now**:
 
 ![cfg-step1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/760bd4d0-e2de-493b-8fb0-aee52caf15c0)
+
+#### Additional Propteries (optional)
+
+Key                              | Type | Value     | Notes
+---------------------------------|:----:|:---------:|------
+`enable-backlight-registers-fix` | Data | `01000000`| Fixes backlight registers on Kaby Lake, Coffee Lake and Ice Lake platforms. Add this if your internal screen turns black during booting
+`enable-backlight-registers-alternative-fix` | Data | `01000000`| Same but for macOS 13.4+
 
 ## 5. Testing and modifying the framebuffer patch
 Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
