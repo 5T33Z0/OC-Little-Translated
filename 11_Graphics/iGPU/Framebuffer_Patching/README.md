@@ -100,7 +100,7 @@ Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
 No | No| <ul> <li> [Verify/adjust used `AAPL,ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id) <li> [Add Connectors to framebuffer patch](#adding-connectors) <li> Change Bus ID for both **`con1`** and **`con2`**  
 No | Yes (Index?)| Adjust flags for the connector detected at Index X (X= con1 or con2)
 
-If the display is detected in Hackintool's "Patch" section, either **Index 1** or **Index 2** should turn redl 
+If the display is detected in Hackintool's "Patch" section, either **Index 1** or **Index 2** should turn red: 
 
 ![display-red](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f671908c-ae2f-4241-a782-f35ccaa6c918)
 
@@ -339,7 +339,7 @@ Key                      | Type | Value
 
 Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|---------------
 `framebuffer-con1-busid` | Data | `01000000` | 5 
 `framebuffer-con2-busid` | Data | `02000000` | 4 
@@ -349,7 +349,7 @@ Key                      | Type | Value      | Tested BusIDs
 Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
 
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|---------------
 `framebuffer-con1-busid` | Data | `02000000` | 5, 1 
 `framebuffer-con2-busid` | Data | `01000000` | 4, 2 
@@ -358,7 +358,7 @@ Key                      | Type | Value      | Tested BusIDs
 
 Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|---------------
 `framebuffer-con1-busid` | Data | `04000000` | 5, 1, 2
 `framebuffer-con2-busid` | Data | `06000000` | 4, 2, 1
@@ -367,12 +367,12 @@ Key                      | Type | Value      | Tested BusIDs
 
 Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|----------------------
 `framebuffer-con1-busid` | Data | `06000000` | 5, 1, 2, 4 
 `framebuffer-con2-busid` | Data | `05000000` | 4, 2, 1, 6
 
-If the external display still won't be detected, there must be another issue. Check AAPL,ig-platform-id again.
+If the external display still won't be detected, there must be another issue. Check `AAPL,ig-platform-id` again.
 
 ### If case 2 occurs
 
@@ -387,39 +387,44 @@ Key                      | Type | Value
 
 **Next test**
 
-Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+Change the BusIDs for the `con` that your monitor is using, save the config.plist and reboot from USB flash drive.
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|---------------
 `framebuffer-con1-busid` | Data | `01000000` | 5 
 
 **Next test**
 
-Change the BusIDs for each `con`, save the config.plist and reboot from USB flash drive.
+Change the BusIDs for the `con` that your monitor is using, save the config.plist and reboot from USB flash drive.
 
-Key                      | Type | Value      | Tested BusIDs
+Key                      | Type | Value      | Tested <br> BusIDs
 -------------------------|:----:|:----------:|---------------
 `framebuffer-con1-busid` | Data | `02000000` | 5, 1,
 
 **Next test**
 
-Key                      | Type | Value     | Tested BusIDs
+Change the BusIDs for the `con` that your monitor is using, save the config.plist and reboot from USB flash drive.
+
+Key                      | Type | Value     | Tested <br> BusIDs
 -------------------------|:----:|:---------:|---------------
 `framebuffer-con1-busid` | Data | `04000000`| 5, 1, 2,
-`framebuffer-con2-busid` | Data | `05000000`| Needs to be changed once because default BusID is `4`!
+`framebuffer-con2-busid` | Data | `05000000`| Needs to be changed once as well to avoid using the same BusID for both connectors twice (because the default BusID is `4` for **con2**)
 
 **Next test**
 
-Key                      | Type | Value     | Tested BusIDs
+Change the BusIDs for the `con` that your monitor is using, save the config.plist and reboot from USB flash drive.
+
+
+Key                      | Type | Value     | Tested <br> BusIDs
 -------------------------|:----:|:---------:|---------------
 `framebuffer-con1-busid` | Data | `06000000`| 5, 1, 2, 4
 
-If the external display still won't be detected, there must be another issue. Check AAPL,ig-platform-id again.
+If the external display still won't be detected, there must be another issue. Check `AAPL,ig-platform-id` again.
 
 ### If case 3 occurs
 Modify the connector flags for the connector(s):
 
-Key                      | Type | Value     | Tested BusIDs
+Key                      | Type | Value     | Tested <br> BusIDs
 -------------------------|:----:|:---------:|---------------
 `framebuffer-con1-flags` | Data| `C7030000` | Works well when using HDMI to HDMI and HDMI to DVI
 `framebuffer-con2-flags` | Data| `C7030000` | Works well when using HDMI to HDMI and HDMI to DVI
