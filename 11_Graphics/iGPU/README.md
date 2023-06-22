@@ -12,6 +12,7 @@ Incomplete collection of iGPU related fixes. For general configuration of Intel 
 	- [**Disabling audio over HDMI/DisplayPort**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_disable_audio_over_HDMI-DP.md)
 	- [**Force-enabling graphics with a fake ig-platform-id**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Fake_ig-platform-id.md)
 	- [**How to enable "GPU" Tab in Activity Monitor, Hardware Acceleration and Metal 3 Support in macOS Ventura**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU_Tab)
+	- [**Framebuffer patching for enabling external display on Laptops**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/README.md) 
 
 
 ## Resources
