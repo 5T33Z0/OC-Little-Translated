@@ -1,7 +1,5 @@
 # Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
-:warning: :construction: WORK IN PROGRESS… Don't use yet
-
 **TABLE of CONTENTS**
 
 - [About](#about)
@@ -42,10 +40,10 @@ Your Laptop boots into macOS and the internal screen works, but:
 
 ### Possible causes
 - Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your iGPU
-- Misconfigured framebuffer patch with incorrect flags for the used cable/connector
+- Misconfigured framebuffer patch with incorrect BusID and/or flags for the used cable/connector
 
 ### Solution
-- Modify framebuffer patch for your iGPU
+- Modify framebuffer patch for your iGP
 
 ### Supported Connection Types
 - **HDMI** &rarr; **HDMI**
