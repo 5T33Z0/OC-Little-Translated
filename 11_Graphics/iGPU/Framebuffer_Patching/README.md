@@ -43,7 +43,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 - Misconfigured framebuffer patch with incorrect BusID and/or flags for the used cable/connector
 
 ### Solution
-- Modify framebuffer patch for your iGP
+- Modify framebuffer patch for your iGPU
 
 ### Supported Connection Types
 - **HDMI** &rarr; **HDMI**
