@@ -108,7 +108,7 @@ If the display is detected and turns on:
 
 Ext. Display detected <br> in Hackintool?| Handshake| Symptoms | Action
 :---------------------------------------:|:--------:|----------|--------
-Yes (Index?)| Slow| <ul> <li> Mouse Cursor lagging <li> System feels unresponsive <li> Display turns on late after completing boot sequence <li> Displays turn on and off more than 3 times during handshake|Adjust connector flags for the connector at detected Index. In this example for **con2**
+Yes (Index?)| Slow| <ul> <li> Mouse Cursor lagging <li> System feels unresponsive <li> Display turns on late after completing boot sequence <li> Displays turn on and off more than 3 times during handshake|Adjust connector flags for the connector at detected Index. In my case it's connected via **con2**.
 Yes (Index?)| Fast| Everything feels normal|Congrats. Nothing to do!
 
 Take note of your test results. Depending on the results you might be able to skip sections.
