@@ -356,7 +356,7 @@ Before we start to generat/modify the framebuffer patch in Hackintool, let's hav
 13. In the "General" section, enable the following settings:<br>![patch01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b58b1b6c-15d5-4cb6-8e75-81947c052100)
 14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br>![patch02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/cc34a3b1-25bc-4201-a2d7-660abea2aca0)
 15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br>![patch03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f337105e-b1de-48f7-b87a-73b5b3540a52)
-16. Now, click on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![patch04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35ba152c-97be-49e1-8c1e-0a18108b9423)
+16. Now, click on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![generate01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/c8011839-6c8b-4dfe-9216-efe91655252d)
 17. Click in the text area. Press CMD+A to select the text, press CMD+C to copy it to the clipboard
 18. Run ProperTree
 19. Press CMD+V and you should have something like this: <br> ![result01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/077a94e9-330c-459d-a7dc-5231de7af0b0)
