@@ -312,7 +312,6 @@ Key                    | Type | Value| Notes
 **This is how the DevicyProperties for your iGPU should look like now**:
 
 ![cfg-step1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/760bd4d0-e2de-493b-8fb0-aee52caf15c0)
-
 </details>
 <details>
 <summary><strong>Semi-automated method using Hackintool</strong> (click to reveal)</summary>
@@ -335,11 +334,11 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 3. Next, click on "Patch".
 4. Then click on "Connectors"
 5. From the "Intel Generation" dropdown menu, select the CPU family your CPU belongs to. Since my Whiskey Lake CPU is 8th Gen and since 8th and 9th gen Intel CPUs belong to the Coffee Lake family, I select Coffee Lake)
-6. Next, specify the "Platform ID" to use. In my case I am going to use `0x9B3E0000`:</br> ![](/Users/stunner/Desktop/start01.png)
-7. The list below the "Connectors" tab shows the default configuration of the selected Framebuffer:<br>![](/Users/stunner/Desktop/start02.png)
+6. Next, specify the "Platform ID" to use. In my case I am going to use `0x9B3E0000`:</br>![start01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/67f8c8a5-6474-4168-9fe7-7ae942743a8f)
+7. The list below the "Connectors" tab shows the default configuration of the selected Framebuffer:<br>![start02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/912181f0-5b68-4228-bfec-adf89cd0ea41)
 8. Leave `Index 0` (= internal display) and `Index 1` untouched!
-9. If you are using HDMI to HDMI or HDMI to DVI, change the "Type" for `Index 1` and `Index 2` to  HDMI: <br>![](/Users/stunner/Desktop/cons01.png)
-10. Next, we modify the connector "Flags" for `Index 1` and `Index 2`:<br>![](/Users/stunner/Desktop/cons02.png)
+9. If you are using HDMI to HDMI or HDMI to DVI, change the "Type" for `Index 1` and `Index 2` to  HDMI: <br>![cons01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/8df0d0a8-67da-43ba-8048-fb496cb1fa48)
+10. Next, we modify the connector "Flags" for `Index 1` and `Index 2`:<br>![cons02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/238faa4b-ac61-4a1c-bbbb-b5dde21d3400)
 11. We want the sum to be `0x000003C7`, which consists of the following flags:
 	- `CNAlterAppertureRequirements`
 	- `CNUnknownFlag_2`
@@ -348,20 +347,20 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 	- `CNUnknownFlag_80`
 	- `CNUnknownFlag_100`
 12. Next, click on "Patch".
-13. In the "General" section, enable the following settings:<br> ![](/Users/stunner/Desktop/patch01.png)
-14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br> ![](/Users/stunner/Desktop/patch02.png)
-15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br> ![](/Users/stunner/Desktop/patch03.png)
-16. Now, cick on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br> ![](/Users/stunner/Desktop/patch04.png)
+13. In the "General" section, enable the following settings:<br>![patch01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b58b1b6c-15d5-4cb6-8e75-81947c052100)
+14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br>![patch02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/cc34a3b1-25bc-4201-a2d7-660abea2aca0)
+15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br>![patch03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f337105e-b1de-48f7-b87a-73b5b3540a52)
+16. Now, cick on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![patch04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35ba152c-97be-49e1-8c1e-0a18108b9423)
 17. Click in the text area. Press CMD+A to select the text, press CMD+C to copy it to the clipboard
 18. Run ProperTree
-19. Press CMD+V and you should have something like this: <br> ![](/Users/stunner/Desktop/result01.png)
+19. Press CMD+V and you should have something like this: <br> ![result01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/077a94e9-330c-459d-a7dc-5231de7af0b0)
 20. Now, you could add the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to your config.plist as is, but there are some entries in there that we don't need, so do the following:
 	- Delete all **`framebuffer-con0-`** properties since they are the default settings for the internal screen
 	- Delete all entries for **`framebuffer-con3-`** since this is for the dummy connector which is not used anyway.
 	- Change the value for `model` by entering the name of your actual iGPU, like `Intel UHD Grpahics 620` for example
 	- Disable/delete `framebuffer-stolenmem` if you want to use 2048 MB of VRAM which is handled by `framebuffer-unifiedmem`. Stolenmen and Unified mem should not be used at the same time.
 	- Add addtional properties required for your iGPU (check Whatevergreen repo for details). In my case I need a backlight registers fix for Kaby Lake and newer which is property `enable-backlight-registers-fix` or `enable-backlight-registers-alternative-fix` (macOS 13.4+)
-21. After editing, the framebuffer patch might look like this:<br>![](/Users/stunner/Desktop/result02.png)
+21. After editing, the framebuffer patch might look like this:<br>![result02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b87abad1-3cb2-4db8-917a-60717b7007fa)
 22. Now copy the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard, open your config.plits on your USB flash drive and replace the existing entry under `DeviceProperties/Add`
 </details>
 
