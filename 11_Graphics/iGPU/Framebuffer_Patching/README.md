@@ -23,6 +23,7 @@
 	- [Semi-automated method using Hackintool](#semi-automated-method-using-hackintool)
 		- [Understanding the Parameters](#understanding-the-parameters-1)
 		- [Generating a framebuffer patch with Hackintool](#generating-a-framebuffer-patch-with-hackintool)
+		- [Optional Properties:](#optional-properties)
 - [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
 	- [If case 1 occurs](#if-case-1-occurs)
 	- [If case 2 occurs](#if-case-2-occurs)
@@ -245,7 +246,7 @@ Let's have a look inside Hackintool's "Connectors" tab to get to know the parame
 |Parameter|Description|
 |:-------:|-----------|
 **Index**| An **Index** represents a *physical* graphics output on your Laptop. In macOS, up to 3 software connectors can be assigned (`con0` to `con2`) to 3 connectors (Indexes `1` to `3`). Index `-1` has no physical connector:</br>![Connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/38ab2a7f-c342-4f1a-81a0-72decf1d0b4d) </br>Framebuffers which only contain `-1` Indexes (often referred to as "headless" or "empty") are used in setups where a discrete GPU is used for displaying graphics while the iGPU performs computational tasks only, such as Platform-ID `0x9BC80003`:</br>![headless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/00b0b232-0de7-4a1b-a01f-8c6fabb90753)|
-|**BusID**| ![](/Users/stunner/Desktop/BUSIDs.png) </br> The **Bus ID** is used to select the busses or pathways available for connecting displays. Every connector (`con`) must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical port(s). Unique means each Bus ID can only be assigned to one connector at a time! And: only certain combinations of BusIDs and connector Types are allowed: <ul> <li> For **DisplayPort**: `0x02`, `0x04`, `0x05` or `0x06`<li>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availabilty may vary) <li> For **DVI**: same as HDMI <li> For **VGA**: N/A|
+|**BusID**| ![](/Users/stunner/Desktop/BUSIDs.png) </br> The **Bus ID** is used to select the busses or pathways available for connecting displays. Every connector (`con`) must be assigned a *unique* `BusID` through which the signal travels from the iGPU to the physical port(s). Unique means each Bus ID can only be assigned to one connector at a time! And: only certain combinations of BusIDs and connector Types are allowed: <ul> <li> For **DisplayPort**: `0x02`, `0x04`, `0x05` or `0x06`<li>For **HDMI**: `0x01`, `0x02`, `0x04`, `0x06` (availability may vary) <li> For **DVI**: same as HDMI <li> For **VGA**: N/A|
 **Pipe**| Responsible for taking the graphics data from the iGPU and converting it into a format that can be displayed on a monitor or screen. It performs tasks such as scaling, color correction, and synchronization to ensure that the visual output appears correctly on the connected display. This is fixed for each framebuffer
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
 |**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
@@ -314,6 +315,13 @@ Key                    | Type | Value| Notes
 `framebuffer-patch-enable` | Data | `0100000` | Enables Framebuffer patching via Whatevergreen
 `model` | String | Intel UHD Graphics 620 | Optional property
 
+**Optional Properties**:
+
+Key                              | Type | Value     | Notes
+---------------------------------|:----:|:---------:|------
+`enable-backlight-registers-fix` | Data | `01000000`| Fixes backlight registers on Kaby Lake, Coffee Lake and Ice Lake platforms. Add this if your internal screen turns black during booting
+`enable-backlight-registers-alternative-fix` | Data | `01000000`| Same but for macOS 13.4+
+
 > **Note**: We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
 
 **This is how the DeviceProperties for your iGPU should look like now**:
@@ -370,6 +378,13 @@ Before we start to generat/modify the framebuffer patch in Hackintool, let's hav
 	- Add additional properties required for your iGPU (check Whatevergreen repo for details). In my case I need a backlight registers fix for Kaby Lake and newer which is property `enable-backlight-registers-fix` or `enable-backlight-registers-alternative-fix` (macOS 13.4+)
 21. After editing, the framebuffer patch might look like this:<br>![result02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b87abad1-3cb2-4db8-917a-60717b7007fa)
 22. Now copy the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard, open your config.plist on your USB flash drive and replace the existing entry under `DeviceProperties/Add`
+
+#### Optional Properties:
+
+Key                              | Type | Value     | Notes
+---------------------------------|:----:|:---------:|------
+`enable-backlight-registers-fix` | Data | `01000000`| Fixes backlight registers on Kaby Lake, Coffee Lake and Ice Lake platforms. Add this if your internal screen turns black during booting
+`enable-backlight-registers-alternative-fix` | Data | `01000000`| Same but for macOS 13.4+
 </details>
 
 ## 5. Testing and modifying the framebuffer patch
@@ -520,4 +535,4 @@ Once you've found a framebuffer patch you are happy with, do the following:
 - AppleIntelFramebufferAzul.kext ([Part 1](https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/) and [Part 2](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/)) by Piker Alpha 
 - [Patching connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids) by Dortania
 - benbaker76 for [Hackintool](https://github.com/benbaker76/Hackintool/releases)
-- Special thanks to **deeveedee** from insanlymac forums for the help!
+- Special thanks to **deeveedee** from insanelymac forums for the help!
