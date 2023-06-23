@@ -2,31 +2,34 @@
 
 **TABLE of CONTENTS**
 
-- [Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)](#intel-igpu-framebuffer-patching-for-connecting-an-external-monitor-laptop)
-	- [About](#about)
-		- [Problem description](#problem-description)
-		- [Possible causes](#possible-causes)
-		- [Solution](#solution)
-		- [Supported Connection Types](#supported-connection-types)
-		- [Workflow overview](#workflow-overview)
-	- [1. Preparations](#1-preparations)
-		- [Create a bootable USB flash drive](#create-a-bootable-usb-flash-drive)
-		- [Required Tools and Resources](#required-tools-and-resources)
-	- [2. Test your current configuration](#2-test-your-current-configuration)
-	- [3. Verify/adjust the `AAPL-ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id)
-	- [4. Adding Connectors](#4-adding-connectors)
+- [About](#about)
+	- [Problem description](#problem-description)
+	- [Possible causes](#possible-causes)
+	- [Solution](#solution)
+	- [Supported Connection Types](#supported-connection-types)
+	- [Workflow overview](#workflow-overview)
+- [1. Preparations](#1-preparations)
+	- [Create a bootable USB flash drive](#create-a-bootable-usb-flash-drive)
+	- [Required Tools and Resources](#required-tools-and-resources)
+- [2. Test your current configuration](#2-test-your-current-configuration)
+- [3. Verify/adjust the `AAPL-ig-platform-id`](#3-verifyadjust-the-aapl-ig-platform-id)
+- [4. Adding Connectors](#4-adding-connectors)
+	- [Adding Connectors (Manual Method)](#adding-connectors-manual-method)
 		- [Gather data for your framebuffer (Example 1)](#gather-data-for-your-framebuffer-example-1)
 		- [Gather data for your framebuffer (Example 2)](#gather-data-for-your-framebuffer-example-2)
 		- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
 		- [Understanding the Parameters](#understanding-the-parameters)
 		- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
-	- [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
-		- [If case 1 occurs](#if-case-1-occurs)
-		- [If case 2 occurs](#if-case-2-occurs)
-		- [If case 3 occurs](#if-case-3-occurs)
-		- [If case 4 occurs](#if-case-4-occurs)
-	- [6. Final Steps](#6-final-steps)
-	- [Credits and further resources](#credits-and-further-resources)
+	- [Semi-automated method using Hackintool](#semi-automated-method-using-hackintool)
+		- [Understanding the Parameters](#understanding-the-parameters-1)
+		- [Generating a framebuffer patch with Hackintool](#generating-a-framebuffer-patch-with-hackintool)
+- [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
+	- [If case 1 occurs](#if-case-1-occurs)
+	- [If case 2 occurs](#if-case-2-occurs)
+	- [If case 3 occurs](#if-case-3-occurs)
+	- [If case 4 occurs](#if-case-4-occurs)
+- [6. Final Steps](#6-final-steps)
+- [Credits and further resources](#credits-and-further-resources)
 
 ## About
 This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
@@ -150,11 +153,13 @@ Take note of your test results. Depending on the results you might be able to sk
 ## 4. Adding Connectors
 
 <details>
-<summary><strong>Manual Method</strong> (click to reveal)</summary> 
+<summary><strong>Manual Method</strong> (click to reveal)</summary>
+
+### Adding Connectors (Manual Method)
 
 Now that we have verified that we are using the recommended framebuffer, we need to gather the connectors data associated with the selected framebuffer in the Intel HD FAQs. Since there are 2 different recommendations for my iGPU, I will look at both.
 
-### Gather data for your framebuffer (Example 1)
+#### Gather data for your framebuffer (Example 1)
 The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-platform-id `00009B3E`. Now we need to find the connector data for this framebuffer in the Intel HD FAQs:
 
 1. Convert the value for framebuffer to Big Endian. You can use Hackintool's calculator to do this. In my case it's `0x3E9B0000`.
@@ -165,7 +170,7 @@ The recommended Framebuffer for my Intel UHD suggested by Dortania is AAPL,ig-pl
 6. Scroll down past the table until you see "Spoiler: … connectors". Click on it to reveal the data
 7. Hit forward in the search function to find the next match. This will be the framebuffer data for your AAPL,ig-platform-id!
 
-**Here's the Data for ID 3E9B0000:**
+**This is the Data for ID 3E9B0000:**
 
 ```
 ID: 3E9B0000, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x0000130B
@@ -190,7 +195,7 @@ The picture below lists the same data for the 3 connectors this framebuffer prov
 <details>
 <summary><strong>More Examples</strong> (click to reveal)</summary>
 
-### Gather data for your framebuffer (Example 2)
+#### Gather data for your framebuffer (Example 2)
 Since the Intel HD FAQs recommends a different framebuffer in certain cases you should double-check this, too. So look-up the data for your CPU family in the document and scroll down to where it says ***"Recommended framebuffers"***. In my case the Intel HD FAQs suggests 0x3EA50009 instead.
 
 **Here's the Data for ID: 3E9B0000**
@@ -210,7 +215,7 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 01050900 00040000 C7010000
 02040A00 00040000 C7010000
 ```
-### Gathering data for your framebuffer (Example 3)
+#### Gathering data for your framebuffer (Example 3)
 In the end, I settled with framebuffer `0x3EA50004` instead and in the end you will understand why.
 
 ```
@@ -230,10 +235,10 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 ```
 </details>
 
-Next, we need to "translate" this data into `DeviceProperties` for our config.plist so we can inject it into macOS. But before we do we should look at what all of these paramaters mean…
+Next, we need to "translate" this data into `DeviceProperties` for our config.plist so we can inject it into macOS. But before we do we should look at what all of these parameters mean…
 
-### Understanding the Parameters
-Let's have a look inside Hackintools "Connectors" tab to get to know the parameters we are working with:
+#### Understanding the Parameters
+Let's have a look inside Hackintool's "Connectors" tab to get to know the parameters we are working with:
 
 |Parameter|Description|
 |:-------:|-----------|
@@ -243,7 +248,7 @@ Let's have a look inside Hackintools "Connectors" tab to get to know the paramet
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
 |**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
 
-### Translating the data into `DeviceProperties`
+#### Translating the data into `DeviceProperties`
 
 **Recap**: here is the suitable framebuffer patch we found earlier:
 
@@ -309,15 +314,17 @@ Key                    | Type | Value| Notes
 
 > **Note**: We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
 
-**This is how the DevicyProperties for your iGPU should look like now**:
+**This is how the DeviceProperties for your iGPU should look like now**:
 
 ![cfg-step1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/760bd4d0-e2de-493b-8fb0-aee52caf15c0)
 </details>
 <details>
 <summary><strong>Semi-automated method using Hackintool</strong> (click to reveal)</summary>
 
-###  Understanding the Parameters
-Before we start to gerneate/modify the framebuffer patch in Hackintool, let's have a look at the parameters we are working first and understand what they do:
+### Semi-automated method using Hackintool
+
+####  Understanding the Parameters
+Before we start to generat/modify the framebuffer patch in Hackintool, let's have a look at the parameters we are working first and understand what they do:
 
 |Parameter|Description|
 |:-------:|-----------|
@@ -327,8 +334,7 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
 |**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
 
-### Generating a framebuffer patch with Hackintool
-
+#### Generating a framebuffer patch with Hackintool
 1. Run Hackintool
 2. In the menu bar, choose the "Framebuffer" type. Select either **≤ macOS 10.13** (High Sierra and older) or **≥ macOS 10.14** (Mojave and newer, default): </br> ![Menubar](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3e425067-557c-4418-88d1-02c5f64c9aea)
 3. Next, click on "Patch".
@@ -350,18 +356,18 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 13. In the "General" section, enable the following settings:<br>![patch01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b58b1b6c-15d5-4cb6-8e75-81947c052100)
 14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br>![patch02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/cc34a3b1-25bc-4201-a2d7-660abea2aca0)
 15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br>![patch03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f337105e-b1de-48f7-b87a-73b5b3540a52)
-16. Now, cick on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![patch04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35ba152c-97be-49e1-8c1e-0a18108b9423)
+16. Now, click on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![patch04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/35ba152c-97be-49e1-8c1e-0a18108b9423)
 17. Click in the text area. Press CMD+A to select the text, press CMD+C to copy it to the clipboard
 18. Run ProperTree
 19. Press CMD+V and you should have something like this: <br> ![result01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/077a94e9-330c-459d-a7dc-5231de7af0b0)
 20. Now, you could add the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to your config.plist as is, but there are some entries in there that we don't need, so do the following:
 	- Delete all **`framebuffer-con0-`** properties since they are the default settings for the internal screen
 	- Delete all entries for **`framebuffer-con3-`** since this is for the dummy connector which is not used anyway.
-	- Change the value for `model` by entering the name of your actual iGPU, like `Intel UHD Grpahics 620` for example
-	- Disable/delete `framebuffer-stolenmem` if you want to use 2048 MB of VRAM which is handled by `framebuffer-unifiedmem`. Stolenmen and Unified mem should not be used at the same time.
-	- Add addtional properties required for your iGPU (check Whatevergreen repo for details). In my case I need a backlight registers fix for Kaby Lake and newer which is property `enable-backlight-registers-fix` or `enable-backlight-registers-alternative-fix` (macOS 13.4+)
+	- Change the value for `model` by entering the name of your actual iGPU, like `Intel UHD Graphics 620` in my case.
+	- Disable/delete `framebuffer-stolenmem` if you want to use 2048 MB of VRAM which is handled by `framebuffer-unifiedmem`. `stolenmen` and `unifiedmem` should not be used at the same time.
+	- Add additional properties required for your iGPU (check Whatevergreen repo for details). In my case I need a backlight registers fix for Kaby Lake and newer which is property `enable-backlight-registers-fix` or `enable-backlight-registers-alternative-fix` (macOS 13.4+)
 21. After editing, the framebuffer patch might look like this:<br>![result02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b87abad1-3cb2-4db8-917a-60717b7007fa)
-22. Now copy the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard, open your config.plits on your USB flash drive and replace the existing entry under `DeviceProperties/Add`
+22. Now copy the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard, open your config.plist on your USB flash drive and replace the existing entry under `DeviceProperties/Add`
 </details>
 
 ## 5. Testing and modifying the framebuffer patch
@@ -377,7 +383,7 @@ Case | Ext. Display <br>ON? |Detected in <br> Hackintool | Handshake | Action
 4 | **YES** | **YES** | **Fast** | You're done. Transfer the DeviceProperties to your main config.plist
 
 ### If case 1 occurs
-Since the external display has not been detected yet, it's most likely that the BusIDs for both connectors is incorrectc. And since we don't know which connector is actually used we need to change the Bus ID for both. 
+Since the external display has not been detected yet, it's most likely that the BusIDs for both connectors is incorrect. And since we don't know which connector is actually used we need to change the Bus ID for both. 
 
 - Possible BusIDs are: `1`, `2`, `4`, `5`, or `6`
 - The same BusID can only be used for one con at a time!
@@ -512,4 +518,4 @@ Once you've found a framebuffer patch you are happy with, do the following:
 - AppleIntelFramebufferAzul.kext ([Part 1](https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/) and [Part 2](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/)) by Piker Alpha 
 - [Patching connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids) by Dortania
 - benbaker76 for [Hackintool](https://github.com/benbaker76/Hackintool/releases)
-- Special tanks to **deeveedee** form insanlymac forums for the help!
+- Special thanks to **deeveedee** from insanlymac forums for the help!
