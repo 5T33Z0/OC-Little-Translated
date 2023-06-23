@@ -461,4 +461,4 @@ Once you've found a framebuffer patch you are happy with, do the following:
 - AppleIntelFramebufferAzul.kext ([Part 1](https://pikeralpha.wordpress.com/2013/06/27/appleintelframebufferazul-kext/) and [Part 2](https://pikeralpha.wordpress.com/2013/08/02/appleintelframebufferazul-kext-part-ii/)) by Piker Alpha 
 - [Patching connectors](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/connector.html#patching-connector-types) and [Bus IDs](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html#patching-bus-ids) by Dortania
 - benbaker76 for [Hackintool](https://github.com/benbaker76/Hackintool/releases)
-- Sepcial tanks to **deeveedee** form insanlymac forums for the help!
+- Special tanks to **deeveedee** form insanlymac forums for the help!
