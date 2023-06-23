@@ -335,11 +335,11 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 3. Next, click on "Patch".
 4. Then click on "Connectors"
 5. From the "Intel Generation" dropdown menu, select the CPU family your CPU belongs to. Since my Whiskey Lake CPU is 8th Gen and since 8th and 9th gen Intel CPUs belong to the Coffee Lake family, I select Coffee Lake)
-6. Next, specify the "Platform ID" to use. In my case I am going to use `0x9B3E0000`:</br> ![](/Users/stunner/Desktop/start01.png)
-7. The list below the "Connectors" tab shows the default configuration of the selected Framebuffer:<br>![](/Users/stunner/Desktop/start02.png)
+6. Next, specify the "Platform ID" to use. In my case I am going to use `0x9B3E0000`:</br> ![start01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/dfa9f7bd-83c5-49ea-9a01-e42fd1da3b24)
+7. The list below the "Connectors" tab shows the default configuration of the selected Framebuffer:<br> ![start02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/539a6f61-cc48-4343-8ea3-388fbabf654d)
 8. Leave `Index 0` (= internal display) and `Index 1` untouched!
-9. If you are using HDMI to HDMI or HDMI to DVI, change the "Type" for `Index 1` and `Index 2` to  HDMI: <br>![](/Users/stunner/Desktop/cons01.png)
-10. Next, we modify the connector "Flags" for `Index 1` and `Index 2`:<br>![](/Users/stunner/Desktop/cons02.png)
+9. If you are using HDMI to HDMI or HDMI to DVI, change the "Type" for `Index 1` and `Index 2` to  HDMI: <br>![cons01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/647ac2f8-037e-40ca-8602-4b79214f0990)
+10. Next, we modify the connector "Flags" for `Index 1` and `Index 2`:<br>![cons02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3ced0e46-4a54-47cc-a0b3-61bbf6c3b5fe)
 11. We want the sum to be `0x000003C7`, which consists of the following flags:
 	- `CNAlterAppertureRequirements`
 	- `CNUnknownFlag_2`
@@ -348,20 +348,20 @@ Before we start to gerneate/modify the framebuffer patch in Hackintool, let's ha
 	- `CNUnknownFlag_80`
 	- `CNUnknownFlag_100`
 12. Next, click on "Patch".
-13. In the "General" section, enable the following settings:<br> ![](/Users/stunner/Desktop/patch01.png)
-14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br> ![](/Users/stunner/Desktop/patch02.png)
-15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br> ![](/Users/stunner/Desktop/patch03.png)
-16. Now, cick on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br> ![](/Users/stunner/Desktop/patch04.png)
+13. In the "General" section, enable the following settings:<br>![patch01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/5f3a1728-ce9c-44a8-b61a-6e657a6e5ad9)
+14. Next, click the "Advanced" tab, select the following settings (and read the notes):<br>![patch02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/ca57362c-c2ed-44d3-a55a-b8e21433b6bd)
+15. Next, click on "LSPCON" and read the text that appears when hovering over the "Enable Driver" box. If you have verified that your iGPU supports HDMI 2.0 and is routed via the iGPU you can enable the driver and select the "Preferred Mode". If uncertain, just leave it on "Auto Detect": <br>![patch03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2fa669d8-f696-4837-9f2e-78e46bf53708)
+16. Now, cick on "Generate Patch" located at the bottom of the window. The empty black area will be filled with the raw text for a .plist containing the `DeviceProperties` for your iGPU: <br>![patch04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/26e95506-8a47-4adf-ba81-ccc695ab579d)
 17. Click in the text area. Press CMD+A to select the text, press CMD+C to copy it to the clipboard
 18. Run ProperTree
-19. Press CMD+V and you should have something like this: <br> ![](/Users/stunner/Desktop/result01.png)
+19. Press CMD+V and you should have something like this: <br>![result01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/10a92d72-00d6-42fc-947e-08cfc43afa70)
 20. Now, you could add the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to your config.plist as is, but there are some entries in there that we don't need, so do the following:
 	- Delete all **`framebuffer-con0-`** properties since they are the default settings for the internal screen
 	- Delete all entries for **`framebuffer-con3-`** since this is for the dummy connector which is not used anyway.
 	- Change the value for `model` by entering the name of your actual iGPU, like `Intel UHD Grpahics 620` for example
 	- Disable/delete `framebuffer-stolenmem` if you want to use 2048 MB of VRAM which is handled by `framebuffer-unifiedmem`. Stolenmen and Unified mem should not be used at the same time.
 	- Add addtional properties required for your iGPU (check Whatevergreen repo for details). In my case I need a backlight registers fix for Kaby Lake and newer which is property `enable-backlight-registers-fix` or `enable-backlight-registers-alternative-fix` (macOS 13.4+)
-21. After editing, the framebuffer patch might look like this:<br>![](/Users/stunner/Desktop/result02.png)
+21. After editing, the framebuffer patch might look like this:<br>![result02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/308836fc-3da3-4430-8995-927797e5ab57)
 22. Now copy the dictionary `PciRoot(0x0)/Pci(0x2,0x0)` to the clipboard, open your config.plits on your USB flash drive and replace the existing entry under `DeviceProperties/Add`
 
 </details>
