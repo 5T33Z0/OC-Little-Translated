@@ -1,4 +1,4 @@
-# Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
+Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
 <details>
 <summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
@@ -22,15 +22,12 @@
 		- [Gather data for your framebuffer (Example 1)](#gather-data-for-your-framebuffer-example-1)
 		- [Gather data for your framebuffer (Example 2)](#gather-data-for-your-framebuffer-example-2)
 		- [Gathering data for your framebuffer (Example 3)](#gathering-data-for-your-framebuffer-example-3)
+		- [Understanding the Parameters](#understanding-the-parameters)
 		- [Translating the data into `DeviceProperties`](#translating-the-data-into-deviceproperties)
 	- [Semi-automated method using Hackintool](#semi-automated-method-using-hackintool)
 		- [Generating a framebuffer patch with Hackintool](#generating-a-framebuffer-patch-with-hackintool)
-<<<<<<< Updated upstream
 		- [Optional Properties:](#optional-properties)
-- [5. Testing and modifying the framebuffer patch](#5-testing-and-modifying-the-framebuffer-patch)
-=======
 - [6. Testing and modifying the framebuffer patch](#6-testing-and-modifying-the-framebuffer-patch)
->>>>>>> Stashed changes
 	- [If case 1 occurs](#if-case-1-occurs)
 	- [If case 2 occurs](#if-case-2-occurs)
 	- [If case 3 occurs](#if-case-3-occurs)
@@ -522,7 +519,7 @@ Key                      | Type | Value     | Tested <br> BusIDs
 Safe your config.plist, reboot from USB flash drive and observe if the handshake improves now. When using Adapters like HDMI to DVI the handshake takes a bit longer than using HDMI to HDMI but it should improve nonetheless. 
 
 ### If case 4 occurs
-Congratulations. Continue with step 6.
+Congratulations. Continue with step 7.
 
 ## 7. Final Steps
 
