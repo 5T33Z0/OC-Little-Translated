@@ -161,7 +161,7 @@ MacMini7,1 and older|N/A|N/A|N/A|N/A
 **MacPro7,1**|0x13EC|0x0834|0x13EC|0x0834|
 MacPro6,1 and older|N/A|N/A|N/A|N/A
 
-As you can see, desktop machines (iMac, iMacPro and MacPrp) use the same values, whereas the values for notebooks and MacMinis differ.
+As you can see, desktop machines (iMac, iMacPro and MacPro) use the same values, whereas the values for notebooks and MacMinis differ.
 
 ## Credits
 - Apple for IORegistryExplorer
