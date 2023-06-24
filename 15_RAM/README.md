@@ -3,11 +3,11 @@
 ## About
 I recently acquired a Lenovo T490 Laptop. While checking the installed RAM, I noticed in System Profiler the the reported RAM speed was 2400 mHz:
 
-![](/Users/stunner/Desktop/2400.png)
+![2400](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e068bb0e-d9e7-4e0f-a591-50a6ba992ac4)
 
 But in Windows it was reported correctly, running @2666 mHz:
 
-![](/Users/stunner/Desktop/MemSpeed.png)
+![MemSpeed](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/41e21b50-d19c-4ac8-9c2e-5fbd615cfe01)
 
 Since in Wintel systems RAM speed is are handle by the BIOS, I assume there's a memory speed reporting issue in macOS.
 
@@ -90,11 +90,11 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 2. Run OpenCore Auxiliary Tools, mount the EFI and open your `config.plist`
 3. Navigate to `PlatformInfo/Memory`
 4. Enable `CustomMemory`
-5. :warning: Mandatory: consult OC's "Documentation.pdf", chapter 10.4: "Memory Properties" for details about all the used parameters before entering the data
-7. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![](/Users/stunner/Desktop/CstmMem.png)
+5. :warning: Mandatory: read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get famiiar with the available parameters before entering _any_ data!
+7. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
 8. Save your config and reboot.
 
 ## Verify the data
 - Run System Profiler
-- Check "Memory" Section: <br>![](/Users/stunner/Desktop/2667.png)
+- Check "Memory" Section: <br>![2667](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/338f44f4-f7db-4bbf-91ca-53ec9afbf187)
 - Done
