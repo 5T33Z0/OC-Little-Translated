@@ -98,3 +98,6 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 - Run System Profiler
 - Check "Memory" Section: <br>![2667](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/338f44f4-f7db-4bbf-91ca-53ec9afbf187)
 - Done
+
+## Further Resources
+- [New Memory Properties Section](https://www.insanelymac.com/forum/topic/345520-opencore-063-new-memory-properties-section/) by miliuco
