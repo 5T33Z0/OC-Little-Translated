@@ -116,18 +116,19 @@ Using Linux is recommended because the command used under Windoesdoesn't show th
 > **Note**: It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
 
 ## Add the memory data to your config.plist 
+:warning: Read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get famiiar with the available parameters *before entering any data into your config.plist!* Because some parameters use different values in OpenCore and also have to be converted from hex to decimal.
+
 1. Reboot into macOS
 2. Run OpenCore Auxiliary Tools, mount the EFI and open your `config.plist`
 3. Navigate to `PlatformInfo/Memory`
 4. Enable `CustomMemory`
-5. :warning: Mandatory: read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get famiiar with the available parameters before entering _any_ data!
-7. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
-8. Save your config and reboot.
+5. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
+6. Save your config and reboot
 
-## Verify the data
+## Check the results
 - Run System Profiler
 - Check "Memory" Section: <br>![2667](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/338f44f4-f7db-4bbf-91ca-53ec9afbf187)
 - Done
 
-## Further Resources
+## Addtional Info
 - [New Memory Properties Section](https://www.insanelymac.com/forum/topic/345520-opencore-063-new-memory-properties-section/) by miliuco
