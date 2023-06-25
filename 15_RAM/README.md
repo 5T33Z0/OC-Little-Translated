@@ -121,7 +121,7 @@ Using Linux is recommended because the command used under Windoesdoesn't show th
 1. Reboot into macOS
 2. Run OpenCore Auxiliary Tools, mount the EFI and open your `config.plist`
 3. Navigate to `PlatformInfo/Memory`
-4. Enable `CustomMemory`
+4. Enable `CustomMemory` (disbaling it ignores the whole `Memory` section)
 5. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
 6. Save your config and reboot
 
