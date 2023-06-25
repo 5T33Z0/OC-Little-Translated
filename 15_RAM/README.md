@@ -1,11 +1,11 @@
 # Fixing falsely reported RAM speed in macOS
 
 ## About
-I recently acquired a Lenovo T490 Laptop. While checking the installed RAM, I noticed in System Profiler the the reported RAM speed was 2400 mHz:
+I recently acquired a Lenovo T490 Laptop. While checking the installed RAM, I noticed in System Profiler the the reported RAM speed was 2400 MHz:
 
 ![2400](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e068bb0e-d9e7-4e0f-a591-50a6ba992ac4)
 
-But in Windows it was reported correctly, running @2666 mHz:
+But in Windows it was reported correctly, running @2666 MHz:
 
 ![MemSpeed](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/41e21b50-d19c-4ac8-9c2e-5fbd615cfe01)
 
@@ -16,12 +16,14 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 
 ## Gathering RAM data
 
+### Using Windows
 1. Run Windows, open a command prompt and enter:
 	
 	```bash
 	wmic memorychip list full
 	```
-2. This should result in something like this:
+2. <details>
+<summary>The output shoul look like this (click to reveal):</summary>
 
 	```
 	BankLabel=BANK 0
@@ -82,10 +84,38 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 	TypeDetail=128
 	Version=
 	```
+</details>
+	
 3. Save the data as a .txt file so you can access it later from within macOS
 
-## Transfer the data 
+### Using Linux (recommended)
+Using Linux is recommended because the command used under Windoesdoesn't show the `AssetTag`. Listed below are the instructions to to tun a live version of Linux from a USB flash drive directly from an .iso
 
+1. Prepare a USB Flash Drive with [Ventoy](https://github.com/ventoy/Ventoy)
+2. Download the .iso for a Linux distro of your choice (like Ubuntu or Zorin, etc.)
+3. Copy the .iso to your Ventoy USB stick
+4. Reboot from USB flash drive
+5. In the ventoy menu select your Linux distro and click on "Normal Boot"
+6. Select the "Try" option instead of the "Install" option 
+7. Once you're reached the Desktop, run Terminal and enter:
+	
+	```bash
+	sudo dmidecode -t memory
+	```
+
+8. <details> 
+	<summary>The output shoul look like this (click to reveal):</summary>
+	
+	```
+	dmidecode 3.2	Getting SMBIOS data from sysfs.	SMBIOS 3.1.1 present.	Handle 0x0002, DMI type 16, 23 bytes	Physical Memory Array		Location: System Board Or Motherboard		Use: System Memory		Error Correction Type: None		Maximum Capacity: 16 GB		Error Information Handle: Not Provided		Number Of Devices: 2	Handle 0x0003, DMI type 17, 40 bytes	Memory Device		Array Handle: 0x0002		Error Information Handle: Not Provided		Total Width: 64 bits		Data Width: 64 bits		Size: 8192 MB		Form Factor: SODIMM		Set: None		Locator: ChannelA-DIMM0		Bank Locator: BANK 0		Type: DDR4		Type Detail: Synchronous		Speed: 2667 MT/s		Manufacturer: Samsung		Serial Number: 00000000		Asset Tag: None		Part Number: M471A1K43BB1-CTD    		Rank: 1		Configured Memory Speed: 2400 MT/s		Minimum Voltage: Unknown		Maximum Voltage: Unknown		Configured Voltage: 1.2 V	Handle 0x0004, DMI type 17, 40 bytes	Memory Device		Array Handle: 0x0002		Error Information Handle: Not Provided		Total Width: 64 bits		Data Width: 64 bits		Size: 8192 MB		Form Factor: SODIMM			Set: None		Locator: ChannelB-DIMM0		Bank Locator: BANK 2		Type: DDR4		Type Detail: Synchronous		Speed: 2667 MT/s		Manufacturer: Samsung		Serial Number: 397269CB		Asset Tag: None		Part Number: M471A1K43CB1-CTD    		Rank: 1		Configured Memory Speed: 2400 MT/s		Minimum Voltage: Unknown		Maximum Voltage: Unknown
+```
+</details>
+
+9. Save the data as a .txt file on a USB flash drive so you can access it later from within macOS
+
+> **Note**: It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
+
+## Add the memory data to your config.plist 
 1. Reboot into macOS
 2. Run OpenCore Auxiliary Tools, mount the EFI and open your `config.plist`
 3. Navigate to `PlatformInfo/Memory`
