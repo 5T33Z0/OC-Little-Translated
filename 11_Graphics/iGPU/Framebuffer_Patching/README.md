@@ -169,6 +169,33 @@ Let's have a look inside Hackintool's "Connectors" tab to understand the paramet
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
 |**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
 
+### Understanding the `framebuffer-conX-alldata` property
+
+This is special property which allows to patch multiple connectors in sequence by putting them in a single string and specifying the index of a connector to start with. The string length should be a multiple of 12 bytes (the length of a single connector), 24 bytes for ICL. In other words, the con-alldate patch injects `Index`, `BusID`, `Pipe`, `Type` and `Flags` for numerous connectors in one go.
+
+An example for the usage of this method of custom patching can be found in the framebuffer patch for Ivy Bridge Laptops with Intel HD 4000 graphics and a display panel with 1600x900 px or more which using AAPL,ig-platform-id `0x0166000`, which only has one connector for the internal display:
+
+```
+ID: 01660004, STOLEN: 32 MB, FBMEM: 16 MB, VRAM: 1536 MB, Flags: 0x00000000
+TOTAL STOLEN: 16 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 16 MB, MAX OVERALL: 17 MB (18354176 bytes)
+Camellia: CamelliaUnsupported (255), Freq: 1808 Hz, FreqMax: 1808 Hz
+Mobile: 1, PipeCount: 3, PortCount: 1, FBMemoryCount: 1
+[5] busId: 0x03, pipe: 0, type: 0x00000002, flags: 0x00000230 - ConnectorLVDS
+05030000 02000000 30020000
+```
+
+To inject additional connectors, the ones from `0x01660003` (which is for standard def displays) can be used which contains the following connectors:
+
+```
+02050000 00040000 07040000
+03040000 00040000 81000000
+04060000 00040000 81000000
+```
+
+This results in the following string for con1-alldata:
+
+`framebuffer-con1-alldata`: `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000`
+
 ## 5. Adding Connectors
 
 <details>
@@ -250,7 +277,7 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
 00000800 02000000 98040000
 01050900 00040000 C7030000
-02040A00 00040000 C7030000`
+02040A00 00040000 C7030000
 ```
 </details>
 
