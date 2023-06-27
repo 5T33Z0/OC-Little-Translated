@@ -15,7 +15,6 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 
 ## Other
 - [macOS Sonoma Notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
-- :warning: Don't create issue reports asking for help to fix your config! I will close such issues immediately. This is not a support forum and I am not your personal OC customer support guy!
 
 ## Contribute?
 Although I've created these guides with a lot of attention to details, there's always room for improvement – especially since I only have an Ivy Bridge Notebook so I cannot test all them myself. So if you have any suggestions or updated instructions to improve the workflow, feel free to create an issue and let me know!

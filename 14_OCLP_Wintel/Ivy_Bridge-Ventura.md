@@ -8,6 +8,7 @@
 
 - [About](#about)
 	- [How Ivy Bridge systems are affected](#how-ivy-bridge-systems-are-affected)
+	- [Disclaimer](#disclaimer)
 - [Precautions and Limitations](#precautions-and-limitations)
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
@@ -50,8 +51,8 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For I
 - Use a native SMBIOS for Ivy Bridge CPUs for optimal performance (no more spoofing required)
 - Install OTA updates [which wouldn't be possible otherwise](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#fixing-issues-with-system-update-notifications-in-macos-113-and-newer)
 
-> **Warning**
-This guide is not for beginners! There are a lot of things to consider when trying to get newer versions of macOS working on unsupported hardware. DON'T upgrade from an existing working version of macOS. You won't be able to downgrade afterwards if something goes wrong. Perform a clean install on a spare internal disk or create a new volume on your current one. 
+### Disclaimer
+This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
 
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
