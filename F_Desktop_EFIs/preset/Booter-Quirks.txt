@@ -4,7 +4,7 @@ Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServic
 CPU:Intel Core 11th Gen Rocket Lake and 12th Gen Alder Lake (Desktop) (Requires Fake CPU-ID)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel Core 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+CPU:Intel Core 10th Gen Comet Lake (Dektop/Mobile/NUC)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
 CPU:Intel Core 9th Gen Coffee Lake (Desktop)
@@ -13,13 +13,13 @@ Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlid
 CPU:Intel Core 9th Gen Coffee Lake (Desktop) (Z390 Chipset)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide SetupVirtualMap RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel Core 9th Gen Coffee Lake (Mobile/Nuc)
+CPU:Intel Core 9th Gen Coffee Lake (Mobile/NUC)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:Intel Core 2nd to 8th Gen (Desktop/Mobile/Nuc) 
+CPU:Intel Core 2nd to 8th Gen (Desktop/Mobile/NUC) 
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
 
-CPU:Intel Core 1st Gen Penryn/Clardale/ynnfield (Desktop/Mobile/NUC)
+CPU:Intel Core 1st Gen Penryn/Clarkdale/Lynnfield (Desktop/Mobile/NUC)
 Booter:EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap
 
 CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
