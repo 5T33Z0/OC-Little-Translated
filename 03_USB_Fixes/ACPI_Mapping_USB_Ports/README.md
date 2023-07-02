@@ -111,6 +111,8 @@ In order to delete (or drop) the original table during boot and replace it with 
 6. Save the config.
 
 > **Note**: In some cases, the `TableLength` may be required as well to drop the table successfully.
+>
+> If the USB ports are defined within the `DSDT` itself, you cannot use this approach and have to find other ways of manipulating the values in the DSDT directly by utilizing using ACPI renames, [as explained here](https://www.insanelymac.com/forum/topic/352311-mapping-usb-ports-discussions/?do=findComment&comment=2790643).
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 
