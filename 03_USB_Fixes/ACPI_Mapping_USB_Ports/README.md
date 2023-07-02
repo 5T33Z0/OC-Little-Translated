@@ -51,7 +51,7 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 1. The USB port are declared in a separate ACPI file, a SSDT, not inside the DSDT
 2. This SSDT contains `XHC` and `_UPC` method and a list of ports (primarily `HSXX` and `SSXX`)
 
-:warning: This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
+> **Warning**: This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
 
 ## Preparations
 
@@ -94,7 +94,7 @@ As you can see, the `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `S
 
 If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not being detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
-**NOTE**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+> **Note**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
 
 ### Adding a delete rule to config.plist
 In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.
@@ -110,7 +110,7 @@ In order to delete (or drop) the original table during boot and replace it with 
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
-**NOTE**: In some cases, the `TableLength` may be required as well to drop the table successfully.
+> **Note**: In some cases, the `TableLength` may be required as well to drop the table successfully.
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 
