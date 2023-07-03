@@ -94,6 +94,7 @@ This it the tl;dr version of what we are going to do basically:
 
 ### Required Tools and Resources
 - A FAT32 formatted USB Flash drive
+- Lilu and Whatevergreen kexts enabled (mandatory)
 - External Monitor and a cable to connect it to your system (obviously)
 - [**Hackintool App**](https://github.com/headkaze/Hackintool/releases) for creating/modifying framebuffer  properties
 - [**ProperTree**](https://github.com/corpnewt/ProperTree) to copy over Device Properties to your config
@@ -101,8 +102,8 @@ This it the tl;dr version of what we are going to do basically:
 - [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) (for referencing default/recommended framebuffers)
 - [**Intel HD Graphics FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-uhd-graphics-610-655-coffee-lake-and-comet-lake-processors) for Framebuffers and Device-IDs and additional info.
 - [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
-- Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort) 
-- Lilu and Whatevergreen kexts enabled (mandatory)
+- Monitor cable(s) to populate the output(s) of your mainboard (usually HDMI an/or DisplayPort)
+- **Optional**: [**OCToolbox**](https://github.com/webfalter/OCToolBox) – includes calculators for Freamebuffer and Connector flags (can also reverse checksums into the included flags) 
 
 ## 2. Test your current configuration
 Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working. Observe what happens after attaching our external display to your Laptop:
