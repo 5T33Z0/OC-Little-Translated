@@ -22,18 +22,28 @@ The `.contentVisibility` file can be opened and edited with TextEdit, Visual Stu
 
 ![visibility](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/101f23b6-06b2-4938-b741-468e27ffe6ac)
 
-**Options**:
-You can change its behaviour by using these words:
+**Options** – You can change its behaviour by using these words:
 
 - `Disabled` &rarr; Hides the entry from OpenCore's BootPicker.
 - `Enabled` &rarr; Shows the entry.
-- `Auxiliary` &rarr; Treats the entry as an Auxiliary, so it's only reveled after pressing the space bar.
+- `Auxiliary` &rarr; Treats the entry as an Auxiliary, so it's only revealed after pressing the space bar.
+
+**Placement** – You can place the file in the following locations:
+
+- /System/Volumes/Preboot/{GUID}/.contentVisibility 
+- /System/Volumes/Preboot/.contentVisibility
+- /Volumes/{ESP}/.contentVisibility (not recommended)
 
 **Examples**:
 
 - To hide the EFI folder, put in `EFI/OC/BOOT`
 - To hide Windows, put it in the EFI containing the `Microsoft/Boot` folder
 - For any other OS, the same principle applies.
+
+### InstanceIdentifier
+OpenCore 0.9.4 added a new feature called `IntanceIdentifier`. This allows adding an `InstanceIdentifier` to the config, which describes the used OpenCore instance. If you have 2 different instances of OpenCore (using different identifiers), you can then modify the `.contentVisibilty` file to hide instances.
+
+For more details, refer to the OpenCore Documentation, chapter 8.1.1: Boot Algorithm 
 
 ## About `.contentFlavour`
 
