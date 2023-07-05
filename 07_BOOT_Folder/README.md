@@ -26,13 +26,14 @@ The `.contentVisibility` file can be opened and edited with TextEdit, Visual Stu
 
 - `Disabled` &rarr; Hides the entry from OpenCore's BootPicker.
 - `Enabled` &rarr; Shows the entry.
-- `Auxiliary` &rarr; Treats the entry as an Auxiliary, so it's only revealed after pressing the space bar.
+- `Auxiliary` &rarr; Treats the entry as Auxiliary, so it's only revealed after pressing the space bar. I am using this option for my USB flash drive that is permanently attached to my system as a plug and stay device that contains a working backup of my EFI folder.
 
 **Placement** – You can place the file in the following locations:
 
 - /System/Volumes/Preboot/{GUID}/.contentVisibility 
 - /System/Volumes/Preboot/.contentVisibility
 - /Volumes/{ESP}/.contentVisibility (not recommended)
+- /EFI/Boot folder on USB flash drives (set to `Auxiliary`, not `Disabled`!)
 
 **Examples**:
 
