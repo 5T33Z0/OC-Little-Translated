@@ -17,9 +17,9 @@ Under one of the following conditions (or combinations thereof), System Update N
 	- MacPro7,1 (`J160`)
  	- Any (other) model (`Default`)
 
-Disabling `SecureBootModel` for the listed SMBIOSes is necessary when trying to run current versions of macOS (Big Sur+) with unsupported GPUs/iGPUs. This requires re-installing previously removed drivers back into macOS with OpenCore Legacy Patcher. But in order to do so, `System Integrity Protection` *and* `SecureBootModel` have to be disabled for installing and loading drivers for Intel HD 4000 as well as NVIDIA Kepler cards.
+Disabling `SecureBootModel` for the listed SMBIOSes is necessary when trying to run macOS Big Sur and newer with unsupported GPUs/iGPUs. This requires re-installing previously removed drivers back into macOS with OpenCore Legacy Patcher. But in order to do so, `System Integrity Protection` *and* `SecureBootModel` have to be disabled for installing and loading drivers for Intel integrated graphics as well as NVIDIA Kepler cards.
 
-But re-installing (graphics) drivers breaks the security seal of the system volume. And since these drivers are unsigned, the system will crash on boot if `SecureBootModel` and `SIP` are enabled. So in this case it's a combination of 2 factors which break system updates.
+Re-installing (graphics) drivers onto the system partition breaks the security seal of the system volume. And since these drivers are unsigned, the system will crash on boot if `SecureBootModel` and `SIP` are enabled. So in this case it's a combination of two factors which break system updates.
 
 ## Fix
 
@@ -31,11 +31,7 @@ Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable:</b
 
 ## Limitations
 
-Since the fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+) you can't use it in macOS Catalina and older.
-
-But this can simply be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.)
-
-Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
+Since this fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+), you can't use it in macOS Catalina and older. This can be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.). Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
 
 ### What about Clover?
 
