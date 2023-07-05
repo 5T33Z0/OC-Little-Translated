@@ -27,7 +27,10 @@ All of these issues can be eliminated in macOS 11.3+ by removing the `-no_compat
 
 You only need the Booter patches not the Kernel patches, though! These can be substituted by the [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer.
 
-Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable:</br>![](https://user-images.githubusercontent.com/76865553/209689694-8b3fe03d-0eea-4261-bf68-1042e201f30b.png)
+Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variables. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
+
+![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
+
 
 ## Limitations
 
