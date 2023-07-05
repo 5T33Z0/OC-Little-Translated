@@ -15,6 +15,7 @@ Under one of the following conditions (or combinations thereof), System Update N
 	- iMac20,1 (`J185`), 20,2 (`J185F`)
 	- iMacPro1,1 (`J137`)
 	- MacPro7,1 (`J160`)
+ 	- Any (other) model (`Default`)
 
 Disabling `SecureBootModel` for the listed SMBIOSes is necessary when trying to run current versions of macOS (Big Sur+) with unsupported GPUs/iGPUs. This requires re-installing previously removed drivers back into macOS with OpenCore Legacy Patcher. But in order to do so, `System Integrity Protection` *and* `SecureBootModel` have to be disabled for installing and loading drivers for Intel HD 4000 as well as NVIDIA Kepler cards.
 
