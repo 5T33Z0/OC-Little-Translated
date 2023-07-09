@@ -15,7 +15,7 @@
 	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
 		- [:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports](#bulb-fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
-	- [Example 8: Intel WiFi and Bluetooth](#example-8-intel-wifi-and-bluetooth)
+	- [Example 8: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 - [Notes](#notes)
@@ -69,20 +69,21 @@ OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  |PPC and Intel</br> (32/64-bit
 OS X 10.5 (Leopard)        | 9.0.0     | 9.99.99  | "
 ||
 OS X 10.6 (Snow Leopard)   | 10.0.0    | 10.99.99 | Intel (32/64-bit)
-OS X 10.7 (Lion)           | 11.0.0    | 11.99.99 |"
-OS X 10.8 (Mountain Lion)  | 12.0.0    | 12.99.99 |"
-OS X 10.9 (Mavericks)      | 13.0.0    | 13.99.99 |"
-OS X 10.10 (Yosemite)      | 14.0.0    | 14.99.99 |"
-OS X 10.11 (El Capitan     | 15.0.0    | 15.99.99 |"
-macOS 10.12 (Sierra)       | 16.0.0    | 16.99.99 |"
-macOS 10.13 (High Sierra)  | 17.0.0    | 17.99.99 |"
-macOS 10.14 (Mojave)       | 18.0.0    | 18.99.99 |"
+OS X 10.7 (Lion)           | 11.0.0    | 11.99.99 | "
+OS X 10.8 (Mountain Lion)  | 12.0.0    | 12.99.99 | "
+OS X 10.9 (Mavericks)      | 13.0.0    | 13.99.99 | "
+OS X 10.10 (Yosemite)      | 14.0.0    | 14.99.99 | "
+OS X 10.11 (El Capitan     | 15.0.0    | 15.99.99 | "
+macOS 10.12 (Sierra)       | 16.0.0    | 16.99.99 | "
+macOS 10.13 (High Sierra)  | 17.0.0    | 17.99.99 | "
+macOS 10.14 (Mojave)       | 18.0.0    | 18.99.99 | "
 ||
 macOS 10.15 (Catalina)     | 19.0.0    | 19.99.99 |Intel (64-bit only)
 ||
-macOS 11 (Big Sur) | 20.0.0    | 20.99.99 |Intel (64-bit)</br>Apple Silicon (ARM)
-macOS 12 (Monterey)| 21.0.0    | 21.99.99 |"
-macOS 13 (Ventura) | 22.0.0    | 22.99.99 |"
+macOS 11 (Big Sur)         | 20.0.0    | 20.99.99 |Intel (64-bit)</br>Apple Silicon (ARM)
+macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
+macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
+macOS 13 (Sonoma)          | 23.0.0    | 23.99.99 | "
 
 :bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a version of macOS which uses a Kernel greater than `X.9.9`. 
 
@@ -137,10 +138,13 @@ I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.B
 
 This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
 
-### Example 8: Intel WiFi and Bluetooth 
+### Example 8: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
 
-For macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+**NOTES**:
+
+- For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
+- For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
