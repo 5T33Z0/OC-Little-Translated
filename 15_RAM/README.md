@@ -9,10 +9,10 @@ But in Windows it was reported correctly, running @2666 MHz:
 
 ![MemSpeed](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/41e21b50-d19c-4ac8-9c2e-5fbd615cfe01)
 
-Since in Wintel systems RAM speed is are handle by the BIOS, I assume there's a memory speed reporting issue in macOS.
+Since in Wintel systems RAM speed is are handle by the BIOS/UEFI Firmware, I assume there's a memory speed reporting issue in macOS.
 
 ## Fix
-In order to fix the falsely reported memory speed in macOS, yo *can* do the following. I say *can* because this fix is purely cosmetic:
+In order to fix the falsely reported memory speed in macOS, you *can* do the following. I say *can* because this fix is purely cosmetic:
 
 ## Gathering RAM data
 
@@ -85,15 +85,15 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 3. Save the data as a .txt file so you can access it later from within macOS
 
 ### Using Linux (recommended)
-Using Linux is recommended because the command used under Windows doesn't show the `AssetTag`. Listed below are the instructions to run a live version of Linux from a USB flash drive directly from an .iso, so you don't need to install Linus or create a USB installer.
+Using Linux is recommended because the command used under Windows doesn't show the `AssetTag`. Listed below are the instructions to run a live version of Linux from a USB flash drive directly from an .iso, without needing to install Linux.
 
-1. Prepare a USB Flash Drive with [Ventoy](https://github.com/ventoy/Ventoy)
+1. Prepare a USB Flash Drive with [**Ventoy**](https://github.com/ventoy/Ventoy)
 2. Download the .iso for a Linux distro of your choice (like Ubuntu or Zorin, etc.)
 3. Copy the .iso to your Ventoy USB stick
 4. Reboot from USB flash drive
-5. In the ventoy menu select your Linux distro and click on "Normal Boot"
+5. In the Ventoy menu, select your Linux distro and click on "Normal Boot"
 6. Select the "Try" option instead of the "Install" option 
-7. Once you're reached the Desktop, run Terminal and enter:
+7. Once you've reached the Desktop, run Terminal and enter:
 	```bash
 	sudo dmidecode -t memory
 	```
@@ -173,10 +173,10 @@ Using Linux is recommended because the command used under Windows doesn't show t
 5. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
 6. Save your config and reboot
 
-## Check the results
+## Verify
 - Run System Profiler
-- Check "Memory" Section: <br>![2667](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/338f44f4-f7db-4bbf-91ca-53ec9afbf187)
+- Check "Memory" Section. The correct memory speed should be reported now: <br>![2667](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/338f44f4-f7db-4bbf-91ca-53ec9afbf187)
 - Done
 
-## Addtional Info
+## Further Resources
 - [New Memory Properties Section](https://www.insanelymac.com/forum/topic/345520-opencore-063-new-memory-properties-section/) by miliuco
