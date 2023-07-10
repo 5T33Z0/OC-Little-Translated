@@ -22,9 +22,7 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 	```bash
 	wmic memorychip list full
 	```
-2. <details>
-<summary>The output shoul look like this (click to reveal):</summary>
-
+2. The output shoul look like this:
 	```
 	BankLabel=BANK 0
 	Capacity=8589934592
@@ -84,8 +82,6 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 	TypeDetail=128
 	Version=
 	```
-</details>
-	
 3. Save the data as a .txt file so you can access it later from within macOS
 
 ### Using Linux (recommended)
@@ -103,14 +99,69 @@ Using Linux is recommended because the command used under Windoesdoesn't show th
 	sudo dmidecode -t memory
 	```
 
-8. <details> 
-	<summary>The output shoul look like this (click to reveal):</summary>
+8. The output shoul look like this:
 	
 	```
-	dmidecode 3.2	Getting SMBIOS data from sysfs.	SMBIOS 3.1.1 present.	Handle 0x0002, DMI type 16, 23 bytes	Physical Memory Array		Location: System Board Or Motherboard		Use: System Memory		Error Correction Type: None		Maximum Capacity: 16 GB		Error Information Handle: Not Provided		Number Of Devices: 2	Handle 0x0003, DMI type 17, 40 bytes	Memory Device		Array Handle: 0x0002		Error Information Handle: Not Provided		Total Width: 64 bits		Data Width: 64 bits		Size: 8192 MB		Form Factor: SODIMM		Set: None		Locator: ChannelA-DIMM0		Bank Locator: BANK 0		Type: DDR4		Type Detail: Synchronous		Speed: 2667 MT/s		Manufacturer: Samsung		Serial Number: 00000000		Asset Tag: None		Part Number: M471A1K43BB1-CTD    		Rank: 1		Configured Memory Speed: 2400 MT/s		Minimum Voltage: Unknown		Maximum Voltage: Unknown		Configured Voltage: 1.2 V	Handle 0x0004, DMI type 17, 40 bytes	Memory Device		Array Handle: 0x0002		Error Information Handle: Not Provided		Total Width: 64 bits		Data Width: 64 bits		Size: 8192 MB		Form Factor: SODIMM			Set: None		Locator: ChannelB-DIMM0		Bank Locator: BANK 2		Type: DDR4		Type Detail: Synchronous		Speed: 2667 MT/s		Manufacturer: Samsung		Serial Number: 397269CB		Asset Tag: None		Part Number: M471A1K43CB1-CTD    		Rank: 1		Configured Memory Speed: 2400 MT/s		Minimum Voltage: Unknown		Maximum Voltage: Unknown
-```
-</details>
+	dmidecode 3.2
+	Getting SMBIOS data from sysfs.
+	SMBIOS 3.1.1 present.
 
+	Handle 0x0002, DMI type 16, 23 bytes
+	Physical Memory Array
+		Location: System Board Or Motherboard
+		Use: System Memory
+		Error Correction Type: None
+		Maximum Capacity: 16 GB
+		Error Information Handle: Not Provided
+		Number Of Devices: 2
+
+	Handle 0x0003, DMI type 17, 40 bytes
+	Memory Device
+		Array Handle: 0x0002
+		Error Information Handle: Not Provided
+		Total Width: 64 bits
+		Data Width: 64 bits
+		Size: 8192 MB
+		Form Factor: SODIMM
+		Set: None
+		Locator: ChannelA-DIMM0
+		Bank Locator: BANK 0
+		Type: DDR4
+		Type Detail: Synchronous
+		Speed: 2667 MT/s
+		Manufacturer: Samsung
+		Serial Number: 00000000
+		Asset Tag: None
+		Part Number: M471A1K43BB1-CTD    
+		Rank: 1
+		Configured Memory Speed: 2400 MT/s
+		Minimum Voltage: Unknown
+		Maximum Voltage: Unknown
+		Configured Voltage: 1.2 V
+
+	Handle 0x0004, DMI type 17, 40 bytes
+	Memory Device
+		Array Handle: 0x0002
+		Error Information Handle: Not Provided
+		Total Width: 64 bits
+		Data Width: 64 bits
+		Size: 8192 MB
+		Form Factor: SODIMM	
+		Set: None
+		Locator: ChannelB-DIMM0
+		Bank Locator: BANK 2
+		Type: DDR4
+		Type Detail: Synchronous
+		Speed: 2667 MT/s
+		Manufacturer: Samsung
+		Serial Number: 397269CB
+		Asset Tag: None
+		Part Number: M471A1K43CB1-CTD    
+		Rank: 1
+		Configured Memory Speed: 2400 MT/s
+		Minimum Voltage: Unknown
+		Maximum Voltage: Unknown
+	```
 9. Save the data as a .txt file on a USB flash drive so you can access it later from within macOS
 
 > **Note**: It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
