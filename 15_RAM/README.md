@@ -85,7 +85,7 @@ In order to fix the falsely reported memory speed in macOS, yo *can* do the foll
 3. Save the data as a .txt file so you can access it later from within macOS
 
 ### Using Linux (recommended)
-Using Linux is recommended because the command used under Windoesdoesn't show the `AssetTag`. Listed below are the instructions to to tun a live version of Linux from a USB flash drive directly from an .iso
+Using Linux is recommended because the command used under Windows doesn't show the `AssetTag`. Listed below are the instructions to run a live version of Linux from a USB flash drive directly from an .iso, so you don't need to install Linus or create a USB installer.
 
 1. Prepare a USB Flash Drive with [Ventoy](https://github.com/ventoy/Ventoy)
 2. Download the .iso for a Linux distro of your choice (like Ubuntu or Zorin, etc.)
@@ -94,13 +94,10 @@ Using Linux is recommended because the command used under Windoesdoesn't show th
 5. In the ventoy menu select your Linux distro and click on "Normal Boot"
 6. Select the "Try" option instead of the "Install" option 
 7. Once you're reached the Desktop, run Terminal and enter:
-	
 	```bash
 	sudo dmidecode -t memory
 	```
-
 8. The output shoul look like this:
-	
 	```
 	dmidecode 3.2
 	Getting SMBIOS data from sysfs.
@@ -167,7 +164,7 @@ Using Linux is recommended because the command used under Windoesdoesn't show th
 > **Note**: It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
 
 ## Add the memory data to your config.plist 
-:warning: Read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get familiar with the available parameters *before entering any data into your config.plist!* Because some parameters use different values in OpenCore and also have to be converted from hex to decimal.
+:warning: Read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get familiar with the available parameters *before entering any data into your config.plist!* Because some parameters use different values in OpenCore and have to be converted from hex to decimal.
 
 1. Reboot into macOS
 2. Run OpenCore Auxiliary Tools, mount the EFI and open your `config.plist`
