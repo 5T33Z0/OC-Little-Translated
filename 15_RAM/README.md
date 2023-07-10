@@ -1,7 +1,7 @@
 # Fixing falsely reported RAM speed in macOS
 
 ## About
-I recently acquired a Lenovo T490 Laptop. While checking the installed RAM, I noticed in System Profiler the the reported RAM speed was 2400 MHz:
+I recently acquired a Lenovo T490 Laptop. While checking the installed RAM, I noticed in System Profiler that the reported RAM speed was 2400 MHz:
 
 ![2400](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e068bb0e-d9e7-4e0f-a591-50a6ba992ac4)
 
