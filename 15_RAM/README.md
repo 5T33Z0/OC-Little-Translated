@@ -12,7 +12,7 @@ But in Windows it was reported correctly, running @2666 MHz:
 Since in Wintel systems RAM speed is are handle by the BIOS, I assume there's a memory speed reporting issue in macOS.
 
 ## Fix
-In order to fix the falsely reported memory speed in macOS, yo *can* do the following. I say *can* because this fix a purely cosmetic:
+In order to fix the falsely reported memory speed in macOS, yo *can* do the following. I say *can* because this fix is purely cosmetic:
 
 ## Gathering RAM data
 
