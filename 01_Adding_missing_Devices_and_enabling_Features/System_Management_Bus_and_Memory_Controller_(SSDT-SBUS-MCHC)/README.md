@@ -35,7 +35,7 @@ Recently, it has been discovered that the 3rd device â€“ `DVL0` ("Diagsvault") â
 **Background**:
 
 - OpenCorePkg Pull Request #442: [Comment DVL0 device in SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/pull/442)
-- Discussion on [Hackintosh Paaradise Discord](https://discord.com/channels/186648463541272576/1106976787172425880)
+- Discussion on [Hackintosh Paradise Discord](https://discord.com/channels/186648463541272576/1106976787172425880)
 
 ## Instructions
 
