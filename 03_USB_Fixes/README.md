@@ -8,7 +8,7 @@ In macOS, the number of available USB ports is limited to 15. But since modern m
 
 Since a physical USB 3 connector (the blue ones) actually supports two USB protocols, it requires 2 ports: one called "HS" for "High Speed" – which is actually USB 2.0 – and one called "SS" for "Super Speed", which is USB 3.0. So in reality, you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols and one that's either or – and that's about it. USB 3.2 is not supported by macOS via the USB protocol – Apple uses Thunderbolt for this. So you have to decide which ports you are going to use and map them accordingly.
 
-## USB Specs
+### USB Specs
 
 USB Standard | Speed | Controller | macOS support 
 ------------:|-------|:----------:|:---------------:
@@ -20,7 +20,7 @@ USB 4        | 40 Gbps | PCIe | via Thunderbolt only
 
 **NOTE**: Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 instead which provide similar transfer rates.
 
-## Removing the USB port limit and mapping USB ports
+### Removing the USB port limit and mapping USB ports
 
 The workaround is to lift the USB port limit and use additional tools to generate a codeless kext including a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable all 26 ports and you we're good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this.
 
