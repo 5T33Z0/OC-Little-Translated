@@ -3,13 +3,14 @@
 In general, please refer to Dortania's [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/) if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
 
 ## AMD GPU Cards Support
-- [AMD Compatibility Chart](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
-- [Enabling (Big) Navi Cards](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)
-- [Enabling AMD Vega 56/64 Cards](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Vega)
-- [AMD Radeon Tweaks](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
-- [Enabling undetected AMD GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)
-- [GPU BAR Size in OpenCore](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU-BAR_Size)
-- [Legacy AMD Cards and macOS](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300)
+- [**AMD Compatibility Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_GPU_Compatbility.md)
+- [**Enabling (Big) Navi Cards**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)
+- [**Enabling AMD Vega 56/64 Cards**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Vega)
+- [**AMD Radeon Tweaks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks)
+- [**Enabling undetected AMD GPUs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)
+- [**RadeonSensor**](https://github.com/NootInc/RadeonSensor) – Kexts and App for monitoring the teperature of AMD GPUs
+- [**GPU BAR Size in OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU-BAR_Size)
+- [**Legacy AMD Cards and macOS**](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300)
 
 ## NVIDIA GPU Support †
 It's complicated… well, actually it isn't: just don't buy them! ;)
