@@ -177,8 +177,8 @@ Vendor| Model | Metal | Sierra | High Sierra | Mojave | Catalina | Big Sur | Mon
 
 ## HD 6000 Series​
 
-Vendor| Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​+| 
-| :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: 
+Vendor | Model​ | Metal​ | Sierra​ | High Sierra​ | Mojave​+ 
+| :---: | --- | :---: | :---: | :---: | :---:
 | AMD​ | Radeon HD 6350​ | Yes​ | Yes​ | Yes​ | No  | No  | No  | No  |     |
 | AMD​ | Radeon HD 6450​ | Yes​ | Yes​ | Yes​ | No  | No  | No  | No  |     |
 | AMD​ | Radeon HD 6570​ | Yes​ | Yes​ | Yes​ | No  | No  | No  | No  |     |
