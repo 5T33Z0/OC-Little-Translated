@@ -66,10 +66,10 @@ Vendor| Model | Metal* | Sierra | High Sierra | Mojave | Catalina | Big Sur | Mo
 Vendor| Model | Metal | Sierra | High Sierra | Mojave | Catalina | Big Sur | Monterey | Ventura | Sonoma
 | :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |:---:|
 | AMD​ | Radeon RX 455​ | Yes | No  | No  | No  | No  | No  | No  | No  |     |
-| AMD​ | Radeon RX 460​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| AMD​ | Radeon RX 470D​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| AMD​ | Radeon RX 470​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| AMD​ | Radeon RX 480​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| AMD​ | Radeon RX 460​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | |
+| AMD​ | Radeon RX 470D​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | |
+| AMD​ | Radeon RX 470​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | |
+| AMD​ | Radeon RX 480​ | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | |
 
 ### Radeon R9​ ([Curacao](https://www.techpowerup.com/gpu-specs/amd-curacao.g758), [Grenada](https://www.techpowerup.com/gpu-specs/amd-grenada.g779), [Hawaii](https://www.techpowerup.com/gpu-specs/amd-hawaii.g738),)
 💡Some unsupported R7/R9 cards an be enabled by using a fake device-id and an addtional SSDT ([**more details**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html))
