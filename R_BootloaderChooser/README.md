@@ -1,6 +1,7 @@
 # Using Clover alongside OpenCore
 
-![20230721_092840_HDR](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/4402737d-af09-4418-be2f-fc5741e082ea)
+![20230721_092840_HDR](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a5972f35-afa1-4dd7-991f-d1eb8904092a)
+
 
 This guide is for users who want to be able to switch between OpenCore and Clover for various reasons. May it be that they are trying to convert from one Boot Manager to the other or for testing things in one environment without risking to break their working configuration.
 
