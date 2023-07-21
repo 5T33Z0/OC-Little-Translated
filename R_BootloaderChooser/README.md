@@ -25,3 +25,4 @@ The BLC configuration file which is generated once Bootloader Chooser is execute
 
 ## Uninstalling
 - Simply replace the `BootX64.efi` file by the one of your preferred Boot Manager
+- Delete the `BLC.plist`
