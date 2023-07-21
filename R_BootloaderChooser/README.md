@@ -1,11 +1,10 @@
 # Using Clover alongside OpenCore
 
-![20230721_092840_HDR](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a5972f35-afa1-4dd7-991f-d1eb8904092a)
-
-
 This guide is for users who want to be able to switch between OpenCore and Clover for various reasons. May it be that they are trying to convert from one Boot Manager to the other or for testing things in one environment without risking to break their working configuration.
 
-This is possible by using [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser). It's a clover-based pre-bootloader which allows to select the actual Boot Manager you want to use present in your EFI folder structure, namely the "CLOVER" and "OC" folder. It's a pretty handy utility to have stored on a backup USB boot stick. 
+This is possible by using [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser). It's a clover-based pre-bootloader which allows to select the actual Boot Manager you want to use present in your EFI folder structure, namely the "CLOVER" and "OC" folder. It's a pretty handy utility to have stored on a backup USB boot stick to select the Bootloades present on your USB flash drive and internal EFI folder on your SSD/NVMe, as shown in this example:
+
+![20230721_092840_HDR](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a5972f35-afa1-4dd7-991f-d1eb8904092a)
 
 ## Installing
 - Download the [**latest release**](https://github.com/jief666/BootloaderChooser/releases) of `BootX64.efi`
