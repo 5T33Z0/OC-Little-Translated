@@ -21,7 +21,7 @@ The BLC configuration file which is generated once Bootloader Chooser is execute
 - Open the `BLC.plist` with the TextEdit app
 - Add `</plist>` to the last line
 - Save the file
-- Now it can be opened in by plist editors and you can change settings like the Timeout, etc.: <br> ![](/Users/stunner/Desktop/bLC.png) 
+- Now it can be opened in by plist editors and you can change settings like the Timeout, etc.: <br> ![bLC](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1bc35fc0-3390-453d-8d12-73ebcda9fc24)
 
 ## Uninstalling
 - Simply replace the `BootX64.efi` file by the one of your preferred Boot Manager
