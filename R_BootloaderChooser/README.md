@@ -1,5 +1,7 @@
 # Using Clover alongside OpenCore
 
+![20230721_092840_HDR](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/4402737d-af09-4418-be2f-fc5741e082ea)
+
 This guide is for users who want to be able to switch between OpenCore and Clover for various reasons. May it be that they are trying to convert from one Boot Manager to the other or for testing things in one environment without risking to break their working configuration.
 
 This is possible by using [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser). It's a clover-based pre-bootloader which allows to select the actual Boot Manager you want to use present in your EFI folder structure, namely the "CLOVER" and "OC" folder. It's a pretty handy utility to have stored on a backup USB boot stick. 
