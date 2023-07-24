@@ -95,9 +95,7 @@ To apply the Kernel patches, you have 2 options:
 - **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
 	- **"Force FileVault on Broken Seal"** (only required when using File Vault)
 	- **"Disable Library Validation Enforcement"** (enable it)
-	- **"Reroute kern.hv_vmm_present patch (1)"** (enable it)
-	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** (enable it)
-	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** (enable it)
+	- **"Reroute kern.hv_vmm_present patch (1)"** (enable when using Monterey, otherwise disable)	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** (enable for Ventura and newer, otherwise disable)
 	- **"Force IOGetVMMPresent"** (enable it)
 	- **"Disable Root Hash validation"** (enable it). **Note**: Not required when using CryptexFixup (IvyBridge and older only).
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
