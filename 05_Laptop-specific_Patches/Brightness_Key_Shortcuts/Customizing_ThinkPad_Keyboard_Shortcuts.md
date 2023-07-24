@@ -150,16 +150,16 @@ Print out SUKKA_DEBUG_KEYBOARD-Q14 , indicating that Fn + F5 is Q14. Continue to
 
 Here is a list of functions for the ThinkPad keyboard I found using the method above:
 
-- Fn + F1 = Q43
-- Fn + F5 = Q15
-- Fn + F6 = Q14
-- Fn + F7 = Q16
-- Fn + F8 = Q64
-- Fn + F9 = Q66
-- Fn + F10 = Q60
-- Fn + F11 = Q61
-- Fn + F12 = Q62
-- Fn + PrtScreen = Q65
+- `Fn` + `F1` = `Q43`
+- `Fn` + `F5` = `Q15`
+- `Fn` + `F6` = `Q14`
+- `Fn` + `F7` = `Q16`
+- `Fn` + `F8` = `Q64`
+- `Fn` + `F9` = `Q66`
+- `Fn` + `F10` = `Q60`
+- `Fn` + `F11` = `Q61`
+- `Fn` + `F12` = `Q62`
+- `Fn` + `PrtScreen` = `Q65`
 
 ## Learn PS2 and ABD keycodes
 
