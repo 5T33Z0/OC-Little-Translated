@@ -441,6 +441,25 @@
 				<integer>0</integer>
 			</dict>
 		</array>
+		<key>Block</key>
+		<array>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>Comment</key>
+				<string>Allow IOSkywalk Downgrade (for Sonoma)</string>
+				<key>Enabled</key>
+				<false/>
+				<key>Identifier</key>
+				<string>com.apple.iokit.IOSkywalkFamily</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>23.0.0</string>
+				<key>Strategy</key>
+				<string>Exclude</string>
+			</dict>
+		</array>
 	</dict>
 	<key>Misc</key>
 	<dict>
