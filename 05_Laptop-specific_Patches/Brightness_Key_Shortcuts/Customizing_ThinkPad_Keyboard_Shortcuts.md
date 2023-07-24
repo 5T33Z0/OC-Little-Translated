@@ -104,19 +104,17 @@ Scope (_SB.PCI0.LPCB.EC0)
     }
 }
 ```
-Notice that \RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK) doesn't? In the QXX function, the \RMDT.P2 function is called to print two arguments, the first is the ABCD-_PTS-Arg0= string, and the second is the variable \_SB.PCI9.TPTS . Press the shortcut key corresponding to the QXX function, the above print function will be executed, and you can see the values of the ABCD-_PTS-Arg0= and \_SB.PCI9.TPTS variables in the macOS console Console.app.
+Notice \RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)? In the `QXX` function, the call to the \RMDT.P2 function prints two arguments, the first is the `ABCD-_PTS-Arg0=` string and the second is the variable `\_SB.PCI9.TPTS`. Pressing the shortcut key for the `QXX` function executes the print function and you can see the values of the `ABCD-_PTS-Arg0=` and `\_SB.PCI9.TPTS` variables in the Console.app.
 
-If you can understand some ACPI, the \RMDT.P2 function defined in SSDT-RMD needs to print two parameters, while the P1 function only prints one parameter. Of course, now we only need this conclusion.
-
-Following the example of brightness shortcut key patch and SSDT-BKeyQxx-Debug.dsl given by OC-little, write the following SSDT:
+If you can understand some ACPI, the \RMDT.P2 function defined in SSDT-RMD needs to print two parameters, while the P1 function only prints one parameter. Following the example of the brightness shortcut key patch and SSDT-BKeyQxx-Debug.dsl given by OC-little, write the following SSDT:
 
 ```asl
 DefinitionBlock("", "SSDT", 2, "OCLT", "ACPIDebug", 0) // Our table name is ACPIDebug
 {
-    External(_SB.PCI0.LPCB.KBD, DeviceObj) // Reference to Device KBD (Keyboard), whichever is in DSDT on your machine
-    External(_SB.PCI0.LPCB.EC, DeviceObj) // EC, whichever is in the DSDT on your machine
+    External(_SB.PCI0.LPCB.KBD, DeviceObj)     // Reference to Device KBD (Keyboard), whichever is in DSDT on your machine
+    External(_SB.PCI0.LPCB.EC, DeviceObj)      // EC, whichever is in the DSDT on your machine
     External(_SB.PCI0.LPCB.EC.XQ14, MethodObj) // Reference to XQ14 function
-    External(RMDT.P1, MethodObj) // Reference to an externally defined RMDT.P1 function
+    External(RMDT.P1, MethodObj)               // Reference to an externally defined RMDT.P1 function
 
     Scope (_SB.PCI0.LPCB.EC)
     {
@@ -305,9 +303,9 @@ Can't understand? Let's look at this example:
 ```
 where 1e is the PS2 scan code of A and 2c is the PS2 scan code of Z. So 1e=2c means that pressing A will trigger 2c, and the original definition of 2c is Z, so the letter Z is output; similarly, after pressing Z, 2c is mapped to 1e, which is the original A, so the output is the letter A.
 
-## Disable the trackpad using a shortcut key (and the ThinkPad red dot)
+## Disabling the TrackpPad (and TrackPoint) using a shortcut key
 
-Before using the above SSDT to map e037 (PrtSc) to 6d (F13), e037 is actually a special key code used to switch the Trackpad (trackpad) device (on ThinkPad, the little red dot also belongs to the Trackpad device). Although few people use macOS (especially Hackintosh) laptops to play games, so there is no need to disable the trackpad, but in the spirit of "I can use it, you can't do it", we still hope that there are shortcut keys that can be used. To turn off the touchpad, just not PrtSc.
+Before using the above SSDT to map `e037` (PrtSc) to `6d` (F13), `e037` is actually a special key code used to switch the TrackPad (trackpad) device (on ThinkPad, the little red dot also belongs to the Trackpad device). Although few people use macOS (especially Hackintosh) laptops to play games, so there is no need to disable the trackpad, but technically, it's possible.
 
 As mentioned above, we can map A to Z and also map Z to A; in the same way, we can also map a key to e037 to switch the touchpad, and then map PrtSc (e037) to other keys (eg F13).
 
