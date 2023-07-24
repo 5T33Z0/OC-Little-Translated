@@ -1,6 +1,6 @@
 # Customizing Lenovo Keyboard `Fn` Shortcuts
 
-OC-Little contains an SSDT to remap brightness shortcut keys for ThinkPads, which essentially remaps Fn + F5 and Fn + F6 to F14 and F15 to control the brightness of the internal display in macOS.
+OC-Little contains an SSDT to remap brightness shortcut keys for ThinkPads, which essentially remaps Fn + F5 and Fn + F6 to F14 and F15 to control the brightness of the internal display in macOS. This approach can be used to map other funtions defined in your Embedded Controller so they work in macOS as well (if macOS supports them).
 
 Let's look at the code:
 
