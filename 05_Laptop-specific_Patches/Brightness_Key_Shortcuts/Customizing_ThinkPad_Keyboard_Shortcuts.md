@@ -1,6 +1,6 @@
-# Customizing Lenovo Keyboard Fn Shortcuts
+# Customizing Lenovo Keyboard `Fn` Shortcuts
 
-OC-Little contains a brightness shortcut SSDT for ThinkPads, which essentially maps Fn + F5 and Fn + F6 to F14 and F15 to control the brightness of the internal display in macOS.
+OC-Little contains an SSDT to remap brightness shortcut keys for ThinkPads, which essentially remaps Fn + F5 and Fn + F6 to F14 and F15 to control the brightness of the internal display in macOS.
 
 Let's look at the code:
 
@@ -47,16 +47,18 @@ Translated into human language, it says:
 - Otherwise (if not macOS), execute the function `XQ14()`. 
 - Same is true for `_Q15` (but `0x0405` is send instead).
 
-It should be noted that the premise of using this brightness patch is to rename `_Q14` to `XQ14` in order to redefine the function when macOS is running. `0x0406` is actually the scan code for `F15`, which will be discussed later. What conclusions can we draw from this?
+It should be noted that the premise of using this brightness patch is to rename `_Q14` to `XQ14` in order to redefine the function when macOS is running. `0x0406` is actually the scan code for `F15`, which will be discussed later. 
 
-- Fn+F5 and Fn+F6 correspond to two functions defined in the Embedded Controller `_SB.PCI0.LPCB.EC`, `Q15` and `Q14`.
+What conclusions can we draw from this?
+
+- Fn+F5 and Fn+F6 correspond to two functions defined in the Embedded Controller (`_SB.PCI0.LPCB.EC`), `Q15` and `Q14`.
 - On macOS, changing the brightness is achieved by sending a string of hex code to the keyboard device.
-- The hex sent by Q15 and Q14 is F14 and F15, so Fn + F5 and Fn + F6 are actually F14 and F15
+- The hex sent by Q15 and Q14 is F14 and F15, so Fn + F5 and Fn + F6 are actually F14 and F15 in macOS
 
 ## Finding all "extra" shortcuts on your keyboard
-If there are functions under `_SB.PCI0.LPCB.EC` that implement brightness shortcut keys, we have every reason to speculate that there other functions under this bus define other shortcut keys.
+If there are functions defined in `_SB.PCI0.LPCB.EC` that implement brightness shortcut keys, we have every reason to believe that there may be other functions under this bus that define other shortcut keys (results vary from model to model).
 
-We can dump and analyze the systems `DSDT` and check for other shortcuts in the EC Bus. Open the `DSDT` with maciASL and search for `_SB.PCI0.LPCB.EC `(or `_SB.PCI0.LPC.EC`) to see if there are other functions. Sure enough, many function definitions for similar patterns can be found:
+We can dump and analyze the system's `DSDT` and check for other shortcuts in the EC Bus. Open the `DSDT` with maciASL and search for `_SB.PCI0.LPCB.EC `(or `_SB.PCI0.LPC.EC`) to check if there are other functions defined. Sure enough, many function definitions for similar patterns can be found:
 
 ```asl
 Scope (\_SB.PCI0.LPCB.EC)
