@@ -35,5 +35,7 @@ For kext that haven't been updated for macOS 14 support:
 **NOTE**: Always look for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
 ## OCLP Status
-- **OCLP 068**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) is working fine on my Ivy Bridge Notebook.
+- **OCLP 068**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) 
+	- Fixes graphics acceleration
+	- Introduces kexts to fix Broadcom WiFi (BCM94350, BCM94360, BCM43602, BCM94331, BCM943224)
 - **OCLP 067**: currently not working (which was expected)
