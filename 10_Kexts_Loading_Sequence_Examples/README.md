@@ -161,6 +161,20 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 >- Dell users can add `SMCDellSensors` for temperature monitoring and fan control.
 >- If your laptop has a built-in compatible brightness sensor, you can add `SMCLightSensor` 
 
+### Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14
+
+1. Block **IOSkymwalkFamily**: <br> ![](/Users/stunner/Desktop/Brcm_Sonoma1.png)
+2. Add the following kexts from the [Sonoma Development branch of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) (adjust `MinKernel` accordingly): <br> ![](/Users/stunner/Desktop/Brcm_Sononma2.png)
+3. Apply Root patches with OCLP 0.6.8 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
+4. Save and reboot. After that WiFi should word (if your card is supported).
+
+Only a couple of cards are support at the moment:
+
+- **Modern**: Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
+- **Legacy**: 
+	- Atheros chipsets 
+	- Broadcom BCM94322, BCM94328
+
 ## Notes
 - :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
 - Ignore the red dots in the screenshots. 
