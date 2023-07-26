@@ -18,6 +18,7 @@
 	- [Example 8: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
+	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
 - [Notes](#notes)
 
 ## About
