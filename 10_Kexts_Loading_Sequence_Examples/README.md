@@ -167,7 +167,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 1. Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
 2. Add the following kexts from the [Sonoma Development branch of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) (adjust `MinKernel` accordingly): <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
 3. Apply Root patches with OCLP 0.6.8 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-4. Save and reboot. After that WiFi should word (if your card is supported).
+4. Save and reboot. After that WiFi should work (if your card is supported).
 
 Only a couple of cards are support at the moment:
 
