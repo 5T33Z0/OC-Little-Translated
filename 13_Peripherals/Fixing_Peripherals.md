@@ -17,19 +17,10 @@
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
 ### Solution 0: Add `AMFIPass.kext` (best)
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise. Since this kext is not publicly available yet, you have to extract it from OCLP itself which  it's a bit of a pita because the file will be located in temporary folder with a dynamic path once the app is started.
-
-#### Extracting AMFIPass from OpenCore Patcher
-1. Download and unzip [**OCLP 0.6.7 beta**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test)
-2. Download and unzip [**AMFIPass-v1.2.1-Extract.zip**](https://github.com/5T33Z0/OC-Little-Translated/files/11611061/AMFIPass-v1.2.1-Extract.zip)
-3. Right-click the OpenCore-Patcher app to bring up the context menu
-4. Hold <kbd>Alt</kbd> to show additional options. This changes the option "Copy" to "Copy as path"
-5. Select "Copy OpenCore-Patcher as path name" (or similar)
-6. Now run AMFIPass-v1.2.1-Extract
-7. Press <kbd>CMD</kbd>+<kbd>V</kbd> to paste in the path to the OpenCore-Patcher.app and hit <kbd>Enter</kbd>.
-8. Once the extraction is done, `AMFIPass-v1.2.1-RELEASE.zip` will be available on your desktop  
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise.
 
 #### Add AMFIPass to your EFI and Config:
+- Download [**AMFIPass.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Acidanthera) from the OpenCore Legacy Patcher Repo and unzip it
 - Mount your EFI
 - Add the kext to `EFI/OC/Kexts` 
 - Open your config.plist
