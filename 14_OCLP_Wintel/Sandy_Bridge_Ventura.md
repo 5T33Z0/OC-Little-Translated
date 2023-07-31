@@ -76,6 +76,8 @@ Update your kexts to the latest version as well to avoid compatibility issues wi
 ## Config Edits
 Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Sandy Bridge systems. If this is over your head, there's an [accompanying plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sandy_Bridge_OCLP_Wintel_Patches.plist) that contains the necessary settings that you can use for cross-referencing. 
 
+:bulb: If your system (or components thereof) doen't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
+
 Config Section | Setting | Description
 ---------------| ------- | ---------
 **`Booter/Patch`**| **Add** and **enable** both Booter Patches from OCLP's [**Board-ID VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches): <ul> <li> **"Skip Board ID check"** <li> **"Reroute HW_BID to OC_BID"** | Skips board-id checks in macOS virtualizes the used board-id &rarr; Makes macOS "believe" it's running in a VM. This allows booting macOS with unsupported, native SMBIOS best suited for your CPU.

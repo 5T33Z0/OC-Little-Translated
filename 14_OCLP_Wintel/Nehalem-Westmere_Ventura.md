@@ -118,6 +118,8 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ## Config Edits
 Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer.
 
+:bulb: If your system (or components thereof) doen't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
+
 Config Section | Setting | Description
 ---------------| ------- | ---------
 **`ACPI/Add`** | Add [**`SSDT-CPBG.aml`**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/ACPI/SSDT-CPBG.aml) | Patches CPBG for Arrandale, Lynnfield and Clarkdale
