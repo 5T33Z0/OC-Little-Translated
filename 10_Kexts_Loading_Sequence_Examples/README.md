@@ -178,7 +178,8 @@ Only a couple of cards are support at the moment. Depending on the card you are 
 	- Atheros chipsets 
 	- Broadcom BCM94322, BCM94328
 
-## Notes
+## Notes and Credits
 - :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
 - Ignore the red dots in the screenshots. 
 - The kexts listed in Examples 2 to 6 are for PS2 Controllers (Keyboards, Mice, Trackpads). We recommend to use `config-2-PS2-Controller` plist as a starting point.
+- Thabks to Acquarius13 for showing how to enable te Wifi Root Patches in OCLP!
