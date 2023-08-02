@@ -167,15 +167,16 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 1. Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
 2. Add the following kexts from the [Sonoma Development branch of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) (adjust `MinKernel` accordingly): <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
 3. Save and reboot
-4. Apply Root patches with OCLP 0.6.8 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-5. If "Networking: Modern Wirless" or "Nwtworking Legacy Wireless" is not shown in the list of avaialble patches you need enable the option in the Source Code and build OpenCore Patcher yourself. Details [here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809431) 
+4. Verify that all the kext listed above are loaded. Enter `kextstat` in Terminal and check the list. If they are not loaded, add `-lilubetaall`boot-arg to your config. Save, reboot and verify again.
+5. Apply Root patches with OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
+6. If "Networking: Modern Wirless" or "Nwtworking Legacy Wireless" (use either or depending on your card) is not shown in the list of avaialble patches you need enable the option in the Source Code and build OpenCore Patcher yourself. Details [here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809431) 
 5. Reboot. After that WiFi should work (if your card is supported).
 
-Only a couple of cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy_wifi):
+**Compatible Cards**: only a couple of wifi cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy_wifi):
 
 - **Modern**: Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
 - **Legacy**: 
-	- Atheros chipsets 
+	- Atheros Chipsets 
 	- Broadcom BCM94322, BCM94328
 
 ## Notes and Credits
