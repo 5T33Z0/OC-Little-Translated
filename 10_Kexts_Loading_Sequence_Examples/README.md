@@ -174,7 +174,8 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 
 **Compatible Cards**: only a couple of wifi cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy_wifi):
 
-- **Modern**: Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
+- **Modern**:
+	- Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
 - **Legacy**: 
 	- Atheros Chipsets 
 	- Broadcom BCM94322, BCM94328
