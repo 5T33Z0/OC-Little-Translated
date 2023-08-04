@@ -5,9 +5,9 @@
 ## Technical Background
 During the early stages of macOS Sonoma development, kexts and frameworks responsible for using older WiFi Cards were removed, leaving the WiFI portion of commonly used BT/WiFi cards in a non-working state.
 
-The followimg WiFI card chipsets are affected:
+The following WiFi card chipsets are affected:
 
-- **"Modern"** cards :
+- **"Modern"** cards:
 	- Broadcom `BCM94350`, `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
 - **"Legacy"** cards:
 	- Atheros chipsets
@@ -15,9 +15,9 @@ The followimg WiFI card chipsets are affected:
 
 Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to WiFi as well.
 
-But since the Patcher for macOS Sonoma is still in development, the feature to Patch WiFi is not available on the current public release (v.068). On top of that, the detection to patch WiFi is based on the compatible device-ids of cards used on real Macs. So on Winel System, the patcher won't show this option if you are not using a card with a device-id used by Apple. 
+But since the Patcher for macOS Sonoma is still in development, the feature to Patch WiFi is not available on the current public release (v.068). On top of that, the detection to patch WiFi is based on the compatible device-ids of cards used on real Macs. So on Wintel System, the patcher won't show this option if you are not using a card with a device-id used by Apple. 
 
-Althugh OCLP allows enabling certain features in the app, the option to patch Wifi cards has not been implemnented into the GUI. So we have to enable it manually by enabling it in the Source code and then compile a custom version to apply Wifi root patches.
+Although OCLP allows enabling certain features in the app, the option to patch Wifi cards has not been implemented into the GUI. So we have to enable it manually by enabling it in the Source code and then compile a custom version to apply Wifi root patches.
 
 ## Instructions
 
@@ -35,20 +35,12 @@ Config Section | Action
 - Save your config and reboot
 - Verify that all the kext listed above are loaded in macOS Sonoma. Enter `kextstat` in Terminal and check the list. If they are not loaded, add `-brcmfxbeta`boot-arg to your config. Save, reboot and verify again.
 - Apply Root patches with OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-- If the "Networking: Modern Wirless" or "Netwworking: Legacy Wireless" option is not shown in the list of avaialble patches, you need enable the option in the Source Code and build OpenCore Patcher yourself. Details [here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809431)
+- If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not shown in the list of available patches, you need enable the option in the Source Code and build OpenCore Patcher yourself. Details [here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809431)
 - Reboot. After that WiFi should work (if your card is supported).
-
-**Compatible Cards**: only a couple of wifi cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy_wifi):
-
-- **Modern**:
-	- Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
-- **Legacy**:
-	- Atheros Chipsets
-	- Broadcom BCM94322, BCM94328
 
 ## Building OCLP from Source
 
-- Dowlonad the [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development) of the Sonoma Development Branch and unzip it
+- Download the [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development) of the Sonoma Development Branch and unzip it
 -  Enter in Terminal:
 
     ```
@@ -68,10 +60,10 @@ Config Section | Action
 - WiFi should now be working again: <br>![](https://www.insanelymac.com/uploads/monthly_2023_08/1841481226_Bildschirmfoto2023-08-02um11_19_25.thumb.png.42f9df96caa57f9bcfeb1a4d596c5735.png)
 
 ## Notes
-This workaround will probably no longer be required once the official Patcher for Sonoma is released and the option for root patching WiFi funtionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all this Patcher was written for real Macs after all.
+This workaround will probably no longer be required once the official Patcher for macOS Sonoma is released and the option for root patching WiFi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
 
 ## Credits
 - Acidanthera for OpenCore and Kexts
 - Dortania for OpenCore Legacy Patcher
 - Acquarius13 for figuring out what to edit in the Source Code
-- deeveedee for his tests and pointng towards using `brcmfxbeta` boot-arg
+- deeveedee for his tests and pointing towards using `brcmfxbeta` boot-arg
