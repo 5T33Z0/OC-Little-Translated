@@ -87,7 +87,8 @@ For patching legacy cards a spoof hasn't been implemented yet. Probably due to t
 **Work in Progress…**
 
 ## Notes
-This workaround will probably no longer be required once the official Patcher for macOS Sonoma is released and the option for root patching WiFi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
+- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB).
+- This workaround will probably no longer be required once the official OpenCore Patcher for macOS Sonoma is released and the option for root patching WiFi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
 
 ## Credits
 - Acidanthera for OpenCore and Kexts
