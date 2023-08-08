@@ -31,9 +31,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
-> **Note**: 
-> <ul><li> You will still need `AMFI=0x80` before re-applying root patches after installing system updates
-> <li> Once AMFIPass is released on it's own repo, this laborious process will no longer be required.
+> **Note**: You will still need `AMFI=0x80` before re-applying root patches after installing system updates
 
 ### Solution 1: Re-enable SIP (not always possible)
 
