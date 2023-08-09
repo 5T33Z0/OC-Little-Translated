@@ -33,9 +33,17 @@ sudo spctl --master-disable
 
 **Reset all Privacy Settings**:</br>
 
-```sheel
+```shell
 tccutil reset All
 ```
+
+**Check if the seal of APFS volume snapshots is intact or broken**
+
+```shell
+diskutil apfs list
+```
+
+:bulb: If you apply root patches with OCLP, the status of the entry `Snapshot sealed` seal will change from `Yes` to `Broken`. But if you revert the root patches with OCLP *prior* to updating macOS, the seal will become intact again. And if the snapshot is sealed, incremental (or delta) OTA updates will work and System Update won't download the complete installer!
 
 **Disable `.DS_Store` file creation on network storages**
 
