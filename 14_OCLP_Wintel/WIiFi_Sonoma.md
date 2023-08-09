@@ -82,7 +82,7 @@ Config Section | Action
 
 ### Legacy Wifi
 
-For patching legacy cards a spoof hasn't been implemented yet. Probably due to the lack of in-use legacy cards in the Hackintosh scene. But a compatible IOName for Atheros card has been [found](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/page/19/) on an `iMac11,3`. But you can always use Method 1 as an alternative!
+For patching legacy cards a spoof hasn't been implemented yet. Probably due to the lack of in-use legacy cards in the Hackintosh scene. But a compatible IOName for Atheros card has been [found]([https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/page/19/](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809829)) on an `iMac11,3`. But you can always use Method 1 as an alternative!
 
 **Work in Progress…**
 
