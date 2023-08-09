@@ -82,9 +82,7 @@ Config Section | Action
 
 ### Legacy Wifi
 
-For patching legacy cards a spoof hasn't been implemented yet. Probably due to the lack of in-use legacy cards in the Hackintosh scene. But a compatible IOName for Atheros card has been [found]([https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/page/19/](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809829)) on an `iMac11,3`. But you can always use Method 1 as an alternative!
-
-**Work in Progress…**
+For patching legacy cards a spoof hasn't been implemented yet. Probably due to the lack of in-use legacy cards in the Hackintosh scene. But spoofing an **IOName** of legacy Broadcom and Atheros cards used in real Macs could be a possible solution [as outlined in this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
 ## Notes
 - Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB).
