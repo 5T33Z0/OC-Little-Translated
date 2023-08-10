@@ -1,9 +1,7 @@
 # How OpenCore handles ACPI 
 
 ## Order of operations
-Before you beginn fiddling with SSDTs it's a probably a good idea to take a look at how OpenCore handles ACPI tables and patches in general. 
-
-In general, OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
+Before you begin fiddling with SSDTs, it's a probably a good idea to take a look at how OpenCore handles ACPI tables and patches. In general, OpenCore applies ACPI changes globally to *every* operating system (unlike Clover) in the following order:
 
 1. `Patch` is processed
 2. `Delete` is processed
