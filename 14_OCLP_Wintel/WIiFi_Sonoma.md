@@ -1,4 +1,4 @@
-# How to enable legacy Wifi Cards in macOS Sonoma with OpenCore Legacy Patcher
+# How to re-enable previously supported Wifi Cards in macOS Sonoma with OpenCore Legacy Patcher
 
 > **Applicable to**: OCLP 0.6.9 (Sonoma Development Branch)
 
