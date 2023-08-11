@@ -1,0 +1,67 @@
+# Workaround for installing OTA System Updates on disk volumes with broken seals
+
+## Cause
+
+If you apply root patches to your macOS installation with OCLP or other tools that install files into the system volume, this breaks the security seal of the volume.
+
+You can check this if you enter the following command in Terminal:
+
+```shell
+diskutil apfs list
+```
+Here's the output of the APFS volume in my iMac that I applied root patches to with OCLP:
+
+```
+ +-> Volume disk1s6
+        ---------------------------------------------------
+        APFS Volume Disk (Role):   disk1s6 (System)
+        Name:                      Big Sur (Case-insensitive)
+        Mount Point:               Not Mounted
+        Capacity Consumed:         15152431104 B (15.2 GB)
+        Sealed:                    Broken
+        FileVault:                 No
+        |
+        Snapshot:                  -----------------
+        Snapshot Disk:             disk1s6s1
+        Snapshot Mount Point:      /
+        Snapshot Sealed:           Broken
+```
+
+As you can see, status of the `Snapshot Sealed` is `Broken`.
+
+## Efect
+Once a snapshot is broken, incremental (or delta) updates will no longer work. Instead, every time a System Update is available, the full macOS Installer is downloaded instead (approx. 13 GB), which takes a long time, causes a lot of traffic and requires more enegergy which in return is bad for the envirnment.
+
+## Workaround
+So to prevent that the full installer is donlowaded everytime, you can do the following:
+
+- Run the OpenCore Legacy Patcher
+- Click on "Post-Install Root Patch"
+- Next, select `Revert Root Patches`: <br> ![](/Users/5t33z0/Desktop/revert.png)
+
+Once reverting the patches is done, reboot. all the patches will be gone but the Snaphot seal will be intact again:
+
+```
++-> Volume disk1s6
+        ---------------------------------------------------
+        APFS Volume Disk (Role):   disk1s6 (System)
+        Name:                      Big Sur (Case-insensitive)
+        Mount Point:               Not Mounted
+        Capacity Consumed:         15152431104 B (15.2 GB)
+        Sealed:                    Broken
+        FileVault:                 No
+        |
+        Snapshot:                  -----------------
+        Snapshot Disk:             disk1s6s1
+        Snapshot Mount Point:      /
+        Snapshot Sealed:           Yes
+```
+
+If you check for updates again, the size of the file(s) to download should be significantly smaller – usually between 1 or 2 GB.
+
+## Notes
+- Depending on the root patches your system need to be able to run macOS Ventura or newer, booting might only be possible in Safe Mode. To do so, hold <kbd>Shift</kbd> and press <kbd>Enter</kbd> in OpenCore's Bootpicker.
+- To fix issues with System Update Notofications not showing at all, check [this article](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
+
+## Credits
+Thanks to Cyberdevs from Insanelymac for his [explanations](https://www.insanelymac.com/forum/topic/356881-pre-release-macos-sonoma/page/61/#comment-2809998)
