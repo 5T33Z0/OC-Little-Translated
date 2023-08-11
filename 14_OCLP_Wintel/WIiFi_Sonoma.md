@@ -24,7 +24,7 @@ Although OCLP allows enabling certain features in the app, the option to manuall
 ### 1. Prerequisites
 The following steps are requireded after a clean install of macOS Sonoma (Tested on beta 5)
 
-1. If your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following the [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU.
+1. If your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following a [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family.
 2. Connect your system via Ethernet to access the internet. Should be obvious since WiFi doesn't work at this stage…
 3. Disable Gatekeeper via Terminal so macOS won't get in your way:
 	```shell
