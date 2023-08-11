@@ -43,7 +43,7 @@ Apply the following changes to your config and `EFI/OC/Kexts` folder:
 
 Config Section | Action
 :-------------:|-------
-**Kernel/Add** | Add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP and add `MinKernel` settings as shown below: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)<br> The latest available nightly build of **AirportBrcmFixup** is available [here](https://dortania.github.io/builds/?product=AirportBrcmFixup&viewall=true)
+**Kernel/Add** | Add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP and add `MinKernel` settings as shown below: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)<br> The latest nightly build of **AirportBrcmFixup** is available [here](https://dortania.github.io/builds/?product=AirportBrcmFixup&viewall=true)
 **Kernel/Block**| Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
 **Misc/Security** | Change `SecureBootModel` to `Disabled`
 **NVRAM/Add/...-FE41995C9F82** |<ul><li> Change `csr-active-config` to `03080000` <li> Add `amfi=0x80` to `boot-args` <li> Optional: add `-brcmfxbeta` to `boot-args` (if you cannot connect to WiFi hotspots after applying root patches) <li> Optional: add `-amfipassbeta` to `boot-args` (if WiFi and BT don't work in the latest beta of Sonoma after applying root patches). 
