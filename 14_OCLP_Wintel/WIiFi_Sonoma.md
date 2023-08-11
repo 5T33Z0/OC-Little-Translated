@@ -39,7 +39,7 @@ The following steps are requireded after a clean install of macOS Sonoma (Tested
 **IMPORTANT**: If your beta of Sonoma is too new and you didn't update from an existing installation which had Command Line Tools installed already, you might get an error message when trying to install it via Terminal. In this case you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
 
 ### 2. Config and EFI adjustments
-Apply the following changes to your config and `EFI/OC/Kexts` folder:
+Apply the following changes to your config (or copy them over from the [plist example](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI.plist)) and add the listed kexts to`EFI/OC/Kexts` folder :
 
 Config Section | Action
 :-------------:|-------
