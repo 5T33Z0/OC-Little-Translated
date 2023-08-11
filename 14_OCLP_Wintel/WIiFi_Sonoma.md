@@ -24,13 +24,14 @@ Although OCLP allows enabling certain features in the app, the option to patch W
 ### 1. Prerequisites
 The following steps are requireded after a clean install of macOS Sonoma (Tested on beta 5)
 
-1. Connect your system via Ethernet to access the internet. Should be obvious since WiFi doesn't work at this stage…
-2. Disable Gatekeeper via Terminal so macOS won't get in your way:
+1. If your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following the [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU.
+2. Connect your system via Ethernet to access the internet. Should be obvious since WiFi doesn't work at this stage…
+3. Disable Gatekeeper via Terminal so macOS won't get in your way:
 	```shell
 	sudo spctl --master-disable
 	```
-3. Install [Python](https://www.python.org/). We need it to build and run the modified version of OpenCore Legacy Patcher we are going to use to patch Wifi.
-4. Install Command Line Tools via Terminal:
+4. Install [Python](https://www.python.org/). We need it to build and run the modified version of OpenCore Legacy Patcher we are going to use to patch Wifi.
+5. Install Command Line Tools via Terminal:
 	```shell
 	xcode-select --install
 	```
@@ -42,7 +43,7 @@ Apply the following changes to your config and `EFI/OC/Kexts` folder:
 
 Config Section | Action
 ---------------|-------
-**Kernel/Add** | Add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP and add `MinKernel` settings as shown below: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
+**Kernel/Add** | Add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP and add `MinKernel` settings as shown below: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)<br> The latest available nightly build of **AirportBrcmFixup** is available [here](https://dortania.github.io/builds/?product=AirportBrcmFixup&viewall=true)
 **Kernel/Block**| Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
 **Misc/Security** | Change `SecureBootModel` to `Disabled`
 **NVRAM/Add/...-FE41995C9F82** |<ul><li> Change `csr-active-config` to `03080000` <li> Add `amfi=0x80` to `boot-args` <li> Optional: add `-brcmfxbeta` to `boot-args` (if you cannot connect to WiFi hotspots after applying root patches) <li> Optional: add `-amfipassbeta` to `boot-args` (if WiFi and BT don't work in the latest beta of Sonoma after applying root patches). 
