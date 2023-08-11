@@ -30,8 +30,8 @@ The following steps are requireded after a clean install of macOS Sonoma (Tested
 	```shell
 	sudo spctl --master-disable
 	```
-4. Install [Python](https://www.python.org/). We need it to build and run the modified version of OpenCore Legacy Patcher we are going to use to patch Wifi.
-5. Install Command Line Tools via Terminal:
+4. Install [Python](https://www.python.org/). We need it to build and run the modified version of OpenCore Legacy Patcher to force-enable Wifi patching.
+5. Install Command Line Tools via Terminal. It's needed to build OCLP as well:
 	```shell
 	xcode-select --install
 	```
