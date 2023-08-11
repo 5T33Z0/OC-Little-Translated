@@ -69,7 +69,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
 - Wait until the downloads and installations for the pip3 stuff has finished
 - Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are files the patcher needs so patching won't fail.
 - Once the download is done, navigaze to `/Downloads/OpenCore-Legacy-Patcher-sonoma-development/resources/sys_patch/`
-- Opem `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
+- Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
 - Change the following setting based on the chipset your Wifi Card uses:
 	- For **Modern** WiFi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** WiFI Cards: set `self.legacy_wifi = True`
