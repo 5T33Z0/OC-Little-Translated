@@ -139,6 +139,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 	- Chris1111's patchers:
 		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) (for Intel HD 4000)
 		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) (for NVIDIA Kepler Cards)
+- For getting macOS Ventura and newer to work on legacy systems, check the [OCLP Wintel section](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel)
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
