@@ -37,7 +37,7 @@ So to prevent that the full installer is donlowaded everytime, you can do the fo
 
 - Run the OpenCore Legacy Patcher
 - Click on "Post-Install Root Patch"
-- Next, select `Revert Root Patches`: <br> ![](/Users/5t33z0/Desktop/revert.png)
+- Next, select `Revert Root Patches`: <br> ![revert](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e5f9c409-7aad-4511-b1bc-e20466908913)
 
 Once reverting the patches is done, reboot. all the patches will be gone but the Snaphot seal will be intact again:
 
