@@ -84,7 +84,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
 This method uses a device spoof instead to inject a compatible **IOName** of WiFi cards used in real Macs. In theory, OpenCore Patcher then detects a supported Wifi Scard and enables the option for applying root patches for "Modern" or "Legacy" WiFi. It should be clear that patching only works if you have a card with a supported chipset. Since this method didn't work for me I won't cover it here. But if you want to try it for yourself, [take a look here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/).
 
 ## Notes
-- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB). There's a workaround for it I'll cover later.
+- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB). [There's a workaround](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows incremental updates to work temporarily.
 - This workaround will probably no longer be required once the official OpenCore Patcher for macOS Sonoma is released and the option for root patching WiFi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
 
 ## Credits
