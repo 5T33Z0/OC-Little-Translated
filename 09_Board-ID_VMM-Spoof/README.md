@@ -138,7 +138,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (highly recommended) or 
 	- Chris1111's patchers:
 		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) (for Intel HD 4000)
-		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher)(for NVIDIA Kepler Cards)
+		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) (for NVIDIA Kepler Cards)
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
