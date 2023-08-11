@@ -10,14 +10,14 @@ The following WiFi card chipsets are affected:
 - **"Modern"** cards:
 	- Broadcom `BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
 - **"Legacy"** cards:
-	- Atheros chipsets
+	- Atheros `AR928X`, `AR93xx`, `AR242x`/`AR542x`, `AR5418`, `AR5416` (never used by Apple)
 	- Broadcom `BCM94322`, `BCM94328`
 
-Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to WiFi as well.
+Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to WiFi as well. If you want to know how OCLP Wifi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
-But since the Patcher for macOS Sonoma is still in development, the feature to Patch WiFi is not available on the current public release (v.068). On top of that, the detection to patch WiFi is based on the compatible device-ids of cards used on real Macs. So on Wintel System, the patcher won't show this option if you are not using a card with a device-id used by Apple. 
+Since the Patcher for macOS Sonoma is still in development, the feature to patch WiFi is not available on the current public release (v.068). On top of that, the detection to patch WiFi is based on detecting  compatible device-ids/IONames of cards used in real Macs. So on Wintel System, the patcher won't show the option to patch WiFI if you are not using a card with a device-id/IOName used by Apple. 
 
-Although OCLP allows enabling certain features in the app, the option to patch Wifi cards has not been implemented into the GUI. So we have to enable it manually by enabling it in the Source code and then compile a custom version to apply Wifi root patches.
+Although OCLP allows enabling certain features in the app, the option to manually enable patching  Wifi has not been implemented into the GUI (yet). So we have to force-enable it manually in the Source Code and then compile a custom version to apply Wifi root patches.
 
 ## Method 1: Force-Enable WiFi-Patching in OpenCore Legacy Patcher
 
