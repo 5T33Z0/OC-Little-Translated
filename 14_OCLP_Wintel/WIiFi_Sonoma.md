@@ -15,17 +15,17 @@ The following WiFi card chipsets are affected:
 
 Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to WiFi as well. If you want to know how OCLP Wifi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
-Since the Patcher for macOS Sonoma is still in development, the feature to patch WiFi is not available on the current public release (v.068). On top of that, the detection to patch WiFi is based on detecting  compatible device-ids/IONames of cards used in real Macs. So on Wintel System, the patcher won't show the option to patch WiFI if you are not using a card with a device-id/IOName used by Apple. 
+Since the Patcher for macOS Sonoma is still in development, the feature to patch WiFi is not available on the current public release (0.6.8). On top of that, the ability to patch WiFi is based on detecting  compatible device-ids/IONames of WIFI/BT cards used in real Macs. So on Wintel System, the patcher won't show the option to patch WiFi if it doesn't "see" a card with an IOName used by Apple. 
 
-Although OCLP allows enabling certain features in the app, the option to manually enable patching  Wifi has not been implemented into the GUI (yet). So we have to force-enable it manually in the Source Code and then compile a custom version to apply Wifi root patches.
+Although OCLP allows enabling certain features in the app, the option to manually enable patching Wifi has not been implemented into the GUI (yet). So we have to force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wifi root patches.
 
 ## Method 1: Force-Enable WiFi-Patching in OpenCore Legacy Patcher
 
 ### 1. Prerequisites
-The following prerequisites have to be met in orderto get "Modern" and "Legacy" wireless working in macOS Sonoma (tested on beta 5):
+The following prerequisites have to be met in order to get "Modern" and "Legacy" wireless working in macOS Sonoma (tested on beta 5):
 
-1. If your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following a [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family.
-2. Connect your system via Ethernet to access the internet. Should be obvious since WiFi doesn't work at this stage…
+1. If your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following the [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family.
+2. Connect your system via Ethernet to access the internet. This should be obvious since WiFi doesn't work at this stage…
 3. Disable Gatekeeper via Terminal so macOS won't get in your way:
 	```shell
 	sudo spctl --master-disable
@@ -36,7 +36,7 @@ The following prerequisites have to be met in orderto get "Modern" and "Legacy" 
 	xcode-select --install
 	```
 
-**IMPORTANT**: If your beta of Sonoma is too new and you didn't update from an existing installation which had Command Line Tools installed already, you might get an error message when trying to install it via Terminal. In this case you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
+**IMPORTANT**: If your beta version of Sonoma is too new and you didn't update it from an existing installation which had Command Line Tools installed already, you might get an error message when trying to install it via Terminal. In this case you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
 
 ### 2. Config and EFI adjustments
 Apply the following changes to your config (or copy them over from the [plist example](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI.plist)) and add the listed kexts to`EFI/OC/Kexts` folder :
@@ -45,7 +45,7 @@ Config Section | Action
 :-------------:|-------
 **Kernel/Add** | <ul> <li> For **"Modern"** Wifi, add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP: <ul><li> `IOSkywalkFamily.kext` <li> `IO80211FamilyLegacy.kext` (and its Plugin `AirPortBrcmNIC.kext`) <li> `AirportBrcmFixup` (and its plugin `AirPortBrcmNIC_Injector.kext`) available [here](https://dortania.github.io/builds/?product=AirportBrcmFixup&viewall=true) <li> Organize the kexts as shown below and add `MinKernel` settings: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)</ul> <li> For **"Legacy"** Wifi Cards, add the following kexts instead (avaialble [here](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)):<ul> <li> `corecaptureElCap.kext` <li> `IO80211ElCap.kext` and its Plugin `AirPortAtheros40.kext` (Enable for Atheros Cards) <li> Adjust `MinKernel` Settings as shown below: <br> ![LegacyWiFi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2aaa4b6d-61ee-4182-8565-4a30dfa9665f)
 **Kernel/Block**| <ul> <li>Block **IOSkywalkFamily** (**Modern** WiFi only): <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
-**Misc/Security** | Change `SecureBootModel` to `Disabled` to rule-out early Kernel Panics caused by security conflics. You can re-enable it afterwards once everything is working!
+**Misc/Security** | Change `SecureBootModel` to `Disabled` to rule-out early Kernel Panics caused by security conflicts. You can re-enable it afterwards once everything is working!
 **NVRAM/Add/...-FE41995C9F82** |<ul><li> Change `csr-active-config` to `03080000` <li> Add `amfi=0x80` to `boot-args` (Required for applying Root Patches. Can be disabled afterwards.)<li> Optional: add `-brcmfxbeta` to `boot-args` (if you cannot connect to WiFi hotspots after applying root patches) <li> Optional: add `-amfipassbeta` to `boot-args` (if WiFi and BT don't work in the latest beta of Sonoma after applying root patches). 
 **NVRAM/Delete...-FE41995C9F82** | <ul> <li> Add `csr-active-config` <li> Add `boot-args`
 
@@ -67,14 +67,14 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
     pip3 install -r requirements.txt
     ```
 - Wait until the downloads and installations for the pip3 stuff has finished
-- Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are files the patcher needs so patching won't fail.
-- Once the download is done, navigaze to `/Downloads/OpenCore-Legacy-Patcher-sonoma-development/resources/sys_patch/`
+- Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are required files so patching won't fail.
+- Once the download is complete, navigaze to `/Downloads/OpenCore-Legacy-Patcher-sonoma-development/resources/sys_patch/`
 - Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
 - Change the following setting based on the chipset your Wifi Card uses:
 	- For **Modern** WiFi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** WiFI Cards: set `self.legacy_wifi = True`
 	- :warning: Enable either **Modern** or **Legacy**, not both!!! It will break WiFi.
-- Once that's done, double-click on `OpenCore-Patcher-GUI.command` to build the Patcher App. The GUI will pop-up automatically once it's done.
+- Close the .py file and double-click on `OpenCore-Patcher-GUI.command` to build the Patcher App. The GUI will pop-up automatically once it's done.
 - Click on "Post-Install Root Patch". You should be greeted by this message (Available Graphics Patches vary based on used CPU): <br>![](https://www.insanelymac.com/uploads/monthly_2023_08/403798316_Bildschirmfoto2023-08-02um11_12_24.png.7b944c8bdf5e5a1ed396b7a93fe391a9.png)
 - Start Patching. In my case, it's for a BCM94352HMB (Modern): <br>![](https://www.insanelymac.com/uploads/monthly_2023_08/366682814_Bildschirmfoto2023-08-02um11_17_12.png.ad94650eb54ff5401f2320bb89b8c24b.png)
 - Once it's done, reboot
