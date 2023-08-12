@@ -93,12 +93,12 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 To apply the Kernel patches, you have 2 options:
 
 - **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
-	- **"Force FileVault on Broken Seal"** (only required when using File Vault)
-	- **"Disable Library Validation Enforcement"** (enable it)
-	- **"Reroute kern.hv_vmm_present patch (1)"** (enable when using Monterey, otherwise disable)
- 	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** (enable for Ventura and newer, otherwise disable)
-	- **"Force IOGetVMMPresent"** (enable it)
-	- **"Disable Root Hash validation"** (enable it). **Note**: Not required when using CryptexFixup (IvyBridge and older only).
+	- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
+	- **"Disable Library Validation Enforcement"** &rarr; Enable it
+	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable for installing/running **macOS Monterey**, otherwise disable it!
+ 	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; Enable for installing/running Ventura and newer, otherwise disable it :warning: Change `MinKernel` to `20.4.0` in order to upgrade from Big Bur.
+	- **"Force IOGetVMMPresent"** &rarr; Enable it.
+	- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
 - **Option 2**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
 	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
@@ -139,7 +139,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 	- Chris1111's patchers:
 		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) (for Intel HD 4000)
 		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) (for NVIDIA Kepler Cards)
-- For getting macOS Ventura and newer to work on legacy systems, check the [**OCLP Wintel**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) section.
+- For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) section. It contains guides for 1st to 6th Gen Intel Core CPUs. 
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
