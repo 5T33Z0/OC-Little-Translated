@@ -169,7 +169,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 3. Save and reboot
 4. Verify that all the kext listed above are loaded. Enter `kextstat | grep -v com.apple` in Terminal and check the list. If they are not loaded, add `-brcmfxbeta` boot-arg to your config. Save, reboot and verify again.
 5. Apply Root patches with OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-6. If "Networking: Modern Wirless" or "Networking Legacy Wireless" (use either or depending on your card) is not shown in the list of avaialble patches you need enable the option in the Source Code manually and compile OpenCore Patcher yourself. Instructions can be found [here](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809431) 
+6. If "Networking: Modern Wirless" or "Networking Legacy Wireless" (use either or depending on your card) is not shown in the list of avaialble patches you need enable the option in the Source Code manually and compile OpenCore Patcher yourself. Instructions can be found [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md) 
 5. Reboot. After that WiFi should work (if your card is supported).
 
 **Compatible Cards**: only a couple of wifi cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy_wifi):
