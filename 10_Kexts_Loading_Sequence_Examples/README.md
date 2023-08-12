@@ -129,7 +129,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM.kext`: For 10.10 or earlier
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
-5. With the release of macOS Sonoma Developer Preview (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards!  
+5. With the release of macOS Sonoma Developer Preview (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi you have to adjust some settings, add additional kexts and apply root patches with OpenCore Legacy Patcher, [as explained here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md).
 
 > **Warning**: Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.  You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext on the system directly.
 
