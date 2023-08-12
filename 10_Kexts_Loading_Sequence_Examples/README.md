@@ -114,7 +114,7 @@ For Synaptics TrackPads which are controlled via I2C, the kext order is:
 
 ### Example 7: Broadcom WiFi and Bluetooth 
 
-![BRCM_WIFI_BT](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/872fc20c-9bf5-4fa9-95ad-02d36f0f69b2)
+![brcmwifi+bt](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e4ba8edf-d8bc-4c7a-b095-d8c4ec05d142)
 
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
