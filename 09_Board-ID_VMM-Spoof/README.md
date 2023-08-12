@@ -59,19 +59,16 @@ Disabling SIP is necessary in order to re-install [components which have been re
 So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
 ## About the Patches
-Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
+Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
 
 - **Booter Patches**
 	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
 	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
 	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
 - **Kernel Patches** (see "Comment" section)
-	- **"Reroute kern.hv_vmm_present patch (1)"**, 
-	- **"Reroute kern.hv_vmm_present patch (2) Legacy"**, 
-	- **"Reroute kern.hv_vmm_present patch (3) Ventura"** and 
-	- **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
-	-  **"Disable Root Hash validation"** &rarr; Disables Cryptex hash verification in APFS.kext.
-	- **"Force FileVault on Broken Seal"** &rarr; Mandatory if you are using FileVault since installing Drivers back into the system's root breaks the security seal. 
+	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
+	- **"Disable Root Hash validation"** &rarr; Disables Cryptex hash verification in APFS.kext.
+	- **"Force FileVault on Broken Seal"** &rarr; Mandatory if you are using FileVault since installing Drivers back into the system volume breaks its security seal. 
 	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it. In this case it's needed because root patches for Non-Metal GPUs won't pass library validation tests otherwise.
 	- **"Disable _csr_check() in _vnode_check_signature"** &rarr; Allows using AMFI enabled with root patches applied, this helps avoid issues that occur with AMFI disabled. Note that currently OCLP requires AMFI disabled when applying root patches but with this kernel patch you can re-enable AMFI afterwards.
 	- **SurPlus Patches 1 and 2**: Race to condition fixes for Sandy Bridge and older. Fixes issues in macOS 11.3+, where Big Sur often won't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
@@ -96,7 +93,7 @@ To apply the Kernel patches, you have 2 options:
 	- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
 	- **"Disable Library Validation Enforcement"** &rarr; Enable it
 	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable for installing/running **macOS Monterey**, otherwise disable it!
- 	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; Enable for installing/running Ventura and newer, otherwise disable it :warning: Change `MinKernel` to `20.4.0` in order to upgrade from Big Bur.
+	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; Enable for installing/running **macOS Ventura** and newer, otherwise disable it.
 	- **"Force IOGetVMMPresent"** &rarr; Enable it.
 	- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
