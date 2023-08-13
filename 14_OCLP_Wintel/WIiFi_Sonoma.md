@@ -134,31 +134,26 @@ In order to trigger OpenCore Legacy Patchers Wifi patching, it needs to detect a
 4. Take note of its "IOReg IOName". In this example, it's `pci14e4,43b1`. **Explanation**: The `IOName` is a combination of a device's location (`pci14e4`) as well as its device-id (`43b1`). In this example, it's for a BCM94352HMB DW1550 card not used in real Macs so OCLP won't detect if as "patchable".
 5. The [pci_data.py](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/sonoma-development/data/pci_data.py) file contains the device-ids we need:
 	- For patching **Broadcom** cards, the relevant IDs are located under "class broadcom_ids": 
-	
 		```
-    	AirPortBrcmNIC = [ // >> MODERN WIFI
-       	0x43BA,  # BCM43602
-        	0x43A3,  # BCM4350 // For me, this device-id is the closest match to my Wifi card 
-        	0x43A0,  # BCM4360
-    	]
-
-    	AirPortBrcm4360 = [ // >> LEGACY WIFI
-       	0x4331,  # BCM94331
-        	0x4353,  # BCM943224
-    	]
+  		AirPortBrcmNIC = [ // >> MODERN WIFI
+  		0x43BA,  # BCM43602
+  		0x43A3,  # BCM4350 // For me, this device-id is the closest match to my Wifi card
+  		0x43A0,  # BCM4360
+  		]
+  		AirPortBrcm4360 = [ // >> LEGACY WIFI
+  		0x4331,  # BCM94331
+  		0x4353,  # BCM943224
+  		]
 		``` 
 	- For patching **Legacy Atheros** cards, the relevant IDs are located in the "class atheros_ids" section:
-		
 		```
-		AtherosWifi = [
-       	# AirPortAtheros40 IDs
-       	0x0030,  # AR93xx
-       	0x002A,  # AR928X
-       	0x001C,  # AR242x / AR542x
-       	0x0023,  # AR5416 - never used by Apple
-       	0x0024,  # AR5418
-    ]	
-	```
+  		# AirPortAtheros40 IDs
+  		0x0030,  # AR93xx
+  		0x002A,  # AR928X
+  		0x001C,  # AR242x / AR542x
+  		0x0023,  # AR5416 - never used by Apple
+  		0x0024,  # AR5418
+		```
 9. The required device-id to trigger OCLP's Modern Wifi Patchig in my case is `0x43A3`. 
 10. This results in the following `IOName`: `pci14e4,43A3` (= pci path + new device-id without `0x` prefix)
 
