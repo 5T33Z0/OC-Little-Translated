@@ -52,11 +52,11 @@ Config Section | Action
 - Save your config and reboot
 - Enter `kextstat | grep -v com.apple` in Terminal to check if all the kexts you added are loaded. If they are not, add `-brcmfxbeta` boot-arg to your config. Save, reboot and verify again.
 - Download OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-- Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the option to patch "Networking Modern Wirless" or "Networking Legacy Wirelss" is availables, apply the root patches:<br> ![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e1495929-945a-400e-961d-6263f15c3fde)
+- Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the option to patch "Networking Modern Wireless" or "Networking Legacy Wireless" is available, apply the root patches:<br> ![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e1495929-945a-400e-961d-6263f15c3fde)
 - If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, you need to force-enable the option in the Source Code and build OpenCore Patcher yourself (see step 3 and following).
 
 ### 3. Building OCLP from Source and applying Root Patches
-Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only supports specific cards used in real Macs afterall…)
+Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only supports specific cards used in real Macs after all…)
 
 - Download the [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development) of the Sonoma Development Branch and unzip it
 -  Enter in Terminal:
@@ -66,14 +66,14 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
     ```
 - Wait until the downloads and installations for the pip3 stuff has finished
 - Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are required files so patching won't fail.
-- Once the download is complete, navigaze to `/Downloads/OpenCore-Legacy-Patcher-sonoma-development/resources/sys_patch/`
+- Once the download is complete, navigate to `/Downloads/OpenCore-Legacy-Patcher-sonoma-development/resources/sys_patch/`
 - Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
 - Change the following setting based on the chipset your Wifi Card uses:
 	- For **Modern** WiFi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** WiFI Cards: set `self.legacy_wifi = True`
 	- :warning: Enable either **Modern** or **Legacy**, not both!!! It will break WiFi.
 - Close the .py file and double-click on `OpenCore-Patcher-GUI.command` to build the Patcher App. The GUI will pop-up automatically once it's done.
-- Click on "Post-Install Root Patch". Depending on your Wifi Card the option "Networking Modern Wirless" or "Networking Legacy Wirelss" should now appear in the list of patches
+- Click on "Post-Install Root Patch". Depending on your Wifi Card the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of patches
 - Start Patching. 
 - Once it's done, reboot
 - Enjoy working WiFi again
@@ -81,14 +81,14 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
 <details>
 <summary><strong>Modern Wifi patching example</strong> (Click to reveal!)</summary>
 
-- Option "Networking Modern Wirless" is available: <br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/064d1ddb-fd91-4ddf-abb5-a8b00e37f3e2)
+- Option "Networking Modern Wireless" is available: <br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/064d1ddb-fd91-4ddf-abb5-a8b00e37f3e2)
 - Patching in Progress. In my case, it's for a BCM94352HMB (Modern): <br>![Progress](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/7f0ed6dc-67bf-4f89-99a1-ea72d518fbee)
 - WiFi again: <br>![access](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/11e57c0e-fd81-4aea-ae5b-475b7cf013b2)
 
 </details>
 
 ## Method 2: Spoofing a compatible WiFi Card
-This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and rnables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me.
+This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and enables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me.
 
 ### 1. Prerequisites
 The following prerequisites have to be met in order to get "Modern" and "Legacy" wireless working in macOS Sonoma (tested on beta 5):
@@ -115,17 +115,17 @@ Config Section | Action
 **Kernel/Add** | <ul> <li> For **"Modern"** Wifi, add the following **Kexts** from the [Sonoma Development branch](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) of OCLP: <ul><li> `IOSkywalkFamily.kext` <li> `IO80211FamilyLegacy.kext` (and its Plugin `AirPortBrcmNIC.kext`) <li> `AirportBrcmFixup` (and its plugin `AirPortBrcmNIC_Injector.kext`) available [here](https://dortania.github.io/builds/?product=AirportBrcmFixup&viewall=true) <li> Organize the kexts as shown below and add `MinKernel` settings: <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)</ul> <li> For **"Legacy"** Wifi Cards, add the following kexts instead (avaialble [here](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)):<ul> <li> `corecaptureElCap.kext` <li> `IO80211ElCap.kext` and its Plugin `AirPortAtheros40.kext` (Enable for Atheros Cards) <li> Adjust `MinKernel` Settings as shown below: <br> ![LegacyWiFi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2aaa4b6d-61ee-4182-8565-4a30dfa9665f)
 **Kernel/Block**| <ul> <li>Block **IOSkywalkFamily** (**Modern** WiFi only): <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
 **Misc/Security** | Change `SecureBootModel` to `Disabled` to rule-out early Kernel Panics caused by security conflicts. You can re-enable it afterwards once everything is working!
-**NVRAM/Add/...-FE41995C9F82** |<ul><li> Change `csr-active-config` to `03080000` <li> Add `amfi=0x80` to `boot-args` (Required for applying Root Patches. Can be disabled afterwards.)<li> Optional: add `-brcmfxbeta` to `boot-args` (if you cannot connect to WiFi hotspots after applying root patches) <li> Optional: add `-amfipassbeta` to `boot-args` (if WiFi and BT don't work in the latest beta of Sonoma after applying root patches). 
+**NVRAM/Add/...-FE41995C9F82** |<ul><li> Change `csr-active-config` to `03080000` <li> Add `amfi=0x80` to `boot-args` (Required for applying Root Patches. Can be disabled afterwards.)<li> Optional: add `-brcmfxbeta` to `boot-args` (if you cannot connect to WiFi access points after applying root patches) <li> Optional: add `-amfipassbeta` to `boot-args` (if WiFi and BT don't work in the latest beta of Sonoma after applying root patches). 
 **NVRAM/Delete...-FE41995C9F82** | <ul> <li> Add `csr-active-config` <li> Add `boot-args`
 
 - Save your config and reboot
 - Enter `kextstat | grep -v com.apple` in Terminal to check if all the kexts you added are loaded. If they are not, add `-brcmfxbeta` boot-arg to your config. Save, reboot and verify again.
 - Download OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-- Click on "Post-Install Root Patch". Depending on your Wifi Card the option "Networking Modern Wirless" or "Networking Legacy Wirelss" should now appear in the list of patches:<br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/656dd8c4-8c5d-4663-ba52-8d0af19ff058)
-- If the option to patch Wiis is listd, dpply the patches and reboot. After that WiFi should work again. If the option to patch Wifi is not available, you will need a `IOName` spoof.
+- Click on "Post-Install Root Patch". Depending on your Wifi Card the option "Networking Modern Wirless" or "Networking Legacy Wireless" should now appear in the list of patches:<br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/656dd8c4-8c5d-4663-ba52-8d0af19ff058)
+- If the option to patch WiFi is listed, apply the patches and reboot. After that WiFi should work again. If the option to patch Wifi is not available, you will need a `IOName` spoof.
 
 ### 3. Finding an `IOName` spoof
-In order to trigger OpenCore Legacy Patchers Wifi patching, it needs to detect a compatible device-id. In this section we will find a suitable devce id and then inject it into macOS
+In order to trigger OpenCore Legacy Patchers Wifi patching, it needs to detect a compatible device-id. In this section we will find a suitable device id and then inject it into macOS
 
 1. Download and run Hackintool [Hackintool](https://github.com/benbaker76/Hackintool)
 2. Click on the "PCIe" Tab
@@ -153,7 +153,7 @@ In order to trigger OpenCore Legacy Patchers Wifi patching, it needs to detect a
   		0x0023,  # AR5416 - never used by Apple
   		0x0024,  # AR5418
 		```
-9. The required device-id to trigger OCLP's Modern Wifi Patchig in my case is `0x43A3`. 
+9. The required device-id to trigger OCLP's Modern Wifi Patching in my case is `0x43A3`. 
 10. This results in the following `IOName`: `pci14e4,43A3` (= pci path + new device-id without `0x` prefix)
 
 Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof into macOS
@@ -164,14 +164,14 @@ Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof
 2. Click on the "PCIe" Tab
 3. Click on the "Export" button at the bottom of the Window. This will export the device list in various formats to the desktop
 4. Open the `pcidevices.plist` with ProperTree
-5. Press CMD+F to bring uo the search funtion
-6. Change "Find" to `String` and search for `Wirelsss. This should take you right to the correct device entry:<br>![ProperTree01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f1600b8c-d5ad-4416-b13b-ad09b6058edb)
+5. Press CMD+F to bring uo the search function
+6. Change "Find" to `String` and search for `Wireless. This should take you right to the correct device entry:<br>![ProperTree01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f1600b8c-d5ad-4416-b13b-ad09b6058edb)
 7. Select the Dictionary with the device path into memory (CMD+C)
 8. Mount your EFI, open your config.plist and paste the entry into the `DeviceProperties/Add` section:<br>![config01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/24a7825d-bcd8-4d04-a795-59c29fd5b3bb)
 9. Next, add a new "Child" to the entry (press CMD+)
 10. Call it "IOName", select "String" as type and add the value for your Wifi card:<br>![config02](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/25fe9818-b58a-4b7c-8ec9-293561558d43)
 11. Save your config.plist and reboot
-12. Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the spoof worked, the option "Networking Modern Wirless" or "Networking Legacy Wirelss" should now appear in the list of patches:<br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a053ee5-dba6-4ff6-b087-f10f55f9a616)
+12. Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the spoof worked, the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of patches:<br>![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a053ee5-dba6-4ff6-b087-f10f55f9a616)
 13. Apply the Root patches, reboot and enjoy your newly working Wifi in macOS Sonoma!
 
 **NOTE**: If the Patcher does not show you the option to patch WiFi, then the spoof doesn't work. In this case you need to try a different spoof or use Method 1 instead!
@@ -190,5 +190,5 @@ Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof
 ## Credits
 - Acidanthera for OpenCore and Kexts
 - Dortania for OpenCore Legacy Patcher
-- Acquarius13 for figuring out what to edit in the Source Code
-- deeveedee for pointing me towards using `brcmfxbeta` boot-arg and the idea for spoofing a compatible `IOName`.
+- Acquarius13 for figuring out what to edit in OCLPs Source Code
+- deeveedee for pointing me towards using `brcmfxbeta` boot-arg and the method for spoofing a compatible `IOName`.
