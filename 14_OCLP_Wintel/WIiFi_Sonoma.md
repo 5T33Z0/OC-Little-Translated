@@ -185,4 +185,4 @@ Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof
 - Acidanthera for OpenCore and Kexts
 - Dortania for OpenCore Legacy Patcher
 - Acquarius13 for figuring out what to edit in the Source Code
-- deeveedee for his tests and pointing towards using `brcmfxbeta` boot-arg and idea for spoofing a compatible IOName.
+- deeveedee for pointing me towards using `brcmfxbeta` boot-arg and the idea for spoofing a compatible `IOName`.
