@@ -35,7 +35,9 @@ For kext that haven't been updated for macOS 14 support:
 **NOTE**: Always look for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
 ## OCLP Status
-- **OCLP 068**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) 
-	- Fixes graphics acceleration
-	- Introduces kexts to fix Broadcom WiFi (BCM94350, BCM94360, BCM43602, BCM94331, BCM943224)
+- **OCLP 069**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) 
+	- Introduces kexts and root patching options to re-enable previously working Wifi Cards
+- [**OCLP 068**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/0.6.8): 
+	- Fixes graphics acceleration patches in Sonoma
+	- Introduces AMFIPass.kext which allows AMFI to work with lowered/disabled SIP settings, resolving issues with [granting 3rd party app access to peripherals](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Peripherals.md) like webcams and micreophones
 - **OCLP 067**: currently not working (which was expected)

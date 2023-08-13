@@ -17,7 +17,7 @@
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
 
 ### Solution 0: Add `AMFIPass.kext` (best)
-The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI enabled even if root patches have been applied – which would be impossible otherwise.
+The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI fully enabled even if root patches have been applied – which would be impossible otherwise. This not only enhances security it also resolves the issue of not being able to grant 3rd party applications permissions to cameras and microphones.
 
 #### Add AMFIPass to your EFI and Config:
 - Download [**AMFIPass.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Acidanthera) from the OpenCore Legacy Patcher Repo and unzip it
@@ -31,7 +31,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
-> **Note**: You will still need `AMFI=0x80` before re-applying root patches after installing system updates
+> **Note**: You might still need `AMFI=0x80` before re-applying root patches after installing system updates
 
 ### Solution 1: Re-enable SIP (not always possible)
 
