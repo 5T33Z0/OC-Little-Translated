@@ -88,8 +88,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wifi Card (it only suppor
 </details>
 
 ## Method 2: Spoofing a compatible WiFi Card
-
-This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and rnables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary.
+This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and rnables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me.
 
 ### 1. Prerequisites
 The following prerequisites have to be met in order to get "Modern" and "Legacy" wireless working in macOS Sonoma (tested on beta 5):
@@ -176,6 +175,13 @@ Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof
 13. Apply the Root patches, reboot and enjoy your newly working Wifi in macOS Sonoma!
 
 **NOTE**: If the Patcher does not show you the option to patch WiFi, then the spoof doesn't work. In this case you need to try a different spoof or use Method 1 instead!
+
+### Tipps for Troubleshooting 
+- Open IORegistry explorer
+- Search for `ARPT`
+- Highlight the ARPT entry and look for the property `IOName` in the list on the right
+- If the listed `IOName` is identical with the one you injected via `DeviceProperties` then the spoof is working.
+- If it shows the original `IOName`, the spoof doesn't work.
 
 ## Notes
 - Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB). [There's a workaround](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows incremental updates to work temporarily.
