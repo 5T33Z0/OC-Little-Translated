@@ -7,11 +7,21 @@ During the early stages of macOS Sonoma development, kexts and frameworks respon
 
 The following Wi-Fi card chipsets are affected:
 
+<<<<<<< Updated upstream
 - **"Modern"**:
 	- Broadcom `BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
 - **"Legacy"**:
 	- Atheros `AR928X`, `AR93xx`, `AR242x`/`AR542x`, `AR5418`, `AR5416` (never used by Apple)
 	- Broadcom `BCM94322`, `BCM94328`
+=======
+- **"Modern"** cards:
+	- **Broadcom**:`BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
+	- **Required Kexts**: IOSkywalkFamily, IO80211FamilyLegacy, AirPortBrcmNIC, AirportBrcmFixup, AirPortBrcmNIC_Injector.
+- **"Legacy"** cards:
+	- **Atheros**: `AR928X`, `AR93xx`, `AR242x`/`AR542x`, `AR5418`, `AR5416` (never used by Apple)
+	- **Broadcom**: `BCM94322`, `BCM94328`
+	- **Required Kexts**: corecaptureElCap, IO80211ElCap, AirPortAtheros40 (for Atheros only)
+>>>>>>> Stashed changes
 
 Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to Wi-Fi as well. If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
