@@ -35,6 +35,7 @@ The following prerequisites have to be met in order to get "Modern" and "Legacy"
 	```shell
 	xcode-select --install
 	```
+6. Since we are working with beta software here, it's strongly adviced to use the latest nightly builds of OpenCore and *all* kexts you are using in order to maximize compatibilty. This can be achieved by switching OCAT to DEV Mode and update OpenCore and Kexts or by downloading the [latest builds from Dortania](https://dortania.github.io/builds/).
 
 **IMPORTANT**: If you did a clean install of the latest Sonoma beta abd didn't update from an existing install which had Command Line Tools installed already, you might get an error message when trying to install it via Terminal if the file is not present on the update server. In this case you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
 
