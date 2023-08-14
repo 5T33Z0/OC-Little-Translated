@@ -1,19 +1,25 @@
-![macOS](https://img.shields.io/badge/Applicable_to:-macOS_12+-version.svg) ![macOS](https://img.shields.io/badge/Affected_Mainboard/Chipset:-Gigabyte_Z490-white.svg)
-
 # Intel I225-V Ethernet Controller Fix
-
-**TABLE of CONTENTS**
-
-- [About](#about)
-- [Adding SSDT-I225-V](#adding-ssdt-i225-v)
-- [Settings](#settings)
-- [Troubleshooting](#troubleshooting)
-- [Credits and Resources](#credits-and-resources)
 
 ## About
 The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos. The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver. Apply this fix to re-enable Internet in macOS Monterey and newer.
 
-## Adding SSDT-I225-V
+## Option 1: Add `AppleIGC.kext` 
+Earlier 2023. a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) for I225/I226 cards was released. It's an "Intel 2.5G Ethernet driver for macOS. Based on the Intel igc implementation in Linux". It works on both stock and custom firmware, rendering all previously used fixes obsolete. It's highly recommended to revert old fixes and use this kext instead.
+
+**Instructions**: 
+
+- Add `AppleIGC.kext` to `EFI/OC/Kexts` and config.plist.
+- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, use `dk.e1000=0`. I don't need it on my system.
+- In `Kernel/Quirks`, turn on `DisableIoMapper` (might work without it. I need it on my I225-V with custom firmware).
+- Save your config and reboot
+- Run IORegistryExplorer and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
+
+:warning: **IMPORTANT**: If you previously used "Option 2" to get Ethernet working, you need to disable `SSDT-I225V` and `AppleIntelI210Ethernet.kext` so the new kext can be used.
+
+<details>
+<summary><strong>Option 2</strong> (Click to reveal!)</summary>
+
+## Option 2: Adding SSDT-I225-V (obsolete)
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. 
 
 For macOS 13, you also need to inject AppleIntel210Ethernet.kext, since it has been removed from the IONetworkingFamily.kext and you can't use the .dext version unless you flash a modded firmware.
@@ -66,6 +72,9 @@ After a few seconds, the connection should work. If you still can't access the I
 - `/Library/Preferences/com.apple.networkextension.necp.plist`
 - `/Library/Preferences/com.apple.networkextension.plist`
 - `/Library/Preferences/com.apple.networkextension.uuidcache.plist`
+
+</details>
+
 
 ## Credits
 - [**MacAbe**](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786836) for SSDT-I225-V.aml
