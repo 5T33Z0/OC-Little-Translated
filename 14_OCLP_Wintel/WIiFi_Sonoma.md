@@ -88,7 +88,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only suppo
 </details>
 
 ## Method 2: Spoofing a compatible WiFi Card
-This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and enables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me.
+This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and enables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me. But I cover it here anyway so you can try it for yourself.
 
 ### 1. Prerequisites
 &rarr; Same as for Method 1
