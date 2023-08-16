@@ -18,6 +18,7 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 
 ## Other
 - [macOS Sonoma Notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
+- [Fetching kext updates from OCLP with OCAT](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Fetching_OCLP_Kexts.md)
 
 ## Contribute?
 Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as legacy systemes go, I only have an Ivy Bridge Notebook and an iMac11,3 (Lynnfield) to test legacy configs. So if you have any suggestions or updated instructions to improve the workflow, feel free to create an issue and let me know!
