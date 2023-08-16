@@ -140,6 +140,12 @@ This should return something like this:
 ```
 > **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock is [skipped in macOS 13 based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c). So injecting the required kexts to re-enable legacy CPU Power Management results in a kernel panic unless CFG Lock can be disabled in the BIOS menu (or by flashing a modified BIOS if there is no setting available).
 
+### Alternative Solution
+
+Instead of injecting the required kext to re-enable legacy CPU Power Management on Sandy and Ivy Bridge via Bootloaders, it's also possible to install patched versions of the kexts in S/L/E. I haven't tested this and I wouldn't recommend it but it's an option.
+
+**Source**: [**OSX Latitude**](https://osxlatitude.com/forums/topic/18089-patched-aicpupm-kext-for-sandy-bridgeivy-bridge-cpu-power-management-in-macos-ventura/#comment-117988)
+
 ## Notes
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
 - ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)).
