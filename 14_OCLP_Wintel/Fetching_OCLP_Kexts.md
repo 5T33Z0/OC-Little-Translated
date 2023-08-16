@@ -6,7 +6,7 @@ As you may or my not know, you can add kexts to check for updates in OpenCore Au
 But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can feth it is quite a pain. So instead of adding the kexts via the app, we can edit the textfile that contains the URLs directly and just paste in the list of kexts that don't have their own repo. 
 ## Adding kext URLs in batch 
 
-1. Go to your Home Folder
+1. In Finder, navigate to your Home folder
 2. Press <kbd>CMD</kbd> + <kbd>.</kbd> (dot) to show hidden files and folders
 3. Navigate to:
 	- `/.ocat/Database/preset/KextUrl.txt` (if OCAT is running in regular Release Mode)
