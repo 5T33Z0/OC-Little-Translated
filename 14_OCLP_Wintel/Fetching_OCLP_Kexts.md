@@ -33,7 +33,7 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 	corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
 	```
 6. Save the file
-7. Press <kbd>CMD</kbd> + <kbd>.</kbd> (dot) to show hide files and folders again
+7. Press <kbd>CMD</kbd> + <kbd>.</kbd> (dot) to hide files and folders again
 8. Run OCAT and check for kext Updates 
 
 ## Notes
