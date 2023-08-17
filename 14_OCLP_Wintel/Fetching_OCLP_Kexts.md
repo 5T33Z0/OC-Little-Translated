@@ -14,23 +14,29 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 5. Add the following Lines to the list and save it:
 	```
 	AMFIPass.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
+	AppleIntelCPUPowerManagement.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
+	AppleIntelCPUPowerManagementClient.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
+	ASPP-Override.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
 	AutoPkgInstaller.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
-	CSLVFixup.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
-	RSRHelper.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
 	AppleEthernetAbuantiaAqtion.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	AppleIntel8254XEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
+	Bluetooth-Spoof.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
 	CatalinaBCM5701Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	CatalinaIntelI210Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
+	corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
+	CSLVFixup.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
 	Intel82574L.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
-	MarvelYukonEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
-	nForceEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	IOFireWireFamily.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
 	IOFireWireSBP2.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
 	IOFireWireSerialBusProtocolTransport.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
 	IO80211ElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
 	IO80211FamilyLegacy.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
 	IOSkywalkFamily.kext https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
-	corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
+	MarvelYukonEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
+	nForceEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
+	NoAVXFSCompressionTypeZlib.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
+	NoAVXFSCompressionTypeZlib-AVXpel.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
+	RSRHelper.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
 	```
 6. Save the file
 7. Press <kbd>CMD</kbd> + <kbd>.</kbd> (dot) to hide files and folders again
@@ -38,5 +44,5 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 
 ## Notes
 - Fetching kext updates might not work when using OCAT in DEV mode. I can't find the location of `KextUrl.txt` in the `DevDatabase`.
-- I only included kexts from the following categories: "Acidanthera", "Ethernet", "Firewire" and "Wifi". Omitted are: kexts already present in OCAT as well as Mac-specific ones ("Misc", "SSE", "USB"). 
+- I only included kexts from the following categories: "Acidanthera", "Ethernet", "Firewire" and "Wifi". Omitted are: kexts already present in OCAT as well as Mac-specific ones (most of "Misc", "SSE", "USB"). 
 - Currently, the kexts required for re-enabling Wi-Fi in macOS Sonoma are hosted on an extra branch called "Sonoma-Development". Once these are merged into the "Main" branch the URLs need to be adjusted.
