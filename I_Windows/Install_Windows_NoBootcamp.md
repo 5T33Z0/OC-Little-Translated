@@ -22,14 +22,14 @@ Once the installation is completed you can reboot and the entry for booting Wind
 1. Donwload the [Windows_Install.zip](https://i.applelife.ru/2023/04/501805_Windows_Install_5.9.1.zip) and unpack it
 2. Run the App
 3. Drag your Windows Installation ISO into the app's window
-4. The following Windows should be displayed:<br> ![](/Users/5t33z0/Desktop/Win10Config.png)
+4. The following Windows should be displayed:<br> ![Win10Config](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b633cf25-ee19-4581-887c-42173a232a8f)
 5. Under "index", enter the number representing the variant of Windows you want install
 6. Under "Disk" and "s" enter the location your FAT32 formatted partition (double-check in Disk Utility)
 7. Enter your macOS Login-Password so the installer can do its thing
 8. Click on install and watch the progress.
 9. Once the installation is complete the app will mount your System's EFI and add the "Microsoft" folder to it.
 10. Reboot
-11. Windows should now be available from the Bootpicker. If it's not, add `\EFI\Microsoft\Boot\bootmgfw.efi` to `Misc/BlessOverride` to your config.plist:<br> ![](/Users/5t33z0/Desktop/Bless.png)
+11. Windows should now be available from the Bootpicker. If it's not, add `\EFI\Microsoft\Boot\bootmgfw.efi` to `Misc/BlessOverride` to your config.plist:<br>![Bless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/fdb65892-ccea-4e7d-90f4-c60742a0124a)
 12. Save and Reboot
 13. Select Windows and the Installation starts. Once that's done, continue with Post-Install
 
