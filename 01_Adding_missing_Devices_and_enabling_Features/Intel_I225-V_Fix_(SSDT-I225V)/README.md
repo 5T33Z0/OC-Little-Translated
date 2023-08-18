@@ -6,15 +6,21 @@ The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte
 ## Option 1: Add `AppleIGC.kext` 
 Earlier 2023. a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) for I225/I226 cards was released. It's an "Intel 2.5G Ethernet driver for macOS. Based on the Intel igc implementation in Linux". It works on both stock and custom firmware, rendering all previously used fixes obsolete. It's highly recommended to revert old fixes and use this kext instead.
 
-**Instructions**: 
+### Instructions: 
 
-- Add `AppleIGC.kext` to `EFI/OC/Kexts` and config.plist.
-- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, use `dk.e1000=0`. I don't need it on my system.
-- In `Kernel/Quirks`, turn on `DisableIoMapper` (might work without it. I need it on my I225-V with custom firmware).
-- Save your config and reboot
-- Run IORegistryExplorer and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
+- **Revert previous Fixes**:
+	- Disable/Delete `SSDT-I225-V.aml`(if present) 
+	- Disable/Delete `FakePCIID.kext` (if present)
+	- Disable/Delete `FakePCIID_Intel_I225-V.kext` (if present)
+	- Disable/Delete `AppleIntelI210Ethernet.kext` (if preent)
+	- Disable Kernel/Patch `__Z18e1000_set_mac_typeP8e1000_hw` (if present)
 
-:warning: **IMPORTANT**: If you previously used "Option 2" to get Ethernet working, you need to disable `SSDT-I225V` and `AppleIntelI210Ethernet.kext` so the new kext can be used.
+- **Add `AppleIGC.kext`**
+	- Add `AppleIGC.kext` to `EFI/OC/Kexts` and config.plist.
+	- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, use `dk.e1000=0`. I don't need it on my system.
+	- In `Kernel/Quirks`, turn on `DisableIoMapper` (might work without it. I need it on my I225-V with custom firmware).
+	- Save your config and reboot
+	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 
 <details>
 <summary><strong>Option 2</strong> (Click to reveal!)</summary>
