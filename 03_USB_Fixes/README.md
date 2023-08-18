@@ -4,7 +4,7 @@
 
 ## Technical Background
 
-In macOS, the number of available USB ports is limited to 15. But since modern motherboard with XHCI controllers (Extensible Host Controller Interface)  provide up to 26 ports (per controller), this becomes an issue when trying to get USB ports working properly in macOS. If the ports are not mapped correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also true for Bluetooth since it's basically "wireless" USB 2.0 and therefore requires an internally assigned USB 2.0 port.
+In macOS, the number of available USB ports is limited to 15. But since modern motherboards with XHCI controllers (Extensible Host Controller Interface) provide up to 26 ports (per controller), this becomes an issue when trying to get USB ports working properly in macOS. If the ports are not mapped correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also true for Bluetooth since it's basically "wireless" USB 2.0 and therefore requires an internally assigned USB 2.0 port.
 
 Since a physical USB 3 connector (the blue ones) actually supports two USB protocols, it requires 2 ports: one called "HS" for "High Speed" – which is actually USB 2.0 – and one called "SS" for "Super Speed", which is USB 3.0. So in reality, you can actually only map 7 USB 3.0 Ports, supporting USB 2.0 and 3.0 protocols and one that's either or – and that's about it. USB 3.2 is not supported by macOS via the USB protocol – Apple uses Thunderbolt for this. So you have to decide which ports you are going to use and map them accordingly.
 
