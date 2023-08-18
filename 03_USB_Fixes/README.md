@@ -42,7 +42,7 @@ When using **USBToolBox** in macOS, there are 2 mapping options available which 
 - **Option 2** (uses native Apple classes): Hit "C" to enter the settings and then "N" to enable native Apple classes (AppleUSBHostMergeProperties). This kext can only be used with the SMBIOS it was created with. If you decide to change your SMBIOS later, you have to adjust the `model` property inside the kext's info.plist – otherwise the mapping won't be applied!
 
 ### Option 2: Mapping ports in macOS
-Since the `XhciPortLimit` quirk has been fixed since OC 0.9.3, it van be used again to map USB ports in macOS 11.4 and newer.
+Since the `XhciPortLimit` quirk has been fixed since OC 0.9.3, it can be used again to map USB ports in macOS 11.4 and newer!
 
 #### Using USBMap
 This method is applicable when using [**USBMap**](https://github.com/corpnewt/USBMap).
