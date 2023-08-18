@@ -61,7 +61,7 @@ This method is applicable when using [**Hackintool**](https://github.com/benbake
 - [**Update OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) to the lates version (0.9.3 or newer is mandatory!)
 - Enable Kernel Quirk `XchiPortLimit`
 - Add Daliansky's variant of [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) to EFI/OC/Kexts and your config.plist since it also supports the latest chipsets
-- [**Preppare your system**](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) for mapping USB ports
+- [**Prepare your system**](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) for mapping USB ports
 - Save your config and reboot
 - Run Hackintool
 - Click on the "USB" Tab
