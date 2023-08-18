@@ -92,14 +92,15 @@ To apply the Kernel patches, you have 2 options:
 - **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
 	- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
 	- **"Disable Library Validation Enforcement"** &rarr; Enable it
-	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable for installing/running **macOS Monterey**, otherwise disable it!
-	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; Enable for installing/running **macOS Ventura** and newer, otherwise disable it.
+	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
+   	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
+   	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
 	- **"Force IOGetVMMPresent"** &rarr; Enable it.
 	- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
 	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
-- **Option 2**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
+- **Option 2**: If your hardware is still supported by the latest version of macOS, but OTA System Updates are not working for [different reasons](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates), do the following:
 	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
-	- Add `revpatch=sbvmm` to boot-args or as an NVRAM parameter (check RestrictEvents' documentation for more details). This substitues "kern.hv_vmm_present" and "Force IOGetVMMPresent" Kernel patches. 
+	- Add `revpatch=sbvmm` to boot-args or as an NVRAM parameter (check RestrictEvents' documentation for more details). This enables the **`VMM-x86_64`** board-id, allowing OTA updates to workd again. 
 	- Save your config and reboot.
 
 To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
@@ -131,11 +132,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 </details>
 
 ## Notes
-- After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use: 
-	- [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) (highly recommended) or 
-	- Chris1111's patchers:
-		- [**Patch Intel HD 4000**](https://github.com/chris1111/Patch-HD4000-Monterey) (for Intel HD 4000)
-		- [**Gefore Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) (for NVIDIA Kepler Cards)
+- After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
 - For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) section. It contains guides for 1st to 6th Gen Intel Core CPUs. 
 
 ## Credits
