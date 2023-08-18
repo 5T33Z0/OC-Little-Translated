@@ -79,19 +79,19 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 > **Warning**: Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 ### Booter Patches
-- Copy the raw text of the OCLP [config](https://raw.githubusercontent.com/dortania/OpenCore-Legacy-Patcher/main/payloads/Config/config.plist) to the clipboard
-- Paste it into ProperTree
-- Copy the entries from `Booter/Patch` to your config.plist to the same section (and enable them)
+- Mount your EFI
+- Open your config.plist with ProperTree
+- Copy the entries from OCLPs [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L267) section to your config.plist and enable them
 - Leave ProperTree open an continue reading
 
-**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents kexts instead to workaround issues with System Update Notifications.
+**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents.kext instead to workaround issues with System Update Notifications.
 
 ### Kernel Patches
 To apply the Kernel patches, you have 2 options:
 
-- **Option 1**: Copy the following entries from `Kernel/Patch` section your to config.plist::
+- **Option 1**: Copy the following entries from OCLPs [`Kernel/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L1636) section your to config.plist:
 	- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
-	- **"Disable Library Validation Enforcement"** &rarr; Enable it
+	- **"Disable Library Validation Enforcement"** &rarr; Enable it!
 	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
    	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
    	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
