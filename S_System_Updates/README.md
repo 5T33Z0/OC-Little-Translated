@@ -23,14 +23,13 @@ Re-installing (graphics) drivers onto the system partition breaks the security s
 
 ## Fix
 
-All of these issues can be eliminated in macOS 11.3+ by removing the `-no_compat_check` boot-arg and adding the Board-id VMM spoof to your config. This allows using an unsupported SMBIOS, have proper CPU Power Management and get System Updates. [**Follow the instructions here**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to add the necessary patches to your config. 
-
-You only need the Booter patches not the Kernel patches, though! These can be substituted by the [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer.
+1. Remove `-no_compat_check` boot-arg (if present)
+2. Add the [Booter Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L268) from OCLPs config and enable them.
+3. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer. This also allows using the "native" SMBIOS for the used CPU which improves CPU and GPU power management.
 
 Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variables. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
 
 ![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
-
 
 ## Limitations
 
@@ -49,4 +48,5 @@ But as mentioned earlier, using `-no_compat_check` disables system updates. Ther
 When I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which is pretty damn cool.
 
 ## Credits
-- Acidanthera for OCLP and RestrictEvents.kext
+- Dortania for OCLP 
+- Acidanthera and RestrictEvents.kext
