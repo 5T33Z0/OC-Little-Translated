@@ -29,7 +29,7 @@ Here's the output of the APFS volume in my iMac that I applied root patches to w
 
 As you can see, status of the `Snapshot Sealed` is `Broken`.
 
-## Efect
+## Effect
 Once a snapshot is broken, incremental (or delta) updates will no longer work. Instead, every time a System Update is available, the full macOS Installer is downloaded instead (approx. 13 GB), which takes a long time, causes a lot of traffic and requires more enegergy which in return is bad for the envirnment.
 
 ## Workaround
