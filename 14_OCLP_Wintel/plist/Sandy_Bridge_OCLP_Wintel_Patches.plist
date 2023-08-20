@@ -11,6 +11,40 @@
 		<key>Systems: Desktops/Laptops</key>
 		<string></string>
 	</dict>
+	<key>ACPI</key>
+	<dict>
+		<key>Delete</key>
+		<array>
+			<dict>
+				<key>All</key>
+				<false/>
+				<key>Comment</key>
+				<string>Delete CpuPm</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>Q3B1UG0AAAA=</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>U1NEVA==</data>
+			</dict>
+			<dict>
+				<key>All</key>
+				<false/>
+				<key>Comment</key>
+				<string>Delete Cpu0Ist</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>Q3B1MElzdAA=</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>U1NEVA==</data>
+			</dict>
+		</array>
+	</dict>
 	<key>Booter</key>
 	<dict>
 		<key>Patch</key>
@@ -69,11 +103,6 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x16,0x0) (IMEI)</key>
-			<dict>
-				<key>device-id</key>
-				<data>OhwAAA==</data>
-			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Desktop)</key>
 			<dict>
 				<key>AAPL,snb-platform-id</key>
@@ -90,11 +119,11 @@
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (Laptop)</key>
 			<dict>
-				<key>#AAPL00,DualLink</key>
-				<data>AQAAAA==</data>
 				<key>AAPL,snb-platform-id</key>
 				<data>AAABAA==</data>
 				<key>device-id</key>
+				<data>AQAAAA==</data>
+				<key>#AAPL00,DualLink</key>
 				<data>AQAAAA==</data>
 			</dict>
 			<key>#PciRoot(0x0)/Pci(0x2,0x0) (NUC/USDT)</key>
@@ -102,7 +131,14 @@
 				<key>AAPL,snb-platform-id</key>
 				<data>EAADAA==</data>
 			</dict>
+			<key>#PciRoot(0x0)/Pci(0x16,0x0) (IMEI)</key>
+			<dict>
+				<key>device-id</key>
+				<data>OhwAAA==</data>
+			</dict>
 		</dict>
+		<key>Delete</key>
+		<dict/>
 	</dict>
 	<key>Kernel</key>
 	<dict>
@@ -233,25 +269,6 @@
 				<string>16.0.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
-			</dict>
-		</array>
-		<key>Block</key>
-		<array>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>Comment</key>
-				<string>Allow IOSkywalk Downgrade (for Sonoma)</string>
-				<key>Enabled</key>
-				<false/>
-				<key>Identifier</key>
-				<string>com.apple.iokit.IOSkywalkFamily</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string>23.0.0</string>
-				<key>Strategy</key>
-				<string>Exclude</string>
 			</dict>
 		</array>
 		<key>Patch</key>
@@ -497,6 +514,37 @@
 				<integer>0</integer>
 			</dict>
 		</array>
+		<key>Block</key>
+		<array>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>Comment</key>
+				<string>Allow IOSkywalk Downgrade (for Sonoma)</string>
+				<key>Enabled</key>
+				<false/>
+				<key>Identifier</key>
+				<string>com.apple.iokit.IOSkywalkFamily</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>23.0.0</string>
+				<key>Strategy</key>
+				<string>Exclude</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Misc</key>
+	<dict>
+		<key>Security</key>
+		<dict>
+			<key>ScanPolicy</key>
+			<integer>0</integer>
+			<key>SecureBootModel</key>
+			<string>Disabled</string>
+			<key>Vault</key>
+			<string>Optional</string>
+		</dict>
 	</dict>
 	<key>NVRAM</key>
 	<dict>
@@ -511,10 +559,10 @@
 			<dict>
 				<key>OCLP-Settings</key>
 				<string>-allow_fv -allow_amfi</string>
-				<key>revblock</key>
-				<string>media</string>
 				<key>revpatch</key>
 				<string>sbvmm,f16c,asset</string>
+				<key>revblock</key>
+				<string>media</string>
 			</dict>
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
@@ -546,12 +594,28 @@
 			<key>FA4CE28D-B62F-4C99-9CC3-6815686E30F9</key>
 			<array/>
 		</dict>
-		<key>LegacyOverwrite</key>
-		<false/>
-		<key>LegacySchema</key>
-		<dict/>
 		<key>WriteFlash</key>
 		<true/>
+	</dict>
+	<key>UEFI</key>
+	<dict>
+		<key>ConnectDrivers</key>
+		<true/>
+		<key>Drivers</key>
+		<array>
+			<dict>
+				<key>Arguments</key>
+				<string>--preserve-boot</string>
+				<key>Comment</key>
+				<string>Adds NVRAM reset to Bootpicker</string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ResetNvramEntry.efi</string>
+			</dict>
+		</array>
 	</dict>
 </dict>
 </plist>
