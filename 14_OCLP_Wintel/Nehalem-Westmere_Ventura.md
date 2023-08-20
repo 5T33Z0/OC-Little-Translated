@@ -48,30 +48,9 @@ In order to check if your system is potentially capable of installing and runnin
 2. CPU must support **SSE4.2** in order to boot macOS 10.14 Mojave and newer
 
 ### Potential Candidates
-Listed below are CPU families used in Intel Macs prior to Sandy Bridge which *might* work with Ventura.
+Check [this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) to find out if your CPU is supported and which SMBOS is suitable.
 
-- **Desktop/HEDT**: 
-	- **Intel Celeron Core Duo**:
-		- ~~**Yonah**~~ &rarr; incompatible, 32-bit only
-		- **Merom** – Intel Core Duos used in **iMac5,1/6,1/7,1** 
-		- **Penryn** – Intel Core Duos used in **iMac8,1/9,1**
-		- ~~**Wolfdale**~~ &rarr; Incompatible; doesn't support SSE4.2
-	- **Intel Core i**:
-		- **Lynnfield** – 1st Gen Intel Core i7 **iMac11,x**
-	- **Intel Xeon**:
-		- **Woodcrest** – Xeon CPUs used in **MacPro1,1**
-		- **Clovertown** – Xeon CPUs used in **MacPro2,1**
-		- **Harpertown** – Xeon CPUs used in **MacPro3,1**
-		- **Bloomfield** – Xeon CPUs used in **MacPro4,1/5,1**
-		- **Nehalem EP** – Xeon CPUs used in **MacPro4,1**
-		- **Westmere EP** – Xeon CPUs used in **MacPro5,1**
-- **Mobile/NUC**:
-	- **Intel Core Duo** 
-		- **Penryn** – Intel Core Duos used in **MacBook/MacBookPro4,1** (2008) **MacBook/MacBook5,x** (2009), **MacBook6,1** (2010) **MacBook/MacBookPro7,1** (2012)
-	- **Intel Core i** era:
-		- **Arrendale** – 1st Gen Intel Core, used **MacBookPro5,1**, **MacBookPro6,1**
-
-> **Note**: Check out the Anti-Hackintosh Buyers Guide to find out more about [incompatible and CPUs to avoid](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/CPU.html).
+> **Note**: Check the [Anti-Hackintosh Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/CPU.html) to find out more about incompatible CPUs and CPUs to avoid.
 
 ### Patching Principle
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge and older this mainly affects:
