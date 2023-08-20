@@ -17,7 +17,7 @@ CPU Family | Mac Model / SMBIOS
 **Haswell** | <ul><li>MacBookAir6,x <li> MacBookPro11,x <li> Macmini7,1 <li>iMac14,x <li>iMac15,1
 **Broadwell**    | <ul><li>MacBook8,1 <li>MacBookAir7,x <li>MacBookPro12,x <li> iMac16,x
 **Skylake**      | <ul><li>MacBook9,1 <li>MacBookPro13,x <li> iMac17,1  
-**Kaby Lake**    | <ul><li>MacBook10,1 <li>MacBookPro14,x <iMac18,x>
+**Kaby Lake**    | <ul><li>MacBook10,1 <li>MacBookPro14,x <li>iMac18,x
 
 ## Usage example
 
