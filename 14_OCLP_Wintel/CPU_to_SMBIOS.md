@@ -27,7 +27,7 @@ CPU Family | Mac Model / SMBIOS
 - Select the SMBIOS of choice from the "Target" dropdown menu and click on the "Return" button
 - Back in the main window, click on "Build and Install OpenCore" 
 - This will generate the EFI in a temporary location
-- Once that's finished, there will be a Pop-up:<br> ![](/Users/stunner/Desktop/EFI_build.png)
+- Once that's finished, there will be a Pop-up:<br> ![EFI_build](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/71b8579b-924e-4697-addc-06bd88242e21)
 - :warning: **DON'T click on "Install to Disk"!** This will replace your EFI folder by the one for the corresponding Mac model!
 - Instead, click on "View Build Log" 
 - Copy the path to the EFI listed at the end of the log
