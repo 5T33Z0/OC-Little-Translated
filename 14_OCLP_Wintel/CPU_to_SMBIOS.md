@@ -2,22 +2,22 @@
 
 Listed below are all the Mac models supported by OpenCore Legacy Patcher, grouped by CPU Family. This should make it easier to research which settings, kexts and patches can be carried over to Wintel configs.
 
-CPU Family | Mac Model / SMBIOS   
-:---------:|-------------------
-**Harpertown** | <ul><li>MacPro3,1 <li> Xserve2,1
-**Blomfield**, <br> **Nehalem EP** | <ul><li>MacPro4,1 <li>Xserve3,1
-**Bloomfield**, <br>**Westmere EP** | MacPro5,1
-**Merom** | iMac7,1
-**Penryn** | <ul><li>MacBook5,x <li>MacBook6,1 <li>MacBook7,1 <li> MacBookAir2,1 <li>MacBookAir3,x <li> MacBookPro4,1 <li> MacBookPro5,x <li> MacBookPro7,x <li> Macmini3,1 <li> Macmini4,1 <li> iMac8,1 <li> iMac9,1
-**Wolfdale** | iMac10,1
-**Arrandale** | <ul><li> MacBookPro6,x <li>iMac11,x
-**Sandy Bridge** | <ul><li>MacBookAir4,x <li> MacBookPro8,x <li> Macmini5,x <li> iMac12,x
-**Ivy Bridge**   | <ul><li>MacBookAir5,x <li>MacBookPro9,x <li> MacBookPro10,x <li> Macmini6,x <li> iMac13,x
-**Ivy Bridge EP** | MacPro6,1  
-**Haswell** | <ul><li>MacBookAir6,x <li> MacBookPro11,x <li> Macmini7,1 <li>iMac14,x <li>iMac15,1
-**Broadwell**    | <ul><li>MacBook8,1 <li>MacBookAir7,x <li>MacBookPro12,x <li> iMac16,x
-**Skylake**      | <ul><li>MacBook9,1 <li>MacBookPro13,x <li> iMac17,1  
-**Kaby Lake**    | <ul><li>MacBook10,1 <li>MacBookPro14,x <li>iMac18,x
+CPU Family | Mac Model / SMBIOS | Intel Core <br>Gen. |
+:---------:|--------------------|:-----:
+**Harpertown** | <ul><li>MacPro3,1 <li> Xserve2,1 | 1st
+**Blomfield**, <br> **Nehalem EP** | <ul><li>MacPro4,1 <li>Xserve3,1 | 1st
+**Bloomfield**, <br>**Westmere EP** | MacPro5,1 | 1st
+**Merom** | iMac7,1 | 1st
+**Penryn** | <ul><li>MacBook5,x <li>MacBook6,1 <li>MacBook7,1 <li> MacBookAir2,1 <li>MacBookAir3,x <li> MacBookPro4,1 <li> MacBookPro5,x <li> MacBookPro7,x <li> Macmini3,1 <li> Macmini4,1 <li> iMac8,1 <li> iMac9,1 | 1st
+**Wolfdale** | iMac10,1 | 1st
+**Arrandale** | <ul><li> MacBookPro6,x <li>iMac11,x |1st
+**Sandy Bridge** | <ul><li>MacBookAir4,x <li> MacBookPro8,x <li> Macmini5,x <li> iMac12,x | 2nd
+**Ivy Bridge**   | <ul><li>MacBookAir5,x <li>MacBookPro9,x <li> MacBookPro10,x <li> Macmini6,x <li> iMac13,x | 3rd
+**Ivy Bridge EP** | MacPro6,1 | 3rd
+**Haswell** | <ul><li>MacBookAir6,x <li> MacBookPro11,x <li> Macmini7,1 <li>iMac14,x <li>iMac15,1 | 4th
+**Broadwell**    | <ul><li>MacBook8,1 <li>MacBookAir7,x <li>MacBookPro12,x <li> iMac16,x | 5th
+**Skylake**      | <ul><li>MacBook9,1 <li>MacBookPro13,x <li> iMac17,1 | 6th
+**Kaby Lake**    | <ul><li>MacBook10,1 <li>MacBookPro14,x <li>iMac18,x | 7th
 
 ## Usage example
 
