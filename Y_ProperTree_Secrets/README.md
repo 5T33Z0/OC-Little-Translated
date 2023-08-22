@@ -35,13 +35,12 @@ You probably have come across posts like these on Forums or Reddit:
 	<data></data>
 </dict>
 ```
-Isolated patches for your config in raw text format instead of a ready-made .plist. I hate if patches are posted this way for several reasons:
+Isolated patches in text format instead of a ready-made .plist. I hate if patches are posted this way for several reasons:
 
 - In this form, it's a drag to integrate them into an existing `config.plist`
-- It's hard to "convert" the patch if you want to add it to your config manually since the data is presented in Base64 format. 
+- It's hard to "convert" the patch if you want to add it to your config manually since the data is presented in Base64. 
 - There's always a chance to mess up the structure of the plist file if you have to do it in text mode. 
-- Some plist editors don't even offer/allow pasting of raw text.
-- If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item because the file header and the rest of tree structure is missing. 
+- Some plist editors don't even offer/allow pasting of raw text. If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item because the file header and the rest of tree structure is missing. 
 
 ## ProperTree for the win
 
