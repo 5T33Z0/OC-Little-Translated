@@ -20,7 +20,6 @@ This SSDT injects two devices into macOS: `MCHC` and `SMBUS` (or `SBUS`). Please
 - iMac7,1 to iMac20,x
 - MacBook3,1 to MacBook9,1
 - MacBookAir1,1 to MacBookAir9,1
-- MacBookAir1,1 to MacBookAir9,1
 - MacBookPro3,1 to MacBookPro16,x
 - MacMini3,1 to MacMini8,1
 
