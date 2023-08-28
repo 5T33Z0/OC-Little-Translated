@@ -1,6 +1,6 @@
 # Automated SSDT Generation with SSDTTime
 
-With the python script **SSDTTime**, you can generate the following SSDTs by analyzing your system's `DSDT`:
+The python script **SSDTTime** can generate the following SSDTs by analyzing your system's `DSDT.aml` ACPI table:
 
 * ***[SSDT-AWAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))*** – Context-aware AWAC and Fake RTC
 * ***[SSDT-Bridge](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)*** – ACPI device for missing PCI bridges for passed device path
