@@ -27,7 +27,7 @@ This SSDT injects two devices into macOS: `MCHC` and `SMBUS` (or `SBUS`). Please
 
 **Update (May 14th, 2023)**:
 
-Recently, it has been discovered that the 3rd device – `DVL0` ("Diagsvault") – injected by previous versions SSDT-SBUS-MCHC is an apple-only device. It writes to SMBus addresses 50h-57h via SMBus Host Controller registers which are disabled by default since Intel 7 Series. So there's no point in injecting `DVL0` on Wintel systems. Therefore, I removed it from the corresponding SSDTs.
+Recently, it has been discovered that the 3rd device – `DVL0` ("Diagsvault") – injected by previous versions `SSDT-SBUS-MCHC` is an Apple-only device. It writes to SMBus addresses 50h-57h via SMBus Host Controller registers which are write-disabled by default since Intel 7 Series. So there's no point in injecting `DVL0` on Wintel systems. Therefore, I removed it from the corresponding SSDTs.
 
 :bulb: If you are using an old version of `SSDT-SBUS-MCHC`, please remove the `DVL0` device from it!
 
