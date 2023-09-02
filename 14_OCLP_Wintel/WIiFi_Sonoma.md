@@ -7,11 +7,6 @@ During the early stages of macOS Sonoma development, kexts and frameworks respon
 
 The following Wi-Fi card chipsets are affected:
 
-- **"Modern"**:
-	- Broadcom `BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
-- **"Legacy"**:
-	- Atheros `AR928X`, `AR93xx`, `AR242x`/`AR542x`, `AR5418`, `AR5416` (never used by Apple)
-	- Broadcom `BCM94322`, `BCM94328`
 - **"Modern"** cards:
 	- **Broadcom**:`BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
 	- **Required Kexts**: IOSkywalkFamily, IO80211FamilyLegacy, AirPortBrcmNIC, AirportBrcmFixup, AirPortBrcmNIC_Injector.
