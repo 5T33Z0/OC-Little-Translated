@@ -8,18 +8,18 @@ During the early stages of macOS Sonoma development, kexts and frameworks respon
 The following Wi-Fi card chipsets are affected:
 
 - **"Modern"** cards:
-	- **Broadcom**:`BCM94350` (`BCM94352` works as well), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
+	- **Broadcom**:`BCM94350` (incuding `BCM94352`), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
 	- **Required Kexts**: IOSkywalkFamily, IO80211FamilyLegacy, AirPortBrcmNIC, AirportBrcmFixup, AirPortBrcmNIC_Injector.
 - **"Legacy"** cards:
 	- **Atheros**: `AR928X`, `AR93xx`, `AR242x`/`AR542x`, `AR5418`, `AR5416` (never used by Apple)
 	- **Broadcom**: `BCM94322`, `BCM94328`
 	- **Required Kexts**: corecaptureElCap, IO80211ElCap, AirPortAtheros40 (for Atheros only)
 
-Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable such cards by injecting the required kexts and applying root patches to Wi-Fi as well. If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
+Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable these Wi-Fi cards by injecting the required kexts as well as patching files in the system with OCLP. If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
-Since the Patcher for macOS Sonoma is still in development, the feature to patch Wi-Fi is not available on the current public release (0.6.8). On top of that, the ability to patch Wi-Fi is based on detecting  compatible device-ids/IONames of Wi-Fi/BT cards used in real Macs. So on Wintel systems, the patcher won't show the option to patch Wi-Fi if it doesn't detect a card with an `IOName` used by Apple. 
+Since the patcher for macOS Sonoma is still in development, the feature to patch Wi-Fi is not available on the current public release (0.6.8). On top of that, the ability to patch Wi-Fi is based on detecting  compatible device-ids/IONames of Wi-Fi/BT cards used in real Macs. So on Wintel systems, the patcher won't show the option to patch Wi-Fi if it doesn't detect a card with an `IOName` used by Apple. 
 
-Although OCLP allows enabling certain features in the app, the option to manually enable patching Wi-Fi has not been implemented into the GUI (yet). So we have to either force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2).
+Although OCLP allows setting certain features in the app, the option to manually enable Wi-Fi patching has not been implemented into the GUI of the app (yet). So we have to either force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2), whereby the second method did not work for me. 
 
 ## Method 1: Force-Enable Wi-Fi-Patching in OpenCore Legacy Patcher
 
@@ -91,7 +91,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only suppo
 </details>
 
 ## Method 2: Spoofing a compatible WiFi Card
-This method uses a spoof instead to inject a compatible IOName of WiFi cards used in real Macs. This way, the OpenCore Patcher detects a supported card and enables the option for applying root patches for "Modern" or "Legacy" WiFi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me. But I cover it here anyway so you can try it for yourself.
+This method uses a spoof instead to inject a compatible `IOName` of Wi-Fi cards used in real Macs. This way, OpenCore Patcher detects a supported card and enables the option for applying root patches for "Modern" or "Legacy" Wi-Fi cards so compiling a modified version of OCLP is not necessary. Unfortunately, this approach didn't work for me. But I cover it here anyway so you can try it for yourself.
 
 ### 1. Prerequisites
 &rarr; Same as for Method 1
