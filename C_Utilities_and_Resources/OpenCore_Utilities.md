@@ -17,4 +17,4 @@ Utility | Description
 **macserial** | Tool to generate SMBIOS data (cf. Chpt. 10.6: "SMBIOS Properties"). Also availably as python script called [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) which provides a GUI.
 **ocpasswordgen** | Tool for generating a password which has to be entered on boot prior to reaching the BootPicker (cf. Chpt. 8.5: "Security Properties").
 **ocvalidate** | Utility to validate whether a `config.plist` matches requirements and conventions imposed by OpenCore (cf. Chpt. 2.3 "Configuration Structure").
-**Shim-To-Cert** | Utility to extract the public key needed to boot a Linux distro’s kernel directly, as done when using OpenCore with `OpenLinuxBoot`, rather than via GRUB shim (cf. Chpt. 11.6: "OpenLinuxBoot").
+**ShimUtils** | Set of utilities to prepare your system to boot Linux from within OpenCore and sign security certificates so Secure Boot can be used. For details, read the included README.md file and check chapter 11.7: "OpenLinuxBoot" of the Configuration.pdf.
