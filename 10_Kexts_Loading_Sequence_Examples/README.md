@@ -84,7 +84,7 @@ macOS 10.15 (Catalina)     | 19.0.0    | 19.99.99 |Intel (64-bit only)
 macOS 11 (Big Sur)         | 20.0.0    | 20.99.99 |Intel (64-bit)</br>Apple Silicon (ARM)
 macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
 macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
-macOS 13 (Sonoma)          | 23.0.0    | 23.99.99 | "
+macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
 
 :bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a version of macOS which uses a Kernel greater than `X.9.9`. 
 
