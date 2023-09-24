@@ -49,7 +49,7 @@ Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/feat
 - Boot into macOS 
 - Update OpenCore, Config, Drivers and Kexts
 - Delete the `Bootstrap` folder
-- Set `Misc/Boot/LauncherOption` as needed (Refer to the [**Updating Bootstrao**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) and Configuration.pdf for more details)
+- Set `Misc/Boot/LauncherOption` as needed (Refer to the [**Updating Bootstrap**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) and Configuration.pdf for more details)
 
 :bulb: **TIPS**:
 
