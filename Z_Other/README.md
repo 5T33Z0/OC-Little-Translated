@@ -11,3 +11,4 @@ A lose collection of links to guides, fixes, news and blog articles. Feel free t
 - [Old Hackintosh Guides](https://web.archive.org/web/20170911113616/http://www.rampagedev.com/guides/) by Rampage Dev. Excellent read. Might be useful for users on the vintage tip. Definitely worth preservation.
 - [How to modify "About this Mac" section](https://www.idownloadblog.com/2017/01/13/how-to-modify-about-this-mac-hackintosh/)
 - [BIOS extraction and modification guide](https://github.com/dreamwhite/bios-extraction-guide/blob/master/README.md#unlock-cfg-lock)
+- [Xcode Releases](https://xcodereleases.com/?scope=release)
