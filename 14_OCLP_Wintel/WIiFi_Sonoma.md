@@ -69,7 +69,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only suppo
 - Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are required files so patching won't fail.
 - Once the download is complete, navigate to `/Downloads/OpenCore-Legacy-Patcher-main/resources/sys_patch/`
 - Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
-- Change the following setting based on the chipset your Wi-Fi Card uses:
+- Under "# Misc Patch Detection", change the following setting based on the chipset your Wi-Fi Card uses:
 	- For **Modern** Wi-Fi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** Wi-Fi Cards: set `self.legacy_wifi = True`
 	- :warning: Enable either **Modern** or **Legacy**, not both! It will break Wi-Fi.
