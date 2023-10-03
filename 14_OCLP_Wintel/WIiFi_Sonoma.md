@@ -104,7 +104,7 @@ In order to trigger OCLPs Wi-Fi patching, it needs to detect a compatible device
 2. Click on the "PCIe" Tab
 3. Check the columns Class/Sub-Class to find "Network Controller":<br>![Hackintool01](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e5f8f4cc-69e8-4b8e-8785-fe15ef5ed04d)
 4. Take note of its "IOReg IOName". In this example, it's `pci14e4,43b1`. **Explanation**: Here, `IOName` is a combination of the pci device's Vendor-ID (`pci14e4` for Broadcom) as well as its device-id (`43b1`). In this case, it's from an BCM94352HMB DW1550 card not used in real Macs so OCLP won't detect if as "patchable".
-5. The [pci_data.py](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/sonoma-development/data/pci_data.py) file contains the device-ids we need:
+5. The [pci_data.py](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/data/pci_data.py) file contains the device-ids we need:
 	- For patching **Broadcom** cards, the relevant IDs are located under "class broadcom_ids": 
 		```
   		AirPortBrcmNIC = [ // >> MODERN Wi-Fi
