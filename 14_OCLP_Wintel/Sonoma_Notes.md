@@ -35,6 +35,7 @@ For kext that haven't been updated for macOS 14 support:
 **NOTE**: Always look for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
 ## OCLP Status
+- **October 2nd, 2023**: [**OCLP version 1.0.0:**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. It enables running macOS Sonoma on 83 previously unsupported Mac models. With it, they also switched the numbering of releases from a simple "counter" to Semantic Versioning.
 - **OCLP 069**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) 
 	- Introduces kexts and root patching options to re-enable previously working Wifi Cards
 - [**OCLP 068**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/0.6.8): 
