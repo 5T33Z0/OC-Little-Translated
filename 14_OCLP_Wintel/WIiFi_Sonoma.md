@@ -1,6 +1,6 @@
 # How to re-enable previously supported Wi-Fi Cards in macOS Sonoma with OpenCore Legacy Patcher
 
-> **Applicable to**: OCLP 0.6.9 (Sonoma Development Branch)
+> **Applicable to**: OCLP 0.6.9+
 
 ## Technical Background
 During the early stages of macOS Sonoma development, kexts and frameworks responsible for using older Wi-Fi Cards were removed, leaving the Wi-Fi portion of commonly used BT/Wi-Fi cards in a non-working state.
@@ -17,9 +17,7 @@ The following Wi-Fi card chipsets are affected:
 
 Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable these Wi-Fi cards by injecting the required kexts as well as patching files in the system with OCLP. If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
-Since the patcher for macOS Sonoma is still in development, the feature to patch Wi-Fi is not available on the current public release (0.6.8). On top of that, the ability to patch Wi-Fi is based on detecting  compatible device-ids/IONames of Wi-Fi/BT cards used in real Macs. So on Wintel systems, the patcher won't show the option to patch Wi-Fi if it doesn't detect a card with an `IOName` used by Apple. 
-
-Although OCLP allows setting certain features in the app, the option to manually enable Wi-Fi patching has not been implemented into the GUI of the app (yet). So we have to either force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2), whereby the second method did not work for me. 
+Although OCLP allows setting certain features in the app, the option to manually select Wi-Fi patching has not been implemented into the GUI of the app (yet). So we have to either force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2), whereby the second method did not work for me. 
 
 ## Method 1: Force-Enable Wi-Fi-Patching in OpenCore Legacy Patcher
 
