@@ -54,7 +54,7 @@ Config Section | Action
 - Enter `kextstat | grep -v com.apple` in Terminal to check if all the required kexts you added are loaded. If not add `-amfipassbeta` (if AMFIPass.kext is not present) and `-brcmfxbeta` (if Wireless is working but you cannot connect to accesspotsints) 
 - Download the [latest release](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) of OpenCore Legacy Patcher
 - Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the option to patch "Networking Modern Wireless" or "Networking Legacy Wireless" is available, apply the root patches:<br> ![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e1495929-945a-400e-961d-6263f15c3fde)
-- If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, you need either need to force-enable the option in the Source Code and build OpenCore Patcher yourself (Step 3) or inject a spoofed Wi-Fi device into macOS (Method 2).
+- If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, you need either need to force-enable the option in the Source Code and build OpenCore Patcher yourself (Step 3) or inject a spoofed Wi-Fi device into macOS.
 
 ### 3. Building OCLP from Source and applying Root Patches
 Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only supports specific cards used in real Macs after all…)
