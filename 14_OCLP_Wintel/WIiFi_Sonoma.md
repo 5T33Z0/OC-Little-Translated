@@ -60,7 +60,7 @@ Config Section | Action
 Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only supports specific cards used in real Macs after all…)
 
 - Download the OCLP [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher) and unzip it
--  Enter in Terminal:
+-  Enter in Terminal (line by line):
     ```shell
     cd ~/Downloads/OpenCore-Legacy-Patcher-main
     pip3 install -r requirements.txt
