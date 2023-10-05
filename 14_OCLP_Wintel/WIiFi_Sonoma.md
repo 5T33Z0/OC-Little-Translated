@@ -73,7 +73,7 @@ Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only suppo
 	- For **Modern** Wi-Fi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** Wi-Fi Cards: set `self.legacy_wifi = True`
 	- :warning: Enable either **Modern** or **Legacy**, not both! It will break Wi-Fi.
-	- Close the .py file and double-click on `OpenCore-Patcher-GUI.command` to build the Patcher App. The GUI will pop-up automatically once it's done.
+	- Close the .py file and double-click on `OpenCore-Patcher-GUI.command` to run the Patcher App.
 - Click on "Post-Install Root Patch". Depending on your Wi-Fi Card the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of applicable patches.
 - Start Patching. 
 - Once it's done, reboot
