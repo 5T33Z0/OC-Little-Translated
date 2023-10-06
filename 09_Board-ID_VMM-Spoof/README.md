@@ -107,6 +107,8 @@ To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the
 
 Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
 
+**IMPORTANT**: If you experence issues with Bluetooth when using Broadcom cards in macOS Sonoma, then disable the Kernel Patches and follow the instructions of "Option 2" instead!
+
 <details>
 <summary><strong>My test</strong> (Click to show content!)</summary>
 
