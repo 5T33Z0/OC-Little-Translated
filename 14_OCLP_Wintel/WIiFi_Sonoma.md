@@ -17,7 +17,7 @@ The following Wi-Fi card chipsets are affected:
 
 Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable these Wi-Fi cards by injecting the required kexts as well as patching files in the system with OCLP. If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
-Although OCLP allows setting certain features in the app, the option to manually select Wi-Fi patching has not been implemented into the GUI of the app (yet). So we have to either force-enable it manually in the Source Code and then compile a custom version of OCLP to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2), whereby the second method did not work for me. 
+Although OCLP allows enabling certain features in the app, the option to manually enable Wi-Fi patching has not been implemented into the GUI of the app (yet). So we have to either force-enable it manually in the Source Code and then run OCLP with modified settings to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2) so OCLP detects a compatible Wi-Fi war it can patch. However, the 2nd method did not work for me. 
 
 ## Method 1: Force-Enable Wi-Fi-Patching in OpenCore Legacy Patcher
 
