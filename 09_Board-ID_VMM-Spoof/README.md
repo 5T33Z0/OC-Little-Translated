@@ -1,12 +1,12 @@
 # Using unsupported Board-IDs with macOS 11.3 and newer
 
-OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
-
 **TABLE of CONTENTS**
 
-- [How the spoof works](#how-the-spoof-works)
+- [About](#about)
+	- [How the spoof works](#how-the-spoof-works)
 - [System Requirements](#system-requirements)
 - [Use Cases](#use-cases)
+- [How to enable the spoof](#how-to-enable-the-spoof)
 - [About the Patches](#about-the-patches)
 - [Adding the Patches](#adding-the-patches)
 	- [Booter Patches](#booter-patches)
@@ -14,7 +14,10 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 - [Notes](#notes)
 - [Credits](#credits)
 
-## How the spoof works
+## About
+OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
+
+### How the spoof works
 **OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of new booter and kernel patches which utilize macOS'es virtualization capabilities (VMM) to trick it into "believing" that it's running in a Virtual Machine:
 
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
@@ -29,11 +32,11 @@ I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.c
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
-**CPU**: The following Intel CPU families and corresponding SMBIOSes (newer ones don't need this since they are still supported): 
+**Intel CPU families** (newer ones don't need this since they are still supported): 
 
 - Sandy Bridge (need SurPlus patches)
 - Ivy Bridge
-- Haswell
+- Haswell/Broadwell
 - Skylake (to continue using SMBIOS `iMac17,1` on macOS 13). Requires additional [iGPU spoof for Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
 
 ## Use Cases
@@ -51,13 +54,47 @@ I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.c
 
 In the following cases you won't receive System Update Notifications and therefore you won't be able to download OTA System Updates:
 
-1. Using `csr-active-config` value containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
+1. Using a [`csr-active-config` bitmask](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
 2. Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 
 Disabling SIP is necessary in order to re-install [components which have been removed from macOS](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) because they cannot be injected by Bootloaders. But if these 2 SIP flags are set, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled to boot the system afterwards.
 
 So in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
+## How to enable the spoof
+Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were required to install and run macOS Monterey and newer on unsupported hardware. It turns out that these patches have negative affect on Bluetooth (&rarr; check "Previous Method" section for details)
+
+- Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your EFI/OC/Kext folder and config.plist
+- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br>![](/Users/stunner/Desktop/revpatch.png)
+
+<details>
+<summary><strong>My test</strong> (Click to show content!)</summary>
+
+I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
+
+![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
+
+Terminal shows the currently used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configurator snippet:
+
+![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
+  
+Next, I checked for updates and was offered macOS 12.1 beta:
+
+![Proof03](https://user-images.githubusercontent.com/76865553/139529788-d8ca770e-f8c2-49a8-a44e-908137f5e45c.png)
+  
+Which I installed…
+  
+![Proof04](https://user-images.githubusercontent.com/76865553/139529792-d92e52d3-5f91-4044-b788-730d603327b3.png)
+
+Installation went smoothly and macOS 12.1 booted without issues:
+
+![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
+
+</details>
+
+<details>
+<summary><strong>Previous method </strong> (Click to reveal)</summary>
+
 ## About the Patches
 Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
 
@@ -87,50 +124,24 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 **NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents.kext instead to workaround issues with System Update Notifications.
 
 ### Kernel Patches
-To apply the Kernel patches, you have 2 options:
 
-- **Option 1**: Copy the following entries from OCLPs [`Kernel/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L1636) section your to config.plist:
-	- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
-	- **"Disable Library Validation Enforcement"** &rarr; Enable it!
-	- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
-   	- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
-   	- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
-	- **"Force IOGetVMMPresent"** &rarr; Enable it.
-	- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
-	- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
-- **Option 2**: If your hardware is still supported by the latest version of macOS, but OTA System Updates are not working for [different reasons](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates), do the following:
-	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
-	- Add `revpatch=sbvmm` to boot-args or as an NVRAM parameter (check RestrictEvents' documentation for more details). This enables the **`VMM-x86_64`** board-id, allowing OTA updates to workd again. 
-	- Save your config and reboot.
+Copy the following entries from OCLPs [`Kernel/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L1636) section your to config.plist:
+
+- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
+- **"Disable Library Validation Enforcement"** &rarr; Enable it!
+- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
+- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
+- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
+- **"Force IOGetVMMPresent"** &rarr; Enable it.
+- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
+- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
 
 To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
 
 Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
 
-**IMPORTANT**: If you experience [issues with Bluetooth](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076) when using Broadcom cards in macOS Sonoma, then disable the Kernel Patches and follow the instructions of "Option 2" instead!
+**IMPORTANT**: If you experience [issues with Bluetooth](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076) when using Broadcom cards in macOS Sonoma, then disable the Kernel Patches and use RestrictEvents.kext and boot-arg instead!
 
-<details>
-<summary><strong>My test</strong> (Click to show content!)</summary>
-
-I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
-
-![Proof01](https://user-images.githubusercontent.com/76865553/139529766-87daac84-126e-4dfc-ac1d-37e4730e0bbf.png)
-
-Terminal shows the currently used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configurator snippet:
-
-![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
-  
-Next, I checked for updates and was offered macOS 12.1 beta:
-
-![Proof03](https://user-images.githubusercontent.com/76865553/139529788-d8ca770e-f8c2-49a8-a44e-908137f5e45c.png)
-  
-Which I installed…
-  
-![Proof04](https://user-images.githubusercontent.com/76865553/139529792-d92e52d3-5f91-4044-b788-730d603327b3.png)
-
-Installation went smoothly and macOS 12.1 booted without issues:
-
-![About](https://user-images.githubusercontent.com/76865553/139529802-3ea61297-7c7b-4369-8c21-4160b437f1a6.png)
 </details>
 
 ## Notes
