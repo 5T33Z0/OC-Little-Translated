@@ -65,7 +65,7 @@ So in order to be able to boot the system with patched-in drivers ***and*** rece
 Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were required to install and run macOS Monterey and newer on unsupported hardware. It turns out that these patches have negative affect on Bluetooth (&rarr; check "Previous Method" section for details)
 
 - Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your EFI/OC/Kext folder and config.plist
-- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br>![](/Users/stunner/Desktop/revpatch.png)
+- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br> ![revpatchsbvmm](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/0da94174-b45c-4bd3-9722-cddd87596580)
 
 <details>
 <summary><strong>My test</strong> (Click to show content!)</summary>
