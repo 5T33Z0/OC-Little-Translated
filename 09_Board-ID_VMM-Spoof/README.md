@@ -69,7 +69,7 @@ Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were re
 - Copy the 2 patches from OCLP's [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L267) section to your config.plist 
 - Enable both patches (set them to "true")
 - Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your EFI/OC/Kext folder and config.plist
-- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br> ![revpatchsbvmm](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/0da94174-b45c-4bd3-9722-cddd87596580)
+- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
 - Save your config and reboot.
 - Install macOS 12 or newer.
 
