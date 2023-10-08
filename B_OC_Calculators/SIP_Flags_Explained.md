@@ -73,3 +73,4 @@ Allows custom APFS snapshots to be booted (primarily for modified root volumes).
 ## Furter Resources
 
 - [System Integrity Protection: The misunderstood setting](https://khronokernel.github.io/macos/2022/12/09/SIP.html) by Mykola Grymalyuk (khronokernel)
+- [Risks of bypassing SIP](https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-security-protections/macos-sip#sip-bypasses) by HackTricks
