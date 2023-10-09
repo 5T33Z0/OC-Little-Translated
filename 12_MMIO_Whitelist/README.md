@@ -61,7 +61,7 @@ Once you are done with creating the MMIO Whitelist and testing, do the following
 
 - In OCAT, select "Edit > OpenCore DEBUG" again, to uncheck it
 - Mount your EFI and open your `config.plist`
-- Disable logging (change `Misc/Debug/Target` to `3`)
+- Disable logging. Change `Misc/Debug/Target` to `3` (default) or `0` (Logging fully disabled)
 - Update OpenCore files and Drivers to switch back to the RELEASE build
 - Save and reboot
 
