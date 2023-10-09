@@ -38,7 +38,7 @@
 </details>
 
 ## About
-This guide is for modifying framebuffers for Intel iGPUs and modifying `DeviceProperties` for connector types, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
+This guide is for modifying `DeviceProperties` for connector types Intel iGPUs, so you can connect a secondary display to the `HDMI` or `DisplayPort` of your Laptop.
 
 ### Problem description
 Your Laptop boots into macOS and the internal screen works, but:
@@ -53,7 +53,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 - Misconfigured framebuffer patch with incorrect BusID and/or flags for the used cable/connector
 
 ### Solution
-- Modify framebuffer patch for your iGPU
+- Adjust the framebuffer patch for your iGPU
 
 ### Supported Connection Types
 - **HDMI** &rarr; **HDMI**
