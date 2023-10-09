@@ -15,7 +15,7 @@
 - [Credits](#credits)
 
 ## About
-OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well.
+OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow installing, booting and updating macOS Monterey and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to run OpenCore and install macOS on legacy Macs, you can utilize these patches on regular Hackintoshes as well to expand the range of installable versions of macOS – without having to resort to changing the SMBIOS.
 
 ### How the spoof works
 **OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of new booter and kernel patches which utilize macOS'es virtualization capabilities (VMM) to trick it into "believing" that it's running in a Virtual Machine:
