@@ -12,7 +12,7 @@ Earlier 2023. a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/App
 	- Disable/Delete `SSDT-I225-V.aml`(if present) 
 	- Disable/Delete `FakePCIID.kext` (if present)
 	- Disable/Delete `FakePCIID_Intel_I225-V.kext` (if present)
-	- Disable/Delete `AppleIntelI210Ethernet.kext` (if preent)
+	- Disable/Delete `AppleIntelI210Ethernet.kext` (if present)
 	- Disable Kernel/Patch `__Z18e1000_set_mac_typeP8e1000_hw` (if present)
 
 - **Add `AppleIGC.kext`**
