@@ -18,7 +18,7 @@ Switch OpenCore from the RELEASE to the DEBUG version using OCAT:
 - Backup your current EFI Folder on a FAT32 formatted USB flash drive!
 - In `config.plist`, change the following:
 	- Enable `DevirtualiseMmio` (in `Booter/Quirks`)
-	- `Misc/Debug/Target` to: `67`
+	- Set `Misc/Debug/Target` to: `67`
 - Update OpenCore files and Drivers
 - Save and reboot
 
