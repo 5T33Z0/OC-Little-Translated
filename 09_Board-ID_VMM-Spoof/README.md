@@ -54,7 +54,7 @@ I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.c
 
 In the following cases you won't receive System Update Notifications and therefore you won't be able to download OTA System Updates:
 
-1. Using a [`csr-active-config` bitmask](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to disable `System Integrity Protection` (SIP). 
+1. Using a [`csr-active-config` bitmask](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to lower/disable `System Integrity Protection` (SIP). 
 2. Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 
 Disabling SIP is necessary in order to re-install [components which have been removed from macOS](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) because they cannot be injected by Bootloaders. But if these 2 SIP flags are set, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled to boot the system afterwards.
