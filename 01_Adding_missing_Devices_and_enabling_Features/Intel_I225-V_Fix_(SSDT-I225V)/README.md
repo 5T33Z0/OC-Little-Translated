@@ -30,7 +30,7 @@ If Ethernet is not working afterwards, adjust the following settings. Use _eithe
 	- Drop the original `DMAR` table ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table))
 	- Replace it by a modified `DMAR` without Reserved Memory Regions ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one))
 	- Deselect `DisableIoMapper` (if enabled)
-	- Enable `DisableIoMapperMapping`
+	- Enable `DisableIoMapperMapping` (macOS 13.3 and newer only)
 	- Save your config and reboot
 
 If this still does not work for you, try Method 2.
@@ -41,7 +41,7 @@ If this still does not work for you, try Method 2.
 ## Method 2: Adding SSDT-I225-V (obsolete)
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. 
 
-For macOS 13, you also need to inject AppleIntel210Ethernet.kext, since it has been removed from the IONetworkingFamily.kext and you can't use the .dext version unless you flash a modded firmware.
+For macOS 13 and newer, you also need to inject `AppleIntel210Ethernet.kext` if your ethernet controller cannot utilize the newer .dext version of this driver unless you flash a modded firmware, since the .kext has been removed from the IONetworkingFamily.kext.
 
 :warning: Before adding this SSDT, verify the ACPI path of the I225-V is matching the one used in your `DSDT` and adjust it accordingly! You can use Hackintool and IO RegistryExplorer to find the correct ACPI path.
 
