@@ -3,7 +3,7 @@
 ## About
 The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos. The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver. Apply this fix to re-enable Internet in macOS Monterey and newer.
 
-## Option 1: Add `AppleIGC.kext` 
+## Method 1: Add `AppleIGC.kext` 
 Earlier in 2023 a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) for I225/I226 cards was released. It's an "Intel 2.5G Ethernet driver for macOS. Based on the Intel igc implementation in Linux". It works on both stock and custom firmware, rendering all previously used fixes obsolete. It's highly recommended to revert old fixes and use this kext instead.
 
 ### Instructions: 
@@ -33,10 +33,12 @@ If Ethernet is not working afterwards, adjust the following settings. Use _eithe
 	- Enable `DisableIoMapperMapping`
 	- Save your config and reboot
 
-<details>
-<summary><strong>Option 2</strong> (Click to reveal!)</summary>
+If this still does not work for you, try Method 2.
 
-## Option 2: Adding SSDT-I225-V (obsolete)
+<details>
+<summary><strong>Method 2</strong> (Click to reveal!)</summary>
+
+## Method 2: Adding SSDT-I225-V (obsolete)
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. 
 
 For macOS 13, you also need to inject AppleIntel210Ethernet.kext, since it has been removed from the IONetworkingFamily.kext and you can't use the .dext version unless you flash a modded firmware.
