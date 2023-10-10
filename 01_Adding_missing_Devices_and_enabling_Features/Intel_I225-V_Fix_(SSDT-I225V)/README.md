@@ -19,7 +19,8 @@ Earlier 2023. a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/App
 - Save your config and reboot
 - Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 
-If Ethernet is not working afterwards, adjust the following settings. Use either Option 1 or 2  based on whether or not you need Vt-d.
+#### Troubleshooting
+If Ethernet is not working afterwards, adjust the following settings. Use _either_ Option 1 or 2  based on whether or not you need Vt-d.
 
 - **Option 1**: If you don't need Vt-d:
 	- Under Kernel/Quirks, select `DisableIoMapper`
