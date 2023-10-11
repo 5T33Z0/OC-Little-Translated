@@ -43,3 +43,4 @@ For kext that haven't been updated for macOS 14 support:
 
 ## Other
 - How to delete Sonoma's new Live Wallpapers: https://youtu.be/EmAxYGLkM1w
+- [Discussing OCLP and Security Concerns](https://forums.macrumors.com/threads/security-for-oclp-opencore-legacy-patcher.2406586/page-2?post=32613005#post-32613005)
