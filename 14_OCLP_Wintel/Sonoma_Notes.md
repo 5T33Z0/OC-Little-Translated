@@ -15,13 +15,11 @@
 </details>
 
 ## Create USB Installer
-
 ```text
 sudo /Applications/Install\ macOS\ 14\ beta.app/Contents/Resources/createinstallmedia --volume /Volumes/yourdiskname
 ```
 
 ## Kexts and Drivers
-
 - `IO80211FamilyLegacy.kext` has been removed &rarr; renders ALL Broadcom WiFi/BT cards useless (for now?)
 - Kaby Lake iGPU drivers are still present in beta 1
 - Dreamwhite had some interesintg findings in regards to the dropped  `IO80211FamilyLegacy.kext`: https://www.insanelymac.com/forum/topic/356881-pre-release-macos-sonoma/?do=findComment&comment=2805853
@@ -42,3 +40,6 @@ For kext that haven't been updated for macOS 14 support:
 	- Fixes graphics acceleration patches in Sonoma
 	- Introduces AMFIPass.kext which allows AMFI to work with lowered/disabled SIP settings, resolving issues with [granting 3rd party app access to peripherals](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Peripherals.md) like webcams and micreophones
 - **OCLP 067**: currently not working (which was expected)
+
+## Other
+- How to delete Sonoma's new Live Wallpapers: https://youtu.be/EmAxYGLkM1w
