@@ -23,15 +23,17 @@ Earlier in 2023 a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/A
 If Ethernet is not working afterwards, adjust the following settings. Use _either_ Option 1 or 2  based on whether or not you need Vt-d.
 
 - **Option 1**: If you don't need Vt-d:
-	- Under Kernel/Quirks, select `DisableIoMapper`
+	- Disable Vt-D in BIOS or enable `Kernel/Quirks/DisableIoMapper` if you don't need AppleVTD (some Network/Wifi/BT cards require it to work properly)
 	- Save your config and reboot
-	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V
+	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 - **Option 2**: If you have Vt-d enabled in BIOS and your system has a `DMAR` table with Reserved Memory regions:
 	- Drop the original `DMAR` table ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table))
 	- Replace it by a modified `DMAR` without Reserved Memory Regions ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one))
 	- Deselect `DisableIoMapper` (if enabled)
 	- Enable `DisableIoMapperMapping` (macOS 13.3 and newer only)
 	- Save your config and reboot
+	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
+
 
 If this still does not work for you, try Method 2.
 
