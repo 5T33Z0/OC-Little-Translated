@@ -6,8 +6,7 @@ The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte
 ## Method 1: Add `AppleIGC.kext` 
 Earlier in 2023 a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) for I225/I226 cards was released. It's an "Intel 2.5G Ethernet driver for macOS. Based on the Intel igc implementation in Linux". It works on both stock and custom firmware, rendering all previously used fixes obsolete. It's highly recommended to revert old fixes and use this kext instead.
 
-### Instructions: 
-
+### Instructions
 - **Revert previous Fixes**:
 	- Disable/Delete `SSDT-I225-V.aml`(if present) 
 	- Disable/Delete `FakePCIID.kext` (if present)
@@ -15,11 +14,11 @@ Earlier in 2023 a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/A
 	- Disable/Delete `AppleIntelI210Ethernet.kext` (if present)
 	- Disable Kernel/Patch `__Z18e1000_set_mac_typeP8e1000_hw` (if present)
 - Add `AppleIGC.kext` to `EFI/OC/Kexts` and config.plist.
-- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, use `dk.e1000=0`. I don't need it on my system.
+- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, you can use `dk.e1000=0`. I don't need it on my system.
 - Save your config and reboot
 - Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 
-#### Troubleshooting
+### Troubleshooting
 If Ethernet is not working afterwards, adjust the following settings. Use _either_ Option 1 or 2  based on whether or not you need Vt-d.
 
 - **Option 1**: If you don't need Vt-d:
