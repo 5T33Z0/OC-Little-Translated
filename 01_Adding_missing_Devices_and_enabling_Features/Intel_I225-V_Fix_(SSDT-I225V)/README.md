@@ -14,7 +14,6 @@ Earlier in 2023 a new kext called [**AppleIGC**](https://github.com/SongXiaoXi/A
 	- Disable/Delete `AppleIntelI210Ethernet.kext` (if present)
 	- Disable Kernel/Patch `__Z18e1000_set_mac_typeP8e1000_hw` (if present)
 - Add `AppleIGC.kext` to `EFI/OC/Kexts` and config.plist.
-- Optional: add `e1000=0` to `boot-args` (macOS Monterey+). For Big Sur, you can use `dk.e1000=0`. I don't need it on my system.
 - Save your config and reboot
 - Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 
@@ -57,7 +56,7 @@ For macOS 13 and newer, you also need to inject `AppleIntel210Ethernet.kext` if 
 - **macOS 13 only**: 
 	- Add [**this kext**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
 	- Set `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
-- Add boot-arg `dk.e1000=0` (macOS 11) and/or `e1000=0` (macOS 12+)
+- Optional: add boot-arg `dk.e1000=0` (macOS 11) and/or `e1000=0` (macOS 12+)
 - Apply the correct **Settings** from the table below.
 - Save the config and reboot.
 
