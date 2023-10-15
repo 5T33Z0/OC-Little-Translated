@@ -346,6 +346,12 @@ ___
 
 # Keyboard Shorcuts
 
+**Disable Press and Hold for Keyboard Keys** (req. reboot)
+
+```shell
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
 **Show hidden Files and Folders in Finder**: 
 
 <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
