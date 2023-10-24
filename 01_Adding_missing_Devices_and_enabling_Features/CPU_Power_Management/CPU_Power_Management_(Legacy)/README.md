@@ -1,4 +1,4 @@
-# CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
+ CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
 
 **TABLE of CONTENTS**
 
@@ -6,21 +6,23 @@
 - [Prerequisites](#prerequisites)
 - [Instructions](#instructions)
 	- [Modifiers](#modifiers)
+- [Technical Background](#technical-background)
 - [macOS Monterey](#macos-monterey)
-- [Re-enabling ACPI Power Management in macOS Ventura](#re-enabling-acpi-power-management-in-macos-ventura)
+- [Re-enabling ACPI Power Management in macOS 13 and newer](#re-enabling-acpi-power-management-in-macos-13-and-newer)
+	- [Alternative Solution](#alternative-solution)
 - [Notes](#notes)
 - [Credits](#credits)
 
 ## About
-SSDT for enabling CPU Power Management on legacy Intel CPUs (Ivy Bridge and older) using the `ACPI_SMC_PlatformPlugin` (plugin-type `0`). 
+SSDT for enabling CPU Power Management on legacy Intel CPUs using the `ACPI_SMC_PlatformPlugin` (plugin-type `0`), so mainly 2nd and 3rd Gen Intel Core/Xeon CPUs.
 
-You can tell whether or not the CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency and doesn't drop in idle or if does never reach the turbo frequency specified for your CPU model when performing cpu-intense tasks, then you have an issue with CPU Power Management at hand. Since this not only affects the overall performance but sleep/hibernation as well, it's mandatory to get it working properly. 
+You can use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing, when people had to use a patched DSDT to run macOS on their PCs since hotpatching didn't exist yet, this table was simply referred to as "SSDT.aml" because it usually was the only SSDT injected into the system (besides the patched DSDT).
+
+Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays since Haswell and newer support XCPM via the `X86PlatformPlugin` (plugin-type `1`). It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatfromPlugin` to optimize performance (check the [Modifiers](#modifiers) section for details).
+
+You can tell whether or not your system's CPU Power Management is working correctly by monitoring the behavior of the CPU. You can use [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) to do so. If the CPU always runs at the same frequency no matter waht's happening (idleing or performing cpu-intense tasks which would normally cause it to use different speed multipliers and turbo states) then you have an issue with CPU Power Management at hand. Since this not only affects overall performance and power consumption but sleep/hibernation as well, it's mandatory to get the CPU Power Management working properly to have an efficient system when running macOS. 
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
-
-You have to use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate this table, which is now called `SSDT-PM`. In the early days of hackintoshing, when you had to use a patched DSDT to run macOS since hotpatching wasn't a thing yet, this table was simply referred as "SSDT.aml" since it usually was the only SSDT injected into the system besides the DSDT.
-
-Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used for 2nd and 3rd Gen Intel CPUs nowadays. It might still be useful on Haswell and newer when working with unlocked, overclockable "k" variants of Intel CPUs which support the `X86PlatfromPlugin` to optimize performance (check the [Modifiers](#modifiers) section for details).
 
 ## Prerequisites
 - Hardware Requirements: 3rd Gen Intel Core or older CPU (Ivy Bridge and older) 
@@ -92,7 +94,7 @@ sudo ~/ssdtPRGen.sh -p 'i7-3630QM' -c 3 -lfm 900 -x 1
 ## macOS Monterey
 With the release of macOS Monterey, Apple dropped the Plugin-Type check, so that the `X86PlatformPlugin` is loaded by default. For Haswell and newer this is great, since you no longer need `SSDT-PLUG` to enable Plugin-Type `1`. But for Ivy Bridge and older, you now need to select Plugin-Type `0`. If you've previously generated an `SSDT-PM` with ssdtPRGen, it's already configured to use Plugin-Type `0`, so ACPI CPU Power Management is still working. For macOS Ventura, it's a different story…
 
-## Re-enabling ACPI Power Management in macOS Ventura
+## Re-enabling ACPI Power Management in macOS 13 and newer
 When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlugin` *binary* from the `ACPI_SMC_PlatformPlugin.kext` itself (previously located under S/L/E/IOPlatformPluginFamily.kext/Contents/PlugIns/ACPI_SMC_PlatformPlugin.kext/Contents/MacOS/), rendering `SSDT-PM` generated for Plugin-Type 0 useless since it cannot utilize a plugin which is longer present. Instead, the `X86PlaformPlugin` is loaded by default. Therefore, CPU Power Management doesn't work correctly on legacy Intel CPUs out of the box (no turbo states, incorrect LFM frequency, higher average clock). Additionally, the AppleIntelCPUPowerManagement kexts that handle ACPI CPU Power Management were removed from macOS 13 as well. 
 
 So when switching to macOS Ventura, you either have to:
@@ -148,6 +150,7 @@ Instead of injecting the required kext to re-enable legacy CPU Power Management 
 
 ## Notes
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
+- **ssdtPRGen** does not work with Lynnfield and other 1st Gen Intel Core CPUs
 - ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)).
 - Check the **Configuration.pdf** included in the OpenCorePkg for details about unlocking the MSR 0xE2 register (&rarr; Chapter 7.8: "AppleCpuPmCfgLock").
 
