@@ -51,13 +51,19 @@ Config Section | Action
 **NVRAM/Delete...-FE41995C9F82** | <ul> <li> Add `csr-active-config` <li> Add `boot-args`
 
 - Save your config and reboot
-- Enter `kextstat | grep -v com.apple` in Terminal to check if all the required kexts you added are loaded. If not add `-amfipassbeta` (if AMFIPass.kext is not present) and `-brcmfxbeta` (if Wireless is working but you cannot connect to accesspotsints) 
+- Enter `kextstat | grep -v com.apple` in Terminal to check if all the required kexts you added are loaded. If not add `-amfipassbeta` (if AMFIPass.kext is not present) and `-brcmfxbeta` (if Wireless is working but you cannot connect to access points) 
+
+### 3. Applying Root Patches to re-enable Wi-Fi Cards 
+
 - Download the [latest release](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) of OpenCore Legacy Patcher
 - Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the option to patch "Networking Modern Wireless" or "Networking Legacy Wireless" is available, apply the root patches:<br> ![OCLP_Wifi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e1495929-945a-400e-961d-6263f15c3fde)
-- If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, you need either need to force-enable the option in the Source Code and build OpenCore Patcher yourself (Step 3) or inject a spoofed Wi-Fi device into macOS.
+- Once patching is done, reboot
+- Enjoy working Wi-Fi again!
 
-### 3. Building OCLP from Source and applying Root Patches
-Do this if OpenCore Legacy Patcher doesn't detect your Wi-Fi Card (it only supports specific cards used in real Macs after all…)
+**NOTE**: If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, then OCLP couldn't detect a compatible Wi-Fi card. In this case you need to either force-enable the option in the Source Code, build OCLP Patcher yourself and then apply the root patches (Step 4) or spoof a compatible Wi-Fi device into macOS.
+
+### 4. Workaround: Force-enable Wi-Fi Patching in OCLP
+If you have one of the compatible and previously supported Broadcom or Atheros Wi-Fi Cards but it is not detected by OCLP, you need to force-enable Wi-Fi patching in OCLP's Source Code and then build a custom version of the patcher by following the steps below. In my experience this is only an issue in OCLP 0.6.9 and older. Once version 1.0.0 was released it detects the Broadcom card in my system automatically.
 
 - Download the OCLP [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher) and unzip it
 -  Enter in Terminal (line by line):
