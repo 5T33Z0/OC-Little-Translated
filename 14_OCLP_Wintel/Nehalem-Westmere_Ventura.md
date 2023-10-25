@@ -220,7 +220,7 @@ com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0)
 If the 2 kexts are not present, they were not injected. So check your config and EFI folder again. Also ensure that the `AppleCpuPmCfgLock` Quirk is enabled.
 
 #### Optimizing CPU Power Management
-Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using Intel Power Gadget. If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
+Once you've verified that SMC CPU Power Management (plugin-type `0`) is working, monitor the behavior of the CPU using [Intel Power Gadget](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/). If it doesn't reach its maximum turbo frequency or if the base frequency is too high/low or if the idle frequency is too high, [generate an `SSDT-PM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) to optimize CPU Power Management.
 
 ### Removing/Disabling boot-args
 After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:

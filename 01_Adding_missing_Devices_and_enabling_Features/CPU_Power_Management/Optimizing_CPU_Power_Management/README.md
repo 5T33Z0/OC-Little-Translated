@@ -44,7 +44,7 @@ This This describes how fast the CPU scales from the lowest to the highest Turbo
 
 ## Testing
 
-- Download, install and run [**IntelPowerGadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html).
+- Download, install and run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/).
 - Observe the frequency graph:</br>![](https://raw.githubusercontent.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/main/Pics/CPU_PM.png)
 
 ### Explanation 

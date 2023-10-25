@@ -65,7 +65,7 @@ The manual patching method described below is outdated, since the patching proce
 **IMPORTANT**: If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
 
 ## Testing
-To check if Speedstep and turbo work correctly, run Intel Power Gadget and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency as defined by the product specs.
+To check if Speedstep and turbo work correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency as defined by the product specs.
 
 Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
 

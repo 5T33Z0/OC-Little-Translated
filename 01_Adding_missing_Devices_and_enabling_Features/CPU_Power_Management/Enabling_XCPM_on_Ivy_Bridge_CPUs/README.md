@@ -76,7 +76,7 @@ The ssdt.aml file contains a summary of all the set parameters. If there is a "1
 - Under `ACPI/Delete`, disable "Drop CpuPm" and "Drop Cpu0Ist"
 - Save and reboot
 
-Monitor the behavior of the CPU using Intel Power Gadget. If the CPU Power Management is working correctly, the CPU should step through the whole range of frequencies according to its specs – from the lowest (in idle) to its maximum (when running cpu-intense tasks).
+Monitor the behavior of the CPU using [Intel Power Gadget](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/). If the CPU Power Management is working correctly, the CPU should step through the whole range of frequencies according to its specs – from the lowest (in idle) to its maximum (when running cpu-intense tasks).
 
 ## Big Sur and Monterey
 Since Big Sur and newer usually require a newer SMBIOS to boot, `ssdtPRGen` fails to generate `SSDT-XCPM` in this case, because it relies on Board-IDs containing data for Plugin-Type 0. As a workaround, you have 2 options:

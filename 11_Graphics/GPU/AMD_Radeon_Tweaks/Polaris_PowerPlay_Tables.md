@@ -42,7 +42,7 @@ Basically, you dump the vBIOS ROM from your GPU, modify it, save it. Then you ex
 	- [**LuxMark**](http://wiki.luxcorerender.org/LuxMark_v3) (see "Binaries" section) &rarr; for OpenCL Benchmark test
 	- [**Geekbench**](https://www.geekbench.com/) &rarr; for Benchmarking Metal
 	- [**HWMonitorSMC2**](https://github.com/CloverHackyColor/HWMonitorSMC2) &rarr; For monitoring CPU and GPU Performance, Power Consumption and Temps.
-	- [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) &rarr; installs `EnergyDriver.kext` into S/L/E which can be utilized by HWMonitorSMC2 for monitoring (select "Intel Power Gadget" in options).
+	- [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) &rarr; installs `EnergyDriver.kext` into S/L/E which can be utilized by HWMonitorSMC2 for monitoring (select "Intel Power Gadget" in options).
 
 ## Instructions
 
