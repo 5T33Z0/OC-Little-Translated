@@ -26,5 +26,5 @@ Quirk               | Affected Table(s) | Table Description | What it fixes
 > For more info about ACPI Tables in general, please refer to the official [**ACPI Specs**](https://uefi.org/specifications).
 
 ## Credits
-- Acidanthera for OpenCore and its [**Documantaion**](https://dortania.github.io/docs/latest/Configuration.html)
+- Acidanthera for OpenCore and its [**Documentation**](https://dortania.github.io/docs/latest/Configuration.html)
 - [**ACPI Specifications**](https://uefi.org/specifications) by UEFI.org
