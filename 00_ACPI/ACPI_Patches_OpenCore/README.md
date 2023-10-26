@@ -28,4 +28,4 @@ Quirk               | Affected Table(s) | Table Description | What it fixes
 
 ## Credits
 - Acidanthera for OpenCore and its [**Documantaion**](https://dortania.github.io/docs/latest/Configuration.html)
-- [**ACPI Specifications**](https://uefi.org/htmlspecs/ACPI_Spec_6_5_html/) by UEFI.org
+- [**ACPI Specifications**](https://uefi.org/specifications) by UEFI.org
