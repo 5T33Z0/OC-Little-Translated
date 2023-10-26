@@ -1,7 +1,6 @@
 # Enabling Devices and Features for macOS
 
 ## About
-
 Among the many `SSDT` patches available in this repo, a significant number of them are for enabling devices, services or features in macOS. They can be divided into four main categories:
 
 - **Virtual Devices**, such as Fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS is happy and works as expected.
@@ -21,7 +20,6 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 :bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
 
 ## Properties of Virtual Devices
-
 - **Features**:
   - The device already exists in ACPI, is relatively small and self-contained in code.  
   - The original device has a canonical `_HID` or `_CID` parameter.
@@ -48,10 +46,10 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
   - ***SSDT-RTC0*** - Fake RTC
   - _HID: `PNP0B00`
 
-**Important**: The path and name of the Low Pin Configuration Bus used in a SSDT – either `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
+> [!IMPORTANT]
+> The path and name of the Low Pin Configuration Bus used in a SSDT – either `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
 
 ## Adding missing Devices and Features
-
 Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse through the folders above to find out which you may need.
 
 ### Obtaining ACPI Tables
@@ -147,8 +145,9 @@ The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In o
 > [!NOTE]
 > If you download the whole repo, you can just open the .dsl files with maciASL instead.
 
-## Critical Notice 
-Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila posted on insanelymac.com as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
+## Avoid Olarila/MalD0n 
+> [!WARNING]
+> Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
 
 ## Resources
 [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped) – IORegistry collection of almost any Mac model by khronokernel
