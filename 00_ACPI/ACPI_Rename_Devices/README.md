@@ -92,7 +92,8 @@ DefinitionBlock ("", "SSDT", 2, "Slav", "SsdtEC", 0x00001000)
     }
 }
 ```
-**NOTE**: Renaming EC Devices is not recommended for desktop systems. Instead, the existing EC should be disabled and replaced by a virtual one. You can follow [this guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)#adding-a-fake-embedded-controller-ssdt-ec-or-ssdt-ec-usbx) to do so.
+>[!NOTE]
+>Renaming the Embedded Controller (EC) is not recommended for desktop systems. Instead, the existing EC device should be disabled and replaced by a virtual one. You can follow [this guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)#adding-a-fake-embedded-controller-ssdt-ec-or-ssdt-ec-usbx) to do so.
 
 ## Credits and Resources
 - Dortania for [**Rename-SSDT**](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Rename-SSDT.dsl)
