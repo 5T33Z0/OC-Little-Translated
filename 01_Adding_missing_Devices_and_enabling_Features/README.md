@@ -80,7 +80,8 @@ Listed below are all SSDTs contained in this chapter. Use the listed search term
 
 The hotfixes have to be placed in `EFI/OC/ACPI` and added to the config.plist (under `ACPI/Add`). OpenCore accepts files with `.aml` and `.bin` extension.
 
-**NOTE**: You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
+> [!NOTE]
+> You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
 
 #### Functional SSDTs
 Listed below are SSDTs which add or enable devices and features in macOS.
