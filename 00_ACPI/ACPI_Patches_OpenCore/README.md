@@ -21,7 +21,6 @@ Quirk               | Affected Table(s) | Table Description | What it fixes
 **RebaseRegions** | All Tables | Relocates ACPI Memory Regions | ACPI forms have memory regions with both dynamically allocated as well as fixed addresses. This quirk turns dynamically allocated addresses into fixed ones which can help with patched `DSDTs`.</br>:warning: **Caution**: This patch is very dangerous and should not be chosen unless relocating memory regions solves boot crashes!
 **ResetHwSig** | **`FACS.aml`**| Sets Hardware Signature to `0` | `Hardware Signature` is part of the **`FACS`** table. It's calculated after the system has started based on the hardware configuration. If this value changes after the machine wakes up from a **Hibernate** state, the system will not recover correctly. **Note:** If the system has **Hibernation** disabled, you do not need to this quirk!
 **SyncTableIds**| **`SLIC.aml`** | Microsoft Software Licensing table |Fixes `SLIC` table causing licensing issues in older Windows versions.
-**DisableIoMapper** | **`DMAR.aml`** | Kernel Quirk to disable Vt-d and [dropping the DMAR table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/).| Usually, only early Mac systems need this patch. But with the release of macOS Monterey this has become relevant again for getting some 2.5 and 10 gig Ethernet Cards to work.
 
 > [!NOTE]
 > For more info about ACPI Tables in general, please refer to the official [**ACPI Specs**](https://uefi.org/specifications).
