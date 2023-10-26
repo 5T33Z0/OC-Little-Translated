@@ -62,10 +62,11 @@ The manual patching method described below is outdated, since the patching proce
 	```
 - Based on the search result, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
 
-**IMPORTANT**: If the query result and the patch file name **do not match**, please select any file as a sample and modify the patch file related content by yourself. If you are unsure what to do, use the `SSDT-PLUG.aml` sample included with the OpenCore package since it covers all cases of possible CPU device names.
+>[!IMPORTANT]
+>If the query result and the patch file name **do not match**, please pick the `SSDT-PLUG.aml` sample included in the OpenCore package since it covers all cases of possible CPU device names and modify it so that it matches the ACPI name and paths used in your system!
 
 ## Testing
-To check if Speedstep and turbo work correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency as defined by the product specs.
+To check if Speedstep and turbo states work correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
 
 Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
 
@@ -78,7 +79,7 @@ Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 **`Cpuid1Mask`**: FFFFFFFF000000000000000000000000 </br>
 **`MinKernel`**: 19.0.0
 
-Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is 19.0.0. This also means that this fake CPUID is only appliad for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
+Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is 19.0.0. This also means that this fake CPUID is only applied for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
 
 12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the **Docs** folder of the OpenCore Package as well.
 
