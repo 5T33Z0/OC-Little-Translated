@@ -113,8 +113,9 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 #### Cosmetic SSDTs (optional)
 The SSDTs listed below are considered cosmetic and non-essential. They add devices which are present in real Macs. Adding any of these tables does not add or enable features besides mimicking the *look* of the I/O registy of the selected Mac model by the SMBIOS – they are not needed:
 
+> [!NOTE]
 > It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
-> 
+>
 > [**– vit9696**](https://github.com/acidanthera/OpenCorePkg/pull/121#issuecomment-696825376)
 
 |SSDT|Description|Search term(s) in DSDT
@@ -142,7 +143,8 @@ The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In o
 10. Add the `.aml` file to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`).
 11. Save and reboot to test it.
 
-**NOTE**: If you download the whole repo, you can just open the .dsl files with maciASL instead.
+> [!NOTE]
+> If you download the whole repo, you can just open the .dsl files with maciASL instead.
 
 ## Critical Notice 
 Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila posted on insanelymac.com as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
