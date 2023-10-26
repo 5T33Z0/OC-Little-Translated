@@ -39,7 +39,8 @@ Name (_UID, 14)  // _UID: Unique ID: 19
 
 This `_UID` can be used to select different brightness curves stored in Whatevergreen with different levels of max brightness. In my test on an Ivy Bridge Notebook, the maximum brightness was not bright enough when using `_UID` 14, so I changed it to 15 for Haswell/Broadwell which allowed it to be brighter.
 
-> **Note** When working with the .dsl file, the _UID is presented in decimal. Once you export the SSDT-PNLF as .aml, the value will be converted to hex, so `14` will become `0x0E`, for example. So keep in mind that you have to convert the value to hex when changing it in the .aml directly.
+> [!IMPORTANT]
+> When working with the .dsl file, the _UID is shown as a decimal number. Once you export the SSDT-PNLF as .aml, this number will be converted to hex, so `14` will become `0x0E`, for example. So keep in mind that you have to convert the value to hex when changing it in the .aml directly!
 
 ## Other Methods
 
@@ -62,13 +63,13 @@ Listed below are manual approaches for fixing Laptop backlight controls. Try eit
     - [**SSDT-RMCF.dsl**](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl) (Rehabman Configuration File)
 - Edit `SSDT-RMCF` to configure the actual `SSDT-PNLF` file. 
 
-RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following binary rename:
-
-```text
-Name: PNLF to XNLF  
-Find: 504E4C46  
-Replace: 584E4C46
-```
+> [!NOTE]
+> RehabMan's luminance patches are inserted into `_SB.PCI0.IGPU`, so rename the `IGPU` of the patch file to the original name in ACPI (e.g. `GFX0`) when using them. RehabMan's PNLF Patches require the following binary rename:
+> ```text
+> Name: PNLF to XNLF
+> Find: 504E4C46
+> Replace: 584E4C46
+> ```
 
 ### [ACPI Brightness Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch#acpi-brightness-patch) (deprecated)
 
