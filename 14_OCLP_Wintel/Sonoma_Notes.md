@@ -19,7 +19,7 @@
 sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-## Kexts and Drivers
+## Removed Kexts and Drivers
 - `IO80211FamilyLegacy.kext` has been removed &rarr; renders ALL Broadcom WiFi/BT cards useless (for now?)
 - Kaby Lake iGPU drivers are still present in beta 1
 - Dreamwhite had some interesintg findings in regards to the dropped  `IO80211FamilyLegacy.kext`: https://www.insanelymac.com/forum/topic/356881-pre-release-macos-sonoma/?do=findComment&comment=2805853
