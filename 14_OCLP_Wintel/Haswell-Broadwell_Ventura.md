@@ -40,7 +40,8 @@ Although installing and running macOS Ventura on machines with Intel Haswell and
 ### How Haswell/Broadwell systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
-> **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
+> [!NOTE]
+> Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 ### Disclaimer
 This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
@@ -124,8 +125,6 @@ When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capab
 	- **High Ende Desktop** (Haswell/Broadwell-E): **`iMacPro1,1`** 
 - Generate new Serials with [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-> **Note**: Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
-
 #### When Upgrading from macOS Catalina or older
 Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot. So adjust the `SystemProductName` (under `PlatformInfo`) accordingly.
 
@@ -142,7 +141,8 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 
 Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-> **Note**: <ul><li> Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. <li> You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
+> [!NOTE]
+> Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. 
 
 ## macOS Ventura Installation
 With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
@@ -154,7 +154,8 @@ With all the prep work out of the way you can now upgrade to macOS Ventura. Depe
 - Select macOS 13.x (whatever the latest available build is)  
 - Once the download is completed, the "Install macOS Ventura" app will be located in the "Programs" folder
 
-> **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> [!NOTE]
+> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
@@ -205,7 +206,8 @@ To bring them back, do the following:
   - `-radvesa` – put a `#` in front to disable it: `#-radvesa`
   - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
 
-> **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put 
+> [!NOTE]
+> Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put the card in VESA mode.
 
 ### Revert SMBIOS (after upgrading from macOS Catalina or older only)
 Once macOS Ventura is up and running, the VMM Board-ID spoof will work, so you can now revert to one of the "native" SMBIOSes mentioned in the "When Upgrading from macOS Big Sur 11.3+" section that suits for your Haswell/Broadwell CPU for optimal CPU/GPU Power Management. To further adjust/optimize CPU Power Management, generate a new `CPUFriendDataProvider.kext` with [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) or [One-Key-CPUFriend](https://github.com/stevezhengshiqi/one-key-cpufriend) and add it to your config and EFI.
@@ -218,7 +220,8 @@ After macOS Ventura is installed and OCLP's root patches have been applied in Po
 - Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
-> **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
+> [!NOTE]
+> Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
 ### Verifying AMFI is enabled
 We can check whether or not AMFI is enabled by entering the following command in Terminal:
