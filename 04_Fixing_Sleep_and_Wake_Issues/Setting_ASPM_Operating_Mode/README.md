@@ -61,7 +61,8 @@ You can manually set the ASPM mode of 3rd party SATA and NVMe drives if it's not
 - Save the config, reboot
 - In hackintool, check the if the ASPM state for the NVMe Disk has changed.
 
-**NOTE**: if you are uncertain which ASPM states are supported by your NVMe Disk, you could use Acidanthera's [NVMeFix kext](https://github.com/acidanthera/NVMeFix) instead, which provides "Autonomous Power State Transition to reduce idle power consumption of the controller".
+>[!NOTE]
+> If you are uncertain which ASPM states are supported by your NVMe Disk, you could use Acidanthera's [NVMeFix kext](https://github.com/acidanthera/NVMeFix) instead, which provides "Autonomous Power State Transition to reduce idle power consumption of the controller".
 
 #### Example 2: Changing the ASPM mode of a WiFi Card
 The default ASPM mode of Xiaoxin PRO13 wireless card is `L0s/L1`. Folowing the instructions above, changing the ASPM from `L0s/L1` to `L1` by injecting `pci-aspm-default` would result in:
@@ -98,6 +99,6 @@ An SSDT patch can also set the ASPM working mode. For example, set a device ASPM
 :bulb:**Note1**: `_SB.PCI0.RP05` = path of the Xiaoxin PRO13 wireless card.</br>
 :bulb:**Note2**: L1 = 1 in `\_SB.PCI0.RP05.L1 = 1` actually sets ASPM to `L0s/L1`, whereas L1 = 0 in `\_SB.PCI0.RP05.L1 = 0` sets ASPM to `L1`.
 
-## :warning: Caution
-If you notice abnormal behavior of the system after changing the ASPM mode of a device, please restore the original ASPM mode and reboot the system.
+> [!IMPORTANT]
+> If you notice an unusual behavior of the system after changing the ASPM mode of a device, please restore the original ASPM mode and reboot the system.
 
