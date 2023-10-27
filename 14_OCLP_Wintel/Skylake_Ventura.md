@@ -1,6 +1,6 @@
 # Installing macOS Ventura or newer on Skylake systems
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-≤0.9.4-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.0-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.1-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -109,7 +109,7 @@ While an iGPU spoof works well for systems which use a dedicated GPU for display
 ### Config Edits
 Listed below, you find the required modifications to prepare your config and EFI folder for installing macOS Monterey or newer on Skylake systems. I've also prepared a [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Skylake_OCLP_Wintel_Patches.plist) for cross-referencing which contains the necessary settings.
 
-:bulb: If your system (or components thereof) doen't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
+:bulb: If your system (or components thereof) doesn't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
 
 Config Section | Action | Description
 :-------------:| ------ | ------------
