@@ -16,7 +16,7 @@
 
 ## Create USB Installer
 ```text
-sudo /Applications/Install\ macOS\ 14\ beta.app/Contents/Resources/createinstallmedia --volume /Volumes/yourdiskname
+sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 ## Kexts and Drivers
