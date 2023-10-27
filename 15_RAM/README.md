@@ -161,8 +161,8 @@ Using Linux is recommended because the command used under Windows doesn't show t
 	```
 9. Save the data as a .txt file on a USB flash drive so you can access it later from within macOS
 
->[!NOTE]: 
->It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
+> [!NOTE]
+> It seems that macOS displays the "Configured Memory Speed" value instead of the "Speed" value. And since the Configured Memory Speed is 2400 MT/s in my case, that's the reason why the reported speed is lower in macOS than in Windows. But "Configured Memory Speed" actually refers to the *actual* speed the RAM is running at and not the maximum possible speed it is capable of. This can be changed in BIOS but Laptop BIOSes usually don't let you configure RAM speeds. Mhh…
 
 ## Add the memory data to your config.plist 
 :warning: Read OpenCore's "Documentation.pdf", chapter 10.4: "Memory Properties" to get familiar with the available parameters *before entering any data into your config.plist!* Because some parameters use different values in OpenCore and have to be converted from hex to decimal.
