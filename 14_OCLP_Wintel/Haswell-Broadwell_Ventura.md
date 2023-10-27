@@ -1,6 +1,6 @@
 # Installing macOS Ventura or newer on Haswell/Broadwell systems
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-≤0.9.4-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.0-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.1-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -71,7 +71,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ## Config Edits
 Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Haswell/Broadwell systems. You can use this [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Haswell-Broadwell_OCLP_Wintel_Patches.plist) which contains all the necessary settings for cross-referencing.
 
-:bulb: If your system (or components thereof) doen't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
+:bulb: If your system (or components thereof) doesn't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
 
 Config Section | Action | Description
 :-------------:| ------ | ------------
