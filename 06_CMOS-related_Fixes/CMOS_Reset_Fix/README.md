@@ -78,7 +78,6 @@ This section provides an SSDT hotfix to solve the CMOS reset issue. It adds a fa
 ## NOTES
 - The device name and path in the patch must match the one used in your system's `DSDT`.
 - If the `RTC` of your systems is disabled by for some reason, a fake RTC is required for it to work properly. In the case that a **"Boot self-test error"** occurs, remove the interrupt from the SSDT:
-
   ```asl
     IRQNoFlags () /* delete this line */
         {8} /* Delete this line */
