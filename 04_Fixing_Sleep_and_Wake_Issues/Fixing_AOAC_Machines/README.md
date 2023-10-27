@@ -1,14 +1,14 @@
-# AOAC General Description
+# Fixig Sleep issues on AOAC machines
 
 ## About AOAC Technology
 
-A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel in the 2000s and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops like our cell phones or Bluetooth Headsets.
+A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel in the 2000s and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops behave similar to Smartphones or Bluetooth Headsets.
 
 ### How to determine if you have an `AOAC` Machine
 
 - Open [MaciASL](https://github.com/acidanthera/MaciASL/releases)
-- Click on "File > New From ACPI" and select `FACP.aml`
-- Search for `Low Power S0 Idle`. If it is = `1`, it is an `AOAC` machine. For example:
+- Click on "File > New From ACPI" and select `FACP.aml` (if present)
+- Search for `Low Power S0 Idle`. If it is set to `1`, you have an `AOAC` machine. For example:
   ```asl
   Low Power S0 Idle (V5) : 1
   ```
@@ -28,12 +28,11 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 ## Fixing AOAC
 
 - Disable `S3` sleep
-- Turn off the power supply of the solo display
-- Power Idle Management
-- Choose better quality SSD: SLC>MLC>TLC>QLC (not sure)
+- Adjust Power Idle Management
+- Choose a better quality SSD: SLC>MLC>TLC>QLC (not sure)
 - Update SSD firmware if possible to improve power management performance
-- Enable APST for SSDs using NVMeFix.kext
-- Enable and configure ASPM (if you can't enable it in the BIOS/UEFI directly)
+- Enable APST (Autonomous Power State Transition) for SSDs using [`NVMeFix.kext`](https://github.com/acidanthera/NVMeFix/releases)
+- Configure [`ASPM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode) (if you can't enable it in the BIOS/UEFI directly)
 
 ## AOAC Sleep, Wake
 
