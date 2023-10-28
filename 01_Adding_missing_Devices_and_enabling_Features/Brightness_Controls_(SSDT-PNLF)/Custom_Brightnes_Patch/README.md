@@ -7,4 +7,4 @@
 - `SSDT-PNLF-SNB_IVY` &rarr; For Sandy Bridge and Ivy Bridge
 
 ## Credits
-Rehabman for SSDT-PNLF-ALL
+Rehabman for `SSDT-PNLF-ALL`
