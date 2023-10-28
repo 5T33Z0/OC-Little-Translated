@@ -112,13 +112,10 @@ Advantages and disadvantages of using `MacBookPro10,1` (or equivalent iMac Board
 
 **CONS**:
 
-- You won't be able to install System Updates because you won't be notified about them. But there's a **Workaround**: [**Enable board-id VMM spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof). This allows using the recommended SMBIOS for Ivy Bridge CPUs for optimal CPU Power Management, running macOS Monterey as well as installing macOS Updates.
-
-**NOTE**: If you only need the **`VMM-x86_64`** board-id for fixing issues with System Updates, do the following:
-
-- Add the Booter Patches mentioned in the board-id VMM spoofing guide to your config
-- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
-- Add boot-arg `revpatch=sbvmm`
+- You won't be able to install System Updates because you won't be notified about them. But there's a **Workaround**:
+	- Add the Booter Patches mentioned in the board-id VMM spoofing [guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof) to your config
+	- Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `EFI/OC/Kexts` and config.plist
+	- Add boot-arg `revpatch=sbvmm`
 - Save your config and reboot.
 
 ### Plugin Type 1 becomes the new default in macOS 12
