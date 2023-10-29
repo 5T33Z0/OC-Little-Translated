@@ -4,10 +4,10 @@
 
 The ThinkPad Battery system consists of 2 categories: `single` and `dual` battery systems.
 
-- A single battery system is a machine equipped with one battery and only one battery in defined in ACPI.
-- A dual battery system is a machine is equipped with up to two batteries. The second battery is optional and can be installed later. A dual battery system may have one battery or two batteries.
+- A single battery system is a machine equipped with one battery and only one battery defined in ACPI.
+- A dual battery system is a machine is equipped with up to two batteries. The second battery is optional and can be installed later. A dual battery system may have one or two batteries.
 
-For example, the T470/T470s belongs in the dual battery systems category whereas the T470P belongs in the single battery category. On the other hand the T430 series belongs to the dual battery systems, although the machine itself has only one battery, but a second battery can be installed through the optical drive bit.
+For example, the T470/T470s belongs in the dual battery systems category whereas the T470P belongs in the single battery category. On the other hand the T430 series belongs to the dual battery systems, although the machine itself has only one battery installed ex factory, but a second one can be installed in the optical drive bay.
 
 ## Instructions
 In order to get your battery percentage indicator working correctly, you have to do the following: 
