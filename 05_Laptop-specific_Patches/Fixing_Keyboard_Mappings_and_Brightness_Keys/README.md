@@ -14,9 +14,7 @@ If the BrightnessKeys kext does not work initially, please refer to the "[specia
   
 >[!NOTE]
 >
->Some ASUS and Dell machines require `SSDT-OCWork-xxx` to unblock `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, allowing the BrightnessKeys kext to work properly. 
->
->Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for more details.
+>Some ASUS and Dell machines require `SSDT-OCWork-xxx` to unblock `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, allowing the BrightnessKeys kext to work properly. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for more details.
 
 ## Requirements and Preparations
 
