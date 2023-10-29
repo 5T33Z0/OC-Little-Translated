@@ -1,5 +1,7 @@
 # Fixing the battery status indicator on Laptops
-Before applying any of these battery patches available here, you should test the new [**ECEnabler.kext**](https://github.com/1Revenger1/ECEnabler) first, which "allows reading Embedded Controller fields over 1 byte long, vastly reducing the amount of ACPI modification needed (if any) for working battery status". It works on a lot of ThinkPads without additional renames and Battery SSDTs.
+
+## Try `ECEnabler.kext` first!
+Before applying any of these battery patches available here, you should test the new [**ECEnabler.kext**](https://github.com/1Revenger1/ECEnabler) first, which "allows reading Embedded Controller fields over 1 byte long, vastly reducing the amount of ACPI modification needed (if any) for working battery status". It works on a lot of ThinkPads and other Laptops without additional ACPI patches and Battery SSDTs.
 
 ## Available Battery Hotfixes
 This section contains battery hotfixes for notebooks from various vendors (check the folders above). For more battery patches, check [GZXiaoBai's Github Repo](https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch) (writen in Chinese).
