@@ -24,6 +24,6 @@ The python script **SSDTTime** can generate the following SSDTs by analyzing you
 7. Add required Kexts to `EFI/OC/Kexts` and your `config.plist` if they are not present already. Usually Lilu, VirtualSMC, WhateverGreen (for Graphics) and AppleALC (for Audio).
 8. Save and Reboot.
 
-## Notes
+## NOTES
 - The Windows and Linux version of SSDTTime can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
 - If you are using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases) to edit your config.plist, you can drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can just copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.

@@ -1,5 +1,5 @@
 # Dropping ACPI Tables
-Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover an OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to dump the existing ACPI tables from your BIOS/Firmware to analyze them.
+Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover and OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to dump the existing ACPI tables from your BIOS/Firmware to analyze them.
 
 **TABLE of CONTENTS**
 

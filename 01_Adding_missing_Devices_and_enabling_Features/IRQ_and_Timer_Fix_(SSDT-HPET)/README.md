@@ -100,7 +100,8 @@ Scope (\)
     	}
     }
 ```
-**NOTE**: The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
+> [!NOTE]
+> The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
   
 #### If `HPAE/HPTE` does not exist
 On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (applies to Lenovo T430/T530 to T450/550): 
@@ -108,7 +109,7 @@ On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is 
 ```asl
 Device (HPET)
 {
-    Name (_HID, EisaId ("PNP0103") /* HPET System Timer */)  // _HID: Hardware ID
+    Name (_HID, EisaId ("PNP0103") 
     Method (_STA, 0, NotSerialized)  // _STA: Status
     {
         If ((\WNTF && !\WXPF))
@@ -146,8 +147,9 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
         }
     } ...
 	```
-	> **Note** The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
-- I was wondering if it would be possible to achieve the same without using binary renames because it feels a bit redundant to rename 2 parameters system-wide and then restore them for every other OS instead of renaming them *only for* macOS. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. This also worked and looks like this:
+	> [!IMPORTANT]
+	> The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
+- I was wondering if it would be possible to achieve the same *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to restore them for every other OS instead of changing their values for macOS *only*. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. I called it `SSDT-IRQ_FIXES_THINK`. This actually works and the relevant code snippet looks like this:
 
 	```asl
     Scope (_SB.PCI0.LPC.HPET)
