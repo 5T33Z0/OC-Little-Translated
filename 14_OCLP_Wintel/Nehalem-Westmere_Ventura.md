@@ -54,7 +54,7 @@ In order to check if your system is potentially capable of installing and runnin
 > Check the [Anti-Hackintosh Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/CPU.html) to find out more about incompatible CPUs and CPUs to avoid.
 
 ### Patching Principle
-In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge and older this mainly affects:
+In macOS Ventura and newer, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge and older this mainly affects:
 
 - CPU instructions:
 	- Missing AVX2.0 for cryptography tasks
@@ -62,6 +62,7 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For S
 - CPU Power Management (removed `ACPI_SMC_PlatformPlugin`) 
 - iGPU, dGPU and Metal support
 - USB 1.1 support
+- Legacy Ethernet and Wi-Fi
 
 So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
