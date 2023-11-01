@@ -50,7 +50,8 @@ In order to check if your system is potentially capable of installing and runnin
 ### Potential Candidates
 1st Gen Intel Core CPUs. Check [this list](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) to find out if your CPU is supported and which SMBOS is suitable.
 
-> **Note**: Check the [Anti-Hackintosh Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/CPU.html) to find out more about incompatible CPUs and CPUs to avoid.
+> [!NOTE]
+> Check the [Anti-Hackintosh Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/CPU.html) to find out more about incompatible CPUs and CPUs to avoid.
 
 ### Patching Principle
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge and older this mainly affects:
