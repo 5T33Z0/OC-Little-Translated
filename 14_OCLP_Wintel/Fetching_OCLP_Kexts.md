@@ -11,7 +11,7 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 3. Navigate to:
 	- `/.ocat/Database/preset/KextUrl.txt` (if OCAT is running in regular Release Mode)
 4. Open it with TextEdit
-5. Add the following Lines to the list and save it:
+5. Add the following Lines to the list:
 	```
 	AMFIPass.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
 	AppleIntelCPUPowerManagement.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
