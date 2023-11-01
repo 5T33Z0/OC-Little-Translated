@@ -40,7 +40,7 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 	```
 6. Save the file
 7. Press <kbd>CMD</kbd> + <kbd>.</kbd> (dot) to hide files and folders again
-8. Run OCAT and check for kext Updates 
+8. Run OCAT and check for kext updates 
 
 ## Notes
 - Fetching kext updates might not work when using OCAT in DEV mode. I can't find the location of `KextUrl.txt` in the `DevDatabase`.
