@@ -138,8 +138,8 @@ I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with 
 
 Terminal shows the currently used Board-ID which belongs to the `MacBookPro10,1` SMBIOS as you can see in Clover Configurator. Usually, running macOS would require using `MacBookPro11,4` which uses a different Board-ID as you can see in the Clover Configurator snippet:
 
-![Proof02](https://user-images.githubusercontent.com/76865553/139529778-6f82306a-22db-43dd-b594-c863af6e4ddd.png)
-  
+![boardid](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/79e6ae79-5c4b-4a41-b84e-29e4ac2d78b3)
+
 Next, I checked for updates and was offered macOS 12.1 beta:
 
 ![Proof03](https://user-images.githubusercontent.com/76865553/139529788-d8ca770e-f8c2-49a8-a44e-908137f5e45c.png)
