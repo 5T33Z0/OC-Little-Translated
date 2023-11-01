@@ -23,15 +23,15 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 	Bluetooth-Spoof.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
 	CatalinaBCM5701Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	CatalinaIntelI210Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
-	corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
+	corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree//tree/main/payloads/Kexts/Wifi
 	CSLVFixup.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera
 	Intel82574L.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	IOFireWireFamily.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
 	IOFireWireSBP2.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
 	IOFireWireSerialBusProtocolTransport.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/FireWire
-	IO80211ElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
-	IO80211FamilyLegacy.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
-	IOSkywalkFamily.kext https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi
+	IO80211ElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi
+	IO80211FamilyLegacy.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi
+	IOSkywalkFamily.kext https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi
 	MarvelYukonEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	nForceEthernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet
 	NoAVXFSCompressionTypeZlib.kext | https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/
