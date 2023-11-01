@@ -35,7 +35,7 @@
 </details>
 
 ## About
-Besides installing macOS Ventura+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on even older platforms using OpenCore and the OpenCore Legacy Patcher (OCLP). 
+Besides installing macOS Ventura+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on 1st Gen Intel Core CPUs using OpenCore and the OpenCore Legacy Patcher (OCLP). 
 
 ### Disclaimer
 This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. Since I only have an iMac11,3 that uses an i7-870 to check the kext and settings it uses, this guide must be considered experimental! I created it to lay out the basic principly of how one could go about attempting to install macOS 13+ on ancient harwdware – it's not a given that it'll work! So please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
