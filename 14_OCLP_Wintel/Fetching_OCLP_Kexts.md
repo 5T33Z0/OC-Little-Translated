@@ -45,4 +45,3 @@ But adding every single kext from OpenCore Legacy Patcher's Repo to OCAT can fet
 ## Notes
 - Fetching kext updates might not work when using OCAT in DEV mode. I can't find the location of `KextUrl.txt` in the `DevDatabase`.
 - I only included kexts from the following categories: "Acidanthera", "Ethernet", "Firewire" and "Wifi". Omitted are: kexts already present in OCAT as well as Mac-specific ones (most of "Misc", "SSE", "USB"). 
-- Currently, the kexts required for re-enabling Wi-Fi in macOS Sonoma are hosted on an extra branch called "Sonoma-Development". Once these are merged into the "Main" branch the URLs need to be adjusted.
