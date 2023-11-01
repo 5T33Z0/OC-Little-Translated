@@ -26,9 +26,10 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 >
 > **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
-This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware.
+This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware. I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Sonoma. 
 
-I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Sonoma. 
+> [!NOTE]
+> With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext incorporates the patches during macOS installation as well.
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
@@ -74,7 +75,62 @@ Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were re
 - Install macOS 12 or newer.
 
 <details>
-<summary><strong>My test</strong> (Click to show content!)</summary>
+<summary><strong>Previous method</strong> (obsolete)(Click to reveal)</summary>
+
+## About the Patches
+Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
+
+- **Booter Patches**
+	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
+	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
+	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
+- **Kernel Patches** (see "Comment" section)
+	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
+	- **"Disable Root Hash validation"** &rarr; Disables Cryptex hash verification in APFS.kext.
+	- **"Force FileVault on Broken Seal"** &rarr; Mandatory if you are using FileVault since installing Drivers back into the system volume breaks its security seal. 
+	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it. In this case it's needed because root patches for Non-Metal GPUs won't pass library validation tests otherwise.
+	- **"Disable _csr_check() in _vnode_check_signature"** &rarr; Allows using AMFI enabled with root patches applied, this helps avoid issues that occur with AMFI disabled. Note that currently OCLP requires AMFI disabled when applying root patches but with this kernel patch you can re-enable AMFI afterwards.
+	- **SurPlus Patches 1 and 2**: Race to condition fixes for Sandy Bridge and older. Fixes issues in macOS 11.3+, where Big Sur often won't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
+
+> [!IMPORTANT]
+> RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
+
+## Adding the Patches
+> [!WARNING]
+> Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
+
+### Booter Patches
+- Mount your EFI
+- Open your config.plist with ProperTree
+- Copy the entries from OCLPs [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L267) section to your config.plist and enable them
+- Leave ProperTree open an continue reading
+
+> [!NOTE]
+> These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents.kext instead to workaround issues with System Update Notifications.
+
+### Kernel Patches
+
+Copy the following entries from OCLPs [`Kernel/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L1636) section your to config.plist:
+
+- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
+- **"Disable Library Validation Enforcement"** &rarr; Enable it!
+- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
+- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
+- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
+- **"Force IOGetVMMPresent"** &rarr; Enable it.
+- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
+- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
+
+To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
+
+Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
+
+> [!IMPORTANT]
+> If you experience [issues with Bluetooth](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076) when using Broadcom cards in macOS Sonoma, then disable the Kernel Patches and use RestrictEvents.kext and boot-arg instead!
+</details>
+
+<details>
+<summary><strong>Testing the spoof on my Laptop</strong></summary>
 
 I tested these patches on my Lenovo T530 Notebook, using an Ivy Bridge CPU with `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
@@ -98,57 +154,6 @@ Installation went smoothly and macOS 12.1 booted without issues:
 
 </details>
 
-<details>
-<summary><strong>Previous method </strong> (Click to reveal)</summary>
-
-## About the Patches
-Following are the relevant Booter and Kernel Patches contained in the [**config.plist**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) provided by OpenCore Legacy Patcher.
-
-- **Booter Patches**
-	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
-	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
-	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
-- **Kernel Patches** (see "Comment" section)
-	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
-	- **"Disable Root Hash validation"** &rarr; Disables Cryptex hash verification in APFS.kext.
-	- **"Force FileVault on Broken Seal"** &rarr; Mandatory if you are using FileVault since installing Drivers back into the system volume breaks its security seal. 
-	- **"Disable Library Validation Enforcement"** &rarr; Library Validation Enforcement checks if an app's libraries are signed by Apple or the creator. Until recently, macOS apps could load code freely from foreign sources called code libraries. With macOS 10.15, apps are no longer allowed to load libraries that weren't originally packaged with it, unless they explicitly allow it. In this case it's needed because root patches for Non-Metal GPUs won't pass library validation tests otherwise.
-	- **"Disable _csr_check() in _vnode_check_signature"** &rarr; Allows using AMFI enabled with root patches applied, this helps avoid issues that occur with AMFI disabled. Note that currently OCLP requires AMFI disabled when applying root patches but with this kernel patch you can re-enable AMFI afterwards.
-	- **SurPlus Patches 1 and 2**: Race to condition fixes for Sandy Bridge and older. Fixes issues in macOS 11.3+, where Big Sur often won't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
-
-**NOTE**: RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
-
-## Adding the Patches
-> **Warning**: Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
-
-### Booter Patches
-- Mount your EFI
-- Open your config.plist with ProperTree
-- Copy the entries from OCLPs [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L267) section to your config.plist and enable them
-- Leave ProperTree open an continue reading
-
-**NOTE**: These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents.kext instead to workaround issues with System Update Notifications.
-
-### Kernel Patches
-
-Copy the following entries from OCLPs [`Kernel/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L1636) section your to config.plist:
-
-- **"Force FileVault on Broken Seal"** &rarr; Only required when using File Vault)
-- **"Disable Library Validation Enforcement"** &rarr; Enable it!
-- **"Reroute kern.hv_vmm_present patch (1)"** &rarr; Enable it!
-- **"Reroute kern.hv_vmm_present patch (2) Legacy"** &rarr; For installing/running **macOS Monterey**. Enable it.
-- **"Reroute kern.hv_vmm_present patch (2) Ventura"** &rarr; For installing/running **macOS Monterey** and newer. Enable it.
-- **"Force IOGetVMMPresent"** &rarr; Enable it.
-- **"Disable Root Hash validation"** &rarr; Enable it. **Note**: Not required when using [CryptexFixup](https://github.com/acidanthera/CryptexFixup) (IvyBridge and older only).
-- Add and enable additional Kernel patches if required (SurPlus patches for Sandy Bridge CPUs for example).
-
-To verify, enter `sysctl kern.hv_vmm_present` in Terminal. If it returns `1` the spoof is working (applies to option 1 only!). Remember: these patches have no effect below macOS 11.3.
-
-Enjoy macOS Monterey and newer with the correct SMBIOS for your CPU with working System Updates!
-
-**IMPORTANT**: If you experience [issues with Bluetooth](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076) when using Broadcom cards in macOS Sonoma, then disable the Kernel Patches and use RestrictEvents.kext and boot-arg instead!
-
-</details>
 
 ## Notes
 - After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
