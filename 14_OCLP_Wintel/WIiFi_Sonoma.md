@@ -22,10 +22,10 @@ Although OCLP allows changing some settings in the app, the option to manually e
 ## Method 1: Force-Enable Wi-Fi-Patching in OpenCore Legacy Patcher
 
 ### 1. Prerequisites
-The following prerequisites have to be met in order to get "Modern" and "Legacy" wireless working in macOS Sonoma (tested on beta 5):
+The following prerequisites have to be met in order to get "Modern" and "Legacy" wireless working in macOS Sonoma:
 
-1. Mandatory: if your system is unsupported by macOS Ventura and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following the [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family.
-2. Connect your system via Ethernet to access the internet. This should be obvious since Wi-Fi doesn't work at this stage…
+1. **Mandatory**: if your system is unsupported by macOS 12 and newer (everything prior to 7th Gen Intel Kaby Lake), you need to prepare your Config and EFI first by following the [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family.
+2. Connect your system via Ethernet to access the internet since Wi-Fi doesn't work at this stage.
 3. Disable Gatekeeper via Terminal so macOS won't get in your way:
 	```shell
 	sudo spctl --master-disable
@@ -35,9 +35,10 @@ The following prerequisites have to be met in order to get "Modern" and "Legacy"
 	```shell
 	xcode-select --install
 	```
-6. Since we are working with beta software here, it's strongly adviced to use the latest nightly builds of OpenCore and *all* kexts you are using in order to maximize compatibilty. This can be achieved by [switching OCAT to DEV Mode](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#2-pick-an-opencore-variant) and update OpenCore and Kexts or by downloading the [latest builds from Dortania](https://dortania.github.io/builds/) and applying updates manually (tedious).
+6. Since we are working with beta software here, it's strongly adviced to use the latest nightly builds of OpenCore and *all* kexts you are using in order to maximize compatibilty. This can be achieved by [switching OCAT to DEV Mode](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#2-pick-an-opencore-variant) before updating OpenCore and Kexts or by downloading the [latest builds from Dortania](https://dortania.github.io/builds/) and updating them manually (tedious).
 
-**IMPORTANT**: If you did a clean install of the latest Sonoma beta and didn't update from an existing install which had Command Line Tools installed already, you might get an error message when trying to install it via Terminal if the file is not present on the update server. In this case you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
+> [!NOTE]
+> If you cannot install Command Line Tools via Terminal, you need to download the installer from Apple's Developer Site instead (which you need an account for). It's located under: [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/).
 
 ### 2. Config and EFI adjustments
 Apply the following changes to your config (or copy them over from the [plist example](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI.plist)) and add the listed kexts to`EFI/OC/Kexts` folder:
@@ -60,7 +61,8 @@ Config Section | Action
 - Once patching is done, reboot
 - Enjoy working Wi-Fi again!
 
-**NOTE**: If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, then OCLP couldn't detect a compatible Wi-Fi card. In this case you need to either force-enable the option in the Source Code, build OCLP Patcher yourself and then apply the root patches (Step 4) or spoof a compatible Wi-Fi device into macOS.
+> [!NOTE]
+> If the "Networking: Modern Wireless" or "Networking: Legacy Wireless" option is not available, then OCLP couldn't detect a compatible Wi-Fi card. In this case you need to either force-enable the option in the Source Code, build OCLP Patcher yourself and then apply the root patches (Step 4) or spoof a compatible Wi-Fi device into macOS (Method 2).
 
 ### 4. Workaround: Force-enable Wi-Fi Patching in OCLP
 If you have one of the compatible and previously supported Broadcom or Atheros Wi-Fi Cards but it is not detected by OCLP, you need to force-enable Wi-Fi patching in OCLP's Source Code and then build a custom version of the patcher by following the steps below. In my experience this is only an issue in OCLP 0.6.9 and older. Once version 1.0.0 was released it detects the Broadcom card in my system automatically.
@@ -153,14 +155,15 @@ Next, we will create `DeviceProperties` to inject our newly found `IOName` spoof
 12. Run OpenCore Legacy Patcher and click on "Post Install Root Patch". If the spoof worked, the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of patches:<br>![OCLP_Wi-Fi](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a053ee5-dba6-4ff6-b087-f10f55f9a616)
 13. Apply the Root patches, reboot and enjoy your newly working Wi-Fi in macOS Sonoma!
 
-**NOTE**: If the Patcher does not show you the option to patch Wi-Fi, then the spoof doesn't work. In this case you need to try a different spoof or use Method 1 instead!
+> [!NOTE]
+> If the Patcher does not show you the option to patch Wi-Fi, then the spoof doesn't work. In this case you need to try a different spoof or use Method 1 instead!
 
 ### Tipps for Troubleshooting 
 - Download and open [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone)
 - Search for `ARPT`
-- Highlight the ARPT entry and look for the property `IOName` in the list on the right
-- If the listed `IOName` is identical with the one you injected via `DeviceProperties`, then the spoof is working and the problem must be something else.
-- If it still shows the original `IOName`, the spoof doesn't work.
+- Select the `ARPT` entry and look for the property `IOName` in the right column
+- If the listed `IOName` is identical with the one you injected via `DeviceProperties`, then the spoof is working and the problem must be something else
+- If it still shows the original `IOName`, the spoof doesn't work
 
 ## Notes
 - Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 13 GB). [There's a workaround](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows incremental updates to work temporarily.
