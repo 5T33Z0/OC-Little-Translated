@@ -41,10 +41,7 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
             }
         }
 	```
-- **Example**: [**Adding a fake Realtime Clock (RTC0)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))
-  
-  - ***SSDT-RTC0*** - Fake RTC
-  - _HID: `PNP0B00`
+- **Example**: &rarr; See [**Adding a fake Realtime Clock (RTC0)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))
 
 > [!IMPORTANT]
 > The name and path of the [**Low Pin Count Bus**](https://www.intel.com/content/dam/www/program/design/us/en/documents/low-pin-count-interface-specification.pdf) used in an SSDT – usually `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
