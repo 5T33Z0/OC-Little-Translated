@@ -47,7 +47,7 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
   - _HID: `PNP0B00`
 
 > [!IMPORTANT]
-> The path and name of the Low Pin Configuration Bus used in a SSDT – either `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
+> The path and name of the [Low Pin Count Bus](https://www.intel.com/content/dam/www/program/design/us/en/documents/low-pin-count-interface-specification.pdf) used in a SSDT – usually `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
 
 ## Adding missing Devices and Features
 Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse through the folders above to find out which you may need.
