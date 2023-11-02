@@ -1,7 +1,6 @@
 # Fixing issues with System Update Notifications in macOS 11.3 and newer
 
 ## Problem Description
-
 Under one of the following conditions (or combinations thereof), System Update Notifications won't work in Big Sur and newer, so you can't install any OTA System Updates/Upgrades:
 
 1. When using `-no_compat_check` boot-arg. This disables System Updates *by design*
@@ -22,9 +21,8 @@ Disabling `SecureBootModel` for the listed SMBIOSes is necessary when trying to 
 Re-installing (graphics) drivers onto the system partition breaks the security seal of the system volume. And since these drivers are unsigned, the system will crash on boot if `SecureBootModel` and `SIP` are enabled. So in this case it's a combination of two factors which break system updates.
 
 ## Fix
-
 1. Remove `-no_compat_check` boot-arg (if present)
-2. Add the [Booter Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L268) from OCLPs config and enable them.
+2. Add the [**Booter Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L268) from OCLPs config and enable them.
 3. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer. This also allows using the "native" SMBIOS for the used CPU which improves CPU and GPU power management.
 
 Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variables. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
@@ -32,11 +30,9 @@ Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variables. M
 ![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
 
 ## Limitations
-
 Since this fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+), you can't use it in macOS Catalina and older. This can be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.). Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
 
 ### What about Clover?
-
 This fix also works in Clover but it requires a slightly different approach, since Clover cannot apply OpenCore's Booter patches needed for the board-id skip. Therefore you need `-no_compat_check` to boot macOS with an unsupported Board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. Installing macOS still requires a supported SMBIOS, though.
 
 But as mentioned earlier, using `-no_compat_check` disables system updates. Therefore we add `RestrictEvents.kext` (and `revpatch=sbvmm` boot-arg) to force-enable the `VMM-x86_64` which somehow cancels out the side-effects of no_compat_check. So now you can:
@@ -46,6 +42,9 @@ But as mentioned earlier, using `-no_compat_check` disables system updates. Ther
 3. Receive OTA System Updates with Clover – which was impossible before!
 
 When I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIOS `MacBookPro10,1`, `-no_compat_check`, `RestrictEvent.kext` and `revpatch=sbvmm`, I was offered System Updates, which is pretty damn cool.
+
+## Notes
+- [**Reducing the download size of OTA Updates**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md)
 
 ## Credits
 - Dortania for OCLP 

@@ -154,10 +154,9 @@ Installation went smoothly and macOS 12.1 booted without issues:
 
 </details>
 
-
 ## Notes
 - After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
-- For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) section. It contains guides for 1st to 6th Gen Intel Core CPUs. 
+- For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel) section. It contains guides for 1st to 6th Gen Intel Core CPUs.
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
