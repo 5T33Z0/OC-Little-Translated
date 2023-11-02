@@ -56,9 +56,10 @@ So to prevent that the full installer is downloaded every time, you can do the f
 	```
 - If you check for updates now, the size of the update should be significantly smaller – usually between 1 to 2 GB.
 
-## Limitations
-- This workaround is only applicable to Haswell and newer. On systems with older CPUs, an error occurs during the update preparation phase!
-- This workaround cannot be utilized if your system requires post-install patches for *both* WiFi and Ethernet. Because then you cannot access the internet to download updates in this case
+> [!WARNING]
+> 
+> - This workaround only works on systems with Haswell/Broadwell and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase!
+> - This workaround cannot be utilized if your system requires post-install patches for *both* WiFi and Ethernet. Because then you cannot access the internet to download updates!
 
 ## Notes
 - Depending on the root patches your system need to be able to run macOS Ventura or newer, booting might only be possible in Safe Mode. To do so, hold <kbd>Shift</kbd> and press <kbd>Enter</kbd> in OpenCore's Boot Picker.
