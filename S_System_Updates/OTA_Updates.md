@@ -38,25 +38,23 @@ So to prevent that the full installer is downloaded every time, you can do the f
 - Run the OpenCore Legacy Patcher
 - Click on "Post-Install Root Patch"
 - Next, select `Revert Root Patches`: <br> ![revert](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e5f9c409-7aad-4511-b1bc-e20466908913)
-- Once reverting the patches is done, reboot. all the patches will be gone but the Snapshot seal will be intact again:
-
+- Once reverting the patches is done, reboot. All the patches will be gone but the Snapshot seal will be intact again:
 	```
-+-> Volume disk1s6
-        ---------------------------------------------------
-        APFS Volume Disk (Role):   disk1s6 (System)
-        Name:                      Big Sur (Case-insensitive)
-        Mount Point:               Not Mounted
-        Capacity Consumed:         15152431104 B (15.2 GB)
-        Sealed:                    Broken
-        FileVault:                 No
-        |
-        Snapshot:                  -----------------
-        Snapshot Disk:             disk1s6s1
-        Snapshot Mount Point:      /
-        Snapshot Sealed:           Yes
-```
-
-If you check for updates again, the size of the update should be significantly smaller – usually between 1 to 2 GB.
+	+-> Volume disk1s6
+        	---------------------------------------------------
+        	APFS Volume Disk (Role):   disk1s6 (System)
+        	Name:                      Big Sur (Case-insensitive)
+        	Mount Point:               Not Mounted
+        	Capacity Consumed:         15152431104 B (15.2 GB)
+        	Sealed:                    Broken
+        	FileVault:                 No
+        	|
+        	Snapshot:                  -----------------
+        	Snapshot Disk:             disk1s6s1
+        	Snapshot Mount Point:      /
+        	Snapshot Sealed:           Yes
+	```
+- If you check for updates now, the size of the update should be significantly smaller – usually between 1 to 2 GB.
 
 ## Limitations
 - This workaround is only applicable to Haswell and newer. On systems with older CPUs, an error occurs during the update preparation phase!
