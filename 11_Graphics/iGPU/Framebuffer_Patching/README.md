@@ -212,7 +212,6 @@ HEX value  | Amount of VRAM
 `FFFFFFFF` | 4096 MB
 
 > [!IMPORTANT]
-
 > - According to the Whatevergreen FAQ, using the `framebuffer-stolenmem` property is not recommended.
 > - This should be obvious: don't assign more VRAM than phiscal RAM is installed in your system!
 > - Disable/delete the `framebuffer-stolenmem` property if you want to increase the amount of VRAM which is handled by `framebuffer-unifiedmem`. Properties `stolenmen` and `unifiedmem` should not be used together at the same time!
