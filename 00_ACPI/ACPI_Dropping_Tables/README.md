@@ -78,7 +78,6 @@ Find out more about "internal" tables [**here**](https://github.com/acidanthera/
 For tables other than SSDTs, OEM Table ID isn't a reliable source to detect and drop a table by because (based on vendor) the OEM Table IDs may only contain some letters followed by a lot of blanks or underscores, for example `AMI____`. In this case, we use the `Table Signature` and `Table Length` instead to clearly identify the table.
 
 ### Example 1: dropping the `DMAR` Table
-
 On some Z490/Z590 boards (e.g. Gigabyte), the presence of Reserved Memory Regions in the DMA Remapping Table (`DMAR`) in combination with disabled VT-d and/or `DisableIOMapper` Kernel Quirk render the dreaded on-board Intel(r) I225-V Ethernet Controller and PCIe Ethernet cards useless in macOS Monterey and newer. In this case, `DMAR` has to be modified, VT-d enabled in BIOS and `DisableIOMapper` disabled.
 
 Therefore, you might consider dropping the `DMAR` table completely and/or replace it with a modified version. Here's how you do it:
@@ -118,10 +117,14 @@ After rebooting, do the following:
 
 This will disable the OEM DMAR table and inject the modified one instead but we need to check if it worked…
 
+> [!IMPORTANT]
+>
+> I've noticed that macOS 14.2 crashes on my Z490 system if a Reserved Memory Region for the `XHCI` Controller is present in the OEM DMAR Table (cross-reference PCI paths to figure out which memory region is for what). In this case, drop and replace the OEM `DMAR` table by a modified one without reserved memory regions to resolve the issue!
+
 #### Verifying that the `DMAR` Table has been replaced
 - Open maciASL
 - Select "File" > "New from ACPI"
-- Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions (which it doesn't):</br>
+- Pick `DMAR`. The file should be shorter in length than the original (in this case it's `104`) and should no longer contain Reserved Memory Regions (which it doesn't in this case):</br>
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
 ## NOTES
