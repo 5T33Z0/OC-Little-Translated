@@ -35,10 +35,11 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
 **Intel CPU families** (newer ones don't need this since they are still supported): 
 
-- Sandy Bridge (need SurPlus patches)
+- 1st Gen Intel Core CPUs (req. SurPlus Kernel Patches)
+- Sandy Bridge (req. SurPlus Kernel Patches)
 - Ivy Bridge
 - Haswell/Broadwell
-- Skylake (to continue using SMBIOS `iMac17,1` on macOS 13). Requires additional [iGPU spoof for Intel HD 530](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13))
+- Skylake (to continue using SMBIOS `iMac17,1` on macOS 13). Requires additional [iGPU spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13) so the Intel HD 530 can be used.
 
 ## Use Cases
 1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOS/board-id.
