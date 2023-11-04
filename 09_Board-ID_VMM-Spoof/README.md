@@ -28,8 +28,8 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 
 This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware. I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Sonoma. 
 
-> [!NOTE]
-> With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext applies them during macOS installation as well now. So, if your config still contains the Kernel Patches disable them!
+> [!IMPRTANT]
+> With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext applies to the macOS installation environment as well now. So, if your config still contains the Kernel Patches disable them!
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
@@ -39,7 +39,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 - Sandy Bridge (req. SurPlus Kernel Patches)
 - Ivy Bridge
 - Haswell/Broadwell
-- Skylake (to continue using SMBIOS `iMac17,1` on macOS 13). Requires additional [iGPU spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13) so the Intel HD 530 can be used.
+- Skylake (to continue using SMBIOS `iMac17,1` on macOS 13+). Requires additional [iGPU spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13) so the Intel HD 530 can be used.
 
 > [!NOTE]
 > 7th to 10 Gen Intel Core CPUs don't need this spoof since they are still supported by macOS.
@@ -76,8 +76,8 @@ Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were re
 - Enable both patches (set them to "true")
 - Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your EFI/OC/Kext folder and config.plist
 - Delete `-no_compat_check` boot-arg (if present)
-- Add `revpatch=sbvmm` to boot-args or as NVRAM variables: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
-- Under `PlatformInfo/Generic`, pick the correct/designated [SMBIOS designed for your CPU family](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) and system and generate new serials, etc (with GenSMBIOS for example) 
+- Add `revpatch=sbvmm` to boot-args or as as an NVRAM variable: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
+- Under `PlatformInfo/Generic`, pick the correct/designated [SMBIOS designed for your CPU family](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) and system and generate new serials, etc (with OCAT or GenSMBIOS for example) 
 - Save your config and reboot.
 - Install macOS 12 or newer.
 
