@@ -199,9 +199,9 @@ This results in the following string for con1-alldata:
 `framebuffer-con1-alldata`: `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000`
 
 ### Understanding the `framebuffer-unifiedmem` property
-This device property can be used to assign more RAM to the iGPU sos it can be used as VRAM. On laptops, the default usually is 1536 MB. With the unifiedmem property you can increase the amount of VRAM to address glitches like artifacts. On my T530 Laptop for example, the scrollbars in Firfox would become glitch with pink horizontal stripes if only 1536 MB of VRAM was assigned. Increasing the amount to 2048 MB resolved this issue.  
+This device property can be used to allocate more RAM to the iGPU as VRAM. On laptops, the default usually is 1536 MB. With the unifiedmem property you can increase the amount of VRAM to address graphical glitches or artifacts. On my Lenovo T530 Laptop for example, the scrollbars in Firfox would become glitchy with pink horizontal stripes if only 1536 MB of VRAM were allocated. Increasing the amount to 2048 MB resolved this issue.  
 
-HEX value  | Amount of VRAM
+HEX value  | Allocated VRAM
 :---------:|:------------:
 `00000040` | 1024 MB
 `00000060` | 1536 MB
