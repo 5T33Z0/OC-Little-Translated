@@ -1,4 +1,4 @@
- CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
+# CPU Power Management for legacy Intel CPUs (`SSDT-PM`)
 
 **TABLE of CONTENTS**
 
