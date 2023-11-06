@@ -40,7 +40,7 @@ What happened here? There is an obvious error after applying the find and replac
 
 In practice, we should try our best to ensure the integrity of the grammar after the name change.
 
-Here is am extended `Find` and `Replace` sequence. It's length determines the number of lines/levels that are affected by this `DSDT` patch.
+Here is an extended `Find` and `Replace` sequence. It's length determines the number of lines/levels that are affected by this `DSDT` patch.
   
 **Find**: `00 A0 08 48 50 54 45 A4 0A 0F A4 00` &rarr; [48 50 54 45 = HPTE]</br>
 **Replace**: `00 A4 0A 0F A3 A3 A3 A3 A3 A3 A3 A3` &rarr; [A3 = empty operation]
