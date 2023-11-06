@@ -1,9 +1,7 @@
 # Advanced Patching Techniques
 
 ## Really hacky Binary Rename patches
-A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
-
-But besides that you can also use binary renames in rather unconventional ways to enable or disable a device by literally manipulating section(s) of the `DSTD` in such a way that only the desired parts of it remain intact.
+A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. But besides that you can also use binary renames in rather unconventional ways to enable or disable devices by literally manipulating section(s) of the `DSDT` in such a way that only desired parts of the code is executed.
 
 ### Risks
 ACPI binary renaming affects other Operating Systems when using OpenCore for booting.
