@@ -1,15 +1,14 @@
 # Advanced Patching Techniques
 
 ## Really hacky Binary Rename patches
-A usual application of using binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
-But besides that you can also use binary renames in a rather unconventional way to enable or disable a device by literally breaking the section in such a way that only the desired parts of it remain intact. 
+A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
+
+But besides that you can also use binary renames in rather unconventional ways to enable or disable a device by literally manipulating section(s) of the `DSTD` in such a way that only the desired parts of it remain intact.
 
 ### Risks
-
 ACPI binary renaming affects other Operating Systems when using OpenCore for booting.
 
-### Example: Enabling HPET
-
+### Example: Enabling `HPET`
 Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. Here's the renaming rule:
 
 **Find**: `00 A0 08 48 50` &rarr; "00 = {; A0 = If ......"</br>
@@ -39,7 +38,6 @@ Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. 
   }
 ```
 ### Explanation
-
 What happened here? There is an obvious error after applying the find and replacs masks, but this error does not cause any harm. First, the content after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content. 
 
 In practice, we should try our best to ensure the integrity of the grammar after the name change.
@@ -77,10 +75,12 @@ So basically, you overwrite everything undesirable in the method by `Noop` (A3).
 > [!WARNING] 
 > If there's a mismatch in size between the `Find` and `Replace` sequence, you will be greeted by a "Patch is borked!" message from OpenCore and the machine won't boot. So create an OC Snapshot with ProperTree to check the config after creating such a binary patch!
 
-## `Find` and `Replace` data lookup method using Hex
+## `Find` and `Replace` data lookup method utilizing Hex
 Let's assume you want one specific parameter to be changed but the renaming rule you create doesn't target the specific location alone. This method combines viewing the `DSDT` in a text-based IDE like maciASL by finding surrounding data pattern in `Hex` to target a specific location to limit the reach of a binary rename. 
 
-This approach is a bit outdated since we now have modifiers like `base` to specify exact locations where to apply a patch. Anyway, this is how it works:
+This approach is a bit outdated since we now have modifiers like `base` to specify exact locations where to apply a patch. 
+
+**This is how it works**:
 
 - Find the device, method or paramater you want to change in a `DSDT` in maciASL.
 - View the `DSDT` as Hex code (Visual Studio Code has an extension for it) and find the corresponding section
@@ -92,7 +92,7 @@ This approach is a bit outdated since we now have modifiers like `base` to speci
 **NOTE**: You need to ensure that the sequence you want to change is a unique pattern, otherwise it will be applied in more than one section.
 
 ## Preset variable method techniques
-The preset variable method is used to pre-assign some variables of ACPI to `FieldUnitObj` to achieve the purpose of initialization. Although these variables are assigned values, they are not changed until their method is called. Modifying these variables through third-party patch Scope (\) files can achieve our expected patch effect.
+The preset variable method is used to pre-assign some variables of ACPI to the `FieldUnitObj` to achieve the purpose of initialization. Although these variables are assigned values, they are not changed until their method is called. Modifying these variables through third-party patch Scope (\) files can achieve our expected patch effect.
 
 ### Risks
 The variable being fixed may exist in multiple places, and fixing it may affect other components while achieving the desired effect. The corrected variable may be from hardware information that can only be read but not written. In this case, a binary rename and SSDT patch are required. It should be noted that the renamed variable may not be recovered when the OC boots another system. See Example 4.
@@ -125,7 +125,7 @@ Scope (\)
 ```
 This has the same effect as changing `Return` to `Zero` because it becomes true, which returns `0x0F` which results in Zero being returned.
 
-### Example 2: SSDT-AWAC
+### Example 2: `SSDT-AWAC`
 The official patch `SSDT-AWAC` is for some 300+ series machines to force `RTC` to be enabled and `AWAC` to be disabled at the same time.
 
 original:
@@ -196,7 +196,7 @@ External (STAS, IntObj)
 		}
 	}
 ```
-### Example 3: GPIO Patch
+### Example 3: `GPIO` Patch
 This patch is required for enabling the GPIO pin for using I2C Touchpads. See Chapter [Trackpad Patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches) for further details.
 
 An original text:
@@ -327,4 +327,4 @@ Method (_STA, 0, NotSerialized)
 ```
 The original `_STA` method contains other operations besides setting the conditional device status enable bit so that's why this approach cna't be applied in this case.
 
-**Risk**: XM01 may not be recovered when OC boots other systems.
+**Risk**: `XM01` may not be recovered when OC boots other systems.
