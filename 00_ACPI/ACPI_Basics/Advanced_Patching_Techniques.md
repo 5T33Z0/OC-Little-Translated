@@ -128,7 +128,7 @@ This has the same effect as changing `Return` to `Zero` because it becomes true,
 ### Example 2: `SSDT-AWAC`
 The official patch `SSDT-AWAC` is for some 300+ series machines to force `RTC` to be enabled and `AWAC` to be disabled at the same time.
 
-original:
+Code Snippet from `DSDT`:
 
 ```asl
 Device (RTC)

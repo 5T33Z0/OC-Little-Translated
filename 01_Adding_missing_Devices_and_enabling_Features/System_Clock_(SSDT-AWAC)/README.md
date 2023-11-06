@@ -74,8 +74,6 @@ Scope (\)
 - If `STAS` is `One` enable RTC (set it to `0x0F`). 
 - On the other hand, changing `STAS` to `One` will disable `AWAC` because the *Else* condition is met: *"if the value for `STAS` is anything but Zero, return `Zero`* – in other words, turn of `AWAC`.
 
-___
-
 ### Method 2: using `SSDT-AWAC-ARTC`
 This SSDT is for systems with 7th Gen Intel Core or newer CPUs. In DSDTs of real Macs, `ARTC` ("ACPI000E") is used instead of `RTC`. This SSDT disables `AWAC` and `HPET` (High Precision Event Timer, which is now a legacy device) and adds `RTC` ("PNP0B00") "disguised" as `ARTC` instead.
 
@@ -158,7 +156,8 @@ Enabling `HPET` might improve multicore performance, though. On the other hand, 
 I suggest you try this method and check how the system behaves afterwards. Also perform some CPU/GPU Benchmark tests to find out what works best for you. On my Lenovo T490, the system feels snappier with `AppleHPET` present.
 
 ## Notes
-On some **X299** mainboards (ASUS), the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, the `RTC` won't work so booting macOS fails. To work around this issues, leave `AWAC` enabled (so `RTC` won't be available) but add a [**Fake RTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead.
+- On some **X299** mainboards (ASUS), the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, the `RTC` won't work so booting macOS fails. To work around this issues, leave `AWAC` enabled (so `RTC` won't be available) but add a [**Fake RTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead.
+- Disabling `AWAC` via [**Preset Variable**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Advanced_Patching_Techniques.md#example-2-ssdt-awac)
 
 ## Credits
 - [**Baio1977**](https://github.com/Baio1977) for `SSDT-AWAC-ARTC`
