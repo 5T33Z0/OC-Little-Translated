@@ -255,23 +255,24 @@ This translates as follows: unless `IM01` is not equal to `0x02`, the content of
 
 1. **Binary Rename**:
 	
-	**Comment**: Change IM01 rename XM01</br>
+	**Comment**: Change `IM01` rename `XM01`</br>
 	**Find**: 49 4D 30 31 08 </br>
 	**Replace**: 58 4D 30 31 08
 
 2. **SSDT Patch**: 
+	
+ 	```asl
+	Name (IM01, 0x02)
 
-	```asl
-Name (IM01, 0x02)
-If (_OSI ("Darwin"))
-{
-    ...
-}
-Else
-{
-    IM01 = XM01 /* The same path as the original ACPI variable */
-}
-```
+	If (_OSI ("Darwin"))
+	{
+          ...
+  	}	
+	Else
+	{
+          IM01 = XM01 /* The same path as the original ACPI variable */
+	}
+	```
 
 ### Example 5
 Change the enable bit of the device state using an assignment operation that references the device's original `_STA` method as an `IntObj`.
