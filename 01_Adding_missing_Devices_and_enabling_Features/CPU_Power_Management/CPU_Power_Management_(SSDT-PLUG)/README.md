@@ -19,7 +19,7 @@ The manual patching method described below is outdated, since the patching proce
 ## Patching method 2: manual
 
 ### Example 1
-- In `DSDT`, search for `Processor`, e.g.:
+- Search results in `DSDT` for `Processor`, e.g.:
 
 	```	asl 
       Scope (_PR)
@@ -37,7 +37,7 @@ The manual patching method described below is outdated, since the patching proce
 - Based on the search result, the `Processor` object is located in the Scope `_PR` and the name of the first core is `CPU0`, so select the injection file: ***SSDT-PLUG-_PR.CPU0***
 
 ### Example 2
-- In `DSDT`, search for `Processor`, e.g.:
+- Search results in `DSDT` for `Processor`, e.g.:
 
 	```asl
       Scope (_SB)
@@ -60,13 +60,26 @@ The manual patching method described below is outdated, since the patching proce
           Processor (PR15, 0x10, 0x00001810, 0x06){}
       }
 	```
-- Based on the search result, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
+- Based on this search result example, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
 
 >[!IMPORTANT]
->If the query result and the patch file name **do not match**, please pick the `SSDT-PLUG.aml` sample included in the OpenCore package since it covers all cases of possible CPU device names and modify it so that it matches the ACPI name and paths used in your system!
+>
+>If your search results **do not match** with any of the available SSDTs, please pick the `SSDT-PLUG.dsl` sample included in the OpenCore package since it covers all cases of possible CPU device names, modify it so that it matches the ACPI name and paths used in your system and export it as an .aml (ACPI Machine Language) file!
 
-## Testing
-To check if Speedstep and turbo states work correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
+## Verifying and Testing
+To verify that XCPM is working, you can enter the following command in Terminal and press <kbd>Enter</kbd>:
+
+`sysctl -n machdep.xcpm.mode`
+
+If the `X86PlatformPlugin` is used, the output should be `1` 
+
+To show the number of fequency vectors of the current SMBIOS, you can enter the following and press <kbd>Enter</kbd>:
+
+`sysctl -n machdep.xcpm.vectors_loaded_count`
+
+Alternatively, you can use `IORegistryExplorer` to check for [**CPU states**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/XCPM_PSTATES.png)
+
+To test if Speedstep and turbo states are working correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
 
 Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
 
@@ -79,7 +92,7 @@ Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 **`Cpuid1Mask`**: FFFFFFFF000000000000000000000000 </br>
 **`MinKernel`**: 19.0.0
 
-Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is 19.0.0. This also means that this fake CPUID is only applied for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
+Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is `19.0.0.` This also means that this fake CPUID is only applied for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
 
 12th Gen Intel Core (Codename "Alder Lake") requires [***SSDT-PLUG-ALT***](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/SSDT-PLUG-ALT.dsl) instead of ***SSDT-PLUG***. It's contained in the **Docs** folder of the OpenCore Package as well.
 
@@ -95,10 +108,10 @@ AMD CPU families 15h, to 17h and 19h also require [**additional Kernel Patches**
 On macOS 12.3+, you also need [**AppleMCEReporterDisabler**](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) kext when using the following SMBIOSes: `iMacPro1,1`, `MacPro6,1` or `MacPro7,1`.
 
 ## Notes
-- The `X86PlatformPlugin` is not available for 2nd Gen (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [**`SSDT-PM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
+- The `X86PlatformPlugin` is not available for 2nd (Sandy Bridge) and 3rd Gen (Ivy Bridge) Intel CPUs - they use the `ACPI_SMC_PlatformPlugin` instead. But you can use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a [**`SSDT-PM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#readme) for these CPUs instead to enable proper CPU Power Management.
 - For **Intel Xeon**, a different approach is required if the CPU is not detected by macOS. See [**this guide**](https://www.insanelymac.com/forum/topic/349526-cpu-wrapping-ssdt-cpu-wrap-ssdt-cpur-acpi0007/) for reference.
-- From **macOS 12.3 Beta 1** onward, Apple dropped the `plugin-type` check within the `X86PlatformPlugin` which means that the X86 Platform Plugin is enabled by default. So you  no longer need `SSDT-PLUG.aml` to enable it in macOS Monterey and newer. It also means that power management is broken on pre-Ivy Bridge CPUs as they don't have correct power management tables provided. More info [**here**](https://github.com/acidanthera/bugtracker/issues/2013).
-- If you are using [**CPUFriend**](https://github.com/acidanthera/CPUFriend), you also don't need SSDT-PLUG – CPUFriend enables the X86PlaformPlugin on its own. **CPUFriend** can be used to optimize CPU Power Management. This requires an additional CPUFriendDataProvider.kext that can be generated with [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend).
+- From **macOS 12.3 Beta 1** onward, Apple dropped the `plugin-type` check within the `X86PlatformPlugin`. This results in the X86 Platform Plugin being enabled by default. So you no longer need `SSDT-PLUG.aml` to enable it in macOS Monterey and newer. It also means that power management is broken on pre-Ivy Bridge CPUs as they don't have correct power management tables provided. More info [**here**](https://github.com/acidanthera/bugtracker/issues/2013).
+- If you are using [**CPUFriend**](https://github.com/acidanthera/CPUFriend) to adjust CPU Power Management, you also don't need SSDT-PLUG – CPUFriend enables the X86PlaformPlugin on its own. In order to work properly **CPUFriend** requires an additional CPUFriendDataProvider.kext which can be generated with [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend).
 
 ## Credits
 - Acidanthera for `SSDT-PLUG-ALT.dsl` for Intel Alder Lake (requires [**Fake CPUID**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/advanced-topics/using-alder-lake#kernel-greater-than-emulate)).
