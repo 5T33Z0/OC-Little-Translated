@@ -89,7 +89,9 @@ This approach is a bit outdated since we now have modifiers like `base` to speci
 - Next, you change the "inside" of the mask (the parameter you actually want to change) and leave the surrounding code alone to create your unique `Replace` rule.
 - Apply and test.
 
-**NOTE**: You need to ensure that the sequence you want to change is a unique pattern, otherwise it will be applied in more than one section.
+> [!NOTE]
+> 
+> You need to ensure that the sequence you want to change is a unique pattern, otherwise it will be applied in more than one section.
 
 ## Preset variable method techniques
 The preset variable method is used to pre-assign some variables of ACPI to the `FieldUnitObj` to achieve the purpose of initialization. Although these variables are assigned values, they are not changed until their method is called. Modifying these variables through third-party patch Scope (\) files can achieve our expected patch effect.
