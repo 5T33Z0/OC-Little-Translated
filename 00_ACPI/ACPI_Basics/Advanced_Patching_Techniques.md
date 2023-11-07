@@ -1,9 +1,7 @@
 # Advanced Patching Techniques
 
 ## Really hacky Binary Rename patches
-A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. 
-
-But besides that you can also use binary renames in rather unconventional ways to enable or disable a device by literally manipulating section(s) of the `DSTD` in such a way that only the desired parts of it remain intact.
+A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. But besides that you can also use binary renames in rather unconventional ways to enable or disable devices by literally manipulating section(s) of the `DSDT` in such a way that only desired parts of the code is executed.
 
 ### Risks
 ACPI binary renaming affects other Operating Systems when using OpenCore for booting.
@@ -42,7 +40,7 @@ What happened here? There is an obvious error after applying the find and replac
 
 In practice, we should try our best to ensure the integrity of the grammar after the name change.
 
-Here is am extended `Find` and `Replace` sequence. It's length determines the number of lines/levels that are affected by this `DSDT` patch.
+Here is an extended `Find` and `Replace` sequence. It's length determines the number of lines/levels that are affected by this `DSDT` patch.
   
 **Find**: `00 A0 08 48 50 54 45 A4 0A 0F A4 00` &rarr; [48 50 54 45 = HPTE]</br>
 **Replace**: `00 A4 0A 0F A3 A3 A3 A3 A3 A3 A3 A3` &rarr; [A3 = empty operation]
