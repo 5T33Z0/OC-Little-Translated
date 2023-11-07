@@ -1,12 +1,12 @@
 # Enabling CPU Power Management (`SSDT-PLUG`)
 
 ## Description
-Enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake requires `SSDT-PLUG-ALT.aml` instead.
+`SSDT-PLUG` enables `X86PlatformPlugin` to utilize XCPM CPU Power Management on 4th Gen Intel Core CPUs and newer. Intel Alderlake requires `SSDT-PLUG-ALT.aml` instead.
 
 ## Patching method 1: automated, using SSDTTime
 The manual patching method described below is outdated, since the patching process can now be automated using **SSDTTime** which can generate the SSDT-PLUG for you by analyzing your system's `DSDT`.
 
-**HOW TO:**
+### Instructions
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
@@ -20,7 +20,6 @@ The manual patching method described below is outdated, since the patching proce
 
 ### Example 1
 - Search results in `DSDT` for `Processor`, e.g.:
-
 	```	asl 
       Scope (_PR)
       {
@@ -35,10 +34,12 @@ The manual patching method described below is outdated, since the patching proce
       }
 	```
 - Based on the search result, the `Processor` object is located in the Scope `_PR` and the name of the first core is `CPU0`, so select the injection file: ***SSDT-PLUG-_PR.CPU0***
+- Add the SSDT to `EFI/OC/ACPI` and your config.plist
+- Save and reboot
+- Check if the X86PlatformPlugin is working
 
 ### Example 2
 - Search results in `DSDT` for `Processor`, e.g.:
-
 	```asl
       Scope (_SB)
       {
@@ -61,6 +62,9 @@ The manual patching method described below is outdated, since the patching proce
       }
 	```
 - Based on this search result example, the `Processor` object is located under `_SB` and the name of the first core is `PR00`, so select the injection file: ***SSDT-PLUG-_SB.CPU0***
+- Add the SSDT to `EFI/OC/ACPI` and your config.plist
+- Save and reboot
+- Check if the X86PlatformPlugin is working
 
 >[!IMPORTANT]
 >
