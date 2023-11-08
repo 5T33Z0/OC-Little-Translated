@@ -1,5 +1,5 @@
 # Dropping ACPI Tables
-Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover and OpenCore provide means to prohibit certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to dump the existing ACPI tables from your BIOS/Firmware to analyze them.
+Sometimes ACPI Tables provided with your Firmware/BIOS might hinder some features or devices to work properly in macOS. Boot managers like Clover and OpenCore provide means to block certain tables from loading or to replace them. In order to do so, you need to know the Tables Signature, OEM Table ID and/or Table Length. Therefore, you need to extract ("dump") the ACPI tables from your BIOS/Firmware to analyze them.
 
 **TABLE of CONTENTS**
 
@@ -128,5 +128,5 @@ This will disable the OEM DMAR table and inject the modified one instead but we 
 	![DMARnu](https://user-images.githubusercontent.com/76865553/148192464-230e64c0-7817-4a83-b54d-c7d1f3e7adb6.png)
 
 ## NOTES
-- OpenCore 0.9.2 introduced a new Kernel Quirk called [`DisableIoMapperMapping`](https://github.com/acidanthera/bugtracker/issues/2278#issuecomment-1542657515) which can be used to address new connectivity issues in macOS 13.3+ (if they weren't there before).
-- You should only import ACPI tables with maciASL if you know they are unmodified by OpenCore. Otherwise, dump the OEM ACPI Tables using the debug version of OpenCore and enabling the `SysReport` Quirk and work with those.
+- OpenCore 0.9.2 introduced a new Kernel Quirk called [`DisableIoMapperMapping`](https://github.com/acidanthera/bugtracker/issues/2278#issuecomment-1542657515) which can be used to address new connectivity issues in macOS 13.3+ (if they weren't present before).
+- You should only import ACPI tables with maciASL if you know that they are unmodified by OpenCore. Otherwise, dump the OEM ACPI Tables using the debug version of OpenCore and enabling the `SysReport` Quirk and work with those.
