@@ -5,7 +5,7 @@ Hotpatches for enabling `RTC` and disabling `AWAC` system clock at the same time
 ## Automated SSDT generation: using SSDTTime
 With the python script **SSDTTime**, you can generate SSDT-AWAC by analyzing your system's `DSDT`.
 
-**HOW TO:**
+### Instructions
 
 1. Download [**SSDTTime**](https://github.com/corpnewt/SSDTTime) and run it
 2. Press <kbd>D</kbd>, drag in your system's DSDT and hit and hit <kbd>Enter</kbd>
@@ -15,7 +15,9 @@ With the python script **SSDTTime**, you can generate SSDT-AWAC by analyzing you
 6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
 7. Save and Reboot.
 
-**NOTE**: If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
+> [!NOTE]
+> 
+> If you are editing your config using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), OCAT it will update the list of kexts and .aml files automatically, since it monitors the EFI folder.
 
 ## Manual patching methods
 Besides using SSDTTime to generate `SSDT-AWAC.aml`, there are other methods for disabling AWAC. Depending on the search results in your DSDT, you can use different methods and SSDT-AWAC variants. Here are some examples.
@@ -147,13 +149,14 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 8. In maciASL the `HPET` should also not be present.
 
 ### To HPET, or not to HPET?
-With the release of the Skylake X and Kaby Lake CPU families, `HPET` ("PNP0103") and `AppleHPET` are now optional legacy devices kept for backward compatibility. 
+With the release of the Skylake X and Kaby Lake CPU families, `HPET` (`AppleHPET` in macOS) was declared a  legacy device kept for backward compatibility. In Windows 10 and newer, `HPET` is not used as the primary timer for the system. Instead, Windows 10 uses a combination of the `TSC` (Time Stamp Counter) and the ACPI `PM` timer to keep track of time. 
 
-In Windows 10 and newer, `HPET` is a legacy device and is not used as the primary timer for the system. Instead, Windows 10 uses a combination of the `TSC` (Time Stamp Counter) and the ACPI `PM` timer to keep track of time.
+:bulb: The `HPET` device itself might still be present in your system's `DSDT`, though and if macOS detects it, it will service it. If this is the case, I suggest you cross-reference the `.ioreg` file of a real Mac using the same SMBIOS as your system and check for the presence of `AppleHPET`. If it is present, use Method 1 to enable `RTC`, if it is not present, you can try Method 2 to enable `RTC`. You can find a collection of Mac ioregs on [**DarwinDumped**](https://github.com/khronokernel/DarwinDumped).
 
-Enabling `HPET` might improve multicore performance, though. On the other hand, there are reports about it reducing frame rate while gaming since the single core performance is a little lower. 
+**EXAMPLES**:
 
-I suggest you try this method and check how the system behaves afterwards. Also perform some CPU/GPU Benchmark tests to find out what works best for you. On my Lenovo T490, the system feels snappier with `AppleHPET` present.
+- On My Lenovo T490 Notebook, which has an 8th Gen Whiskey Lake CPU, I am using the `MacBookPro15,2` SMBIOS. `AppleHPET` is present in the .ioreg file of the corresponding Mac. For testing, I disabled `HPET` via Method 2, but the system feels snappier with it enabled.
+- On my Z490 System (i9 10850K) which uses the `iMac20,2` SMBIOS, `AppleHPET` is not present in the .ioreg of the corresponding Mac. I tried both methods to enable RTC but I can't notice any difference in system behavior.
 
 ## Notes
 - On some **X299** mainboards (ASUS), the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, the `RTC` won't work so booting macOS fails. To work around this issues, leave `AWAC` enabled (so `RTC` won't be available) but add a [**Fake RTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead.
