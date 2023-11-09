@@ -44,7 +44,7 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
  Key | Function |
  ---------| -------- |
 `AAPL,ig-platform-id` |Platform identifier of the iGPU you are using/spoofing.
-`AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs only. 
+`AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs ONLY. 
 `device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
 `framebuffer-patch-enable` | Switch to enable framebuffer patching. Required when setting properties like `fbmem`, `stolenmem` or `unifiedmem`. 
 `framebuffer-fbmem` | Patches framebuffer memory. Required if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
@@ -59,18 +59,18 @@ List of Framebuffers for Intel CPUs with integrated graphics that are used for c
 
 CPU Family (iGPU variant)| Type | AAPL,ig-platform-id | device-id | Notes
 -------------------------|:----:|:-------------------:|-----------|------
-[Comet Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html?wapkw=comet%20lake#@Desktop) |Data|`0300C89B`
-[Coffee Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html?wapkw=coffee%20lake#@Desktop) | Data |`0300913E`
-[Kaby Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/82879/products-formerly-kaby-lake.html?wapkw=kaby%20lake#@Desktop) | Data |`03001259`
-[Skylake](https://ark.intel.com/content/www/us/en/ark/products/codename/37572/products-formerly-skylake.html?wapkw=Skylake#@Desktop) | Data |`01001219`
-Skylake (P530) | Data |`01001219`| `1B190000` | P530 is not natively supported so you need to add the device-id as well.
-[Haswell](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=Haswell#@Desktop) | Data| `04001204`
+[**Comet Lake**](https://ark.intel.com/content/www/us/en/ark/products/codename/90354/products-formerly-comet-lake.html?wapkw=comet%20lake#@Desktop) |Data|`0300C89B`
+[**Coffee Lake**](https://ark.intel.com/content/www/us/en/ark/products/codename/97787/products-formerly-coffee-lake.html?wapkw=coffee%20lake#@Desktop) | Data |`0300913E`
+[**Kaby Lake**](https://ark.intel.com/content/www/us/en/ark/products/codename/82879/products-formerly-kaby-lake.html?wapkw=kaby%20lake#@Desktop) | Data |`03001259`
+[**Skylake**](https://ark.intel.com/content/www/us/en/ark/products/codename/37572/products-formerly-skylake.html?wapkw=Skylake#@Desktop) | Data |`01001219`
+**Skylake** <br>(Intel HD P530) | Data |`01001219`| `1B190000` | The Intel P530 is not natively supported so you need to add the device-id as well.
+[**Haswell**](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=Haswell#@Desktop) | Data| `04001204`
 Haswell (HD 4400)| Data| `04001204`|`12040000`|HD 4400 is unsupported in macOS so the device-id is needed to spoof it as HD 4600 instead.
-[Ivy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Desktop) | Data| `07006201`|
+[**Ivy Bridge**](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Desktop) | Data| `07006201`|
 
 CPU Family | Type | AAPL,snb-platform-id | device-id
 -----------|:----:|:--------------------:|-----------
-[Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=sandy%20bridge#@Desktop)| Data | `00000500`|`02010000`
+[**Sandy Bridge**](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=sandy%20bridge#@Desktop)| Data | `00000500`|`02010000`
 
 **Address**: PciRoot(0x0)/Pci(0x16,0x0)	
 
@@ -262,7 +262,7 @@ Key | Type | Value| Notes
 `framebuffer-fbmem`| Data | `00009000`
 ||||
 `device-id`|Data|`9B3E0000`| ⚠️ For UHD 630: only required if the Device-iD IS NOT `0x3E9B`. Under Windows, open Device Manager, bring up the iGPU, open the properties, select details and click on Hardware IDs and check.
-`device-id`|Data|`9B3E0000`| ⚠️ Required for Coffee Lake CPUs with UHD 620 to spoof the as Intel UHD 630.
+`device-id`|Data|`9B3E0000`| ⚠️ Required for 8th/9th Gen CPUs with UHD 620 iGPUs to spoof as Intel UHD 630.
 
 :bulb: The recommendet settings for **Intel UHD 620** listed in the Intel HD FAQs differ from those in Dortania's guide and worked better for me:
 
@@ -272,9 +272,9 @@ Key | Type | Value| Notes
 ||||
 `device-id `| Data|`A53E0000` | Spoof Intel UHD 620 as Intel Iris 655
 
-**NOTES**:
-
-- For **Lenovo T490**: add and enable the patch located in the `UEFI/ReservedMemory` section of the sample.plist to fix black screen issues after waking from hibernation. 
+> [!NOTE]
+> 
+> For **Lenovo T490**: add and enable the patch located in the `UEFI/ReservedMemory` section of the sample.plist to fix black screen issues after waking from hibernation. 
 
 ### [Kaby Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/82879/products-formerly-kaby-lake.html?wapkw=kaby%20lake#@Mobile) and [Amber Lake Y](https://ark.intel.com/content/www/us/en/ark/products/codename/186968/products-formerly-amber-lake-y.html?wapkw=amber%20lake#@Mobile)
 >For Intel HD 615/617/620/630/640/650</br>
@@ -426,10 +426,10 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
-**NOTES**:
-
-- `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
-- You can enable/disable keys by removing/putting `#` in front of them.
+> [!NOTE]
+> 
+> - `framebuffer-unifiedmem` value `00000080` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
+> - You can enable/disable keys by removing/putting `#` in front of them.
 - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
 #### Connector Patches for `03006601`
@@ -472,11 +472,11 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
-**NOTES**:
-
-- `framebuffer-unifiedmem` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
-- You can enable/disable keys by removing/putting `#` in front of them.
-- Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
+> [!NOTE]
+> 
+> - `framebuffer-unifiedmem` value `00000080` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
+> - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
+> - You can enable/disable keys by removing/putting `#` in front of them.
 
 #### Installing Intel HD4000 Drivers on macOS 12 and newer
 When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
