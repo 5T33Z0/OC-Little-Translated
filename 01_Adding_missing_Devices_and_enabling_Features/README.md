@@ -140,10 +140,12 @@ The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In o
 11. Save and reboot to test it.
 
 > [!NOTE]
+> 
 > If you download the whole repo, you can just open the .dsl files with maciASL instead.
 
 ## Avoid Olarila/MalD0n 
 > [!WARNING]
+> 
 > Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
 
 ## Resources
