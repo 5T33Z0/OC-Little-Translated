@@ -19,6 +19,7 @@
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
+	- [Example 11: CPUFriend](#example-11-cpufriend)
 - [Notes](#notes)
 
 ## About
@@ -66,7 +67,7 @@ This way, you can leave all kexts enabled but control which ones will be loaded 
 
 |OS X/macOS Version (Name) | MinKernel | MaxKernel| Architecture
 |-------------------------:|:---------:|:--------:|:-----------:
-OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  |PPC and Intel</br> (32/64-bit)
+OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  |PowerPC (PPC)<br>Intel (32/64-bit)
 OS X 10.5 (Leopard)        | 9.0.0     | 9.99.99  | "
 ||
 OS X 10.6 (Snow Leopard)   | 10.0.0    | 10.99.99 | Intel (32/64-bit)
@@ -179,6 +180,24 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 - **Legacy**: 
 	- Atheros Chipsets 
 	- Broadcom BCM94322, BCM94328
+
+### Example 11: CPUFriend
+You can use **CPUFried.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
+
+By default, the frequency vecors stored in the selected SMBIOS are used to handle CPU Power Management. If your Hackintosh uses the same CPU model as the one used in the corresponding Mac model of the selected SMBIOS, you don't need to use this kext. But if the CPU used in your system doesn't match one of the CPUs defined in the selected SMBIOS of the corresponding Mac model (i.e. if your CPU is better or worse than the one used in the Mac), you should optimize the CPU Power Management so your CPU is working optimally in macOS.
+
+**Example**: You are using the [**iMac19,1**](https://everymac.com/ultimate-mac-lookup/?search_keywords=iMac19,1) SMBIOS but your CPU is an [i7-9700](https://ark.intel.com/content/www/de/de/ark/products/191792/intel-core-i79700-processor-12m-cache-up-to-4-70-ghz.html), which is not defined in this SMBIOS. In this case, you should use CPUFriendFriend to generate a Data Provider kext which provides the correct CPU Frequency Vectors to CPUFirend which in return injects them into the selected SMBIOS. In order for this to work, CPUFriend needs to be loaded prior to CPUFriendDataprovider.
+
+**Here's how**:
+
+1. Download and run [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend)
+2. Follow the On-Screen Instructions
+3. Add [**CPUFried.kext**](https://github.com/acidanthera/CPUFriend) and CPUFriendDataprovider kexts to EFI/OC/Kexts and your config.plist
+4. Order of the kexts as follows: <br> ![CPUFriend](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2189b749-cf6e-4027-a36b-95a385e2c521)
+
+> [!NOTE]
+> 
+> For more info about CPU Power Management, please refer to &rarr; [**Enabling CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
 
 ## Notes and Credits
 - :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!

@@ -124,7 +124,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 		...
 		{
 			0x0D, // (or 0x6D), 1st byte of the package
-			0x04 // 2nd byte, should be 0x00
+			0x04  // 2nd byte, should be 0x00
     	})
 	```
 4. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.

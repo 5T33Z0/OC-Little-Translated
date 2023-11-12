@@ -27,13 +27,17 @@ sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallme
 ## Beta boot-args
 For kext that haven't been updated for macOS 14 support:
 
-~~**`-wegbeta`** &rarr; so Whatevergreen works~~ &rarr; no longer required <br> 
-~~**`-revbeta`** &rarr; so RestrichEvents works~~ &rarr; no longer required
+- ~~**`-wegbeta`** &rarr; so Whatevergreen works~~ &rarr; no longer required
+- ~~**`-revbeta`** &rarr; so RestrichEvents works~~ &rarr; no longer required
+- **`-brcmfxbeta`** &rarr; for AirportBrcmFixup. Try, If you cannot connect to Hotspots after applying Root Patches for re-enabling broadcom Wi-Fi cards
 
-**NOTE**: Always look for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
+> [!NOTE]:
+> 
+> Always check for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
 ## OCLP Status
-- **October 23rd, 2023**: [**OCLP v1.1.0**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. Includes updated kexts, binaries for Non-Metal Binaries for macOS Sonoma and other improvements (&rarr; see changelog for details)
+- **November 6th, 2023**: **OCLP v1.2.0** is released and includes a long list of [changes](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.2.0)
+- **October 23rd, 2023**: [**OCLP v1.1.0**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. Includes updated kexts, binaries for Non-Metal GPUs for macOS Sonoma and other improvements (&rarr; see changelog for details)
 - **October 2nd, 2023**: [**OCLP v1.0.0:**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. It enables running macOS Sonoma on 83 previously unsupported Mac models. With it, they also switched the numbering of releases from a simple "counter" to Semantic Versioning.
 - **OCLP 069**: [Nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494) 
 	- Introduces kexts and root patching options to re-enable previously working Wifi Cards
@@ -43,5 +47,5 @@ For kext that haven't been updated for macOS 14 support:
 - **OCLP 067**: currently not working (which was expected)
 
 ## Other
-- How to delete Sonoma's new Live Wallpapers: https://youtu.be/EmAxYGLkM1w
+- How to delete Sonoma's new Live Wallpapers: [https://youtu.be/EmAxYGLkM1w](https://youtu.be/EmAxYGLkM1w)
 - [Discussing OCLP and Security Concerns](https://forums.macrumors.com/threads/security-for-oclp-opencore-legacy-patcher.2406586/page-2?post=32613005#post-32613005)

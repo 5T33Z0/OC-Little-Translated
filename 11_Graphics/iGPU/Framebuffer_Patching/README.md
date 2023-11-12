@@ -46,7 +46,8 @@ Your Laptop boots into macOS and the internal screen works, but:
 1. if you connect a secondary monitor to your Laptop it won't turn on at all or 
 2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
-> **Note**: If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systems, try CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
+> [!NOTE]
+> If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systems, try CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
 
 ### Possible causes
 - Using an incorrect or sub-optimal `AAPL,ig-platform-id` for your iGPU
@@ -197,6 +198,24 @@ This results in the following string for con1-alldata:
 
 `framebuffer-con1-alldata`: `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000`
 
+### Understanding the `framebuffer-unifiedmem` property
+This device property can be used to allocate more RAM to the iGPU as VRAM. On laptops, the default usually is 1536 MB. With the unifiedmem property you can increase the amount of VRAM to address graphical glitches or artifacts. On my Lenovo T530 Laptop for example, the scrollbars in Firfox would become glitchy with pink horizontal stripes if only 1536 MB of VRAM were allocated. Increasing the amount to 2048 MB resolved this issue.  
+
+HEX value  | Allocated VRAM
+:---------:|:------------:
+`00000040` | 1024 MB
+`00000060` | 1536 MB
+`00000080` | 2048 MB
+`000000A0` | 2560 MB
+`000000C0` | 3072 MB
+`000000E0` | 3584 MB
+`FFFFFFFF` | 4096 MB
+
+> [!IMPORTANT]
+> - According to the Whatevergreen FAQ, using the `framebuffer-stolenmem` property is not recommended.
+> - This should be obvious: don't assign more VRAM than phiscal RAM is installed in your system!
+> - Disable/delete the `framebuffer-stolenmem` property if you want to increase the amount of VRAM which is handled by `framebuffer-unifiedmem`. Properties `stolenmen` and `unifiedmem` should not be used together at the same time!
+
 ## 5. Adding Connectors
 
 <details>
@@ -284,7 +303,6 @@ Mobile: 1, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
 Next, we need to "translate" this data into `DeviceProperties` for our config.plist so we can inject it into macOS. But before we do we should look at what all of these parameters mean…
 
-<<<<<<< Updated upstream
 #### Understanding the Parameters
 Let's have a look inside Hackintool's "Connectors" tab to get to know the parameters we are working with:
 
@@ -296,8 +314,6 @@ Let's have a look inside Hackintool's "Connectors" tab to get to know the parame
 |**Type**| Type of the *physical* connector (DP, HDMI, DVi, LVDS, etc). Each connector type has a specific value associated with it: <ul><li> **DP**: `00040000` <li> **HDMI**: `00080000` <li> **DVI**: `0080000`
 |**Flags**| A bitmask representing connector "Flags" for the selected connector. The recommended value for connect value for any connection is `C7030000`:</br>![Flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/94aa0944-a3dc-4fb8-b68e-ba4c502c7bac) <br> For a complete list of framebuffer and connector flags, [click here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Framebuffer_Connector_Flags.md)
 
-=======
->>>>>>> Stashed changes
 #### Translating the data into `DeviceProperties`
 
 **Recap**: here is the suitable framebuffer patch we found earlier:
@@ -369,7 +385,8 @@ Key                              | Type | Value     | Notes
 `enable-backlight-registers-fix` | Data | `01000000`| Fixes backlight registers on Kaby Lake, Coffee Lake and Ice Lake platforms. Add this if your internal screen turns black during booting
 `enable-backlight-registers-alternative-fix` | Data | `01000000`| Same but for macOS 13.4+
 
-> **Note**: We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
+> [!NOTE]
+> We don't add properties for `con0` since this is the internal display which should work fine with the correct framebuffer.
 
 **This is how the DeviceProperties for your iGPU should look like now**:
 

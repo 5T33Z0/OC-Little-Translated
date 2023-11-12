@@ -56,7 +56,7 @@ You can manually set the ASPM mode of 3rd party SATA and NVMe drives if it's not
 	|---|-----|-----|
 	built-in|Data|`01000000` 
 	pci-aspm-default|Data |`03010000` (for L0s/L1 mode) or `02010000` (for L1)
-	device_type|String|Non-Volatile memory controller (optional key)
+	device_type|String| Non-Volatile memory controller (for NVME disks, optional) or <br> SATA Controller (for SATA SSDs, optional)
 	model|String|Name of the Drive (optional key)
 - Save the config, reboot
 - In hackintool, check the if the ASPM state for the NVMe Disk has changed.

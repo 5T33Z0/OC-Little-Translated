@@ -44,13 +44,14 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 - **Example**: &rarr; See [**Adding a fake Realtime Clock (RTC0)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0))
 
 > [!IMPORTANT]
+>
 > The name and path of the [**Low Pin Count Bus**](https://www.intel.com/content/dam/www/program/design/us/en/documents/low-pin-count-interface-specification.pdf) used in an SSDT – usually `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
 
 ## Adding missing Devices and Features
-Although adding any of the missing parts listed below may improve performance, they can only be regarded as a refinement. They are not a necessity for getting your Hackintosh to work, except for `PMCR` which may be a requirement for Z390 Chipsets. Browse through the folders above to find out which you may need.
+Listed below, you will find two categories of ACPI hotfixes: essential (or fuctional) and non-essential SSDTs. Functional SSDTs are a necessity for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. SSDT-ALS0 or SSDT-PNLF), some are required based on the used CPU and/or chipset (e.g. SSDT-HPET, SSDT-AWAC or SSDT-PMCR). Non-essential (or cosmetic) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or through the folders above to find out which you may need.
 
 ### Obtaining ACPI Tables
-In order to add/apply any of the Patches, it is necessary to research your machine's ACPI - more specifically, the `DSDT`. To obtain a copy of the `DSDT`, it is necessary to dump it from your system's ACPI Table. There are a few options to do this.
+In order to to figure out which SSDTs are required for your system, it is necessary to research your machine's ACPI tables - more specifically, your system's `DSDT` table. To obtain a copy it, it's necessary to extract it from your system's BIOS/UEFI. There are a couple of options to do this.
 
 **Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables:
 
@@ -76,6 +77,7 @@ Listed below are all SSDTs contained in this chapter. Use the listed search term
 The hotfixes have to be placed in `EFI/OC/ACPI` and added to the config.plist (under `ACPI/Add`). OpenCore accepts files with `.aml` and `.bin` extension.
 
 > [!NOTE]
+> 
 > You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
 
 #### Functional SSDTs
@@ -140,10 +142,12 @@ The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In o
 11. Save and reboot to test it.
 
 > [!NOTE]
+> 
 > If you download the whole repo, you can just open the .dsl files with maciASL instead.
 
 ## Avoid Olarila/MalD0n 
 > [!WARNING]
+> 
 > Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
 
 ## Resources
