@@ -77,8 +77,8 @@ The easiest and most reliable way to verify that the `X86PlatformPlugin` is load
 - Run the App
 - Select `IOService` (default)
 - Search for "X86Platform"
-- If the plugin is loaded you will see something like this: <br> ![](/Users/5t33z0/Desktop/x86pp_loaded.png)
-- If the `X86PlatformPlugin` is not loaded, the legacy `ACPI_SMC_PlatformPlugin` is used instead <br>: ![](/Users/5t33z0/Desktop/ACPISMC.png)
+- If the plugin is loaded you will see something like this: <br> ![x86pp_loaded](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/15063cc9-4434-432e-879e-bb72fd8269c4)
+- If the `X86PlatformPlugin` is not loaded, the legacy `ACPI_SMC_PlatformPlugin` is used instead <br>: ![ACPISMC](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d065c904-8df2-41c4-8624-4055d05e1310)
 - In this case you did something wrong.
 
 ### Using Terminal (deceiving)
@@ -88,7 +88,7 @@ Alternatively, you could use the following two commands in Terminal:
 
 The output should be `1`. The output will return `1` even if the `X86PlatformPlugin` is **NOT** working as you can see in the following screenshot:
 
-![](/Users/5t33z0/Desktop/Terminal.png)
+![Terminal](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a82d6826-a3bc-47c2-b440-81b4a8d83448)
 
 In order to verify that the `X86PlatformPlugin` is *really* working, the output of the follwong command must also reeturn `1`:
 
@@ -96,8 +96,9 @@ In order to verify that the `X86PlatformPlugin` is *really* working, the output 
 
 Only if *both* commands return `1`, you can reliably say that `XCPM` is working correctly: 
 
- ![](/Users/5t33z0/Desktop/Terminal2.png)
+![Terminal2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d8c6c9e1-964f-42c3-9c2a-67ff0d891ead)
 
+**Conlucion**: If your CPU supports XCPM, always use IORegistryExplorer to verify the presence of the X86PlatformPlugin, because using `sysctl -n machdep.xcpm.mode` alone is deceiving and insufficent!
 
 ## Testing
 To test if Speedstep and turbo states are working correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
