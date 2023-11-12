@@ -70,22 +70,41 @@ The manual patching method described below is outdated, since the patching proce
 >
 >If your search results **do not match** with any of the available SSDTs, please pick the `SSDT-PLUG.dsl` sample included in the OpenCore package since it covers all cases of possible CPU device names, modify it so that it matches the ACPI name and paths used in your system and export it as an .aml (ACPI Machine Language) file!
 
-## Verifying and Testing
-To verify that XCPM is working, you can enter the following command in Terminal and press <kbd>Enter</kbd>:
+## Verifying
+### Using IORegistryExplorer (recommended)
+The easiest and most reliable way to verify that the `X86PlatformPlugin` is loaded and `XCPM` is working, is to use [**IORegistryExplorer**](https://github.com/khronokernel/IORegistryClone):
+
+- Run the App
+- Select `IOService` (default)
+- Search for "X86Platform"
+- If the plugin is loaded you will see something like this: <br> ![](/Users/5t33z0/Desktop/x86pp_loaded.png)
+- If the `X86PlatformPlugin` is not loaded, the legacy `ACPI_SMC_PlatformPlugin` is used instead <br>: ![](/Users/5t33z0/Desktop/ACPISMC.png)
+- In this case you did something wrong.
+
+### Using Terminal (deceiving)
+Alternatively, you could use the following two commands in Terminal:
 
 `sysctl -n machdep.xcpm.mode`
 
-If the `X86PlatformPlugin` is used, the output should be `1` 
+The output should be `1`. The output will return `1` even if the `X86PlatformPlugin` is **NOT** working as you can see in the following screenshot:
 
-To show the number of fequency vectors of the current SMBIOS, you can enter the following and press <kbd>Enter</kbd>:
+![](/Users/5t33z0/Desktop/Terminal.png)
+
+In order to verify that the `X86PlatformPlugin` is *really* working, the output of the follwong command must also reeturn `1`:
 
 `sysctl -n machdep.xcpm.vectors_loaded_count`
 
-Alternatively, you can use `IORegistryExplorer` to check for [**CPU states**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/XCPM_PSTATES.png)
+Only if *both* commands return `1`, you can reliably say that `XCPM` is working correctly: 
 
+ ![](/Users/5t33z0/Desktop/Terminal2.png)
+
+
+## Testing
 To test if Speedstep and turbo states are working correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
 
 Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to inject modified frequency vectors into macOS to fine tune its performance.
+
+You can use IORegistryExplorer to check the number of supported [**CPU states**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/XCPM_PSTATES.png) as well as the available Frequency Vecors (under: X86PlatformPlugin/IOPlatformPowerProfile/FrequencyVectors).
 
 ## 11th Gen Intel and newer
 Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and newer Intel CPUs require ***SSDT-PLUG*** and a fake CPUID ("disguising" it as a Comet Lake CPU) in order to run macOS. Otherwise the system won't boot. 
