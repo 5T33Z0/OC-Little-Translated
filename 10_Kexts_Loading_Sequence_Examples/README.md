@@ -19,6 +19,8 @@
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
+	- [Example 11: CPUFriend](#example-11-cpufriend)
+
 - [Notes](#notes)
 
 ## About
@@ -180,7 +182,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 	- Atheros Chipsets 
 	- Broadcom BCM94322, BCM94328
 
-## CPUFriend
+### Example 11: CPUFriend
 You can use **CPUFried.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
 
 By default, the frequency vecors stored in the selected SMBIOS are used to handle CPU Power Management. If your Hackintosh uses the same CPU model as the one used in the corresponding Mac model of the selected SMBIOS, you don't need to use this kext. But if the CPU used in your system doesn't match one of the CPUs defined in the selected SMBIOS of the corresponding Mac model (i.e. if your CPU is better or worse than the one used in the Mac), you should optimize the CPU Power Management so your CPU is working optimally in macOS.
