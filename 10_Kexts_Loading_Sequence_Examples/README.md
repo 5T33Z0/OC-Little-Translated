@@ -20,7 +20,6 @@
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
 	- [Example 11: CPUFriend](#example-11-cpufriend)
-
 - [Notes](#notes)
 
 ## About
