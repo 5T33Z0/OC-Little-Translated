@@ -194,7 +194,7 @@ By default, the frequency vecors stored in the selected SMBIOS are used to handl
 1. Download and run [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend)
 2. Follow the On-Screen Instructions
 3. Add [**CPUFried.kext**](https://github.com/acidanthera/CPUFriend) and CPUFriendDataprovider kexts to EFI/OC/Kexts and your config.plist
-4. Order of the kexts as follows: <br> ![](/Users/5t33z0/Desktop/CPUFriend.png)
+4. Order of the kexts as follows: <br> ![CPUFriend](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2189b749-cf6e-4027-a36b-95a385e2c521)
 
 > [!NOTE]
 > 
