@@ -86,11 +86,11 @@ Alternatively, you could use the following two commands in Terminal:
 
 `sysctl -n machdep.xcpm.mode`
 
-The output should be `1`. The output will return `1` even if the `X86PlatformPlugin` is **NOT** working as you can see in the following screenshot:
+The output should be `1`. But output might return `1` even if the `X86PlatformPlugin` is **NOT** working – as you can see in the following screenshot:
 
 ![Terminal](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a82d6826-a3bc-47c2-b440-81b4a8d83448)
 
-In order to verify that the `X86PlatformPlugin` is *really* working, the output of the follwong command must also reeturn `1`:
+In order to verify that the `X86PlatformPlugin` is *really* working, the output of the follwong command must also return `1`:
 
 `sysctl -n machdep.xcpm.vectors_loaded_count`
 
@@ -98,7 +98,7 @@ Only if *both* commands return `1`, you can reliably say that `XCPM` is working 
 
 ![Terminal2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d8c6c9e1-964f-42c3-9c2a-67ff0d891ead)
 
-**Conlucion**: If your CPU supports XCPM, always use IORegistryExplorer to verify the presence of the X86PlatformPlugin, because using `sysctl -n machdep.xcpm.mode` alone is deceiving and insufficent!
+**Conlucion**: If your CPU supports `XCPM`, always use IORegistryExplorer to verify the presence of the `X86PlatformPlugin`, because using Terminal command `sysctl -n machdep.xcpm.mode` alone is deceiving and insufficent!
 
 ## Testing
 To test if Speedstep and turbo states are working correctly, run [**Intel Power Gadget**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget/) and monitor the frequency curve while running a CPU benchmark test in Geekbench. The CPU frequency range should reach all the way from the lowest possible frequency (before running the test) up to the max turbo frequency (as defined by the product specs).
