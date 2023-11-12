@@ -37,7 +37,7 @@ Although **ssdtPRGen** supports Sandy Bridge to Kabylake CPUs, it's only used fo
 
 ### XCPM (= XNU CPU Power Management)
 
-In OSX 10.11 and older, boot-arg `-xcpm` could be used to enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) for unsupported CPUs. 
+In OSX 10.11 and older, boot-arg `-xcpm` could be used to force-enable [**XCPM**](https://pikeralpha.wordpress.com/2013/10/05/xnu-cpu-power-management/) in macOS (3rd Gen Intel Core and newer).
 
 Since macOS Sierra, this boot-arg does no longer work. Instead, you have to add [***SSDT-PLUG***](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs#readme) to select the `X86PlatformPlugin.kext`, which takes care of CPU Power Management on Haswell and newer Intel CPUs based on the `FrequencyVectors` stored in the selected SMBIOS (or more specifically, the board-id). These Frequency Vectors can be modified to optimize the performance and CPU Power Management for your CPU model using [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) to generate a `CpuFriendDataProvider.kext` which must be injected alongside [**CPUFriend**](https://github.com/acidanthera/CPUFriend) into macOS. 
 
