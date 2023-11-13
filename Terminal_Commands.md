@@ -23,7 +23,9 @@ uname -r
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
 sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
 ```
-**NOTE**: In macOS 13, [switching update seeds via seedutil is no longer possible](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
+> [!NOTE]
+> 
+> In macOS 13+, [switching update seeds via seedutil is no longer possible](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
 
 **Disable Gatekeeper**:</br>
 
@@ -47,22 +49,37 @@ diskutil apfs list
 
 **Disable `.DS_Store` file creation on network storages**
 
-```shell
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
-```
+- **Disable**:
+
+	```shell
+	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+	```
+
+- **Re-enable**:
+
+	```shell
+	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
+	```
+
 **Show the User Library in Big Sur+**:</br>
 
 ```shell
 setfile -a v ~/Library
 chflags nohidden ~/Library
 ```
+
 **Disable/enable DMG Verification**:</br>
 
-```shell
-defaults write com.apple.frameworks.diskimages skip-verify TRUE 
-defaults write com.apple.frameworks.diskimages skip-verify FALSE
-```
+-  **Disable**:
+
+	```shell
+	defaults write com.apple.frameworks.diskimages skip-verify TRUE
+	```
+-  **Re-enable**: 
+
+	```shell
+	defaults write com.apple.frameworks.diskimages skip-verify FALSE
+	``` 
 
 **Install Command Line Developer Tools**:</br>
 
@@ -70,12 +87,37 @@ defaults write com.apple.frameworks.diskimages skip-verify FALSE
 xcode-select --install
 ```
 
+**Rebuilding the Spotlight Index**
+
+- **System-wide**: 
+	
+	```shell
+	sudo mdutil -a -i off
+	sudo mdutil -a -i on
+	```
+
+- **For a specific volume**:
+
+	```shell
+	sudo mdutil -i off /Volumes/Your Volume Name
+	sudo mdutil -i on /Volumes/Your Volume Name
+	```
+
 **Disable/enable Notification Center**:
 
-```shell
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-```
+- **Disable**:
+
+	```shell
+	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	```
+	
+- **Re-Enable**:
+
+	```shell
+	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	```	
+
+
 **Add "Quit" option to Finder**:</br>
 
 ```shell
@@ -98,11 +140,17 @@ networksetup -listallhardwareports
 ```
 **Show all Files and Folders in Finder**:</br>
 
-```shell
-defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
-defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
-```
-Alternatively, use **Key Command** <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+- **Show**: 
+
+	```shell
+	defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
+	```
+- **Hide**:
+
+	```shell
+	defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
+	```
+Alternatively, you could simply use this **Keyboard Shortcut**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
 
 **Rebuild Launch Services**:</br>
 
@@ -121,7 +169,9 @@ sudo /usr/libexec/xpchelper --rebuild-cache
 defaults write com.apple.sidecar.display AllowAllDevices -bool true
 defaults write com.apple.sidecar.display hasShownPref -bool true
 ```
-**NOTE**: Requires Intel CPU with working Intel on-board graphics!
+> [!NOTE]
+> 
+> Requires Intel CPU with working Intel on-board graphics!
 
 **Disable Logging:**</br>
 
@@ -145,7 +195,7 @@ defaults write -g ignore-devices -bool true
 
 **List of Keyboard Shortcuts**
 
-https://support.apple.com/en-us/HT201236
+[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
 
 ## CPU related
 
@@ -184,7 +234,9 @@ sysctl -a | grep machdep.cpu.leaf7_features
 ```shell
 ioreg -rxn "CPU0@0"
 ```
-**NOTE**: Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
+> [!NOTE]
+> 
+> Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
 
 ## Hackintosh specific
 **Check currently used SMBIOS**:</br>
@@ -287,7 +339,9 @@ ioreg -l -p IOService -w0 | grep -i XHCI
 ```shell
 kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 ```
-**NOTE**: The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. If only one is present, SMBus isn't fully working!
+> [!NOTE]
+> 
+> The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. If only one is present, SMBus isn't fully working!
 
 **Debug ACPI Hotpatches**:</br>
 
