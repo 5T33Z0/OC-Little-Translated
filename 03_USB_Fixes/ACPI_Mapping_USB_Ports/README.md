@@ -1,6 +1,8 @@
 # USB port mapping via ACPI (macOS 11.3+)
 
->**DISCLAIMER**: I am not a programmer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it works for everybody – and I cannot and will not fix your SSDTs!
+> **DISCLAIMER**
+> 
+> I am not a developer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it will work for everybody – and I cannot and will not fix your SSDTs!
 
 **TABLE of CONTENTS**
 
@@ -88,13 +90,14 @@ Have a look into Clover's "ACPI/origin" folder. In there you will find a lot of 
 ### Intel Broadwell and older CPUs
 ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
 
-![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png)
-	
-As you can see, the `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. So does the `EHC1` device (ports `PRT0` to `PRT7`). `EHC2` only contains 6 Ports (`PRT8` to `PRTD`). 
+|Device Tree | Explanation
+------------|------------
+![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png) | <ul> <li> OEM USB port mapping example from an Ivy Bridge Notebook <li> This system has 3 USB controllers: <ul> <li> `XHCI` (USB3), <li> `EHC1` (USB 2) and <li>`EHC2` (USB 2) </ul> <li> The `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. <li> The `EHC1` device also contains 8 ports:  (`PRT0` to `PRT7`). <li> `EHC2` only contains 6 ports: `PRT8` to `PRTD`. </ul> &rarr; Since the 15 port limit is *per* controller and since each of the controllers have less than 15 ports mapped, we don't need to do any port remaapping here.
 
-If you have sleep and wake issues due to an internally connected WiFi/Bluetooth module not being detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) on windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
-
-> **Note**: Just because a SSDT includes 26 port entries, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+> [!NOTE]
+> 
+> - Just because an SSDT includes 26 port *entries*, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+> - If your system has issues with sleep and wake due to an internally connected WiFi/Bluetooth module not being detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) under Windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
 ### Adding a delete rule to config.plist
 In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.

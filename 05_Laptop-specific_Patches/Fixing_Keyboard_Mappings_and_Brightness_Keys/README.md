@@ -41,10 +41,9 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
     
 #### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
 - Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
-- Next, browse to Contents/Plugins 
-- Right-click on `VoodooPS2Keyboard.kext` and select "Show Package Contents"
-- Browse `Contents` and open `Info.plist` with a plist Editor
-- Search for **`LogScanCodes`** and change it to **`1`** (once you're done, change it back to **`0`** again!)
+- Next, browse to `Contents/Plugins` 
+- Browse `Contents` and open the `Info.plist` with a plist Editor
+- Search for **`LogScanCodes`** and change it from `0`to **`1`** (once you're done, change it back to **`0`** again!)
 - Save the file
 - Reboot
 - Open the **Console App** and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed:
