@@ -1,7 +1,7 @@
 # 0D/6D Instant Wake Fix
 
 ## Description
-Some devices defined in the `DSDT` (e.g. USB Controllers, LAN cards, Audio Codecs, etc.) can contain  sleep state values defined in the `_PRW` (Power Resource for Wake) method that cause issues in macOS, causing the machine to instantly wake after attempting to enter stand-by or sleep. This guide describes how this instant wake issue.
+Some devices defined in the `DSDT` (e.g. USB Controllers, LAN cards, Audio Codecs, etc.) can contain sleep state values defined in the method `_PRW` (Power Resource for Wake) that can cause the machine to instantly wake after attempting to enter stand-by or sleep in macOS. This guide describes how to fix such instant wake issues.
 
 ### Technical Background
 The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events in the operating system, including power management events. `GPE` registers are memory locations which can be set or cleared to enable or disable specific events. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the lid of a laptop, etc. Each event has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
@@ -9,10 +9,10 @@ The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger
 Used in devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-fields (Package Objects):
 
 - The 1st bit-field of the `_PRW` package we are interested in is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
-- The 2nd bit-field of the `_PRW` package is either `0x03` or `0x04`. It describes the wake capabilities of the device (see below). MacOS expects `0x00` here in order to *not* wake immediately.
+- The 2nd bit-field of the `_PRW` package defines the wake capabilities of a device. If it's `0x03` (Wake on Mouse/Keybord) or `0x04` (Wake on LAN) then we are in trouble: macOS expects `0x00` (Wake disabled) here in order to *not* wake immediately.
 
 ### What the fix does
-This fix changes the 2nd package in the `_PRW` method to `0x00` if macOS is running – thus completing the `0D/6D Patch`. Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined ***on a case-by-case basis by analyzing the `DSDT`***. Refer to the ACPI specs for further details about the `_PRW` method. 
+The fix changes the 2nd package in the `_PRW` method to `0x00` if macOS is running – thus completing the `0D/6D Patch`. Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined ***on a case-by-case basis by analyzing the `DSDT`***. Refer to the ACPI specs for further details about the `_PRW` method. 
 
 #### Wake Capabilities
 Here is a list of the most common bit-fields that can be used to describe the wake capabilities of a device:
