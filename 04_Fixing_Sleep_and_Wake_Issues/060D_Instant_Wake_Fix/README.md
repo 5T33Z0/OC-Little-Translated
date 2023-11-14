@@ -1,19 +1,18 @@
 # 0D/6D Instant Wake Fix
 
 ## Description
-Some components (like USB Controllers, LAN cards, Audio Codecs, etc.) can create conflicts between the sleep state values defined in their `_PRW` methods and macOS that cause the machine to instantly wake after attempting to enter sleep state. This guide describes how to fix this so-called instant wake issue.
+Some devices defined in the `DSDT` (e.g. USB Controllers, LAN cards, Audio Codecs, etc.) can contain  sleep state values defined in the `_PRW` (Power Resource for Wake) method that cause issues in macOS, causing the machine to instantly wake after attempting to enter stand-by or sleep. This guide describes how this instant wake issue.
 
 ### Technical Background
-The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events in the operating system, including power management events. GPE registers are memory locations which can be set or cleared to enable or disable specific GPEs. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the lid of a laptop, etc. Each event has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
+The `DSDT` contains `_GPE` (General Purpose Events) which can be used to trigger various types of events in the operating system, including power management events. `GPE` registers are memory locations which can be set or cleared to enable or disable specific events. GPEs can be triggered by pressing the Power/Sleep Button, opening/closing the lid of a laptop, etc. Each event has its own number assigned to it and can be triggered by different methods, such as `_PRW` (Power Resource for Wake).
 
-Used in devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-fields (or Package Objects):
+Used in devices, the `_PRW` method describes the wake method by using packages which return two power resource values if the corresponding `_GPE` is triggered. The `Return` package consists of 2 bit-fields (Package Objects):
 
 - The 1st bit-field of the `_PRW` package we are interested in is either `0x0D` or `0x6D`. That's where the name of the fix comes from.
-- The 2nd bit-field of the `_PRW` package is either `0x03` or `0x04`. It describes the wake capabilities of the device (see below). MacOS expects `0x00` here in order to not wake immediately.
+- The 2nd bit-field of the `_PRW` package is either `0x03` or `0x04`. It describes the wake capabilities of the device (see below). MacOS expects `0x00` here in order to *not* wake immediately.
 
-And that's what this fix does: it changes the 2nd byte to `0x00` if macOS is running – thus completing the `0D/6D Patch`. Refer to the ACPI specs for further details about the `_PRW` method.
-
-Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined on a case-by-case basis by analyzing the `DSDT`.
+### What the fix does
+This fix changes the 2nd package in the `_PRW` method to `0x00` if macOS is running – thus completing the `0D/6D Patch`. Different machines may define `_PRW` in different ways, so the contents and forms of their packets may also be diverse. The actual `0D/6D Patch` should be determined ***on a case-by-case basis by analyzing the `DSDT`***. Refer to the ACPI specs for further details about the `_PRW` method. 
 
 #### Wake Capabilities
 Here is a list of the most common bit-fields that can be used to describe the wake capabilities of a device:
@@ -30,7 +29,7 @@ Here is a list of the most common bit-fields that can be used to describe the wa
 - `0x80`: Wake on power button or fixed feature button 
 
 ### Refined Fix
-Previously, a lot of binary name changes were necessary to fix instant-wake issues, which could cause problems in other Operating Systems. Since then, the fix has been refined so it requires only 1 binary rename (if at all) while the rest of it is handled by simple SSDTs which are easy to edit which replace the 2nd bit-field with `0x00` for macOS only.
+Previously, a lot of binary renames were necessary to fix instant-wake issues, which could cause problems in other Operating Systems. Since then, the fix has been refined, so that it requires only 1 binary rename (if at all), while the rest of it is handled by simple SSDTs which are easy to edit and replace the 2nd bit-field with `0x00` for macOS only.
 
 ### Devices that may require a `0D/6D Patch`
 
