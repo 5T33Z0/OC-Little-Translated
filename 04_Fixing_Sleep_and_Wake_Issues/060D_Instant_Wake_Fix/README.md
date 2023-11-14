@@ -69,9 +69,9 @@ For these packages, the 2nd byte needs to return `0x00`, so the system doesn't w
 -  if only `_PRW` is present, use `SSDT-PRW0` and follow **Method 2**.
 
 ### Method 1: using `SSDT-GPRW/UPRW`
-This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via DSDT patches, they are renamed via SSDT in macOS only, which is much cleaner.
+This approach minimizes the amount of necessary binary renames to one to correct the values of return packages. Instead of renaming them via `DSDT` patches, we only rename the used method (either `GPRW` or `UPRW`) and then redefine it via SSDT in a way that the values are only changed for macOS while other OSes get the original, unmodified values to work with.
 
-1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow the instructions of "Method 2" instead.
+1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow the instructions of ["Method 2"](#method-2-using-ssdt-prw0aml-no-gprwuprw) instead.
 2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
 3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
 4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
@@ -83,7 +83,7 @@ This approach minimizes the amount of necessary binary renames to one to correct
 - Reduce the time until the machine enters sleep automatically in the Energy Options to one minute.
 - Wait until the machine enters sleep on its own. That's important to trigger the General Purpose Event.
 - If the patch works, the system will enter and stay in sleep. 
-- If it doesn't work, it will wake immediately after entering sleep.
+- If it doesn't work, it will wake immediately after trying to enter sleep state.
 - In this case, enter `pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"` in Terminal to find the culprit for the instant wake.
 
 ### Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)
@@ -141,7 +141,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 <details>
 <summary><strong>Previous Method</strong> (Click to reveal)</summary>
 
-### Old Method using binary renames (no longer required)
+### Old Method using binary renames (superseeded)
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
 
   - Name-0D rename .plist
@@ -203,23 +203,26 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 **Caution**: Whenever a binary name change is used, the system's `DSDT` file should be extracted and analyzed before applying it.
 </details>
 
-## Alternative approaches
+## Alternative Fixes
 
 ### Using `USBWakeFixup.kext`
 Find out what's causing the wake by entering this in terminal:
 
 ``` pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"```
 
-If your wake issues are caused by USB devices only, you could try [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) intsead. It's combination of a kext and an SSDT. It has been reported as working on PCs at least. I doubt it'll work on Laptops but you could try your luck.
+If your wake issues are caused by USB devices *only*, you could try [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) intsead. It's combination of a kext and an SSDT. It has been reported as working on PCs at least. I doubt it'll work on Laptops but you could try your luck.
 
-### Removing the `_PRW` method from DSDT completely
-The following approaches require using a patched DSDT which we are trying to avoid when using OpenCore, so they are not recommended. I also don't know if this has negative effects in other Operating System.
+### Using a patched `DSDT`
+The following apporaches require injecting a patched `DSDT` file which is not recommended for reaasons I won't go ito detail about here.
 
-### Changing `_PRW` to specific return values
+#### Changing `_PRW` to specific return values
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [**here**](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
+
+#### Removing the `_PRW` method from the `DSDT` completely
+Instead of modifying the the return packages of the `_PRW` method, removing the method from the `DSDT` is also an option.
 
 ## Notes and Resources
 - If you are using any of the SSDTs to change any of the `_PRW` bit-fields, these changes won't be reflected in the `DSDT` nor in IORegistryExplorer so you have to just test it.
 - A handy Python script for finding Name Paths of Devices containing `_PRW` packages is [**ACPIRename**](https://github.com/corpnewt/ACPIRename)
 - [**_PWR (Power Resource for Wake**)](https://uefi.org/specs/ACPI/6.5/07_Power_and_Performance_Mgmt.html#prw-power-resources-for-wake) in ACPI Specs
-- You could apply Method 2 for fixing DSDTs using `GPRE`/`UPRW` as well. In this case you wouldn't need the `XPRW` rename. Since I can't test this on your own.
+- You could try tp apply Method 2 for fixing DSDTs which use the `GPRE`/`UPRW` method as well. In this case you wouldn't need the `XPRW` rename. I have not tested this yet, so I cannot verify that it will work.
