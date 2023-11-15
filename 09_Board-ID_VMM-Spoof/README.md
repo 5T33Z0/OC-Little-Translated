@@ -6,7 +6,7 @@
 	- [How the spoof works](#how-the-spoof-works)
 - [System Requirements](#system-requirements)
 - [Use Cases](#use-cases)
-- [How to enable the spoof](#how-to-enable-the-spoof)
+- [Instructions](#instructions)
 - [About the Patches](#about-the-patches)
 - [Adding the Patches](#adding-the-patches)
 	- [Booter Patches](#booter-patches)
@@ -24,11 +24,13 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 >
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
 >
-> **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
+
+**Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
 This is great, since it allows using the "native", designated SMBIOS for a given CPU family, even if it is not officially supported by macOS 11.3 and newer. This not only improves CPU Power Management - especially on Laptops – it also allows installing, running and updating macOS Monterey and newer on otherwise unsupported hardware. I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Sonoma. 
 
-> [!IMPRTANT]
+> [!IMPORTANT]
+>
 > With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext applies to the macOS installation environment as well now. So, if your config still contains the Kernel Patches disable them!
 
 ## System Requirements
@@ -42,6 +44,7 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 - Skylake (to continue using SMBIOS `iMac17,1` on macOS 13+). Requires additional [iGPU spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13) so the Intel HD 530 can be used.
 
 > [!NOTE]
+>
 > 7th to 10 Gen Intel Core CPUs don't need this spoof since they are still supported by macOS.
 
 ## Use Cases
@@ -67,14 +70,13 @@ Lowering/disabling SIP is necessary in order to re-install [components which hav
 
 So, in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
-## How to enable the spoof
-Prior to the release of `RestrictEvents.kext`, Booter and Kernel Patches were required to install and run macOS Monterey and newer on unsupported hardware. It turns out that these patches have negative affect on Bluetooth (&rarr; check "Previous Method" section for details)
+## Instructions
+Prior to the release of `RestrictEvents.kext`, Booter and Kernel patches were required to enable the VMM board-id, to install an run macOS Monterey and newer on unsupported hardware. It turned out that the kernel patches had negative effects on Bluetooth because enabling the VMM Board-ID skipped the loading of BT firmware (&rarr; See "Previous Method" section for details). This has been resolved now.
 
 - Mount your EFI
 - Open your `config.plist` with ProperTree
-- Copy the 2 patches from OCLP's [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L267) section to your `config.plist` 
-- Enable both patches (set them to "true")
-- Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your EFI/OC/Kext folder and config.plist
+- Copy the "Skip Board ID check" patch from OCLP's [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L243) section to your `config.plist` and **enable** it. 
+- Add [RestrictEvent.kext](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your `EFI/OC/Kext` folder and `config.plist`
 - Delete `-no_compat_check` boot-arg (if present)
 - Add `revpatch=sbvmm` to boot-args or as as an NVRAM variable: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
 - Optional (but recommended): Under `PlatformInfo/Generic`, pick the correct/designated [SMBIOS for your CPU family/system](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) and generate new serials, etc (with OCAT or GenSMBIOS for example) 
@@ -90,7 +92,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 - **Booter Patches**
 	- **"Skip Board ID check"** &rarr; Skips Hardware Board ID Check (enabled)
 	- **"Reroute HW_BID to OC_BID"** &rarr; Reroutes Hardware Board-ID check to OpenCore (enabled)
-	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID
+	- Both patches in tandem allow to run/install macOS on systems using a unsupported SMBIOS/Board-ID (No longer required)
 - **Kernel Patches** (see "Comment" section)
 	- **"Reroute kern.hv_vmm_present patch (1)"**, **"Reroute kern.hv_vmm_present patch (2) Legacy"**, **"Reroute kern.hv_vmm_present patch (3) Ventura"** and **"Force IOGetVMMPresent"** &rarr; Set of Kernel patches to enable Board-ID spoof via VMM in macOS 11.3+ that allow booting, installing and updating macOS 12 and newer with an unsupported Board-ID and SMBIOS.
 	- **"Disable Root Hash validation"** &rarr; Disables Cryptex hash verification in APFS.kext.
@@ -100,10 +102,12 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 	- **SurPlus Patches 1 and 2**: Race to condition fixes for Sandy Bridge and older. Fixes issues in macOS 11.3+, where Big Sur often won't boot when using SMBIOS `MacPro5,1` (disabled). These patches are now Included in the `sample.plist` (OC 0.7.7+).
 
 > [!IMPORTANT]
+> 
 > RDRAND Patches for Sandy Bridge CPUs are no longer required since OpenCore 0.7.8 and must be disabled/deleted.
 
 ## Adding the Patches
 > [!WARNING]
+> 
 > Before adding these patches to your config.plist, make sure you have a working backup of your EFI folder stored on a FAT32 formatted USB flash drive to boot your PC from just in case something goes wrong!
 
 ### Booter Patches
@@ -113,6 +117,7 @@ Following are the relevant Booter and Kernel Patches contained in the [**config.
 - Leave ProperTree open an continue reading
 
 > [!NOTE]
+> 
 > These booter patches skip the board-id checks in macOS. They can only be applied using OpenCore. When using Clover you have to use boot-args `-no_compat_check`, `revpatch=sbvmm` and RestrictEvents.kext instead to workaround issues with System Update Notifications.
 
 ### Kernel Patches
