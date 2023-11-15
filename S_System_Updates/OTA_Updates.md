@@ -1,7 +1,7 @@
 # Workaround for installing OTA System Updates on disk volumes with broken seals
 
 ## Cause
-If you apply root patches to macOS to OpenCore Legacy Patcher or other tools that install files into the system volume, this breaks the security seal of the volume.
+If you apply root patches to macOS with OpenCore Legacy Patcher (or other tools that install files on the system volume), this breaks the security seal of the volume.
 
 You can check the status of the seal by entering the following command in Terminal:
 
