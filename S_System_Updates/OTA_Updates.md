@@ -1,10 +1,9 @@
 # Workaround for installing OTA System Updates on disk volumes with broken seals
 
 ## Cause
+If you apply root patches to macOS to OpenCore Legacy Patcher or other tools that install files into the system volume, this breaks the security seal of the volume.
 
-If you apply root patches to your macOS installation with OCLP or other tools that install files into the system volume, this breaks the security seal of the volume.
-
-You can check this if you enter the following command in Terminal:
+You can check the status of the seal by entering the following command in Terminal:
 
 ```shell
 diskutil apfs list
@@ -58,7 +57,7 @@ So to prevent that the full installer is downloaded every time, you can do the f
 
 > [!WARNING]
 > 
-> - This workaround only works on systems with Haswell/Broadwell and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase!
+> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; Sreenshot)
 > - This workaround cannot be utilized if your system requires post-install patches for *both* WiFi and Ethernet. Because then you cannot access the internet to download updates!
 
 ## Notes
