@@ -57,7 +57,7 @@ So to prevent that the full installer is downloaded every time, you can do the f
 
 > [!WARNING]
 > 
-> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; Sreenshot)
+> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; [Sreenshot](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/Pics/SysUpd_Fail.png))
 > - This workaround cannot be utilized if your system requires post-install patches for *both* WiFi and Ethernet. Because then you cannot access the internet to download updates!
 
 ## Notes
