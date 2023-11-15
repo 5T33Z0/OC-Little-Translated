@@ -2,6 +2,9 @@
 
 List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. They Framebuffer Data is already converted to Little Endian so you can use it as is.
 
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [General Configuration Notes](#general-configuration-notes)
@@ -13,8 +16,6 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
 	- [Ivy Bridge](#ivy-bridge)
-		- [Installing Intel HD4000 Drivers on macOS 12 and newer](#installing-intel-hd4000-drivers-on-macos-12-and-newer)
-		- [OCLP and System Updates](#oclp-and-system-updates)
 	- [Sandy Bridge](#sandy-bridge)
 - [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
 	- [Ice Lake](#ice-lake)
@@ -28,11 +29,10 @@ List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobil
 	- [Ivy Bridge](#ivy-bridge-1)
 		- [Connector Patches for `04006601`](#connector-patches-for-04006601)
 		- [Connector Patches for `03006601`](#connector-patches-for-03006601)
-		- [Installing Intel HD4000 Drivers on macOS 12 and newer](#installing-intel-hd4000-drivers-on-macos-12-and-newer-1)
-		- [OCLP and System Updates](#oclp-and-system-updates-1)
 	- [Sandy Bridge](#sandy-bridge-1)
 - [About VGA](#about-vga)
 - [Credits and Resources](#credits-and-resources)
+</details>
 
 ## General Configuration Notes
 Most of the Framebuffer patches listed below (besides empty framebuffers) represent the bare minimum configuration to get on-board graphics and hardware acceleration working. In cases where your display output does not work, you may have to change the `AAPL,ig-platform-id` and/or add display connector data using Hackintool and following a general framebuffer patching guide [**such as this**](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/). 
@@ -42,7 +42,7 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 ### About the used properties
 
  Key | Function |
- ---------| -------- |
+ ----| -------- |
 `AAPL,ig-platform-id` |Platform identifier of the iGPU you are using/spoofing.
 `AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs ONLY. 
 `device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
@@ -50,6 +50,9 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 `framebuffer-fbmem` | Patches framebuffer memory. Required if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-stolenmem` | Patches framebuffer stolen memory. Required if you cannot adjust DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
+
+<details>
+<summary><b>Empty Framebuffers</b> (for Desktop)</summary>
 
 ## Empty Framebuffers (for Desktop)
 
@@ -86,6 +89,9 @@ CPU Family | Type | AAPL,snb-platform-id | device-id
 	-----------|-----|----|:----:|:----:
 	Ivy Bridge|PciRoot(0x0)/Pci(0x16,0x0)|`device-id` | Data | `3A1C0000`
 
+</details>
+<details>
+<summary><b>Framebuffers</b> (Desktop)</summary>
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
@@ -133,7 +139,9 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data | `1B190000` | ⚠️ Only needed when using Intel HD P530!
 
-For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
+> [!NOTE]
+> 
+> For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
 
 ### Haswell and Broadwell
 >For HD 4400, HD 4600 and Iris Pro 6200. 4th and 5th Gen Intel Core.
@@ -150,6 +158,10 @@ Key | Type | Value| Notes
 `framebuffer-fbmem`| Data | `00009000`
 ||||
 `device-id`| Data| `12040000` | ⚠️ Only needed when using HD Intel HD 4400!
+
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 
 ### Ivy Bridge
 >For Intel HD 2500/4000. 3rd Gen Intel Core</br>
@@ -169,27 +181,9 @@ Key | Type | Value
 ----|:----:|:----:
 `device-id` | Data | `3A1C0000`
 
-#### Installing Intel HD4000 Drivers on macOS 12 and newer
-
-When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
-
-To bring them back, do the following:
-
-- Download [**OpenCore Legacy Patcher App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Run the App 
-- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch"
-- Next, click on "Start Root Patching"
-- The App has to relaunch with Admin Roots. Click "Yes"
-- You will have to enter your Admin Password and then the installation will begin.
-- Once it's done, reboot.
-- Check "About this Mac…" section to verify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
-
-#### OCLP and System Updates
-The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
-
-![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
-
-You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
 
 ### Sandy Bridge
 >Intel HD 3000. 2nd Gen Intel Core.</br>
@@ -209,6 +203,14 @@ If you are using a **Sandy Bridge CPU with a 7-series mainboard** (ie. B75, Q75,
 Key | Type | Value
 ----|:----:|:----:
 `device-id` | Data | `3A1C0000`
+
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
+
+</details>
+<details>
+<summary><b>Framebuffers </b> (Laptop/NUC)</summary>
 
 ## Framebuffers (Laptop/NUC)
 
@@ -297,6 +299,9 @@ Key | Type | Value| Notes
 ||||
 `device-id`|Data|`16590000`| ⚠️ All UHD 620 with Kaby Lake-R require a device-id spoof!
 
+<details>
+<summary><b>Connector Patches</b> (Click to reveal)</summary>
+
 #### Connector Patches for HD 6XX models (not UHD!)
 HD 6xx users (UHD 6xx users are not concerned) may face some issues with the output where plugging in a display causes a lock up (kernel panic). Listed below are some patches to mitigate that (credits to RehabMan). If you're facing lock ups, try the following sets of patches (try both, but only one set at a time): 
 
@@ -317,6 +322,8 @@ HD 6xx users (UHD 6xx users are not concerned) may face some issues with the out
 	`framebuffer-con1-alldata` | Data | `01050A00 00080000 87010000`
 	`framebuffer-con2-enable`| Data | `01000000`
 	`framebuffer-con2-alldata` |Data| `03060A00 00040000 87010000`
+
+</details>
 
 ### [Skylake](https://ark.intel.com/content/www/us/en/ark/products/codename/37572/products-formerly-skylake.html?wapkw=Skylake#@Mobile)
 >For Intel HD 510/515/520/530/540/550/580 and P530. 6th Gen Intel Core Mobile.</br>
@@ -341,6 +348,10 @@ Key | Type | Value| Notes
 `device-id` |Data |`02190000` | ⚠️ Required for HD 510
 `device-id` |Data |`16190000` | ⚠️ Required for HD 550 and P530 
 
+> [!NOTE]
+> 
+> For enabling Skylake graphics on macOS Ventura, you need a [spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
+
 ### [Broadwell](https://ark.intel.com/content/www/us/en/ark/products/codename/38530/products-formerly-broadwell.html?wapkw=Broadwell#@Mobile)
 >For Intel HD 5500/5600/6000 and Iris (Pro) 6100/6200. 5th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.10
@@ -358,6 +369,10 @@ Key | Type | Value| Notes
 ||||
 `device-id` | Data |`26160000` | Required For HD 5600
 
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
+
 ### [Haswell](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=haswell#@Mobile)
 >For Intel HD 4200/4400/4600 and HD 5000/5100/5200. 4th Gen Intel Core Mobile.</br>
 >Supported since: macOS 10.8
@@ -374,6 +389,10 @@ Key | Type | Value| Notes
 `framebuffer-fbmem`| Data | `00009000`
 ||||
 `device-id` | Data |`12040000` | Required for HD 4200/4400/4600.
+
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 
 ### [Ivy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Mobile)
 >For Intel HD 4000. 3rd Gen Intel Core Mobile.</br>
@@ -397,6 +416,9 @@ Key | Type | Value
 `device-id` | Data | `3A1C0000`
 
 Additionally, you need one of the following sets of Connector patches so external monitors work (including clamshell mode, etc.).
+
+<details>
+<summary><b>Connector Patches</b> (Click to reveal)</summary>
 
 #### Connector Patches for `04006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
@@ -472,32 +494,14 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
+</details>
+
 > [!NOTE]
 > 
 > - `framebuffer-unifiedmem` value `00000080` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
 > - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 > - You can enable/disable keys by removing/putting `#` in front of them.
-
-#### Installing Intel HD4000 Drivers on macOS 12 and newer
-When installing macOS Monterey, you will notice that the system feels super sluggish once you reach the set-up assistant (where you set language, time zone, etc). That's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 4000 drivers. 
-
-To bring them back, do the following:
-
-- Download [**OpenCore Legacy Patcher App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and unpack it.
-- Run the App 
-- In the OpenCore Legacy Patcher menu, select "Post Install Root Patch"
-- Next, click on "Start Root Patching"
-- The App has to relaunch with Admin Roots. Click "Yes"
-- You will have to enter your Admin Password and then the installation will begin.
-- Once it's done, reboot.
-- Check "About this Mac…" section to veryify that acceleration is working (more than 7mb RAM):</br>![](https://user-images.githubusercontent.com/76865553/181920410-28cc08d2-0bcd-4868-b30d-112caec7206d.png)
-
-#### OCLP and System Updates
-The major advantage of using OCLP over [**HD4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) by chris1111 is that it remains on the system even after installing System Updates. After an update, it detects that the graphics drivers are missing and asks you, if you want to to patch them in again:
-
-![Notify](https://user-images.githubusercontent.com/76865553/181934588-82703d56-1ffc-471c-ba26-e3f59bb8dec6.png)
-
-You just click on "Okay" and the drivers will be re-installed. After the obligatory reboot, everything will be back to normal.
+> - MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
 
 ### [Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=Sandy%20Bridge#@Mobile)
 >Intel HD 3000. 2nd Gen Intel Core Mobile.</br>
@@ -517,6 +521,12 @@ If you are using a **Sandy Bridge CPU with a 7-series mainboard** (ie. B75, Q75,
 Key | Type | Value
 ----|:----:|:----:
 `device-id` | Data | `3A1C0000`
+
+> [!NOTE]
+> 
+> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
+
+</details>
 
 ## About VGA
 
