@@ -23,7 +23,6 @@ OpenCore Legacy Patcher (OCLP) contains Booter and Kernel patches which allow in
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
 >
 > - Patching kern.hv_vmm_present over manually setting the VMM CPUID allows for native features such as CPU and GPU power management
->
 
 **Source**: [OCLP issue 543](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
@@ -31,10 +30,10 @@ This is great, since it allows using the "native", designated SMBIOS for a given
 
 > [!IMPORTANT]
 >
-> With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext applies to the macOS installation environment as well now. So, if your config still contains the Kernel Patches disable them!
+> With the release of `RestrictEvents.kext` 1.1.3, adding the Kernel Patches to the config is no longer required since the kext applies to the macOS installation environment as well now. So, if your config still contains the Kernel Patches disable them! Prior to the release of `RestrictEvents.kext`, the kernel patches had negative effects on Bluetooth because enabling the VMM Board-ID skipped the loading of BT firmware (&rarr; See "Previous Method" section for details). This has been resolved now.
 
 ## System Requirements
-**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+)</br>
+**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+ is **mandatory**!</br>
 **Intel CPU families**:
 
 - 1st Gen Intel Core CPUs (req. SurPlus Kernel Patches)
@@ -71,8 +70,6 @@ Lowering/disabling SIP is necessary in order to re-install [components which hav
 So, in order to be able to boot the system with patched-in drivers ***and*** receive system updates, the Board-ID VMM spoof is the only workaround.
 	
 ## Instructions
-Prior to the release of `RestrictEvents.kext`, Booter and Kernel patches were required to enable the VMM board-id, to install an run macOS Monterey and newer on unsupported hardware. It turned out that the kernel patches had negative effects on Bluetooth because enabling the VMM Board-ID skipped the loading of BT firmware (&rarr; See "Previous Method" section for details). This has been resolved now.
-
 - Mount your EFI
 - Open your `config.plist` with ProperTree
 - Copy the "Skip Board ID check" patch from OCLP's [`Booter/Patch`](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L243) section to your `config.plist` and **enable** it. 
