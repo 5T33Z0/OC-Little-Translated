@@ -24,6 +24,11 @@ You can tell whether or not your system's CPU Power Management is working correc
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
+> [!WARNING]
+> 
+> 1. Don't use Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to run at 100 %! Use the included Uninstaller prior to upgrading!
+> 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
+
 ## Prerequisites
 - Hardware Requirements: 3rd Gen Intel Core or older CPU (Ivy Bridge and older) 
 - Mount your ESP

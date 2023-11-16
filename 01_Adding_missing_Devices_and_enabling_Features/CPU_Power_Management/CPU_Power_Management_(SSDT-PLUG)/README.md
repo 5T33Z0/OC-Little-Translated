@@ -107,6 +107,11 @@ Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CP
 
 You can use IORegistryExplorer to check the number of supported [**CPU states**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/XCPM_PSTATES.png) as well as the available Frequency Vecors (under: X86PlatformPlugin/IOPlatformPowerProfile/FrequencyVectors).
 
+> [!WARNING]
+> 
+> 1. Don't use Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to run at 100 %! Use the included Uninstaller prior to upgrading to get rid of it!
+> 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
+
 ## 11th Gen Intel and newer
 Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and newer Intel CPUs require ***SSDT-PLUG*** and a fake CPUID ("disguising" it as a Comet Lake CPU) in order to run macOS. Otherwise the system won't boot. 
 

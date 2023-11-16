@@ -54,6 +54,11 @@ At the lower end of the scale, `CoreMin` should be below 1 gHz, since we entered
 
 If the frequency is never below the base frequency or permanently above it, something is wrong with the CPU power management – unless you’ve modified the CPU parameters in the BIOS by disabling speed step or overclocking all cores, etc.
 
+> [!WARNING]
+> 
+> 1. Don't use Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to run at 100 %! Use the included Uninstaller prior to upgrading to get rid of it!
+> 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
+
 ## CREDITS
 - Acidanthera for CPUFriend
 - CorpNewt for CPUFriendFriend

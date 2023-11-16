@@ -161,6 +161,7 @@ sysctl machdep.xcpm.mode
 The output should be `0`, indicating that the `X86PlatformPlugin` is not loaded so ACPI CPU Power Management is used. To verify, run Intel Power Gadget and check the behavior of the CPU.
 
 > [!NOTE]
+> 
 > Check the full [guide on upgrading Ivy Bridge systems to macOS Ventura
 ](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md)
 
