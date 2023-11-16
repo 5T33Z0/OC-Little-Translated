@@ -26,7 +26,7 @@ For Ivy Bridge(-E) and older, you have to create an SSDT containing the power an
 
 > [!WARNING]
 > 
-> 1. Don't use Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to run at 100 %! Use the included Uninstaller prior to upgrading!
+> 1. Don't install Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to permanently run at 100 %! Use the included Uninstaller to get rid of it prior to upgrading to macOS 14!
 > 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
 
 ## Prerequisites
