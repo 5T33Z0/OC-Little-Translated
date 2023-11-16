@@ -153,7 +153,7 @@ Key | Type | Value| Notes
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 
 ### Ivy Bridge
 >For Intel HD 2500/4000. 3rd Gen Intel Core</br>
@@ -175,7 +175,7 @@ Key | Type | Value
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
 
 ### Sandy Bridge
 >Intel HD 3000. 2nd Gen Intel Core.</br>
@@ -198,7 +198,7 @@ Key | Type | Value
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
 
 ----
 
@@ -362,7 +362,7 @@ Key | Type | Value| Notes
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 
 ### [Haswell](https://ark.intel.com/content/www/us/en/ark/products/codename/42174/products-formerly-haswell.html?wapkw=haswell#@Mobile)
 >For Intel HD 4200/4400/4600 and HD 5000/5100/5200. 4th Gen Intel Core Mobile.</br>
@@ -383,7 +383,7 @@ Key | Type | Value| Notes
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Haswell-Broadwell_Ventura.md#installing-intel-haswellbroadwell-graphics-acceleration-patches)
 
 ### [Ivy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29902/products-formerly-ivy-bridge.html?wapkw=Ivy%20Bridge#@Mobile)
 >For Intel HD 4000. 3rd Gen Intel Core Mobile.</br>
@@ -486,7 +486,7 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 > - `framebuffer-unifiedmem` value `00000080` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
 > - Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 > - You can enable/disable keys by removing/putting `#` in front of them.
-> - MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
+> - macOS 12+ require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Ivy_Bridge-Ventura.md#installing-intel-hd4000-drivers)
 
 ### [Sandy Bridge](https://ark.intel.com/content/www/us/en/ark/products/codename/29900/products-formerly-sandy-bridge.html?wapkw=Sandy%20Bridge#@Mobile)
 >Intel HD 3000. 2nd Gen Intel Core Mobile.</br>
@@ -509,7 +509,7 @@ Key | Type | Value
 
 > [!NOTE]
 > 
-> MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
+> macOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
 
 ## About VGA
 
