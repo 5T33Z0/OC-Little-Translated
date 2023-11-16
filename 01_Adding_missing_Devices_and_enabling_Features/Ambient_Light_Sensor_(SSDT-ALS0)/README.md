@@ -121,7 +121,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "ALS0", 0)
 }
 ```
 ## NOTES
-- It's okay to add a fake `ALS0`, even if an ambient light sensor exists in the original `ACPI`.
-- The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving our desired effect.
-- When there is an ambient light sensor device in the original `ACPI`, the name may not be `ALSD`, although no other name has been found yet. If so, adjust the path in the SSDT accordingly.
-- If an ambient light sensor device exist in the original `DSDT` that you want to force-enable, you need to pay attention to `_SB.INI`. If it exists, please use method 2 to add a fake `ALS0`.
+- If your system has an ambient light sensor that you want to force-enable in macOS, you need to check if `_SB.INI` exists. In this case, please use method 2 to add a fake `ALS0` device.
+- It's okay to add a fake `ALS0` device even if an ambient light sensor exists in your original `ACPI` tables.
+- If the the name of the light sensor differes from `ALSD` (no other name has been found yet), adjust the path in your SSDT accordingly.
+- The corrected `Variable` may exist in multiple places and correcting it may affect other components while achieving the desired effect.
