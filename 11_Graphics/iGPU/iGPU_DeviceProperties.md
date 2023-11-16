@@ -51,12 +51,12 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 `framebuffer-stolenmem` | Patches framebuffer stolen memory. Required if you cannot adjust DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-unifiedmem` | Can be used to increase the amount of assigned VRAM. ⚠️ Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
 
-<details>
-<summary><b>Empty Framebuffers</b> (for Desktop)</summary>
-
 ## Empty Framebuffers (for Desktop)
 
-List of Framebuffers for Intel CPUs with integrated graphics that are used for computing purposes only (e.g. QuickSync Video, HEVC), when a separate GPU is utilized for display.
+List of empty Framebuffers for utilizing the iGPU for computing taks only (e.g. Intel QuickSync Video, HEVC), while the discrete GPU is handling graphics.
+
+<details>
+<summary><b>Click to reveal</b></summary>
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
@@ -90,11 +90,12 @@ CPU Family | Type | AAPL,snb-platform-id | device-id
 	Ivy Bridge|PciRoot(0x0)/Pci(0x16,0x0)|`device-id` | Data | `3A1C0000`
 
 </details>
-<details>
-<summary><b>Framebuffers</b> (Desktop)</summary>
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
+
+<details>
+<summary><b>Click to reveal</b></summary>
 
 ### Coffee Lake and Comet Lake
 >For Intel UHD-630. 8th to 10th Gen Intel Core CPUs
@@ -209,10 +210,10 @@ Key | Type | Value
 > MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
 
 </details>
-<details>
-<summary><b>Framebuffers </b> (Laptop/NUC)</summary>
 
 ## Framebuffers (Laptop/NUC)
+<details>
+<summary><b>Click to reveal</b></summary>
 
 ### [Ice Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/74979/products-formerly-ice-lake.html?wapkw=Ice%20Lake#@Mobile)
 >Intel Iris Plus Graphics. 10th Gen Intel Core Mobile</br>
