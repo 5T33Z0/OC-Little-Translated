@@ -439,12 +439,6 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 		<string>Intel HD Graphics 4000</string>
 	</dict>
 ```
-> [!NOTE]
-> 
-> - `framebuffer-unifiedmem` value `00000080` increases VRAM to 2048 MB (instead of 1536 MB). To use the default value, disable it and re-enable `framebuffer-stolenmem` instead!
-> - You can enable/disable keys by removing/putting `#` in front of them.
-- Don't use `framebuffer-unifiedmem` and `framebuffer-stolenmem` together at the same time – use either or!
-
 #### Connector Patches for `03006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
