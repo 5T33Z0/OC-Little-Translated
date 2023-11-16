@@ -517,7 +517,7 @@ Whether or not your VGA port can be used depends on 2 factors: macOS and the CPU
 
 - VGA support was dropped from macOS since OSX 10.8.2.
 - On Ivy Bridge and others, you can try [these Connector Patches](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#vga-support) to enable it (if OSX is < 10.8.2).
-- With the release of the Skylake CPU family, Intel dropped VGA support from their iGPUs completely, but manufacturers continued to use it for their devices. In order to do so, they used a DisplayPort connection and a small digital-to-analog RAMDAC to convert the signal from digital to analog so the VGA connection could be utilized.
+- With the release of the Skylake CPU family, Intel dropped VGA support from their iGPUs completely. But manufacturers continued to service it for their devices. In order to do so, they used a DisplayPort connection and a small digital-to-analog RAMDAC to convert the signal from digital to analog so the VGA connector could still be utilized.
 
 ## Credits and Resources
 - Acidanthera for [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher)
