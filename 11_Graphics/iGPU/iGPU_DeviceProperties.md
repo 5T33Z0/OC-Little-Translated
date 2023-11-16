@@ -1,23 +1,20 @@
 # iGPU Framebuffer DeviceProperties
 
-List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. They Framebuffer Data is already converted to Little Endian so you can use it as is.
-
-<details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+List of Intel iGPU Device Properties for 2nd to 10th Gen Intel Desktop and Mobile CPUs as provided by the OpenCore Install Guide. The Framebuffer Data is already converted to Little Endian so you can use it as is.
 
 **TABLE of CONTENTS**
 
 - [General Configuration Notes](#general-configuration-notes)
 	- [About the used properties](#about-the-used-properties)
-- [Empty Framebuffers (for Desktop)](#empty-framebuffers-for-desktop)
-- [Framebuffers (Desktop)](#framebuffers-desktop)
+- [**Empty Framebuffers** (for Desktop)](#empty-framebuffers-for-desktop)
+- [**Framebuffers (Desktop)**](#framebuffers-desktop)
 	- [Coffee Lake and Comet Lake](#coffee-lake-and-comet-lake)
 	- [Kaby Lake](#kaby-lake)
 	- [Skylake](#skylake)
 	- [Haswell and Broadwell](#haswell-and-broadwell)
 	- [Ivy Bridge](#ivy-bridge)
 	- [Sandy Bridge](#sandy-bridge)
-- [Framebuffers (Laptop/NUC)](#framebuffers-laptopnuc)
+- [**Framebuffers (Laptop/NUC)**](#framebuffers-laptopnuc)
 	- [Ice Lake](#ice-lake)
 	- [Coffee Lake Plus and Comet Lake](#coffee-lake-plus-and-comet-lake)
 	- [Coffee Lake and Whiskey Lake](#coffee-lake-and-whiskey-lake)
@@ -55,9 +52,6 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 
 List of empty Framebuffers for utilizing the iGPU for computing taks only (e.g. Intel QuickSync Video, HEVC), while the discrete GPU is handling graphics.
 
-<details>
-<summary><b>Click to reveal</b></summary>
-
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
 CPU Family (iGPU variant)| Type | AAPL,ig-platform-id | device-id | Notes
@@ -89,13 +83,10 @@ CPU Family | Type | AAPL,snb-platform-id | device-id
 	-----------|-----|----|:----:|:----:
 	Ivy Bridge|PciRoot(0x0)/Pci(0x16,0x0)|`device-id` | Data | `3A1C0000`
 
-</details>
+----
 
 ## Framebuffers (Desktop)
 AMD and 11th gen and newer Intel CPUs are unsupported! Since High End Desktop (HEDT) CPUs don't feature integrated graphics, there are no Device Properties to add for these!
-
-<details>
-<summary><b>Click to reveal</b></summary>
 
 ### Coffee Lake and Comet Lake
 >For Intel UHD-630. 8th to 10th Gen Intel Core CPUs
@@ -209,11 +200,10 @@ Key | Type | Value
 > 
 > MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
 
-</details>
+----
 
 ## Framebuffers (Laptop/NUC)
-<details>
-<summary><b>Click to reveal</b></summary>
+Framebuffer patches for Mobile iGPUs. AMD as well as 11th Gen Intel and newer CPUs are not support by macOS!
 
 ### [Ice Lake](https://ark.intel.com/content/www/us/en/ark/products/codename/74979/products-formerly-ice-lake.html?wapkw=Ice%20Lake#@Mobile)
 >Intel Iris Plus Graphics. 10th Gen Intel Core Mobile</br>
@@ -526,8 +516,6 @@ Key | Type | Value
 > [!NOTE]
 > 
 > MacOS 12 and newer require re-installing the iGPU drivers in Post-Install with [OpenCore Legacy Patcher](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sandy_Bridge_Ventura.md#installing-intel-hd-20003000-drivers)
-
-</details>
 
 ## About VGA
 
