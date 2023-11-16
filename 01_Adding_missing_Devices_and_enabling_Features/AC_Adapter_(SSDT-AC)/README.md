@@ -3,7 +3,7 @@ This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `A
 
 If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't need to add this SSDT. Read the notes about **ACPIBatteryManager** vs. **SMCBatteryManager** below for more details.
 
-**Applicable to**: MacBook, MacBookAir and MacBookPro SMBIOS. 
+**Applicable to SMBIOS**: MacBook, MacBookAir and MacBookPro. 
 
 ## Preparations
 - In `DSDT`, search for `ACPI0003` and the device it belongs to: either `AC`, `AC0`, `ADP`, `ADP1` or `ACAD`. 
