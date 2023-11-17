@@ -28,4 +28,6 @@ In **DSDT**, search for:
     }
     ```
 
-:warning: **CAUTION:** When using the any of the included SSDTs, ensure that the PCI paths are consistent with the ones used in the original DSDT!
+> [!CAUTION]
+> 
+> Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`! 
