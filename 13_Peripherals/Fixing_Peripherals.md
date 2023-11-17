@@ -32,6 +32,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
 
 > [!NOTE]
+>
 > You might still need `AMFI=0x80` before re-applying root patches after installing system updates
 
 ### Solution 2: Re-enable SIP (not always possible)
@@ -64,6 +65,7 @@ Once SIP has been re-enabled, the prompts for granting access to the cam/mic wil
 If you can't boot with SIP enabled, you must add permissions to the SQL3 database manually, as explained here: [Unable to grant special permissions to apps](https://dortania.github.io/OpenCore-Legacy-Patcher/ACCEL.html#unable-to-grant-special-permissions-to-apps-ie-camera-access-to-zoom)
 
 > [!NOTE]
+> 
 > This guide is applicable to *any* 3rd party app which requires access to the microphone and/or camera – Digital Audio Workstations and Video Editing Software included!
 
 ## Furter Resources

@@ -200,7 +200,9 @@ For more details check the `Configuration.pdf` included in the OpenCore package.
 
 If it takes a long time (8 seconds or longer) until the BootPicker appears after switching on the computer, this option can be used to shorten the waiting time - especially for notebooks. But then you have to live without the boot chime, because the audio driver `AudioDxe.efi` is not started in this case. 
 
-:warning: **CAUTION**: Before installing macOS from USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
+> [!CAUTION]
+> 
+> Before installing macOS from USB flash drive, `ConnectDrivers` needs to be enabled, otherwise you won't see the drive in the bootpicker.
 
 ### Boot variants (Selection)
 
@@ -225,7 +227,9 @@ Great for dual boot setups. Combine with `LauncherOption` `Full` or `Short`to pr
 **PickerMode** = `Default`</br> 
 **ShowPicker** = `No`
 
-> **Warning** This option can be problematic if have Windows installed. Beecaus if you perform an NVRAM reset and `LauncherPath` is not enabled, Windows might take over the first slot of boot order and then you cannot enter OC's BootPicker any more.
+> [!CAUTION]
+> 
+> This option can be problematic if have Windows installed. Beecaus if you perform an NVRAM reset and `LauncherPath` is not enabled, Windows might take over the first slot of boot order and then you cannot enter OC's BootPicker any more.
 
 #### Skip the BootPicker to load macOS automatically
 
@@ -236,7 +240,9 @@ The following settings will boot macOS from first APFS volume it finds. Combine 
 **PickerMode** = `Builtin`</br>
 **ShowPicker** = `Yes`
 
-**NOTE**: Hold `X` after turning on the system to directly boot into macOS – even if you get a black screen instead of the BootPicker.
+> [!NOTE]
+> 
+> Hold `X` after turning on the system to directly boot into macOS – even if you get a black screen instead of the BootPicker.
 
 This is a reliably workaround for this issue:
 
@@ -264,11 +270,13 @@ Therefore, the OpenCore package also contains an additional driver `ResetNvramEn
 * Press Space Bar in Boot Picker to show the "CleanNvram" entry.
 * Highlight the icon and press enter to reset NVRAM.
 
-**NOTE**: Since OC 0.8.4, the previous options for resetting NVRAM are deprecated. So delete: 
-
-- `AllowNvranReset` key from `config.plist`
-- `CleanNvramReset.efi` from `config.plist` (Misc/Tools)
-- `CleanNvramReset.efi` from `EFI/OC/Tools` 
+> [!NOTE]
+> 
+> Since OC 0.8.4, the previous options for resetting NVRAM are deprecated. So delete: 
+> 
+> - `AllowNvranReset` key from `config.plist`
+> - `CleanNvramReset.efi` from `config.plist` (Misc/Tools)
+> - `CleanNvramReset.efi` from `EFI/OC/Tools` 
 
 #### OC ≥ 0.8.4
 To enable NVRAM Reset on OC 0.8.4 and newer, do the following:
@@ -348,10 +356,10 @@ Besides manually copying over SMBIOS data from your OpenCore to your Clover conf
 
 ![ocat](https://user-images.githubusercontent.com/76865553/162971063-cbab15fa-4c83-4013-a732-5486d4f00e31.png)
 
-**IMPORTANT**
-
-- If you did everything correct, you won't have to enter your AppleID Password after switching Boot Managers and macOS will let you know, that "This AppleID is now used with this device" or something like that.
-- But if macOS asks for your AppleID Password and Mail passwords etc., you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
+> [!IMPORTANT]
+> 
+> - If you did everything correct, you won't have to enter your AppleID Password after switching Boot Managers and macOS will let you know, that "This AppleID is now used with this device" or something like that.
+> - But if macOS asks for your AppleID Password and Mail passwords etc., you did something wrong. In this case you should reboot into OpenCore instead and check again. Otherwise, you are registering your computer as a new/different Mac.
 
 ### 1-Click-Solution for Clover Users
 If you've used the real MAC Address of your Ethernet Controller ("ROM") when generating your SMBIOS Data for your OpenCore config, you can avoid possible SMBIOS conflicts altogether. In the "Rt Variables" section, click on "from System" and you should be fine!

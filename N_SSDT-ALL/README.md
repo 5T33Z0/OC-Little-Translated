@@ -22,7 +22,9 @@ Before attempting this, you should also consider which SSDTs to merge together. 
 - Open one of the .aml files in the ACPI folder
 - This will batch decompile all the files to `.dsl` automatically:</br>![xiasl01](https://user-images.githubusercontent.com/76865553/176115267-d5c224ba-58f4-4fb5-a317-d0029e7dc5a1.png)
 
-**NOTE**: If someone knows if maciASL supports batch conversion, please let me know.
+> [!NOTE]
+> 
+> If someone knows if maciASL supports batch conversion, please let me know.
 
 ## Modifying the .dsl files
 - Delete the `DefinitionBlock` (curly brackets of the 1st level included) from each table:</br>**Before**:</br>![xiasl02](https://user-images.githubusercontent.com/76865553/176115380-29d3cd77-eff8-45f0-863a-e22b25f0f8a7.png)</br>**After**:</br>![xiasl03](https://user-images.githubusercontent.com/76865553/176115472-5285e051-bf6b-4cf7-b6ec-533fef2c6136.png)

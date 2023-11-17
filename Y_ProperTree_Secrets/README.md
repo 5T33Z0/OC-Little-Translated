@@ -38,12 +38,11 @@ You probably have come across posts like these on Forums or Reddit:
 Isolated patches in text format instead of a ready-made .plist. I hate if patches are posted this way for several reasons:
 
 - In this form, it's a drag to integrate them into an existing `config.plist`
-- It's hard to "convert" the patch if you want to add it to your config manually since the data is presented in Base64. 
-- There's always a chance to mess up the structure of the plist file if you have to do it in text mode. 
-- Some plist editors don't even offer/allow pasting of raw text. If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item because the file header and the rest of tree structure is missing. 
+- The data is represented in Base64, so you can't really comprehend it, which makes adding it to your config manually even more tedious 
+- There's always a chance to mess up the structure of the config.plist if you have to integrate it in text mode. 
+- Some plist editors don't even allow pasting raw text. If you would paste this patch into PlistEdit Pro for example, it wouldn't even convert it into a plist item since the file header and the rest of tree structure is missing.
 
 ## ProperTree for the win
-
 Enter ProperTree to save the day! With ProperTree, you can just copy raw text with <kbd>⌘</kbd><kbd>c</kbd>, run the App, hit <kbd>⌘</kbd><kbd>v</kbd> and boom, a `<Dict>` will be created:
 
 ![singlepatch](https://user-images.githubusercontent.com/76865553/181589762-0e30ea62-d792-4af5-8418-7c8f875d032b.png)

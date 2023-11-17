@@ -36,7 +36,11 @@ Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/feat
 
 - Working Internet Connection
 - Download and install [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig/releases)
-- :warning: Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong!
+
+> [!CAUTION]
+> 
+> Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong, so you can boot your system via USB!
+
 
 ### For users updating from OpenCore 0.6.5 or lower
 
@@ -88,7 +92,9 @@ For Kexts, you can also choose between `Release` and `DEV` builds in the Sync wi
 	![Save_ok](https://user-images.githubusercontent.com/76865553/140640868-b76f0ca8-496f-42cb-9cb4-737ce03bca1a.png)
 8. You're already done with updating your config. On to updating files…
 
-**NOTES**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
+> [!NOTE]
+> 
+> Any remaining errors after saving the config.plist are most likely *actual configuration errors* which you need to fix – OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ## 4. Updating OpenCore Files, Drivers, Kexts and Resources
 
@@ -182,7 +188,9 @@ OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo auto
 - Copy `.contentFlavour` and `.contentVisibility` to EFI/OC/Boot
 - Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
 
-> **Note**: Refer to OpenCore's Documentation.pdf to find out how to configure these files.
+> [!NOTE]
+> 
+> Refer to OpenCore's Documentation.pdf to find out how to configure these files.
 
 ## Refreshing the OCAT Database
 
@@ -218,7 +226,7 @@ If Acidanthera would actually come up with a better all-in-one solution than OCA
 
 Until further progress is made, I feel sorry for any users who are still manually updating OpenCore because they may not be aware of better options, and are being misinformed by certain individuals who are spreading false information on reddit and discord about OCAT and stigmatizing it.
 
-## Notes
+## NOTES
 - When setting-up your config for the very first time, you should create an OC Snapshot with ProperTree prior to deployment. Because it does a better job of detecting kext dependencies and organizing nested kexts which can prevent possible boot errors later.
 - If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver) 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
