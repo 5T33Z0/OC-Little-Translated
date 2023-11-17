@@ -10,5 +10,6 @@
 - If missing, you can add ***SSDT-MEM2***. 
 - If `PNP0C01` is present but is called `MEM` instead, you don't need this patch either – IOReg will still pick it up.
 
-## Notes
-Whether or not this patch is needed is not clear. In my test in an Ivy Bridge Notebook with Intel HD4000 graphics, adding `SSDT-MEM2` did not result in IOAccelMemoryInfoUserClient being present. Also, my system already has a `MEM` device. So this SSDT to be tested on a case-by-case basis. If you are uncertain, don't use this patch.
+>[!NOTE]
+>
+> Whether or not this patch is needed is uncertain. In my test on an Ivy Bridge Notebook with Intel HD4000 graphics, adding `SSDT-MEM2` did not result in `IOAccelMemoryInfoUserClient` being present. Also, my system already has a `MEM` device. So this SSDT has to be tested on a case-by-case basis. If you are uncertain, don't use it.
