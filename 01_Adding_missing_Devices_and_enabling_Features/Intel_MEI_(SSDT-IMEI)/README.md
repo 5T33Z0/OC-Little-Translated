@@ -21,4 +21,6 @@ In **DSDT**, search for:
 
 `0x00160000`. If missing, add ***SSDT-IMEI*** to ACPI Folder and Config.
 
-**CAUTION:** When using this patch, make sure that the device path of the low pin configuration bus (`LPC`/`LPCB`) is consistent with the one used in the original `DSDT`.
+> [!CAUTION]
+> 
+> Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`! 
