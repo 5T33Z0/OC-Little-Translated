@@ -1,6 +1,9 @@
 # Boot arguments explained
 Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it. I also used tables instead of lists to separate boot-args, properties and descriptions more clearly, which makes it easier to copy entries and identify additional parameters associated with a boot-arg/property (such as switches and bitmasks).
 
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+
 **TABLE of CONTENTS**
 
 - [Debugging](#debugging)
@@ -35,7 +38,10 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 	- [RTCMemoryFixup](#rtcmemoryfixup)
 - [Credits](#credits)
 
+</details>
+
 ## Debugging
+
 |Boot-arg | Description|
 |:-------:|-----------|
 **`-v`**|Verbose Mode. Replaces the progress bar with a text output of the boot process which helps identifying issues. Combine with `debug=0x100` and `keepsyms=1`
@@ -53,7 +59,9 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 :bulb: **TIPS**
 
 - Recommended boot-arg for installing macOS the first time: `-v`, `keepsyms=1` and `debug=0x100`
-- A more in-depth debugging guide can be found [**here**](https://caizhiyuan.gitee.io/opencore-install-guide/troubleshooting/kernel-debugging.html#efi-setup) 
+- A more in-depth debugging guide can be found [**here**](https://caizhiyuan.gitee.io/opencore-install-guide/troubleshooting/kernel-debugging.html#efi-setup)
+
+</details>
 
 ## Network-specific boot arguments
 |Boot-arg|Description|
