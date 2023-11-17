@@ -12,7 +12,9 @@ Appllicable to **SMBIOS**:
 - **MacMini8,1**
 - **MacPro7,1**
 
-:warning: Don't use this SSDT for fixing your System Clock! This is just a virtual  device. If you need to fix your Clock, use [**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)) or [**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead!
+> [!IMPORTANT]
+>
+> Don't use this SSDT for fixing your System Clock! This is just a virtual  device. If you need to fix your Clock, use [**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)) or [**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead!
 
 ## Credits
 - [**Baio1977**](https://www.mstx.cn/Baio1977) for **SSDT-ARTC**
