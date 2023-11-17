@@ -43,7 +43,7 @@ This `_UID` can be used to select different brightness curves stored in Whatever
 
 > [!IMPORTANT]
 > 
-> When working with the .dsl file, the `_UID` is shown as a *decimal* number. Once you export the file to .aml, this number will be converted to *hexadeciam*, so `14` will become `0x0E`, for example. So keep in mind that you have to convert the value to hex when changing it in the .aml directly!
+> When working with the .dsl file, the `_UID` is shown as a *decimal* number. Once you export the file to .aml, this number will be converted to *hexadecimal*, so `14` will become `0x0E`, for example. So keep in mind that you have to convert the value to hex when changing it in the .aml directly!
 
 ## Other Methods
 
