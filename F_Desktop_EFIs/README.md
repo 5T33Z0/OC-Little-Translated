@@ -163,8 +163,8 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled. A better solution is to add Booter Patches to enable the board-id skip and add RestrictEvents to enable system updates as explained [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
 
 ## References
-- **OpenCore Bootloader**: https://github.com/acidanthera/OpenCorePkg
-- **OpenCore Auxiliary Tools**: https://github.com/ic005k/QtOpenCoreConfig
-- **Base Configs**: https://github.com/luchina-gabriel?tab=repositories
-- **OpenCore Install Guide**: https://dortania.github.io/OpenCore-Install-Guide
-- **OpenCore Troubleshooting Guide**: https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents
+- **OpenCore Bootloader**: [https://github.com/acidanthera/OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
+- **OpenCore Auxiliary Tools**: [https://github.com/ic005k/QtOpenCoreConfig](https://github.com/ic005k/QtOpenCoreConfig)
+- **Base Configs**: [https://github.com/luchina-gabriel?tab=repositories](https://github.com/luchina-gabriel?tab=repositories)
+- **OpenCore Install Guide**: [https://dortania.github.io/OpenCore-Install-Guide](https://dortania.github.io/OpenCore-Install-Guide)
+- **OpenCore Troubleshooting Guide**:[https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents]( https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents)
