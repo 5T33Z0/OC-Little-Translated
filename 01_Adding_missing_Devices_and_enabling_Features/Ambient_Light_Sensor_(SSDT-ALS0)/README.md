@@ -32,7 +32,6 @@ Device (ALSD)
   		{
       		Return (0x0B)
     	}
-
     	Return (Zero)
     }
     Method (_ALI, 0, NotSerialized)  // _ALI: Ambient Light Illuminance
@@ -63,8 +62,8 @@ Device (ALSD)
     	},
     	Package (0x02)
     	{
-    	0x96,
-    	0x03E8
+    	    0x96,
+    	    0x03E8
     	}
   }
 ```
