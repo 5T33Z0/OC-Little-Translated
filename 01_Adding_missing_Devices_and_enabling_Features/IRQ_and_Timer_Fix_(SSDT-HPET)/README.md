@@ -190,7 +190,7 @@ If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well.
 
 Tthe Programmable Interrupt Controller (PIC) is a hardware device that is responsible for managing interrupts. The PIC receives these interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
 
-## NOTES
+## Notes
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
 - The IRQ and RTC fixes used here cannot be combined with other RTC fixes, such as:
   - ***SSDT-AWAC*** and ***SSDT-AWAC-ARTC***
