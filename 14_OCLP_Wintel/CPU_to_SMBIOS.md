@@ -12,14 +12,29 @@ CPU Family | Mac Model / SMBIOS | Intel Core <br>Gen.
 **Wolfdale** | <ul><li> iMac10,1 | 1st
 **Arrandale** | <ul><li> MacBookPro6,x <li>iMac11,x |1st
 **Sandy Bridge** | <ul><li>MacBookAir4,x <li> MacBookPro8,x <li> Macmini5,x <li> iMac12,x | 2nd
-**Ivy Bridge**   | <ul><li>MacBookAir5,x <li>MacBookPro9,x <li> MacBookPro10,x <li> Macmini6,x <li> iMac13,x | 3rd
+**Ivy Bridge** | <ul><li>MacBookAir5,x <li>MacBookPro9,x <li> MacBookPro10,x <li> Macmini6,x <li> iMac13,x | 3rd
 **Ivy Bridge EP** | <ul><li> MacPro6,1 | 3rd
 **Haswell** | <ul><li>MacBookAir6,x <li> MacBookPro11,x <li> Macmini7,1 <li>iMac14,x <li>iMac15,1 | 4th
 **Broadwell** | <ul><li>MacBook8,1 <li>MacBookAir7,x <li>MacBookPro12,x <li> iMac16,x | 5th
-**Skylake**      | <ul><li>MacBook9,1 <li>MacBookPro13,x <li> iMac17,1 | 6th
-**Kaby Lake**    | <ul><li>MacBook10,1 <li>MacBookPro14,x <li> iMac18,x | 7th
+**Skylake**  | <ul><li>MacBook9,1 <li>MacBookPro13,x <li> iMac17,1 | 6th
+**Kaby Lake**  | <ul><li>MacBook10,1 <li>MacBookPro14,x <li> iMac18,x | 7th
 **Coffee Lake**,<br> **Whiskey Lake**  | <ul><li>MacBookPro15,x <li>MacBookPro16,1 <li> Macmini8,1<li> iMac19,x | 8th/9th
 **Comet Lake**, <br> **Ice Lake** |  <ul><li> iMac20,x <li> MacBookPro16,2 | 10th
+
+## Lists of Apple Mac Models
+Listed below, you find official links to every Intel/ARM-based Apple Mac model, including additional info such as tech specs, etc. This might help to figure out the best suited hardware and SMBIOS.
+
+- [**MacBook**](https://support.apple.com/en-us/HT201608)
+- [**MacBook Air**](https://support.apple.com/en-us/HT201862)
+- [**MacBook Pro**](https://support.apple.com/en-us/HT201300)
+- [**iMac**](https://support.apple.com/en-us/HT201634)
+- [**Mac Pro**](https://support.apple.com/en-us/HT202888)
+- [**Mac Studio**](https://support.apple.com/en-us/HT213073)
+- [**Mac mini**](https://support.apple.com/en-us/HT201894)
+
+> [!NOTE]
+>
+> There's also a python script called [Identfy your Mac Scraper](https://github.com/ripeda/Identify-your-Mac-Scraper) that can scrape the data for you.
 
 ## Usage example
 Backup your existing EFI folder on a FAT32 formatted USB flash drive before fiddling with OCLP!
