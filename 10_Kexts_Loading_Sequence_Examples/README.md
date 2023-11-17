@@ -3,7 +3,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-- [General Kernel and Kext handling by OpenCore](#general-kernel-and-kext-handling-by-opencore)
+- [Processing order of Kexts and Kernel patches](#processing-order-of-kexts-and-kernel-patches)
 - [Lilu and VirtualSMC first?](#lilu-and-virtualsmc-first)
 - [Kernel Support Table](#kernel-support-table)
 - [Examples](#examples)
@@ -20,7 +20,7 @@
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
 	- [Example 11: CPUFriend](#example-11-cpufriend)
-- [Notes](#notes)
+- [Notes and Credits](#notes-and-credits)
 
 ## About
 
