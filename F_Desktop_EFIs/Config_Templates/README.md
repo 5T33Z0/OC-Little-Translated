@@ -14,4 +14,6 @@ Well, the developer of OCAT removed direct access to the config templates stored
 - Select "Edit" > "Create EFI Folder on Desktop"
 - The EFI folder will be populated on the desktop
 
-> **Note**: Before deployment, you probably have to adjust settings or add more/different Kexts to suit your needs. Please refer to the main article [Generating an OpenCore EFI folder with OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#generating-an-opencore-efi-folder-with-opencore-auxiliary-tools) for further instructions.
+> [!NOTE]
+> 
+> Before deployment, you probably have to adjust settings or add more/different Kexts to suit your needs. Please refer to the main article [Generating an OpenCore EFI folder with OCAT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#generating-an-opencore-efi-folder-with-opencore-auxiliary-tools) for further instructions.
