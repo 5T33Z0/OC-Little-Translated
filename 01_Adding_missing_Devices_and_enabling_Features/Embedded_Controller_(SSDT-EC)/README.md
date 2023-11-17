@@ -22,7 +22,6 @@ On Laptops, the `EC` microcontroller actually really exists but may not be detec
 |:--| 
 | **Screensot**: `EC` device in a Lenovo Laptop which does't require `SSDT-EC` because it already has the correct name so macOS detects it 
 
-
 ### `SSDT-EC` or `SSDT-EC-USBX`: which one do I need?
 In order to get USB Power Management working properly on **Skylake and newer**, we have to add a fake `EC` as well as a `USBX` device to inject USB power properties, so macOS can attach its `AppleBusPowerController` service to it. Both devices are included in `SSDT-EC-USBX`. For older systems, `SSDT-EC` alone is sufficient.
 
@@ -33,9 +32,11 @@ In order to get USB Power Management working properly on **Skylake and newer**, 
 - **Skylake** and newer Intel CPUs require `SSDT-EC-USBX`, older CPUs require `SSDT-EC`.
 
 ## Adding a fake EC Device
-There are 2 methods for adding a fake or virtual EC: automated (Method 1) or manual (Method 2).
+There are 2 methods for adding a fake or virtual EC: automated (Method 1) or manual (Method 2). Use either one method or the other, not both!
 
-Use either one method or the other, not both! :warning: DON'T rename `EC0`, `H_EC`, etc. to `EC` desktop systems. These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
+> [!WARNING]
+> 
+> Don't rename `EC0`, `H_EC`, etc. to `EC` for desktop systems! These devices are incompatible with macOS and may break at any time. `AppleACPIEC` kext must NOT load on desktops.
 
 ### Method 1: automated SSDT generation using SSDTTime
 
