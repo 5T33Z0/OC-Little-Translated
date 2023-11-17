@@ -16,7 +16,9 @@ Once the installation is completed you can reboot and the entry for booting Wind
 4. Create a new FAT32 Partition. **SIZE**: At least **40 GB**. Windows 10 requires about 20 GB for the Installation + x GB RAM of installed RAM (this amount will be reserved by Windows for storing the Sleepimage) + whatever space you need for your programs. So if you have 16 Gigs of RAM that makes 36 GB – without any space left. So add at least 4 GB for apps and updates minimum. Otherwise, you have to disable hibernation and Windows recovery in order to have enough space on the disk to work with.
 5. Take note of the Disk's device path (`diskXsX`)
 
-**NOTE**: If you want to use a seperate pysical disk for installing Windows instead you just have to format the disk as FAT32 and continue with "Install Windows"
+> [!NOTE]
+> 
+> If you want to use a seperate physical disk for installing Windows instead you just have to format the disk as FAT32 and continue with "Install Windows"
 
 ### Windows Installation
 1. Donwload the [Windows_Install.zip](https://i.applelife.ru/2023/04/501805_Windows_Install_5.9.1.zip) and unpack it

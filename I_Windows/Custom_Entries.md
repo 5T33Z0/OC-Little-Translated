@@ -4,7 +4,7 @@ This guide is for adding an entry for booting Windows to the OpenCore boot menu,
 
 ## Prerequisites
 
-In order to add the Windows Boot Manager to OpenCore's boot menu, we need to find the location of the EFI Partition containing the "Microsoft" folder. If you only use one HDD, it's located inside the same EFI folder as your OpenCore files. But on systems which have Windows on a separate disk, we need to find out its PCI path first via the Open Shell command line tool before we can add the path to the `config.plist`.
+In order to add the Windows Boot Manager to OpenCore's boot menu, we need to find the location of the EFI Partition with the "Microsoft" folder that contains the Windows Bootloader. If you only use one HDD, it's located inside the same EFI folder as your OpenCore files. But on systems which have Windows on a separate disk, we need to find out its PCI path first via the Open Shell command line tool before we can add the path to the `config.plist`.
 
 ### Finding the PCI path of the Windows Bootloader using OpenShell
 
@@ -39,9 +39,13 @@ Once you're back in macOS, do the following:
 - Save your config and reboot. The Windows Entry should now be present in the OC boot menu:</br>
 ![win10flav](https://user-images.githubusercontent.com/76865553/148958994-60379e98-4b84-4e4b-b0d0-e2484813d06b.png)
 
-**Done**!
+> [!IMPORTANT]
+> 
+> - Remember that the PCI root path to the Microsoft Boot Manager may change if you format the HDD containing the Windows installation!
+> - Revert `ScanPolicy` to `0` if other drives are missing from the Boot Picker GUI.
+> - If macOS partitions are not shown in the Boot Picker GUI, change `MinDate` and `MinVersion` to `-1` for macOS versions older than macOS 11.
 
-## Notes for using QWERTZ keyboard layouts (with umlauts)
+## Notes for using QWERTZ keyboard layouts with "umlauts"
 If you run shell on a (german) "QWERTZ" keyboard, some keys are different:
 
 US Layout | DE Layout
@@ -50,9 +54,3 @@ US Layout | DE Layout
 `>`       | `SHIFT+.`
 `\`       | `#`
 `y`       | `z`
-
-## :warning: Caution
-
-- Remember that the PCI root path to the Microsoft Boot Manager may change if you format the HDD containing the Windows installation!
-- Revert `ScanPolicy` to `0` if other drives are missing from the Boot Picker GUI.
-- If macOS partitions are not shown in the Boot Picker GUI, change `MinDate` and `MinVersion` to `-1` for macOS versions older than macOS 11.
