@@ -33,6 +33,7 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **For**: Intel WiFi (Firmware)</br>
 **Filesize reduction**: From approx. 15 MB to 2 MB </br>
 **Guide**: [**Chonky itwm Build**](https://github.com/dreamwhite/Chonky-itlwm-Build)
+**Firmwares**: [Support for Intel Wireless Adapters](https://www.intel.com/content/www/us/en/support/articles/000005511/wireless.html)
 
 ## Slimming Xcode
 You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
