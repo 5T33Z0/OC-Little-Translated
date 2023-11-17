@@ -88,7 +88,9 @@ For Kexts, you can also choose between `Release` and `DEV` builds in the Sync wi
 	![Save_ok](https://user-images.githubusercontent.com/76865553/140640868-b76f0ca8-496f-42cb-9cb4-737ce03bca1a.png)
 8. You're already done with updating your config. On to updating files…
 
-**NOTES**: Remaining errors after saving the config.plist are most likely actual configuration errors which you need to fix on your own. OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
+> [!NOTE]
+> 
+> Any remaining errors after saving the config.plist are most likely *actual configuration errors* which you need to fix – OC Validate might provide hints to do so. Otherwise refer to the OpenCore Installation Guide by Dortania.
 
 ## 4. Updating OpenCore Files, Drivers, Kexts and Resources
 
@@ -182,7 +184,9 @@ OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo auto
 - Copy `.contentFlavour` and `.contentVisibility` to EFI/OC/Boot
 - Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again
 
-> **Note**: Refer to OpenCore's Documentation.pdf to find out how to configure these files.
+> [!NOTE]
+> 
+> Refer to OpenCore's Documentation.pdf to find out how to configure these files.
 
 ## Refreshing the OCAT Database
 
