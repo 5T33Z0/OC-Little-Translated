@@ -1,7 +1,7 @@
 # Preventing a Volume from mounting at startup
 You can use this to prevent Windows (or other) Volumes from auto-mounting under macOS.
 
-1. Make sure the disk you want to prevent mounting at boot is mounted.
+1. Ensure that the disk you want to prevent from mounting at boot is currently mounted
 2. Launch Hackintool
 3. Click on the "Disks" Tab
 4. Find the Windows Volume you want to prevent from mounting
