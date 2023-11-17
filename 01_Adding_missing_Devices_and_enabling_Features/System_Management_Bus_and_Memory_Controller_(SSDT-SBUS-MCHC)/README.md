@@ -23,7 +23,9 @@ This SSDT injects two devices into macOS: `MCHC` and `SMBUS` (or `SBUS`). Please
 - MacBookPro3,1 to MacBookPro16,x
 - MacMini3,1 to MacMini8,1
 
-> **Note**: `MCHC` is not present in Apple's "pro" lins of Macs: **iMacPro**, **MacPro** and **Xserve**. So don't add `MCHC` if you are using a Xeon E/W or similar Workstation/Server CPU!
+> [!NOTE]:
+>
+> `MCHC` is not present in Apple's "pro" lins of Macs: **iMacPro**, **MacPro** and **Xserve**. So don't add `MCHC` if you are using a Xeon E/W or similar Workstation/Server CPU!
 
 **Update (May 14th, 2023)**:
 
