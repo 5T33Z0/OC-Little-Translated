@@ -11,7 +11,9 @@
 - In **DSDT**, search for Address `0x001F0002` or `Device (PPMC)`. Make sure it's the address is not associated with a SATA Device!
 - If missing, add `SSDT-PPMC.aml`
 
-**CAUTION**: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
+> [!CAUTION]
+>
+> Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`. 
 
 ### Verifying
 In IORegistryExplorer search for `PPMC`. If present, it should look like this:
