@@ -34,13 +34,11 @@ In general, kexts which provide additional functionality for other kexts have to
 2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ optional Sensor Plugins)
 3. **Whatevergreen**
 
-The rest of the config examples show the loading sequences for `Bluetooth`, `Wifi`, `Keyboards` and `Trackpad` kexts because these contain additional kexts nested inside them which have to be loaded in the correct order to work correctly. Not having them in the correct order may cause Kernel Panics. 
-
-Same goes for having kexts in the list which aren't present in the `OC/Kexts` folder. So it's of utmost importance that the kexts are loaded in the correct order and that the content of the `config.plist` reflect the kexts present in the OC folder 1:1. The examples listed below provide a solid guideline on how to organize and combine kexts.
+The config examples listed below show the loading sequences for **Bluetooth**, **Wifi**, **Keyboards** and **Trackpads**, and other kexts that have to be loaded in the correct order to work properly. Not having them in the correct order may cause Kernel Panics. Same goes for having kexts listed in your config.plist which are not present in the `EFI/OC/Kexts` folder. So it's of utmost importance that the kexts are loaded in the correct order *and* that the content of the `config.plist` reflect the kexts present in the OC folder 1 to 1. The examples listed below provide a solid guideline on how to organize and combine kexts correctly.
 
 For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
-## General Kernel and Kext handling by OpenCore
+## Processing order of Kexts and Kernel patches
 OpenCore handles the `Kernel` section of the `config.plist` in the following order (since version 0.9.2, Commit 6a65dd1):
 
 - `Block` is processed
@@ -48,12 +46,14 @@ OpenCore handles the `Kernel` section of the `config.plist` in the following ord
 - `Emulate` and `Quirks` are processed
 - `Patch` is processed
 
-**NOTE**: Prior to this commit, `Add` and `Force` where last in the chain which made it impossible to patch force-injected kexts.
+> [!NOTE]
+> 
+> Prior to Commit 6a65dd1, `Add` and `Force` where last in the chain which made it impossible to patch force-injected kexts.
 
 ## Lilu and VirtualSMC first?
-Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***. **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot.  For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
+Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***! **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot. For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
 
-:bulb: **Tip**: When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** first to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
+:bulb: **Tip**: When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** at the top in the config to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
 
 ## Kernel Support Table
 Listed below, you will find the Kernel version ranges for macOS 10.4 to macOS 13. Setting `MinKernel` and `MaxKernel` for kexts is very useful to maximize the compatibility of your `config.plist` with various versions of macOS without having to create multiple configs with different sets of kexts. This way, you can control which kexts are enabled for which macOS version by specifying the kernel range. It's basically the same feature Clover provides, just a lot smarter: instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.), you specify the lower and upper kernel limit. This way you don't have to create duplicates of kexts (which you maybe forget to update later).
@@ -132,11 +132,11 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
 5. With the release of macOS Sonoma Developer Preview (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi you have to adjust some settings (see [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)), add additional kexts and apply root patches with OpenCore Legacy Patcher, [as explained here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md).
 
-> [!WARNING]
-> Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be installed in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required.  You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext on the system directly.
+> [!CAUTION]
+> 
+> Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
 
 #### :bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
-
 I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
 
 This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
@@ -144,10 +144,10 @@ This issue is related to Smart Connect, a feature of WiFi routers which support 
 ### Example 8: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
 
-**NOTES**:
-
-- For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
-- For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+> [!NOTE]
+> 
+> - For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
+> - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
@@ -160,6 +160,7 @@ Most Intel Desktop configs will at least contain `Lilu`, `VirtualSMC` (Plugins a
 This is how a possible sequence of kexts for a Laptop might look. In this example, the Trackpad requires `VoodooPS2Controller`, WiFi and BT are by Intel and the Ethernet card is from Realtek. Depending on your Laptop components, Kexts 10 to 17 could be something else entirely.
 
 > [!NOTE]
+> 
 > - Dell users can add `SMCDellSensors` for temperature monitoring and fan control.
 > - If your laptop has a built-in compatible brightness sensor, you can add `SMCLightSensor` 
 
@@ -203,4 +204,4 @@ By default, the frequency vecors stored in the selected SMBIOS are used to handl
 - :warning: The plists included in this section ARE NOT for use with any system. The are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
 - Ignore the red dots in the screenshots. 
 - The kexts listed in Examples 2 to 6 are for PS2 Controllers (Keyboards, Mice, Trackpads). We recommend to use `config-2-PS2-Controller` plist as a starting point.
-- Thabks to Acquarius13 for showing how to enable te Wifi Root Patches in OCLP!
+- Thanks to Acquarius13 for showing how to enable te Wifi Root Patches in OCLP!
