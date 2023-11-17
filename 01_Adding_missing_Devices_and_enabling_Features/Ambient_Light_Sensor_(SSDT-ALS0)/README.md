@@ -40,25 +40,25 @@ Device (ALSD)
     }
 	Name (_ALR, Package (0x05)  // _ALR: Ambient Light Response
 	{
-		Package (0x02)
+	Package (0x02)
     	{
-    		0x46,
-    		Zero
+            0x46,
+            Zero
     	},
     	Package (0x02)
     	{
-    		0x49,
-      		0x0A
+            0x49,
+            0x0A
     	},
     	Package (0x02)
     	{
-    		0x55,
-    		0x50
+            0x55,
+            0x50
     	},
     	Package (0x02)
     	{
-    		0x64,
-    		0x012C
+            0x64,
+            0x012C
     	},
     	Package (0x02)
     	{
