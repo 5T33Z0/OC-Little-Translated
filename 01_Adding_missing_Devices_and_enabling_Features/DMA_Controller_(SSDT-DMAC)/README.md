@@ -35,7 +35,7 @@ In **DSDT**, search for:
 - `PNP0200` or `DMAC`
 -  If missing, add ***SSDT-DMAC*** (export as `.aml`)
 
-> [!IMPORTANT]
+> [!CAUTION]
 > 
 > Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`! 
 
