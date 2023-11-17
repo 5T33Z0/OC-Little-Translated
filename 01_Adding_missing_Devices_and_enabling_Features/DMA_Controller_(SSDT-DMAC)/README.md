@@ -35,7 +35,9 @@ In **DSDT**, search for:
 - `PNP0200` or `DMAC`
 -  If missing, add ***SSDT-DMAC*** (export as `.aml`)
 
-:warning: When using this patch, ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is consistent with the one used in your system's `DSDT`. 
+> [!IMPORTANT]
+> 
+> Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`! 
 
 ## Verifying that the patch is working
 - Incorporate SSDT-DMAC.aml in your EFI's ACPI folder and config.plist.
