@@ -53,10 +53,9 @@ Add the following Renames (if applicable) to `config.plist`:
   Replace: 584F5349
   ```
 
-#### ⚠️ Caution: Order of Operations
-Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors under Windows. 
-
-Therefore, you need to rename these methods to something else *before* applying the `_OSI to XOSI` rename. In other words: rename rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *prior* to `_OSI to XOSI` in the `config.plist`!
+> [!CAUTION]
+>
+> Some machines use methods with similar names to `_OSI`, e.g. some Dell machines use `OSID`, some ThinkPads use `OSIF`. These methods will accidentally be renamed to `XOSI` as well which causes ACPI Errors under Windows. Therefore, you need to rename these methods to something else *before* applying the `_OSI to XOSI` rename. In other words: rename rules like `OSID to XSID` or `OSIF to XSIF` have to be listed *prior* to `_OSI to XOSI` in the `config.plist`!
   
 #### Part 2: Hotpatch ***SSDT-OC-XOSI***
 
