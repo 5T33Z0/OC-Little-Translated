@@ -3,9 +3,9 @@
 > **Applicable to**: OCLP 1.0.0+
 
 ## Technical Background
-During the early stages of macOS Sonoma development, kexts and frameworks responsible for using older Wi-Fi Cards were removed, leaving the Wi-Fi portion of commonly used BT/Wi-Fi cards in a non-working state.
+During the early stages of macOS Sonoma development, kexts and frameworks required for driving older Wi-Fi Cards were removed, leaving the Wi-Fi portion of commonly used BT/Wi-Fi cards in a non-working state.
 
-The following Wi-Fi card chipsets are affected:
+This affects the following Wi-Fi card chipsets:
 
 - **"Modern"** cards:
 	- **Broadcom**:`BCM94350` (incuding `BCM94352`), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
@@ -15,9 +15,7 @@ The following Wi-Fi card chipsets are affected:
 	- **Broadcom**: `BCM94322`, `BCM94328`
 	- **Required Kexts**: corecaptureElCap, IO80211ElCap, AirPortAtheros40 (for Atheros only)
 
-Thanks to Dortania's OpenCore Legacy Patcher, it's possible to re-enable these Wi-Fi cards by patching some system files (as well as injecting additional kexts via OpenCore). If you want to know how OCLP Wi-Fi patching works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
-
-Although OCLP allows changing some settings in the app, the option to manually enable Wi-Fi patching has not been implemented (yet). So we have to either force-enable it manually in the Source Code and then run OCLP with modified settings to apply Wi-Fi root patches (Method 1) or spoof a compatible Wi-Fi device (Mehod 2) so OCLP detects a compatible Wi-Fi war it can patch. However, the 2nd method did not work for me. 
+Thanks to Dortania's OpenCore Legacy Patcher (OCLP), it's possible to re-enable these Wi-Fi cards by patching some system files (as well as injecting additional kexts via OpenCore). If you want to know how Wi-Fi patching with OCLP works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
 
 ## Instructions
 
