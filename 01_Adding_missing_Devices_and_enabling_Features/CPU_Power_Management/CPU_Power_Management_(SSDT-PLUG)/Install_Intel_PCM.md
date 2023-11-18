@@ -12,13 +12,18 @@ Anyway, below you will find the instructions, to download, compile, install and 
 
 ## 1. Prerequisites
 
-1. Install **Homebrew** via Terminal: 
+1. Uninstall **Intel Power Gadget** (if present):
+	- Run `Uninstaller.pkg` (located under `Application/Intel Power Gadget`)
+	- This will uninstall the .app as well as the `EnergyDriver.kext`
+	- Maybe you also have to log-off to unload the kext.
+
+2. Install **Homebrew** via Terminal: 
 
 	```
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	```
 
-2. Next, install **Cmake**: 
+3. Next, install **Cmake**: 
 	
 	```
 	brew install cmake
