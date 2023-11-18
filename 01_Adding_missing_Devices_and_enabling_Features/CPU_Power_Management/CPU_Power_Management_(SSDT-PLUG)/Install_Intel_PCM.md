@@ -6,9 +6,9 @@
 ## About
 In October 2023, Intel discontinued [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). A simple but super useful tool which allowed monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
 
-But since the app is no longer comapatible with macOS 14 – you should *really* uninstall it prior to updating/upgrading to macOS Sonoma – and 11th Gen and newer Intel CPUs, they came up with a replacement.
+But the app is no longer comapatible with macOS and newer Intel CPUs (11th Gen+). In macOS 14.2 beta 3, Intel Power Gadget causes the CPU to freak out and run at 100% on all cores. So it's highly recommended to uninstal it via the included uninstaller, so the `EnergyDriver.kext` it uses is uninstalled as well. 
 
-Intel introduced the Performance Counter Monitor (or: [PCM](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download and run . Instead you have to jump through hoops to get it working. And on top of that: it runs in Terminal and doesn't really help you much with monitoring CPU frequencies since everything mostly consists of charts with stats – no graphs.
+So as a replacement, Intel introduced the Performance Counter Monitor (or: [PCM](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download, install and run. Instead, you have to jump through hoops to get it working. And on top of that: it runs in Terminal and doesn't really help you much with monitoring CPU frequencies since everything mostly consists of charts with stats – no graphs.
 
 Anyway, below you will find the instructions, to download, compile, install and run Intel PCM.
 
