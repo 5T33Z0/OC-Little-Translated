@@ -8,7 +8,7 @@ In October 2023, Intel discontinued [Intel Power Gadget](https://www.intel.com/c
 
 But since the app is no longer comapatible with macOS 14 – you should *really* uninstall it prior to updating/upgrading to macOS Sonoma – and 11th Gen and newer Intel CPUs, they came up with a replacement.
 
-Intel introduced the Performance Counter Monitor (or: [PCM](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download and run . Instead you have to jump through hoops to get it working. And on top of that: it runs in Terminal, looks shitty and doesn't really help you much with monitoring CPU frequencies.
+Intel introduced the Performance Counter Monitor (or: [PCM](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download and run . Instead you have to jump through hoops to get it working. And on top of that: it runs in Terminal and doesn't really help you much with monitoring CPU frequencies since everything mostly consists of charts with stats – no graphs.
 
 Anyway, below you will find the instructions, to download, compile, install and run Intel PCM.
 
