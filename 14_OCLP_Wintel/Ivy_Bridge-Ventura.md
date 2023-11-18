@@ -41,6 +41,11 @@ Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge f
 ### How Ivy Bridge systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Ivy Bridge systems this affects CPU Instructions (missing AVX 2.0 instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
+| ⚠️ Important Updates |
+|:----------------------------|
+| Don't install macOS 14.2 beta 3 (23C5047e) on Ivy Bridge systems yet! Patching with OCLP 1.2.1 in Post-Install will cause the **WindowServer** to crash so you will get kicked back out to the logon screen.
+| Uninstall Intel Power Gadget before upgrading to macOS Sonoma (use the uninstaller in the app's folder)! The `EnergyDriver.kext` that comes with the app causes all CPU cores to run at 100% in macOS Sonoma 14.2+!
+
 > [!NOTE]
 > Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
