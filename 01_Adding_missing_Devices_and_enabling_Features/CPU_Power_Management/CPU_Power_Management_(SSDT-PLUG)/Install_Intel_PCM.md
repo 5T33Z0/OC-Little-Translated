@@ -43,7 +43,7 @@ Once that's done, you can build and install Intel PCM Tools.
 	cd ~/pcm
 	```
 
-3. Next, Build the PCM binaries:
+3. Next, Build the PCM binaries (this can take a few minutes):
 
 	```
 	mkdir build
