@@ -1,7 +1,5 @@
 # Installing Intel PCM on macOS
-
 ![macOS](https://img.shields.io/badge/Requirements:-macOS_12+-default.svg)
-
 
 ## About
 In October 2023, Intel discontinued [Intel Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). A simple but super useful tool which allowed monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
