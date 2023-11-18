@@ -1,10 +1,10 @@
 # Fixing AppleSMBus (`SSDT-SBUS-MCHC`)
 
 ## Description
-**AppleSMBus** is Apple's variant of the System Management Bus. It consists of 3 parts handling different functions, such as:
+**`AppleSMBus`** is Apple's variant of the System Management Bus. It consists of 3 parts handling different functions, such as:
 
-* **AppleSMBusController**: Aids with correct Temperature, Fan, Voltage, ICH, and other readings.  
-* **AppleSMBusPCI**: Same idea as AppleSMBusController except for low bandwidth PCI devices.
+* **`AppleSMBusController`**: Aids with correct Temperature, Fan, Voltage, ICH, and other readings.  
+* **`AppleSMBusPCI`**: Same idea as AppleSMBusController except for low bandwidth PCI devices. 
 * **Memory Reporting**: Aids in proper memory reporting and can aid in getting better memory-related kernel panic details.
 
 Other things the System Management Bus handles can be found in the [**SMBus WIKI**](https://en.wikipedia.org/wiki/System_Management_Bus).
@@ -83,6 +83,10 @@ kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 If the Terminal output contains the following 2 drivers, your SMBus is working correctly:
 
 ![sbus_present](https://user-images.githubusercontent.com/76865553/140615883-3c8af435-b09a-4a3e-9746-28f8a05c9e37.png)
+
+> [!NOTE]
+>
+> I've noticed on macOS Sonoma 14.2 beta 3 that only the AppleSMBusController will be detected – even after adding `SSDT-SBUS-MCHC`.
 
 [^1]: Additional information about `AppleSMBus` as well as the `GREP` command for testing  were taken from Dortania's Post-Install Guide, since the original Guide by DalianSky was lacking in this regard. The SSDT sample included in the OpenCore package combines `SSDT-SBUS/SMBUS` and `SSDT-MCHC` into one file (`SSDT-SBUS-MCHC.aml`), so I suggest you use this instead.
 
