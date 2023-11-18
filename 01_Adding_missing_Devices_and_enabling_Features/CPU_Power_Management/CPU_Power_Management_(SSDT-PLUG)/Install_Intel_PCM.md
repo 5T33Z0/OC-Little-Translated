@@ -60,7 +60,7 @@ Once that's done, you can build and install Intel PCM Tools.
 	
 	This will install the the required `PcmMsrDriver.kext` under `~/Library/Extensions`.
 	
-	**NOTE**: macOS will notify you about a new extension beeing added. You may have to allow it in System Settings (under Gatekeeper)
+	**NOTE**: macOS will notify you about a new extension beeing added. You have to allow "Unidentified PcmMsrDriver" in System Settings (under Gatekeeper).
 	
 4. Reboot
 
