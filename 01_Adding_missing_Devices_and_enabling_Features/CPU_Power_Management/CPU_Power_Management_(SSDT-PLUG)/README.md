@@ -107,7 +107,7 @@ Additionally, you could use [**CPUFriendFriend**](https://github.com/corpnewt/CP
 
 You can use IORegistryExplorer to check the number of supported [**CPU states**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/XCPM_PSTATES.png) as well as the available Frequency Vecors (under: X86PlatformPlugin/IOPlatformPowerProfile/FrequencyVectors).
 
-> [!WARNING]
+> [!CAUTION]
 > 
 > 1. Don't install Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to permanently run at 100 %! Use the included Uninstaller to get rid of it prior to upgrading to macOS 14! Use [**Intel PCM**](01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/Install_Intel_PCM.md) instead!
 > 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
