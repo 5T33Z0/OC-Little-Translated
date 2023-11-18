@@ -84,10 +84,6 @@ If the Terminal output contains the following 2 drivers, your SMBus is working c
 
 ![sbus_present](https://user-images.githubusercontent.com/76865553/140615883-3c8af435-b09a-4a3e-9746-28f8a05c9e37.png)
 
-> [!NOTE]
->
-> I've noticed on macOS Sonoma 14.2 beta 3 that only the AppleSMBusController will be detected – even after adding `SSDT-SBUS-MCHC`.
-
 [^1]: Additional information about `AppleSMBus` as well as the `GREP` command for testing  were taken from Dortania's Post-Install Guide, since the original Guide by DalianSky was lacking in this regard. The SSDT sample included in the OpenCore package combines `SSDT-SBUS/SMBUS` and `SSDT-MCHC` into one file (`SSDT-SBUS-MCHC.aml`), so I suggest you use this instead.
 
 ## Further Resources
