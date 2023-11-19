@@ -20,7 +20,7 @@ Since disabling AMFI requires System Integrity Protection (SIP) to be disabled i
 The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `AMFIPass` which allows booting macOS with SIP disabled and AMFI fully enabled even if root patches have been applied – which would be impossible otherwise. This not only enhances security it also resolves the issue of not being able to grant 3rd party applications permissions to cameras and microphones.
 
 #### Add AMFIPass to your EFI and Config:
-- Download [**AMFIPass.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Acidanthera) from the OpenCore Legacy Patcher Repo and unzip it
+- Download [**`AMFIPass.kext`**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Acidanthera) from the OpenCore Legacy Patcher Repo and unzip it
 - Mount your EFI
 - Add the kext to `EFI/OC/Kexts` 
 - Open your config.plist
@@ -62,7 +62,7 @@ Once SIP has been re-enabled, the prompts for granting access to the cam/mic wil
 
 ### Solution 4: Add permissions manually (requires command line skills)
 
-If you can't boot with SIP enabled, you must add permissions to the SQL3 database manually, as explained here: [Unable to grant special permissions to apps](https://dortania.github.io/OpenCore-Legacy-Patcher/ACCEL.html#unable-to-grant-special-permissions-to-apps-ie-camera-access-to-zoom)
+If you can't boot with SIP enabled, you must add permissions to the SQL3 database manually wit [tccplus](https://github.com/jslegendre/tccplus/releases), as explained here: [Unable to grant special permissions to apps](https://dortania.github.io/OpenCore-Legacy-Patcher/ACCEL.html#unable-to-grant-special-permissions-to-apps-ie-camera-access-to-zoom)
 
 > [!NOTE]
 > 
@@ -73,4 +73,3 @@ If you can't boot with SIP enabled, you must add permissions to the SQL3 databas
 - **More about TCC**: [What TCC does and doesn't](https://eclecticlight.co/2023/02/10/privacy-what-tcc-does-and-doesnt)
 - **More about AMFI**: [AMFI: checking file integrity on your Mac](https://eclecticlight.co/2018/12/29/amfi-checking-file-integrity-on-your-mac/)
 - **AMFI in macOS 13**: [How does Ventura check an app's security](https://eclecticlight.co/2023/03/09/how-does-ventura-check-an-apps-security/)
-- **Another tool to add permissions**: https://github.com/jacobsalmela/tccutil
