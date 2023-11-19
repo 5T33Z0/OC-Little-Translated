@@ -13,16 +13,17 @@ Incomplete list of useful freeware Apps, Tools and Resources for hackintoshing.
 Tools for downloading macOS directly from Apple Servers as well as creating installation media.
 
 - [**MIST**](https://github.com/ninxsoft/Mist) (macOS Installer Super Tool) – So far the only App that can download ipsw Firmwares (ARM) as well as macOS Installers for Intel-based systems (OSX 10.7.5 and newer). Also the one with the best GUI and most options. Check the "Settings…" menu to select the diplayed seed(s) of the Software Update Catalog, etc. Requires macOS Monterey or newer.
-- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) – App for patching macOS so it can run on unsupported systems. Can download macOS (Big Sur and newer) and create a USB Installer.
+- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) – App for patching macOS so it can run on unsupported systems. Can also download macOS (Big Sur and newer) and prepare a USB Installer.
+- [**Create macOS Install**](https://github.com/LAbyOne/Create-MacOS-Install) - CLI-based Tool to download and prepare macOS (Snow Leopard or newer), Bootloaders and USB Installers.
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python script for downloading macOS (10.13 to 13). Only tool that can be used from within Windows to create an Internet Recovery USB installer!
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer (Big Sur and newer).
 - [**ISO Image Creator**](https://macmeup.com/create-iso-images/) – App to convert macOS Installers to .iso images.
 
 ### macOS (General)
 - [**About this Hack**](https://github.com/0xCUB3/About-This-Hack) – Simple app to view your exact hardware in macOS. Similar to how the "About This Mac" window looked prior to macOS 13 but with more features. 
-- [**MountEFI**](https://github.com/corpnewt/MountEFI) – Tool for mounting the ESP partition
-- [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor
-- [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos about I/O on macOS.
+- [**MountEFI**](https://github.com/corpnewt/MountEFI) – Python Script for mounting the ESP partition
+- [**MaciASL**](https://github.com/acidanthera/MaciASL) – ASL/AML Editor for working ACPI Tables 
+- [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos from the [**I/OKit**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011) in macOS.
 - [**Hackintool**](https://github.com/headkaze/Hackintool) – Powerful post-install utility that everyone should have in their Hackintosh tool box
 - [**Kext Updater**](https://www.sl-soft.de/en/kext-updater/) – Great App for checking and downloading Kext updates, Boot Manager files, etc.
 - [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/) – App for dumping ACPI tables, I/O Registry and more from real Macs.
