@@ -14,25 +14,27 @@
 - [Preparations](#preparations)
 	- [Update OpenCore and kexts](#update-opencore-and-kexts)
 - [Upgrade options](#upgrade-options)
-	- [Option 1: Installing macOS Ventura without Root Patches](#option-1-installing-macos-ventura-without-root-patches)
+	- [Option 1: Installing macOS 13+ without Root Patches](#option-1-installing-macos-13-without-root-patches)
 		- [Pros and Cons of this method](#pros-and-cons-of-this-method)
-	- [Option 2: Installing macOS Ventura with Root Patches](#option-2-installing-macos-ventura-with-root-patches)
+	- [Option 2: Installing macOS Ventura or newer with Root Patches](#option-2-installing-macos-ventura-or-newer-with-root-patches)
 		- [Pros and Cons of this method](#pros-and-cons-of-this-method-1)
 	- [Config Edits](#config-edits)
 - [Testing the changes](#testing-the-changes)
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
 		- [When Upgrading from macOS Big Sur 11.3+](#when-upgrading-from-macos-big-sur-113)
 		- [When Upgrading from macOS Catalina or older](#when-upgrading-from-macos-catalina-or-older)
-- [macOS Ventura Installation](#macos-ventura-installation)
+- [macOS Installation](#macos-installation)
 	- [Getting macOS](#getting-macos)
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
 - [Post-Install](#post-install)
-	- [Installing Intel Skylake Graphics Acceleration Patches (macOS 13)](#installing-intel-skylake-graphics-acceleration-patches-macos-13)
+	- [Installing Intel Skylake Graphics Acceleration Patches (macOS 13+)](#installing-intel-skylake-graphics-acceleration-patches-macos-13)
 	- [Installing Drivers for other GPUs](#installing-drivers-for-other-gpus)
 	- [Removing/Disabling boot-args](#removingdisabling-boot-args)
 	- [Verifying AMFI is enabled](#verifying-amfi-is-enabled)
 - [OCLP and System Updates](#oclp-and-system-updates)
+	- [Re-applying root patches after System Updates](#re-applying-root-patches-after-system-updates)
+	- [OCLP App Update Notifications](#oclp-app-update-notifications)
 - [Notes](#notes)
 - [Further Resources](#further-resources)
 - [Credits](#credits)
@@ -40,18 +42,19 @@
 </details>
 
 ## About
-Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, their might be something I am missing.
+Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura or newer on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, there might be something I am missing.
 
 ### How Skylake systems are affected
-In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Skylake CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+With the release of macOS 13, Apple dropped support for all CPU families prior to Kaby Lake. For Skylake CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura (or newer) and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
-> **Note**: Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
+> [!NOTE] 
+> Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 ### Disclaimer
-This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
+This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura or newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
 
 ## Precautions and Limitations
-This is what you need to know before attempting to install macOS Ventura on unsupported systems:
+This is what you need to know before attempting to install macOS 13 or newer on unsupported systems:
 
 - :warning: **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
 - **iGPU/GPU**: Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list is limited](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) 
@@ -77,12 +80,12 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
 ## Upgrade options
-Since Skylake CPUs are relatively new, the only thing which doesn't really work out of the box is the Intel HD 530/P530/Iris iGPU which is only compatible up to macOS Monterey. So there are 2 possible upgrade option for installing macOS Ventura, depending on your hardware configuration:
+Since Skylake CPUs are relatively new, the only thing which doesn't really work out of the box is the Intel HD 530/P530/Iris iGPU which is only compatible up to macOS Monterey. So there are 2 possible upgrade option for installing macOS Ventura or newer, depending on your hardware configuration:
 
-### Option 1: Installing macOS Ventura without Root Patches
-If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura, the you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
+### Option 1: Installing macOS 13+ without Root Patches
+If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura and newer, you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
 
-Once you have the spoof configured, jump to [**macOS Ventura Installation**](#macos-ventura-installation)
+Once you have the spoof configured, jump to [**macOS Installation**](#macos-installation)
 
 #### Pros and Cons of this method
 - **Pros**:
@@ -93,7 +96,7 @@ Once you have the spoof configured, jump to [**macOS Ventura Installation**](#ma
 	- CPU Power Management is not optimal (can be addressed by implementing Board-ID VMM spoof and RestrictEvents kext)
 	- macOS Sonoma requires SMBIOS `iMac19,1`, so CPU Power Management won't be optumal. Use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to adjust it.
 
-### Option 2: Installing macOS Ventura with Root Patches
+### Option 2: Installing macOS Ventura or newer with Root Patches
 While an iGPU spoof works well for systems which use a dedicated GPU for displaying graphics, it's not working so well if the iGPU is required for driving a display becasue [these files were removed from macOS](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md#extensions-5). So if you are using a Desktop/Laptop/NUC that relies on the iGPU because it has no dGPU or it is incompatible with macOS 12 or newer (e.g. NVIDIA Kepler Cards) then applying Root Patches in Post-Install with OCLP is the way to go.
 
 #### Pros and Cons of this method
@@ -117,11 +120,11 @@ Config Section | Action | Description
 **`DeviceProperties/Add`**|**PciRoot(0x0)/Pci(0x2,0x0)** – Verify/adjust Framebuffer patch. <ul><li> **Desktop** (Headless) <ul><li> **AAPL,ig-platform-id**: 01001219 </ul></ul><ul><li> **Desktop** (Default) <ul><li> **AAPL,ig-platform-id**: 00001219 </ul></ul><ul></ul></ul><ul><li> **Laptop/Intel NUC** (or other USDT): <ul><li> **AAPL,ig-platform-id**: &rarr; See [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html#add-2)</ul> | **iGPU Support**: Intel HD 510/515/520/530/540/550/580 and P530. <ul> <li> **Headless**: For systems with an iMac SMBIOS, iGPU and a GPU which is used for graphics. The example in the OC Install Guide is actually wrong. <li> **Default**: Use this if you have a PC and the iGPU is used for driving a display. <li>**Laptops/NUCs**: Use the recommended Framebuffer for your device and iGPU listed in the OpenCore Install guide – but **DON'T spoof a Kaby Lake device-id**! 
 **`Kernel/Add`** and <br>**`EFI/OC/Kexts`** |**Add the following Kexts**:<ul><li>[**AMFIPass**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) (`MinKernel`: `21.0.0`)<li> [**RestrictEvents**](https://github.com/acidanthera/RestrictEvents) (`MinKernel`: `20.4.0`) <li> [**FeatureUnlock**](https://github.com/acidanthera/FeatureUnlock) (optional) </ul> </ul> **WiFi** (optional) <ul><li>[**IOSkywalk.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IOSkywalkFamily-v1.0.0.zip) (`MinKernel`: `23.0.0`) <li>[**IO80211FamilyLegacy.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IO80211FamilyLegacy-v1.0.0.zip) (contains `AirPortBrcmNIC.kext`, ensure this is injected as well) (`MinKernel`: `23.0.0`) </ul> **Disable the following Kexts** (if present): <ul><li> **CPUFriend** <li> **CPUFriendDataProvider**| <ul> <li> **AMFIPass**: Beta kext from OCLP 0.6.7. Allows booting macOS 12+ without disabling AMFI.  <li> **RestrictEvents**: Forces VMM SB model, allowing OTA updates for unsupported models on macOS 11.3 or newer. Requires additional NVRAM parameters. <li> **FeatureUnlock**: Unlocks AirPlay to Mac. <li> **WiFi Kexts**: For macOS Sonoma. Re-Enable modern WiFi: BCM94350, BCM94360, BCM43602, BCM94331 and BCM943224. Legacy WiFi: Atheros chipsets, Broadcom BCM94322, BCM94328.
 **`Kernel/Block`**| Block `com.apple.iokit.IOSkywalkFamily`: <br> ![](https://user-images.githubusercontent.com/76865553/256150446-54079541-ee2e-4848-bb80-9ba062363210.png)| Blocks macOS'es IOSkywalk kext, so the injected one will be used instead. Only required for "Modern" [Wifi patching](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md). 
-**`Kernel/Patch`** | Add and enable the following Kernel Patches from [**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) (apply `MinKernel` and `MaxKernel` settings as well): <ul> <li>**"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** | <ul><li>The **"Reroute kern.hv"** and "**IOGetVMMPresent**" Kernel Patches are required, so upgrading from Big Sur to macOS Ventura is possible when using an unsupported SMBIOS. <li> **"Disable _csr_check() in _vnode_check_signature"** might not be necessary. Try for yourself. <li> **Kernel VMM patches** are no longer needed since RestrictEvents kext handles this now!
+**`Kernel/Patch`** | Add and enable the following Kernel Patches from [**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist) (apply `MinKernel` and `MaxKernel` settings as well): <ul> <li>**"Disable Library Validation Enforcement"**<li>**"Disable _csr_check() in _vnode_check_signature"** | <ul><li>The **"Reroute kern.hv"** and "**IOGetVMMPresent**" Kernel Patches are required, so upgrading from Big Sur to macOS Ventura and newer is possible when using an unsupported SMBIOS. <li> **"Disable _csr_check() in _vnode_check_signature"** might not be necessary. Try for yourself. <li> **Kernel VMM patches** are no longer needed since RestrictEvents kext handles this now!
 **`Misc/Security`**| <ul> <li>**SecureBootModel**: `Disabled` <li> **Vault**: `Optional`| Required when patching in graphics drivers for AMD and NVIDIA cards. Intel HD graphics might work with SecureBootModel set to `Default`. Try for yourself.
 **`NVRAM/Add/...-4BCCA8B30102`** | **Add the following Keys**: <ul> <li> **Key**: `OCLP-Settings`<br>**Type**: String <br> **Value**: `-allow_amfi`<li> **Key**: `revpatch` <br> **Type:** String <br> **Value**: `sbvmm,asset`| <ul> <li> Settings for OCLP and RestrictEvents.  <li>`sbvmm,asset` &rarr; Enables OTA updates and content caching (&rarr; Check RestrictEvents documentation for details)|
 **`NVRAM/Delete/...-4BCCA8B30102`** (Array) | **Add the following Strings**: <ul> <li>  `OCLP-Settings` <li> `revblock` <li> `revpatch` | Deletes NVRAM for these parameters before writing them. Otherwise you would need to perform an NVRAM reset every time you change any of them in the corresponding `Add` section.  
-**`NVRAM/Add/...-FE41995C9F82`** | <li> **Change** **`csr-active-config`** to: **`03080000`** <br><br> **Add the following**`boot-args`: <ul><li> **`amfi=0x80`** (only necessary if root patches can't be applied)<li> **`ipc_control_port_options=0`** <li> **`-disable_sidecar_mac`** </ul>**Optional boot-args for GPUs** (Select based on GPU Vendor): <ul><li> **`-radvesa`** <li> **`nv_disable=1`** <li> **`ngfxcompat=1`**<li>**`ngfxgl=1`**<li> **`nvda_drv_vrl=1`** <li> **`agdpmod=vit9696`** | <ul> <li>**`amfi=0x80`**: Disables Apple Mobile File Integrity validation. Required for applying Root Patches with OCLP ~~and booting macOS 12+~~. :bulb: No longer needed for booting thanks to AMFIPass.kext – only for installing Root Patches with OCLP. Disabling AMFI causes issues with [3rd party apps' access to Mics and Cameras](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md).<li> **`ipc_control_port_options=0`**: Required for Intel HD Graphics. Fixes issues with Firefox and electron-based apps like Discord. <li> **`-disable_sidecar_mac`**: For FeatureUnlock &rarr; Disables Sidecar/AirPlay/Universal Control patches. <li> **`-radvesa`** (AMD only): Disables hardware acceleration and puts the card in VESA mode. Only required if your screen turns off after installing macOS 12+. Once you've installed the GPU drivers with OCLP, **disable it** so graphics acceleration works! <li> **`nv_disable=1`** (NVIDIA only): Disables hardware acceleration and puts the card in VESA mode. Only required if your screen turns off after installing macOS Ventura. Kepler Cards switch into VESA mode automatically without it. Once you've installed the GPU drivers with OCLP, **disable it** so graphics acceleration works! <li>**`ngfxcompat=1`** (NVIDIA only): Ignores compatibility check in `NVDAStartupWeb`. Not required for Kepler GPUs <li>**`ngfxgl=1`** (NVIDIA only): Disables Metal Spport so OpenGL is used for rendering instead. Not required for Kepler GPUs. <li> **`nvda_drv_vrl=1`** (NVIDIA only): Enables Web Drivers. Not required for Kepler GPUs. <li> **`agdpmod=vit9696`** &rarr; Disables board-id check. Useful if screen turns black after booting macOS which can happen after installing NVIDIA Webdrivers. <li> **`-wegnoigpu`** &rarr; Optional. Disables the iGPU in macOS. **ONLY** required when using an AMD GPU and an SMBIOS for a CPU without on-board graphics (i.e. `iMacPro1,1` or `MacPro7,1`) to let the GPU handle background rendering and other tasks. Requires Polaris or Vega cards to work properly (Navi is not supported by OCLP). Combine with `unfairgva=x` bitmask (x= 1 to 7) to [address DRM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#unfairgva-overrides)
+**`NVRAM/Add/...-FE41995C9F82`** | <li> **Change** **`csr-active-config`** to: **`03080000`** <br><br> **Add the following**`boot-args`: <ul><li> **`amfi=0x80`** (only necessary if root patches can't be applied)<li> **`ipc_control_port_options=0`** <li> **`-disable_sidecar_mac`** </ul>**Optional boot-args for GPUs** (Select based on GPU Vendor): <ul><li> **`-radvesa`** <li> **`nv_disable=1`** <li> **`ngfxcompat=1`**<li>**`ngfxgl=1`**<li> **`nvda_drv_vrl=1`** <li> **`agdpmod=vit9696`** | <ul> <li>**`amfi=0x80`**: Disables Apple Mobile File Integrity validation. Required for applying Root Patches with OCLP ~~and booting macOS 12+~~. :bulb: No longer needed for booting thanks to AMFIPass.kext – only for installing Root Patches with OCLP. Disabling AMFI causes issues with [3rd party apps' access to Mics and Cameras](https://github.com/5T33Z0/OC-Little-Translated/blob/main/13_Peripherals/Fixing_Webcams.md).<li> **`ipc_control_port_options=0`**: Required for Intel HD Graphics. Fixes issues with Firefox and electron-based apps like Discord. <li> **`-disable_sidecar_mac`**: For FeatureUnlock &rarr; Disables Sidecar/AirPlay/Universal Control patches. <li> **`-radvesa`** (AMD only): Disables hardware acceleration and puts the card in VESA mode. Only required if your screen turns off after installing macOS 12+. Once you've installed the GPU drivers with OCLP, **disable it** so graphics acceleration works! <li> **`nv_disable=1`** (NVIDIA only): Disables hardware acceleration and puts the card in VESA mode. Only required if your screen turns off after installing macOS. Kepler Cards switch into VESA mode automatically without it. Once you've installed the GPU drivers with OCLP, **disable it** so graphics acceleration works! <li>**`ngfxcompat=1`** (NVIDIA only): Ignores compatibility check in `NVDAStartupWeb`. Not required for Kepler GPUs <li>**`ngfxgl=1`** (NVIDIA only): Disables Metal Spport so OpenGL is used for rendering instead. Not required for Kepler GPUs. <li> **`nvda_drv_vrl=1`** (NVIDIA only): Enables Web Drivers. Not required for Kepler GPUs. <li> **`agdpmod=vit9696`** &rarr; Disables board-id check. Useful if screen turns black after booting macOS which can happen after installing NVIDIA Webdrivers. <li> **`-wegnoigpu`** &rarr; Optional. Disables the iGPU in macOS. **ONLY** required when using an AMD GPU and an SMBIOS for a CPU without on-board graphics (i.e. `iMacPro1,1` or `MacPro7,1`) to let the GPU handle background rendering and other tasks. Requires Polaris or Vega cards to work properly (Navi is not supported by OCLP). Combine with `unfairgva=x` bitmask (x= 1 to 7) to [address DRM issues](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#unfairgva-overrides)
 `UEFI/Drivers` and <br> `EFI/OC/Drivers`| <ul> <li> Add `ResetNvramEntry.efi` to `EFI/OC/Drivers` <li> And to your config:<br> ![resetnvram](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/8d955605-fb27-401f-abdd-2c616b233418) | Adds a boot menu entry to perform an NVRAM reset but without resetting the order of the boot drives. Requires a BIOS with UEFI support.
 
 ## Testing the changes
@@ -148,7 +151,7 @@ Based on your system, use one of the following SMBIOSes for Skylake CPUs. Open y
 > **Note**: Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
 #### When Upgrading from macOS Catalina or older
-Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
+Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS 13 or newer. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
 
 **Supported SMBIOSes**:
 
@@ -162,24 +165,24 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 	- **Macmini8,1**
 - Generate new Serials with [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-> **Note**: <li> Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. <li> You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
+> **Note**: <li> Once macOS is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. <li> You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
-## macOS Ventura Installation
-With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
+## macOS Installation
+With all the prep work out of the way you can now upgrade to macOS Ventura or newer. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
 - Next, click on "Download macOS Installer"
 - Select macOS 13.x (whatever the latest available build is)  
-- Once the download is completed, the "Install macOS Ventura" app will be located in the "Programs" folder
+- Once the download is completed, the "Install macOS" app will be located in the "Programs" folder
 
 > **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
-- Run the "Install macOS Ventura" App
+- Run the "Install macOS" App
 - There will be a few reboots
 - Boot from the new macOS Partition until it's no longer present in the Boot Picker
 
@@ -199,17 +202,17 @@ When upgrading from macOS Catalina or older a clean install from USB flash drive
 		- Add MountEFI
 		- Add ProperTree
 - Reboot
-- Select "Install macOS Ventura" from the BootPicker
-- Install macOS Ventura on the volume you prepared earlier
+- Select "Install macOS" from the BootPicker
+- Install macOS Ventura or newer on the volume you prepared earlier
 - There will be a few reboots during installation. Boot from the new "Install macOS" Partition until it's no longer present in the Boot Picker
-- Once the macOS Ventura installation is finished, switch back to an SMBIOS best suited for your Skylake CPU.
+- Once the macOS installation is finished, switch back to an SMBIOS best suited for your Skylake CPU.
 
 After the installation is completed and the system boots it will run without hardware graphics acceleration if you only have an iGPU or if you GPU is no longer supported by macOS. We will address this in Post-Install.
 
 ## Post-Install
 OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.
 
-### Installing Intel Skylake Graphics Acceleration Patches (macOS 13)
+### Installing Intel Skylake Graphics Acceleration Patches (macOS 13+)
 Once you reach the set-up assistant (where you select your language, time zone, etc), you will notice that the system feels super sluggish – that's normal because it is running in VESA mode without graphics acceleration, since the friendly guys at Apple removed the Intel HD 2000/3000 drivers from macOS.
 
 To bring them back, do the following:
@@ -228,7 +231,7 @@ To bring them back, do the following:
 > **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
 ### Removing/Disabling boot-args
-After macOS Ventura is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
+After macOS is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
 
 - `ipc_control_port_options=0`: ONLY when using a dedicated GPU. You still need it when using the Intel HD 4000 so Firefox and electron-based apps will work.
 - `amfi_get_out_of_my_way=0x1`: ONLY needed for re-applying root patches with OCLP after System Updates
