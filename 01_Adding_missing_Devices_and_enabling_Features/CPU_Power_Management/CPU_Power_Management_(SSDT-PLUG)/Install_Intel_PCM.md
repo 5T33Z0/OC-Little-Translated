@@ -8,7 +8,7 @@ But the app is no longer comapatible with macOS and newer Intel CPUs (11th Gen+)
 
 As a replacement, Intel introduced the **Performance Counter Monitor** (or: [**PCM**](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download, install and run. Instead, you have to jump through hoops to get it working. And on top of that: it runs in Terminal and doesn't really help you much with monitoring CPU frequencies since everything mostly consists of charts with stats – no graphs.
 
-Anyway, below you will find the instructions, to download, compile, install and run Intel PCM.
+Anyway, below you will find instructions to download, compile, install and run Intel PCM.
 
 ## 1. Prerequisites
 
