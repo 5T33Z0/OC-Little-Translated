@@ -35,7 +35,7 @@ The Bootlog will be stored in the `EFI` folder as a .txt file (even if boot fail
 
 > [!NOTE]
 > 
-> Alternatively, you can use Corpnewt's [**MmioDevirt**](https://github.com/corpnewt/MmioDevirt) python script to analyze the log and generate the MMIO Whitelist.
+> Alternatively, you could use Corpnewt's [**MmioDevirt**](https://github.com/corpnewt/MmioDevirt) script to analyze the log and generate the MMIO Whitelist. In this case you can skip step 3 so you only have to copy the `MmioWhitelist` Array to your config.plist, save and reboot. Done.
 
 ### 3. Converting Hex to Decimal
 In order to add the found addresses which are not skipped (`skip 0`) to the MMIO whitelist, we need to convert them to decimal first:
