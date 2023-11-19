@@ -71,6 +71,7 @@ Once that's done, you can build and install Intel PCM Tools.
 In Terminal, enter:
 
 ```
+cd ~/pcm
 sudo ~/pcm/build/bin/pcm -r
 ```
 
