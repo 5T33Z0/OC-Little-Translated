@@ -81,6 +81,7 @@ Check the table of contents for more. Although aimed primarily at OpenCore users
 - Added new content (USB Port Mapping via ACPI, Chapters 7 to 14 as well as the whole "Appendix" section)
 
 > [!NOTE]
+>
 > Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
 
 ## CONTRIBUTIONS
