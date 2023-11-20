@@ -1,53 +1,169 @@
 # Terminal Commands
 
-## macOS related
+## macOS Look and Feel
 
-- **List of [defaults commands](https://macos-defaults.com/)** for modifying macOS default settings/behavior.
-- **List of [PMSET Commands](https://www.dssw.co.uk/reference/pmset.html)** for modifying power management paramters. **Examples**:
-	- `sudo pmset proximitywake 0` &rarr; Disables wake based on proximity of other devices using the same iCloud ID (iWatch or similar)
-	- `pmset restoredefaults` &rarr; Restores default values. Or click the "Restore Defaults" in System Preferences > Energy Saver.
+### Defaults
+Collection of `Defaults` commands For modifying macOS default settings/behavior.
 
-**Show macOS Version and Build Number**:</br>
+**https://macos-defaults.com/**
+
+### Power Management
+Collection of `PMSET` commands to adjust Powwer Management (Standby, Sleep, Hibernation, etc.)
+
+**https://www.dssw.co.uk/reference/pmset.html**
+
+#### Check Hibernation Settings
+`pmset -g`
+
+#### Checking Reasons for Wake
+
+```shell
+pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
+```
+
+Alternative Command (searches in syslog instead):
+
+```shell
+log show --style syslog | fgrep "Wake reason"
+```
+
+#### Disable Power Management Scheduler
+Fixes high CPU usage for `Powerd` service in macOS Ventura beta 4
+
+```shell
+sudo pmset schedule cancelall
+```
+
+### Disable Notification Center
+
+- **Disable**:
+
+	```shell
+	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	```
+	
+- **Re-Enable**:
+
+	```shell
+	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	```	
+
+### Enable Key Repeating
+
+```shell
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
+### Add "GPU" Tab to Activity Monitor
+
+```shell
+defaults write com.apple.ActivityMonitor ShowGPUTab -bool true
+```
+
+### macOS Info
+
+#### Display macOS Version and Build Number
 
 ```shell
 sw_vers
 ```
-**Show macOS Kernel Version**:</br>
+#### Display Darwin Kernel Version
 
 ```shell
 uname -r
 ```
-**Change Update Seed to Developer** (≤ macOS 12 only):</br>
+
+### Display Model Identifier (SMBIOS)
 
 ```shell
-sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
-sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+system_profiler SPHardwareDataType | grep 'Model Identifier'
 ```
-> [!NOTE]
-> 
-> In macOS 13+, [switching update seeds via seedutil is no longer possible](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/) – it requires registration via Apple-ID instead.
 
-**Disable Gatekeeper**:</br>
+## System Behavior
+
+### Disable Gatekeeper
 
 ```shell
 sudo spctl --master-disable
 ```
 
-**Reset all Privacy Settings**:</br>
+### Disable DMG verification
+
+-  **Disable Disk Image verification**:
+
+	```shell
+	defaults write com.apple.frameworks.diskimages skip-verify TRUE
+	```
+-  **To Re-enable**: 
+
+	```shell
+	defaults write com.apple.frameworks.diskimages skip-verify FALSE
+	``` 
+
+### Change Update Seed to Developer (≤ macOS 12 only)
+
+1. Unenroll from current seed:
+
+	```shell
+	sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
+	```
+2. Change seed:
+
+	```
+	sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+	```
+
+> [!NOTE]
+> 
+> In macOS 13+, [switching update seeds via seedutil is no longer supported](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/). Instead, registering your system in Apples [beta program](https://beta.apple.com/) via Apple-ID is required. After that you can switch the updated seed in system sttings. 
+
+### Reset all Privacy Settings
+Brings back all the window pop-ups that ask for granting pernission to access periferals like microphones, webcams, etc.
 
 ```shell
 tccutil reset All
 ```
 
-**Check if the seal of APFS volume snapshots is intact or broken**
+## Finder-related
+
+### Show User Library in macOS 11 and newer
 
 ```shell
-diskutil apfs list
+setfile -a v ~/Library
+chflags nohidden ~/Library
 ```
 
-:bulb: If you apply root patches with OCLP, the status of the entry `Snapshot sealed` seal will change from `Yes` to `Broken`. But if you revert the root patches with OCLP *prior* to updating macOS, the seal will become intact again. And if the snapshot is sealed, incremental (or delta) OTA updates will work and System Update won't download the complete installer!
+### Show all Files and Folders in Finder
 
-**Disable `.DS_Store` file creation on network storages**
+- **Show**: 
+
+	```shell
+	defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
+	```
+- **Hide**:
+
+	```shell
+	defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
+	```
+
+> [!NOTE] 
+> 
+> Alternatively, simply use this **Keyboard Shortcut**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+
+### Rebuilding Launch Services
+You can use this to fix the “Open with…” sub-menu (if it contains entries from apps that are no onger installed, etc.)  
+
+```shell
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+```
+
+### Add "Quit" option to Finder menu
+
+```shell
+defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
+```
+
+### Disable `.DS_Store` file creation on network storages
 
 - **Disable**:
 
@@ -61,33 +177,9 @@ diskutil apfs list
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
 	```
 
-**Show the User Library in Big Sur+**:</br>
+## Filesystem-related
 
-```shell
-setfile -a v ~/Library
-chflags nohidden ~/Library
-```
-
-**Disable/enable DMG Verification**:</br>
-
--  **Disable**:
-
-	```shell
-	defaults write com.apple.frameworks.diskimages skip-verify TRUE
-	```
--  **Re-enable**: 
-
-	```shell
-	defaults write com.apple.frameworks.diskimages skip-verify FALSE
-	``` 
-
-**Install Command Line Developer Tools**:</br>
-
-```shell
-xcode-select --install
-```
-
-**Rebuilding the Spotlight Index**
+### Rebuilding the Spotlight Index**
 
 - **System-wide**: 
 	
@@ -103,260 +195,69 @@ xcode-select --install
 	sudo mdutil -i on /Volumes/Your Volume Name
 	```
 
-**Disable/enable Notification Center**:
-
-- **Disable**:
-
-	```shell
-	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-	```
-	
-- **Re-Enable**:
-
-	```shell
-	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-	```	
-
-
-**Add "Quit" option to Finder**:</br>
+### Checking if the APFS volume snapshots is intact
 
 ```shell
-defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
+diskutil apfs list
 ```
-**Add "GPU" Tab to Activity Monitor**:</br>
+
+> [!NOTE]
+> 
+> If you apply root patches with OCLP, the status of the entry `Snapshot sealed` seal will change from `Yes` to `Broken`. But if you revert the root patches with OCLP *prior* to updating macOS, the seal will become intact again. And if the snapshot is sealed, incremental (or delta) OTA updates are available again so System Update won't download the complete installer!
+
+### Update the PreBoot Volume (APFS volumes only)
 
 ```shell
-defaults write com.apple.ActivityMonitor ShowGPUTab -bool true
+sudo diskutil apfs updatePreboot /
 ```
-**Disable Library Validation**:</br>
+
+### Disable Library Validation
 
 ```shell
 sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
 ```
-**List MAC Addresses**:</br>
 
-```shell
-networksetup -listallhardwareports
-```
-**Show all Files and Folders in Finder**:</br>
+> [!NOTE]
+>
+> This change is only temporary. Requires a Kernel Patch to make it persistant.
 
-- **Show**: 
-
-	```shell
-	defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
-	```
-- **Hide**:
-
-	```shell
-	defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
-	```
-Alternatively, you could simply use this **Keyboard Shortcut**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
-
-**Rebuild Launch Services**:</br>
-
-```shell
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-```
-**Rebuild DYLD and XPC caches** (≤ macOS 10.15):
+### Rebuild DYLD and XPC caches (macOS 10.15 or older only)
 
 ```shell
 sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
 ```
-**Enable Sidecar**:</br>
 
-```shell
-defaults write com.apple.sidecar.display AllowAllDevices -bool true
-defaults write com.apple.sidecar.display hasShownPref -bool true
-```
-> [!NOTE]
-> 
-> Requires Intel CPU with working Intel on-board graphics!
+### Create new shapshot** (macOS 11+ only) 
 
-**Disable Logging:**</br>
-
-```shell
-sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist
-```
-**Enable Key Repeating**</br>
-
-```shell
-defaults write -g ApplePressAndHoldEnabled -bool false
-```
-**Prohibit macOS from mastering iDevices**:
-
-```shell
-defaults write com.apple.iTunesHelper ignore-devices -bool YES
-defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
-defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
-defaults write -g ignore-devices -bool true
-```
-**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
-
-**List of Keyboard Shortcuts**
-
-[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
-
-## CPU related
-
-**Show CPU Vendor**:</br>
-
-```shell
-sysctl -a | grep machdep.cpu.vendor
-```
-**Show CPU Model** (doesn't really tell you much):</br> 
-
-```shell
-sysctl -a | grep machdep.cpu.model
-```
-**Show CPU Brand String**:</br>
-
-```shell
-sysctl machdep.cpu.brand_string
-```
-**List CPU features**:</br>
-
-```shell
-sysctl -a | grep machdep.cpu.features
-```
-**Display Bus and CPU Frequency**:</br>
-
-```shell
-sysctl -a | grep freq
-```
-**List supported instruction sets** (AVX2 and others):<br>
-
-```shell
-sysctl -a | grep machdep.cpu.leaf7_features
-```
-**Get CPU details** from IO Registry:</br>
-
-```shell
-ioreg -rxn "CPU0@0"
-```
-> [!NOTE]
-> 
-> Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
-
-## Hackintosh specific
-**Check currently used SMBIOS**:</br>
-
-```shell
-system_profiler SPHardwareDataType | grep 'Model Identifier'
-```
-**Check OpenCore version**:</br>
-
-```shell
-nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
-```
-**Check currently active csr-active-config**:</br>
-
-```shell
-nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
-```
-**Check the status of System Integrity Protection**:</br>
-
-```shell
-csrutil status
-```
-**Checking Reasons for Wake**:</br>
-
-```shell
-pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
-```
-Alternative Connmand (searches in syslog):
-
-```shell
-log show --style syslog | fgrep "Wake reason"
-```
-**Find loaded Kexts** (excluding those from Apple):</br>
-
-```shell
-kextstat | grep -v com.apple
-```
-**Rebuild Kext Cache** (Deprecated in macOS 13):</br>
-
-```shell
-sudo kextcache -i /
-```
-**Update PreBoot Volume**:</br>
-
-```shell
-sudo diskutil apfs updatePreboot /
-```
-**Show last boot log**:</br>
-
-```shell
-log show --last boot
-```
-**Search for terms in last boot log**:</br>
-
-```shell
-log show --last boot | grep "your search term"
-```
-**Example**: `log show --last boot | grep "ACPI"`
-
-**Create new shapshot** (macOS 11+ only) In Recovery, enter:</br>
+In Recovery, enter:
 
 ```shell
 csrutil authenticated-root disable
 bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot
 ``` 
-**x** = name of your macOS Big Sur/Monterey Volume
+**x** = name of your macOS Volume
 
-**Check if used Hardware supports Apple Secure Boot**:</br>
+## Enabling/Disabling Features
 
-1. In Terminal, enter:</br>
-`nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
-3. Check the Results:
-	-  if `%00` = No Security
-	-  if `%01` = Medium Security
-	-  if `%02` = Full Security 
-
-**Show currently used Board-ID**:<br>
-`ioreg -l | grep -i board-id`
-
-or
-
-`var_ID=$(ioreg -p IODeviceTree -r -n / -d 1 | grep board-id);var_ID=${var_ID##*<\"};var_ID=${var_ID%%\">};echo $var_ID`
-
-**Check Hibernation Settings**:</br>
-`pmset -g`
-
-**Make .command files executable**:</br>
-`chmod +x` (drag file in terminal, hit enter)
-
-**Find USB Controller Renames**:</br>
+### Enable Sidecar
 
 ```shell
-ioreg -l -p IOService -w0 | grep -i EHC1
-ioreg -l -p IOService -w0 | grep -i EHC2
-ioreg -l -p IOService -w0 | grep -i XHC1
-ioreg -l -p IOService -w0 | grep -i XHCI
+defaults write com.apple.sidecar.display AllowAllDevices -bool true
+defaults write com.apple.sidecar.display hasShownPref -bool true
 ```
-**Verifying if SMBus is working**:</br>
 
-```shell
-kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
-```
 > [!NOTE]
 > 
-> The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. If only one is present, SMBus isn't fully working!
+> Requires Intel CPU with on-board graphics and is limited to specific SMBIOSes. It’s easier to enable it via [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock)!
 
-**Debug ACPI Hotpatches**:</br>
-
-```shell
-log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"
-```
-
-**Display CPU Features**:</br>
+### Disable Logging
 
 ```shell
-sysctl -a | grep machdep.cpu.features
-sysctl -a | grep machdep.cpu.leaf7_features
-sysctl machdep.cpu | grep AVX
+sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist
 ```
-**Disable/Delete Metal Support**:</br>
+
+### Disable/Delete Metal Support
 
 ```shell
 sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no
@@ -370,48 +271,239 @@ sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
 ```
 [**Source**](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
 
-**Removing Network .plists (for troubleshooting)**:</br>
+### Prohibit macOS from mastering iDevices
+
+```shell
+defaults write com.apple.iTunesHelper ignore-devices -bool YES
+defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
+defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
+defaults write -g ignore-devices -bool true
+```
+**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
+
+## Networking
+
+### List MAC Addresses of Network Adapters
+
+```shell
+networksetup -listallhardwareports
+```
+
+### Delete Network .plists
 
 ```shell
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
 sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 ```
 
-**List ACPI Errors**:</br>
+## CPU-related
+
+### Show CPU Vendor
+
+```shell
+sysctl -a | grep machdep.cpu.vendor
+```
+
+### Show CPU Model
+Doesn't really tell you much
+
+```shell
+sysctl -a | grep machdep.cpu.model
+```
+
+### Show CPU Brand String
+
+```shell
+sysctl machdep.cpu.brand_string
+```
+
+### List CPU features
+
+```shell
+sysctl -a | grep machdep.cpu.features
+```
+
+### Display Bus and CPU Frequency
+
+```shell
+sysctl -a | grep freq
+```
+
+### List supported CPU instructions
+
+```shell
+sysctl -a | grep machdep.cpu.leaf7_features
+```
+
+### Get CPU details from IO Registry
+
+```shell
+ioreg -rxn "CPU0@0"
+```
+
+> [!NOTE]
+> 
+> Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
+
+## Troubleshooting
+
+### Show log ot last boot
+
+```shell
+log show --last boot
+```
+
+### Search for terms in last boot log
+
+```shell
+log show --last boot | grep "your search term"
+```
+**Example**: `log show --last boot | grep "ACPI"`
+
+### Check OpenCore version
+
+```shell
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+```
+
+### Display currently used Board-ID
+
+```shell
+ioreg -l | grep -i board-id
+```
+or
+
+```shell
+`var_ID=$(ioreg -p IODeviceTree -r -n / -d 1 | grep board-id);var_ID=${var_ID##*<\"};var_ID=${var_ID%%\">};echo $var_ID`
+```
+
+### Checking Reasons for Wake
+
+```shell
+pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
+```
+
+Alternative Command (searches in syslog instead):
+
+```shell
+log show --style syslog | fgrep "Wake reason"
+```
+
+### Check currently active `csr-active-config`
+
+```shell
+nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
+```
+
+### Check the status of System Integrity Protection (SIP)
+
+```shell
+csrutil status
+```
+
+### Install Command Line Developer Tools
+
+```shell
+xcode-select --install
+```
+
+### Kext-related
+
+#### Find loaded Kexts (excluding those from Apple)
+
+```shell
+kextstat | grep -v com.apple
+```
+
+#### Rebuild Kext Cache (macOS 10.15 or older)
+
+```shell
+sudo kextcache -i /
+```
+
+### Check status of Apple Secure Boot
+
+1. In Terminal, enter:</br>
+`nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
+3. Check the Results:
+	-  if `%00` = No Security
+	-  if `%01` = Medium Security
+	-  if `%02` = Full Security
+
+> [!NOTE]
+>
+> To achieve full securiity `02` additional measures are required.
+
+### Make .command files executable
+
+`chmod +x` (drag file in terminal, hit enter)
+
+### Finding USB Controller Renames
+
+```shell
+ioreg -l -p IOService -w0 | grep -i EHC1
+ioreg -l -p IOService -w0 | grep -i EHC2
+ioreg -l -p IOService -w0 | grep -i XHC1
+ioreg -l -p IOService -w0 | grep -i XHCI
+```
+### Verifying if SMBus is working
+
+```shell
+kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
+```
+
+> [!NOTE]
+> 
+> The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. On modern Laptops, only AppleSMBusController may return in the search results!
+
+### ACPI-related
+#### Debug ACPI Tables
+
+```shell
+log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"
+```
+
+#### List ACPI Errors
 
 ```shell
 log show --last boot | grep AppleACPIPlatform
 log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log
 ```
+
 The 2nd Command saves a log on the desktop.
-
-**Dump Audio Codec** (in Linux):</br>
-
-```shell
-cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
-```
-
-**Disable Power Management Scheduler** (fixes high CPU usage for `Powerd` service in macOS Ventura beta 4):</br>
-
-```shell
-sudo pmset schedule cancelall
-```
 ___
 
-# Keyboard Shorcuts
+## Keyboard Shortcuts
 
-**Disable Press and Hold for Keyboard Keys** (req. reboot)
+### Collection of Keyboard Shortcuts
+
+[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
+
+### Show hidden Files and Folders in Finder
+
+<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+
+### Disable Press and Hold for Keyboard Keys (requires reboot)
 
 ```shell
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 
-**Show hidden Files and Folders in Finder**: 
+### Accessing Terminal in macOS Setup-Assistant
 
-<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+<kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>T</kbd> (Command+Option+Control+T)
 
-**Starting Ternibal in macOS Setup-Assistant**:
+---
+## Linux
 
-Cmd + Option + Control + T
+### Generate Audio Codec Dump (in Linux)
 
-dmesg|grep -i firmware
+```shell
+cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
+```
+
+### Search for firmware used by devices
+
+```shell
+sudo dmesg|grep -i firmware
+```
