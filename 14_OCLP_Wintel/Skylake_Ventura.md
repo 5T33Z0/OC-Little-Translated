@@ -52,7 +52,7 @@ With the release of macOS 13, Apple dropped support for all CPU families prior t
 > Check out the [list of things that were removed macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and the impact this has on pre-Kaby Lake systems. But keep in mind that this was written for real Macs so certain issues don't affect Wintel machines.
 
 ### Disclaimer
-This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura or newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
+This guide is intended to provide general information for adjusting your EFI and `config.plist` to install and run macOS Ventura or newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
 
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS 13 or newer on unsupported systems:
