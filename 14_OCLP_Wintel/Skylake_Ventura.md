@@ -136,7 +136,6 @@ Once you've added the required kexts and made the necessary changes to your conf
 If your system reboots successfully, we need to edit the config one more time and adjust the SMBIOS depending on the macOS Version *currently* installed.
 
 #### When Upgrading from macOS Big Sur 11.3+
-
 When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capabilities to trick it into thinking that it is running in a VM so spoofing a compatible SMBIOS is no longer a requirement.
 
 Based on your system, use one of the following SMBIOSes for Skylake CPUs. Open your config.plist and change the SMBIOS in the `PlatformInfo/Generic` section.
@@ -150,7 +149,9 @@ Based on your system, use one of the following SMBIOSes for Skylake CPUs. Open y
 - **For NUC and USDTs**: `iMac17,1` (Apple never released a MacMini with Skylake CPUs)
 - Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-> **Note**: Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
+> [!NOTE]
+>
+> Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
 #### When Upgrading from macOS Catalina or older
 Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS 13 or newer. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
@@ -167,7 +168,8 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 	- **Macmini8,1**
 - Generate new Serials with [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
-> [!NOTE]:
+> [!NOTE]
+> 
 > Once macOS is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management.
 > You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
@@ -181,7 +183,9 @@ With all the prep work out of the way you can now upgrade to macOS Ventura or ne
 - Select macOS 13.x (whatever the latest available build is)  
 - Once the download is completed, the "Install macOS" app will be located in the "Programs" folder
 
-> **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> [!NOTE]
+>
+> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
@@ -232,7 +236,8 @@ To bring them back, do the following:
   - `-radvesa` – put a `#` in front to disable it: `#-radvesa`
   - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
 
-> **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
+> [!NOTE]
+> Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
 ### Removing/Disabling boot-args
 After macOS is installed and OCLP's root patches have been applied in Post-Install, remove or disable the following boot-args:
@@ -242,7 +247,8 @@ After macOS is installed and OCLP's root patches have been applied in Post-Insta
 - Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
-> **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
+> [!NOTE]
+> Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
 ### Verifying AMFI is enabled
 We can check whether or not AMFI is enabled by entering the following command in Terminal:
