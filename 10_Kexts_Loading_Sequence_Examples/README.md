@@ -141,13 +141,33 @@ I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.B
 
 This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
 
-### Example 8: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
+### Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
 ![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
 
 > [!NOTE]
 > 
 > - For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
 > - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+
+### Example 8b: Using `AirportItlwm.kext` in multiple versions of macOS
+
+As you may know, 2 kexts for enabling Wi-Fi support for Intel cards exist: itlwm and AirportItlwm. unlike the Itlwm, AirportItlwm requires a different variant of the kext per macOS version (macOS High Sierra up to Sonoma are currently supported).
+
+If you have multiple versions of macOS installed and want to use AirportItlwm in all of them, you have to be able to have different builds of the kext present in your EFI folder so Wi-Fi works on all of your macOS versions.
+
+#### Instructions       
+
+1. Go to [https://github.com/OpenIntelWireless/itlwm/releases](https://github.com/OpenIntelWireless/itlwm/releases)
+2. Click on “Assets”
+3. Download the builds of the AirportItlwm of your choice
+4. Extract and rename them: I usually add an underscore followed by the name of the OS, e.g. `AirportItlwm_Sonoma.kext` (don’t add empty spaces!)
+6. Disable `itlwm.kext` (if present)
+7. Next, add `MinKernel` and `MaxKernel` Settings to limit the kext to only load the kext for the macOS version it’s designed for: <br> ![airprt](/Users/stunner/Desktop/AirportItlwm.png)
+8. Save
+
+> [!IMPORTANT]
+> - Adding the correct `MinKernel` and `MaxKernel` settings is *really* important. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
+> - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
