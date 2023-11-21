@@ -161,11 +161,13 @@ If you have multiple versions of macOS installed and want to use AirportItlwm in
 2. Click on “Assets”
 3. Download the builds of the AirportItlwm of your choice
 4. Extract and rename them: I usually add an underscore followed by the name of the OS, e.g. `AirportItlwm_Sonoma.kext` (don’t add empty spaces!)
+5. Add them to `EFI/OC/Kexts` and your `config.plist`
 6. Disable `itlwm.kext` (if present)
-7. Next, add `MinKernel` and `MaxKernel` Settings to limit the kext to only load the kext for the macOS version it’s designed for: <br> ![airprt](/Users/stunner/Desktop/AirportItlwm.png)
-8. Save
+7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for: <br> ![AirportItlwm](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d2669702-a7e1-4de3-8106-220756ac2d4d)
+8. Save your config
 
 > [!IMPORTANT]
+> 
 > - Adding the correct `MinKernel` and `MaxKernel` settings is *really* important. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
 > - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
 
