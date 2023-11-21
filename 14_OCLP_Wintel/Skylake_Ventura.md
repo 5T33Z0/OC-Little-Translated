@@ -67,7 +67,7 @@ This is what you need to know before attempting to install macOS 13 or newer on 
 - **Other**: Check out the lists of things removed from macOS [Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) and [Sonoma](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076) and the impact this has on pre-Kaby Lake systems. But keep in mind that these lists were written with real Macs in mind – so certain issues don't apply to Wintel systems.
 
 ## Preparations
-I assume you already have a working OpenCore configuration for your Skylake system. Otherwise follow Dortania's OpenCore Install Guide ([Desktop](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html), [Laptop/NUC](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html), [HEDT](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html)) to create one. The instructions below only contain additional steps required to install and boot macOS Monterey and newer.
+I assume you already have a working OpenCore configuration for your Skylake system. Otherwise follow Dortania's OpenCore Install Guide ([**Desktop**](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html), [**Laptop/NUC**](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html), [**HEDT**](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html)) to create one. The instructions below only contain additional steps required to install and boot macOS Monterey and newer.
 
 ### Update OpenCore and kexts
 Update OpenCore and kexts to the latest versions to maximize compatibility with macOS. To check which version of OpenCore you're currently using, run the following commands in Terminal:
