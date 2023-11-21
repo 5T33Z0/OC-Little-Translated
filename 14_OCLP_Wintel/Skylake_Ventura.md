@@ -77,12 +77,10 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
 ## Upgrade options
-Since Skylake CPUs are relatively new, the only thing which doesn't really work out of the box is the Intel HD 530/P530/Iris iGPU which is only compatible up to macOS Monterey. So there are 2 possible upgrade option for installing macOS Ventura or newer, depending on your hardware configuration:
+Since Skylake CPUs are relatively new, the only thing which doesn't really work out of the box is on-board grapics, specifically: Intel HD 530/P530/Iris which are only compatible up to macOS Monterey. There are 2 possible upgrade option for installing macOS Ventura or newer, depending on your hardware configuration:
 
 ### Option 1: Installing macOS 13+ without Root Patches
-If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura and newer, you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13).
-
-Once you have the spoof configured, jump to [**macOS Installation**](#macos-installation)
+If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura or newer, you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13). Once the iGPU spoof is workin, jump to [**macOS Installation**](#macos-installation)
 
 #### Pros and Cons of this method
 - **Pros**:
@@ -91,7 +89,7 @@ Once you have the spoof configured, jump to [**macOS Installation**](#macos-inst
 - **Cons**:
 	- Requires Kaby Lake iGPU spoof, which is not 100% compatible
 	- CPU Power Management is not optimal (can be addressed by implementing Board-ID VMM spoof and RestrictEvents kext)
-	- macOS Sonoma requires SMBIOS `iMac19,1`, so CPU Power Management won't be optumal. Use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to adjust it.
+	- macOS Sonoma requires SMBIOS `iMac19,1` (for Desktop PCs), so CPU Power Management won't be optimal. Use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to adjust it.
 
 ### Option 2: Installing macOS Ventura or newer with Root Patches
 While an iGPU spoof works well for systems which use a dedicated GPU for displaying graphics, it's not working so well if the iGPU is required for driving a display becasue [these files were removed from macOS](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md#extensions-5). So if you are using a Desktop/Laptop/NUC that relies on the iGPU because it has no dGPU or it is incompatible with macOS 12 or newer (e.g. NVIDIA Kepler Cards) then applying Root Patches in Post-Install with OCLP is the way to go.
@@ -100,11 +98,11 @@ While an iGPU spoof works well for systems which use a dedicated GPU for display
 
 - **Pros**:
 	- iGPU is working correctly
-	- Legacy GPU can be enabled (if OpenCore Legacy Patcher has drivers for it)
-	- Ideal CPU/GPU Power Management because a Skylake SMBIOS can by used
+	- Legacy GPUs can be enabled (if OpenCore Legacy Patcher has drivers for it)
+	- Ideal CPU/GPU Power Management because a native Skylake SMBIOS can be used
 - **Cons**:
 	- Takes more effort to configure
-	- Incremental System Updates won't work after applying root patches with OpenCore Legacy Patcher. Instead, the full installer (about 12 GB) is downloaded every time a System Update is available.
+	- Incremental system updates won't work after applying root patches with OCLP. Instead, the full installer (about 12 GB) will be downloaded each time a System Update is available.
 
 ### Config Edits
 Listed below, you find the required modifications to prepare your config and EFI folder for installing macOS Monterey or newer on Skylake systems. I've also prepared a [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Skylake_OCLP_Wintel_Patches.plist) for cross-referencing which contains the necessary settings.
