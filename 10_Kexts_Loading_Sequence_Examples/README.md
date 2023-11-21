@@ -191,7 +191,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 ### Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14
 
 1. Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
-2. Add the following kexts from the [Sonoma Development branch of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/sonoma-development/payloads/Kexts/Wifi) (adjust `MinKernel` accordingly): <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
+2. Add the following kexts from OCLP ([**foud here**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/master/payloads/Kexts/Wifi) and [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera)) (adjust `MinKernel` accordingly): <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
 3. Save and reboot
 4. Verify that all the kext listed above are loaded. Enter `kextstat | grep -v com.apple` in Terminal and check the list. If they are not loaded, add `-brcmfxbeta` boot-arg to your config. Save, reboot and verify again.
 5. Apply Root patches with OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
