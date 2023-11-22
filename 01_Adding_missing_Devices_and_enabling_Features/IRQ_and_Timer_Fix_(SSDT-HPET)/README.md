@@ -151,7 +151,9 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
 > [!IMPORTANT]
 > 
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
-- I was wondering if it would be possible to achieve the same *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to restore them for every other OS instead of changing their values for macOS *only*. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. I called it `SSDT-IRQ_FIXES_THINK`. This actually works and the relevant code snippet looks like this:
+
+#### SSDT-IRQ_FIXES_THINK
+I was wondering if it would be possible to achieve the same *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to restore them for every other OS instead of chaning their values for macOS *only*. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. I called it `SSDT-IRQ_FIXES_THINK`. This actually works and the relevant code snippet looks like this:
 
 	```asl
     Scope (_SB.PCI0.LPC.HPET)
