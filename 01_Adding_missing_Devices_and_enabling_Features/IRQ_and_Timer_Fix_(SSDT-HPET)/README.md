@@ -157,18 +157,18 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
 #### SSDT-IRQ_FIXES_THINK
 I was wondering if it would be possible to achieve the same *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to restore them for every other OS instead of chaning their values for macOS *only*. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. I called it `SSDT-IRQ_FIXES_THINK`. This actually works and the relevant code snippet looks like this:
 
-	```asl
-    Scope (_SB.PCI0.LPC.HPET)
-    {
-        Name (XXXX, One)
+```asl
+Scope (_SB.PCI0.LPC.HPET)
+{
+	Name (XXXX, One)
         Name (YYYY, Zero)
         If (_OSI ("Darwin"))
         {
             WNTF = XXXX 
             WXPF = YYYY
         }
-    } ...
-	```
+} ...
+```
 - **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 ### Disable **`RTC`**
