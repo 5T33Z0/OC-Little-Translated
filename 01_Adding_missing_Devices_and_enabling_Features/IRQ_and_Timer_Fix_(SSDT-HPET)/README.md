@@ -2,13 +2,18 @@
 
 ## Description
 
-Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is).
+Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only present in 7th gen an newer for backward compatibility with older versions of Windows. If you are using Windows 8.1 or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is no no present in Device Manager (the driver is unloaded).
 
 In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
 
-But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from Intel's 6th Gen platform and is only present for backward compatibility with older Windows versions. If you use 7th Gen Intel Core CPU or newer with Windows 8.1+, HPET (High Precision Event Timer) is no longer present in Device Manager (the driver is unloaded).
-
 For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be blocked directly to solve the problem. Check the original DSDT's HPET `_STA` method for specific settings.
+
+### Symptoms
+- `Lilu.kext` is loaded
+- `AppleALC.kext` is loaded
+- Layout-Id is preseni in `boot-args` or `DeviceProperties`
+- In some cases: `SSDT-HPET` and patches are also present
+- &rarr; **But**: NO Sound!
 
 ## Patching Principle
 
@@ -20,14 +25,14 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be b
 
 Two methods for fixing **HPET** and **IRQs** exist:
 
-1. **Automated method** using the python script SSDTTime (simple, for novice users).</br>
+1. **Semi-Automated patching** using the python script SSDTTime (simple, for novice users).</br>
 **Advantage**: No ACPI skills required.</br>
 **Disadvantage**: Requires binary renames, so it's not as clean as using method 2, which is completely ACPI-based.
-2. **Manual method** (complicated, aimed at advanced users)</br>
-**Advantages**: Doesn't require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
+2. **Manual patching** (complicated, aimed at advanced users)</br>
+**Advantages**: May not require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
 **Disadvantage**: Requires analysis of the DSDT and adjustments of the SSDT sample.
 
-## 1. Automated Method (using SSDTTime)
+## 1. Semi-Automated patching (using SSDTTime)
 
 Since the manual patching method described below is rather complicated, the semi-automated approach using **SSDTTime** which can generate `SSDT-HPET` is prefered in most cases.
 
@@ -38,15 +43,16 @@ Since the manual patching method described below is rather complicated, the semi
 3. Generate all the SSDTs you need.
 4. The SSDTs will be stored under `Results` inside the `SSDTTime-master` Folder along with `patches_OC.plist`.
 5. Copy the generated SSDTs to `EFI/OC/ACPI`
-6. Open `patches_OC.plist` and copy the included entries to the corresponding section(s) of your `config.plist`.
+6. Open `patches_OC.plist` and copy the included entries to the corresponding sections of your `config.plist`.
 7. Save and Reboot.
 
 Audio should work now (assuming Lilu and AppleALC kexts are present along with the correct layout-id for your on-board audio card).
 
-**NOTE:**
-If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective section of the GUI to add them to the EFI/OC folder (.aml, .kext, .efi) and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
+> [!NOTE]
+>
+> If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective section of the GUI to add them to the EFI/OC folder (.aml, .kext, .efi) and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
-## Troubleshooting
+### Troubleshooting
 Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime which looks like this:
 
 ```asl
@@ -71,28 +77,26 @@ So if you don't have sound after injecting **SSDT-HPET**, the required binary re
 ``` 
 Save the file and reboot. Sound should work now. If it's not working, then the issue must be something else.
 
-## 2. Manual Method
-Below you will find the guide for fixing IRQ issues manually if you don't want to use SSDTTime.
+## 2. Manual patching methods
+Below you will find a guide for fixing IRQ issues manually if you don't want to use SSDTTime.
 
-- The sound card on earlier machines require **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card would not work properly. In reality, almost all machines have **HPET** without any interrupt provided. Usually, interrupts `0` and `8` are occupied by **RTC** (`PNP0B00`), **TIMR** (`PNP0100`) respectively
-- To solve the problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
-
-## Patching principle
-To fix this issue, we use ***SSDT-HPET_RTC_TIMR-fix***, which does the following:
-
-- Disables original **HPET**, **RTC**, **TIMR** devices,
-- Creates fake **HPE0**, **RTC0**, **TIM0** and finally,
-- Removes `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and adds them to **HPE0**.
+- The sound card on earlier machines require **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card will not work properly. In general, almost all machines have **HPET** without any interrupts provided. Usually, interrupts `0` and `8` are occupied by **RTC** (`PNP0B00`), **TIMR** (`PNP0100`) respectively.
+- To solve this problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously. This can be achieved by ***SSDT-HPET_RTC_TIMR-fix***.
+- In cases where `HPET` can't be disabled easily (because different conditions have to be met first=, binary renames and ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** are required.
 
 > [!NOTE]
 > 
 > ThinkPad users might want to test ***SSDT-IRQ_FIXES_THINK*** first which doesn't require any binary renames.
 
-## Patching method
-Use ***SSDT-HPET_RTC_TIMR-fix*** to disable **HPET**, **RTC** and **TIMR**
+### Method 2.1: Patching with ***SSDT-HPET_RTC_TIMR-fix***
 
-### Disable **`HPET`**
-Usually, `_STA` exists for HPET, so disabling HPET requires the use of the Preset Variable Method by changing `HPAE`/`HPTE` to `0`:
+***SSDT-HPET_RTC_TIMR-fix*** does the following:
+
+- It disables the original `HPET`, `RTC` and `TMR` devices if macOS is running
+- Adds and enables Devices `HPE0` (with IRQs), `RTC0` and `TIM0` if macOS is running.
+
+#### Disabling **`HPET`**
+Usually, `_STA` exists for HPET, so disabling `HPET` requires changing the Preset Variable `HPAE`/`HPTE` to `0`:
 
 ```asl
 External (HPAE, IntObj) /* or External (HPTE, IntObj) */
@@ -104,12 +108,41 @@ Scope (\)
     	}
     }
 ```
-> [!NOTE]
+> [!CAUTION]
 > 
-> The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
+> - The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
+> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2
+> - If you have an older Lenovo ThinkPad, try Method 2.3 first!
   
+#### Disabling **`RTC`**
+Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
+
+```asl
+Method (_STA, 0, NotSerialized)
+{
+	If (_OSI ("Darwin"))
+	{
+		Return (ZERO)
+	}
+	Else
+	{
+		Return (0x0F)
+	}
+}
+```
+#### Disabling **`TIMR`**
+(&rarr; Same principle as **Disabling `RTC`** applies)
+
+#### Disabling **`PIC`**/ **`IPIC`** (optional)
+
+If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also removes `IRQNoFlags{2}`. Adjust the device names and paths according to the paths used in your `DSDT`.
+
+Tthe Programmable Interrupt Controller (PIC) is a hardware device that is responsible for managing interrupts. The PIC receives these interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
+
+### Method 2.2: Patching with ***SSDT-HPET_RTC_TIMR_WNTF_WXPF***
+
 #### If `HPAE/HPTE` does not exist
-On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by different conditions by default, namely `WNTF` and `WXPF`, as shown below (applies to Lenovo T430/T530 to T450/550): 
+On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by **different conditions** by, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550): 
 
 ```asl
 Device (HPET)
@@ -122,7 +155,7 @@ Device (HPET)
             Return (0x00)
         ...
 ```    
-In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the conditions that turns it on first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed `XXXX` and `YYYY` so they have no matches any more. (There's a method that doesn't require binary renames, that I will discuss later):
+In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the ***conditions*** that enables it first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed to `XXXX` and `YYYY` so they have no matches any more. There's another,much more elegant method that doesn't require binary renames, which I will discuss later:
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
@@ -158,8 +191,12 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
 > 
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
 
-#### SSDT-IRQ_FIXES_THINK
-I was wondering if it would be possible to achieve the same *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to restore them for every other OS instead of chaning their values for macOS *only*. So I disabled the binary renames, switched the positions for `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` instead. I called it `SSDT-IRQ_FIXES_THINK`. This actually works and the relevant code snippet looks like this:
+### Method 2.3: Patching with ***SSDT-IRQ_FIXES_THINK***
+This can be used on older Lenovo ThinkPads (pre Skylake) and doesn't require any binary renames. Might work on other systems as well, that use `WNTF` and `WXPF` to control the `HPET`. 
+
+#### If `HPAE/HPTE` does not exist
+
+I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS alone*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
@@ -174,31 +211,6 @@ Scope (_SB.PCI0.LPC.HPET)
 } ...
 ```
 - **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
-
-### Disable **`RTC`**
-Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
-
-```asl
-Method (_STA, 0, NotSerialized)
-{
-	If (_OSI ("Darwin"))
-	{
-		Return (ZERO)
-	}
-	Else
-	{
-		Return (0x0F)
-	}
-}
-```
-### Disable **`TIMR`**
-(same as **Disable `RTC`**)
-
-### Disable **`PIC`**/ **`IPIC`** (optional)
-
-If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also removes `IRQNoFlags{2}`. Adjust the device names and paths according to the paths used in your `DSDT`.
-
-Tthe Programmable Interrupt Controller (PIC) is a hardware device that is responsible for managing interrupts. The PIC receives these interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
 
 ## Notes
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
