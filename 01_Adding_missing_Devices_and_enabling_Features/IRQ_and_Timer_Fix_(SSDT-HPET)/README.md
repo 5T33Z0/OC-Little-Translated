@@ -84,6 +84,10 @@ To fix this issue, we use ***SSDT-HPET_RTC_TIMR-fix***, which does the following
 - Creates fake **HPE0**, **RTC0**, **TIM0** and finally,
 - Removes `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and adds them to **HPE0**.
 
+> [!NOTE]
+> 
+> ThinkPad users might want to test SSDT-IRQ_FIXES_THINK first which doesn't require binary renames! 
+
 ## Patching method
 Use ***SSDT-HPET_RTC_TIMR-fix*** to disable **HPET**, **RTC** and **TIMR**
 
