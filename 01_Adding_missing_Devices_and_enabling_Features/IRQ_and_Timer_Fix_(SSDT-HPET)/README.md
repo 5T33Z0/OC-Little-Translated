@@ -86,7 +86,7 @@ To fix this issue, we use ***SSDT-HPET_RTC_TIMR-fix***, which does the following
 
 > [!NOTE]
 > 
-> ThinkPad users might want to test SSDT-IRQ_FIXES_THINK first which doesn't require binary renames! 
+> ThinkPad users might want to test ***SSDT-IRQ_FIXES_THINK*** first which doesn't require binary renames! 
 
 ## Patching method
 Use ***SSDT-HPET_RTC_TIMR-fix*** to disable **HPET**, **RTC** and **TIMR**
