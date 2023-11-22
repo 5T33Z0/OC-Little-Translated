@@ -47,7 +47,7 @@ Audio should work now (assuming Lilu and AppleALC kexts are present along with t
 If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective section of the GUI to add them to the EFI/OC folder (.aml, .kext, .efi) and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
 ## Troubleshooting
-Some system's implementations of ACPI can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime which looks like this (for example the Lenovo T530):
+Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime which looks like this.
 
 ```asl
 ...
