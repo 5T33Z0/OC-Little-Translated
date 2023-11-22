@@ -29,7 +29,7 @@ Two methods for fixing **HPET** and **IRQs** exist:
 
 ## 1. Automated Method (using SSDTTime)
 
-The manual patching method described below is rather complicated, because the patching process can now be automated using **SSDTTime** which can generate `SSDT-HPET`.
+Since the manual patching method described below is rather complicated, the semi-automated approach using **SSDTTime** which can generate `SSDT-HPET` is prefered in most cases.
 
 **HOW TO:**
 
