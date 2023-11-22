@@ -50,7 +50,7 @@ Audio should work now (assuming Lilu and AppleALC kexts are present along with t
 
 > [!NOTE]
 >
-> If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files into the respective section of the GUI to add them to the EFI/OC folder (.aml, .kext, .efi) and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
+> If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files (.aml, .kext, .efi) into the respective section of the GUI to add them to the EFI/OC folder and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
 ### Troubleshooting
 Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime which looks like this:
@@ -58,8 +58,8 @@ Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle th
 ```asl
 ...
 {	
-	IRQNoFlags ()
-	    {0,8,11}
+    IRQNoFlags ()
+    {0,8,11}
 ...
 ```
 So if you don't have sound after injecting **SSDT-HPET**, the required binary renames, kexts and ALC Layout-ID, change the formatting of the IRQNoFlags section to:
@@ -67,12 +67,12 @@ So if you don't have sound after injecting **SSDT-HPET**, the required binary re
 ```asl
 ...
 {
-	IRQNoFlags ()
-	    {0}
-	IRQNoFlags ()
-	    {8}
-	IRQNoFlags ()
-	    {11}
+    IRQNoFlags ()
+        {0}
+    IRQNoFlags ()
+        {8}
+    IRQNoFlags ()
+        {11}
 ...
 ``` 
 Save the file and reboot. Sound should work now. If it's not working, then the issue must be something else.
@@ -214,6 +214,7 @@ Scope (_SB.PCI0.LPC.HPET)
 
 ## Notes
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
+- To find out which Layout-ID is used by your machine, look up your CODEC (sorted by manufacturer) on this repo: https://github.com/dreamwhite/ChonkyAppleALC-Build
 - The IRQ and RTC fixes used here cannot be combined with other RTC fixes, such as:
   - ***SSDT-AWAC*** and ***SSDT-AWAC-ARTC***
   - ***SSDT-RTC0*** and ***SSDT-RTC0-NoFlags***
