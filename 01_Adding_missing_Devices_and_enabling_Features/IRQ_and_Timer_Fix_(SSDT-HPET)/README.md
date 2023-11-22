@@ -196,7 +196,7 @@ This can be used on older Lenovo ThinkPads (pre Skylake) and doesn't require any
 
 #### If `HPAE/HPTE` does not exist
 
-I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS alone*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))` The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
+I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS alone*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))`. The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
