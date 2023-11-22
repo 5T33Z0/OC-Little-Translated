@@ -61,6 +61,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
 - [**freqVectorsEdit**](https://github.com/Piker-Alpha/freqVectorsEdit.sh) – Python Script for editing frequency Vectors of Board-ID plists contained in the X86PlatformPlugin.kext
 - [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer) – Python Script for removing sensitive data from a config.plist as well as restoring some default settings.
+- [**MmioDevirt**](https://github.com/corpnewt/MmioDevirt) – Python script that can analyse the OC bootlog to generate entries for the MMIO Whitelist.
 
 ### Windows
 - [**BlueScreenView**](https://www.nirsoft.net/utils/blue_screen_view.html) –  Displays information about `blue screen of death' crashes containing details about the driver or module that possibly caused the crash.
@@ -68,6 +69,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**CrystalDiskInfo**](https://crystalmark.info/en/software/crystaldiskinfo/) – Great tool for checking the health of hard disks, SSDs and NVMEs.
 - [**GPU-Z**](https://www.techpowerup.com/gpuz/) – Provides useful information about your GPU
 - [**HWiNFO**](https://www.hwinfo.com/) – Great Tool for getting in-depth info about your system and components
+- [**Intel Processor Identification Utility**](https://www.intel.com/content/www/us/en/download/12136/intel-processor-identification-utility-windows-version.html)  – As the name suggests…
 
 ### Web-based applications
 - [**Sanity Checker**](https://sanitychecker.ocutils.me/) – The popular tool for checking the consistency of OpenCore configs online has returned!
