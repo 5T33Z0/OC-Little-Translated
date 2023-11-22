@@ -148,6 +148,8 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
         }
     } ...
 	```
+- **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+
 > [!IMPORTANT]
 > 
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
