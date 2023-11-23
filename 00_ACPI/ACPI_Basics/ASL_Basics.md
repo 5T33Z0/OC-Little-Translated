@@ -101,7 +101,7 @@ and is ended by:
    ```
 3. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
-   - `\_GPE` &rarr; ACPI Event handlers
+   - `\_GPE` &rarr; General Purpose Event (ACPI Event handlers)
    - `\_PR` &rarr; CPU
    - `\_SB` &rarr; Devices and Busses
    - `\_SI` &rarr; System indicator
