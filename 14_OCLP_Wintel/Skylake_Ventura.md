@@ -288,9 +288,10 @@ But as Hackintosh users, we only care about the App updates to apply new, update
 - After each System Update, the iGPU/GPU drivers have to be re-installed. OCLP will take care of this. Just make sure to re-enable the appropriate boot-args to put AMD/NVIDIA GPUs in VESA mode prior to updating/upgrading macOS.
 
 ## Further Resources
+- [**Enabling Intel HD Graphics 5xx in macOS 13+**](https://elitemacx86.com/threads/how-to-enable-intel-skylake-graphics-intel-hd-graphics-515-520-530-540-550-and-580-on-macos-ventura-and-later.928/) by elitemacx86.com 
+- [**Enabling NVIDIA WebDrivers in macOS 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 - [**Non-Metal Wiki**](https://moraea.github.io/) by Moraea
 - [**SMBIOS Compatibility Chart**](https://docs.google.com/spreadsheets/d/1DSxP1xmPTCv-fS1ihM6EDfTjIKIUypwW17Fss-o343U/edit#gid=483826077)
-- [**Enabling NVIDIA WebDrivers in macOS 11+**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) by elitemacx86.com
 
 ## Credits
 - Acidanthera for OpenCore, OCLP and numerous Kexts
