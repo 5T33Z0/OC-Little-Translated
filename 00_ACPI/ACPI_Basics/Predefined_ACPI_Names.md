@@ -282,4 +282,4 @@ Name | Description
 `_WPP`|Wireless Power Polling - returns the recommended polling frequency
 `_Wxx`|Wake Event – method executed as a result of a wake event.
 
-**SOURCE**: ACPI Specs. Chapter 5.6.8: "[**Predefined ACPI Names for Objects, Method and Resources**](https://uefi.org/specs/ACPI/6.5/05_ACPI_Software_Programming_Model.html#predefined-acpi-names-for-objects-methods-and-resources)"
+**SOURCE**: [**ACPI Specs**](https://uefi.org/specifications), Chpt. 5.6.8: "Predefined ACPI Names for Objects, Method and Resources"
