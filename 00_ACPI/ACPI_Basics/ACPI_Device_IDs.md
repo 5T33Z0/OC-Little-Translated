@@ -38,4 +38,4 @@ Plug and Play ID | Description
 `ACPI0017`| **Compute Express Link Root Object**. This device represents the root of a CXL capable device hierarchy. It shall be present whenever the platform allows OSPM to dynamically assign CXL endpoints to a platform address space.
 `ACPI0018` | **Audio Composition Device**. This is an ACPI-enumerated device that describes audio component logical connection information within a system.
 
-**SOURCE**: [ACPI Specs](https://uefi.org/specifications), Chapter 5.6.7: "Device Class-Specific Objects"
+**SOURCE**: [**ACPI Specs**](https://uefi.org/specifications), **Chpt. 5.6.7**: "Device Class-Specific Objects"
