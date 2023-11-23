@@ -75,6 +75,7 @@ This method is applicable when using [**Hackintool**](https://github.com/benbake
 - Save your config and reboot.
 
 > [!IMPORTANT]
+> 
 > If you decide to change your SMBIOS later, you have to adjust the `model` property inside the kext's `info.plist` – otherwise the mapping won't be applied!
 
 ## Method 2: Mapping USB Ports via ACPI
@@ -86,4 +87,4 @@ You can follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/t
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 600-series mainboards.
 - [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) by chriswayg. A bit outdated but informative. Just ignore the stuff about `XhciPortLimit` Quirk and blocking ports via NVRAM!
 - [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) – Kext and SSDT for fixing USB Wake issues
-
+- [**GUX-RyzenXHCIFix**](https://github.com/RattletraPM/GUX-RyzenXHCIFix) – GenericUSBXHCI kext variant for fixing USB 3 issues on some Ryzen APU-based hackintoshes running macOS 11.0 or newer.
