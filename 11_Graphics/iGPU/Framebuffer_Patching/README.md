@@ -80,7 +80,7 @@ This it the tl;dr version of what we are going to do basically:
 4. Adjust/modify connector data to optimize handshake
 5. Test again
 6. Repeat steps 4 and 5 until you think it's optimal
-7. Add framebuffer patch to to config.plist on system disk.
+7. Add framebuffer patch to the config.plist on system disk.
 
 ## 1. Preparations
 
@@ -159,6 +159,7 @@ Take note of your test results. Depending on the results you might be able to sk
 
 - The OpenCore Install Guide only provides *basic* settings to enable your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
 - In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630, while Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better for me in the end.
+- To resolve issues with HDMI handshake, you need to disable **Apple Graphics Device Control** (AGDC) as it can cause conflicts when using a spoofed spoofing SMBIOS/Board-ID with non-native macOS versions!
 
 ## 4. Understanding the Parameters
 Let's have a look inside Hackintool's "Connectors" tab to understand the parameters we are working with:
@@ -445,6 +446,14 @@ Key                              | Type | Value     | Notes
 
 ## 6. Testing and modifying the framebuffer patch
 Now that we have added the default connectors for the selected framebuffer reboot from your USB flash drive and connect your external monitor. 
+
+:warning: If you are using any kind of SMBIOS/board-id and/or device-id spoof, add the following key to your Framebuffer Patch:
+
+Key            | Type   | Value
+---------------|--------|-----------
+`disable-agdc` | `DATA` | `01000000`
+
+It disables **Apple Graphics Device Control** (AGDC) since it’s known to cause issues during the handshake between the HDMI port and external displays. If you are lucky, this might be the only thing you have to change.
 
 Observe the behavior of the system:
 
