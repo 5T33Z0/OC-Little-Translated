@@ -33,7 +33,7 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 
 ## Required Binary Renames
 
-The `_PTS` and `_WAK` must be renamed in order to use the integrated patch (see `PTS-TTS-WAK_Renames.plist`). Choose the correct name change based on the method(s) used in your system's `DSDT`.
+The `_PTS` and `_WAK` must be renamed in order to use the integrated patch (see `PTS-TTS-WAK_Renames.plist`). Choose the correct name change based on the method(s) used in your system's `DSDT`:
 
 - `_PTS` to `ZPTS(1,N)` for:
 
