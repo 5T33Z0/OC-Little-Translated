@@ -17,19 +17,16 @@ If you have a 4k Display attached to your Laptop, you can use this guide to forc
 
 - Back in the Boot Picker, Press <kbd>space bar</kd>
 - Select modgrubshell and press <kbd>Enter</kbd>
-- Enter the following commands:
-	
+- Enter the following commands:	
 	```shell
 	setup_var 0x8DC 
 	```
 	Check the current value – default should be `0x01` 
 - Change it to `0x02`:
-	
 	```shell
 	setup_var 0x8DC 0x2
 	```
 - Verify that the change has been applied
-
 	```shell
 	setup_var 0x8DC 
 	```
