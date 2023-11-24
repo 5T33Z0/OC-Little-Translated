@@ -41,21 +41,18 @@ The `_PTS` and `_WAK` must be renamed in order to use the integrated patch (see 
     Method (_PTS, 1, NotSerialized) /* _PTS: Prepare To Sleep */
     {
   ```
-
-- `_WAK` to `ZWAK(1,N)` for:
-
-  ```asl
-    Method (_WAK, 1, NotSerialized) /* _WAK: Wake */
-    {
-  ```
-
 - `_PTS` to `ZPTS(1,S)` for:
 
   ```asl
     Method (_PTS, 1, Serialized) /* _PTS: Prepare To Sleep */
     {
   ```
+- `_WAK` to `ZWAK(1,N)` for:
 
+  ```asl
+    Method (_WAK, 1, NotSerialized) /* _WAK: Wake */
+    {
+  ```
 - `_WAK` to `ZWAK(1,S)` for:
 
   ```asl
