@@ -8,6 +8,10 @@ This is the center piece for fixing most sleep and wake issues and is used in co
 
 Basically, the `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TTS` (Transition to State) methods are renamed to something else. And once any of these methods are triggered by entering sleep (either automatically, by pressing the sleep button or via the  Menu), ***SSDT-PTSWAKTTS*** fetches them and takes care of the rest (in conjunction with additional SSDTs).
 
+> [!NOTE]
+> 
+> ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to some of the other Hotpatches in this section. Details about each patch are provided in the `README` of the corresponding fix.
+
 ## Fixing [`PNP0C0E Sleep`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 
 This patch is required if pressing the Power or Sleep button causes an instant reset or shutdown. In order for this to work, it must be used in conjunction with ***SSDT-PTSWAKTTS***.
@@ -26,15 +30,14 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 
 ## Changing [Hibernation Modes](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes)
 
-Terminal commanfs for changing settings related to **system power management**, such as  sleep/hibernation.
+`pmset` commands for changing settings related to **system power management**, such as sleep/hibernation.
 
 ## Notes and further Resources
-- Check Dortania's Post-Install guide fore additional info about [Fixing SLeep](https://github.com/dortania/OpenCore-Post-Install/blob/master/universal/sleep.md#irq-conflicts)
-- Before applying any hotfixes, ensure that you do not simply use generic ACPI tables from Dortania or the OpenCore Package as is, as they often contain additional devices and device paths to cover various scenarios. A good example of this is SSDT-PLUG. Instead, tailor them to your system's specific requirements or generate your own using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). This alone can prevent sleep and wake issues.
-- ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to other Hotpatches listed above. Further information on each patch are located in the `README` of each sub-folder of this section.
+- Before applying any of these hotfixes, make sure that you are not using generic ACPI tables from Dortania or the OpenCore Package as provided, since they often contain additional devices, device names and paths to cover various scenarios at once (e.g. `SSDT-PLUG`). Instead, tailor them to your system's specific requirements or generate your own using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). This alone can prevent sleep and wake issues.
+- Check Dortania's Post-Install guide for additional info about [**Fixing Sleep Issues**](https://github.com/dortania/OpenCore-Post-Install/blob/master/universal/sleep.md)
 - Acidanthera provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup).
-- In-depth look into [**Darkwake**](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/), what it does (and what it doesn't).
-- While researching how these fixes work, I found out that the SSDTs and binary renames used in this chapter are basically "reverse engineered" `DSDT` patches created by RehabMan included in maciASL's DSDT patching engine. They are also available on his "Laptop DSDT Patch" Repo:
+- In-depth look into [**Darkwake**](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/), what it does (and what it doesn't do).
+- While researching how these fixes work, I found out that the SSDTs and binary renames used in this section are basically "reverse engineered" `DSDT` patches created by RehabMan included in maciASL's DSDT patching engine. They are also available on his "Laptop DSDT Patch" Repo:
 	- **Sleep and Wake** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/system
 	- **0D/6D** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/usb
 	- **Lid** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/misc
