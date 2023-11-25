@@ -27,9 +27,14 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 - ***SSDT-EXT5-TP-LED*** – `EXT5` extension patch. On Lenovo Thinkpads, the LED inside the Power Button stars pulsing slowly once the system has entered sleep state. Once the system wakes, the LED should stop pulsing and return to a solid. But when running macOS, it continues pulsing. This SSDT attempts to fix this issue. It also fixes an issue where the <kbd>F4</kbd> microphone indicator status is not normal after waking up on older ThinkPad models. On newer ThinkPad models, YogaSMC takes care of this.
 - ***SSDT-ASUS-Shutdown*** – Shutdown Fix for ASUS systems. Combine with `_PTS` to `ZPTS` rename.
 
+### Sorting Order
+Since ***SSDT-PTSWAKTTS*** injects **`EXT`** devices into macOS that oder hotfixes rely on for patching, it’s important that ***SSDT-PTSWAKTTS*** is injected *prior* to any other sleep/wake fixes:
+
+![/Users/stunner/Desktop/PTSWAK.png](/Users/stunner/Desktop/PTSWAK.png)
+
 > [!CAUTION]
 >
-> You cannot have more than one SSDT that uses the same extension (e.g. `EXT1`) present at any time. If there is a need to patch 2 things using the same extension, then these patches must be integrated into the same SSDT!
+> You cannot have more than one SSDT that uses the same extension (e.g. `EXT1`) present at any time. If there is a need to patch 2 things ot once using the same extension, then these patches must be integrated into the same SSDT!
 
 ## Required Binary Renames
 
