@@ -46,10 +46,10 @@ Previously, a lot of binary renames were necessary to fix instant-wake issues, w
   - Before Gen 6, `ADR` address: `0x001B0000`, part name: `HDEF`, `AZAL`, etc.
   - Generation 6 and later, `ADR` address: `0x001F0003`, part name: `HDAS`, `AZAL`, `HDEF`, etc.
 
-**NOTES**: 
-
-- Looking up the names of devices in the `DSDT` is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
-- Newly released machines may have new parts that require the `0D/6D patch`.
+> [!NOTE]
+>
+> - Looking up the names of devices in the `DSDT` is not a reliable approach. If possible, Search by `ADR address` or `_PRW`.
+> - Newly released machines may have new parts that require the `0D/6D patch`.
 
 ## Diversity of `_PRW` and the corresponding patch method
 Your `DSDT` may contain code like this:
@@ -143,11 +143,11 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
 ### Old Method using binary renames (superseeded)
 This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` using the binary renaming method. Two variants for each case are available:
 
-  - Name-0D rename .plist
+  - Name-0D_Rename.plist
     - `Name-0D-03` to `00`
     - `Name-0D-04` to `00`
     
-  - Name-6D rename .plist
+  - Name-6D_Rename.plist
     - `Name-6D-03` to `00`
     - `Name-6D-04` to `00`
 
@@ -155,9 +155,9 @@ This type of `0D/6D patch` is suitable for fixing `0x03` (or `0x04`) to `0x00` u
 
   ```asl
     Method (_PRW, 0, NotSerialized)
-    	{
-      		Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
-    	}
+    {
+        Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
+    }
   ```
   Most of the newer machines fall into this case. Just follow the usual method (rename-patch). Depending on which method is used in your DSDT, chose the corresponding SSDT: ***SSDT-XPRW*** (patch file with binary rename data inside). Depending on the method present in your DSDT (GPRW or UPRW), add the corresponding rename rule to the ACPI/Patch section of your config.plist.
 
