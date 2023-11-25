@@ -36,13 +36,13 @@ sudo pmset schedule cancelall
 
 ### Disable Notification Center
 
-- **Disable**:
+- Disable:
 
 	```shell
 	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 	```
 	
-- **Re-Enable**:
+- Re-Enable:
 
 	```shell
 	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
@@ -89,12 +89,12 @@ sudo spctl --master-disable
 
 ### Disable DMG verification
 
--  **Disable Disk Image verification**:
+-  Disable Disk Image verification:
 
 	```shell
 	defaults write com.apple.frameworks.diskimages skip-verify TRUE
 	```
--  **To Re-enable**: 
+-  To Re-enable: 
 
 	```shell
 	defaults write com.apple.frameworks.diskimages skip-verify FALSE
@@ -135,12 +135,12 @@ chflags nohidden ~/Library
 
 ### Show all Files and Folders in Finder
 
-- **Show**: 
+- Show: 
 
 	```shell
 	defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
 	```
-- **Hide**:
+- Hide:
 
 	```shell
 	defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
@@ -148,7 +148,7 @@ chflags nohidden ~/Library
 
 > [!NOTE] 
 > 
-> Alternatively, simply use this **Keyboard Shortcut**: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+> Alternatively, simply use this Keyboard Shortcut: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
 
 ### Rebuilding Launch Services
 You can use this to fix the “Open with…” sub-menu (if it contains entries from apps that are no onger installed, etc.)  
@@ -165,13 +165,13 @@ defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
 
 ### Disable `.DS_Store` file creation on network storages
 
-- **Disable**:
+- Disable:
 
 	```shell
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 	```
 
-- **Re-enable**:
+- Re-enable:
 
 	```shell
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
@@ -181,14 +181,14 @@ defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
 
 ### Rebuilding the Spotlight Index
 
-- **System-wide**: 
+- System-wide: 
 	
 	```shell
 	sudo mdutil -a -i off
 	sudo mdutil -a -i on
 	```
 
-- **For a specific volume**:
+- For a specific volume:
 
 	```shell
 	sudo mdutil -i off /Volumes/Your Volume Name
@@ -228,7 +228,7 @@ sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
 ```
 
-### Create new shapshot** (macOS 11+ only) 
+### Create new shapshot (macOS 11+ only) 
 
 In Recovery, enter:
 
