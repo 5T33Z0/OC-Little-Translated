@@ -30,7 +30,7 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 ### Sorting Order
 Since ***SSDT-PTSWAKTTS*** injects **`EXT`** devices into macOS that oder hotfixes rely on for patching, it’s important that ***SSDT-PTSWAKTTS*** is injected *prior* to any other sleep/wake fixes:
 
-![/Users/stunner/Desktop/PTSWAK.png](/Users/stunner/Desktop/PTSWAK.png)
+![PTSWAK](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/73505d50-615a-4e30-aa32-179caad14c81)
 
 > [!CAUTION]
 >
