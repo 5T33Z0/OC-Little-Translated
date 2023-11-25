@@ -179,7 +179,7 @@ defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
 
 ## Filesystem-related
 
-### Rebuilding the Spotlight Index**
+### Rebuilding the Spotlight Index
 
 - **System-wide**: 
 	
