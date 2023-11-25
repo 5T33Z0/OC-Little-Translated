@@ -1,7 +1,8 @@
 # HP Special `0D6D` patch
 
-- See `0D6D Patch` for more information about the `0D/6D Patch
+- See [`0D6D Patch`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix) to find out for more about this fix.
 - Some HP machines with `_PRW` methods for some parts of `ACPI` (related to `0D6D`) are as follows:
+
 	```asl
     Method (_PRW, 0, NotSerialized)
     {
@@ -19,7 +20,7 @@
   	}
     ```
 
-This case can be completed with the ``0D/6D patch`` using the ``preset variables method``, e.g.:
+- This case can be completed with the ``0D/6D patch`` using the ``preset variables method``, e.g.:
 
   ```asl
   Scope (\)
