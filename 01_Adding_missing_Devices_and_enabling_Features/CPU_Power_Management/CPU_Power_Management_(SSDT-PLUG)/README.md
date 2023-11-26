@@ -117,9 +117,9 @@ Since Apple dropped Intel CPU support after 10th Gen Comet Lake, 11th Gen and ne
 
 Add the following data in the `Kernel/Emulate`section of your `config.plist`:
 
-**`Cpuid1Data`**: 55060A00000000000000000000000000 </br>
-**`Cpuid1Mask`**: FFFFFFFF000000000000000000000000 </br>
-**`MinKernel`**: 19.0.0
+**`Cpuid1Data`**: `55060A00000000000000000000000000` </br>
+**`Cpuid1Mask`**: `FFFFFFFF000000000000000000000000` </br>
+**`MinKernel`**: `19.0.0`
 
 Since the Comet Lake CPU family is only supported on macOS Catalina and newer, the minimum Darwin Kernel requirement is `19.0.0.` This also means that this fake CPUID is only applied for macOS Catalina and newer. Running older versions of macOS requires using a fake CPUID of an older CPU supported by the macOS version you want to use.
 
