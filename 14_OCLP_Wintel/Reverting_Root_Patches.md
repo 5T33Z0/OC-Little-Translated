@@ -9,7 +9,7 @@ Listed below, you find some options to recover from failed root patching attemps
 
 ## Preperations
 - Check if a newer version of [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) is available and download it prior to reverting root patches if your system relies on root patches to get working Wi-Fi.
-- If the macOS update is newer than the latest official OCLP release, check if newer commits to the source code exist and [download the nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md). The version number should be higher than the one of the official release.
+- If the macOS update is newer than the latest official OCLP release, check if newer commits to the source code exist and [download the latest nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md). The version number should be higher than the one of the official release.
 
 ## Option 1: Reverting Root Patches if macOS still can be used
 If you can still boot into macOS and use it, do the following to revert Root Patches.
