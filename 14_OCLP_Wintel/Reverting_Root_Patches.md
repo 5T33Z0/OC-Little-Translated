@@ -42,7 +42,7 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 1. In OpenCore’s boot menu, press <kbd>Spacebar</kbd> to show hidden entries
 2. Select the Recovery partition of the affected macOS version
 3. Press <kbd>Enter</kbd> to boot into Recovery
-4. Once you reach the recovery menu, select **Disk Utiliy**
+4. Once you reach the recovery menu, select **Disk Utility**
 5. Change “View” to “Show all Volumes” (or similar, depending on your language settings)
 6. From the menu on the left, select the “Volumes of XYZ” entry (XYZ = NAME of the VOLUME that contains the broken macOS install). For example “Volumes of Sonoma”, if you named your Volume “Sonoma”.
 7. Next, click on “Info” (or press <kbd>CMD</kbd> and <kbd>Enter</kbd>). This opens the Info dialog for the disk/volum.
@@ -54,8 +54,8 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
     mount -uw "/Volumes/XYZ”
     bless --mount "/Volumes/XYZ" -bootefi --last-sealed-snapshot
     ```
-12. Close the Terminal
-13. Restare the system via the Apple Menu
+12. Close Terminal
+13. Restart the system from the Apple Menu
 14. Reboot macOS without Root Patches!
 15. Click “Cancel” once OCLP asks you to re-apply root patches again!
 16. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
