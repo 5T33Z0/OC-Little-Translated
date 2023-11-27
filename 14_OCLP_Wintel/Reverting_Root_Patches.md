@@ -58,7 +58,7 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 15. Click “Cancel” once OCLP asks you to re-apply root patches again!
 16. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
 
-> [!NOTE]
+> [!TIP]
 >
 > - If your system can connect to the internet via Ethernet cable without root patches you can use Safari in Recovery as well to follow the instructions.
 > - There’s also a very helpful [YouTube video](https://youtu.be/mNcjmvzS0Vo?si=OtNeB4r1q3s3sW9T) that explains all the steps in detail.
