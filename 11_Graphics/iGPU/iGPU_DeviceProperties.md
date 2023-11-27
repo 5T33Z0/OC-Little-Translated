@@ -41,7 +41,7 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
  ----| -------- |
 `AAPL,ig-platform-id` |Platform identifier of the iGPU you are using/spoofing.
 `AAPL,snb-platform-id`|Same as above but for Sandy Bridge CPUs ONLY. 
-`device-id` | Device identifier of the GPU you are spoofing. Only required if the iGPU model on the used CPU is not natively supported by macOS.
+`device-id` | Device identifier. Only required if the device-id of your CPU is not *natively* supported by macOS. If this is the case, you must add a supported device-id (needs to be converted to Little Endian) of the CPU which is the closest match to yours so that macOS cann assign a driver to it. Refer to the [**Intel HD FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) for details.
 `framebuffer-patch-enable` | Switch to enable framebuffer patching. Required when setting properties like `fbmem`, `stolenmem` or `unifiedmem`. 
 `framebuffer-fbmem` | Patches framebuffer memory. Required if you cannot set DVMT to 64 MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
 `framebuffer-stolenmem` | Patches framebuffer stolen memory. Required if you cannot adjust DVMT to 64MB in the BIOS. ⚠️ Don't use if the DVMT option is available in the BIOS.
