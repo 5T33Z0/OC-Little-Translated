@@ -47,10 +47,10 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 8. Look for the entry “Mount Point”. It should be someting like “/Volume/XYZ”
 9. Take note of that path and close Disk Utility
 10. Back in the recovery menu, select “Utilities > Terminal” from the menu bar
-11. Enter the following Commands one by one (replace XYZ with the nameof your volume!): 
-    ```
+11. Enter the following Commands one by one (replace "XYZ" by the name of your volume!): 
+    ```shell
     mount -uw "/Volumes/XYZ”
-    bless --mount "/Volumes/X”YZ -bootefi --last-sealed-snapshot
+    bless --mount "/Volumes/XYZ" -bootefi --last-sealed-snapshot
     ```
 12. Close the Terminal
 13. Restare the system via the Apple Menu
