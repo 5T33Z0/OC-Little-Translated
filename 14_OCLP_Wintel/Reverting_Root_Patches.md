@@ -8,8 +8,10 @@ This happened with the release of macOS 14.2 beta 3, where you could no longer l
 Listed below, you find some options to recover from failed root patching attemps. They are sorted from easiest (option 1) to most difficult (option 3).
 
 ## Preperations
-- Check if a newer version of [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) is available and download it prior to reverting root patches if your system relies on root patches to get working Wi-Fi.
-- If the macOS update is newer than the latest official OCLP release, check if newer commits to the source code exist and [download the latest nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md). The version number should be higher than the one of the official release.
+Prior to reverting root patches, do the following if your system requires root patches in order to access the internet:
+- Check if a newer version of [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) is available and download it 
+- If the macOS update is newer than the latest official OCLP release, check if newer commits to the source code exist and [download the latest nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md) instead. The version number should be higher than the one of the official release.
+- Download the latest [KernelDebupKit](https://github.com/dortania/KdkSupportPkg/releases). Click on "Assets" and download the .dmg file
 
 ## Option 1: Reverting Root Patches if macOS still can be used
 If you can still boot into macOS and use it, do the following to revert Root Patches.
@@ -57,6 +59,10 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 14. Reboot macOS without Root Patches!
 15. Click “Cancel” once OCLP asks you to re-apply root patches again!
 16. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
+
+> [!IMPORTANT]
+>
+> If you don't have internet access, root patching might fail due to missing Kernel Debug Kit (KDK). In this case, install the KDK first and then run OCLP!
 
 > [!TIP]
 >
