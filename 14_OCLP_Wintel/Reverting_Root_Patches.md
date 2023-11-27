@@ -11,7 +11,11 @@ Listed below, you find some options to recover from failed root patching attemps
 Prior to reverting root patches, do the following if your system requires root patches in order to access the internet:
 - Check if a newer version of [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) is available and download it 
 - If the macOS update is newer than the latest official OCLP release, check if newer commits to the source code exist and [download the latest nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md) instead. The version number should be higher than the one of the official release.
-- Download the latest [KernelDebugKit](https://github.com/dortania/KdkSupportPkg/releases). Click on "Assets" and download the .dmg file
+- Download the latest [KernelDebugKit](https://github.com/dortania/KdkSupportPkg/releases) (KDK). Click on "Assets" and download the .dmg file.
+
+> [!NOTE]
+>
+> If OCLP is installed already and can access the intenet, it automatically detects when a macOS update is being downloaded. It the notifies you that it needs to installs the latest KDK in order to perform the update. Just click "Ok" and OCLP will take care of it.
 
 ## Option 1: Reverting Root Patches if macOS still can be used
 If you can still boot into macOS and use it, do the following to revert Root Patches.
