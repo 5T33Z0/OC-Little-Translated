@@ -56,10 +56,10 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 **`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**:<ul><li>For installing macOS, you still need a supported SMBIOS temporarily</li><li>You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)</li></ul>
 **`-liludbgall`** | For debugging Lilu kext and plugins (requires DEBUG build of Lilu and asociated plugins)
 
-:bulb: **TIPS**
-
-- Recommended boot-arg for installing macOS the first time: `-v`, `keepsyms=1` and `debug=0x100`
-- A more in-depth debugging guide can be found [**here**](https://caizhiyuan.gitee.io/opencore-install-guide/troubleshooting/kernel-debugging.html#efi-setup)
+> [!TIP]
+>
+> - Recommended boot-arg for installing macOS the first time: `-v`, `keepsyms=1` and `debug=0x100`
+> - A more in-depth debugging guide can be found [**here**](https://caizhiyuan.gitee.io/opencore-install-guide/troubleshooting/kernel-debugging.html#efi-setup)
 
 </details>
 
@@ -305,10 +305,10 @@ boot-arg | Description
 **`bpr_postresetdelay=X`** | Changes `mPostResetDelay`, where `X` describes the delay in ms assumed to be needed for the firmware to initialise after reseting the device upon firmware upload. Default value is `100`. </br></br> **Example**: `bpr_postresetdelay=400`
 **`bpr_probedelay=X`** | Changes `mProbeDelay` (removed in BrcmPatchRAM3), where X describes the delay in ms before probing the device. Default value is `0`.
 
-:bulb: **TIP**: Some users with typical "wake from sleep" problems reported success with the following settings:
-
-- `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or
-- `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400` (slightly longer delays)
+> [!TIP] Some users with typical "wake from sleep" problems reported success with the following settings:
+>
+> - `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or
+> - `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400` (slightly longer delays)
 
 [**Source**](https://github.com/acidanthera/BrcmPatchRAM)
 

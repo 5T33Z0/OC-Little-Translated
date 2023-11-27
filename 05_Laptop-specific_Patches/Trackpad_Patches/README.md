@@ -287,7 +287,9 @@ In order to use Touchpads with incompatible APIC Pins on macOS, we need to use S
 
 This section also contains additional patches for Notebooks from various vendors (Acer, ASUS, Dell, HP, Huawei, Lenovo).
 
-:bulb: **TIPS**: Check the **Resources** section below for additional patching guides. If you are still facing issues getting your I2C Touchpad to work, look for existing EFI folders for your machine and check which combination of kexts, SSDT Hotfixes and/or binary renames have been used to get the Touchpad working and test them in your build.
+> [!TIP]
+>
+> Check the **Resources** section for additional patching guides. If you are still facing issues getting the I2C Touchpad to work, look for existing EFI folders for your Laptop model and check which combination of kexts, SSDT Hotfixes and/or binary renames have been used to get the Touchpad working and test them in your build.
 
 ## Resources and Credits
 * Special thanks to [1Revenger1](https://github.com/1Revenger1) for providing additional info about SMBus Touchpads.

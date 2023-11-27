@@ -55,7 +55,9 @@ OpenCore handles the `Kernel` section of the `config.plist` in the following ord
 ## Lilu and VirtualSMC first?
 Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***! **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot. For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
 
-:bulb: **Tip**: When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** at the top in the config to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
+> [!TIP]
+> 
+> When in doubt, either create a (new) snapshot in ProperTree or place **Lilu** and **VirtualSMC** at the top in the config to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
 
 ## Kernel Support Table
 Listed below, you will find the Kernel version ranges for macOS 10.4 to macOS 13. Setting `MinKernel` and `MaxKernel` for kexts is very useful to maximize the compatibility of your `config.plist` with various versions of macOS without having to create multiple configs with different sets of kexts. This way, you can control which kexts are enabled for which macOS version by specifying the kernel range. It's basically the same feature Clover provides, just a lot smarter: instead of using sub-folders labeled by the macOS Version (10.15, 11, 12, etc.), you specify the lower and upper kernel limit. This way you don't have to create duplicates of kexts (which you maybe forget to update later).

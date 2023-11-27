@@ -169,7 +169,9 @@ If your keyboard is powered by VoodooPS2Controller, you can use the [ioio](https
 
 Go back to the macOS console you just opened, delete all characters in the search box in the upper right corner, type PS2 and press Enter.
 
-Tips: If the console has a lot of information, you can use the button at the top to clear it.
+> [!TIP] 
+> 
+> If the console contains a lot of information, click on the “Clear” in the menu bar.
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/147893/18/26008/46596/6257a096E56f47351/5a94c93bc1c8b2d8.png)
 
