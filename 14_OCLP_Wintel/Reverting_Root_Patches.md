@@ -62,7 +62,7 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 
 > [!IMPORTANT]
 >
-> If you don't have internet access, root patching might fail due to missing Kernel Debug Kit (KDK). In this case, install the KDK first and then run OCLP!
+> If you don't have internet access, root patching might fail due to missing Kernel Debug Kit (KDK). In this case, install the KDK and run OCLP again!
 
 > [!TIP]
 >
