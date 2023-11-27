@@ -24,9 +24,12 @@ If you can still boot into macOS and use it, do the following to revert Root Pat
 2. Click on “Post-Install Root Patch”
 3. Next, click on the button “Revert Root Patches”
 4. This will restore the previous unpatched snapshot
-5. Reboot afterwards
+5. Reboot macOS without Root Patches!
+6. Click “Cancel” once OCLP asks you to re-apply root patches again!
+7. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
+8. Reboot
 
-Once everything is back to normal, check if a newer version of OCLP is available and apply root patches again.
+Everything should be back to normal again.
 
 ## Option 2: Reverting Root Patches in Safe Mode
 If you’ve applied root patches that leave macOS in an unusable, e.g. after installng iGPU/GPU drivers, recovering from this might be possible by running macOS in Safe Mode without hardware acceleration for graphics. Because in Safe Mode graphics drivers are not loaded so it might still be possible to get into macOS and revert root patches.
@@ -36,9 +39,12 @@ If you’ve applied root patches that leave macOS in an unusable, e.g. after ins
 3. Click on “Post-Install Root Patch”
 4. Next, click on the button “Revert Root Patches”
 5. This will restore the previous unpatched snapshot
-6. Reboot afterwards
+6. Reboot macOS without Root Patches!
+7. Click “Cancel” once OCLP asks you to re-apply root patches again!
+8. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
+9. Reboot
 
-Once everything is back to normal, check if a newer version of OCLP is available and apply root patches again.
+Everything should be back to normal again.
 
 ## Option 3: Reverting Root Patches via macOS Recovery and Terminal
 This option is the last resort, if macOS won’t boot normally nor in safe mode. The idea is to boot into Recovery and use Terminal to restore the last working macOS Snapshot.
@@ -63,6 +69,9 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 14. Reboot macOS without Root Patches!
 15. Click “Cancel” once OCLP asks you to re-apply root patches again!
 16. Instead, check if a newer version of OCLP is available, download it and apply root patches again.
+17. Reboot
+
+Everything should be back to normal again.
 
 > [!IMPORTANT]
 >
