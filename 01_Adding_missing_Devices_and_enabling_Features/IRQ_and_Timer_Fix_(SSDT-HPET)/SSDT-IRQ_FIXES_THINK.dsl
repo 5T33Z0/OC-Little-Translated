@@ -30,12 +30,10 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
 
     Scope (_SB.PCI0.LPC.HPET)
     {
-        Name (XXXX, One)
-        Name (YYYY, Zero)
         If (_OSI ("Darwin"))
         {
-            WNTF = XXXX /* \_SB_.PCI0.LPC_.HPET.XXXX */
-            WXPF = YYYY /* \_SB_.PCI0.LPC_.HPET.YYYY */
+            WNTF = One
+            WXPF = Zero
         }
     }
 

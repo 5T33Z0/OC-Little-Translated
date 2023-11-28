@@ -1,7 +1,6 @@
 # Sound Card IRQ Patches (`SSDT-HPET`)
 
 ## Description
-
 Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only present in 7th gen an newer for backward compatibility with older versions of Windows. If you are using Windows 8.1 or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is no no present in Device Manager (the driver is unloaded).
 
 In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
@@ -28,8 +27,8 @@ Two methods for fixing **HPET** and **IRQs** exist:
 1. **Semi-Automated patching** using the python script SSDTTime (simple, for novice users).</br>
 **Advantage**: No ACPI skills required.</br>
 **Disadvantage**: Requires binary renames, so it's not as clean as using method 2, which is completely ACPI-based.
-2. **Manual patching** (complicated, aimed at advanced users)</br>
-**Advantages**: May not require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
+2. **Manual patching**: Simple </br>
+**Advantages**: Does not require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
 **Disadvantage**: Requires analysis of the DSDT and adjustments of the SSDT sample.
 
 ## 1. Semi-Automated patching (using SSDTTime)
@@ -111,8 +110,8 @@ Scope (\)
 > [!CAUTION]
 > 
 > - The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
-> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2 or 2.3 (for ThinkPads)
-> - If you have an older Lenovo ThinkPad, try Method 2.3 first!
+> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2 or 2.3
+> - If you have an older Lenovo ThinkPad, try Method 2.2 first!
   
 #### Disabling **`RTC`**
 Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
@@ -139,10 +138,9 @@ The Programmable Interrupt Controller (`PIC` or `IPIC`) is responsible for manag
 
 If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also contains `IRQNoFlags{2}` (must be uncommented to enable). Adjust the device name and path to mach the one used in your `DSDT`.
 
-### Method 2.2: Patching with ***SSDT-HPET_RTC_TIMR_WNTF_WXPF***
+### Method 2.2: Patching with ***SSDT-IRQ_FIXES_THINK*** if `HPAE/HPTE` does not exist
 
-#### If `HPAE/HPTE` does not exist
-On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, where the original `HPET` device cannot be disabled easily because the preset variable `HPAE/HPTE` to turn it off does not exist. Instead, its on/off state is controlled by **different variables**, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
+I recently found this fix which doesn't require any binary renames. On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, the status of the `HPET` device is not controlled by the `HPAE/HPTE` preset variable but rather by **2 different variables**, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
 
 ```asl
 Device (HPET)
@@ -154,70 +152,39 @@ Device (HPET)
         {
             Return (0x00)
         ...
-```    
-In this case, `HPET` can’t be disabled simply by setting it to `0x00`. Instead, you have to get rid of the ***conditions*** that enables it first – in this case `WNTF` and `WXPF`. To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed to `XXXX` and `YYYY` so they have no matches any more. There's another, much more elegant (Method 2.3) that doesn't require *any* binary renames, which I will discuss later:
-
-- Rename `WNTF` to `XXXX` in `HPET`:
-	```text
-	Comment: HPET WNTF to XXXX
-	Find: 574E5446
-	Replace: 58585858
-	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
-	```
-- Rename `WXPF` to `YYYY` in `HPET`:
-	```text
-	Comment: HPET WXPF to YYYY
-	Find: 57585046
-	Replace: 59595959
-	Base: \_SB.PCI0.LPC.HPET (adjust LPC bus path accordingly)
-	```
-- Next, you need to add `SSDT-HPET_RTC_TIMR_WNTF_WXPF.aml` to fix the RTC, TIMER, HPET restore the 2 variables `WNTF` and `WXPF` for when macOS is NOT running. This is handled by the following bit:
-
-	```asl    
-    Scope (\)
-    {
-        Name (XXXX, One)
-        Name (YYYY, Zero)
-        If (!_OSI ("Darwin"))
-        {
-            XXXX = WNTF /* External reference */
-            YYYY = WXPF /* External reference */
-        }
-    } ...
-	```
-
-> [!IMPORTANT]
-> 
-> The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
-
-### Method 2.3: Patching with ***SSDT-IRQ_FIXES_THINK***
-This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It disables `HPET`, `RTC`, `TIMR` and `PIC` devices and adds fake ones instead. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well. Adjust LPC/LPCB paths and device names accordingly.
-
-#### If `HPAE/HPTE` does not exist
-
-I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS only*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))`. The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
+```
+In order to disable `HPET`, you can disable it by changing the values for `WNTF` and `WXPF`:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
 {
-	Name (XXXX, One)
-        Name (YYYY, Zero)
-        If (_OSI ("Darwin"))
-        {
-            WNTF = XXXX 
-            WXPF = YYYY
-        }
-} ...
+	If (_OSI ("Darwin"))
+	{
+		WNTF = One
+		WXPF = Zero
+	}
+}
+...
+
 ```
+This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable `HPET`, `RTC`, `TIMR` and `IPIC`/`PIC` and injects fake versions of them, if macOS is running. If the combination for `WNTF` and `WXPF` used in the SSDT does not work, try other combinations – there are 4 possible combination for disabling `HPET`:
+
+1. **WNTF** = One and **WXPF** = One (unlikely to work)
+2. **WNTF** = Zero and **WXPF** = Zero (didn't work for me)
+3. **WNTF** = One and **WXPF** = Zero (worked for my Lenovo T530)
+4. **WNTF** = Zero and **WXPF** = One
 
 #### Instructions
 
-- Open ***SSDT-IRQ_FIXES_THINK*** and adjust LPC/LPCB paths according to your `DSDT`
+- Open ***SSDT-IRQ_FIXES_THINK*** and adjust LPC/LPCB paths according to the paths and device names used in your `DSDT`
 - Export the SSDT as .aml
 - Add it to `EFI/OC/ACPI` and your config.plist
 - Save your config and reboot.
 
+Sound should work afterwads.
+
 ### Method 2.4: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
+
 I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach which I wouldn’t recommend. Basically, it uses a binary rename to turn this part of the `DSDT`…
 
 ```asl
@@ -268,4 +235,3 @@ Device (HPET)
 
 ## Credits
 - CorpNewt for SSDTTime
-- [racka98](https://github.com/racka98) for ***SSDT-HPET_RTC_TIMR_WNTF_WXPF.dsl***
