@@ -23,7 +23,6 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 
 ## Re-Enabling Features
 - [**Fixing WiFi in macOS Sonoma**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md)
-- [**Replacing Intel Power Gadget on macOS Sonoma**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/Install_Intel_PCM.md)
 
 ## Troubleshooting
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Reverting_Root_Patches.md)
