@@ -185,14 +185,13 @@ In this case, `HPET` can’t be disabled simply by setting it to `0x00`. Instead
         }
     } ...
 	```
-- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 > [!IMPORTANT]
 > 
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
 
 ### Method 2.3: Patching with ***SSDT-IRQ_FIXES_THINK***
-This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well.
+This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It disables `HPET`, `RTC`, `TIMR` and `PIC` devices and adds fake ones instead. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well.
 
 #### If `HPAE/HPTE` does not exist
 
