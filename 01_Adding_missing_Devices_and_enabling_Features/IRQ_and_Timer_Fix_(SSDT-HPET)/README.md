@@ -93,7 +93,7 @@ Below you will find a guide for fixing IRQ issues manually if you don't want to 
 ***SSDT-HPET_RTC_TIMR-fix*** does the following:
 
 - It disables the original `HPET`, `RTC` and `TMR` devices if macOS is running
-- Adds and enables Devices `HPE0` (with IRQs), `RTC0` and `TIM0` if macOS is running.
+- Adds and enables `HPE0`, `RTC0` and `TIM0` if macOS is running.
 
 #### Disabling **`HPET`**
 Usually, `_STA` exists for HPET, so disabling `HPET` requires changing the Preset Variable `HPAE`/`HPTE` to `0`:
@@ -111,7 +111,7 @@ Scope (\)
 > [!CAUTION]
 > 
 > - The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
-> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2
+> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2 or 2.3 (for ThinkPads)
 > - If you have an older Lenovo ThinkPad, try Method 2.3 first!
   
 #### Disabling **`RTC`**
@@ -135,14 +135,14 @@ Method (_STA, 0, NotSerialized)
 
 #### Disabling **`PIC`**/ **`IPIC`** (optional)
 
-If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also removes `IRQNoFlags{2}`. Adjust the device names and paths according to the paths used in your `DSDT`.
+The Programmable Interrupt Controller (`PIC` or `IPIC`) is responsible for managing interrupts. The PIC receives interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
 
-Tthe Programmable Interrupt Controller (PIC) is a hardware device that is responsible for managing interrupts. The PIC receives these interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
+If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also contains `IRQNoFlags{2}` (must be uncommented to enable). Adjust the device name and path to mach the one used in your `DSDT`.
 
 ### Method 2.2: Patching with ***SSDT-HPET_RTC_TIMR_WNTF_WXPF***
 
 #### If `HPAE/HPTE` does not exist
-On a lot of Lenovo ThinkPads with Intel CPUs prior to Skylake, `Device HPET` is enabled by **different conditions** by, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550): 
+On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, where the original `HPET` device cannot be disabled easily because the preset variable `HPAE/HPTE` to turn it off does not exist. Instead, its on/off state is controlled by **different variables**, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
 
 ```asl
 Device (HPET)
@@ -155,7 +155,7 @@ Device (HPET)
             Return (0x00)
         ...
 ```    
-In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, you have to get rid of the ***conditions*** that enables it first – in this case `WNTF` and `WXPF` (or whatever these variables are called in your DSDT). To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed to `XXXX` and `YYYY` so they have no matches any more. There's another,much more elegant method that doesn't require binary renames, which I will discuss later:
+In this case, `HPET` can’t be disabled simply by setting it to `0x00`. Instead, you have to get rid of the ***conditions*** that enables it first – in this case `WNTF` and `WXPF`. To do so, you can add binary renames to your `config.plist` under `ACPI/Patch` so that the 2 variables are renamed to `XXXX` and `YYYY` so they have no matches any more. There's another, much more elegant (Method 2.3) that doesn't require *any* binary renames, which I will discuss later:
 
 - Rename `WNTF` to `XXXX` in `HPET`:
 	```text
@@ -185,18 +185,18 @@ In this case, you can't disable `HPET` simply by setting it to `0x00`. Instead, 
         }
     } ...
 	```
-- **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 
 > [!IMPORTANT]
 > 
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
 
 ### Method 2.3: Patching with ***SSDT-IRQ_FIXES_THINK***
-This can be used on older Lenovo ThinkPads (pre Skylake) and doesn't require any binary renames. Might work on other systems as well, that use `WNTF` and `WXPF` to control the `HPET`. 
+This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well.
 
 #### If `HPAE/HPTE` does not exist
 
-I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS alone*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))`. The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
+I was wondering if it would be possible to achieve the same as described in Method 2.2 but *without* using binary renames. Because it feels redundant to rename 2 parameters system-wide just to *restore them for every other OS*, instead of changing their values *for macOS only*. So I disabled the binary renames, swapped the positions of `XXXX` and `YYYY` around and incorporated `If (_OSI ("Darwin"))`. The effect is the same: it changes `WNTF` to `XXXX` and `WXPF` to `YYYY` if macOS is running – no binary renames are required. I named this new SSDTs ***SSDT-IRQ_FIXES_THINK***. This actually works and the relevant code snippet looks like this:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
@@ -210,7 +210,49 @@ Scope (_SB.PCI0.LPC.HPET)
         }
 } ...
 ```
-- **Optional**: Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+
+### Method 2.4: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
+I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach which I wouldn’t recommend. Basically, it uses a binary rename to turn this part of the `DSDT`:
+
+```asl
+Device (HPET)
+{
+    Name (_HID, EisaId ("PNP0103") 
+    Method (_STA, 0, NotSerialized)  // _STA: Status
+    {
+        If ((\WNTF && !\WXPF))
+        {
+            Return (0x00)
+        ...
+```   
+
+into this:
+
+```asl
+Device (HPET)
+{
+    Name (_HID, EisaId ("PNP0103") 
+    Method (_STA, 0, NotSerialized)  // _STA: Status
+    {
+        If (_OSI ("Darwin"))
+        {
+            Return (0x00)
+        ...
+```   
+
+#### Instructions
+
+- Add the following rename rule to your config.plist (under `ACPI/Patch`):
+    ```
+    Comment: HPET (\WNTF\!WXPF) to _OSI("Darwin"))
+    Find: A010905C574E5446925C57585046
+    Replace: A00F5F4F53490D44617277696E00
+    Table Signature: 44534454
+    ```
+- Add `SSDT-HPET_RTC_TIMR-fix.aml` to `EFI/OC/ACPI` and your config.plist
+- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+- Save your config and reboot.
 
 ## Notes
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
