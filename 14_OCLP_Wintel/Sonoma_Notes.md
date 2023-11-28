@@ -36,6 +36,7 @@ For kext that haven't been updated for macOS 14 support:
 > Always check for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
 ## OCLP Status
+- **November 6th, 2023**: **OCLP 1.3.0 beta**. Fixes Intel HD 4000 and Kepler GPU Windowserver crashes in macOS 14.2 beta 3
 - **November 6th, 2023**: **OCLP v1.2.0** is released and includes a long list of [changes](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.2.0)
 - **October 23rd, 2023**: [**OCLP v1.1.0**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. Includes updated kexts, binaries for Non-Metal GPUs for macOS Sonoma and other improvements (&rarr; see changelog for details)
 - **October 2nd, 2023**: [**OCLP v1.0.0:**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. It enables running macOS Sonoma on 83 previously unsupported Mac models. With it, they also switched the numbering of releases from a simple "counter" to Semantic Versioning.
