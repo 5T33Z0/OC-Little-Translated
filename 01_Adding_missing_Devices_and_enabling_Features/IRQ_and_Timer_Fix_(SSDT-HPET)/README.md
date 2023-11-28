@@ -191,7 +191,7 @@ In this case, `HPET` can’t be disabled simply by setting it to `0x00`. Instead
 > The "!" in the "If (!_OSI ("Darwin"))" statement is not a typo but a logical NOT operator! It actually means: if the OS *is not* Darwin, use variables `WNTF` instead of `XXXX` and `WXPF` instead of `YYYY`. This restores the 2 variables for any other kernel than Darwin so everything is back to normal.
 
 ### Method 2.3: Patching with ***SSDT-IRQ_FIXES_THINK***
-This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It disables `HPET`, `RTC`, `TIMR` and `PIC` devices and adds fake ones instead. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well.
+This SSDT is a refined and more elegant variant of ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** that doesn’t require any binary renames. It disables `HPET`, `RTC`, `TIMR` and `PIC` devices and adds fake ones instead. It can be used on older Lenovo ThinkPads (pre Kaby Lake) but It might work on other systems that use `WNTF` and `WXPF` to control the status of `HPET` as well. Adjust LPC/LPCB paths and device names accordingly.
 
 #### If `HPAE/HPTE` does not exist
 
@@ -209,10 +209,16 @@ Scope (_SB.PCI0.LPC.HPET)
         }
 } ...
 ```
-- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
+
+#### Instructions
+
+- Open ***SSDT-IRQ_FIXES_THINK*** and adjust LPC/LPCB paths according to your `DSDT`
+- Export the SSDT as .aml
+- Add it to `EFI/OC/ACPI` and your config.plist
+- Save your config and reboot.
 
 ### Method 2.4: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
-I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach which I wouldn’t recommend. Basically, it uses a binary rename to turn this part of the `DSDT`:
+I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach which I wouldn’t recommend. Basically, it uses a binary rename to turn this part of the `DSDT`…
 
 ```asl
 Device (HPET)
