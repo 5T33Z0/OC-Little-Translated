@@ -2,18 +2,15 @@
 
 ## Description
 
-Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only present in 7th gen an newer for backward compatibility with older versions of Windows. If you are using Windows 8.1 or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is no no present in Device Manager (the driver is unloaded).
+Sound cards of older systems (pre Kaby Lake) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. 
 
-In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
+`HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only kept in ACPI tables of newer systems (Kaby Lake or newer) for backward compatibility with older versions of Windows (XP and older). If you are using Windows Vista or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is disabled by default – even if it's defined in the `DSDT.`
 
-For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be blocked directly to solve the problem. Check the original DSDT's HPET `_STA` method for specific settings.
+In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously with the SSDTs introduced in this chapter. If the `HPET` device is controlled by the `_STA` method you can simply set `_STA` to `Zero` for macOS to disable it and then block `SSDT-HPET` from loading. But on older systems (pre Kaby Lake), the HPET feature might be controlled by other preset variables (or combinations thereof) instead, so disabling it is not as straight forward. Below you find approaches for fixing audio issues.
 
-### Symptoms
-- `Lilu.kext` is loaded
-- `AppleALC.kext` is loaded
-- Layout-Id is preseni in `boot-args` or `DeviceProperties`
-- In some cases: `SSDT-HPET` and patches are also present
-- &rarr; **But**: NO Sound!
+> [!TIP]
+> 
+> If you are uncomfortable with working with ACPI tables, I recommend using **SSDTTime** to generate fixes. But if you are interested to fix audio issues without using any binary renames (which is he most non-invasive approach), then try manual patching. 
 
 ## Patching Principle
 
@@ -21,13 +18,21 @@ For macOS 10.12 and newer, if the problem occurs on the 6th Gen, `HPET` can be b
 - Create fake **HPE0**, **RTC0**, **TIM0**.
 - Remove `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and add them to **HPE0**.
 
+### Symptoms for Audio issues
+- `Lilu.kext` is loaded
+- `AppleALC.kext` is loaded
+- Layout-Id is present in `boot-args` or `DeviceProperties`
+- In some cases: `SSDT-HPET` fixes from SSDTTime are present
+
+&rarr; **But**: NO Sound!
+
 ### Patching Methods
 
-Two methods for fixing **HPET** and **IRQs** exist:
+Two approaches for fixing **HPET** and **IRQs** are covered here:
 
 1. **Semi-Automated patching** using the python script SSDTTime (simple, for novice users).</br>
 **Advantage**: No ACPI skills required.</br>
-**Disadvantage**: Requires binary renames, so it's not as clean as using method 2, which is completely ACPI-based.
+**Disadvantage**: Requires binary renames – applied system-wide, so it's not as clean as using Method 2, which is completely ACPI-based.
 2. **Manual patching**: Simple </br>
 **Advantages**: Does not require binary renames, is fully ACPI-compliant and can be applied to macOS only.</br>
 **Disadvantage**: Requires analysis of the DSDT and adjustments of the SSDT sample.
@@ -197,7 +202,7 @@ Sound should work afterwads.
 
 ### Method 2.3: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
 
-I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach to fixing auddio issues which I wouldn’t recommend. Because the original conditions that determine whether or not to use the HPET feature if Windows is running gets lost completely. So when running Windows XP or older, ACPI errors might occur since it's undefined what happens with HPET if macOS is not running.
+I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach to fixing audio issues which I wouldn’t recommend. Because the original conditions that determine whether or not to use the HPET feature if Windows is running gets lost completely. So when running Windows XP or older, ACPI errors might occur since it's undefined what happens with HPET if macOS is not running.
 
 Basically, this patch uses a binary rename to turn this part of the `DSDT`…
 
