@@ -1,6 +1,7 @@
 # Sound Card IRQ Patches (`SSDT-HPET`)
 
 ## Description
+
 Sound cards of older systems (mobile Ivy Bridge for example) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. This is due to the fact that `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only present in 7th gen an newer for backward compatibility with older versions of Windows. If you are using Windows 8.1 or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is no no present in Device Manager (the driver is unloaded).
 
 In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously.
@@ -140,7 +141,7 @@ If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well.
 
 ### Method 2.2: Patching with ***SSDT-IRQ_FIXES_THINK*** if `HPAE/HPTE` does not exist
 
-I recently found this fix which doesn't require any binary renames. On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, the status of the `HPET` device is not controlled by the `HPAE/HPTE` preset variable but rather by **2 different variables**, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
+I recently found this fix which doesn't require *any* binary renames. On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, the status of the `HPET` device is not controlled by the `HPAE/HPTE` preset variable by **2 different variables** instead, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
 
 ```asl
 Device (HPET)
@@ -150,10 +151,19 @@ Device (HPET)
     {
         If ((\WNTF && !\WXPF))
         {
-            Return (0x00)
-        ...
+            Return (0x00)        ...
 ```
-In order to disable `HPET`, you can disable it by changing the values for `WNTF` and `WXPF`:
+
+#### Explanation
+
+`WNTF` and `WXPF` are flags that help the ACPI system to determine the compatibility and appropriateness of using the HPET feature on the hardware based on the specific version of Windows installed.
+
+- **`WNTF`** (Wake No Timer Flag): This flag is used to indicate whether HPET should be enabled for ***older*** versions of Windows (XP and older). **If WNTF is set, it means that HPET should not be used or enabled for wake timer events**.
+- **`WXPF`** (Wake X Power Flag): Similarly, WXPF is used for ***newer*** versions of Windows (Vista and newer) to determine whether HPET should be enabled for power events. **If WXPF is set, it means that HPET should not be used or enabled for wake on power events**.
+
+In this case, the condition `(\WNTF && !\WXPF)` is being checked to determine the action regarding HPET (High Precision Event Timer) configuration, whereby the `\` symbol denotes a negation in ACPI code, so `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**. Whereas the `!` symbol in `!\WXPF` **means the opposite of the Wake X Power Flag**. This implies that the Wake X Power Flag is not active or false. In other words, `If  (\WNTF && !\WXPF)` means: "If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable HPET (Return 0x00)"
+
+So, in order to disable `HPET`, you only have to change the values for `WNTF` and `WXPF`:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
@@ -167,12 +177,9 @@ Scope (_SB.PCI0.LPC.HPET)
 ...
 
 ```
-This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable `HPET`, `RTC`, `TIMR` and `IPIC`/`PIC` and injects fake versions of them, if macOS is running. If the combination for `WNTF` and `WXPF` used in the SSDT does not work, try other combinations – there are 4 possible combination for disabling `HPET`:
+This condition indicates that the Wake No Timer Flag is active (`WNTF` = **One**), which implies that the system should not use the timer to wake up. Meanwhile, the Wake X Power Flag is not active (`WXPF` = **Zero**), suggesting that HPET should not be used for power events. Therefore, in this scenario, `HPET` will be turned off in macOS.
 
-1. **WNTF** = One and **WXPF** = One (unlikely to work)
-2. **WNTF** = Zero and **WXPF** = Zero (didn't work for me)
-3. **WNTF** = One and **WXPF** = Zero (worked for my Lenovo T530)
-4. **WNTF** = Zero and **WXPF** = One
+This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `HPET`, `RTC`, `TIMR` and `IPIC`/`PIC` devices and injects fake/corrected ones instead, if macOS is running.
 
 #### Instructions
 
