@@ -86,7 +86,7 @@ Below you will find a guide for fixing IRQ issues manually if you don't want to 
 
 > [!IMPORTANT]
 > 
-> If you previously used SSDT time to fix HPET, you need to revert these changes prior to using any of the manual patching methods. So disable SSDT-HPET and any binary renames associated with it!
+> If you previously used SSDTTime to fix `HPET`, you need to revert these changes prior to using any of the manual patching methods. So disable `SSDT-HPET` and any binary renames associated with it!
 
 > [!NOTE]
 > 
