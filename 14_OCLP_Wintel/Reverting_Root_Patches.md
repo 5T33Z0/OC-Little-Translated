@@ -1,9 +1,7 @@
 # Recovering from failed root patching attemps
 
 ## About
-Whenever a new macOS Update is released, there’s a chance that Apple removed something else from the OS so that the root patches might fail or break something in macOS so that it becomes unusable,
-
-This happened with the release of macOS 14.2 beta 3, where you could no longer log into macOS on Ivy Bridge systems after applying root patches with OCLP 1.2.1 to re-enable Intel HD 4000 graphics because it caused the Windowserver to crash. Luckily, the issue was resolved in OCLP 1.3.0 but it can happen again any time a new macOS update is released.
+Whenever a new macOS Update is released, there’s a chance that Apple removed something else from the OS so that the root patches might fail or break something in macOS so that it becomes unusable. This happened with the release of macOS 14.2 beta 3, where you could no longer log into macOS on Ivy Bridge systems after applying root patches with OCLP 1.2.1 to re-enable Intel HD 4000 graphics because it caused the Windowserver to crash. Luckily, the issue was resolved in OCLP 1.3.0 but it can happen again any time a new macOS update is released.
 
 Listed below, you find some options to recover from failed root patching attemps. They are sorted from easiest (option 1) to most difficult (option 3).
 
