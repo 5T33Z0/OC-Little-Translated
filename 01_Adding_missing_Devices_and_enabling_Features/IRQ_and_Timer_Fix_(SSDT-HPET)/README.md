@@ -191,9 +191,15 @@ This condition indicates that the Wake No Timer Flag is active (`WNTF` = **One**
 
 This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `HPET`, `RTC`, `TIMR` and `IPIC`/`PIC` devices and injects fake/corrected ones instead, if macOS is running.
 
+#### Pre-requisites
+Revert previous fixes:
+
+- Disable/delete `SSDT-HPET` (or `SSDT-HRTF`) if present
+- Disable binary renames associatted with `SSDT-HPET` (or `SSDT-HRTF`), such as: "CRS to XRCs", "IRQ…" or "HPET (\WNTF\!WXPF to _OSI("Darwin"))"
+
 #### Instructions
 
-- Open ***SSDT-IRQ_FIXES_THINK*** and adjust LPC/LPCB paths according to the paths and device names used in your `DSDT`
+- Open ***SSDT-IRQ_FIXES_THINK.dsl*** and adjust LPC/LPCB paths according to the paths and device names used in your `DSDT`
 - Export the SSDT as .aml
 - Add it to `EFI/OC/ACPI` and your config.plist
 - Save your config and reboot.
@@ -241,7 +247,7 @@ Device (HPET)
 
 - Add the following rename rule to your config.plist (under `ACPI/Patch`):
     ```
-    Comment: HPET (\WNTF\!WXPF) to _OSI("Darwin"))
+    Comment: Change HPET (\WNTF !WXPF) to _OSI("Darwin"))
     Find: A010905C574E5446925C57585046
     Replace: A00F5F4F53490D44617277696E00
     Table Signature: 44534454
