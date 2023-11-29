@@ -58,7 +58,7 @@ Audio should work now (assuming Lilu and AppleALC kexts are present along with t
 > If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files (.aml, .kext, .efi) into the respective section of the GUI to add them to the EFI/OC folder and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
 ### Troubleshooting
-Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime which looks like this:
+Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime, which looks like this:
 
 ```asl
 ...
@@ -67,7 +67,7 @@ Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle th
     {0,8,11}
 ...
 ```
-So if you don't have sound after injecting **SSDT-HPET**, the required binary renames, kexts and ALC Layout-ID, change the formatting of the IRQNoFlags section to:
+So if you don't have sound after injecting **SSDT-HPET**, the required binary renames, kexts and ALC Layout-ID, change the formatting of the `IRQNoFlags` section to:
 
 ```asl
 ...
@@ -85,9 +85,9 @@ Save the file and reboot. Sound should work now. If it's not working, then the i
 ## 2. Manual patching methods
 Below you will find a guide for fixing IRQ issues manually if you don't want to use SSDTTime.
 
-- The sound card on earlier machines require **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card will not work properly. In general, almost all machines have **HPET** without any interrupts provided. Usually, interrupts `0` and `8` are occupied by **RTC** (`PNP0B00`), **TIMR** (`PNP0100`) respectively.
-- To solve this problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously. This can be achieved by ***SSDT-HPET_RTC_TIMR-fix***.
-- In cases where `HPET` can't be disabled easily (because different conditions have to be met first=, binary renames and ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** are required.
+- The sound card on machines prior to Kaby Lake require **HPET** (`PNP0103`) to provide interrupts `0` and `8` in order to work properly. In general, almost all machines have **HPET** without any interrupts provided. Usually, interrupts `0` and `8` are occupied by **RTC** (`PNP0B00`), **TIMR** (`PNP0100`) respectively.
+- To solve this problem, **HPET**, **RTC** and **TIMR** have to be fixed simultaneously. This can be achieved by ***SSDT-HPET_RTC_TIMR-fix***.
+- In cases where `HPET` can't be disabled easily (because a specific conditions has to be met first), try Method 2.2.
 
 > [!IMPORTANT]
 > 
@@ -105,7 +105,7 @@ Below you will find a guide for fixing IRQ issues manually if you don't want to 
 - Adds and enables `HPE0`, `RTC0` and `TIM0` if macOS is running.
 
 #### Disabling **`HPET`**
-Usually, `_STA` exists for HPET, so disabling `HPET` requires changing the Preset Variable `HPAE`/`HPTE` to `0`:
+Usually, `_STA` exists for `HPET`, so disabling it only requires changing the preset variable `HPAE` to `0` (or `HPTE`, depending on your `DSDT`):
 
 ```asl
 External (HPAE, IntObj) /* or External (HPTE, IntObj) */
@@ -119,9 +119,9 @@ Scope (\)
 ```
 > [!CAUTION]
 > 
-> - The `HPAE`/`HPTE` variable within `_STA` may vary from machine to machine.
-> - If the HPET device is not controlled via `HPAE` or `HPTE` use Method 2.2 or 2.3
-> - If you have an older Lenovo ThinkPad, try Method 2.2 first!
+> - The `HPAE`/`HPTE` preset variable within `_STA` may vary from machine to machine.
+> - If the `HPET` is controlled by more than on preset variable that formulate a specific condition tha has to be met in order to disable the `HPET`, try Method 2.2 or 2.3 instead!
+> - If you have an older Lenovo ThinkPad, Method 2.2 will work!
   
 #### Disabling **`RTC`**
 Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
@@ -150,7 +150,7 @@ If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well.
 
 ### Method 2.2: Patching with ***SSDT-IRQ_FIXES_THINK*** if `HPAE/HPTE` does not exist
 
-I recently found this fix which doesn't require *any* binary renames. On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, the status of the `HPET` device is not controlled by the `HPAE/HPTE` preset variable by **2 different variables** instead, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
+I recently devloped this fix which doesn't require *any* binary renames. On a lot of Lenovo ThinkPads with Intel CPUs prior to Kaby Lake, the status of the `HPET` device is not controlled by the preset varible `HPAE/HPTE` but by **2 different variables at the same time** instead, namely: `WNTF` and `WXPF`, as shown below (found in Lenovo T430/T530 to T450/550 and T460s): 
 
 ```asl
 Device (HPET)
@@ -166,28 +166,30 @@ Device (HPET)
 
 #### Explanation
 
-`WNTF` and `WXPF` are flags that help the ACPI system to determine the compatibility and appropriateness of using the HPET feature on the hardware based on the specific version of Windows installed.
+`WNTF` and `WXPF` are flags that help the ACPI system to determine the *compatibility* and *appropriateness* of using the HPET feature on the hardware based on the specific version of Windows installed. The condition `If ((\WNTF && !\WXPF))` is being checked to determine the action regarding `HPET` configuration, i.e. whether or not to enable or disable it based on the used Windows version. So disablibg `HPET` requiews the correct combination of values for *both* preset variables. 
 
-- **`WNTF`** (Wake No Timer Flag): This flag is used to indicate whether HPET should be enabled for ***older*** versions of Windows (XP and older). **If WNTF is set, it means that HPET should not be used or enabled for wake timer events**.
-- **`WXPF`** (Wake X Power Flag): Similarly, WXPF is used for ***newer*** versions of Windows (Vista and newer) to determine whether HPET should be enabled for power events. **If WXPF is set, it means that HPET should not be used or enabled for wake on power events**.
+- **`WNTF`** (Wake No Timer Flag): This flag is used to indicate whether `HPET` should be enabled for ***older*** versions of Windows (XP and older) or not. **If `WNTF` is set, it means that `HPET` should not be used or enabled for wake timer events**.
+- **`WXPF`** (Wake X Power Flag): Similarly, `WXPF` is used for ***newer*** versions of Windows (Vista or newer) to determine whether `HPET` should be enabled for power events. **If `WXPF` is set, it means that `HPET` should not be used or enabled for wake on power events**. 
 
-In this case, the condition `(\WNTF && !\WXPF)` is being checked to determine the action regarding HPET (High Precision Event Timer) configuration, whereby the `\` symbol denotes a negation in ACPI code, so `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**. Whereas the `!` symbol in `!\WXPF` **means the opposite of the Wake X Power Flag**. This implies that the Wake X Power Flag is not active or false. In other words, `If  (\WNTF && !\WXPF)` means: "If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable HPET (Return 0x00)"
+But the condition `If ((\WNTF && !\WXPF))` is a bit tricky to comprehend because it operates with a combination (`&&`) of a negation (`/`) and an opposition (`!`) which can a knot in one's brain. In this case, `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**, whereas `!\WXPF` implies the **opposite of the Wake X Power Flag** is true (Wake X Power Flag is not active or false). 
 
-So, in order to disable `HPET`, you only have to change the values for `WNTF` and `WXPF`:
+In other words, `If  (\WNTF && !\WXPF)` means: **"If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable `HPET` (Return `0x00`)"**.
+
+So, in order to disable `HPET`, you only have to change the values for for the preset variable `WNTF` and `WXPF`, which is super simple:
 
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
 {
 	If (_OSI ("Darwin"))
 	{
-		WNTF = One
-		WXPF = Zero
+		WNTF = One // Sets Wake no Timer to true in macOS 
+		WXPF = Zero // Sets Wake X Power Flag to false in macOS
 	}
 }
 ...
 
 ```
-This condition indicates that the Wake No Timer Flag is active (`WNTF` = **One**), which implies that the system should not use the timer to wake up. Meanwhile, the Wake X Power Flag is not active (`WXPF` = **Zero**), suggesting that HPET should not be used for power events. Therefore, in this scenario, `HPET` will be turned off in macOS.
+This condition indicates that the Wake No Timer Flag is active (`WNTF` = **One**), which implies that the system should not use the timer to wake up. Meanwhile, the Wake X Power Flag is not active (`WXPF` = **Zero**), suggesting that `HPET` should not be used for power events. Therefore, in this scenario, `HPET` will be turned off in macOS.
 
 This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `HPET`, `RTC`, `TIMR` and `IPIC`/`PIC` devices and injects fake/corrected ones instead, if macOS is running.
 
@@ -195,7 +197,7 @@ This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `H
 Revert previous fixes:
 
 - Disable/delete `SSDT-HPET` (or `SSDT-HRTF`) if present
-- Disable binary renames associatted with `SSDT-HPET` (or `SSDT-HRTF`), such as: "CRS to XRCs", "IRQ…" or "HPET (\WNTF\!WXPF to _OSI("Darwin"))"
+- Disable binary renames associatted with `SSDT-HPET` (or `SSDT-HRTF`), such as: "CRS to XRCS rename", "IRQ…" or "HPET (\WNTF\!WXPF) to _OSI("Darwin"))"
 
 #### Instructions
 
@@ -253,8 +255,11 @@ Device (HPET)
     Table Signature: 44534454
     ```
 - Add `SSDT-HPET_RTC_TIMR-fix.aml` to `EFI/OC/ACPI` and your config.plist
-- **Optional**: add `SSDT-IPIC.aml` if sound still doesn't work after rebooting.
 - Save your config and reboot.
+
+> [!NOTE]
+>
+> Add `SSDT-IPIC.aml` if sound still doesn't work after rebooting. Adjust ACPI name and path accordingly.
 
 ## Notes
 - The names and paths of the `LPC/LPCB` bus as well as `RTC`, `TMR`, `RTC` and `IPIC` devices used in the hotpatch must match the names and paths used in your system's DSDT `DSDT`.
