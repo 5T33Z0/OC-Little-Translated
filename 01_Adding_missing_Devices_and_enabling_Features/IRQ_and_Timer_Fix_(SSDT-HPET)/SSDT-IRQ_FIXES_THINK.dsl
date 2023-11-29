@@ -1,22 +1,9 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLgwF7Bc.aml, Tue Nov 28 17:18:34 2023
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x000002B5 (693)
- *     Revision         0x02
- *     Checksum         0x46
- *     OEM ID           "5T33Z0"
- *     OEM Table ID     "FixIRQs"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
+/* 
+ * Fixes HPET,RTC,TIMR and IPIC if both WNTF and WXPF preset variable are used 
+ * to enable/disable HPET. This is usually the case on Lenovo ThinkPad up to 
+ * 6th Gen Skylake.
+ * NOTE: Adjust LPC/LPCB path and IPIC/PIC name according to the device names 
+ * and paths used in your system's DSDT!
  */
 DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
 {
@@ -28,6 +15,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
     External (WNTF, IntObj)
     External (WXPF, IntObj)
 
+    //disable HPET
     Scope (_SB.PCI0.LPC.HPET)
     {
         If (_OSI ("Darwin"))
@@ -37,6 +25,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
         }
     }
 
+    //disable RTC
     Scope (_SB.PCI0.LPC.RTC)
     {
         Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -52,6 +41,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
         }
     }
 
+    //disable TIMR
     Scope (_SB.PCI0.LPC.TIMR)
     {
         Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -66,7 +56,8 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
             }
         }
     }
-
+    
+    //disable PIC/IPIC
     Scope (_SB.PCI0.LPC.PIC)
     {
         Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -84,6 +75,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
 
     Scope (_SB.PCI0.LPC)
     {
+        //Add Fake HPE0
         Device (HPE0)
         {
             Name (_HID, EisaId ("PNP0103") /* HPET System Timer */)  // _HID: Hardware ID
@@ -114,7 +106,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
                 Return (BUF0) /* \_SB_.PCI0.LPC_.HPE0.BUF0 */
             }
         }
-
+        //Add Fake RTC
         Device (RTC0)
         {
             Name (_HID, EisaId ("PNP0B00") /* AT Real-Time Clock */)  // _HID: Hardware ID
@@ -139,7 +131,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
                 }
             }
         }
-
+        //Fake TIMR
         Device (TIM0)
         {
             Name (_HID, EisaId ("PNP0100") /* PC-class System Timer */)  // _HID: Hardware ID
@@ -170,8 +162,8 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
                 }
             }
         }
-
-        Device (IPI0) //Fake IPIC
+        //Add Fake IPIC
+        Device (IPI0)
         {
             Name (_HID, EisaId ("PNP0000"))
             Name (_CRS, ResourceTemplate ()
