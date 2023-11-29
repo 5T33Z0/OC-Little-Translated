@@ -281,6 +281,11 @@ defaults write -g ignore-devices -bool true
 ```
 **Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
 
+### Change default state of Bluetooth (on/off)
+
+&rarr; Check this [guide](https://mogutan.wordpress.com/2018/07/24/switch-bluetooth-setting-from-command-line-on-macos/) for instructions.
+
+
 ## Networking
 
 ### List MAC Addresses of Network Adapters
