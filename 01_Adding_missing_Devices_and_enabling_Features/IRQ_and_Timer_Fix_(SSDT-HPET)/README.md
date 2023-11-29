@@ -198,7 +198,12 @@ This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `H
 - Add it to `EFI/OC/ACPI` and your config.plist
 - Save your config and reboot.
 
-Sound should work afterwads.
+Sound should work afterwads. 
+
+> [!NOTE]
+> 
+> If audio doesn't work after rebooting, you have to uncomment the `IRQNoFlags` code snippet for the `IPIC`/`PIC` device in the .dsl file, export it as .aml, replace `SSDT-IRQ_FIXES_THINK.aml` and reboot.
+
 
 ### Method 2.3: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
 
