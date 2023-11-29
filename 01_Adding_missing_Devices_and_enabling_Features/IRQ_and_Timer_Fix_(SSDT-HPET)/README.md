@@ -2,7 +2,7 @@
 
 ## Description
 
-Sound cards of older systems (pre Kaby Lake) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). But the issue can occur on newer platforms as well. 
+Sound cards of older systems (pre Kaby Lake) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). 
 
 `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only kept in ACPI tables of newer systems (Kaby Lake or newer) for backward compatibility with older versions of Windows (XP and older). If you are using Windows Vista or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is disabled by default – even if it's defined in the `DSDT.`
 
