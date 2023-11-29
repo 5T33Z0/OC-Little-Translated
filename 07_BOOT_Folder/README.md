@@ -30,10 +30,10 @@ The `.contentVisibility` file can be opened and edited with TextEdit, Visual Stu
 
 **Placement** – You can place the file in the following locations:
 
-- /System/Volumes/Preboot/{GUID}/.contentVisibility 
-- /System/Volumes/Preboot/.contentVisibility
-- /Volumes/{ESP}/.contentVisibility (not recommended)
-- /EFI/Boot folder on USB flash drives (set to `Auxiliary`, not `Disabled`!)
+- `/System/Volumes/Preboot/{GUID}/.contentVisibility`
+- `/System/Volumes/Preboot/.contentVisibility`
+- `/Volumes/{ESP}/.contentVisibility` (not recommended)
+- `/EFI/Boot` folder on USB flash drives (set it to `Auxiliary`, not `Disabled`!)
 
 **Examples**:
 
