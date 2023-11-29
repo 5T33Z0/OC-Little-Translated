@@ -190,9 +190,11 @@ This is exactly what ***SSDT-IRQ_FIXES_THINK*** does: it disable the original `H
 
 Sound should work afterwads.
 
-### Method 2.4: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
+### Method 2.3: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
 
-I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach which I wouldn’t recommend. Basically, it uses a binary rename to turn this part of the `DSDT`…
+I stumbled over this method recently in a T460s config. I would consider this as a brute-force approach to fixing auddio issues which I wouldn’t recommend. Because the original conditions that determine whether or not to use the HPET feature if Windows is running gets lost completely. So when running Windows XP or older, ACPI errors might occur since it's undefined what happens with HPET if macOS is not running.
+
+Basically, this patch uses a binary rename to turn this part of the `DSDT`…
 
 ```asl
 Device (HPET)
