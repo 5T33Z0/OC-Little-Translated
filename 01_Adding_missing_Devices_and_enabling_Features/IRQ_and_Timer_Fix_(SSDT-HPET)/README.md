@@ -155,7 +155,8 @@ Device (HPET)
     {
         If ((\WNTF && !\WXPF))
         {
-            Return (0x00)        ...
+            Return (0x00)
+ ...
 ```
 
 #### Explanation
