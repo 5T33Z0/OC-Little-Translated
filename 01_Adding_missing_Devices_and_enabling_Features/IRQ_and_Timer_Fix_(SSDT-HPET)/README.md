@@ -84,9 +84,13 @@ Below you will find a guide for fixing IRQ issues manually if you don't want to 
 - To solve this problem, we need to fix **HPET**, **RTC** and **TIMR** simultaneously. This can be achieved by ***SSDT-HPET_RTC_TIMR-fix***.
 - In cases where `HPET` can't be disabled easily (because different conditions have to be met first=, binary renames and ***SSDT-HPET_RTC_TIMR_WNTF_WXPF*** are required.
 
+> [!IMPORTANT]
+> 
+> If you previously used SSDT time to fix HPET, you need to revert these changes prior to using any of the manual patching methods. So disable SSDT-HPET and any binary renames associated with it!
+
 > [!NOTE]
 > 
-> ThinkPad users might want to test ***SSDT-IRQ_FIXES_THINK*** first which doesn't require any binary renames.
+> ThinkPad users might want to try ***SSDT-IRQ_FIXES_THINK*** first to fix audio issues.
 
 ### Method 2.1: Patching with ***SSDT-HPET_RTC_TIMR-fix***
 
