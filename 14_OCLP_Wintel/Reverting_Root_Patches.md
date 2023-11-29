@@ -13,7 +13,7 @@ Prior to reverting root patches, do the following if your system requires root p
 
 > [!NOTE]
 >
-> If OCLP is installed already and can access the intenet, it automatically detects when a macOS update is being downloaded. It then notifies you that it needs to installs the latest KDK in order to perform the update (if it isn't installed already). Just click "Ok" and OCLP will take care of it.
+> If OCLP is installed already and can access the internet, it automatically detects when a macOS update is being downloaded. It then notifies you that it needs to installs the latest KDK in order to perform the update (if it isn't installed already). Just click "Ok" and OCLP will take care of it.
 
 ## Option 1: Reverting Root Patches if macOS still can be used
 If you can still boot into macOS and use it, do the following to revert Root Patches.
