@@ -200,7 +200,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
                  * {2}
                  */
             })          
-            Method (_STA, 0, NotSerialized)
+            Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 If (_OSI ("Darwin"))
                 {
@@ -208,7 +208,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "FixIRQs", 0x00000000)
                 }
                 Else
                 {
-                    Return (0)
+                    Return (Zero)
                 }
             }
         }
