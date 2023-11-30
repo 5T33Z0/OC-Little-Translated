@@ -181,10 +181,10 @@ So, in order to disable `HPET`, you only have to change the values for for the p
 Scope (_SB.PCI0.LPC.HPET)
 {
 	If (_OSI ("Darwin"))
-	{
-		WNTF = One // Sets Wake no Timer to true in macOS 
-		WXPF = Zero // Sets Wake X Power Flag to false in macOS
-	}
+		{
+			WNTF = One // Sets Wake no Timer to true in macOS 
+			WXPF = Zero // Sets Wake X Power Flag to false in macOS
+		}
 }
 ...
 
