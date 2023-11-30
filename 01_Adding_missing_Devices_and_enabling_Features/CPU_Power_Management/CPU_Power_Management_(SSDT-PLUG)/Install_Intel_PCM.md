@@ -90,7 +90,7 @@ To uninstall Intel PCM, do the following:
 3.  Next, clean up manually:
 	
 	```
-	rm /usr/local/sbin/*`
+	rm /usr/local/sbin/*
 	```
 	Enter "y" to delete the following entries (one by one):
 	
