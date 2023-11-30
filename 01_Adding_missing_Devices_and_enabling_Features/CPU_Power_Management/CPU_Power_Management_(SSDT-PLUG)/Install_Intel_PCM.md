@@ -115,7 +115,7 @@ To uninstall Intel PCM, do the following:
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tpmi? y
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tsx? y 	```
 	
-4. Finally, remove the dynamic link library of the PcmMSrDriver:
+4. Finally, remove the dynamic link library of the PcmMsrDriver:
 	
 	```
 	sudo rm /usr/local/lib/libPcmMsr.dylib
