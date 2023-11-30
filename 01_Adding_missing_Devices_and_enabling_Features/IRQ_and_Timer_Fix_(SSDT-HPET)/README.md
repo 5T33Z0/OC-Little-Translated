@@ -171,7 +171,7 @@ Device (HPET)
 - **`WNTF`** (Wake No Timer Flag): This flag is used to indicate whether `HPET` should be enabled for ***older*** versions of Windows (XP and older) or not. **If `WNTF` is set, it means that `HPET` should not be used or enabled for wake timer events**.
 - **`WXPF`** (Wake X Power Flag): Similarly, `WXPF` is used for ***newer*** versions of Windows (Vista or newer) to determine whether `HPET` should be enabled for power events. **If `WXPF` is set, it means that `HPET` should not be used or enabled for wake on power events**. 
 
-But the condition `If ((\WNTF && !\WXPF))` is a bit tricky to comprehend because it operates with a combination (`&&`) of a negation (`/`) and an opposition (`!`) which can a knot in one's brain. In this case, `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**, whereas `!\WXPF` implies the **opposite of the Wake X Power Flag** is true (Wake X Power Flag is not active or false). 
+But the condition `If ((\WNTF && !\WXPF))` is a bit tricky to comprehend because it operates with a combination (`&&`) of a negation (`/`) and an opposition (`!`) which can twist a knot in one's brain. In this case, `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**, whereas `!\WXPF` implies the **opposite of the Wake X Power Flag** is true (Wake X Power Flag is not active or false). 
 
 In other words, `If  (\WNTF && !\WXPF)` means: **"If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable `HPET` (Return `0x00`)"**.
 
