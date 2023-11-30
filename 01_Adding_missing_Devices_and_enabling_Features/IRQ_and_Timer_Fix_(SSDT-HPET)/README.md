@@ -173,7 +173,7 @@ Device (HPET)
 
 But the condition `If ((\WNTF && !\WXPF))` is a bit tricky to comprehend because it operates with a combination (`&&`) of a negation (`/`) and an opposition (`!`) which can twist a knot in one's brain. In this case, `\WNTF` being **false** or **unset** would imply that the **Wake No Timer Flag is not active**, whereas `!\WXPF` implies the **opposite of the Wake X Power Flag** is true (Wake X Power Flag is not active or false). 
 
-In other words, `If  (\WNTF && !\WXPF)` means: **"If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable `HPET` (Return `0x00`)"**.
+In other words, `If (\WNTF && !\WXPF)` means: **"If the Wake No Timer Flag is active and the Wake X Power Flag is not active, then disable `HPET` (Return `0x00`)"**.
 
 So, in order to disable `HPET`, you only have to change the values for for the preset variable `WNTF` and `WXPF`, which is super simple:
 
@@ -211,7 +211,6 @@ Sound should work afterwads.
 > [!NOTE]
 > 
 > If audio doesn't work after rebooting, you have to uncomment the `IRQNoFlags` code snippet for the `IPIC`/`PIC` device in the .dsl file, export it as .aml, replace `SSDT-IRQ_FIXES_THINK.aml` and reboot.
-
 
 ### Method 2.3: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`
 
