@@ -122,5 +122,5 @@ To uninstall Intel PCM, do the following:
 	```
 
 ## Thank Yous
-- Thanks to Dreamwhite and jozews321 for their help.
+- Thanks to Dreamwhite and jozews321 for their help
 - Thanks to User232 for the Uninstall Instructions
