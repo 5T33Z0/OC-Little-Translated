@@ -2,7 +2,7 @@
 ![macOS](https://img.shields.io/badge/Requirements:-macOS_12+-default.svg)
 
 ## About
-In October 2023, Intel discontinued [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) (but you can still get it from [**insanelymac**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget)). A simple but super useful tool which allows monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
+In October 2023, Intel discontinued [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) (but you can still get it from [**insanelymac**](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget))). A simple but super useful tool which allows monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
 
 But the app is no longer comapatible with newer Intel CPUs (11th Gen+). In macOS 14.2 beta 3, Intel Power Gadget causes the CPU to freak out and run at 100% on all cores. Luckily, this issues was resolved by the 14.2 beta 4 update, so you can use it again. 
 
