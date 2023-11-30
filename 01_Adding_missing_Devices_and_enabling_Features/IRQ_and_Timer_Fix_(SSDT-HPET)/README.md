@@ -129,15 +129,16 @@ Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is 
 ```asl
 Method (_STA, 0, NotSerialized)
 {
-	If (_OSI ("Darwin"))
-	{
-		Return (ZERO)
-	}
-	Else
-	{
-		Return (0x0F)
-	}
+    If (_OSI ("Darwin"))
+    {
+        Return (Zero)
+    }
+    Else
+    {
+        Return (0x0F)
+    }
 }
+...
 ```
 #### Disabling **`TIMR`**
 (&rarr; Same principle as **Disabling `RTC`** applies)
@@ -180,14 +181,13 @@ So, in order to disable `HPET`, you only have to change the values for for the p
 ```asl
 Scope (_SB.PCI0.LPC.HPET)
 {
-	If (_OSI ("Darwin"))
-		{
-			WNTF = One // Sets Wake no Timer to true in macOS 
-			WXPF = Zero // Sets Wake X Power Flag to false in macOS
-		}
+    If (_OSI ("Darwin"))
+        {
+            WNTF = One // Sets Wake no Timer to true in macOS 
+            WXPF = Zero // Sets Wake X Power Flag to false in macOS
+        }
 }
 ...
-
 ```
 This condition indicates that the Wake No Timer Flag is active (`WNTF` = **One**), which implies that the system should not use the timer to wake up. Meanwhile, the Wake X Power Flag is not active (`WXPF` = **Zero**), suggesting that `HPET` should not be used for power events. Therefore, in this scenario, `HPET` will be turned off in macOS.
 
