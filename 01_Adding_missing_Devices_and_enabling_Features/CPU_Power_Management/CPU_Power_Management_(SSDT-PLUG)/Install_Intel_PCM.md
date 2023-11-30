@@ -2,9 +2,9 @@
 ![macOS](https://img.shields.io/badge/Requirements:-macOS_12+-default.svg)
 
 ## About
-In October 2023, Intel discontinued [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). A simple but super useful tool which allowed monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
+In October 2023, Intel discontinued [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html) (but you can still get it from [**insanelymac**]([https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget](https://www.insanelymac.com/forum/files/file/1056-intel-power-gadget))). A simple but super useful tool which allows monitoring the CPU's behavior in a really elegant manner. It displayed all the relevant data inside a neatly desgined GUI (on macOS at least).
 
-But the app is no longer comapatible with newer Intel CPUs (11th Gen+). In macOS 14.2 beta 3, Intel Power Gadget causes the CPU to freak out and run at 100% on all cores. Luckily, this issues was resolved by the 14.2 beta 4 update.
+But the app is no longer comapatible with newer Intel CPUs (11th Gen+). In macOS 14.2 beta 3, Intel Power Gadget causes the CPU to freak out and run at 100% on all cores. Luckily, this issues was resolved by the 14.2 beta 4 update, so you can use it again. 
 
 As a replacement, Intel introduced the **Performance Counter Monitor** (or: [**PCM**](https://github.com/intel/pcm)). This "glorious" new tool has no macOS app that you can simply download, install and run. Instead, you have to jump through hoops to get it working. And on top of that: it runs in Terminal and doesn't really help you much with monitoring CPU frequencies since everything mostly consists of charts with stats – no graphs.
 
@@ -77,5 +77,50 @@ sudo ~/pcm/build/bin/pcm -r
 
 After entering your password, PCM will start and a bunch of stats and tables will appear.
 
-## Credits
-Thanks to Dreamwhite and jozews321 for their help.
+## Uninstalling
+
+To uninstall Intel PCM, do the following: 
+
+1. Delete the `PcmMsrDriver.kext` from `System/Library`
+
+2. Enter in Terminal (and confirm with your Admin password):
+
+	```
+	sudo ~/pcm/build/bin/pcm --uninstallDriver
+	```
+3.  Next, clean up manually:
+	
+	```
+	rm /usr/local/sbin/*`
+	```
+	Enter "y" to delete the following entries:
+	
+	```
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-accel? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-bw-histogram? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-core? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-iio? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-latency? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-lspci? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-memory? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-mmio? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-msr? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-numa? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-pcicfg? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-pcie? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-power? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-raw? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-sensor? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tpmi? y
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tsx? y 	```
+	
+4. Finally, remove the dynamic link library of the PcmMSrDriver:
+	
+	```
+	sudo rm /usr/local/lib/libPcmMsr.dylib
+	```
+
+## Thank Yous
+- Thanks to Dreamwhite and jozews321 for their help.
+- Thanks to User232 for the Uninstall Instructions
