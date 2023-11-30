@@ -78,7 +78,6 @@ sudo ~/pcm/build/bin/pcm -r
 After entering your password, PCM will start and a bunch of stats and tables will appear.
 
 ## Uninstalling
-
 To uninstall Intel PCM, do the following: 
 
 1. Delete the `PcmMsrDriver.kext` from `System/Library`
@@ -93,7 +92,7 @@ To uninstall Intel PCM, do the following:
 	```
 	rm /usr/local/sbin/*`
 	```
-	Enter "y" to delete the following entries:
+	Enter "y" to delete the following entries (one by one):
 	
 	```
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm? y
@@ -113,8 +112,8 @@ To uninstall Intel PCM, do the following:
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-raw? y
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-sensor? y
 	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tpmi? y
-	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tsx? y 	```
-	
+	override rwxr-xr-x root/admin for /usr/local/sbin/pcm-tsx? y
+ 	```	
 4. Finally, remove the dynamic link library of the PcmMsrDriver:
 	
 	```
