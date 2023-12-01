@@ -62,6 +62,10 @@ To force enable patching of **NVIDIA Kepler Cards** (GT(X) 7xx Series) in OCLP, 
 
 Enjoy working GPU Acceleration again!
 
+> [!CAUTION]
+> 
+> Beware when using an **Nvidia GT 730** because it comes in 2 variants: Fermi (GF108) and Kepler (GK208B). But only the Kepler variant is compatible with macOS!
+
 ## NVIDIA Tesler Patching
 
 ### Config Preparations
