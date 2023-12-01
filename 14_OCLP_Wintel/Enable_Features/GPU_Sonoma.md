@@ -12,9 +12,6 @@ In some cases, discrete GPUs might not be detected by OpenCore Legacy Patcher be
 
 ## NVIDIA Kepler Patching
 
-<details>
-<summary><b>INSTRUCTIONS</b></summary>
-
 ### Config Preparations
 - Mount your EFI and open your config.plist
 - Adjust the following Settings:
@@ -53,12 +50,7 @@ To force enable patching of **NVIDIA Kepler Cards** (GT(X) 7xx Series) in OCLP, 
 
 Enjoy working GPU Acceleration again!
 
-</details>
-
 ## NVIDIA Tesler Patching
-
-<details>
-<summary><b>INSTRUCTIONS</b></summary>
 
 ### Config Preparations
 - Mount your EFI and open your config.plist
@@ -102,8 +94,6 @@ To force enable patching of **NVIDIA Tesler Cards** in OCLP, do the following:
 - Once it's done, reboot
 
 Enjoy working GPU Acceleration again!
-
-</details>
 
 ## Further Resources
 -  How to Root Patch with non-OpenCore Legacy Patcher Macs/Hackintoshes. ([**OCLP issue #348**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/348))
