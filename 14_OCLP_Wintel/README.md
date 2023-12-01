@@ -23,7 +23,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 
 ## Re-Enabling Features
 - [**Fixing WiFi in macOS Sonoma**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
-- [**Forc-enable GPU Patching**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/GPU_Sonoma.md)
+- [**Force-enable GPU Patching**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/GPU_Sonoma.md)
 
 ## Troubleshooting
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
