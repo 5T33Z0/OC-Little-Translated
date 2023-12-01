@@ -1,4 +1,4 @@
-## Troubleshooting: Force-enable GPU patching 
+## Force-enable GPU patching 
 > **System Requirments**: macOS 12 or newer<br>
 > **OCLP**: 0.6.9 or newer
 
