@@ -116,4 +116,5 @@ Enjoy working GPU Acceleration again!
 &rarr; TO BE CONTINUED…
 
 ## Further Resources
--  How to Root Patch with non-OpenCore Legacy Patcher Macs/Hackintoshes. ([**OCLP issue #348**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/348))
+- How to Root Patch with non-OpenCore Legacy Patcher Macs/Hackintoshes. ([**OCLP issue #348**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/348))
+- [**GPU Buyers Guide**](https://dortania.github.io/GPU-Buyers-Guide/) by Dortania
