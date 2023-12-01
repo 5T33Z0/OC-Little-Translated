@@ -106,7 +106,7 @@ To force enable patching of **NVIDIA Tesler Cards** in OCLP, do the following:
  	- Leave the other option in this section at **`False`** 
  	- Save and close the .py file 
 - Back in Finder, double-click on `OpenCore-Patcher-GUI.command` to run the Patcher App.
-- Click on "Post-Install Root Patch". The option "Graphics: Nvidia Kepler" should now appear in the list of applicable patches:<br>
+- Click on "Post-Install Root Patch". The option "Graphics: Nvidia Kepler" should now appear in the list of applicable patches:<br>![Patch_Tesler](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/32c41807-3189-492f-886e-54e8ed486b73)
 - Start Patching. 
 - Once it's done, reboot
 
