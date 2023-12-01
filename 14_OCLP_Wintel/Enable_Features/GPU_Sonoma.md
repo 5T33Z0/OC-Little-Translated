@@ -29,7 +29,7 @@ To force enable patching of **NVIDIA Kepler Cards** (GT(X) 7xx Series) in OCLP, 
  	- Save and close the .py file 
 - Back in Finder, double-click on `OpenCore-Patcher-GUI.command` to run the Patcher App.
 - Click on "Post-Install Root Patch". The option "Graphics: Nvidia Kepler" should now appear in the list of applicable patches:<br>![KEPLER](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/56441ba0-73f9-46e0-a4d2-7ae320f2f551)
-- **Optional**: If the patches can't be applied due to config restrictions, lift the restrictions by adjusting the mentioned setting(s) in the config.plist. In this eaxample, `SecuredBootModel`has to be set to `Disabled` in the config.plist first before root patches can be applied.
+- **Optional**: If the patches can't be applied due to config restrictions, lift the restrictions by adjusting the mentioned setting(s) in the config.plist first. In this eaxample, `SecuredBootModel`has to be set to `Disabled` in the config.plist first before root patches can be applied. SIP and AMFI can are features that prohiit applying root patches. Check the corresponding [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family to find out the correct settings to prepare your config.plist.
   	- Save the config and reboot
   	- Run OCLP again
 - Start Patching. 
