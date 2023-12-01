@@ -3,7 +3,7 @@
 > **OCLP**: 0.6.9 or newer
 
 ## About
-In some cases, discrete GPUs might not be detected by OpenCore Legacy Patcher because their device-id or IOName is not in the list of supported GPUs used in real Macs. In this case, you need to force-enable GPU patching in the configuration file of the OpenCore Lagacy Patcher Source Code since the GUI of the app does not include settings to enable GPU patching manually (for probably good reasons).
+In some cases, discrete GPUs might not be detected by OpenCore Legacy Patcher because their device-id or IOName is not in the list of supported GPUs used in real Macs. In this case, you need to force-enable GPU patching in the configuration file of the OpenCore Lagacy Patcher Source Code since the GUI of the app does not include settings to enable GPU patching manually (probably for good reasons).
 
 > [!CAUTION]
 > 
