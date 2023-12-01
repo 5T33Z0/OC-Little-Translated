@@ -22,11 +22,11 @@ To force enable patching of **NVIDIA Kepler Cards** (GT(X) 7xx Series) in OCLP, 
 	- **`self.kepler_gpu = True`**
  	- Save and close the .py file 
 - Back in Finder Double-click on `OpenCore-Patcher-GUI.command` to run the Patcher App.
-- Click on "Post-Install Root Patch". The option "Graphics: Nvidia Kepler" should now appear in the list of applicable patches: <br>![](/Users/stunner/Desktop/KEPLER.png)
+- Click on "Post-Install Root Patch". The option "Graphics: Nvidia Kepler" should now appear in the list of applicable patches:<br>![KEPLER](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/56441ba0-73f9-46e0-a4d2-7ae320f2f551)
 - Start Patching. 
 - Once it's done, reboot
 
-Enjoy working GPU Acceleration again
+Enjoy working GPU Acceleration again!
 
 ### Force NVIDIA Tesler Patching
 &rarr; Work in Progress
