@@ -74,7 +74,8 @@ Enjoy working GPU Acceleration again!
 	- Change `Misc/Security/SecureBootModel` to: `Disabled`
 	- Change `csr-active-config` to `03080000`
 	- Add the following boot-args:
-		- `ngfxcompat=1` (Ignores compatibility check in NVDAStartupWeb)
+		- `nvda_drv_vrl=1` (Enables NVIDIA Web Drivers)  
+		- `ngfxcompat=1` (Ignores compatibility check in `NVDAStartupWeb`)
 		- `ngfxgl=1` (Disables Metal support on NVIDIA cards)
 		- `amfi=0x80` (Optional: disables AMFI)
 		- `ngfxsubmit=0` (Optional: disables interface stuttering fix on macOS 10.13)
