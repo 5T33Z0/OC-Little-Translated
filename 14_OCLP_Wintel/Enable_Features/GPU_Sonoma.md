@@ -36,7 +36,7 @@ Enjoy working GPU Acceleration again!
 
 > [!IMPORTANT]
 >
-> If root patches can't be applied due to config restrictions, lift the restrictions first by adjusting the mentioned setting(s) in the config.plist. In this eaxample, `SecuredBootModel` has to be set to `Disabled` in the config.plist before root patches can be applied. Other security features like `SIP` and `AMFI` prohiit applying root patches as well. Check the corresponding [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family to find out the correct settings to prepare your config.plist for applying root patches. Keep in mind that config.plist changes are only applied after the next reboot! 
+> If root patches can't be applied due to config restrictions, lift the restrictions first by adjusting the mentioned setting(s) in the config.plist. In this example, `SecuredBootModel` has to be set to `Disabled` in the config.plist before root patches can be applied. Other security features like `SIP` and `AMFI` also prohibit applying root patches as well. Check the corresponding [configuration guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for your CPU family to find the correct settings to prepare your config.plist for applying root patches. Keep in mind that any config.plist changes require a reboot in order to affect macOS!
 
 ## Force NVIDIA Tesler Patching
 &rarr; Work in Progress
