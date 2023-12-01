@@ -1,6 +1,18 @@
 # Force-enable GPU patching in OpenCore Legacy Patcher
+
 **System Requirments**: macOS 12 or newer<br>
 **OCLP**: 0.6.9 or newer
+
+**TABLE of CONTENTS**
+
+- [About](#about)
+- [NVIDIA Kepler Patching](#nvidia-kepler-patching)
+	- [Config Preparations](#config-preparations)
+	- [OCLP Preparations](#oclp-preparations)
+- [NVIDIA Tesler Patching](#nvidia-tesler-patching)
+	- [Config Preparations](#config-preparations-1)
+	- [OCLP Preparations](#oclp-preparations-1)
+- [Further Resources](#further-resources)
 
 ## About
 In some cases, discrete GPUs might not be detected by OpenCore Legacy Patcher because their device-id or IOName is not in the list of supported GPUs used in real Macs. In this case, you need to force-enable GPU patching in the configuration file of the OpenCore Lagacy Patcher Source Code since the GUI of the app does not include settings to enable GPU patching manually (probably for good reasons).
@@ -94,6 +106,9 @@ To force enable patching of **NVIDIA Tesler Cards** in OCLP, do the following:
 - Once it's done, reboot
 
 Enjoy working GPU Acceleration again!
+
+## Other GPUs
+&rarr; TO BE CONTINUED…
 
 ## Further Resources
 -  How to Root Patch with non-OpenCore Legacy Patcher Macs/Hackintoshes. ([**OCLP issue #348**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/348))
