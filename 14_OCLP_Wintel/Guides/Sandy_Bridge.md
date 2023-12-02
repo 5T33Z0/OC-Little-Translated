@@ -115,7 +115,9 @@ Based on your system, use one of the following SMBIOSes for Sandy Bridge CPUs. O
 	- **`MacBookPro8,3`** (= 17″ Display, Core i7)
 - **For NUCs**: **`Macmini5,x`**
 
-> **Note**: Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
+> [!NOTE]
+> 
+> Once macOS 12 or newer is installed, you can disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects.
 
 #### When Upgrading from macOS Catalina or older
 Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot.
@@ -132,7 +134,11 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 	- **`Macmini8,1`** 
 - Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
-> **Note**: <ul><li> Once macOS 12 or newer is installed, you can switch to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. <li> You may want to generate a new [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) in Post-Install to optimize CPU Power Management. <li> You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects. 
+> [!NOTE]
+> 
+> - Once macOS 12 or newer is installed, you can switch to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS. 
+> - You may want to generate a new [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) in Post-Install to optimize CPU Power Management. 
+> - You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects. 
 
 ## macOS Ventura Installation
 With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
@@ -144,7 +150,9 @@ With all the prep work out of the way you can now upgrade to macOS Ventura. Depe
 - Select macOS 13.x (whatever the latest available version is)  
 - Once the download is finished the "Install macOS Ventura" app will be located in your "Programs" folder
 
-> **Note**: OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> [!NOTE]
+> 
+> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer 
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
@@ -195,7 +203,9 @@ To bring them back, do the following:
   - `-radvesa` – put a `#` in front to disable it: `#-radvesa`
   - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
 
-> **Note**: Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
+> [!NOTE]
+> 
+> Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put them into VESA mode so you have a picture and not a black screen!
 
 ### Verifying SMC CPU Power Management
 To verify that SMC CPU Power Management is working, enter the following command in Terminal:
@@ -227,7 +237,9 @@ After macOS Ventura is installed and OCLP's root patches have been applied in Po
 - Change `-radvesa` to `#-radvesa` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on AMD GPUs.
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
-> **Note**: Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
+> [!NOTE]
+> 
+> Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
 ### Verifying AMFI is enabled
 We can check whether or not AMFI is enabled by entering the following command in Terminal:
@@ -267,6 +279,10 @@ After that, you will be notified whenever an update for the OpenCore Patcher is 
 Note that this Pop-up refers to "OpenCore" and not the Patcher because OCLP was designed with real Macs and Mac users in mind. For "regular" Mac users, using OCLP is most likely the only way they update OpenCore, config and kexts. So after downloading the latest OCLP update, they, just rebuild the EFI, mount the ESP, replaces the EFI/OC folder, apply reoo patches, reboot and that's it. 
 
 But as Hackintosh users, we only care about the App updates to apply new, updated or refined root patches for iGPUs, Wi-FI, etc. Please keep in mind that you have to manually adjust the OCLP version number after each update so that you won't be notified about a possibly outdated patcher app although the newest version is installed already. So adding the OCLP-Version Key to a Hackintosh build is not really a necessity.
+
+> [!TIP]
+> 
+> If your system won't boot after patching it with OpenCore Legacy Patcher, you have several options to [revert root patches](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md).
 
 ## Notes
 - Applying Root Patches to the system partition breaks its security seal. This affects System Updates: every time a System Update is available, the FULL Installer (about 12 GB) will be downloaded. There is a [**workaround**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) to this but it's only applicable to Haswell/Broadwell and newer.

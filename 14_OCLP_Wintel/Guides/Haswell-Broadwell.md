@@ -142,6 +142,7 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
 > [!NOTE]
+>
 > Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. 
 
 ## macOS Ventura Installation
@@ -155,6 +156,7 @@ With all the prep work out of the way you can now upgrade to macOS Ventura. Depe
 - Once the download is completed, the "Install macOS Ventura" app will be located in the "Programs" folder
 
 > [!NOTE]
+> 
 > OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
 
 ### Option 1: Upgrading from macOS 11.3 or newer
@@ -207,6 +209,7 @@ To bring them back, do the following:
   - `nv_disable=1` – put a `#` in front to disable it: `#nv_disable=1`
 
 > [!NOTE]
+> 
 > Prior to installing macOS updates you probably have to re-enable boot-args for AMD and NVIDIA GPUs again to put the card in VESA mode.
 
 ### Revert SMBIOS (after upgrading from macOS Catalina or older only)
@@ -221,6 +224,7 @@ After macOS Ventura is installed and OCLP's root patches have been applied in Po
 - Change `nv_disable=1` to `#nv_disable=1` &rarr; This disables the boot-arg which in return re-enables hardware acceleration on NVIDIA GPUs.
 
 > [!IMPORTANT]
+> 
 > Keep a backup of your currently working EFI folder on a FAT32 USB flash drive just in case your system won't boot after removing/disabling these boot-args!
 
 ### Verifying AMFI is enabled
@@ -261,6 +265,10 @@ After that, you will be notified whenever an update for the OpenCore Patcher is 
 Note that this Pop-up refers to "OpenCore" and not the Patcher because OCLP was designed with real Macs and Mac users in mind. For "regular" Mac users, using OCLP is most likely the only way they update OpenCore, config and kexts. So after downloading the latest OCLP update, they, just rebuild the EFI, mount the ESP, replaces the EFI/OC folder, apply reoo patches, reboot and that's it. 
 
 But as Hackintosh users, we only care about the App updates to apply new, updated or refined root patches for iGPUs, Wi-FI, etc. Please keep in mind that you have to manually adjust the OCLP version number after each update so that you won't be notified about a possibly outdated patcher app although the newest version is installed already. So adding the OCLP-Version Key to a Hackintosh build is not really a necessity.
+
+> [!TIP]
+> 
+> If your system won't boot after patching it with OpenCore Legacy Patcher, you have several options to [revert root patches](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md).
 
 ## Notes
 - Applying Root Patches to the system partition breaks its security seal. This affects System Updates: every time a System Update is available, the FULL Installer (about 12 GB) will be downloaded. But there is a [**workaround to reduce the size of OTA Updates**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md).
