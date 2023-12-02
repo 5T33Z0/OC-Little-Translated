@@ -25,7 +25,9 @@ But if you don't use this kext to fix the EC in macOS and `HWAC` is present in y
 
 ## Instructions
 
-- Add `SSDT-HWAC.aml` to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`)
+- Open `SSDT-HWAC.dsl` in maciASL
+- Export it as `SSDT-HWAC.aml` (ACPI Machine Language)
+- Add it to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`)
 - Add the following rename to the `ACPI/Patch` section:
 	```text
 	COMMENT: Change HWAC to XWAC EC Reads, pair with SSDT-HWAC

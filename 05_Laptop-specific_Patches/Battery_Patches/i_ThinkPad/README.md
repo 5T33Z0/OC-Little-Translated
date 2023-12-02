@@ -9,6 +9,10 @@ The ThinkPad Battery system consists of 2 categories: `single` and `dual` batter
 
 For example, the T470/T470s belongs in the dual battery systems category whereas the T470P belongs in the single battery category. On the other hand the T430 series belongs to the dual battery systems, although the machine itself has only one battery installed ex factory, but a second one can be installed in the optical drive bay.
 
+> [!NOTE]
+> 
+> ThinkPad users might also need [**`SSDT-HWAC`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ThinkPad)
+
 ## Instructions
 In order to get your battery percentage indicator working correctly, you have to do the following: 
 
