@@ -30,7 +30,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Mojave.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Monterey</string>
+				<string>V2.3.0 | Intel WiFi Driver for macOS Mojave</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -48,7 +48,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Catalina.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Monterey</string>
+				<string>V2.3.0 | Intel WiFi Driver for macOS Catalina</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -66,7 +66,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_BigSur.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Monterey</string>
+				<string>V2.3.0 | Intel WiFi Driver for macOS Big Sur</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
