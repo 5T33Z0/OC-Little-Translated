@@ -25,20 +25,20 @@
 - [Notes and Credits](#notes-and-credits)
 
 ## About
+This shapter contains a collection of `config.plist` examples to demonstrate the loading order for certain kexts. In contrast to Clover, where just drop required kexts into the `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot! So it's essential to get the order right.
 
-This Chapter contains a collection of `config.plist` examples to demonstrate the loading sequences for certain kexts and family of kexts. 
-
-In contrast to Clover, where just drop required kexts to `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot!
-
-In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the most essential kexts that are required by almost every Hackintosh to boot. These are:
+In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the bare minimum kexts required by any Hackintosh to boot:
 
 1. **Lilu.kext**
 2. **VirtualSMC.kext** (+ Sensor Plugins) or **FakeSMC.kext** (+ optional Sensor Plugins)
-3. **Whatevergreen**
+3. **Whatevergreen** 
+4. **AppleALC**
 
-The config examples listed below show the loading sequences for **Bluetooth**, **Wifi**, **Keyboards** and **Trackpads**, and other kexts that have to be loaded in the correct order to work properly. Not having them in the correct order may cause Kernel Panics. Same goes for having kexts listed in your config.plist which are not present in the `EFI/OC/Kexts` folder. So it's of utmost importance that the kexts are loaded in the correct order *and* that the content of the `config.plist` reflect the kexts present in the OC folder 1 to 1. The examples listed below provide a solid guideline on how to organize and combine kexts correctly.
+The config examples listed below show the loading sequences for **Bluetooth**, **Wifi**, **Keyboards**, **Trackpads**, and other kexts that have to be loaded in the correct order to work properly. Not having them in the correct order may cause Kernel Panics. Same goes for having kexts listed in your config.plist which are not present in the `EFI/OC/Kexts` folder. So it's of utmost importance that the kexts are loaded in the correct order *and* that the content of the `config.plist` reflect the kexts present in the OC folder 1 to 1. The examples listed below provide a solid guideline on how to organize and combine kexts correctly.
 
-For additional information about available kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
+> [!NOTE]
+>
+> For additional information about available and supported kexts, read the [**Kext documentation**](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) on the OpenCore Github.
 
 ## Processing order of Kexts and Kernel patches
 OpenCore handles the `Kernel` section of the `config.plist` in the following order (since version 0.9.2, Commit 6a65dd1):
@@ -91,7 +91,9 @@ macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
 macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
 macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
 
-:bulb: To find out which Kernel your current macOS install is running, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a version of macOS which uses a Kernel greater than `X.9.9`. 
+> [TIP]
+>
+> To find out which Kernel your current macOS install is using, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a single version of macOS which used a Kernel greater than `X.9.9`. 
 
 ## Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
