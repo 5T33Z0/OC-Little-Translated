@@ -73,9 +73,9 @@ Everything should be back to normal again.
 
 > [!IMPORTANT]
 >
-> If you don't have internet access, root patching might fail due to missing Kernel Debug Kit (KDK). In this case, install the KDK and run OCLP again!
+> If you don't have internet access, root patching might fail due to missing Kernel Debug Kit (KDK). In this case, install the KDK and then run OCLP again!
 
 > [!TIP]
 >
-> - If your system can connect to the internet via Ethernet cable without root patches you can use Safari in Recovery as well to follow the instructions.
+> - If your system can connect to the internet via Ethernet cable without root patches, you can use Safari in Recovery as well to follow the instructions.
 > - There’s also a very helpful [YouTube video](https://youtu.be/mNcjmvzS0Vo?si=OtNeB4r1q3s3sW9T) that explains all the steps in detail.
