@@ -43,8 +43,8 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For I
 
 | ⚠️ Important Updates |
 |:----------------------------|
-| Don't install macOS 14.2 beta 3 (23C5047e) on Ivy Bridge systems yet! Patching with OCLP 1.2.1 in Post-Install will cause the **WindowServer** to crash so you will get kicked back out to the logon screen.
-| Uninstall Intel Power Gadget before upgrading to macOS Sonoma (use the uninstaller in the app's folder)! The `EnergyDriver.kext` that comes with the app causes all CPU cores to run at 100% in macOS Sonoma 14.2+!
+| ~~Don't install macOS 14.2 beta 3 (23C5047e) on Ivy Bridge systems yet! Patching with OCLP 1.2.1 in Post-Install will cause the **WindowServer** to crash so you will get kicked back out to the logon screen.~~ Use OCLP 1.3.0 [beta version](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/SOURCE.md) or newer for patching.
+| ~~Uninstall Intel Power Gadget before upgrading to macOS Sonoma (use the uninstaller in the app's folder)! The `EnergyDriver.kext` that comes with the app causes all CPU cores to run at 100% in macOS Sonoma 14.2 beta 3!~~ Resolved in macOS 14.2 beta 4 (23C5055b)
 
 **This guide allows you to**: 
 
@@ -68,7 +68,7 @@ This is what you need to know before attempting to install macOS Monterey and ne
 	- For **Ethernet**, there are kexts for legacy LAN controllers [available here](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet)
 	- **Wifi and Bluetooth**:
 		- For enabling Broadcom Wifi/BT Cards, you will need a different [set of kexts](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) to load which need to be controlled via `MinKernel` and `MaxKernel` settings. On macOS 12.4 and newer, a new address check has been introduced in `bluetoothd`, which will trigger an error if two Bluetooth devices have the same address. This can be circumvented by adding boot-arg `-btlfxallowanyaddr` (provided by [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) kext).
-		- Same applies to [Intel WiFi/BT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8-intel-wifi-and-bluetooth) cards using [OpenIntelWirless](https://github.com/OpenIntelWireless) kexts
+		- Same applies to [Intel WiFi/BT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware) cards using [OpenIntelWirless](https://github.com/OpenIntelWireless) kexts
 		- [Enabling Wifi in macOS Sonoma](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) requires additional kext and also applying root patches in Post-Install!
 - **Security**: Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
 - **System Updates**: 
