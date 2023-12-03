@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤0.9.7-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.2b-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.12.01-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤0.9.7-success.svg)](https://github.com/acidanthera/OpenCorePkg) [![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.2b-white.svg)](https://www.apple.com/macos/macos-ventura-preview/) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-23.12.03-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## TABLE of CONTENTS
 
@@ -47,6 +47,7 @@
 * [**Switching to NO_ACPI build of OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI)
 * [**Using Clover alongside OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/R_BootloaderChooser#readme)
 * [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
+* [**Featured OpenCanopy Themes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/T_Themes)
 * [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
 
 ___
