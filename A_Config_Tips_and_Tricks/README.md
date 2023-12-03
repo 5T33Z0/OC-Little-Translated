@@ -1,8 +1,9 @@
 # OpenCore Config Tips and Tricks
 This section contains a small collection of useful configuration tips for OpenCore's `config.plist`.
 
-**TABLE of CONTENTS**
-
+<details>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+	
 - [OpenCore Troubleshooting Quick Tips](#opencore-troubleshooting-quick-tips)
 	- [`MinDate`/`MinVersion` settings for the APFS driver](#mindateminversion-settings-for-the-apfs-driver)
 - [I. Updating config.plist and fixing errors](#i-updating-configplist-and-fixing-errors)
@@ -36,6 +37,8 @@ This section contains a small collection of useful configuration tips for OpenCo
 	- [SMBIOS Data Import/Export with OCAT](#smbios-data-importexport-with-ocat)
 	- [1-Click-Solution for Clover Users](#1-click-solution-for-clover-users)
 - [Further Resources](#further-resources)
+
+</details>
 
 ## OpenCore Troubleshooting Quick Tips
 
