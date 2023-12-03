@@ -5,6 +5,7 @@ This section contains a small collection of useful configuration tips for OpenCo
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
 	
 - [OpenCore Troubleshooting Quick Tips](#opencore-troubleshooting-quick-tips)
+	- [Troubleshooting Workflow](#troubleshooting-workflow)
 	- [`MinDate`/`MinVersion` settings for the APFS driver](#mindateminversion-settings-for-the-apfs-driver)
 - [I. Updating config.plist and fixing errors](#i-updating-configplist-and-fixing-errors)
 	- [Automated config upgrade (recommended)](#automated-config-upgrade-recommended)
@@ -42,6 +43,10 @@ This section contains a small collection of useful configuration tips for OpenCo
 
 ## OpenCore Troubleshooting Quick Tips
 
+### Troubleshooting Workflow
+
+![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
+
 Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following settings:
 
 - `UEFI/ConnectDrivers` = true
@@ -50,7 +55,6 @@ Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the fo
 - `UEFI/APFS/MinDate` = -1
 - `UEF/APFS/MinVersion` = -1
 - Compare the structure of `UEFI/Drivers` with `sample.plist` from the OpenCore Package (format changed in OC 0.7.3).
-- **OC Troubleshooting Workflow**: ![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
 
 For extensive troubleshooting please refer to Dortania's [Troubleshooting Guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents).
 
