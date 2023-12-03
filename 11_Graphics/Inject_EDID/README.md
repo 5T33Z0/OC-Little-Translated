@@ -67,7 +67,7 @@ Hopefully this will resolve the issue!
 
 > [!NOTE]
 >
-> Injecting the EDID only makes sense, if you need specific resolutions and/or display refresh rates (higher or lower) that are supported by the display panael but are not available in display settings by default!
+> Injecting the EDID only makes sense, if you need a specific resolution and/or display refresh rate (higher or lower) that is supported by the display panael but is unavailable in the display settings by default!
 
 # Alternatives
 If the above method doesn't work, try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
