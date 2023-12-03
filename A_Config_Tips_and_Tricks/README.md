@@ -72,7 +72,9 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 
 **Source**: [Acidanthera](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h)
 
-**IMPORTANT**: For security concerns, you should change these values according to the version of macOS you are using.
+> [!IMPORTANT]
+>
+> For security concerns, you should change these values according to the version of macOS you are using.
 
 ## I. Updating config.plist and fixing errors
 
