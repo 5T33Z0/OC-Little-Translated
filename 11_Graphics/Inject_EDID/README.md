@@ -58,7 +58,9 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 
 Hopefully this will resolve the issue!
  
-**NOTE**: If you added additional resolutions, you need to install either the display override in `/System/Library/Displays/Overrides` or install `DisplayMergeNub.kext` in `/System/Library/Extensions`.
+> [!IMPORTANT]
+> 
+> If you added additional/custom resolutions, you need to copy the `DisplayVendorID-XXX` folder containing the display override to `/System/Library/Displays/Overrides` or install the `DisplayMergeNub.kext` in `/System/Library/Extensions`. Since `S/L/E` is write-protected in macOS 10.15 and newer by default, doing this is not recommended.
 
 ## Example
 
