@@ -8,6 +8,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 - Fixing Black Screen on Wake
 - Fixing 8 Apples Glitch and scrambled screen
 - Issues when a second Monitor is connected
+- Unlocking additional resolutions and refresh rates
 
 ## Patching Principle
 - Dump EDID
@@ -58,6 +59,11 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 Hopefully this will resolve the issue!
  
 **NOTE**: If you added additional resolutions, you need to install either the display override in `/System/Library/Displays/Overrides` or install `DisplayMergeNub.kext` in `/System/Library/Extensions`.
+
+## Example
+
+- Availabke resolutions for my laptop's display (default):<br>![noEDID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/80291495-8685-4dc9-935e-dd77ad24ed8b)
+- With correct EDID injected:<br>![WithEDID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/6941a1bd-9e06-4927-b9dc-84e4aa77514b)
 
 ## Alternatives
 If the above method doesn't work, try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
