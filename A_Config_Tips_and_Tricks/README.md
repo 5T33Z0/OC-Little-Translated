@@ -55,7 +55,7 @@ Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the fo
 For extensive troubleshooting please refer to Dortania's [Troubleshooting Guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents).
 
 ### `MinDate`/`MinVersion` settings for the APFS driver
-OpenCore introduced a new security feature in version 0.7.2 which prohibits the APFS driver from loading if it doesn't comply to a specific Date and Version (`MinDate` and `MinVersion`).
+OpenCore introduced a new security feature in version 0.7.2 which prohibits the APFS driver from loading if it doesn't comply to a specific Date (`MinDate`) and Version and (`MinVersion`) in the  `UEFI/APFS` section.
 
 The new default values `0`and `0` is for macOS Big Sur. So if you're running an older version of macOS, you won't see your drives. To disable this feature, enter `-1` and the APFS driver will load for any macOS version.
 
