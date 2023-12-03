@@ -327,7 +327,7 @@ To avoid OpenCore from injecting SMBIOS Infos into Windows or other OSes causing
 ### Manual method
 Exchanging existing SMBIOS data back and forth between an OpenCore and a Clover config can be a bit confusing since both use different names and locations for data fields. 
 
-Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. On top of that you have to re-enter and 2-way-authenticate the system every single time you switch between OpenCore and Clover, which is incredibly annoying. So in order to prevent this, you have to do the following:
+Transferring the data correctly is important because otherwise you have to enter your AppleID and Password again which in return will register your computer as a new device in the Apple Account. As long as there is a mismatch betwenne the two SMBIOS datasets, you have to go through the 2-way-authenticatin process every single time you switch between OpenCore and Clover, which is incredibly annoying. So in order to prevent this, you have to do the following:
 
 1. Copy the Data from the following fields to Clover Configurator's "SMBIOS" and "RtVariables" sections:
 	PlatformInfo/Generic (OpenCore)| SMBIOS (Clover)      |
