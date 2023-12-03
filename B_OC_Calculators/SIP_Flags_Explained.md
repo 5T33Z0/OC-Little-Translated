@@ -1,4 +1,4 @@
-# CSR-ACTIVE-CONFIG Flags explained
+# `csr-active-config` flags explained
 
 ## About
 OSX 10.11 (El Capitan) introduced a new security feature called **System Integrity Protection** (or SIP) to improve system security. It's designed to protect the core operating system files and processes from unauthorized access and modification, even by users with administrative privileges. SIP currently provides 12 flags which can be set by calculating a bitmask which can be injected by Boot Managers such as Clover an OpenCore to control the level of SIP. Below you will find the flags and what they do. If you want to calculate your own csr-active-config value, [have a look here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators).
