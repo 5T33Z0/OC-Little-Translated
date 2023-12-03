@@ -134,20 +134,21 @@ You should deactivate the single user mode for security reasons, because it can 
 
    **NVRAM/Delete/7C436110-AB2A-4BBB-A880-FE41995C9F82** &rarr; `csr-active-config`.
 
-   This deletes the current csr value from the NVRAM on reboot and replaces it with the value stored under "NVRAM > Add…". This is Very useful if you have different macOS installs which use different CSR values.
+   This deletes the currently set `csr-active-config` value from NVRAM on reboot and replaces it with the value stored under "NVRAM > Add…". This is necessary to apply the new value if you have changed it. Otherwise you would have to use "Reset NVRAM". 
 
-   To test if the correct settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this:
+   To test if the correct settings were applied after reboot, type `csrutil status` into the terminal after reboot. The result should look something like this (for `03080000`):
 
 	```
 	Configuration:
-	Apple Internal: enabled
+	Apple Internal: disbaled
 	Kext Signing: disabled
 	Filesystem Protections: disabled
-	Debugging Restrictions: disabled
-	DTrace Restrictions: disabled
-	NVRAM Protections: disabled
-	BaseSystem Verification: disabled
-	```   
+	Debugging Restrictions: enabled
+	DTrace Restrictions: enabled
+	NVRAM Protections: enabled
+	BaseSystem Verification: enabled
+	```
+	**NOTE**: Check ["`csr-active-config` flags explained"](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) to figure out how this bitmask works.
 
 ## IV. Adjust Boot Picker Attributes, enable Mouse Support
 
