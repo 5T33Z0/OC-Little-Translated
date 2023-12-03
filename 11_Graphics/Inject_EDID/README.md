@@ -63,7 +63,7 @@ Hopefully this will resolve the issue!
 ## Example
 
 - Available resolutions for my laptop's display (default):<br>![noEDID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/80291495-8685-4dc9-935e-dd77ad24ed8b)
-- With correct EDID injected (with "Add/Fix the monitor ranges" enabled):<br>![WithEDID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/6941a1bd-9e06-4927-b9dc-84e4aa77514b)
+- After injecting EDID (with "Add/Fix the monitor ranges" enabled):<br> ![WithEDID](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/5cb29091-0a4e-4ae6-b986-92d00cb794ee)
 
 > [!NOTE]
 >
