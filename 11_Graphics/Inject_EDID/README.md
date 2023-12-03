@@ -77,6 +77,6 @@ If the above method doesn't work, try [**`HibernationFixup.kext`**](https://gith
 ## Credits and Resources
 - For fixing purple/magenta screen issues, try [this fix](https://github.com/dreamwhite/patch_edid)
 - Acidanthera for OpenCore, Whatevergreen and HibernationFixup
-- Blackosx for DarwinDumper
-- andyvand for FixEDID
-- Daliansky for [original guide](https://blog-daliansky-net.translate.goog/Use-HIDPI-to-solve-sleep-wake-up-black-screen,-Huaping-and-connect-the-external-monitor-the-correct-posture.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+- Blackosx for [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/)
+- andyvand for [**FixEDID**](https://github.com/andyvand/FixEDID)
+- Daliansky for [**original guide**](https://blog-daliansky-net.translate.goog/Use-HIDPI-to-solve-sleep-wake-up-black-screen,-Huaping-and-connect-the-external-monitor-the-correct-posture.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
