@@ -31,7 +31,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 ### Extracting the EDID value from `EDID.bin`
 - Download [**FixEDID**](https://github.com/andyvand/FixEDID) (click on "Code" and select "Download ZIP")
 - Unzip the file
-- Run the FixEDID App (It's located under `FixEDID-master/Release_10.7 and +`)
+- Open **FixEDID** App (located under "FixEDID-master/Release_10.7 and +"). If macOS won't let you run it, open it wia right-click menu.
 - Click on "Open EDID binary file":</br>![EDID_03](https://user-images.githubusercontent.com/76865553/184684202-9aa99568-a179-42d4-8672-38448990948d.png)
 - Navigate to the dumped `EDID.bin` file and open it
 - Select "Apple iMac Retina Display (16:9)" if your display supports HD and High DPI, otherwise use whatever is appropriate for your display.
@@ -49,7 +49,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 ### Adding the `EDID` to `config.plist`
 - Open your `config.plist`
 - Go to `DeviceProperties/Add` 
-- Locate the Framebuffer Patch for your iGPU: `PciRoot(0x0)/Pci(0x2,0x0)`
+- Locate the Framebuffer Patch for your iGPU in `DeviceProperties`: `PciRoot(0x0)/Pci(0x2,0x0)`
 - Add Key `AAPL00,override-no-connect`, Type: `Data`
 - Press CMD+V to enter the EDID as hex in the `Value` field:</br>![EDID_07](https://user-images.githubusercontent.com/76865553/184684433-a53ba979-a0e1-4e91-b95b-4a0411f8e3ae.png)
 - Save your `config.plist` and reboot
