@@ -13,7 +13,7 @@ Prior to reverting root patches, do the following if your system requires root p
 
 > [!NOTE]
 >
-> If OCLP is installed already and can access the internet, it automatically detects when a macOS update is being downloaded. It then notifies you that it needs to installs the latest KDK in order to succesfully perform the update:
+> If OCLP is installed already and can access the internet, it automatically detects when a macOS update is being downloaded. It then notifies you that it needs to install the latest KDK in order to succesfully perform the update:
 > 
 > ![kdkdl](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/1bd1f9f0-9ea9-4ad4-b112-93bad9261b56)
 > 
