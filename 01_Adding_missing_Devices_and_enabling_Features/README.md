@@ -1,7 +1,7 @@
 # Enabling Devices and Features for macOS
 
 ## About
-Among the many `SSDT` patches available in this repo, a significant number of them are for enabling devices, services or features in macOS. They can be divided into four main categories:
+Among the many `SSDT` (Secondary System Description Table) patches available in this repo, a significant number of them are for enabling devices, services or features in macOS. They can be divided into four main categories:
 
 - **Virtual Devices**, such as Fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS is happy and works as expected.
 - **Devices which exist in the `DSDT` but are disabled by the vendor.** These are usually devices considered "legacy" under Windows but are required by macOS to boot. They are still present in the system's `DSDT` and provide the same functionality but are disabled in favor of a newer device. A prime example for this is the Realtime Clock (`RTC`) which is disabled in favor of the `AWAC` clock on modern Wintel machines, like 300-series mainboards and newer. SSDT Hotfixes from this category disable the newer device and enable its "legacy" pendent for macOS only by inverting their statuses (`_STA`). 
@@ -51,25 +51,46 @@ The only reason for doing this is to have installed PCIe cards listed in the "PC
 Listed below, you will find two categories of ACPI hotfixes: essential (or fuctional) and non-essential SSDTs. **Functional** SSDTs are a necessity for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. SSDT-ALS0 or SSDT-PNLF), some are required based on the used CPU and/or chipset (e.g. SSDT-HPET, SSDT-AWAC or SSDT-PMCR). Non-essential (or **cosmetic**) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or through the folders above to find out which you may need.
 
 ### Obtaining ACPI Tables
-In order to to figure out which SSDTs are required for your system, it is necessary to research your machine's ACPI tables - more specifically, your system's `DSDT` table. To obtain a copy it, it's necessary to extract it from your system's BIOS/UEFI. There are a couple of options to do this.
+In order to to figure out which SSDTs are required for your system, it is necessary to research your machine's ACPI tables - more specifically, your system's `DSDT` table. To obtain a copy it, it's necessary to extract it from your system's BIOS/UEFI. There are a couple of options to do this listed below.
 
-**Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables:
+<details>
+<summary><b>Dumping ACPI Tables</b> (Click to reveal)</summary>
 
-- Using **Clover** (easiest and fastest way): Clover can dump ACPI tables without a working config within seconds.
-	- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) (CloverV2-51xx.zip) and extract it 
-	- Put the `EFI` folder on the USB flash drive. 
-	- Start the system from the flash drive. 
-	- Hit `F4` in the Boot Menu. The screen should blink once.
-	- Pull the USB flash drive, reset the system and boot into macOS
-	- Put the USB flash drive back in. The dumped ACPI tables will be stored on the flash drive under: `EFI\CLOVER\ACPI\origin`.
-- Using **OpenCore**: Normally, you would need a working config to do this. But the guys from Utopia-Team have created a generic, pre-build Debug EFI which can do it *without* it.
-	- Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
-	- Put the `EFI` folder on the USB flash drive. 
-	- Start the system from the flash drive.
-	- Let the text run through until you reach the text-based boot menu. This takes about a minute
-	- Pull out the USB stick and reboot into a working OS.
-	- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
-- Using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) (Windows only): if you use SSDTTime under Windows, you can also dump the DSDT, which is not possible under macOS.
+**Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables.
+
+#### Dumping ACPI tables with Clover (easiest and fastest method)
+Clover can dump ACPI tables without a working config within seconds.
+
+- Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) (CloverV2-51xx.zip) and extract it 
+- Put the `EFI` folder on the USB flash drive. 
+- Start the system from the flash drive. 
+- Hit `F4` in the Boot Menu. The screen should blink once.
+- Pull the USB flash drive, reset the system and reboot into your OS
+- Put the USB flash drive back in. The dumped ACPI tables will be stored on the flash drive under: `EFI\CLOVER\ACPI\origin`.
+
+#### Dumping ACPI tables with OpenCore (requires Debug version)
+Normally, you would need an already working config.plist in order to obtain the ACPI tables from your system. But since you need the ACPI tables *first* in order to figure out which SSDT hotfixes you *actually* need to boot macOS this is a real dilemma. Luckily, the guys from Utopia-Team have created a generic, pre-configured Debug OpenCore EFI which can dump your system's ACPI tables *without* a bootable config.
+
+- Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
+- Put the `EFI` folder on the USB flash drive. 
+- Start the system from the flash drive.
+- Let the text run through until you reach the text-based boot menu. This takes about a minute
+- Pull out the USB stick and reboot into a working OS.
+- Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
+
+#### Dumping ACPI tables with `SSDTTime` (Windows version only)
+If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) under Windows, you can also dump the DSDT, which is not possible under macOS. 
+
+- Download **SSDTTime**
+- Double-click on `SSDTTime.bat`
+- You should see a menu with a lot of options. 
+- Press "p" to dump the `DSDT`
+- It will be located in a sub-folder called "Results".
+
+> [!NOTE]
+> 
+> If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, download them manually [here](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the SSDTTime.bat file again. 
+</details>
  
 ### Available Hotpatches
 Listed below are all SSDTs contained in this chapter. Use the listed search terms to find the device in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case: read the instructions of a hotpatch first to find out if you really need it and how to apply it. If there's no search term listed, further analysis of the `DSDT` is required to apply the hotpatch.
