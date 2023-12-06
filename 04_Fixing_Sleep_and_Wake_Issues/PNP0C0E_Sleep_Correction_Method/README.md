@@ -130,7 +130,7 @@ Else /* PNP0C0D sleep */
 
 **NOTES**:
 
-- The Sleep Button on X1C5th is `Fn+4`, on other ThinkPads it can be`Fn+F4`  
+- The Sleep Button on the X1 is `Fn+4`, on other ThinkPads it can be `Fn+F4`  
 - On ThinkPads, the `LPC` bus name can also be `LPCB`.
 
 ## Fixing `PNP0C0E` Sleep on other machines
