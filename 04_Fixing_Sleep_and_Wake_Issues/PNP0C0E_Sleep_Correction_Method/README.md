@@ -118,7 +118,7 @@ Else /* PNP0C0D sleep */
   - ***SSDT-LIDpatch***: Lid status patch. Adjust ACPI paths for Lid device and `_LID` control method as needed
   - ***SSDT-FnInsert_BTNV-dell***: Sleep button patch.
 
-### Example 2: ThinkPad X1C5th
+### Example 2: ThinkPad X1 Carbon (5th Gen)
 - **ACPI Renames**:
 	- PTSWAK renames: `_PTS` to `ZPTS` and `_WAK` to `ZWAK`
 	- Lid Method rename: `_LID` to `XLID`
