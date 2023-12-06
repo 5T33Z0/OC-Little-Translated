@@ -9,46 +9,16 @@ To resolve this issue, the following fixes can be applied:
 - Intercept the parameter passed over by ACPI and correct it.
 - Convert `PNP0C0E` sleep to `PNP0C0D` sleep.
 
-## `PNP0C0E`/`PNP0C0D` Sleep methods explained
-
-- **ACPI Specifications**:
-	- `PNP0C0E` &rarr; Hardware ID of Sleep Button Device `SLPB`
-	- `PNP0C0D` &rarr; Hardware ID of Lid Device `LID0`
-- `PNP0C0E` Sleep condition:
-	- If the Sleep Button is pressed
-	- `Notify(***.SLPB, 0x80)` is triggered
-- `PNP0C0D` Sleep condition:
-  - If the lid is closed, `_LID` method returns `Zero`. (`_LID` is the control method for the `PNP0C0D` device) on Laptops.
-  - `Notify(***.LID0, 0x80)` is triggered
-
-### `PNP0C0E` Sleep characteristics
-
-- Entering sleep state is slightly faster than using `PNP0C0D` sleep.
-- But it cannot be interrupted while entering sleep.
-- Enabled by setting `MODE` = `1` in ***SSDT-PTSWAKTTS***
-
-### `PNP0C0D` Sleep characteristics
-
-- Entering sleep can be interrupred immediately by pressing the sleep button again.
-- When connected to an external display, pressing the sleep button has the following effect:
-	- Internal screen is switched off 
-	- Main screen switches over to the external display
-	- Pressing the sleep button again restores the previous state.
-- Enabled by setting `MODE` = `0` (default) in ***SSDT-PTSWAKTTS***
-
-**NOTE**: Please refer to the ACPI specification for more details about `PNP0C0E` and `PNP0C0D`.
-
 ## Solution
-
-3 Associated Patches:
+To fix issues caused by pressing the sleep button and/or to change the sleep mode that it triggers, a combination of 3 patches is available:
 
 1. ***SSDT-PTSWAKTTS***: defines variables `FNOK` and `MODE` to capture changes in `FNOK` and trigger the preferred sleep state. See [**PTSWAK Comprehensive Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
 	- `FNOK` indicates the key state:  
 		- `FNOK` = `1`: Sleep button is pressed
 		- `FNOK` = `0`: After pressing the sleep button/waking the machine again
 	- `MODE` sets the sleep mode:
-		- `MODE` = `1`: `PNP0C0E` sleep
-		- `MODE` = `0`: `PNP0C0D` sleep
+		- `MODE` = `1`: `PNP0C0E` sleep (= `S3` – Standby or Sleep)
+		- `MODE` = `0`: `PNP0C0D` sleep (= `S4` – Hibernation)
 
 	:bulb: **NOTE**: Set `MODE` according to your needs, but do not change `FNOK`!
 
@@ -103,6 +73,43 @@ Else /* PNP0C0D sleep */
     Notify (\_SB.LID, 0x80) /* Execute PNP0C0D sleep */
 }
 ```
+
+## `PNP0C0E`/`PNP0C0D` Sleep methods explained
+
+- **ACPI Specifications**:
+	- `PNP0C0E` &rarr; Hardware ID of Sleep Button Device `SLPB`
+	- `PNP0C0D` &rarr; Hardware ID of Lid Device `LID0`
+- `PNP0C0E` Sleep condition:
+	- If the Sleep Button is pressed
+	- `Notify(***.SLPB, 0x80)` is triggered
+- `PNP0C0D` Sleep condition:
+  - If the lid is closed, `_LID` method returns `Zero`. (`_LID` is the control method for the `PNP0C0D` device) on Laptops.
+  - `Notify(***.LID0, 0x80)` is triggered
+
+### `PNP0C0E` Sleep characteristics
+
+- Known as the `Standby` or `Sleep` state (`S3`).
+- When a system enters `PNP0C0E` sleep, it suspends its activities and enters a low-power mode, where the system's state is stored in RAM (random access memory).
+- `PNP0C0E` consumes some power since the RAM needs to be powered to maintain the system state.
+- Entering sleep state is slightly faster than using `PNP0C0D` sleep. But it cannot be interrupted while entering sleep.
+- Enabled by setting `MODE` = `1` in ***SSDT-PTSWAKTTS***
+
+### `PNP0C0D` Sleep characteristics
+
+- Known as Hibernate or Hibernation state (`S4`).
+- When a system enters `PNP0C0D` sleep, it saves the contents of the RAM to a specific file on the hard drive or SSD (/var/vm/sleepimage), allowing the computer to completely power off.
+- This state consumes no power once the system has saved its state to disk. It's a deeper sleep state compared to `PNP0C0E` sleep, where the system essentially shuts down but can resume to its previous state upon waking up.
+- Waking up from hibernation takes longer compared to the `PNP0C0E` sleep as it requires reloading the saved state from the disk back into RAM.
+- Entering sleep can be interrupred immediately by pressing the sleep button again.
+- Enabled by setting `MODE` = `0` (default) in ***SSDT-PTSWAKTTS***
+
+> [!NOTE] 
+> 
+> - Please refer to the ACPI specification for more details about `PNP0C0E` and `PNP0C0D`.
+> - When connected to an external display, pressing the sleep button has the following effect in macOS:
+> 	- Internal display is switched off 
+> 	- Main screen switches over to the external display
+> 	- Pressing the sleep button again restores the previous state.
 
 ## Name change and patch combination examples
 
