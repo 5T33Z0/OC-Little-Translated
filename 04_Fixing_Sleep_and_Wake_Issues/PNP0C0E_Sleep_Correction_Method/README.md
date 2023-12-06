@@ -125,7 +125,7 @@ Else /* PNP0C0D sleep */
   - ***SSDT-LIDpatch***: Lid status patch. Adjust ACPI paths for Lid device and `_LID` control method as needed
   - ***SSDT-FnInsert_BTNV-dell***: Sleep button patch.
 
-### Example 2: ThinkPad X1C5th
+### Example 2: ThinkPad X1 Carbon (5th Gen)
 - **ACPI Renames**:
 	- PTSWAK renames: `_PTS` to `ZPTS` and `_WAK` to `ZWAK`
 	- Lid Method rename: `_LID` to `XLID`
@@ -137,7 +137,7 @@ Else /* PNP0C0D sleep */
 
 **NOTES**:
 
-- The Sleep Button on X1C5th is `Fn+4`, on other ThinkPads it can be`Fn+F4`  
+- The Sleep Button on the X1 is `Fn+4`, on other ThinkPads it can be `Fn+F4`  
 - On ThinkPads, the `LPC` bus name can also be `LPCB`.
 
 ## Fixing `PNP0C0E` Sleep on other machines
@@ -152,5 +152,5 @@ Else /* PNP0C0D sleep */
   - Refer to the examples to create the sleep button patch and the necessary name change.
 
 ## Caution
-- If your DSDT doen't contain sleep button device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
+- If your DSDT doesn't contain device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
 - `PNP0C0E` and `PNP0C0D` device names and paths should be consistent with the paths used in your `DSDT`.
