@@ -80,7 +80,7 @@ After entering your password, PCM will start and a bunch of stats and tables wil
 ## Uninstalling
 To uninstall Intel PCM, do the following: 
 
-1. Delete the `PcmMsrDriver.kext` from `System/Library`
+1. Delete the `PcmMsrDriver.kext` from `/Library/Extensions`
 
 2. Enter in Terminal (and confirm with your Admin password):
 
