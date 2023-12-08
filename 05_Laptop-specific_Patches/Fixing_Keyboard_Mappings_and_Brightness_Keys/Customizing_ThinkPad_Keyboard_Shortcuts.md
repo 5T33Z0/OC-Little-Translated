@@ -83,9 +83,9 @@ The next question is, how to find the relationship between each button and the a
 
 Rehabman provides a series of DSDT Patches for debugging ACPI functions. OC-little simplifies the DSDT patch into a general SSDT hotpatch, which can be used directly. ACPIDebug provides a set of ACPI functions that can output specified information to the Console, like printf or console.log. We only need to call the relevant function to output the information where we need to print the debugging information.
 
-Enabling ACPI debugging is relatively simple: just add `SSDT-RMDT.aml` (RehabMan Debugging Table) and `ACPIDebug.kext`. The (relatively) difficult part is writing an SSDT for debugging.
+Enabling ACPI debugging is easy: grab `SSDT-RMDT.aml` (RehabMan Debugging Table) and `ACPIDebug.kext` from the [**ACPI Debuggig section**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) and add them to your EFI and config.plist. The (relatively) difficult part is writing an SSDT for debugging.
 
-The sample `SSDT-BKeyQxx-Debug.dsl` in OC-little also provides an example for using the RMDT function that prints two arguments:
+The sample [`SSDT-BKeyQxx-Debug.dsl`](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Debugging/SSDT-BKeyQxx-Debug.dsl) in OC-little also provides an example for using the RMDT function that prints two arguments:
 
 ```asl
 Scope (_SB.PCI0.LPCB.EC0)
@@ -134,7 +134,7 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "ACPIDebug", 0) // Our table name is ACPI
     }
 }
 ```
-Add more `External` references following the same principle `_Q14` function to cover the remaining shortcut key function definitions. Of course, don't forget to add the corresponding ACPI renames to the config.plist, like rename `_Q14` to `XQ14`, etc. to avoid conflicts. The final SSDT looks like the image below:
+Add more `External` references following the same principle as the `_Q14` to define the remaining shortcut keys. Of course, don't forget to add the corresponding ACPI renames to the config.plist, like rename `_Q14` to `XQ14`, etc. to avoid conflicts. The final SSDT looks like the image below:
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/192837/32/23139/28717/6257a095E1192c695/ec36e588b503bbf4.png)
 

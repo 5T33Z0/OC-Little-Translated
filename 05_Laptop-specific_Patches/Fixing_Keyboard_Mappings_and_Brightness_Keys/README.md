@@ -14,13 +14,17 @@ If the BrightnessKeys kext does not work initially, please refer to the "[specia
   
 >[!NOTE]
 >
->Some ASUS and Dell machines require `SSDT-OCWork-xxx` to unblock `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, allowing the BrightnessKeys kext to work properly. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for more details.
+> Some ASUS and Dell machines require `SSDT-OCWork-xxx` to unblock `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, allowing the BrightnessKeys kext to work properly. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for more details.
 
 ## Requirements and Preparations
 
 - Use **VoodooPS2Controller.kext** and its sub-drivers.
 - Clear the key mapping contents of previous, other methods.
 - Plist Editor
+
+> [!CAUTION]
+>
+> If the keys you want to map are not routed via the PS/2 Controller but via the EC instead, you cannot use this method. In this case, try ACPI Debugging instead (&rarr; [**Example**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/Customizing_ThinkPad_Keyboard_Shortcuts.md): In-depth guide for Mapping `Fn` Shortcut Keys on Lenovo ThinkPads)
 
 ### About PS2 and ABD Scan Codes
 
@@ -40,11 +44,13 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 - Next, enter `ioio -s ApplePS2Keyboard LogScanCodes 1` to enable log scan codes (set to `0` to disable the logging again).
     
 #### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
-- Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
-- Next, browse to `Contents/Plugins` 
-- Browse `Contents` and open the `Info.plist` with a plist Editor
-- Search for **`LogScanCodes`** and change it from `0`to **`1`** (once you're done, change it back to **`0`** again!)
-- Save the file
+- Moun your EFI
+- In Finder press <kbd>CMD</kbd>+<kbd>G</kbd> (or select "Go to folder…" from the menu bar)
+- Enter `/Volumes/EFI/EFI/OC/Kexts/VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/Info.plist`
+- Open the `Info.plist` with a plist Editor
+- Navigate tp `IOKitPersonalities\Platform Profile\Default`
+- Change `LogScanCodes` from `0`to **`1`** (once you're done, change it back to **`0`** again!)
+- Save the the file
 - Reboot
 - Open the **Console App** and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed:
 	```text
