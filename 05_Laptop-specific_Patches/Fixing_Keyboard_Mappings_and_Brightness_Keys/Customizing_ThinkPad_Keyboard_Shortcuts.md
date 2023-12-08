@@ -196,7 +196,7 @@ Remember the "0x0406 is the scan code of F15" mentioned earlier? Let's read the 
 BRIGHTNESS_DOWN,    // e0 05 dell down
 BRIGHTNESS_UP,      // e0 06 dell up
 ```
-Aha! 0x6b is F15 is the scan key code of ADB, and corresponds to e0 06 at the same time. So 0x0406 corresponds to e0 06, 0x0405 corresponds to e0 05, and the last two bits are the same. Is this a coincidence? Certainly not.
+Aha! 0x71 is F15 is the scan key code of ADB, and corresponds to e0 06 at the same time. So 0x0406 corresponds to e0 06, 0x0405 corresponds to e0 05, and the last two bits are the same. Is this a coincidence? Certainly not.
 
 Here I go straight to the conclusion. The 04 in 0x0406 refers to the e0 (that is, the extended key code) in the PS2 scan code, and 06 is the last two digits. In addition to 04, you can also take 0x03, which means that the PS2 scan code has only 2 digits. For example, the PS2 scan code 3b of F1 can be represented as 0x033b.
 
