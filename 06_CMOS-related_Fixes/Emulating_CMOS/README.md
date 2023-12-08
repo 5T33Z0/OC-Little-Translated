@@ -2,7 +2,7 @@
 
 ## Description
 
-When a conflict occurs between **AppleRTC** and **BIOS**, use [**RTCMemoryFixup.kext**](https://github.com/acidanthera/RTCMemoryFixup) to emulate **CMOS** memory to avoid the conflict.
+When a conflict between **AppleRTC** and **BIOS** occurs, use [**RTCMemoryFixup.kext**](https://github.com/acidanthera/RTCMemoryFixup) to emulate **CMOS** memory to fix it.
 
 ## About **CMOS** Memory
 

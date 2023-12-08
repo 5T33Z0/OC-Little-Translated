@@ -1,5 +1,5 @@
 # Selected OpenCore Themes
-This sections features 3rd party themes for OpenCore's Boot Menu. And since I am super picky when it comes to themes, only those that match the overall aesthetic of Apple and macOS the best are presented here – it's is all about class, not mass! 
+This sections features 3rd party OpenCanopy themes for OpenCore's Boot Menu. And since I am super picky when it comes to themes, only those that match the overall aesthetic minimalism of Apple and macOS the best are presented here – it's is all about class, not mass! 
 
 |Apple Flavours by [Chris1111](https://github.com/chris1111)|
 |:-----------------------------| 
@@ -16,5 +16,10 @@ This sections features 3rd party themes for OpenCore's Boot Menu. And since I am
 |:-----------------------------| 
 |![](https://github.com/velickovicdj/OpenCanopy-EnterTwilight/blob/main/Preview.png?raw=true)
 |[**Download and Instructions**](https://github.com/velickovicdj/OpenCanopy-EnterTwilight)
+
+|Nordic OpenCanopy by [e-tho](https://github.com/e-tho)
+|:-----------------------------| 
+|![](https://github.com/e-tho/nordic-opencanopy/blob/main/preview/theme-screenshot.png?raw=true)
+|[**Download and Instructions**](https://github.com/e-tho/nordic-opencanopy)
 
 **TBC…**
