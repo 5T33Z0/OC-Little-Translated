@@ -40,11 +40,13 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 - Next, enter `ioio -s ApplePS2Keyboard LogScanCodes 1` to enable log scan codes (set to `0` to disable the logging again).
     
 #### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
-- Right-click on `VoodooPS2Controller.kext` and select "Show Package Contents"
-- Next, browse to `Contents/Plugins` 
-- Browse `Contents` and open the `Info.plist` with a plist Editor
-- Search for **`LogScanCodes`** and change it from `0`to **`1`** (once you're done, change it back to **`0`** again!)
-- Save the file
+- Moun your EFI
+- In Finder press <kbd>CMD<kbd>+<kbd>G</kbd> (or select "Go to folder…" from the menu bar)
+- Enter `/Volumes/EFI/EFI/OC/Kexts/VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/Info.plist`
+- Open the `Info.plist` with a plist Editor
+- Navigate tp `IOKitPersonalities\Platform Profile\Default`
+- Change `LogScanCodes` from `0`to **`1`** (once you're done, change it back to **`0`** again!)
+- Save the the file
 - Reboot
 - Open the **Console App** and search for `ApplePS2Keyboard`. Check the output. In this examples, `A/a`and `Z/z` are pressed:
 	```text
