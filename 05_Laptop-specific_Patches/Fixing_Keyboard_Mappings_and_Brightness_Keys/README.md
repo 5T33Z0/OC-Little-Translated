@@ -5,9 +5,10 @@ Keyboard keys can be re-mapped for triggering different keys than the one that's
 
 ### Update [September 30, 2020]:
 
-**VoodooPS2Controller** now separates the brightness shortcut keys part from the standalone driver **BrightnessKeys** kext and it provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. So the previous brightness shortcut patches are no longer needed and should be disabled. 
+- **VoodooPS2Controller** now separates the brightness shortcut keys part from the standalone driver **BrightnessKeys** kext
+- It provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. So the previous brightness shortcut patches are no longer needed and should be disabled. 
 
-If the BrightnessKeys kext does not work initially, please refer to the "[special cases](https://github.com/acidanthera/BrightnessKeys#special-cases)" section on the github repo's Readme. If that doesn't fix it assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness. Required kexts:
+If the **BrightnessKeys** kext does not work initially, please refer to the "[special cases](https://github.com/acidanthera/BrightnessKeys#special-cases)" section. If that doesn't fix it assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness. Required kexts:
 
   - [**VoodooPS2Controller.kext**](https://github.com/acidanthera/VoodooPS2)
   - [**BrightnessKeys.kext**](https://github.com/acidanthera/BrightnessKeys)
