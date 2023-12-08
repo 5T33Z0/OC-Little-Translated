@@ -41,7 +41,7 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
     
 #### Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)
 - Moun your EFI
-- In Finder press <kbd>CMD<kbd>+<kbd>G</kbd> (or select "Go to folder…" from the menu bar)
+- In Finder press <kbd>CMD</kbd>+<kbd>G</kbd> (or select "Go to folder…" from the menu bar)
 - Enter `/Volumes/EFI/EFI/OC/Kexts/VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/Info.plist`
 - Open the `Info.plist` with a plist Editor
 - Navigate tp `IOKitPersonalities\Platform Profile\Default`
