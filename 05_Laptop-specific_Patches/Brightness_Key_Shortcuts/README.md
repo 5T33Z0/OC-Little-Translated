@@ -14,7 +14,9 @@ Since the Brightness Control is part of the Embedded Controller (EC) defined in 
 3. Save and reboot
 4. Check if the Brightness Shortcut Keys are still working. If not, you can always revert the changes.
 
-**NOTE**: If you have an older ThinkPad (3rd to 5th gen), read the Spoiler in the "Special Cases" section of the Brightness Keys repo to find out if you need to change `NBCF` form `Zero` to `One` resp. `0x01`. In this case, add `SSDT-NBCF.aml` instead of using a binary rename since using ACPI is cleaner and limited to macOS only.
+> [!NOTE]
+> 
+> If you have an older ThinkPad (3rd to 5th gen), read the Spoiler in the "Special Cases" section of the Brightness Keys repo to find out if you need to change `NBCF` form `Zero` to `One` resp. `0x01`. In this case, add `SSDT-NBCF.aml` instead of using a binary rename since using ACPI is cleaner and limited to macOS only.
 
 ## Old method: SSDT + Binary Renames
 Enabling Brightness Hotkeys consists of two stages:
@@ -31,11 +33,13 @@ Pick the corresponding SSDT for your Laptop model, export it as `SSDT-Bkey.aml` 
 - **SSDT-BKeyQ14Q15-TP** → For various Thinkpad models
 - **SSDT-BKeyQ64Q65-S2-2017** → ForThinkpad S2 2017
 
-**NOTE**: Make sure the following PCI device names and paths are consistent with the ones used in the `DSDT`:
-
-- Low Pin Configuration Bus (`LPC`/`LPCB`)
-- Keyboard (`PS2K`/`KBD`) 
-- Embedded Controller (`EC`/`EC0`)
+> [!NOTE]
+> 
+> Make sure the following PCI device names and paths are consistent with the ones used in the `DSDT`:
+>
+> - Low Pin Count Bus (`LPC`/`LPCB`)
+> - Keyboard (`PS2K`/`KBD`) 
+> - Embedded Controller (`EC`/`EC0`)
 
 ## II. Binary Renames
 Add the corresponding renames listed in the `.dsl` file to your config.plist under `ACPI/Patch`.
