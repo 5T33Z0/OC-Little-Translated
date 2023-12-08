@@ -1,15 +1,13 @@
 # Special patch for Xiaoxin PRO13
 
 ## Special renaming
-
-Rename `PNLF` to `XNLF`
+The variable `PNLF` exists in the DSDT, which may conflict with the name of the brightness patch, so use the following rename to circumvent it.
 
 ```
+Comment: Change `PNLF` to `XNLF`
 Find: 504E4C46
 Replace: 584E4C46
 ```
-
-The variable `PNLF` exists in the DSDT of XNLF, which may conflict with the name of the brightness patch, so use the above name change to circumvent it.
 
 ## Special AOAC patches
 
@@ -18,7 +16,9 @@ The variable `PNLF` exists in the DSDT of XNLF, which may conflict with the name
 - ***SSDT-DeepIdle***
 - ***SSDT-PCI0.LPCB-Wake-AOAC***
 
-Note: Please refer to "Fixing AOAC Machines" in chapter 06 for more info
+> [!NOTE]
+> 
+> Please refer to Chapter ["Fixing AOAC Machines"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) for more details
 
 ## Other required Patches (Reference)
 
@@ -37,7 +37,9 @@ Note: Please refer to "Fixing AOAC Machines" in chapter 06 for more info
 - ***SSDT-OCPublic-Merge*** – Patch for this chapter, see **Attachment** Description
 - ***SSDT-BATS-PRO13***
 
-**Note**: The name changes required for the above patches are in the comments of the corresponding source code patch files (.dsl).
+> [!NOTE]
+> 
+> The name changes required for the above patches are in the comments of the corresponding source code patch files (.dsl).
 
 ## Annex: Merging Shared Patches
 
