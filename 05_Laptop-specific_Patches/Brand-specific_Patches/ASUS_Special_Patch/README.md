@@ -1,9 +1,7 @@
-# ASUS Special Patch
-Most ASUS machines contain the `MSOS` method. The `MSOS` method assigns a value to `OSFG` and returns the current state value, which determines the machine's operating mode.
+# ASUS Brightness Keys Patch
+Most ASUS machines contain the `MSOS` method. The `MSOS` method assigns a value to `OSFG` and returns the current state value, which determines the machine's operating mode. The ACPI brightness shortcut method only works if `MSOS` ≥ `0x0100`. In the default state, `MSOS` is locked to `OSME` (check your DSDT for details).
 
-For example, the ACPI brightness shortcut method works only when `MSOS` >= `0x0100`. In the default state, `MSOS` is locked to `OSME`.
-
-***SSDT-OCWork-asus*** changes `MSOS` by changing `OSME`. See DSDT's `Method (MSOS)` for details on the `MSOS` method. If `MSOS` >= `0x0100` it sets the Operating Mode to Windows 8 and the brightness shortcut works. The return value of `MSOS` depends on the OS itself, if Darwin Kernel is running, you must use use **this patch** to meet specific requirements.
+***SSDT-OCWork-asus*** changes `MSOS` by setting the value of `OSME` to `0x100` if the Darwin Kernel is running. This changes the Operating Mode to Windows 8 which in return makes the brightness keyboard shortcuts work in macOS.
 
 ## Requirements
 - In `DSDT`, check for the following:
@@ -47,12 +45,12 @@ Method (MSOS, 0, NotSerialized)
 }
 ```
 ## Patching principle
-- Add ***SSDT-OCWork-asus.aml*** to ACPI folder and config
-- Add PNLF to XNLF rename if `PNLF` method is present in your DSDT (see "Special Rename" below)
-- Reboot
+- Add ***SSDT-OCWork-asus.aml*** to the `EFI/OC/ACPI` folder and config.plist.
+- If the `PNLF` method is present in your `DSDT`: add `PNLF` to `XNLF` rename (&rarr; check "Special Rename").
+- Reboot.
 
 ## Special Rename
-Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict with the same name as the brightness patch, so use the above name change to avoid it.
+Some ASUS machines have the variable `PNLF` in the `DSDT`, which may conflict with the brightness patch (SSDT-PNLF) which uses the same variable. If this is the case, add the following binary rename to the `ACPI/Patch` section of your `config.plist` to avoid conflicts:
 
 ```text
 Comment: Change PNLF to XNLF

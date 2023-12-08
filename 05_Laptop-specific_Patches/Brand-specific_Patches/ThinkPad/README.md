@@ -1,4 +1,4 @@
-# Fixing `HWAC` Bitfield in ThinkPads
+# Fixing `HWAC` Bitfield in Lenovo ThinkPads
 
 ## About
 On many modern ThinkPads, there are often accesses to the 16-bit EC-field `HWAC`, which are not covered by battery-patches (i.e. those currated by OC-Little). Those accesses are (mostly) located in the `_OWAK` and/or `_L17` methods of the system's DSDT.
