@@ -21,8 +21,9 @@ In order to get your battery percentage indicator working correctly, you have to
 	* Dual battery systems have both `BAT0` and `BAT1` in ACPI
 2. Combine the correct name changes and Battery Patch(es) required for your system. See the samples below for more details.
 
-**CAUTION**: Make sure the `Battery Path` used in the SSDT patch matches the one used in the DSDT.  
-It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, ***never*** both!
+> [!CAUTION]
+> 
+> Make sure the `Battery Path` used in the SSDT patch matches the one used in the DSDT. It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, ***never*** both!
 
 ### Example 1: Single-cell Battery
 
@@ -40,10 +41,12 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
   - `BAT1` Disable renaming `_STA to XSTA` 
   
 - Required Patches:
-  - `Main Battery` patch -- ***SSDT-OCBAT0-TP****** 
+  - `Main Battery` patch -- ***SSDT-OCBAT0-TP*** 
   - `BAT1` disable patch -- ***SSDT-OCBAT1-disable-`LPC`*** [or ***SSDT-OCBAT1-disable-`LPCB`***]
 
-**Note**: Please use `Count`, `Skip`, `TableSignature` correctly and verify the correct location of `_STA to XSTA` by system-DSDT.
+> [!NOTE]
+> 
+> Please use `Count`, `Skip`, `TableSignature` correctly and verify the correct location of `_STA to XSTA` by system-DSDT.
 
 ### Example 3: Dual battery system with two physical batteries
 
@@ -52,7 +55,7 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
   - TP Battery `Mutex` Place `0` Rename
   - `Notify` rename
 - Required Patches:
-  - `Main Battery` Patch -- ***SSDT-OCBAT0-TP******
+  - `Main Battery` Patch -- ***SSDT-OCBAT0-TP***
   - `BATC` patch -- ***SSDT-OCBATC-TP-`LPC`*** [or ***SSDT-OCBATC-TP-`LPCB`*** , ***SSDT-OCBATC-TP-`_BIX`***]
   - `Notify` patch -- ***SSDT-Notify-`LPC`*** [or ***SSDT-Notify-`LPCB`***]
 
@@ -67,11 +70,11 @@ It's either`\_SB.PCI0.`**`LPC`**`.EC.BAT0` or `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`, 
 
 ### Precautions
 
-- ***SSDT-OCBAT0-TP****** is the `Main Battery` patch. Select the corresponding patch according to the machine model when selecting.
+- ***SSDT-OCBAT0-TP*** is the `Main Battery` patch. Select the corresponding patch according to the machine model when selecting.
 - When selecting the patch, you should pay attention to the difference between `LPC` and `LPCB`.
 - If you want to change the name of `TP Battery Mutex to 0`, try it yourself.
 
-## `Notify` patch example [Only `Method (_Q22`, ... Part]
+## `Notify` patch example [only `Method (_Q22`, ... Part]
 
 > T580 original
 
@@ -130,5 +133,4 @@ See `Notify` patch for details – ***SSDT-Notify-`BFCC`***
 - **SSDT-OCBATC-TP-`LPCB`** 
 - **SSDT-Notify-`LPCB`** 
 - **TP battery basic renamed** 
-- **Notify name change** 
-
+- **Notify name change**
