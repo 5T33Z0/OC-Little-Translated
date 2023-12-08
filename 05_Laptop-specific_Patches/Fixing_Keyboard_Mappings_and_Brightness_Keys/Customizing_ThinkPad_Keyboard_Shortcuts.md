@@ -134,7 +134,7 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "ACPIDebug", 0) // Our table name is ACPI
     }
 }
 ```
-Add more `External` references following the same principle `_Q14` function to cover the remaining shortcut key function definitions. Of course, don't forget to add the corresponding ACPI renames to the config.plist, like rename `_Q14` to `XQ14`, etc. to avoid conflicts. The final SSDT looks like the image below:
+Add more `External` references following the same principle as the `_Q14` to define the remaining shortcut keys. Of course, don't forget to add the corresponding ACPI renames to the config.plist, like rename `_Q14` to `XQ14`, etc. to avoid conflicts. The final SSDT looks like the image below:
 
 ![](https://img10.360buyimg.com/ddimg/jfs/t1/192837/32/23139/28717/6257a095E1192c695/ec36e588b503bbf4.png)
 
