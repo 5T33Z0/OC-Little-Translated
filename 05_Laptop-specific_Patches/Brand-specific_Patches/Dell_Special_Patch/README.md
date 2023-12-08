@@ -24,10 +24,14 @@ The `OSID` method exists on most Dell machines. It includes two variables, `ACOS
 Following are some of the relationships between the 2 variables and the operating mode. For more details about the `OSID` method, please see DSDT's `Method (OSID…`:
 
 - `ACOS` >= `0x20`, the brightness shortcut works
-- `ACOS` = `0x80` and `ACSE` = `0` for win7 mode. In this case the breathing light blinks during machine sleep
-- `ACOS` = `0x80`, `ACSE` = 1 for win8 mode. In this case the breathing light is off during the machine sleep
+- `ACOS` = `0x80` and `ACSE` = `0` for win7 mode. In this case the power LED pulses during sleep
+- `ACOS` = `0x80`, `ACSE` = 1 for win8 mode. In this case, the power LED is off during sleep
 
 The specific content of the 2 variables in the `OSID` method are set dynamically, based on the detected version of Windows. If you add `SSDT-OCWork-dell.aml` to `EFI/OC/ACPI` and your `config.plist`, fixed values for `ACOS` (`0x80`) and `ACSE`  (`0`) are injected if macOS is running to make it work.
+
+> [!NOTE]
+> 
+> If present, disable `SSDT-XOSI.aml` and any binary renames associated with it (e.g. `OSID to XSID` and/or `_OSI to XOSI`). Otherwise the patch does not work.
 
 ## Patch combination for fixing `Fn`+`Insert` keyboard shortcut
 
