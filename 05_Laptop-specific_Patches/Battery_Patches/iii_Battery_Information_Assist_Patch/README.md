@@ -2,7 +2,7 @@
 
 ## Overview
 
-The latest ***VirtualSMC.kext*** and its plugin ***kexts*** provide an interface for displaying addition battery status information. By customizing the SSDT with the driver, you can display the `PackLotCode`, `PCBLotCode`, `Firmware Version`, `Hardware Correction` and `Battery Correction` of the battery, etc. This patch is from ***VirtualSMC.kext*** official patch with some adjustments. This patch has no master/slave relationship with the main `Battery` patch. This patch is applicable to all laptops.
+The latest ***VirtualSMC.kext*** and its plugin ***kexts*** provide an interface for displaying battery status information. By customizing the SSDT with the driver, you can display the `PackLotCode`, `PCBLotCode`, `Firmware Version`, `Hardware Correction` and `Battery Correction` of the battery, etc. This patch is from ***VirtualSMC.kext*** official patch with some adjustments. This patch has no master/slave relationship with the main `Battery` patch. This patch is applicable to all laptops.
 
 ### Patch Notes
 - In the ACPI specification, `_BST` defines some battery information, which is injected in this patch via methods `CBIS` and `CBSS`. Please refer to the ACPI specification for details on the definition of `_BST`.
