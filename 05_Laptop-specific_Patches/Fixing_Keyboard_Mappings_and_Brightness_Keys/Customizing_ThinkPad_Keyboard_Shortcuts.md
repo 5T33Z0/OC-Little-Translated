@@ -85,7 +85,7 @@ Rehabman provides a series of DSDT Patches for debugging ACPI functions. OC-litt
 
 Enabling ACPI debugging is relatively simple: just add `SSDT-RMDT.aml` (RehabMan Debugging Table) and `ACPIDebug.kext`. The (relatively) difficult part is writing an SSDT for debugging.
 
-The sample `SSDT-BKeyQxx-Debug.dsl` in OC-little also provides an example for using the RMDT function that prints two arguments:
+The sample [**`SSDT-BKeyQxx-Debug.dsl`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Debugging/SSDT-BKeyQxx-Debug.dsl) in OC-little also provides an example for using the RMDT function that prints two arguments:
 
 ```asl
 Scope (_SB.PCI0.LPCB.EC0)
