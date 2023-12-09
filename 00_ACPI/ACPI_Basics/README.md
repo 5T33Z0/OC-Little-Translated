@@ -19,7 +19,7 @@ In the ACPI subsystem, peripheral devices and system hardware features of the pl
 
 The ACPI subsystem is initialized after the system's POST. The initialization works as follows (chronoligically, from top to bottom):
 
-![](/Users/stunner/Desktop/ACPI_Init.png)
+![ACPI_Init](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/7769db1f-a046-4990-9546-c001fe9f4654)
 
 **Source**: [ACPI Introduction and Overview](https://cdrdv2-public.intel.com/772721/acpi-introduction-042723.pdf)
 
