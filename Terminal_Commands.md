@@ -420,6 +420,12 @@ xcode-select --install
 kextstat | grep -v com.apple
 ```
 
+#### Rebuild Kext Cache (macOS 11+)
+
+```shell
+sudo kextcache -U /
+```
+
 #### Rebuild Kext Cache (macOS 10.15 or older)
 
 ```shell
