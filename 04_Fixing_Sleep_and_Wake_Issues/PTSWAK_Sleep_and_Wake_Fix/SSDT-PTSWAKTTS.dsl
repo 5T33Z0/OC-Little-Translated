@@ -49,14 +49,7 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "PTSWAK", 0)
             Name (TWAK, Zero)
             Method (_STA, 0, NotSerialized)
             {
-                If (_OSI ("Darwin"))
-                {
-                    Return (0x0F)
-                }
-                Else
-                {
-                    Return (Zero)
-                }
+                Return (_OSI("Darwin") ? 0x0F : Zero)
             }
         }
     }
@@ -85,13 +78,11 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "PTSWAK", 0)
 
         ZPTS(Arg0)
         
-        If (_OSI ("Darwin"))
+        If (_OSI("Darwin") && CondRefOf(EXT2)) 
         {
-            If (CondRefOf(EXT2))
-            {
-                EXT2(Arg0)
-            }
+            EXT2(Arg0);
         }
+
     }
 
     Method (_WAK, 1, NotSerialized) //Method (_WAK, 1, Serialized)
@@ -120,24 +111,20 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "PTSWAK", 0)
         }
 
         Local0 = ZWAK(Arg0)
-        If (_OSI ("Darwin"))
+        
+        If (_OSI("Darwin") && CondRefOf(EXT4)) 
         {
-            If (CondRefOf(EXT4))
-            {
-                EXT4(Arg0)
-            }
+            EXT4(Arg0);
         }
+
         Return (Local0)
     }
 
     Method (_TTS, 1, NotSerialized) //Method (_TTS, 1, Serialized)
     {
-        If (_OSI ("Darwin"))
+        If (_OSI("Darwin") && CondRefOf(EXT5)) 
         {
-            If (CondRefOf(EXT5))
-            {
-                EXT5(Arg0)
-            }
+            EXT5(Arg0);
         }
 
         If (CondRefOf(ZTTS))
@@ -145,12 +132,9 @@ DefinitionBlock("", "SSDT", 2, "OCLT", "PTSWAK", 0)
             ZTTS(Arg0)
         }
         
-        If (_OSI ("Darwin"))
+        If (_OSI("Darwin") && CondRefOf(EXT6))
         {
-            If (CondRefOf(EXT6))
-            {
-                EXT6(Arg0)
-            }
+            EXT6(Arg0);
         }
     }
 }
