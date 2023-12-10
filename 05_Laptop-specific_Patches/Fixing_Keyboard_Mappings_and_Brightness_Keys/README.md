@@ -1,7 +1,11 @@
-# Modifying PS2 Keyboard mappings and brightness shortcut keys
+# Modifying PS/2 Keyboard mappings and brightness shortcut keys
 
 ## Description
-Keyboard keys can be re-mapped for triggering different keys than the one that's actual pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture **PS2 Scan Code** under macOS can be re-mapped!
+Keyboard keys can be re-mapped for triggering different keys than the ones that are actually pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture **PS2 Scan Code** under macOS can be re-mapped!
+
+> [!CAUTION]
+> 
+> Logging Keyboard Scan Codes does no longer work on macOS Big Sur and newer. There have been reports ([here](https://github.com/acidanthera/bugtracker/issues/872), [here](https://github.com/daliansky/OC-little/issues/46) and [here](https://github.com/5T33Z0/OC-Little-Translated/issues/92#issuecomment-1848874053). Solution: unknown.
 
 ### Update [September 30, 2020]:
 
@@ -15,10 +19,11 @@ If the **BrightnessKeys** kext does not work initially, please refer to the "[sp
   
 >[!NOTE]
 >
-> Some ASUS and Dell machines require `SSDT-OCWork-xxx` to unblock `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, allowing the BrightnessKeys kext to work properly. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for more details.
+> Some ASUS and Dell Laptops require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, so that the Brightness shorcut keys work. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for instructions.
 
 ## Requirements and Preparations
 
+- macOS 10.15 or older
 - Use **VoodooPS2Controller.kext** and its sub-drivers.
 - Clear the key mapping contents of previous, other methods.
 - Plist Editor
@@ -27,12 +32,12 @@ If the **BrightnessKeys** kext does not work initially, please refer to the "[sp
 >
 > If the keys you want to map are not routed via the PS/2 Controller but via the EC instead, you cannot use this method. In this case, try ACPI Debugging instead (&rarr; [**Example**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/Customizing_ThinkPad_Keyboard_Shortcuts.md): In-depth guide for Mapping `Fn` Shortcut Keys on Lenovo ThinkPads)
 
-### About PS2 and ABD Scan Codes
+### About PS/2 and ABD Scan Codes
 
-A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**. For example, the PS2 scan code for the `Z/z` key is `2c` but the ABD scan code is `6`. Because of the difference in scan codes, two mapping methods correspond to
+A keystroke will generate 2 scan codes, **PS/2 Scan Code** and **ABD Scan Code**. For example, the PS/2 scan code for the `Z/z` key is `2c` but the ABD scan code is `6`. Because of the difference in scan codes, two mapping methods correspond to
 
-- `PS2 Scan Code` &rarr; `PS2 Scan Code`
-- `PS2 Scan Code` &rarr; `ADB Scan Code`
+- `PS/2 Scan Code` &rarr; `PS/2 Scan Code`
+- `PS/2 Scan Code` &rarr; `ADB Scan Code`
 
 ### Enabling keyboard scan codes
 
@@ -59,8 +64,8 @@ A keystroke will generate 2 scan codes, **PS2 Scan Code** and **ABD Scan Code**.
 	11:58:58.636955 +0800 kernel ApplePS2Keyboard: sending key 2c=6 down
  	```
 	 **Meaning**:
-	- `1e=0`: `1e`is the PS2 Scan Code for the `A/a` key, whereas `0` is the ADB Scan Code.
-	- `2c=6`: `2c`is the PS2 Scan Code for the `Z/z` key, whereas `6` is the ADB Scan Code.
+	- `1e=0`: `1e`is the PS/2 Scan Code for the `A/a` key, whereas `0` is the ADB Scan Code.
+	- `2c=6`: `2c`is the PS/2 Scan Code for the `Z/z` key, whereas `6` is the ADB Scan Code.
 
 ## Key mapping principle
 
@@ -68,8 +73,8 @@ Keyboard (re-)mappings can be realized by modifying the `info.plist` file inside
 
 **Example**: Remapping `A/a` to trigger `Z/z` via ***SSDT-RMCF-PS2Map-AtoZ.dsl***. 
 
-- `A/a` PS2 scan code:`1e`
-- `Z/z` PS2 scan code:`2c`
+- `A/a` PS/2 scan code:`1e`
+- `Z/z` PS/2 scan code:`2c`
 - `Z/z` ADB scan code:`06`
 
 You can use either of the following mapping methods:
