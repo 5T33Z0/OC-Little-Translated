@@ -6,10 +6,14 @@
   - **Desktop**: 6th to 8th Gen Intel (100 and 200-series mainboards only)
   - **Mobile/NUC**: 6th to 8th Gen Intel
 
+> [!NOTE]
+>
+> This SSDT hotfix has to be considered non-functionol or cosmetic. It only adds a fake `PPMC` device to I/O Kit's device tree.
+
 ## Instructions
 
 - In **DSDT**, search for Address `0x001F0002` or `Device (PPMC)`. Make sure it's the address is not associated with a SATA Device!
-- If missing, add `SSDT-PPMC.aml`
+- If missing, you can add `SSDT-PPMC.aml`
 
 > [!CAUTION]
 >
