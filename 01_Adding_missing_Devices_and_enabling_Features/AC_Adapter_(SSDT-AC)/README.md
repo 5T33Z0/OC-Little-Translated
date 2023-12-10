@@ -5,6 +5,10 @@ If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't
 
 **Applicable to SMBIOS**: MacBook, MacBookAir and MacBookPro. 
 
+> [!NOTE]
+>
+> This SSDT hotfix has to be considered non-functionol or cosmetic since VirtualSMC's SMCBatteryManagement plugin takes care of all of this.
+
 ## Preparations
 - In `DSDT`, search for `ACPI0003` and the device it belongs to: either `AC`, `AC0`, `ADP`, `ADP1` or `ACAD`. 
 - In this example, it's present and located under `\SB.PCI0.LPC.EC.AC`: 
