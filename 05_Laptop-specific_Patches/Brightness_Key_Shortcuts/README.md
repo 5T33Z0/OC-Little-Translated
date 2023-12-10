@@ -4,6 +4,10 @@ SSDT Hotpatches to enable Brightness Key Shortcuts for various Laptop models (As
 
 The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I added `If (_OSI ("Darwin")` switches. This modification is important to ristrict the patches to macOS only because otherwise OpenCore injects these ACPI tables system-wide whereas Clover only injects them into macOS.
 
+>[!NOTE]
+>
+> Some ASUS and Dell Laptops only require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0,0x87)`, so that the Brightness shorcut keys work. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for instructions.
+
 ## New method: using [`BrightnessKeys.kext`](https://github.com/acidanthera/BrightnessKeys) 
 In late 2020, Acidanthera introduced a new kext to handle Brightness Key Shortcuts which replaces the previous patching method.
 
