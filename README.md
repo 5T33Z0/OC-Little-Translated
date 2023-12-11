@@ -26,6 +26,7 @@
 * [**Graphics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics) (integrated/discrete)
 * [**MMIO Whitelist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_MMIO_Whitelist)
 * [**Fixing Peripherals**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Peripherals)
+* [**Fixing falsely reported RAM speed**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/15_RAM)
 * [**Using OpenCore Legacy Patcher on Wintel systems**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware) 
 
 **APPENDIX**
@@ -66,7 +67,7 @@ Besides the original translated guides, this repo contains additional guides com
 - Fixing sleep/wake and other power-related issues
 - Guides for Mapping USB Ports
 - Fixing Laptop-specific issues
-- Fixing graphics-related issues and tweaks
+- Fixing graphics-related issues
 - Config-related tips
 - Guides for using OpenCore Legacy Patcher on Wintel Systems
 
