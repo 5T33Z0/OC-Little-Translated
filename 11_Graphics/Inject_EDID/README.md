@@ -71,9 +71,6 @@ Hopefully this will resolve the issue!
 >
 > Injecting the EDID only makes sense, if you need a specific resolution and/or display refresh rate (higher or lower) that is supported by the display panel but is not available in the display settings menu!
 
-# Alternatives
-If the above method doesn't work, try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci`, which supposedly fixes black screen issues when resuming from sleep.
-
 ## Credits and Resources
 - For fixing purple/magenta screen issues, try [this fix](https://github.com/dreamwhite/patch_edid)
 - Acidanthera for OpenCore, Whatevergreen and HibernationFixup
