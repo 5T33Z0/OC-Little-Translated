@@ -76,7 +76,7 @@ This method is applicable when using [**Hackintool**](https://github.com/benbake
 
 > [!IMPORTANT]
 > 
-> If you decide to change your SMBIOS later, you have to adjust the `model` property inside the kext's `info.plist` – otherwise the mapping won't be applied!
+> If you decide to change your SMBIOS later, you have to adjust the `model` property inside the kext's `info.plist` – otherwise the mapping won't be applied! **Example** <br>: ![USBremap](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/4386daf7-fc63-480d-8922-9632425c3c57)
 
 ## Method 2: Mapping USB Ports via ACPI
 Declaring USB ports is via ACPI is the "gold standard" since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for). It's aimed at advanced users only who are experienced in working with ACPI tables already. 
