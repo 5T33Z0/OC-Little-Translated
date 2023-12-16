@@ -132,7 +132,7 @@ Based on your system, use one of the following SMBIOSes for Ivy Bridge CPUs. Ope
 	- **`MacBookPro10,1`** (i7-3615QM, i7-3635QM, i7-3720QM, i7-3740QM, i7-3820QM, i7-3840QM)
 	- **`MacBookPro10,2`** (i5-3210M, i7-3520M, i5-3230M, i7-3540M)
 	- **`MacBookPro9,1`** (i7-3615QM, i7-3720QM, i7-3820QM)
-	- **`MacBookPro9,2`** (I5-3210M, I7-3520M)
+	- **`MacBookPro9,2`** (i5-3210M, i7-3520M)
 	- **`MacBookAir5,1`** (i5-3317U, i7-3667U)
 	- **`MacBookAir5,2`** (i5-3317U, i5-3427U or i7-3667U)
 - **For NUCs**:
