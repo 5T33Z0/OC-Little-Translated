@@ -44,6 +44,6 @@ This section covers running macOS in a virtual machine in different fashions.
 - The Hyper-V Manager now contains the entry "macOS" under "Virtual Machines":<br>![08](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/ab467af3-3eee-4e6c-83b9-b95ef5ad5da3)
 
 ### Preparing the macOS VM
-Next, we need to add another virtual hard disk containing the EFI partition to boot macOS as well as the recovery partition to download and install the actual OS. Finally we have to adjust some settings in the VM to make it all work.
+Next, we need to add another virtual hard disk containing the EFI partition with OpenCore to boot macOS as well as the Recovery Partition to download and install macOS. Finally, we have to adjust some settings in the VM to make it all work together.
 
 To be continued…
