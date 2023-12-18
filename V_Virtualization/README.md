@@ -48,10 +48,12 @@ This section covers running macOS in a virtual machine in different fashions.
 ### Preparing the macOS VM
 Next, we need to add another virtual hard disk containing the EFI partition with OpenCore to boot macOS as well as the Recovery Partition to download and install macOS. Finally, we have to adjust some settings in the VM to make it all work together.
 
-- Next, download the latest release of [**UEFI_OC**](https://github.com/balopez83/macOS_On_Hyper-V/releases). It's a 1GB virtual hard disk image containing a pre-configured OpenCore EFI folder containing the necessary config and files to boot the macOS VM under Hyper-V
+- Next, download the latest release of [**UEFI_OC**](https://github.com/balopez83/macOS_On_Hyper-V/releases). It's a 1GB virtual hard disk image. It contains a pre-configured OpenCore EFI folder with the necessary config and files to boot the macOS VM under Hyper-V.
 - Unpack the .7z file and copy the `UEFI.vhdx` file to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br>![Screenshot 2023-12-18 041516](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/ef0e6576-34b9-4357-a474-c563e1274ae5)
 - Next, download a macOS Recovery for the macOS version you want to install.
+- Double-click the virtual "UEFI" hard disk to mount it  
 - Copy the `com.apple.recovery.boot` folder containing the `BaseSystem.chunklist` and `BaseSystem.dmg` onto the virtual UEFI disk:<br>![Screenshot 2023-12-18 043718](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/036152a8-4fc3-4fad-baed-d206cf0778b6)
+- Right-click the "UEFI" disk in Windows Explorer and select "Eject" to unmout it.
 - Back in Hyper-V Manger, right-click the macOS VM and select "Settings…":<br> ![Screenshot 2023-12-18 045351](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d347cee7-0cd6-45ec-8c99-6d3f7d2207c0)
 - Adjust the following:
   - **Add Hardware**: 
@@ -73,6 +75,7 @@ Next, we need to add another virtual hard disk containing the EFI partition with
 - Click "OK" to save the Settings and close the Window.
 
 > [!IMPORTANT]
+>
 > Make sure to "Eject" the UEFI disk if it's mounted (if it's visible under "This PC") prior to starting the macOS VM. Otherwise you get an error message because the disk is not accessible! 
 
 ### Testing the VM
@@ -90,6 +93,6 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 
 > [!NOTE]
 > 
-> If booting fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "UEFI" disk to access the OC folder and config.plist. 
+> If booting macOS Recovery fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "UEFI" disk to access the OC folder and config.plist. 
 > 
 > If you have an already working OC folder for your system, you probably only have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidantera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
