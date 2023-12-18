@@ -49,10 +49,10 @@ This section covers running macOS in a virtual machine in different fashions.
 Next, we need to add another virtual hard disk containing the EFI partition with OpenCore to boot macOS as well as the Recovery Partition to download and install macOS. Finally, we have to adjust some settings in the VM to make it all work together.
 
 - Next, download the latest release of [**UEFI_OC**](https://github.com/balopez83/macOS_On_Hyper-V/releases). It's a 1GB virtual hard disk image containing a pre-configured OpenCore EFI folder containing the necessary config and files to boot the macOS VM under Hyper-V
-- Unpack the .7z file and copy the `UEFI.vhdx` file to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br>![Alt text](<Screenshot 2023-12-18 041516.png>)
+- Unpack the .7z file and copy the `UEFI.vhdx` file to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br>![Screenshot 2023-12-18 041516](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/ef0e6576-34b9-4357-a474-c563e1274ae5)
 - Next, download a macOS Recovery for the macOS version you want to install.
-- Copy the `com.apple.recovery.boot` folder containing the `BaseSystem.chunklist` and `BaseSystem.dmg` onto the virtual UEFI disk:<br> ![](<Screenshot 2023-12-18 043718.png>)
-- Back in Hyper-V Manger, right-click the macOS VM and select "Settings…":<br> ![](<Screenshot 2023-12-18 045351.png>)
+- Copy the `com.apple.recovery.boot` folder containing the `BaseSystem.chunklist` and `BaseSystem.dmg` onto the virtual UEFI disk:<br>![Screenshot 2023-12-18 043718](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/036152a8-4fc3-4fad-baed-d206cf0778b6)
+- Back in Hyper-V Manger, right-click the macOS VM and select "Settings…":<br> ![Screenshot 2023-12-18 045351](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d347cee7-0cd6-45ec-8c99-6d3f7d2207c0)
 - Adjust the following:
   - **Add Hardware**: 
     - Select "SCSI Controller" and click "Add"
