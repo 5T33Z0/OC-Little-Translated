@@ -58,7 +58,7 @@ Next, we need to add another virtual hard disk containing the EFI partition with
 - Adjust the following Settings:
 	- **Add Hardware**:
 		- Select "SCSI Controller" and click "Add"
-    	- Select "Hard Drive"
+		- Select "Hard Drive"
     	- Tick "Virtual Hard Drive" and click "Browse…"
     	- Navigate to the folder containing the `UEFI.vhdx` (in this example `C:\VMs\macOS\Virtual Hard Disks`), select it and click "Open"
     	- Click "Apply" (important!)
@@ -67,10 +67,10 @@ Next, we need to add another virtual hard disk containing the EFI partition with
     	- Followed by the "macOS" Hard Disk
     	- Move the "Network Adapter" to the bottom
     	- Click "Apply"
-  - **Security**: Unselect "Secure Boot"
-  - **Processor**: Assign more than 1 virtual processors if possible (ideally 4 or more)
-  - **Integration Services**: Enable "Guest Services"
-  - **Checkpoints**: Unselect "Enable Checkpoints"
+    - **Security**: Unselect "Secure Boot"
+  	- **Processor**: Assign more than 1 virtual processors if possible (ideally 4 or more)
+  	- **Integration Services**: Enable "Guest Services"
+  	- **Checkpoints**: Unselect "Enable Checkpoints"
 - Click "OK" to save the settings and close the window.
 
 > [!IMPORTANT]
@@ -82,7 +82,8 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 
 - Back in Hyper-V, double-click on the `macOS` VM to connect to it
 - This opens a new Window. Click "Start" to boot the VM
-- In the OpenCore Boot Menu, select "UEFI" to start the macOS Recovery with the arrow keys and hit enter to boot the system. 
+- In the OpenCore Boot Menu, select "UEFI (dmg)" with the arrow keys and press <kbd>Enter</kbd> to start the macOS Recovery: <br> 
+![Screenshot 2023-12-18 052528](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/29642a3f-7a17-489b-b821-b0be7abe3c55)
 - From the Recovery Menu, select "Disk Utility"
 - Select "Msft Virtual Disk Media" and click on "Erase"
 - **Format**: `APFS`
