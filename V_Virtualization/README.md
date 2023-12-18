@@ -93,7 +93,3 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 > If booting fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "UEFI" disk to access the OC folder and config.plist. 
 > 
 > If you have an already working OC folder for your system, you probably only have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidantera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
-
-
-## Resources
-- 
