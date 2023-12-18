@@ -55,35 +55,34 @@ Next, we need to add another virtual hard disk containing the EFI partition with
 - Copy the `com.apple.recovery.boot` folder containing the `BaseSystem.chunklist` and `BaseSystem.dmg` onto the virtual UEFI disk:<br>![Screenshot 2023-12-18 043718](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/036152a8-4fc3-4fad-baed-d206cf0778b6)
 - Right-click the "UEFI" disk in Windows Explorer and select "Eject" to unmout it.
 - Back in Hyper-V Manger, right-click the macOS VM and select "Settings…":<br> ![Screenshot 2023-12-18 045351](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/d347cee7-0cd6-45ec-8c99-6d3f7d2207c0)
-- Adjust the following:
-  - **Add Hardware**: 
-    - Select "SCSI Controller" and click "Add"
-    - Select "Hard Drive"
-    - Tick "Virtual Hard Drive" and click "Browse…"
-    - Navigate to the folder containing the `UEFI.vhdx` (in my case `C:\VMs\macOS\Virtual Hard Disks`), select it and click "Open"
-    - Click "Apply" (important!)
-  - **Firmware**:
-    - Boot order: 
-      - Move the "UEFI" Hard Disk to the top of the list (it contains the OpenCore Boot Loader and the macOS Recovery)
-      - Followed by the "macOS" Hard Disk
-      - Move the "Network Adapter" to the bottom
-      - Click "Apply"
+- Adjust the following Settings:
+	- **Add Hardware**:
+		- Select "SCSI Controller" and click "Add"
+    	- Select "Hard Drive"
+    	- Tick "Virtual Hard Drive" and click "Browse…"
+    	- Navigate to the folder containing the `UEFI.vhdx` (in this example `C:\VMs\macOS\Virtual Hard Disks`), select it and click "Open"
+    	- Click "Apply" (important!)
+    - **Firmware**: Boot order
+    	- Move the "UEFI" Hard Disk to the top of the list – it contains the OpenCore Boot Loader and the macOS Recovery.
+    	- Followed by the "macOS" Hard Disk
+    	- Move the "Network Adapter" to the bottom
+    	- Click "Apply"
   - **Security**: Unselect "Secure Boot"
-  - **Processor**: assign more than 1 virtual processors if you can (ideally 4 or more)
-  - **Integration Services**: enable "Guest Services"
+  - **Processor**: Assign more than 1 virtual processors if possible (ideally 4 or more)
+  - **Integration Services**: Enable "Guest Services"
   - **Checkpoints**: Unselect "Enable Checkpoints"
-- Click "OK" to save the Settings and close the Window.
+- Click "OK" to save the settings and close the window.
 
 > [!IMPORTANT]
 >
-> Make sure to "Eject" the UEFI disk if it's mounted (if it's visible under "This PC") prior to starting the macOS VM. Otherwise you get an error message because the disk is not accessible! 
+> Make sure to "Eject" the UEFI disk prior to starting the macOS VM. Otherwise you get an error message because the disk is not accessible from within the VM! 
 
 ### Testing the VM
 Now that the VM is prepared, we can test it. Booting macOS Recovery is most likely not going to work out of the box, but as long as OpenCore is booting you are half way there.
 
-- Back in Hyper-V, double-click on the macOS VM to connect to it
+- Back in Hyper-V, double-click on the `macOS` VM to connect to it
 - This opens a new Window. Click "Start" to boot the VM
-- In the OpenCore Boot Menu, select "UEFI" to start the macOS Recovery
+- In the OpenCore Boot Menu, select "UEFI" to start the macOS Recovery with the arrow keys and hit enter to boot the system. 
 - From the Recovery Menu, select "Disk Utility"
 - Select "Msft Virtual Disk Media" and click on "Erase"
 - **Format**: `APFS`
@@ -95,4 +94,4 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 > 
 > If booting macOS Recovery fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "UEFI" disk to access the OC folder and config.plist. 
 > 
-> If you have an already working OC folder for your system, you probably only have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidantera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
+> If you have an already working OC folder for your system, you probably "only" have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidantera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
