@@ -91,7 +91,7 @@ macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
 macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
 macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
 
-> [TIP]
+> [!TIP]
 >
 > To find out which Kernel your current macOS install is using, either enter `uname -r` in Terminal or look it up in the System Profiler under "Software". Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a single version of macOS which used a Kernel greater than `X.9.9`. 
 
