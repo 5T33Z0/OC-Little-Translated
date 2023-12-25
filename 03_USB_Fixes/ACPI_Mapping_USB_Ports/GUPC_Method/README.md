@@ -147,9 +147,9 @@ The following values for USB port types are possible:
 -  Under `ACPI/Patch`, add the following rename:
 	
 	```
-	Comment: 	USB GUPC to XUPC
-	Find: 		4755504309
-	Replace: 	5855504309
+	Comment: USB GUPC to XUPC
+	Find: 4755504309
+	Replace: 5855504309
 	```
 
 ## Notes and Credits
