@@ -1,10 +1,9 @@
-# Mapping USB ports via ACPI without a replacement Table
+# Mapping USB ports via ACPI without a replacement table
 
 ## About
-In the previous chapter we replaced the original USB port mapping table by our own to enable and disable ports for macOS only. This approach requires to drop and replace the ordinal table and takes a lot of effort.
+As shown earlier in this chapter, writing a replacement USB port mapping table for macOS takes a lot of effort. 
 
-But there's a simpler method to achieve the same: instead of rewriting the whole USB port mapping table, we just use a binary rename to reroute calls to the `UPC` method to `XUPC` and add an SSDT to only modify the 2 relevant packets of the `UPC` for each port which are then 
-handed over to the `GUPC` method inside the Root Hub to enable/disable a port and the type of connection it has.
+But there's a simpler way to achieve the same: instead of rewriting the *whole* USB port mapping table, you can a use binary rename to reroute calls to the `GUPC` method to `XUPC` and add a `SSDT-GUPC` instead to disable ports and change port types in order to work around macOS' port limit of 15 ports.
 
 ## Explanation
 
@@ -24,23 +23,10 @@ Method (GUPC, 1, Serialized)
     Return (PCKG)
 }
 ```
-Now we modify this method. Since this method is serialized, we can add judgment statements to determine the state and type of each port by using the `USBP += One` operator:
 
-```asl
- ···               
-     If (((USBP == 0x04) || (Arg0 == Zero))) // Here we add the ports that should be disabled when macOS is running
-     {
-         PCKG [Zero] = Zero // Zero = disabled
-     }
+The `GUPC` method takes one argument (`Arg0`) and is serialized, meaning only *one* thread of execution can run it at a time. It creates a package (`PCKG`) with four elements (`0x04`), in this example: `Zero`, `0xFF`, `Zero`, and `Zero`, whereby the first packet is used to enable/disable a port (`One` or `Zero`), while 2nd packet sets the type of port – in the example above: `0xFF` for internal connector (as required for Bluetooth cards).
 
-     If ((((USBP == 0x04) || (USBP == 0x05)) || (USBP == 0x06))) // Here we enter the ports which shuld be changed (in this case Ports 4, 5 and 6)
-     {
-         PCKG [One] = 0xFF // 0xFF = internal
-     }
-···
-```
-
-Then we combine both, add the If (_OSI ("Darwin")) method and catch calls to the `UPC` method and end up with this, called `SSDT-GUPC`:
+We can use the following SSDT to modify the availability of USB Ports as well as the port types:
 
 ```asl
 DefinitionBlock ("", "SSDT", 2, "INTEL", "GUPC", 0x00000000)
@@ -68,7 +54,7 @@ DefinitionBlock ("", "SSDT", 2, "INTEL", "GUPC", 0x00000000)
                     PCKG [Zero] = Zero // Return package 0 = disabled
                 }
 
-                If ((((USBP == 0x04) || (USBP == 0x05)) || (USBP == 0x06))) // Change Port type for ports listed here
+                If ((((USBP == 0x04) || (USBP == 0x05)) || (USBP == 0x06))) // Change Port type for the ports listed here
                 {
                     PCKG [One] = 0xFF // Port Type: Internal (in this example) 
                 }
@@ -77,31 +63,96 @@ DefinitionBlock ("", "SSDT", 2, "INTEL", "GUPC", 0x00000000)
             }
             Else
             {
-                Return (XUPC(Arg0))
+                Return (XUPC(Arg0)) // Uses the original values for any other OS
             }
         }
     }
 }
 ```
 
-## Patching Principle
-:warning: Before attempting this method, make sure to disable any previously created replacement USB tables and corresponding drop rules and USBPort.kexts!
+**Explanation**
 
-### 1. Prepare SSDT-GUPC.aml
-- Copy the code for SSDT-GUPC from above into maciASL
+This SSDT contains a method named `GUPC` within the scope of `_SB.PCI0.XHC.RHUB`. Let's break it down:
+
+- If the OS is Darwin (macOS), it creates a package (`PCKG`) with four elements: `0xFF`, `0x03`, `Zero`, and `Zero`.
+- `USBP += One` increments the value of `USBP` by one. This is a port counter
+- The "If" block checks conditions based on the value of `USBP` and the input argument (`Arg0`):
+	- If `USBP` equals `0x04` or if `Arg0` is `zero`, it sets the first element of `PCKG` to zero. In other words: it disables the port
+	- If `USBP` equals `0x04`, `0x05`, or `0x06`, it sets the second element of PCKG to `0xFF`, which changes the port to internal
+   - Returns the package PCKG after the conditions are checked.
+- `Else` Block: If the OS is not Darwin (macOS), it returns the result of `XUPC(Arg0)` – in other words: it uses the unmodified USB port mapping as defined in the systems ACPI layer.
+
+With this, we now have means to enable/disable ports:
+
+```asl
+···               
+If (((USBP == 0x04) || (Arg0 == Zero)))
+{
+	PCKG [Zero] = Zero
+}
+```
+This segment checks if `USBP` equals `0x04` (= the forth port detected) or if `Arg0` is zero, and if so, it sets the first element of PCKG to `zero`, which disables the port. So if you want disable different ports you just add them to the the "If" expression, e.g.:
+
+```asl
+···               
+If (((USBP == 0x01) || (USBP == 0x02) || (USBP == 0x03) (Arg0 == Zero))) // Disables ports 01, 02, 03 and ports where the value for Arg0 is 0
+{
+	PCKG [Zero] = Zero
+}
+...
+```
+
+The following part checks if `USBP` is `0x04`, `0x05`, or `0x06` and if so, it sets the second element of `PCKG` to `0xFF` (changes the USB port to internal):
+
+```asl
+··· 
+If ((((USBP == 0x04) || (USBP == 0x05)) || (USBP == 0x06))) // Here we add the ports which should be enable (in this case Ports 4, 5 and 6)
+	{
+		PCKG [One] = 0xFF // 0xFF = internal
+	}
+···
+```
+The following values for USB port types are possible:
+
+| Value  | Port Type |       
+| :----: | ----------|
+|**`0X00`**| USB Type `A` |
+|**`0x01`**| USB `Mini-AB` |
+|**`0x02`**| USB Smart Card |
+|**`0x03`**| USB 3 Standard Type `A` |
+|**`0x04`**| USB 3 Standard Type `B` |
+|**`0x05`**| USB 3 `Micro-B` |
+|**`0x06`**| USB 3 `Micro-AB` |
+|**`0x07`**| USB 3 `Power-B` |
+|**`0x08`**| USB Type `C` (USB 2 only) |
+|**`0x09`**| USB Type `C` (with Switch) | 
+|**`0x0A`**| USB Type `C` (w/o Switch) | 
+|**`0xFF`**| Internal USB 2 port|
+
+## Patching Principle
+
+### 1. Prerequisites
+- Backup your current EFI folder on a FAT32 formatted USB flash drive – just in case something goes wrong and your system wont boot.
+- Disable previously used USB port patches, like:
+	- Custom SSDTs containing a replacement USB port mapping table and the corresponding drop rule (located under `ACPI/delete`)
+	- USBPort kexts
+
+### 2. Prepare `SSDT-GUPC.aml`
+- Copy the code for `SSDT-GUPC` from above into maciASL
 - Modify the `USBP += One` section as indicated
 - Export the file as `SSDT-GUPC.aml`
 - Add it to `EFI/OC/ACPI` and config.plist under `ACPI/Add`
 
-### 2. Add binary rename
--  Under ACPI/Patch, add the following:
+### 3. Add binary rename
+-  Under `ACPI/Patch`, add the following rename:
 	
 	```
-	Comment: USB GUPC to XUPC
-	Find: 47 55 50 43 09
-	Replace: 58 55 50 43 09
+	Comment: 	USB GUPC to XUPC
+	Find: 		4755504309
+	Replace: 	5855504309
 	```
 
 ## Notes and Credits
-- In my tests, I couldn't get this to work as intended. I don't understand how to address the different Port types (HS, SS and USR) that are present in my OEM USB Port Table. I don't have `USBP` in my table. Maybe it has to be replaced by rules/names that represent the port types, like: `NHSP` (for HS ports), `NSSP` (for SS) and `USRA` (for USR)? Anyway, if you find a solution, let me know.
+- In my tests, I couldn't get this to work. If you find a solution, let me know.
 - Original [**Blog Post**](https://blog-gzxiaobai-cn.translate.goog/post/利用GUPC以热补丁定制USB端口?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) by [**GZXiaoBai**](https://github.com/GZXiaoBai)
+- Original OC-Litte issue: **https://github.com/daliansky/OC-little/issues/18**
