@@ -15,7 +15,7 @@ Method (GUPC, 1, Serialized)
     Name (PCKG, Package (0x04)
     {
         Zero, // 1st packet. Determines if a port is on or off
-        0xFF, // 2nd packet. Determines the type of port
+        0xFF, // 2nd packet. Determines the type of port. 0xFF = Type: 255 = Internal Connector
         Zero, 
         Zero
     })
@@ -128,6 +128,16 @@ The following values for USB port types are possible:
 |**`0x09`**| USB Type `C` (with Switch) | 
 |**`0x0A`**| USB Type `C` (w/o Switch) | 
 |**`0xFF`**| Internal USB 2 port|
+
+The most connector types nowadays are:
+
+| Value  | Port Type |       
+| :----: | ----------|
+|**`0X00`**| USB 2, Type `A` |
+|**`0x03`**| USB 3, Type `A` |
+|**`0x09`**| USB Type `C` (with Switch) | 
+|**`0x0A`**| USB Type `C` (w/o Switch) | 
+|**`0xFF`**| Internal USB 2 port (for Bluetooth connectors)|
 
 ## Patching Principle
 
