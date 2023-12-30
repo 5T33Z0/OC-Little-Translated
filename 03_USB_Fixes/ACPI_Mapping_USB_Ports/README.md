@@ -53,7 +53,9 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 1. The USB port are declared in a separate ACPI file, a SSDT, not inside the DSDT
 2. This SSDT contains `XHC` and `_UPC` method and a list of ports (primarily `HSXX` and `SSXX`)
 
-> **Warning**: This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
+> [!WARNING]:
+>
+> This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
 
 ## Preparations
 
@@ -113,9 +115,10 @@ In order to delete (or drop) the original table during boot and replace it with 
 5. Enable the rule and a comment so you know what it does.
 6. Save the config.
 
-> **Note**: In some cases, the `TableLength` may be required as well to drop the table successfully.
+> [!NOTE]
 >
-> If the USB ports are defined within the `DSDT` itself, you cannot use this approach and have to find other ways of manipulating the values in the DSDT directly by utilizing using ACPI renames, [as explained here](https://www.insanelymac.com/forum/topic/352311-mapping-usb-ports-discussions/?do=findComment&comment=2790643).
+> - In some cases, the `TableLength` may be required as well to drop the table successfully.
+> - If the USB ports are defined within the `DSDT` itself, you cannot use this approach and have to find other ways of manipulating the values in the DSDT directly by utilizing using ACPI renames, [as explained here](https://www.insanelymac.com/forum/topic/352311-mapping-usb-ports-discussions/?do=findComment&comment=2790643).
 
 You should have the correct rule for replacing the ACPI Table containing the USB Port declarations. Let's move on to the hard part…
 
@@ -279,7 +282,9 @@ As seen earlier, the ports listed in the SSDT have different names.
 | **SS01…SS10** | SS = Super Speed Ports | USB 3.0, 3.1, 3.2 | 5 to 20 Gbit/s   |
 | **USR1/2**    | Not supported by macOS. Deactivate them.   | Intel AMT        | 
 
-**IMPORTANT**: A physical USB 3.0 Connector (the blue one, you know?!) actually connects to 2 USB Ports: one for USB 2.0 and one for USB 3.0. So having 15 Ports available for mapping doesn't mean that you can assign them to 15 physical connectors. Actually, you can only assign them to 7 USB 3.x and 1 USB 2.0-only connectors.
+> [!IMPORTANT]
+>
+> A physical USB 3.0 Connector (the blue one, you know?!) actually connects to 2 USB Ports: one for USB 2.0 and one for USB 3.0. So having 15 Ports available for mapping doesn't mean that you can assign them to 15 physical connectors. Actually, you can only assign them to 7 USB 3.x and 1 USB 2.0-only connectors.
 
 **EXAMPLE**: if you plug in a USB 3.0 flash drive, you can see in IORestryExplorer, that it connects to `SS07` for example. If you take it out and put a USB 2.0 drive in the same connector, it will most likely be connected to `HS07` now. So 1 Connector, 2 Ports with the same counter (usually) – in this example HS07 and SS07.
 
