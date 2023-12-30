@@ -33,9 +33,7 @@
 - [Credits](#credits)
 
 ## Background
-Since macOS Big Sur 11.3, the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per controller on Apple USB kexts no longer works. This complicates the process of creating a `USBPorts.kext` with Tools like `Hackintool` or `USBMap` (besides the fact that these tools don't work for AMD chipsets). 
-
-So the best way to declare USB ports is via ACPI since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for).
+Although the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per USB controllers under macOS was fixed with the Release of OpenCore 0.9.3., it is still recommended to create a custom `USBPorts.kext` with tools like `Hackintool` or `USBMap` (note that these tools don't work on AMD chipsets). But since these USB Port mapping kexts are usually bound to the SMBIOS they were created with, the best way to declare USB ports is via ACPI, since this method works independent of the OS and SMBIOS!
 
 ## Approach
 In order to build our own USB Port map as SSDT, we will do the following:
@@ -53,7 +51,7 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 1. The USB port are declared in a separate ACPI file, a SSDT, not inside the DSDT
 2. This SSDT contains `XHC` and `_UPC` method and a list of ports (primarily `HSXX` and `SSXX`)
 
-> [!WARNING]:
+> [!WARNING]
 >
 > This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
 
