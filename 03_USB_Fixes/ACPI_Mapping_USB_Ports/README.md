@@ -267,7 +267,7 @@ According to the ACPI Specifications about [USB Port Capabilities](https://uefi.
 |**0x08**| Type C connector, USB 2.0 only | Mainly used in phones|
 |**0x09**| Type C connector, USB 2.0 and USB 3.0 with Switch | Flipping the device does not change the ACPI port |
 |**0x0A**| Type C connector, USB 2.0 and USB 3.0 w/o Switch |Flipping the device does change the ACPI port. generally seen on USB 3.1/3.2 mainboard headers|
-|**0xFF**| Proprietary Connector | For Internal USB 2.0 ports like Bluetooth|
+|**0xFF**| Proprietary Connector | For internal USB 2.0 connections like Bluetooth or integrated cameras |
 
 We will use these "Type" bytes to declare the USB Port types.
 
