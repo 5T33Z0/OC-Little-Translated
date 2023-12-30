@@ -26,7 +26,7 @@
 	- [USB Port Names](#usb-port-names)
 	- [Port mapping options](#port-mapping-options)
 		- [Option A: Mapping ports based on a known configuration](#option-a-mapping-ports-based-on-a-known-configuration)
-		- [OPTION B: Mapping Ports of an unknown configuration](#option-b-mapping-ports-of-an-unknown-configuration)
+		- [Option B: Mapping Ports of an unknown configuration](#option-b-mapping-ports-of-an-unknown-configuration)
 			- [Gathering information about USB Ports](#gathering-information-about-usb-ports)
 	- [Assigning Physical Location of Device (`_PLD`)](#assigning-physical-location-of-device-_pld)
 - [Wrapping up and testing](#wrapping-up-and-testing)
@@ -376,7 +376,7 @@ Scope (USR1)
    	}
 }
 ```
-#### OPTION B: Mapping Ports of an unknown configuration
+#### Option B: Mapping Ports of an unknown configuration
 Option B is for user who don't alread know which internal USB ports connect to which physical port on the front and back I/O panel of their computer and internally. Basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
 
 ##### Gathering information about USB Ports
