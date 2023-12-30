@@ -92,7 +92,7 @@ ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapp
 
 |Device Tree | Explanation
 ------------|------------
-![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png) | <ul> <li> OEM USB port mapping example from an Ivy Bridge Notebook <li> This system has 3 USB controllers: <ul> <li> `XHCI` (USB3), <li> `EHC1` (USB 2) and <li>`EHC2` (USB 2) </ul> <li> The `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. <li> The `EHC1` device also contains 8 ports:  (`PRT0` to `PRT7`). <li> `EHC2` only contains 6 ports: `PRT8` to `PRTD`. </ul> &rarr; Since the 15 port limit is *per* controller and since each of the controllers have less than 15 ports mapped, we don't need to do any port remaapping here.
+![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png) | <ul> <li> OEM USB port mapping example from an Ivy Bridge Notebook <li> This system has 3 USB controllers: <ul> <li> `XHCI` (USB3), <li> `EHC1` (USB 2) and <li>`EHC2` (USB 2) </ul> <li> The `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. <li> The `EHC1` device also contains 8 ports:  (`PRT0` to `PRT7`). <li> `EHC2` only contains 6 ports: `PRT8` to `PRTD`. </ul> &rarr; Since the 15 port limit is *per* controller and since each of the controllers have less than 15 ports mapped, we don't need to do any port remapping here.
 
 > [!NOTE]
 > 
