@@ -55,7 +55,7 @@ The method presented here is a slightly modified version of a guide by "Apfelnic
 In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your system have to be met:
 
 1. The USB ports are declared in a separate `SSDT`, not inside the `DSDT` itself!
-2. This SSDT contains an `XHC` devicce as well as the method `_UPC` and a list of ports, primarily `HSxx` and `SSxx` (xx = digits, e.g. `HS01` or `SS01`, etc.)
+2. This SSDT contains an `XHC` device as well as the method `_UPC` and a list of ports, primarily `HSxx` and `SSxx` (xx = digits, e.g. `HS01` or `SS01`, etc.)
 
 > [!WARNING]
 >
