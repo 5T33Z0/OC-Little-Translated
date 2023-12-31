@@ -445,10 +445,11 @@ Once you are done with your port mapping activities, do the following:
 - Save the SSDT as something plausible like `SSDT-XHCI.aml` or `SSDT-PORTS.aml` (keep it short!)
 - Mount your EFI partition
 - Copy the EFI folder to a FAT32 formatted USB flash drive (for testing)
-- Open your OpenCore `config.plist` (the one on the flash drive)
 - Add the .aml file to the `EFI\OC\ACPI` folder on your flash driver.
+- Open your OpenCore `config.plist` (the one on the flash drive)
 - Add the file to the `ACPI > Add` Section and enable it.
-- Save your `config.plist`
+- Make sure to enable the rule to drop the OEM USB table in the `ACPI > Delete` section.
+- Save the `config.plist`
 - Reboot from USB flash drive. 
 - Test the ports with macOS and your other Operating systems.
 - If it works, Congrats! 
