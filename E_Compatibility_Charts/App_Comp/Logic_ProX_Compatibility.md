@@ -15,5 +15,5 @@ App Version   | macOS Requirements
 
 > [!NOTE]
 > 
-> - To figure out the minimum macOS requirements for any Logic version, right-click the app and select "Show Package Contents". Next, open the `info.plist` with a plist editor and search for "Minimum system version".
+> - To figure out the minimum macOS requirements for any Logic version, right-click the app and select "Show Package Contents". Next, open the `info.plist` with a plist editor and search for `LSMinimumSystemVersion`.
 > - A more detailed compatibility chart can be found [here](https://docs.google.com/spreadsheets/d/1az7KnLQJ1jm_umIhkjjNTr47-vUCcranCXgTTW5R7jY/edit?usp=sharing).
