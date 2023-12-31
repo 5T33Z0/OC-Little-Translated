@@ -1,6 +1,6 @@
 # Fixing USB issues
 
-> **Update** (2023-06-12): `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur to Sonoma. Generating a USB Port Map kext is still recommended!
+> **Update** (2023-06-12): `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur to Sonoma. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
 
 ## Technical Background
 
