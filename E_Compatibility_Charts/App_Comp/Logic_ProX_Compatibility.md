@@ -2,7 +2,7 @@
 
 App Version   | macOS Requirements
 ------------:|-------------------
-10.8          | macOS 13.5 or newer
+10.8+         | macOS 13.5 or newer
 10.7.5+       | macOS 12.3 or newer
 10.7.3–10.7.4 | macOS 11.5 or newer
 10.7.0–10.7.2 | macOS 11.0 or newer
