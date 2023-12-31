@@ -33,23 +33,29 @@
 - [Credits](#credits)
 
 ## Background
-Although the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per USB controllers under macOS was fixed with the Release of OpenCore 0.9.3., it is still recommended to create a custom `USBPorts.kext` with tools like `Hackintool` or `USBMap` (note that these tools don't work on AMD chipsets). But since these USB Port mapping kexts are usually bound to the SMBIOS they were created with, the best way to declare USB ports is via ACPI, since this method works independent of the OS and SMBIOS!
+Although the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per USB controller under macOS was fixed in OpenCore 0.9.3, it is recommended to only enable it temporarily for creating a custom USB port injector kext with tools like `Hackintool` or `USBMap`: 
+
+> While [using `XHCIPortLimit`] sounds like the best-case solution, it does come with some drawbacks… The port limit is *hardcoded* in a ton of places all over OS, and as we're only lifting it in a few, this causes access outside the bounds of a fixed array. We're accessing things that shouldn't even be there, and that can cause some odd or unpredictable side effects.[…] Ultimately, it's considered best practice to only leverage the port limit patch for the mapping process, and then to disable it.
+> 
+> **Source**: https://github.com/corpnewt/USBMap/blob/master/Information.md#port-limit-patch
+
+Since USB port injector kexts are usually bound to the SMBIOS, the best and cleanest way to declare USB ports is via ACPI, since this method works independent of the macOS version and SMBIOS!
 
 ## Approach
-In order to build our own USB Port map as SSDT, we will do the following:
+In order to build our own USB port map as SSDT, we will do the following:
 
 1. Dump the original ACPI tables from BIOS
 2. Find the SSDT which declares USB ports
 3. Modify it so 15 ports are mapped for macOS without affecting other OSes
-4. Inject this table during boot, replacing the original one
+4. Inject this SSDT during boot, replacing the original one
 
 The method presented here is a slightly modified version of a guide by "Apfelnico" and "N0b0dy" of the [**German Hackintosh Forum**](https://www.hackintosh-forum.de/forum/thread/54986-usb-mittels-ssdt-deklarieren/?postID=721415) which I used to create my own `SSDT-PORTS.aml`. I just translated and transformed it into this step by step guide. 
 
 ## Patching requirments
 In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your system have to be met:
 
-1. The USB port are declared in a separate ACPI file, a SSDT, not inside the DSDT
-2. This SSDT contains `XHC` and `_UPC` method and a list of ports (primarily `HSXX` and `SSXX`)
+1. The USB ports are declared in a separate `SSDT`, not inside the `DSDT` itself!
+2. This SSDT contains an `XHC` devicce as well as the method `_UPC` and a list of ports, primarily `HSxx` and `SSxx` (xx = digits, e.g. `HS01` or `SS01`, etc.)
 
 > [!WARNING]
 >
@@ -92,12 +98,13 @@ ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapp
 
 |Device Tree | Explanation
 ------------|------------
-![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png) | <ul> <li> OEM USB port mapping example from an Ivy Bridge Notebook <li> This system has 3 USB controllers: <ul> <li> `XHCI` (USB3), <li> `EHC1` (USB 2) and <li>`EHC2` (USB 2) </ul> <li> The `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. <li> The `EHC1` device also contains 8 ports:  (`PRT0` to `PRT7`). <li> `EHC2` only contains 6 ports: `PRT8` to `PRTD`. </ul> &rarr; Since the 15 port limit is *per* controller and since each of the controllers have less than 15 ports mapped, we don't need to do any port remapping here.
+![legacyports](https://user-images.githubusercontent.com/76865553/163591806-b34aebd2-7d41-47ce-bc80-054447cf1e64.png) | <ul> <li> OEM USB port mapping example from an Ivy Bridge Notebook <li> This system has 3 USB controllers: <ul> <li> `XHCI` (USB 3), <li> `EHC1` (USB 2) and <li>`EHC2` (USB 2) </ul> <li> The `XHCI` device only contains 8 Ports: `HPS0` to `HSP3` and `SSP0` to `SSP3`. <li> The `EHC1` device also contains 8 ports:  (`PRT0` to `PRT7`). <li> `EHC2` only contains 6 ports: `PRT8` to `PRTD`. </ul> &rarr; Since the 15 port limit is *per* controller and since each of the controllers have less than 15 ports mapped, we don't need to do any port remapping here.
 
 > [!NOTE]
 > 
-> - Just because an SSDT includes 26 port *entries*, that doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
-> - If your system has issues with sleep and wake due to an internally connected WiFi/Bluetooth module not being detected as "internal", I suggest using [**USBToolBox**](https://github.com/USBToolBox/tool) under Windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
+> - Just because an SSDT includes 26 port *entries*, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+> - If your system has issues with sleep and wake due to an *internally* connected WiFi/Bluetooth/Camera module not being detected as "internal", I suggest you check in Windows which USB port the device uses. In device manager, find the device and open it's preferences. Click the tab "Details". From the "Property" dropdown menu, select "BIOS pathname" (or similar). This will show the ACPI path of the port the device is connected to. Since Bluetooth uses USB 2.0, it will most likely be a `HSxx` port. Take note of the port and change it's type to `255` later in the SSDT.
+> - Alternatively, use [**USBToolBox**](https://github.com/USBToolBox/tool) under Windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
 ### Adding a delete rule to config.plist
 In order to delete (or drop) the original table during boot and replace it with our own, we need to tell OpenCore to look for the Signature ("SSDT") and the OEM Table ID (in my case "xh_cmsd4") to drop.
