@@ -93,9 +93,12 @@ Have a look into Clover's "ACPI/origin" folder. In there you will find a lot of 
 
 **We can see the following**:
 
-- There's ab `XHC` (eXtensible Host Controller) and for `XHC.RHUB` (USB Root Hub) device
+- The SSDT contains an `XHC` (eXtensible Host Controller) device and an `XHC.RHUB` (USB Root Hub) device
 - There's a list of Ports, 26 in this case: `HS01` to `HS14`, `USR1` and `USR2`, and `SS01` to `SS10`. We will come back to the meaning of these names later. 
-- Take note of the "Table Signature" and the "OEM Table ID". We will need them later to create a drop rule in the `ACPI/Delete` section of the OpenCore config, so it can be replaced by our modified table we are going to create.
+
+> [!TIP]
+> 
+> Take note of the "Table Signature" and the "OEM Table ID". We will need them later to create a drop rule in the `ACPI/Delete` section of the OpenCore config, so it can be replaced by our modified table we are going to create.
 
 ### Intel Broadwell and older CPUs
 ACPI tables for Broadwell and older Intel CPUs don't use separate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
