@@ -8,6 +8,7 @@
 
 - [Background](#background)
 - [Approach](#approach)
+- [Patching requirments](#patching-requirments)
 - [Preparations](#preparations)
 	- [Required Tools](#required-tools)
 	- [Dumping ACPI Tables](#dumping-acpi-tables)
@@ -17,6 +18,9 @@
 	- [Adding a delete rule to config.plist](#adding-a-delete-rule-to-configplist)
 - [Preparing the replacement SSDT](#preparing-the-replacement-ssdt)
 	- [Modifying the original USB Table](#modifying-the-original-usb-table)
+		- [1. `_UPC` (**USB Port Capabilities**)](#1-_upc-usb-port-capabilities)
+			- [Explanations](#explanations)
+		- [2. `_PLD` (**Physical Location of Device**)](#2-_pld-physical-location-of-device)
 		- [Adding `Arg1` to `GUPC`](#adding-arg1-to-gupc)
 		- [Deleting the existing `_UPC` method](#deleting-the-existing-_upc-method)
 		- [Adding the new `_UPC` method](#adding-the-new-_upc-method)
@@ -55,7 +59,7 @@ The method presented here is a slightly modified version of a guide by "Apfelnic
 In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your system have to be met:
 
 1. The USB ports are declared in a separate `SSDT`, not inside the `DSDT` itself!
-2. This SSDT contains an `XHC` device as well as the method `_UPC` and a list of ports, primarily `HSxx` and `SSxx` (xx = digits, e.g. `HS01` or `SS01`, etc.)
+2. This SSDT contains an `XHC` device as well as the method `_UPC` and a list of ports, primarily `HSxx` and `SSxx` (xx = integers, e.g. `HS01` and/or `SS01`, etc.)
 
 > [!WARNING]
 >
@@ -64,15 +68,15 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 ## Preparations
 
 ### Required Tools
-- [**Clover Bootmanager**](https://github.com/CloverHackyColor/CloverBootloader/releases) for dumping your System's ACPI tables.
-- [**maciASL**](https://github.com/acidanthera/MaciASL) or [**XIASL**](https://github.com/ic005k/Xiasl/releases) (cross-platform) for editing `.aml` files.
+- [**Clover Bootmanager**](https://github.com/CloverHackyColor/CloverBootloader/releases) for dumping your system's ACPI tables.
+- [**maciASL**](https://github.com/acidanthera/MaciASL) or [**XIASL**](https://github.com/ic005k/Xiasl/releases) (cross-platform) for editing `.dsl`/`.aml` files.
 - [**IOResgistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases) for gathering infos about I/O on macOS. Used for probing USB Ports.
 - [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig) or a Plist Editor for editing the `config.plist`.
 - [**Example Files**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports/Example_Files) (for following along)
-- FAT32 formatted USB 3.0 flash drive (USB 3.0) for dumping ACPI tables and probing ports.
-- USB 2.0 Flash Drive (optional, also for probing Ports).
-- Your mainboard manual with a schematic listing all its ports and USB headers
-- Spreadsheet for taking notes about Port names, Types and physical Location (optional)
+- FAT32 formatted USB 3.x flash drive for dumping ACPI tables and probing `SS` ports.
+- Additional USB 2.0 flash drive (optional, for probing `HS` ports).
+- Your mainboard manual with a schematic of the physical locations of the USB headers and ports.
+- Spreadsheet for taking notes about Port names, Types and physical Location (optional).
 - Patience and time (mandatory). Seriously, this is not for beginners! 
 
 ### Dumping ACPI Tables
@@ -94,7 +98,7 @@ Have a look into Clover's "ACPI/origin" folder. In there you will find a lot of 
 - Take note of the "Table Signature" and the "OEM Table ID". We will need them later to create a drop rule in the `ACPI/Delete` section of the OpenCore config, so it can be replaced by our modified table we are going to create.
 
 ### Intel Broadwell and older CPUs
-ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
+ACPI tables for Broadwell and older Intel CPUs don't use separate SSDTs for mapping USB ports – it's all handled within the `DSDT` itself so you can't drop this table. The `DSDT` includes Controllers for USB 2 (`EHC0`, `EHC1`, etc.) and USB 3 (`XHCI`). In most cases, you don't have to manually map these ports since each controller usually contains less than 15 Ports as you can see in this example from an Ivy Bridge Notebook:
 
 |Device Tree | Explanation
 ------------|------------
@@ -102,7 +106,7 @@ ACPI tables for Broadwell and older Intel CPUs don't use seperate SSDTs for mapp
 
 > [!NOTE]
 > 
-> - Just because an SSDT includes 26 port *entries*, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by Devs.
+> - Just because an SSDT includes 26 port *entries*, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by developers.
 > - If your system has issues with sleep and wake due to an *internally* connected WiFi/Bluetooth/Camera module not being detected as "internal", I suggest you check in Windows which USB port the device uses. In device manager, find the device and open it's preferences. Click the tab "Details". From the "Property" dropdown menu, select "BIOS pathname" (or similar). This will show the ACPI path of the port the device is connected to. Since Bluetooth uses USB 2.0, it will most likely be a `HSxx` port. Take note of the port and change it's type to `255` later in the SSDT.
 > - Alternatively, use [**USBToolBox**](https://github.com/USBToolBox/tool) under Windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
@@ -169,7 +173,7 @@ _UPC, Package ()
    | `0x0A` | USB Type `C` **(w/o switch)** | 
    | `0xFF` | Built-in |
 
-**UBS-C Switches**: if both sides of a USB-C connector are plugged into the same pysical port and hackintool uses the same port for it, than the connected device has a switch. In other words: 2 sides, 1 port = switch. Conversely, if both sides of the same connector occupy two ports, it has no switch
+**UBS-C Switches**: if both sides of a USB-C connector are plugged into the same physical port and hackintool uses the same port for it, than the connected device has a switch. In other words: 2 sides, 1 port = switch. Conversely, if both sides of the same connector occupy two ports, it has no switch
 
 #### 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.5/06_Device_Configuration.html#pld-physical-location-of-device))
 
@@ -204,7 +208,7 @@ Method (GUPC, 2, Serialized)
 	Return (PCKG) /* \GUPC.PCKG */
 }
 ```
-`Arg0`= addresse the first value in the package. It enables (`0xff`) or disables (`Zero`) the port</br>
+`Arg0`= addresses the first value in the package. It enables (`0xff`) or disables (`Zero`) the port</br>
 `Arg1`= addresses the second value in the package. It declares the USB port type as mentioned earlier (`0x00` for USB2, `0x03` for USB, etc.)
 
 #### Deleting the existing `_UPC` method
@@ -252,7 +256,7 @@ Now we have a USB Port SSDT Template with 24 enabled ports defined as USB 2.0/US
 Next, we need to figure out how the ports are attached to actually physical USB connectors.
 
 ### How USB is structured in ACPI
-When it comes to USB, there is a Root Hub (RHUB) which defines ports. But a port can also function as Hub itself (Integrated Hub), as you can see in this illustration:
+When it comes to USB, there is a Root Hub (`RHUB`) which contains the defined USB ports. But a port can also function as Hub itself (Integrated Hub), as you can see in this illustration:
 
 ![ACPIdefined_Devices_and_DeviceSpecificObjects-5](https://user-images.githubusercontent.com/76865553/191863871-53de2612-590e-471f-8a8b-85f20f82ec63.png)
 
@@ -289,9 +293,9 @@ As seen earlier, the ports listed in the SSDT have different names.
 
 > [!IMPORTANT]
 >
-> A physical USB 3.0 Connector (the blue one, you know?!) actually connects to 2 USB Ports: one for USB 2.0 and one for USB 3.0. So having 15 Ports available for mapping doesn't mean that you can assign them to 15 physical connectors. Actually, you can only assign them to 7 USB 3.x and 1 USB 2.0-only connectors.
+> A physical USB 3.0 Connector (the blue one) actually connects to two USB Ports: one for USB 2.0 and one for USB 3.0. So having 15 Ports available for mapping doesn't mean that you can assign them to 15 physical connectors. Actually, you can only assign them to 7 USB 3.x and 1 USB 2.0-only connectors.
 
-**EXAMPLE**: if you plug in a USB 3.0 flash drive, you can see in IORestryExplorer, that it connects to `SS07` for example. If you take it out and put a USB 2.0 drive in the same connector, it will most likely be connected to `HS07` now. So 1 Connector, 2 Ports with the same counter (usually) – in this example HS07 and SS07.
+**EXAMPLE**: if you plug in a USB 3.0 flash drive, you can see in IORegistryExplorer, that it connects to `SS07` for example. If you take it out and put a USB 2.0 drive in the same connector, it will most likely be connected to `HS07` now. So 1 Connector, 2 Ports with the same counter (usually) – in this example HS07 and SS07.
 
 ### Port mapping options
 At this stage, there are two options for mapping your USB ports.
@@ -306,7 +310,7 @@ This is for people who already created a `USBPorts.kext` in Hackintool or simila
 	
 As you can see, `HS01` is not used in my case, so we deactivate it. But to keep compatibility with other Operating Systems, we turn it off for macOS only. To achieve this, we use a conditional rule with an "if/else" statement, the method `_OSI` (Operating System Interfaces): `If (_OSI ("Darwin"))`. It tells the system: "If the Darwin Kernel (aka macOS) is loaded, `HS01` does not exist, everybody else can have it". This is a super elegant and non-invasive way of declaring USB Ports without messing up the port mapping for other OSes. This is the code snippet (adjust the scope accordingly):
 
-![IFOSI](https://user-images.githubusercontent.com/76865553/137521985-96a3620d-b6b3-40ee-b554-ce86078b05d7.png)
+![darwin](https://user-images.githubusercontent.com/76865553/137521985-96a3620d-b6b3-40ee-b554-ce86078b05d7.png)
 
 This is the Code snippet. As you can see, it is applies to `_UPC` and `_PLD` in this case
 
@@ -370,7 +374,7 @@ Continue mapping your ports this way: for those which you do use, declare the po
 
 **Remember**: This SSDT contains 26 ports in total, so you need to deactivate at least 11 in total to stay within the Port limit of 15 for macOS!
 
-Once you reach `USR1` and `USR2`, change `GUPC` to `Zero`, `Zero`. This to deactivates them (if you need these port in Windows, add the `If (_OSI ("Darwin"))` switch.
+Once you reach `USR1` and `USR2`, change `GUPC` to `Zero`, `Zero`. This to deactivates them (if you need these port in Windows, add the `If (_OSI ("Darwin"))` switch).
 
 ```asl
 Scope (USR1)
@@ -387,22 +391,22 @@ Scope (USR1)
 }
 ```
 #### Option B: Mapping Ports of an unknown configuration
-Option B is for user who don't alread know which internal USB ports connect to which physical port on the front and back I/O panel of their computer and internally. Basically, this works the same as Option A. The only difference is that you need to find out which physical connects to which internal USB Port of your machine.
+Option B is for user who don't already know which internal USB ports connect to which physical port on the front and back I/O panel of their computer or internally. Basically, this works the same as Option A. The only difference is that you need to find out which physical port connects to which internal USB port of your machine.
 
 ##### Gathering information about USB Ports
-The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks to them. Take notes of which physical USB port connect to which port internally. You can monitor the Ports use IORegistryExploer for this too, but [Hackintool](https://github.com/headkaze/Hackintool) or Corpnewt's [USBMap](https://github.com/corpnewt/USBMap) are a lot simpler to use:
+The first step is to monitor the Ports, while connecting USB 2 and USB 3 Sticks to them. Take notes of which physical USB port connect to which port internally. You can monitor the Ports use IORegistryExplorer for this too, but [Hackintool](https://github.com/headkaze/Hackintool) or Corpnewt's [USBMap](https://github.com/corpnewt/USBMap) are a lot simpler to use:
 
 - Run the python script `USBMap.command` 
 - Press "d" on the Keyboard to detect ports:</br>
 ![USBmap](https://user-images.githubusercontent.com/76865553/142078666-1a96ee4e-dc82-4658-91d6-ac370614b2a8.png)</br>
-In this example, the system has more than one USB Controller. For the sake of the Example, we focus on the `XHC` Controller ("HSXX" and "SSXX").
+In this example, the system has more than one USB Controller. For the sake of the Example, we focus on the ports declared in the `XHC` Controller ("HSXX" and "SSXX").
 - Leave the Window open and put in your USB 2 Stick into a port and check which entry turns blue in the list and take notes.
 - Next, put a USB 3.0 stick in the same port and see what turns blue next. Usually, if a physical USB port is blue, it supports USB 2 and 3 Ports. An as far as its routing is concerned, only the Prefix changes when switching between USB 2 and USB3. In other words: if a USB 2 stick is mapped to "HS01", the corresponding USB 3 Port will most likely be "SS01".
 - Continue probing all ports with USB 2/3/C flash drives or devices und you're done.
-- Once you collected all the neccessary data return to "Option A" of the guide to map the ports in ACPI.
+- Once you collected all the necessary data return to "Option A" of the guide to map the ports in ACPI.
 
 ### Assigning Physical Location of Device (`_PLD`) 
-This method provides a lot of details about the pysical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
+This method provides a lot of details about the physical location of the USB ports themselves. Such as: location, shape, color and a lot of rather uninteresting details for PC users. Here's a long list of some of the available parameters:
 
 ```asl
 Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
