@@ -110,7 +110,7 @@ ACPI tables for Broadwell and older Intel CPUs don't use separate SSDTs for mapp
 > [!NOTE]
 > 
 > - Just because an SSDT includes 26 port *entries*, it doesn't meant that they are all connected to physical devices on the mainboard. Look at it more as a template used by developers.
-> - If your system has issues with sleep and wake due to an *internally* connected WiFi/Bluetooth/Camera module not being detected as "internal", I suggest you check in Windows which USB port the device uses. In device manager, find the device and open it's preferences. Click the tab "Details". From the "Property" dropdown menu, select "BIOS pathname" (or similar). This will show the ACPI path of the port the device is connected to. Since Bluetooth uses USB 2.0, it will most likely be a `HSxx` port. Take note of the port and change it's type to `255` later in the SSDT.
+> - If your system has issues with sleep and wake due to an *internally* connected WiFi/Bluetooth/Camera module not being detected as "internal", I suggest you check in Windows which USB port the device uses. In device manager, find the device and open it's preferences. Click the tab "Details". From the "Property" dropdown menu, select "BIOS pathname" (or similar). This will show the ACPI path of the port the device is connected to. Since Bluetooth uses USB 2.0, it will most likely be a `HSxx` port. Take note of the port and change it's type to `FF` (255) in the SSDT later.
 > - Alternatively, use [**USBToolBox**](https://github.com/USBToolBox/tool) under Windows to create a USBPort kext and change the port type for the the port in question to `255`. This should fix the problem.
 
 ### Adding a delete rule to config.plist
