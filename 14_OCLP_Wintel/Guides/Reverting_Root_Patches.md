@@ -57,7 +57,7 @@ This option is the last resort, if macOS won’t boot normally nor in safe mode.
 4. Once you reach the recovery menu, select **Disk Utility**
 5. Change “View” to “Show all Volumes” (or similar, depending on your language settings)
 6. From the menu on the left, select the “Volumes of XYZ” entry (XYZ = NAME of the VOLUME that contains the broken macOS install). For example “Volumes of Sonoma”, if you named your Volume “Sonoma”.
-7. Next, click on “Info” (or press <kbd>CMD</kbd> and <kbd>Enter</kbd>). This opens the Info dialog for the disk/volume.
+7. Next, click on “Info” (or press <kbd>CMD</kbd> and <kbd>i</kbd>). This opens the Info dialog for the disk/volume.
 8. Look for the entry “Mount Point”. It should be something like “/Volume/XYZ”
 9. Take note of that path and close Disk Utility
 10. Back in the recovery menu, select “Utilities > Terminal” from the menu bar
