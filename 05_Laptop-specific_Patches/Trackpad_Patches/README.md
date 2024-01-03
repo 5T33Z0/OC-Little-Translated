@@ -293,7 +293,8 @@ This section also contains additional patches for Notebooks from various vendors
 
 ## Resources and Credits
 * Special thanks to [1Revenger1](https://github.com/1Revenger1) for providing additional info about SMBus Touchpads.
-
+* [**GenI2C_Refresh**](https://github.com/Baio1977/GenI2C_Refresh) – Updated Tool for generating SSDT hotpatches for I2C controlled TouchPads for use with the VoodooI2C.kext.
+  
 ### Documentation and Support
 * [**Official VoodooI2C Documentation**](https://voodooi2c.github.io/)
 * [**VoodooI2C Support on Gitter**](https://gitter.im/alexandred/VoodooI2C) – Ask the  VoodooI2C dev for support directly
