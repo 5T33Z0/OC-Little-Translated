@@ -58,7 +58,7 @@ Audio should work now (assuming Lilu and AppleALC kexts are present along with t
 > If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files (.aml, .kext, .efi) into the respective section of the GUI to add them to the EFI/OC folder and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
 ### Troubleshooting
-Some implementations of ACPI, e.g. the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are injected by **SSDT-HPET.aml** generated with SSDTTime, which looks like this:
+Some implementations of ACPI, e.g. on the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are notated in the **SSDT-HPET.aml** generated with SSDTTime, which looks like this:
 
 ```asl
 ...
@@ -124,7 +124,7 @@ Scope (\)
 > - If you have an older Lenovo ThinkPad, Method 2.2 will work!
   
 #### Disabling **`RTC`**
-Disable the Realtime Clock by changing it's status (`_STA`) to zero if macOS is running:
+Disable the Realtime Clock by changing its status (`_STA`) to zero if macOS is running:
 
 ```asl
 Method (_STA, 0, NotSerialized)
@@ -145,7 +145,7 @@ Method (_STA, 0, NotSerialized)
 
 #### Disabling **`PIC`**/ **`IPIC`** (optional)
 
-The Programmable Interrupt Controller (`PIC` or `IPIC`) is responsible for managing interrupts. The PIC receives interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
+The Programmable Interrupt Controller (`PIC` or `IPIC`) is responsible for managing interrupts. It receives interrupts from various devices and routes them to the CPU, allowing the CPU to efficiently handle multiple events simultaneously.
 
 If the three-in-one patch alone does not fix audio, add ***SSDT-IPIC*** as well. It disables an existing `IPIC`/`PIC` device and adds a fake one instead (`IPI0`). It also contains `IRQNoFlags{2}` (must be uncommented to enable). Adjust the device name and path to mach the one used in your `DSDT`.
 
