@@ -24,11 +24,6 @@ You can tell whether or not your system's CPU Power Management is working correc
 
 For Ivy Bridge(-E) and older, you have to create an SSDT containing the power and turbo states of the CPU which are then injected into macOS via ACPI so that the `ACPI_SMC_PlatformPlugin` has the correct data to work with. That's why this method is also referred to as "ACPI CPU Power Management". 
 
-> [!WARNING]
-> 
-> 1. Don't install Intel Power Gadget on macOS Sonoma 14.2 beta 3 or newer! The `EnergyDriver.kext` it installs causes all cores to permanently run at 100 %! Use the included Uninstaller to get rid of it prior to upgrading to macOS 14!
-> 2. Don't use Intel Power Gadget on 11th Gen Intel and newer CPUs.
-
 ## Prerequisites
 - Hardware Requirements: 3rd Gen Intel Core or older CPU (Ivy Bridge and older) 
 - Mount your ESP
@@ -104,10 +99,10 @@ When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlu
 
 So when switching to macOS Ventura, you either have to:
 
-- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) (not recommended) or 
-- Re-enable ACPI CPU Power Management (**recommended**)
+- Re-enable ACPI CPU Power Management (**recommended**) or
+- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) (not recommended)
 
-In order to re-enable and use ACPI CPU Power Management on macOS Ventura, you have to do the following:
+In order to re-enable and use ACPI CPU Power Management in macOS Ventura and newer, you have to do the following:
 
 - Update OpenCore to 0.9.2 or newer (**Mandatory unless you can disable CFG Lock in BIOS!**)
 - `Booter/Patch`: Add [**Booter Patches from OCLP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof#booter-patches) to skip board-id check to run macOS on unsupported SMBIOS/Board-ids. Requires Darwin Kernel 20.4 (macOS 11.3+). So when upgrading from Catalina or older, you need to use a supported SMBIOS temporily to run the installer. Once the installation is done, you can revert to the SMBIOS best suited for your CPU.
@@ -145,11 +140,13 @@ This should return something like this:
 57    0 0xffffff800439a000 0x3e000    0x3e000    com.apple.driver.AppleIntelCPUPowerManagement (222.0.0) 20DD89B4-45CE-3E56-A484-15B74E79ACDD <9 8 7 6 3 1>
 88    0 0xffffff80043d8000 0xf000     0xf000     com.apple.driver.AppleIntelCPUPowerManagementClient (222.0.0) B3E52B58-0634-333C-9A71-E99BE79F8283 <9 8 7 6 3 1>
 ```
-> **Note** Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock is [skipped in macOS 13 based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c). So injecting the required kexts to re-enable legacy CPU Power Management results in a kernel panic unless CFG Lock can be disabled in the BIOS menu (or by flashing a modified BIOS if there is no setting available).
-
+> [!IMPORTANT] 
+> 
+> Prior to OpenCore 0.9.2, the necessary `AppleCpuPmCfgLock` Quirk to patch CFG Lock is [skipped in macOS 13 based on a kernel version check](https://github.com/acidanthera/OpenCorePkg/commit/77d02b36fa70c65c40ca2c3c2d81001cc216dc7c). This results in a kernel panic when attempting to inject the AppleIntelCPUPowerManagement kexts. So make sure to update OpenCore to the latest version where the quirk is working again. Otherwise you need to disable CFG lock in your UEFI/BIOS. And if the BIOS doesn't offer an to disable disabled it, you will have to flash a modified BIOS where CFG lock is disabled.
+ 
 ### Alternative Solution
 
-Instead of injecting the required kext to re-enable legacy CPU Power Management on Sandy and Ivy Bridge via Bootloaders, it's also possible to install patched versions of the kexts in S/L/E. I haven't tested this and I wouldn't recommend it but it's an option.
+Instead of injecting the required kexts to re-enable legacy CPU Power Management on Sandy and Ivy Bridge via OpenCore or Clover, it's also possible to install patched versions of the kexts under S/L/E. I haven't tested this and I wouldn't recommend doing this due to increased access restrictions to the system partitions since the release of macOS Catalina.
 
 **Source**: [**OSX Latitude**](https://osxlatitude.com/forums/topic/18089-patched-aicpupm-kext-for-sandy-bridgeivy-bridge-cpu-power-management-in-macos-ventura/#comment-117988)
 
