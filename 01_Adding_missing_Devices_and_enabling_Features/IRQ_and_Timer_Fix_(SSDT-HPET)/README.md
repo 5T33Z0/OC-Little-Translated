@@ -4,9 +4,11 @@
 
 Sound cards of older systems (pre Kaby Lake) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). 
 
-`HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only kept in ACPI tables of newer systems (Kaby Lake or newer) for backward compatibility with older versions of Windows (XP and older). If you are using Windows Vista or newer with a 7th Gen Intel Core or newer CPU, **HPET** (High Precision Event Timer) is disabled by default – even if it's defined in the `DSDT`.
+`HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only kept in ACPI tables of newer systems (Kaby Lake or newer) for backward compatibility with Windows XP and older. When running Windows Vista or newer on a system with a 7th Gen or newer Intel CPU, **HPET** (High Precision Event Timer) is disabled by default – even if it's present in the `DSDT`.
 
-In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To solve this issue, we need to fix **HPET**, **RTC** and **TIMR** simultaneously with the SSDTs introduced in this chapter. If the `HPET` device is controlled by the `_STA` method you can simply set `_STA` to `Zero` for macOS to disable it and then block `SSDT-HPET` from loading. But on older systems (pre Kaby Lake), the HPET feature might be controlled by other preset variables (or combinations thereof) instead, so disabling it is not as straight forward. Below you find approaches for fixing audio issues.
+In most cases, almost all machines have **HPET** without any interrupts. Usually, interrupts `0` & `8` are occupied by **RTC** (`PNP0B00`) or **TIMR** (`PNP0100`) respectively. To get audio working in macOS, we need to fix **HPET**, **RTC** and **TIMR** simultaneously with the SSDTs provided in this chapter. 
+
+If the `HPET` device is controlled by the `_STA` method, it can be disabled easily by changing its `_STA` to `Zero` for macOS and then block `SSDT-HPET` from loading. But on older systems (pre Kaby Lake), the HPET feature might be controlled by other preset variables (or combinations thereof) instead, so disabling it is not that trivial.
 
 > [!TIP]
 > 
@@ -15,14 +17,14 @@ In most cases, almost all machines have **HPET** without any interrupts. Usually
 ## Patching Principle
 
 - Disable **HPET**, **RTC**, **TIMR** and **PIC/IPIC** (optional)
-- Create fake **HPE0**, **RTC0**, **TIM0**.
+- Add fake **HPE0**, **RTC0**, **TIM0** and **PIC/IPIC** (optional) devices.
 - Remove `IRQNoFlags (){8}` from **RTC0** and `IRQNoFlags (){0}` from **TIM0** and add them to **HPE0**.
 
 ### Symptoms for Audio issues
 - `Lilu.kext` is loaded
 - `AppleALC.kext` is loaded
 - Layout-Id is present in `boot-args` or `DeviceProperties`
-- In some cases: `SSDT-HPET` fixes from SSDTTime are present
+- In some cases: `SSDT-HPET` and binary renames generatd with SSDTTime are present
 
 &rarr; **But**: NO Sound!
 
@@ -53,9 +55,9 @@ Since the manual patching method described below is rather complicated, the semi
 
 Audio should work now (assuming Lilu and AppleALC kexts are present along with the correct layout-id for your on-board audio card).
 
-> [!NOTE]
+> [!TIP]
 >
-> If you are editing your config with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases), you can either drag files (.aml, .kext, .efi) into the respective section of the GUI to add them to the EFI/OC folder and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
+> If you are using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases) to edit your config.plist, you can drag files (.aml, .kext, .efi) into the respective section of the GUI to add them to the EFI/OC folder and config.plist. Alternatively, you can just copy SSDTs, Kexts, and Drives to the corresponding sections of EFI/OC and the changes will be reflected in the config.plist since OCAT monitors this folder.
 
 ### Troubleshooting
 Some implementations of ACPI, e.g. on the Lenovo T530 (Ivy Bridge), can't handle the form the IRQ flags are notated in the **SSDT-HPET.aml** generated with SSDTTime, which looks like this:
