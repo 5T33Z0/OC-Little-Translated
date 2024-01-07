@@ -140,7 +140,7 @@ Power consumption in idle (in Watts):
 - **Modded**: ≈ 70 W
 
 ## Example Files
-Here are some example files by Jasonhacks with explanations about the sections of the PowerPlayInfo Table code. The tables are for a Sapphire Nitro+ Radeon RX 580 (8 GB). So unless you have the same model I wouldn't recommend just copying over the data 1:1. Instead, study the principle behind it. [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/GPU/AMD_Radeon_Tweaks/PowerPlayInfo/PowerPlayInfo.zip?raw=true) 
+Here are some example files by Jasonhacks with explanations about the sections of the PowerPlayInfo Table code. The tables are for a Sapphire Nitro+ Radeon RX 580 (8 GB). So unless you have the same model I wouldn't recommend just copying over the data 1:1. Instead, study the principle behind it. [**Download**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Radeon_Tweaks/PowerPlayInfo) 
 
 ## Credits and Thank Yous
 - Original [Guide](https://www.reddit.com/r/hackintosh/comments/hg56pv/guide_polaris_rx_560_580_etc_custom_powerplay/) by Z4mp4n0
