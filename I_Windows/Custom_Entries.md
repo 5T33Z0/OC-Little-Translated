@@ -10,7 +10,7 @@ In order to add the Windows Boot Manager to OpenCore's boot menu, we need to fin
 
 - Add `OpenShell.efi` to EFI/OC/Tools folder and `config.plist`.
 - Reboot the system.
-- From the OC boot menu, select `OpenSheel.efi` (if it's configured as an `Auxiliary` tool, hit space bar to show it)
+- From the OC boot menu, select `OpenShell.efi` (if it's configured as an `Auxiliary` tool, hit space bar to show it)
 - Once Open Shell is running, we need to find the EFI partition containing the "Microsoft" folder:
 	- Type `ls fs1:EFI` and hit `Enter`.
 	- If it returns `ls: File not Found - 'fs1'`, continue searching.
