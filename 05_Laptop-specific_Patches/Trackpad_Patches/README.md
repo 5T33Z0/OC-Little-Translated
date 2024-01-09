@@ -167,10 +167,9 @@ SYN3257 | HP Envy 13-ad105ng
 </details>
 
 ### About I2C and USB Touchpads (Haswell and newer)
-**I2C** (Inter-Integrated Circuit or eye-squared-C) and USB devices have gained widespread adoption due to Microsoft's Precision Touchpad requirements. Touchpads will usually be I2C, while touchscreens will usually be USB. VoodooI2C and it's satellites can be used for both I2C and USB devices, though I2C devices will usually require ACPI patching.
+**I2C** (Inter-Integrated Circuit or eye-squared-C) is a synchronous, multi-master, multi-slave, packet-switched, single-ended, serial communication bus invented in 1982 by Philips Semiconductors. It has gained widespread adoption due to Microsoft's Precision Touchpad requirements. Touchpads will usually be controlled via I2C, while touchscreens will usually be controlled via USB protocol. VoodooI2C and its satellite kexts can be used for both I2C and USB devices, though I2C devices will usually require additional ACPI patching, which makes it much more difficult to get it working properly.
 
 #### Required Kexts
-
 - **Necessary base kext**: [**VoodooI2C**](https://github.com/VoodooI2C)
 - Depending on the Touchpad model (vendor and used protocol), you need additional [**Satellite kexts**](https://voodooi2c.github.io/#Satellite%20Kexts/Satellite%20Kexts):
 	|Device/Protocol|Kext|Notes|
