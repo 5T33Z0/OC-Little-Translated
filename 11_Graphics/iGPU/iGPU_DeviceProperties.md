@@ -49,7 +49,7 @@ For more Framebuffer options, please refer to Whatevergreen's [**Intel HD FAQs**
 
 ## Empty Framebuffers (for Desktop)
 
-List of empty Framebuffers for utilizing the iGPU for computing taks only (e.g. Intel QuickSync Video, HEVC), while the discrete GPU is handling graphics.
+List of empty Framebuffers for utilizing the iGPU for computing tasks only (e.g. Intel QuickSync Video, HEVC), while the discrete GPU is handling graphics.
 
 **Address**: `PciRoot(0x0)/Pci(0x2,0x0)`
 
