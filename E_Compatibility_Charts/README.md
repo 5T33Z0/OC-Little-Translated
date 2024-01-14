@@ -1,4 +1,4 @@
-# Compatibility charts
+t# Compatibility charts
 Listed below, you find some charts containing useful information about SMBIOS, Hardware and DRM compatibility as well as NVRAM variables.
 
 ## Hardware and macOS compatibility
@@ -24,7 +24,7 @@ Choosing an appropriate SMBIOS for your Hackintosh is crucial if you want a smoo
 	- The used CPU family determines the optimal SMBIOS. 
 	- Newest macOS versions most likely only support more recent SMBIOSes.
 	
-For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania-github-io.thrrip.space/OpenCore-Install-Guide/extras/smbios-support.html#how-to-decide)
+For an in-depth guide on choosing the best SMBIOS for your system, please refer to Dortania's [**SMBIOS Guide**](https://dortania.github.io/OpenCore-Install-Guide/extras/smbios-support.html#macos-smbios-list)
 
 ### Notes regarding SMBIOS
 Things you can do on Hackintoshes that you can't do on real Macs:
