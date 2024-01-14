@@ -57,8 +57,8 @@ So to prevent that the full installer is downloaded every time, you can do the f
 
 > [!WARNING]
 > 
-> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; [Sreenshot](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/Pics/SysUpd_Fail.png))
-> - This workaround cannot be utilized if your system requires post-install patches for *both* WiFi and Ethernet. Because then you cannot access the internet to download updates!
+> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; [Screenshot](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/Pics/SysUpd_Fail.png))
+> - This workaround cannot be utilized if your system requires post-install patches for *both* Wi-Fi and Ethernet, because then you cannot access the internet to download updates!
 
 ## Notes
 - Depending on the root patches your system need to be able to run macOS Ventura or newer, booting might only be possible in Safe Mode. To do so, hold <kbd>Shift</kbd> and press <kbd>Enter</kbd> in OpenCore's Boot Picker.
