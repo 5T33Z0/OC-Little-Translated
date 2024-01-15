@@ -10,17 +10,19 @@ Since a physical USB 3 connector (the blue one) actually supports two USB protoc
 
 ### USB Specs
 
-USB Standard | Speed | Controller | macOS support 
-------------:|-------|:----------:|:---------------:
-USB 1.1      | 12 Mbps | UHCI/OHCI |  ≤ macOS 12 (officially)</br>([**OCLP**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/0.6.1) brings it to Ventura)
-USB 2.0      | 480 Mbps |EHCI | OSX 10.2+ 
-USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
-USB 3.1 Gen 2| 10 Gbps | XHCI | via Thunderbolt only
-USB 4        | 40 Gbps | PCIe | via Thunderbolt only
+ USB Version | Year | Current Name | Signaling rate | Marketing name| Controller | Notes
+:-----------:|------|--------------:|:-------------:|:-------------:|:----------:|-------
+ USB 1.0/1.1 | 1996 |USB 1.0/1.1 |1.5 Mbps <br>12 Mbps| Low-Speed <br>Full-Speed |UHCI/OHCI| Dropped from macOS Ventura+. Important for driving keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support).
+ USB 2.0     | 2000 |USB 2.0|480 Mbps         |High-Speed         | EHCI | Requires USB port-mapping (via Kext or ACPI)  
+ USB 3.0     | 2008 | USB 3.2 Gen 1x1|5 Gbps | SuperSpeed USB 5 Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI)    
+ USB 3.1     | 2013 | USB 3.2 Gen 2x1|10 Gbps | SuperSpeed USB 10 Gbps |XHCI| Requires USB port-mapping (via Kext or ACPI)  
+ USB 3.2     | 2017 | USB 3.2 Gen 2x2|Up to 20 Gbps | USB 20 Gbps |TB/PCIe| Requirements: <ul><li> USB-C <li> Port-mapping <li> Patched Thunderbolt controller
+ USB4        | 2019 |USB4 1.0|Up to 40 Gbps    | USB4 40 Gbps|TB/PCIe| Not implemented yet
+ USB4v2      | 2022 |USB4 2.0 |Up to 80 Gbps    | USB4 80 Gbps|TB/PCIe‚| Not implemented yet
 
 > [!NOTE]
 > 
-> Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 instead which provide similar transfer rates.
+> Apple uses Thunderbolt 3 to for USB 3.2. USB4 is not implemented in macOS yet.
 
 ### Removing the USB port limit and mapping USB ports
 
