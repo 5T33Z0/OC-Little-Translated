@@ -14,8 +14,8 @@ Since a physical USB 3 connector (the blue one) actually supports two USB protoc
 :-----------:|------|--------------:|:-------------:|:-------------:|:----------:|-------
  USB 1.0/1.1 | 1996 |USB 1.0/1.1 |1.5 Mbps <br>12 Mbps| Low-Speed <br>Full-Speed |UHCI/OHCI| Dropped from macOS Ventura+. Important for driving keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support).
  USB 2.0     | 2000 |USB 2.0|480 Mbps         |High-Speed         | EHCI | Requires USB port-mapping (via Kext or ACPI)  
- USB 3.0     | 2008 | USB 3.2 Gen 1x1|5 Gbps | SuperSpeed USB 5 Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI)    
- USB 3.1     | 2013 | USB 3.2 Gen 2x1|10 Gbps | SuperSpeed USB 10 Gbps |XHCI| Requires USB port-mapping (via Kext or ACPI)  
+ USB 3.0     | 2008 | USB 3.2 Gen 1x1|5 Gbps | USB 5 Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI)    
+ USB 3.1     | 2013 | USB 3.2 Gen 2x1|10 Gbps | USB 10 Gbps |XHCI| Requires USB port-mapping (via Kext or ACPI)  
  USB 3.2     | 2017 | USB 3.2 Gen 2x2|Up to 20 Gbps | USB 20 Gbps |TB/PCIe| Requirements: <ul><li> USB-C <li> Port-mapping <li> Patched Thunderbolt controller
  USB4        | 2019 |USB4 1.0|Up to 40 Gbps    | USB4 40 Gbps|TB/PCIe| N/A in macOS
  USB4v2      | 2022 |USB4 2.0 |Up to 80 Gbps    | USB4 80 Gbps|TB/PCIe‚| N/A in macOS
