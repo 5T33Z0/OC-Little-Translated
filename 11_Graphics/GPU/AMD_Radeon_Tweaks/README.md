@@ -90,6 +90,10 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
+> [!NOTE]
+> 
+> The Framebuffers listed above have been removed from macOS Sonoma, so this setting no longer has any effect.
+
 ## Method 2b: Using PowerPlay Tables
 With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to optimize the performance of your AMD card under macOS.
 
