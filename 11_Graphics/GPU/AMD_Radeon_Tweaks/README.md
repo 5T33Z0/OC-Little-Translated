@@ -32,7 +32,7 @@ This chapter contains 2 methods for improving the performance of AMD Radeon Grap
 - At best, the value(s) injected via the SSDT would be overwritten by the one(s) defined by `DeviceProperties` in the config.plist.
 - In the worst case, you could inject conflicting settings.
 - However, if you only need the SSDT to inject the correct ACPI path into macOS to get the card working, you can combine both. 
-- If you want to inject properties into macOS *only*, doing it via `config.plist` is the way to go. Because injecting variables via ACPI affects the whole system and could affect other Operating Systems and in some cases does have no effect in Catalina and newer (&rarr; See "Addendum")
+- If you want to inject properties into macOS *only*, doing it via `config.plist` is the way to go. Because injecting variables via ACPI affects the whole system and could affect other Operating Systems and in some cases does have no effect in Catalina and newer (&rarr; see ["Addendum"](#addendum-ssdt-vs-deviceproperties))
  
 In my experience using an AMD RX 580 card, combining methods 2a and 2b give he best results.
 
