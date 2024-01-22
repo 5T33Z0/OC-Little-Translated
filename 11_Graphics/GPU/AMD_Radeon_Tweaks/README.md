@@ -22,7 +22,11 @@
 This chapter contains 2 methods for improving the performance of AMD Radeon Graphics Cards when running macOS:
 
 - **Method 1**: Utilizes **SSDTs** to inject GPU Properties and PowerPlay data into macOS to optimize performance in OpenCL and Metal applications while lowering the overall power consumption of the card. This method tries to mimic how the GPU would operate in a real Mac. 
-- **Method 2**: Utilizes **`DeviceProperties`** to select specific Framebuffers (method 2a) and inject PowerPlayInfo tables (method 2b). Methods 2a and b can be combined. 
+- **Method 2** (recommended): Utilizes **`DeviceProperties`** to select specific Framebuffers (method 2a) and inject PowerPlayInfo tables (method 2b). Methods 2a and b can be combined.
+
+> [IMPORTANT]
+> 
+> According to Whatevergreen's [**Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md), using named framebuffers is not recommended: "Named framebuffers (Baladi, Futomaki, Lotus, etc.), enabled by Clover's GPU injection or any other methods should never ever be used. This way of GPU injection is a common mistake, preventing automatic configuration of various important GPU parameters. This will inavoidably lead to borked GPU functioning in quite a number of cases."
 
 ### SSDTs vs. `DeviceProperties` – some considerations
 - Combining methods 1 and 2 can be problematic *if* the SSDT also injects values for the same device properties as the config.plist.
