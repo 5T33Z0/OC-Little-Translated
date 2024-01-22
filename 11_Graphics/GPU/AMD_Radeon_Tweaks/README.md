@@ -17,7 +17,6 @@
 - [Credits](#credits)
 - [Further Resources](#further-resources)
 
-
 ## About
 This chapter contains 2 methods for improving the performance of AMD Radeon Graphics Cards when running macOS:
 
