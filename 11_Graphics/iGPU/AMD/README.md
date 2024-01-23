@@ -7,7 +7,7 @@ Until mid 2023, there was no way of running macOS on AMD systems with support fo
 The first kext is called **NootedRed** (formerly known as **WhateverRed**) and is the latest addition to the list of Lilu plugins. It's still in an early state of research and development so don't expect it to be working perfectly yet.
 
 ### Supported Models
-Fully functional for the following iGUs (Ryzen 3XXX series and older):  
+Fully functional for the following iGPUs (Ryzen 3XXX series and older):  
 
 - **Picasso**
 - **Raven**
