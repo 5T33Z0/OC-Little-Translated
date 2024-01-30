@@ -66,6 +66,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**MmioDevirt**](https://github.com/corpnewt/MmioDevirt) – Python script that can analyse the OC bootlog to generate entries for the MMIO Whitelist.
 
 ### Windows
+- [**Windows Install**](https://sourceforge.net/projects/windows-install/) – Easy to use tool to install Windows from an .iso from within macOS.
 - [**BlueScreenView**](https://www.nirsoft.net/utils/blue_screen_view.html) –  Displays information about `blue screen of death' crashes containing details about the driver or module that possibly caused the crash.
 - [**USB Device Tree Viewer**](https://www.uwe-sieber.de/usbtreeview_e.html) – Helpful tool for analyzing USB ports
 - [**CrystalDiskInfo**](https://crystalmark.info/en/software/crystaldiskinfo/) – Great tool for checking the health of hard disks, SSDs and NVMEs.
