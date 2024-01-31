@@ -1,9 +1,9 @@
 # Installing newer versions of macOS on legacy hardware
 
 ## About
-Although you can use OpenCore and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) to install newer versions of macOS on Wintel systems with CPUs that were dropped from macOS 12 and newer (everything prior to Kaby Lake), it's not officially supported by Dortania nor is it documented, nor will you get any support for this on discord. That's why I created this section.
+Although you can use OpenCore and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) to install newer versions of macOS on Wintel systems with CPUs that were dropped from macOS 12 and newer (everything prior to Kaby Lake), it's not officially supported by Dortania nor is it documented, nor will you get any help for doing so on discord. That's why I created this section.
 
-Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you can run OLCP on Wintel systems as well to re-install drivers and frameworks which were removed from macOS 12 and newer (check [this repo](https://github.com/dortania/PatcherSupportPkg) for references). This includes mainly
+Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you can run OLCP on Wintel systems as well to re-install drivers and frameworks which were removed from macOS 12 and newer (check [this repo](https://github.com/dortania/PatcherSupportPkg) for references). This includes:
 
 - iGPU drivers (to [reinstate graphics acceleration and Metal Graphics API support](https://khronokernel.github.io/macos/2022/11/01/LEGACY-METAL-PART-1.html)) 
 - GPU drivers for legacy (non-metal) AMD and NVIDIA Kepler Cards 
@@ -33,6 +33,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 - [**Fetching kext updates from OCLP with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Fetching_OCLP_Kexts.md)
 - [**Installing Windows from within macOS without Bootcamp**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Install_Windows_NoBootcamp.md)
 - [**Collection of Non-Metal Apple apps**](https://archive.org/details/apple-apps-for-non-metal-macs) (Archive.org)
+- [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
 
 ## Contribute?
 Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as legacy systemes go, I only have an Ivy Bridge Notebook and an iMac11,3 (Lynnfield) to test legacy configs. So if you have any suggestions or updated instructions to improve the workflow, feel free to create an issue and let me know!
