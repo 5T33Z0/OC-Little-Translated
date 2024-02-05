@@ -55,10 +55,10 @@ Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/feat
 - Delete the `Bootstrap` folder
 - Set `Misc/Boot/LauncherOption` as needed (Refer to the [**Updating Bootstrap**](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#updating-bootstrap-in-0-6-6) and Configuration.pdf for more details)
 
-:bulb: **TIPS**:
-
-- When updating from a very low version of OpenCore to the newest, it's wise to rebuild the config based on the latest Sample.plist. You could open both files in 2 ProperTree windows and copy over the existing settings (ACPI, Quirks, Device Properties, etc.).
-- Avoid Bootstrap/LauncherOption unless you really need it. For example, if you have Windows and macOS installed on the same disk, as Laptops often do.
+> [!TIP]
+>
+> - When updating from a very low version of OpenCore to the newest, it's wise to rebuild the config based on the latest Sample.plist. You could open both files in 2 ProperTree windows and copy over the existing settings (ACPI, Quirks, Device Properties, etc.).
+> - Avoid Bootstrap/LauncherOption unless you _really_ need it. For example, if you have Windows and macOS installed on the same disk, as Laptops often do.
 
 ## 2. Pick an OpenCore variant
 
