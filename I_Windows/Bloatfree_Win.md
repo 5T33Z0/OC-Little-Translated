@@ -20,20 +20,20 @@ So instead of downloading and manipulating the default Windows ISO (prior to ins
 ### Instructions
 
 1. Visit [**UUPDump**](https://uupdump.net/)
-2. Select the Windows Build (here Windows 11, 23H2):<br>![alt text](upload_2024-2-7_5-53-13.png)
+2. Select the Windows Build (here Windows 11, 23H2):<br>![upload_2024-2-7_5-53-13](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a484c05f-6fea-439b-84df-1ae7dcc4e0dc)
 3. Pick an `X64` build of your choice
 4. Select your preferred language and click "Next"
-5. Choose the Windows edition(s) that should be included in the ISO and click "Next":<br>![picture 0](images/aebc3140e8957b38ee7e414247a6d9f97bf1174001217268d0c1043e86e62833.png)
-6. In the next Window, set the following options (should be enabled by default):<br>![picture 1](images/8723e80135b9ce1dd8f4df80a7a80054fd9d6c39cba0191a2990634c08adeeed.png)
+5. Choose the Windows edition(s) that should be included in the ISO and click "Next":<br>![aebc3140e8957b38ee7e414247a6d9f97bf1174001217268d0c1043e86e62833](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/c20d3281-cc2a-4704-b795-e18949f4affe)
+6. In the next Window, set the following options (should be enabled by default):<br>![8723e80135b9ce1dd8f4df80a7a80054fd9d6c39cba0191a2990634c08adeeed](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/01704a39-206d-4e6b-aeba-038b2d446403)
 7. Click on "Create Download Package"
-8. Unpack the .zip file. It contains these files:<br>![picture 2](images/12df44193729e18d042c1b21ae961ab652440287c5e7f12593eac4e3a862da6b.png)  
+8. Unpack the .zip file. It contains these files:<br>![12df44193729e18d042c1b21ae961ab652440287c5e7f12593eac4e3a862da6b](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e02ae73b-300b-4f73-845d-dd9a9b4824a3)
 9. Open the `ConvertConfig.ini` file and change the following Settings from `0` to `1` and save the file:
     ```PowerShell
     [Store_Apps]
     SkipApps =1
     CustomList =1
     ```
-10. Next, open the `CustomApps.txt` file. It contains all the apps that are available in the selected windows build: <br> ![picture 3](images/c9cf383ed68ee6d9a9eef8e372dd8b99a11e6b8129ab2609d830da966a3fa39e.png)  
+10. Next, open the `CustomApps.txt` file. It contains all the apps that are available in the selected windows build:<br>![c9cf383ed68ee6d9a9eef8e372dd8b99a11e6b8129ab2609d830da966a3fa39e](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3b69926e-fe4e-4f8c-9582-0af9bfad3d9f)
 11. Most of the apps are disabled (commented-out) by default via `#`. To enable any of them, you only have to delete the `#` in front of them.
 12. Once you've decided which features you want, double-click the `uup_download_windows.cmd` to start the download and build process.
 
