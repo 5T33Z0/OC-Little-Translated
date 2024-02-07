@@ -35,9 +35,7 @@ So instead of downloading and manipulating the default Windows ISO (prior to ins
     ```
 10. Next, open the `CustomApps.txt` file. It contains all the apps that are available in the selected windows build:<br>![c9cf383ed68ee6d9a9eef8e372dd8b99a11e6b8129ab2609d830da966a3fa39e](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/3b69926e-fe4e-4f8c-9582-0af9bfad3d9f)
 11. Most of the apps are disabled (commented-out) by default via `#`. To enable any of them, you only have to delete the `#` in front of them.
-12. Once you've decided which features you want, double-click the `uup_download_windows.cmd` to start the download and build process.
-
-The necessary files wll be downloaded from Microsoft Servers and the iso will be compiled. This takes about an hour or so. Afterwards you will have a super-clean vanilla Windows ISO without any garbage apps and without having to mess with powershell or the registry.
+12. Once you've decided which features you want, double-click `uup_download_windows.cmd`. The necessary files to build the ISO will be downloaded from Microsoft Servers and then the image will be compiled. This takes about an hour or so. Afterwards, you will have a super-clean vanilla Windows ISO without any garbage apps and without having to mess with powershell or the registry.
 
 > [!TIP]
 >
