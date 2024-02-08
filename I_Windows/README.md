@@ -6,3 +6,4 @@
 - [**Prohibiting SMBIOS Injection into Windows**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/SMBIOS_Windows.md)
 - [**Fixing Windows features after installing macOS**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Windows_fixes.md)
 - [**Preventing Windows Volumes (and others) from mounting at startup**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Prevent_Windows_auto-mount.md)
+- [**Building a bloatfree Windows 10/11 ISO**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Bloatfree_Win.md)

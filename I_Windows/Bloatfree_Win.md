@@ -41,5 +41,11 @@ So instead of downloading and manipulating the default Windows ISO (prior to ins
 >
 > If you want multimedia support, you should definitely uncomment the entries in the "Media Codecs" section of `CustomApps.txt`!
 
+## Troubleshooting
+
+### Reinstalling the Microsoft Store
+- Open the Command Prompt as an administrator 
+- Type `wsreset -i` The issue should be fixed in a few minutes.
+
 ## Bonus: Installing Windows 10/11 with Ventoy
-Once the ISO has been build, you can copy it onto a bootable USB flash drive created with [Ventoy](https://www.ventoy.net/en/index.html) and boot directly from the ISO. If you choose "Wimboot" as an option, this even allows you to install Windows 11 on systems without Secureboot or a TPM2 module.
+Once the ISO has been build, you can copy it onto a bootable USB flash drive created with [Ventoy](https://www.ventoy.net/en/index.html). Reboot the system from the USB flash drive and select the Windows iso from the menu. If you choose "Wimboot" as boot method, this even allows you to install Windows 11 on systems with Secure Boot enabled as well as on systems that don't have a TPM2 module, which is a requirement for installing Windows 11.
