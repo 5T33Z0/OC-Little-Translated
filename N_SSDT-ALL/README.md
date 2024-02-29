@@ -6,7 +6,7 @@ But even then it's not guaranteed that the system will boot afterwards. In my te
 Before attempting this, you should also consider which SSDTs to merge together. It doesn't make much sense to include SSDTs for the CPU and 3rd party devices that are not part of the stock system configuration if you want to share your EFI folder with others!
 
 ## Preparations
-- Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it for batch convert `.aml` files to `.dsl` automatically.
+- Download [**Xiasl**](https://github.com/ic005k/Xiasl/releases) and unzip it. We need it to automatically batch convert `.aml` into `.dsl` files.
 - Right-click on the App and select "Show Package Contents"
 - Copy the `iasl` file located under `/Contents/MacOS/` to memory (CMD+C)
 - In Finder, press <kbd>CMD</kbd><kbd>Shift</kbd><kbd>.</kbd> to show hidden files and folders.
