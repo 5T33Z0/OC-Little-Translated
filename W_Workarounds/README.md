@@ -37,7 +37,7 @@ I don't have a clue why this happens, but it seems something changed drastically
 
 - Someone suggested to change `SecureBootModel` and the install macOS over the existing 14.3.1 install. DON'T DO THIS!
 - The system partiton will be deleted but the installer will crash afterwards – so you are left with no OS and the Data partition only
-- Although you can acces your User Account and data after installing macOS on a new APFS Volume via Finder later, you cannot access it via Migration Assistant. 
+- Although you can acces your User Account and data after installing macOS on a new APFS Volume via Finder later, you cannot access it via Migration Assistant: ![masucksazz](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2c850846-ee6d-4b37-8af0-f0522a83c96b)
 - In this case you have to copy over all your Data manually. 
 
 > [!NOTE]
