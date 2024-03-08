@@ -41,4 +41,4 @@ I don't have a clue why this happens, but it seems something changed drastically
 
 > [!NOTE]
 > 
-> If someone has any clues why upgrading from macOS 14.3.1 is such a pita, let me know! Because comments like "Upgrade worked fine for me" followedd by the obligatory ovesized screenshots of "About this Mac" on Forums are helping nobody!
+> If someone has any clues why upgrading from macOS 14.3.1 is such a pita, let me know! Because comments like "Upgrade worked fine for me" followed by the obligatory oversized screenshots of the "About this Mac" section on Forums are not helping anybody.
