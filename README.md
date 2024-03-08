@@ -30,7 +30,7 @@
 * [**Using OpenCore Legacy Patcher on Wintel systems**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware) 
 
 **APPENDIX**
-
+* [**macOS 14.4 install workaround**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/README.md)
 * [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#readme)
 * [**Fixing issues with System Update Notifications**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#readme)
 * [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#readme)
