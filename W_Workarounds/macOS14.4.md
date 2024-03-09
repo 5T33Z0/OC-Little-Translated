@@ -3,7 +3,7 @@
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.9+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.4-white.svg)
 
 ## About
-I've noticed that I could not upgrade from macOS 14.3.1 to 14.4 on 2 of my machines when using `Software Update`. One was my Gigabyte Z490 workstation, the other one was my Lenovo T490. Below is how I solved it.
+I've noticed that I could not upgrade from macOS 14.3.1 to 14.4 on 2 of my machines when using `Software Update`. One was my [Gigabyte Z490](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore) workstation, the other one was my [Lenovo T490](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore) Laptop. Below is how I solved it.
 
 ##  Symptoms
 
