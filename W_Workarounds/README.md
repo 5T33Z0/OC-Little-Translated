@@ -10,9 +10,9 @@ I've noticed that I could not upgrade from macOS 14.3.1 to 14.4 on 2 of my machi
 - Incremental updates download fine via Software Update
 - The preparation stage works fine as well
 - After rebooting, the installer crashes early
-- Starting the existing macOS install results in what behaves like an installation process, but in the end the system still is at version 14.3.1
+- Starting the existing macOS install results in what _looks_ and _behaves_ like an installation process, but in the end the system will still be macOS 14.3.1
 
-I don't have a clue why this happens, but it seems something changed drastically between macOS 13.3.1 and 13.4. that makes it impossible on some systems to upgrade via incremental updates.
+I don't have a clue why this happens, but it seems something changed drastically between macOS 13.3.1 and 13.4., that makes it impossible on some systems to upgrade via incremental updates.
 
 ## Workaround
 
@@ -24,8 +24,8 @@ I don't have a clue why this happens, but it seems something changed drastically
 - Reboot
 - Run the Installer from the USB flash drive
 - Create a new APFS volume on your SSD/NVME in Disk Utility
-- Install macOS on it – if your EFI and config were working fine before, the installation should work without problems
-- If you face problems, disable `SecureBootModel` during installation
+- Install macOS on it – if your EFI and config were working fine prior tp installing 14.4, they should work fine now
+- If you face problems, disable `SecureBootModel` prior to installing
 
 ### Post-Install
 
@@ -35,9 +35,10 @@ I don't have a clue why this happens, but it seems something changed drastically
 
 ## Previously failed workaround attempts (aka: Don't do this!)
 
-- Someone suggested to change `SecureBootModel` and the install macOS over the existing 14.3.1 install. DON'T DO THIS! The system partiton will be deleted but the installer will crash afterwards– so you are left behind without an OS and the Data partition only!
-- Although you can acces your User Account and data after installing macOS on a new APFS Volume via Finder later, you cannot access it via Migration Assistant: ![masucksazz](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2c850846-ee6d-4b37-8af0-f0522a83c96b)
-- In this case you have to copy over all your data manually. 
+- Someone suggested to change `SecureBootModel` and the install macOS over the existing 14.3.1 install. ⚠️ DON'T DO THIS! The system volume will be deleted but the installer will crash when attempting to create a new system volume – so you will be left with the Data partition of the 14.3.1 install only – no bootable OS!
+- In this case, you have to install macOS 14.4 on a new APFS volume
+- Once macOS 14.4 is installe, you can acces the old User Account and Data via Finder, but you cannot use the Migration Assistant to get the data onto your current system: ![masucksazz](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2c850846-ee6d-4b37-8af0-f0522a83c96b)
+- In this case you have to copy over all your data manually.
 
 > [!NOTE]
 > 
