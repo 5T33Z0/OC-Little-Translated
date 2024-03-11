@@ -10,7 +10,7 @@ I've noticed that I could not upgrade from macOS 14.3.1 to 14.4 on 2 of my machi
 - Incremental updates download fine via Software Update
 - The preparation stage works fine as well
 - After rebooting, the installer crashes early
-- Starting the existing macOS install results in what _looks_ and _behaves_ like an installation process, but in the end the system will still be macOS 14.3.1
+- Starting the existing macOS install results in what _looks_ and _behaves_ like an installation process, but in the end the system will still be on macOS 14.3.1
 
 I don't have a clue why this happens, but it seems something changed drastically between macOS 13.3.1 and 13.4., that makes it impossible on some systems to upgrade via incremental updates.
 
