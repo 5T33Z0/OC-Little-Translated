@@ -409,7 +409,7 @@ NVRAM Key |Type
 
 boot-arg | Description 
 ---------|------------
- `-CKFBOnly` | Enables "partial" acceleration (Framebuffer only)
+ `-CKFBOnly` | Enables "partial" acceleration 
  `-NRedDPDelay` | Adds delay to the boot sequence, useful if experiencing black screen on boot
  `-NRedDebug` | Enables detailed logging for `DEBUG` build
 
