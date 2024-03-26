@@ -410,6 +410,7 @@ NVRAM Key |Type
 boot-arg | Description 
 ---------|------------
  `-nredfbonly` | Enables "partial" acceleratio on Renoir iGUs (Ryzen 4XXX and newer)
+ `-nreddpdelay` | Adds delay to the boot sequence, useful if experiencing black screen on boot
 
 [**Source**](https://github.com/NootInc/NootedRed)
 
