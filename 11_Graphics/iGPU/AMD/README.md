@@ -7,7 +7,7 @@ Until mid 2023, there was no way of running macOS on AMD systems with support fo
 The first kext is called **NootedRed** (formerly known as **WhateverRed**) and is the latest addition to the list of Lilu plugins. It's still in an early state of research and development so don't expect it to be working perfectly yet.
 
 ### Supported Models
-Entire Vega Raven ASIC family (Ryzen 1xxx (Athlon Silver/Gold) to 5xxx, and 7x30 series).
+Ryzen 1xxx (Athlon Silver/Gold) to 5xxx, and 7x30 series
 ### Instructions
 - Please refer to the [**NootedRed**](https://github.com/NootInc/NootedRed) repo for instructions since I don't have an AMD system so I can't test this.
 
