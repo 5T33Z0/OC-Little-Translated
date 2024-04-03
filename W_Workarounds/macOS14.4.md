@@ -16,18 +16,31 @@ I don't have a clue why this happens, but it seems something changed drastically
 
 ## Workaround
 
-### Install via USB flash drive
+### Option 1: Disable `SecureBootModel` and `Airportitlwm.kext`
+
+On my Lenovo T490, disabling `SecureBootModel` and the beta version of `AirPortItlwm.kext` in favor of `ìtlwn.kext` did solve the issue of the macOS Installer crashing early, so disabling troublesome kexts *might* help to resolve the issue in similar circumstances.
+
+- Set `Misc/Security/SecurebootModel` to `Disabled`
+- Disable `AirPortItlwm.kext` if you have it
+- Enable `itlwm.kext` (and install HeliPort App)
+- Save your config and reboot
+- Download the macOS 14.4+ update and install it
+- Disable `itlwm.kext` and re-enable `AirPortItlwm.kext` again
+- Re-enable `SecureBootModel`
+- Safe and reboot
+
+### Option 2: Install macOS on a new volume
 
 - Update OpenCore, drivers and kexts to the latest version
 - Download OpenCore Legacy Patcher
-- Use it to download macOS 14.4 and create a USB Installer
+- Use it to download macOS 14.4+ and create a USB Installer
 - Reboot
 - Run the Installer from the USB flash drive
 - Create a new APFS volume on your SSD/NVME in Disk Utility
 - Install macOS on it – if your EFI and config were working fine prior tp installing 14.4, they should work fine now
 - If you face problems, disable `SecureBootModel` prior to installing
 
-### Post-Install
+#### Post-Install
 
 - Run the Migration Manager to copy over the data from your previous macOS installation
 - Delete the old 14.3.1 macOS Sonoma Volume 
