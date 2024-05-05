@@ -6,6 +6,7 @@ Incomplete collection of iGPU related fixes. For general configuration of Intel 
 - **AMD**
 	- [**Enabling AMD Vega iGPUs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/AMD) 
 - **Intel**
+	- Iris Xe Support ([**NootedBlue – in Development**](https://www.insanelymac.com/forum/topic/358305-80-solved-iris-xe-igpu-on-tiger-lake-successfully-loaded-icllp-frambuffer-and-vram-also-recognizes-1536mb-however-some-issues/?do=findComment&comment=2819650)) 	
 	- [**iGPU Framebuffer List**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md)
 	- [**Enabling Skylake Graphics in macOS Ventura**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13)
 	- [**Fixing Comet Lake and Z500-series mainboard iGPU issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Cometlake_Z590#comet-lake-igpu-issues-on-500-series-mainboards)
