@@ -83,3 +83,6 @@ Everything should be back to normal again.
 >
 > - If your system can connect to the internet via Ethernet cable without root patches, you can use Safari in Recovery as well to follow the instructions.
 > - There’s also a very helpful [YouTube video](https://youtu.be/mNcjmvzS0Vo?si=OtNeB4r1q3s3sW9T) that explains all the steps in detail.
+
+## Links
+- [Bless, and what makes a volume bootable](https://eclecticlight.co/2018/08/30/booting-the-mac-bless-and-what-makes-a-volume-bootable/)
