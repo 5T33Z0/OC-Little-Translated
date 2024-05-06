@@ -31,7 +31,7 @@ For kext that haven't been updated for macOS 14 support:
 - ~~**`-revbeta`** &rarr; so RestrichEvents works~~ &rarr; no longer required
 - **`-brcmfxbeta`** &rarr; for AirportBrcmFixup. Try, If you cannot connect to Hotspots after applying Root Patches for re-enabling broadcom Wi-Fi cards
 
-> [!NOTE]:
+> [!NOTE]
 > 
 > Always check for the latest nightly builds of OpenCore and kexts on Dortania's ["Builds"](https://dortania.github.io/builds/) site before upgrading macOS! 
 
