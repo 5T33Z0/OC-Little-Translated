@@ -228,7 +228,7 @@ sudo update_dyld_shared_cache -force
 sudo /usr/libexec/xpchelper --rebuild-cache
 ```
 
-### Create new shapshot (macOS 11+ only) 
+### Create new snapshot (macOS 11+ only)
 
 In Recovery, enter:
 
