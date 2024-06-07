@@ -352,7 +352,7 @@ ioreg -rxn "CPU0@0"
 
 ## Troubleshooting
 
-### Show log ot last boot
+### Show log of last boot
 
 ```shell
 log show --last boot
@@ -436,7 +436,7 @@ sudo kextcache -i /
 
 1. In Terminal, enter:</br>
 `nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
-3. Check the Results:
+2. Check the Results:
 	-  if `%00` = No Security
 	-  if `%01` = Medium Security
 	-  if `%02` = Full Security
