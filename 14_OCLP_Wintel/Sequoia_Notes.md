@@ -1,6 +1,6 @@
 # macOS Sequoia Notes
 
-:construction:
+:construction: Under Construction
 
 ## (Officially) Supported Models
 
