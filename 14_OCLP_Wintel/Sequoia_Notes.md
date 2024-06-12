@@ -11,7 +11,7 @@
 ## Features unavailable on Intel Systems
 
 - Apple Intelligence
-- …
+- Siri 2.0
 
 ## OCLP Update Status
 - **May 30th, 2024**: [**OCLP v1.50**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.5.0) released
