@@ -15,7 +15,7 @@
 - Basically everything "AI", incuding:
 	- Apple Intelligence
 	- Siri 2.0 
-	- Logic Pro 11s Stem Splitter, etc.
+	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
 
 > [!CAUTION]
 >
