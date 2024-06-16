@@ -32,6 +32,18 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 ## Troubleshooting
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
 
+## Fetching macOS Installers
+
+There are several options to fetch and download macOS Installers directly from Apple. Here are some of them:
+
+1. **OpenCore Legacy Patcher**. It has the options to download macOS and create a USB Installer right build in
+2. [**MIST**](https://github.com/ninxsoft/Mist): Gui based app to download macOS Installers and Firmwares
+3. **Terminal**. Open Terminal and enter the following commands:<br>
+	`softwareupdate  --fetch-full-installer --list-full-installers` (to fetch the list of Installers)
+	`softwareupdate  --fetch-full-installer --list-full-installer-version xx.xx` (replace xx.xx by the version you want to download)
+
+Foe more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#getting-macos) section
+ 
 ## Other
 - [**macOS Sequoia Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
 - [**macOS Sonoma Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
