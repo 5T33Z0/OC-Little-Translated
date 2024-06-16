@@ -17,6 +17,11 @@
 	- Siri 2.0 
 	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
 
+## Currently not working
+Listed below are things I noticed that are currently not working…
+
+- Intel Bluetooth (WiFi works using `Itlwm.kext`!)
+
 > [!CAUTION]
 >
 > Don't upgrade to macOS Sequoia on legacy systems that require root patches! There is not ETA for OpenCore Legacy Patcher with macOS 15 support available yet.
