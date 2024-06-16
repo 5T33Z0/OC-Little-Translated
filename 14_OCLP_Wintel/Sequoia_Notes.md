@@ -18,10 +18,10 @@
 	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
 
 ## Observations
-Listed below are things I noticed that are currently not working…
 
 - Most kexts require `-lilubetaall` to load
-- Intel Bluetooth (WiFi works using `Itlwm.kext`!)
+- Intel Bluetooth doesn't work yet
+- Intel WiFi works using `Itlwm.kext`!
 
 > [!CAUTION]
 >
