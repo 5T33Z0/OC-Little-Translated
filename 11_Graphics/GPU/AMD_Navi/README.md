@@ -1,5 +1,27 @@
 # Enabling AMD Navi GPUs in macOS
 
+## Option 1: using `NootRX.kext`
+
+There's a new kext out called [**NootRX**](https://chefkissinc.github.io/nootrx) to enable unsupported AMD Navi GPUs (Navi 21, 22 and 23) in macOS 11 and newer (check the [**compatibility list**](https://chefkissinc.github.io/nootrx#gpu-compatibility) to find out if your GPU is supprted).
+
+**Instructions**:
+
+1. [**Download**](https://github.com/ChefKissInc/NootRX/releases) and unzip it
+2. Mount your EFI
+3. Create a backup of your current EFI folder and store it on a FAT32 formatted USB flash drive (just in case something goes wrong, so you can boot from it)
+4. Add`NootRX.kext` to your EFI/OC/Kexts folder and `config.plist`
+5. Disable `Whatevergreen` and/or `NootedRed` kexts (if present)
+6. If you use an SSDT to get your GPU working, disable it
+7. Save your config an reboot
+
+Enjoy!
+
+> [!NOTE]
+>  
+> Curently NootRX cannot be used in recovery or during upgrades due to a misdetection causing a stall at the last stage. For now, have it enabled only *after* installing/updating macOS.
+
+## Option 2: Using `SSDT-NAVI.aml`
+
 This SSDT enables (Big) Navi Cards (RX 5000/6000 series) in macOS. It renames `PEGP` to `EGP0` so the GPU is recognized and adds an HDMI audio device (`HDAU`).
 
 1. Add `SSDT-NAVI.aml`
@@ -8,7 +30,7 @@ This SSDT enables (Big) Navi Cards (RX 5000/6000 series) in macOS. It renames `P
     - `Whatevergreen.kext`
 3. Add Boot-arg `agdpmod=pikera` to config.plist → Fixes black screen issues on some Navi GPUs.
 
-## SSDT-NAVI Content
+### Code
 
 ```asl
 External (_SB_.PCI0, DeviceObj)
