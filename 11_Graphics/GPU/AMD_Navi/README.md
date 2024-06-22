@@ -16,7 +16,7 @@ There's a new kext out called [**NootRX**](https://chefkissinc.github.io/nootrx)
 
 Enjoy!
 
-> [!NOTE]
+> [!IMPORTANT]
 >  
 > Curently NootRX cannot be used in recovery or during upgrades due to a misdetection causing a stall at the last stage. For now, have it enabled only *after* installing/updating macOS.
 
