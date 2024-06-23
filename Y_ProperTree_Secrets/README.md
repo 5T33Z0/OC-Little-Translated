@@ -3,7 +3,7 @@
 ## The issue
 You probably have come across posts like these on Forums or Reddit:
 
-```swift
+```xml
 <dict>
 	<key>Base</key>
 	<string>\_SB.PCI0.LPCB.HPET</string>

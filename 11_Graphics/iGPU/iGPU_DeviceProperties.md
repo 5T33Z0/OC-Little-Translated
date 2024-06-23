@@ -413,7 +413,7 @@ Additionally, you need one of the following sets of Connector patches so externa
 #### Connector Patches for `04006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
-```swift
+```xml
 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
 		<key>#framebuffer-stolenmem</key>
@@ -441,7 +441,7 @@ Copy the entry below into the `DeviceProperties/Add/` section of your `config.pl
 #### Connector Patches for `03006601`
 Copy the entry below into the `DeviceProperties/Add/` section of your `config.plist` using ProperTree:
 
-```swift
+```xml
 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 	<dict>
 		<key>#device-id</key>

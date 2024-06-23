@@ -111,7 +111,9 @@ To get a bit more insight on what's happening on your Hackintosh, we install som
 
 :bulb: Alternatively, you can monitor GPU usage via Terminal, using this command: 
 
-`ioreg -l |grep \"PerformanceStatistics\" | cut -d '{' -f 2 | tr '|' ',' | tr -d '}' | tr ',' '\n'|grep 'Temp\|Fan\|Power\|Clock\|Utilization'`
+```
+ioreg -l |grep \"PerformanceStatistics\" | cut -d '{' -f 2 | tr '|' ',' | tr -d '}' | tr ',' '\n'|grep 'Temp\|Fan\|Power\|Clock\|Utilization'
+```
 
 ### Run some Benchmark Tests
 - Open Geekbench
