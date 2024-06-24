@@ -73,7 +73,7 @@ Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated
 | **SMBIOS** |iMac20,X|MacBookPro16,X / Macmini8,1|iMacPro1,1|iMac19,1|MacBookPro15,1 / Macmini8,1|System Management BIOS
 |                 |           |          ||           |             |             ||**AppleCpuPmCfgLock**||||||Disables MSR modification in AppleIntelCPUPowerManagement.kext
 |**AppleXcpmCfgLock**°|(x)|(x)||(x)|(x)|Enables write access for XNU Kernel to enable XCPM power management.
-|**AppleXcpmExtraMsrs**||||||Disables multiple MSR access critical for certain CPUs, which have no native XCPM support.
+|**AppleXcpmExtraMsrs**||||||Disables multiple MSR access critical for certain CPUs, which have no native XCPM support. This Quirk is disabled on macOS 12+ due to non-existence of the feature
 |**AppleXcpmForceBoost**||||||Forces maximum performance in XCPM mode. Not recomm.
 |**CustomSMBIOSGuid**°°|( )|( )||( )|( )|Usually relevant for Dell laptops and when having issues with Windows License.
 |**DisableIoMapper**|x|x||x|x|Disables IOMapper support in XNU (VT-d).
