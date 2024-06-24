@@ -121,7 +121,7 @@ In order to re-enable and use ACPI CPU Power Management in macOS Ventura and new
 	- `revpatch=sbvmm` &rarr; Enables `VMM-x86_64` Board-id which allows installing system updates on unsupported systems 
 	- `revblock=media` &rarr; Blocks `mediaanalysisd` service on Ventura+ which fixes issues on Metal 1 iGPUs. Firefox won't work without this.
 	- `ipc_control_port_options=0` &rarr; Fixes crashes with Electron apps like Discord
-	- `amfi_get_out_of_my_way=1` &rarr; Required to re-install legacy drivers (iGPU, GPU, etc.) with the OpenCore Patcher App in Post-Install.
+	- `amfi_get_out_of_my_way=1` (or `amfi=0x80`) &rarr; Required to re-install legacy drivers (iGPU, GPU, etc.) with the OpenCore Patcher App in Post-Install.
 - Save and reboot
 
 Once the 3 Kexts from OCLP are injected, ACPI Power Management will work in Ventura and you can use your `SSDT-PM` like before. For tests, enter in Terminal:
