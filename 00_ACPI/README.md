@@ -2,7 +2,8 @@
 
 **TABLE of CONTENTS**
 
-- [**ACPI Basics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Basics#acpi-basics) – An introduction to ACPI in regards to hackintoshing.
+- **ACPI**
+    - [**ACPI Basics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Basics#acpi-basics)
 	- [**Introduction to ACPI Source Language (ASL)**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ASL_Basics.md)
 	- [**List of ACPI Device IDs**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ACPI_Device_IDs.md)
 	- [**List of Predefined ACPI Names**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Predefined_ACPI_Name.md)

@@ -71,7 +71,9 @@ It may even be possible to use ChatGPT to assist you in writing your own ACPI ta
 >
 >It is worth noting that this SSDT is just one part of the solution for addressing power management issues on systems running macOS on Intel CPUs. Other modifications to the system firmware or operating system may also be necessary in order to fully resolve these issues.
 
-**TO BE CONTINUED…**
+## 2024 Update
+
+In June of 2024, a new AI called [Claude](https://claude.ai/) by Anthropic was made publicly available. In my experience, it works really well for everything related to programming: writing Code in C#, PowerShell scripts, plantUML diagrams, etc. So you might want to give this one a try for analyzing ACPI tables and maybe modifying/creating SSDT patches. Just don't blame me if they don't work. The more precise the instructions given by the user are the better the outcome!
 
 ## Credits
 Information provided by an OpenAI language model trained by OpenAI (https://openai.com)

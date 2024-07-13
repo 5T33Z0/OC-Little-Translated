@@ -17,7 +17,7 @@ The latest version of the ACPI Specification (v6.5) was released in August 2022.
 
 In the ACPI subsystem, peripheral devices and system hardware features of the platform are described in the **`DSDT`** (Differentiated System Description Table), which is loaded at boot and in SSDTs (Secondary System Description Tables), which are loaded *dynamically* at run time. The ACPI system describes a machine's hardware information in `.aml` format and does not have any driver capabilities of its own.
 
-The ACPI subsystem is initialized after the system's POST. The initialization works as follows (chronoligically, from top to bottom):
+The ACPI subsystem is initialized after the system's POST. The initialization works as follows (chronologically, from top to bottom):
 
 ![ACPI_Init](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/7769db1f-a046-4990-9546-c001fe9f4654)
 
@@ -28,7 +28,7 @@ The ACPI subsystem itself consists of 2 data structures: *data tables* and *defi
 ![acpi-structure](https://user-images.githubusercontent.com/76865553/187380905-e325398d-e65a-4db3-85c2-0d2cdb0b2934.png)</br>
 **Source**: **UEFI.org**
 
-We can make use of SSDTs to inject said Definintion Blocks into the system to change things as needed. We can add (virtual) devices, rename devices, change control methods (or redefine them), modify buffers, etc. so macOS is happy.
+We can make use of SSDTs to inject said Definition Blocks into the system to change things as needed. We can add (virtual) devices, rename devices, change control methods (or redefine them), modify buffers, etc. so macOS is happy.
 
 ### Why to prefer SSDTs over a patched DSDT
 A common problem with Hackintoshes is missing ACPI functionality when trying to run macOS on X86-based Intel and AMD systems, such as: Networking not working, USB Ports not working, CPU Power Management not working correctly, screens not turning off when the lid is closed, Sleep and Wake not working, Brightness controls not working, etc.

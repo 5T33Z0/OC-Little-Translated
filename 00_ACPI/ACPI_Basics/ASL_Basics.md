@@ -157,7 +157,7 @@ and is ended by:
 ### `External` References
 External references must be used used to address objects in the `DSDT`, where they are defined. In other words: you need to tell your SSDT where the Device, Method or whatever object you want to change is located inside the structure of the `DSDT`.
 
-|  Quote Types   | External Reference | Addressed paramter
+|  Quote Types   | External Reference | Addressed parameter
 | :------------: | :----------------- | :----------------------- 
 |   UnknownObj   | `External (\_SB.EROR, UnknownObj`| (avoid to use)                                                          
 |     IntObj     | `External (TEST, IntObj`| `Name (TEST, 0)`                                                        
@@ -184,9 +184,9 @@ It is easy to acquire the current operating system's name and version when apply
 `_OSI` requires a string which must be picked from the table below.
 
 |   OS                         |      String     |
-| :-------------------------- | :------------- |
+| :--------------------------- | :-------------- |
 | macOS                        | `"Darwin"`      |
-| Linux (and Linux-based OS) | `"Linux"`       |
+| Linux (and Linux-based OS)   | `"Linux"`       |
 | FreeBSD                      | `"FreeBSD"`     |
 | Windows                      | `"Windows 20XX"`|
 

@@ -6,7 +6,7 @@ A usual application of binary renames is to disable a `Device` or `Method` in th
 ### Risks
 Patching ACPI tables via binary renames apply system-wide. If done inappropriately, it might have negative affects on other Operating Systems when using OpenCore for booting. 
 
-In Windows, for example, an incorrectly applied binary rename can cause Bluescreens during boot caused by an "ACPI_BIOS_ERROR".
+In Windows, for example, an incorrectly applied binary rename can cause Blue Screen errors during boot caused by an `ACPI_BIOS_ERROR`
 
 ### Example: Enabling `HPET`
 Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. Here's the renaming rule:
@@ -38,7 +38,7 @@ Let's take enabling `HPET` for example. We want it to return `0x0F` for `_STA`. 
   }
 ```
 ### Explanation
-What happened here? There is an obvious error after applying the find and replacs masks, but this error does not cause any harm. First, the content after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content. 
+What happened here? There is an obvious error after applying the find and replace masks, but this error does not cause any harm. First, the content after `Return (0x0F)` will not be executed. Second, the error is located inside `{}` and does not affect the rest of the content. 
 
 In practice, we should try our best to ensure the integrity of the grammar after the name change.
 
@@ -82,7 +82,7 @@ This approach is a bit outdated since we now have modifiers like `base` to speci
 
 **This is how it works**:
 
-- Find the device, method or paramater you want to change in a `DSDT` in maciASL.
+- Find the device, method or parameter you want to change in a `DSDT` in maciASL.
 - View the `DSDT` as Hex code (Visual Studio Code has an extension for it) and find the corresponding section
 - Look at the surrounding Code
 - Select and incorporate a few characters left and right of what you actually want to change and use that as your `Find` mask – since it's in hex already you can just copy it over.
