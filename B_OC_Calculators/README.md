@@ -1,5 +1,5 @@
 # OpenCore Calculators
-This is my clumsy approach to calculate the correct values for the following bitmasks, using an Apple Numbers [Spreadsheet](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/OpenCoreCalcs.numbers?raw=true):
+This is my clumsy approach to calculate the correct values for the following bitmasks, using an Apple Numbers [Spreadsheet](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/OpenCoreCalcs.numbers):
 
 Bitmask | Description
 ------|-----------
