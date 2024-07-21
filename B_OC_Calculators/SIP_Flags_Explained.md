@@ -30,7 +30,7 @@ CSR_ALLOW_UNAUTHENTICATED_ROOT       | 11 | 11+
 
 ## Explanation of the flags
 
-Flag | Fubction
+Flag | Function
 :----:|----------
 **CSR_ALLOW_UNTRUSTED_KEXTS** | Allows the loading of unsigned kernel extensions (kexts) that have not been explicitly approved by Apple. By default, macOS only allows the loading of kexts that have been signed by Apple or approved by the user through a special process. This flag can be useful for developers or power users who need to use kexts that have not been signed or approved.
 **CSR_ALLOW_UNRESTRICTED_FS** | Allows unrestricted file system access, including creating and deleting system files and directories. By default, macOS prevents modification of the root file system to protect the integrity of the system. This flag can be useful for developers or advanced users who need to modify system files for debugging or customization purposes.
