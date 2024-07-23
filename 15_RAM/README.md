@@ -88,7 +88,7 @@ In order to fix the falsely reported memory speed in macOS, you *can* do the fol
 Using Linux is recommended because the command used under Windows doesn't show the `AssetTag`. Listed below are the instructions to run a live version of Linux from a USB flash drive directly from an .iso, without needing to install Linux.
 
 1. Prepare a USB Flash Drive with [**Ventoy**](https://github.com/ventoy/Ventoy)
-2. Download the .iso for a Linux distro of your choice (like Ubuntu or Zorin, etc.)
+2. Download an .iso of a Linux distribution of your choice (for example Ubuntu or Zorin, etc.)
 3. Copy the .iso to your Ventoy USB stick
 4. Reboot from USB flash drive
 5. In the Ventoy menu, select your Linux distro and click on "Normal Boot"
@@ -97,7 +97,7 @@ Using Linux is recommended because the command used under Windows doesn't show t
 	```bash
 	sudo dmidecode -t memory
 	```
-8. The output shoul look like this:
+8. The output should look like this:
 	```
 	dmidecode 3.2
 	Getting SMBIOS data from sysfs.
