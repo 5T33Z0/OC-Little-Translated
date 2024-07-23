@@ -106,7 +106,7 @@ This it the tl;dr version of what we are going to do basically:
 - **Optional**: [**OCToolbox**](https://github.com/webfalter/OCToolBox) – includes calculators for Freamebuffer and Connector flags (can also reverse checksums into the included flags) 
 
 ## 2. Test your current configuration
-Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working. Observe what happens after attaching our external display to your Laptop:
+Before we do any editing we will run a basic test. You can skip this if you already know that your external display isn't working. Observe what happens after attaching the external display to your Laptop:
 
 Ext. Display turns On? | Ext. Display detected <br> in Hackintool?|  Action(s)
 :---------------------:|:---------------------------------------:|------------------
