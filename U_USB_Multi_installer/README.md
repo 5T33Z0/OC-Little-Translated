@@ -62,6 +62,10 @@ macOS Catalina | 9 GB
 macOS Mojave | 7 GB 
 macOS High Sierra |6 GB
 
+> [!NOTE]
+>
+> Seeing the progressive increase in size of the macOS Installer over the past decade made me wonder: does the increased size of the OS come with a decrease in performance? So I ran Geekbench 5 in High Sierra and Sonoma on the 2011 iMac I required recently and surprisingly, Sonoma actually slightly out-performed High Sierra in both single core and multi-core performance.
+
 **My final USB Installer looks like this**:
 
 ![Finished](https://github.com/user-attachments/assets/d9feafef-c839-4ded-970e-db0228021b17)
