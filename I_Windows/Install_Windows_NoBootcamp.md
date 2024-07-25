@@ -31,7 +31,7 @@ Once the installation is completed you can reboot and the entry for booting Wind
 8. Click on install and watch the progress.
 9. Once the installation is complete the app will mount your System's EFI and add the "Microsoft" folder to it.
 10. Reboot
-11. Windows should now be available from the Bootpicker. If it's not, add `\EFI\Microsoft\Boot\bootmgfw.efi` to `Misc/BlessOverride` to your config.plist:<br>![Bless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/fdb65892-ccea-4e7d-90f4-c60742a0124a)
+11. Windows should now be available from the Bootpicker. If it's not, open your `config.plist`. Add `\EFI\Microsoft\Boot\bootmgfw.efi` to `Misc/BlessOverride`:<br>![Bless](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/fdb65892-ccea-4e7d-90f4-c60742a0124a)
 12. Save and Reboot
 13. Select Windows and the Installation starts. Once that's done, continue with Post-Install
 
