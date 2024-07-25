@@ -81,7 +81,7 @@ system_profiler SPHardwareDataType | grep 'Model Identifier'
 
 ## System Behavior
 
-### Disable Gatekeeper
+### Disable Gatekeeper (< macOS 15.0 beta 3)
 
 ```shell
 sudo spctl --master-disable
