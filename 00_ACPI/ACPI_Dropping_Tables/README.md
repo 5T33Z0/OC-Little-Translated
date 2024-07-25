@@ -115,7 +115,7 @@ After rebooting, do the following:
 - Put it in the `EFI/OC/ACPI` and add it to your `config.plist`.
 - Save and reboot.
 
-This will disable the OEM DMAR table and inject the modified one instead but we need to check if it worked…
+This will disable the OEM DMAR table and inject the modified one instead but we need to check if it worked. If you are scared editing the DMAR table yourself, you can also use SSDTTime for this now, too.
 
 > [!IMPORTANT]
 >
