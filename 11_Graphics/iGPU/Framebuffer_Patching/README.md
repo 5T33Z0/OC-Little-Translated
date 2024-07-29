@@ -594,10 +594,11 @@ Once you've found a framebuffer patch you are happy with, do the following:
 - Boot macOS from internal drive
 - Done
 
-## NOTES
-- You don't need to inject a property for a **`con`**, if the injected parameter is the same as the default used by the selected framebuffer already!
-- Besides connector flags there are also framebuffer flags to experiment with.
-- Look into Intel HD FAQs for better suited framebuffer patches than the ones recommended by Dortania! For the UHD 620 on Laptops for example, `0x3EA50004` is suited much better than the one recommended by Dortania since it already uses the required flags by default.
+> [!NOTE]
+>
+> - You don't need to inject a property for a **`con`**, if the injected parameter is the same as the default used by the selected framebuffer already!
+> - Besides connector flags there are also framebuffer flags to experiment with.
+> - Look into Intel HD FAQs for better suited framebuffer patches than the ones recommended by Dortania! For the UHD 620 on Laptops for example, `0x3EA50004` is suited much better than the one recommended by Dortania since it already uses the required flags by default.
  
 ## Credits and further resources
 - [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) by CaseySJ
