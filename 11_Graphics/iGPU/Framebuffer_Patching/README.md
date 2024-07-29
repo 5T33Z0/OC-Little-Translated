@@ -154,11 +154,11 @@ Take note of your test results. Depending on the results you might be able to sk
 
 8. Save your config and reboot from the USB flash drive. If the system boots and the internal display works, we can now add data to connect to an external display. If it doesn't boot, reset the system, boot from the internal disk and start over.
 
-**NOTES**:
-
-- The OpenCore Install Guide only provides *basic* settings to enable your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
-- In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630, while Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better for me in the end.
-- To resolve issues with HDMI handshake, you need to disable **Apple Graphics Device Control** (AGDC) as it can cause conflicts when using a spoofed spoofing SMBIOS/Board-ID with non-native macOS versions!
+> [!NOTE]
+>
+> - The OpenCore Install Guide only provides *basic* settings to enable your primary display. It does not include additional connectors (except for Ivy Bridge Laptops).
+> - In my case, the recommended framebuffer and device-id for the Intel UHD 620 differ: Dortania recommends AAPL,ig-platform-id `00009B3E` and device-id `9B3E0000` to spoof the iGPU as Intel UHD 630, while Intel HD FAQs recommends AAPL,ig-platform-id `0900A53E` and device-id `A53E0000` to spoof it as Intel Iris 655 which worked better for me in the end.
+> - To resolve issues with HDMI handshake, you need to disable **Apple Graphics Device Control** (AGDC) as it can cause conflicts when using a spoofed spoofing SMBIOS/Board-ID with non-native macOS versions!
 
 ## 4. Understanding the Parameters
 Let's have a look inside Hackintool's "Connectors" tab to understand the parameters we are working with:
@@ -594,10 +594,11 @@ Once you've found a framebuffer patch you are happy with, do the following:
 - Boot macOS from internal drive
 - Done
 
-## NOTES
-- You don't need to inject a property for a **`con`**, if the injected parameter is the same as the default used by the selected framebuffer already!
-- Besides connector flags there are also framebuffer flags to experiment with.
-- Look into Intel HD FAQs for better suited framebuffer patches than the ones recommended by Dortania! For the UHD 620 on Laptops for example, `0x3EA50004` is suited much better than the one recommended by Dortania since it already uses the required flags by default.
+> [!NOTE]
+>
+> - You don't need to inject a property for a **`con`**, if the injected parameter is the same as the default used by the selected framebuffer already!
+> - Besides connector flags there are also framebuffer flags to experiment with.
+> - Look into Intel HD FAQs for better suited framebuffer patches than the ones recommended by Dortania! For the UHD 620 on Laptops for example, `0x3EA50004` is suited much better than the one recommended by Dortania since it already uses the required flags by default.
  
 ## Credits and further resources
 - [General Framebuffer Patching Guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) by CaseySJ
