@@ -14,7 +14,7 @@ So, config profiles it is…
 
 ## Instructions
 
-1. Download the "Disable.Gatekeeper.mobileconfig.zip" and unzip it
+1. Download the ["Disable.Gatekeeper.mobileconfig.zip"](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/files/Disable.Gatekeeper.mobileconfig.zip) and unzip it
 2. Go to System Settings >> General >> Device Management and click the <kbd>+</kbd> button
 3. Navigate to the Disable.Gatekeeper.mobileconfig file and open it
 4. A new device called "Disable Gatekeeper" should appear:<br>![](/Users/5t33z0/Desktop/disablegk.png)
