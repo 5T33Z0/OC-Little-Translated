@@ -2,7 +2,7 @@
 
 ## Preface
 
-After installing macOS Sequoia beta 3 on a new Volume, I wanted to run Corpnewt's MountEFI script to mount the ESP but it was blocked by Gatekeeper. Right-clicking the file and selecting "Open" does no longer work either, which is new. So I decided to disable GateKeeper via Terminal, only to realize that this is no longer possible either:
+After installing macOS Sequoia beta 3 on a new Volume, I wanted to run Corpnewt's MountEFI script to mount the ESP but it was blocked by Gatekeeper. Right-clicking the file and selecting "Open" does no longer work, which is new. So I decided to disable GateKeeper via Terminal, only to realize that this is no longer possible either:
 
 ```shell
 sudo spctl --master-disable
