@@ -12,12 +12,27 @@ This operation is no longer supported. To disable the assessment subsystem, plea
 
 So, config profiles it is…
 
-## Instructions
+## Sentinel-Method (preferred)
 
-1. Download [Disable.Gatekeeper.mobileconfig.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/files/Disable.Gatekeeper.mobileconfig.zip) and unzip it
-2. Go to System Settings >> General >> Device Management and click the <kbd>+</kbd> button
-3. Navigate to the Disable.Gatekeeper.mobileconfig file and open it
-4. A new device called "Disable Gatekeeper" should appear:<br>![disablegk](https://github.com/user-attachments/assets/b76ed1c1-77d5-47d7-97f5-622ccf724451)
+This will install a signed config profile to disable Gatekepper.
+
+- Download [**Sentinel**](https://github.com/alienator88/Sentinel/releases)
+- Unzip and run the app
+- Click on "Install Profile"
+- This will open the System Settings >> General >> Device Management window
+- Double-click on the loaded Profile "Disable Gatekeeper"
+- Click the "Install…" button to install the profile.
+
+Afterwards Gatekeeper will be disabled
+
+## Previous Method
+
+This will also install a config profile to disable Gatekepper but it will be unsigned.
+
+- Download [Disable.Gatekeeper.mobileconfig.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/files/Disable.Gatekeeper.mobileconfig.zip) and unzip it
+- Go to System Settings >> General >> Device Management and click the <kbd>+</kbd> button
+- Navigate to the Disable.Gatekeeper.mobileconfig file and open it
+- A new device called "Disable Gatekeeper" should appear:<br>![disablegk](https://github.com/user-attachments/assets/b76ed1c1-77d5-47d7-97f5-622ccf724451)
 
 Afterwards, Gatekeeper will be disabled.
 
