@@ -8,7 +8,7 @@
 This is the official method suggested by the OpenCore developers.
 
 - Add [**RTCMemoryFixup.kext**](https://github.com/acidanthera/RTCMemoryFixup) to `EFI/OC/Kexts` and `config.plist`
-- Enable `Kernel\Patch` **__ZN11BCM5701Enet14getAdapterInfoEv** (copy it over from the `Sample.plist` included in the OpenCore package if it's missing.)
+- Enable `Kernel\Patch` for **Disable RTC wake scheduling** (copy it over from the `Sample.plist` included in the OpenCore package if it's missing.)
 - Save and reboot. 
 
 The problem should be gone, the next time you reboot or shutdown the system.
