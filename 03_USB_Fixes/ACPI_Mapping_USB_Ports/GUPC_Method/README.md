@@ -163,6 +163,6 @@ The most connector types nowadays are:
 	```
 
 ## Notes and Credits
-- In my tests, I couldn't get this guide work. But unitedastromer has found [a solution that works](https://github.com/unitedastronomer/miscellaneous-hackintosh-guides/tree/main/SSDT_USB_Mapping)
+- In my tests, I couldn't get this guide work. But unitedastromer has found [a solution that supposedly works](https://github.com/unitedastronomer/miscellaneous-hackintosh-guides/tree/main/SSDT_USB_Mapping)
 - Original [**Blog Post**](https://blog-gzxiaobai-cn.translate.goog/post/利用GUPC以热补丁定制USB端口?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) by [**GZXiaoBai**](https://github.com/GZXiaoBai)
 - Original OC-Litte issue: **https://github.com/daliansky/OC-little/issues/18**
