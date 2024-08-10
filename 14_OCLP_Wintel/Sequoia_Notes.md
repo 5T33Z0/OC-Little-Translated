@@ -18,7 +18,7 @@
 	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
 
 ## Observations
-
+- With the release of Sequoia beta 5, MountEFI stopped working because Apple changed something in the way FAT32 partitions are handeled. You can use [Mount-MS-DOS-Partition](https://github.com/chris1111/Mount-MS-DOS-Partition) in the meantime to mount the EFI partiton.
 - Most kexts require `-lilubetaall` to load
 - Intel Bluetooth doesn't work yet
 - Intel WiFi works using `Itlwm.kext`!
@@ -26,6 +26,7 @@
 > [!CAUTION]
 >
 > Don't upgrade to macOS Sequoia on legacy systems that require root patches! There is not ETA for OpenCore Legacy Patcher with macOS 15 support available yet.
+
 
 ## OCLP Update Status
 - **June 28th, 2024**: [AMFIPass.kext updated to 1.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/sequoia-development/payloads/Kexts/Acidanthera/AMFIPass-v1.4.1-RELEASE.zip)
