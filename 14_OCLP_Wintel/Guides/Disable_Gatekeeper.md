@@ -20,7 +20,7 @@ This will install a signed config profile to disable Gatekepper.
 - Unzip and run the app
 - Click on "Install Profile"
 - This will open the System Settings >> General >> Device Management window
-- Double-click on the loaded Profile "Disable Gatekeeper":<br>[disablegk](https://github.com/user-attachments/assets/b76ed1c1-77d5-47d7-97f5-622ccf724451)
+- Double-click on the loaded Profile "Disable Gatekeeper":<br>![disablegk](https://github.com/user-attachments/assets/b76ed1c1-77d5-47d7-97f5-622ccf724451)
 - Click the "Install…" button to install the profile.
 
 Afterwards Gatekeeper will be disabled
