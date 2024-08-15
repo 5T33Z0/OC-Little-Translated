@@ -90,6 +90,8 @@ macOS 11 (Big Sur)         | 20.0.0    | 20.99.99 |Intel (64-bit)</br>Apple Sili
 macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
 macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
 macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
+macOS 15 (Sequoia)         | 24.0.0    | 24.99.99 | "
+
 
 > [!TIP]
 >
