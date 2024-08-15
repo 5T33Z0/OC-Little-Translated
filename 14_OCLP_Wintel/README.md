@@ -31,6 +31,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 - [**How to disable Gatekeeper in macOS Sequoia**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Disable_Gatekeeper.md)
 
 ## Troubleshooting
+- [**Dos and Don'ts of running macOS beta versions**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Beta_dos_donts.md)
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
 
 ## Fetching macOS Installers
