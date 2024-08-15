@@ -1,4 +1,4 @@
-# Dos and Don'ts for running beta versions of macOS
+# Dos and Don'ts of running beta versions of macOS
 
 1. Backup your EFI folder on a FAT32 (MBR) formatted USB flash drive for recovery
 2. Use the latest kexts and OpenCore files before installing a public/developer build of macOS! By "latest" I mean the [latest commits](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true) of OpenCore and Kexts – not the tagged, monthly builds from the "Releases" section since they won't contain the latest adjustments required to run the new OS!
