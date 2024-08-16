@@ -12,12 +12,13 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 #### Wi-Fi Firmware
 - Open IORegistryExplorer
 - If you are using `AirportItlwm.kext`, search for `Aiport`
-- Take note of the entry for `IOModel` ("iwm-…"):<br>![](/Users/5t33y0/Desktop/Airport.png)
+- Take note of the entry for `IOModel` ("iwm-…"):<br>![Airport](https://github.com/user-attachments/assets/53c10e65-cf57-495a-af53-55862480a9d6)
 
 ### Bluetooth Firmware
+
 - In IORegistryExplorer, locate the entry `InteBluetoothFirmware`
 - Check the entry for `fw_name` 
-- Take note of the value
+- Take note of the value:<br>![btfirmware](https://github.com/user-attachments/assets/d2395b61-7a11-4494-97ec-439c26de2962)
 
 > [!NOTE]
 > 
@@ -30,7 +31,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - Run Linux live, don't install it
 > - Once you reach the desktop, run Terminal
 > - Enter `dmesg | grep ibt`
-> - This will show you the used BT Firmware files ("ibt…"):<br>![](/Users/5t33y0/Desktop/linux.png)
+> - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
 ### Install Xcode
