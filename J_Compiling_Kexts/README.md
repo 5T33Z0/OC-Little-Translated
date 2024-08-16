@@ -23,8 +23,8 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Guide**: [**Slimming AppleALC**](https://github.com/5T33Z0/AppleALC-Guides/tree/main/Slimming_AppleALC)
 
 ## Slimming Kexts for Intel WiFi/BT Cards
-**Kexts**: `Itlwm`, `AirportItlwm`, `IntelBluetoothFirmware`
-**Filesize Reduction**: About 10 times smaller filesize
+**Kexts**: `Itlwm`, `AirportItlwm`, `IntelBluetoothFirmware`<br>
+**Filesize Reduction**: About 10 times smaller filesize<br>
 **Guide**: [Slimming Intel Wi-Fi and BT kexts](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
 
 ## Slimming Xcode
