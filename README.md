@@ -6,7 +6,7 @@
 
 **PREFACE**
 
-* [**Disclaimer**](#disclaimer)
+* [**DISCLAIMER**](#disclaimer)
 * [**About OC Little Translated**](#about)
 * [**About the translation**](#about-the-translation)
 
