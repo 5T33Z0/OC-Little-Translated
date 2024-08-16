@@ -14,6 +14,10 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - If you are using `AirportItlwm.kext`, search for `Aiport`
 - Take note of the entry for `IOModel` ("iwm-…"):<br>![Airport](https://github.com/user-attachments/assets/53c10e65-cf57-495a-af53-55862480a9d6)
 
+> [!NOTE]
+>
+> Identifying the Wi-Fi firmware does not work when using `Itlwm.kext`, so you must use `AirportItlwm.kext`!
+
 ### Bluetooth Firmware
 
 - In IORegistryExplorer, locate the entry `InteBluetoothFirmware`
