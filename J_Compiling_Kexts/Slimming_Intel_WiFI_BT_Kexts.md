@@ -11,7 +11,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 ### Identifying the used firmwares
 #### Wi-Fi Firmware
 - Open IORegistryExplorer
-- If you are using `AirportItlwm.kext`, search for `Aiport`
+- If you are using `AirportItlwm.kext`, search for `Airport`
 - Take note of the entry for `IOModel` ("iwm-…"):<br>![Airport](https://github.com/user-attachments/assets/53c10e65-cf57-495a-af53-55862480a9d6)
 
 > [!NOTE]
@@ -97,7 +97,7 @@ Once compiling is completed the kexts will be located at `~/Downloads/itlwm-mast
 
 > [!IMPORTANT]
 > 
-> - `itlw.kext` requires the [Heliport](https://github.com/OpenIntelWireless/HeliPort) app to connect to Wi-Fi Hotspots
+> - `itlwm.kext` requires the [Heliport](https://github.com/OpenIntelWireless/HeliPort) app to connect to Wi-Fi Hotspots
 > - If you are having issues with the slimmed itlwm.kext, use the pre-cpmpiled version from the OpenIntelWireless repo!
 
 ## Credits
