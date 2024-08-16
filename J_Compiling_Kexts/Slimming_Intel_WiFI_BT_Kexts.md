@@ -99,3 +99,6 @@ Once compiling is completed the kexts will be located at `~/Downloads/itlwm-mast
 > 
 > - `itlw.kext` requires the [Heliport](https://github.com/OpenIntelWireless/HeliPort) app to connect to Wi-Fi Hotspots
 > - If you are having issues with the slimmed itlwm.kext, use the pre-cpmpiled version from the OpenIntelWireless repo!
+
+## Credits
+- Original Guides by [dreamwhite](https://github.com/dreamwhite)
