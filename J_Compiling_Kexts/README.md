@@ -13,13 +13,13 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 - Additional requirements as mentioned in the respective guide
 
 ## Slimming `AppleALC.kext`
-**Kext**: [**AppleALC.kext**](https://github.com/acidanthera/AppleALC/releases)</br>
+**Kext**: [**`AppleALC`**](https://github.com/acidanthera/AppleALC/releases)</br>
 **For**: On-board Audio</br>
 **Filesize reduction**: From 3.8 MB to approx. 600 KB. If you strip down the the config files so that they only contain data for the one layout you are using, you can get it as small as 90 KB!</br>
 **Guide**: [**Slimming AppleALC**](https://github.com/5T33Z0/AppleALC-Guides/tree/main/Slimming_AppleALC)
 
 ## Slimming Kexts for Intel WiFi/BT Cards
-**Kexts**: `Itlwm`, `AirportItlwm`, `IntelBluetoothFirmware`<br>
+**Kexts**: [**`Itlwm`/`AirportItlwm`**](https://github.com/OpenIntelWireless/itlwm), [**`IntelBluetoothFirmware`**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware)<br>
 **Filesize reduction**: approx. 10 times smaller than the original<br>
 **Guide**: [**Slimming Intel Wi-Fi and BT kexts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
 
