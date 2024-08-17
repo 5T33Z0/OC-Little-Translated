@@ -5,10 +5,6 @@ There are a couple of essential kexts which enable non-Apple devices like on-boa
 
 Below you will find links to guides to compile slimmed-down versions of kext which are known to be notoriously large in size by default.
 
-> [!NOTE]
-> 
-> Please direct any support requests (apart from slimming AppleALC) to the author of the respective guide.
-
 ## Requirements
 - [**XCode**](https://developer.apple.com/xcode/)
 - [**MacKernelSDK**](https://github.com/acidanthera/MacKernelSDK)
@@ -24,11 +20,11 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 
 ## Slimming Kexts for Intel WiFi/BT Cards
 **Kexts**: `Itlwm`, `AirportItlwm`, `IntelBluetoothFirmware`<br>
-**Filesize Reduction**: About 10 times smaller filesize<br>
-**Guide**: [Slimming Intel Wi-Fi and BT kexts](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
+**Filesize reduction**: approx. 10 times smaller than the original<br>
+**Guide**: [**Slimming Intel Wi-Fi and BT kexts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
 
 ## Slimming Xcode
 You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](https://github.com/5T33Z0/OC-Little-Translated/blob/main/J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
 
 ## Credits
-[**dreamwhite**](https://github.com/dreamwhite) for the IntelBluetoothFirmware and itlwm slimming guides.
+[**dreamwhite**](https://github.com/dreamwhite) for the original IntelBluetoothFirmware and itlwm slimming guides.
