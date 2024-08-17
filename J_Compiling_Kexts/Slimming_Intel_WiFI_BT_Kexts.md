@@ -75,6 +75,9 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build itlwm as well as AirportItlwm kexts for all versions of macOS:
 
 ```
+# navigate to the itlwm folder (if it is not your working directory already)
+cd ~/Downloads/itlwm-master
+
 # remove generated firmware
 rm include/FwBinary.cpp
 
@@ -84,15 +87,14 @@ xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk m
 # building the kexts
  xcodebuild -alltargets -configuration Release
 ```
-
-Once compiling is completed the kexts will be located under `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
+Once building the kexts is completed they will be located under `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
 
 ### Compiling `InteBluetothFirmware`
 
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build the IntelBluetoothFirmware kext:
 
 ```
-# Navigate to the folder
+# Navigate to the IntelBluetoothFirmware folder (if it is not your working directory already)
 cd ~/Downloads/IntelBluetoothFirmware-master
 
 # build the kext
