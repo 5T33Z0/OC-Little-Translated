@@ -26,13 +26,13 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 
 > [!NOTE]
 > 
-> - If the field `fw_name` is empty, you need to use Linux to find the firmware.
-> - Prepare a USB flash drive with Ventoy
+> If the field `fw_name` is empty, you need to use Linux to find the firmware:
+> - Prepare a bootable USB flash drive with [**Ventoy**](https://www.ventoy.net/en/index.html)
 > - Download a Linux distro of your choice (as .iso)
 > - Put the .iso on the Ventoy USB Stick
 > - Boot from the Ventoy USB stick
 > - Select the Linux distro
-> - Run Linux live, don't install it
+> - Run Linux in live mode, don't install it
 > - Once you reach the desktop, run Terminal
 > - Enter `dmesg | grep ibt`
 > - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
@@ -52,6 +52,10 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - Download the DEBUG version of Lilu, extract it and place the kext in the itlwm-master folder
 - In Finder, navigate to `~/Downloads/itlwm-master/itlwm/firmware`
 - Delete every file except the `iwm-…` file for your Intel Wifi/BT card.
+
+> [!NOTE]
+>
+> Instead of manually deleting firmware files, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`, so you have to put the name of the firmware required for your card in there: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
 
 ### Prepare the `IntelBluetoothFirmware` source code
 - Download [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) source code (click on "Code" and select "Download zip")
