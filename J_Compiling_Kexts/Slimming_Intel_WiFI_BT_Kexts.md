@@ -53,9 +53,9 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - In Finder, navigate to `~/Downloads/itlwm-master/itlwm/firmware`
 - Delete every file except the `iwm-…` file for your Intel Wifi/BT card.
 
-> [!NOTE]
+> [!TIP]
 >
-> Instead of manually deleting firmware files, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`, so you have to put the name of the firmware required for your card in there: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
+> Instead of deleting unnecessary firmware files manually, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`. So before using this command, you have to adjust the name of the firmware to match the one required by your card: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
 
 ### Prepare the `IntelBluetoothFirmware` source code
 - Download [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) source code (click on "Code" and select "Download zip")
@@ -85,14 +85,20 @@ xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk m
  xcodebuild -alltargets -configuration Release
 ```
 
-Once compiling is completed the kexts will be located at `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
+Once compiling is completed the kexts will be located under `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
 
 ### Compiling `InteBluetothFirmware`
 
-- Run Terminal 
-- Enter: `cd ~/Downloads/IntelBluetoothFirmware-master`
-- Next, enter ` xcodebuild -alltargets -configuration Release`to compile the kexts
-- The finished kexts will be located under `~/Downloads/IntelBluetoothFirmwar-master/build/Release`:<br>![itlbtfw](https://github.com/user-attachments/assets/c9be468e-11fa-475e-9fb8-c7d7b3a348e2)
+Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build the IntelBluetoothFirmware kext:
+
+```
+# Navigate to the folder
+cd ~/Downloads/IntelBluetoothFirmware-master
+
+# build the kext
+xcodebuild -alltargets -configuration Release
+```
+The compiled kexts will be located under `~/Downloads/IntelBluetoothFirmwar-master/build/Release`:<br>![itlbtfw](https://github.com/user-attachments/assets/c9be468e-11fa-475e-9fb8-c7d7b3a348e2)
 
 ## Testing
 - Copy the newly compiled kexts to `EFI/OC/Kexts`, replacing the existing ones
@@ -102,7 +108,7 @@ Once compiling is completed the kexts will be located at `~/Downloads/itlwm-mast
 > [!IMPORTANT]
 > 
 > - `itlwm.kext` requires the [Heliport](https://github.com/OpenIntelWireless/HeliPort) app to connect to Wi-Fi Hotspots
-> - If you are having issues with the slimmed itlwm.kext, use the pre-cpmpiled version from the OpenIntelWireless repo!
+> - If you are having issues with the slimmed kexts, I suggest you use the pre-compiled version from the OpenIntelWireless repo instead
 
 ## Credits
 - Original Guides by [dreamwhite](https://github.com/dreamwhite)
