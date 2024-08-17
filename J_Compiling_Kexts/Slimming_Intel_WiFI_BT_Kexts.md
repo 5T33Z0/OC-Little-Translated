@@ -39,7 +39,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - Take note of the two files, reboot into macOS and continue with the guide
 
 ### Install Xcode
-- Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release) for your system. 
+- Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release)
 - Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
 
 ### Prepare the `itlwm` source code
@@ -47,22 +47,22 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - Unzip the file – "itlwm-master" folder will be created
 - Run Terminal
 - Enter `cd ~/Downloads/itlwm-master`
-- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` to download MacKernelSDK into the "itlwm-master" folder
+- Next, download MacKernelSDK into the "itlwm-master" folder. Enter: `git clone https://github.com/acidanthera/MacKernelSDK`
 - Leave the Terminal window open for later use
-- Download the DEBUG version of Lilu, extract it and place the kext in the itlwm-master folder
+- Download the DEBUG version of [**Lilu**](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the itlwm-master folder
 - In Finder, navigate to `~/Downloads/itlwm-master/itlwm/firmware`
 - Delete every file except the `iwm-…` file for your Intel Wifi/BT card.
 
 > [!TIP]
 >
-> Instead of deleting unnecessary firmware files manually, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`. So before using this command, you have to adjust the name of the firmware to match the one required by your card: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
+> Instead of deleting unnecessary firmware files manually, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`. So before using it, you have to adjust the name of the firmware to match the one required by your card: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
 
 ### Prepare the `IntelBluetoothFirmware` source code
 - Download [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) source code (click on "Code" and select "Download zip")
 - Unzip the file – "IntelBluetoothFirmware-master" folder will be created
 - Run Terminal
 - Enter: `cd ~/Downloads/IntelBluetoothFirmware-master`
-- Next, enter `git clone https://github.com/acidanthera/MacKernelSDK` to download MacKernelSDK into the "IntelBluetoothFirmware-master" folder
+- Next, download MacKernelSDK into the "IntelBluetoothFirmware-master" folder. Enter: `git clone https://github.com/acidanthera/MacKernelSDK`
 - Leave the Terminal window open for later use
 - Download the DEBUG version of Lilu, extract it and place the kext in the IntelBluetoothFirmware-master folder
 - In Finder, navigate to `~/Downloads/IntelBluetoothFirmware-master/IntelBluetoothFirmware/fw`
