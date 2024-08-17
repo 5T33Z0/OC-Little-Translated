@@ -64,7 +64,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - Enter: `cd ~/Downloads/IntelBluetoothFirmware-master`
 - Next, download MacKernelSDK into the "IntelBluetoothFirmware-master" folder. Enter: `git clone https://github.com/acidanthera/MacKernelSDK`
 - Leave the Terminal window open for later use
-- Download the DEBUG version of Lilu, extract it and place the kext in the IntelBluetoothFirmware-master folder
+- Download the DEBUG version of [Lilu](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the IntelBluetoothFirmware-master folder
 - In Finder, navigate to `~/Downloads/IntelBluetoothFirmware-master/IntelBluetoothFirmware/fw`
 - In the `fw` folder delete all the firmware files except the two: `ibt-….ddc` and `ibt-….sfi` files for your card
 - If present, also delete `FwBinary.cpp` from `/IntelBluetoothFirmware-MASTER/IntelBluetoothFirmware`
