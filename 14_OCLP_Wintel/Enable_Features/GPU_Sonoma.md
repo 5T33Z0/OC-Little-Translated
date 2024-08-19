@@ -9,7 +9,7 @@
 - [NVIDIA Kepler Patching](#nvidia-kepler-patching)
 	- [Config Preparations](#config-preparations)
 	- [OCLP Preparations](#oclp-preparations)
-- [NVIDIA Tesler Patching](#nvidia-tesler-patching)
+- [NVIDIA Tesla Patching](#nvidia-tesla-patching)
 	- [Config Preparations](#config-preparations-1)
 	- [OCLP Preparations](#oclp-preparations-1)
 - [Other GPUs](#other-gpus)
@@ -67,7 +67,7 @@ Enjoy working GPU Acceleration again!
 > 
 > Beware when using an **Nvidia GT 730** because it comes in 2 variants: Fermi (GF108) and Kepler (GK208B). But only the Kepler variant is compatible with macOS!
 
-## NVIDIA Tesler Patching
+## NVIDIA Tesla Patching
 
 ### Config Preparations
 - Mount your EFI and open your config.plist
