@@ -1,4 +1,4 @@
-# Fetching kext upates from OpenCore Legacy Patcher with OCAT automatically
+# Fetching kext upates from the OpenCore Legacy Patcher repo with OCAT
 
 ## About
 
