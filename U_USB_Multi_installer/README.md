@@ -27,7 +27,7 @@ So what if you could have something similar to Ventoy, but for macOS, containing
 3. Select the "macOS Install" partiton from the menu and press "Next":<br>![TINU_02](https://github.com/user-attachments/assets/10b03691-7602-4c04-88e2-2c4aadbca86c)
 4. Press "Open" and navigate to the location of your macOS Installer App to add it and press "Next":<br>![TINU_03](https://github.com/user-attachments/assets/accf3e39-439b-4627-8787-35ac28317723)
 5. In the next Window, you get a summery:<br>![TINU_04](https://github.com/user-attachments/assets/55e99ca4-f13d-497e-ba53-69be14589fde)
-6. Click on "Options" and unselect the following and click on "Done":<br>![TINU_05](https://github.com/user-attachments/assets/01f77069-a387-4c28-a289-26cfbc79ba1e)
+6. Click on "Options", unselect the following settings and click on "Done":<br>![Bildschirmfoto 2024-08-23 um 19 02 31](https://github.com/user-attachments/assets/c8177bfa-2470-467d-a2d0-88645948ee7a)
 7. Press "I Understand" to start the process
 
 Depending on size of the macOS DMG and the speed of your USB flash drive this can take about 15 Minutes.
