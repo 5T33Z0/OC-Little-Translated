@@ -30,7 +30,6 @@ As you may or my not know, you can add kexts to check for updates in OpenCore Au
     IOSkywalkFamily.kext | https://github.com/dortania/OpenCore-Legacy-Patcher 
     KDKlessWorkaround.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     RSRHelper.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
-    USB-Map.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     ```
 5. Save the file
 6. Restart OCAT
