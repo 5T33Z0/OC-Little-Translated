@@ -12,17 +12,22 @@ As you may or my not know, you can add kexts to check for updates in OpenCore Au
 4. Add the following entries:
     ```
     AMFIPass.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
+    AppleIntelCPUPowerManagement.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
+    AppleIntelCPUPowerManagementClient.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     ASPP-Override.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     AutoPkgInstaller.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     BacklightInjector.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     Bluetooth-Spoof.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     CatalinaBCM5701Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     CatalinaIntelI210Ethernet.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
+    CryptexFixup.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     corecaptureElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     AppleIntelCPUPowerManagement.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     AppleIntelCPUPowerManagementClient.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     ECM-Override.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     IO80211ElCap.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
+    IO80211FamilyLegacy.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
+    IOSkywalkFamily.kext | https://github.com/dortania/OpenCore-Legacy-Patcher 
     KDKlessWorkaround.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     RSRHelper.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
     USB-Map.kext | https://github.com/dortania/OpenCore-Legacy-Patcher
