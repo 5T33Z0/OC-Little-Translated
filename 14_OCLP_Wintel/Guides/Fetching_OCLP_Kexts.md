@@ -34,9 +34,10 @@ As you may or my not know, you can add kexts to check for updates in OpenCore Au
     ```
 5. Save the file
 6. Restart OCAT
-7. Check for kext updates
-8. All the kexts from the OCLP repo that had a grey indicator should now be green.
-9. Update kexts
+7. Open your config.plisst
+8. Check for kext updates
+9. Kexts from the OCLP repo that had a grey indicator should now be green.
+10. Update kexts
 
 ## Notes
-- If you need more/different kexts for the OCLP repo just add a new line with the name of the kext separated by `|` followed by OCLP repo URL.
+This list is incomplete. So, if you need additional kexts for the OCLP repo, just add a new line to `KextUrl.txt`, enter the name of the kext followd by `|` and the URL of the OCLP repo.
