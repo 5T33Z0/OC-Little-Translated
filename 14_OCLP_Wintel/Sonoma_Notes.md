@@ -1,5 +1,7 @@
 # macOS Sonoma Notes
 
+This section covers the current status of OpenCore Legacy Patcher development for macOS Sonoma.
+
 ## (Officially) Supported SMBIOS (Intel Models)
 - **iMac**: iMac19,x, iMac20,x, iMacPro1,1
 - **MacPro**: MacPro7,1
