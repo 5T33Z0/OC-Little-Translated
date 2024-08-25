@@ -33,6 +33,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 ## Troubleshooting
 - [**Dos and Don'ts of running macOS beta versions**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Beta_dos_donts.md)
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
+- [**OCLP and the macOS compatibility gap**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Bridging_the_gap.md)
 
 ## Fetching macOS Installers
 
