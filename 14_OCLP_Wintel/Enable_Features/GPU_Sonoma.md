@@ -114,6 +114,7 @@ To force enable patching of **NVIDIA Tesler Cards** in OCLP, do the following:
 Enjoy working GPU Acceleration again!
 
 ## Other GPUs
+
 &rarr; TO BE CONTINUED…
 
 ## Further Resources
