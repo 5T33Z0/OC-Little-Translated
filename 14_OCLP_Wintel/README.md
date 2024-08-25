@@ -46,14 +46,13 @@ There are several options to fetch and download macOS Installers directly from A
 
 Foe more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#getting-macos) section
  
-## Other
+## Miscellaneous
+- [**OCLP Changelog**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md)
 - [**macOS Sequoia Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
-- [**macOS Sonoma Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
-- [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
+- [**macOS Sonoma Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)- [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
 - [**Fetching kext updates from OCLP with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Fetching_OCLP_Kexts.md)
 - [**Installing Windows from within macOS without Bootcamp**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Install_Windows_NoBootcamp.md)
 - [**Collection of Non-Metal Apple apps**](https://archive.org/details/apple-apps-for-non-metal-macs) (Archive.org)
-- [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
 
-## Contribute?
-Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as legacy systemes go, I only have an Ivy Bridge Notebook and an iMac11,3 (Lynnfield) to test legacy configs. So if you have any suggestions or updated instructions to improve the workflow, feel free to create an issue and let me know!
+## Contribute
+Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as legacy systemes go, I only have an Ivy Bridge Notebook, an iMac11,3 (Lynnfield), and an iMac12,2 (Sand Bridge) to test legacy configs. So if you have any suggestions or updated instructions to improve the guides or workflows, feel free to create an issue and let me know!
