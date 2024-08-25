@@ -285,7 +285,6 @@ defaults write -g ignore-devices -bool true
 
 &rarr; Check this [guide](https://mogutan.wordpress.com/2018/07/24/switch-bluetooth-setting-from-command-line-on-macos/) for instructions.
 
-
 ## Networking
 
 ### List MAC Addresses of Network Adapters
@@ -299,6 +298,28 @@ networksetup -listallhardwareports
 ```shell
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
 sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
+```
+
+### Disable TPC/IPv6 Protocol
+
+You really should disable IPv6 for security reasons, if you don't need it!
+
+List all Network devices:
+
+```shell
+sudo networksetup -listallnetworkservices 
+```
+Disable IPv6 for the following interfaces:
+
+```shell
+sudo networksetup -setv6off Ethernet
+sudo networksetup -setv6off Wi-Fi
+```
+To re-enable:
+
+```shell
+sudo networksetup -setv6automatic Wi-Fi
+sudo networksetup -setv6automatic Ethernet
 ```
 
 ## CPU-related
