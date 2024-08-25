@@ -3,18 +3,14 @@
 This section covers the current status of OpenCore Legacy Patcher development for macOS Sonoma.
 
 ## (Officially) Supported SMBIOS (Intel Models)
+
+![Somona_SMBIOS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9ebc9596-5f1a-4a63-9758-a89018501372)
+
 - **iMac**: iMac19,x, iMac20,x, iMacPro1,1
 - **MacPro**: MacPro7,1
 - **MacBookAir**: MacBookAir9,1
 - **MacBookPro**: MacBookPro15,x, MacBookPro16,x
 - **Mac mini**: Macmini8,1
-
-<details>
-<summary><b>Source: Apple</b></summary>
-
-![Somona_SMBIOS](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/9ebc9596-5f1a-4a63-9758-a89018501372)
-
-</details>
 
 ## OCLP Update Status
 - **May 30th, 2024**: [**OCLP v1.50**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.5.0) released
