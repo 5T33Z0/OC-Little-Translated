@@ -55,4 +55,4 @@ Foe more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-
 - [**Collection of Non-Metal Apple apps**](https://archive.org/details/apple-apps-for-non-metal-macs) (Archive.org)
 
 ## Contribute
-Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as legacy systemes go, I only have an Ivy Bridge Notebook, an iMac11,3 (Lynnfield), and an iMac12,2 (Sand Bridge) to test legacy configs. So if you have any suggestions or updated instructions to improve the guides or workflows, feel free to create an issue and let me know!
+Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as verifying the guides are concerned, I only have an iMac11,3 (Lynnfield), an iMac12,2 (Sandy Bridge), and and Ivy Bridge Notebook for testing. So if you have any suggestions or updated instructions to improve the guides or workflows, feel free to create an issue and let me know!
