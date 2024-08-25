@@ -1,6 +1,5 @@
 # macOS Sequoia Notes
-
-:construction: Under Construction
+This section covers the current status of OpenCore Legacy Patcher development for macOS Sequoia.
 
 ## (Officially) Supported Mac Models
 
