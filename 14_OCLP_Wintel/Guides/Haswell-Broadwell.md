@@ -1,6 +1,6 @@
 # Installing macOS Ventura or newer on Haswell/Broadwell systems
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.6.1-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.7-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -36,6 +36,10 @@
 
 ## About
 Although installing and running macOS Ventura on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented nor officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP for a Haswell system.
+
+| ⚠️ Important Status Updates |
+|:----------------------------|
+| Don't install macOS Sequoia yet. OCLP cannot patch it yet. Currently, there's no solution to make enable iGPU drivers on Haswell systems!
 
 ### How Haswell/Broadwell systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
