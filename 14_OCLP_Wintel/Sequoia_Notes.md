@@ -17,7 +17,7 @@ This section covers the current status of OpenCore Legacy Patcher development fo
 	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
 
 ## Observations
-- With the release of Sequoia beta 5, MountEFI stopped working because Apple changed something in the way FAT32 partitions are handeled. You can use [Mount-MS-DOS-Partition](https://github.com/chris1111/Mount-MS-DOS-Partition) in the meantime to mount the EFI partiton.
+- With the release of Sequoia beta 5, MountEFI stopped working because Apple changed something in the way FAT32 partitions are handeled. You can use [Mount-MS-DOS-Partition](https://github.com/chris1111/Mount-MS-DOS-Partition) in the meantime to mount the EFI partiton. This issue has been fixeed since beta 6
 - Most kexts require `-lilubetaall` to load
 - Intel Bluetooth doesn't work yet
 - Intel WiFi works using `Itlwm.kext`!
