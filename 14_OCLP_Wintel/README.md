@@ -15,6 +15,10 @@ OCLP also introduced a bunch of new kexts that allow booting with the correct SM
 
 - Updating from from macOS 14.3.x to 14.4.x might crash the installer early. This is mostly related to `SecureBootModel` (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details)
 
+## Latest Updates
+- [**macOS Sequoia OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
+- [**macOS Sonoma OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
+
 ## Configuration Guides
 Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st to 6th gen CPUs, I've compiled configuration guides for adjusting your existing OpenCore config so you can install and run macOS 13+ on unsupported hardware:
 
@@ -49,8 +53,6 @@ Foe more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-
  
 ## Miscellaneous
 - [**OCLP Changelog**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md)
-- [**macOS Sequoia OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
-- [**macOS Sonoma OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
 - [**Fetching kext updates from OCLP with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Fetching_OCLP_Kexts.md)
 - [**Installing Windows from within macOS without Bootcamp**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Install_Windows_NoBootcamp.md)
 - [**Collection of Non-Metal Apple apps**](https://archive.org/details/apple-apps-for-non-metal-macs) (Archive.org)
