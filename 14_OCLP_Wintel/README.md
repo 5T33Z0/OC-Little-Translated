@@ -11,11 +11,11 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 
 OCLP also introduced a bunch of new kexts that allow booting with the correct SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling SecureBootModel, System Integrity Protection (SIP) and Apple Mobile File Integrity (AMFI) that can be utilized on Wintel systems as well.
 
-## Important Updates
+## Important Notes
 
-- Updating from from macOS 14.3.x to 14.4.x might crash the installer early. This is mostly related to `SecureBootModel` (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details)
+- Updating from from macOS 14.3.x to 14.4.x and newer might crash the installer early. This is mostly related to `SecureBootModel` (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details)
 
-## Latest Updates
+## Latest OCLP Status Updates
 - [**macOS Sequoia OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
 - [**macOS Sonoma OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
 
