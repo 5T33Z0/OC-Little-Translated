@@ -428,6 +428,10 @@
 			</dict>
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
+				<key>bluetoothInternalControllerInfo</key>
+				<data>AAAAAAAAAAAAAAAAAAA=</data>
+				<key>bluetoothExternalDongleFailed</key>
+				<data>AA==</data>
 				<key>boot-args</key>
 				<string>ipc_control_port_options=0 amfi=0x80 -disable_sidecar_mac</string>
 				<key>csr-active-config</key>
