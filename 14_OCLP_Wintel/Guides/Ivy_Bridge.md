@@ -43,7 +43,7 @@ In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For I
 
 | ⚠️ Important Status Updates |
 |:----------------------------|
-| Don't install macOS Sequoia yet. OCLP cannot patch it yet. Currently, there's no solution to make Intel HD 4000 iGPU drivers work!
+| macOS Sequoia requires root patching with the [nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1137#issuecomment-2295376562) of OpenCore Legacy Patcher 1.6.0 from the development branch!
 
 **This guide allows you to**: 
 
