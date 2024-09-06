@@ -7,8 +7,8 @@ Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you 
 
 - iGPU drivers (to [reinstate graphics acceleration and Metal Graphics API support](https://khronokernel.github.io/macos/2022/11/01/LEGACY-METAL-PART-1.html)) 
 - GPU drivers for legacy (non-metal) AMD and NVIDIA Kepler Cards 
-- Components for re-enabling previously supported Wi-Fi cards (macOS 14)
-
+- Components for re-enabling previously supported Wi-Fi and Bluetooth cards
+ 
 OCLP also introduced a bunch of new kexts that allow booting with the correct SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling SecureBootModel, System Integrity Protection (SIP) and Apple Mobile File Integrity (AMFI) that can be utilized on Wintel systems as well.
 
 ## Important Notes
