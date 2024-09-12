@@ -9,6 +9,7 @@ A lose collection of links to guides, fixes, news and blog articles. Feel free t
 - [Virtualizing OpenCore and x86 macOS on Apple Silicon](https://khronokernel.github.io/apple/silicon/2021/01/17/QEMU-AS.html)
 - [Why you shouldn't use tonymacX86 tools](https://github.com/khronokernel/Tonymacx86-stance)
 - [Old Hackintosh Guides](https://web.archive.org/web/20170911113616/http://www.rampagedev.com/guides/) by Rampage Dev. Excellent read. Might be useful for users on the vintage tip. Definitely worth preservation.
+- [Nucintosh](https://github.com/zearp/Nucintosh) (Installation Guide for converting Intel NUCs into Hackintoshes)
 - [How to modify "About this Mac" section](https://www.idownloadblog.com/2017/01/13/how-to-modify-about-this-mac-hackintosh/)
 - [BIOS extraction and modification guide](https://github.com/dreamwhite/bios-extraction-guide/blob/master/README.md#unlock-cfg-lock)
 - [Xcode Releases](https://xcodereleases.com/?scope=release)
