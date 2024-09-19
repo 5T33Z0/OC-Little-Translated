@@ -48,14 +48,13 @@ Since USB port injector kexts are usually bound to the SMBIOS, the best and clea
 
 ## Benefits of mapping USB ports via ACPI vs. using a USB port kext 
 
-1. **Native approach**: ACPI is a more native method, as it's how real Macs handle USB port mapping.
-2. **Universal**: The port mapping is OS-agnostic and independent of the selected SMBIOS
-3. **Stability**: ACPI mappings are generally more stable across macOS updates.
-4. **Customization**: ACPI allows for more granular control over individual ports.
-5. **Compatibility**: ACPI method works with a wider range of USB controllers.
-6. **Performance**: Potentially better performance as it's closer to how Apple implements USB mapping.
-7. **Easier maintenance**: ACPI can be easier to maintain long-term compared to kexts.
-8. **Security**: Less likely to be affected by security changes in macOS that might impact kexts.
+1. **Universal**: The port mapping is OS-agnostic and independent of the selected SMBIOS
+2. **Stability**: ACPI mappings are generally more stable across macOS updates.
+3. **Customization**: ACPI allows for more granular control over individual ports.
+4. **Compatibility**: ACPI method works with a wider range of USB controllers.
+5. **Performance**: Potentially better performance as it's closer to how Apple implements USB mapping.
+6. **Easier maintenance**: ACPI can be easier to maintain long-term compared to kexts.
+7. **Security**: Less likely to be affected by security changes in macOS that might impact kexts.
 
 ## Approach
 In order to build our own USB port map as SSDT, we will do the following:
