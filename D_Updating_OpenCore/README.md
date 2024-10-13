@@ -81,11 +81,11 @@ Initially, OpenCore Auxiliary Tools won't include the latest OpenCore files. In 
 
 1. Press "Upgrade OpenCore an Kexts" <br>![uppgrade](https://github.com/user-attachments/assets/4ef9ac96-b37c-499a-b5f4-38ecf32d13d5)
 2. Click the "Get the latest version of OpenCore" Button: <br>![release](https://github.com/user-attachments/assets/e3d6bef2-caaa-4c01-8cac-16771340750b)
-3. Once the download is complete, the displayed version will change. In this case you have to click on "Get OpenCore":<br>![main01](https://github.com/user-attachments/assets/9af27512-9735-41fc-95f2-96f49938aaa6)
+3. Once the download is complete, the displayed version will change in order to represent the current OpenCore version":<br>![main01](https://github.com/user-attachments/assets/9af27512-9735-41fc-95f2-96f49938aaa6)
 
 > [!NOTE]
 > 
-> When "OpenCore DEV" is selected, the Sync Window will hace a slightly different layout:<br>![SyncDev](https://github.com/user-attachments/assets/3991bb2d-b51b-4c62-8caf-5031ae8a1484)
+> - When "OpenCore DEV" is selected, the Sync Window will hace a slightly different layout. In this case, you have to click on the "Get OpenCore" button:<br>![SyncDev](https://github.com/user-attachments/assets/3991bb2d-b51b-4c62-8caf-5031ae8a1484)
 
 ## 4. Updating/migrating the `config.plist`
 
