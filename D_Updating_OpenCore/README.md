@@ -81,7 +81,7 @@ Initially, OpenCore Auxiliary Tools won't include the latest OpenCore files. In 
 
 1. Press "Upgrade OpenCore an Kexts" <br>![uppgrade](https://github.com/user-attachments/assets/4ef9ac96-b37c-499a-b5f4-38ecf32d13d5)
 2. Click the "Get the latest version of OpenCore" Button: <br>![release](https://github.com/user-attachments/assets/e3d6bef2-caaa-4c01-8cac-16771340750b)
-3. Once the download is complete, the displayed version will change in order to represent the current OpenCore version":<br>![main01](https://github.com/user-attachments/assets/9af27512-9735-41fc-95f2-96f49938aaa6)
+3. Once the download is complete, the displayed OC version will change in order to reflect the OpenCore version present in your database:<br>![main01](https://github.com/user-attachments/assets/9af27512-9735-41fc-95f2-96f49938aaa6)
 
 > [!NOTE]
 > 
