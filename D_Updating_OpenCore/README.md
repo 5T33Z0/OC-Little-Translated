@@ -43,7 +43,6 @@ Unlike other Configurator apps, OCAT is able to integrates new/unknown keys/feat
 > 
 > Keep a backup of your working EFI folder on a FAT32 formatted USB flash drive in case something goes wrong, so you can boot your system via USB!
 
-
 ### For users updating from OpenCore 0.6.5 or lower
 
 :warning: When updating OpenCore from version ≤ 0.6.5, disabling `BootProtect` is mandatory prior to updating OpenCore, to avoid issue which otherwise can only be resolved by a CMOS reset. If you don't use `BootProtect` you can skip this part:
@@ -82,11 +81,11 @@ Initially, OpenCore Auxiliary Tools won't include the latest OpenCore files. In 
 
 1. Press "Upgrade OpenCore an Kexts" <br>![uppgrade](https://github.com/user-attachments/assets/4ef9ac96-b37c-499a-b5f4-38ecf32d13d5)
 2. Click the "Get the latest version of OpenCore" Button: <br>![release](https://github.com/user-attachments/assets/e3d6bef2-caaa-4c01-8cac-16771340750b)
-3. Once the download is complete, the displayed version will change. In this case you have to click on "Get OpenCore":<br>![](/Users/5t33y0/Desktop/main01.png)
+3. Once the download is complete, the displayed version will change. In this case you have to click on "Get OpenCore":<br>![main01](https://github.com/user-attachments/assets/9af27512-9735-41fc-95f2-96f49938aaa6)
 
 > [!NOTE]
 > 
-> When "OpenCore DEV" is selected, the Sync Window will hace a slightly different layout:<br>![](/Users/5t33y0/Desktop/SyncDev.png)
+> When "OpenCore DEV" is selected, the Sync Window will hace a slightly different layout:<br>![SyncDev](https://github.com/user-attachments/assets/3991bb2d-b51b-4c62-8caf-5031ae8a1484)
 
 ## 4. Updating/migrating the `config.plist`
 
