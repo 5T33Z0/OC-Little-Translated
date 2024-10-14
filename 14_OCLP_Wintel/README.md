@@ -39,6 +39,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 - [**Recovering from failed root patching attempts**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
 - [**OCLP and the macOS compatibility gap**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Bridging_the_gap.md)
 - [**Triggering macOS Updates via Terminal**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/macOS_Update_Terminal.md)
+- [**Addressing sleep isues in macOS Sequoia**](https://www.insanelymac.com/forum/topic/360040-macos-15-sequoia-does-not-enter-sleep-mode-properly/#comment-2826474) (Thread on insanelymac)
 
 ## Fetching macOS Installers
 
