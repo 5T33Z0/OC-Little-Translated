@@ -96,8 +96,9 @@ Declaring USB ports is via ACPI is the "gold standard" since this method is OS-a
 
 You can follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via ACPI.
 
-## Other Resources
+## Additional Resources
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 700-series mainboards. Its `info.plist` contains about 9.300 lines of code while the original by Rehabman is from 2018 and "only" contains about 6.800!
 - [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) by chriswayg. A bit outdated but informative. Just ignore the stuff about `XhciPortLimit` Quirk and blocking ports via NVRAM!
 - [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) – Kext and SSDT for fixing USB Wake issues
-- [**GUX-RyzenXHCIFix**](https://github.com/RattletraPM/GUX-RyzenXHCIFix) – GenericUSBXHCI kext variant for fixing USB 3 issues on some Ryzen APU-based hackintoshes running macOS 11.0 or newer.
+- [**GUX-RyzenXHCIFix**](https://github.com/RattletraPM/GUX-RyzenXHCIFix) – `GenericUSBXHCI.kext` variant for fixing USB 3 issues on some APU-based Ryzentoshes running macOS 11.0 or newer.
+- [**ACE: Apple Type-C Port Controller Secrets**](https://web.archive.org/web/20211023034503/https://blog.t8012.dev/ace-part-1/) (archived)
