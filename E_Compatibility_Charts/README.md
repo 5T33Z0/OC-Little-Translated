@@ -1,4 +1,4 @@
-t# Compatibility charts
+# Compatibility charts
 Listed below, you find some charts containing useful information about SMBIOS, Hardware and DRM compatibility as well as NVRAM variables.
 
 ## Hardware and macOS compatibility
