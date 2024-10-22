@@ -1,5 +1,5 @@
 # Installing macOS Ventura or newer on Ivy Bridge systems
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤14.6.1-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.1-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -40,10 +40,6 @@ Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge f
 
 ### How Ivy Bridge systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Ivy Bridge systems this affects CPU Instructions (missing AVX 2.0 instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
-
-| ⚠️ Important Status Updates |
-|:----------------------------|
-| macOS Sequoia requires root patching with the [nightly build](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1137#issuecomment-2295376562) of OpenCore Legacy Patcher 1.6.0 from the development branch!
 
 **This guide allows you to**: 
 
@@ -159,6 +155,7 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 
 > [!NOTE]
+> 
 > - Once macOS 12 or newer is installed, you can switch to an SMBIOS best suited for your Ivy Bridge CPU and reboot to enjoy all the benefits of a proper SMBIOS.
 > - You may want to generate a new [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) in Post-Install to optimize CPU Power Management.
 > - You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects. 
