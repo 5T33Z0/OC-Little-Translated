@@ -5,7 +5,7 @@
 ## Technical Background
 During the early stages of macOS Sonoma development, kexts and frameworks required for driving older Wi-Fi Cards were removed, leaving the Wi-Fi portion of commonly used BT/Wi-Fi cards in a non-working state.
 
-This affects the following Wi-Fi card chipsets:
+**This affects the following Wi-Fi card chipsets**:
 
 - **"Modern"** cards:
 	- **Broadcom**:`BCM94350` (incuding `BCM94352`), `BCM94360`, `BCM43602`, `BCM94331`, `BCM943224`
