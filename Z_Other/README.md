@@ -13,3 +13,4 @@ A lose collection of links to guides, fixes, news and blog articles. Feel free t
 - [How to modify "About this Mac" section](https://www.idownloadblog.com/2017/01/13/how-to-modify-about-this-mac-hackintosh/)
 - [BIOS extraction and modification guide](https://github.com/dreamwhite/bios-extraction-guide/blob/master/README.md#unlock-cfg-lock)
 - [Xcode Releases](https://xcodereleases.com/?scope=release)
+- [Remove Deleted Apps from Background Login Items](https://droidwin.com/remove-deleted-apps-from-background-login-items-in-ventura/)
