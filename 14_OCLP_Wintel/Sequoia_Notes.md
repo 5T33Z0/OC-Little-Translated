@@ -13,8 +13,9 @@ This section covers the current status of OpenCore Legacy Patcher development fo
 
 - Basically everything "AI", incuding:
 	- Apple Intelligence
-	- Siri 2.0 
-	- Logic Pro 11s Stem Splitter, Mastering Assistant, etc.
+	- Siri 2.0
+ 	- Live Audio Transcription in Notes
+- Logic Pro 11: Stem Splitter, Mastering Assistant, etc.
 
 ## New issues
 - **Dual Socket CPUs**
