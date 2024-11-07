@@ -126,7 +126,7 @@ Config Section | Action | Description
 **`UEFI/Drivers`** and <br> **`EFI/OC/Drivers`**| <ul> <li> Add `ResetNvramEntry.efi` to `EFI/OC/Drivers` <li> And to your config:<br> ![resetnvram](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/8d955605-fb27-401f-abdd-2c616b233418) | Adds a boot menu entry to perform an NVRAM reset but without resetting the order of the boot drives. Requires a BIOS with UEFI support.
 **`PlatformInfo/Generic`**| Adjust **SMBIOS**: <ul><li> **Desktop**: `iMac17,1` <li> **Laptop**: `MacBookPro13,1` <li> **NUC**: `iMac17,1` | Read **"Adjusting the SMBIOS"** for more details!
 
-> **[CAUTION]**
+> [!CAUTION]
 > 
 > Avoid adding the NVRAM entry `OCLP-Version` to your config. This entry checks if your EFI folder and configuration are up to date with OCLP and prompts for an upgrade (replacement). You don't want your EFI folder replaced by one designed for the Mac model specified in your config's SMBIOS section!
 
