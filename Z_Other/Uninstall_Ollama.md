@@ -4,7 +4,6 @@
 - Quit Ollama (from Menubar)
 - Delete the Ollama App using [AppCleaner](https://freemacsoft.net/appcleaner/). This gets rid of Support files and plists, etc
 - Run the following commands in Terminal to delete LLMs, etc.:
-	
 	```shell
 	rm /usr/local/bin/ollama 
 	rm -rf ~/Library/Application\ Support/Ollama
@@ -19,7 +18,6 @@
 - Delete `/Library/LaunchDaemons/com.docker.socket.plist`
 - Delete `/Library/PrivilegedHelperTools/com.docker.socket`
 - Run in Terminal:
-	
 	```shell
 	rm -rf ~/Library/Containers/com.docker.docker
 	```
