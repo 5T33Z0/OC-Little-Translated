@@ -5,7 +5,7 @@
 - Delete the Ollama App using [AppCleaner](https://freemacsoft.net/appcleaner/). This gets rid of Support files and plists, etc
 - Run the following commands in Terminal to delete LLMs, etc.:
 	```shell
-	rm /usr/local/bin/ollama 
+	sudo rm /usr/local/bin/ollama 
 	rm -rf ~/Library/Application\ Support/Ollama
 	rm -rf ~/.ollama
 	```
