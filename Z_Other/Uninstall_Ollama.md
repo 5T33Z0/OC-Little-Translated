@@ -15,10 +15,10 @@
 - Delete Images
 - Quit App
 - Delete App using [AppCleaner](https://freemacsoft.net/appcleaner/))
-- Delete `/Library/LaunchDaemons/com.docker.socket.plist`
-- Delete `/Library/PrivilegedHelperTools/com.docker.socket`
-- Run in Terminal:
+- Delete residual files via Terminal:
 	```shell
+ 	rm -rf /Library/LaunchDaemons/com.docker.socket.plist
+ 	rm -rf /Library/PrivilegedHelperTools/com.docker.socket
 	rm -rf ~/Library/Containers/com.docker.docker
 	```
 
