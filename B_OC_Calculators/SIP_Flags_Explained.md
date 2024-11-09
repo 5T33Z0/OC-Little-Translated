@@ -11,7 +11,7 @@ If you want to calculate your own `csr-active-config` bitmask, [have a look here
 Originally, the bitmask consisted of 8 bits. Since the release macOS 10.12, 4 more bits followed. Currently, the CSR bitmask consist of 12 bits providing the following flags:
 
 Flag | Bit | macOS req.
------|-----|:------------:
+-----|-----:|:------------:
 CSR_ALLOW_UNTRUSTED_KEXTS            | 0 | 10.11+
 CSR_ALLOW_UNRESTRICTED_FS            | 1 | 10.11+
 CSR_ALLOW_TASK_FOR_PID               | 2 | 10.11+
@@ -26,7 +26,11 @@ CSR_ALLOW_UNAPPROVED_KEXTS           | 9 | 10.13+
 CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE | 10 | 10.14+
 CSR_ALLOW_UNAUTHENTICATED_ROOT       | 11 | 11+
 
-**Source** https://github.com/apple/darwin-xnu/blob/main/bsd/sys/csr.h
+**Source**: [https://github.com/apple/darwin-xnu/blob/main/bsd/sys/csr.h](https://github.com/apple/darwin-xnu/blob/main/bsd/sys/csr.h)
+
+> [!IMPORTANT]
+> 
+> Choosing a bitmask with the correct length and suited flags is really important in order for the system to boot and boot fast. A bitmask with inappropriate flags for the chosen version of macOS can cause early crashes or stalling of the boot process or prohibit loading of librariers installed with OpenCore Legacy Patcher!
 
 ## Explanation of the flags
 
