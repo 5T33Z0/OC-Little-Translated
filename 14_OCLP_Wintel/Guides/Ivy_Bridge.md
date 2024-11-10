@@ -4,8 +4,6 @@
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
 
-**TABLE of CONTENTS**
-
 - [About](#about)
 	- [How Ivy Bridge systems are affected](#how-ivy-bridge-systems-are-affected)
 	- [Disclaimer](#disclaimer)
