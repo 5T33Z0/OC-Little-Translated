@@ -22,6 +22,12 @@ ASPM supports a number of different power states, depending on the specific hard
 
 Changing the ASPM operatio modes of PCI devices can resolve issues with third-party devices not being detected during boot. For example, Realtek's RTS525A SD Card Reader is only detected after changing its default state from `L0s` to `L1`.
 
+To check the default ASPM values of PCI devices, you can use the following GREP command (≤: macOS Sonoma):
+
+```terminal
+ioreg -l -p IODeviceTree | grep pci-aspm-default
+```
+
 ### AOAC Devices and ASPM
 
 For machines using Always-On Always-Connected technology [(**AOAC**)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines), try changing the ASPM modes of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption.
