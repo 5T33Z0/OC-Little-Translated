@@ -21,17 +21,16 @@ Follow and read the [**Issues**](https://github.com/dortania/OpenCore-Legacy-Pat
 ## Disable downloading macOS updates in the Background
 If your system is not registered for receiving beta updates (public/development), ***disable*** the following option under General &rarr; Software Update &rarr; Automatic Updates:
 
-![](/Users/5t33z0/Desktop/updates.png)
+![updates](https://github.com/user-attachments/assets/545f2ad9-bbc8-42f0-9ec6-ad9e5c99c8d6)
 
 **Why?**
 
 Because it will download the newest OS in the background and prepare it for installation. This will upgrade you to the newest OS and then you could be stuck. Even if you don't install the update it will change the version info in the `SystemVersion.plist`. This happened to me and I could no longer apply root patches to the Sonoma install:
 
-![](/Users/5t33z0/Desktop/oclplog.png)
+![oclplog](https://github.com/user-attachments/assets/a27acd40-9c0c-48b9-b765-ca11972d66f2)
 
 In my case, macOS Sequoia was installed on a separate volume. After applying root patches via OCLP, I rebooted into macOS Sonoma and noticed that the iGPU acceleration was no longer working properly: although the external display was working, there was no transparency and the system felt sluggish. Somehow patching macOS Sequoia had an affect on my macOS Sonoma install. So I tried to reinstall the root patches again. But since the downloaded Sequoia update was still present sometwhere on the Sonoma disk, I could no longer patch the system. So I basicayll had to re-install Sonoma
 
 **Best Practice**
 
 My suggestion would be to register your system for beta updates and enable them. Because then you can decide which update to download and which not.
-
