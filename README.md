@@ -4,13 +4,13 @@
 
 ## TABLE of CONTENTS
 
-**PREFACE**
+### PREFACE
 
 * [**DISCLAIMER**](#disclaimer)
 * [**About OC-Little Translated**](#about)
 * [**About the translation**](#about-the-translation)
 
-**MAIN**
+### MAIN
 
 * [**ACPI basics and guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI)
 * [**Adding/Enabling Devices and Features with SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme)
@@ -22,40 +22,48 @@
 * [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
 * [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
 * [**BOOT Folder**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_BOOT_Folder#adding-and-configuring-contentflavour-and-contentvisibility)
-* [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
-* [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
 * [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#readme)
 * [**MMIO Whitelist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_MMIO_Whitelist)
 * [**Fixing falsely reported RAM speed**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/15_RAM)
 
-**SPECIAL**
+### SPECIAL
+* [**Using OpenCore-Patcher on Wintel machines**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware)
+* [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
+* [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
 
-* [**Using OpenCore-Patcher on Wintel machines**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware) 
+### APPENDIX
 
-**APPENDIX**
-
-* [**macOS 14.4 install workaround**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/README.md)
-* [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#readme)
-* [**Fixing issues with System Update Notifications**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#readme)
+#### Config-related
 * [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#readme)
-* [**Compatibility Charts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts)
+* [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#readme)
+* [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
+
+#### Guides for OpenCore Auxiliary Tools (OCAT)
+* [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#readme)
+* [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
+* [**Switching to NO_ACPI build of OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI)
 * [**Generating EFIs with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#readme)
-* [**Create/modify a Layout-ID for AppleALC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#readme)
+* [**OpenCore EFI Upload Checklist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/M_EFI_Upload_Chklst#readme)
+
+#### macOS-related
+* [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
+* [**Compatibility Charts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts)
+* [**Fixing issues with System Update Notifications**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#readme)
+* [**macOS 14.4 install workaround**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/README.md)
+* [**Creating a multi macOS USB Installer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/U_USB_Multi_installer#readme)
+
+#### Other OSes
 * [**Windows-related Guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/I_Windows)
 * [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux#readme)
-* [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#readme)
-* [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
-* [**Compiling slimmed-down variants of Kexts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/J_Compiling_Kexts#readme)
-* [**Debugging**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#readme)
-* [**OpenCore EFI Upload Checklist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/M_EFI_Upload_Chklst#readme)
-* [**Combining all SSDTs into one file (SSDT-ALL)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/N_SSDT-ALL)
-* [**Switching to NO_ACPI build of OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI)
-* [**Using Clover alongside OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/R_BootloaderChooser#readme)
-* [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
-* [**Featured OpenCanopy Themes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/T_Themes)
 * [**macOS Virtulization**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/V_Virtualization#virtualization)
-* [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
-* [**Creating a multi macOS USB Installer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/U_USB_Multi_installer#readme)
+
+#### Misc.
+* [**Featured OpenCanopy Themes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/T_Themes)
+* [**Create/modify a Layout-ID for AppleALC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#readme)
+* [**Compiling slimmed-down variants of Kexts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/J_Compiling_Kexts#readme)
+* [**Debugging with SysReport**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#readme)
+* [**Combining all SSDTs into one file (SSDT-ALL)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/N_SSDT-ALL)
+* [**Using Clover alongside OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/R_BootloaderChooser#readme)
 
 ___
 
