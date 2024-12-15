@@ -1,9 +1,9 @@
-# Installing macOS Ventura or newer on Haswell/Broadwell systems
+# Installing macOS Monterey and newer on Haswell/Broadwell systems
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.1-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 
 **TABLE of CONTENTS**
 
@@ -35,11 +35,11 @@
 </details>
 
 ## About
-Although installing and running macOS Ventura on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not documented nor officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences getting macOS Ventura to run on an Ivy Bridge Laptop and analyzing the log, config and EFI folder after building OpenCore with OCLP for a Haswell system.
+Although installing and running macOS Monterey and newer on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences, analyzing the config and EFI folder and log after building OpenCore with OCLP for a Haswell system.
 
 | ⚠️ Important Status Updates |
 |:----------------------------|
-| Don't install macOS Sequoia yet. OCLP cannot patch it yet. Currently, there's no solution to make enable iGPU drivers on Haswell systems!
+| All good.
 
 ### How Haswell/Broadwell systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
@@ -60,7 +60,7 @@ This is what you need to know before attempting to install macOS Ventura on unsu
 		- Same applies to [Intel WiFi/BT](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware) cards using [OpenIntelWirless](https://github.com/OpenIntelWireless) kexts
 		- [Enabling Wifi in macOS Sonoma](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) requires additional kext and also applying root patches in Post-Install!
 - **Security**: Modifying the system with OCLP Requires SIP, Apple Secure Boot and AMFI to be disabled so there are some compromises in terms of security.
-- **System Updates**: Incremental (or delta) updates won't be available after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 12 GB)!
+- **System Updates**: Incremental (or delta) updates won't be available after applying root patches with OCLP. Instead, the whole macOS Installer will be downloaded every time (approx. 15 GB for the latest OS), since root patching breaks the security seal of the volume! :bulb: In Haswell and newer, you can actually workaround this issue by reverting the root patches *prior* to checking for updates. Then, a regular incremental update will be installed which is much smaller. Afterwards you just have to re-apply the root patches again.
 - **Other**: Check the links below for in-depth documentation about components/features that have been removed from macOS 12 and newer and the impact this has on systems prior to Kaby Lake. But keep in mind that this was written for real Macs so certain issues don't apply to Wintel systems.
 	- [Status of OpenCore Legacy Patcher Support for macOS Sonoma](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)
 	- [Status of OpenCore Legacy Patcher Support for macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)
@@ -74,7 +74,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
 ## Config Edits
-Listed below, you find the required modifications to prepare your config.plist and EFI folder for installing macOS Monterey or newer on Haswell/Broadwell systems. You can use this [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Haswell-Broadwell_OCLP_Wintel_Patches.plist) which contains all the necessary settings for cross-referencing.
+Listed below, you find the required modifications to prepare your `config.plist` and EFI folder for installing macOS Monterey or newer on Haswell/Broadwell systems. You can use this [.plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Haswell-Broadwell_OCLP_Wintel_Patches.plist) which contains all the necessary settings for cross-referencing.
 
 :bulb: If your system (or components thereof) doesn't work afterwards, please refer to OCLP's [patch documentation](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/PATCHEXPLAIN.md) and see if need additional settings or kexts.
 
@@ -138,7 +138,7 @@ When upgrading from macOS 11.3 or newer, we can use macOSes virtualization capab
 - Generate new Serials with [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) or [**OCAT**](https://github.com/ic005k/OCAuxiliaryTools/releases)
 
 #### When Upgrading from macOS Catalina or older
-Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot. So adjust the `SystemProductName` (under `PlatformInfo`) accordingly.
+Since macOS Catalina and older lack the virtualization capabilities required to apply the VMM Board-ID spoof, switching to a supported SMBIOS temporarily is mandatory in order to be able to install macOS Ventura or newer. Otherwise you will be greeted by the crossed-out circle instead of the Apple logo when trying to boot. So adjust the `SystemProductName` (under `PlatformInfo`) accordingly.
 
 **Supported SMBIOSes**:
 
@@ -155,30 +155,34 @@ Generate new Serials using [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS
 
 > [!NOTE]
 >
-> Once macOS Ventura is up and running, you can switch to an SMBIOS best suited for your Haswell/Broadwell CPU for optimal CPU Power Management. 
+> Once macOS is up and running, you can switch to an SMBIOS designed for Haswell/Broadwell systems for optimal CPU/GPU Power Management. 
 
-## macOS Ventura Installation
-With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
+## macOS installation
+With all the prep work out of the way you can now upgrade to macOS Ventura or newer. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
 - Next, click on "Download macOS Installer"
-- Select macOS 13.x (whatever the latest available build is)  
-- Once the download is completed, the "Install macOS Ventura" app will be located in the "Programs" folder
+- Select the macOS version you want to install
+- Once the download is completed, the "Install macOS…" app will be located the "Programs" folder.
 
 > [!NOTE]
 > 
-> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> OCLP can also create a USB installer if you want to perform a clean install (highly recommended). Creating a USB installer is a necessity if you want to install an older OS since macOS does not allow downgrading.
 
 ### Option 1: Upgrading from macOS 11.3 or newer
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
-- Run the "Install macOS Ventura" App
+- Run the "Install macOS…" App
 - There will be a few reboots
-- Boot from the new macOS Partition until it's no longer present in the Boot Picker
+- Boot from the new macOS install partition until it's no longer present in the Boot Picker
 
-Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this next in Post-Install.
+Once the installation is completed and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by the newer version of macOS. We will address this next in Post-Install.
+
+> [!TIP]
+> 
+> Instead of upgrading your runnning macOS installation, create a new APFS volume and install macOS on there. This way you can always revert back to your previous macOS installation if you are facing issues with the new macOS version.
 
 ### Option 2: Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
@@ -199,7 +203,7 @@ When upgrading from macOS Catalina or older a clean install from USB flash drive
 - There will be a few reboots during installation. Boot from the new "Install macOS" Partition until it's no longer present in the Boot Picker
 - Next, Boot into macOS Ventura. 
 
-Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this next in Post-Install.
+Once the installation is completed and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by the newer version of macOS. We will address this next in Post-Install.
 
 ## Post-Install
 OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.

@@ -1,5 +1,5 @@
-# Installing macOS Ventura or newer on Ivy Bridge systems
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.1-white.svg)
+# Installing macOS Monterey and newer on Ivy Bridge systems
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -34,7 +34,11 @@
 </details>
 
 ## About
-Although installing macOS Ventura on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania – the only provide support for legacy Macs by Apple. So there is no official guide on how to do it. I developed this guide based on my experiences trying to get macOS 13 running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary changes for those, too.
+Although installing macOS Monterey and newer on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented since Dortania only provides support for legacy Macs by Apple. I developed this guide based on my experiences trying to get macOS 13 and newer running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary EFI and config adjustments.
+
+| ⚠️ Important Status Updates |
+|:----------------------------|
+| All good.
 
 ### How Ivy Bridge systems are affected
 In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Ivy Bridge systems this affects CPU Instructions (missing AVX 2.0 instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
@@ -166,28 +170,32 @@ Generate new Serials using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
 > - You may want to generate a new [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) in Post-Install to optimize CPU Power Management.
 > - You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects. 
 
-## macOS Ventura Installation
+## macOS installation
 With all the prep work out of the way, you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
 - Click on "Download macOS Installer"
-- Select macOS 13.x (whatever the latest available build is)  
-- Once the download is completed the "Install macOS Ventura" app will be located in your "Programs" folder
+- Select the macOS version you want to install
+- Once the download is completed the "Install macOS…" app will be located in your "Programs" folder
 
 > [!NOTE]
->
-> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> 
+> OCLP can also create a USB installer if you want to perform a clean install (highly recommended). Creating a USB installer is a necessity if you want to install an older OS since macOS does not allow downgrading.
 
 ### Option 1: Upgrading from macOS 11.3 or newer 
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
-- Run the "Install macOS Ventura" App
+- Run the "Install macOS…" App
 - There will be a few reboots
 - Boot from the new macOS Partition until it's no longer present in the Boot Picker
 
 Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this in Post-Install.
+
+> [!TIP]
+> 
+> Instead of upgrading your runnning macOS installation, create a new APFS volume and install macOS on there. This way you can always revert back to your previous macOS installation if you are facing issues with the new macOS version.
 
 ### Option 2: Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:

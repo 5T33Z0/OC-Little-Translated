@@ -1,5 +1,5 @@
-# Installing macOS Ventura or newer on Sandy Bridge systems
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.1-white.svg)
+# Installing macOS Monterey and newer on Sandy Bridge systems
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -36,10 +36,16 @@
 </details>
 
 ## About
-Although installing macOS Ventura on systems with Intel CPUs of the Sandy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania – the only provide support for legacy Macs by Apple. So there is no official guide on how to do it. Since I don't have a Sandy Bridge system, I developed this guide based on my experience getting an Ivy Bridge Laptop to work and by analyzing the changelog, config and EFI folder structure after building OpenCore with OCLP.
+Although installing macOS Monterey and newer on systems with Intel CPUs of the Sandy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented by Dortania since they only provide support for legacy Macs by Apple. 
+
+This guide was created based on my experiences root patching my 27" `iMac12,2` with a Sandy Bridge CPU and an NVIDIA Quadro GPU as well as analyzing the EFI folder content, config and log after building OpenCore with OCLP.
+
+| ⚠️ Important Status Updates |
+|:----------------------------|
+| All good.
 
 ### How Sandy Bridge systems are affected
-In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge systems this mainly affects the CPU (missing AVX 2.0 and [rdrand](https://github.com/reenigneorcim/SurPlus) instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+In macOS Ventura+, support for CPU families prior to Kaby Lake was dropped. For Sandy Bridge systems this mainly affects the CPU (missing AVX 2.0 and [rdrand](https://github.com/reenigneorcim/SurPlus) instructions), CPU Power Management (removed `ACPI_SMC_PlatformPlugin`), integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
 ### Disclaimer
 This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
@@ -47,7 +53,7 @@ This guide is intended to provide general information for adjusting your EFI and
 ## Precautions and Limitations
 This is what you need to know before attempting to install macOS Monterey and newer on unsupported systems:
 
-- ⚠️ **Backup** your working EFI folder on a FAT32 formatted USB Flash Drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
+- ⚠️ **Backup** your working EFI folder on a FAT32 formatted USB flash drive just in case something goes wrong because we have to modify the config and content of the EFI folder.
 - **iGPU/GPU**: 
 	- Check if your iGPU/GPU is supported by OCLP. Although Drivers for Intel, NVIDIA and AMD cards can be added in Post-Install, the [list is limited](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches)
 	- AMD Navi Cards (Radeon 5xxx and 6xxx) can't be used with Sandy Bridge CPUs since they require the AVX 2.0 instruction set which is only available on Haswell and newer.
@@ -148,28 +154,32 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 > - You may want to generate a new [**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) in Post-Install to optimize CPU Power Management. 
 > - You can also disable the "Reroute kern.hv" and "IOGetVMMPresent" Kernel Patches. RestrictEvents will handle the VMM-Board-id spoof from now on. **Only Exception**: Before running the "Install macOS" App, you have to re-enable the kernel patches again. Otherwise the installer will say the system is incompatible because of the unsupported SMBIOS it detects. 
 
-## macOS Ventura Installation
+## macOS installation
 With all the prep work out of the way you can now upgrade to macOS Ventura. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
-- Click on "Download macOS Installer"
-- Select macOS 13.x (whatever the latest available version is)  
-- Once the download is finished the "Install macOS Ventura" app will be located in your "Programs" folder
+- Next, click on "Download macOS Installer"
+- Select the macOS version you want to install
+- Once the download is completed, the "Install macOS…" app will be located the "Programs" folder.
 
 > [!NOTE]
 > 
-> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> OCLP can also create a USB installer if you want to perform a clean install (highly recommended). Creating a USB installer is a necessity if you want to install an older OS since macOS does not allow downgrading.
 
 ### Option 1: Upgrading from macOS 11.3 or newer 
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
-- Run the "Install macOS Ventura" App
+- Run the "Install macOS…" App
 - There will be a few reboots
-- Boot from the new macOS Partition until it's no longer present in the Boot Picker
+- Boot from the new macOS install partition until it's no longer present in the Boot Picker
 
-Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this in Post-Install.
+Once the installation is completed and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by the newer version of macOS. We will address this next in Post-Install.
+
+> [!TIP]
+> 
+> Instead of upgrading your runnning macOS installation, create a new APFS volume and install macOS on there. This way you can always revert back to your previous macOS installation if you are facing issues with the new macOS version.
 
 ### Option 2: Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
@@ -185,12 +195,12 @@ When upgrading from macOS Catalina or older a clean install from USB flash drive
 		- Add MountEFI
 		- Add ProperTree
 - Reboot 
-- Select "Install macOS Ventura" from the BootPicker
-- Install macOS Ventura on the volume you prepared earlier 
+- Select "Install macOS…" from the BootPicker
+- Install macOS on the volume you prepared earlier 
 - There will be a few reboots during installation. Boot from the new "Install macOS" Partition until it's no longer present in the Boot Picker
 - Once the macOS Ventura installation is finished, switch back to an SMBIOS best suited for your Sandy Bridge CPU mentioned earlier.
 
-After the installation is completed and the system boots it will run without hardware graphics acceleration if you only have an iGPU or if you GPU is no longer supported by macOS. We will address this in Post-Install. 
+After the installation is completed and the system boots it will run without hardware graphics acceleration if you only have an iGPU or if you GPU is no longer supported by the newer version of macOS. We will address this in Post-Install. 
 
 ## Post-Install
 OpenCore Legacy patcher can re-install components which were removed from macOS, such as Graphics Drivers, Frameworks, etc. This is called "root patching". For Wintel systems, we will make use of it to install iGPU and GPU drivers primarily.

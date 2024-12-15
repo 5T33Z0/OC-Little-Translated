@@ -1,6 +1,6 @@
-# Installing macOS Ventura or newer on legacy Intel CPUs
+# Installing macOS Monterey and newer on legacy Intel CPUs
 
-[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.1-white.svg)
+[![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
@@ -35,10 +35,14 @@
 </details>
 
 ## About
-Besides installing macOS Ventura+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on 1st Gen Intel Core CPUs using OpenCore and the OpenCore Legacy Patcher (OCLP). 
+Besides installing macOS Monterey+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on 1st Gen Intel Core CPUs using OpenCore and the OpenCore Legacy Patcher (OCLP).
+
+| ⚠️ Important Status Updates |
+|:----------------------------|
+| All good.
 
 ### Disclaimer
-This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. Since I only have an iMac11,3 that uses an i7-870 to check the kext and settings it uses, this guide must be considered experimental! I created it to lay out the basic principle of how one could go about attempting to install macOS 13+ on ancient harwdware – it's not a given that it'll work! So please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
+This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Monterey and newer on unsupported Wintel systems. Since I only have an iMac11,3 that uses an i7-870 to check the kext and settings it uses, this guide must be considered experimental! I created it to lay out the basic principle of how one could go about attempting to install macOS 13+ on ancient harwdware – it's not a given that it'll work! So please refrain from using the "report issue" function to seek individualized assistance for fixing your config. Such issue reports will be closed immediately!
 
 ## CPU Requirements
 In order to check if your system is potentially capable of installing and running macOS, you need to verify that your CPU fulfills the minimum CPU requirements, which are:
@@ -164,28 +168,28 @@ Since macOS Catalina and older lack the virtualization capabilities required to 
 > 
 > Once macOS 12 or newer is installed, you can switch to an SMBIOS designated for your CPU for optimal CPU Power Management. This is rather important since you cannot use ssdtPRGen on first Gen Intel Core and Xeon CPUs. 
 
-## macOS Ventura Installation
+## macOS installation
 With all the prep work out of the way you can now upgrade to macOS Ventura or newer. Depending on the version of macOS you are coming from, the installation process differs.
 
 ### Getting macOS
 - Download the latest release of [OpenCore Patcher GUI App](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) and run it
 - Click on "Create macOS Installer"
 - Click on "Download macOS Installer"
-- Select macOS 13.x (whatever the latest available version is)  
-- Once the download is finished the "Install macOS Ventura" app will be located in your "Programs" folder
+- Select the macOS version you want to install
+- Once the download is completed the "Install macOS…" app will be located in your "Programs" folder
 
 > [!NOTE]
 > 
-> OCLP can also create a USB Installer if you want to perform a clean install (highly recommended)
+> OCLP can also create a USB installer if you want to perform a clean install (highly recommended). Creating a USB installer is a necessity if you want to install an older OS since macOS does not allow downgrading.
 
 ### Option 1: Upgrading from macOS 11.3 or newer 
 Only applicable when upgrading from macOS 11.3+. If you are on macOS Catalina or older, use Option 2 instead.
 
-- Run the "Install macOS Ventura" App
+- Run the "Install macOS…" App
 - There will be a few reboots
-- Boot from the new macOS Partition until it's no longer present in the Boot Picker
+- Boot from the new "Install macOS…" partition until it's no longer present in the Boot Picker
 
-Once the installation has finished and the system boots it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by macOS. We will address this in Post-Install.
+Once the installation is completed and the system boots, it will run without graphics acceleration if you only have an iGPU or if you GPU is not supported by the newer macOS version. We will address this in Post-Install.
 
 ### Option 2: Upgrading from macOS Catalina or older
 When upgrading from macOS Catalina or older a clean install from USB flash drive is recommended. To create a USB Installer, you can use OpenCore Legacy Patcher:
