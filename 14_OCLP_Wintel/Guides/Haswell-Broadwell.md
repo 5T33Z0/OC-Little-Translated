@@ -95,9 +95,9 @@ Config Section | Action | Description
 > [!CAUTION]
 > 
 > Don't add the NVRAM parameter `OCLP-Version` to your config – it's meant for real Macs only! It checks if your `config.plist` is up to par with the one provided by OCLP. If the version in your config is lower, a pop-up will appear asking you if you would like to update OpenCore:
-> 
-> ![](/Users/5t33y0/Desktop/oclp-version.png)
-> 
+>
+> ![oclp-version](https://github.com/user-attachments/assets/3376afa3-da56-4311-9960-a9ec90e6010f)
+>
 > If you would press "OK" in this scenario, your `OC` folder would be replaced by the one created for the corresponding Mac model leaving your macOS installation in an unbootable state!
 
 ## Testing the changes
