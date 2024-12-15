@@ -13,7 +13,7 @@ OCLP also introduced a bunch of new kexts that allow booting with the correct SM
 
 ## Important Notes
 
-- Updating from from macOS 14.3.x to 14.4.x and newer might crash the installer early. This is mostly related to `SecureBootModel` (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details)
+- Updating from from macOS 14.3.x to 14.4.x and newer might crash the installer early. This is related to `SecureBootModel`, so it should be set to `Disabled` during installation (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details).
 
 ## Latest OCLP Status Updates
 - [**macOS Sequoia OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
