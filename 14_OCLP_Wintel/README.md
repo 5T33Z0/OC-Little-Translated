@@ -43,15 +43,15 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 
 ## Fetching macOS Installers
 
-There are several options to fetch and download macOS Installers directly from Apple. Here are some of them:
+There are several options to fetch and download macOS installers directly from Apple. Here are some of them:
 
-1. **OpenCore Legacy Patcher**. It has the options to download macOS and create a USB Installer right build in
-2. [**MIST**](https://github.com/ninxsoft/Mist): Gui based app to download macOS Installers and Firmwares
+1. **OpenCore Legacy Patcher**. It can download macOS 11+ and create a USB Installer as well.
+2. [**MIST**](https://github.com/ninxsoft/Mist): GUI-based app to download macOS Installers and Apple Silicon Firmwares
 3. **Terminal**. Open Terminal and enter the following commands:<br>
-	`softwareupdate  --fetch-full-installer --list-full-installers` (to fetch the list of Installers)
+	`softwareupdate  --fetch-full-installer --list-full-installers` (to fetch the list of Installers)<br>
 	`softwareupdate  --fetch-full-installer --list-full-installer-version xx.xx` (replace xx.xx by the version you want to download)
 
-Foe more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#getting-macos) section
+For more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#getting-macos) section
  
 ## Miscellaneous
 - [**OCLP Changelog**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md)
