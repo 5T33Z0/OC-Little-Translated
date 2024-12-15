@@ -1,11 +1,9 @@
-# Installing macOS Monterey and newer on Haswell/Broadwell systems
+# Installing macOS Ventura and newer on Haswell/Broadwell systems
 
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
-
-**TABLE of CONTENTS**
 
 - [About](#about)
 	- [How Haswell/Broadwell systems are affected](#how-haswellbroadwell-systems-are-affected)
@@ -17,7 +15,7 @@
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
 		- [When Upgrading from macOS Big Sur 11.3+](#when-upgrading-from-macos-big-sur-113)
 		- [When Upgrading from macOS Catalina or older](#when-upgrading-from-macos-catalina-or-older)
-- [macOS Ventura Installation](#macos-ventura-installation)
+- [macOS installation](#macos-installation)
 	- [Getting macOS](#getting-macos)
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
@@ -35,7 +33,7 @@
 </details>
 
 ## About
-Although installing and running macOS Monterey and newer on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences, analyzing the config and EFI folder and log after building OpenCore with OCLP for a Haswell system.
+Although installing and running macOS Ventura and newer on machines with Intel Haswell and Broadwell CPUs is possible with OpenCore and the OpenCore Legacy Patcher (OCLP), it’s not officially supported by Dortania – their support is limited to Apple Macs. Since no guide exists, I created this one in order to bridge the gap. I wrote it based on my experiences, analyzing the config and EFI folder and log after building OpenCore with OCLP for a Haswell system.
 
 | ⚠️ Important Status Updates |
 |:----------------------------|

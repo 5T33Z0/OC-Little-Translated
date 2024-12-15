@@ -1,4 +1,4 @@
-# Installing macOS Monterey and newer on Skylake systems
+# Installing macOS Ventura and newer on Skylake systems
 
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
@@ -42,7 +42,7 @@
 </details>
 
 ## About
-Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura or newer on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, there might be something I am missing.
+Although it is possible to utilize OpenCore and the OpenCore Legacy Patcher (OCLP) to install and run macOS Ventura and newer on machines with 6th Gen Intel Core CPUs (Skylake/Skylake X/W), it's not officially supported nor documented by Dortania – they only support legacy Macs by Apple. That's why I created this guide. Since I no longer own a Skylake system, there might be something I am missing.
 
 | ⚠️ Important Status Updates |
 |:----------------------------|

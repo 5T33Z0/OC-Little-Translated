@@ -1,9 +1,9 @@
-# Installing macOS Monterey and newer on legacy Intel CPUs
+# Installing macOS Ventura and newer on legacy Intel CPUs
 
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 
 - [About](#about)
 - [CPU Requirements](#cpu-requirements)
@@ -16,7 +16,7 @@
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
 		- [When Upgrading from macOS Big Sur 11.3+](#when-upgrading-from-macos-big-sur-113)
 		- [When Upgrading from macOS Catalina or older](#when-upgrading-from-macos-catalina-or-older)
-- [macOS Ventura Installation](#macos-ventura-installation)
+- [macOS installation](#macos-ventura-installation)
 	- [Getting macOS](#getting-macos)
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
@@ -35,7 +35,7 @@
 </details>
 
 ## About
-Besides installing macOS Monterey+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on 1st Gen Intel Core CPUs using OpenCore and the OpenCore Legacy Patcher (OCLP).
+Besides installing macOS Ventura+ on unsupported platforms like Sandy/Ivy Bridge, Haswell/Broadwell and Skylake, it is also be possible to install it on 1st Gen Intel Core CPUs using OpenCore and the OpenCore Legacy Patcher (OCLP).
 
 | ⚠️ Important Status Updates |
 |:----------------------------|

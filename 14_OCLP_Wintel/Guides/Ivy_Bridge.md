@@ -1,8 +1,9 @@
-# Installing macOS Monterey and newer on Ivy Bridge systems
+# Installing macOS Ventura and newer on Ivy Bridge systems
+
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 
 - [About](#about)
 	- [How Ivy Bridge systems are affected](#how-ivy-bridge-systems-are-affected)
@@ -15,7 +16,7 @@
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
 		- [When Upgrading from macOS Big Sur 11.3+](#when-upgrading-from-macos-big-sur-113)
 		- [When Upgrading from macOS Catalina or older](#when-upgrading-from-macos-catalina-or-older)
-- [macOS Ventura Installation](#macos-ventura-installation)
+- [macOS installation](#macos-installation)
 	- [Getting macOS](#getting-macos)
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
@@ -34,7 +35,7 @@
 </details>
 
 ## About
-Although installing macOS Monterey and newer on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented since Dortania only provides support for legacy Macs by Apple. I developed this guide based on my experiences trying to get macOS 13 and newer running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary EFI and config adjustments.
+Although installing macOS Ventura and newer on systems with Intel CPUs of the Ivy Bridge family can be achieved with OpenCore and the OpenCore Legacy Patcher (OCLP), it's not officially supported nor documented since Dortania only provides support for legacy Macs by Apple. I developed this guide based on my experiences trying to get macOS 13 and newer running on my Lenovo T530 Laptop but it is applicable to desktop systems as well since I factored in the necessary EFI and config adjustments.
 
 | ⚠️ Important Status Updates |
 |:----------------------------|
