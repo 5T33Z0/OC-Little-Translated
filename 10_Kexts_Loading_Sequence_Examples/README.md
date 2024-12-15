@@ -24,8 +24,10 @@
 	- [Example 11: CPUFriend](#example-11-cpufriend)
 - [Notes and Credits](#notes-and-credits)
 
+---
+
 ## About
-This shapter contains a collection of `config.plist` examples to demonstrate the loading order for certain kexts. In contrast to Clover, where just drop required kexts into the `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot! So it's essential to get the order right.
+This chapter contains a collection of `config.plist` examples to demonstrate the loading order for certain kexts. In contrast to Clover, where just drop required kexts into the `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot! So it's essential to get the order right.
 
 In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the bare minimum kexts required by any Hackintosh to boot:
 
