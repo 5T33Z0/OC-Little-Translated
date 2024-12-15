@@ -15,7 +15,7 @@
 	- [Adjusting the SMBIOS](#adjusting-the-smbios)
 		- [When Upgrading from macOS Big Sur 11.3+](#when-upgrading-from-macos-big-sur-113)
 		- [When Upgrading from macOS Catalina or older](#when-upgrading-from-macos-catalina-or-older)
-- [macOS Ventura Installation](#macos-ventura-installation)
+- [macOS installation](#macos-installation)
 	- [Getting macOS](#getting-macos)
 	- [Option 1: Upgrading from macOS 11.3 or newer](#option-1-upgrading-from-macos-113-or-newer)
 	- [Option 2: Upgrading from macOS Catalina or older](#option-2-upgrading-from-macos-catalina-or-older)
