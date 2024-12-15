@@ -1,4 +1,4 @@
-# How to re-enable previously supported Wi-Fi Cards in macOS Sonoma/Sequoia with OpenCore Legacy Patcher
+# How to re-enable previously supported Wi-Fi Cards in macOS Sonoma+ with OpenCore Legacy Patcher
 
 > **Applicable to**: OCLP 1.0.0+
 
