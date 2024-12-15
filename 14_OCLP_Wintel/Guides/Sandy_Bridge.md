@@ -2,9 +2,7 @@
 [![OpenCore Version](https://img.shields.io/badge/OpenCore_Version:-0.9.4+-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.2-white.svg)
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
-
-**TABLE of CONTENTS**
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 
 - [About](#about)
 	- [How Sandy Bridge systems are affected](#how-sandy-bridge-systems-are-affected)
