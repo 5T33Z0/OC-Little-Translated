@@ -34,7 +34,7 @@ If you can still boot into macOS and use it, do the following to revert Root Pat
 Everything should be back to normal again.
 
 ## Option 2: Reverting Root Patches in Safe Mode
-If you’ve applied root patches that leave macOS in an unusable state, e.g. after installing iGPU/GPU drivers, reverting room patches might be possible by booting macOS into Safe Mode. Because in Safe Mode graphics drivers are not loaded so it might still be possible to get into macOS and revert root patches.
+If you’ve applied root patches that leave macOS in an unusable state, e.g. after installing iGPU/GPU drivers, reverting root patches might be possible by booting macOS into Safe Mode. Because in Safe Mode graphics drivers are not loaded so it might still be possible to get into macOS and revert root patches.
 
 1. In OpenCore’s boot menu, select macOS
 2. Hold <kbd>Shift</kbd> and press <kbd>Enter</kbd> to boot macOS in Safe Mode which takes significantly longer than a normal boot

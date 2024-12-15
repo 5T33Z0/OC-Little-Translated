@@ -16,7 +16,7 @@ So, config profiles it is…
 
 This will install a signed config profile to disable Gatekepper.
 
-- Download [**Sentinel**](https://github.com/alienator88/Sentinel/releases)
+- Download [**Sentinel**](https://github.com/alienator88/Sentinel/releases) (use version 1.6, the newest one isn't working properly!)
 - Unzip and run the app
 - Click on "Install Profile"
 - This will open the System Settings >> General >> Device Management window

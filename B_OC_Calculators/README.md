@@ -11,7 +11,7 @@ Bitmask | Description
 `Darkwake` | For calculating a value for darkwake
 
 <details>
-<summary><strong>Screenshots</strong> (click to reveal)</summary>
+<summary><strong>Screenshots</strong> (click to reveal)</summary><br>
 
 ![CSROC](https://user-images.githubusercontent.com/76865553/180944112-a6fbbf86-f613-4bf6-8076-a3845dc911e3.png)
 

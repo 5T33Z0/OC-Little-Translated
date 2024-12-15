@@ -18,6 +18,6 @@ Incomplete collection of iGPU related fixes. For general configuration of Intel 
 
 ## Resources
 - `DeviceProperties` with Framebuffer Patches for numerous Intel iGPUs for most CPU Generations can be obtained from the config.plists in the &rarr; [**Desktop EFIs Section**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
-- For Notebooks, you can use the `Properties` inside of the &rarr; [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/Laptop_Configs). 
-- OpenCore's `DeviceProperties` and Clover's `Devices/Properties` entries are interchangeable.
+- For Notebooks, you can use the `Properties` inside of the &rarr; [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/Laptop_Configs). OpenCore's `DeviceProperties` and Clover's `Devices/Properties` entries are interchangeable.
 - [**Intel iGPU OpRegion Specs**](https://01.org/sites/default/files/documentation/acpi_igd_opregion_spec_0.pdf) (**PDF**)
+- [**DVMT/stolenmem/fbmem/cursormem explained**](https://osxlatitude.com/forums/topic/17804-dvmtstolenmemfbmemcursormem-why-do-we-patch-these-for-broadwell-and-later/)
