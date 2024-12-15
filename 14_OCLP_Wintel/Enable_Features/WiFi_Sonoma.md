@@ -20,7 +20,7 @@ Thanks to Dortania's OpenCore Legacy Patcher (OCLP), it's possible to re-enable 
 ## Instructions
 
 ### 1. Config and EFI adjustments
-Apply the following changes to your config (or copy them over from the [plist example](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI.plist)) and add the listed kexts to `EFI/OC/Kexts` folder:
+Apply the following changes to your config (or copy them over from the plist examples (&rarr;[Legacy WiFi](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI_Legacy.plist) &rarr;[Modern WiFI](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI_Modern.plist)) and add the listed kexts to `EFI/OC/Kexts` folder:
 
 Config Section | Action
 :-------------:|-------
