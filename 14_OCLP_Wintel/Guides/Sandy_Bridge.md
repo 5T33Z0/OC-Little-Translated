@@ -99,7 +99,11 @@ Config Section | Action | Description
 
 > [!CAUTION]
 > 
-> Avoid adding the NVRAM entry `OCLP-Version` to your config. This entry checks if your EFI folder and configuration are up to date with OCLP and prompts for an upgrade (replacement). You don't want your EFI folder replaced by one designed for the Mac model specified in your config's SMBIOS section!
+> Don't add the NVRAM parameter `OCLP-Version` to your config – it's meant for real Macs only! It checks if your `config.plist` is up to par with the one provided by OCLP. If the version in your config is lower, a pop-up will appear asking you if you would like to update OpenCore:
+>
+> ![oclp-version](https://github.com/user-attachments/assets/3376afa3-da56-4311-9960-a9ec90e6010f)
+>
+> If you would press "OK" in this scenario, your `OC` folder would be replaced by the one created for the corresponding Mac model leaving your macOS installation in an unbootable state!
 
 ## Testing the changes
 Once you've added the required kexts and made the necessary changes to your config.plist, save, reboot and perform an NVRAM Reset. If your system still boots fine after that, you can now prepare the system for installing macOS 13.
