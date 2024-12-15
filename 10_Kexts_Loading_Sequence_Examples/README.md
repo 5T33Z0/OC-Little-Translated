@@ -27,7 +27,7 @@
 ---
 
 ## About
-This chapter contains a collection of `config.plist` examples to demonstrate the loading order for certain kexts. In contrast to Clover, where just drop required kexts into the `Clover\kexts\other` folder, OpenCore loads kexts in the exact order as listed in the `Kernel/Add` section of the `config.plist`. And if this order is incorrect, your system either won't boot or will crash during boot! So it's essential to get the order right.
+This chapter contains a collection of `config.plist` examples to demonstrate the loading order for certain kexts. In contrast to Clover, where you just drop required kexts into the `Clover\kexts\other` folder, OpenCore loads kexts in the _exact_ order as listed in the `Kernel/Add` section of your `config.plist`. And if this order is incorrect, your system either won't boot, will crash during boot or the device you added the kext(s) for might not work! So it's essential to get the order right.
 
 In general, kexts which provide additional functionality for other kexts have to be loaded first. Config 1 contains the loading sequence for the bare minimum kexts required by any Hackintosh to boot:
 
