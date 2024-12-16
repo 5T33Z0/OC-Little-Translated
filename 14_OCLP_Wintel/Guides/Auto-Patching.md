@@ -18,7 +18,7 @@ You still to have to prepare your EFI folder and config as described in my guide
 6. Show hidden files (CMD+Shift+.)
 7. Navigate to `Library` 
 8. Create a new folder and name it `Packages`
-9. Add the `AutoPkg-Asstets.pkg` to it:<br>![](/Users/5t33z0/Desktop/pkg.png)
+9. Add the `AutoPkg-Asstets.pkg` to it:<br>![pkg](https://github.com/user-attachments/assets/fa8ceb1d-2faa-42cb-9695-c2b23314fde0)
 10. Install macOS from the USB flash drive
 
 Once the installation reaches the first time set-up stage, iGPU/GPU acceleratiion, external displays, Wi-Fi, Bluetooth will work already.
