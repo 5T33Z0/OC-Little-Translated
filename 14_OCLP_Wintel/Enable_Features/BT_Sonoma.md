@@ -4,20 +4,20 @@
 
 ## General information
 
-In general, the kexts required kexts for enabling Bluetooth are listed are listed in the chapter &rarr; [Kext Loading Sequence Examples](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples). But for using Bluetooth in Sonoma and newer addtional Settings and kexts may be required. 
+In general, the kexts required kexts for enabling Bluetooth are listed in the chapter &rarr; [Kext Loading Sequence Examples](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples). But for using Bluetooth in Sonoma and newer additional settings and kexts may be required.
+
+## Prerequisites
+Unless you are using a Wi-Fi/BT card that's supported by Apple out of the box (usually Broadcom or Atheros), you need to apply root patches with OCLP (either for "Modern" or "Legacy") in order to enable the card in macOS Sonoma and newer.
+
+Since real Macs don't use Intel WiFi/BT cards, 
 
 ## Broadcom Cards
-
-**Prerequisites**: Applying root patches with OpenCore Legacy Patcher
 
 ### Modern Broadcom Cards
 
 Kext | Comment | MinKernel | MaxKernel
 -----|---------|:---------:|:---------:
-**`BlueToolFixup.kext`** | For macOS 12 and newer. Contains Firmware Data. |21.0.0| -
-|||
-ç
-
+**`BlueToolFixup.kext`** | BT enabler for macOS 12 or newer. Contains Firmware Data. | 21.0.
 
 **SCREENSHOT**:
 
