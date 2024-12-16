@@ -3,13 +3,15 @@
 ## About
 Although you can use OpenCore and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) to install newer versions of macOS on Wintel systems (aka Windows PCs and Laptops) with CPUs that were dropped from macOS 12 and newer (everything prior to Kaby Lake), it's not officially supported by Dortania nor is it documented, nor will you get any help for doing so on discord. That's why I created this section.
 
-Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you can run OLCP on Wintel systems as well to re-install drivers and frameworks which were removed from macOS 12 and newer (check [this repo](https://github.com/dortania/PatcherSupportPkg) for references). This includes:
+Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you can run OLCP on Wintel systems as well to re-install drivers and frameworks which were removed from macOS 12 and newer (check [this repo](https://github.com/dortania/PatcherSupportPkg) for reference) via applying Post-Install volume patches (aka root patches). 
+
+**The ones relevant for us are**:
 
 - iGPU drivers (to [reinstate graphics acceleration and Metal Graphics API support](https://khronokernel.github.io/macos/2022/11/01/LEGACY-METAL-PART-1.html)) 
 - GPU drivers for legacy (non-metal) AMD and NVIDIA Kepler Cards 
-- Components for re-enabling previously supported Wi-Fi and Bluetooth cards
+- Frameworks for re-enabling previously supported Wi-Fi/Bluetooth cards
  
-OCLP also introduced a bunch of new kexts that allow booting with the correct SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling SecureBootModel, System Integrity Protection (SIP) and Apple Mobile File Integrity (AMFI) that can be utilized on Wintel systems as well.
+The OCLP repo also contains [additional kexts](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) which need to be injected via OpenCore on Wintel systems. These are required for installing and booting newer versions of macOS with the native SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling `SecureBootModel`, System Integrity Protection (`SIP`) and Apple Mobile File Integrity (`AMFI`). The OCLP repo also provides kexts previous macOS versions as well as kexts by Acidanthera required to re-enable legacy devices such as LAN, WiFi, Bluetooth and even Firewire.
 
 ## Important Notes
 
