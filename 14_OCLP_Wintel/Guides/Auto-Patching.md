@@ -41,7 +41,7 @@ Once the installation reaches the first time set-up stage, iGPU/GPU acceleration
 
 > [!TIP]
 >
-> If iGPU/GPU acceleration is not working properly after reaching the desktop, apply root patches again. Chances are that OCLP requires the latest Metallib library in order to patch the latest version of macOS. It will check for the latest version aand download it automatically, if your machine has internet access. 
+> If iGPU/GPU acceleration is not working properly after reaching the desktop, apply root patches again. Chances are that OCLP requires the latest Metallib library in order to patch the latest version of macOS. It will check for the latest version and download it automatically, if your machine has internet access. 
 
 ## Credits
 
