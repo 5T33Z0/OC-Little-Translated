@@ -1,14 +1,29 @@
 # Applying root patches during macOS install automatically 
 
+:contsruction: Work in progress
+
 ## About
 
 Did you ever wonder what the `AutoPkgInstaller.kext` and the `AutoPkg-Asstets.pkg` which can be found on the OpenCore Legacy Patcher repository are actually for?
 
-Well, if you add the kext to your OpenCore EFI folder and add the `.pkg` file to the macOS USB Installer in a specific location, your system will get root patched during install *automatically*!
+> `AutoPkg-Assets.pkg` is a support package used by the autopatcher during OS installation. It is automatically added to any USB installer created by OCLP and is run using an *undocumented* macOS post-installation administration feature. […]
+> 
+> – [**Jazzny**](https://forums.macrumors.com/threads/macos-12-monterey-on-unsupported-macs-thread.2299557/page-283?post=31315624#post-31315624)
+
+If you add the `AutoPkgInstaller.kext` to your OpenCore EFI folder and add the `.pkg` file to the macOS USB Installer in a specific location, root patches will be applied to your system during macOS installation *automatically*!
 
 You still to have to prepare your EFI folder and config as described in my guides in order to run macOS 14 and newer, but if they are configured correctly, you don't have to run OCLP in Post-Install. And the OCLP app will get installed automatically as well.
 
+> [!CAUTION]
+> 
+> `AutoPkg-Asstets.pkg` is not designed to be run by users. It is only for the autopatcher. Running it manually by the user may result in bricked installations!
+
 ## Instructions
+
+### Option 1: Using OCLP to prepare a USB installer
+
+
+### Option 2: Modifying an existing USB installer
 
 1. [Prepare](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) your OpenCore `config.plist` and `EFI` folder for installing macOS 13 and newer based on the configuration guide for your CPU family
 2. Add [`AutoPkgInstaller.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) to your EFI folder and `config.plist`
@@ -22,6 +37,8 @@ You still to have to prepare your EFI folder and config as described in my guide
 10. Install macOS from the USB flash drive
 
 Once the installation reaches the first time set-up stage, iGPU/GPU acceleratiion, external displays, Wi-Fi, Bluetooth will work already.
+
+
 
 ## Credits
 
