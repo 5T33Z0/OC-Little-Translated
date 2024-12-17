@@ -17,9 +17,9 @@ You still to have to prepare your EFI folder and config as described in my guide
 > `AutoPkg-Asstets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
 
 ## Instructions
-If you create a macOS USB installer with OpenCore Legacy Patcher,  `AutoPkg-Assets.pkg` will be added to the USB installer automatically, so you only have to make sure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and `config.plist` in order to enable auto root-patching.
+If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` should be added to the USB installer automatically, so you only have to make sure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and `config.plist` in order to enable auto root-patching.
 
-But if you just use OCLP to download the latest macOS Installer app and want to run it from within macOS to install a newer version of macOS on a separate volume or upgrade your existing install, you need to add `AutoPkg-Asstets.pkg` to the installer manually first:
+If you use OCLP to download the latest macOS Installer app so that you can install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Asstets.pkg` to the macOS installer manually after the download and assembly of the macOS installer is completed:
 
 1. [Prepare](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) your OpenCore `config.plist` and `EFI` folder for installing macOS 13 and newer based on the configuration guide for your CPU family.
 2. Add [`AutoPkgInstaller.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) to your EFI folder and `config.plist` if it is not present already.
