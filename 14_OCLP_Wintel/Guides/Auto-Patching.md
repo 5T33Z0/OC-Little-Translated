@@ -2,7 +2,7 @@
 
 ## About
 
-Did you ever wonder what the `AutoPkgInstaller.kext` and the `AutoPkg-Asstets.pkg` which can be found on the OpenCore Legacy Patcher repository are actually for?
+Did you ever wonder what the `AutoPkgInstaller.kext` and the `AutoPkg-Assets.pkg` which can be found on the OpenCore Legacy Patcher repository are actually for?
 
 > `AutoPkg-Assets.pkg` is a support package used by the autopatcher during OS installation. It is automatically added to any USB installer created by OCLP and is run using an *undocumented* macOS post-installation administration feature.
 > 
@@ -19,7 +19,7 @@ You still to have to prepare your EFI folder and config as described in my guide
 ## Instructions
 If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` will be added to the USB installer automatically, so you only have to ensure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and in your `config.plist` in order to enable auto root-patching.
 
-If you use OCLP to download the latest macOS Installer app so that you can install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Asstets.pkg` to the macOS installer manually after the download and assembly of the macOS installer is completed:
+If you use OCLP to download the latest macOS Installer app so that you can install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Assets.pkg` to the macOS installer manually after the download and assembly of the macOS installer is completed:
 
 1. [Prepare](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) your OpenCore `config.plist` and `EFI` folder for installing macOS 13 and newer based on the configuration guide for your CPU family.
 2. Add [`AutoPkgInstaller.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) to your EFI folder and `config.plist` if it is not present already.
@@ -34,7 +34,7 @@ If you use OCLP to download the latest macOS Installer app so that you can insta
 7. Show hidden files by pressing <kbd>CMD</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd>
 8. Navigate to `Library` 
 9. Create a new folder and name it `Packages`
-10. Copy the `AutoPkg-Asstets.pkg` into the `Packages` folder:<br>![pkg](https://github.com/user-attachments/assets/fa8ceb1d-2faa-42cb-9695-c2b23314fde0)
+10. Copy the `AutoPkg-Assets.pkg` into the `Packages` folder:<br>![pkg](https://github.com/user-attachments/assets/fa8ceb1d-2faa-42cb-9695-c2b23314fde0)
 11. Install macOS
 
 Once the installation reaches the first time set-up stage, iGPU/GPU acceleration, external displays, Wi-Fi, Bluetooth will work already.
@@ -43,6 +43,6 @@ Once the installation reaches the first time set-up stage, iGPU/GPU acceleration
 >
 > If iGPU/GPU acceleration is not working properly after reaching the desktop, apply root patches again. Chances are that OCLP requires the latest Metallib library in order to patch the latest version of macOS. It will check for the latest version and download it automatically, if your machine has internet access. 
 
-## Credits and Ressources
+## Credits and Resources
 - [Background info about the inner workings of automatic root patching](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/986)
-- [HorizontalUnix](https://github.com/HorizonUnix/PatchSonomaWiFiOnTheFly) for explaining where the `AutoPkg-Asstets.pkg` has to be placed!
+- [HorizontalUnix](https://github.com/HorizonUnix/PatchSonomaWiFiOnTheFly) for explaining where the `AutoPkg-Assets.pkg` has to be placed!
