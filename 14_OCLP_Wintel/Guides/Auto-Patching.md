@@ -17,7 +17,7 @@ You still to have to prepare your EFI folder and config as described in my guide
 > `AutoPkg-Asstets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
 
 ## Instructions
-If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` should be added to the USB installer automatically, so you only have to make sure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and `config.plist` in order to enable auto root-patching.
+If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` will be added to the USB installer automatically, so you only have to ensure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and in your `config.plist` in order to enable auto root-patching.
 
 If you use OCLP to download the latest macOS Installer app so that you can install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Asstets.pkg` to the macOS installer manually after the download and assembly of the macOS installer is completed:
 
