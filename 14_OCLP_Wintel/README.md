@@ -35,7 +35,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 - [**Fixing WiFi and Bluetooth in macOS Sonoma+**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
 - [**Force-enable GPU Patching**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/GPU_Sonoma.md)
 - [**How to disable Gatekeeper in macOS Sequoia**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Disable_Gatekeeper.md)
-- [**Enable auto-root-patching during macOS installation**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Auto-Patching.md)
+- [**How to enable auto-root-patching during macOS installation**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Auto-Patching.md)
 
 ## Troubleshooting
 - [**Dos and Don'ts of running macOS beta versions**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Beta_dos_donts.md)
