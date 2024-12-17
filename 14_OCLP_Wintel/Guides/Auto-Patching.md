@@ -43,6 +43,6 @@ Once the installation reaches the first time set-up stage, iGPU/GPU acceleration
 >
 > If iGPU/GPU acceleration is not working properly after reaching the desktop, apply root patches again. Chances are that OCLP requires the latest Metallib library in order to patch the latest version of macOS. It will check for the latest version and download it automatically, if your machine has internet access. 
 
-## Credits
-
+## Credits and Ressources
+- [Background info abot the inner workings of automatic root patching](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/986)
 - [HorizontalUnix](https://github.com/HorizonUnix/PatchSonomaWiFiOnTheFly) for explaining where the `AutoPkg-Asstets.pkg` has to be placed!
