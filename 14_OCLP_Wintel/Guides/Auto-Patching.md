@@ -39,6 +39,10 @@ But if you just use OCLP to download the latest macOS Installer app and want to 
 
 Once the installation reaches the first time set-up stage, iGPU/GPU acceleration, external displays, Wi-Fi, Bluetooth will work already.
 
+> [!NOTE]
+>
+> If iGPU/GPU acceleration is not working properly after reaching the desktop, apply root patches again. Chances are that OCLP requires the latest Metallib library in order to patch the latest version of macOS. It will check for the latest version aand download it automatically, if your machine has internet access. 
+
 ## Credits
 
 - [HorizontalUnix](https://github.com/HorizonUnix/PatchSonomaWiFiOnTheFly) for explaining where the `AutoPkg-Asstets.pkg` has to be placed!
