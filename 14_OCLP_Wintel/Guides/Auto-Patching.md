@@ -30,7 +30,7 @@ If you use OCLP to download the latest macOS Installer app so that you can insta
    - Click on "Download macOS Installer" 
    - Select the macOS Installer you want and click on "Download"
 5. Once the download is completed the macOS Installer app will be located in "Programs"
-6. Right-click the macOS Installer app and select "Show Package "
+6. Right-click the macOS Installer app and select "Show Package Contents"
 7. Show hidden files by pressing <kbd>CMD</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd>
 8. Navigate to `Library` 
 9. Create a new folder and name it `Packages`
