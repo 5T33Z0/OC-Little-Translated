@@ -26,6 +26,7 @@ This section covers the current status of OpenCore Legacy Patcher development fo
 	- [Non-Metal](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/108)
 
 ## OCLP Update Status
+- **December 10th, 2024**: OCLP 2.2.0 is [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.2.0) and comes with a lot of improvements for non-metal machines on Sonoma/Sequoia!
 - **September 14th, 2024**: OCLP 2.0.0 is officially [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.0.0)!
 - **September 6th, 2024**: OCLP Development branch been merged with the master branch &rarr; see [Changelog](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md#200) for details
 - **September 2nd, 2024**: New nightly build of OpenCore Legacy Patcher 1.6.0 based on Sequoia Development branch is [avaialble here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1137#issuecomment-2295376562) which can re-enable Ivy Bridge iGPUs and NVDIA Kepler Cards
