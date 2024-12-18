@@ -16,6 +16,10 @@ You still to have to prepare your EFI folder and config as described in my guide
 > 
 > `AutoPkg-Asstets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
 
+### Who is this method for?
+
+If your system requires iGPU and/or GPU (AMD/NVIDIA) root patches to enable hardware graphics acceleration, then this method is highly recommended to avoid the super-sluggish software-rendered setup-screen. If you just need to patch Wi-Fi, then not so much. In this case, I would recommend to patch Wi-Fi in post-install as usual.
+
 ## Instructions
 If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` will be added to the USB installer automatically, so you only have to ensure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and in your `config.plist` in order to enable auto root-patching.
 
