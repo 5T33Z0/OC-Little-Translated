@@ -22,9 +22,9 @@ This will install a signed config profile to disable Gatekepper.
 - Enter your admin password
 - Click "Ok" in the "Attention" pop-up:<br>![att](https://github.com/user-attachments/assets/9c66a4c7-693f-4eab-9aa6-47ae5c1f5fe7)
 - This will open the System Settings >> Privacy & Security
-- Scroll down to security and select "Anywhere" from the dropdown menu:<br>![disableGK](https://github.com/user-attachments/assets/16ac2a51-1207-4f7e-b68a-4dbe11291d22)
-- Enter your admin pw again
-- Read the nozr about reduced security when disabling Geatekeeper, press "Allow Anywhere" and go on with your life:<br>![allowanywhere](https://github.com/user-attachments/assets/74d752aa-65a8-411a-b234-2746da424f55)
+- Scroll down to "Security" and select "Anywhere" from the dropdown menu:<br>![disableGK](https://github.com/user-attachments/assets/16ac2a51-1207-4f7e-b68a-4dbe11291d22)
+- Enter your admin pw once again
+- Read the note about reduced security when disabling Geatekeeper, press "Allow Anywhere" and go on with your life:<br>![allowanywhere](https://github.com/user-attachments/assets/74d752aa-65a8-411a-b234-2746da424f55)
 
 ## Previous Method
 
