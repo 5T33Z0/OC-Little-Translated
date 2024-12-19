@@ -13,7 +13,7 @@ Bitmask | Description
 <details>
 <summary><strong>Screenshots</strong> (click to reveal)</summary><br>
 
-![CSROC](https://user-images.githubusercontent.com/76865553/180944112-a6fbbf86-f613-4bf6-8076-a3845dc911e3.png)
+![csr](https://github.com/user-attachments/assets/a42ef173-aeeb-4d6f-8df1-f98002b91451)
 
 ![Bildschirmfoto 1](https://user-images.githubusercontent.com/76865553/134348928-ee19f359-c8fd-4e16-a99e-2cd652c9c64b.png)
 
