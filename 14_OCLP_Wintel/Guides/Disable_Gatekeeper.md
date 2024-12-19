@@ -12,16 +12,19 @@ This operation is no longer supported. To disable the assessment subsystem, plea
 
 So, config profiles it is…
 
-## Sentinel-Method (preferred)
+## Disabling Gatekeeper with  the Sentinel app (recommended)
 
 This will install a signed config profile to disable Gatekepper.
 
-- Download [**Sentinel**](https://github.com/alienator88/Sentinel/releases) (use version 1.6, the newest one isn't working properly!)
+- Download the latest version of [**Sentinel**](https://github.com/alienator88/Sentinel/releases)
 - Unzip and run the app
-- Click on "Install Profile"
-- This will open the System Settings >> General >> Device Management window
-- Double-click on the loaded Profile "Disable Gatekeeper"
-- Click the "Install…" button to install the profile.
+- Click on the green lock icon
+- Enter your admin password
+- Click "Ok" in the "Attention" pop-up
+- This will open the System Settings >> Privacy & Security
+- Scroll down to security and select "Anywhere" from the dropdown menu:<br>![disableGK](https://github.com/user-attachments/assets/16ac2a51-1207-4f7e-b68a-4dbe11291d22)
+- Enter your admin pw again
+- Read the disclaimer about reduced security when disabling Geatekeeper and press the red text and go on with your life:<br>![blabla](https://github.com/user-attachments/assets/ad9aa47c-d384-4da3-bd3a-4f8519e6cbef)
 
 Afterwards Gatekeeper will be disabled
 
