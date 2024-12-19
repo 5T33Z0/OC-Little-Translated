@@ -1,5 +1,5 @@
 # How to disable Gatekeeper in macOS Sequoia
-
+![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg)
 ## Preface
 
 After installing macOS Sequoia beta 3 on a new Volume, I wanted to run Corpnewt's MountEFI script to mount the ESP but it was blocked by Gatekeeper. Right-clicking the file and selecting "Open" does no longer work, which is new. So I decided to disable GateKeeper via Terminal, only to realize that this is no longer possible either:
@@ -20,7 +20,7 @@ This will install a signed config profile to disable Gatekepper.
 - Unzip and run the app
 - Click on the green lock icon
 - Enter your admin password
-- Click "Ok" in the "Attention" pop-up:<br>![att](https://github.com/user-attachments/assets/9c66a4c7-693f-4eab-9aa6-47ae5c1f5fe7)
+- Click "Okay" in the "Attention" pop-up:<br>![att](https://github.com/user-attachments/assets/9c66a4c7-693f-4eab-9aa6-47ae5c1f5fe7)
 - This will open the System Settings >> Privacy & Security
 - Scroll down to "Security" and select "Anywhere" from the dropdown menu:<br>![disableGK](https://github.com/user-attachments/assets/16ac2a51-1207-4f7e-b68a-4dbe11291d22)
 - Enter your admin pw once again
