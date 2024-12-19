@@ -12,7 +12,7 @@ This operation is no longer supported. To disable the assessment subsystem, plea
 
 So, config profiles it is…
 
-## Disabling Gatekeeper with  the Sentinel app (recommended)
+## Disabling Gatekeeper with the Sentinel app (recommended)
 
 This will install a signed config profile to disable Gatekepper.
 
@@ -20,13 +20,11 @@ This will install a signed config profile to disable Gatekepper.
 - Unzip and run the app
 - Click on the green lock icon
 - Enter your admin password
-- Click "Ok" in the "Attention" pop-up
+- Click "Ok" in the "Attention" pop-up:<br>![att](https://github.com/user-attachments/assets/9c66a4c7-693f-4eab-9aa6-47ae5c1f5fe7)
 - This will open the System Settings >> Privacy & Security
 - Scroll down to security and select "Anywhere" from the dropdown menu:<br>![disableGK](https://github.com/user-attachments/assets/16ac2a51-1207-4f7e-b68a-4dbe11291d22)
 - Enter your admin pw again
-- Read the disclaimer about reduced security when disabling Geatekeeper and press the red text and go on with your life:<br>![blabla](https://github.com/user-attachments/assets/ad9aa47c-d384-4da3-bd3a-4f8519e6cbef)
-
-Afterwards Gatekeeper will be disabled
+- Read the nozr about reduced security when disabling Geatekeeper, press "Allow Anywhere" and go on with your life:<br>![allowanywhere](https://github.com/user-attachments/assets/74d752aa-65a8-411a-b234-2746da424f55)
 
 ## Previous Method
 
