@@ -27,11 +27,7 @@ This operation is no longer supported. To disable the assessment subsystem, plea
 
 So, config profiles it is… 
 
-<<<<<<< Updated upstream
-## Disabling Gatekeeper with Sentinel (recommended)
-=======
 ### Disabling Gatekeeper with the Sentinel app 
->>>>>>> Stashed changes
 
 The Sentinal app will install a _signed_ config profile to disable Gatekepper.
 
