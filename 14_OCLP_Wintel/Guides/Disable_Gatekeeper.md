@@ -1,8 +1,23 @@
 # How to disable Gatekeeper in macOS Sequoia
-![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg)
-## Preface
 
-After installing macOS Sequoia beta 3 on a new Volume, I wanted to run Corpnewt's MountEFI script to mount the ESP but it was blocked by Gatekeeper. Right-clicking the file and selecting "Open" does no longer work, which is new. So I decided to disable GateKeeper via Terminal, only to realize that this is no longer possible either:
+![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg)
+
+## Disabling Gatekeeper in macOS ≥ 15.1.1
+
+From macOS 15.1.1 onward, Apple reverted the necessity of having a configuration profile to disable Gatekeeper, so the old Terminal command works again:
+
+``` shell
+spctl --master-disable
+Globally disabling the assessment system needs to be confirmed in System Settings.
+```
+
+- Next, navigate to "System Settings" >> "Privacy & Security"
+- Scroll down to "Security" and select "Anywhere" from the dropdown menu.
+- Read the note about reduced security when disabling Geatekeeper, press "Allow Anywhere" and go on with your life:<br>![allowanywhere](https://github.com/user-attachments/assets/74d752aa-65a8-411a-b234-2746da424f55)
+
+## Disabling Gatekeeper in macOS Sequoia < 15.1.1
+
+After installing macOS Sequoia beta 3 on a new APFS volume, I wanted to run Corpnewt's MountEFI script to mount the ESP but it was blocked by Gatekeeper. Right-clicking the file and selecting "Open" did no longer work either. So I decided to disable GateKeeper via Terminal as usual, only to realize that this is no longer possible either:
 
 ```shell
 sudo spctl --master-disable
@@ -10,9 +25,13 @@ Password:
 This operation is no longer supported. To disable the assessment subsystem, please use configuration profiles.
 ```
 
-So, config profiles it is…
+So, config profiles it is… 
 
+<<<<<<< Updated upstream
 ## Disabling Gatekeeper with Sentinel (recommended)
+=======
+### Disabling Gatekeeper with the Sentinel app 
+>>>>>>> Stashed changes
 
 The Sentinal app will install a _signed_ config profile to disable Gatekepper.
 
@@ -26,7 +45,7 @@ The Sentinal app will install a _signed_ config profile to disable Gatekepper.
 - Enter your admin pw once again
 - Read the note about reduced security when disabling Geatekeeper, press "Allow Anywhere" and go on with your life:<br>![allowanywhere](https://github.com/user-attachments/assets/74d752aa-65a8-411a-b234-2746da424f55)
 
-## Previous Method
+### Previous Method
 
 This will also install a config profile to disable Gatekepper but it will be _unsigned_.
 
