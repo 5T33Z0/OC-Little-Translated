@@ -12,9 +12,9 @@ This operation is no longer supported. To disable the assessment subsystem, plea
 
 So, config profiles it is…
 
-## Disabling Gatekeeper with the Sentinel app (recommended)
+## Disabling Gatekeeper with Sentinel (recommended)
 
-This will install a signed config profile to disable Gatekepper.
+The Sentinal app will install a _signed_ config profile to disable Gatekepper.
 
 - Download the latest version of [**Sentinel**](https://github.com/alienator88/Sentinel/releases)
 - Unzip and run the app
@@ -28,7 +28,7 @@ This will install a signed config profile to disable Gatekepper.
 
 ## Previous Method
 
-This will also install a config profile to disable Gatekepper but it will be unsigned.
+This will install an _unsigned_ config profile to disable Gatekepper but it will be unsigned.
 
 - Download [Disable.Gatekeeper.mobileconfig.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/files/Disable.Gatekeeper.mobileconfig.zip) and unzip it
 - Go to System Settings >> General >> Device Management and click the <kbd>+</kbd> button
