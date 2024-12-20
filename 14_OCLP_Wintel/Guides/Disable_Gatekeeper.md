@@ -28,7 +28,7 @@ The Sentinal app will install a _signed_ config profile to disable Gatekepper.
 
 ## Previous Method
 
-This will install an _unsigned_ config profile to disable Gatekepper but it will be unsigned.
+This will also install a config profile to disable Gatekepper but it will be _unsigned_.
 
 - Download [Disable.Gatekeeper.mobileconfig.zip](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/files/Disable.Gatekeeper.mobileconfig.zip) and unzip it
 - Go to System Settings >> General >> Device Management and click the <kbd>+</kbd> button
