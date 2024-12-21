@@ -38,7 +38,7 @@ Thanks to Dortania's OpenCore Legacy Patcher (OCLP), it's possible to re-enable 
 
 > [!NOTE]
 > 
-> Besided patching Wifi/BT cards officially used in Apple products, OCLP also supports Wi-Fi patching of systems with 3rd party Broadcom chipsets (enabled by `AirportBrcmFixup.kext`) which are often found in Hackintoshes:
+> Besides patching Wifi/BT cards officially used in Apple products, OCLP also supports Wi-Fi patching of systems with 3rd party Broadcom chipsets (enabled by `AirportBrcmFixup.kext`) which are often found in Hackintoshes:
 >
 >- device-id `pci12e4,4357` &rarr; BCM43225
 >- device-id `pci12e4,43B1` &rarr; BCM4352
