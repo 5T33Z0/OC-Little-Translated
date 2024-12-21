@@ -1,7 +1,7 @@
 # Force-enable GPU patching in OpenCore Legacy Patcher
 
-**System Requirements**: macOS 12 or newer<br>
-**OCLP**: 0.6.9 or newer
+> **System Requirements**: macOS 12 or newer<br>
+> **OCLP**: 0.6.9 or newer
 
 **TABLE of CONTENTS**
 
