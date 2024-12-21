@@ -1,7 +1,5 @@
 # How to re-enable previously supported WiFi/BT cards in macOS Sonoma+ with OpenCore Legacy Patcher
 
-:construction: CURRENTLY under REVISION
-
 > **Applicable to**: OCLP 1.0.0+
 
 **INDEX**
@@ -9,11 +7,14 @@
 - [Technical Background](#technical-background)
 - [Instructions](#instructions)
 	- [1. Config and EFI adjustments](#1-config-and-efi-adjustments)
-	- [2. Applying Root Patches to re-enable Wi-Fi Cards](#2-applying-root-patches-to-re-enable-wi-fi-cards)
+	- [2. Verifying added Kexts](#2-verifying-added-kexts)
+	- [3. Applying Root Patches to re-enable Wi-Fi Cards](#3-applying-root-patches-to-re-enable-wi-fi-cards)
 - [Re-Enabling Bluetooth](#re-enabling-bluetooth)
-	- [Intel Cards](#intel-cards)
-		- [Troubleshooting](#troubleshooting)
-	- [Broadcom Cards](#broadcom-cards)
+	- [Intel](#intel)
+		- [Troubleshooting Intel BT](#troubleshooting-intel-bt)
+	- [Broadcom](#broadcom)
+		- [NVRAM Settings](#nvram-settings)
+		- [Kexts](#kexts)
 - [Manually enable Wi-Fi Patching in OCLP](#manually-enable-wi-fi-patching-in-oclp)
 - [Notes](#notes)
 - [Credits](#credits)
@@ -34,6 +35,14 @@ During the early stages of macOS Sonoma development, kexts and frameworks requir
 	- **Required Kexts**: corecaptureElCap, IO80211ElCap, AirPortAtheros40 (for Atheros only)
 
 Thanks to Dortania's OpenCore Legacy Patcher (OCLP), it's possible to re-enable these Wi-Fi cards by patching some system files (as well as injecting additional kexts via OpenCore). If you want to know how Wi-Fi patching with OCLP works, [have a look at this post](https://www.insanelymac.com/forum/topic/357087-macos-sonoma-wireless-issues-discussion/?do=findComment&comment=2809940).
+
+> [!NOTE]
+> 
+> Besided patching Wifi/BT cards officially used in Apple products, OCLP also supports Wi-Fi patching of systems with 3rd party Broadcom chipsets (enabled by `AirportBrcmFixup.kext`) which are often found in Hackintoshes:
+>
+>- device-id `pci12e4,4357` &rarr; BCM43225
+>- device-id `pci12e4,43B1` &rarr; BCM4352
+>- device-id `pci12e4,43B2` &rarr; BCM4352 (2.4 GHz).
 
 ## Instructions
 
@@ -102,12 +111,17 @@ If your Intel Wi-FI/BT card is [supported](https://openintelwireless.github.io/i
 
 Kext | Comment | `MinKernel` | `MaxKernel`
 -----|---------|:-----------:|:-----------:
-**`BlueToolFixup.kext`** | BT enabler for macOS 12 and newer | 21.0.0 | leave blank
-**`IntelBluetoothFirmware.kext`** | Intel BT FIrmware | leave blank | leave blank
+**`BlueToolFixup.kext`** | BT enabler for macOS 12 and newer | 21.0.0 | 
+**`IntelBluetoothFirmware.kext`** | Intel BT FIrmware |  | 
 
 **Screenshot**:
 
 ![](https://www.insanelymac.com/uploads/monthly_2024_12/Bildschirmfoto2024-12-15um20_12_46.png.5c0492379b510559349b00035c424288.png)
+
+> [!NOTE]
+> 
+> - Make sure to perform an NVRAM reset after applying these settings and after switching macOS versions (if you have different versions of macOS installed)
+> - I have noticed that it can take like 10 seconds or so until BT is available after applying these changes.
 
 #### Troubleshooting Intel BT
 
@@ -120,6 +134,10 @@ If BT is not working after adding the two kexts, do the following:
 
 ### Broadcom
 
+For enable Bluetooth of previously supported Broadcom Cards in macOS 13 and newer, you only need the following:  
+
+#### NVRAM Settings
+
 Config Section | Action
 :-------------:|-------
 **NVRAM/Add/...-FE41995C9F82** | If Bluetooth is still not working after adding kexts, settings and applying root patches, add the following keys: <ul><li> **`bluetoothInternalControllerInfo`**, Type: `Data`, Value: `00000000 00000000 00000000 0000`<li>**`bluetoothExternalDongleFailed`**, Type: `Data`, Value: `00`</ul> 
@@ -127,6 +145,25 @@ Config Section | Action
 **Screenshot**:
 
 ![](https://www.insanelymac.com/uploads/monthly_2024_12/Bildschirmfoto2024-12-15um14_18_08.png.d2057e458a2be3cefff9afe2ae40688f.png)
+
+> [!NOTE]
+> 
+> - Make sure to perform an NVRAM reset after applying these settings and after switching macOS versions (if you have different versions of macOS installed)
+> - I have noticed that it can take like 10 seconds or so until BT is available after applying these changes.
+
+#### Kexts
+
+Kext | Comment | `MinKernel` | `MaxKernel`
+-----|---------|:-----------:|:-----------:
+**`BlueToolFixup.kext`** | BT enabler for macOS 12 and newer | 21.0.0 | 
+
+**Screenshot**: 
+
+![brcmwifi+bt](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e4ba8edf-d8bc-4c7a-b095-d8c4ec05d142)
+
+> [!IMPORTANT]
+> 
+> Maker sure to set the `MinKernel` and `Maxkernel` settings as shown in the screenshot!
 
 ---
 
