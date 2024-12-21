@@ -107,6 +107,8 @@ Once you have verified that the required kext are actually loaded, you can conti
 - Wi-Fi is working again: <br>![access](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/11e57c0e-fd81-4aea-ae5b-475b7cf013b2)
 </details>
 
+---
+
 ## Instructions (Intel)
 
 If your Intel Wi-FI/BT card is [supported](https://openintelwireless.github.io/itlwm/Compat.html) by the OpenIntelWireless project, the following kexts are required for enabling Bluetooth in macOS 14+:
