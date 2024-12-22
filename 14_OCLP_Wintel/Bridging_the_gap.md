@@ -14,7 +14,7 @@ Since the virtualization technology cannot be utilized prior to Big Sur 11.3, in
 - macOS Catalina (slimmest macOS since it only contains 64 bit Intel code). Owners of a real Mac can use [Catalina Patcher](https://dosdude1.com/catalina/) to install it.
 
 ## Bridging the Gap
-The following Settings need to be changed in your `config.plist` to install macOS prio to Big Sur 11.3. This mainly concerns SMBIOS, SIP and APFS driver settings:
+The following Settings need to be changed in your `config.plist` to install macOS prior to Big Sur 11.3. This mainly concerns SMBIOS, SIP and APFS driver settings:
 
 Section | Setting
 :--------:|----------------
