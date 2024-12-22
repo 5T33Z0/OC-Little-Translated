@@ -1,35 +1,35 @@
-# Installing newer versions of macOS on legacy hardware
+# Installing newer versions of macOS on legacy Wintel PC hardware
 
 ## About
-Although you can use OpenCore and [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) to install newer versions of macOS on Wintel systems (aka Windows PCs and Laptops) with CPUs that were dropped from macOS 12 and newer (everything prior to Kaby Lake), it's not officially supported by Dortania nor is it documented, nor will you get any help for doing so on discord. That's why I created this section.
+As you may know, Dortania developed the [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) (OCLP) to install and run macOS 12 and newer on end-of-life Macs with Intel Core CPUs from the 1st to 6th generation. It does this by installing the OpenCore boot loader, injecting additional kexts and installing on-disk patches ("root-patches") in Post-Install to re-enable iGPU, GPU and WiFi drivers in order to extend the lifecycle of these expansive machines.
 
-Officially, OCLP only supports end of life (or "legacy") Macs by Apple. But you can run OLCP on Wintel systems as well to re-install drivers and frameworks which were removed from macOS 12 and newer (check [this repo](https://github.com/dortania/PatcherSupportPkg) for reference) via applying Post-Install volume patches (aka root patches). 
+These kexts and root-patches can also be applied to Wintel systems. But the process of adjusting the `config.plist` – which settings to add and which kexts to inject – is not officially documented nor supported by Dortania, nor will you get any help for this on Discord. That's why I created in-depth configuration guides to prepare your old Hackintosh to run macOS 12 and newer.
 
-**The ones relevant for us are**:
+**The patches relevant to us are**:
 
 - iGPU drivers (to [reinstate graphics acceleration and Metal Graphics API support](https://khronokernel.github.io/macos/2022/11/01/LEGACY-METAL-PART-1.html)) 
 - GPU drivers for legacy (non-metal) AMD and NVIDIA Kepler Cards 
 - Frameworks for re-enabling previously supported Wi-Fi/Bluetooth cards
  
-The OCLP repo also contains [additional kexts](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) which need to be injected via OpenCore on Wintel systems. These are required for installing and booting newer versions of macOS with the native SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling `SecureBootModel`, System Integrity Protection (`SIP`) and Apple Mobile File Integrity (`AMFI`). The OCLP repo also provides kexts previous macOS versions as well as kexts by Acidanthera required to re-enable legacy devices such as LAN, WiFi, Bluetooth and even Firewire.
+The OCLP repo also contains [additional kexts](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) which need to be injected via OpenCore. They are required for installing and booting newer versions of macOS with the native SMBIOS for your CPU, re-enabling SMC CPU Power Management in macOS 13+, fix issues with System Updates caused by disabling `SecureBootModel`, System Integrity Protection (`SIP`) and Apple Mobile File Integrity (`AMFI`). The OCLP repo also provides kexts of previous macOS versions as well as kexts by Acidanthera required to re-enable legacy devices such as LAN, WiFi, Bluetooth and even Firewire. For a complete list and explanation of applicable patches, refer to [this List](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches).
 
-## Important Notes
-
-- Updating from from macOS 14.3.x to 14.4.x and newer might crash the installer early. This is related to `SecureBootModel`, so it should be set to `Disabled` during installation (&rarr; see [**Workarounds**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md) section for details).
-
-## Latest OCLP Status Updates
+## Latest OCLP status updates
 - [**macOS Sequoia OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sequoia_Notes.md)
 - [**macOS Sonoma OCLP Notes**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
 
 ## Configuration Guides
 Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st to 6th gen CPUs, I've compiled configuration guides for adjusting your existing OpenCore config so you can install and run macOS 13+ on unsupported hardware:
 
-- [**Installing macOS 13+ on 1st Gen Intel Core**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Nehalem-Westmere-Lynnfield.md)
+- [**Installing macOS 13+ on 1st Gen Intel Core systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Nehalem-Westmere-Lynnfield.md)
 - [**Installing macOS 13+ on Sandy Bridge systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Sandy_Bridge.md)
 - [**Installing macOS 13+ on Ivy Bridge systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Ivy_Bridge.md)
 - [**Installing macOS 13+ on Haswell/Broadwell systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Haswell-Broadwell.md)
 - [**Installing macOS 13+ on Skylake systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Skylake.md)
 - [**General CPU and SMBIOS Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/CPU_to_SMBIOS.md)
+
+> [!IMPORTANT]
+>
+> Updating from from macOS 14.3.x to 14.4.x and newer might crash the installer early. This is related to `SecureBootModel`, so it should be set to `Disabled` during installation (&rarr; see [**Workarounds**](/W_Workarounds/macOS14.4.md) section for details).
 
 ## (Re-)Enabling Features
 - [**Fixing WiFi and Bluetooth in macOS Sonoma+**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
