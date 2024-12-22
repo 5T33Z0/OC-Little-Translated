@@ -29,7 +29,7 @@ Based on analyzing EFI folders and configs that OCLP generates for Macs of 1st t
 - [**Installing macOS 13+ on Ivy Bridge systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Ivy_Bridge.md)
 - [**Installing macOS 13+ on Haswell/Broadwell systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Haswell-Broadwell.md)
 - [**Installing macOS 13+ on Skylake systems**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Skylake.md)
-- [**General CPUs and SMBIOSes Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/CPU_to_SMBIOS.md)
+- [**General CPU and SMBIOS Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/CPU_to_SMBIOS.md)
 
 ## (Re-)Enabling Features
 - [**Fixing WiFi and Bluetooth in macOS Sonoma+**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
