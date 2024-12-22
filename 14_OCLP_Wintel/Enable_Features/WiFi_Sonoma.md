@@ -111,7 +111,7 @@ Once you have verified that the required kext are actually loaded, you can conti
 
 ## Instructions (Intel)
 
-If your Intel Wi-FI/BT card is [supported](https://openintelwireless.github.io/itlwm/Compat.html) by the OpenIntelWireless project, the following kexts are required for enabling Bluetooth in macOS 14+:
+If your Intel Wi-FI/BT card is [supported](https://openintelwireless.github.io/itlwm/Compat.html) by the OpenIntelWireless project, the following kexts are required for enabling Bluetooth in macOS 14+ (&rarr; [plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI_Intel.plist)):
 
 Kext | Comment | `MinKernel` | `MaxKernel`
 -----|---------|:-----------:|:-----------:
@@ -121,6 +121,8 @@ Kext | Comment | `MinKernel` | `MaxKernel`
 **Screenshot**:
 
 ![](https://www.insanelymac.com/uploads/monthly_2024_12/Bildschirmfoto2024-12-15um20_12_46.png.5c0492379b510559349b00035c424288.png)
+
+
 
 > [!NOTE]
 > 

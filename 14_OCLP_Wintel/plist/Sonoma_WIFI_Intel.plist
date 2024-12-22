@@ -10,17 +10,17 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>corecaptureElCap.kext</string>
+				<string>itlwm.kext</string>
 				<key>Comment</key>
-				<string>BCM94328 Wifi Patch (Legacy)</string>
+				<string>V2.4.0 | Intel WiFI Driver (req. HeliPort app)</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/corecaptureElCap</string>
+				<string>Contents/MacOS/itlwm</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
-				<string>16.0.0</string>
+				<string>24.0.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -28,17 +28,17 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>IO80211ElCap.kext</string>
+				<string>AirportItlwm_Sonoma.kext</string>
 				<key>Comment</key>
-				<string>BCM94328 Wifi Patch (Legacy)</string>
+				<string>V2.4.0 | Intel WiFi Driver for macOS 14.4+</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/IO80211ElCap</string>
+				<string>Contents/MacOS/AirportItlwm</string>
 				<key>MaxKernel</key>
-				<string></string>
+				<string>23.9.9</string>
 				<key>MinKernel</key>
-				<string>16.0.0</string>
+				<string>23.4.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -46,17 +46,17 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>IO80211ElCap.kext/Contents/PlugIns/AirPortAtheros40.kext</string>
+				<string>IntelBTPatcher.kext</string>
 				<key>Comment</key>
-				<string>V700.74.5 | Monterey Atheros Wifi Patch</string>
+				<string>V2.5.0 | No longer neded/handled by IntelBluetoothFirmware</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/AirPortAtheros40</string>
+				<string>Contents/MacOS/IntelBTPatcher</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
-				<string>18.0.0</string>
+				<string></string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -64,13 +64,49 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>AMFIPass.kext</string>
+				<string>IntelBluetoothFirmware.kext</string>
 				<key>Comment</key>
-				<string>V1.3.1 | Boot macOS 12+ with AMFI enabled</string>
+				<string>V2.5.0 | Firmware for Intel Bluetooth Card</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/AMFIPass</string>
+				<string>Contents/MacOS/IntelBluetoothFirmware</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>IntelBluetoothInjector.kext</string>
+				<key>Comment</key>
+				<string>V2.5.0 | Only needed on macOS 11 and older</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string></string>
+				<key>MaxKernel</key>
+				<string>20.9.9</string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>BlueToolFixup.kext</string>
+				<key>Comment</key>
+				<string>V2.6.9 | Required when using macOS 12+</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/BlueToolFixup</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -91,7 +127,7 @@
 				<key>bluetoothExternalDongleFailed</key>
 				<data>AA==</data>
 				<key>boot-args</key>
-				<string>amfi=0x80 ipc_control_port_options=0 gfxrst=1 -brcmfxbeta</string>
+				<string>amfi=0x80</string>
 				<key>csr-active-config</key>
 				<data>AwgAAA==</data>
 			</dict>
