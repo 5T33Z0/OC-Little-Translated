@@ -148,30 +148,29 @@ If BT is not working after adding the two kexts, do the following:
 
 If you have one of the compatible and previously supported Broadcom or Atheros Wi-Fi Cards but it is not detected by OCLP, you need to force-enable Wi-Fi patching in OCLP's Source Code and then build a custom version of the patcher by following the steps below. In my experience this is only an issue in OCLP 0.6.9 and older. Once version 1.0.0 was released, it detected the Broadcom card in my system automatically.
 
-- Download the OCLP [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher) and unzip it
--  Enter in Terminal (line by line):
+1. Download the OCLP [Source Code](https://github.com/dortania/OpenCore-Legacy-Patcher) and unzip it
+2.  Enter in Terminal (line by line):
     ```shell
     cd ~/Downloads/OpenCore-Legacy-Patcher-main
     pip3 install -r requirements.txt
     ```
-- Wait until the downloads and installations for the pip3 stuff has finished
-- Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are required files so patching won't fail.
-- Once the download is complete, navigate to `/Downloads/OpenCore-Legacy-Patcher-main/resources/sys_patch/`
-- Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
-- Under **"# Misc Patch Detection"**, change the following setting based on the chipset your Wi-Fi Card uses:
+3. Wait until the downloads and installations for the pip3 stuff have finished
+4. Next, double-click on `Build-Binary.command` &rarr; It will download `payloads.dmg` and `Universal-Bibaries.dmg`. These are required files so patching won't fail.
+5. Once the download is complete, navigate to `/Downloads/OpenCore-Legacy-Patcher-main/resources/sys_patch/`
+6. Open `sys_patch_detect.py` with IDLE, TextEdit, Visual Studio Code or Xcode
+7. Under **"# Misc Patch Detection"**, change the following setting based on the chipset your Wi-Fi Card uses:
 	- For **Modern** Wi-Fi Cards: set `self.modern_wifi = True` 
 	- For **Legacy** Wi-Fi Cards: set `self.legacy_wifi = True`
 	- :warning: Enable either **Modern** or **Legacy**, not both! It will break Wi-Fi.
 	- Close the .py file and double-click on `OpenCore-Patcher-GUI.command` to run the Patcher App.
-- Click on "Post-Install Root Patch". Depending on your Wi-Fi Card the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of applicable patches.
-- Start Patching. 
-- Once it's done, reboot
-- Enjoy working Wi-Fi again!
+8. Click on "Post-Install Root Patch". Depending on your Wi-Fi Card the option "Networking Modern Wireless" or "Networking Legacy Wireless" should now appear in the list of applicable patches.
+9. Start Patching. 
+10. Once it's done, reboot
+11. Enjoy working Wi-Fi again!
 
 ## Notes
-- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 15 GB). [There's a workaround for Haswell+](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows installing incremental updates.
-- This workaround will probably no longer be required once the official OpenCore Patcher for macOS Sonoma is released and the option for root patching Wi-Fi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
-- For enabling modern Wi-Fi on macOS Sonoma, there's also a semi-automated [patch](https://github.com/AppleOSX/PatchSonomaWiFiOnTheFly) available.
+- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 15 GB). [There's a workaround for Haswell+](/S_System_Updates/OTA_Updates.md) that allows installing incremental updates.
+- For enabling legacy and modern Wi-Fi on macOS Sonoma or newer during install, you can make use of [auto-root-patching](/14_OCLP_Wintel/Guides/Auto-Patching.md).
 
 ## Credits
 - Acidanthera for OpenCore and Kexts
