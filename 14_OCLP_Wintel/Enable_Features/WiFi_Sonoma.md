@@ -169,7 +169,7 @@ If you have one of the compatible and previously supported Broadcom or Atheros W
 - Enjoy working Wi-Fi again!
 
 ## Notes
-- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 15 GB). [There's a workaround for Haswell+](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows incremental updates to work temporarily.
+- Keep in mind that incremental system updates will no longer work once you applied root patches. Instead the complete macOS installer will be downloaded (≈ 15 GB). [There's a workaround for Haswell+](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/OTA_Updates.md) that allows installing incremental updates.
 - This workaround will probably no longer be required once the official OpenCore Patcher for macOS Sonoma is released and the option for root patching Wi-Fi functionality can either be enabled in the GUI or the detection for used cards in Wintel machines works better. After all, OpenCore Legacy Patcher was written for real Macs.
 - For enabling modern Wi-Fi on macOS Sonoma, there's also a semi-automated [patch](https://github.com/AppleOSX/PatchSonomaWiFiOnTheFly) available.
 
