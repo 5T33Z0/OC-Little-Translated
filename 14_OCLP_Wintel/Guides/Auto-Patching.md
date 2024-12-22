@@ -8,32 +8,35 @@ Did you ever wonder what the `AutoPkgInstaller.kext` and the `AutoPkg-Assets.pkg
 > 
 > – [**Jazzny**](https://forums.macrumors.com/threads/macos-12-monterey-on-unsupported-macs-thread.2299557/page-283?post=31315624#post-31315624)
 
-If you add `AutoPkgInstaller.kext` to your OpenCore EFI folder and the `.pkg` file to the macOS Installer in a specific location, root patches will be applied to your system during macOS installation *automatically*! The OpenCore-Patcher app will be installed automatically as well.
+If you add `AutoPkgInstaller.kext` to your OpenCore EFI folder and the `.pkg` file to the macOS Installer in a specific location, root patches will be applied to your system during macOS installation *automatically!* The OpenCore-Patcher app will be installed automatically as well.
 
-You still have to prepare your EFI folder and config as described in my guides to run macOS 13 and newer, but if they are configured correctly, you don't have to run OCLP in Post-Install.
-
-> [!CAUTION]
-> 
-> `AutoPkg-Assets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
+You still have to prepare your EFI folder and `config.plist` as described in my guides to run macOS 13 and newer, but if they are configured correctly, you don't have to run OCLP in Post-Install.
 
 ### Who is this method for?
 
 If your system requires iGPU and/or GPU (AMD/NVIDIA) root patches to enable hardware graphics acceleration, then this method is highly recommended to avoid the super-sluggish software-rendered setup screen. If you just need to patch Wi-Fi, then not so much. In this case, I would recommend patching Wi-Fi in post-install as usual.
 
+> [!CAUTION]
+> 
+> `AutoPkg-Assets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
+
 ## Instructions
+
+### When using a USB Installer
 If you create a macOS USB installer with OpenCore Legacy Patcher, `AutoPkg-Assets.pkg` will be added to the USB installer automatically. You only need to ensure that `AutoPkgInstaller.kext` is present in your OpenCore EFI and in your `config.plist` to enable auto root-patching.
 
-If you use OCLP to download the latest macOS Installer app to install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Assets.pkg` to the macOS installer manually after the download and assembly of the macOS installer is completed:
+### When using the macOS Installer app
+If you use OCLP to download the macOS Installer app to install a newer version of macOS on a separate APFS volume or upgrade your existing install, you need to add `AutoPkg-Assets.pkg` to the app manually after the download and assembly of the macOS installer is completed:
 
-1. [Prepare](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) your OpenCore `config.plist` and `EFI` folder for installing macOS 13 and newer based on the configuration guide for your CPU family.
-2. Add [`AutoPkgInstaller.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) to your EFI folder and `config.plist` if it is not present already.
-3. Download the latest [AutoPkg-Assets.pkg](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) file from the OCLP repo.
-4. Download macOS with OCLP:
+1. [**Prepare**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) your OpenCore `config.plist` and `EFI` folder for installing macOS 13 and newer based on the configuration guide for your CPU family.
+2. Add [**`AutoPkgInstaller.kext`**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) to your EFI folder and `config.plist` if it is not present already.
+3. Download the latest [**AutoPkg-Assets.pkg**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) file from the OCLP repo.
+4. Download the macOS Installer with OCLP:
    - Run OCLP
    - Click on "Create macOS Installer"
    - Click on "Download macOS Installer" 
    - Select the macOS Installer you want and click on "Download"
-5. Once the download is completed, the macOS Installer app will be located in "Applications"
+5. Once the download is completed, the "Install macOS" app will be located in "Applications"
 6. Right-click the macOS Installer app and select "Show Package Contents"
 7. Show hidden files by pressing <kbd>CMD</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd>
 8. Navigate to `Library`
@@ -45,7 +48,7 @@ Once the installation reaches the first-time setup stage, iGPU/GPU acceleration,
 
 > [!TIP]
 >
-> If your system only supports Metal 1 (Intel Ivy Bridge, Intel Haswell, Nvidia Kepler), graphics acceleration may not work properly in macOS Sequoia after reaching the desktop. In this case, make sure that your system has internet access and apply root patches again. OCLP will check for the latest [MetallibSupporPkg](https://github.com/dortania/MetallibSupportPkg) and download it prior to applying root patches. Afterward, hardware graphics acceleration should work as expected again.
+> If your system only supports Metal 1 (Intel Ivy Bridge, Intel Haswell, Nvidia Kepler), graphics acceleration may not work properly in macOS Sequoia after reaching the desktop. In this case, make sure that your system has internet access and apply root patches again. OCLP will check for the latest [**MetallibSupporPkg**](https://github.com/dortania/MetallibSupportPkg) and download it prior to applying root patches. Afterwards, hardware graphics acceleration should work as expected again.
 
 ## Resources
 - [Background info about the inner workings of automatic root patching](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/986)
