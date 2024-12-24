@@ -12,6 +12,8 @@
 	- [Verifying added Kexts](#verifying-added-kexts)
 	- [Applying Root Patches to re-enable Wi-Fi Cards](#applying-root-patches-to-re-enable-wi-fi-cards)
 - [Instructions (Intel)](#instructions-intel)
+	- [Wi-Fi](#wi-fi)
+	- [Bluetooth](#bluetooth)
 	- [Troubleshooting Intel BT](#troubleshooting-intel-bt)
 - [Credits](#credits)
 
