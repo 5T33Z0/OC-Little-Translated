@@ -109,6 +109,34 @@ Once you have verified that the required kext are actually loaded, you can conti
 
 ## Instructions (Intel)
 
+### Wi-Fi
+
+For enabling Wi-Fi cards from Intel, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. While AirportItlwm acts as a Wi-Fi driver, the card will be detected as an Ethernet Controller when using Itlwm. Both kexts have different pros and cons, so which one to use depends on personal preference and the used OS ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html)).
+
+Unlike `Itlwm.kext`, `AirportItlwm.kext` requires a different variant of the kext *per macOS version* (macOS High Sierra up to Sonoma are currently supported). In macOS Sequoia, using `itlwm.kext` is mandatory to get WiFi working. When using `Itlwm.kext`, you also need an additional app called [**HeliPort**](https://github.com/OpenIntelWireless/HeliPort/releases) to connect to Wi-Fi Hotspots.
+
+If you have multiple versions of macOS installed and want to use `AirportItlwm.kext` in all of them, you have to a) rename the kexts in order to place them all in the "kexts" folder and b) you also have to adjust their `MinKernel` and `MaxKernel` settings, so only the correct one gets loaded.
+
+Listed below are instruction of how to cobinate itlwm and AirportIlmw kexts. In this case, itlwm is used for macOS Sequoia, while AirportItlwm is used for macOS Big Sur up to Sonoma.
+
+1. Go to [**https://github.com/OpenIntelWireless/itlwm/releases**](https://github.com/OpenIntelWireless/itlwm/releases)
+2. Click on “Assets”
+3. Download the builds of the AirportItlwm of your choice
+4. Extract and rename them: I usually add an underscore followed by the name of the OS, e.g. `AirportItlwm_Sonoma.kext` (don’t add blank spaces!)
+5. Add them to `EFI/OC/Kexts` and your `config.plist`
+6. Disable `itlwm.kext` (if present)
+7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for:<br>![intelwifi](/Users/5t33y0/Desktop/intelwlan.png)
+8. Save your config
+
+> [!IMPORTANT]
+> 
+> - Use either `AirportItlwm` or `Itlwm` – never both!
+> - When using `AirportItlwm`, adding the correct `MinKernel` and `MaxKernel` settings is *madatory*. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
+> - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
+> - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md)). Afterwards, you can revert the settings.
+
+### Bluetooth
+
 If your Intel Wi-FI/BT card is [supported](https://openintelwireless.github.io/itlwm/Compat.html) by the OpenIntelWireless project, the following kexts are required for enabling Bluetooth in macOS 14+ (&rarr; [plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/Sonoma_WIFI_Intel.plist)):
 
 Kext | Comment | `MinKernel` | `MaxKernel`
@@ -118,14 +146,13 @@ Kext | Comment | `MinKernel` | `MaxKernel`
 
 **Screenshot**:
 
-![](https://www.insanelymac.com/uploads/monthly_2024_12/Bildschirmfoto2024-12-15um20_12_46.png.5c0492379b510559349b00035c424288.png)
-
-
+![intelbt](/Users/5t33y0/Desktop/intelbt.png)
 
 > [!NOTE]
 > 
 > - Make sure to perform an NVRAM reset after applying these settings and after switching macOS versions (if you have different versions of macOS installed)
 > - I have noticed that it can take like 10 seconds or so until BT is available after applying these changes.
+> - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
 ### Troubleshooting Intel BT
 
