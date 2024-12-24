@@ -127,8 +127,8 @@ Listed below are instruction of how to cobinate itlwm and AirportIlmw kexts. In 
 4. Extract and rename them: I usually add an underscore followed by the name of the OS, e.g. `AirportItlwm_Sonoma.kext` (don’t add blank spaces!)
 5. Add them to `EFI/OC/Kexts` and your `config.plist`
 6. Disable `itlwm.kext` (if present)
-7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for:<br>![intelwifi](/Users/5t33y0/Desktop/intelwlan.png)
-8. Save your config
+7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for:<br>![intelwlan](https://github.com/user-attachments/assets/bf6ebd02-922b-42cf-9095-b103028ffa0d)
+8. Save your config and reboot.
 
 > [!IMPORTANT]
 > 
@@ -148,7 +148,7 @@ Kext | Comment | `MinKernel` | `MaxKernel`
 
 **Screenshot**:
 
-![intelbt](/Users/5t33y0/Desktop/intelbt.png)
+![intelbt](https://github.com/user-attachments/assets/96062780-6a52-430c-a1ac-4b45515c81a6)
 
 > [!NOTE]
 > 
