@@ -64,7 +64,7 @@ Config Section | Action
 > [!NOTE]
 > 
 > - Make sure to perform an NVRAM reset after applying these settings and after switching macOS versions (if you have different versions of macOS installed)
-> - I have noticed that it can take like 10 seconds or so until BT is available after applying these changes.
+> - I have noticed that it can take 5 to 10 seconds or so until BT is available after applying these changes.
 
 ### Verifying added Kexts
 
@@ -134,8 +134,8 @@ Listed below are instruction of how to cobinate itlwm and AirportIlmw kexts. In 
 > 
 > - Use either `AirportItlwm` or `Itlwm` – never both!
 > - When using `AirportItlwm`, adding the correct `MinKernel` and `MaxKernel` settings is *madatory*. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
-> - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
-> - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md)). Afterwards, you can revert the settings.
+> - When renaming kexts, you can’t automatically fetch kext updates for them with tools like OCAT any longer.
+> - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md)). Afterwards, you can enable `SecureBootModel` again.
 
 ### Bluetooth
 
