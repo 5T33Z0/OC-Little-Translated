@@ -35,13 +35,22 @@ For Ivy Bridge(-E) and older, you have to create an SSDT containing the power an
 
 ## Instructions
 - Open Terminal
-- Enter the following command to download the ssdtPRGen Script: `curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh`
-- Make it executable: `chmod +x ~/ssdtPRGen.sh` 
-- Run the script: `sudo ~/ssdtPRGen.sh`
+- Enter the following command to download the ssdtPRGen Script:
+	```bash
+	curl -o ~/ssdtPRGen.sh https://raw.githubusercontent.com/Piker-Alpha/ssdtPRGen.sh/Beta/ssdtPRGen.sh
+	```
+- Make it executable: 
+	```bash
+	chmod +x ~/ssdtPRGen.sh
+	``` 
+- Run the script: 
+	```bash
+	sudo ~/ssdtPRGen.sh
+	```
 - The generated `SSDT.aml` will be located at `~/Library/ssdtPRGen`
-- Rename it to `SSDT-PM.aml` 
-- Copy it to `EFI/OC/ACPI` and list it in the `ACPI/Add` section of your config.plist
-- Under `ACPI/Delete`, disable `Delete CpuPm` and `Delete Cpu0Ist`
+- Rename it to `SSDT-PM.aml` (optional, but good practice)
+- Copy it to `EFI/OC/ACPI` and list it in the `ACPI/Add` section of your `config.plist`
+- Under `ACPI/Delete`, disable `Delete CpuPm` and `Delete Cpu0Ist` again
 - Save the config and reboot
 
 Monitor the behavior of the CPU in [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
