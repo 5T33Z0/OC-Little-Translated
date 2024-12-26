@@ -1,5 +1,23 @@
 # Enabling Devices and Features for macOS
 
+**TABLE of CONTENTS**
+
+- [About](#about)
+- [Properties of Virtual Devices](#properties-of-virtual-devices)
+- [Adding missing Devices and Features](#adding-missing-devices-and-features)
+  - [Obtaining ACPI Tables](#obtaining-acpi-tables)
+    - [Dumping ACPI tables with Clover (easiest and fastest method)](#dumping-acpi-tables-with-clover-easiest-and-fastest-method)
+    - [Dumping ACPI tables with OpenCore (requires Debug version)](#dumping-acpi-tables-with-opencore-requires-debug-version)
+    - [Dumping ACPI tables with `SSDTTime` (Windows version only)](#dumping-acpi-tables-with-ssdttime-windows-version-only)
+  - [Available Hotpatches](#available-hotpatches)
+    - [Functional SSDTs](#functional-ssdts)
+    - [Cosmetic SSDTs (optional)](#cosmetic-ssdts-optional)
+- [Converting `.dsl` files to `.aml`](#converting-dsl-files-to-aml)
+- [Avoid patches from Olarila/MalD0n](#avoid-patches-from-olarilamald0n)
+- [Resources](#resources)
+
+---
+
 ## About
 Among the many `SSDT` (Secondary System Description Table) patches available in this repo, a significant number of them are for enabling devices, services or features in macOS. They can be divided into four main categories:
 
@@ -12,12 +30,13 @@ Among the many `SSDT` (Secondary System Description Table) patches available in 
 
 Clover users don't have to worry about this since binary renames and SSDT hotpatches are not injected into other OSes (unless you tell it to do so). But if you are a Clover user switching over to OpenCore, you have to adjust your SSDTs since they most likely don't contain the `_OSI` method!
 
-### :warning: Don't inject already known Devices
-Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
-
-The only reason for doing this is to have installed PCIe cards listed in the "PCI" section of System Profiler. Apart from that, all detected devices will be listed in the corresponding category they belong to automatically. So there's really no need to do this.
-
-:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
+> [!WARNING] 
+> 
+> Don't inject already known Devices! Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same, already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
+>
+> The only reason for doing this is to have installed PCIe cards listed in the "PCI" section of System Profiler. Apart from that, all detected devices will be listed in the corresponding category they belong in automatically. So there's really no need to do this.
+>
+>:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
 
 ## Properties of Virtual Devices
 - **Features**:
@@ -106,31 +125,31 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
-[**SSDT-ALS0/ALSD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD). Also included in OpenCorePkg.|`ACPI0008`
-[**SSDT-AWAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer. Also included in OpenCorePkg.|`Device (AWAC)` or `ACPI000E`
-[**SSDT-BRG0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)|For enabling undetected AMD GPUs sitting behind an intermediate PCI bridge without an ACPI device name assigned to it. Also included in OpenCorePkg.| –
-[**SSDT-DTGP**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Method_DTGP)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
-[**SSDT-EC/-USBX**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
-[**SSDT-GPIO**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch)|Enables GPIO device.|–
-[**SSDT-HPET**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))|Fixes IRQ conflicts. Required for on-board sound to work.|–
-[**SSDT-I225V**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
-[**SSDT-HV-…**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...))|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
-[**SSDT-IMEI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
-[**SSDT-LAN**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
-[**SSDT-NAVI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/AMD_Navi)|Enables AMD Navi GPUs in macOS|–
-[**SSDT-PLUG**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)#readme)| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
-[**SSDT-PM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
-[**SSDT-PMCR**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR))|Adds Apple exclusice `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
-[**SSDT-PNLF**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
-[**SSDT-PWRB/SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB_SSDT-SLPB))|Adds Power and Sleep Button Devices if missing (for Laptops primarily).|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
-[**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) </br>[**SSDT-RTC0-RANGE**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac-methods/manual-hedt.html#seeing-if-you-need-ssdt-rtc0-range)|Adds a fake Real Time Clock. Required for (real) 300-series mainboards (RTCO) and X299 (RTC0-Range) only! Also included in OpenCorePkg.|`PNP0B00`
-[**SSDT-SBUS-MCHC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_and_Memory_Controller_(SSDT-SBUS-MCHC))|Fixes System Management Bus and Memory Controller in macOS. Also included in OpenCorePkg.|`0x001F0003` or</br> `0x001F0004`
-[**SSDT-UNC**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0.html) |Disables unused uncore bridges to prevent kenel panic in macOS 11+. Affected chipsets: X99, X79, C602, C612. Also included in OpenCorePkg.|–
-[**SSDT-XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs.| –
-[**SSDT-XOSI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))|OS Compatibility Patch. Also included in OpenCorePkg.|–
+[**SSDT-ALS0/ALSD**](/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)/README.md)|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD). Also included in OpenCorePkg.|`ACPI0008`
+[**SSDT-AWAC**](/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)/README.md)|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer. Also included in OpenCorePkg.|`Device (AWAC)` or `ACPI000E`
+[**SSDT-BRG0**](/11_Graphics/GPU/GPU_undetected/README.md)|For enabling undetected AMD GPUs sitting behind an intermediate PCI bridge without an ACPI device name assigned to it. Also included in OpenCorePkg.| –
+[**SSDT-DTGP**](/01_Adding_missing_Devices_and_enabling_Features/Method_DTGP/README.md)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
+[**SSDT-EC/-USBX**](/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md)|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
+[**SSDT-GPIO**](/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch/README.md)|Enables GPIO device.|–
+[**SSDT-HPET**](/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET)/README.md)| Fixes IRQ conflicts. Required for on-board sound to work.|–
+[**SSDT-I225V**](/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
+[**SSDT-HV-…**](/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...)/README.md)|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
+[**SSDT-IMEI**](/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI)/README.md)|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
+[**SSDT-LAN**](/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN)/README.md)|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
+[**SSDT-NAVI**](/11_Graphics/GPU/AMD_Navi/README.md)|Enables AMD Navi GPUs in macOS|–
+[**SSDT-PLUG**](/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/README.md)| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
+[**SSDT-PM**](/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)/README.md)|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
+[**SSDT-PMCR**](/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR)/README.md)|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
+[**SSDT-PNLF**](/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/README.md)|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
+[**SSDT-PWRB/SLPB**](/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB_SSDT-SLPB)/README.md)|Adds Power and Sleep Button Devices if missing (for Laptops primarily).|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
+[**SSDT-RTC0**](/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)/README.md) </br>[**SSDT-RTC0-RANGE**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac-methods/manual-hedt.html#seeing-if-you-need-ssdt-rtc0-range)|Adds a fake Real Time Clock. Required for (real) 300-series mainboards (RTCO) and X299 (RTC0-Range) only! Also included in OpenCorePkg.|`PNP0B00`
+[**SSDT-SBUS-MCHC**](/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_and_Memory_Controller_(SSDT-SBUS-MCHC)README.md)|Fixes System Management Bus and Memory Controller in macOS. Also included in OpenCorePkg.|`0x001F0003` or</br> `0x001F0004`
+[**SSDT-UNC**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0.html) |Disables unused uncore bridges to prevent kernel panics in macOS 11+. Affected chipsets: X99, X79, C602, C612. Also included in OpenCorePkg.|–
+[**SSDT-XCPM**](/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs/README.md)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs.| –
+[**SSDT-XOSI**](/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI)/README.md)|OS Compatibility Patch. Also included in OpenCorePkg.|–
 
 #### Cosmetic SSDTs (optional)
-The SSDTs listed below are considered cosmetic and non-functional – they are not needed!. They add virtual versions of devices existing in real Macs. Adding any of the tables listed below, ***does not*** add or enable any features besides mimicking the ***look*** of the I/O registy of the corresponding Mac model (as defined in the SMBIOS). To quote one of the devlopers of OpenCore:
+The SSDTs listed below are considered cosmetic and non-functional – they are not needed!. They add virtual versions of devices existing in real Macs. Adding any of the tables listed below, ***does not*** add or enable any features besides mimicking the ***look*** of the I/O registry of the corresponding Mac model (as defined in the SMBIOS). To quote one of the developers of OpenCore:
 
 > It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
 >
@@ -138,13 +157,13 @@ The SSDTs listed below are considered cosmetic and non-functional – they are n
 
 |SSDT|Description|Search term(s) in DSDT
 |:----:|-------------|:-------------------:|
-[**SSDT-AC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC))|Attaches AC Adapter Device to `AppleACPIACAdapter` Service in I/O Registry. No longer needed since `VirtualSMC` and `SMCBatteryManager` handle this nowadays.|`ACPI0003`
-[**SSDT-ARTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC))|Adds fake `ARTC` Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses the same `_HID` as `AWAC`.| `ACPI000E` 
-[**SSDT-DMAC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC))|Adds fake DMA Controller to the device tree.|`PNP0200` or</br> `DMAC`
-[**SSDT-FWHD**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD))|Adds fake Firmware Hub Device (`FWHD`) to IOReg. Used by almost every Intel-based Mac.|`INT0800`
-[**SSDT-MEM2**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2)|Adds `MEM2` Device to the iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
-[**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC))| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
-[**SSDT-XSPI**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI))|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
+[**SSDT-AC**](/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC)/README.md)|Attaches AC Adapter Device to `AppleACPIACAdapter` Service in I/O Registry. No longer needed since `VirtualSMC` and `SMCBatteryManager` handle this nowadays.|`ACPI0003`
+[**SSDT-ARTC**](/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC)/README.md)|Adds fake `ARTC` Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses the same `_HID` as `AWAC`.| `ACPI000E` 
+[**SSDT-DMAC**](/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)/README.md)|Adds fake DMA Controller to the device tree.|`PNP0200` or</br> `DMAC`
+[**SSDT-FWHD**](/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD)/README.md)|Adds fake Firmware Hub Device (`FWHD`) to IOReg. Used by almost every Intel-based Mac.|`INT0800`
+[**SSDT-MEM2**](/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2/README.md)|Adds `MEM2` Device to the iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
+[**SSDT-PPMC**](/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)/README.md)| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
+[**SSDT-XSPI**](/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI)/README.md)|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 
 ## Converting `.dsl` files to `.aml`
 The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In order to use them in your system, do the following:
@@ -163,11 +182,11 @@ The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In o
 
 > [!NOTE]
 > 
-> If you download the whole repo, you can just open the .dsl files with maciASL instead.
+> If you download the whole repo, you can open the .dsl files with maciASL instead.
 
-## Avoid Olarila/MalD0n 
+## Avoid patches from Olarila/MalD0n 
 
-> [!WARNING]
+> [!CAUTION]
 > 
 > Avoid using pre-made OpenCore (and Clover) EFI folders from MalD0n/Olarila as they include a generic `SSDT-OLARILA.aml` which injects all sorts of devices which your system may not even need. It also injects an "Olarila" branding into the "About this Mac" section. To get rid of it, delete `Device (_SB.PCI0.OLAR)` and `Device (_SB.PCI0.MALD)` from this SSDT. Or even better: delete the whole file and add individual SSDTs for the devices/features your system actually needs instead.
 
