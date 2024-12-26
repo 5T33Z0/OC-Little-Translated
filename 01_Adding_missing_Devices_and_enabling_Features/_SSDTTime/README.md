@@ -4,21 +4,27 @@ The python script **SSDTTime** can generate the following SSDTs by analyzing you
 
 SSDT | Description
 :---: |---------
-***[SSDT-AWAC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC))*** |  Context-aware AWAC and Fake RTC
-***[SSDT-Bridge](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/GPU/GPU_undetected)*** | ACPI device for missing PCI bridges for passed device path
-***[SSDT-EC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))*** | OS-aware fake EC for Desktops and Laptops
-***[SSDT-USBX](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC))*** | Adds USB power properties for Skylake and newer SMBIOS
-***[SSDT-HPET](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))*** | Patches out IRQ Conflicts
-***[SSDT-PLUG](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG))*** | Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management in macOS Big Sur and older. Not required in macOS Monterey and newer. Also not required when CPUFriend and CPUFriendDataProvider kexts are injected.
-***[SSDT-PMC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR))*** | Enables Native NVRAM on true 300-Series Boards and newer
-***[SSDT-PNLF](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF))*** | PNLF device for laptop backlight control
+[***SSDT-AWAC***](/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)/README.md) | Context-aware AWAC and Fake RTC (System Clock)
+[***SSDT-Bridge***](/11_Graphics/GPU/GPU_undetected/README.md) | ACPI device for missing PCI bridges for passed device path
+[***SSDT-EC***](/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md) | OS-aware fake EC for Desktops and Laptops
+[***SSDT-USBX***](/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md) | Adds USB power properties for Skylake and newer SMBIOS
+[***SSDT-HPET***](/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET)/README.md) | Patches out IRQ conflicts. Symptom: No Audio. Usually only required on older Intel chipsets (pre Skylake).
+[***SSDT-PLUG***](/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/README.md) | Sets plugin-type to `1` on `CPU0`/`PR00` to enable the X86PlatformPlugin for CPU Power Management in macOS Big Sur and older. Not required in macOS Monterey and newer. Also not required when CPUFriend and CPUFriendDataProvider kexts are injected.
+[***SSDT-PMC***](/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR)/README.md) | Enables Native NVRAM on true 300-Series Boards and newer
+[***SSDT-PNLF***](/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/README.md) | PNLF device for enabling backlight control of Laptop displays.
+[***SSDT-XOSI***](/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI)/README.md) | SSDT hotfix and and binary rename(s) to make macOS "believe" that it's currently running Windows on a Mac &rarr; Mainly required to improve I2C TouchPad support on Laptops.
+[***SSDT-SBUS-MCHC***](/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_and_Memory_Controller_(SSDT-SBUS-MCHC)/README.md) | Defines an MCHC and BUS0 device for SMBus compatibility
 ***SSDT-USB-Reset*** | Resets USB controllers to allow USB port mapping
-***[SSDT-XOSI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI))*** | SSDT hotfix and and binary rename(s) to make macOS "believe" that it's currently running Windows on a Mac &rarr; Mainly required to improve I2C TouchPad support on Laptops.
 
-Additionally, it can modify the following ACPI tables:
+Additionally, it can modify the following ACPI table:
+
 Table <br>Signature  | Description
 :------------------: |---------
 [***DMAR***](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#method-2-dropping-tables-based-on-table-signature) |  Removes Reserved Memory Regions from the `DMAR` table and creates a rule to drop and replace the original table.
+
+> [!TIP]
+>
+> **SSDTTime** should be your goto utility for preparing a new/unknown system's ACPI tables for installing/running macOS.
 
 ## Instructions
 
@@ -31,6 +37,6 @@ Table <br>Signature  | Description
 7. Add required Kexts to `EFI/OC/Kexts` and your `config.plist` if they are not present already. Usually Lilu, VirtualSMC, WhateverGreen (for Graphics) and AppleALC (for Audio).
 8. Save and Reboot.
 
-## NOTES
-- The Windows and Linux version of SSDTTime can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
-- If you are using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases) to edit your config.plist, you can drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can just copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.
+> [!NOTE]
+> - The Windows and Linux version of SSDTTime can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
+> - If you are using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases) for editing your config, you can drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can just copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.
