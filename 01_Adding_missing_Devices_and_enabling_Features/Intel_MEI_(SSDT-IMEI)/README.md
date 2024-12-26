@@ -19,7 +19,9 @@ In this case, you don't need `SSDT-IMEI`. But if Terminal just returns an empty 
 ## Instructions
 In **DSDT**, search for:
 
-`0x00160000`. If missing, add ***SSDT-IMEI*** to ACPI Folder and Config.
+`0x00160000`
+
+If missing, add ***SSDT-IMEI*** to the `EFI/OC/ACPI` folder and `config.plist` (ACPI/Add).
 
 > [!CAUTION]
 > 
