@@ -53,7 +53,7 @@ For Ivy Bridge(-E) and older, you have to create an SSDT containing the power an
 - Under `ACPI/Delete`, disable `Delete CpuPm` and `Delete Cpu0Ist` again
 - Save the config and reboot
 
-Monitor the behavior of the CPU in [**Intel Power Gadget**](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html). Check if it is stepping though different frequencies. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
+Monitor the behavior of the CPU in [**Intel Power Gadget**](https://www.insanelymac.com/forum/topic/357902-intel-power-gadget/). Check if it is stepping though different frequencies by performing different tasks like browsing the web and watching a YT video for example. If the CPU is reacting to your usage of the system and if it reaches the defined lower and upper frequency limits, then CPU Power Management is working correctly.
 
 ### Modifiers
 Besides simply generating the ssdt by running the script, you can add modifiers to the terminal command. Although the ssdtPRGen repo lists a bunch of [overrides](https://github.com/Piker-Alpha/ssdtPRGen.sh#help-information), it doesn't go into detail about how and when to use them.
