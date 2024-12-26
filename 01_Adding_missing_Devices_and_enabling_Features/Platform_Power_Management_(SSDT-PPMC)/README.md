@@ -1,5 +1,6 @@
 # Platform Power Management Controller (`SSDT-PPMC`)
 
+## Description
 - **What it is**: Adds Platform Power Management Controller Device
 - **What it does**: Improves Power Management (supposedly)
 - **Supported Intel CPU Families**:
@@ -19,7 +20,7 @@
 >
 > Ensure that the ACPI path of the LPC Bus (`LPC` or `LPCB`) used in the SSDT is identical with the one used in your system's `DSDT`. 
 
-### Verifying
+## Verifying
 In IORegistryExplorer search for `PPMC`. If present, it should look like this:
 
 ![PPMC](https://user-images.githubusercontent.com/76865553/140606933-94dbfeda-386e-4885-b2a6-ea214b9f4f07.png)

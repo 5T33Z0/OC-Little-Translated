@@ -1,6 +1,8 @@
 ## Laptop Patches
 This section contains a collection of guides with laptop-specific patches for enabling Touch- and TrackPads, the Battery Status indicator, Brightness Shortcut Keys, etc.
 
+**TABLE of CONTENTS**
+
 - [**Adjusting Framebuffer Patches for connecting an external display**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Framebuffer_Patching)
 - [**Enabling TrackPad support on Laptopss**
 ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches)

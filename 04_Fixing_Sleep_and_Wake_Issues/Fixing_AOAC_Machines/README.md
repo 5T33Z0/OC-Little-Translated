@@ -1,5 +1,16 @@
 # Fixig Sleep issues on AOAC machines
 
+- [About AOAC Technology](#about-aoac-technology)
+  - [How to determine if you have an `AOAC` Machine](#how-to-determine-if-you-have-an-aoac-machine)
+- [AOAC Problems](#aoac-problems)
+  - [Sleep Issues](#sleep-issues)
+  - [Standby Issues](#standby-issues)
+- [Fixing AOAC](#fixing-aoac)
+- [AOAC Sleep, Wake](#aoac-sleep-wake)
+- [AOAC Patches](#aoac-patches)
+
+---
+
 ## About AOAC Technology
 
 A new technology, namely *Always On/Always Connected* (AOAC) was introduced by Intel in the 2000s and is designed to maintain network connectivity and data transfer while the computer is in sleep or hibernation mode. Simply put, the introduction of `AOAC` makes laptops behave similar to Smartphones or Bluetooth Headsets.
@@ -49,11 +60,11 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 - Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
 - Enabling `L1` power state &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
 
-## :warning: Caution
-
-- The `AOAC` fix is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
-- Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
-  - [PTSWAKTTS Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
-  - [PNP0C0E Sleep Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
-- For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
-- You can also try this method on non-AOAC machines.
+> [!CAUTION]
+>
+>- The `AOAC` fix is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
+>- Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
+>   - [PTSWAKTTS Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+>   - [PNP0C0E Sleep Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
+>- For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
+>- You can also try this method on non-AOAC machines.

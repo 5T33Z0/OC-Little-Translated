@@ -1,5 +1,12 @@
 # Comprehensive Sleep and Wake Patch
 
+- [Description](#description)
+- [About the Patches](#about-the-patches)
+  - [Sorting Order](#sorting-order)
+- [Required Binary Renames](#required-binary-renames)
+
+---
+
 ## Description
 By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition to State) methods and redefining them via `SSDT-PTSWAKTTS`, problems with sleep and wake can be fixed on certain machines.
 
@@ -81,5 +88,6 @@ If `_TTS` exists in the `DSDT`, you need to rename it too; if it doesn't, you do
     {
   ```
 
-## Notes
-- For more details about the connection between `_PTS`, `_TTS` and `_WAK` methods, please refer to chapter 7.5 of the [**ACPI Specifications**](https://uefi.org/specsandtesttools)
+>[!NOTE]
+>
+> For more details about the connection between `_PTS`, `_TTS` and `_WAK` methods, please refer to chapter 7.5 of the [**ACPI Specifications**](https://uefi.org/specsandtesttools).

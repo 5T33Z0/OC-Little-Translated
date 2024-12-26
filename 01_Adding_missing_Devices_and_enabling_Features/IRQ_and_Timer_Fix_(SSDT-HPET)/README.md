@@ -1,7 +1,29 @@
 # Sound Card IRQ Patches (`SSDT-HPET`)
 
-## Description
+- [Description](#description)
+- [Patching Principle](#patching-principle)
+  - [Symptoms for Audio issues](#symptoms-for-audio-issues)
+  - [Patching Methods](#patching-methods)
+- [1. Semi-Automated patching (using SSDTTime)](#1-semi-automated-patching-using-ssdttime)
+  - [Troubleshooting](#troubleshooting)
+- [2. Manual patching methods](#2-manual-patching-methods)
+  - [Method 2.1: Patching with ***SSDT-HPET\_RTC\_TIMR-fix***](#method-21-patching-with-ssdt-hpet_rtc_timr-fix)
+    - [Disabling **`HPET`**](#disabling-hpet)
+    - [Disabling **`RTC`**](#disabling-rtc)
+    - [Disabling **`TIMR`**](#disabling-timr)
+    - [Disabling **`PIC`**/ **`IPIC`** (optional)](#disabling-pic-ipic-optional)
+  - [Method 2.2: Patching with ***SSDT-IRQ\_FIXES\_THINK*** if `HPAE/HPTE` does not exist](#method-22-patching-with-ssdt-irq_fixes_think-if-hpaehpte-does-not-exist)
+    - [Explanation](#explanation)
+    - [Pre-requisites](#pre-requisites)
+    - [Instructions](#instructions)
+  - [Method 2.3: Renaming `If ((\WNTF && !\WXPF))` to `If (_OSI ("Darwin"))`](#method-23-renaming-if-wntf--wxpf-to-if-_osi-darwin)
+    - [Instructions](#instructions-1)
+- [Notes](#notes)
+- [Credits](#credits)
 
+---
+
+## Description
 Sound cards of older systems (pre Kaby Lake) require High Precision Event Timer **HPET** (`PNP0103`) to provide interrupts `0` and `8`, otherwise the sound card won't work, even if `AppleALC.kext` is present and the correct layout-id is used. That's because `AppleHDA.kext` is not loaded (only `AppleHDAController.kext` is). 
 
 `HPET` is a legacy device from earlier Intel platforms (1st to 6th Gen Intel Core) that is only kept in ACPI tables of newer systems (Kaby Lake or newer) for backward compatibility with Windows XP and older. When running Windows Vista or newer on a system with a 7th Gen or newer Intel CPU, **HPET** (High Precision Event Timer) is disabled by default – even if it's present in the `DSDT`.

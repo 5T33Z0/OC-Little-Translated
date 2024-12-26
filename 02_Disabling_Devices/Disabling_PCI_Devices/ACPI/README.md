@@ -1,5 +1,9 @@
 # Disabling PCI devices
 
+- [Description](#description)
+- [Device name](#device-name)
+- [SSDT Disable Patch Example](#ssdt-disable-patch-example)
+
 ## Description
 
 In some cases you may want to disable a PCI device. For example, the HDMI Audio Device of a discrete GPU or a SD Card Reader attached via PCIe which is not working under macOS. You can disable PCI devices with a custom SSDT patch.
@@ -50,9 +54,9 @@ These devices have the following characteristics:
   }
   ```
 
-## :warning: Caution
-
-- If there are multiple **child devices** to a **parent device**, please **use this method with caution**.
-- When using the SSDT, replace `RP01` in the example with the name of the **parent** device to which the disabled child device belongs to, as shown in the example.
-- If the disabled device already includes the `_STA` method, ignore the content between the *possible start* to *possible end* markers of the example.
-- This method does not release the device from the PCI Bus.
+> [!CAUTION]
+>
+> - If there are multiple **child devices** to a **parent device**, please **use this method with caution**.
+> - When using the SSDT, replace `RP01` in the example with the name of the **parent** device to which the disabled child device belongs to, as shown in the example.
+> - If the disabled device already includes the `_STA` method, ignore the content between the *possible start* to *possible end* markers of the example.
+> - This method does not release the device from the PCI Bus.

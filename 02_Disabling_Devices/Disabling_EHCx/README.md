@@ -1,5 +1,16 @@
 # Disabling `EHCx` USB Controllers
 
+- [About](#about)
+- [Use cases](#use-cases)
+- [System Requirements](#system-requirements)
+- [Patch](#patch)
+- [Technical Background: `EHCI` and `XHCI`](#technical-background-ehci-and-xhci)
+  - [USB Specs](#usb-specs)
+- [Notes](#notes)
+
+---
+
+## About
 SSDTs for disabling `EHC1` and `EHC2` USB Controllers 2.0 used in 1st to 5th Gen Intel systems.
 
 ## Use cases

@@ -1,5 +1,18 @@
 # Using unsupported Board-IDs with macOS 11.3 and newer
 
+- [About](#about)
+- [System Requirements](#system-requirements)
+- [Use Cases](#use-cases)
+- [Instructions](#instructions)
+- [About the Patches](#about-the-patches)
+- [Adding the Patches](#adding-the-patches)
+	- [Booter Patches](#booter-patches)
+	- [Kernel Patches](#kernel-patches)
+- [Notes](#notes)
+- [Credits](#credits)
+
+---
+
 ## About
 **OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of Booter and Kernel patches which utilize macOS'es virtualization capabilities (VMM) to trick it into "believing" that it's running inside a Virtual Machine:
 

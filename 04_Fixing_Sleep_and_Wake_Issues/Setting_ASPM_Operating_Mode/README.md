@@ -1,5 +1,16 @@
 # Configuring Active State Power Management (ASPM)
 
+- [About ASPM](#about-aspm)
+  - [ASPM States](#aspm-states)
+  - [AOAC Devices and ASPM](#aoac-devices-and-aspm)
+- [Injecting ASPM operation mode](#injecting-aspm-operation-mode)
+  - [Method 1: Injecting ASPM mode via `DeviceProperties` (recommended):](#method-1-injecting-aspm-mode-via-deviceproperties-recommended)
+    - [Example 1: Changing the ASPM mode of an NVMe Disk](#example-1-changing-the-aspm-mode-of-an-nvme-disk)
+    - [Example 2: Changing the ASPM mode of a WiFi Card](#example-2-changing-the-aspm-mode-of-a-wifi-card)
+  - [Method 2: Injecting ASPM via SSDT](#method-2-injecting-aspm-via-ssdt)
+
+---
+
 ## About ASPM
 
 **Active State Power Management** (ASPM) is a power management technique that allows a computer to reduce the power consumption of its hardware components when they are not in use. It is used to extend the battery life of portable devices and to reduce power consumption in desktop and server systems.

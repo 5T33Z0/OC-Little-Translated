@@ -1,5 +1,26 @@
 # 0D/6D Instant Wake Fix
 
+- [Description](#description)
+  - [Technical Background](#technical-background)
+  - [What the fix does](#what-the-fix-does)
+    - [Wake Capabilities](#wake-capabilities)
+  - [Refined Fix](#refined-fix)
+  - [Devices that may require a `0D/6D Patch`](#devices-that-may-require-a-0d6d-patch)
+- [Diversity of `_PRW` and the corresponding patch method](#diversity-of-_prw-and-the-corresponding-patch-method)
+  - [Method 1: using `SSDT-GPRW/UPRW`](#method-1-using-ssdt-gprwuprw)
+    - [Testing and verifying](#testing-and-verifying)
+  - [Method 2: using `SSDT-PRW0.aml` (no GPRW/UPRW)](#method-2-using-ssdt-prw0aml-no-gprwuprw)
+    - [Testing and verifying](#testing-and-verifying-1)
+  - [Old Method using binary renames (superseeded)](#old-method-using-binary-renames-superseeded)
+- [Alternative Fixes](#alternative-fixes)
+  - [Using `USBWakeFixup.kext`](#using-usbwakefixupkext)
+  - [Using a patched `DSDT`](#using-a-patched-dsdt)
+    - [Changing `_PRW` to specific return values](#changing-_prw-to-specific-return-values)
+    - [Removing the `_PRW` method from the `DSDT` completely](#removing-the-_prw-method-from-the-dsdt-completely)
+- [Notes and Resources](#notes-and-resources)
+
+---
+
 ## Description
 Some devices defined in the `DSDT` (e.g. USB Controllers, LAN cards, Audio Codecs, etc.) can contain sleep state values defined in the method `_PRW` (Power Resource for Wake) that can cause the machine to instantly wake after attempting to enter stand-by or sleep in macOS. This guide describes how to fix such instant wake issues.
 

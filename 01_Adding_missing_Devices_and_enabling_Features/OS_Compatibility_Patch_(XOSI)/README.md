@@ -1,7 +1,18 @@
 # Operating System Patch (`_OSI to XOSI`) 
 
-## About
+- [About](#about)
+- [Patching methods](#patching-methods)
+  - [Method 1: automated patching using SSDTTime](#method-1-automated-patching-using-ssdttime)
+  - [Method 2: manual patching](#method-2-manual-patching)
+    - [Part 1: Rename Method `_OSI` to `XOSI`](#part-1-rename-method-_osi-to-xosi)
+    - [Part 2: Hotpatch ***SSDT-OC-XOSI***](#part-2-hotpatch-ssdt-oc-xosi)
+  - [Usage](#usage)
+- [Appendix: Origin of OS Patches](#appendix-origin-of-os-patches)
+- [NOTES](#notes)
 
+---
+
+## About
 `ACPI` can use the `_OSI` (= Operating System Interface) method to check which `Windows` version it is currently running on. However, when running macOS on a PC, none of these checks will return `true` since `Darwin` (name of the macOS kernel) is running.
 
 But by simulating a certain version of `Windows` while running the `Darwin` kernel, we can utilize system behaviors which normally are limited to `Windows`. This is useful to better support certain devices like I2C Touchpads, etc.

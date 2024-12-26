@@ -28,6 +28,8 @@
 	- [Documentation and Support](#documentation-and-support)
 	- [Guides and Patches](#guides-and-patches)
 
+---
+
 ## Introduction
 PC-based Notebook Touchpads are not supported natively by macOS. Depending on the type of controller and protocol that is used to communicate with the Touchpad, you may need to combine kexts, binary renames as well as SSDT Hotfixes to enable it in macOS.
 

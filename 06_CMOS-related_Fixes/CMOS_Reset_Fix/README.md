@@ -1,5 +1,15 @@
 # CMOS Reset Fix
 
+- [About](#about)
+- [Method 1: Using a Kext and a Kernel Patch](#method-1-using-a-kext-and-a-kernel-patch)
+- [Method 2: Fixing the Real Time Clock via SSDT](#method-2-fixing-the-real-time-clock-via-ssdt)
+- [Instructions](#instructions)
+- [Patch: `SSDT-RTC0-NoFlags`](#patch-ssdt-rtc0-noflags)
+- [NOTES](#notes)
+
+---
+
+## About
 - Some machines will report a **"Boot Self Test Error"** when shutting down or rebooting, due to a CMOS Reset triggered by macOS.
 - When using Clover, checking `ACPI/DSDT/Fixes/FixRTC` will resolve this issue.
 - When using OpenCore, there are 2 Methods available – use either or.

@@ -1,5 +1,7 @@
 # Intel PCH SPI Controller (`SSDT-XSPI`)
-Adds Platform Controller Hub (PCH) to IORegistry as `XSPI`. Research showed that `XSPI` is present in the IORegistries of some (not all) 9th Gen Intel Core machines and all 10th Gen Macs (Comet/Ice Lake).
+
+## About
+`SSDT-XSPI` adds Platform Controller Hub (PCH) to IORegistry as `XSPI`. Research showed that `XSPI` is present in the IORegistries of some (not all) 9th Gen Intel Core machines and all 10th Gen Macs (Comet/Ice Lake).
 
 Applicable to **SMBIOS**:
 

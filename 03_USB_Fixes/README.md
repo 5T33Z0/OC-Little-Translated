@@ -1,8 +1,21 @@
 # Fixing USB issues
 
-> **Update** (2023-06-12): `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur to Sonoma. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
+- [Technical Background](#technical-background)
+  - [USB Specs](#usb-specs)
+  - [Removing the USB port limit and mapping USB ports](#removing-the-usb-port-limit-and-mapping-usb-ports)
+- [Method 1: Mapping USB Ports with Tools](#method-1-mapping-usb-ports-with-tools)
+  - [Option 1: Mapping port in Windows (recommended)](#option-1-mapping-port-in-windows-recommended)
+  - [Option 2: Mapping ports in macOS](#option-2-mapping-ports-in-macos)
+    - [Using USBMap (recommended)](#using-usbmap-recommended)
+    - [Using Hackintool (outdated, inconvenient but prevalent)](#using-hackintool-outdated-inconvenient-but-prevalent)
+- [Method 2: Mapping USB Ports via ACPI](#method-2-mapping-usb-ports-via-acpi)
+- [Additional Resources](#additional-resources)
+
+---
 
 ## Technical Background
+
+> **Update** (2023-06-12): `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur and newer. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
 
 In macOS, the number of available USB ports is limited to 15. But since modern mainboards with `XHCI` (Extensible Host Controller Interface) controllers provide up to 26 ports (per controller), this becomes an issue when trying to get USB ports working properly in macOS. If the ports are not mapped correctly, internal and external USB devices will default to USB 2.0 speed or won't work at all. This is also relevant for Bluetooth since it's basically "wireless" USB 2.0 and therefore requires an internally assigned USB 2.0 port. The same applies to built-in cameras in Laptop computers.
 

@@ -1,5 +1,14 @@
 # Enabling Brightness Key Shortcuts
 
+- [About](#about)
+- [New method: using `BrightnessKeys.kext`](#new-method-using-brightnesskeyskext)
+- [Old method: SSDT + Binary Renames](#old-method-ssdt--binary-renames)
+	- [I. Select the appropriate Hotpatch](#i-select-the-appropriate-hotpatch)
+	- [II. Binary Renames](#ii-binary-renames)
+
+---
+
+## About
 SSDT Hotpatches to enable Brightness Key Shortcuts for various Laptop models (Asus, Lenovo, Xiaoxin, Dell, et al.). They have to be paired with the corresonding binary renames mentioned in the .dsl files.
 
 The included Hotpatches are from Dahllian Sky's P-Little Repo for Clover but I added `If (_OSI ("Darwin")` switches. This modification is important to ristrict the patches to macOS only because otherwise OpenCore injects these ACPI tables system-wide whereas Clover only injects them into macOS.
@@ -28,7 +37,7 @@ Enabling Brightness Hotkeys consists of two stages:
 1. Choosing the correct SSDT for your Laptop model
 2. Renaming existing methods for brightness keys to disable them (renames are listed in the `.dsl` files)
 
-## I. Select the appropriate Hotpatch
+### I. Select the appropriate Hotpatch
 Pick the corresponding SSDT for your Laptop model, export it as `SSDT-Bkey.aml` and inlude it in your ACPI folder and config.plist. 
 
 - **SSDT-BKeyQ0EQ0F-A580UR** &rarr; For Asus A580UR
@@ -45,7 +54,7 @@ Pick the corresponding SSDT for your Laptop model, export it as `SSDT-Bkey.aml` 
 > - Keyboard (`PS2K`/`KBD`) 
 > - Embedded Controller (`EC`/`EC0`)
 
-## II. Binary Renames
+### II. Binary Renames
 Add the corresponding renames listed in the `.dsl` file to your config.plist under `ACPI/Patch`.
 
 - **Asus A580UR**:

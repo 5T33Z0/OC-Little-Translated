@@ -17,7 +17,6 @@ you have to add `SSDT-DTGP.aml`.
 Alternatively, you could integrate the method directly into the SSDT itself. Eamples for this can be found in ***SSDT-I225V*** and ***SSDT-RX580***.
 
 ## `DTGP` explained
-
 In addition to using `DeviceProperties` to inject device parameters into macOS, you can also use the method `_DSM` (Device Specific Method) to do so. It contains properties for a device and makes use of the method `DTGP` which is universal for all devices. It is specified in the `DSDT` of real Macs. Its purpose is to inject custom parameters into some devices. Without this method, patched `DSDTs` would not work well.
 
 The `DTGP` (Device Temporary Got Power) method is called by the ACPI firmware to determine whether a specific device should temporarily receive power or not. The method takes five arguments:

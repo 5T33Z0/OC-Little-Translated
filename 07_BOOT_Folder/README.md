@@ -1,5 +1,17 @@
 # Adding and configuring `.contentFlavour` and `.contentVisibility`
 
+- [About](#about)
+- [How to add `.contentFlavour` and `.contentVisibility`](#how-to-add-contentflavour-and-contentvisibility)
+- [About `.contentVisibility`](#about-contentvisibility)
+  - [Usage](#usage)
+  - [InstanceIdentifier](#instanceidentifier)
+- [About `.contentFlavour`](#about-contentflavour)
+  - [Configuration](#configuration)
+- [Resources](#resources)
+
+---
+
+## About
 OpenCore 0.8.8 introduced two new hidden files: `.contentFlavour` and `.contentVisibility` to further control the behavior of the BootPicker. If you have been using OpenCore prior to 0.8.8 and use OCAT to update it, these files are most likely missing from your `EFI/OC/BOOT` folder.
 
 ## How to add `.contentFlavour` and `.contentVisibility` 

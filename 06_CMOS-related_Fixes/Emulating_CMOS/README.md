@@ -1,5 +1,13 @@
 # Emulating CMOS Memory
 
+- [Description](#description)
+- [About **CMOS** Memory](#about-cmos-memory)
+- [View CMOS memory](#view-cmos-memory)
+- [Emulating **CMOS** memory](#emulating-cmos-memory-1)
+- [Appendix: **CMOS** Memory `00-3F` Definition](#appendix-cmos-memory-00-3f-definition)
+
+---
+
 ## Description
 
 When a conflict between **AppleRTC** and **BIOS** occurs, use [**RTCMemoryFixup.kext**](https://github.com/acidanthera/RTCMemoryFixup) to emulate **CMOS** memory to fix it.
@@ -35,8 +43,9 @@ When a conflict between **AppleRTC** and **BIOS** occurs, use [**RTCMemoryFixup.
 - `rtcfx_exclude=40-AF`, 
 - `rtcfx_exclude=2A,2D,80-AB`, etc.
 
-## Caution
-Emulating **CMOS** memory will erase the originally defined functions, please **use with caution**. For example: `rtcfx_exclude=00-0D` will cause the date and time of the machine to stop updating during sleep.
+> [!CAUTION]
+>
+> Emulating **CMOS** memory will erase the originally defined functions, please **use with caution**. For example: `rtcfx_exclude=00-0D` will cause the date and time of the machine to stop updating during sleep.
 
 ## Appendix: **CMOS** Memory `00-3F` Definition
 

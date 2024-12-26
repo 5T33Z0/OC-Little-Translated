@@ -1,5 +1,15 @@
 # Modifying Power Management Settings
 
+- [Instructions](#instructions)
+- [Changing Hibernation modes](#changing-hibernation-modes)
+  - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
+  - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
+  - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
+- [More `pmset` parameters](#more-pmset-parameters)
+- [Notes and further Resources](#notes-and-further-resources)
+
+## Instructions
+
 Open Terminal. Enter `man pmset` &rarr; Lists all available `pmset` parameters to modify System Power Management!
 
 :warning: **CAUTION**: Don't fiddle around with these settings unless you know what you are doing!

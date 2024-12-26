@@ -1,5 +1,20 @@
 # Fixing `PNP0C0E` Sleep
 
+- [Problem description](#problem-description)
+- [Solution](#solution)
+  - [Description of the two Sleep Modes](#description-of-the-two-sleep-modes)
+    - [`MODE` = `1`: `PNP0C0E` sleep.](#mode--1-pnp0c0e-sleep)
+    - [`MODE` = `0`: `PNP0C0D` sleep](#mode--0-pnp0c0d-sleep)
+- [`PNP0C0E`/`PNP0C0D` Sleep methods explained](#pnp0c0epnp0c0d-sleep-methods-explained)
+  - [`PNP0C0E` Sleep characteristics](#pnp0c0e-sleep-characteristics)
+  - [`PNP0C0D` Sleep characteristics](#pnp0c0d-sleep-characteristics)
+- [Name change and patch combination examples](#name-change-and-patch-combination-examples)
+  - [Example 1: Dell Latitude 5480](#example-1-dell-latitude-5480)
+  - [Example 2: ThinkPad X1 Carbon (5th Gen)](#example-2-thinkpad-x1-carbon-5th-gen)
+- [Fixing `PNP0C0E` Sleep on other machines](#fixing-pnp0c0e-sleep-on-other-machines)
+
+---
+
 ## Problem description
 
 Some machines have an extra sleep button (half moon symbol) or a keyboard shortcut for entering sleep state, e.g. `Fn+F4` on some ThinkPads, `Fn+Insert` for Dell, etc. When this button/keyboard shortcut is pressed, the system enters what's called `PNP0C0E` sleep. However, on some machines ACPI incorrectly passes over shutdown parameters to the system instead, which causes it to crash/reset. Even if a system is able to enter sleep state it resets when trying to resume from sleep. 
@@ -151,6 +166,6 @@ Else /* PNP0C0D sleep */
   - Usually, the sleep button is `_Qxx` under `EC`, and this `_Qxx` contains the `Notify(***.SLPB,0x80)` instruction. If you can't find it, search for `Notify(***.SLPB,0x80)` in the `DSDT`, find its location, and gradually work its way up to the initial location.
   - Refer to the examples to create the sleep button patch and the necessary name change.
 
-## Caution
-- If your DSDT doesn't contain device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
-- `PNP0C0E` and `PNP0C0D` device names and paths should be consistent with the paths used in your `DSDT`.
+> [!CAUTION]
+> - If your DSDT doesn't contain device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
+> - `PNP0C0E` and `PNP0C0D` device names and paths should be consistent with the paths used in your `DSDT`.

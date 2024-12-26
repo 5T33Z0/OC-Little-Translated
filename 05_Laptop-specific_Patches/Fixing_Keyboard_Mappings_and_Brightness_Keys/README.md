@@ -1,5 +1,18 @@
 # Modifying PS/2 Keyboard mappings and brightness shortcut keys
 
+- [Description](#description)
+  - [Update \[September 30, 2020\]:](#update-september-30-2020)
+- [Requirements and Preparations](#requirements-and-preparations)
+  - [About PS/2 and ABD Scan Codes](#about-ps2-and-abd-scan-codes)
+  - [Enabling keyboard scan codes](#enabling-keyboard-scan-codes)
+    - [Method 1: Using Terminal](#method-1-using-terminal)
+    - [Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)](#method-2-enabling-log-scan-codes-in-voodoops2keyboardkext-recommended)
+- [Key mapping principle](#key-mapping-principle)
+    - [PS2 Scan Code to PS2 Scan Code](#ps2-scan-code-to-ps2-scan-code)
+    - [PS2 Scan Code to ADB Scan Code](#ps2-scan-code-to-adb-scan-code)
+  - [NOTES](#notes)
+- [Credits and Resources](#credits-and-resources)
+
 ## Description
 Keyboard keys can be re-mapped for triggering different keys than the ones that are actually pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture **PS2 Scan Code** under macOS can be re-mapped! An in-depth example from a Lenovo ThinkPad utilizing this technique and [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) can be found [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/Customizing_ThinkPad_Keyboard_Shortcuts.md).
 
