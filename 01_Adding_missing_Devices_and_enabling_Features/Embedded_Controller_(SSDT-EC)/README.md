@@ -1,4 +1,17 @@
-# Adding a fake Embedded Controller (`SSDT-EC`) or (`SSDT-EC-USBX`) 
+# Adding a fake Embedded Controller (`SSDT-EC`) or (`SSDT-EC-USBX`)
+
+- [What's an EC?](#whats-an-ec)
+  - [Why do I need a fake/virtual EC?](#why-do-i-need-a-fakevirtual-ec)
+  - [`SSDT-EC` or `SSDT-EC-USBX`: which one do I need?](#ssdt-ec-or-ssdt-ec-usbx-which-one-do-i-need)
+  - [SSDT-EC in a nutshell](#ssdt-ec-in-a-nutshell)
+- [Adding a fake EC Device](#adding-a-fake-ec-device)
+  - [Method 1: automated SSDT generation using SSDTTime](#method-1-automated-ssdt-generation-using-ssdttime)
+  - [Method 2: Manual patching method (recommended)](#method-2-manual-patching-method-recommended)
+    - [Additional Steps (Desktop PCs only)](#additional-steps-desktop-pcs-only)
+- [Adding the correct current values to `USBX` device](#adding-the-correct-current-values-to-usbx-device)
+- [Credits](#credits)
+
+---
 
 ## What's an EC?
 An embedded controller (or `EC`) is a hardware microcontroller inside of computers (especially Laptops) that can handle a lot of different tasks: from receiving and processing signals from keyboards and/or touchpads, thermal measurements, managing the battery, handling switches and LEDs, handling USB power, Bluetooth toggle, etc., etc.

@@ -1,5 +1,17 @@
 # Brightness Controls (`SSDT-PNLF`)
 
+- [About](#about)
+- [**Using SSDTTime** (automated process, recommended)](#using-ssdttime-automated-process-recommended)
+	- [Modifiying max brightness](#modifiying-max-brightness)
+- [Other Methods](#other-methods)
+	- [Acidanthera's Brightnes Patch](#acidantheras-brightnes-patch)
+	- [IntelBacklight Patch (outdated)](#intelbacklight-patch-outdated)
+	- [ACPI Brightness Patch (deprecated)](#acpi-brightness-patch-deprecated)
+- [NOTES](#notes)
+
+---
+## About
+
 In order to enable backlight controls on laptops, there are several ways to do so. It requires a combination of one or two kexts and a corresponding **`SSDT-PNLF`** to work. 
 
 macOS Catalina and newer also require a Fake Ambient Light Sensor ([**`SSDT-ALS0`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))) so that the brightness level doesn't reset to maximum after rebooting.

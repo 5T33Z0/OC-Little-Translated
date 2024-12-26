@@ -1,5 +1,17 @@
 # Intel I225-V Ethernet Controller Fix
 
+- [About](#about)
+- [Method 1: Add `AppleIGC.kext`](#method-1-add-appleigckext)
+	- [Instructions](#instructions)
+	- [Troubleshooting](#troubleshooting)
+- [Method 2: Adding `SSDT-I225-V` (obsolete)](#method-2-adding-ssdt-i225-v-obsolete)
+	- [Instructions](#instructions-1)
+- [Settings](#settings)
+- [Troubleshooting](#troubleshooting-1)
+- [Credits](#credits)
+
+---
+
 ## About
 The stock firmware of the Intel I225-V Ethernet Controller used on some Gigabyte Z490 Boards contains incorrect Subsystem-ID and Subsystem Vendor-ID infos. The Vendor-ID (`8086`, for Intel) is also used as Subsystem-Vendor-ID (instead of `1458`) and the Subsystem-ID only contains zeros instead of the correct value (`E000`). This results in Internet not working on macOS Monterey and newer since it cannot connect to the necessary driver. Apply this fix to re-enable Internet in macOS Monterey and newer.
 
@@ -32,13 +44,12 @@ If Ethernet is not working afterwards, adjust the following settings. Use _eithe
 	- Save your config and reboot
 	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 
-
-If this still does not work for you, try Method 2.
+If the LAN controller still does not work afterwards, try Method 2.
 
 <details>
 <summary><strong>Method 2</strong> (Click to reveal!)</summary>
 
-## Method 2: Adding SSDT-I225-V (obsolete)
+## Method 2: Adding `SSDT-I225-V` (obsolete)
 Use the attached SSDT to inject the correct header descriptions for the Intel I225-V into macOS Monterey and newer. 
 
 For macOS 13 and newer, you also need to inject `AppleIntel210Ethernet.kext` if your ethernet controller cannot utilize the newer .dext version of this driver unless you flash a modded firmware, since the .kext has been removed from the IONetworkingFamily.kext.

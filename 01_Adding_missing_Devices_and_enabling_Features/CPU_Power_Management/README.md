@@ -1,4 +1,17 @@
 # Enabling CPU Power Management
+- [Overview](#overview)
+- [Available SSDTs](#available-ssdts)
+- [About CPU Power Management in macOS](#about-cpu-power-management-in-macos)
+  - [ACPI CPU Power Management](#acpi-cpu-power-management)
+  - [XCPM (= XNU CPU Power Management)](#xcpm--xnu-cpu-power-management)
+    - [macOS Monterey](#macos-monterey)
+    - [macOS Ventura+, `XCPM` and ACPI CPU Power Management](#macos-ventura-xcpm-and-acpi-cpu-power-management)
+  - [macOS Sonoma+](#macos-sonoma)
+- [Further Resources](#further-resources)
+
+---
+
+## Overview
 
 This chapter contains guides for enabling (and optimizing) CPU Power Management for Intel and AMD CPUs in macOS. 
 
@@ -49,7 +62,7 @@ Since Apple dropped Intel CPU support after 10th Gen Comet Lake, newer Intel CPU
 
 In macOS 12 (Monterey), Apple disabled the plugin-type check for CPU Power Management, so the `X86PlatformPlugin` (plugin-type `1`) is loaded by default. Prior to macOS 12, plugin-type `0` was the default, that's why `SSDT-PLUG` was required to select the `X86PlatformPlugin`. This is great for users of Haswell and newer: now they don't need `SSDT-PLUG` any more. But for Ivy Bridge and older, `SSDT-PM` is now required to select plugin-type to `0` which then loads the `AppleIntelCPUPowerManagement.kext`. So ACPI CPU Power Management can still be utilized in macOS 12. For macOS Ventura it's a different story…
 
-#### macOS Ventura, `XCPM` and ACPI CPU Power Management
+#### macOS Ventura+, `XCPM` and ACPI CPU Power Management
 
 In macOS 13 (Ventura), Apple deleted the actual *binary* from the `ACPI_SMC_PlatformPlugin.kext` – it's an empty stub now. So selecting plugin-type `0` with SSDT-PM doesn't work. On top of that, `AppleIntelCPUPowerManagement.kext` was deleted as well. So ACPI CPU Power Management is basically non-existent in macOS 13 and newer.
 
@@ -58,7 +71,7 @@ For Ivy Bridge and older that's a problem. In order to get proper CPU Management
 - **Option 1**: [**Re-enable ACPI CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)#re-enabling-acpi-power-management-in-macos-ventura) (Highly Recommended)
 - **Option 2**: [**Force-enable `XCPM`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only. Doesn't work well)
 
-### macOS Sonoma
+### macOS Sonoma+
 - Requires Kaby Lake and newer
 - More changes &rarr; See [Sonoma Notes](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Sonoma_Notes.md)
 

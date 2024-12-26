@@ -1,4 +1,18 @@
 # AC Adapter (`SSDT-AC`) (for Laptops)
+
+- [About](#about)
+- [Preparations](#preparations)
+- [Applying the patch](#applying-the-patch)
+	- [Method 1: Using a Kext (easy but outdated)](#method-1-using-a-kext-easy-but-outdated)
+		- [ACPIBatteryManager vs. SMCBatteryManager](#acpibatterymanager-vs-smcbatterymanager)
+	- [Method 2: Using a SSDT (for advanced users)](#method-2-using-a-ssdt-for-advanced-users)
+- [Verifying the patch](#verifying-the-patch)
+- [NOTES](#notes)
+- [CREDITS](#credits)
+
+---
+
+## About
 This patch attaches an AC Adapter Device existing in a Laptop's `DSDT` to the `AppleACPIACAdapter` service in the IORegistry of macOS. This is optional and mostly cosmetic – it doesn't make any difference in terms of functionality as explained [here](https://github.com/acidanthera/bugtracker/issues/1808).
 
 If you are using **VirtualSMC** with the **SMCBatteryManager** plugin, you don't need to add this SSDT. Read the notes about **ACPIBatteryManager** vs. **SMCBatteryManager** below for more details.
