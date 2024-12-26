@@ -154,7 +154,7 @@ Instead of injecting the required kexts to re-enable legacy CPU Power Management
 - **ssdtPRGen** includes lists with settings for specific CPUs sorted by families. These can be found under `~/Library/ssdtPRGen/Data`. They are in .cfg format which can be viewed with TextEdit.
 - **ssdtPRGen** does not work with Lynnfield and other 1st Gen Intel Core CPUs
 - ⚠️ macOS Ventura users: you cannot install macOS Security Response Updates (RSR) on pre-Haswell systems. They will fail to install (more info [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)).
-- Check the **Configuration.pdf** included in the OpenCorePkg for details about unlocking the MSR 0xE2 register (&rarr; Chapter 7.8: "AppleCpuPmCfgLock").
+- Check the **Configuration.pdf** included in the OpenCorePkg for details about unlocking the MSR 0xE2 register (&rarr; [Chapter 7.8](https://dortania.github.io/docs/release/Configuration.html#quirks-properties2): "AppleCpuPmCfgLock").
 
 ## Credits
 - Acidanthera for OpenCore Legacy Patcher, Kexts, Booter- and Kernel Patches
