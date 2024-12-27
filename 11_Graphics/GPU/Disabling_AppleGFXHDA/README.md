@@ -1,7 +1,7 @@
 # Disabling `AppleGFXHDA` on AMD GPUs
 
 ## About
-SSDT for disabling the audio device of AMD GPU so it no longer attaches to the `AppleGFXHDA.kext`, thus effectivley disabling audio output over HDMI/DisplayPort.
+SSDT for disabling the audio device of AMD GPUs, so it no longer attaches to the `AppleGFXHDA.kext`, thus effectivley disabling audio output over HDMI/DisplayPort.
 
 Unfortunately, macOS is not very clever when it comes to remembering the last used audio output. After a restart (or returning from sleep), the HDMI/DisplayPort audio device is auto-selected again, even though you've set the default output to "Line-Out" for example. This is really annoying since you have to change it back manually every time.
 

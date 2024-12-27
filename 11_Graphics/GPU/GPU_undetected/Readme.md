@@ -1,7 +1,18 @@
 # Enabling undetected AMD GPUs
 
-## About
+- [About](#about)
+- [Instructions](#instructions)
+	- [Prerequisites](#prerequisites)
+	- [Method 1: automated fix, using SSDTTime](#method-1-automated-fix-using-ssdttime)
+	- [Method 2: manual patching](#method-2-manual-patching)
+		- [Find the PCI path of your GPU](#find-the-pci-path-of-your-gpu)
+		- [Cross-reference in IO Registry](#cross-reference-in-io-registry)
+	- [Adjusting `SSDT-BRG0`](#adjusting-ssdt-brg0)
+- [Notes, Credits and Resources](#notes-credits-and-resources)
 
+---
+
+## About
 If your macOS-compatible AMD GPU works fine in Windows but is not detected by macOS it's possible that your `GFX0` device is sitting behind an intermediate PCI bridge without an ACPI device name assigned to it, as in this example:
 
 ![nobrigeeee](https://user-images.githubusercontent.com/76865553/198372013-932cb76e-842d-45ac-a4eb-3c77ee060cde.png)
@@ -52,7 +63,7 @@ Luckily the patching process can now be automated using **SSDTTime** which can g
 	* If the GPU has a different address than the one gfxutil provided
 	* If the GPU sits behind a `pci-bridge@…` device
 
-### Adjusting SSDT-BRG0
+### Adjusting `SSDT-BRG0`
 Now that you have found the correct PCI device path (here:`PCI0/PEG1/PEGP/BRG0/GFX0`) and figured out that it sits behind another PCI bridge, you can add SSDT-BRGO so macOS can use the GPU.
 
 1. Open `SSDT-BRG0.dsl`

@@ -2,7 +2,7 @@
 This section contains a small collection of useful configuration tips for OpenCore's `config.plist`.
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 	
 - [OpenCore Troubleshooting Quick Tips](#opencore-troubleshooting-quick-tips)
 	- [Troubleshooting Workflow](#troubleshooting-workflow)

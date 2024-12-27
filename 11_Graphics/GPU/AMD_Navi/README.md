@@ -1,5 +1,14 @@
 # Enabling AMD Navi GPUs in macOS
 
+- [Option 1: using `NootRX.kext`](#option-1-using-nootrxkext)
+- [Option 2: Using `SSDT-NAVI.aml`](#option-2-using-ssdt-naviaml)
+  - [Code](#code)
+  - [Enabling RX 6900XT Cards](#enabling-rx-6900xt-cards)
+- [AMD and DRM](#amd-and-drm)
+- [Credits \& Resources](#credits--resources)
+
+---
+
 ## Option 1: using `NootRX.kext`
 
 There's a new kext out called [**NootRX**](https://chefkissinc.github.io/nootrx) to enable unsupported AMD Navi GPUs (Navi 21, 22 and 23) in macOS 11 and newer (check the [**compatibility list**](https://chefkissinc.github.io/nootrx#gpu-compatibility) to find out if your GPU is supprted).

@@ -1,5 +1,17 @@
 # How to populate the MMIO Whitelist
 
+- [About](#about)
+- [Instructions](#instructions)
+	- [1. Generating a bootlog](#1-generating-a-bootlog)
+	- [2. Analyzing the bootlog](#2-analyzing-the-bootlog)
+	- [3. Converting Hex to Decimal](#3-converting-hex-to-decimal)
+	- [4. Populating and verifying the MMIO Whitelist](#4-populating-and-verifying-the-mmio-whitelist)
+	- [5. Finishing touches](#5-finishing-touches)
+- [Resources](#resources)
+
+---
+
+## About
 MMIO stands for Memory-Mapped Input/Output. It's a method to perform I/O processes between the CPU and peripheral devices of a computer. The memory and registers of the I/O devices are mapped to (and associated with) address values. 
 
 MMIO whitelist is a security feature that controls access to certain memory addresses in a computer system, allowing access only to specific processes or devices that have been explicitly granted permission and denying access to all others.

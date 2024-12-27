@@ -1,4 +1,4 @@
-# Resizable GPU BARs in OpenCore
+# Adjusting GPU BAR Size in OpenCore
 
 **TABLE of CONTENTS**
 
@@ -9,11 +9,12 @@
   - [ResizeUsePciRbIo](#resizeusepcirbio)
 - [How to enable Resizable BAR Support in OpenCore](#how-to-enable-resizable-bar-support-in-opencore)
 
-## About PCI BAR Size
+---
 
+## About PCI BAR Size
 GPU BAR size refers to the Base Address Register size of a GPU. It is a feature that improves communication between your processor and graphics card. The BAR size depends on the card type. Resizable BAR is a term specific to NVIDIA’s GPUs, but AMD has its own version of the same technology called Smart Access Memory (SAM). With this feature activated, the CPU can access the entire “frame buffer” (another name for the GPU’s memory), which means it can quickly find and process the data it needs.
 
-> While macOS does support this feature, it limits the supported BAR sizes by 1 GB and seems to be unstable with BARs above 256 MB. If both your GPU and your firmware support Resizable BAR, setting `ResizeAppleGpuBars` to `0` will update GPU registers to their defaults when booting macOS and fix the hangs on newer boards.
+> While macOS *does* support this feature, it limits the supported BAR sizes by 1 GB and seems to be unstable with BARs above 256 MB. If both your GPU and your firmware support Resizable BAR, setting `ResizeAppleGpuBars` to `0` will update GPU registers to their defaults when booting macOS and fix the hangs on newer boards.
 > 
 > **Source**: [Dortania](https://dortania.github.io/hackintosh/updates/2021/11/01/acidanthera-november.html)
 
