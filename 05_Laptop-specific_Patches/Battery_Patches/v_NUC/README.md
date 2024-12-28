@@ -7,7 +7,7 @@ When running macOS on Intel NUC Mini PCs, an entry for the Battery may be presen
 ![facp-Nuc](https://github.com/user-attachments/assets/a52e4e74-bd65-4995-8fc8-1586570933ef)
 
 ## Fix
-Baio77 has created an ACPI patch to disable the Battery entry in macOS. Paste the following code to your `config.plist` under ACPI/Patch:
+[Baio77](https://github.com/Baio1977) has created an ACPI patch to disable the Battery entry in macOS. Paste the following code to your `config.plist` under ACPI/Patch:
 
 ```xml
 <dict>
