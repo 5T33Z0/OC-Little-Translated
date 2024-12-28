@@ -2,15 +2,15 @@
 
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-24.12.28-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
-## TABLE of CONTENTS
+**TABLE of CONTENTS**
 
-### PREFACE
+## PREFACE
 
 * [**DISCLAIMER**](#disclaimer)
 * [**About OC-Little Translated**](#about)
 * [**About the translation**](#about-the-translation)
 
-### MAIN
+## MAIN
 
 * [**ACPI basics and guides**](/00_ACPI/README.md)
 * [**Adding/Enabling Devices and Features with SSDTs**](/01_Adding_missing_Devices_and_enabling_Features/README.md)
@@ -26,38 +26,38 @@
 * [**MMIO Whitelist**](/12_MMIO_Whitelist/README.md)
 * [**Fixing falsely reported RAM speed**](/15_RAM/README.md)
 
-### SPECIAL
+## SPECIAL
 * [**Using OpenCore-Patcher on Wintel machines**](/14_OCLP_Wintel/README.md)
 * [**Board-ID Skip and VMM Spoof**](/09_Board-ID_VMM-Spoof/README.md)
 * [**Utilities and Resource**](/C_Utilities_and_Resources/README.md)
 
-### APPENDIX
+## APPENDIX
 
-#### Config-related
+### Config-related
 * [**Config Tips & Tricks**](/A_Config_Tips_and_Tricks/README.md)
 * [**Boot Arguments Explained**](/H_Boot-args/README.md)
 * [**Quirks**](/08_Quirks/README.md)
 * [**EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
 
-#### Guides for OpenCore Auxiliary Tools (OCAT)
+### Guides for OpenCore Auxiliary Tools (OCAT)
 * [**Updating OpenCore**](/D_Updating_OpenCore/README.md)
 * [**OpenCore Calculators**](/B_OC_Calculators/README.md)
 * [**Switching to NO_ACPI build of OpenCore**](/O_OC_NO_ACPI/README.md)
 * [**Generating EFIs with OCAT**](/F_Desktop_EFIs/README.md)
 
-#### macOS-related
+### macOS-related
 * [**Terminal Commands**](/Terminal_Commands.md#readme)
 * [**Compatibility Charts**](/E_Compatibility_Charts/README.md)
 * [**Fixing issues with System Update Notifications**](/S_System_Updates/README.md)
 * [**macOS 14.4 install workaround**](/W_Workarounds/README.md)
 * [**Creating a multi macOS USB Installer**](/U_USB_Multi_installer/README.md)
 
-#### Other OSes
+### Other OSes
 * [**Windows-related Guides**](/I_Windows/README.md)
 * [**Enabling Linux Boot Entries**](/G_Linux/README.md)
 * [**macOS Virtulization**](/V_Virtualization/README.md)
 
-#### Miscellaneous
+### Miscellaneous
 * [**Featured OpenCanopy Themes**](/T_Themes/README.md)
 * [**Create/modify a Layout-ID for AppleALC**](/L_ALC_Layout-ID/README.md)
 * [**Compiling slimmed-down variants of Kexts**](/J_Compiling_Kexts/README.md)
