@@ -3,8 +3,15 @@
 ## Try `ECEnabler.kext` first!
 Before applying any of these battery patches available here, you should test the new [**ECEnabler.kext**](https://github.com/1Revenger1/ECEnabler) first, which "allows reading Embedded Controller fields over 1 byte long, vastly reducing the amount of ACPI modification needed (if any) for working battery status". It works on a lot of ThinkPads and other Laptops without additional ACPI patches and Battery SSDTs.
 
-## Available Battery Hotfixes
-This section contains battery hotfixes for notebooks from various vendors (check the folders above). For more battery patches, check [**GZXiaoBai's Github Repo**](https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch) (writen in Chinese).
+## Battery Hotfixes
+This section contains battery hotfixes for notebooks from various vendors (check the folders above). 
+
+- [ThinkPad Battery Fixes](/05_Laptop-specific_Patches/Battery_Patches/i_ThinkPad/README.md)
+- [Intel NUC](/05_Laptop-specific_Patches/Battery_Patches/v_NUC/README.md)
+- [Various](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Battery_Patches/ii_Other_brands)
+- [Battery Information Patch](/05_Laptop-specific_Patches/Battery_Patches/iii_Battery_Information_Assist_Patch/README.md)
+
+For more battery patches, check [**GZXiaoBai's Github Repo**](https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch) (writen in Chinese).
 
 ## Battery Hotfix Tutorials
 Below you'll find some links to battery patching guides. If you want to understand and learn how to make your own battery hotfix, you can go to XStarDev's tutorial site and ask questions on the `Issues` page (please don't ask too low-level questions, otherwise it will be considered invalid).
