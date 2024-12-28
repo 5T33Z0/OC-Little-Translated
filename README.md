@@ -1,6 +1,6 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-24.12.26-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.3-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.3-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-24.12.28-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ## TABLE of CONTENTS
 
@@ -12,58 +12,58 @@
 
 ### MAIN
 
-* [**ACPI basics and guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI)
-* [**Adding/Enabling Devices and Features with SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme)
-* [**Disabling Devices**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices)
-* [**Fixing Graphics**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics) (integrated/discrete)
-* [**Fixing USB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes)
-* [**Fixing Sleep and Wake Issues**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues)
-* [**Fixing issues with peripherals**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/13_Peripherals)
-* [**Laptop-specific Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches)
-* [**CMOS-related Fixes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes)
-* [**BOOT Folder**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/07_BOOT_Folder#adding-and-configuring-contentflavour-and-contentvisibility)
-* [**Kext Loading Sequence Examples**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#readme)
-* [**MMIO Whitelist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/12_MMIO_Whitelist)
-* [**Fixing falsely reported RAM speed**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/15_RAM)
+* [**ACPI basics and guides**](/00_ACPI/README.md)
+* [**Adding/Enabling Devices and Features with SSDTs**](/01_Adding_missing_Devices_and_enabling_Features/README.md)
+* [**Disabling Devices**](/02_Disabling_Devices/README.md)
+* [**Fixing Graphics**](/11_Graphics/README.md) (integrated/discrete)
+* [**Fixing USB**](/03_USB_Fixes/README.md)
+* [**Fixing Sleep and Wake Issues**](04_Fixing_Sleep_and_Wake_Issues/README.md)
+* [**Fixing issues with peripherals**](/13_Peripherals/README.md)
+* [**Laptop-specific Patches**](/05_Laptop-specific_Patches/README.md)
+* [**CMOS-related Fixes**](/06_CMOS-related_Fixes/README.md)
+* [**BOOT Folder**](/07_BOOT_Folder/README.md)
+* [**Kext Loading Sequence Examples**](/10_Kexts_Loading_Sequence_Examples/README.md)
+* [**MMIO Whitelist**](/12_MMIO_Whitelist/README.md)
+* [**Fixing falsely reported RAM speed**](/15_RAM/README.md)
 
 ### SPECIAL
-* [**Using OpenCore-Patcher on Wintel machines**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#installing-newer-versions-of-macos-on-legacy-hardware)
-* [**Board-ID Skip and VMM Spoof**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/09_Board-ID_VMM-Spoof)
-* [**Utilities and Resource**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#readme)
+* [**Using OpenCore-Patcher on Wintel machines**](/14_OCLP_Wintel/README.md)
+* [**Board-ID Skip and VMM Spoof**](/09_Board-ID_VMM-Spoof/README.md)
+* [**Utilities and Resource**](/C_Utilities_and_Resources/README.md)
 
 ### APPENDIX
 
 #### Config-related
-* [**Config Tips & Tricks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#readme)
-* [**Boot Arguments Explained**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/H_Boot-args#readme)
-* [**Quirks**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
+* [**Config Tips & Tricks**](/A_Config_Tips_and_Tricks/README.md)
+* [**Boot Arguments Explained**](/H_Boot-args/README.md)
+* [**Quirks**](/08_Quirks/README.md)
 
 #### Guides for OpenCore Auxiliary Tools (OCAT)
-* [**Updating OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore#readme)
-* [**OpenCore Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)
-* [**Switching to NO_ACPI build of OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI)
-* [**Generating EFIs with OCAT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs#readme)
-* [**OpenCore EFI Upload Checklist**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/M_EFI_Upload_Chklst#readme)
+* [**Updating OpenCore**](/D_Updating_OpenCore/README.md)
+* [**OpenCore Calculators**](/B_OC_Calculators/README.md)
+* [**Switching to NO_ACPI build of OpenCore**](/O_OC_NO_ACPI/README.md)
+* [**Generating EFIs with OCAT**](/F_Desktop_EFIs/README.md)
+* [**OpenCore EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
 
 #### macOS-related
-* [**Terminal Commands**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Terminal_Commands.md#readme)
-* [**Compatibility Charts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/E_Compatibility_Charts)
-* [**Fixing issues with System Update Notifications**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates#readme)
-* [**macOS 14.4 install workaround**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/README.md)
-* [**Creating a multi macOS USB Installer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/U_USB_Multi_installer#readme)
+* [**Terminal Commands**](/Terminal_Commands.md#readme)
+* [**Compatibility Charts**](/E_Compatibility_Charts/README.md)
+* [**Fixing issues with System Update Notifications**](/S_System_Updates/README.md)
+* [**macOS 14.4 install workaround**](/W_Workarounds/README.md)
+* [**Creating a multi macOS USB Installer**](/U_USB_Multi_installer/README.md)
 
 #### Other OSes
-* [**Windows-related Guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/I_Windows)
-* [**Enabling Linux Boot Entries**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/G_Linux#readme)
-* [**macOS Virtulization**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/V_Virtualization#virtualization)
+* [**Windows-related Guides**](/I_Windows/README.md)
+* [**Enabling Linux Boot Entries**](/G_Linux/README.md)
+* [**macOS Virtulization**](/V_Virtualization/README.md)
 
 #### Misc.
-* [**Featured OpenCanopy Themes**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/T_Themes)
-* [**Create/modify a Layout-ID for AppleALC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID#readme)
-* [**Compiling slimmed-down variants of Kexts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/J_Compiling_Kexts#readme)
-* [**Debugging with SysReport**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/K_Debugging#readme)
-* [**Combining all SSDTs into one file (SSDT-ALL)**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/N_SSDT-ALL)
-* [**Using Clover alongside OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/R_BootloaderChooser#readme)
+* [**Featured OpenCanopy Themes**](/T_Themes/README.md)
+* [**Create/modify a Layout-ID for AppleALC**](/L_ALC_Layout-ID/README.md)
+* [**Compiling slimmed-down variants of Kexts**](/J_Compiling_Kexts/README.md)
+* [**Debugging with SysReport**](/K_Debugging/README.md)
+* [**Combining all SSDTs into one file (SSDT-ALL)**](/N_SSDT-ALL/README.md)
+* [**Using Clover alongside OpenCore**](/R_BootloaderChooser/README.md)
 
 ___
 

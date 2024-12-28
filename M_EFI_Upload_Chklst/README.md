@@ -12,7 +12,7 @@ Listed below, you find a checklist of config settings and parameters you should 
 ## Checklist
 **Work through the following list and adjust your config accordingly before sharing it**
 
-| Section                | Action                                                                                                                                      
+| Section | Action
 :------------------------:|-----------------------------------------
 **ACPI/Add**               | <ul> <li> Deactivate non-essential and custom SSDTs, which were written for 3rd party devices that are not part of the mainboard/system the EFI is for. <li> Add proper comments!
 **Booter/Quirks**          | Change `ResizeAppleGpuBars` to `-1` since you don't know which GPU the next user has.

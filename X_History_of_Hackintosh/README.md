@@ -1,6 +1,6 @@
 # A brief history of hackintoshing
 
-If we take the definition of a "Hackintosh" (or "Black Apple", as it's called in Asia) – a computer without the Apple logo running an operating system developed by Apple – then the world's first "Hackintosh" would have been born 24 years ago. 
+If we take the definition of a "Hackintosh" (or "Black Apple", as it's called in Asia) – a computer without the Apple logo running an operating system developed by Apple – then the world's first "Hackintosh" would have been born around 1996 – almost 30 years ago. 
 
 In 1996, Apple switched its Macintosh computers to IBM's PowerPC architecture. Gil Amelio, then Apple CEO, took the opportunity to sign up some of the same CPU and motherboard manufacturers as the Macintosh, such as Motorola, to license their PCs with Apple's Macintosh System 7 (known as Classic Mac OS 7).
 
