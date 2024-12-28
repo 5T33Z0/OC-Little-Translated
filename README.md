@@ -37,13 +37,13 @@
 * [**Config Tips & Tricks**](/A_Config_Tips_and_Tricks/README.md)
 * [**Boot Arguments Explained**](/H_Boot-args/README.md)
 * [**Quirks**](/08_Quirks/README.md)
+* [**EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
 
 #### Guides for OpenCore Auxiliary Tools (OCAT)
 * [**Updating OpenCore**](/D_Updating_OpenCore/README.md)
 * [**OpenCore Calculators**](/B_OC_Calculators/README.md)
 * [**Switching to NO_ACPI build of OpenCore**](/O_OC_NO_ACPI/README.md)
 * [**Generating EFIs with OCAT**](/F_Desktop_EFIs/README.md)
-* [**OpenCore EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
 
 #### macOS-related
 * [**Terminal Commands**](/Terminal_Commands.md#readme)
@@ -57,12 +57,12 @@
 * [**Enabling Linux Boot Entries**](/G_Linux/README.md)
 * [**macOS Virtulization**](/V_Virtualization/README.md)
 
-#### Misc.
+#### Miscellaneous
 * [**Featured OpenCanopy Themes**](/T_Themes/README.md)
 * [**Create/modify a Layout-ID for AppleALC**](/L_ALC_Layout-ID/README.md)
 * [**Compiling slimmed-down variants of Kexts**](/J_Compiling_Kexts/README.md)
 * [**Debugging with SysReport**](/K_Debugging/README.md)
-* [**Combining all SSDTs into one file (SSDT-ALL)**](/N_SSDT-ALL/README.md)
+* [**Combining all SSDTs into one file (`SSDT-ALL`)**](/N_SSDT-ALL/README.md)
 * [**Using Clover alongside OpenCore**](/R_BootloaderChooser/README.md)
 
 ___
