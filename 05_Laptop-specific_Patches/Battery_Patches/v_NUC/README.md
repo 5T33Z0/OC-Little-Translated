@@ -4,7 +4,7 @@
 
 When running macOS on Intel NUC Mini PCs, an entry for the Battery may be present in System Preferences under macOS because in the FACP table, the `PM Profile` is defined as `mobile`, as on this Intel NUC8i7HVK:
 
-![](/Users/5t33y0/Desktop/facp-Nuc.png)
+![facp-Nuc](https://github.com/user-attachments/assets/a52e4e74-bd65-4995-8fc8-1586570933ef)
 
 ## Fix
 Baio77 has created an ACPI patch to disable the Battery entry in macOS. Paste the following code to your `config.plist` under ACPI/Patch:
@@ -44,4 +44,5 @@ Baio77 has created an ACPI patch to disable the Battery entry in macOS. Paste th
 
 **Screenshot**:
 
-![](/Users/5t33y0/Desktop/fiixnucbat.png)
+![fiixnucbat](https://github.com/user-attachments/assets/c77b151f-92bb-45fc-a021-ec5bdb41805b)
+
