@@ -15,7 +15,7 @@
 	- [Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)](#example-5-voodoops2--voodoormi--voodoosmbus-laptop)
 	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
-		- [:bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports](#bulb-fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
+		- [Fixing issues with AirportBrcmFixup generating a lot of crash reports](#fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
 	- [Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
 	- [Example 8b: Using `AirportItlwm.kext` in multiple versions of macOS](#example-8b-using-airportitlwmkext-in-multiple-versions-of-macos)
 		- [Instructions](#instructions)
@@ -60,7 +60,7 @@ Although it is recommended to load **Lilu** and **VirtualSMC** first in order to
 
 > [!TIP]
 > 
-> When in doubt, either create a (new) snapshot in ProperTree (File &rarr; `OC Snapshot`) or place **Lilu** and **VirtualSMC** at the top in the config to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also improves boot times.
+> When in doubt, either create a (new) snapshot in ProperTree (File &rarr; `OC Snapshot`) or place **Lilu** and **VirtualSMC** at the top in the config to eliminate kext dependency issues altogether! In my experience, placing Lilu and VirtualSMC first also reduces boot times.
 
 ## Utilizing `MinKernel` and `MaxKernel` settings
 
@@ -148,13 +148,16 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- `BrcmPatchRAM.kext`: For 10.10 or earlier
 	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
 	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
-5. With the release of macOS Sonoma Developer Preview (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi you have to adjust some settings (see [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)), add additional kexts and apply root patches with OpenCore Legacy Patcher, [as explained here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md).
+5. With the release of macOS Sonoma (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi, you have to:
+	- [Apply root patches](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) with OpenCore Legacy Patcher
+	- Add additional kexts and 
+	- Adjust some config settings (see &rarr; [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14))
 
 > [!CAUTION]
 > 
-> Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected via Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
+> Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected by Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
 
-#### :bulb: Fixing issues with AirportBrcmFixup generating a lot of crash reports
+#### Fixing issues with AirportBrcmFixup generating a lot of crash reports
 I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
 
 This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.

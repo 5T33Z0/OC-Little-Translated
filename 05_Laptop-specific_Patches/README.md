@@ -3,17 +3,17 @@ This section contains a collection of guides with laptop-specific patches for en
 
 **TABLE of CONTENTS**
 
-- [**Adjusting Framebuffer Patches for connecting an external display**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Framebuffer_Patching)
-- [**Enabling TrackPad support on Laptopss**
-](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches)
+- [**Adjusting Framebuffer Patches for connecting an external display**](/11_Graphics/iGPU/Framebuffer_Patching/README.md)
+- [**Enabling TrackPad support on Laptops**](/05_Laptop-specific_Patches/Trackpad_Patches/README.md)
 	- I2C TrackPad Patches
 	- ThinkPad Click and TrackPad Patches
-- [**Battery Patches**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Battery_Patches)
+- [**Battery Patches**](/05_Laptop-specific_Patches/Battery_Patches/README.md)
     - Patches for Battery Status Information
     - for Lenovo ThinkPads
+    - for [disabling Battery entry on Intel NUCs](/05_Laptop-specific_Patches/Battery_Patches/v_NUC/README.md)
     - for other brands
-- [**Enabling Brightness Key Shortcuts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brightness_Key_Shortcuts)
-- [**Fixing Keyboard Mappings and Brightness Keys**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys)
+- [**Enabling Brightness Key Shortcuts**](/05_Laptop-specific_Patches/Brightness_Key_Shortcuts/README.md)
+- [**Fixing Keyboard Mappings and Brightness Keys**](/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/README.md)
 - [**Brand-specific patches for different Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches)
     - Dell Machine Special Patch
     - Enabbling 4k output on Dell Optiplex Laptops

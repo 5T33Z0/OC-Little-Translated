@@ -7,5 +7,5 @@ When running macOS on Wintel systems, it can sometimes trigger a CMOS-reset on s
 
 You can use one of the following fixes to resolve the issue:
 
-- [**CMOS Reset Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes/CMOS_Reset_Fix) – For fixing CMOS resets triggered by macOS after shutting down or rebooting.
-- [**Emulating CMOS Memory**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes/Emulating_CMOS) – For fixing conflicts between `AppleRTC` and the BIOS/UEFI Firmware. Can be helpful when trying to fix hibernation.
+- [**CMOS Reset Fix**](/06_CMOS-related_Fixes/CMOS_Reset_Fix/README.md) – For fixing CMOS resets triggered by macOS after shutting down or rebooting.
+- [**Emulating CMOS Memory**](/06_CMOS-related_Fixes/Emulating_CMOS/README.md) – For fixing conflicts between `AppleRTC` and the BIOS/UEFI Firmware. Can be helpful when trying to fix hibernation.
