@@ -146,7 +146,10 @@ That said, it took 4 years for Apple to go from *announcing* the switch to Intel
 
 **OpenCore 0.0.1** was released on **May 4, 2019**. If it only took two years for Clover to go from release to replacing Chameleon, then OpenCore will completely replace Clover next year. 
 
-In the previous sections we saw the many flaws of Chameleon so that its replacement by Clover was inevitable. But as of today, Clover has no significant drawbacks, OpenCore has no significant advantages over Clover that would make it obsolete. So both Clover and OpenCore will still co-exist for the foreseeable future. [The views about OpenCore shared in this paragraph are not those of 5T33Z0.]
+In the previous sections we saw the many flaws of Chameleon so that its replacement by Clover was inevitable. But as of today, Clover has no significant drawbacks, OpenCore has no significant advantages over Clover that would make it obsolete. So both Clover and OpenCore will still co-exist for the foreseeable future. 
+
+**EDIT**: Re-evaluating the relevance of OpenCore in 2024 [by 5T33Z0]
+It's the end of 2024, and Clover is pretty much obsolete. Over the last 4 years, OpenCore has become the de-facto standard for booting macOS on Wintel systems as well as on legacy Macs for booting newer versions of macOS!
 
 ## When will Apple abandon Intel's x86 architecture?
 
