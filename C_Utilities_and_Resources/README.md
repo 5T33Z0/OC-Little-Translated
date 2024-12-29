@@ -39,7 +39,8 @@ Tools for keeping your OpenCore EFI folder so fresh and so clean, clean!
 - [**MountEFI**](https://github.com/corpnewt/MountEFI) – Python Script for mounting the ESP partition
 - [**OCConfigCompare**](https://github.com/corpnewt/OCConfigCompare) – Compares your  config with latest sample.plist to migrate (and validate) it. For those who love the drudgery of updating the config manually…
 - [**OC Anonymizer**](https://github.com/dreamwhite/OC-Anonymizer) – Python Script for removing sensitive data from a config.plist as well as restoring some default settings.
-- [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data
+- [**GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS) – Python-based Tool for generating SMBIOS data.
+- [OpCore Simplify](https://github.com/lzhoang2801/OpCore-Simplify) – The first tool that tries to automate OpenCore EFI generation, includion config settings, ACPI Patches and kexts based on hardware detection. I have not tested it yet on any of my systems but it looks very promising.
 
 ### ACPI-related tools
 Tools for getting, generating and editing ACPI tables.
