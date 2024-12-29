@@ -103,6 +103,16 @@ Check the table of contents for more. Although aimed primarily at OpenCore users
 ## CONTRIBUTIONS
 If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
 
+## STAR HISTORY
+
+<a href="https://star-history.com/#5T33Z0/OC-Little-Translated&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
+ </picture>
+</a>
+
 ## 5T33Z0's 5H0UT 0UT5
 
 - Thanks to al the [**contributors**](https://github.com/5T33Z0/OC-Little-Translated/graphs/contributors) for improving and expanding the repo! Additional credits for contributors outside of the github realm are listed in the respective chapters/sections.
