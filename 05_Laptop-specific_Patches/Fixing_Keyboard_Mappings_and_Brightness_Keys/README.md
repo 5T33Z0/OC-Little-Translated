@@ -18,7 +18,7 @@ Keyboard keys can be re-mapped for triggering different keys than the ones that 
 
 > [!CAUTION]
 > 
-> Logging Keyboard Scan Codes does no longer work on macOS Big Sur and newer. There have been reports [here](https://github.com/acidanthera/bugtracker/issues/872), [here](https://github.com/daliansky/OC-little/issues/46) and [here](https://github.com/5T33Z0/OC-Little-Translated/issues/92#issuecomment-1848874053). Solution: unknown.
+> Logging Keyboard Scan Codes does no longer work on macOS Big Sur and newer. There have been reports [here](https://github.com/acidanthera/bugtracker/issues/872), [here](https://github.com/daliansky/OC-little/issues/46) and [here](https://github.com/5T33Z0/OC-Little-Translated/issues/92#issuecomment-1848874053). <br> **Solution**: use macOS 10.15 or older for mapping keyboard shortcuts.
 
 ### Update [September 30, 2020]:
 
