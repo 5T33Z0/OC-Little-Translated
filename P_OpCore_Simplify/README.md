@@ -20,7 +20,7 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 
 ## Usage Example
 
-I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you wanr to try it
+I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you want to try it
 how you can use it.
 
 > [!CAUTION]
@@ -39,13 +39,13 @@ how you can use it.
 10. Select option <kbd>2</kbd> and hit <kbd>Enter</kbd>
 11. Select the macOS version you want to install by entering the corresponding number, here <kbd>24</kbd> for macOS Sequoia:<br>![macOS](/Users/5t33z0/Desktop/OpCore_Simplify/05.png)
 12. Back in the main screen, select Option <kbd>3</kbd> and press <kbd>Enter</kbd>:<br>![select macOS](/Users/5t33z0/Desktop/OpCore_Simplify/07.png)
-13. This shows the available SSDT hotfixes availabe for your system:<br>![SSDTs](/Users/5t33z0/Desktop/OpCore_Simplify/09.png)
+13. This shows the available SSDT hotfixes available for your system:<br>![SSDTs](/Users/5t33z0/Desktop/OpCore_Simplify/09.png)
 14. Select/de-select the SSDTs you need for your system. Most required patches will be pre-enabled automatically. If you are uncertain which ones you need (or not), please refer to the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/). Once your done reviewing the SSDTs, type <kbd>b</kbd> and press <kbd>Enter</kbd> to return to the main menu.
 15. Back in the main screen, select Option <kbd>4</kbd> and press <kbd>Enter</kbd> to select/modify the kexts to add to your OpenCore EFI folder:<br>![kexts](/Users/5t33z0/Desktop/OpCore_Simplify/11.png)
 16. Return to the main screen and select Option <kbd>5</kbd> and press enter to select an SMBIOS best matching your CPU, here it's `MacBookPro10,1`, since my Laptop has an i7 Ivy Bridge Mobile CPU:<br>![](/Users/5t33z0/Desktop/OpCore_Simplify/12.png)
 17. Return to the main screen and select option <kbd>6</kbd> to start building the OpenCore EFI folder and `config.plist`. Once that's done you will be notified about the next steps to map USB ports:<br>![](/Users/5t33z0/Desktop/OpCore_Simplify/13.png)
 18. [**Map your USB ports**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes) as explained and add the required kext(s) to the `EFI/OC/Kexts` folder located under:<br>![](/Users/5t33z0/Desktop/OpCore_Simplify/14.png)
-19. Open your `config.plist` with [**ProperTree**](https://github.com/corpnewt/ProperTree) and creat an OC Snapshot:<br>![](/Users/5t33z0/Desktop/OpCore_Simplify/15.png)
+19. Open your `config.plist` with [**ProperTree**](https://github.com/corpnewt/ProperTree) and create an OC Snapshot:<br>![](/Users/5t33z0/Desktop/OpCore_Simplify/15.png)
 
 ## Testing
 ### If macOS is installed already 
@@ -53,7 +53,7 @@ how you can use it.
 - If it works out of the box, congrats! If it doesn't work consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html). 
 
 ### If macOS is not installed
-- If macOS is not installed alread, you can follow this guide to [**create a USB Installer**](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#making-the-installer) and put your EFI folder on it.
+- If macOS is not installed already, you can follow this guide to [**create a USB Installer**](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#making-the-installer) and put your EFI folder on it.
 - Restart your system from the USB flash drive and [**install macOS**](https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html#installation-process). Windows users can also use [**UnPlugged**](https://github.com/corpnewt/UnPlugged).
 - For troubleshooting, consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html).
 
