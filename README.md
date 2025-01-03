@@ -38,6 +38,7 @@
 * [**Boot Arguments Explained**](/H_Boot-args/README.md)
 * [**Quirks**](/08_Quirks/README.md)
 * [**EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
+* G[enerating OpenCore EFIs with OpCore Simplify](/P_OpCore_Simplify.md)
 
 ### Guides for OpenCore Auxiliary Tools (OCAT)
 * [**Updating OpenCore**](/D_Updating_OpenCore/README.md)
