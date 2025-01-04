@@ -68,7 +68,8 @@ Tools for getting, generating and editing ACPI tables.
 - [**About this Hack**](https://github.com/0xCUB3/About-This-Hack) – Simple app to view your exact hardware in macOS. Similar to how the "About This Mac" window looked prior to macOS 13 but with more features. 
 - [**DevCleaner for Xcode**](https://github.com/vashpan/xcode-dev-cleaner) - App for clearing various Xcode caches to reclaim tens of gigabytes of storage.
 - [**unpkg**](https://www.timdoug.com/unpkg/) – Utility to unpack .pkg files into a folder instead of installing them on the system.
-- [**LuLu**](https://github.com/objective-see/LuLu) – Free open-source macOS firewall. 
+- [**LuLu**](https://github.com/objective-see/LuLu) – Free open-source macOS firewall.
+- [Find Any File](https://findanyfile.app/) – FAF can find files that Spotlight doesn't, e.g. on network (NAS) and other external volumes, hidden ones inside bundles and packages, and those in folders that are usually excluded from Spotlight search, such as the System and Library folders.
 
 ### macOS Virtualization
 - [**Create macOS VM Install**](https://github.com/rtrouton/create_macos_vm_install_dmg) – Script to prepare macOS installer disk images for use with virtualization software like VMware Fusion or Parallels Desktop.
