@@ -61,6 +61,7 @@ There are several options to fetch and download macOS installers directly from A
 For more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/C_Utilities_and_Resources#getting-macos) section
  
 ## Miscellaneous
+- [**OCLP FAQ**](https://dortania.github.io/OpenCore-Legacy-Patcher/FAQ.html#application-requirements)
 - [**OCLP Changelog**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md)
 - [**OCLP Troubleshooting**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/docs/TROUBLESHOOTING.md)
 - [**Installing Windows from within macOS without Bootcamp**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Install_Windows_NoBootcamp.md)
