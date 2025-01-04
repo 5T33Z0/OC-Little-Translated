@@ -1,5 +1,16 @@
 # Generating an OpenCore Config with OpCore Simplify
 
+**INDEX**
+
+- [About](#about)
+- [Usage Example](#usage-example)
+- [Testing](#testing)
+	- [If macOS is installed already](#if-macos-is-installed-already)
+	- [If macOS is not installed](#if-macos-is-not-installed)
+- [Reporting](#reporting)
+- [Closing thoughts](#closing-thoughts)
+
+---
 ## About
 
 I recently stumbled over an interesting project on Github called [**OpCore Simplify**](https://github.com/lzhoang2801/OpCore-Simplify). It's designed to automate and streamline the creation of OpenCore EFI configurations for Hackintosh setups. It supports a wide range of hardware, including modern CPUs and GPUs, and macOS versions from High Sierra to Sequoia. 
@@ -65,12 +76,12 @@ how you can use it.
 
 - Put your newly generated EFI folder on a FAT32 formatted USB flash drive and try to boot macOS with it.
 - If it works out of the box, congrats! You can mount your system's EFI partition and put the EFI folder on it to boot from an internal disk.
-- If it doesn't work consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html). 
+- If it doesn't work, consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html). 
 
 ### If macOS is not installed
 
-- If macOS is not installed already, you can follow this guide to [**create a USB Installer**](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#making-the-installer) and put your EFI folder on it.
-- Restart your system from the USB flash drive and [**install macOS**](https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html#installation-process). Windows users can also use [**UnPlugged**](https://github.com/corpnewt/UnPlugged).
+- If macOS is not installed already, [**create a USB Installer**](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#making-the-installer) and put your EFI folder on it.
+- Restart your system from the USB flash drive and [**install macOS**](https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html#installation-process). Windows users can also use [**UnPlugged**](https://github.com/corpnewt/UnPlugged) to do so.
 - For troubleshooting, consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html).
 
 ## Reporting
