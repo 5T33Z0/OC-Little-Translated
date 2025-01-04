@@ -8,7 +8,19 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 
 **How It Works:**
 
-1. **Hardware Detection:** OpCore Simplify automatically detects your system's hardware components, such as CPU, GPU, chipset, NICs, peripherals, etc. This information is crucial for generating a compatible EFI configuration.
+1. **Hardware Detection:** OpCore Simplify includes a Python-Script called **Hardware Sniffer** that gathers detailed hardware information from a Wintel system by applying:
+
+	- **Data Collection via WMIC:** Hardware Sniffer utilizes the **Windows Management Instrumentation Command-line** utility (WMIC) to extract comprehensive details about system components, including the MAINBOARD, CPU, GPU, monitors, network adapters, audio devices, USB controllers, input devices, storage controllers, biometric sensors, Bluetooth devices, SD controllers, and system devices. 
+	
+	- **Advanced Detection Techniques:**
+		- **Motherboard Chipset Identification:** The tool analyzes PCI device information to accurately identify Intel chipset models.
+		- **CPU Codename Recognition:** It determines the CPU codename by evaluating the processor's family, model, and stepping values, eliminating the need to query external sources like Intel ARK or AMD websites.
+		- **GPU Codename Recognition:** Hardware Sniffer identifies GPU codenames using device IDs, facilitating precise hardware identification.
+		- **Input Device Connection Type:** The script detects the connection types of input devices (such as touchpads and touchscreens), distinguishing between interfaces like I2C, PS/2, SMBus, and USB.
+	
+	- **Output Generation:** After collecting and analyzing the hardware data, Hardware Sniffer can export the information in JSON format. This structured output is particularly useful for integration with tools like OpCore Simplify, which automate the creation of OpenCore EFI configurations for Hackintosh systems. 
+
+	By automating the detection and reporting of hardware components, Hardware Sniffer streamlines the process of configuring macOS installations on non-Apple hardware, ensuring that all necessary drivers and settings are appropriately accounted for in the resulting OpenCore EFI. 
 
 2. **ACPI Patches and Kexts:** Based on the detected hardware, the tool applies necessary ACPI patches and includes appropriate kernel extensions (kexts) to ensure compatibility and functionality. It integrates with SSDTTime for common patches and includes custom patches to prevent kernel panics and disable unsupported devices. 
 
