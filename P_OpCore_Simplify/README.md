@@ -30,7 +30,7 @@ how you can use it.
 1. Run MS Windows
 2. Download [**OpCore Simplify**](https://github.com/lzhoang2801/OpCore-Simplify) (click on `<> Code` and select "Download Zip")
 3. Extract the zip file
-4. Run the `OpCore-Simplify.bat` file (click on "More info", if Windows wants to block the script)
+4. Run the `OpCore-Simplify.bat` file (if Windows wants to block the script, click on "More info" so that the button to run the script appears!)
 5. This will start a Terminal Window and download required files. Once that's done, you will be greeted by the following screen:<br>![01](https://github.com/user-attachments/assets/be90d44c-9698-4196-b4f0-58965607e451)
 6. Select option <kbd>1</kbd> and hit <kbd>Enter</kbd>
 7. This will start the hardware detection – Type <kbd>e</kbd> and press <kbd>Enter</kbd>:<br>![02](https://github.com/user-attachments/assets/feefc135-7ba9-481b-a8ac-11203161d91f)
@@ -41,21 +41,32 @@ how you can use it.
 12. Back in the main screen, select Option <kbd>3</kbd> and press <kbd>Enter</kbd>:<br>![07](https://github.com/user-attachments/assets/59aa0e14-4aa2-455d-91d3-fba2580d3ff5)
 13. This shows the available SSDT hotfixes available for your system:<br>![09](https://github.com/user-attachments/assets/a7eaedfc-b8e4-411d-855e-dbe47df52d4f)
 14. Select/de-select the SSDTs you need for your system. Most required patches will be pre-enabled automatically. If you are uncertain which ones you need (or not), please refer to the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/). Once your done reviewing the SSDTs, type <kbd>b</kbd> and press <kbd>Enter</kbd> to return to the main menu.
-15. Back in the main screen, select Option <kbd>4</kbd> and press <kbd>Enter</kbd> to select/modify the kexts to add to your OpenCore EFI folder:<br>![11](https://github.com/user-attachments/assets/0d77f97f-8470-49d1-a891-335d8346a5ad)
+15. Back in the main screen, select Option <kbd>4</kbd> and press <kbd>Enter</kbd> to select/modify the kexts to add to your OpenCore EFI folder. If you are using a laptop, make sure to inspect the selected kexts for Wi-Fi/BT and Touchpad especially:<br>![11](https://github.com/user-attachments/assets/0d77f97f-8470-49d1-a891-335d8346a5ad)
 16. Return to the main screen and select Option <kbd>5</kbd> and press enter to select an SMBIOS best matching your CPU, here it's `MacBookPro10,1`, since my Laptop has an i7 Ivy Bridge Mobile CPU:<br>![12](https://github.com/user-attachments/assets/25ee0af1-debe-40c1-9034-bc085f8d18ac)
 17. Return to the main screen and select option <kbd>6</kbd> to start building the OpenCore EFI folder and `config.plist`. Once that's done you will be notified about the next steps to map USB ports:<br>![13](https://github.com/user-attachments/assets/359d41ac-9b3c-4cd8-8f43-9d93897b3999)
 18. [**Map your USB ports**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes) as explained and add the required kext(s) to the `EFI/OC/Kexts` folder located under:<br>![14](https://github.com/user-attachments/assets/97dbac6f-6f28-4d92-8cec-00e8142765ee)
 19. Open your `config.plist` with [**ProperTree**](https://github.com/corpnewt/ProperTree) and create an OC Snapshot:<br>![15](https://github.com/user-attachments/assets/4922e670-de33-408c-b316-913a5a948d98)
 
 ## Testing
+
 ### If macOS is installed already 
+
 - Put your newly generated EFI folder on a FAT32 formatted USB flash drive and try to boot macOS with it.
-- If it works out of the box, congrats! If it doesn't work consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html). 
+- If it works out of the box, congrats! You can mount your system's EFI partition and put the EFI folder on it to boot from an internal disk.
+- If it doesn't work consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html). 
 
 ### If macOS is not installed
+
 - If macOS is not installed already, you can follow this guide to [**create a USB Installer**](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#making-the-installer) and put your EFI folder on it.
 - Restart your system from the USB flash drive and [**install macOS**](https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html#installation-process). Windows users can also use [**UnPlugged**](https://github.com/corpnewt/UnPlugged).
 - For troubleshooting, consult the [**OpenCore Troubleshooting Guide**](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html).
 
+## Reporting
+
+The OpCore Simplify repo has a [discussion section](https://github.com/lzhoang2801/OpCore-Simplify/discussions/23) where you can share your experiences which might be helpful for the developer to improve the tool.
+
 ## Closing thoughts
-In this example, this particular system didn't boot with the generated EFI and config. But I've tried OpCore Simplify on two newer systems and it worked out of the box. Still, I think OpCore Simplify is the closest thing to a fully automated OpenCore configuration tool we have yet. It's a great tool for new and inexperienced users who simply want to try OpenCore without spending hours trying to configure OpenCore and the EFI folder. I am very excited to see future developments.
+
+In my test, this particular laptop didn't boot with the generated EFI and config. Since then, I've tested OpCore Simplify on two other systems (a laptop and a desktop pc) and both booted macOS out of the box without issues. That's pretty impressive, especially when considering the timesave this tool allows: setting up and building an OpenCore EFI folder this way takes around 5 to 10 minutes (mapping USB ports excluded).
+
+Overall, I think OpCore Simplify is the closest thing to a fully automated OpenCore configuration tool we have yet. It's a great starting point for new and inexperienced users who simply want to try OpenCore without spending *hours* trying to configure OpenCore manually using the OpenCore Configuration guide. I am very excited to see how this project will evolve in the future.
