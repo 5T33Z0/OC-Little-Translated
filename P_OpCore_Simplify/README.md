@@ -91,18 +91,18 @@ Since OpCore Simplify dumps the target system's ACPI tables and generates a hard
 8. Once the hardware detection is completed, a report is shown:<br>![03](https://github.com/user-attachments/assets/2021cd8b-48d2-44f9-b39f-8032000b67b0)
 9. Press <kbd>Enter</kbd> and <kbd>Q</kbd> to quit OpCore Simplify
 10. In File Explorer, navigate to the `OpCore-Simplify-main` folder
-11. Inside should now be a `SysReport` folder containing `ACPITables` and `Report.json`: ![alt text](report01.png)
+11. Inside should now be a `SysReport` folder containing `ACPITables` and `Report.json`: ![report01](https://github.com/user-attachments/assets/f01b80d9-c349-4068-8429-1dfcbc8d5f3d)
 12. Zip the `SysReport` folder and send it to the person who wants to assist you.
 
 #### Instructions (for assistants/helpers)
 1. Once you receive the `SysReport.zip`, unzip it
 2. Run OpCore Simplify in Windows
 3. Chose Option 1: "Select Hardware Report"
-4. Drag and Drop the `Report.json` file into the Terminal Window:<br>![alt text](report02.png)
-5. Press <kbd>Enter</kbd> to import the data. Once that's done, you will have something like this:<br>![alt text](report03.png)
+4. Drag and Drop the `Report.json` file into the Terminal Window:<br>![report02](https://github.com/user-attachments/assets/973cb472-fb1a-4fbb-aab5-060170e94431)
+5. Press <kbd>Enter</kbd> to import the data. Once that's done, you will have something like this:<br>![report03](https://github.com/user-attachments/assets/06c4189f-b815-4825-bfc7-f2f9feb313e9)
 6. Press <kbd>Enter</kbd> to continue
-7. Drag and drop the `ACPITables` folder into the Terminal Window:<br>![alt text](report04.png)
-8. Press Enter again to import the tables. Once that's done, you will be back in the main screen showing the results, including the compatible macOS version as well as the recommended SMBIOS:<br>![alt text](report05.png)
+7. Drag and drop the `ACPITables` folder into the Terminal Window:<br>![report04](https://github.com/user-attachments/assets/af2f8ab6-0d88-4522-aa89-0e3e27687fd5)
+8. Press Enter again to import the tables. Once that's done, you will be back in the main screen showing the results, including the compatible macOS version as well as the recommended SMBIOS:<br>![report05](https://github.com/user-attachments/assets/76c35384-727d-4225-b706-3537803ed4f5)
 9. Continue to configure the EFI as explained in "Use case 1", build it, zip it up and send it the user you want to help for testing.
 
 ## Testing
