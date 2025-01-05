@@ -3,7 +3,11 @@
 **INDEX**
 
 - [About](#about)
-- [Usage Example](#usage-example)
+- [Use Cases](#use-cases)
+	- [Use Case 1: creating an OpenCore EFI folder for your own system](#use-case-1-creating-an-opencore-efi-folder-for-your-own-system)
+	- [Use case 2: creating an OpenCore EFI for other systems/users](#use-case-2-creating-an-opencore-efi-for-other-systemsusers)
+		- [Instructions (for system owners)](#instructions-for-system-owners)
+		- [Instructions (for assistants/helpers)](#instructions-for-assistantshelpers)
 - [Testing](#testing)
 	- [If macOS is installed already](#if-macos-is-installed-already)
 	- [If macOS is not installed](#if-macos-is-not-installed)
@@ -41,7 +45,9 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 
 5. **User Guidance:** The tool provides instructions on additional steps, such as USB mapping using USBToolBox and adding the generated USBMap.kext to your EFI, to ensure a fully functional Hackintosh setup.
 
-## Usage Example
+## Use Cases
+
+### Use Case 1: creating an OpenCore EFI folder for your own system
 
 I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you want to try it
 how you can use it.
@@ -69,6 +75,35 @@ how you can use it.
 17. Return to the main screen and select option <kbd>6</kbd> to start building the OpenCore EFI folder and `config.plist`. Once that's done you will be notified about the next steps to map USB ports:<br>![13](https://github.com/user-attachments/assets/359d41ac-9b3c-4cd8-8f43-9d93897b3999)
 18. [**Map your USB ports**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes) as explained and add the required kext(s) to the `EFI/OC/Kexts` folder located under:<br>![14](https://github.com/user-attachments/assets/97dbac6f-6f28-4d92-8cec-00e8142765ee)
 19. Open your `config.plist` with [**ProperTree**](https://github.com/corpnewt/ProperTree) and create an OC Snapshot:<br>![15](https://github.com/user-attachments/assets/4922e670-de33-408c-b316-913a5a948d98)
+
+### Use case 2: creating an OpenCore EFI for other systems/users
+
+Since OpCore Simplify dumps the target system's ACPI tables and generates a hardware report (`Report.json`), these resources can be used by more experienced users to configure an OpenCore EFI folder for them. The user you want to assist must run OpCore Simplfiy in Windows, create a hardware report (Steps 1-12) and send it to you.
+
+#### Instructions (for system owners)
+1. Run MS Windows
+2. Download [**OpCore Simplify**](https://github.com/lzhoang2801/OpCore-Simplify) (click on `<> Code` and select "Download Zip")
+3. Extract the zip file
+4. Run the `OpCore-Simplify.bat` file (if Windows wants to block the script, click on "More info" so that the button to run the script appears!)
+5. This will start a Terminal Window and download required files. Once that's done, you will be greeted by the following screen:<br>![01](https://github.com/user-attachments/assets/be90d44c-9698-4196-b4f0-58965607e451)
+6. Select option <kbd>1</kbd> and hit <kbd>Enter</kbd>
+7. This will start the hardware detection – Type <kbd>e</kbd> and press <kbd>Enter</kbd>:<br>![02](https://github.com/user-attachments/assets/feefc135-7ba9-481b-a8ac-11203161d91f)
+8. Once the hardware detection is completed, a report is shown:<br>![03](https://github.com/user-attachments/assets/2021cd8b-48d2-44f9-b39f-8032000b67b0)
+9. Press <kbd>Enter</kbd> and <kbd>Q</kbd> to quit OpCore Simplify
+10. In File Explorer, navigate to the `OpCore-Simplify-main` folder
+11. Inside should now be a `SysReport` folder containing `ACPITables` and `Report.json`: ![alt text](report01.png)
+12. Zip the `SysReport` folder and send it to the person who wants to assist you.
+
+#### Instructions (for assistants/helpers)
+1. Once you receive the `SysReport.zip`, unzip it
+2. Run OpCore Simplify in Windows
+3. Chose Option 1: "Select Hardware Report"
+4. Drag and Drop the `Report.json` file into the Terminal Window:<br>![alt text](report02.png)
+5. Press <kbd>Enter</kbd> to import the data. Once that's done, you will have something like this:<br>![alt text](report03.png)
+6. Press <kbd>Enter</kbd> to continue
+7. Drag and drop the `ACPITables` folder into the Terminal Window:<br>![alt text](report04.png)
+8. Press Enter again to import the tables. Once that's done, you will be back in the main screen showing the results, including the compatible macOS version as well as the recommended SMBIOS:<br>![alt text](report05.png)
+9. Continue to configure the EFI as explained in "Use case 1", build it, zip it up and send it the user you want to help for testing.
 
 ## Testing
 
