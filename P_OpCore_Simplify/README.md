@@ -8,6 +8,7 @@
 	- [Use case 2: creating an OpenCore EFI for other systems/users](#use-case-2-creating-an-opencore-efi-for-other-systemsusers)
 		- [Instructions (for system owners)](#instructions-for-system-owners)
 		- [Instructions (for assistants/helpers)](#instructions-for-assistantshelpers)
+	- [Other use cases](#other-use-cases)
 - [Testing](#testing)
 	- [If macOS is installed already](#if-macos-is-installed-already)
 	- [If macOS is not installed](#if-macos-is-not-installed)
@@ -104,6 +105,10 @@ Since OpCore Simplify dumps the target system's ACPI tables and generates a hard
 7. Drag and drop the `ACPITables` folder into the Terminal Window:<br>![report04](https://github.com/user-attachments/assets/af2f8ab6-0d88-4522-aa89-0e3e27687fd5)
 8. Press Enter again to import the tables. Once that's done, you will be back in the main screen showing the results, including the compatible macOS version as well as the recommended SMBIOS:<br>![report05](https://github.com/user-attachments/assets/76c35384-727d-4225-b706-3537803ed4f5)
 9. Continue to configure the EFI as explained in "Use case 1", build it, zip it up and send it the user you want to help for testing.
+
+### Other use cases
+
+- Generating EFI folders for Intel-based CPUs past 10th Gen Intel Core: as you know, the OpenCore install guide only supports Intel CPUs up to 10th Gen "Comet Lake". But just because Apple dropped Intel CPUs from their roster, doesn't mean that you cannot run macOS on 11th Gen and newer, just the iGPU won't work since there are no framebuffer patches available. So, OpCore Simplify can help you with newer Intel CPUs as well (up to 14th Gen is currently supported)
 
 ## Testing
 
