@@ -37,6 +37,7 @@ Listed below are configuration guides to update your OpenCore EFI and `config.pl
 
 ## (Re-)Enabling Features
 - [**Fixing WiFi and Bluetooth in macOS Sonoma+**](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
+- [**Enabling `AirportItlwm.kext` in macOS Sequoia**](/14_OCLP_Wintel/Enable_Features/AirportItllwm_Sequoia.md)
 - [**How to disable Gatekeeper in macOS Sequoia**](/14_OCLP_Wintel/Guides/Disable_Gatekeeper.md)
 - [**How to enable auto-root-patching during macOS installation**](/14_OCLP_Wintel/Guides/Auto-Patching.md)
 - [**Force-enabling root-patches Patches in OCLP**](/14_OCLP_Wintel/Enable_Features/Force-enable_Root-Patches.md)
