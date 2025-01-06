@@ -20,7 +20,7 @@ Luckily for use, we can utilize OpenCore Legacy patcher to make use of `AirportI
 
 ## Instructions
 
-We need to prepare the `config.plist` and EFI folder content to make `AirportItlwm.kext` work again!
+We need to prepare the `config.plist` and EFI folder content to make `AirportItlwm.kext` work again! You can either follow the instructions below, or [copy the settings from this plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/AirportItlwm_Sequoia.plist) ⚠️ Make sure to adjust the PCI path of the WiFi card so that it matches the path to the WiFi card in your system!
 
 ### 1. Spoof Intel WiFi as a Broadcom card
 
