@@ -49,9 +49,7 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 
 ### Use case 1: creating an OpenCore EFI folder for your own system
 
-I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you want to try it
-
-how you can use it.
+I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you want to try it.
 
 > [!CAUTION]
 >
