@@ -8,7 +8,7 @@
 	- [Use case 2: creating an OpenCore EFI for other systems/users](#use-case-2-creating-an-opencore-efi-for-other-systemsusers)
 		- [Instructions (for system owners)](#instructions-for-system-owners)
 		- [Instructions (for assistants/helpers)](#instructions-for-assistantshelpers)
-	- [Other use cases](#other-use-cases)
+	- [Use case 3: 11th to 14 Gen Intel Core CPUs](#use-case-3-11th-to-14-gen-intel-core-cpus)
 - [Testing](#testing)
 	- [If macOS is installed already](#if-macos-is-installed-already)
 	- [If macOS is not installed](#if-macos-is-not-installed)
@@ -16,6 +16,7 @@
 - [Closing thoughts](#closing-thoughts)
 
 ---
+
 ## About
 
 I recently stumbled over an interesting project on Github called [**OpCore Simplify**](https://github.com/lzhoang2801/OpCore-Simplify). It's designed to automate and streamline the creation of OpenCore EFI configurations for Hackintosh setups. It supports a wide range of hardware, including modern CPUs and GPUs, and macOS versions from High Sierra to Sequoia. 
@@ -26,17 +27,15 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 
 1. **Hardware Detection:** OpCore Simplify includes a Python-Script called **Hardware Sniffer** that gathers detailed hardware information from a Wintel system by applying:
 
-	- **Data Collection via WMIC:** Hardware Sniffer utilizes the **Windows Management Instrumentation Command-line** utility (WMIC) to extract comprehensive details about system components, including the MAINBOARD, CPU, GPU, monitors, network adapters, audio devices, USB controllers, input devices, storage controllers, biometric sensors, Bluetooth devices, SD controllers, and system devices. 
-	
-	- **Advanced Detection Techniques:**
-		- **Motherboard Chipset Identification:** The tool analyzes PCI device information to accurately identify Intel chipset models.
-		- **CPU Codename Recognition:** It determines the CPU codename by evaluating the processor's family, model, and stepping values, eliminating the need to query external sources like Intel ARK or AMD websites.
-		- **GPU Codename Recognition:** Hardware Sniffer identifies GPU codenames using device IDs, facilitating precise hardware identification.
-		- **Input Device Connection Type:** The script detects the connection types of input devices (such as touchpads and touchscreens), distinguishing between interfaces like I2C, PS/2, SMBus, and USB.
-	
-	- **Output Generation:** After collecting and analyzing the hardware data, Hardware Sniffer can export the information in JSON format. This structured output is particularly useful for integration with tools like OpCore Simplify, which automate the creation of OpenCore EFI configurations for Hackintosh systems. 
+   - **Data Collection via WMIC:** Hardware Sniffer utilizes the **Windows Management Instrumentation Command-line** utility (WMIC) to extract comprehensive details about system components, including the MAINBOARD, CPU, GPU, monitors, network adapters, audio devices, USB controllers, input devices, storage controllers, biometric sensors, Bluetooth devices, SD controllers, and system devices. 
+   - **Advanced Detection Techniques:**
+       - **Motherboard Chipset Identification:** The tool analyzes PCI device information to accurately identify Intel chipset models.
+       - **CPU Codename Recognition:** It determines the CPU codename by evaluating the processor's family, model, and stepping values, eliminating the need to query external sources like Intel ARK or AMD websites.
+       - **GPU Codename Recognition:** Hardware Sniffer identifies GPU codenames using device IDs, facilitating precise hardware identification.
+       - **Input Device Connection Type:** The script detects the connection types of input devices (such as touchpads and touchscreens), distinguishing between interfaces like I2C, PS/2, SMBus, and USB.
+   - **Output Generation:** After collecting and analyzing the hardware data, Hardware Sniffer can export the information in JSON format. This structured output is particularly useful for integration with tools like OpCore Simplify, which automate the creation of OpenCore EFI configurations for Hackintosh systems. 
 
-	By automating the detection and reporting of hardware components, Hardware Sniffer streamlines the process of configuring macOS installations on non-Apple hardware, ensuring that all necessary drivers and settings are appropriately accounted for in the resulting OpenCore EFI. 
+   By automating the detection and reporting of hardware components, Hardware Sniffer streamlines the process of configuring macOS installations on non-Apple hardware, ensuring that all necessary drivers and settings are appropriately accounted for in the resulting OpenCore EFI. 
 
 2. **ACPI Patches and Kexts:** Based on the detected hardware, the tool applies necessary ACPI patches and includes appropriate kernel extensions (kexts) to ensure compatibility and functionality. It integrates with SSDTTime for common patches and includes custom patches to prevent kernel panics and disable unsupported devices. 
 
@@ -51,10 +50,11 @@ In terms of building an OpenCore config semi-automatically, OpCore Simplify the 
 ### Use case 1: creating an OpenCore EFI folder for your own system
 
 I've tried OpCore Simplify on one my Ivy Bridge laptop which requires quite a complex configuration to boot macOS 13 and newer. Below, I've explained how I did, so you can check out for yourself if you want to try it
+
 how you can use it.
 
 > [!CAUTION]
-> 
+>
 > Don't use the settings shown in the screenshots for *your* system. It's just an example, **NOT** a config guide!
 
 1. Run MS Windows
@@ -82,6 +82,7 @@ how you can use it.
 Since OpCore Simplify dumps the target system's ACPI tables and generates a hardware report (`Report.json`), these resources can be used by more experienced users to configure an OpenCore EFI folder for them. The user you want to assist must run OpCore Simplfiy in Windows, create a hardware report (Steps 1-12) and send it to you.
 
 #### Instructions (for system owners)
+
 1. Run MS Windows
 2. Download [**OpCore Simplify**](https://github.com/lzhoang2801/OpCore-Simplify) (click on `<> Code` and select "Download Zip")
 3. Extract the zip file
@@ -96,6 +97,7 @@ Since OpCore Simplify dumps the target system's ACPI tables and generates a hard
 12. Zip the `SysReport` folder and send it to the person who wants to assist you.
 
 #### Instructions (for assistants/helpers)
+
 1. Once you receive the `SysReport.zip`, unzip it
 2. Run OpCore Simplify in Windows
 3. Chose Option 1: "Select Hardware Report"
@@ -106,9 +108,14 @@ Since OpCore Simplify dumps the target system's ACPI tables and generates a hard
 8. Press Enter again to import the tables. Once that's done, you will be back in the main screen showing the results, including the compatible macOS version as well as the recommended SMBIOS:<br>![report05](https://github.com/user-attachments/assets/76c35384-727d-4225-b706-3537803ed4f5)
 9. Continue to configure the EFI as explained in "Use case 1", build it, zip it up and send it the user you want to help for testing.
 
-### Other use cases
+### Use case 3: 11th to 14 Gen Intel Core CPUs 
 
-- Generating EFI folders for Intel-based CPUs past 10th Gen Intel Core: as you know, the OpenCore install guide only supports Intel CPUs up to 10th Gen "Comet Lake". But just because Apple dropped Intel CPUs from their roster, doesn't mean that you cannot run macOS on 11th Gen and newer, just the iGPU won't work since there are no framebuffer patches available. So, OpCore Simplify can help you with newer Intel CPUs as well (up to 14th Gen is currently supported)
+The official OpenCore installation guide only covers Intel CPUs up to 10th Gen "Comet Lake". However, while Apple has officially dropped support for newer Intel processors, it's still possible to run macOS on 11th Gen and later CPUs. There are two main considerations when using these newer processors:
+
+1. The integrated GPU (iGPU) won't function since no framebuffer patches are available
+2. The config needs adjustments to properly handle Performance (P) and Efficiency (E) cores (12th gen+)
+
+Currently, OpenCore Simplify supports generation OpenCore EFIs up to 14th gen Intel Core.
 
 ## Testing
 
