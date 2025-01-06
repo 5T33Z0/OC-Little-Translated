@@ -53,9 +53,9 @@ We need to prepare the `config.plist` and EFI folder content to make `AirportItl
 			</dict>
 	```
 - Get the correct PCI device path for *your* Intel WiFi card. 
-- You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![](/Users/5t33y0/Desktop/intel_spoof01.png)
-- Adjust the PCI path to match *your* system:<br>![](/Users/5t33y0/Desktop/intel_spoof02.png)
-	
+- You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![intel_spoof01](https://github.com/user-attachments/assets/44f21ce0-63ca-45f4-b15c-55cbe3c98a1d)
+- Adjust the PCI path to match *your* system:<br>![intel_spoof02](https://github.com/user-attachments/assets/a9b88f3c-7bdf-4de9-9a7e-10c163203dfb)
+ 
 ## 2. Block new `IOSkywalk` kext
 
 Under `Kernel/Block`, add the following rule:
@@ -79,7 +79,7 @@ Under `Kernel/Block`, add the following rule:
 </dict>
 ```
 
-**Screenshot**:<br> ![](/Users/5t33y0/Desktop/intel_spoof08.png)
+**Screenshot**:<br> ![intel_spoof08](https://github.com/user-attachments/assets/0d5a08a1-035c-4079-8128-a8e5435bec59)
 
 ## 3. Add Kexts
 - Disable `Itlwm.kext`, if present!
@@ -88,7 +88,7 @@ Under `Kernel/Block`, add the following rule:
 	- `IOSkywalk.kext`
 	- `IO8021FamilyLegacy.kext` (contains an additional kext as plugin)
 	- [**`AirportItlwm.kext`**](https://github.com/OpenIntelWireless/itlwm/releases) (inject the one for macOS Ventura! I have renamed it to `AirportItlwm_Sequoia.kext` since I also have macOS Sonoma installed and it requires a different variant of the kext. Make sure, it is injected ***after*** `IOSkywalk` and `IO8021FamilyLegacy` kexts!
-- Adjust MinKernel and MaxKernel Settings as shown in the **Screenshot**: <br>![](/Users/5t33y0/Desktop/intel_spoof03.png)
+- Adjust MinKernel and MaxKernel Settings as shown in the **Screenshot**: <br>![intel_spoof03](https://github.com/user-attachments/assets/f5edc4f2-cb0b-4124-a16b-860ccd87c48f)
 
 ## 4. Disable `SecureBootModel`
 
@@ -112,7 +112,7 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 	<data>AwgAAA==</data>
 </dict>
 ```
-**Screenshot**:<br>![](/Users/5t33y0/Desktop/nvram.png)
+**Screenshot**:<br>![nvram](https://github.com/user-attachments/assets/b322597d-98d0-4961-81d3-19ec8ecb9bf9)
 
 - Save your `config.plist`
 
@@ -124,9 +124,9 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 
 - Run OCLP
 - Click on "Apply Root Patch" button
-- "Networking: Modern WiFi" should be available:<br>![](/Users/5t33y0/Desktop/intel_spoof05.png)
+- "Networking: Modern WiFi" should be available:<br>![intel_spoof05](https://github.com/user-attachments/assets/8b072d05-93f5-4151-b6e1-1d8e0c6c555e)
 - Click "Start Root Patching"
-- It will install the necessary Frameworks required for `AirportItlwm` to work:<br> ![](/Users/5t33y0/Desktop/intel_spoof06.png)	
+- It will install the necessary Frameworks required for `AirportItlwm` to work:<br> ![intel_spoof06](https://github.com/user-attachments/assets/ced653f7-0807-4aef-82cb-eabf35b08884)
 
 ## 8. Disable spoofed Broadcom card
 
@@ -137,9 +137,10 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 - Reboot the system
 - Perform an NVRAM reset
 - Boot into macOS Sequoia
-- You should now be able to use the Airport-Utility in macOS Sequoia again, to connect to WiFi APs (proof):<br> ![](/Users/5t33y0/Desktop/intel_spoof07.png) 
+- You should now be able to use the Airport-Utility in macOS Sequoia again, to connect to WiFi APs (proof):<br>![intel_spoof07](https://github.com/user-attachments/assets/1659fde4-4815-4e87-9de1-ddbd84cf6f7c)
 
 ## Credits and Thank Yous
 
 - lifeknife10A who came up with this [workaround](https://github.com/OpenIntelWireless/itlwm/issues/1009#issuecomment-2370919270)
 - sughero, for additional info about the order of the kexts
+- stefanalmare for pointing me to this solution
