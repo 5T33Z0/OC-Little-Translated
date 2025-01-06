@@ -1,4 +1,6 @@
-# Using `AirportItlwm.kext` in macOS Sequoia 
+# Using `AirportItlwm.kext` in macOS Sequoia
+
+![intel_spoof07](https://github.com/user-attachments/assets/255406e1-554e-4b6c-9b67-5d24b9fcb962)
 
 ## About
 
@@ -137,7 +139,7 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 - Reboot the system
 - Perform an NVRAM reset
 - Boot into macOS Sequoia
-- You should now be able to use the Airport-Utility in macOS Sequoia again, to connect to WiFi APs (proof):<br>![intel_spoof07](https://github.com/user-attachments/assets/1659fde4-4815-4e87-9de1-ddbd84cf6f7c)
+- You should now be able to use the Airport-Utility in macOS Sequoia again, to connect to WiFi APs
 
 ## Credits and Thank Yous
 
