@@ -25,35 +25,38 @@ We need to prepare the `config.plist` and EFI folder content to make `AirportItl
 ### 1. Spoof Intel WiFi as a Broadcom card
 
 - In your `config.plist`, create an entry for a Broadcom BCM4360 device in `DeviceProperties`:
-	```xml
-	<key>DeviceProperties</key>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>#PciRoot(0x0)/Pci(0x14,0x3)</key>
 	<dict>
-		<key>Add</key>
-		<dict>
-			<key>PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)</key>
-			<dict>
-				<key>IOName</key>
-				<string>pci14e4,43a0</string>
-				<key>compatible</key>
-				<string>pci106b,117</string>
-				<key>device-id</key>
-				<data>oEMAAA==</data>
-				<key>device_type</key>
-				<string>Network controller</string>
-				<key>model</key>
-				<string>BCM4360 802.11 ac Wireless Network Adapter</string>
-				<key>name</key>
-				<string>pci14e4,43a0</string>
-				<key>pci-aspm-default</key>
-				<integer>0</integer>
-				<key>subsystem-id</key>
-				<data>FwEAAA==</data>
-				<key>subsystem-vendor-id</key>
-				<data>axAAAA==</data>
-				<key>vendor-id</key>
-				<data>5BQAAA==</data>
-			</dict>
-	```
+		<key>IOName</key>
+		<string>pci14e4,43a0</string>
+		<key>compatible</key>
+		<string>pci106b,117</string>
+		<key>device-id</key>
+		<data>oEMAAA==</data>
+		<key>device_type</key>
+		<string>Network controller</string>
+		<key>model</key>
+		<string>BCM4360 802.11 ac Wireless Network Adapter</string>
+		<key>name</key>
+		<string>pci14e4,43a0</string>
+		<key>pci-aspm-default</key>
+		<integer>0</integer>
+		<key>subsystem-id</key>
+		<data>FwEAAA==</data>
+		<key>subsystem-vendor-id</key>
+		<data>axAAAA==</data>
+		<key>vendor-id</key>
+		<data>5BQAAA==</data>
+	</dict>
+</dict>
+</plist>
+
+```
 - Get the correct PCI device path for *your* Intel WiFi card. 
 - You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![intel_spoof01](https://github.com/user-attachments/assets/44f21ce0-63ca-45f4-b15c-55cbe3c98a1d)
 - Adjust the PCI path to match *your* system:<br>![intel_spoof02](https://github.com/user-attachments/assets/a9b88f3c-7bdf-4de9-9a7e-10c163203dfb)
@@ -86,7 +89,7 @@ Under `Kernel/Block`, add the following rule:
 ## 3. Add Kexts
 - Disable `Itlwm.kext`, if present!
 - Add the following [**Kexts from the OCLP repo**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi) to `EFI/OC/Kexts` and your `config.plist`:
-	- `AMFIPasss.kext` 
+	- [`AMFIPasss.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) 
 	- `IOSkywalk.kext`
 	- `IO8021FamilyLegacy.kext` (contains an additional kext as plugin)
 	- [**`AirportItlwm.kext`**](https://github.com/OpenIntelWireless/itlwm/releases) (inject the one for macOS Ventura! I have renamed it to `AirportItlwm_Sequoia.kext` since I also have macOS Sonoma installed and it requires a different variant of the kext). ⚠️ Make sure it is injected ***after*** `IOSkywalk` and `IO8021FamilyLegacy` kexts!
