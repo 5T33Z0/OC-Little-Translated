@@ -35,7 +35,7 @@ In your `config.plist`, create an entry for a Broadcom BCM4360 device in `Device
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x14,0x3)</key>
+			<key>#PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)</key>
 			<dict>
 				<key>IOName</key>
 				<string>pci14e4,43a0</string>
