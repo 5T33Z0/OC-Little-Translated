@@ -63,7 +63,7 @@ In your `config.plist`, create an entry for a Broadcom BCM4360 device in `Device
 </dict>
 </plist>
 ```
-**Screenshot**:<br> ![devprops](https://github.com/user-attachments/assets/97eadc8c-21c6-4968-a7cf-ddd7b54492f6)
+**Screenshot**:<br> ![devpropss](https://github.com/user-attachments/assets/ffd6c5b7-91ba-4510-a676-f31c3e8ab576)
 
 - Get the correct PCI device path for *your* Intel WiFi card. 
 - You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![intel_spoof01](https://github.com/user-attachments/assets/44f21ce0-63ca-45f4-b15c-55cbe3c98a1d)
