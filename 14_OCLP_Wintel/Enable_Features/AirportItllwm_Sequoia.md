@@ -154,7 +154,7 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 
 > [!IMPORTANT]
 > 
-> Once root patches are applied, the security seal of the volume will be broken. And once it is broken, the complete macOS version will be downloaded every timan an OS update is available. The workaround would be to revert root patches before installing updates – but then you won't have WiFi (unless you enable `itlwm` beforehand).
+> Once root patches are applied, the security seal of the volume will be broken. And once it is broken, the complete macOS version will be downloaded every time an OS update is available. The workaround would be to revert root patches before installing updates – but then you won't have WiFi (unless you enable `itlwm` beforehand).
 
 ## Credits and Thank Yous
 
