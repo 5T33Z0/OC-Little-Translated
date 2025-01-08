@@ -13,10 +13,10 @@ Luckily for use, we can utilize OpenCore Legacy patcher to make use of `AirportI
 ## Patching principle
 
 1. Inject the Intel WiFi card as a legacy 4360 Broadcom card via `DeviceProperties` &rarr; This will allow "Modern WiFi" patches in OCLP 
-2. Inject the required kexts for re-enabling the legacy WiFi cards
+2. Inject the required kexts for re-enabling legacy WiFi cards
 3. Apply root patches
 4. Disable the WiFi spoof again
-5. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` working in Sequoia 
+5. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` working again 
 
 ## Instructions
 
