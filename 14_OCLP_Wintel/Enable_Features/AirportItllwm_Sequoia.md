@@ -152,6 +152,10 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 - Boot into macOS Sequoia
 - You should now be able to use the Airport-Utility in macOS Sequoia again, to connect to WiFi APs
 
+> [!IMPORTANT]
+> 
+> Once root patches are applied, the security seal of the volume will be broken. And once it is broken, the complete macOS version will be downloaded every timan an OS update is available. The workaround would be to revert root patches before installing updates – but then you won't have WiFi (unless you enable `itlwm` beforehand).
+
 ## Credits and Thank Yous
 
 - lifeknife10A who came up with this [workaround](https://github.com/OpenIntelWireless/itlwm/issues/1009#issuecomment-2370919270)
