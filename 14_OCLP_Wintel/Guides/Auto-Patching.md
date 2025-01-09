@@ -20,6 +20,9 @@ If your system requires iGPU and/or GPU (AMD/NVIDIA) root patches to enable hard
 > 
 > `AutoPkg-Assets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
 
+### Limitations
+Auo-Patching only works when installing macOS either from the "Install macOS" app or when using a USB installer, but not when installung (delta) updates via the Software Update feature in system settings!
+ 
 ## Instructions
 
 ### When using a USB Installer
