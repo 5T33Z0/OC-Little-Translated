@@ -52,5 +52,5 @@ Once the installation reaches the first-time setup stage, iGPU/GPU acceleration,
 
 ## Resources
 - [Background info about the inner workings of automatic root patching](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/986)
-- Khronokernel: [macOS Ventura and legacy Metal: Part 2; New challenges with Ventura](https://khronokernel.com/macos/2022/11/01/LEGACY-METAL-PART-2.html)
+- Khronokernel: [macOS Ventura and legacy Metal, Part 2: New challenges with Ventura](https://khronokernel.com/macos/2022/11/01/LEGACY-METAL-PART-2.html)
 - [HorizontalUnix](https://github.com/HorizonUnix/PatchSonomaWiFiOnTheFly) for explaining where the `AutoPkg-Assets.pkg` has to be placed!
