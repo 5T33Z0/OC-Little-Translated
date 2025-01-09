@@ -46,13 +46,13 @@ In your `config.plist`, create an entry for a Broadcom BCM4360 device in `Device
 </dict>
 </plist>
 ```
-**Screenshot**:<br> ![IOName](/Users/5t33z0/Desktop/IOName1.png)
+**Screenshot**:<br> ![IOName1](https://github.com/user-attachments/assets/6b261d32-b140-4f0f-8a98-7cf60277eb3e)
 
 ### 1.2 Adjust the PCI path
 
 - Get the correct PCI device path for *your* Intel WiFi card. 
 - You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![intel_spoof01](https://github.com/user-attachments/assets/44f21ce0-63ca-45f4-b15c-55cbe3c98a1d)
-- Adjust the PCI path to match *your* system:<br>![IOName](/Users/5t33z0/Desktop/IOName2.png) 
+- Adjust the PCI path to match *your* system:<br>![IOName2](https://github.com/user-attachments/assets/6848f554-5fe1-420c-a85b-1c0c87310ab2)
 
 ### 2. Block new `IOSkywalk` kext
 
