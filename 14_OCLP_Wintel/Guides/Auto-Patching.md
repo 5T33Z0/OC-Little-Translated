@@ -12,6 +12,9 @@ If you add `AutoPkgInstaller.kext` to your OpenCore EFI folder and the `.pkg` fi
 
 You still have to prepare your EFI folder and `config.plist` as described in my guides to run macOS 13 and newer, but if they are configured correctly, you don't have to run OCLP in Post-Install.
 
+### Limitations
+Auo-Patching only works when installing macOS either from the "Install macOS" app or when using a USB installer, but not when installung (delta) updates via the Software Update feature in system settings!
+
 ### Who is this method for?
 
 If your system requires iGPU and/or GPU (AMD/NVIDIA) root patches to enable hardware graphics acceleration, then this method is highly recommended to avoid the super-sluggish software-rendered setup screen. If you just need to patch Wi-Fi, then not so much. In this case, I would recommend patching Wi-Fi in post-install as usual.
@@ -20,9 +23,6 @@ If your system requires iGPU and/or GPU (AMD/NVIDIA) root patches to enable hard
 > 
 > `AutoPkg-Assets.pkg` is not designed to be run by users. Running it manually may result in bricked installations!
 
-### Limitations
-Auo-Patching only works when installing macOS either from the "Install macOS" app or when using a USB installer, but not when installung (delta) updates via the Software Update feature in system settings!
- 
 ## Instructions
 
 ### When using a USB Installer
