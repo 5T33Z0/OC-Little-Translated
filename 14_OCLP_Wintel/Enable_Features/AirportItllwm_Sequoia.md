@@ -12,17 +12,18 @@ Luckily for use, we can utilize OpenCore Legacy patcher to make use of `AirportI
 
 ## Patching principle
 
-1. Inject the Intel WiFi card as a legacy 4360 Broadcom card via `DeviceProperties` &rarr; This will allow "Modern WiFi" patches in OCLP 
+1. Inject `IOName` of a BRCM 4360 Broadcom card via `DeviceProperties` to trigger "Modern WiFi" patches in OCLP 
 2. Inject the required kexts for re-enabling legacy WiFi cards
 3. Apply root patches
-4. Disable the WiFi spoof again
-5. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` working again 
+4. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` working again 
 
 ## Instructions
 
-We need to prepare the `config.plist` and EFI folder content to make `AirportItlwm.kext` work again! You can either follow the instructions below, or [copy the settings from this plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/AirportItlwm_Sequoia.plist) ⚠️ Make sure to adjust the PCI path of the WiFi card so that it matches the path to the WiFi card in your system!
+We need to prepare the `config.plist` and EFI folder content to make `AirportItlwm.kext` work again! You can either follow the instructions below, or [copy the settings from this plist](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/plist/AirportItlwm_Sequoia.plist).
 
-### 1. Spoof Intel WiFi as a Broadcom card
+⚠️ Make sure to adjust the PCI path of the WiFi card so that it matches the location of the WiFi card in your system!
+
+### 1.1 Add `IOName` spoof
 
 In your `config.plist`, create an entry for a Broadcom BCM4360 device in `DeviceProperties`:
 
@@ -35,41 +36,25 @@ In your `config.plist`, create an entry for a Broadcom BCM4360 device in `Device
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)</key>
+			<key>PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)</key>
 			<dict>
 				<key>IOName</key>
 				<string>pci14e4,43a0</string>
-				<key>compatible</key>
-				<string>pci106b,117</string>
-				<key>device-id</key>
-				<data>oEMAAA==</data>
-				<key>device_type</key>
-				<string>Network controller</string>
-				<key>model</key>
-				<string>BCM4360 802.11 ac Wireless Network Adapter</string>
-				<key>name</key>
-				<string>pci14e4,43a0</string>
-				<key>pci-aspm-default</key>
-				<integer>0</integer>
-				<key>subsystem-id</key>
-				<data>FwEAAA==</data>
-				<key>subsystem-vendor-id</key>
-				<data>axAAAA==</data>
-				<key>vendor-id</key>
-				<data>5BQAAA==</data>
 			</dict>
 		</dict>
 	</dict>
 </dict>
 </plist>
 ```
-**Screenshot**:<br> ![devpropss](https://github.com/user-attachments/assets/ffd6c5b7-91ba-4510-a676-f31c3e8ab576)
+**Screenshot**:<br> ![IOName](/Users/5t33z0/Desktop/IOName1.png)
+
+### 1.2 Adjust the PCI path
 
 - Get the correct PCI device path for *your* Intel WiFi card. 
 - You can do this with Hackintool. Just find the entry for the Wireless Network Controler, right-click and select "Copy Device Path":<br>![intel_spoof01](https://github.com/user-attachments/assets/44f21ce0-63ca-45f4-b15c-55cbe3c98a1d)
-- Adjust the PCI path to match *your* system:<br>![intel_spoof02](https://github.com/user-attachments/assets/a9b88f3c-7bdf-4de9-9a7e-10c163203dfb)
- 
-## 2. Block new `IOSkywalk` kext
+- Adjust the PCI path to match *your* system:<br>![IOName](/Users/5t33z0/Desktop/IOName2.png) 
+
+### 2. Block new `IOSkywalk` kext
 
 Under `Kernel/Block`, add the following rule:
 
@@ -94,7 +79,7 @@ Under `Kernel/Block`, add the following rule:
 
 **Screenshot**:<br> ![intel_spoof08](https://github.com/user-attachments/assets/0d5a08a1-035c-4079-8128-a8e5435bec59)
 
-## 3. Add Kexts
+### 3. Add Kexts
 - Disable `Itlwm.kext`, if present!
 - Add the following [**Kexts from the OCLP repo**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi) to `EFI/OC/Kexts` and your `config.plist`:
 	- [`AMFIPasss.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) 
@@ -103,12 +88,12 @@ Under `Kernel/Block`, add the following rule:
 	- [**`AirportItlwm.kext`**](https://github.com/OpenIntelWireless/itlwm/releases) (inject the one for macOS Ventura! I have renamed it to `AirportItlwm_Sequoia.kext` since I also have macOS Sonoma installed and it requires a different variant of the kext). ⚠️ Make sure it is injected ***after*** `IOSkywalk` and `IO8021FamilyLegacy` kexts!
 - Adjust MinKernel and MaxKernel Settings as shown in the **Screenshot**: <br>![intel_spoof03](https://github.com/user-attachments/assets/f5edc4f2-cb0b-4124-a16b-860ccd87c48f)
 
-## 4. Disable `SecureBootModel`
+### 4. Disable `SecureBootModel`
 
 Under `Misc`, change `SecureBootModel` to `Disabled`
 
-## 5. NVRAM Entries (optional)
-- Change `csr-active-config` to `08030000`
+### 5. NVRAM Entries (optional)
+- Change `csr-active-config` to `03080000` (resp. `030A0000` if you are using an NVIDIA GPU)
 - Enable `-lilubetaall` boot.arg if WiFi/BT is not working in macOS Sequoia
 - If Bluetooth stops working after root patching, add the following entries to the NVRAM section:
 
@@ -129,11 +114,11 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 
 - Save your `config.plist`
 
-## 6. Download OCLP
+### 6. Download OCLP
 - Since you won't have internet Access in macOS Sequoia, [download the latest release of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) before rebooting into macOS
 - Now reboot into macOS Sequoia
 
-## 7. Apply root patches with OCLP
+### 7. Apply root patches with OCLP
 
 - Run OCLP
 - Click on "Apply Root Patch" button
@@ -141,11 +126,7 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 - Click "Start Root Patching"
 - It will install the necessary Frameworks required for `AirportItlwm` to work:<br> ![intel_spoof06](https://github.com/user-attachments/assets/ced653f7-0807-4aef-82cb-eabf35b08884)
 
-## 8. Disable spoofed Broadcom card
-
-- Once root patching is completed successfully, disable the `DeviceProperty` for the fake `Bcm 4360` card by putting a `#` in front of it!
-
-## 9. Reboot and enjoy!
+### 8. Reboot and enjoy!
 
 - Reboot the system
 - Perform an NVRAM reset

@@ -6,28 +6,10 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>#PciRoot(0x0)/Pci(0x14,0x3)</key>
+			<key>PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)</key>
 			<dict>
 				<key>IOName</key>
 				<string>pci14e4,43a0</string>
-				<key>compatible</key>
-				<string>pci106b,117</string>
-				<key>device-id</key>
-				<data>oEMAAA==</data>
-				<key>device_type</key>
-				<string>Network controller</string>
-				<key>model</key>
-				<string>BCM4360 802.11 ac Wireless Network Adapter</string>
-				<key>name</key>
-				<string>pci14e4,43a0</string>
-				<key>pci-aspm-default</key>
-				<integer>0</integer>
-				<key>subsystem-id</key>
-				<data>FwEAAA==</data>
-				<key>subsystem-vendor-id</key>
-				<data>axAAAA==</data>
-				<key>vendor-id</key>
-				<data>5BQAAA==</data>
 			</dict>
 		</dict>
 	</dict>
