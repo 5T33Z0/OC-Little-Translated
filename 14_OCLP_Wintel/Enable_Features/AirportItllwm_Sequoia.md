@@ -8,7 +8,7 @@ As you may know, Apple removed support for various system kexts and frameworks r
 
 Since `Itlwm.kext` injects the WiFi card as LAN adapter into macOS, this has some side-effects. For example, the Airport-Utility which lets you connect to WiFi hotspot can no longer be used – a separate app (`Heliport`) has to be used to join WiFi APs. Another issue is that FindMyMac also requires WiFi.
 
-Luckily for use, we can utilize OpenCore Legacy patcher to make use of `AirportItlwm` in Sequoia again!
+Luckily for us, we can utilize OpenCore Legacy patcher to make use of `AirportItlwm` in Sequoia again!
 
 ## Patching principle
 
