@@ -135,6 +135,8 @@ The OpCore Simplify repo has a [discussion section](https://github.com/lzhoang28
 
 ## Closing thoughts
 
-In my test, this particular laptop didn't boot with the generated EFI and config. Since then, I've tested OpCore Simplify on two other systems (a laptop and a desktop pc) and both booted macOS out of the box without issues. That's pretty impressive, especially when considering the timesave this tool allows: setting up and building an OpenCore EFI folder this way takes around 5 to 10 minutes (mapping USB ports excluded).
+In my test, this particular Ivy Bridge laptop didn't boot with the generated EFI and config. Since then, I've tested OpCore Simplify on two other systems (a laptop and a desktop pc) and both booted macOS out of the box without issues. That's pretty impressive, especially when considering the timesave this tool allows: setting up and building an OpenCore EFI folder this way takes around 5 to 10 minutes (mapping USB ports excluded).
 
-Overall, I think OpCore Simplify is the closest thing to a fully automated OpenCore configuration tool we have yet. It's a great starting point for new and inexperienced users who simply want to try OpenCore without spending *hours* trying to configure OpenCore manually using the OpenCore Configuration guide. I am very excited to see how this project will evolve in the future.
+For owners of legacy systems (1st to 6th Gen Intel Core), who already have an existing OpenCore EFI, I would recommend to use the corresponding guide in the [**OCLP Wintel section**](/14_OCLP_Wintel/README.md) instead to manually prepare their config, when trying to install macOS Monterey or newer on their machines. 
+
+Overall, I think OpCore Simplify is the closest thing to a fully automated OpenCore configuration tool we have yet. It's a great starting point for new and inexperienced users who simply want to try OpenCore on relatively current hardware without spending *hours* trying to configure OpenCore manually using the OpenCore Configuration guide. I am very excited to see how this project will evolve in the future.
