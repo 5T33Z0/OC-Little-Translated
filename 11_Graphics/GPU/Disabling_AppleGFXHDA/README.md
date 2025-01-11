@@ -62,7 +62,7 @@ Alternatively, you can try to inject bogus data for the GPU's audio device via `
 				<data>//8AAA==</data>
 			</dict>
 	```
-- **Screenshot**:<br>![](/Users/5t33z0/Desktop/audidev.png)
+- **Screenshot**:<br><img width="626" alt="audidev" src="https://github.com/user-attachments/assets/4d7a4343-c815-4751-b1e4-ad63820b5257" />
 
 ## Credits
 - Apfelnico for the [**SSDT Sample**](https://www.hackintosh-forum.de/forum/thread/55014-hdmi-audio-mittels-ssdt-entfernen-radeon-vii/?postID=721986#post721986)
