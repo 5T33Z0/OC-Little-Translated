@@ -46,7 +46,6 @@ Alternatively, you can try to inject bogus data for the GPU's audio device via `
 - Open your `config.plist` 
 - Navigate tp `DeviceProperties/Add` 
 - Add the device path and these addtional properties:
-	
 	```xml
 	<key>DeviceProperties</key>
 	<dict>
