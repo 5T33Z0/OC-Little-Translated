@@ -4,15 +4,15 @@
 
 - [About](#about)
 - [Properties of Virtual Devices](#properties-of-virtual-devices)
+- [Obtaining ACPI Tables](#obtaining-acpi-tables)
+  - [Dumping ACPI tables with Clover (easiest and fastest method)](#dumping-acpi-tables-with-clover-easiest-and-fastest-method)
+  - [Dumping ACPI tables with OpenCore (requires Debug version)](#dumping-acpi-tables-with-opencore-requires-debug-version)
+  - [Dumping ACPI tables with `SSDTTime` (Windows version only)](#dumping-acpi-tables-with-ssdttime-windows-version-only)
 - [Adding missing Devices and Features](#adding-missing-devices-and-features)
-  - [Obtaining ACPI Tables](#obtaining-acpi-tables)
-    - [Dumping ACPI tables with Clover (easiest and fastest method)](#dumping-acpi-tables-with-clover-easiest-and-fastest-method)
-    - [Dumping ACPI tables with OpenCore (requires Debug version)](#dumping-acpi-tables-with-opencore-requires-debug-version)
-    - [Dumping ACPI tables with `SSDTTime` (Windows version only)](#dumping-acpi-tables-with-ssdttime-windows-version-only)
-  - [Available Hotpatches](#available-hotpatches)
-    - [Functional SSDTs](#functional-ssdts)
-    - [Cosmetic SSDTs (optional)](#cosmetic-ssdts-optional)
+  - [Functional SSDTs](#functional-ssdts)
+  - [Cosmetic SSDTs (optional)](#cosmetic-ssdts-optional)
 - [Converting `.dsl` files to `.aml`](#converting-dsl-files-to-aml)
+- [Applying different ACPI patches for different versions of macOS](#applying-different-acpi-patches-for-different-versions-of-macos)
 - [Avoid patches from Olarila/MalD0n](#avoid-patches-from-olarilamald0n)
 - [Resources](#resources)
 
@@ -66,19 +66,13 @@ Clover users don't have to worry about this since binary renames and SSDT hotpat
 >
 > The name and path of the [**Low Pin Count Bus**](https://www.intel.com/content/dam/www/program/design/us/en/documents/low-pin-count-interface-specification.pdf) used in an `SSDT` – usually `LPC` or `LPCB` – must match the one used in the original ACPI tabled in order for a patch to work!
 
-## Adding missing Devices and Features
-Listed below, you will find two categories of ACPI hotfixes: essential (or fuctional) and non-essential SSDTs. **Functional** SSDTs are a necessity for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. SSDT-ALS0 or SSDT-PNLF), some are required based on the used CPU and/or chipset (e.g. SSDT-HPET, SSDT-AWAC or SSDT-PMCR). Non-essential (or **cosmetic**) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or through the folders above to find out which you may need.
-
-### Obtaining ACPI Tables
-In order to to figure out which SSDTs are required for your system, it is necessary to research your machine's ACPI tables - more specifically, your system's `DSDT` table. To obtain a copy it, it's necessary to extract it from your system's BIOS/UEFI. There are a couple of options to do this listed below.
-
-<details>
-<summary><b>Dumping ACPI Tables</b> (Click to reveal)</summary>
+## Obtaining ACPI Tables
+In order to to figure out which SSDTs are required for your system, it is necessary to research your machine's ACPI tables - more specifically, your system's `DSDT` (Differentiated System Description Table) stored in your system's BIOS/UEFI. There are a couple of options to obtain a copy of it listed below.
 
 **Requirements**: FAT32 formatted USB flash drive (for Clover/OpenCore) and one of the following methods to dump your system's ACPI tables.
 
-#### Dumping ACPI tables with Clover (easiest and fastest method)
-Clover can dump ACPI tables without a working config within seconds.
+### Dumping ACPI tables with Clover (easiest and fastest method)
+Clover can dump ACPI tables *without* a working config within seconds.
 
 - Download the latest [**Release**](https://github.com/CloverHackyColor/CloverBootloader/releases) (CloverV2-51xx.zip) and extract it 
 - Put the `EFI` folder on the USB flash drive. 
@@ -87,8 +81,8 @@ Clover can dump ACPI tables without a working config within seconds.
 - Pull the USB flash drive, reset the system and reboot into your OS
 - Put the USB flash drive back in. The dumped ACPI tables will be stored on the flash drive under: `EFI\CLOVER\ACPI\origin`.
 
-#### Dumping ACPI tables with OpenCore (requires Debug version)
-Normally, you would need an already working config.plist in order to obtain the ACPI tables from your system. But since you need the ACPI tables *first* in order to figure out which SSDT hotfixes you *actually* need to boot macOS this is a real dilemma. Luckily, the guys from Utopia-Team have created a generic, pre-configured Debug OpenCore EFI which can dump your system's ACPI tables *without* a bootable config.
+### Dumping ACPI tables with OpenCore (requires Debug version)
+Normally, you would need an already working `config.plist` in order to obtain the ACPI tables from your system with OpenCore. But since you need the ACPI tables *first* in order to figure out which SSDT hotfixes you *actually* need to boot macOS this is a real dilemma. Luckily, the guys from Utopia-Team have created a generic, pre-configured Debug OpenCore EFI which can dump your system's ACPI tables *without* a bootable config.
 
 - Download the [**OC Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) and extract it
 - Put the `EFI` folder on the USB flash drive. 
@@ -97,8 +91,8 @@ Normally, you would need an already working config.plist in order to obtain the 
 - Pull out the USB stick and reboot into a working OS.
 - Put the USB flash drive back in. The dumped ACPI tables will be located in the "SysReport".
 
-#### Dumping ACPI tables with `SSDTTime` (Windows version only)
-If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) under Windows, you can also dump the DSDT, which is not possible under macOS. 
+### Dumping ACPI tables with `SSDTTime` (Windows version only)
+If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) in Microsoft Windows, you can also dump the DSDT, which is not possible when running it in macOS. 
 
 - Download **SSDTTime**
 - Double-click on `SSDTTime.bat`
@@ -108,11 +102,10 @@ If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) under Wind
 
 > [!NOTE]
 > 
-> If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, download them manually [here](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the SSDTTime.bat file again. 
-</details>
- 
-### Available Hotpatches
-Listed below are all SSDTs contained in this chapter. Use the listed search terms to find the device in your system's `DSDT`. If you can't find the term/device/hardware-ID, you can add it with the corresponding SSDT. In any case: read the instructions of a hotpatch first to find out if you really need it and how to apply it. If there's no search term listed, further analysis of the `DSDT` is required to apply the hotpatch.
+> If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, download them manually [here](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the `SSDTTime.bat` file again.
+
+## Adding missing Devices and Features
+Listed below, you will find two categories of ACPI hotfixes: essential (or functional) and non-essential SSDTs. **Functional** SSDTs are a *necessity* for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. `SSDT-ALS0` or `SSDT-PNLF`), some are required based on the used CPU and/or chipset (e.g. `SSDT-HPET`, `SSDT-AWAC` or `SSDT-PMCR`). Non-essential (or **cosmetic**) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or browser through the folders above to find out which you may need.
 
 The hotfixes have to be placed in `EFI/OC/ACPI` and added to the `config.plist` (under `ACPI/Add`). OpenCore accepts files with `.aml` and `.bin` extension.
 
@@ -120,8 +113,8 @@ The hotfixes have to be placed in `EFI/OC/ACPI` and added to the `config.plist` 
 > 
 > You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
 
-#### Functional SSDTs
-Listed below are SSDTs which add or enable devices and features in macOS.
+### Functional SSDTs
+Listed below are SSDTs which add or enable devices and features in macOS. Use the listed search terms to find the device in your system's `DSDT`. If there's no search term listed, further analysis of the `DSDT` is required to apply the hotpatch. Read the description of a hotpatch first to find out if you really need it and how to apply it correctly.
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
@@ -148,7 +141,7 @@ Listed below are SSDTs which add or enable devices and features in macOS.
 [**SSDT-XCPM**](/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs/README.md)|SSDT and Kernel Patches and to force-enable XCPM Power Management on Ivy Bridge CPUs.| –
 [**SSDT-XOSI**](/01_Adding_missing_Devices_and_enabling_Features/OS_Compatibility_Patch_(XOSI)/README.md)|OS Compatibility Patch. Also included in OpenCorePkg.|–
 
-#### Cosmetic SSDTs (optional)
+### Cosmetic SSDTs (optional)
 The SSDTs listed below are considered cosmetic and non-functional – they are not needed!. They add virtual versions of devices existing in real Macs. Adding any of the tables listed below, ***does not*** add or enable any features besides mimicking the ***look*** of the I/O registry of the corresponding Mac model (as defined in the SMBIOS). To quote one of the developers of OpenCore:
 
 > It is unjustified why these devices are needed on our machines. Just the fact they are present in Apple ACPI does not make it a requirement for our ACPI. 
@@ -168,21 +161,25 @@ The SSDTs listed below are considered cosmetic and non-functional – they are n
 ## Converting `.dsl` files to `.aml`
 The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In order to use them in your system, do the following:
 
-1. Click on the link to the `.dsl` file of your choice.
-2. Click the `Raw` button.
-3. Press <kbd>⌘</kbd><kbd>A</kbd> (select all), followed by <kbd>⌘</kbd><kbd>C</kbd> (copy).
-4. Open maciASL.
-5. Press <kbd>⌘</kbd><kbd>V</kbd> (paste).
-6. Edit the file (if necessary).
-7. Click on "File" > "Save As…".
-8. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
-9. Save it as "SSDT–…" (whatever the original file name is).
-10. Add the `.aml` file to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`).
-11. Save and reboot to test it.
+1. Click on the link to a `.dsl` file of your choice. This will display the code contained in the file
+2. Download the file (there's a download button on the top right; "Download raw file").
+3. Open it in maciASL.
+4. Edit the file (if necessary).
+5. Click on "File" > "Save As…".
+6. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
+7. Save it as "SSDT–…" (whatever the original file name is).
+8. Add the `.aml` file to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`).
+9. Save and reboot to test it.
 
-> [!NOTE]
-> 
-> If you download the whole repo, you can open the .dsl files with maciASL instead.
+## Applying different ACPI patches for different versions of macOS
+
+As you may know, the ACPI specs allow to apply different settings based on the detected Operating System by making use of the method (`_OSI`) (Operating System Interface). Hackintoshers make heavy use of the method `If (_OSI ("Darwin"))` in SSDTs to apply patches only if macOS is running.
+
+What if you need to apply different patches for the same device depending on the macOS version—for instance, switching to a different `AAPL,ig-platform-id` and framebuffer patch to make your unsupported iGPU work in a newer macOS version? By default, this isn’t possible because the ACPI specifications don’t support such functionality. It’s essentially an all-or-nothing situation: the Darwin kernel is either running, or it isn’t.
+
+Luckily, a relatively new kext called [**OSIEnhancer**](https://github.com/b00t0x/OSIEnhancer) addresses this issue. It enables modifications to the OSI ("Darwin") method, giving you greater control over when a patch is applied. With OSIEnhancer, you can specify the Darwin kernel and/or macOS version, effectively introducing functionality similar to the `MinKernel` and `MaxKernel` settings for kexts, but applied to ACPI tables.
+
+Since OSIEnhancer is a relatively new kext, there aren’t many SSDT examples available for reference – some can be find on the repo, though. Its use cases tend to be highly specific and tailored to individual machines, as the patches often depend on unique hardware configurations and the macOS versions in question. This makes it more of a "per-machine" solution, requiring users to create custom SSDTs that address their particular needs. As a result, implementing OSIEnhancer may involve some trial and error, along with a solid understanding of ACPI and system-specific requirements.
 
 ## Avoid patches from Olarila/MalD0n 
 
