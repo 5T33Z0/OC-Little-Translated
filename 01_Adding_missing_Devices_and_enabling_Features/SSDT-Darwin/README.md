@@ -15,3 +15,7 @@ Since OSIEnhancer is a relatively new kext, there aren’t many SSDT examples av
 - Add addtional SSDT for the device you want to inject different properties for different versions of macOS (check the OSIEnhancer repo for examples)
 
 Note that this solution typically requires custom SSDT implementation for your specific hardware configuration and macOS version requirements. While example SSDTs are available in the OSIEnhancer repository, you'll likely need to create custom patches tailored to your system's needs.
+
+## Credits
+
+[b00t0x](https://github.com/b00t0x/OSIEnhancer) for OSIEnhancer kext and SSDT samples
