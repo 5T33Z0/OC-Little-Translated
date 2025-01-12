@@ -2,7 +2,11 @@
 ![spoofkbl](https://user-images.githubusercontent.com/76865553/174740275-9bb63d0c-f8f1-4dde-ab52-a101334b9def.png)
 
 ## About
-With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated graphics on Skylake CPUs, you need to either spoof Kaby Lake Framebuffers (Method 1) or use OpenCore Legacy Patcher to re-enable Skylake graphics (Method 2). 
+With the release of macOS 13 beta, support for 4th to 6th Gen CPUs was [dropped](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998) – on-board graphics included. In order to enable integrated graphics on Skylake CPUs, you need to either spoof Kaby Lake Framebuffers (Method 1) or use OpenCore Legacy Patcher to re-enable Skylake graphics (Method 2).
+
+> [!TIP]
+> 
+> There might be a third option which needs to be investigated further: using the [**OSIEnhancer**](https://github.com/b00t0x/OSIEnhancer) kext in combination with a custom SSDT that allows switching AAPL,ig-platform-id and device-ids based on the used Darwin Kernel.
 
 ## Method 1: Use a Kaby Lake iGPU spoof
 
