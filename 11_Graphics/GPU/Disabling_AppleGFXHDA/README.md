@@ -35,14 +35,14 @@ This SSDT disabled the `HDAU` audio device inside of AMD GPUs in macOS, so that 
 
 ## Alternative method: using `DeviceProperties`
 
-Alternatively, you can try to inject bogus data for the GPU's audio device via `DeviceProperties`, so the audio device cannot be used by macOS.
+Alternatively, you can inject bogus data for the GPU's audio device via `DeviceProperties`, if the SSDT-method does not work for you.
 
 **INSTRUCTIONS**:
 
 - Run **Hackintool** 
 - Select the **PCIe** tab
 - Locate the audio device associated with the GPU, for example "Navi 21/23 HDMI/DP Audio Controller" (Device Name) / Multimedia Controller (Class) / Audio Device (Subclass)
-- Right-click the entry and select "Copy Device Path", e.g. `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x1)` (your system's PCIe device patch will be different)
+- Right-click the entry and select "Copy Device Path", e.g. `PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x1)` (your system's PCIe device path will be different)
 - Open your `config.plist` 
 - Navigate tp `DeviceProperties/Add` 
 - Add the device path and these addtional properties:
