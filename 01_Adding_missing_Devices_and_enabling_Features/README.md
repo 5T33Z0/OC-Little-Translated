@@ -13,7 +13,8 @@
   - [Cosmetic SSDTs (optional)](#cosmetic-ssdts-optional)
 - [Converting `.dsl` files to `.aml`](#converting-dsl-files-to-aml)
 - [Applying different ACPI patches for different versions of macOS](#applying-different-acpi-patches-for-different-versions-of-macos)
-- [Avoid patches from Olarila/MalD0n](#avoid-patches-from-olarilamald0n)
+- [SSDTs vs. `config.plist`: Understanding Property Injection Precedence](#ssdts-vs-configplist-understanding-property-injection-precedence)
+- [Avoid patches by Olarila/MalD0n](#avoid-patches-by-olarilamald0n)
 - [Resources](#resources)
 
 ---
@@ -24,7 +25,7 @@ Among the many `SSDT` (Secondary System Description Table) patches available in 
 - **Virtual Devices**, such as Fake Embedded Controllers or Ambient Light Sensors, etc. These just need to be present, so macOS is happy and works as expected.
 - **Devices which exist in the `DSDT` but are disabled by the vendor.** These are usually devices considered "legacy" under Windows but are required by macOS to boot. They are still present in the system's `DSDT` and provide the same functionality but are disabled in favor of a newer device. A prime example for this is the Realtime Clock (`RTC`) which is disabled in favor of the `AWAC` clock on modern Wintel machines, like 300-series mainboards and newer. SSDT Hotfixes from this category disable the newer device and enable its "legacy" pendent for macOS only by inverting their statuses (`_STA`). 
 - **Devices which either do not exist in ACPI or use different names than expected by macOS in order to work**. SSDT hotpatches rename these devices/methods for macOS only, so they can attach to drivers and services in macOS but work as intended in other OSes as well, such as: USB and CPU Power Management, Backlight Control for Laptop Displays, ect. 
-- **Patch combinations which work in stages to redefine a device or method so it works with macOS**. First, the original device/method is renamed so macOS doesn't detect it, like `_DSM` to `XDSM` for example. Then a replacement SSDT is written which redefines the device or method for macOS only. The redefined device/method is then injected back into the system, so it's working as expected in macOS. Examples: fixing Sleep and Wake issues or enabling Touchpads.
+- **Patch combinations which work in stages to redefine a device or method so it works with macOS**. First, the original device/method is renamed so macOS doesn't detect it, like `_DSM` to `XDSM` for example. Then a replacement SSDT is written which redefines the device or method for macOS only. The redefined device/method is then injected back into the system, so it's working as expected in macOS. Examples: fixing Sleep and Wake issues or enabling Trackpads.
 
 :bulb: OpenCore users should avoid using binary renames for enabling devices and methods since these renames will be applied system-wide which can break other OSes. Instead, ACPI-compliant SSDTs making use of the `_OSI` method to rename these devices/methods for macOS only should be applied. 
 
@@ -159,16 +160,18 @@ The SSDTs listed below are considered cosmetic and non-functional – they are n
 [**SSDT-PPMC**](/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)/README.md)| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
 [**SSDT-XSPI**](/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI)/README.md)|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
 
+---
+
 ## Converting `.dsl` files to `.aml`
-The Hotfixes in this section are provided as disassembled ASL Files (.dsl). In order to use them in your system, do the following:
+The Hotfixes in this section are provided as disassembled ASL Files (`.dsl`) so that they can be viewed in webbrowser. In order to use them in Bootloaders, they need to be converted to ASL Machine Language (`.aml`) first. Here's how to do this:
 
 1. Click on the link to a `.dsl` file of your choice. This will display the code contained in the file
 2. Download the file (there's a download button on the top right; "Download raw file").
-3. Open it in maciASL.
+3. Open it in [**maciASL**](https://github.com/acidanthera/MaciASL).
 4. Edit the file (if necessary).
 5. Click on "File" > "Save As…".
 6. From the "File Format" dropdown menu, select "ACPI Machine Language Binary"
-7. Save it as "SSDT–…" (whatever the original file name is).
+7. Save it as "SSDT–…" (whatever the original file name was).
 8. Add the `.aml` file to `EFI/OC/ACPI` and your `config.plist` (under `ACPI/Add`).
 9. Save and reboot to test it.
 
@@ -182,7 +185,39 @@ Luckily, a relatively new kext called [**OSIEnhancer**](https://github.com/b00t0
 
 Since OSIEnhancer is a relatively new kext, there aren’t many SSDT examples available for reference – some can be find on the repo, though. Its use cases tend to be highly specific and tailored to individual machines, as the patches often depend on unique hardware configurations and the macOS versions in question. This makes it more of a "per-machine" solution, requiring users to create custom SSDTs that address their particular needs. As a result, implementing OSIEnhancer may involve some trial and error, along with a solid understanding of ACPI and system-specific requirements.
 
-## Avoid patches from Olarila/MalD0n 
+## SSDTs vs. `config.plist`: Understanding Property Injection Precedence
+
+In OpenCore, **properties injected via SSDTs (Secondary System Description Tables) typically take precedence over those defined in the `config.plist`**, provided the SSDTs are correctly implemented and loaded. This precedence is due to the hierarchical nature of how macOS processes ACPI tables and device properties during the boot sequence.
+
+**Understanding the Hierarchy:**
+
+1. **ACPI Level (SSDTs):**
+   - **Function:** SSDTs are used to define or override ACPI tables, allowing for low-level hardware configuration and property injection.
+   - **Precedence:** Since SSDTs are loaded early in the boot process, they can establish or modify device properties at a fundamental level.
+
+2. **Bootloader Level (`config.plist`):**
+   - **Function:** The `config.plist` file in OpenCore is used to configure various bootloader settings, including device property injections.
+   - **Precedence:** Properties defined here are applied after the ACPI tables have been processed. If a property has already been set by an SSDT, the `config.plist` may not override it unless explicitly configured to do so.
+
+**Practical Implications:**
+
+- **USB Power Properties:** Injecting USB power properties via an SSDT (e.g., creating a `USBX` device) is a common practice to ensure proper USB functionality. This method is often preferred over injecting the same properties via `config.plist` because it integrates the properties at a lower level, leading to more reliable behavior. 
+
+- **Device Renaming:** Certain device renaming tasks, such as changing `GFX0` to `IGPU`, are better handled within SSDTs or by using kexts like WhateverGreen, which can perform these renames dynamically. This approach is generally safer and more effective than attempting the same renames via `config.plist`. 
+
+**Recommendations:**
+
+- **Use SSDTs for Hardware-Level Configurations:** For tasks that require low-level hardware interaction, such as injecting USB power properties or renaming devices, implementing these changes via SSDTs is advisable. This method ensures that the properties are applied early in the boot process, leading to more consistent behavior.
+
+- **Use `config.plist` for Bootloader and High-Level Settings:** For configurations that pertain to the bootloader itself or high-level system settings, the `config.plist` is appropriate. This includes settings like boot arguments, enabling or disabling kexts, and other bootloader-specific options.
+
+**Conclusion:**
+
+While both SSDTs and the `config.plist` can be used to inject properties in OpenCore, the precedence and timing of their application differ. SSDTs, being part of the ACPI layer, are processed earlier and can override properties set later in the boot process by the `config.plist`. Therefore, for critical hardware-level property injections, SSDTs are generally the preferred method.
+
+For more detailed guidance on configuring OpenCore and the use of SSDTs, you can refer to the [**OpenCore Configuration Documentation**](https://dortania.github.io/docs/latest/Configuration.html).  
+
+## Avoid patches by Olarila/MalD0n 
 
 > [!CAUTION]
 > 
