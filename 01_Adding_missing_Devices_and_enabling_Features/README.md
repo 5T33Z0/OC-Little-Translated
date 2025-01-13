@@ -33,11 +33,11 @@ Clover users don't have to worry about this since binary renames and SSDT hotpat
 
 > [!WARNING] 
 > 
-> Don't inject already known Devices! Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same, already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
+> Don't inject already known devices into macOS! Sometimes I come across configs which contain a lot of unnecessary `DeviceProperties` which Hackintool extracted for them. In other words: they inject the same, already known devices and properties back into the system where they came from. In most cases, this is completely unnecessary – there are no benefits in doing so – and it slows down the boot process as well.
 >
 > The only reason for doing this is to have installed PCIe cards listed in the "PCI" section of System Profiler. Apart from that, all detected devices will be listed in the corresponding category they belong in automatically. So there's really no need to do this.
 >
->:bulb: You only need to inject DeviceProperties in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
+>:bulb: You only need to inject `DeviceProperties` in case you need to modify parameters/properties of devices, features, etc. So don't inject the same, unmodified properties into the system you got them from in the first place!
 
 ## Properties of Virtual Devices
 - **Features**:
