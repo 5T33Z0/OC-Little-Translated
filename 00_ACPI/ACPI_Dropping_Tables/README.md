@@ -134,4 +134,5 @@ This will disable the OEM DMAR table and inject the modified one instead but we 
 
 ## NOTES
 - OpenCore 0.9.2 introduced a new Kernel Quirk called [`DisableIoMapperMapping`](https://github.com/acidanthera/bugtracker/issues/2278#issuecomment-1542657515) which can be used to address new connectivity issues in macOS 13.3+ (if they weren't present before).
+- The presence of Reserved Memory Regions in the `DMAR` table may hinder `AppleVTD` service from being available in macOS, which is required for certain 3rd party WiFi/BT cards, as well as Intel-I225/I226 NICs using the [AppleIGC.kext](https://github.com/SongXiaoXi/AppleIGC) to work. Read this [write-up](https://github.com/Fu-Yuxuan-hub/Generic-EFI-for-H610-B660-Z690-B760-Z790/wiki/AppleVTD_English) to fix it.
 - You should only import ACPI tables with maciASL if you know that they are unmodified by OpenCore. Otherwise, dump the OEM ACPI Tables using the debug version of OpenCore and enabling the `SysReport` Quirk and work with those.

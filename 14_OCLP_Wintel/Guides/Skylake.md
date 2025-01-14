@@ -87,7 +87,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 Since Skylake CPUs are relatively new, the only thing which doesn't really work out of the box is on-board grapics, specifically: Intel HD 530/P530/Iris which are only compatible up to macOS Monterey. There are 2 possible upgrade option for installing macOS Ventura or newer, depending on your hardware configuration:
 
 ### Option 1: Installing macOS 13+ without Root Patches
-If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura or newer, you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13). Once the iGPU spoof is workin, jump to [**macOS Installation**](#macos-installation)
+If you are using a PC and don't have to rely on the iGPU for driving a display and your GPU is compatible with macOS Ventura or newer, you only need to change the SMBIOS and add a Kaby Lake device-id to your iGPU framebuffer as explained here: [**Enabling Skylake Graphics in macOS 13**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13). Once the iGPU spoof is working, jump to [**macOS Installation**](#macos-installation)
 
 #### Pros and Cons of this method
 - **Pros**:
