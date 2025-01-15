@@ -1,23 +1,3 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20210331 (64-bit version)
- * Copyright (c) 2000 - 2021 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLVNKIUq.aml, Mon Jan 13 20:51:41 2025
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x000001F0 (496)
- *     Revision         0x02
- *     Checksum         0x41
- *     OEM ID           "5T33Z0"
- *     OEM Table ID     "IGPU"
- *     OEM Revision     0x00001000 (4096)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20210331 (539034417)
- */
 DefinitionBlock ("", "SSDT", 2, "5T33Z0", "HD530", 0x00001000)
 {
     External (_SB_.PCI0, DeviceObj)
