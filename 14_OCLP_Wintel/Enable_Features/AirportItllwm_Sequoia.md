@@ -77,14 +77,14 @@ Under `Kernel/Block`, add the following rule:
 </dict>
 ```
 
-**Screenshot**:<br> ![intel_spoof08](https://github.com/user-attachments/assets/0d5a08a1-035c-4079-8128-a8e5435bec59)
+**Screenshot**:<br>![intel_spoof08](https://github.com/user-attachments/assets/0d5a08a1-035c-4079-8128-a8e5435bec59)
 
 ### 3. Add Kexts
 - Disable `Itlwm.kext`, if present!
 - Add the following [**Kexts from the OCLP repo**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi) to `EFI/OC/Kexts` and your `config.plist`:
 	- [`AMFIPasss.kext`](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera) 
 	- `IOSkywalk.kext`
-	- `IO8021FamilyLegacy.kext` (contains an additional kext as plugin)
+	- `IO8021FamilyLegacy.kext` (contains plugin `AirportBrcmNIC.kext` which you can disable since it is for Broadcom WiFi cards)
 	- [**`AirportItlwm.kext`**](https://github.com/OpenIntelWireless/itlwm/releases) (inject the one for macOS Ventura! I have renamed it to `AirportItlwm_Sequoia.kext` since I also have macOS Sonoma installed and it requires a different variant of the kext). ⚠️ Make sure it is injected ***after*** `IOSkywalk` and `IO8021FamilyLegacy` kexts!
 - Adjust `MinKernel` and `MaxKernel` settings as shown in the **Screenshot**: <br>![intel_spoof03](https://github.com/user-attachments/assets/f5edc4f2-cb0b-4124-a16b-860ccd87c48f)
 
