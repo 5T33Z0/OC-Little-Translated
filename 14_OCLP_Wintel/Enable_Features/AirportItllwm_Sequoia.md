@@ -86,7 +86,7 @@ Under `Kernel/Block`, add the following rule:
 	- `IOSkywalk.kext`
 	- `IO8021FamilyLegacy.kext` (contains plugin `AirportBrcmNIC.kext` which you can disable since it is for Broadcom WiFi cards)
 	- [**`AirportItlwm.kext`**](https://github.com/OpenIntelWireless/itlwm/releases) (inject the one for macOS Ventura! I have renamed it to `AirportItlwm_Sequoia.kext` since I also have macOS Sonoma installed and it requires a different variant of the kext). ⚠️ Make sure it is injected ***after*** `IOSkywalk` and `IO8021FamilyLegacy` kexts!
-- Adjust `MinKernel` and `MaxKernel` settings as shown in the **Screenshot**: <br>![intel_spoof03](https://github.com/user-attachments/assets/f5edc4f2-cb0b-4124-a16b-860ccd87c48f)
+- Adjust `MinKernel` and `MaxKernel` settings as shown in the **Screenshot**: <br>![itlwfbt](https://github.com/user-attachments/assets/b3cb9e89-9d91-4eb7-87e3-6ff5516df386)
 
 ### 4. Disable `SecureBootModel`
 
