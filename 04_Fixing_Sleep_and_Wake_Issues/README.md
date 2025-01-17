@@ -40,6 +40,7 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 - Check Dortania's Post-Install guide for additional info about [**Fixing Sleep Issues**](https://github.com/dortania/OpenCore-Post-Install/blob/master/universal/sleep.md)
 - Acidanthera provides a kext which addresses issues with hibernation, called [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup).
 - In-depth look into [**Darkwake**](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/), what it does (and what it doesn't do).
+- [Fixing Power Management, Sleep and Hibernation](https://github.com/zx0r/HackintoshBible/blob/main/PowerManagement/README.md) in macOS Sonoma and Sequoia (by zx0r).
 - While researching how these fixes work, I found out that the SSDTs and binary renames used in this section are basically "reverse engineered" `DSDT` patches created by RehabMan included in maciASL's DSDT patching engine. They are also available on his "Laptop DSDT Patch" Repo:
 	- **Sleep and Wake** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/system
 	- **0D/6D** fixes: https://github.com/RehabMan/Laptop-DSDT-Patch/tree/master/usb
