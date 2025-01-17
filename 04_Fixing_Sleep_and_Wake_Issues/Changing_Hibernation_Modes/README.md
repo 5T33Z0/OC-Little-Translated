@@ -72,7 +72,6 @@ Listed below are power managements settings you can configure in Terminal via **
 **Source**: [Insanelymac](https://www.insanelymac.com/forum/topic/342002-darkwake-on-macos-catalina-boot-args-darkwake8-darkwake10-are-obsolete/)
 
 ## Notes and further Resources
-- Helpful [guide](https://github.com/zx0r/HackintoshBible/blob/main/PowerManagement/README.md) by zx0r for fixing Power Management, Sleep and Hibernation in macOS Sonoma and Sequoia
 - If you feel uncomfortable using Terminal, you can also use Hackintool to check and change the `hibernatemode`. Simply click on the "Power" Tab and there you find all the currently set parameters.
 - For a more in-depth look into the subject matter, I recommend this article: [Power Management in detail using pmset](https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/)
 - For Sleep and wake issue in general, refer to [this article](https://eclecticlight.co/2019/05/09/tackling-sleep-and-wake-problems/)
