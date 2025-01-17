@@ -107,7 +107,7 @@ This way, you can leave your DeviceProperties as is for older versions of macOS 
 - If present, revert framebuffer patch to the [default](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html#add-2) for Skylake systems. 
 - Save your `config.plist` and rebbot into macOS 13 or newer. 
 
-The SSDT should inject the required iGPU properties into macOS Ventura and newer, so that the Kaby Lake spoof will work. If it doesn't work, add the ACPI patch from [this `.plist`](/_DSM_Rename.plist) to your config. It renames the `_DSM` method of your iGPU to `XDSM`, so that the `_DSM` method injected by `SSDT-GFX0` takes precedence. Don't modify the PCI device path listed under `base`, since Whatevergreen corrects the path of the iGPU device in your `DSDT`, which matches the one in the .plist! 
+The SSDT should inject the required iGPU properties into macOS Ventura and newer, so that the Kaby Lake spoof will work. If it doesn't work, add the ACPI patch from [this `.plist`](/11_Graphics/iGPU/Skylake_Spoofing_macOS13/_DSM_Rename.plist) to your config. It renames the `_DSM` method of your iGPU to `XDSM`, so that the `_DSM` method injected by `SSDT-GFX0` takes precedence. Don't modify the PCI device path listed under `base`, since Whatevergreen corrects the path of the iGPU device in your `DSDT`, which matches the one in the .plist! 
 
 > [!IMPORTANT]
 >
