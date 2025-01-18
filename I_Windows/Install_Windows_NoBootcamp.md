@@ -1,8 +1,8 @@
-# Installing Windows without Bootcamp on Apple Macs
+# Installing Windows from within macOS without BootCamp
 
 ## About
 
-I recently tried to install Windows 10 on my `iMac11,3` but it didn't work. According to Windows Setup, the partition I had prepared on the SSD did not use the GUID Partition Table (GPT). Trying to convert the disk to GPT via CLI didn't work. Luckily, I came a across an app called Windows Install that allows installing Windows from within macOS. It extracts the files of a Windows .ISO to a designated Windows partition and then adds the `Microsoft` bootloader folder to the EFI partition. 
+I recently tried to install Windows 10 on my `iMac11,3` but it didn't work. According to Windows Setup, the partition I had prepared on the SSD did not use the GUID Partition Table (GPT). Trying to convert the disk to GPT via CLI didn't work. Luckily, I came a across an app called Windows Install that allows installing Windows from within macOS. It extracts the files of a Windows .ISO to a designated Windows partition and then adds the `Microsoft` bootloader folder to the EFI partition. It works on Hackintoshes as well, of course.
 
 Once the installation is completed, you can reboot and the entry for booting Windows should be available from OpenCore's Bootpicker. I haven't tested it when using the Apple bootloader, though. I guess you just have to hold <kbd>Shift</kbd> after turning on the machine and the entry should appear.
 
