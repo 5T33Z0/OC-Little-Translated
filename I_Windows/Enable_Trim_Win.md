@@ -1,5 +1,5 @@
 # Trim
-Windows 7 and newer supports TRIM for SSDs (if the disk supports it)
+Microsoft Windows 7 and newer supports TRIM for SSDs (if the disk supports it)
 
 ## How to check if TRIM is enabled on Windows
 To check if TRIM is enabled in Windows, follow these steps:
