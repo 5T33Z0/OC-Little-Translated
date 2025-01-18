@@ -21,7 +21,7 @@ There are two possible outputs of running the above command:
 If TRIM is disabled, it can be enabled by following these steps:
 
 - Right-click the Windows icon, click Search.
-- Type cmd in the Search box.
+- Type `cmd` in the Search box.
 - Right-click Command Prompt.
 - Select "Run as administrator".
 - Enter `fsutil behavior set DisableDeleteNotify 0`.
