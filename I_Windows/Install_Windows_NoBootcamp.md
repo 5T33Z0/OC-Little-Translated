@@ -2,9 +2,9 @@
 
 ## About
 
-I recently tried to install Windows 10 on my `iMac11,3` but it didn't work. According to Windows Setup, the partition I had prepared on the SSD did not use the GUID Partition Table (GPT). Trying to convert the disk to GPT via CLI didn't work. Luckily I came a across a tool that allows installing Windows from within macOS which extracts the files of a Windows .ISO to the designated Windows partition and then adds the `Microsoft`folder to the EFI folder. 
+I recently tried to install Windows 10 on my `iMac11,3` but it didn't work. According to Windows Setup, the partition I had prepared on the SSD did not use the GUID Partition Table (GPT). Trying to convert the disk to GPT via CLI didn't work. Luckily, I came a across an app called Windows Install that allows installing Windows from within macOS. It extracts the files of a Windows .ISO to a designated Windows partition and then adds the `Microsoft` bootloader folder to the EFI partition. 
 
-Once the installation is completed you can reboot and the entry for booting Windows should be available from OpenCore's Bootpicker. I ahven't tested it when musing the Apple bootloader. I guess you just have to hold <kbd>Shift</kbd> after turning on the machine and the entry should appear.
+Once the installation is completed, you can reboot and the entry for booting Windows should be available from OpenCore's Bootpicker. I haven't tested it when using the Apple bootloader, though. I guess you just have to hold <kbd>Shift</kbd> after turning on the machine and the entry should appear.
 
 ## Instructions
 
