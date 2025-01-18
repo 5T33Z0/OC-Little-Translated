@@ -13,8 +13,8 @@ All Windows OSes post Windows 7 support TRIM for SSDs that support the feature. 
 
 There are two possible results of running the above command:
 
-- `DisableDeleteNotify` = 1, which means that TRIM is disabled on the SSD.
-- `DisableDeleteNotify` = 0, which means that TRIM is enabled on the SSD.
+- `DisableDeleteNotify` = `1`, which means that TRIM is disabled on the SSD.
+- `DisableDeleteNotify` = `0`, which means that TRIM is enabled on the SSD.
 
 ## Enabling Trim
 
