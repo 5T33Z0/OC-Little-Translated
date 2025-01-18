@@ -1,5 +1,7 @@
 # Windows Guides
 
+- [**Installing Windows from within macOS**](/I_Windows/Install_Windows_NoBootcamp.md)
+- [**Restoring `Windows` bootloader folder**](/I_Windows/Restore_Microsoftt_Bootloader.md)
 - [**Accessing the ESP Partition from within Windows**](/I_Windows/Accessing_ESP_Windows.md#accessing-esp-partition-from-within-windows)
 - [**Adding a custom Windows entry to the OpenCore Boot Menu**](/I_Windows/Custom_Entries.md)
 - [**Changing the Label of a Windows Disk in Boot Picker**](/I_Windows/Disk_Label.md)
