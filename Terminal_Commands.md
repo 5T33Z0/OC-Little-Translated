@@ -1,5 +1,89 @@
 # Terminal Commands
 
+**INDEX**
+
+- [macOS Look and Feel](#macos-look-and-feel)
+	- [Defaults](#defaults)
+	- [Power Management](#power-management)
+		- [Check Hibernation Settings](#check-hibernation-settings)
+		- [Checking Reasons for Wake](#checking-reasons-for-wake)
+		- [Disable Power Management Scheduler](#disable-power-management-scheduler)
+	- [Disable Notification Center](#disable-notification-center)
+	- [Enable Key Repeating](#enable-key-repeating)
+	- [Add "GPU" Tab to Activity Monitor](#add-gpu-tab-to-activity-monitor)
+	- [macOS Info](#macos-info)
+		- [Display macOS Version and Build Number](#display-macos-version-and-build-number)
+		- [Display Darwin Kernel Version](#display-darwin-kernel-version)
+	- [Display Model Identifier (SMBIOS)](#display-model-identifier-smbios)
+- [System Behavior](#system-behavior)
+	- [Disable Gatekeeper (\< macOS 15.0 beta 3)](#disable-gatekeeper--macos-150-beta-3)
+	- [Disable DMG verification](#disable-dmg-verification)
+	- [Change Update Seed to Developer (≤ macOS 12 only)](#change-update-seed-to-developer--macos-12-only)
+	- [Reset all Privacy Settings](#reset-all-privacy-settings)
+- [Finder-related](#finder-related)
+	- [Show User Library in macOS 11 and newer](#show-user-library-in-macos-11-and-newer)
+	- [Show all Files and Folders in Finder](#show-all-files-and-folders-in-finder)
+	- [Rebuilding Launch Services](#rebuilding-launch-services)
+	- [Add "Quit" option to Finder menu](#add-quit-option-to-finder-menu)
+	- [Disable `.DS_Store` file creation on network storages](#disable-ds_store-file-creation-on-network-storages)
+- [Application-related](#application-related)
+	- [Fixing codesign issues](#fixing-codesign-issues)
+- [Filesystem-related](#filesystem-related)
+	- [Rebuilding the Spotlight Index](#rebuilding-the-spotlight-index)
+	- [Checking if the APFS volume snapshots is intact](#checking-if-the-apfs-volume-snapshots-is-intact)
+	- [Update the PreBoot Volume (APFS volumes only)](#update-the-preboot-volume-apfs-volumes-only)
+	- [Disable Library Validation](#disable-library-validation)
+	- [Rebuild DYLD and XPC caches (macOS 10.15 or older only)](#rebuild-dyld-and-xpc-caches-macos-1015-or-older-only)
+	- [Create new snapshot (macOS 11+ only)](#create-new-snapshot-macos-11-only)
+- [Enabling/Disabling Features](#enablingdisabling-features)
+	- [Enable Sidecar](#enable-sidecar)
+	- [Disable Logging](#disable-logging)
+	- [Disable/Delete Metal Support](#disabledelete-metal-support)
+	- [Prohibit macOS from mastering iDevices](#prohibit-macos-from-mastering-idevices)
+	- [Change default state of Bluetooth (on/off)](#change-default-state-of-bluetooth-onoff)
+- [Networking](#networking)
+	- [List MAC Addresses of Network Adapters](#list-mac-addresses-of-network-adapters)
+	- [Delete Network .plists](#delete-network-plists)
+	- [Disable TPC/IPv6 Protocol](#disable-tpcipv6-protocol)
+- [CPU-related](#cpu-related)
+	- [Show CPU Vendor](#show-cpu-vendor)
+	- [Show CPU Model](#show-cpu-model)
+	- [Show CPU Brand String](#show-cpu-brand-string)
+	- [List CPU features](#list-cpu-features)
+	- [Display Bus and CPU Frequency](#display-bus-and-cpu-frequency)
+	- [List supported CPU instructions](#list-supported-cpu-instructions)
+	- [Get CPU details from IO Registry](#get-cpu-details-from-io-registry)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+	- [Collection of Keyboard Shortcuts](#collection-of-keyboard-shortcuts)
+	- [Show hidden Files and Folders in Finder](#show-hidden-files-and-folders-in-finder)
+	- [Disable Press and Hold for Keyboard Keys (requires reboot)](#disable-press-and-hold-for-keyboard-keys-requires-reboot)
+	- [Accessing Terminal in macOS Setup-Assistant](#accessing-terminal-in-macos-setup-assistant)
+- [Linux](#linux)
+	- [Generate Audio Codec Dump (in Linux)](#generate-audio-codec-dump-in-linux)
+	- [Search for firmware used by devices](#search-for-firmware-used-by-devices)
+- [Troubleshooting](#troubleshooting)
+	- [Show log of last boot](#show-log-of-last-boot)
+	- [Search for terms in last boot log](#search-for-terms-in-last-boot-log)
+	- [Check OpenCore version](#check-opencore-version)
+	- [Display currently used Board-ID](#display-currently-used-board-id)
+	- [Checking Reasons for Wake](#checking-reasons-for-wake-1)
+	- [Check currently active `csr-active-config`](#check-currently-active-csr-active-config)
+	- [Check the status of System Integrity Protection (SIP)](#check-the-status-of-system-integrity-protection-sip)
+	- [Install Command Line Developer Tools](#install-command-line-developer-tools)
+	- [Kext-related](#kext-related)
+		- [Find loaded Kexts (excluding those from Apple)](#find-loaded-kexts-excluding-those-from-apple)
+		- [Rebuild Kext Cache (macOS 11+)](#rebuild-kext-cache-macos-11)
+		- [Rebuild Kext Cache (macOS 10.15 or older)](#rebuild-kext-cache-macos-1015-or-older)
+	- [Check status of Apple Secure Boot](#check-status-of-apple-secure-boot)
+	- [Make .command files executable](#make-command-files-executable)
+	- [Finding USB Controller Renames](#finding-usb-controller-renames)
+	- [Verifying if SMBus is working](#verifying-if-smbus-is-working)
+	- [ACPI-related](#acpi-related)
+		- [Debug ACPI Tables](#debug-acpi-tables)
+		- [List ACPI Errors](#list-acpi-errors)
+
+---
+
 ## macOS Look and Feel
 
 ### Defaults
@@ -78,6 +162,7 @@ uname -r
 ```shell
 system_profiler SPHardwareDataType | grep 'Model Identifier'
 ```
+---
 
 ## System Behavior
 
@@ -127,6 +212,7 @@ Brings back all the window pop-ups that ask for granting pernission to access pe
 ```shell
 tccutil reset All
 ```
+---
 
 ## Finder-related
 
@@ -180,6 +266,20 @@ defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
 	```shell
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
 	```
+---
+
+## Application-related
+
+### Fixing codesign issues
+
+Run line by line:
+
+```shell
+xcode-select --install
+sudo codesign --force --deep --sign - <drag the app here>
+sudo xattr -d -r com.apple.quarantine <drag the app here>
+sudo chmod +x <drag the app here>
+```
 
 ## Filesystem-related
 
@@ -375,6 +475,46 @@ ioreg -rxn "CPU0@0"
 > 
 > Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
 
+---
+
+## Keyboard Shortcuts
+
+### Collection of Keyboard Shortcuts
+
+[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
+
+### Show hidden Files and Folders in Finder
+
+<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+
+### Disable Press and Hold for Keyboard Keys (requires reboot)
+
+```shell
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
+### Accessing Terminal in macOS Setup-Assistant
+
+<kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>T</kbd> (Command+Option+Control+T)
+
+---
+
+## Linux
+
+### Generate Audio Codec Dump (in Linux)
+
+```shell
+cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
+```
+
+### Search for firmware used by devices
+
+```shell
+sudo dmesg|grep -i firmware
+```
+
+---
+
 ## Troubleshooting
 
 ### Show log of last boot
@@ -507,39 +647,3 @@ log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d
 ```
 
 The 2nd Command saves a log on the desktop.
-___
-
-## Keyboard Shortcuts
-
-### Collection of Keyboard Shortcuts
-
-[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
-
-### Show hidden Files and Folders in Finder
-
-<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
-
-### Disable Press and Hold for Keyboard Keys (requires reboot)
-
-```shell
-defaults write -g ApplePressAndHoldEnabled -bool false
-```
-
-### Accessing Terminal in macOS Setup-Assistant
-
-<kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>T</kbd> (Command+Option+Control+T)
-
----
-## Linux
-
-### Generate Audio Codec Dump (in Linux)
-
-```shell
-cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
-```
-
-### Search for firmware used by devices
-
-```shell
-sudo dmesg|grep -i firmware
-```
