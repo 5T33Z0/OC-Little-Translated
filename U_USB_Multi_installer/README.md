@@ -53,14 +53,14 @@ You can take the values for the required partition sizes for the desired macOS i
 
 Installer | Partition Size <br>(minimum)
 ----------|:-------------------------:
-macOS Sequoia | 17 GB
-macOS Sonoma | 17 GB
-macOS Ventura | 15 GB
-macOS Monterey | 13 GB
-macOS Big Sur | 13 GB
-macOS Catalina | 9 GB
-macOS Mojave | 7 GB 
-macOS High Sierra |6 GB
+macOS Sequoia | ≈17 GB
+macOS Sonoma | ≈16 GB
+macOS Ventura | ≈15 GB
+macOS Monterey | ≈13 GB
+macOS Big Sur | ≈13 GB
+macOS Catalina | ≈9 GB
+macOS Mojave | ≈7 GB 
+macOS High Sierra | ≈6 GB
 
 > [!NOTE]
 >
