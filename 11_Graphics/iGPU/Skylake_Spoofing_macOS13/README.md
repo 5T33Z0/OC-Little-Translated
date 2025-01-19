@@ -101,8 +101,8 @@ This way, you can leave your DeviceProperties as is for older versions of macOS 
 
 - Download [**`OSIEnhancer.kext`**](https://github.com/b00t0x/OSIEnhancer/releases)
 - Add it to `EFI/OC/Kexts` and your `config.plist` 
-- Download [**`SSDT-Darwin.dsl`**](/SSD/SSDT-Darwin.aml)
-- Download [**`SSDT-GFX0.dsl`**](/SSD/SSDT-GFX0.aml)
+- Download [**`SSDT-Darwin.aml`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13/SSDT/SSDT-Darwin.aml)
+- Download [**`SSDT-GFX0.aml`**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13/SSDT/SSDT-GFX0.aml)
 - Add them to `EFI/OC/ACPI` and your `config.plist`
 - If present, revert framebuffer patch to the [default](https://dortania.github.io/OpenCore-Install-Guide/config.plist/skylake.html#add-2) for Skylake systems. 
 - Save your `config.plist` and rebbot into macOS 13 or newer. 
