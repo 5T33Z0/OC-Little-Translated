@@ -62,7 +62,7 @@ Run either [**VDADecoderChecker**](https://i.applelife.ru/2019/05/451893_10.12_V
 
 ### Re-enabling Intel HD 520/530 (Laptop)
 
-Do the following to enabled Intel HD 520/530 or P530 on-board graphics in macOS 13 on desktop systems: 
+Do the following to enable Intel HD 520/530 or P530 on-board graphics in macOS 13 on desktop systems: 
 
 - Update [**Lilu**](https://dortania.github.io/builds/?product=Lilu&viewall=true)
 - Update [**Whatevergreen**](https://dortania.github.io/builds/?product=WhateverGreen&viewall=true)
