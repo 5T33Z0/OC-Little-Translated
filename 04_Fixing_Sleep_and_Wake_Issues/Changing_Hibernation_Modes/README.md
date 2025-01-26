@@ -46,7 +46,7 @@ For hibernation to work successfully, there are a few prerequisites that *must* 
 
 - **Required Kexts**:
   
-  - [HibernationFixup](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
+  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
   
   - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions
 
