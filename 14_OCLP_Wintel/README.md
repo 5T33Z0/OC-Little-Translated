@@ -48,6 +48,7 @@ Listed below are configuration guides to update your OpenCore EFI and `config.pl
 - [**OCLP and the macOS compatibility gap**](/14_OCLP_Wintel/Bridging_the_gap.md)
 - [**Triggering macOS Updates via Terminal**](/14_OCLP_Wintel/macOS_Update_Terminal.md)
 - [**Addressing sleep issues in macOS Sequoia**](https://www.insanelymac.com/forum/topic/360040-macos-15-sequoia-does-not-enter-sleep-mode-properly/#comment-2826474) (Thread on insanelymac)
+- [**Fixing Preboot volumes modified by macOS High Sierra**](/14_OCLP_Wintel/Guides/Fix_Preboot_High_Sierra.md)
 
 ## Fetching macOS Installers
 
