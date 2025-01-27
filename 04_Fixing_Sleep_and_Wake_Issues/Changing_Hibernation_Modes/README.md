@@ -1,13 +1,17 @@
 # Modifying Power Management Settings
 
+:construction: Under revision!
+
 - [Understanding Power States](#understanding-power-states)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
 - [Changing Hibernation modes in macOS](#changing-hibernation-modes-in-macos)
   - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
   - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
   - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
+- [Configuring Hibernation](#configuring-hibernation)
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
+
 
 ## Understanding Power States
 
@@ -23,6 +27,7 @@ PC Power States (S-States) define different levels of system power consumption a
 | S5 | Soft Off | Complete shutdown | Zero | No system state maintained |
 
 **Key characteristics**:
+
 - Lower S-States provide increased power savings
 - Higher states progressively reduce power consumption
 - Each state involves different levels of system context preservation
@@ -107,6 +112,21 @@ This mode (as well as hibernatemode 3) does require [**HibernationFixup**](https
 - `WhenBatteryAtCriticalLevel` (32)
 
 For more settings, please refer to the boot-args section of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
+
+## Configuring Hibernation
+
+Selecting a hibernation mode is only half of the story. In order for hibernation to work properly, it must be configured by applying standby arguments via `pmset` in Terminal or Hackintool. The configuration consists mainly of setting up timers for events, like, how long it takes (in seconds) to transition from `S3` to `S4` state. If it's a mobile device with a battery, it's charging level is also a factor.
+
+The following Safe Sleep Arguments are available:
+
+Argument | Description 
+---------|-------------
+`standby` | Enables automatic hibernation after sleep for power saving. Default: `ON` for supported hardware. 
+`standbydelayhigh` | Time in seconds before hibernation when battery is above highstandbythreshold. 
+`standbydelaylow` | Time in seconds before hibernation when battery is below highstandbythreshold. 
+`highstandbythreshold` | Battery percentage threshold (default 50%) that determines whether to use high or low delay. 
+`autopoweroff` | European Energy directive feature that enables deeper sleep state after specified delay. Default: ON. 
+`autopoweroffdelay` | Time in seconds before system enters autopoweroff mode.
 
 ## More `pmset` parameters
 
