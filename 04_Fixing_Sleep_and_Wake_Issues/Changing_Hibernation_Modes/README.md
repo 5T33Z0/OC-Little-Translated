@@ -9,6 +9,10 @@
   - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
   - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
 - [Configuring Hibernation](#configuring-hibernation)
+  - [Special Note about `autopoweroff`](#special-note-about-autopoweroff)
+  - [Understanding Power State Transitions and Timers](#understanding-power-state-transitions-and-timers)
+  - [Getting the currently set parameters](#getting-the-currently-set-parameters)
+  - [Testing](#testing)
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
 
@@ -19,12 +23,12 @@ PC Power States (S-States) define different levels of system power consumption a
 
 | State | Name | Description | Power Consumption | System Functionality |
 |:-----:|------|-------------|:-----------------:|----------------------|
-| S0 | Working State | Fully operational system | Highest | Full CPU and hardware operation |
-| S1 | Standby | Minimal power saving | Very Low | Context preserved, quick resume |
-| S2 | Standby | More power saving | Low | Processor stopped, context saved |
-| S3 | Sleep | Suspend to RAM | Minimal | Most components powered down |
-| S4 | Hibernate | Suspend to Disk | Near Zero | System state saved to hard drive |
-| S5 | Soft Off | Complete shutdown | Zero | No system state maintained |
+| `S0` | Working State | Fully operational system | Highest | Full CPU and hardware operation |
+| `S1` | Standby | Minimal power saving | Very Low | Context preserved, quick resume |
+| `S2` | Standby | More power saving | Low | Processor stopped, context saved |
+| `S3` | Sleep | Suspend to RAM | Minimal | Most components powered down |
+| `S4` | Hibernate | Suspend to Disk | Near Zero | System state saved to hard drive |
+| `S5` | Soft Off | Complete shutdown | Zero | No system state maintained |
 
 **Key characteristics**:
 
@@ -56,9 +60,11 @@ For hibernation to work successfully, there are a few prerequisites that *must* 
   - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions
 
 ## Changing Hibernation modes in macOS
-Open Terminal. Enter `man pmset` &rarr; Lists all available `pmset` parameters to modify System Power Management!
 
-:warning: **CAUTION**: Don't fiddle around with these settings unless you know what you are doing!
+> [!CAUTION]
+> Don't fiddle around with these settings unless you know what you are doing!
+
+Open Terminal. Enter `man pmset` &rarr; Lists all available `pmset` parameters to modify System Power Management!
 
 To check the currently selected Hibernation mode, enter:
 
@@ -67,7 +73,9 @@ pmset -g | grep hibernatemode
 ```
 
 ### hibernatemode 0: Suspend to RAM only
-Default for desktops. The system will not back memory up to persistent storage. The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep. To enable it, enter in Terminal:
+Default for desktops. The system will not back memory up to persistent storage. The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep. 
+
+To enable hibernatemode 0, enter in Terminal:
 
 ```
 sudo pmset -a hibernatemode 0
@@ -78,7 +86,7 @@ Default on portables. Hibernation mode 3 will transition from `S3` to `S4` depen
 
 Benefit of this mode is that is does quicken the wakeup time when the device is being used quickly while still providing the benefits of hibernation when the device is not in use overnight. 
 
-To enable ibernatemode 3, enter in Terminal:
+To enable hibernatemode 3, enter in Terminal:
 
 ```bash
 sudo pmset -a hibernatemode 3
@@ -95,13 +103,14 @@ This mode (as well as hibernatemode 25) does require [**HibernationFixup**](http
 For more settings, please refer to the boot-args settings of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
 
 ### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
-For portables as well. Mode 25 is only settable via `pmset`. Same as mode 3, but will remove power to memory. The system will restore from disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting. Hibernation mode 25 will always go directly from `S0` to `S4`.
-When using this mode, entering the hibernation state takes a bit longer than using mode 0 using this mode. To enable it, enter in Terminal:
+For portables as well. Mode 25 is only settable via `pmset`. Same as mode 3, but will remove power to memory. The system will restore from disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting. Hibernatemode 25 will always go directly from `S0` to `S4`.
+When using this mode, entering the hibernation state takes a bit longer than using mode 0 using this mode. Please note that hibernatefile may only point to a file located on the root volume.
+
+To enable it, enter in Terminal:
 
 ```bash
 sudo pmset -a hibernatemode 25
 ```
-Please note that hibernatefile may only point to a file located on the root volume.
 
 This mode (as well as hibernatemode 3) does require [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext to work – otherwise the device stays in `S3` and never transitions to `S4`. You do also need to set a value to boot-arg `hbfx-ahbm=`, representing the parameters/features of HibernationFixup. For example `hbfx-ahbm=55`, which contains the following 4 settings:
 
@@ -115,18 +124,78 @@ For more settings, please refer to the boot-args section of the  [**HibernationF
 
 ## Configuring Hibernation
 
-Selecting a hibernation mode is only half of the story. In order for hibernation to work properly, it must be configured by applying standby arguments via `pmset` in Terminal or Hackintool. The configuration consists mainly of setting up timers for events, like, how long it takes (in seconds) to transition from `S3` to `S4` state. If it's a mobile device with a battery, it's charging level is also a factor.
+Picking a hibernation mode is only the first step. In order for hibernation to work properly, it must be configured as well by applying standby arguments via `pmset` in Terminal or Hackintool.
 
-The following Safe Sleep Arguments are available:
+The configuration primarily involves setting timers that control state transitions – for example, how long the system should remain in sleep (`S3`) before transitioning to hibernation (`S4`). On battery-powered devices, the system also takes the current battery level into account when determining these transitions, represented by the parameters `standbydelayhigh`, `standbydelaylow`, `highstandbythreshold`.
+
+**The following parameters have to be set**:
 
 Argument | Description 
 ---------|-------------
-`standby` | Enables automatic hibernation after sleep for power saving. Default: `ON` for supported hardware. 
-`standbydelayhigh` | Time in seconds before hibernation when battery is above highstandbythreshold. 
-`standbydelaylow` | Time in seconds before hibernation when battery is below highstandbythreshold. 
-`highstandbythreshold` | Battery percentage threshold (default 50%) that determines whether to use high or low delay. 
-`autopoweroff` | European Energy directive feature that enables deeper sleep state after specified delay. Default: ON. 
-`autopoweroffdelay` | Time in seconds before system enters autopoweroff mode.
+`sleep` | System sleep timer (value in minutes, or `0` to disable). Time in minutes before the system enters sleep mode (not hibernation). This is the initial entry into `S3` state that triggers hibernation after all the delay timers have counted down.
+`standby` | Causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in `pmset -g` if the feature is supported on this machine. Default: `ON` for supported hardware. 
+`standbydelayhigh` | Time in seconds before hibernation when battery is *above* the `highstandbythreshold`.
+`standbydelaylow` | Time in seconds before hibernation when battery is *below* the `highstandbythreshold`.
+`highstandbythreshold` | Battery percentage threshold (default 50%) that determines whether to use the *high* or *low* delay. 
+`autopoweroff` | European Energy directive feature that enables deeper sleep state after specified delay. Default: ON. After sleeping for `<autopoweroffdelay>` amount of seconds, the system will write a hibernation image and go into a lower power chipset sleep. Wakeups from this state will take longer than wakeups from regular sleep. Only available when the system is connected to AC power. 
+`autopoweroffdelay` | Delay in seconds before the system enters `autopoweroff` mode.
+
+### Special Note about `autopoweroff`
+
+The autopoweroff feature in macOS is designed to work ***only when the system is connected to AC power***!
+
+**How autopoweroff Works**:
+
+- **Purpose**: The feature is meant to save energy by powering down the system more deeply after an extended period of standby.
+- **Condition**: Since autopoweroff involves fully powering off certain components (and possibly the entire system), it only activates when the system is on AC power. **This ensures the system can reliably resume without risking data loss or hardware issues caused by insufficient battery charge.**
+
+**Behavior on Battery**:
+
+- When running on battery, macOS relies on *standby* and *standbydelay* to manage power consumption. These modes keep the system in a low-power state but avoid deeper shutdowns like autopoweroff.
+
+**Why It Doesn't Work on Battery**:
+
+- Resuming from autopoweroff requires a reboot-like process, which consumes more power than resuming from sleep or standby. 
+- macOS prioritizes preserving battery life and maintaining faster wake times when on battery.
+
+I have two Lenovo Thinkpads but autopoweroff is only available on the older one. I don't know exactly if this depends on the region the laptop was manufactured for or if the availability of autopoweroff is based on the used SMBIOS.
+
+### Understanding Power State Transitions and Timers
+The system uses four distinct timers to manage power state transitions:
+
+- The initial `sleep` timer that triggers entry into `S3` sleep
+- `standbydelayhigh` for hibernation when battery is above the threshold
+- `standbydelaylow` for hibernation when battery is below the threshold
+- `autopoweroffdelay` for entering the special chipset sleep state
+
+**These timers create two possible power transition paths**:
+
+1. **"Standard" hibernation path**:
+   - S0 (awake) → S3 (sleep) → [standbydelay based on battery] → S4 (hibernation)
+
+2. **"Autopoweroff" path**:
+   - S0 (awake) → S3 (sleep) → [autopoweroffdelay] → writes hibernation image → chipset sleep state
+
+Here's a visualization of how these paths are working
+
+![alt text](hibernate-timeline.png)
+
+> [!NOTE]
+>
+> The autopoweroff state is distinct from standard S4 hibernation - while both write a hibernation image, autopoweroff maintains certain chipset functions in a low-power state instead of powering off completely. This results in wake times that are slower than `S3` sleep but faster than full `S4` hibernation. It seems to be a hybrid state **optimized specifically for EU energy regulations** - using the safety of having a hibernation image but keeping critical chipset components in a deep sleep rather than fully powered down.
+
+### Getting the currently set parameters
+
+- First, you have to check the current pm settings. To do so, you can enter `pmset -g` in Terminal (or use Hackintool). This example is from my Lenovo T530:<br>![alt text](pmsetg.png)
+- As you can see, the `autopoweroffdelay` is set to the ridiculously high value of 259200 seconds, which equals to 72 hours (or 3 days) before entering the `autopoweroff` state.
+- `standby` is enabled, which is good
+- `sleep` is enabled and set to 10 minutes. That's the time before the system enters `S3` state.
+- The sleepimage (`hibernatefile`)is present
+- `stanbydelaylow` and `standbydelayhigh` are booth set to 4200 seconds (= 70 minutes)
+
+###  Testing
+
+to be conntinued…
 
 ## More `pmset` parameters
 
