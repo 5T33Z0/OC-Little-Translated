@@ -141,8 +141,7 @@ Argument | Description
 `autopoweroffdelay` | Delay in seconds before the system enters `autopoweroff` mode.
 
 ### Special Note about `autopoweroff`
-
-The autopoweroff feature in macOS is designed to work ***only when the system is connected to AC power***!
+The autopoweroff state is distinct from standard S4 hibernation - while both write a hibernation image, autopoweroff maintains certain chipset functions in a low-power state instead of powering off completely. This results in wake times that are slower than `S3` sleep but faster than full `S4` hibernation. It seems to be a hybrid state **optimized specifically for EU energy regulations** - using the safety of having a hibernation image but keeping critical chipset components in a deep sleep rather than fully powered down. The autopoweroff feature in macOS is designed to work ***only when the system is connected to AC power***!
 
 **How autopoweroff Works**:
 
@@ -176,13 +175,29 @@ The system uses four distinct timers to manage power state transitions:
 2. **"Autopoweroff" path**:
    - S0 (awake) → S3 (sleep) → [autopoweroffdelay] → writes hibernation image → chipset sleep state
 
-Here's a visualization of how these paths are working
+Here's a visualization of how these timers working:
 
 ![alt text](hibernate-timeline.png)
 
-> [!NOTE]
->
-> The autopoweroff state is distinct from standard S4 hibernation - while both write a hibernation image, autopoweroff maintains certain chipset functions in a low-power state instead of powering off completely. This results in wake times that are slower than `S3` sleep but faster than full `S4` hibernation. It seems to be a hybrid state **optimized specifically for EU energy regulations** - using the safety of having a hibernation image but keeping critical chipset components in a deep sleep rather than fully powered down.
+**Explanation**:
+
+1. **Active**:
+   - The system is fully operational, with no power-saving features active (S0 state).
+
+2. **Sleep**:
+   - The system enters a low-power state, keeping the contents of RAM active for quick wake-up.
+   - This is typical for `hibernatemode = 3` (default for most Macs), where:
+     - RAM stays powered.
+     - The `sleepimage` is also written to disk as a backup.
+
+3. **Hibernate**:
+   - For `hibernatemode = 25`, the system powers off RAM and writes the contents entirely to the `sleepimage` file on disk.
+   - This is a full hibernation mode, ideal for saving battery but slower to wake up.
+
+4. **Standby and Autopoweroff**:
+   - These states are additional layers of power management:
+     - **Standby (`standby = 1`)**: After a specified delay (`standbydelay`), the system transitions from sleep to a hibernation-like state to save more power.
+     - **Autopoweroff (`autopoweroff = 1`)**: After a ***further*** delay (`autopoweroffdelay`), the system can power down more deeply, saving even more energy.
 
 ### Getting the currently set parameters
 
