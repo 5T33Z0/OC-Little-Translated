@@ -9,10 +9,10 @@
   - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
   - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
 - [Configuring Hibernation](#configuring-hibernation)
-  - [Special Note about `autopoweroff`](#special-note-about-autopoweroff)
+  - [About `autopoweroff`](#about-autopoweroff)
   - [Understanding Power State Transitions and Timers](#understanding-power-state-transitions-and-timers)
   - [Getting the currently set parameters](#getting-the-currently-set-parameters)
-  - [Testing](#testing)
+  - [Testing Hibernation](#testing-hibernation)
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
 
@@ -140,7 +140,7 @@ Argument | Description
 `autopoweroff` | European Energy directive feature that enables deeper sleep state after specified delay. Default: ON. After sleeping for `<autopoweroffdelay>` amount of seconds, the system will write a hibernation image and go into a lower power chipset sleep. Wakeups from this state will take longer than wakeups from regular sleep. Only available when the system is connected to AC power. 
 `autopoweroffdelay` | Delay in seconds before the system enters `autopoweroff` mode.
 
-### Special Note about `autopoweroff`
+### About `autopoweroff`
 The autopoweroff state is distinct from standard S4 hibernation - while both write a hibernation image, autopoweroff maintains certain chipset functions in a low-power state instead of powering off completely. This results in wake times that are slower than `S3` sleep but faster than full `S4` hibernation. It seems to be a hybrid state **optimized specifically for EU energy regulations** - using the safety of having a hibernation image but keeping critical chipset components in a deep sleep rather than fully powered down. The autopoweroff feature in macOS is designed to work ***only when the system is connected to AC power***!
 
 **How autopoweroff Works**:
@@ -208,9 +208,21 @@ Here's a visualization of how these timers working:
 - The sleepimage (`hibernatefile`)is present
 - `stanbydelaylow` and `standbydelayhigh` are booth set to 4200 seconds (= 70 minutes)
 
-###  Testing
+###  Testing Hibernation
 
-to be conntinued…
+1. In order for hibernation modes 3 or 25 to work, we have to ensure that the sleepimage is *not* write-protected. Deleting and creating a new, write-protected 0 byte sleepimage is the usual procedure when using hibernatemode 0. This is what happens if you click the screwdriver icon in Hackintool ("Power" Tab). But we *don't* want that. So open Terminal and enter: 
+    
+    ```bash
+    ls -lO /private/var/vm/sleepimage
+    ```
+    
+    The default output should be: 
+    
+    ```bash
+    -rw------  1 root  wheel  <size> <date> /private/var/vm/sleepimage
+    ```
+
+to be continued…
 
 ## More `pmset` parameters
 
