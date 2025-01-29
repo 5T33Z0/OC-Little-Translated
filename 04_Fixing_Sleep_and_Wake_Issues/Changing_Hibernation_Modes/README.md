@@ -221,8 +221,32 @@ Here's a visualization of how these timers working:
     ```bash
     -rw------  1 root  wheel  <size> <date> /private/var/vm/sleepimage
     ```
+  
+    If the file is write-read-only, you can use the following commands to restore the default value:
 
-to be continued…
+    ```bash
+    sudo chmod 600 /private/var/vm/sleepimage
+    sudo chown root:wheel /private/var/vm/sleepimage
+    ```
+2. Next, you need to set short timer values to test hibernation:
+
+    ```bash
+    sudo pmset -a hibernatemode 25
+    sudo pmset -a standby 1
+    sudo pmset -a standbydelaylow 60      # 1 minute before entering standby on low battery
+    sudo pmset -a standbydelayhigh 120    # 2 minutes before entering standby on AC power
+    sudo pmset -a powernap 0
+    sudo pmset -a autopoweroff 1
+    sudo pmset -a autopoweroffdelay 300   # 5 minutes before full shutdown (if supported)
+    sudo pmset -a disksleep 10
+    sudo pmset -a sleep 1
+    sudo pmset -a displaysleep 2
+  ```
+3. Reboot the system, login and just leave the system at idle until it enters sleep. If your system is a laptop, supports autopoweroff and is connected to AC, it should enter autopoweroff after 5 minutes – indicated by the sleep indicator (pulsing light) should stop. 
+
+4. To resume from autopoweroff, press the power button. The system should resume to the login screen but it will take longer since it restors from the hibernation image from disk. It will feel similar to booting the system – just without a bootmenu.
+
+5. Once hibernation is working as expected, change the timer values above to more reasonable values that make sense for your system/working habits.
 
 ## More `pmset` parameters
 
