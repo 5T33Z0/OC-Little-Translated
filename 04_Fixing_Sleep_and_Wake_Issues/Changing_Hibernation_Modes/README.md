@@ -230,7 +230,7 @@ Here's a visualization of how these timers working:
 2. Next, you need to set short timer values to test hibernation:
 
     ```bash
-    sudo pmset -a hibernatemode 25
+    sudo pmset -a hibernatemode 25        # or hibernatemode 3, depending on which mode you want to test
     sudo pmset -a standby 1
     sudo pmset -a standbydelaylow 60      # 1 minute before entering standby on low battery
     sudo pmset -a standbydelayhigh 120    # 2 minutes before entering standby on AC power
