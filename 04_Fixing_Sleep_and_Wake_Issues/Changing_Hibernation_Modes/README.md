@@ -240,7 +240,7 @@ Here's a visualization of how these timers working:
     sudo pmset -a disksleep 10
     sudo pmset -a sleep 1
     sudo pmset -a displaysleep 2
-  ```
+    ```
 3. Reboot the system, login and just leave the system at idle until it enters sleep. If your system is a laptop, supports autopoweroff and is connected to AC, it should enter autopoweroff after 5 minutes – indicated by the sleep indicator (pulsing light) should stop. 
 
 4. To resume from autopoweroff, press the power button. The system should resume to the login screen but it will take longer since it restors from the hibernation image from disk. It will feel similar to booting the system – just without a bootmenu.
