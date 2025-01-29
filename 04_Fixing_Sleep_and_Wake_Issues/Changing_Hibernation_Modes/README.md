@@ -16,7 +16,6 @@
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
 
-
 ## Understanding Power States
 
 PC Power States (S-States) define different levels of system power consumption and functionality. These states range from `S0` (fully operational) to `S5` (soft-off), providing various levels of power saving and system responsiveness.
