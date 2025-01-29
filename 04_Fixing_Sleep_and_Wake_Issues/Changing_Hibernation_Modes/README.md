@@ -76,9 +76,20 @@ Default for desktops. The system will not back memory up to persistent storage. 
 
 To enable hibernatemode 0, enter in Terminal:
 
-```
+```bash
 sudo pmset -a hibernatemode 0
 ```
+
+If you have issues with sleep, run the following commands in Terminal:
+
+```bash
+sudo pmset hibernatemode 0
+sudo rm /var/vm/sleepimage
+sudo touch /var/vm/sleepimage
+sudo chflags uchg /var/vm/sleepimage
+```
+
+This will delete the sleepimage, create a new, write-protected one.
 
 ### hibernatemode 3: Suspend to disk and RAM
 Default on portables. Hibernation mode 3 will transition from `S3` to `S4` depending on the timeout and battery thresholds set in `pmset` (mor on this laster).  The system will store a copy of memory to persistent storage (the disk), and will power memory during sleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
@@ -176,7 +187,7 @@ The system uses four distinct timers to manage power state transitions:
 
 Here's a visualization of how these timers working:
 
-![alt text](hibernate-timeline.png)
+![hibernate-timeline](https://github.com/user-attachments/assets/568a0716-ae1a-42c4-9b82-10e357d310f7)
 
 **Explanation**:
 
@@ -200,7 +211,7 @@ Here's a visualization of how these timers working:
 
 ### Getting the currently set parameters
 
-- First, you have to check the current pm settings. To do so, you can enter `pmset -g` in Terminal (or use Hackintool). This example is from my Lenovo T530:<br>![alt text](pmsetg.png)
+- First, you have to check the current pm settings. To do so, you can enter `pmset -g` in Terminal (or use Hackintool). This example is from my Lenovo T530:<br>![pmsetg](https://github.com/user-attachments/assets/72042d91-41bd-4d37-ad6a-c66b55e92cd3)
 - As you can see, the `autopoweroffdelay` is set to the ridiculously high value of 259200 seconds, which equals to 72 hours (or 3 days) before entering the `autopoweroff` state.
 - `standby` is enabled, which is good
 - `sleep` is enabled and set to 10 minutes. That's the time before the system enters `S3` state.
