@@ -1,6 +1,6 @@
 # Modifying Power Management Settings
 
-:construction: Under revision!
+**INDEX**
 
 - [Understanding Power States](#understanding-power-states)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
