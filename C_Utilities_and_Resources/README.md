@@ -25,6 +25,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos from the [**I/OKit**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011) in macOS.
 - [**Hackintool**](https://github.com/headkaze/Hackintool) – Powerful post-install utility that everyone should have in their Hackintosh tool box
 - [**FindMask**](https://www.insanelymac.com/forum/topic/343572-for-hackers-an-utility-to-search-a-masked-string/?do=findComment&comment=2719931) – CLI to search byte sequences in a file containing masked code.
+- [**Disk Drill**](https://www.cleverfiles.com/) – Tool to recover deleted/damaged files.
 
 ### Editing plists, updating OpenCore and kexts
 Tools for keeping your OpenCore EFI folder so fresh and so clean, clean!
