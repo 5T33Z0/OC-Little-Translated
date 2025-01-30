@@ -302,20 +302,20 @@ Here's a visualization of how these timers working:
 
 ## More `pmset` parameters
 
-The available pmset parameters depend on the Mac model/seleced SMBIOS. To list a system's pmset capabilities, enter the following command in Terminal:
+The available pmset parameters depend on the Mac model/seleced SMBIOS. To list a system's pmset "capabilities", enter the following command in Terminal:
 
 `pmset -g cap`
 
-Listed below are power managements settings you can configure in Terminal via **`pmset`**:
+Here's a list of **`pmset`** paramters and their meanings:
 
 Setting       | Description | Value |
---------------|-------------|:-------:|
+-------------:|-------------|:-------:|
 `displaysleep`| Display sleep timer; replaces `dim` argument in 10.4.| Minutes, or 0 to disable 
 `disksleep`   | Disk spindown timer; replaces `spindown` argument in 10.4.| Minutes, or `0` to disable 
 `sleep`       | System sleep timer.| Minutes, or `0` to disable 
 `womp`        | Wake on Ethernet magic packet. Same as "Wake for network access" in the Energy Saver preferences. | `0`/`1`
-`ring`| Wake on modem ring.| `0`/`1`
-`powernap`   | Enable/disable Power Nap on supported machines.| `0`/`1`
+`ring`        | Wake on modem ring.| `0`/`1`
+`powernap`    | Enable/disable Power Nap on supported machines.| `0`/`1`
 `proximitywake`          | Controls system wake from sleep based on proximity of devices using the same iCloud ID on supported systems.| `0`/`1`
 `autorestart`| Automatic restart on power loss.| `0`/`1`
 `lidwake`| Wake the machine when the laptop lid (or clamshell) is opened.| `0`/`1`
