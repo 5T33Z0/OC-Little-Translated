@@ -3,11 +3,14 @@
 **INDEX**
 
 - [Understanding Power States](#understanding-power-states)
+- [Hibernation modes in macOS](#hibernation-modes-in-macos)
+  - [Mode Explanations](#mode-explanations)
+  - [Changing the hibernation mode](#changing-the-hibernation-mode)
+    - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
+    - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
+    - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
+  - [Which Mode Should You Use?](#which-mode-should-you-use)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
-- [Changing Hibernation modes in macOS](#changing-hibernation-modes-in-macos)
-  - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
-  - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
-  - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
 - [Configuring Hibernation](#configuring-hibernation)
   - [About `autopoweroff`](#about-autopoweroff)
   - [Understanding Power State Transitions and Timers](#understanding-power-state-transitions-and-timers)
@@ -36,42 +39,53 @@ PC Power States (S-States) define different levels of system power consumption a
 - Each state involves different levels of system context preservation
 - Transition between states managed by operating system and ACPI (Advanced Configuration and Power Interface)
 
-## Prerequisites for enabling Hibernation on Hackintosh systems
+## Hibernation modes in macOS
 
-For hibernation to work successfully, there are a few prerequisites that *must* be met first:
+macOS (Lion and newer) supports three different modes of hibernation: `hibernatemode 0`, `hibernatemode 3` and `hibernatemode 25`. The differences betweeen these modes are as follows:
 
-- **Config adjustments**:
+| **Mode** | **hibernatemode 0 (Standard Sleep)** | **hibernatemode 3 (Safe Sleep)** | **hibernatemode 25 (Deep Hibernation)**
+|--------|---------------|---------------|------------------------------|
+| **RAM Powered?**   | ✅ Yes, stays powered | ✅ Yes, stays powered | ❌ No, completely powered off |
+| **Writes to Disk?** | ❌ No | ✅ Yes, saves RAM contents to `/var/vm/sleepimage` | ✅ Yes, saves RAM contents to `/var/vm/sleepimage` |
+| **Power Consumption** | 🔋 **Higher** (RAM stays active) | 🔋 **Lower** (RAM powered, but backup exists) | 📴 **Zero** (RAM completely off) |
+| **Wake-up Speed** | ⚡ **Instant** | ⚡ **Fast** (RAM is active) | 🐌 **Slow** (RAM must be restored from disk) |
+| **Used on** | ⚡ Desktops (iMac, Mac Pro) | 🖥 MacBooks (default) | 🖥 Macs without a battery, or when battery is **very low** |
+| **When Activated?** | - Standard **sleep mode** - **No data saved to disk** | - Normal sleep mode - **Backs up RAM** but keeps it powered | - System writes RAM to disk - **RAM is fully powered off** |
+| **Risk of Data Loss?** | ⚠️ **Yes, if power is lost** | ❌ **No, backup exists** | ❌ **No, full restore possible** |
 
-  - Storage must be detected as `built-in` or `internal` (verify in System Profiler or Hackintool). If the SSD/NVMe is not recognized as built-in, get the PCI device path of the SATA/NVMe Controller from Hackintool, open the `config.plist` and add the DeviceProperty `built-in` with a value of `01000000` (Data) for it.
- 
-  - Many devices will likely need to set `UEFI/ReservedMemory` for region `0x8B000` (size `0x1000`) to fix black screens on wake on Intel laptops. This is an entry that comes as part of the `sample.plist` for OpenCore. No clue with AMD/Intel Desktops.
-  
-  - Block writes to RTC regions `0x80`-`0xAB` and possibly `0xB0`-`0xB4` (refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup)).
-  
-  - By blocking RTC writes to those regions, you prevent hibernation data being written to the RTC. Make sure to allow OC to read hibernation data from NVRAM instead (`Misc/Boot/HibernateMode` = `Auto`) and that you have HibernationFixup so that the data does get written into NVRAM.
- 
-  - Changing `Misc/Boot/HibernationSkipsPicker` to `true` in the `config.plist` is highly recommended. That way, you do not inadvertently boot into another OS and change the environment/whatever assumptions the hibernated OS makes. It's generally a really dumb idea to change BIOS settings in the middle of hibernation so please don't.
+### Mode Explanations
+1. **`hibernatemode 0` (Standard Sleep - No Hibernation)**
+   - RAM stays powered.
+   - Nothing is written to disk.
+   - **Fastest wake-up**, but if power is lost, all unsaved data is gone.
+   - **Used by desktop Macs** like iMacs and Mac Pros.
 
-- **Required Kexts**:
-  
-  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
-  
-  - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions
+2. **`hibernatemode 3` (Safe Sleep - Default for MacBooks)**
+   - RAM stays powered, **but** the system also **backs up RAM contents to disk**.
+   - Allows **quick wake-ups**, and if the battery dies, macOS can **restore from disk**.
+   - **Used on MacBooks** to balance speed and safety.
 
-## Changing Hibernation modes in macOS
+3. **`hibernatemode 25` (True Hibernation - No Power Use)**
+   - RAM contents are **written to disk, and RAM is completely powered off**.
+   - Uses **zero battery**, similar to **Windows hibernation**.
+   - Wake-up is **slow**, since RAM must be restored from disk.
+   - Used when **battery is critically low** or **on Hackintosh desktops**.
+
+### Changing the hibernation mode
 
 > [!CAUTION]
+> 
 > Don't fiddle around with these settings unless you know what you are doing!
 
 Open Terminal. Enter `man pmset` &rarr; Lists all available `pmset` parameters to modify System Power Management!
 
 To check the currently selected Hibernation mode, enter:
 
-```
+```bash
 pmset -g | grep hibernatemode
 ```
 
-### hibernatemode 0: Suspend to RAM only
+#### hibernatemode 0: Suspend to RAM only
 Default for desktops. The system will not back memory up to persistent storage. The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep. 
 
 To enable hibernatemode 0, enter in Terminal:
@@ -89,9 +103,9 @@ sudo touch /var/vm/sleepimage
 sudo chflags uchg /var/vm/sleepimage
 ```
 
-This will delete the sleepimage, create a new, write-protected one.
+This will delete the sleepimage and create a new, write-protected one.
 
-### hibernatemode 3: Suspend to disk and RAM
+#### hibernatemode 3: Suspend to disk and RAM
 Default on portables. Hibernation mode 3 will transition from `S3` to `S4` depending on the timeout and battery thresholds set in `pmset` (mor on this laster).  The system will store a copy of memory to persistent storage (the disk), and will power memory during sleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
 
 Benefit of this mode is that is does quicken the wakeup time when the device is being used quickly while still providing the benefits of hibernation when the device is not in use overnight. 
@@ -112,16 +126,16 @@ This mode (as well as hibernatemode 25) does require [**HibernationFixup**](http
 
 For more settings, please refer to the boot-args settings of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
 
-### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
+#### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
 For portables as well. Mode 25 is only settable via `pmset`. Same as mode 3, but will remove power to memory. The system will restore from disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting. Hibernatemode 25 will always go directly from `S0` to `S4`.
-When using this mode, entering the hibernation state takes a bit longer than using mode 0 using this mode. Please note that hibernatefile may only point to a file located on the root volume.
+
+When using this mode, entering the hibernation state takes a bit longer than using mode 0. Please note that the hibernate file may only point to a file located on the root volume.
 
 To enable it, enter in Terminal:
 
 ```bash
 sudo pmset -a hibernatemode 25
 ```
-
 This mode (as well as hibernatemode 3) does require [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext to work – otherwise the device stays in `S3` and never transitions to `S4`. You do also need to set a value to boot-arg `hbfx-ahbm=`, representing the parameters/features of HibernationFixup. For example `hbfx-ahbm=55`, which contains the following 4 settings:
 
 - `EnableAutoHibernation` (1)
@@ -131,6 +145,34 @@ This mode (as well as hibernatemode 3) does require [**HibernationFixup**](https
 - `WhenBatteryAtCriticalLevel` (32)
 
 For more settings, please refer to the boot-args section of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
+
+### Which Mode Should You Use?
+- **MacBook users** → Stick with **hibernatemode 3** (default).
+- **Hackintosh laptops** → **hibernatemode 3** (fast wake-ups) or **hibernatemode 25** (true hibernation).
+- **Hackintosh desktops** → **hibernatemode 0** (fast sleep) or **hibernatemode 25** (power-saving).
+- **Long-term sleep?** → Use **hibernatemode 25** to **save power**.
+
+## Prerequisites for enabling Hibernation on Hackintosh systems
+
+For hibernation to work successfully, there are a few prerequisites that *must* be met first:
+
+- **Config adjustments**:
+
+  - Storage must be detected as `built-in` or `internal` (verify in System Profiler or Hackintool). If the SSD/NVMe is not recognized as built-in, get the PCI device path of the SATA/NVMe Controller from Hackintool, open the `config.plist` and add the DeviceProperty `built-in` with a value of `01000000` (Data) for it.
+ 
+  - Many devices will likely need to set `UEFI/ReservedMemory` for region `0x8B000` (size `0x1000`) to fix black screens on wake on Intel laptops. This is an entry that comes as part of the `sample.plist` for OpenCore. No clue with AMD/Intel Desktops.
+  
+  - Block writes to RTC regions `0x80`-`0xAB` and possibly `0xB0`-`0xB4` (refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup)).
+  
+  - By blocking RTC writes to those regions, you prevent hibernation data being written to the RTC. Make sure to allow OC to read hibernation data from NVRAM instead (`Misc/Boot/HibernateMode` = `Auto`) and that you have HibernationFixup so that the data does get written into NVRAM.
+ 
+  - Changing `Misc/Boot/HibernationSkipsPicker` to `true` in the `config.plist` is highly recommended. That way, you do not inadvertently boot into another OS and change the environment/whatever assumptions the hibernated OS makes. It's generally a really dumb idea to change BIOS settings in the middle of hibernation so please don't.
+
+- **Required Kexts**:
+  
+  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
+  
+  - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions. If your system crashes when when trying to restore from hibernation, then you definitely need this kext and additional settings to fix RTC memory regions.
 
 ## Configuring Hibernation
 
@@ -167,7 +209,7 @@ The autopoweroff state is distinct from standard S4 hibernation - while both wri
 - Resuming from autopoweroff requires a reboot-like process, which consumes more power than resuming from sleep or standby. 
 - macOS prioritizes preserving battery life and maintaining faster wake times when on battery.
 
-I have two Lenovo Thinkpads but autopoweroff is only available on the older one. I don't know exactly if this depends on the region the laptop was manufactured for or if the availability of autopoweroff is based on the used SMBIOS.
+I have two Lenovo Thinkpads, but autopoweroff is only available on the older one. I don't know exactly if this depends on the region the laptop was manufactured for or if the availability of autopoweroff is based on the used SMBIOS.
 
 ### Understanding Power State Transitions and Timers
 The system uses four distinct timers to manage power state transitions:
@@ -254,13 +296,13 @@ Here's a visualization of how these timers working:
     ```
 3. Reboot the system, login and just leave the system at idle until it enters sleep. If your system is a laptop, supports autopoweroff and is connected to AC, it should enter autopoweroff after 5 minutes – indicated by the sleep indicator (pulsing light) should stop. 
 
-4. To resume from autopoweroff, press the power button. The system should resume to the login screen but it will take longer since it restors from the hibernation image from disk. It will feel similar to booting the system – just without a bootmenu.
+4. To resume from autopoweroff, press the power button. The system should resume to the login screen but it will take longer since it restores from the hibernation image from disk. It will feel similar to booting the system – just without a bootmenu.
 
 5. Once hibernation is working as expected, change the timer values above to more reasonable values that make sense for your system/working habits.
 
 ## More `pmset` parameters
 
-Listed below are power managements settings you can configure in Terminal via **`pmset`**
+Listed below are power managements settings you can configure in Terminal via **`pmset`**.
 
  Setting       | Description | Value |
 ---------------|-------------|:-------:|
