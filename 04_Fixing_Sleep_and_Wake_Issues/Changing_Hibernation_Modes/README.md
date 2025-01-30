@@ -300,6 +300,13 @@ Here's a visualization of how these timers working:
 
 5. Once hibernation is working as expected, change the timer values above to more reasonable values that make sense for your system/working habits.
 
+> [!TIP]
+>
+> If you want to start over, enter the following command in Terminal to restore the default pmset values:
+> ```bash
+> sudo pmset restoredefaults
+> ```
+
 ## More `pmset` parameters
 
 The available pmset parameters depend on the Mac model/seleced SMBIOS. To list a system's pmset "capabilities", enter the following command in Terminal:
