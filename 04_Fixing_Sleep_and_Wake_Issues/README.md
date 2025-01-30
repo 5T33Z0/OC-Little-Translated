@@ -33,7 +33,7 @@ These patches are used for fixing sleep and standby issues on more recent Laptop
 
 ## Changing [Hibernation Modes](/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes/README.md)
 
-`pmset` commands for changing settings related to **system power management**, such as sleep/hibernation.
+Guide for enabling/fixing Hibernation.
 
 ## Notes and further Resources
 - Before applying any of these hotfixes, make sure that you are not using generic ACPI tables from Dortania or the OpenCore Package as provided, since they often contain additional devices, device names and paths to cover various scenarios at once (e.g. `SSDT-PLUG`). Instead, tailor them to your system's specific requirements or generate your own using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). This alone can prevent sleep and wake issues.
