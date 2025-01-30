@@ -30,7 +30,7 @@ In **DSDT**, search for:
         }
     }
     ```
-- Once the Power and/or Sleep button is present, pressing `Ctrl` and holding the power button for 2 seconds, the shitdown menu should appear:<br>![](/Users/5t33z0/Desktop/powermenu.png)
+- Once the Power and/or Sleep button device is present, pressing `Ctrl` and holding the `power` button for 2 seconds, the shutdown menu should appear:<br>![powermenu](https://github.com/user-attachments/assets/8c325335-d750-43cd-a32e-0a35094d2349)
 
 > [!CAUTION]
 > 
