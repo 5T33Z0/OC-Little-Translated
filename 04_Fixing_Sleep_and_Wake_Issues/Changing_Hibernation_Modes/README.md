@@ -302,10 +302,14 @@ Here's a visualization of how these timers working:
 
 ## More `pmset` parameters
 
-Listed below are power managements settings you can configure in Terminal via **`pmset`**.
+The available pmset parameters depend on the Mac model/seleced SMBIOS. To list a system's pmset capabilities, enter the following command in Terminal:
 
- Setting       | Description | Value |
----------------|-------------|:-------:|
+`pmset -g cap`
+
+Listed below are power managements settings you can configure in Terminal via **`pmset`**:
+
+Setting       | Description | Value |
+--------------|-------------|:-------:|
 `displaysleep`| Display sleep timer; replaces `dim` argument in 10.4.| Minutes, or 0 to disable 
 `disksleep`   | Disk spindown timer; replaces `spindown` argument in 10.4.| Minutes, or `0` to disable 
 `sleep`       | System sleep timer.| Minutes, or `0` to disable 
