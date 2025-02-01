@@ -43,14 +43,14 @@ PC Power States (S-States) define different levels of system power consumption a
 
 macOS (Lion and newer) supports three different modes of hibernation: `hibernatemode 0`, `hibernatemode 3` and `hibernatemode 25`. The differences betweeen these modes are as follows:
 
-| **Mode** | **hibernatemode 0 (Standard Sleep)** | **hibernatemode 3 (Safe Sleep)** | **hibernatemode 25 (Deep Hibernation)**
-|--------|---------------|---------------|------------------------------|
+| **Mode** | **`hibernatemode 0`** <br>(Standard Sleep) | **`hibernatemode 3`** <br>(Safe Sleep) | **`hibernatemode 25`** <br> (Deep Hibernation)
+|----------|---------------|---------------|------------------------------|
 | **RAM Powered?**   | ✅ Yes, stays powered | ✅ Yes, stays powered | ❌ No, completely powered off |
-| **Writes to Disk?** | ❌ No | ✅ Yes, saves RAM contents to `/var/vm/sleepimage` | ✅ Yes, saves RAM contents to `/var/vm/sleepimage` |
+| **Writes to Disk?** | ❌ No | ✅ Yes, saves RAM contents to <br>`/var/vm/sleepimage` | ✅ Yes, saves RAM contents to <br>`/var/vm/sleepimage` |
 | **Power Consumption** | 🔋 **Higher** (RAM stays active) | 🔋 **Lower** (RAM powered, but backup exists) | 📴 **Zero** (RAM completely off) |
 | **Wake-up Speed** | ⚡ **Instant** | ⚡ **Fast** (RAM is active) | 🐌 **Slow** (RAM must be restored from disk) |
-| **Used on** | ⚡ Desktops (iMac, Mac Pro) | 🖥 MacBooks (default) | 🖥 Macs without a battery, or when battery is **very low** |
-| **When Activated?** | - Standard **sleep mode** - **No data saved to disk** | - Normal sleep mode - **Backs up RAM** but keeps it powered | - System writes RAM to disk - **RAM is fully powered off** |
+| **Used on** | :desktop_computer: Desktops (iMac, Mac Pro) | :computer: MacBooks (default) | :computer: MacBooks with **very low** Battery, conneted to AC power|
+| **When Activated?** | Standard **sleep mode** &rarr; **No data saved to disk** | Normal sleep mode &rarr; **Backs up RAM** but keeps it powered | System writes RAM to disk &rarr; **RAM is fully powered off** |
 | **Risk of Data Loss?** | ⚠️ **Yes, if power is lost** | ❌ **No, backup exists** | ❌ **No, full restore possible** |
 
 ### Mode Explanations
@@ -69,7 +69,7 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
    - RAM contents are **written to disk, and RAM is completely powered off**.
    - Uses **zero battery**, similar to **Windows hibernation**.
    - Wake-up is **slow**, since RAM must be restored from disk.
-   - Used when **battery is critically low** or **on Hackintosh desktops**.
+   - Used when **battery is critically low**.
 
 ### Changing the hibernation mode
 
@@ -124,7 +124,7 @@ This mode (as well as hibernatemode 25) does require [**HibernationFixup**](http
 - `WhenBatteryIsAtWarnLevel` (16)
 - `WhenBatteryAtCriticalLevel` (32)
 
-For more settings, please refer to the boot-args settings of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
+For more settings, please refer to the boot-args settings of the [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
 
 #### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
 For portables as well. Mode 25 is only settable via `pmset`. Same as mode 3, but will remove power to memory. The system will restore from disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting. Hibernatemode 25 will always go directly from `S0` to `S4`.
@@ -144,7 +144,7 @@ This mode (as well as hibernatemode 3) does require [**HibernationFixup**](https
 - `WhenBatteryIsAtWarnLevel` (16)
 - `WhenBatteryAtCriticalLevel` (32)
 
-For more settings, please refer to the boot-args section of the  [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
+For more settings, please refer to the boot-args section of the [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
 
 ### Which Mode Should You Use?
 - **MacBook users** → Stick with **hibernatemode 3** (default).
