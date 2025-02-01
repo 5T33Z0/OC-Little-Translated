@@ -73,7 +73,7 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 
 ## Prerequisites for enabling Hibernation on Hackintosh systems
 
-For hibernation to work successfully, there are a few prerequisites that *must* be met first:
+For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
 
 - **Config adjustments**:
 
