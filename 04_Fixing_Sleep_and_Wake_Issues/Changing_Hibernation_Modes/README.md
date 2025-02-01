@@ -5,12 +5,12 @@
 - [Understanding Power States](#understanding-power-states)
 - [Hibernation modes in macOS](#hibernation-modes-in-macos)
   - [Mode Explanations](#mode-explanations)
-  - [Changing the hibernation mode](#changing-the-hibernation-mode)
-    - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
-    - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
-    - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
-  - [Which Mode Should You Use?](#which-mode-should-you-use)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
+- [Changing the hibernation mode](#changing-the-hibernation-mode)
+  - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
+  - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
+  - [hibernatemode 25: Suspend to disk and RAM (reduced power consumption)](#hibernatemode-25-suspend-to-disk-and-ram-reduced-power-consumption)
+  - [Which Mode Should You Use?](#which-mode-should-you-use)
 - [Configuring Hibernation](#configuring-hibernation)
   - [About `autopoweroff`](#about-autopoweroff)
   - [Understanding Power State Transitions and Timers](#understanding-power-state-transitions-and-timers)
@@ -54,24 +54,47 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 | **Risk of Data Loss?** | ⚠️ **Yes, if power is lost** | ❌ **No, backup exists** | ❌ **No, full restore possible** |
 
 ### Mode Explanations
-1. **`hibernatemode 0` (Standard Sleep - No Hibernation)**
+1. **`hibernatemode 0` (Standard Sleep – No Hibernation)**
    - RAM stays powered.
    - Nothing is written to disk.
    - **Fastest wake-up**, but if power is lost, all unsaved data is gone.
    - **Used by desktop Macs** like iMacs and Mac Pros.
 
-2. **`hibernatemode 3` (Safe Sleep - Default for MacBooks)**
+2. **`hibernatemode 3` (Safe Sleep – Default for MacBooks)**
    - RAM stays powered, **but** the system also **backs up RAM contents to disk**.
    - Allows **quick wake-ups**, and if the battery dies, macOS can **restore from disk**.
    - **Used on MacBooks** to balance speed and safety.
 
-3. **`hibernatemode 25` (True Hibernation - No Power Use)**
+3. **`hibernatemode 25` (True Hibernation – No Power Use)**
    - RAM contents are **written to disk, and RAM is completely powered off**.
    - Uses **zero battery**, similar to **Windows hibernation**.
    - Wake-up is **slow**, since RAM must be restored from disk.
    - Used when **battery is critically low**.
 
-### Changing the hibernation mode
+## Prerequisites for enabling Hibernation on Hackintosh systems
+
+For hibernation to work successfully, there are a few prerequisites that *must* be met first:
+
+- **Config adjustments**:
+
+  - Storage must be detected as `built-in` or `internal` (verify in System Profiler or Hackintool). If the SSD/NVMe is not recognized as built-in, get the PCI device path of the SATA/NVMe Controller from Hackintool, open the `config.plist` and add the DeviceProperty `built-in` with a value of `01000000` (Data) for it.
+ 
+  - Many devices will likely need to set `UEFI/ReservedMemory` for region `0x8B000` (size `0x1000`) to fix black screens on wake on Intel laptops. This is an entry that comes as part of the `sample.plist` for OpenCore. No clue with AMD/Intel Desktops.
+  
+  - Block writes to RTC regions `0x80`-`0xAB` and possibly `0xB0`-`0xB4` (refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup)).
+  
+  - By blocking RTC writes to those regions, you prevent hibernation data being written to the RTC. Make sure to allow OC to read hibernation data from NVRAM instead (`Misc/Boot/HibernateMode` = `Auto`) and that you have HibernationFixup so that the data does get written into NVRAM.
+ 
+  - Changing `Misc/Boot/HibernationSkipsPicker` to `true` in the `config.plist` is highly recommended. That way, you do not inadvertently boot into another OS and change the environment/whatever assumptions the hibernated OS makes. It's generally a really dumb idea to change BIOS settings in the middle of hibernation so please don't.
+
+- **Required Kexts**:
+  
+  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
+  
+  - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions. If your system crashes when when trying to restore from hibernation, then you definitely need this kext and additional settings to fix RTC memory regions.
+
+
+## Changing the hibernation mode
 
 > [!CAUTION]
 > 
@@ -85,7 +108,7 @@ To check the currently selected Hibernation mode, enter:
 pmset -g | grep hibernatemode
 ```
 
-#### hibernatemode 0: Suspend to RAM only
+### hibernatemode 0: Suspend to RAM only
 Default for desktops. The system will not back memory up to persistent storage. The system must wake from the contents of memory; the system will lose context on power loss. This is, historically, plain old sleep. 
 
 To enable hibernatemode 0, enter in Terminal:
@@ -105,7 +128,7 @@ sudo chflags uchg /var/vm/sleepimage
 
 This will delete the sleepimage and create a new, write-protected one.
 
-#### hibernatemode 3: Suspend to disk and RAM
+### hibernatemode 3: Suspend to disk and RAM
 Default on portables. Hibernation mode 3 will transition from `S3` to `S4` depending on the timeout and battery thresholds set in `pmset` (mor on this laster).  The system will store a copy of memory to persistent storage (the disk), and will power memory during sleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
 
 Benefit of this mode is that is does quicken the wakeup time when the device is being used quickly while still providing the benefits of hibernation when the device is not in use overnight. 
@@ -126,7 +149,7 @@ This mode (as well as hibernatemode 25) does require [**HibernationFixup**](http
 
 For more settings, please refer to the boot-args settings of the [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) repo!
 
-#### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
+### hibernatemode 25: Suspend to disk and RAM (reduced power consumption)
 For portables as well. Mode 25 is only settable via `pmset`. Same as mode 3, but will remove power to memory. The system will restore from disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you should use this setting. Hibernatemode 25 will always go directly from `S0` to `S4`.
 
 When using this mode, entering the hibernation state takes a bit longer than using mode 0. Please note that the hibernate file may only point to a file located on the root volume.
@@ -151,28 +174,6 @@ For more settings, please refer to the boot-args section of the [**HibernationFi
 - **Hackintosh laptops** → **hibernatemode 3** (fast wake-ups) or **hibernatemode 25** (true hibernation).
 - **Hackintosh desktops** → **hibernatemode 0** (fast sleep) or **hibernatemode 25** (power-saving).
 - **Long-term sleep?** → Use **hibernatemode 25** to **save power**.
-
-## Prerequisites for enabling Hibernation on Hackintosh systems
-
-For hibernation to work successfully, there are a few prerequisites that *must* be met first:
-
-- **Config adjustments**:
-
-  - Storage must be detected as `built-in` or `internal` (verify in System Profiler or Hackintool). If the SSD/NVMe is not recognized as built-in, get the PCI device path of the SATA/NVMe Controller from Hackintool, open the `config.plist` and add the DeviceProperty `built-in` with a value of `01000000` (Data) for it.
- 
-  - Many devices will likely need to set `UEFI/ReservedMemory` for region `0x8B000` (size `0x1000`) to fix black screens on wake on Intel laptops. This is an entry that comes as part of the `sample.plist` for OpenCore. No clue with AMD/Intel Desktops.
-  
-  - Block writes to RTC regions `0x80`-`0xAB` and possibly `0xB0`-`0xB4` (refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup)).
-  
-  - By blocking RTC writes to those regions, you prevent hibernation data being written to the RTC. Make sure to allow OC to read hibernation data from NVRAM instead (`Misc/Boot/HibernateMode` = `Auto`) and that you have HibernationFixup so that the data does get written into NVRAM.
- 
-  - Changing `Misc/Boot/HibernationSkipsPicker` to `true` in the `config.plist` is highly recommended. That way, you do not inadvertently boot into another OS and change the environment/whatever assumptions the hibernated OS makes. It's generally a really dumb idea to change BIOS settings in the middle of hibernation so please don't.
-
-- **Required Kexts**:
-  
-  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
-  
-  - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions. If your system crashes when when trying to restore from hibernation, then you definitely need this kext and additional settings to fix RTC memory regions.
 
 ## Configuring Hibernation
 
