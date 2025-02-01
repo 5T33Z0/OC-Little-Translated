@@ -1,6 +1,6 @@
-# Fixing Sleep and Wake issues
+# Fixing Sleep/Wake issues and enabling Hibernation
 
-This section contains fixes for resolving common issues related to Sleep and Wake, occurring especially on but not limited to Laptops. The following areas are covered:
+This section contains fixes for resolving common issues related to Sleep, Wake and Hibernation occurring especially on but not limited to Laptops. The following areas are covered:
 
 ## [`PTSWAKTTS`](/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix/README.md): Comprehensive Sleep and Wake fix
 
@@ -9,6 +9,7 @@ This SSDT is the center piece for fixing most sleep and wake issues and is used 
 ### How the patch works
 
 - The methods `_PTS` (Prepare To Sleep), `_Wak` (Wake) and `_TTS` (Transition to State) are renamed to something else via binary renames. 
+
 - ***SSDT-PTSWAKTTS*** re-defines the original methods and if any of them  are triggered (either automatically by the sleep timer, by pressing the sleep/power button or via the  Menu), it fetches these events and takes care of sleep/wake (in conjunction with additional SSDTs).
 
 > [!NOTE]
@@ -27,13 +28,13 @@ This patch is for fixing instant wake issues, where the system instantly wakes u
 
 These patches are used for fixing sleep and standby issues on more recent Laptops utilizing **Always on always connected** (`AOAC`) technology.
 
+## Enabling and Configuring [Hibernation](/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes/README.md)
+
+Guide for enabling/fixing Hibernation on Hackintosh systems.
+
 ## Configuring [`ASPM`](/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode/README.md)
 
 **ASPM** (Active State Power Management), is a power link management scheme supported at system level. Under ASPM management, **PCI devices** attempt to enter power saving mode when they are idle. You can modify the Active Power State of peripherals like Bluetooth/WiFi or other devices if they interrupt sleep.
-
-## Changing [Hibernation Modes](/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes/README.md)
-
-Guide for enabling/fixing Hibernation.
 
 ## Notes and further Resources
 - Before applying any of these hotfixes, make sure that you are not using generic ACPI tables from Dortania or the OpenCore Package as provided, since they often contain additional devices, device names and paths to cover various scenarios at once (e.g. `SSDT-PLUG`). Instead, tailor them to your system's specific requirements or generate your own using [**SSDTTime**](https://github.com/corpnewt/SSDTTime). This alone can prevent sleep and wake issues.

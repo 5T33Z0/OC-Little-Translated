@@ -1,11 +1,14 @@
-# Modifying Power Management Settings
+# Enabling Hibernation on Hackintosh systems
 
 **INDEX**
 
+- [About](#about)
 - [Understanding Power States](#understanding-power-states)
 - [Hibernation modes in macOS](#hibernation-modes-in-macos)
   - [Mode Explanations](#mode-explanations)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
+  - [**Config Adjustments**](#config-adjustments)
+  - [**Required Kexts**](#required-kexts)
 - [Changing the hibernation mode](#changing-the-hibernation-mode)
   - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
   - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
@@ -18,6 +21,22 @@
   - [Testing Hibernation](#testing-hibernation)
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
+
+## About  
+
+Hibernation on macOS is designed to save system state to disk, allowing the machine to power off completely while preserving open applications and data. However, on Hackintoshes, getting hibernation to work reliably can be challenging due to differences in hardware, firmware, and power management implementations.
+
+By default, macOS expects Apple hardware with native power management, including properly implemented **RTC memory**, **NVRAM storage**, and **device wake signals**. When these features are missing or misconfigured on a Hackintosh, issues like **black screens on wake, failed restores, or system crashes** can occur.  
+
+This guide covers essential adjustments to enable stable hibernation on Hackintoshes, including:  
+
+- Configuring **HibernateMode** correctly  
+- Ensuring storage devices are recognized as **internal**  
+- Blocking problematic **RTC memory writes**  
+- Redirecting hibernation data to **NVRAM**  
+- Applying required **kexts and patches**  
+
+By following these steps, you can achieve a functional hibernation setup, allowing your Hackintosh to resume from sleep seamlessly—just like a real Mac.
 
 ## Understanding Power States
 
@@ -75,24 +94,32 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 
 For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
 
-- **Config adjustments**:
+### **Config Adjustments**  
 
-  - Storage must be detected as `built-in` or `internal` (verify in System Profiler or Hackintool). If the SSD/NVMe is not recognized as built-in, get the PCI device path of the SATA/NVMe Controller from Hackintool, open the `config.plist` and add the DeviceProperty `built-in` with a value of `01000000` (Data) for it.
- 
-  - Many devices will likely need to set `UEFI/ReservedMemory` for region `0x8B000` (size `0x1000`) to fix black screens on wake on Intel laptops. This is an entry that comes as part of the `sample.plist` for OpenCore. No clue with AMD/Intel Desktops.
-  
-  - Block writes to RTC regions `0x80`-`0xAB` and possibly `0xB0`-`0xB4` (refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup)).
-  
-  - By blocking RTC writes to those regions, you prevent hibernation data being written to the RTC. Make sure to allow OC to read hibernation data from NVRAM instead (`Misc/Boot/HibernateMode` = `Auto`) and that you have HibernationFixup so that the data does get written into NVRAM.
- 
-  - Changing `Misc/Boot/HibernationSkipsPicker` to `true` in the `config.plist` is highly recommended. That way, you do not inadvertently boot into another OS and change the environment/whatever assumptions the hibernated OS makes. It's generally a really dumb idea to change BIOS settings in the middle of hibernation so please don't.
+- **Storage Detection:**  
+  Ensure that your storage is recognized as `internal`. Check this in **System Profiler** or **Hackintool** (`System/Peripherals`). If the SSD/NVMe appears as an external drive, retrieve the **PCI device path** of the **SATA/NVMe controller** from Hackintool. Then, edit `config.plist` and add the **DeviceProperty** `built-in` with a **Data** value of `01000000`. Save the config, reboot, and verify again.  
 
-- **Required Kexts**:
-  
-  - [**HibernationFixup**](https://github.com/acidanthera/HibernationFixup) kext is required when changing HibernationMode to anything but `0`
-  
-  - [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup) in order to block writes to specific RTC regions. If your system crashes when when trying to restore from hibernation, then you definitely need this kext and additional settings to fix RTC memory regions.
+- **Fix Black Screen on Wake (Intel Laptops):**  
+  Some Intel laptops require a patch to fix black screen issues after waking from hibernation. This patch can be found in `sample.plist` (included with OpenCore) under **`UEFI/ReservedMemory`** (e.g., *"Fix black screen on wake from hibernation for Lenovo ThinkPad T490"*).  
 
+- **Blocking RTC Writes:**  
+  Prevent write operations to RTC memory regions `0x80`-`0xAB` (and possibly `0xB0`-`0xB4`). For details, refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup).  
+
+  - Blocking these RTC writes prevents hibernation data from being stored in RTC. Instead, OpenCore should read hibernation data from **NVRAM** (`Misc/Boot/HibernateMode` = `Auto` or `NVRAM`).  
+  - This requires **HibernationFixup.kext**, ensuring that hibernation data is correctly redirected to NVRAM.  
+
+- **Skip Boot Picker on Wake:**  
+  Set **`Misc/Boot/HibernationSkipsPicker`** to `true` in `config.plist`. This prevents booting into another OS after waking from hibernation, which could disrupt the hibernated system state.  
+  - **Important:** Avoid making BIOS/UEFI changes while the system is in hibernation, as this can cause unpredictable issues.  
+
+### **Required Kexts**  
+
+- **[HibernationFixup.kext](https://github.com/acidanthera/HibernationFixup)**  
+  - Required if `HibernateMode` is set to anything other than `0`.  
+
+- **[RTCMemoryFixup.kext](https://github.com/acidanthera/RTCMemoryFixup)**  
+  - Needed to block RTC memory writes.  
+  - If your system crashes when restoring from hibernation, this kext and additional RTC memory region fixes are required.  
 
 ## Changing the hibernation mode
 
