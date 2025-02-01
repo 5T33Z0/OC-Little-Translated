@@ -211,7 +211,7 @@ The configuration primarily involves setting timers that control state transitio
 **The following parameters have to be set**:
 
 Argument | Description 
----------|-------------
+---------:|-------------
 `sleep` | System sleep timer (value in minutes, or `0` to disable). Time in minutes before the system enters sleep mode (not hibernation). This is the initial entry into `S3` state that triggers hibernation after all the delay timers have counted down.
 `standby` | Causes kernel power management to automatically hibernate a machine after it has slept for a specified time period. This saves power while asleep. This setting defaults to ON for supported hardware. The setting standby will be visible in `pmset -g` if the feature is supported on this machine. Default: `ON` for supported hardware. 
 `standbydelayhigh` | Time in seconds before hibernation when battery is *above* the `highstandbythreshold`.
