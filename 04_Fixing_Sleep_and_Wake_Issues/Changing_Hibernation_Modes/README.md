@@ -7,8 +7,8 @@
 - [Hibernation modes in macOS](#hibernation-modes-in-macos)
   - [Mode Explanations](#mode-explanations)
 - [Prerequisites for enabling Hibernation on Hackintosh systems](#prerequisites-for-enabling-hibernation-on-hackintosh-systems)
-  - [**Config Adjustments**](#config-adjustments)
-  - [**Required Kexts**](#required-kexts)
+  - [Config Adjustments](#config-adjustments)
+  - [Required Kexts](#required-kexts)
 - [Changing the hibernation mode](#changing-the-hibernation-mode)
   - [hibernatemode 0: Suspend to RAM only](#hibernatemode-0-suspend-to-ram-only)
   - [hibernatemode 3: Suspend to disk and RAM](#hibernatemode-3-suspend-to-disk-and-ram)
@@ -94,7 +94,7 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 
 For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
 
-### **Config Adjustments**  
+### Config Adjustments
 
 - **Storage Detection:**  
   Ensure that your storage is recognized as `internal`. Check this in **System Profiler** or **Hackintool** (`System/Peripherals`). If the SSD/NVMe appears as an external drive, retrieve the **PCI device path** of the **SATA/NVMe controller** from Hackintool. Then, edit `config.plist` and add the **DeviceProperty** `built-in` with a **Data** value of `01000000`. Save the config, reboot, and verify again.  
@@ -112,7 +112,7 @@ For hibernation to work successfully on Hackintoshes, there are a few prerequisi
   Set **`Misc/Boot/HibernationSkipsPicker`** to `true` in `config.plist`. This prevents booting into another OS after waking from hibernation, which could disrupt the hibernated system state.  
   - **Important:** Avoid making BIOS/UEFI changes while the system is in hibernation, as this can cause unpredictable issues.  
 
-### **Required Kexts**  
+### Required Kexts
 
 - **[HibernationFixup.kext](https://github.com/acidanthera/HibernationFixup)**  
   - Required if `HibernateMode` is set to anything other than `0`.  
