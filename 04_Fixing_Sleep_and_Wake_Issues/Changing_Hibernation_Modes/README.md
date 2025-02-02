@@ -368,7 +368,8 @@ Setting       | Description | Value |
 
 ## Notes and further Resources
 - Thanks to Avery Black (`1Rvenger1`) for additional input about Hibernation!
-- If you feel uncomfortable using Terminal, you can also use Hackintool to check and change the `hibernatemode`. Simply click on the "Power" Tab and there you find all the currently set parameters.
+- If you feel uncomfortable using Terminal, you can also use Hackintool ("Power" tab) to check and change the `hibernatemode` and pmset paramters.
 - For a more in-depth look into the subject matter, I recommend this article: [Power Management in detail using pmset](https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/)
 - For Sleep and wake issue in general, refer to [this article](https://eclecticlight.co/2019/05/09/tackling-sleep-and-wake-problems/)
+- For details fixing RTC memory issues, refer to [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#fixing-rtc-write-issues)
 - [Sleepwatcher](https://www.bernhard-baehr.de/) by Bernhard Baehr. A command line tool for prohibiting the system from waking involuntarily.
