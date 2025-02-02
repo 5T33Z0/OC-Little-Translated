@@ -112,6 +112,9 @@ For hibernation to work successfully on Hackintoshes, there are a few prerequisi
   Set **`Misc/Boot/HibernationSkipsPicker`** to `true` in `config.plist`. This prevents booting into another OS after waking from hibernation, which could disrupt the hibernated system state.  
   - **Important:** Avoid making BIOS/UEFI changes while the system is in hibernation, as this can cause unpredictable issues.  
 
+- **Disable RTC Memory checksum** (optional):  
+  Enable Kernel Quirk `DisableRtcChecksum` if you receive a "RTC memory checksum bad" error after waking from Hibernation (after `autopoweroff`). But if the system's working state won't be restored correctly, you still haven't fixed hibernation. For example: on my Lenovo T490, the "RTC memory checksum bad" disappeared after enabling this quirk, but the system would freeze shortly after restoring it from the sleepimage, showing a scrambled desktop wallpaper.
+
 ### Required Kexts
 
 - **[HibernationFixup.kext](https://github.com/acidanthera/HibernationFixup)**  
