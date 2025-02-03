@@ -19,6 +19,10 @@
   - [Understanding Power State Transitions and Timers](#understanding-power-state-transitions-and-timers)
   - [Getting the currently set parameters](#getting-the-currently-set-parameters)
   - [Testing Hibernation](#testing-hibernation)
+- [Testing RTC Memory for Issues](#testing-rtc-memory-for-issues)
+  - [Step 1: Identifying the Problematic Memory Bank](#step-1-identifying-the-problematic-memory-bank)
+  - [Step 2: Testing the Second Memory Bank](#step-2-testing-the-second-memory-bank)
+  - [Step 3: Narrowing Down the Problematic Offsets](#step-3-narrowing-down-the-problematic-offsets)
 - [More `pmset` parameters](#more-pmset-parameters)
 - [Notes and further Resources](#notes-and-further-resources)
 
@@ -331,12 +335,57 @@ Here's a visualization of how these timers working:
 
 5. Once hibernation is working as expected, change the timer values above to more reasonable values that make sense for your system/working habits.
 
+If restoring from the sleepimage fails, you need to address issues with RTC Memory, add offsets to it and run the test again.
+
 > [!TIP]
 >
 > If you want to start over, enter the following command in Terminal to restore the default pmset values:
+> 
 > ```bash
 > sudo pmset restoredefaults
 > ```
+
+## Testing RTC Memory for Issues
+
+The RTC (Real-Time Clock) memory can sometimes cause system instability, particularly after sleep, wake, or reboot cycles. This guide outlines a systematic approach to identifying and isolating problematic memory offsets using exclusion boot arguments. By progressively narrowing down the affected range, you can determine which part of the RTC memory is causing issues and take appropriate action.
+
+The offsets 00-0D (0-13) are non-critical and do not need to be tested. The primary goal is to determine which memory bank is problematic. The first memory bank covers the range 00-7F (0-127), while the second memory bank spans 80-FF (128-256). In the worst-case scenario, both could have issues.
+
+### Step 1: Identifying the Problematic Memory Bank
+To start, we exclude offsets 0D-7F using the boot argument:
+
+```
+rtcfx_exclude=0D-7F
+```
+
+Then, test by putting the system to sleep, waking it up, and rebooting.
+
+- If the issue is resolved, the problem lies within the excluded range (0D-7F). In this case, proceed with finer testing to pinpoint the exact problematic offsets within this range.
+- If the issue persists, then the problem might be in the second memory bank (80-FF). Proceed to Step 2.
+
+### Step 2: Testing the Second Memory Bank
+
+Exclude the second memory bank with the boot argument:
+
+```
+rtcfx_exclude=80-FF
+```
+
+Perform sleep, wake, and reboot tests again.
+
+- If the issue is resolved, then the problem lies within this range (80-FF). Now, proceed to further isolate the exact offsets within this range.
+
+### Step 3: Narrowing Down the Problematic Offsets
+To avoid testing each offset individually, use a binary search approach by progressively halving the test range. For example:
+
+```
+rtcfx_exclude=80-C0
+```
+
+- If the issue disappears, then the problem lies within 80-C0 (128-192), so continue testing this range by further halving it.
+- If the issue persists, then the problematic offsets are in C0-FF (192-256). Focus testing on this range.
+
+Continue this process until the specific problematic offset (or offset range) is found—or until you run out of patience.
 
 ## More `pmset` parameters
 
