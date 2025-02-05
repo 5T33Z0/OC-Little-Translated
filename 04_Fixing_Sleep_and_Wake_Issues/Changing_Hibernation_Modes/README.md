@@ -286,6 +286,10 @@ Here's a visualization of how these timers working:
      - **Standby (`standby = 1`)**: After a specified delay (`standbydelay`), the system transitions from sleep to a hibernation-like state to save more power.
      - **Autopoweroff (`autopoweroff = 1`)**: After a ***further*** delay (`autopoweroffdelay`), the system can power down more deeply, saving even more energy.
 
+> [!NOTE]
+>
+> Autopoweroff (and the corresponding delay timers) is not available on all systems. In this case, the system will enter deep hibernation directly when hibernatemode 25 is used.  
+
 ### Getting the currently set parameters
 
 - First, you have to check the current pm settings. To do so, you can enter `pmset -g` in Terminal (or use Hackintool). This example is from my Lenovo T530:<br>![pmsetg](https://github.com/user-attachments/assets/72042d91-41bd-4d37-ad6a-c66b55e92cd3)
