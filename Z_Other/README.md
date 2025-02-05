@@ -2,6 +2,7 @@
 A lose collection of links to guides, fixes, news and blog articles. Feel free to submit links.
 
 - [Apple Silicon Guide](https://github.com/mikeroyal/Apple-Silicon-Guide)
+- [Apple M1 CPU Microarchitecture](https://dougallj.github.io/applecpu/firestorm.html) 
 - [Features removed from macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)
 - [Enabling VoodooHDA in Big Sur 11.3+](https://www.insanelymac.com/forum/topic/314406-voodoohda-299/?do=findComment&comment=2756841)
 - [Running Snow Leopard in VirtualBox](https://www.youtube.com/watch?v=b2fgOPvkmH8)
