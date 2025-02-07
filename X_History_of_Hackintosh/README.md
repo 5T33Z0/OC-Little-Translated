@@ -171,3 +171,7 @@ This timeline shows that every major version of macOS in the past 6 years will b
 
 ## Credits
 Original Blog Post published by [Sukka](https://blog.skk.moe/post/history-osx86/), 03-09-2020. Translated from Chinese using DeepL and Google Translate. Some sections were redacted/rephrased for better legibility.
+
+## Links
+
+- Interesting YT video about Mac Clones: [How Motorola helped almost BANKRUPT Apple!](https://www.youtube.com/watch?v=p_MZXra9F3w) by *This Does Not Compute*
