@@ -63,6 +63,7 @@
 	- [Search for firmware used by devices](#search-for-firmware-used-by-devices)
 - [Troubleshooting](#troubleshooting)
 	- [Show log of last boot](#show-log-of-last-boot)
+	- [Delete Logs](#delete-logs)
 	- [Search for terms in last boot log](#search-for-terms-in-last-boot-log)
 	- [Check OpenCore version](#check-opencore-version)
 	- [Display currently used Board-ID](#display-currently-used-board-id)
@@ -521,6 +522,14 @@ sudo dmesg|grep -i firmware
 
 ```shell
 log show --last boot
+```
+
+### Delete Logs
+
+I had an issue where an error screen was shown repeatedly after rebooting which would not go away:
+
+```shell
+sudo rm -rf /Library/Logs/DiagnosticReports/*
 ```
 
 ### Search for terms in last boot log
