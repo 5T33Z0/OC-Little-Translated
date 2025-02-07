@@ -174,4 +174,4 @@ Original Blog Post published by [Sukka](https://blog.skk.moe/post/history-osx86/
 
 ## Links
 
-- Interesting YT video about Mac Clones: [How Motorola helped almost BANKRUPT Apple!](https://www.youtube.com/watch?v=p_MZXra9F3w) by *This Does Not Compute*
+- Interesting YT video about Mac Clones: [How Motorola helped almost BANKRUPT Apple!](https://www.youtube.com/watch?v=p_MZXra9F3w) by *q*
