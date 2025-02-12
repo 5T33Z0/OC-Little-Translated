@@ -429,3 +429,4 @@ Setting       | Description | Value |
 - For Sleep and wake issue in general, refer to [this article](https://eclecticlight.co/2019/05/09/tackling-sleep-and-wake-problems/)
 - For details fixing RTC memory issues, refer to [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#fixing-rtc-write-issues)
 - [Sleepwatcher](https://www.bernhard-baehr.de/) by Bernhard Baehr. A command line tool for prohibiting the system from waking involuntarily.
+- [Difference between autopoweroff and standby in pmset](https://apple.stackexchange.com/questions/113954/difference-between-autopoweroff-and-standby-in-pmset)
