@@ -16,7 +16,7 @@
 		- [Display Darwin Kernel Version](#display-darwin-kernel-version)
 	- [Display Model Identifier (SMBIOS)](#display-model-identifier-smbios)
 - [System Behavior](#system-behavior)
-	- [Disable Gatekeeper (\< macOS 15.0 beta 3)](#disable-gatekeeper--macos-150-beta-3)
+	- [Disable Gatekeeper](#disable-gatekeeper)
 	- [Disable DMG verification](#disable-dmg-verification)
 	- [Change Update Seed to Developer (≤ macOS 12 only)](#change-update-seed-to-developer--macos-12-only)
 	- [Reset all Privacy Settings](#reset-all-privacy-settings)
@@ -167,7 +167,7 @@ system_profiler SPHardwareDataType | grep 'Model Identifier'
 
 ## System Behavior
 
-### Disable Gatekeeper (< macOS 15.0 beta 3)
+### Disable Gatekeeper
 
 ```shell
 sudo spctl --master-disable
@@ -175,7 +175,7 @@ sudo spctl --master-disable
 
 > [!IMPORTANT]
 >
-> In macOS Sequoia, Gatekeeper can no longer be disabled via Terminal ([new method](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Guides/Disable_Gatekeeper.md))
+> In macOS Sequoia, disbaling Gatekeeper requires you to confirm the changes in System Settings &rarr; Gatekeeper &rarr; select "Allow apps from 'Everywhere'"
 
 ### Disable DMG verification
 
