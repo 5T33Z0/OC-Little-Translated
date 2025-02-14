@@ -175,7 +175,7 @@ sudo spctl --master-disable
 
 > [!IMPORTANT]
 >
-> In macOS Sequoia, disbaling Gatekeeper requires you to confirm the changes in System Settings &rarr; Gatekeeper &rarr; select "Allow apps from 'Everywhere'"
+> In macOS Sequoia, disabling Gatekeeper requires you to confirm the changes in System Settings &rarr; Gatekeeper &rarr; select "Allow apps from 'Everywhere'"
 
 ### Disable DMG verification
 
