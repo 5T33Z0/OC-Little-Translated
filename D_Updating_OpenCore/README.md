@@ -12,7 +12,7 @@
 - [4. Updating/migrating the `config.plist`](#4-updatingmigrating-the-configplist)
 - [5. Updating OpenCore Files, Drivers, Kexts and Resources](#5-updating-opencore-files-drivers-kexts-and-resources)
 	- [Updating Kexts to Nightly Builds](#updating-kexts-to-nightly-builds)
-- [5. The Sync Window: Release Mode vs. Dev Mode](#5-the-sync-window-release-mode-vs-dev-mode)
+- [6. The Sync Window: Release Mode vs. Dev Mode](#6-the-sync-window-release-mode-vs-dev-mode)
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Switching between Release and Debug builds](#switching-between-release-and-debug-builds)
@@ -125,7 +125,7 @@ The latest update of OCAT introduced updating Kexts to nightly builds from Dorta
 
 ![kextsdev](https://user-images.githubusercontent.com/76865553/174356473-e35e2625-0286-40d7-94c3-1e4d9ea2179e.png)
 
-## 5. The Sync Window: Release Mode vs. Dev Mode
+## 6. The Sync Window: Release Mode vs. Dev Mode
 
 As mentioned previously, the Sync Window looks different depending on the selected mode.
 
@@ -139,7 +139,7 @@ Once the OpenCore Package has been downloaded and integrated into the database, 
 ### Dev Mode
 For downloading and syncing the latest **DEV** versions, you have to select `OpenCore DEV` in the "Edit" menu. This results in a slightly different looking Sync window. Here, you can select and change the repository from where to get the files from. If the default repo (Dortania) is not working, add https://github.com/bugprogrammer/HackinPlugins to the "OpenCore development version upgrade source" field and click "Get OpenCore".
 
-![devrepo](https://user-images.githubusercontent.com/76865553/177286293-1fbbf191-3af0-4751-8c84-5c878b58fd51.png)
+![OC_DevMode](https://github.com/user-attachments/assets/6bf4c801-2beb-481f-ba21-fa516b28d077)
 
 Alternatively, you can click on "Import" to open a downloaded `.zip` containing OpenCore files (for example the builds listed on [Dortania's Website](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true))
 
