@@ -1,5 +1,5 @@
 # Updating OpenCore and Kexts with OCAT
-|![noschemafor](https://user-images.githubusercontent.com/76865553/180214676-455fd9d9-b7eb-4dbf-90c9-cd3225ebe2bc.jpeg)<br>Say good bye to OpenCore config errors like theese!
+|![noschemafor](https://user-images.githubusercontent.com/76865553/180214676-455fd9d9-b7eb-4dbf-90c9-cd3225ebe2bc.jpeg)<br>_Say good bye to OpenCore config errors like theese!_
 |:--------------|
 
 **TABLE of CONTENTS**
