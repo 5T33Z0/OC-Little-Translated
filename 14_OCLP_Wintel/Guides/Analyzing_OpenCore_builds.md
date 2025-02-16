@@ -11,18 +11,22 @@ This might be useful for Hackintosh users who want to update their OpenCore Conf
 ## Instructions
 Run OpenCore Legacy Patcher and follow the instructions to build OpenCore folders for various SMBIOSes.
 
-1. Open Settings: <br>![](/Users/5t33z0/Desktop/SCR-20250216-peqi.png)
-2. Select an SMBIOS of your choice from the "Target Model" dropdown menu (in this example it's for a `MacBook10,1`):<br>![](/Users/5t33z0/Desktop/SCR-20250216-pffn.png)
-3. Click on "Return" to return to the main menu:<br>![](/Users/5t33z0/Desktop/SCR-20250216-pfua.png)
-4. Back in the main window, click on "Build and Install OpenCore"<br>![](/Users/5t33z0/Desktop/SCR-20250216-phsn.png)
-5. This will generate an OpenCore EFI folder with the required files and config.plist for the selected Mac Model. Once that's done, click on "View build log" – **DON'T** click on "Install to disk": <br>![](/Users/5t33z0/Desktop/SCR-20250216-piid.png)
-6. Select the the path at the bottom of the build log and copy it to the clipboard (CMD+C)![](/Users/5t33z0/Desktop/SCR-20250216-pizu.png)
+1. Open Settings: <br>![SCR-20250216-peqi](https://github.com/user-attachments/assets/0f710f00-4228-444d-a2c8-33a2a07b59ca)
+2. Select an SMBIOS of your choice from the "Target Model" dropdown menu (in this example it's for a `MacBook10,1`):<br>![SCR-20250216-pffn](https://github.com/user-attachments/assets/6d6a2763-6d6d-49b7-ba69-766508fcf31c)
+3. Click on "Return" to return to the main menu:<br>![SCR-20250216-pfua](https://github.com/user-attachments/assets/be7cfe3c-1a12-4691-95ec-e3a662e9251d)
+4. Back in the main window, click on "Build and Install OpenCore"<br>![SCR-20250216-phsn](https://github.com/user-attachments/assets/85e4bd28-2095-4332-bb36-dfcf868bb9c9)
+5. This will generate an OpenCore EFI folder with the required files and config.plist for the selected Mac Model. Once that's done, click on "View build log" – **DON'T** click on "Install to disk": <br>![SCR-20250216-piid](https://github.com/user-attachments/assets/31f33120-111f-4bee-96fb-b1e587e2e15a)
+6. Select the the path at the bottom of the build log and copy it to the clipboard (CMD+C)<br>![SCR-20250216-pizu](https://github.com/user-attachments/assets/8993f0fb-f454-4b02-991f-d8fcef821287)
 7. Open Finder
 8. Press CMD+G
 9. Paste the path by pressing CMD+V and hit Enter
-10. Grab the Open-Core Build folder and move it to a different location<br>![](/Users/5t33z0/Desktop/SCR-20250216-pliq.png)
+10. Grab the Open-Core Build folder and move it to a different location<br>![SCR-20250216-pliq](https://github.com/user-attachments/assets/2c469501-cbf8-41ac-b102-274ed2203dc7)
 11. Analyze the `EFI/OC` folder and `config.plist` for clues (kexts, settings, etc.) to apply them to your config.
 
 > [!IMPORTANT]
 >
-> You must leave the OCLP app open while navigating to the location of the OC build, because the Build-Folder will be deleted automaticaly if the app is closed!  
+> You must leave the OCLP app open while navigating to the location of the OC build, because the Build-Folder will be deleted automaticaly if the app is closed!
+
+> [!TIP]
+>
+> Users of legacy Intel Apple Macs can utilize this technique as well to create a bootable USB stick. Copy the `EFI` and the `System` folder to the root of a FAT32 formatted USB flash drive. If something is wrong with the EFI folder installed on disk they can boot from USB instead by holding ALT and selecting the the USB flash drive.
