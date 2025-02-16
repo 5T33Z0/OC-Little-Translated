@@ -2,7 +2,7 @@
 
 ## About
 
-This might be useful for Hackintosh users who want to update their OpenCore Config and EFI folder in order to install macOS Monterey and newer on otherwise unsupported or end-of-life Wintel systems. By default, using the [**configuration guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for 1st to 6th gen Intel Core systems is recommended. But if your are still having issues after applying the neccessary files and settings, having a look into the OpenCore folder of the corresponding Mac model (SMBIOS) might provide some clues.
+This might be useful for Hackintosh users who want to update their OpenCore Config and EFI folder in order to install macOS Monterey and newer on otherwise unsupported or end-of-life Wintel systems. By default, using the [**configuration guides**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/14_OCLP_Wintel#configuration-guides) for 1st to 6th gen Intel Core systems is recommended. But if you are still having issues after applying the neccessary files and settings, having a look into the OpenCore folder of the corresponding Mac model (SMBIOS) might provide some clues.
 
 **What does this do?**: Builds OpenCore EFI folder for selected SMBIOS without installing it to the ESP.
 
