@@ -60,7 +60,7 @@ macOS Monterey | ≈13 GB
 macOS Big Sur | 13,3 GB
 macOS Catalina | 8,24 GB
 macOS Mojave | ≈7 GB 
-macOS High Sierra | ≈6 GB
+macOS High Sierra | 5,32 GB
 
 > [!NOTE]
 >
