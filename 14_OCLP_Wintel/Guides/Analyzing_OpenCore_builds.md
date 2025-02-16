@@ -29,4 +29,4 @@ Run OpenCore Legacy Patcher and follow the instructions to build OpenCore folder
 
 > [!TIP]
 >
-> Users of legacy Intel Apple Macs can utilize this technique as well to create a bootable USB stick. Copy the `EFI` and the `System` folder to the root of a FAT32 formatted USB flash drive. If something is wrong with the EFI folder installed on disk they can boot from USB instead by holding <kbd>ALT</kbd> on stratup to select the USB flash drive.
+> Users of legacy Intel Apple Macs can utilize this technique as well to create a bootable USB stick. Copy the `EFI` and the `System` folder to the root of a FAT32 formatted USB flash drive. If something is wrong with the EFI folder installed on disk they can boot from USB instead by holding <kbd>ALT</kbd> on startup to select the USB flash drive.
