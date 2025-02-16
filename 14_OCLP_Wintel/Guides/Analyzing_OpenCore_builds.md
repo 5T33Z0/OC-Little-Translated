@@ -12,7 +12,7 @@ This might be useful for Hackintosh users who want to update their OpenCore Conf
 Run OpenCore Legacy Patcher and follow the instructions to build OpenCore folders for various SMBIOSes.
 
 1. Open Settings: <br>![SCR-20250216-peqi](https://github.com/user-attachments/assets/0f710f00-4228-444d-a2c8-33a2a07b59ca)
-2. Select an SMBIOS of your choice from the "Target Model" dropdown menu (in this example it's for a `MacBook10,1`):<br>![SCR-20250216-pffn](https://github.com/user-attachments/assets/6d6a2763-6d6d-49b7-ba69-766508fcf31c)
+2. Select an SMBIOS of your choice from the "Target Model" dropdown menu (in this example it's for a `MacBook10,1`). If you want to generate an OC folder for the SMBIOS specified in your `config.plist`, you can leave it set to "Host Model":<br>![SCR-20250216-pffn](https://github.com/user-attachments/assets/6d6a2763-6d6d-49b7-ba69-766508fcf31c)
 3. Click on "Return" to return to the main menu:<br>![SCR-20250216-pfua](https://github.com/user-attachments/assets/be7cfe3c-1a12-4691-95ec-e3a662e9251d)
 4. Back in the main window, click on "Build and Install OpenCore"<br>![SCR-20250216-phsn](https://github.com/user-attachments/assets/85e4bd28-2095-4332-bb36-dfcf868bb9c9)
 5. This will generate an OpenCore EFI folder with the required files and config.plist for the selected Mac Model. Once that's done, click on "View build log" – **DON'T** click on "Install to disk": <br>![SCR-20250216-piid](https://github.com/user-attachments/assets/31f33120-111f-4bee-96fb-b1e587e2e15a)
