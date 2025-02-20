@@ -55,7 +55,7 @@
 ### Other OSes
 * [**Windows-related Guides**](/I_Windows/README.md)
 * [**Enabling Linux Boot Entries**](/G_Linux/README.md)
-* [**macOS Virtulization**](/V_Virtualization/README.md)
+* [**macOS Virtualization**](/V_Virtualization/README.md)
 
 ### Miscellaneous
 * [**Featured OpenCanopy Themes**](/T_Themes/README.md)
