@@ -69,6 +69,7 @@ For more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-
 - [**Installing Windows from within macOS without Bootcamp**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/I_Windows/Install_Windows_NoBootcamp.md)
 - [**Collection of Non-Metal Apple apps**](https://archive.org/details/apple-apps-for-non-metal-macs) (Archive.org)
 - [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
+- [**Evolution of macOS**](/macOS_Evolution.md)
 
 ## Contribute
 Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as verifying the guides are concerned, I only have an iMac11,3 (Lynnfield), an iMac12,2 (Sandy Bridge), and and Ivy Bridge notebook for testing. So if you have any suggestions or updated instructions to improve the guides or workflows, feel free to create an issue and let me know!
