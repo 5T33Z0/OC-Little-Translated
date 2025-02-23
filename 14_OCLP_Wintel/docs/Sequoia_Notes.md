@@ -18,6 +18,8 @@ This section covers the current status of OpenCore Legacy Patcher development fo
 - Logic Pro 11: Stem Splitter, Mastering Assistant, etc.
 
 ## New issues
+- ⚠️ Don't install macOS 14.4 beta yet, if your system requires iGPU (Ivy Bridge, Haswell) and/or GPU patches (Kepler). Boot stalls during 2nd phase. Wait for OCLP Update!
+
 - **Dual Socket CPUs**
 	- Systems with 1st Gen Xeon CPUs (Harpertown) are limited to using 4 cores in total, otherwise macOS panics. So macOS Sequoia is pretty much useless on Dual Socket Systems with more cores. This also means that the config has to be adjusted as well in order to boot these systems. 
  	- When building OpenCore for older OSes, this limitation can be disabled in Settings > Build > "MacPro3,1/Xserve2,1 Workaround".
