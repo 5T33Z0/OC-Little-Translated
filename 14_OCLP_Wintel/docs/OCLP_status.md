@@ -31,3 +31,7 @@
 >[!TIP]
 >
 > The latest nightly builds of OpenCore Legacy Pater can be found in the [**Actions**](https://github.com/dortania/OpenCore-Legacy-Patcher/actions) section of the OCLP repository (requires Github-Account)
+
+## Links
+
+- [**Full OCLP Changelog**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md) (by Dortania)
