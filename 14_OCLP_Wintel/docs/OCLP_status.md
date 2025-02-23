@@ -1,5 +1,10 @@
 # OCLP update status
 
+| ⚠️ Important updates |
+|:----------------------------|
+| Don't install macOS 14.4 beta yet, if your system requires iGPU (Ivy Bridge, Haswell) and/or GPU patches (Kepler). Wait for OCLP Update! Revert Patches in Safe Mode (Press Shft+Enter in OpenCore)!
+
+## Release History
 - **December 11th, 2024**: OCLP 2.2.0 is [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.2.0) and brings a lot of improvements for non-metal machines on Sonoma/Sequoia!
 - **September 14th, 2024**: OCLP 2.0.0 is officially [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.0.0)!
 - **September 6th, 2024**: OCLP Development branch been merged with the master branch &rarr; see [Changelog](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md#200) for details
