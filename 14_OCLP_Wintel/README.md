@@ -72,5 +72,11 @@ For more options, check the [**Utilities**](https://github.com/5T33Z0/OC-Little-
 - [**macOS Release Notes**](https://developer.apple.com/documentation/macos-release-notes)
 - [**Evolution of macOS**](/14_OCLP_Wintel/macOS_Evolution.md)
 
+## Resources
+
+- **OpenCore Bootloader**: https://github.com/acidanthera/OpenCorePkg/releases
+- **OpenCore Legacy Patcher**: https://github.com/dortania/OpenCore-Legacy-Patcher/releases
+- **MetallibSupportPkg**: https://github.com/dortania/MetallibSupportPkg/releases
+
 ## Contribute
 Although I've created these guides with a lot of attention to detail, there's always room for improvement. As far as verifying the guides are concerned, I only have an iMac11,3 (Lynnfield), an iMac12,2 (Sandy Bridge), and and Ivy Bridge notebook for testing. So if you have any suggestions or updated instructions to improve the guides or workflows, feel free to create an issue and let me know!
