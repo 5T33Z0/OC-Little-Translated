@@ -17,7 +17,8 @@ What you may not know is: some of the settings, kexts and root-patches can  be u
 - GPU drivers for legacy (non-metal) AMD and NVIDIA Kepler Cards 
 - Frameworks for re-enabling previously supported Wi-Fi/Bluetooth cards
  
-## Latest OCLP status updates
+## Latest updates
+- [**OCLP update status**](/14_OCLP_Wintel/docs/OCLP_status.md)
 - [**macOS Sequoia OCLP Notes**](/14_OCLP_Wintel/docs/Sequoia_Notes.md)
 - [**macOS Sonoma OCLP Notes**](/14_OCLP_Wintel/docs/Sonoma_Notes.md)
 
