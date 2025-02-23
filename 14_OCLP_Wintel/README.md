@@ -18,8 +18,8 @@ What you may not know is: some of the settings, kexts and root-patches can  be u
 - Frameworks for re-enabling previously supported Wi-Fi/Bluetooth cards
  
 ## Latest OCLP status updates
-- [**macOS Sequoia OCLP Notes**](/14_OCLP_Wintel/Sequoia_Notes.md)
-- [**macOS Sonoma OCLP Notes**](/14_OCLP_Wintel/Sonoma_Notes.md)
+- [**macOS Sequoia OCLP Notes**](/14_OCLP_Wintel/docs/Sequoia_Notes.md)
+- [**macOS Sonoma OCLP Notes**](/14_OCLP_Wintel/docs/Sonoma_Notes.md)
 
 ## Configuration Guides
 Listed below are configuration guides to update your OpenCore EFI and `config.plist` with the required settings and kext to run macOS 13 and newer:
@@ -43,10 +43,10 @@ Listed below are configuration guides to update your OpenCore EFI and `config.pl
 - [**Force-enabling root-patches Patches in OCLP**](/14_OCLP_Wintel/Enable_Features/Force-enable_Root-Patches.md)
 
 ## Troubleshooting
-- [**Dos and Don'ts of running macOS beta versions**](/14_OCLP_Wintel/Beta_dos_donts.md)
+- [**Dos and Don'ts of running macOS beta versions**](/14_OCLP_Wintel/docs/Beta_dos_donts.md)
 - [**Recovering from failed root patching attempts**](/14_OCLP_Wintel/Guides/Reverting_Root_Patches.md)
-- [**OCLP and the macOS compatibility gap**](/14_OCLP_Wintel/Bridging_the_gap.md)
-- [**Triggering macOS Updates via Terminal**](/14_OCLP_Wintel/macOS_Update_Terminal.md)
+- [**OCLP and the macOS compatibility gap**](/14_OCLP_Wintel/docs/Bridging_the_gap.md)
+- [**Triggering macOS Updates via Terminal**](/14_OCLP_Wintel/docs/macOS_Update_Terminal.md)
 - [**Addressing sleep issues in macOS Sequoia**](https://www.insanelymac.com/forum/topic/360040-macos-15-sequoia-does-not-enter-sleep-mode-properly/#comment-2826474) (Thread on insanelymac)
 - [**Fixing Preboot volumes modified by macOS High Sierra**](/14_OCLP_Wintel/Guides/Fix_Preboot_High_Sierra.md)
 
