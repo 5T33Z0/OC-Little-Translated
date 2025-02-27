@@ -40,7 +40,7 @@ Although installing and running macOS Ventura and newer on machines with Intel H
 | All good.
 
 ### How Haswell/Broadwell systems are affected
-In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
+In macOS Ventura, support for CPU families prior to Kaby Lake was dropped. For Haswell/Broadwell CPUs this mainly affects integrated Graphics and Metal support. So what we will do is prepare the config with the required patches, settings and kexts for installing and running macOS Ventura+ and then add iGPU/GPU drivers in Post-Install using OpenCore Legacy Patcher.
 
 ### Disclaimer
 This guide is intended to provide general information for adjusting your EFI and config.plist to install and run macOS Ventura and newer on unsupported Wintel systems. It is not a comprehensive configuration guide. Please refrain from using the "report issue" function to seek individualised assistance for fixing your config. Such issue reports will be closed immediately!
