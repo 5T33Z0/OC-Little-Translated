@@ -15,6 +15,7 @@
 	- [Wi-Fi](#wi-fi)
 	- [Bluetooth](#bluetooth)
 	- [Troubleshooting Intel BT](#troubleshooting-intel-bt)
+- [Links](#links)
 - [Credits](#credits)
 
 ---
@@ -164,7 +165,10 @@ If BT is not working after adding the two kexts, do the following:
 - If the output contains `bluetoothExternalDongleFailed=%01`, you need to change it to `%00` in NVRAM.
 - So enter: `sudo NVRAM bluetoothExternalDongleFailed=%00`
 - Followed by `sudo pkill bluetoothd` to kill and restart the Bluetooth stack
- 
+
+## Links
+- [minipci.biz](https://minipci.biz/) – Find macOS-compatible MiniPCIe WiFi and BT cards.
+
 ## Credits
 - Acidanthera for OpenCore and Kexts
 - Dortania for OpenCore Legacy Patcher
