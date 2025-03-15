@@ -47,6 +47,7 @@ Your Laptop boots into macOS and the internal screen works, but:
 2. the handshake between the system and both displays takes a long time and both screens turn off and on several times during the handshake until a stable connection is established.
 
 > [!NOTE]
+> 
 > If you don't get a picture at all you could try a [fake ig-platform-id](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/Framebuffer_Patching/Fake_IG-Platform-ID.md) to force the system into [VESA mode](https://wiki.osdev.org/VESA_Video_Modes). For desktop systems, try CaseyJ's [General Framebuffer Patching guide](https://www.tonymacx86.com/threads/guide-general-framebuffer-patching-guide-hdmi-black-screen-problem.269149/) instead.
 
 ### Possible causes
@@ -63,10 +64,10 @@ Your Laptop boots into macOS and the internal screen works, but:
 - **DP** &rarr; **DVI**
 - **VGA** (Skylake and newer only)
 
-**NOTES**:
-
-- :bulb: Although the examples used throughout this guide are for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well. Just make sure to use the framebuffer data required for your iGPU.
-- VGA supposedly works out of the box on Skylake and newer but since I have no machine to test this you are on your own in this case. Disabling `ADGC` via device properties seems to be required as well.
+> [!NOTE]
+> 
+> - :bulb: Although the examples used throughout this guide are for getting the Intel UHD 620 to work, the basic principle is applicable to any other iGPU model supported by macOS as well. Just make sure to use the framebuffer data required for your iGPU.
+> - VGA supposedly works out of the box on Skylake and newer but since I have no machine to test this you are on your own in this case. Disabling `ADGC` via device properties seems to be required as well.
 
 ### Workflow overview
 This it the tl;dr version of what we are going to do basically:
