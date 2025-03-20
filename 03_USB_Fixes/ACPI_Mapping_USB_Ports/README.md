@@ -1,8 +1,8 @@
 # USB port mapping via ACPI (macOS 11.3+)
 
-> **DISCLAIMER**
+> [!IMPORTANT]
 > 
-> I am not a developer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it will work for everybody – and I cannot and will not fix your SSDTs!
+> **Disclaimer**: I am not a developer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it will work for everybody – and I cannot and will not fix your SSDTs!
 
 **TABLE of CONTENTS**
 
@@ -74,7 +74,11 @@ In order to declare USB ports via ACPI, 2 conditions of the ACPI tables in your 
 
 > [!WARNING]
 >
-> This method is not applicable on systems where `_UPC` is defined in the `DSDT`!
+> - The ACPI port-mapping method is not applicable on systems where `_UPC` is defined in the `DSDT` itself!
+> - Due to the advanced nature of ACPI modifications, you should:
+> 	- Follow the instructions meticulously.
+> 	- Verify each step (e.g., SSDT identification, port counts).
+> 	- Be prepared to troubleshoot issues like syntax errors or boot failures.
 
 ## Preparations
 
