@@ -137,6 +137,14 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 > 
 > Once root patches are applied, the security seal of the volume will be broken. And once it is broken, the complete macOS version will be downloaded every time an OS update is available. The workaround would be to revert root patches before installing updates – but then you won't have WiFi (unless you enable `itlwm` beforehand).
 
+9. Troubleshooting
+
+On some systems excluding the IOSkywalkFamily kext may cause a Kernel panic. In this case the workaround is to add the following rule to the `Kernel/Force` section of your config.plist:
+
+| Identifier | BundlePath | Enabled | ExecutablePath | MinKernel |
+| - | - | - | - | - | 
+| com.apple.iokit.IOSkywalkFamily | System/Library/Extensions/IOSkywalkFamily.kext | true | Contents/MacOS/IOSkywalkFamily | 24.0.0 |
+
 ## Credits and Thank Yous
 
 - lifeknife10A who came up with this [workaround](https://github.com/OpenIntelWireless/itlwm/issues/1009#issuecomment-2370919270)
