@@ -34,7 +34,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - Select the Linux distro
 > - Run Linux in live mode, don't install it
 > - Once you reach the desktop, run Terminal
-> - Enter `dmesg | grep ibt`
+> - Enter `sudo dmesg | grep ibt`
 > - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
