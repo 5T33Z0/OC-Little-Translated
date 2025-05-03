@@ -20,7 +20,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 
 ### Bluetooth Firmware
 
-- In IORegistryExplorer, locate the entry `InteBluetoothFirmware`
+- In IORegistryExplorer, locate the entry `IntelBluetoothFirmware`
 - Check the entry for `fw_name` 
 - Take note of the value:<br>![btfirmware](https://github.com/user-attachments/assets/d2395b61-7a11-4494-97ec-439c26de2962)
 
