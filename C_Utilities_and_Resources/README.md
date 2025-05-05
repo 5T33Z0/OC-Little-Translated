@@ -58,6 +58,7 @@ Tools for getting, generating and editing ACPI tables.
 - [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Python Script to generate a SSDT for Legacy CPU Power Management
 - [**ACPI Rename**](https://github.com/corpnewt/ACPIRename) – Handy Python script to analyze a `DSDT`. It can list Devices, Methods and Name Paths and can generate HEX values for binray renames.
 - [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/) – App for dumping ACPI tables, I/O Registry and more from real Macs.
+- [**HackinDROM**](https://hackindrom.zapto.org/) – Online-Tool for generating an SSDT for getting non-Apple Thunderbolt Controllers to work in macOS.
 
 ### Audio
 - [**PinConfigurator**](https://github.com/headkaze/PinConfigurator) – App for importing and editing PinConfig Data for AppleALC Layout-IDs.
