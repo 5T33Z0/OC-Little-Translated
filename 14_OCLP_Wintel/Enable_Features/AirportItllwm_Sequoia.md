@@ -1,4 +1,4 @@
-# Using `AirportItlwm.kext` in macOS Sequoia
+# Using `AirportItlwm.kext` in macOS Sequoia and fixing iServices in macOS Sonoma
 
 ![intel_spoof07](https://github.com/user-attachments/assets/255406e1-554e-4b6c-9b67-5d24b9fcb962)
 
@@ -14,8 +14,13 @@ Luckily for us, we can utilize OpenCore Legacy patcher to make use of `AirportIt
 
 1. Inject `IOName` of a BRCM 4360 Broadcom card via `DeviceProperties` to trigger "Modern WiFi" patches in OCLP 
 2. Inject the required kexts for re-enabling legacy WiFi cards
+3. Add `AirportItlwm.kext` for macOS Ventura 
 3. Apply root patches
-4. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` working again 
+4. Reboot to macOS Sequoia, voila, `AirportItlwm.kext` is working again 
+
+> [!NOTE]
+> 
+> When applying root patches for Modern WiFi, OCLP basically rolles back components from macOS Ventura. That's why the AirportItlwm kext for macOS Ventura is required to make WiFi work in Sequoia.
 
 ## Instructions
 
@@ -142,8 +147,12 @@ Under `Misc`, change `SecureBootModel` to `Disabled`
 On some systems excluding the IOSkywalkFamily kext may cause a Kernel panic. In this case the workaround is to add the following rule to the `Kernel/Force` section of your config.plist:
 
 | Identifier | BundlePath | Enabled | ExecutablePath | MinKernel |
-| - | - | - | - | - | 
+| ---------- | ---------- | :------: | -------------- | --------- | 
 | com.apple.iokit.IOSkywalkFamily | System/Library/Extensions/IOSkywalkFamily.kext | true | Contents/MacOS/IOSkywalkFamily | 24.0.0 |
+
+## Using this fix to enable iServices in macOS Sonoma
+
+As it turns out, this fix is also required if you need working iServices in macOS Sonoma. The patching principle is exactly the same except that you need to use `MinKernel` version `23.0.0` instead.
 
 ## Credits and Thank Yous
 
