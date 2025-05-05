@@ -154,6 +154,8 @@ On some systems excluding the IOSkywalkFamily kext may cause a Kernel panic. In 
 
 As it turns out, this fix is also required if you need working iServices in macOS Sonoma. The patching principle is exactly the same except that you need to use `MinKernel` version `23.0.0` instead.
 
+If you don't require iService you don't have to do this – WiFi will work in Sonoma without this patch.
+
 ## Credits and Thank Yous
 
 - lifeknife10A who came up with this [workaround](https://github.com/OpenIntelWireless/itlwm/issues/1009#issuecomment-2370919270)
