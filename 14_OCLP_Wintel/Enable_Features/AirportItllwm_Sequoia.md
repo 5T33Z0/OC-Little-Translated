@@ -156,7 +156,15 @@ As it turns out, this fix is also required if you need working iServices in macO
 
 ![wifi](https://github.com/user-attachments/assets/af01d107-12b8-4441-b858-bc3720b2fe7a)
 
-The patching principle is exactly the same except that you need to use `MinKernel` version `23.0.0` instead. If you don't require iService you don't have to do this – WiFi will work in Sonoma without this patch.
+So, if you need iService in macOS Somona, do the following:
+- [ ] Change `MinKenel` of the following Kexts back to `23.0.0`:
+	- [ ] `AirportItlwm.kext` (use the version for macOS Ventura!)
+	- [ ] `IOSkywalkFamily.kext` 
+	- [ ] `IO80211FamilyLegacy.kext` 
+	- [ ] `com.apple.iokit.IOSkywalkFamily` (under `Kernel/Block`) 
+- [ ] Apply root patches in Post-Install! 
+
+Once you apply root patches, incremental system updates are no longer an option – every time an updates ist available, the complete installer will be downloaded because root patching brakes the security seal of macOS. If you don't require iService you don't have to do this – WiFi will work in Sonoma without this patch.
 
 ## Credits and Thank Yous
 - lifeknife10A who came up with this [workaround](https://github.com/OpenIntelWireless/itlwm/issues/1009#issuecomment-2370919270)
