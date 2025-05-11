@@ -1,8 +1,8 @@
-# Enabling 4k Output on Dell Optiplex Laptops
+# Enabling 4k Output on Dell Optiplex systems
 
 > **Models**: Dell Optiplex 3070 and 7070
 
-If you have a 4k Display attached to your Laptop, you can use this guide to force-enable 4k resulotion by modifying UEFI parameters via a modified GRUB shell. Do this on your own risk! 
+If you have a 4k Display attached to your Dell Optiplex, you can use this guide to force-enable 4k resulotion by modifying UEFI parameters via a modified GRUB shell. Do this on your own risk! 
 
 ## Preparations
 
