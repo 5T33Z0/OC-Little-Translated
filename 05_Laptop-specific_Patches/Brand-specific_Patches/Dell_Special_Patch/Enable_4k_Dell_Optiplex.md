@@ -2,21 +2,21 @@
 
 > **Models**: Dell Optiplex 3070 and 7070
 
-If you have a 4k Display attached to your Dell Optiplex, you can use this guide to force-enable 4k resulotion by modifying UEFI parameters via a modified GRUB shell. Do this on your own risk! 
+If you have a 4k Display attached to your Dell Optiplex, you can use this guide to force-enable 4k resolution by modifying UEFI parameters via a modified GRUB shell. Do this on your own risk! 
 
 ## Preparations
 
 - :warning: Create a Backup of your currently working EFI folder and store it on a FAT32 formatted USB Flash drive!
 - Dowload [modgrubshell.efi](https://github.com/datasone/grub-mod-setup_var/releases) 
 - Add it to `EFI/OC/Tools`
-- Add `modgrubshell.efi` to `config.plist` (UEFI/Drivers)
-- Remove/Disable `stolenmem` from Framebufferpatch 
+- Add `modgrubshell.efi` to `config.plist` (`Misc/Tools`)
+- Remove/Disable `stolenmem` property from Framebufferpatch 
 - Save and reboot
 
 ## Modifying BIOS parameters
 
-- Back in the Boot Picker, Press <kbd>space bar</kd>
-- Select modgrubshell and press <kbd>Enter</kbd>
+- In the Boot Picker, Press <kbd>space bar</kd> to show auxiliary tools.
+- Select `modgrubshell` and press <kbd>Enter</kbd>
 - Enter the following commands:	
 	```shell
 	setup_var 0x8DC 

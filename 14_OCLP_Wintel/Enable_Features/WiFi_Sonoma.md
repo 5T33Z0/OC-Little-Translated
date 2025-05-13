@@ -168,6 +168,7 @@ If BT is not working after adding the two kexts, do the following:
 
 ## Links
 - [minipci.biz](https://minipci.biz/) – Find macOS-compatible MiniPCIe WiFi and BT cards.
+- [Wireless USB Adapter](https://github.com/chris1111/Wireless-USB-OC-Big-Sur-Adapter) – Tool for enabling numerous Realtek-based WiFi Dongles in macOS 10.15 and newer.
 
 ## Credits
 - Acidanthera for OpenCore and Kexts
