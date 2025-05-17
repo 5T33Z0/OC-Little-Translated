@@ -12,7 +12,7 @@ This guides explains how to reduce the filesize of the `BrcmFirmwareData.kext` f
 - Open System Profiler
 - Under "Hardware" click on "USB"
 - On the right side, find your WiFi/BT Card and select it
-- Take note of the "Product-ID" and "Vendor-ID":<br>![](/Users/5t33z0/Desktop/brcm_slim.png)
+- Take note of the "Product-ID" and "Vendor-ID":<br>![brcm_slim](https://github.com/user-attachments/assets/1249b7cf-94a0-44a3-9cd0-6f705152f003)
 - The combined values of Vendor and Product-ID will be the used firmware, here: `0a5c_21e6`
 
 ### Install Xcode
@@ -33,8 +33,8 @@ This guides explains how to reduce the filesize of the `BrcmFirmwareData.kext` f
 - Leave the Terminal window open for later use
 - Download the DEBUG version of [**Lilu**](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the BrcmPatchRAM-master folder
 - In Finder, navigate to `~/Downloads/BrcmPatchRAM-master/firmwares`
-- Find the firmware for your Broadcom WiFi/BT card, you figured out earlier. In my case `0a5c_21e6`. You can use Finder's search for this:<br>![](/Users/5t33z0/Desktop/BTFW.png)
-- Delete all other firmwares and links to subfolders from the firmwares folder until you have something like this:<br>![](/Users/5t33z0/Desktop/FW01.png)
+- Find the firmware for your Broadcom WiFi/BT card, you figured out earlier. In my case `0a5c_21e6`. You can use Finder's search for this:<br>![BTFW](https://github.com/user-attachments/assets/544f478e-367e-433f-b153-fc30acd6ca4f)
+- Delete all other firmwares and links to subfolders from the firmwares folder until you have something like this:<br>![FW01](https://github.com/user-attachments/assets/e834a603-9433-44c9-a57a-e4f8f0851791)
 - Move the `*.zhx` from the sub-folder to the `firmwares` folder
 - Next, compile the kext
 
@@ -48,7 +48,16 @@ xcodebuild -configuration Release clean build ARCHS=x86_64
 
 This will compile the following kexts:
 
-- BlueToolFixup.kext- BrcmBluetoothInjector.kext- BrcmBluetoothInjectorLegacy.kext- **BrcmFirmwareData.kext**- BrcmFirmwareRepo.kext- BrcmNonPatchRAM.kext- BrcmNonPatchRAM2.kext- BrcmPatchRAM.kext- BrcmPatchRAM2.kext- BrcmPatchRAM3.kext
+- BlueToolFixup.kext
+- BrcmBluetoothInjector.kext
+- BrcmBluetoothInjectorLegacy.kext
+- **BrcmFirmwareData.kext**
+- BrcmFirmwareRepo.kext
+- BrcmNonPatchRAM.kext
+- BrcmNonPatchRAM2.kext
+- BrcmPatchRAM.kext
+- BrcmPatchRAM2.kext
+- BrcmPatchRAM3.kext
 
 Thwy will be located under: 
 
