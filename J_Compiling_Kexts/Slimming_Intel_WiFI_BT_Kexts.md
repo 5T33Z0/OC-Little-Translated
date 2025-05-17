@@ -108,4 +108,5 @@ The compiled kexts will be located under `~/Downloads/IntelBluetoothFirmwar-mast
 > - If you are having issues with the slimmed kexts, I suggest you use the pre-compiled version from the OpenIntelWireless repo instead
 
 ## Credits
-- Original Guides by [dreamwhite](https://github.com/dreamwhite)
+- Original Guide by [dreamwhite](https://github.com/dreamwhite)
+- Intel WiFi/BT Firmware from Linux: [https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git) 
