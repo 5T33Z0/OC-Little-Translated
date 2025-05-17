@@ -30,7 +30,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 >
 > - Once you reach the desktop, run Terminal
 > - Enter `sudo dmesg | grep ibt`
-> - Look for "Found device firmware…" as shown in this example:<br>![console_output](https://github.com/user-attachments/assets/3808d9ab-4f36-4e30-b64f-4e790c77cb13)
+> - Look for "Found device firmware…" as shown in this example:<br>![grep](https://github.com/user-attachments/assets/acb73cc1-a001-42dc-bb3b-0baf549ab2a4)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
 ### Install Xcode
