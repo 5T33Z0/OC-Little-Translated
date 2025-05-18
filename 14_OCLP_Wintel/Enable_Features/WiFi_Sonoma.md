@@ -14,7 +14,7 @@
 - [Instructions (Intel)](#instructions-intel)
 	- [Wi-Fi](#wi-fi)
 	- [Bluetooth](#bluetooth)
-	- [Troubleshooting Intel BT](#troubleshooting-intel-bt)
+	- [Troubleshooting BT](#troubleshooting-bt)
 - [Links](#links)
 - [Credits](#credits)
 
@@ -157,7 +157,7 @@ Kext | Comment | `MinKernel` | `MaxKernel`
 > - I have noticed that it can take like 10 seconds or so until BT is available after applying these changes.
 > - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
-### Troubleshooting Intel BT
+### Troubleshooting BT
 
 If BT is not working after adding the two kexts, do the following:
 
@@ -165,6 +165,10 @@ If BT is not working after adding the two kexts, do the following:
 - If the output contains `bluetoothExternalDongleFailed=%01`, you need to change it to `%00` in NVRAM.
 - So enter: `sudo NVRAM bluetoothExternalDongleFailed=%00`
 - Followed by `sudo pkill bluetoothd` to kill and restart the Bluetooth stack
+
+> [!TIP]
+>
+> In cases where `bluetoothExternalDongleFailed` changes from `00` to `01` after rebooting, you can use this [plist](https://gist.github.com/LBates2000/32be3c79dd987e72b98bb669c43fccbf) that acts as a LaunchDaemon to reset the value back to `00`. 
 
 ## Links
 - [minipci.biz](https://minipci.biz/) – Find macOS-compatible MiniPCIe WiFi and BT cards.
