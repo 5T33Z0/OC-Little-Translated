@@ -21,7 +21,7 @@
 		- [Instructions](#instructions)
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
-	- [Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14+](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14)
+	- [Example 10: Re-Enabling legacy Broadcom and Intel WiFi/BT Cards in macOS 14+](#example-10-re-enabling-legacy-broadcom-and-intel-wifibt-cards-in-macos-14)
 	- [Example 11: CPUFriend](#example-11-cpufriend)
 - [Notes and Credits](#notes-and-credits)
 
@@ -138,20 +138,38 @@ For Synaptics TrackPads which are controlled via I2C, the kext order is:
 When using Broadcom WiFi/Bluetooth cards that are not natively supported by macOS, you have to be aware about the following:
 
 1. Kexts have to be loaded in the correct order/sequence (otherwise boot crashes). When in doubt, create an OC Snapshot in ProperTree – it can fix the order if it's incorrect.
+
 2. You have to make use of `MinKernel` and `MaxKernel` settings to control which kexts are loaded for different versions of macOS
+
 3. `AirportBrcomFixup` is for enabling WiFi. It contains 2 additional kexts as Plugins (only one of them should be enabled at any time):
-	- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 and newer)
+	- `AirPortBrcmNIC_Injector.kext` (compatible with macOS 10.13 to macOS 13)
 	- `AirPortBrcm4360_Injector.kext` (compatible with macOS 10.8 to 10.15)
-4. For Bluetooth, various kexts and combinations are necessary:
-	- `BlueToolFixup.kext`: For macOS 12 and newer. Contains Firmware Data (MinKernel 21.0).
-	- `BrcmFirmwareData.kext`: contains necessary firmware. Required for macOS 10.8 to 11.x (MaxKernel 20.9.9)
-	- `BrcmPatchRAM.kext`: For 10.10 or earlier
-	- `BrcmPatchRAM2.kext`: For macOS 10.11 to 10.14
-	- `BrcmPatchRAM3.kext`: For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
-5. With the release of macOS Sonoma (Darwin Kernel 23.0), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi, you have to:
-	- [Apply root patches](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) with OpenCore Legacy Patcher
-	- Add additional kexts and 
+
+4. For Bluetooth, various kexts and setting are necessary:
+	
+	| Kext | Info
+	-------|-----
+	`BlueToolFixup.kext` |For macOS 12 and newer. Contains Firmware Data (`MinKernel`: 21.0.0)
+	`BrcmFirmwareData.kext` | Contains BT Firmware. Required for macOS 10.8 to 11.x (`MaxKernel`: 20.9.9)
+	`BrcmPatchRAM.kext` | For 10.10 or earlier
+	`BrcmPatchRAM2.kext` | For macOS 10.11 to 10.14
+	`BrcmPatchRAM3.kext` | For macOS 10.15 to 11.x. Needs to be combined with `BrcmBluetoothInjector.kext` in order to work.
+	
+5. Add the following NVRAM Paramters to `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82`:	
+	
+	Key | Type | Value
+	----|------|-------
+	bluetoothExternalDongleFailed | Data | 00
+	bluetoothInternalControllerInfo | Data | 00000000 00000000 00000000 0000
+	
+	These Parameters are mandatory in all versions of macOS when using BrcmPatchRAM v2.7.0 and newer!
+
+6. macOS 14+: Add boot-arg `-btlfxboardid` if Bluetooth is not working even if the NVRAM parameters above are present.
+
+7. With the release of macOS Sonoma (Darwin Kernel 23.x), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi, you have to:
+	- Add additional kexts 
 	- Adjust some config settings (see &rarr; [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14))
+	- [Apply root patches with OpenCore Legacy Patcher](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
 
 > [!CAUTION]
 > 
@@ -208,23 +226,9 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 > - Dell users can add `SMCDellSensors` for temperature monitoring and fan control.
 > - If your laptop has a built-in compatible brightness sensor, you can add `SMCLightSensor` 
 
-### Example 10: Enabling legacy Broadcom WiFi Cards in macOS 14+
+### Example 10: Re-Enabling legacy Broadcom and Intel WiFi/BT Cards in macOS 14+
 
-1. Block **IOSkywalkFamily**: <br> ![Brcm_Sonoma1](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/54079541-ee2e-4848-bb80-9ba062363210)
-2. Add the following kexts from OCLP ([**found here**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/master/payloads/Kexts/Wifi) and [**here**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Acidanthera)) (adjust `MinKernel` accordingly): <br> ![Brcm_Sononma2](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/49c099aa-1f83-4112-a324-002e1ca2e6e7)
-3. Save and reboot
-4. Verify that all the kext listed above are loaded. Enter `kextstat | grep -v com.apple` in Terminal and check the list. If they are not loaded, add `-brcmfxbeta` boot-arg to your config. Save, reboot and verify again.
-5. Apply Root patches with OCLP 0.6.9 or newer (you can find the nightly build [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494))
-6. If "Networking: Modern Wireless" or "Networking Legacy Wireless" (use either or depending on your card) is not shown in the list of available patches you need enable the option in the Source Code manually and compile OpenCore Patcher yourself. Instructions can be found [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/WIiFi_Sonoma.md) 
-5. Reboot. After that WiFi should work (if your card is supported).
-
-**Compatible Cards**: only a couple of Wifi cards are support at the moment. Depending on the card you are using you have to enable the correct option for patching Wifi (modern or legacy wifi):
-
-- **Modern**:
-	- Broadcom BCM94350, BCM94360, BCM43602, BCM94331, BCM943224
-- **Legacy**: 
-	- Atheros Chipsets 
-	- Broadcom BCM94322, BCM94328
+&rarr; Please follow the dedicated guide in the [OCLP-Wintel section](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) to (re-)enable WiFi and Bluetooth for Intel and Broadcom cards in macOS Sonoma and newer.
 
 ### Example 11: CPUFriend
 You can use **CPUFried.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
