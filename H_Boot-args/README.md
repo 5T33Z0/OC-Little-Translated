@@ -305,7 +305,13 @@ boot-arg | Description
 **`bpr_postresetdelay=X`** | Changes `mPostResetDelay`, where `X` describes the delay in ms assumed to be needed for the firmware to initialise after reseting the device upon firmware upload. Default value is `100`. </br></br> **Example**: `bpr_postresetdelay=400`
 **`bpr_probedelay=X`** | Changes `mProbeDelay` (removed in BrcmPatchRAM3), where X describes the delay in ms before probing the device. Default value is `0`.
 
-> [!TIP] Some users with typical "wake from sleep" problems reported success with the following settings:
+> [!CAUTION]
+>
+> From BrcmPatchRAM 2.7.0 onward, the board-id patches required by many Broadcom cards for Bluetooth to work have been disabled, as Intel cards do not require these patches. So if Bluetooth stops working in macOS Sonoma and newer _after_ updating your BrcmPatchRAM kexts, add the following boot-arg: `-btlfxboardid`
+
+> [!TIP]
+>
+> Some users with typical "wake from sleep" problems reported success with the following settings:
 >
 > - `bpr_probedelay=100 bpr_initialdelay=300 bpr_postresetdelay=300` or
 > - `bpr_probedelay=200 bpr_initialdelay=400 bpr_postresetdelay=400` (slightly longer delays)
