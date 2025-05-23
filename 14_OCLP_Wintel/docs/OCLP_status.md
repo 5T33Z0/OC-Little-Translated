@@ -2,9 +2,15 @@
 
 | ⚠️ Important updates |
 |:----------------------------|
-| Don't install macOS 14.4 beta yet, if your system requires iGPU (Ivy Bridge, Haswell) and/or GPU patches (Kepler). Wait for OCLP Update! Revert Patches in Safe Mode (Press Shft+Enter in OpenCore)!
+| Nothing to report currently.
 
 ## Release History
+
+### 2025
+- **May 15th,2023**: OCLP 2.4.0 is [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.0) which primarily focuses on macOS 15.5 support. A mentiobable feature is reduced CPU usage in the User Interface thread.
+- **March 31st, 2025**: OCLP 2.3.0 is [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.3.0), focussing on macOS 15.4 support.
+
+### 2024
 - **December 11th, 2024**: OCLP 2.2.0 is [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.2.0) and brings a lot of improvements for non-metal machines on Sonoma/Sequoia!
 - **September 14th, 2024**: OCLP 2.0.0 is officially [released](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.0.0)!
 - **September 6th, 2024**: OCLP Development branch been merged with the master branch &rarr; see [Changelog](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/CHANGELOG.md#200) for details
@@ -17,6 +23,8 @@
 	- OCLP now has a .pkg installer which is the new recommended method for installing OpenCore Legacy Patcher (on real Macs)
 	- New Privileged Helper Tool which removes requirement of password prompts for installing patches, creating installers, etc.
 - **February 12th, 2024**: Updated [**IOSkywalkFamily.kext**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi) for legacy WIFI. Required for macOS 14.4 beta.
+
+### 2023
 - **November 6th, 2023**: **OCLP 1.3.0 beta**. Fixes Intel HD 4000 and Kepler GPU Windowserver crashes in macOS 14.2 beta 3
 - **November 6th, 2023**: **OCLP v1.2.0** is released and includes a long list of [changes](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.2.0)
 - **October 23rd, 2023**: [**OCLP v1.1.0**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases) was released. Includes updated kexts, binaries for Non-Metal GPUs for macOS Sonoma and other improvements (&rarr; see changelog for details)
