@@ -95,7 +95,7 @@ Run either [**VDADecoderChecker**](https://i.applelife.ru/2019/05/451893_10.12_V
 
 This option allows spoofing the Kaby Lake framebuffer patch by injecting the `AAPL,ig-platform-id` and `device-id` into macOS 13 and newer via an SSDT and a new kext called [**OSIEnhancer**](https://github.com/b00t0x/OSIEnhancer). The kext allows using modified versions of the "If (_OSI ("Darwin"))" method to inject properties based of the macOS or Kernel version, e.g. "If (_OSI ("Ventura"))" or "If (_OSI ("Darwin 22")) for macOS Ventura.
 
-This way, you can leave your DeviceProperties as is for older versions of macOS but apply
+This way, you can leave the DeviceProperties as is for macOS 12 and older but inject different properties to macOS 13+.
 
 ### Re-enabling Intel HD 520/530 (Desktop)
 
@@ -111,7 +111,7 @@ The SSDT should inject the required iGPU properties into macOS Ventura and newer
 
 > [!IMPORTANT]
 >
-> Please store a backup of your current EFI folder on a FAT32 formatted USB flash drive before applying this spoof, so you can boot from it in case something goes wrong. Because I cannot test this spoof since I don't have a Skylake system.
+> Please store a backup of your current EFI folder on a FAT32 formatted USB flash drive before applying this spoof, so you can boot from it in case something goes wrong. Because I cannot test this spoof since I don't have a Skylake system. You also need to adjust the device properties inside the SSDT to match your system requirements!
 
 ## Option 2: Re-enable Skylake Graphics with OpenCore Legacy Patcher (macOS 13+)
 
