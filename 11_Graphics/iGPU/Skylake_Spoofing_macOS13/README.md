@@ -77,7 +77,7 @@ Do the following to enable Intel HD 520/530 or P530 on-board graphics in macOS 1
   AAPL,ig-platform-id      | 00001B59 | Data | For [Intel P530](https://www.insanelymac.com/forum/topic/354495-solved-intel%C2%AE-hd-p530-no-graphics-acceleration-on-ventura/?do=findComment&comment=2796368)
   device-id                | 26590000 | Data | "
   ||
-  AAPL,GfxYTile            | 01000000 | Data | Optional. If your having glitches.
+  AAPL,GfxYTile            | 01000000 | Data | Optional. Only required if graphical glitches occur.
 - Optional: add boot-arg `-igfxsklaskbl` (when using macOS 12)
 - Save and reboot
 
