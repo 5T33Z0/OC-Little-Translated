@@ -56,8 +56,14 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 - Download [**itlwm**](https://github.com/OpenIntelWireless/itlwm) source code (click on "Code" and select "Download zip")
 - Unzip the file – "itlwm-master" folder will be created
 - Run Terminal
-- Enter `cd ~/Downloads/itlwm-master`
-- Next, download MacKernelSDK into the "itlwm-master" folder. Enter: `git clone https://github.com/acidanthera/MacKernelSDK`
+- Enter:
+  ```bash
+  cd ~/Downloads/itlwm-master
+  ```
+- Next, download MacKernelSDK into the "itlwm-master" folder. Enter:
+  ```bash
+  git clone https://github.com/acidanthera/MacKernelSDK
+  ```
 - Leave the Terminal window open for later use
 - Download the DEBUG version of [**Lilu**](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the itlwm-master folder
 - In Finder, navigate to `~/Downloads/itlwm-master/itlwm/firmware`
