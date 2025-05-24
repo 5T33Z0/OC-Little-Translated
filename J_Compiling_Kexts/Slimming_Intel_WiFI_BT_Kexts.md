@@ -33,6 +33,21 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - Look for "Found device firmware…" as shown in this example:<br>![grep](https://github.com/user-attachments/assets/acb73cc1-a001-42dc-bb3b-0baf549ab2a4)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
+> [!NOTE]
+> 
+> If the firmware version is not shown even with DebugEnhancer installed, you need to run Linux in Live mode to figure it out:
+> 
+> - Prepare a bootable USB flash drive with [**Ventoy**](https://www.ventoy.net/en/index.html)
+> - Download a Linux distro of your choice (as .iso)
+> - Put the .iso on the Ventoy USB Stick
+> - Boot from the Ventoy USB stick
+> - Select the Linux distro
+> - Run Linux in live mode, don't install it
+> - Once you reach the desktop, run Terminal
+> - Enter `sudo dmesg | grep ibt`
+> - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
+> - Take note of the two files, reboot into macOS and continue with the guide
+
 ### Install Xcode
 - Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release)
 - Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
