@@ -13,7 +13,7 @@ Starting with macOS Catalina, Laptops either require a fake ambient light sensor
 
 > [!NOTE]
 > 
-> he official OpenCore package contains a pre-compiled `SSDT-ALS0.aml` under "Docs". So in case you're not sure what to do you could also use it instead.
+> The official OpenCore package contains a pre-compiled `SSDT-ALS0.aml` under "Docs". So in case you're not sure what to do you could also use it instead.
 
 ## Usage
 There are two possible cases: 
