@@ -47,5 +47,16 @@ So instead of downloading and manipulating the default Windows ISO (prior to ins
 - Open the Command Prompt as an administrator 
 - Type `wsreset -i` The issue should be fixed in a few minutes.
 
-## Bonus: Installing Windows 10/11 with Ventoy
+## Bonus
+
+### Installing Windows 10/11 with Ventoy
 Once the ISO has been build, you can copy it onto a bootable USB flash drive created with [Ventoy](https://www.ventoy.net/en/index.html). Reboot the system from the USB flash drive and select the Windows iso from the menu. If you choose "Wimboot" as boot method, this even allows you to install Windows 11 on systems with Secure Boot enabled as well as on systems that don't have a TPM2 module, which is a requirement for installing Windows 11.
+
+### XML Generator for unattended install
+
+There's an online generator for creating an XML file for unattended Windows installs. **Link**: https://schneegans.de/windows/unattend-generator/ 
+
+When using Ventoy for installing Windows, you have to use [Plugson](https://ventoy.net/en/plugin_plugson.html) to prepare the USB flash drive for unattended installs.
+
+
+
