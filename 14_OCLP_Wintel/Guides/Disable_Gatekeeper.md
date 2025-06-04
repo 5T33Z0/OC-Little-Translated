@@ -7,7 +7,7 @@
 From macOS 15.1.1 onward, Apple reverted the necessity of having a configuration profile to disable Gatekeeper, so the old Terminal command works again:
 
 ``` shell
-spctl --master-disable
+sudo spctl --master-disable
 Globally disabling the assessment system needs to be confirmed in System Settings.
 ```
 
