@@ -1,15 +1,15 @@
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.5-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.5-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-25.05.18-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.5-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤15.5-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-25.06.05-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
-**TABLE of CONTENTS**
-## PREFACE
+## TABLE of CONTENTS
+### PREFACE
 
 * [**DISCLAIMER**](#disclaimer)
 * [**About OC-Little Translated**](#about)
 * [**About the translation**](#about-the-translation)
 
-## MAIN
+### MAIN
 
 * [**ACPI basics and guides**](/00_ACPI/README.md)
 * [**Adding/Enabling Devices and Features with SSDTs**](/01_Adding_missing_Devices_and_enabling_Features/README.md)
@@ -25,7 +25,7 @@
 * [**MMIO Whitelist**](/12_MMIO_Whitelist/README.md)
 * [**Fixing falsely reported RAM speed**](/15_RAM/README.md)
 
-## SPECIAL
+### SPECIAL
 * [**Using OpenCore-Patcher on Wintel machines**](/14_OCLP_Wintel/README.md)
 * [**Board-ID Skip and VMM Spoof**](/09_Board-ID_VMM-Spoof/README.md)
 * [**Utilities and Resource**](/C_Utilities_and_Resources/README.md)
