@@ -115,6 +115,8 @@ If you would like to contribute to the information provided in this repo in orde
 
 ## OC Commits over time
 
+The following chart represents the commit frequency on Acidanthera's OpenCorePkg repository from the imitial commit in 2019 up to June 6th, 2025:
+
 ![OC_Commits_over_time](https://github.com/user-attachments/assets/a0481685-3bd4-43a3-8719-66d739f35538)
 
 ## 5T33Z0's 5H0UT 0UT5
