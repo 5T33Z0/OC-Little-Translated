@@ -1,5 +1,7 @@
 # Fixing USB issues
 
+**TABLE of CONTENTS**
+
 - [Technical Background](#technical-background)
   - [USB Specs](#usb-specs)
   - [Removing the USB port limit and mapping USB ports](#removing-the-usb-port-limit-and-mapping-usb-ports)
