@@ -80,7 +80,7 @@ Tools for getting, generating and editing ACPI tables.
 ### Post-Install Patcher Apps
 Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 
-- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) –  OCLP can install NVIDIA and Intel Graphics Drivers removed from macOS 12 and newer.
+- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) –  OCLP can install NVIDIA and Intel Graphics Drivers removed from macOS 12 and newer as well as re-enable previously working WiFi/BT cards.
 - ~~[**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS 12 and newer.~~ Superseeded by OCLP
 - ~~[**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – For installing Intel HD 4000 iGPU drivers which have been removed from macOS 12 and newer.~~ Superseeded by OCLP
 
