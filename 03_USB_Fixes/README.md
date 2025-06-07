@@ -25,19 +25,23 @@ A single physical USB 3 connector (typically the blue one) supports two distinct
 
 ### USB Specs
 
-| USB Version | Year | Signaling rate | Current Name | Marketing name | Controller | Notes |
-|:-----------:|------|:--------------:|-------------:|---------------:|:----------:|-------|
-| USB 1.0/1.1 | 1996 | 1.5 Mbps <br>12 Mbps | USB 1.0/1.1 | Low-Speed <br>Full-Speed | UHCI/OHCI | Dropped from macOS Ventura+. Important for driving keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support). |
-| USB 2.0     | 2000 | 480 Mbps         | USB 2.0 | High-Speed         | EHCI | Requires USB port-mapping (via Kext or ACPI)  |
-| USB 3.0     | 2008 | 5 Gbps | USB 3.2 Gen 1x1 | USB 5 Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI)    |
-| USB 3.1     | 2013 | 10 Gbps | USB 3.2 Gen 2x1 | USB 10 Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI)  |
-| USB 3.2     | 2017 | Up to 20 Gbps | USB 3.2 Gen 2x2 | USB 20 Gbps | TB/PCIe | **Requirements**: <ul><li> USB-C port and cable (mandatory) <li> Port-mapping <li> Patched Thunderbolt controller |
-| USB4        | 2019 | Up to 40 Gbps    | USB4 1.0 | USB4 40 Gbps | TB/PCIe | N/A in macOS |
-| USB4v2      | 2022 | Up to 80 Gbps    | USB4 2.0 | USB4 80 Gbps | TB/PCIe‚ | N/A in macOS |
+| USB Version | Year | Signaling Rate | Current Name | Marketing Name | Controller | Notes |
+|:-----------:|:----:|:--------------:|:------------:|:--------------:|:----------:|:-----|
+| USB 1.0/1.1 | 1996 | 1.5 Mbps <br>12 Mbps | USB 1.0/1.1 | Low-Speed <br>Full-Speed | UHCI/OHCI | Dropped from macOS Ventura+. Critical for legacy keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support). |
+| USB 2.0     | 2000 | 480 Mbps       | USB 2.0     | High-Speed     | EHCI       | Requires USB port-mapping (via Kext or ACPI) for macOS compatibility. Backward compatible with USB 1.x. |
+| USB 3.0     | 2008 | 5 Gbps         | USB 3.2 Gen 1x1 | USB 5Gbps | XHCI       | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 2.0. |
+| USB 3.1     | 2013 | 10 Gbps        | USB 3.2 Gen 2x1 | USB 10Gbps | XHCI       | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 3.2 Gen 1x1 and USB 2.0. |
+| USB 3.2     | 2017 | 20 Gbps        | USB 3.2 Gen 2x2 | USB 20Gbps | XHCI       | Requires USB-C port and cable. Port-mapping and patched Thunderbolt controller may be needed for full functionality. Backward compatible with lower USB versions. |
+| USB4        | 2019 | Up to 40 Gbps  | USB4 Gen 3x2 | USB4 40Gbps | TB/PCIe    | Not natively supported in macOS. Requires Thunderbolt 3/4 or PCIe controller. Supports USB-C, backward compatible with USB 3.2 and USB 2.0. Optional tunneling for PCIe and DisplayPort. |
+| USB4v2      | 2022 | Up to 80 Gbps  | USB4 Gen 4x2 | USB4 80Gbps | TB/PCIe    | Not natively supported in macOS. Requires USB-C and specific controllers (Thunderbolt 4 or PCIe). Supports asymmetric 120 Gbps (80 Gbps one direction, 40 Gbps other). Backward compatible with USB4, USB 3.2, and USB 2.0. |
 
 > [!NOTE]
-> 
-> Apple uses Thunderbolt 3 to for USB 3.2. USB4 is not implemented in macOS yet.
+>
+> 1. **Naming Conventions**: The USB-IF simplified naming in 2019, emphasizing performance-based marketing names (e.g., USB 5Gbps, USB 10Gbps) over version numbers to reduce confusion. The "Current Name" reflects technical designations (e.g., USB 3.2 Gen 1x1), while "Marketing Name" uses the consumer-friendly speed-based names.
+> 2. **USB4 and USB4v2**: USB4 Gen 3x2 (40 Gbps) and USB4 Gen 4x2 (80 Gbps) are clarified with their technical names. USB4v2 introduces asymmetric bandwidth (up to 120 Gbps in one direction), but 80 Gbps is the standard bidirectional rate.
+> 3. **Controllers**: USB4 and USB4v2 rely on Thunderbolt/PCIe controllers, with USB4 requiring Thunderbolt 3/4 compatibility for full features. XHCI remains standard for USB 3.x.
+> 4. **macOS Support**: USB4 and USB4v2 lack native macOS support, requiring specific hardware and drivers.
+> 5. **Backward Compatibility**: All versions maintain backward compatibility, but performance is limited to the lowest common denominator of connected devices, cables, and ports.
 
 ### Removing the USB port limit and mapping USB ports
 
