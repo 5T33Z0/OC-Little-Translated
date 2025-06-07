@@ -1,6 +1,25 @@
 # Utilities and Resources
 Incomplete list of useful freeware Apps, Tools and Resources for hackintoshing.
 
+- [Boot Managers](#boot-managers)
+- [Apps and Tools](#apps-and-tools)
+  - [Getting macOS](#getting-macos)
+  - [Troubleshooting/Debugging](#troubleshootingdebugging)
+  - [Editing plists, updating OpenCore and kexts](#editing-plists-updating-opencore-and-kexts)
+  - [ACPI-related tools](#acpi-related-tools)
+  - [Audio](#audio)
+  - [Laptop-specific](#laptop-specific)
+  - [macOS Apps (General)](#macos-apps-general)
+  - [macOS Virtualization](#macos-virtualization)
+  - [Post-Install Patcher Apps](#post-install-patcher-apps)
+  - [Cross-Platform](#cross-platform)
+  - [CPU-related](#cpu-related)
+  - [Windows](#windows)
+  - [Web-based applications](#web-based-applications)
+- [Further Resources](#further-resources)
+
+---
+
 ## Boot Managers
 - [**OpenCore Releases**](https://github.com/acidanthera/OpenCorePkg/releases) – Official RELEASE and DEBUG versions of OpenCore.
 - [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true) – Latest Nightly Builds from Dortania's Repo.
