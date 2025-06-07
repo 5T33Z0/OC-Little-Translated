@@ -71,7 +71,8 @@ Tools for getting, generating and editing ACPI tables.
 - [**DevCleaner for Xcode**](https://github.com/vashpan/xcode-dev-cleaner) - App for clearing various Xcode caches to reclaim tens of gigabytes of storage.
 - [**unpkg**](https://www.timdoug.com/unpkg/) – Utility to unpack .pkg files into a folder instead of installing them on the system.
 - [**LuLu**](https://github.com/objective-see/LuLu) – Free open-source macOS firewall.
-- [Find Any File](https://findanyfile.app/) – FAF can find files that Spotlight doesn't, e.g. on network (NAS) and other external volumes, hidden ones inside bundles and packages, and those in folders that are usually excluded from Spotlight search, such as the System and Library folders.
+- [**Find Any File**](https://findanyfile.app/) – FAF can find files that Spotlight doesn't, e.g. on network (NAS) and other external volumes, hidden ones inside bundles and packages, and those in folders that are usually excluded from Spotlight search, such as the System and Library folders.
+- [**MonitorControl**](https://github.com/MonitorControl/MonitorControl) – Enables brightness controls for external displays via keyboard/menu bar.
 
 ### macOS Virtualization
 - [**Create macOS VM Install**](https://github.com/rtrouton/create_macos_vm_install_dmg) – Script to prepare macOS installer disk images for use with virtualization software like VMware Fusion or Parallels Desktop.
@@ -79,9 +80,9 @@ Tools for getting, generating and editing ACPI tables.
 ### Post-Install Patcher Apps
 Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 
-- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) –  Can install NVIDIA and Intel Graphics Drivers removed from macOS 12 and newer.
-- [**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS 12 and newer.
-- [**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – For installing Intel HD 4000 iGPU drivers which have been removed from macOS 12 and newer.
+- [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) –  OCLP can install NVIDIA and Intel Graphics Drivers removed from macOS 12 and newer.
+- ~~[**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS 12 and newer.~~ Superseeded by OCLP
+- ~~[**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – For installing Intel HD 4000 iGPU drivers which have been removed from macOS 12 and newer.~~ Superseeded by OCLP
 
 ### Cross-Platform
 - [**Python Installer**](https://www.python.org/downloads/) – Necessary for running the python-based tools in this list
