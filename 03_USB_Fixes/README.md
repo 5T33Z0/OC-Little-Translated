@@ -80,7 +80,7 @@ The following method is applicable when using [**USBMap**](https://github.com/co
 - Enjoy working USB ports!
 
 #### Using Hackintool (outdated, inconvenient but prevalent)
-This method is applicable when using [**Hackintool**](https://github.com/benbaker76/Hackintool). Although wide-spread, using Hackintool for mapping USB ports is a bit antiquated, requires a kot more prepworkd and is unreliable in terms of detecting *internal* USB ports. You also need 2 different kinds of USB flash drives for mapping ports: a USB 2 and a USB 3 stick!
+This method is applicable when using [**Hackintool**](https://github.com/benbaker76/Hackintool). Although wide-spread, using Hackintool for mapping USB ports is a bit antiquated, requires a lot more prepwork and is unreliable in terms of detecting *internal* USB ports. You also need a USB 2 and a USB 3 flash drive to detept/map ports!
 
 - [**Update OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) to the latest version (0.9.3 or newer is mandatory!)
 - Mount your EFI
