@@ -2,9 +2,7 @@
 Incomplete list of commonly used (and rather uncommon) boot-args and device properties that can be injected by boot managers such as OpenCore and Clover. These are not simply copied and pasted from their respective repositories; I tried to provide additional information about where I could gather it. I also used tables instead of lists to separate boot-args, properties and descriptions more clearly, which makes it easier to copy entries and identify additional parameters associated with a boot-arg/property (such as switches and bitmasks).
 
 <details>
-<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary>
-
-**TABLE of CONTENTS**
+<summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
 
 - [Debugging](#debugging)
 - [Network-specific boot arguments](#network-specific-boot-arguments)
@@ -167,7 +165,7 @@ boot-arg | Property | Description
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers` | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` (Ivy Bridge+) or `AAPL,snb-platform-id` (Sandy Bridge only) | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
 **`igfxfw=2`** | `igfxfw` | Forces loading of Apple's Graphics Unit Control (GUC) firmware. Improves Intel Quick Sync Video performance. Requires chipset supporting Intel ME v12 or newer (Z390, B360, H370, H310, Q370, C246, Z490, etc.). It's [buggy](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Should be tested on a case by case basis. `igfxfw` takes precedence over `igfxrpsc=1` when both are set.
-**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch which improves iGPU performance on Kaby Lake+ using chipsets without ME v12 support (Z370 and others) 
+**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch which improves iGPU performance on Kaby Lake+ using chipsets without ME v12 support ([More details](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/RPS-Control.md)).
 **`wegtree=1`** | `rebuild-device-tree` | Forces WEG to rename the device tree of the iGPU after Apple GUC Firmware is loaded. Useful if the iGPU doesn't work after applying `igfxfw=2` (on a compatible CPU and chipset, of course). 
 **`igfxgl=1`** | `disable-metal` | Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
