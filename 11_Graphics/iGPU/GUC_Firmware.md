@@ -10,6 +10,7 @@
 - [Differences Between GuC Firmware and RPS Control](#differences-between-guc-firmware-and-rps-control)
 - [How to Enable GuC Firmware with WhateverGreen](#how-to-enable-guc-firmware-with-whatevergreen)
 - [Tips for Testing](#tips-for-testing)
+- [Known issues](#known-issues)
 - [Additional Notes](#additional-notes)
 
 ---
@@ -141,6 +142,10 @@ To enable GuC firmware:
 
 ## Tips for Testing
 To evaluate the impact of patches like RPS control or Apple’s GuC firmware on iGPU performance, run Geekbench 5’s Metal test (under “Compute”) three times: once with your default framebuffer, once with RPS control enabled, and once with GuC firmware force-enabled. Compare the scores – higher values indicate better performance. Use the configuration with the best results. If GuC firmware causes issues in daily use, revert to RPS control.
+
+## Known issues
+
+- **Firefox** crashing while using Apple GUC (Generic USB Client) firmware is a known issue that has been reported by several users. In this case either use Safari or disable Apple GuC firmware injection.
 
 ## Additional Notes
 
