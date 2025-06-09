@@ -44,9 +44,12 @@ The `rps-control` patch, implemented via **WhateverGreen.kext** (a Lilu plugin),
   - The patch works within the macOS kernel, leveraging WhateverGreen’s ability to hook into and modify the Intel framebuffer driver. It ensures compatibility with macOS’s expectations for GPU behavior while compensating for non-Apple hardware.
 
 ### 3. Implementation in macOS
+
+The `rps-control` patch was introduced in WhaveverGreen v1.4.1 as an auto-enabled feature. It can be utilized by Kaby Lake and newer CPUs. Since RPS Control caused issues in macOS Catalina 10.15.6 due to a bug in the iGPU drivers, it was disabled in v1.4.2. Since then, the RPS control patch it has to be enabled manually by a boot-arg or device property of the iGPU (see below).
+
 - **Configuration**:
   - The `rps-control` patch is enabled via **WhateverGreen.kext** using either a boot argument or a device property in the bootloader configuration (OpenCore or Clover).
-  - **Boot Argument**: Add `-igfxrpsc` or `-igfxrpsc=1` to the boot arguments in your `config.plist`.
+  - **Boot Argument**: Add `-igfxrpsc=1` to the boot arguments in your `config.plist`.
   - **Device Property**: Add the `rps-control` property under the iGPU’s device path (e.g., `PciRoot(0x0)/Pci(0x2,0x0)` for integrated GPUs) in the `DeviceProperties` section of your `config.plist`. 
   
     **Example**:
