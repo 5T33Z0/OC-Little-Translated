@@ -15,6 +15,7 @@ Incomplete collection of iGPU related fixes. For general configuration of Intel 
 	- [**How to enable "GPU" Tab in Activity Monitor, Hardware Acceleration and Metal 3 Support in macOS 13+**](/11_Graphics/Metal_3)
 	- [**Framebuffer patching for enabling external display on Laptops**](/11_Graphics/iGPU/Framebuffer_Patching/README.md)
  	- [**How the `rps-control` property works**](/11_Graphics/iGPU/RPS-Control.md)
+  	- [**How Apple's GUC firmware works**](/11_Graphics/iGPU/GUC_Firmware.md)
 
 ## Resources
 - `DeviceProperties` with Framebuffer Patches for numerous Intel iGPUs for most CPU Generations can be obtained from the config.plists in the &rarr; [**Desktop EFIs Section**](/F_Desktop_EFIs).
