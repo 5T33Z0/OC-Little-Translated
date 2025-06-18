@@ -187,11 +187,13 @@ _UPC, Package ()
    | `0x06` | USB 3 `Micro-AB` |
    | `0x07` | USB 3 `Power-B` |
    | `0x08` | USB Type `C` **(USB 2 only)** |
-   | `0x09` | USB Type `C` **(with switch)** | 
-   | `0x0A` | USB Type `C` **(w/o switch)** | 
+   | `0x09` | USB Type `C` **(USB 2 and 3 with switch)** | 
+   | `0x0A` | USB Type `C` **(USB 2 and 3 without switch)** | 
    | `0xFF` | Built-in |
 
-**UBS-C Switches**: if both sides of a USB-C connector are plugged into the same physical port and hackintool uses the same port for it, than the connected device has a switch. In other words: 2 sides, 1 port = switch. Conversely, if both sides of the same connector occupy two ports, it has no switch
+> [!NOTE]
+>
+> About **USB-C Switches**: A USB-C connector has a switch if it can be plugged into the same physical port in both orientations but it only maps to one (the same) port. In other words, if both sides of the connector (2 sides) map to a single port (1 port), it has a switch. Conversely, if each side of the connector occupies a different port (2 sides, 2 ports), it has no switch. If your USB-C device does have no switch you should ensure to map ports for both directions, otherwise thesre's a 50/50 chance your USB device will not mount. You can use [USBMap](https://github.com/corpnewt/USBMap) script to detect if a USB-C port has a switch or not.
 
 #### 2. `_PLD` ([**Physical Location of Device**](https://uefi.org/specs/ACPI/6.5/06_Device_Configuration.html#pld-physical-location-of-device))
 
