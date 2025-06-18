@@ -62,7 +62,7 @@
 * [**Create/modify a Layout-ID for AppleALC**](/L_ALC_Layout-ID/README.md)
 * [**Compiling slimmed-down variants of Kexts**](/J_Compiling_Kexts/README.md)
 * [**Debugging with SysReport**](/K_Debugging/README.md)
-* [**Combining all SSDTs into one file (`SSDT-ALL`)**](/N_SSDT-ALL/README.md)
+* [**Combining all SSDTs into one file (`SSDT-ALL`)**](/00_ACPI/SSDT-ALL)
 * [**Using Clover alongside OpenCore**](/R_BootloaderChooser/README.md)
 
 ___
