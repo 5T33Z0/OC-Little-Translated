@@ -15,4 +15,4 @@
 	- [**Renaming Devices via ACPI**](/00_ACPI/ACPI_Rename_Devices/README.md)
 	- [**Debugging ACPI Tables**](/00_ACPI/ACPI_Debugging/README.md)
 	- [**Kernel-dependant Device Property injection via SSDTs**]((https://github.com/b00t0x/opencore-macos-version-specific-dp))
-
+	- [**SSDT-ALL**](/00_ACPI/SSDT-ALL) – Guide for merging multiple SSDTs into a single SSDT
