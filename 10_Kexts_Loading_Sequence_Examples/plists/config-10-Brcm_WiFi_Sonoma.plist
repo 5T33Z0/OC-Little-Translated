@@ -109,13 +109,40 @@
 				<key>Identifier</key>
 				<string>com.apple.iokit.IOSkywalkFamily</string>
 				<key>MaxKernel</key>
-				<string></string>
+				<string>24.9.9</string>
 				<key>MinKernel</key>
 				<string>23.0.0</string>
 				<key>Strategy</key>
 				<string>Exclude</string>
 			</dict>
 		</array>
+	</dict>
+	<key>NVRAM</key>
+	<dict>
+		<key>Add</key>
+		<dict>
+			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
+			<dict>
+				<key>bluetoothExternalDongleFailed</key>
+				<data>AA==</data>
+				<key>bluetoothInternalControllerInfo</key>
+				<data>AAAAAAAAAAAAAAAAAAA=</data>
+				<key>boot-args</key>
+				<string>-btlfxboardid brcmfx-country=#a</string>
+				<key>csr-active-config</key>
+				<data>AwgAAA==</data>
+			</dict>
+		</dict>
+		<key>Delete</key>
+		<dict>
+			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
+			<array>
+				<string>bluetoothExternalDongleFailed</string>
+				<string>bluetoothInternalControllerInfo</string>
+				<string>boot-args</string>
+				<string>csr-active-config</string>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>
