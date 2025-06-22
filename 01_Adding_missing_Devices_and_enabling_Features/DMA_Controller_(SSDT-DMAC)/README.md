@@ -21,7 +21,7 @@
 
 ## Use case: enabling `AppleVTD`
 
-&rarr; See [**Enabling AppleVTD**](/AppleVTD)
+&rarr; See [**Enabling AppleVTD**](/01_Adding_missing_Devices_and_enabling_Features/AppleVTD)
 
 ## Instructions
 
