@@ -19,9 +19,14 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 
 ## Instructions
 
+### Getting the tools
+
+- Download the [tools](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/11_Graphics/Inject_EDID/Tools_backup.7z) and extract them
+- It contains 2 apps: DarwinDumper and FixEDID
+- Continue with the guide
+
 ### Obtaining EDID dump
-- Download and unzip [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/)
-- Run the App
+- Run DarwinDumper
 - In "Save Path", select a path like "Documents"
 - Click on "Deselect All Dumps"
 - Select "EDID":</br>![EDID_01](https://user-images.githubusercontent.com/76865553/184684084-f64b2f07-fa05-4718-9ee9-cec5940d355c.png)
@@ -29,9 +34,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 - Once the process is completed, a Finder Window will open and show the dumped files:</br>:![EDID_02](https://user-images.githubusercontent.com/76865553/184684157-5c54c023-15e7-411b-a8f8-154a94676a5f.png)
 
 ### Extracting the EDID value from `EDID.bin`
-- Download [**FixEDID**](https://github.com/andyvand/FixEDID) (click on "Code" and select "Download ZIP")
-- Unzip the file
-- Open **FixEDID** App (located under "FixEDID-master/Release_10.7 and +"). If macOS won't let you run it, open it wia right-click menu.
+- Run **FixEDID** App
 - Click on "Open EDID binary file":</br>![EDID_03](https://user-images.githubusercontent.com/76865553/184684202-9aa99568-a179-42d4-8672-38448990948d.png)
 - Navigate to the dumped `EDID.bin` file and open it
 - Select "Apple iMac Retina Display (16:9)" if your display supports HD and High DPI, otherwise use whatever is appropriate for your display.
@@ -75,8 +78,9 @@ Hopefully this will resolve the issue!
 If the above method doesn't work to fix black screen issues after wake, try [**`HibernationFixup.kext`**](https://github.com/acidanthera/HibernationFixup) in combination with boot-arg `-hbfx-disable-patch-pci` instead.
 
 ## Credits and Resources
-- For fixing purple/magenta screen issues, try [this fix](https://github.com/dreamwhite/patch_edid)
 - Acidanthera for OpenCore, Whatevergreen and HibernationFixup
 - Blackosx for [**DarwinDumper**](https://bitbucket.org/blackosx/darwindumper/downloads/)
 - andyvand for [**FixEDID**](https://github.com/andyvand/FixEDID)
 - Daliansky for [**original guide**](https://blog-daliansky-net.translate.goog/Use-HIDPI-to-solve-sleep-wake-up-black-screen,-Huaping-and-connect-the-external-monitor-the-correct-posture.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+- For fixing purple/magenta screen issues, try [this fix](https://github.com/dreamwhite/patch_edid)
+
