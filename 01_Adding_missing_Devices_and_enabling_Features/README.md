@@ -8,9 +8,10 @@
   - [Dumping ACPI tables with Clover (easiest and fastest method)](#dumping-acpi-tables-with-clover-easiest-and-fastest-method)
   - [Dumping ACPI tables with OpenCore (requires Debug version)](#dumping-acpi-tables-with-opencore-requires-debug-version)
   - [Dumping ACPI tables with `SSDTTime` (Windows version only)](#dumping-acpi-tables-with-ssdttime-windows-version-only)
-- [Adding missing Devices and Features](#adding-missing-devices-and-features)
+- [Enabling Devices and Features via SSDTs](#enabling-devices-and-features-via-ssdts)
   - [Functional SSDTs](#functional-ssdts)
   - [Cosmetic SSDTs (optional)](#cosmetic-ssdts-optional)
+  - [Other](#other)
 - [Converting `.dsl` files to `.aml`](#converting-dsl-files-to-aml)
 - [Applying different ACPI patches for different versions of macOS](#applying-different-acpi-patches-for-different-versions-of-macos)
 - [SSDTs vs. `config.plist`: Understanding Property Injection Precedence](#ssdts-vs-configplist-understanding-property-injection-precedence)
@@ -105,7 +106,7 @@ If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) in Microso
 > 
 > If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, download them manually [here](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the `SSDTTime.bat` file again.
 
-## Adding missing Devices and Features
+## Enabling Devices and Features via SSDTs
 Listed below, you will find two categories of ACPI hotfixes: essential (or functional) and non-essential SSDTs. **Functional** SSDTs are a *necessity* for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. `SSDT-ALS0` or `SSDT-PNLF`), some are required based on the used CPU and/or chipset (e.g. `SSDT-HPET`, `SSDT-AWAC` or `SSDT-PMCR`). Non-essential (or **cosmetic**) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or browser through the folders above to find out which you may need.
 
 The hotfixes have to be placed in `EFI/OC/ACPI` and added to the `config.plist` (under `ACPI/Add`). OpenCore accepts files with `.aml` and `.bin` extension.
@@ -159,6 +160,12 @@ The SSDTs listed below are considered cosmetic and non-functional – they are n
 [**SSDT-MEM2**](/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2/README.md)|Adds `MEM2` Device to the iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
 [**SSDT-PPMC**](/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)/README.md)| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
 [**SSDT-XSPI**](/01_Adding_missing_Devices_and_enabling_Features/Intel_PCH_SPI_Controller_(SSDT-XSPI)/README.md)|Adds fake Intel PCH SPI Controller to IOReg. Present on 10th gen Macs (and some 9th Gen Mobile CPUs). Probably cosmetic, although uncertain.|`0x001F0005` 
+
+### Other
+
+Listed below are guides for enabling devices, features or services in macOS which cannot be enabled by a single SSDT alone but require additional configuration changes as well.
+
+- [**Enabling AppleVTD**](/01_Adding_missing_Devices_and_enabling_Features/AppleVTD)
 
 ---
 
