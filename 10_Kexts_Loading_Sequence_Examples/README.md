@@ -173,12 +173,11 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 
 > [!TIP]
 > 
-> If Wi-Fi stops working after updating kexts included in the [BrcmPatchRam](https://github.com/acidanthera/BrcmPatchRAM) package (like BluetoolFixup, for example) to 2.7.0 or newer, add `-btlfxboardid` boot argument to patch board-id on macOS 14+. Because automatic board-id patching was disabled, since it is unused by Intel BT…
+> If Wi-Fi stops working after updating kexts included in the [BrcmPatchRam](https://github.com/acidanthera/BrcmPatchRAM) package (like BluetoolFixup, for example) to 2.7.0 or newer, add `-btlfxboardid` boot argument to patch board-id on macOS 14+. Because automatic board-id patching was disabled, since it is unused by Intel BT.
 
 > [!CAUTION]
 > 
 > Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected by Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
-
 
 #### Fixing issues with AirportBrcmFixup generating a lot of crash reports
 I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
