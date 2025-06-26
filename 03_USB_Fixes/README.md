@@ -10,6 +10,7 @@
   - [Option 2: Mapping ports in macOS](#option-2-mapping-ports-in-macos)
     - [Using USBMap (recommended)](#using-usbmap-recommended)
     - [Using Hackintool (outdated, inconvenient but prevalent)](#using-hackintool-outdated-inconvenient-but-prevalent)
+- [Adjusting USBMap Kexts for macOS Tahoe Compatibility](#adjusting-usbmap-kexts-for-macos-tahoe-compatibility)
 - [Method 2: Mapping USB Ports via ACPI](#method-2-mapping-usb-ports-via-acpi)
 - [Additional Resources](#additional-resources)
 
@@ -115,6 +116,10 @@ This method is applicable when using [**Hackintool**](https://github.com/benbake
 > If you decide to change the SMBIOS later, you have to adjust the `model` property inside the kext's `info.plist` – otherwise the mapping won't be applied!
 > 
 > **Example**:<br> ![USBremap](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/4386daf7-fc63-480d-8922-9632425c3c57)
+
+## Adjusting USBMap Kexts for macOS Tahoe Compatibility
+
+In order for USBMap kexts to work in macOS Tahoe, the `info.plist` inside the kext needs to be adjusted. &rarr; [Instructions](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Enable_Features/USB_Tahoe.md)
 
 ## Method 2: Mapping USB Ports via ACPI
 Declaring USB ports is via ACPI is the "gold standard" since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for). It's aimed at advanced users only who are experienced in working with ACPI tables already. 
