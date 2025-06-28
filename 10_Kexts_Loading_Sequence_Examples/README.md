@@ -206,7 +206,7 @@ If you have multiple versions of macOS installed and want to use AirportItlwm in
 4. Extract and rename them: I usually add an underscore followed by the name of the OS, e.g. `AirportItlwm_Sonoma.kext` (don’t add empty spaces!)
 5. Add them to `EFI/OC/Kexts` and your `config.plist`
 6. Disable `itlwm.kext` (if present)
-7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for:<br>![Airportitlwm](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/f47386b8-34f9-42fc-bdb3-8f29b7b95777)
+7. Next, add `MinKernel` and `MaxKernel` settings to limit the kext to only load the kext for the macOS version it’s designed for:<br>![itlwm](https://github.com/user-attachments/assets/c505f572-e8ca-4f21-bf84-c42b8a9a7c4f)
 8. Save your config
 
 > [!IMPORTANT]
