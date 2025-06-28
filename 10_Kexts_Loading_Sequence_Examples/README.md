@@ -214,6 +214,7 @@ If you have multiple versions of macOS installed and want to use AirportItlwm in
 > - Adding the correct `MinKernel` and `MaxKernel` settings is *really* important. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
 > - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
 > - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md)). Afterwards, you can revert the settings.
+> - The pink combination requires additional configuration (rarr; See "[Enabling AirportItlwm in macOS Sequoia](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Enable_Features/AirportItllwm_Sequoia.md)" for instructions
 
 ### Example 9a: Possible Desktop Kext Sequence
 ![config9](https://user-images.githubusercontent.com/76865553/140826181-073a2204-aacb-435e-970c-1823cd2786d1.png)
