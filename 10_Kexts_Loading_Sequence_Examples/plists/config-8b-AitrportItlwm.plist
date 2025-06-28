@@ -10,17 +10,53 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>BundlePath</key>
-				<string>itlwm.kext</string>
+				<string>IOSkywalkFamily.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFI Driver (use HeliPort to connect with WiFi!)</string>
+				<string>V1.0 | Kext Downgrade for macOS Sequoia. Requires blocking system IOSkywalkFamily</string>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/itlwm</string>
+				<string>Contents/MacOS/IOSkywalkFamily</string>
 				<key>MaxKernel</key>
-				<string></string>
+				<string>24.9.9</string>
 				<key>MinKernel</key>
-				<string></string>
+				<string>24.0.0</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>IO80211FamilyLegacy.kext</string>
+				<key>Comment</key>
+				<string>V1200.12.2b1 | Kext Downgrade for macOS Sequoia. Requires blocking system IOSkywalkFamily</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/IO80211FamilyLegacy</string>
+				<key>MaxKernel</key>
+				<string>24.9.9</string>
+				<key>MinKernel</key>
+				<string>24.0.0</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>AirportItlwm_HighSierra.kext</string>
+				<key>Comment</key>
+				<string>V2.4.0 | WiFi kext for macOS 10.13 High Sierra</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/AirportItlwm</string>
+				<key>MaxKernel</key>
+				<string>17.9.9</string>
+				<key>MinKernel</key>
+				<string>17.0.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
@@ -30,7 +66,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Mojave.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Mojave</string>
+				<string>V2.4.0 | WiFi kext for macOS 10.14 Mojave</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -48,7 +84,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Catalina.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Catalina</string>
+				<string>V2.4.0 | WiFi kext for macOS 10.15 Catalina</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -66,7 +102,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_BigSur.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Big Sur</string>
+				<string>V2.4.0 | WiFi kext for macOS 11 Big Sur</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -84,7 +120,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Monterey.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Monterey</string>
+				<string>V2.4.0 | WiFi kext for macOS 12 Monterey</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -102,7 +138,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Ventura.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Ventura</string>
+				<string>V2.4.0 | WiFi kext for macOS 13 Ventura</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -120,7 +156,7 @@
 				<key>BundlePath</key>
 				<string>AirportItlwm_Sonoma.kext</string>
 				<key>Comment</key>
-				<string>V2.3.0 | Intel WiFi Driver for macOS Sonoma</string>
+				<string>V2.4.0 | WiFi kext for macOS 14 Sonoma</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -131,6 +167,61 @@
 				<string>23.0.0</string>
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>AirportItlwm_Sequoia.kext</string>
+				<key>Comment</key>
+				<string>V2.4.0 | WiFi kext for macOS 15 Sequoia. Requires root patching with OCLP</string>
+				<key>Enabled</key>
+				<false/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/AirportItlwm</string>
+				<key>MaxKernel</key>
+				<string>24.9.9</string>
+				<key>MinKernel</key>
+				<string>24.0.0</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>BundlePath</key>
+				<string>itlwm.kext</string>
+				<key>Comment</key>
+				<string>V2.4.0 | WiFi kext for macOS 26 Tahoe (requires Heliport App)</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/itlwm</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string>25.0.0</string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+		</array>
+		<key>Block</key>
+		<array>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>Comment</key>
+				<string>Allows IOSkywalk Downgrade</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Identifier</key>
+				<string>com.apple.iokit.IOSkywalkFamily</string>
+				<key>MaxKernel</key>
+				<string>24.9.9</string>
+				<key>MinKernel</key>
+				<string>24.0.0</string>
+				<key>Strategy</key>
+				<string>Exclude</string>
 			</dict>
 		</array>
 	</dict>
