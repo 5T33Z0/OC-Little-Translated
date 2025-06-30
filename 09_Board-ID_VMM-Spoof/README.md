@@ -1,4 +1,4 @@
-# Using unsupported Board-IDs with macOS 11.3 and newer
+# Using unsupported Board-IDs with macOS 11.3 to 26
 
 **TABLE of CONTENTS**
 
