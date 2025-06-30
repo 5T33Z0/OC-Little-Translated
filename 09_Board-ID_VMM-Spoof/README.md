@@ -31,7 +31,7 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 > - Prior to the release of `RestrictEvents.kext`, the kernel patches had negative effects on Bluetooth since enabling the VMM Board-ID skipped loading firmware of Bluetooth devices. This has been resolved now (&rarr; [ more details](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)).
 
 ## System Requirements
-**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+) is ***mandatory***!</br>
+**Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+) is ***mandatory***!
 
 **Intel CPU families**:
 
@@ -40,10 +40,12 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 - Ivy Bridge
 - Haswell/Broadwell
 - Skylake (to continue using SMBIOS `iMac17,1` on macOS 13+). Requires additional [iGPU spoof](https://github.com/5T33Z0/OC-Little-Translated/tree/main/11_Graphics/iGPU/Skylake_Spoofing_macOS13) so the Intel HD 530 can be used.
+- Kaby Lake (required for intstalling/booting macOS 26)
+- Coffee Lake (required for installing/booting macOS 26)
 
 > [!NOTE]
 >
-> 7th to 10 Gen Intel Core CPUs don't need this spoof (yet) since they are still supported by macOS.
+> 10 Gen Intel Core CPUs don't need this spoof since they are still supported by macOS 26 Tahoe.
 
 ## Use Cases
 1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOSes/Board-IDs
