@@ -45,7 +45,7 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 
 > [!NOTE]
 >
-> 10 Gen Intel Core CPUs don't need this spoof since they are still supported by macOS 26 Tahoe.
+> 10th Gen Intel Core CPUs (Comet Lake) don't need this spoof since they are still supported by macOS 26 Tahoe.
 
 ## Use Cases
 1. **Installing macOS 11.3+** on systems with unsupported CPUs and SMBIOSes/Board-IDs
