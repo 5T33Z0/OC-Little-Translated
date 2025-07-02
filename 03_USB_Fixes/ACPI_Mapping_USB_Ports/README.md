@@ -42,7 +42,7 @@ Although the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 
 
 > While [using `XHCIPortLimit`] sounds like the best-case solution, it does come with some drawbacks… The port limit is *hardcoded* in a ton of places all over OS, and as we're only lifting it in a few, this causes access outside the bounds of a fixed array. We're accessing things that shouldn't even be there, and that can cause some odd or unpredictable side effects.[…] Ultimately, it's considered best practice to only leverage the port limit patch for the mapping process, and then to disable it.
 > 
-> **Source**: https://github.com/corpnewt/USBMap/blob/master/Information.md#port-limit-patch
+> **Source**: [CorpNewt](https://github.com/corpnewt/USBMap/blob/master/Information.md#port-limit-patch)
 
 Since USB port injector kexts are usually bound to the SMBIOS, the best and cleanest way to declare USB ports is via ACPI, since this method works independent of the macOS version and SMBIOS!
 
