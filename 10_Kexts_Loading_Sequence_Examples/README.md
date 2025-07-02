@@ -171,9 +171,9 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 	- Adjust some config settings (see &rarr; [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14))
 	- [Apply root patches with OpenCore Legacy Patcher](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
 
-> [!TIP]
+> [!IMPORTANT]
 > 
-> If Wi-Fi stops working after updating kexts included in the [BrcmPatchRam](https://github.com/acidanthera/BrcmPatchRAM) package (like BluetoolFixup, for example) to 2.7.0 or newer, add `-btlfxboardid` boot argument to patch board-id on macOS 14+. Because automatic board-id patching was disabled, since it is unused by Intel BT.
+> If Wi-Fi stops working after updating kexts from the [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM) package (e.g., BluetoolFixup) to version 2.7.0 or later, add the `-btlfxboardid` boot argument to enable board-id patching on macOS 14 or newer. This is necessary because automatic board-id patching has been disabled by default, as it is not needed for Intel Bluetooth.
 
 > [!CAUTION]
 > 
