@@ -81,7 +81,8 @@ The following table contains the Kernel version ranges for OSX 10.4 up to macOS 
 
 |OS X/macOS Version (Name) | MinKernel | MaxKernel| Architecture
 |-------------------------:|:---------:|:--------:|:-----------:
-macOS 15 (Sequoia)         | 24.0.0    | 24.99.99 | Intel (64-bit)</br>Apple Silicon (ARM)
+macOS 26 (Tahoe)           | 25.0.0    | -        | Intel (64-bit)</br>Apple Silicon (ARM)
+macOS 15 (Sequoia)         | 24.0.0    | 24.99.99 | "
 macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
 macOS 13 (Ventura)         | 22.0.0    | 22.99.99 | "
 macOS 12 (Monterey)        | 21.0.0    | 21.99.99 | "
@@ -101,6 +102,10 @@ OS X 10.6 (Snow Leopard)   | 10.0.0    | 10.99.99 | "
 ||
 OS X 10.5 (Leopard)        | 9.0.0     | 9.99.99  | PowerPC (PPC)<br>Intel (32/64-bit)
 OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  | "
+
+> [!NOTE]
+>
+> Since Hackintoshing will end with macOS Tahoe, there's no need to set `MaxKernel` for it.
 
 > [!TIP]
 >
