@@ -194,9 +194,9 @@ This issue is related to Smart Connect, a feature of WiFi routers which support 
 
 ### Example 8b: Using `AirportItlwm.kext` in multiple versions of macOS
 
-As you may know, 2 kexts for enabling Wi-Fi support for Intel cards exist: itlwm and AirportItlwm. unlike the Itlwm, AirportItlwm requires a different variant of the kext per macOS version (macOS High Sierra up to Sonoma are currently supported).
+As you may know, 2 kexts for enabling Wi-Fi support for Intel cards exist: `itlwm` and `AirportItlwm`. unlike the Itlwm, AirportItlwm requires a different variant of the kext per macOS version (macOS High Sierra up to Sonoma are currently supported).
 
-If you have multiple versions of macOS installed and want to use AirportItlwm in all of them, you have to be able to have different builds of the kext present in your EFI folder so Wi-Fi works on all of your macOS versions.
+If you have multiple versions of macOS installed and want to use AirportItlwm in all of them, you have to be able to have different builds of the kext present in your EFI folder so Wi-Fi works on all of your macOS versions. The screenshot in the instructions below lists all available AirportItlwm kexts with the corresponding `MinKernel` and `MaxKernel` settings.
 
 #### Instructions       
 
