@@ -56,7 +56,7 @@ OpenCore handles the `Kernel` section of the `config.plist` in the following ord
 > Prior to OpenCore Commit 6a65dd1, `Add` and `Force` where last in the chain which made it impossible to patch force-injected kexts.
 
 ## Lilu and VirtualSMC first?
-Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***! **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. `ProperTree` cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot. For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
+Although it is recommended to load **Lilu** and **VirtualSMC** first in order to simplfy kext-related troubleshooting, ***this is not a requirement per se***! **Lilu** and **VirtualSMC** only need to load *prior to any kexts that rely on them*. [**ProperTree**](https://github.com/corpnewt/ProperTree) cross-references `CFBundleIdentifiers` against `OSBundleLibraries` to ensure the correct loading order of kexts when creating a config snapshot. For reviewers of configs who try to assist other users in fixing config issues, this complicates troubleshooting.
 
 > [!TIP]
 > 
