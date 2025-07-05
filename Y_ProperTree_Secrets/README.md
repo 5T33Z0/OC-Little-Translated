@@ -58,7 +58,7 @@ Just highlight the whole raw text, copy it into memory. Open ProperTree, paste i
 ## Converting a .plist file or sections of it to raw text
 Another feature I noticed is that you can use ProperTree to convert plists or sections of it into raw text really easy. And the best thing about it: it automatically creates a correct file header and structure required for .plist files, so if you share a patch as raw text, other user can easily use it.
 
-### Example 1: converting a `config.plist` to raw test
+### Example 1: converting a `config.plist` to raw text
 - Open a config.plist with ProperTree
 - Select the `Root`dictionary:</br>![Raw_01](https://user-images.githubusercontent.com/76865553/183616793-1cfa06ab-dc13-4378-80c9-04b0638fd77a.png)
 - Press <kbd>⌘</kbd><kbd>c</kbd>
@@ -66,7 +66,7 @@ Another feature I noticed is that you can use ProperTree to convert plists or se
 - Change Format to raw text (CMD+SHIFT+T)
 - Press <kbd>⌘</kbd><kbd>v</kbd> and there's your config as raw text:</br>![Raw_02](https://user-images.githubusercontent.com/76865553/183616846-8da43d18-3590-447a-ae6c-79e498ef2b99.png)
 
-### Example 2: converting a specific section to raw test
+### Example 2: converting a specific section to raw text
 Same goes for specific sections like arrays and dictionaries. In this example Kernel/Quirks.
 
 - Open a .plist with ProperTree
