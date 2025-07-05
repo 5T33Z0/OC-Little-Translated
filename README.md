@@ -19,64 +19,64 @@ OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch
 ## Core Guides
 
 ### ACPI and Device Configuration
-- [ACPI Basics and Guides](/00_ACPI/README.md)
-- [Adding Missing Devices and Enabling Features with SSDTs](/01_Adding_missing_Devices_and_enabling_Features/README.md)
-- [Disabling Devices](/02_Disabling_Devices/README.md)
-- [MMIO Whitelist](/12_MMIO_Whitelist/README.md)
-- [Merging SSDTs into a sigle file (`SSDT-ALL`)](/00_ACPI/SSDT-ALL)
+- [ACPI Basics and Guides](/Content/00_ACPI/README.md)
+- [Adding Missing Devices and Enabling Features with SSDTs](/Content/01_Adding_missing_Devices_and_enabling_Features/README.md)
+- [Disabling Devices](/Content/02_Disabling_Devices/README.md)
+- [MMIO Whitelist](/Content/12_MMIO_Whitelist/README.md)
+- [Merging SSDTs into a sigle file (`SSDT-ALL`)](Content/00_ACPI/SSDT-ALL)
 
 ### System Fixes
-- [Fixing Graphics (Integrated/Discrete)](/11_Graphics/README.md)
-- [Fixing USB](/03_USB_Fixes/README.md)
-- [Fixing Sleep and Wake Issues](/04_Fixing_Sleep_and_Wake_Issues/README.md)
-- [Fixing Peripherals](/13_Peripherals/README.md)
-- [Fixing Falsely Reported RAM Speed](/15_RAM/README.md)
-- [CMOS-Related Fixes](/06_CMOS-related_Fixes/README.md)
+- [Fixing Graphics (Integrated/Discrete)](/Content/11_Graphics/README.md)
+- [Fixing USB](/Content/03_USB_Fixes/README.md)
+- [Fixing Sleep and Wake Issues](/Content/04_Fixing_Sleep_and_Wake_Issues/README.md)
+- [Fixing Peripherals](/Content/13_Peripherals/README.md)
+- [Fixing Falsely Reported RAM Speed](/Content/15_RAM/README.md)
+- [CMOS-Related Fixes](/Content/06_CMOS-related_Fixes/README.md)
 
 ### Laptop-Specific
-- [Laptop-Specific Patches](/05_Laptop-specific_Patches/README.md)
+- [Laptop-Specific Patches](/Content/05_Laptop-specific_Patches/README.md)
 
 ### Boot and Kext Management
-- [Boot Arguments Explained](/H_Boot-args/README.md)
-- [Kext Loading Sequence Examples](/10_Kexts_Loading_Sequence_Examples/README.md)
+- [Boot Arguments Explained](/Content/H_Boot-args/README.md)
+- [Kext Loading Sequence Examples](/Content/10_Kexts_Loading_Sequence_Examples/README.md)
 - [Compiling Slimmed-Down Variants of Kexts](/J_Compiling_Kexts/README.md)
-- [BOOT Folder Configuration](/07_BOOT_Folder/README.md)
+- [BOOT Folder Configuration](/Content/07_BOOT_Folder/README.md)
 
 ## Advanced Configuration
 
 ### OpenCore Configuration
-- [Config Tips & Tricks](/A_Config_Tips_and_Tricks/README.md)
-- [Quirks](/08_Quirks/README.md)
-- [EFI Upload Checklist](/M_EFI_Upload_Chklst/README.md)
-- [OpenCore Calculators](/B_OC_Calculators/README.md)
-- [Featured OpenCanopy Themes](/T_Themes/README.md)
-- [Board-ID check skip and VMM Spoof](/09_Board-ID_VMM-Spoof/README.md)
-- [ProperTree Secrets](/Y_ProperTree_Secrets)
+- [Config Tips & Tricks](/Content/A_Config_Tips_and_Tricks/README.md)
+- [Quirks](/Content/08_Quirks/README.md)
+- [EFI Upload Checklist](/Content/M_EFI_Upload_Chklst/README.md)
+- [OpenCore Calculators](/Content/B_OC_Calculators/README.md)
+- [Featured OpenCanopy Themes](/Content/T_Themes/README.md)
+- [Board-ID check skip and VMM Spoof](/Content/09_Board-ID_VMM-Spoof/README.md)
+- [ProperTree Secrets](/Content/Y_ProperTree_Secrets)
 
 ### OpenCore Auxiliary Tools (OCAT)
-- [Updating OpenCore](/D_Updating_OpenCore/README.md)
-- [Switching to NO_ACPI Build of OpenCore](/O_OC_NO_ACPI/README.md)
-- [Generating EFIs with OCAT](/F_Desktop_EFIs/README.md)
+- [Updating OpenCore](/Content/D_Updating_OpenCore/README.md)
+- [Switching to NO_ACPI Build of OpenCore](/Content/O_OC_NO_ACPI/README.md)
+- [Generating EFIs with OCAT](/Content/F_Desktop_EFIs/README.md)
 
 ### macOS-Specific
-- [Terminal Commands](/Terminal_Commands.md#readme)
-- [Compatibility Charts](/E_Compatibility_Charts/README.md)
-- [Fixing System Update Notifications](/S_System_Updates/README.md)
-- [macOS 14.4 Install Workaround](/W_Workarounds/README.md)
-- [Creating a Multi-macOS USB Installer](/U_USB_Multi_installer/README.md)
-- [macOS Virtualization](/V_Virtualization/README.md)
+- [Terminal Commands](/Content/Terminal_Commands.md#readme)
+- [Compatibility Charts](/Content/E_Compatibility_Charts/README.md)
+- [Fixing System Update Notifications](/Content/S_System_Updates/README.md)
+- [macOS 14.4 Install Workaround](/Content/W_Workarounds/README.md)
+- [Creating a Multi-macOS USB Installer](/Content/U_USB_Multi_installer/README.md)
+- [macOS Virtualization](/Content/V_Virtualization/README.md)
 
 ### Other Operating Systems
-- [Windows-Related Guides](/I_Windows/README.md)
-- [Enabling Linux Boot Entries](/G_Linux/README.md)
+- [Windows-Related Guides](/Content/I_Windows/README.md)
+- [Enabling Linux Boot Entries](/Content/G_Linux/README.md)
 
 ### Special Topics
-- [Generating OpenCore EFIs with OpCore Simplify](/P_OpCore_Simplify/README.md)
-- [Using OpenCore-Patcher on Wintel Machines](/14_OCLP_Wintel/README.md)
-- [Creating/Modifying a Layout-ID for AppleALC](/L_ALC_Layout-ID/README.md)
-- [Debugging with SysReport](/K_Debugging/README.md)
-- [Using Clover Alongside OpenCore](/R_BootloaderChooser/README.md)
-- [Utilities and Resources](/C_Utilities_and_Resources/README.md)
+- [Generating OpenCore EFIs with OpCore Simplify](/Content/P_OpCore_Simplify/README.md)
+- [Using OpenCore-Patcher on Wintel Machines](/Content/14_OCLP_Wintel/README.md)
+- [Creating/Modifying a Layout-ID for AppleALC](/Content/L_ALC_Layout-ID/README.md)
+- [Debugging with SysReport](/Content/K_Debugging/README.md)
+- [Using Clover Alongside OpenCore](/Content/R_BootloaderChooser/README.md)
+- [Utilities and Resources](/Content/C_Utilities_and_Resources/README.md)
 
 ## Disclaimer
 
@@ -126,4 +126,3 @@ The chart below shows commit frequency for Acidanthera's OpenCorePkg repository 
   - **XianWu**: For ACPI component patches.
   - **Bat.bat, DalianSky, athlonreg, iStar丶Forever**: For proofreading and finalization.
   - **Additional Credits**: 冬瓜-X1C5th, OC-xlivans, Air 13 IWL-GZ-Big Orange, 子骏oc IWL, 大勇-小新air13-OC-划水小白, xjn819, and Acidanthera for OpenCorePkg.
-
