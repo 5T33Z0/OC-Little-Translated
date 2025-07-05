@@ -51,6 +51,7 @@ OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch
 - [OpenCore Calculators](/B_OC_Calculators/README.md)
 - [Featured OpenCanopy Themes](/T_Themes/README.md)
 - [Board-ID check skip and VMM Spoof](/09_Board-ID_VMM-Spoof/README.md)
+- [ProperTree Secrets](/Y_ProperTree_Secrets)
 
 ### OpenCore Auxiliary Tools (OCAT)
 - [Updating OpenCore](/D_Updating_OpenCore/README.md)
