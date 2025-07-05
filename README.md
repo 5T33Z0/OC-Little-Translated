@@ -1,109 +1,103 @@
+
+
 # OC-Little: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.5-success.svg)](https://github.com/acidanthera/OpenCorePkg) ![macOS](https://img.shields.io/badge/Supported_macOS:-≤26b-white.svg) ![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-25.06.22-blueviolet.svg)</br>![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.5-success.svg)](https://github.com/acidanthera/OpenCorePkg)
+![macOS](https://img.shields.io/badge/Supported_macOS:-≤26b2-white.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_(yy/mm/dd):-25.07.09-blueviolet.svg)
 
-## TABLE of CONTENTS
-### PREFACE
+![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
-* [**DISCLAIMER**](#disclaimer)
-* [**About OC-Little Translated**](#about)
-* [**About the translation**](#about-the-translation)
+## Overview
 
-### MAIN
+OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch samples, guides, and fixes to enhance macOS compatibility on hackintosh systems. This repository, based on [OC-Little](https://github.com/daliansky/OC-little) by Daliansky, provides translated and expanded content, focusing on achieving a "Real Vanilla Hackintosh" experience while maintaining ACPI compliance.
 
-* [**ACPI basics and guides**](/00_ACPI/README.md)
-* [**Enabling Devices and Features with SSDTs**](/01_Adding_missing_Devices_and_enabling_Features/README.md)
-* [**Disabling Devices**](/02_Disabling_Devices/README.md)
-* [**Fixing Graphics**](/11_Graphics/README.md) (integrated/discrete)
-* [**Fixing USB**](/03_USB_Fixes/README.md)
-* [**Fixing Sleep and Wake Issues**](04_Fixing_Sleep_and_Wake_Issues/README.md)
-* [**Fixing issues with peripherals**](/13_Peripherals/README.md)
-* [**Laptop-specific Patches**](/05_Laptop-specific_Patches/README.md)
-* [**CMOS-related Fixes**](/06_CMOS-related_Fixes/README.md)
-* [**BOOT Folder**](/07_BOOT_Folder/README.md)
-* [**Kext Loading Sequence Examples**](/10_Kexts_Loading_Sequence_Examples/README.md)
-* [**MMIO Whitelist**](/12_MMIO_Whitelist/README.md)
-* [**Fixing falsely reported RAM speed**](/15_RAM/README.md)
+- [Disclaimer](#disclaimer)
+- [About OC-Little](#about-oc-little)
+- [Translation Notes](#translation-notes)
 
-### SPECIAL
-* [**Using OpenCore-Patcher on Wintel machines**](/14_OCLP_Wintel/README.md)
-* [**Board-ID Skip and VMM Spoof**](/09_Board-ID_VMM-Spoof/README.md)
-* [**Utilities and Resource**](/C_Utilities_and_Resources/README.md)
+## Core Guides
 
-## APPENDIX
+### ACPI and Device Configuration
+- [ACPI Basics and Guides](/00_ACPI/README.md)
+- [Adding Missing Devices and Enabling Features with SSDTs](/01_Adding_missing_Devices_and_enabling_Features/README.md)
+- [Disabling Devices](/02_Disabling_Devices/README.md)
+- [MMIO Whitelist](/12_MMIO_Whitelist/README.md)
+- [Merging SSDTs into a sigle file (`SSDT-ALL`)](/00_ACPI/SSDT-ALL)
 
-### Config-related
-* [**Config Tips & Tricks**](/A_Config_Tips_and_Tricks/README.md)
-* [**Boot Arguments Explained**](/H_Boot-args/README.md)
-* [**Quirks**](/08_Quirks/README.md)
-* [**EFI Upload Checklist**](/M_EFI_Upload_Chklst/README.md)
-* [**Generating OpenCore EFIs with OpCore Simplify**](/P_OpCore_Simplify/README.md)
+### System Fixes
+- [Fixing Graphics (Integrated/Discrete)](/11_Graphics/README.md)
+- [Fixing USB](/03_USB_Fixes/README.md)
+- [Fixing Sleep and Wake Issues](/04_Fixing_Sleep_and_Wake_Issues/README.md)
+- [Fixing Peripherals](/13_Peripherals/README.md)
+- [Fixing Falsely Reported RAM Speed](/15_RAM/README.md)
+- [CMOS-Related Fixes](/06_CMOS-related_Fixes/README.md)
 
-### Guides for OpenCore Auxiliary Tools (OCAT)
-* [**Updating OpenCore**](/D_Updating_OpenCore/README.md)
-* [**OpenCore Calculators**](/B_OC_Calculators/README.md)
-* [**Switching to NO_ACPI build of OpenCore**](/O_OC_NO_ACPI/README.md)
-* [**Generating EFIs with OCAT**](/F_Desktop_EFIs/README.md)
+### Laptop-Specific
+- [Laptop-Specific Patches](/05_Laptop-specific_Patches/README.md)
 
-### macOS-related
-* [**Terminal Commands**](/Terminal_Commands.md#readme)
-* [**Compatibility Charts**](/E_Compatibility_Charts/README.md)
-* [**Fixing issues with System Update Notifications**](/S_System_Updates/README.md)
-* [**macOS 14.4 install workaround**](/W_Workarounds/README.md)
-* [**Creating a multi macOS USB Installer**](/U_USB_Multi_installer/README.md)
+### Boot and Kext Management
+- [Boot Arguments Explained](/H_Boot-args/README.md)
+- [Kext Loading Sequence Examples](/10_Kexts_Loading_Sequence_Examples/README.md)
+- [Compiling Slimmed-Down Variants of Kexts](/J_Compiling_Kexts/README.md)
+- [BOOT Folder Configuration](/07_BOOT_Folder/README.md)
 
-### Other OSes
-* [**Windows-related Guides**](/I_Windows/README.md)
-* [**Enabling Linux Boot Entries**](/G_Linux/README.md)
-* [**macOS Virtualization**](/V_Virtualization/README.md)
+## Advanced Configuration
 
-### Miscellaneous
-* [**Featured OpenCanopy Themes**](/T_Themes/README.md)
-* [**Create/modify a Layout-ID for AppleALC**](/L_ALC_Layout-ID/README.md)
-* [**Compiling slimmed-down variants of Kexts**](/J_Compiling_Kexts/README.md)
-* [**Debugging with SysReport**](/K_Debugging/README.md)
-* [**Combining all SSDTs into one file (`SSDT-ALL`)**](/00_ACPI/SSDT-ALL)
-* [**Using Clover alongside OpenCore**](/R_BootloaderChooser/README.md)
+### OpenCore Configuration
+- [Config Tips & Tricks](/A_Config_Tips_and_Tricks/README.md)
+- [Quirks](/08_Quirks/README.md)
+- [EFI Upload Checklist](/M_EFI_Upload_Chklst/README.md)
+- [OpenCore Calculators](/B_OC_Calculators/README.md)
+- [Featured OpenCanopy Themes](/T_Themes/README.md)
+- [Board-ID check skip and VMM Spoof](/09_Board-ID_VMM-Spoof/README.md)
 
-___
+### OpenCore Auxiliary Tools (OCAT)
+- [Updating OpenCore](/D_Updating_OpenCore/README.md)
+- [Switching to NO_ACPI Build of OpenCore](/O_OC_NO_ACPI/README.md)
+- [Generating EFIs with OCAT](/F_Desktop_EFIs/README.md)
 
-## DISCLAIMER
-1. OC-Little Translated is not an installation guide for getting your system up and running with macOS – use Dortania's excellent [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/) for that! Instead, it's a supplementary resource that offers guides and fixes for various issues related to hackintosh systems, along with explanations and context about how they work. It is regularly updated to reflect the latest discoveries and developments of the hackintosh community.
-2. The material presented in this repo is designed to empower users to create a *proper* working system running macOS without breaking ACPI-compliancy! Therefore, **OC-Little Translated** does not support methods which do not hold up to this premise – such as patching the `DSDT` – since it's not an *appropriate* measure to get the "Real Vanilla Hackintosh" experience. In fact, it's quite the opposite, [**as discussed on insanelymac**](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870).
-	
-## ABOUT
-Collection of guides, ACPI Hotpatches and Binary Renames for use with the OpenCore Boot Manager based on [**OC-Little by Daliansky**](https://github.com/daliansky/OC-little) translated from Chinese.
+### macOS-Specific
+- [Terminal Commands](/Terminal_Commands.md#readme)
+- [Compatibility Charts](/E_Compatibility_Charts/README.md)
+- [Fixing System Update Notifications](/S_System_Updates/README.md)
+- [macOS 14.4 Install Workaround](/W_Workarounds/README.md)
+- [Creating a Multi-macOS USB Installer](/U_USB_Multi_installer/README.md)
+- [macOS Virtualization](/V_Virtualization/README.md)
 
-Besides the original translated guides, this repo contains additional guides complementary to the ones provided by the OpenCore Package and Dortania's OpenCore Guides. It covers a wide range of hackintosh-related topics, including: 
+### Other Operating Systems
+- [Windows-Related Guides](/I_Windows/README.md)
+- [Enabling Linux Boot Entries](/G_Linux/README.md)
 
-- ACPI basics
-- Enabling devices and features
-- Fixing sleep/wake and other power-related issues
-- Guides for Mapping USB Ports
-- Fixing Laptop-specific issues
-- Fixing graphics-related issues
-- Config-related tips
-- Guides for using OpenCore Legacy Patcher on Wintel Systems
+### Special Topics
+- [Generating OpenCore EFIs with OpCore Simplify](/P_OpCore_Simplify/README.md)
+- [Using OpenCore-Patcher on Wintel Machines](/14_OCLP_Wintel/README.md)
+- [Creating/Modifying a Layout-ID for AppleALC](/L_ALC_Layout-ID/README.md)
+- [Debugging with SysReport](/K_Debugging/README.md)
+- [Using Clover Alongside OpenCore](/R_BootloaderChooser/README.md)
+- [Utilities and Resources](/C_Utilities_and_Resources/README.md)
 
-Check the table of contents for more. Although aimed primarily at OpenCore users, all of the SSDTs and most of the guides/techniques are applicable to Clover as well.
+## Disclaimer
 
-### About the translation
-- AI-based translation using deepL, google translator as well as manual copyediting.
-- Restructured the repository into more plausible (sub-)sections and categories based on types of issues, components, methods, etc.
-- Restructured Texts for better readability and comprehensibility
-- Rewrote whole sections which were confusing/misleading (`ACPI` and `USB Port Mapping` for example)
-- Added missing descriptions
-- Added further explanations where necessary
-- Added new content (USB Port Mapping via ACPI, Chapters 7 to 14 as well as the whole "Appendix" section)
+1. **Not an Installation Guide**: OC-Little is not a guide for installing macOS. For that, refer to [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/). This repository provides supplementary guides, fixes, and explanations for hackintosh systems.
+2. **ACPI Compliance**: OC-Little emphasizes methods that maintain ACPI compliance, avoiding techniques like DSDT patching, which deviate from a "Real Vanilla Hackintosh" experience. See [this discussion on InsanelyMac](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870) for more details.
 
-> [!NOTE]
->
-> Due to the fact that I don't speak Chinese the translation might not be 100% accurate.
+## About OC-Little
 
-## CONTRIBUTIONS
-If you would like to contribute to the information provided in this repo in order to improve/expand it, feel free to create an issue with a meaningful title, link to the chapter/section and describe what you like to add, change, correct or expand upon.
+OC-Little is a collection of ACPI hotpatches, binary renames, and guides for OpenCore, translated from [Daliansky's OC-Little](https://github.com/daliansky/OC-little). It complements Dortania's OpenCore Guides and covers topics like ACPI basics, device enabling, USB mapping, graphics fixes, and more. While tailored for OpenCore, most SSDTs and techniques are compatible with Clover.
 
-## STAR HISTORY
+## Translation Notes
+
+- **Translation Process**: Uses AI-based tools (DeepL, Google Translate) with manual copyediting for accuracy.
+- **Restructuring**: Organized into logical sections based on issue types, components, and methods.
+- **Improvements**: Rewritten confusing sections (e.g., ACPI, USB Port Mapping), added missing descriptions, and included new content (e.g., USB Port Mapping via ACPI, Chapters 7–14, and the Appendix).
+- **Accuracy Note**: As the translator does not speak Chinese, minor inaccuracies may exist.
+
+## Contributions
+
+To contribute, create an issue with a clear title, link to the relevant chapter/section, and describe your proposed additions, changes, or corrections.
+
+## Star History
 
 <a href="https://star-history.com/#5T33Z0/OC-Little-Translated&Date">
  <picture>
@@ -113,32 +107,22 @@ If you would like to contribute to the information provided in this repo in orde
  </picture>
 </a>
 
-## OC Commits over time
+## OC Commits Over Time
 
-The following chart represents the commit frequency on Acidanthera's OpenCorePkg repository from the imitial commit in 2019 up to June 6th, 2025:
+The chart below shows commit frequency for Acidanthera's OpenCorePkg repository from 2019 to June 6, 2025:
 
 ![OC_Commits_over_time](https://github.com/user-attachments/assets/a0481685-3bd4-43a3-8719-66d739f35538)
 
-## 5T33Z0's 5H0UT 0UT5
+## Acknowledgments
 
-- Thanks to al the [**contributors**](https://github.com/5T33Z0/OC-Little-Translated/graphs/contributors) for improving and expanding the repo! Additional credits for contributors outside of the github realm are listed in the respective chapters/sections.
-- sascha_77 for Kext Updater, ANYmacOS and helping me to unbrick my Lenovo T530 BIOS!
-- Apfelnico for introducing me to ASL/AML Basics
-- Bluebyte for having good conversations
-- Cyberdevs from insanelymac for his Z170X Gaming 5 Guide and for being a prime example of a Moderator who treats others with respect!
+- **Contributors**: Thanks to all [contributors](https://github.com/5T33Z0/OC-Little-Translated/graphs/contributors) for improving this repo. Additional credits are listed in relevant chapters.
+- **Special Thanks**:
+  - **sascha_77**: For Kext Updater, ANYmacOS, and BIOS unbricking assistance.
+  - **Apfelnico**: For introducing ASL/AML basics.
+  - **Bluebyte**: For insightful discussions.
+  - **Cyberdevs**: For the Z170X Gaming 5 Guide and exemplary moderation.
+- **Daliansky's Original Credits**:
+  - **XianWu**: For ACPI component patches.
+  - **Bat.bat, DalianSky, athlonreg, iStar丶Forever**: For proofreading and finalization.
+  - **Additional Credits**: 冬瓜-X1C5th, OC-xlivans, Air 13 IWL-GZ-Big Orange, 子骏oc IWL, 大勇-小新air13-OC-划水小白, xjn819, and Acidanthera for OpenCorePkg.
 
-<details>
-<summary><strong>Daliansky's original Credits</strong></summary>
-
-> - Special credit to:
-> 	- @XianWu write these ACPI component patches that useable to OpenCore
-> 	- @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalization.
-> - Credits and thanks to：
-> 	- @冬瓜-X1C5th
-> 	- @OC-xlivans
-> 	- @Air 13 IWL-GZ-Big Orange (OC perfect)
-> 	- @子骏oc IWL
-> 	- @大勇-小新air13-OC-划水小白
-> 	- @xjn819
-> 	- Acidanthera for maintaining OpenCorePkg
-</details>
