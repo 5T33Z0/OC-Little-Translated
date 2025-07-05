@@ -39,7 +39,7 @@ As shown earlier, the system firmware updates the ACPI tables *dynamically* duri
 
 Therefore, *dynamic patching* with SSDTs is preferred and much cleaner in regards to acpi-conformity than using a patched DSDT. Plus the whole process is much more efficient, transparent and elegant. And that's why you should avoid patched DSDTs. So whoever tells you that a hackintosh without a patched `DSDT` is incomplete or not fully functional is not fully functional either.
 
-Continue to the next Chapter, [**ASL Basics**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/ASL_Basics.md).
+Continue to the next Chapter, [**ASL Basics**](/Content/00_ACPI/ACPI_Basics/ASL_Basics.md).
 
 ## CREDITS and RESOURCES
 - Original [**ASL Guide**](https://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1) by suhetao
