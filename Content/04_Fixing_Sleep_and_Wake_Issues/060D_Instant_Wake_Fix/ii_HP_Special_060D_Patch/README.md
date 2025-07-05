@@ -1,6 +1,6 @@
 # HP Special `0D6D` patch
 
-- See [`0D6D Patch`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix) to find out for more about this fix.
+- See [`0D6D Patch`](/Content/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix) to find out for more about this fix.
 - Some HP machines with `_PRW` methods for some parts of `ACPI` (related to `0D6D`) are as follows:
 
 	```asl

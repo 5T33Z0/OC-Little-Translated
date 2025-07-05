@@ -14,7 +14,7 @@ This section contains a collection of guides with laptop-specific patches for en
     - for other brands
 - [**Enabling Brightness Key Shortcuts**](/05_Laptop-specific_Patches/Brightness_Key_Shortcuts/README.md)
 - [**Fixing Keyboard Mappings and Brightness Keys**](/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/README.md)
-- [**Brand-specific patches for different Laptop Models**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches)
+- [**Brand-specific patches for different Laptop Models**](/Content/05_Laptop-specific_Patches/Brand-specific_Patches)
     - Dell Machine Special Patch
     - Enabbling 4k output on Dell Optiplex Laptops
     - Xiaoxin PRO13 Special Patch

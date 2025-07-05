@@ -1,8 +1,12 @@
 # Disabling PCI devices
 
+**INDEX**
+
 - [Description](#description)
 - [Device name](#device-name)
 - [SSDT Disable Patch Example](#ssdt-disable-patch-example)
+
+---
 
 ## Description
 

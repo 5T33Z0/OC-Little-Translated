@@ -1,6 +1,6 @@
 # Fixing USB issues
 
-**TABLE of CONTENTS**
+**INDEX**
 
 - [Technical Background](#technical-background)
   - [USB Specs](#usb-specs)
@@ -79,7 +79,7 @@ Since the `XhciPortLimit` quirk has been fixed since OC 0.9.3, it can be used ag
 #### Using USBMap (recommended)
 The following method is applicable when using [**USBMap**](https://github.com/corpnewt/USBMap).
 
-- [**Update OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) to the latest version (0.9.3 or newer is mandatory!)
+- [**Update OpenCore**](/Content/D_Updating_OpenCore) to the latest version (0.9.3 or newer is mandatory!)
 - Enable Kernel Quirk `XchiPortLimit`
 - Save your config and reboot
 - Follow the [**instructions**](https://github.com/corpnewt/USBMap#general-mapping-process) to map your USB ports and generate a `USBPort.kext`
@@ -91,7 +91,7 @@ The following method is applicable when using [**USBMap**](https://github.com/co
 #### Using Hackintool (outdated, inconvenient but prevalent)
 This method is applicable when using [**Hackintool**](https://github.com/benbaker76/Hackintool). Although wide-spread, using Hackintool for mapping USB ports is a bit antiquated, requires a lot more prepwork and is unreliable in terms of detecting *internal* USB ports. You also need a USB 2 and a USB 3 flash drive to detept/map ports!
 
-- [**Update OpenCore**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) to the latest version (0.9.3 or newer is mandatory!)
+- [**Update OpenCore**](/Content/D_Updating_OpenCore) to the latest version (0.9.3 or newer is mandatory!)
 - Mount your EFI
 - Add Daliansky's variant of [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) to `EFI/OC/Kexts` and your `config.plist` since it also supports the latest chipsets
 - [**Prepare your system**](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) for mapping by renaming USB controllers.
@@ -124,7 +124,7 @@ In order for USBMap kexts to work in macOS Tahoe, the `info.plist` inside the ke
 ## Method 2: Mapping USB Ports via ACPI
 Declaring USB ports is via ACPI is the "gold standard" since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for). It's aimed at advanced users only who are experienced in working with ACPI tables already. 
 
-You can follow [**this guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via ACPI.
+You can follow [**this guide**](/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via ACPI.
 
 ## Additional Resources
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 700-series mainboards. Its `info.plist` contains about 9.300 lines of code while the original by Rehabman is from 2018 and "only" contains about 6.800!

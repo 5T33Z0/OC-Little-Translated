@@ -62,7 +62,7 @@ Clover users don't have to worry about this since binary renames and SSDT hotpat
             }
         }
 	```
-- **Example**: [**Fixing IRQ Conflicts**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))
+- **Example**: [**Fixing IRQ Conflicts**](/Content/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET))
 
 > [!IMPORTANT]
 >
@@ -104,7 +104,7 @@ If you are using [**SSDTTime**](https://github.com/corpnewt/SSDTTime) in Microso
 
 > [!NOTE]
 > 
-> If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, download them manually [here](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the `SSDTTime.bat` file again.
+> If you get an error message because automatic downloading of the required tools (`iasl.exe` and `acpidump.exe`) fails, [download them from Intel](https://www.intel.com/content/www/us/en/download/774881/acpi-component-architecture-downloads-windows-binary-tools.html), extract the .zip, place both executables in the "Scripts" folder and run the `SSDTTime.bat` file again.
 
 ## Enabling Devices and Features via SSDTs
 Listed below, you will find two categories of ACPI hotfixes: essential (or functional) and non-essential SSDTs. **Functional** SSDTs are a *necessity* for booting macOS on Wintel systems. Some SSDTs might be required based on the used macOS version (e.g. `SSDT-ALS0` or `SSDT-PNLF`), some are required based on the used CPU and/or chipset (e.g. `SSDT-HPET`, `SSDT-AWAC` or `SSDT-PMCR`). Non-essential (or **cosmetic**) SSDTs can only be regarded as a refinement. These are not a necessity for getting your Hackintosh to work. Read the descriptions or browser through the folders above to find out which you may need.
@@ -113,7 +113,7 @@ The hotfixes have to be placed in `EFI/OC/ACPI` and added to the `config.plist` 
 
 > [!NOTE]
 > 
-> You can use the Python Script [**SSDTTime**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
+> You can use the Python Script [**SSDTTime**](/Content/01_Adding_missing_Devices_and_enabling_Features/_SSDTTime) to generate a lot of relevant SSDT hotfixes automatically. 
 
 ### Functional SSDTs
 Listed below are SSDTs which add or enable devices and features in macOS. Use the listed search terms to find the device in your system's `DSDT`. If there's no search term listed, further analysis of the `DSDT` is required to apply the hotpatch. Read the description of a hotpatch first to find out if you really need it and how to apply it correctly.

@@ -43,7 +43,7 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 - Choose a better quality SSD: SLC>MLC>TLC>QLC (not sure)
 - Update SSD firmware if possible to improve power management performance
 - Enable APST (Autonomous Power State Transition) for SSDs using [`NVMeFix.kext`](https://github.com/acidanthera/NVMeFix/releases)
-- Configure [`ASPM`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode) (if you can't enable it in the BIOS/UEFI directly)
+- Configure [`ASPM`](/Content/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode) (if you can't enable it in the BIOS/UEFI directly)
 
 ## AOAC Sleep, Wake
 
@@ -52,19 +52,19 @@ Although **Disabling `S3` sleep** solves the **sleep failure** problem, the mach
 
 ## AOAC Patches
 
-- [Prevent S3 Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/i_Prevent_S3_Sleep)
-- [Disabling Discrete GPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/ii_AOAC_Disable_Discrete_GPU)
-- [Deep Idle Power Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iii_Power_Management_Deep_Idle)
-- [AOAC Wakeup Method](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv_AOAC_wake-up_method)
-- [Turning off Bluetooth and WIFI during Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/v_Sleep_automatically_turns_off_Bluetooth_WIFI)
-- Fixing instant Wake issues &rarr; see [060D Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
-- Enabling `L1` power state &rarr; see [Configuring ASPM](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
+- [Prevent S3 Sleep](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/i_Prevent_S3_Sleep)
+- [Disabling Discrete GPUs](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/ii_AOAC_Disable_Discrete_GPU)
+- [Deep Idle Power Management](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iii_Power_Management_Deep_Idle)
+- [AOAC Wakeup Method](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/iv_AOAC_wake-up_method)
+- [Turning off Bluetooth and WIFI during Sleep](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/v_Sleep_automatically_turns_off_Bluetooth_WIFI)
+- Fixing instant Wake issues &rarr; see [060D Patch](/Content/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix)
+- Enabling `L1` power state &rarr; see [Configuring ASPM](/Content/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode)
 
 > [!CAUTION]
 >
 >- The `AOAC` fix is a temporary solution. With the widespread use of `AOAC` technology, there may be a better solution in the future.
 >- Since `AOAC` sleep/wake is different from `S3` sleep/wake, the following patches are not applicable:
->   - [PTSWAKTTS Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
->   - [PNP0C0E Sleep Fix](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
+>   - [PTSWAKTTS Patch](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+>   - [PNP0C0E Sleep Fix](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 >- For the same reason as above, `AOAC` sleep does not show the working status correctly, such as no breathing light blinks during sleep.
 >- You can also try this method on non-AOAC machines.

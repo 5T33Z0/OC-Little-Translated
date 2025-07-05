@@ -1,5 +1,7 @@
 # Disabling `EHCx` USB Controllers
 
+**INDEX**
+
 - [About](#about)
 - [Use cases](#use-cases)
 - [System Requirements](#system-requirements)
@@ -11,14 +13,14 @@
 ---
 
 ## About
-SSDTs for disabling `EHC1` and `EHC2` USB Controllers 2.0 used in 1st to 5th Gen Intel systems.
+SSDTs for disabling `EHC1` and `EHC2` USB 2.0 Controllers used in 1st to 5th Gen Intel systems.
 
 ## Use cases
 
 `EHC1` and `EHC2` controller can be disabled in one of the following cases:
 
 - The DSDT contains `EHC1` and/or `EHC2` controllers but the machine does not have the associated hardware.
-- DSTS contains `EHC1` and/or `EHC2`, the actual hardware controllers exist but no ports are mapped to it (externally or internally).
+- The DSDT contains `EHC1` and/or `EHC2`, the actual hardware controllers exist but no ports are mapped to it (externally or internally).
 
 ## System Requirements
 
@@ -50,7 +52,9 @@ USB 3.0 (aka USB 3.1 Gen 1)| 5 Gbps | XHCI | OSX 10.6.6+
 USB 3.1 Gen 2| 10 Gbps | XHCI | –
 USB 4        | 40 Gbps | PCIe | –
 
-> **Note**: Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 which utilize the PCIe protocol to achieve these high transfer rates.
+> [!NOTE]
+> 
+> Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 which utilize the PCIe protocol to achieve these high transfer rates.
 
 ## Notes
 - If your system is a pre 6th Gen Laptop and supports a docking station which offers additional USB 2 and USB 3 ports, it's most likely that both `EHCI` controllers are used on your machine so don't disable them!

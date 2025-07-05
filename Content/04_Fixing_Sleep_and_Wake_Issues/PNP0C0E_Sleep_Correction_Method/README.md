@@ -27,7 +27,7 @@ To resolve this issue, the following fixes can be applied:
 ## Solution
 To fix issues caused by pressing the sleep button and/or to change the sleep mode that it triggers, a combination of 3 patches is available:
 
-1. ***SSDT-PTSWAKTTS***: defines variables `FNOK` and `MODE` to capture changes in `FNOK` and trigger the preferred sleep state. See [**PTSWAK Comprehensive Patch**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
+1. ***SSDT-PTSWAKTTS***: defines variables `FNOK` and `MODE` to capture changes in `FNOK` and trigger the preferred sleep state. See [**PTSWAK Comprehensive Patch**](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for details.
 	- `FNOK` indicates the key state:  
 		- `FNOK` = `1`: Sleep button is pressed
 		- `FNOK` = `0`: After pressing the sleep button/waking the machine again
@@ -158,7 +158,7 @@ Else /* PNP0C0D sleep */
 ## Fixing `PNP0C0E` Sleep on other machines
 
 - Add ***SSDT-PTSWAKTTS*** 
-	- rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See [**PTSWAK Sleep and Wake Fix**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for instructions. 
+	- rename `_PTS` to `ZPTS` and `_WAK` to `ZWAK`. See [**PTSWAK Sleep and Wake Fix**](/Content/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) for instructions. 
 	- Modify `MODE` to suit your needs.
 - Use patch: ***SSDT-LIDpatch***; rename: `_LID` to `XLID`.
 	- Note: `PNP0C0D` device name and path should be the same as ACPI.
@@ -167,5 +167,6 @@ Else /* PNP0C0D sleep */
   - Refer to the examples to create the sleep button patch and the necessary name change.
 
 > [!CAUTION]
-> - If your DSDT doesn't contain device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
+> 
+> - If your DSDT doesn't contain device `SLPB` (`PNP0C0E`), add [**SSDT-SLPB**](/Content/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB:SSDT-SLPB)).
 > - `PNP0C0E` and `PNP0C0D` device names and paths should be consistent with the paths used in your `DSDT`.

@@ -41,7 +41,7 @@ ioreg -l -p IODeviceTree | grep pci-aspm-default
 
 ### AOAC Devices and ASPM
 
-For machines using Always-On Always-Connected technology [(**AOAC**)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines), try changing the ASPM modes of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption.
+For machines using Always-On Always-Connected technology [(**AOAC**)](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines), try changing the ASPM modes of PCI devices such as Wireless cards, SSDs, etc. to reduce overall power consumption.
 
 ## Injecting ASPM operation mode
 There are two methods for setting/changing the ASPM mode: via DeviceProperties or with SSDTs.
@@ -92,7 +92,7 @@ PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)|pci-aspm-default = 02010000|L1 (modified
 ### Method 2: Injecting ASPM via SSDT
 An SSDT patch can also set the ASPM working mode. For example, set a device ASPM to L1 mode, see the example.
 
-- The patch principle is the same as for [Disabling PCI Devices](https://github.com/5T33Z0/OC-Little-Translated/tree/main/02_Disabling_Devices/Disabling_PCI_Devices).
+- The patch principle is the same as for [Disabling PCI Devices](/Content/02_Disabling_Devices/Disabling_PCI_Devices).
 - Example: ***SSDT-PCI0.RPXX-ASPM***:
   ```asl
   External (_SB.PCI0.RP05, DeviceObj)

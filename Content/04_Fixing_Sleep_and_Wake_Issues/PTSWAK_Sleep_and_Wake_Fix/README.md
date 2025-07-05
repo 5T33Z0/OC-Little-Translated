@@ -14,7 +14,7 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 
   - Controls for the dGPU: `_ON`, `_OFF`
   - 6 extended patch interfaces: `EXT1`, `EXT2`, `EXT3`, `EXT4`, `EXT5` and `EXT6` 
-  - Defines forced Sleep pass parameters `FNOK` and `MODE` for switching between `PNP0C0E` and `PNP0C0D` sleep modes (&rarr; see [**PNP0C0E Sleep Correction Method**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method) for details).
+  - Defines forced Sleep pass parameters `FNOK` and `MODE` for switching between `PNP0C0E` and `PNP0C0D` sleep modes (&rarr; see [**PNP0C0E Sleep Correction Method**](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method) for details).
   - Defines debugging parameters `TPTS` and `TWAK` for tracking `Arg0` changes during sleep and wake. For example, add the following code to the brightness shortcut patch:  
 	```asl
 	/* A keystroke: */
@@ -25,7 +25,7 @@ By renaming the `_PTS` (Prepare to Sleep), `_WAK` (Wake) and `_TTS` (Transition 
 
 > [!NOTE]
 >
-> To debug ACPI tables, you need to install `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) for details.
+> To debug ACPI tables, you need to install `ACPIDebug.kext`, add the patch `SSDT-RMDT`, and a custom debug patch. See the chapter [**ACPI Debugging** ](/Content/00_ACPI/ACPI_Debugging) for details.
 
 ## About the Patches
 - ***SSDT-PTSWAKTTS*** – Primary patch. Required for all other Sleep/Wake fixes in this section to work!

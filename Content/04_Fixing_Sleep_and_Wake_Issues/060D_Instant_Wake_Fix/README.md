@@ -94,7 +94,7 @@ This approach minimizes the amount of necessary binary renames to one to correct
 1. In your `DSDT`, search for `Method (GPRW, 2` and `Method (UPRW, 2`. If either one exists, continue with the guide. If not, follow the instructions of ["Method 2"](#method-2-using-ssdt-prw0aml-no-gprwuprw) instead.
 2. Depending on which method is used, either open `SSDT-GPRW.dsl` or `SSDT-UPRW.dsl`.
 3. Export it as `.aml` and add it to `EFI/OC/ACPI` and your `config.plist`.
-4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
+4. Add the corresponding binary rename to `ACPI/Patch` (see [**GPRW_UPRW-Renames.plist**](/Content/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/i_Common_060D_Patch/GPRW_UPRW-Renames.plist)): 
 	- Rename `GPRW to XPRW` or 
 	- Rename `UPRW to XPRW`
 5. Save and reboot.
@@ -148,7 +148,7 @@ DefinitionBlock ("", "SSDT", 2, "5T33Z0", "PRW0", 0x00000000)
     	})
 	```
 4. Once you're finished adding the devices, export the file as `SSDT-PRW0.aml`, add it to the `EFI/OC/ACPI` folder and your `config.plist`.
-5. Add [**SSDT-PTSWAKTTS**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) 
+5. Add [**SSDT-PTSWAKTTS**](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix) 
 6. Save and reboot.
 
 #### Testing and verifying
