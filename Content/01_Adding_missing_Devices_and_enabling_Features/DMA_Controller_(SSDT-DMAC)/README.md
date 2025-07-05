@@ -1,9 +1,13 @@
 # DMA Controller (`SSDT-DMAC`)
 
+**INDEX**
+
 - [About](#about)
 - [Use case: enabling `AppleVTD`](#use-case-enabling-applevtd)
 - [Instructions](#instructions)
 - [Verifying that the patch is working](#verifying-that-the-patch-is-working)
+
+--- 
 
 ## About 
 `SSDT-DMAC` adds a fake **Direct Memory Access Controller** [**(DMAC)**](https://binaryterms.com/direct-memory-access-dma.html) device to IO Registry. Although present in any SMBIOS of intel-based Macs, the necessity for the SSDT on Hackintoshes is uncertain but it can help when trying to enable AppleVTD. 
