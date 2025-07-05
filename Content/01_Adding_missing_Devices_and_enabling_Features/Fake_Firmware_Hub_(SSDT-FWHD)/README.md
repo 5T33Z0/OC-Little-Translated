@@ -1,7 +1,7 @@
 # Fake Firmware Hub Device (`SSDT-FWHD`) 
 Adds a virtual, non-functional `FWHD` device to the I/O Registry in macOS which has to be considered purely cosmetic. My research of DSDT and .ioreg files showed that the Intel Firmware Hub Device is present in almost every Intel-based Mac. It is listed in **IORegistryExplorer** as "**FWHD**" with the HID `INT0800`.
 
-Mac Models containing `FWHD`:
+**Mac Models containing `FWHD`**:
 
 - **iMac**: 7,1, 8,1, 11,x to 20,x
 - **iMacPro1,1**

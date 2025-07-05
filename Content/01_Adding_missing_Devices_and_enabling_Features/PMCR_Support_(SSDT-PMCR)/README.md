@@ -1,5 +1,7 @@
 # Add PMCR Device (`SSDT-PMCR`)
 
+**INDEX**
+
 - [About](#about)
 - [Affected Chipsets/Mainboards](#affected-chipsetsmainboards)
 - [Instructions](#instructions)
@@ -18,7 +20,7 @@
 
 - :warning: Mandatory for 390-series mainboards
 - Optional for 400/500/600-series (for cosmetics)
-- Users with 100 and 200-series mainboards can use [**SSDT-PPMC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!
+- Users with 100 and 200-series mainboards can use [**SSDT-PPMC**](/Content/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)) instead!
 
 ## Instructions
 There are 2 methods to add the PMCR device – choose either or.

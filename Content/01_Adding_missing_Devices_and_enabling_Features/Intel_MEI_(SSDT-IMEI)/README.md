@@ -1,5 +1,5 @@
 # Add Intel Management Engine (`SSDT-IMEI`)
-Adds Intel Management Engine (IMEI) to the device tree, if it does not exist in your system's `DSDT`. IMEI is required for proper hardware video decoding on Intel iGPUs. Adding IMEI is only required in two cases:
+Adds **Intel Management Engine** (IMEI) to the device tree, if it does not exist in your system's `DSDT`. IMEI is required for proper hardware video decoding on Intel iGPUs. Adding IMEI is only required in two cases:
 
 - Sandy Bridge CPUs running on 7-series mainboards or
 - Ivy Bridge CPUs running on 6-series mainboards

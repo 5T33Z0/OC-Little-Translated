@@ -44,7 +44,7 @@ There are 2 methods of applying this patch: either via kext or via SSDT.
 #### ACPIBatteryManager vs. SMCBatteryManager
 `SMCBatteryManager` is a virtual controller, which implements a complete emulation layer of `AppleSmartBattery` and its SMC and SMBus protocols. Although it is able to find all AC Adapters and Batteries just fine, it doesn't attach them to `ACPIACAdapter` and `AppleSmartBattery` services like `ACPIBatteryManager` does which is all cosmetic.
 
-Note that in order for `ACPIBatteryManager` to work properly, in most cases (if the EC registers exceed 8-bit) additional [battery patches](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Battery_Patches) are required to enable the Battery Status indicator in macOS. Nowadays you can use [**`ECEnabler.kext`**](https://github.com/1Revenger1/ECEnabler) to enable it without additional patches but it's not guaranteed to work on every system.
+Note that in order for `ACPIBatteryManager` to work properly, in most cases (if the EC registers exceed 8-bit) additional [battery patches](/Content/05_Laptop-specific_Patches/Battery_Patches) are required to enable the Battery Status indicator in macOS. Nowadays you can use [**`ECEnabler.kext`**](https://github.com/1Revenger1/ECEnabler) to enable it without additional patches but it's not guaranteed to work on every system.
 
 If you want to be on the safe side, use `SMCBatteryManager` since it is in active development, whereas `ACPIBatteryManager` hasn't been updated since 2018.
 

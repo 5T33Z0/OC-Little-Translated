@@ -38,12 +38,12 @@ Follow these steps to configure your Hackintosh for AppleVTD:
    - The OEM DMAR (DMA Remapping) table may include reserved memory regions that conflict with AppleVTD.
    - In OpenCore `config.plist`, under `ACPI > Delete`:
      - Add an entry to drop the `DMAR` table.
-     - Reference: [Dropping the DMAR Table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table).
+     - Reference: [Dropping the DMAR Table](/Content/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table).
 
 4. **Inject a Modified DMAR Table**:
    - Create or obtain a modified DMAR table without reserved memory regions.
    - Add the modified DMAR table to OpenCore under `ACPI > Add`.
-   - Reference: [Replacing the DMAR Table](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one).
+   - Reference: [Replacing the DMAR Table](/Content/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one).
 
 5. **Verify AppleVTD Activation**:
    - Boot into macOS.
@@ -68,7 +68,7 @@ If `AppleVTD` is not present in the IO Registry after completing the above steps
 
 ### Steps to Implement SSDT-DMAC
 1. **Obtain SSDT-DMAC**:
-   - Download [SSDT-DMAC.aml](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)) file.
+   - Download [SSDT-DMAC.aml](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)) file.
 2. **Add to OpenCore**:
    - Place SSDT-DMAC in your OpenCore `ACPI` folder.
    - Add it to `config.plist` under `ACPI > Add`.

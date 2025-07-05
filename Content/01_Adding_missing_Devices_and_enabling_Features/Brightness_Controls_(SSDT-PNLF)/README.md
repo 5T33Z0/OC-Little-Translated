@@ -14,7 +14,7 @@
 
 In order to enable backlight controls on laptops, there are several ways to do so. It requires a combination of one or two kexts and a corresponding **`SSDT-PNLF`** to work. 
 
-macOS Catalina and newer also require a Fake Ambient Light Sensor ([**`SSDT-ALS0`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))) so that the brightness level doesn't reset to maximum after rebooting.
+macOS Catalina and newer also require a Fake Ambient Light Sensor ([**`SSDT-ALS0`**](/Content/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0))) so that the brightness level doesn't reset to maximum after rebooting.
 
 ## **Using SSDTTime** (automated process, recommended)
 
@@ -89,7 +89,7 @@ Listed below are manual approaches for fixing Laptop backlight controls. Try eit
 > 	Replace: 584E4C46
 > 	```
 
-### [ACPI Brightness Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch#acpi-brightness-patch) (deprecated)
+### [ACPI Brightness Patch](/Content/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch#acpi-brightness-patch) (deprecated)
 
 ## NOTES
 - When choosing an injection method, you should clear the driver, patch, and settings related to other methods.

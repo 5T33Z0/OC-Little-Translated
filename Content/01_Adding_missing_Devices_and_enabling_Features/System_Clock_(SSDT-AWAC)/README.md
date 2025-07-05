@@ -1,5 +1,7 @@
 # Fixing the System Clock (`SSDT-AWAC`)
 
+**INDEX**
+
 - [Description](#description)
   - [To HPET, or not to HPET?](#to-hpet-or-not-to-hpet)
 - [Automated SSDT generation: using SSDTTime](#automated-ssdt-generation-using-ssdttime)
@@ -165,7 +167,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 2. Next, search for `Device (AWAC)` or `ACPI000E`.
 3. If present, check if `STAS` == `Zero` (refer to the DSDT code snippet from the beginning).
 4. If the above conditions are met, you can add `SSDT-AWAC-ARTC.aml` to your ACPI Folder and `config.plist`.
-5. Open maciASL. Under "File" → "New from ACPI", check if `HPET` is listed. If not, continue with step 6. But if it is present, you should drop it. In order to do so, open your `config.plist`, go to `ACPI` &rarr; `Delete`. Create a new rule. Under `TableSignature`, enter `48504554` (HEX for "HPET"). Check the guide for [Dropping ACPI Tables in OpenCore](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables) if you don't know how to do this.
+5. Open maciASL. Under "File" → "New from ACPI", check if `HPET` is listed. If not, continue with step 6. But if it is present, you should drop it. In order to do so, open your `config.plist`, go to `ACPI` &rarr; `Delete`. Create a new rule. Under `TableSignature`, enter `48504554` (HEX for "HPET"). Check the guide for [Dropping ACPI Tables in OpenCore](/Content/00_ACPI/ACPI_Dropping_Tables) if you don't know how to do this.
 6. Save and reboot.
 7. In IORegistryExplorer, verify the following:
 	-  `ARTC`: should be present
@@ -173,8 +175,8 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "ARTC", 0x00000000)
 8. In maciASL the `HPET` should also not be present.
 
 ## Notes
-- On some **X299** mainboards (ASUS), the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, the `RTC` won't work so booting macOS fails. To work around this issues, leave `AWAC` enabled (so `RTC` won't be available) but add a [**Fake RTC**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead.
-- Disabling `AWAC` via [**Preset Variable**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Basics/Advanced_Patching_Techniques.md#example-2-ssdt-awac)
+- On some **X299** mainboards (ASUS), the `RTC` device can be defective, so even if there's an `AWAC` device that can be disabled, the `RTC` won't work so booting macOS fails. To work around this issues, leave `AWAC` enabled (so `RTC` won't be available) but add a [**Fake RTC**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) instead.
+- Disabling `AWAC` via [**Preset Variable**](/Content/00_ACPI/ACPI_Basics/Advanced_Patching_Techniques.md#example-2-ssdt-awac)
 
 ## Credits
 - [**Baio1977**](https://github.com/Baio1977) for `SSDT-AWAC-ARTC`

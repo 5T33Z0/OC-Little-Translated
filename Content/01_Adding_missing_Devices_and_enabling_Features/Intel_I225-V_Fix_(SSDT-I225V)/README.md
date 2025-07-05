@@ -37,8 +37,8 @@ If Ethernet is not working afterwards, adjust the following settings. Use _eithe
 	- Save your config and reboot
 	- Run **IORegistryExplorer** and verify that the kext is servicing the Intel I225-V: <br> ![](https://user-images.githubusercontent.com/88431749/259463074-b1d3801b-c46d-4250-ac8b-8f5c666698fe.png)
 - **Option 2**: If you have Vt-d enabled in BIOS and your system has a `DMAR` table with Reserved Memory regions:
-	- Drop the original `DMAR` table ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table))
-	- Replace it by a modified `DMAR` without Reserved Memory Regions ([Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one))
+	- Drop the original `DMAR` table ([Guide](/Content/00_ACPI/ACPI_Dropping_Tables#example-1-dropping-the-dmar-table))
+	- Replace it by a modified `DMAR` without Reserved Memory Regions ([Guide](/Content/00_ACPI/ACPI_Dropping_Tables#example-2-replacing-the-dmar-table-by-a-modified-one))
 	- Deselect `DisableIoMapper` (if enabled)
 	- Enable `DisableIoMapperMapping` (macOS 13.3 and newer only)
 	- Save your config and reboot
@@ -62,10 +62,10 @@ For macOS 13 and newer, you also need to inject `AppleIntel210Ethernet.kext` if 
 
 - Disable/Delete `FakePCIID.kext` (if present)
 - Disable/Delete `FakePCIID_Intel_I225-V.kext` (if present)
-- [**Download**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/SSDT-I225V.aml?raw=true) `SSDT-I225V.aml`
+- [**Download**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/SSDT-I225V.aml?raw=true) `SSDT-I225V.aml`
 - Add it to `EFI/OC/ACPI` and config.plist 
 - **macOS 13 only**: 
-	- Add [**this kext**](https://github.com/5T33Z0/OC-Little-Translated/raw/main/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
+	- Add [**this kext**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V)/AII210E.zip) 
 	- Set `MinKernel` to `22.0.0` so it's only injected into macOS Ventura!
 - Optional: add boot-arg `dk.e1000=0` (macOS 11) and/or `e1000=0` (macOS 12+)
 - Apply the correct **Settings** from the table below.
@@ -81,7 +81,7 @@ macOS |Vt-D|DisableIoMapper|DMAR (OEM)|DMAR (dropped/replaced)[^1]| I225-V / 3rd
 11.4 to 11.6.7 | ON | ON [^2]| NO | YES / YES | [**YES / YES**](https://github.com/5T33Z0/Gigabyte-Z490-Vision-G-Hackintosh-OpenCore/issues/19#issuecomment-1153315826)
 10.15 to 11.3 [^3]| OFF/ON |OFF/ON | YES | NO / NO | **YES / NO**
 
-[^1]: Check my guide for [dropping ACPI tables](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
+[^1]: Check my guide for [dropping ACPI tables](/Content/00_About_ACPI/ACPI_Dropping_Tables#readme) for details
 [^2]: Combining `Vt-D` and `DisableIOMapper` makes no sense to me in regards to enabling the I225-V in macOS but that's what the user reported as working.
 [^3]: Enabling the I225-V in macOS Catalina requires modified `DeviceProperties` as well as a Kernel Patch since it's not supported natively. With this, the I225-V will be spoofed as Intel I219 and work. Copy the settings from the attached "I225_Catalina.plist" into your Config. Disable the spoof for macOS 11.4 and newer!
 
@@ -105,6 +105,6 @@ After a few seconds, the connection should work. If you still can't access the I
 
 </details>
 
-
 ## Credits
 - [**MacAbe**](https://www.insanelymac.com/forum/topic/352281-intel-i225-v-on-ventura/?do=findComment&comment=2786836) for SSDT-I225-V.aml
+

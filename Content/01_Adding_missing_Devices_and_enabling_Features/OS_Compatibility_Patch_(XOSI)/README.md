@@ -1,5 +1,7 @@
 # Operating System Patch (`_OSI to XOSI`) 
 
+**INDEX**
+
 - [About](#about)
 - [Patching methods](#patching-methods)
   - [Method 1: automated patching using SSDTTime](#method-1-automated-patching-using-ssdttime)

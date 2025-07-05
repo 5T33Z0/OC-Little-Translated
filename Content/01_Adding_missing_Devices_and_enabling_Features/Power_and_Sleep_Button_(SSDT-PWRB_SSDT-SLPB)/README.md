@@ -5,7 +5,7 @@
 In **DSDT**, search for:
 
 - `PNP0C0C` and add ***SSDT-PWRB*** if it is missing. Adds Power Button Device
-- `PNP0C0E` and add ***SSDT-SLPB*** if missing. The Sleep Button Device is mandatory for [`PNP0C0E Sleep Method`](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method) to work.
+- `PNP0C0E` and add ***SSDT-SLPB*** if missing. The Sleep Button Device is mandatory for [`PNP0C0E Sleep Method`](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method) to work.
 - In some cases (like HP or Lenovo laptops), the `SLPB` is present in the `DSDT`, but may be disabled:
 	
 	```asl
