@@ -51,7 +51,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/ **`npci=0x3000`**|Disables PCI debugging related to kIOPCIConfiguratorPFM64. Alternatively, use `npci=0x3000` which also disables debugging of gIOPCITunnelledKey. Required when stuck at **`PCI Start Configuration`** as there are IRQ conflicts related to PCI Lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**:<ul><li>For installing macOS, you still need a supported SMBIOS temporarily</li><li>You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)</li></ul>
+**`-no_compat_check`**|Disables macOS compatibility checks. Allows booting macOS with unsupported SMBIOS/board-ids. **Downsides**:<ul><li>For installing macOS, you still need a supported SMBIOS temporarily</li><li>You can't install system updates if this boot-arg is active. This restriction can be lifted by adding `RestrictEvents.kext` and boot-arg `revpatch=sbvmm` but it [**requires macOS 11.3 or newer**](/Content/S_System_Updates)</li></ul>
 **`-liludbgall`** | For debugging Lilu kext and plugins (requires DEBUG build of Lilu and asociated plugins)
 
 > [!TIP]
@@ -165,7 +165,7 @@ boot-arg | Property | Description
 **`igfxfcmsfbs=`** | `complete-modeset-framebuffers` | Specify indices of connectors for which complete modeset must be enforced. Each index is a byte in a 64-bit word; for example, value `0x010203` specifies connectors 1, 2, 3. If a connector is not in the list, the driver's logic is used to determine whether complete modeset is needed. Pass `-1` to disable. 
 **`igfxframe=frame`** | `AAPL,ig-platform-id` (Ivy Bridge+) or `AAPL,snb-platform-id` (Sandy Bridge only) | Inject a dedicated framebuffer identifier into IGPU (for testing purposes ONLY)
 **`igfxfw=2`** | `igfxfw` | Forces loading of Apple's Graphics Unit Control (GUC) firmware. Improves Intel Quick Sync Video performance. Requires chipset supporting Intel ME v12 or newer (Z390, B360, H370, H310, Q370, C246, Z490, etc.). It's [buggy](https://github.com/acidanthera/bugtracker/issues/800) and not advisable to use. Should be tested on a case by case basis. `igfxfw` takes precedence over `igfxrpsc=1` when both are set.
-**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch which improves iGPU performance on Kaby Lake+ using chipsets without ME v12 support ([More details](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/RPS-Control.md)).
+**`igfxrpsc=1`** | `rps-control` | Enables RPS control patch which improves iGPU performance on Kaby Lake+ using chipsets without ME v12 support ([More details](/Content/11_Graphics/iGPU/RPS-Control.md)).
 **`wegtree=1`** | `rebuild-device-tree` | Forces WEG to rename the device tree of the iGPU after Apple GUC Firmware is loaded. Useful if the iGPU doesn't work after applying `igfxfw=2` (on a compatible CPU and chipset, of course). 
 **`igfxgl=1`** | `disable-metal` | Disable Metal support on Intel
 **`igfxmetal=1`**| `enable-metal` | Force enable Metal support on Intel for offline rendering
@@ -292,7 +292,7 @@ boot-arg | Property | Description
 [**Source**](https://github.com/acidanthera/AppleALC/wiki/Installation-and-usage)
 
 ### BrcmPatchRAM
-BrcmPatchRAM kext is a macOS driver which applies PatchRAM updates for Broadcom RAMUSB based devices. It will apply the firmware update to your Broadcom Bluetooth device on every startup/wakeup. Since this kext includes different kexts which need to be [combined in different ways](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) – depending on the hardware and macOS version used – please follow the instrunctions on the repo to configure it correctly.
+BrcmPatchRAM kext is a macOS driver which applies PatchRAM updates for Broadcom RAMUSB based devices. It will apply the firmware update to your Broadcom Bluetooth device on every startup/wakeup. Since this kext includes different kexts which need to be [combined in different ways](/Content/10_Kexts_Loading_Sequence_Examples#example-7-broadcom-wifi-and-bluetooth) – depending on the hardware and macOS version used – please follow the instrunctions on the repo to configure it correctly.
 
 boot-arg | Description  
 ---------|------------
@@ -464,7 +464,7 @@ boot-arg | NVRAM Key| Description
 
 ### RTCMemoryFixup
 Kext providing a way to emulate some offsets in your CMOS (RTC) memory. 
-More details about CMOS-related isses fan be found [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/06_CMOS-related_Fixes).
+More details about CMOS-related isses fan be found [here](/Content/06_CMOS-related_Fixes).
 
 boot-arg | Description 
 :-------|------------

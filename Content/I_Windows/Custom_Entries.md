@@ -58,4 +58,3 @@ US Layout | DE Layout
 
 ## Further Resources
 - [OpenCore UEFI Shell for Hackintosh troubleshooting - a beginners guide](https://www.reddit.com/r/hackintosh/comments/sy2170/opencore_uefi_shell_for_hackintosh/)
-

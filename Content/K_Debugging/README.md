@@ -21,7 +21,7 @@ Once you reach OpenCore's boot picker, you can remove the flash drive and reset 
 
 ## About the dumped files
 ### ACPI
-With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [**SSDTs**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
+With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [**SSDTs**](/Content/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
 
 **NOTE**: When it comes to obtaining ACPI easily, Clover is the better option since it can do this from the GUI without having a working config (simply press F11 and the tables will be dumped to the USB flash drive).
 
@@ -29,7 +29,7 @@ With `SysReport` enabled, ACPI tables will be dumped which then can be further a
 See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
 
 ### Audio
-With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a priceless asset when [creating Layout-IDs for AppleALC](https://github.com/5T33Z0/OC-Little-Translated/tree/main/L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
+With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a priceless asset when [creating Layout-IDs for AppleALC](/Content//L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
 
 ![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 

@@ -100,7 +100,7 @@ Kext|Description
 > [!NOTE]
 >
 > - Each config.plist contains notes (`#Info`). You can see them if you open the config with a plist editor.
-> - There's also a [zipped version](https://github.com/5T33Z0/OC-Little-Translated/raw/main/F_Desktop_EFIs/Config_Templates/Config_Templates.zip) which contains all config templates.
+> - There's also a [zipped version](/Content/F_Desktop_EFIs/Config_Templates/Config_Templates.zip) which contains all config templates.
 
 ### 2. Modifying the `config.plist` 
 After the base EFI has been generated, the `config.plist` has to be modified based on the used CPU, GPU, additional hardware, peripherals and SMBIOS.
@@ -111,7 +111,7 @@ After the base EFI has been generated, the `config.plist` has to be modified bas
 	Section |Setting(s)
 	--------|---------
 	**ACPI/Add** |Add extra ACPI Tables if your hardware configuration requires them. 2nd to 3rd Gen Intel Core CPUs require `SSDT-PM` (create it in Post-Install).
-	**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled (&rarr; see [Additional Configuration Notes](#additional-configuration-notes)).
+	**DeviceProperties**| `PciRoot(0x0)/Pci(0x2,0x0)`: check if the correct [**Framebuffer Patch**](/Content/11_Graphics/iGPU/iGPU_DeviceProperties.md) is enabled for your hardware configuration and adjust it accordingly (the `model` property for details). Entries with a `#` are disabled (&rarr; see [Additional Configuration Notes](#additional-configuration-notes)).
 	**Kernel/Add** | Add extra kexts required for your hardware and features (WiFi and Bluetooth come to mind). A base-set required for the selected system is already included.
 	**PlatformInfo/Generic** |Generate `SMBIOS` Data for the selected Mac model
 	**NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82**| Add additional boot-args if your hardware requires them (&rarr; see [Additional Configuration Notes](#additional-configuration-notes)).
@@ -126,13 +126,13 @@ After the base EFI has been generated, the `config.plist` has to be modified bas
 ### 3. Post-Install: fixing CPU Power Management on Sandy and Ivy Bridge CPUs
 2nd and 3rd Gen Intel CPUs use a different method for CPU Power Management. Use [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) to generate a `SSDT-PM.aml` in Post-Install, add it to your `EFI\OC\ACPI` folder and config to get proper CPU Power Management.
 
-You can follow [**my guide**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to do so.
+You can follow [**my guide**](/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)) to do so.
 
 ## Additional Configuration Notes
 Before deploying your newly generated EFI folder, check the following:
 
 - Open the `config.plist` in a Plist Editor to find additional info and notes
-- View `DeviceProperties` to check the included Framebuffer-Patches. Usually, 2 Frambuffer Patches are included ([**List of available Framebuffer Patches**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/11_Graphics/iGPU/iGPU_DeviceProperties.md)):
+- View `DeviceProperties` to check the included Framebuffer-Patches. Usually, 2 Frambuffer Patches are included ([**List of available Framebuffer Patches**](/Content/11_Graphics/iGPU/iGPU_DeviceProperties.md)):
 	- One for using the iGPU for driving a Display 
 	- One for using the iGPU for computational tasks only (if a supported discrete GPU is present). 
 - Depending on your hardware configuration (CPU, iGPU, dGPU, Mainboard, other peripherals) you may have to add additional SSDT Hotpatches, boot-args, DeviceProperties and/or Kexts!
@@ -160,7 +160,7 @@ Depending on the combination of CPU, GPU (iGPU and/or dGPU) and SMBIOS, addition
 **`dart=0`**|Disables VT-x/VT-d. Nowadays, `DisableIOMapper` Quirk is used instead.
 **`cpus=1`**|Limits the number of CPU cores to 1. Helpful in cases where macOS won't boot or install otherwise.
 **`npci=0x2000`**/</br>**`npci=0x3000`**|Disables PCI debugging related to `kIOPCIConfiguratorPFM64`. Alternatively, use `npci=0x3000` which also disables debugging of `gIOPCITunnelledKey`. Required when stuck at `PCI Start Configuration` as there are IRQ conflicts related to your PCI lanes. **Not needed if `Above4GDecoding` can be enabled in BIOS**
-**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled. A better solution is to add Booter Patches to enable the board-id skip and add RestrictEvents to enable system updates as explained [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
+**`-no_compat_check`**|Disables macOS compatibility check. For example, macOS 11.0 BigSur no longer supports iMac models introduced before 2014. Enabling this allows installing and booting macOS on otherwise unsupported SMBIOS. Downside: you can't install system updates if this is enabled. A better solution is to add Booter Patches to enable the board-id skip and add RestrictEvents to enable system updates as explained [here](/Content/S_System_Updates)
 
 ## References
 - **OpenCore Bootloader**: [https://github.com/acidanthera/OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)

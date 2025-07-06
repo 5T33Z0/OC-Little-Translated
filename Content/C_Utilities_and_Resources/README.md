@@ -25,7 +25,7 @@ Incomplete list of useful freeware Apps, Tools and Resources for hackintoshing.
 - [**OpenCore Nightly Builds**](https://dortania.github.io/builds/?product=OpenCorePkg&viewall=true) – Latest Nightly Builds from Dortania's Repo.
 - [**OpenCore_NO_ACPI_Build**](https://github.com/wjz304/OpenCore_NO_ACPI_Build/releases) – Unofficial fork of OpenCore which allows to not inject ACPI Tables in other Operating Systems.
 - [**Bootloader Chooser**](https://github.com/jief666/BootloaderChooser) – A pre-bootloader which lets you pick the actual Boot Manager you want to run. This way, you can switch between Clover and OpenCore easily.
-- [**Utilities**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/C_Utilities_and_Resources/OpenCore_Utilities.md) included in the OpenCore Package.
+- [**Utilities**](/Content/OpenCore_Utilities.md) included in the OpenCore Package.
 
 ## Apps and Tools
 

@@ -57,6 +57,3 @@ Once the ISO has been build, you can copy it onto a bootable USB flash drive cre
 There's an online generator for creating an XML file for unattended Windows installs. **Link**: https://schneegans.de/windows/unattend-generator/ 
 
 When using Ventoy for installing Windows, you have to use [Plugson](https://ventoy.net/en/plugin_plugson.html) to prepare the USB flash drive for unattended installs.
-
-
-

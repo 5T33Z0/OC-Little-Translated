@@ -22,4 +22,4 @@ You can use this to prevent Windows (or other) Volumes from auto-mounting under 
 ## Notes and Credits
 - To revert the changes, delete the `fstab` file located under `/private/etc/` and reset the auto mounter. Since this directory is hidden, you need to press `Shift` and `.` (dot/full stop) in Finder to reveal it or use the "Go to" menu instead.
 - You can also edit the file in Visual Studio Code if it exists already
-- Original Guide: https://discussions.apple.com/docs/DOC-7942
+- Original Guide: [https://discussions.apple.com/docs/DOC-7942](https://discussions.apple.com/docs/DOC-7942)

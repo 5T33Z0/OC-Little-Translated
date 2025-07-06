@@ -224,7 +224,7 @@ It’s exciting to see tools like [**OCAT**](https://github.com/ic005k/QtOpenCor
 
 ## NOTES
 - When setting-up your config for the very first time, you should create an OC Snapshot with ProperTree prior to deployment. Because it does a better job of detecting kext dependencies and organizing nested kexts which can prevent possible boot errors later.
-- If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver) 
+- If you are updating from OpenCore ≤ 0.7.2, you need to set UEFI/APFS `MinDate` and `MinVersion` to `-1` if you are using macOS Catalina or older. More Details [here](/Content/A_Config_Tips_and_Tricks#mindateminversion-settings-for-the-apfs-driver) 
 - The lists shown in the Sync Window are scrollable. Whether or not the scrollbar is visible or not, depends on the scrollbar behavior selected in "System Settings" > "General".
 - If downloading files does not work in your region, select a different Server from "Database" > "Misc" Tab > "Upgrade download proxy setting". For me, `https://ghproxy.com/https://github.com/` works.
 - A nice touch when updating kexts is that OCAT writes the version number of a kext into the comments section so you don't have keep track of it.

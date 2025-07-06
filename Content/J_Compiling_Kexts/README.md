@@ -21,16 +21,16 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 ## Slimming Kexts for Intel WiFi/BT Cards
 **Kexts**: [**`Itlwm`/`AirportItlwm`**](https://github.com/OpenIntelWireless/itlwm), [**`IntelBluetoothFirmware`**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware)<br>
 **Filesize reduction**: approx. 10 times smaller than the original<br>
-**Guide**: [**Slimming Intel Wi-Fi and BT kexts**](/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
+**Guide**: [**Slimming Intel Wi-Fi and BT kexts**](/Content/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md)
 
 ## Slimming Broadcom Bluetooth kexts (`BrcmPatchRAM`)
 **Kext**: `BrcmFirmwareData.kext`<br>
 **Filesize reduction**: From 2,8 MB to around 70 KB<br>
-**Guide**: [**Slimming BrcmPatchRAM**](/J_Compiling_Kexts/Slimming_BrcmPatchRAM.md)
+**Guide**: [**Slimming BrcmPatchRAM**](/Content//J_Compiling_Kexts/Slimming_BrcmPatchRAM.md)
 
 
 ## Slimming Xcode
-You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](/J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
+You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](/Content//J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
 
 ## Credits
 [**dreamwhite**](https://github.com/dreamwhite) for the original IntelBluetoothFirmware and itlwm slimming guides.
