@@ -3,7 +3,7 @@ This sections features 3rd party OpenCanopy themes for OpenCore's Boot Menu. And
 
 |Apple Flavours by [Chris1111](https://github.com/chris1111)|
 |:-----------------------------| 
-|![](https://github.com/chris1111/My-Simple-OC-Themes/blob/master/View%20Boot%200.7/Flavours-Apple.png)
+|![](https://raw.githubusercontent.com/chris1111/My-Simple-OC-Themes/refs/heads/master/View%20Boot%200.7/Flavours-Apple.png)
 |**[Download](https://github.com/chris1111/My-Simple-OC-Themes/releases/download/Archive_New-Themes/Flavours-Apple.zip)**
 |**[Instructions](https://github.com/chris1111/My-Simple-OC-Themes/blob/master/Setup-PickerVariant.md#setup-flavours-theme-in-configplist-flavours-wonderfull-themes-as-exemple)**
 
