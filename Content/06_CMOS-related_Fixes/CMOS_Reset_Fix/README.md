@@ -24,7 +24,7 @@ This is the official method suggested by the OpenCore developers.
 The problem should be gone, the next time you reboot or shutdown the system.
 
 ## Method 2: Fixing the Real Time Clock via SSDT 
-This approach uses an SSDT hotfix to solve the CMOS reset issue. It adds a fake `RTC` device for macOS to play with (see [**SSDT-RTC0**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) for details).
+This approach uses an SSDT hotfix to solve the CMOS reset issue. It adds a fake `RTC` device for macOS to play with (see [**SSDT-RTC0**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)) for details).
 
 ## Instructions
 

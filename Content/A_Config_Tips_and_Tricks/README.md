@@ -85,7 +85,7 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 ## I. Updating config.plist and fixing errors
 
 ### Automated config upgrade (recommended)
-Since OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become so much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](https://github.com/5T33Z0/OC-Little-Translated/tree/main/D_Updating_OpenCore) fore more details.
+Since OpenCore Auxiliary Tools [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) were released, the process of maintaining and updating your OpenCore config and files has become so much easier. It can automatically update/migrate any outdated config.plist to the latest structure and feature-set as well as update OpenCore, Drivers and Kexts and check the config for errors. Check my [OpenCore Update Guide](/Content/D_Updating_OpenCore) fore more details.
 
 ### Manual upgrade and error correction (old)
 Prior to the advent of OCAT, I used to maintain and update my config with 4 additional tools to compare it with the latest sample.plist and update files. These included: 
@@ -139,7 +139,7 @@ You should deactivate the single user mode for security reasons, because it can 
    
    - Using `FF0F0000` for Big Sur (as suggested by Dortania's OpenCore Install Guide) is not recommended because it breaks System Update Notifications and incremental updates. For Big Sur and newer, use `67080000` instead.
    - Using `EF0F0000` does notify you about System Updates. But if the seal of the volume is broken however, it will download the complete installer (about 12 GB), instead of performing an incremental update which is not really desireable.
-   - If you want to know how `csr-active-config` is calculated or if you want to calculate your own, check the [OpenCore Calcs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section for details.
+   - If you want to know how `csr-active-config` is calculated or if you want to calculate your own, check the [OpenCore Calcs](/Content/B_OC_Calculators) section for details.
 
 2. To avoid the need of resetting NVRAM every time after you've changed  the csr value, add the following parameter to the config:
 
@@ -261,7 +261,7 @@ This is a reliably workaround for this issue:
 - Instead of the BootPicker, there's only a black screen (seems to be related to GOP Rendering)
 - 5 secends later (default delay) the system boots into Windows becasue it inhibits the first Slot in the BootPicker
 
-:bulb: If you want to bypass all the SSDTs injections into Windows, you either need to boot it via the BIOS Boot Menu or use [OpenCore_NO_ACPI](https://github.com/5T33Z0/OC-Little-Translated/tree/main/O_OC_NO_ACPI). Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
+:bulb: If you want to bypass all the SSDTs injections into Windows, you either need to boot it via the BIOS Boot Menu or use [OpenCore_NO_ACPI](/Content/O_OC_NO_ACPI). Because unlike Clover, OpenCore injects everything present and enabled in the ACPI Folder into any OS.
 
 ## VI. Resolving issues with NVRAM
 

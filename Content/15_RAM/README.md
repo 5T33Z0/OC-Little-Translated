@@ -1,5 +1,7 @@
 # Fixing falsely reported RAM speed in macOS
 
+**INDEX**
+
 - [About](#about)
 - [Fix](#fix)
 - [Gathering RAM data](#gathering-ram-data)

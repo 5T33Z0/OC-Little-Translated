@@ -83,9 +83,9 @@ The next question is, how to find the relationship between each button and the a
 
 Rehabman provides a series of DSDT Patches for debugging ACPI functions. OC-little simplifies the DSDT patch into a general SSDT hotpatch, which can be used directly. ACPIDebug provides a set of ACPI functions that can output specified information to the Console, like printf or console.log. We only need to call the relevant function to output the information where we need to print the debugging information.
 
-Enabling ACPI debugging is easy: grab `SSDT-RMDT.aml` (RehabMan Debugging Table) and `ACPIDebug.kext` from the [**ACPI Debuggig section**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) and add them to your EFI and config.plist. The (relatively) difficult part is writing an SSDT for debugging.
+Enabling ACPI debugging is simple: grab `SSDT-RMDT.aml` (RehabMan Debugging Table) and `ACPIDebug.kext` from the [**ACPI Debuggig section**](/Content/00_ACPI/ACPI_Debugging) and add them to your EFI and config.plist. The (relatively) difficult part is writing an SSDT for debugging.
 
-The sample [`SSDT-BKeyQxx-Debug.dsl`](https://github.com/5T33Z0/OC-Little-Translated/blob/main/00_ACPI/ACPI_Debugging/SSDT-BKeyQxx-Debug.dsl) in OC-little also provides an example for using the RMDT function that prints two arguments:
+The sample [`SSDT-BKeyQxx-Debug.dsl`](/Content/00_ACPI/ACPI_Debugging/SSDT-BKeyQxx-Debug.dsl) in OC-little also provides an example for using the RMDT function that prints two arguments:
 
 ```asl
 Scope (_SB.PCI0.LPCB.EC0)

@@ -11,7 +11,7 @@ For example, the T470/T470s belongs in the dual battery systems category whereas
 
 > [!NOTE]
 > 
-> ThinkPad users might also need [**`SSDT-HWAC`**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ThinkPad)
+> ThinkPad users might also need [**`SSDT-HWAC`**](/Content/05_Laptop-specific_Patches/Brand-specific_Patches/ThinkPad)
 
 ## Instructions
 In order to get your battery percentage indicator working correctly, you have to do the following: 

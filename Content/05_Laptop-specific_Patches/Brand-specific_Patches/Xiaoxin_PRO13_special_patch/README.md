@@ -18,7 +18,7 @@ Replace: 584E4C46
 
 > [!NOTE]
 > 
-> Please refer to Chapter ["Fixing AOAC Machines"](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) for more details
+> Please refer to section [Fixing AOAC Machines](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines) for more details
 
 ## Other required Patches (Reference)
 

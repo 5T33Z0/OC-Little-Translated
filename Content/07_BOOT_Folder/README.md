@@ -60,7 +60,7 @@ For more details, refer to the OpenCore Documentation, chapter 8.1.1: Boot Algor
 
 ## About `.contentFlavour`
 
-**`.contentFlavour`** is used to modify the look and feel of entries in OpenCore's BootPicker (Audio Assist included). In order to enable it, the `OC_ATTR_USE_FLAVOUR_ICON` flag has to be added to the `PickerAtributes` bitmask. Check out the [OpenCore Calculators](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators) section to figure out how to generate it.
+**`.contentFlavour`** is used to modify the look and feel of entries in OpenCore's BootPicker (Audio Assist included). In order to enable it, the `OC_ATTR_USE_FLAVOUR_ICON` flag has to be added to the `PickerAtributes` bitmask. Check out the [OpenCore Calculators](/Content/B_OC_Calculators) section to figure out how to generate it.
 
 ### Configuration
 To configure the `.contentFlavour` file, please follow the extensive [OpenCore Content Flavor](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Flavours.md) guide provided by Acidanthera.

@@ -38,7 +38,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 ### Solution 2: Re-enable SIP (not always possible)
 
 - Change `csr-active-config` to `00000000` to re-enable SIP
-- Save your config
+- Save your config.plist
 - Reboot
 
 Once SIP has been re-enabled, the prompts for granting access to the cam/mic will pop-up immediately once you launch the app requiring access to them. The apps will be listed in the Privacy Settings for Camera and Microphone afterwards.

@@ -1,7 +1,7 @@
 # OpenCore Quirks for Intel and AMD CPUs 
 Quirks (ACPI, Booter, Kernel and UEFI) for Intel and AMD CPUs. Based on the information provided by Dortania's [**OpenCore Install Guide** ](https://dortania.github.io/OpenCore-Install-Guide/) and my own research (for 11 the Gen and newer). Presented in neatly structured tables. 
 
-Also available in [**list form**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/08_Quirks/Quirks_List.md) which is easier to read and maintain and contains newer data, such as Quirks for 11th and 12th Gen Intel Core CPUs.
+Also available in [**list form**](/Content/08_Quirks/Quirks_List.md) which is easier to read and maintain and contains newer data, such as Quirks for 11th and 12th Gen Intel Core CPUs.
 
 :bulb: **TIP**: All of these Quirks combinations are included in [**OpenCore Auxiliary Tools**](https://github.com/ic005k/OCAuxiliaryTools) as presets in the corresponding Quirks sections!
 

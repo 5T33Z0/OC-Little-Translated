@@ -6,10 +6,10 @@ Before applying any of these battery patches available here, you should test the
 ## Battery Hotfixes
 This section contains battery hotfixes for notebooks from various vendors (check the folders above). 
 
-- [ThinkPad Battery Fixes](/05_Laptop-specific_Patches/Battery_Patches/i_ThinkPad/README.md)
-- [Intel NUC](/05_Laptop-specific_Patches/Battery_Patches/v_NUC/README.md)
-- [Various](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Battery_Patches/ii_Other_brands)
-- [Battery Information Patch](/05_Laptop-specific_Patches/Battery_Patches/iii_Battery_Information_Assist_Patch/README.md)
+- [ThinkPad Battery Fixes](/Content/05_Laptop-specific_Patches/Battery_Patches/i_ThinkPad/README.md)
+- [Intel NUC](/Content/05_Laptop-specific_Patches/Battery_Patches/v_NUC/README.md)
+- [Various](/Content/05_Laptop-specific_Patches/Battery_Patches/ii_Other_brands)
+- [Battery Information Patch](/Content/05_Laptop-specific_Patches/Battery_Patches/iii_Battery_Information_Assist_Patch/README.md)
 
 For more battery patches, check [**GZXiaoBai's Github Repo**](https://github.com/GZXiaoBai/Hackintosh-Battery-Hotpatch) (writen in Chinese).
 

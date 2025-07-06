@@ -5,7 +5,7 @@ OSX 10.11 (El Capitan) introduced a new security feature called **System Integri
 
 `csr-active-config` is a crucial setting in custom macOS boot environments like OpenCore, used to fine-tune System Integrity Protection (SIP) at boot time. It employs a 32-bit bitmask (only the least significant 12 bits are actually used for SIP configuration), where each bit corresponds to a specific SIP protection. Users can selectively disable SIP features by setting the appropriate bits. For instance, setting bit 0 (0x1) disables kext signing requirements, while bit 1 (0x2) disables filesystem protections. The bitmask is typically represented in hexadecimal format, with values combined using bitwise OR operations. For example, to disable both kext signing and filesystem protections, you'd use the value 0x3 (0x1 | 0x2), which in the full 32-bit little-endian format becomes `03000000`. This granular control allows advanced users to precisely tailor SIP to their needs, enabling activities like unsigned kext loading or system file modifications while maintaining other protections intact. 
 
-If you want to calculate your own `csr-active-config` bitmask, [have a look here](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators).
+If you want to calculate your own `csr-active-config` bitmask, [have a look here](/Content/B_OC_Calculators).
 
 ## Available Flags
 Originally, the bitmask consisted of 8 bits. Since the release macOS 10.12, 4 more bits followed. Currently, the CSR bitmask consist of 12 bits providing the following flags:

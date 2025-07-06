@@ -35,10 +35,10 @@ The values for the 2 variables in the `OSID` method are set dynamically, based o
 
 ## Patch combination for fixing `Fn`+`Insert` keyboard shortcut
 
-- ***SSDT-PTSWAK*** &rarr; See [Comprehensive Sleep and Wake Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
-- ***SSDT-EXT3-WakeScreen*** &rarr; See [Comprehensive Sleep and Wake Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
-- ***SSDT-LIDpatch*** &rarr; See [Fixing `PNP0C0E` Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
-- ***SSDT-FnInsert_BTNV-dell*** &rarr; See [Fixing `PNP0C0E` Sleep](https://github.com/5T33Z0/OC-Little-Translated/tree/main/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
+- ***SSDT-PTSWAK*** &rarr; See [Comprehensive Sleep and Wake Patch](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+- ***SSDT-EXT3-WakeScreen*** &rarr; See [Comprehensive Sleep and Wake Patch](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix)
+- ***SSDT-LIDpatch*** &rarr; See [Fixing `PNP0C0E` Sleep](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
+- ***SSDT-FnInsert_BTNV-dell*** &rarr; See [Fixing `PNP0C0E` Sleep](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method)
 
 ## Enabling 4k output on Dell Optiplex 3070 and 7070
-&rarr; [**Guide**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch/Enable_4k_Dell_Optiplex.md)
+&rarr; [**Guide**](/Content/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch/Enable_4k_Dell_Optiplex.md)

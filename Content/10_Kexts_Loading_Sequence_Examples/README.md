@@ -174,7 +174,7 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 7. With the release of macOS Sonoma (Darwin Kernel 23.x), Apple completely dropped support for Broadcom Cards! In order to re-enable Broadcom WiFi, you have to:
 	- Add additional kexts 
 	- Adjust some config settings (see &rarr; [Example 10](#example-10-enabling-legacy-broadcom-wifi-cards-in-macos-14))
-	- [Apply root patches with OpenCore Legacy Patcher](/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
+	- [Apply root patches with OpenCore Legacy Patcher](/Content/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md)
 
 > [!IMPORTANT]
 > 
@@ -218,7 +218,7 @@ If you have multiple versions of macOS installed and want to use AirportItlwm in
 > 
 > - Adding the correct `MinKernel` and `MaxKernel` settings is *really* important. Otherwise Wi-Fi won’t work and the system might crash when injecting the kext multiple times!
 > - When renaming kexts, you can’t automatically fetch kext updates for it with tools like OCAT any longer.
-> - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](https://github.com/5T33Z0/OC-Little-Translated/blob/main/W_Workarounds/macOS14.4.md)). Afterwards, you can revert the settings.
+> - When updating macOS Sonoma (14.3 and newer), you _must_ disable `AirportItlwm.kext` in favor of `itlwm.kext` and set `SecureBootModel` to `Disabled` prior to updating. Otherwise the installer will crash ([more info](/Content/W_Workarounds/macOS14.4.md)). Afterwards, you can revert the settings.
 > - The pink combination requires additional configuration (&rarr; See [Enabling AirportItlwm in macOS Sequoia](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Enable_Features/AirportItllwm_Sequoia.md) for instructions).
 
 ### Example 9a: Possible Desktop Kext Sequence
@@ -238,7 +238,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 
 ### Example 10: Re-Enabling legacy Broadcom and Intel WiFi/BT Cards in macOS 14+
 
-&rarr; Please follow the dedicated guide in the [OCLP-Wintel section](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) to (re-)enable WiFi and Bluetooth for Intel and Broadcom cards in macOS Sonoma and newer.
+&rarr; Please follow the dedicated guide in the [OCLP-Wintel section](/Content/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) to (re-)enable WiFi and Bluetooth for Intel and Broadcom cards in macOS Sonoma and newer.
 
 ### Example 11: CPUFriend
 You can use **CPUFried.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
@@ -256,7 +256,7 @@ By default, the frequency vectors stored in the selected SMBIOS are used to hand
 
 > [!NOTE]
 > 
-> For more info about CPU Power Management, please refer to &rarr; [**Enabling CPU Power Management**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
+> For more info about CPU Power Management, please refer to &rarr; [**Enabling CPU Power Management**](/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
 
 ## Notes and Credits
 - :warning: The plists included in this section ARE NOT for use with any system. They are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!

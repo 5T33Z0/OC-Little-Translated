@@ -27,8 +27,8 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 
 > [!CAUTION]
 >
-> - With the release of `RestrictEvents.kext` v1.1.3, the Kernel Patches were implemented into the kext itself, so adding them is no longer necessary. So If your `config.plist` still contains [these Kernel Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L2163-L2282), please disable/delete them! 
-> - Prior to the release of `RestrictEvents.kext`, the kernel patches had negative effects on Bluetooth since enabling the VMM Board-ID skipped loading firmware of Bluetooth devices. This has been resolved now (&rarr; [ more details](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)).
+> - With the release of `RestrictEvents.kext` v1.1.3, the Kernel Patches were implemented into the kext itself, so adding them is no longer necessary. If your `config.plist` still contains these [Kernel Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L2163-L2282), please disable/delete them! 
+> - Prior to the release of `RestrictEvents.kext`, the kernel patches had negative effects on Bluetooth since enabling the VMM Board-ID skipped loading firmware of Bluetooth devices. This has been resolved now (&rarr; [more details](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)).
 
 ## System Requirements
 **Minimum macOS**: Big Sur 11.3 or newer (Darwin Kernel 20.4+) is ***mandatory***!
@@ -62,7 +62,7 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 
 Normally, macOS wouldn't be able to receive System Update Notifications (and therefore wouldn't be able to download OTA System Updates) under the following conditions:
 
-1. Using a [`csr-active-config` bitmask](https://github.com/5T33Z0/OC-Little-Translated/blob/main/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to lower `System Integrity Protection` (SIP). Lowering SIP is mandatory for [applying root-patches with OCLP](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) to the system volume to re-enable legacy hardware since it cannot be enabled by injecting settings and kexts via OpenCore alone alone. But if these 2 SIP flags are active, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled in order to boot the system afterwards.
+1. Using a [`csr-active-config` bitmask](/Content/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to lower `System Integrity Protection` (SIP). Lowering SIP is mandatory for [applying root-patches with OCLP](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) to the system volume to re-enable legacy hardware since it cannot be enabled by injecting settings and kexts via OpenCore alone alone. But if these 2 SIP flags are active, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled in order to boot the system afterwards.
 2. Using an SMBIOS of one of the Mac models listed above in combination with `SecureBootModel` set to `Disabled` (instead of using the correct "J" value).
 3. Using boot-arg `-no_compat_check` which allows booting with an unsupported board-id but it also disables system updates.
 
@@ -75,7 +75,7 @@ In conclusion: in order to be able to boot the system with the designated SMBIOS
 - Add [**`RestrictEvent.kext`**](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your `EFI/OC/Kext` folder and `config.plist`
 - Delete `-no_compat_check` boot-arg (if present)
 - Add `revpatch=sbvmm` to boot-args or as as an NVRAM variable: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
-- Optional (but recommended): Under `PlatformInfo/Generic`, pick the correct/designated [SMBIOS for your CPU family/system](https://github.com/5T33Z0/OC-Little-Translated/blob/main/14_OCLP_Wintel/CPU_to_SMBIOS.md) and generate new serials, etc (with OCAT or GenSMBIOS for example) 
+- Optional (but recommended): Under `PlatformInfo/Generic`, pick the designated [SMBIOS](/Content/14_OCLP_Wintel/CPU_to_SMBIOS.md) and generate new serials, etc (with OCAT or GenSMBIOS for example) 
 - Save your config and reboot.
 - Install macOS 12 or newer.
 
@@ -106,7 +106,7 @@ Installation went smoothly and macOS 12.1 booted without issues:
 
 ## Notes
 - After upgrading to macOS 12+, you have to re-install graphics drivers for legacy iGPUs/dGPUs that are no longer supported by macOS, such as: Intel HD Graphics (Ivy Bridge to Skylake), NVIDIA Kepler and AMD Vega, Polaris and GCN. To do so, you can use [**OpenCore Patcher GUI App**](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
-- For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](/14_OCLP_Wintel/README.md) section for detailed configuration guides (1st to 6th Gen Intel Core CPUs).
+- For getting macOS Ventura and newer to work on unsupported platforms, check the [**OCLP Wintel**](/Content/14_OCLP_Wintel/README.md) section for detailed configuration guides (1st to 6th Gen Intel Core CPUs).
 
 ## Credits
 - [**VMM Usage Notes**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543#issuecomment-953441283)
