@@ -1,8 +1,8 @@
-# Updating OpenCore and Kexts with OCAT
-|![noschemafor](https://user-images.githubusercontent.com/76865553/180214676-455fd9d9-b7eb-4dbf-90c9-cd3225ebe2bc.jpeg)<br>_Say good bye to OpenCore config errors like theese!_
+# Updating OpenCore and Kexts with OpenCore Auxiliary Tools (OCAT)
+|![noschemafor](https://user-images.githubusercontent.com/76865553/180214676-455fd9d9-b7eb-4dbf-90c9-cd3225ebe2bc.jpeg)<br>_Say good bye to OpenCore config errors like these!_
 |:--------------|
 
-**TABLE of CONTENTS**
+**INDEX**
 
 - [About](#about)
 - [1. Tools and Prerequisites](#1-tools-and-prerequisites)
@@ -16,13 +16,16 @@
 	- [Release Mode](#release-mode)
 	- [Dev Mode](#dev-mode)
 - [Switching between Release and Debug builds](#switching-between-release-and-debug-builds)
+- [Adding kext URLs to OCAT](#adding-kext-urls-to-ocat)
+- [Refreshing the OCAT Database](#refreshing-the-ocat-database)
+- [Thoughts on updating OpenCore with OCAT vs. updating it manually](#thoughts-on-updating-opencore-with-ocat-vs-updating-it-manually)
 - [Shortcomings of OCAT](#shortcomings-of-ocat)
 	- [Fixing "Development/Debug version database does not exist" error](#fixing-developmentdebug-version-database-does-not-exist-error)
 	- [Integrating Drivers from OcBinaryData](#integrating-drivers-from-ocbinarydata)
 	- [Adding `.contentFlavour` and `.contentVisibility`](#adding-contentflavour-and-contentvisibility)
-- [Refreshing the OCAT Database](#refreshing-the-ocat-database)
-- [Thoughts on updating OpenCore with OCAT vs. updating it manually](#thoughts-on-updating-opencore-with-ocat-vs-updating-it-manually)
 - [NOTES](#notes)
+
+---
 
 ## About
 
@@ -162,6 +165,49 @@ To revert back to the RELEASE build:
 - Update OpenCore files and Drivers
 - Save and reboot
 
+## Adding kext URLs to OCAT
+
+OCAT does not contain all the links to kext repos. You can tell missing repo links by a grey box in front of thm. In order to fetch updates for these kexts, you have to add links to the corresponding repo to `KextURL.txt`.
+
+**Instructions**
+
+1. Open Finder
+2. Press <kbd>CMD</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>
+3. Paste in this path and hit <kbd>Enter</kbd>: 
+	```
+	~/.config/OCAuxiliaryTools/
+	```
+4. Open `KextUrl.txt` with TextEdit
+5. Add the following entries (examples):
+	```text
+	AdvancedMap.kext | https://github.com/narcyzzo/AdvancedMap
+	AMFIPass.kext | https://github.com/bluppus20/AMFIPass
+	IntelMausiEthernet.kext | https://github.com/Mieze/IntelMausiEthernet
+	```
+6. Save the file
+
+The next time, you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). All [kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain grey!
+
+## Refreshing the OCAT Database
+
+If you want to reset OCATs preferences and its Database (after an update for example), do the folling:
+
+- In Finder, navigate to your Home folder.
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files
+- Delete the `.ocat` folder 
+- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again.
+- Next, run OCAT
+- Fix Database errors downloading the lasted version of OpenCore from the Sync Window:
+	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
+	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build)
+- Once the download has finished, the latest files will be integrated into the database so you can continue using OCAT as usual.
+
+## Thoughts on updating OpenCore with OCAT vs. updating it manually
+
+Updating and maintaining OpenCore with OCAT is remarkably straightforward. If you haven't experienced it yet, give it a try, and you'll quickly see how much easier it is. When comparing OCAT to the manual update process [outlined](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) by Dortania, the difference is clear. The manual method requires multiple tools, is time-consuming and doesn't align with OpenCore’s cutting-edge nature. OpenCore is a modern, innovative Boot Manager that continues to push technological boundaries, yet the traditional method for updating it involves several disconnected tools, creating an unnecessary challenge for users.
+
+It’s exciting to see tools like [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) making OpenCore updates seamless and user-friendly. Even [**HackUpdate**](https://github.com/corpnewt/HackUpdate) is moving in the right direction, though there's still room for improvement. Until something better comes along, OCAT stands out as a practical solution that simplifies what could otherwise be a tedious process.
+
 ## Shortcomings of OCAT
 As useful as OCAT is, it has some shortcomings. The ones that come to mind are database issues, downloading drivers from OcBinaryData and copying the hidden files `.contentFlavour` and `.contentVisibility` which were added in OC 0.8.8 into the EFI/OC/Boot folder.
 
@@ -201,26 +247,6 @@ OCAT is currently not fetching drivers from Acidanthers's OcBinaryData repo auto
 > [!NOTE]
 > 
 > Refer to OpenCore's Documentation.pdf to find out how to configure these files.
-
-## Refreshing the OCAT Database
-
-If you want to reset OCATs preferences and its Database (after an update for example), do the folling:
-
-- In Finder, navigate to your Home folder.
-- Press <kbd>CMD</kbd>+<kbd>.</kbd> to show hidden files
-- Delete the `.ocat` folder 
-- Press <kbd>CMD</kbd>+<kbd>.</kbd> to hide the folders and files again.
-- Next, run OCAT
-- Fix Database errors downloading the lasted version of OpenCore from the Sync Window:
-	- In `Release` mode: select "Latest Version" from the dropdown menu and click on "Get OpenCore"
-	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build)
-- Once the download has finished, the latest files will be integrated into the database so you can continue using OCAT as usual.
-
-## Thoughts on updating OpenCore with OCAT vs. updating it manually
-
-Updating and maintaining OpenCore with OCAT is remarkably straightforward. If you haven't experienced it yet, give it a try, and you'll quickly see how much easier it is. When comparing OCAT to the manual update process [outlined](https://dortania.github.io/OpenCore-Post-Install/universal/update.html#updating-opencore) by Dortania, the difference is clear. The manual method requires multiple tools, is time-consuming and doesn't align with OpenCore’s cutting-edge nature. OpenCore is a modern, innovative Boot Manager that continues to push technological boundaries, yet the traditional method for updating it involves several disconnected tools, creating an unnecessary challenge for users.
-
-It’s exciting to see tools like [**OCAT**](https://github.com/ic005k/QtOpenCoreConfig) making OpenCore updates seamless and user-friendly. Even [**HackUpdate**](https://github.com/corpnewt/HackUpdate) is moving in the right direction, though there's still room for improvement. Until something better comes along, OCAT stands out as a practical solution that simplifies what could otherwise be a tedious process.
 
 ## NOTES
 - When setting-up your config for the very first time, you should create an OC Snapshot with ProperTree prior to deployment. Because it does a better job of detecting kext dependencies and organizing nested kexts which can prevent possible boot errors later.
