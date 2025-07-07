@@ -167,7 +167,7 @@ To revert back to the RELEASE build:
 
 ## Adding kext URLs to OCAT
 
-OCAT does not contain all the links to kext repos. You can tell missing repo links by a grey box in front of thm. In order to fetch updates for these kexts, you have to add links to the corresponding repo to `KextURL.txt`.
+OCAT does not contain all the links to kext repos. You can tell if a link to a repo is missing by a grey box in front of a kext. In order to fetch updates for these kexts, you have to add links to the corresponding repos to `KextURL.txt`. You can do this manually from within the app, but it's a bit tedious. So we will edit the text file directly.
 
 **Instructions**
 
@@ -186,7 +186,7 @@ OCAT does not contain all the links to kext repos. You can tell missing repo lin
 	```
 6. Save the file
 
-The next time, you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). All [kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain grey!
+The next time you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). [Kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain grey!
 
 ## Refreshing the OCAT Database
 
