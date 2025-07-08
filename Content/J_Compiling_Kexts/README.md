@@ -15,7 +15,7 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 ## Slimming `AppleALC.kext`
 **Kext**: [**`AppleALC`**](https://github.com/acidanthera/AppleALC/releases)</br>
 **For**: On-board Audio</br>
-**Filesize reduction**: From 3.8 MB to approx. 600 KB. If you strip down the the config files so that they only contain data for the one layout you are using, you can get it as small as 90 KB!</br>
+**Filesize reduction**: From 3.8 MB to approx. 90 KB, if you strip down the the config files so that they only contain data for the one layout you are using!</br>
 **Guide**: [**Slimming AppleALC**](https://github.com/5T33Z0/AppleALC-Guides/tree/main/Slimming_AppleALC)
 
 ## Slimming Kexts for Intel WiFi/BT Cards
