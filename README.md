@@ -39,7 +39,7 @@ OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch
 ### Boot and Kext Management
 - [Boot Arguments Explained](/Content/H_Boot-args/README.md)
 - [Kext Loading Sequence Examples](/Content/10_Kexts_Loading_Sequence_Examples/README.md)
-- [Compiling Slimmed-Down Variants of Kexts](/J_Compiling_Kexts/README.md)
+- [Compiling Slimmed-Down Variants of Kexts](/Content/J_Compiling_Kexts/README.md)
 - [BOOT Folder Configuration](/Content/07_BOOT_Folder/README.md)
 
 ## Advanced Configuration
