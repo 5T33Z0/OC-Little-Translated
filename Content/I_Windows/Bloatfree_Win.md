@@ -2,6 +2,10 @@
 
 Recently, I looked into debloating Windows 10/11 without having to tamper with Windows in post-install using Powershell and/or Registry "hacks". One option I found was manually editing the `install.wim` file with DISM or a gui-based PowerShell script called WIMWitch. But this was not really satisfying since it takes a lot of time and effort, is rather complicated and the approach is rather outdated. So I kept looking…
 
+>[!TIP]
+> 
+> The following guide still works but is kind of outdated now. I have found a simpler method which is using [WIMUtil](https://github.com/memstechtips/WIMUtil) to create a super clean and slim windows installation ([YouTube Video](https://github.com/memstechtips/WIMUtil))
+
 ## UUPDump to the rescue
 I found this website called [UUPDump](https://uupdump.net/) which lets you select, the version of Windows, Language, Edition, and which additional features/apps should be included in the final ISO. 
 
