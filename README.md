@@ -63,6 +63,7 @@ OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch
 - [macOS 14.4 Install Workaround](/Content/W_Workarounds/README.md)
 - [Creating a Multi-macOS USB Installer](/Content/U_USB_Multi_installer/README.md)
 - [macOS Virtualization](/Content/V_Virtualization/README.md)
+- [Sensor Plugins for System Monitoring](/Content/17_SysMon)
 
 ### Other Operating Systems
 - [Windows-Related Guides](/Content/I_Windows/README.md)
