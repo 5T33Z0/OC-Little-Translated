@@ -57,7 +57,7 @@ OC-Little is a comprehensive resource for OpenCore users, offering ACPI hotpatch
 - [Generating EFIs with OCAT](/Content/F_Desktop_EFIs/README.md)
 
 ### macOS-Specific
-- [Terminal Commands](/Content/Terminal_Commands.md#readme)
+- [Terminal Commands](/Terminal_Commands.md#readme)
 - [Compatibility Charts](/Content/E_Compatibility_Charts/README.md)
 - [Fixing System Update Notifications](/Content/S_System_Updates/README.md)
 - [macOS 14.4 Install Workaround](/Content/W_Workarounds/README.md)
