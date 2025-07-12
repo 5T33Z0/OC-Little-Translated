@@ -17,7 +17,7 @@
 --- 
 ## About RPS-Control
 
-The term **"rps-control"** in the context of Intel GPUs refers to **Render Power States control**, a feature related to power management in Intel's integrated graphics processing units (GPUs). It is part of Intel's **RC6** (Render C6) power-saving technology, which allows the GPU to enter low-power states when idle or under light load to reduce energy consumption. The "rps" specifically stands for **Render Power States**, and it manages the GPU's power and performance by dynamically adjusting clock frequencies and voltage based on workload demands.
+The term **"rps-control"** in the context of Intel GPUs refers to **Render Power States control**, a feature related to power management in Intel's integrated graphics processing units (iGPUs). It is part of Intel's **RC6** (Render C6) power-saving technology, which allows the GPU to enter low-power states when idle or under light load to reduce energy consumption. The "rps" specifically stands for **Render Power States**, and it manages the GPU's power and performance by dynamically adjusting clock frequencies and voltage based on workload demands.
 
 ## RPS-Control in the context of hackintoshing
 
