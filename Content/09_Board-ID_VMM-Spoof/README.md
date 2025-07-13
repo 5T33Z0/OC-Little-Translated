@@ -81,7 +81,6 @@ In conclusion: in order to be able to boot the system with the designated SMBIOS
 
 <details>
 <summary><strong>Proof that the spoof is working</strong> (Click to reveal)</summary><br>
-
 ## Proof
 I tested the Board-id vmm spoof on my Lenovo T530 Notebook (Ivy Bridge), using the `MacBookPro10,1` SMBIOS, which is officially not compatible with macOS Monterey. After rebooting, the system started without using `-no_compat_check` boot-arg, as you can see here:
 
