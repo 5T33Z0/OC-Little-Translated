@@ -39,6 +39,7 @@ Tools for downloading macOS directly from Apple Servers as well as creating inst
 - [**gibMacOS**](https://github.com/corpnewt/gibMacOS) – Python script for downloading macOS (10.13 to 13). Only tool that can be used from within Windows to create an Internet Recovery USB installer!
 - [**StartOSInstall**](https://github.com/chris1111/Startosinstall-Ventura) – Script to turn an external SSD into a macOS Installer (Big Sur and newer).
 - [**ISO Image Creator**](https://macmeup.com/create-iso-images/) – App to convert macOS Installers to .iso images.
+- [**Download Full Installer**](https://github.com/perez987/DownloadFullInstaller) – Downloads macOS Installers (Big Sur+) as .pkg files from different Seeds (Regular, Customer, Developer, Public).
 
 ### Troubleshooting/Debugging
 - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) – App for gathering infos from the [**I/OKit**](https://developer.apple.com/library/archive/documentation/DeviceDrivers/Conceptual/IOKitFundamentals/Introduction/Introduction.html#//apple_ref/doc/uid/TP0000011) in macOS.
