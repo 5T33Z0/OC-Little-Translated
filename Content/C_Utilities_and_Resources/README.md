@@ -109,9 +109,10 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**USBToolbox**](https://github.com/USBToolBox/tool) – USB Port mapping tool. Makes port mapping under macOS 11.3+ easier.
 
 ### CPU-related
-- [**freqVectorsEdit**](https://github.com/Piker-Alpha/freqVectorsEdit.sh) – Python Script for editing frequency Vectors of Board-ID plists contained in the X86PlatformPlugin.kext
-- [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Python Script to generate a SSDT for Legacy CPU Power Management
-- [**MacCPUID**](https://www.intel.com/content/www/us/en/download/674424/maccpuid.html) –  Shows detailed information of Intel CPUs (Model, Features, Cache, etc.)
+- [**MacCPUID**](https://www.intel.com/content/www/us/en/download/674424/maccpuid.html) – Shows detailed information of Intel CPUs (Model, Features, Cache, etc.)
+- [**CPUFriendFriend**](https://github.com/corpnewt/CPUFriendFriend) – Python script for creating a CPUFriendDataProvider.kext for CPUFriend. 
+- [**ssdtPRGen**](https://github.com/Piker-Alpha/ssdtPRGen.sh) – Python Script to generate a SSDT for Legacy ACPI CPU Power Management (Ivy Bridge and older)
+- [**freqVectorsEdit**](https://github.com/Piker-Alpha/freqVectorsEdit.sh) – Python Script for editing frequency Vectors of Board-ID plists contained in the `X86PlatformPlugin.kext`
 
 ### Windows
 - [**Windows Install**](https://sourceforge.net/projects/windows-install/) – Easy to use tool to install Windows from an .iso from within macOS.
@@ -121,6 +122,7 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**GPU-Z**](https://www.techpowerup.com/gpuz/) – Provides useful information about your GPU
 - [**HWiNFO**](https://www.hwinfo.com/) – Great Tool for getting in-depth info about your system and components
 - [**Intel Processor Identification Utility**](https://www.intel.com/content/www/us/en/download/12136/intel-processor-identification-utility-windows-version.html)  – As the name suggests…
+- [**WIMUtil**](https://github.com/memstechtips/WIMUtil) – Easy to us tool for debloating Windows 10/11 isos.
 
 ### Web-based applications
 - [**Sanity Checker**](https://sanitychecker.ocutils.me/) – The popular tool for checking the consistency of OpenCore configs online has returned!
