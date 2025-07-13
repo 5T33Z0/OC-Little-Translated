@@ -5,7 +5,7 @@ Collection of GPU and Intel iGPU related guides and fixes not covered in the Ope
 
 - [**GPU Support in macOS**](/Content/11_Graphics/GPU/README.md)
 	- [Enabling AMD (Big) Navi Cards](/Content/11_Graphics/GPU/AMD_Navi/README.md)
-	- [Enabling AMD Vega 56/64 Cards](/Content/11_Graphics/GPU/AMD_Vega/README.md)
+	- [Enabling AMD Vega 56/64 Cards](/Content/11_Graphics/GPU/AMD_Vega/)
 	- [AMD Radeon Tweaks](/Content/11_Graphics/GPU/AMD_Radeon_Tweaks/README.md)
 	- [Legacy AMD Cards and macOS](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300)
 	- [Disabling unsupported GPUs](/Content/11_Graphics/GPU/Disabling_unsupported_GPUs/README.md)
