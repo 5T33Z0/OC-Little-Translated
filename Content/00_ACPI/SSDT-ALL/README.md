@@ -78,7 +78,7 @@ In cases where you're getting compiler errors like "Existing object has invalid 
 ## Notes
 - After merging your SSDTs into a new file, you may notice that the resulting table is not organized well in terms of the tree stucture. Manually edit the file to clean it up and reduce clutter.
 - Maybe sorting the SSDTs based on their PCI paths prior to merging them results in a cleaner output.
-- If you know a method to improve the merging process so that everything is organized perfectly, let me know.
+- If you know a method to improve the merging process so that everything is organized perfectly, let me know. You could let an LLM of your choise try to restructure it (success not guaranteed).
 
 ## Credits & Resources
 - [ASL Compiler User Reference](https://www.acpica.org/sites/acpica/files/aslcompiler_11.pdf) (PDF)
