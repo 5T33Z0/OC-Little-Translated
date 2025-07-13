@@ -15,10 +15,12 @@
 ### 📌 Disclaimer
 
 1. **🚫 Not an Installation Guide**
+   
    This is *not* a macOS installation guide. For setting up macOS, use the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/).
    OC-Little focuses on **post-install tuning** and **hardware enablement**.
 
-2. **✅ ACPI-Compliant Methods Only**
+3. **✅ ACPI-Compliant Methods Only**
+
    This project avoids DSDT patching and other invasive mods. It adheres to the philosophy of a **clean, vanilla Hackintosh** using only **ACPI hotpatching**.
    For more on this philosophy, see [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870).
 
