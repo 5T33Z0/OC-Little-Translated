@@ -36,10 +36,10 @@ GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP.
 
 **Source**: [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/993)
 
-### Installing NVIDIA Webdrivers in 2022
+### Installing NVIDIA Webdrivers in Big Sur and newer
 
-- There's a [**guide**](https://www.reddit.com/r/hackintosh/comments/v960av/nvidia_web_driver_fix_for_high_sierra/) on reddit on how to install Webdrivers with removed code-signing so the installer won't quit.
-- [**Guide**](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/): Using OpenCore Legacy Patcher to install Webdrivers on Big Sur and Monterey.
+- Using [OpenCore Legacy Patcher](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) to install Webdrivers on Big Sur and Monterey.
+- There's a [**guide**](https://www.reddit.com/r/hackintosh/comments/v960av/nvidia_web_driver_fix_for_high_sierra/) on reddit on how to remove ode-signing from the Webdriver installer, so it doesn't quit.
 
 ## Intel on-board Graphics
 
