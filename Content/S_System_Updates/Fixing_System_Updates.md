@@ -45,6 +45,7 @@ When I was booting macOS Ventura on my Ivy Bridge Laptop with Clover using SMBIO
 
 ## Notes
 - [**Reducing the download size of OTA Updates**](/Content/S_System_Updates/OTA_Updates.md)
+- Find out more about the [origin of this fix](/Content/09_Board-ID_VMM-Spoof)
 
 ## Credits
 - Dortania for OCLP 
