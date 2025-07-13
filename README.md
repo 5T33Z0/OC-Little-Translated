@@ -55,6 +55,7 @@
 ### 💻 Laptop-Specific
 
 * 💻 [Laptop Patches (Battery, FN keys, etc.)](/Content/05_Laptop-specific_Patches/README.md)
+* 🖥️ [Modifying Framebuffer Patch for detecting External Displays](/Content/11_Graphics/iGPU/Framebuffer_Patching)
 
 ## ⚙️ Boot & Kexts
 
