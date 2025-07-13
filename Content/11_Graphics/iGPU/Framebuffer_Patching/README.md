@@ -1,7 +1,7 @@
 # Intel iGPU Framebuffer patching for connecting an external Monitor (Laptop)
 
 <details>
-<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary>
+<summary><strong>TABLE of CONTENTS</strong> (click to reveal)</summary><br>
 
 **TABLE of CONTENTS**
 
