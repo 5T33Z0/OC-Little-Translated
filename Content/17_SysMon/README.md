@@ -3,14 +3,11 @@
 **INDEX**
 
 - [Introduction](#introduction)
-- [Option 1: VirtualSMC (Acidanthera)](#option-1-virtualsmc-acidanthera)
-  - [VirtualSMC.kext — Core SMC Emulator](#virtualsmckext--core-smc-emulator)
+- [Option 1: VirtualSMC](#option-1-virtualsmc)
   - [Official VirtualSMC Sensor Plugins](#official-virtualsmc-sensor-plugins)
   - [3rd Party Sensor Plugins](#3rd-party-sensor-plugins)
-- [Option 2: FakeSMC3 (CloverHackyColor)](#option-2-fakesmc3-cloverhackycolor)
-  - [FakeSMC.kext — Updated Legacy Emulator](#fakesmckext--updated-legacy-emulator)
+- [Option 2: FakeSMC3](#option-2-fakesmc3)
   - [Included Plugins](#included-plugins)
-- [Feature Comparison](#feature-comparison)
 - [Compatible Monitoring Tools](#compatible-monitoring-tools)
 - [Choosing the Right SMC Emulator](#choosing-the-right-smc-emulator)
 - [Example Directory Structures](#example-directory-structures)
@@ -29,9 +26,7 @@ There are two primary approaches for SMC emulation and sensor monitoring:
 
 This guide outlines the differences between the two approaches, explains the roles of their respective plugins, and helps you determine which setup is most appropriate for your system.
 
-## Option 1: VirtualSMC (Acidanthera)
-
-### VirtualSMC.kext — Core SMC Emulator
+## Option 1: VirtualSMC
 
 **GitHub**: [acidanthera/VirtualSMC](https://github.com/acidanthera/VirtualSMC)
 
@@ -51,7 +46,7 @@ These plugins are loaded in addition to `VirtualSMC.kext` and must be enabled in
 
 ### 3rd Party Sensor Plugins
 
-In addition to the official Acidanthera plugins for VirtualSMC, several community-developed sensor extensions provide support for AMD CPUs, Radeon GPUs, and other hardware not covered by the core project. These kexts typically require **Lilu.kext** and **VirtualSMC.kext** to function properly.
+In addition to the official plugins for VirtualSMC by Acidanthera, several community-developed sensor extensions provide support for AMD CPUs, Radeon GPUs, and other hardware not covered by the core project. These kexts typically require **Lilu.kext** and **VirtualSMC.kext** to function properly.
 
 Plugin | Description | macOS
 -------|-------------|-------
@@ -62,15 +57,13 @@ Plugin | Description | macOS
 > 
 > These plugins are often used by AMD Hackintosh users or systems with modern dGPUs not supported by FakeSMC plugins.
 
-## Option 2: FakeSMC3 (CloverHackyColor)
-
-### FakeSMC.kext — Updated Legacy Emulator
+## Option 2: FakeSMC3
 
 **GitHub**: [CloverHackyColor/FakeSMC3\_with\_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins)
 
-This fork of the original FakeSMC has been modernized to support macOS High Sierra through Sonoma. Unlike the original, it is fully modular and supports a wide variety of monitoring extensions, including some legacy sensor chips that VirtualSMC does not support.
+This fork of the original FakeSMC has been modernized to support macOS High Sierra through Tahoe. Unlike the original, it is fully modular and supports a wide variety of monitoring extensions, including some legacy sensor chips that VirtualSMC does not support.
 
-FakeSMC3 does not require Lilu.kext and is often preferred on older systems, or where deeper low-level sensor access is required (via ACPI, SMI, or I/O chipsets).
+FakeSMC3 does not require `Lilu.kext` and is often preferred on older systems, or where deeper low-level sensor access is required (via ACPI, SMI, or I/O chipsets).
 
 ### Included Plugins
 
@@ -90,15 +83,6 @@ Plugin | Purpose
 >
 > Only load the sensor kexts relevant to your hardware. Loading unnecessary plugins may lead to boot delays or conflicts.
 
-## Feature Comparison
-
-Feature | VirtualSMC | FakeSMC3\_with\_plugins
-Actively maintained | Yes (Acidanthera) | Yes (CloverHackyColor)
-macOS support | Catalina – Sonoma | High Sierra – Sonoma
-Lilu required | Yes | No
-Modular plugin system | Yes | Yes
-GPU sensor support | Limited | Partial (AMD/NVIDIA GPUs)
-
 ## Compatible Monitoring Tools
 
 | Tool | Freeware | Compatible with Hackintosh | Description|
@@ -112,6 +96,7 @@ GPU sensor support | Limited | Partial (AMD/NVIDIA GPUs)
 ## Choosing the Right SMC Emulator
 
 Use Case | Recommended Option
+---------|--------------------
 OpenCore setup with modern hardware | VirtualSMC
 Older hardware requiring SMM/ACPI sensors | FakeSMC3
 Need dGPU temperature monitoring | FakeSMC3 (experimental support)
@@ -148,6 +133,11 @@ EFI/OC/Kexts/
 
 ## Conclusion
 
-Both **VirtualSMC** and **FakeSMC3\_with\_plugins** provide reliable solutions for emulating the SMC and accessing hardware sensor data on a Hackintosh. VirtualSMC is the official, Lilu-based solution recommended for most users, while FakeSMC3 may be preferable for systems requiring extended or legacy sensor support, especially if Lilu is to be avoided.
+Both **VirtualSMC** and **FakeSMC3s** provide reliable solutions for emulating the SMC and accessing hardware sensor data on a Hackintosh. VirtualSMC is the official, Lilu-based solution recommended for most users, while FakeSMC3 may be preferable for systems requiring extended or legacy sensor support, especially if Lilu is to be avoided.
+
+**Recommendation**:
+
+- **VirtualSMC** is best for modern Hackintosh builds, especially laptops, due to its integration with Lilu-based kexts, robust battery management, and active development. It’s the recommended choice for OpenCore users and newer macOS versions but may lack some sensor support compared to FakeSMC3.
+- **FakeSMC3** is Ideal for older hardware or systems requiring extensive sensor monitoring (e.g., GPU, fan speeds). It’s a stable choice for Clover-based setups but may face compatibility challenges with newer macOS versions and has less active development.
 
 When used correctly and with compatible tools such as **HWMonitorSMC2**, either solution can provide full-featured, real-time monitoring of your Hackintosh system.
