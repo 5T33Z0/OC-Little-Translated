@@ -43,6 +43,7 @@
 
 ### 🛠️ System Fixes
 
+* :computer: [Fixing CPU Power Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
 * 🎮 [Fixing Graphics (iGPU/dGPU)](/Content/11_Graphics/README.md)
 * 🔌 [Fixing USB](/Content/03_USB_Fixes/README.md)
 * 😴 [Fixing Sleep & Wake](/Content/04_Fixing_Sleep_and_Wake_Issues/README.md)
