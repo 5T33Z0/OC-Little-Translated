@@ -48,7 +48,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
-I also found a list of some of the Intel Wi-Fi/BT Cards and the Firrmware files associated with them:
+I also found a list of some of the Intel Wi-Fi/BT Cards and the Firmware files associated with them:
 
 | Card                              | Firmware File(s)                                                                 |
 |-----------------------------------|---------------------------------------------------------------------------------|
