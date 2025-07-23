@@ -33,9 +33,27 @@ In Hackintosh systems, particularly on laptops like the [Lenovo T490](https://gi
   - Unnecessary throttling despite safe CPU temperatures (e.g., 50-70°C), as shown in tools like HWMonitor.
   - Inconsistent power management, with kexts like YogaSMC or CPUFriend conflicting with macOS’s native power management (XCPM).
 
-## Solution
+## Solution: Disabling BDPROCHOT
 
 To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using [**DisablePROCHOT.efi**](https://github.com/arter97/DisablePROCHOT) and prevent it from activating post-wake with [**SimpleMSR.kext**](https://github.com/arter97/SimpleMSR).
+
+### ⚠️ Disclaimer
+
+Disabling **BDPROCHOT (Bi-Directional Processor Hot)** bypasses a built-in safety feature designed to protect your CPU from overheating and power-related issues. This modification can increase system performance in Hackintosh environments, but it also **removes a critical hardware safeguard**.
+
+Proceed **only** if:
+
+* Your cooling system is functioning reliably.
+* You have verified that BDPROCHOT is being triggered incorrectly (e.g., by faulty firmware or sensors).
+* You understand the risks involved.
+
+Potential consequences include:
+
+* Increased CPU temperatures under load
+* Reduced hardware lifespan
+* System instability or crashes
+
+Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to regularly check temperatures and system behavior. **You proceed at your own risk.**
 
 ### Instructions
 
@@ -84,18 +102,18 @@ To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using
        ```
    - Save the `config.plist`.
 
-3. **Reboot and Reset NVRAM**:
-   - Ensure all changes to the EFI partition and `config.plist` are saved.
-   - Reboot your system.
-   - At the OpenCore picker, select the `ResetNvramEntry.efi` option to clear NVRAM, or press `Space` to access the NVRAM reset option if configured.
-   - Boot into macOS.
-
-4. **Rebuild Kext Cache**:
+3. **Rebuild Kext Cache**:
    - Once macOS boots, rebuild the kext cache to ensure `SimpleMSR.kext` is loaded:
      ```bash
      sudo kextcache -i /
      ```
    - Reboot again to apply the kext cache changes.
+
+4. **Reboot and Reset NVRAM**:
+   - Ensure all changes to the EFI partition and `config.plist` are saved.
+   - Reboot your system.
+   - At the OpenCore picker, select the `ResetNvramEntry.efi` option to clear NVRAM, or press `Space` to access the NVRAM reset option if configured.
+   - Boot into macOS.
 
 5. **Verify the Fix**:
    - **Monitor CPU Performance**:
@@ -107,12 +125,44 @@ To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using
    - **Test Sleep/Wake Cycle**:
      - Put the system to sleep (S3) and wake it multiple times to ensure consistent performance.
 
+## Using VoltageShift instead of SimpleMSR
+
+If you have still witness BDPROCHOT kicking in after waking from sleep, consider using [**VoltageShift**](https://github.com/sicreative/VoltageShift) instead of `SimpleMSR.kext` to disable BDPROCHOT.
+
+### Configuring VoltageShift
+
+- Download the [zip](https://github.com/sicreative/VoltageShift/blob/master/voltageshift_1.25.zip) and extract it
+- Add the VoltageShift.kext to EFI/OC/Kexts and your `config.plist`
+- Disable `SimpleMSR.kext`, if present
+- Reboot macOS
+- Run the VolatgeShift CLI tool: 
+	```bash
+	~/Downloads/voltageshift_1.25/./voltageshift read 0x1fc
+	```
+- This will return a bit sequence, for example: `000101000000000000011011`
+- Change the last bit in the Sequence to 0: `000101000000000000011010`
+- Convert the value to Hex, here: 14001A
+- Write the Value to MSR:
+	```bash
+	~/Downloads/voltageshift_1.25/./voltageshift write 0x1fc 14001A
+	```
+- Automate writing this value after recovering from sleep with an automation tool like [Hammerspoon](https://www.hammerspoon.org/) using a lua script:
+
+	```lua
+	local wakeWatcher = hs.caffeinate.watcher.new(function(event)
+	    if event == hs.caffeinate.watcher.systemDidWake then
+	        hs.execute("~/Downloads/voltageshift_1.25/./voltageshift write 0x1fc 14001A")
+	    end
+	end)
+
+	wakeWatcher:start()
+	```
+
 ## Additional Notes
 
 - **Thermal Monitoring**: Disabling BDPROCHOT may increase CPU temperatures. Use HWMonitor or similar tools to ensure temperatures stay within safe limits (e.g., below 85°C under load). Clean cooling systems or adjust fan curves if necessary.
 - **Compatibility**: This solution is compatible with most Intel-based Hackintosh systems. For AMD systems, additional research may be needed, as BDPROCHOT behavior differs.
 - **Backup EFI**: Always back up your EFI folder before making changes to avoid boot issues.
-- **Alternative Tools**: If `SimpleMSR.kext` is incompatible with your macOS version, consider using [`VoltageSHift`](https://github.com/sicreative/VoltageShift) to generate a custom kext to disable BDPROCHOT.
 
 ## Conclusion
 
