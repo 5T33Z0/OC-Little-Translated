@@ -19,6 +19,7 @@ This section contains a collection of guides with laptop-specific patches for en
     - Enabbling 4k output on Dell Optiplex Laptops
     - Xiaoxin PRO13 Special Patch
     - Asus Machine Special Patch
+- [**Fixing performance issues caused by BDPROCHOT**](/Content/05_Laptop-specific_Patches/BDPROCHOT)
 
 ## Further resources
 - [**Hackintosh Long-Term Maintenance Project**](https://github-com.translate.goog/daliansky/Hackintosh?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp#%E7%AC%94%E8%AE%B0%E6%9C%AC%E9%83%A8%E5%88%86%E6%9C%BA%E5%9E%8B) by Daliansky. Extensive Link Collection or Laptop and Desktop EFIs. If an EFI folder for your Notebook already exists, it's probably listed in there!
