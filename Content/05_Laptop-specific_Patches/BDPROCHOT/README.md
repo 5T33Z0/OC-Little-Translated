@@ -102,18 +102,18 @@ Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to r
        ```
    - Save the `config.plist`.
 
-3. **Rebuild Kext Cache**:
+3. **Reboot and Reset NVRAM**:
+   - Ensure all changes to the EFI partition and `config.plist` are saved.
+   - Reboot your system.
+   - At the OpenCore picker, select the `ResetNvramEntry.efi` option to clear NVRAM, or press `Space` to access the NVRAM reset option if configured.
+   - Boot into macOS.
+
+4. **Rebuild Kext Cache**:
    - Once macOS boots, rebuild the kext cache to ensure `SimpleMSR.kext` is loaded:
      ```bash
      sudo kextcache -i /
      ```
    - Reboot again to apply the kext cache changes.
-
-4. **Reboot and Reset NVRAM**:
-   - Ensure all changes to the EFI partition and `config.plist` are saved.
-   - Reboot your system.
-   - At the OpenCore picker, select the `ResetNvramEntry.efi` option to clear NVRAM, or press `Space` to access the NVRAM reset option if configured.
-   - Boot into macOS.
 
 5. **Verify the Fix**:
    - **Monitor CPU Performance**:
