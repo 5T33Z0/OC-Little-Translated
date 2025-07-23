@@ -112,8 +112,7 @@ To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using
 - **Thermal Monitoring**: Disabling BDPROCHOT may increase CPU temperatures. Use HWMonitor or similar tools to ensure temperatures stay within safe limits (e.g., below 85°C under load). Clean cooling systems or adjust fan curves if necessary.
 - **Compatibility**: This solution is compatible with most Intel-based Hackintosh systems. For AMD systems, additional research may be needed, as BDPROCHOT behavior differs.
 - **Backup EFI**: Always back up your EFI folder before making changes to avoid boot issues.
-- **Alternative Tools**: If `SimpleMSR.kext` is incompatible with your macOS version, consider using `one-key-cpufriend` to generate a custom `CPUFriendDataProvider.kext` to disable BDPROCHOT.
-- **Community Resources**: Refer to forums like tonymacx86, Reddit’s r/hackintosh, or the EliteMacx86 forum for additional troubleshooting and model-specific advice.
+- **Alternative Tools**: If `SimpleMSR.kext` is incompatible with your macOS version, consider using `VoltageSHift` to generate a custom kext to disable BDPROCHOT.
 
 ## Conclusion
 
