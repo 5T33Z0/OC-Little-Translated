@@ -65,7 +65,7 @@ Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to r
    - **Mount the EFI Partition**:
    - **Add `DisablePROCHOT.efi`**:
      - Copy `DisablePROCHOT.efi` to the `EFI/OC/Drivers` directory in your EFI partition.
-     - Open your `config.plist` using ProperTree or OpenCore Configurator.
+     - Open your `config.plist` using ProperTree
      - Add an entry under `UEFI > Drivers`:
        ```xml
        <dict>
@@ -108,26 +108,26 @@ Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to r
    - At the OpenCore picker, select the `ResetNvramEntry.efi` option to clear NVRAM, or press `Space` to access the NVRAM reset option if configured.
    - Boot into macOS.
 
-4. **Rebuild Kext Cache**:
-   - Once macOS boots, rebuild the kext cache to ensure `SimpleMSR.kext` is loaded:
-     ```bash
-     sudo kextcache -i /
-     ```
-   - Reboot again to apply the kext cache changes.
+4. Verify that the `SimpleMSR.kext` is loaded
+  
+    ```
+    kextstat | grep -v com.apple
+    ```
+    This lists all the loaded 3rd party kexts (not authored by Apple). It should contain something like this:
+    ```
+    73 0 0xffffff800430f000 0x9000 0x9000 com.arter97.SimpleMSR (1) 6D9F78A6-6865-342F-8C87-A58A52B90B52 <6 3>
+    ```
 
 5. **Verify the Fix**:
    - **Monitor CPU Performance**:
-     - Use Intel Power Gadget, HWMonitor, or i7z to confirm CPU frequencies remain stable after waking from S3 sleep.
+     - Use Intel Power Gadget, HWMonitor, or iStat Menus to confirm CPU frequencies remain stable after waking from S3 sleep.
      - Ensure the CPU does not drop to abnormally low frequencies (e.g., 400-800 MHz).
-   - **Check BDPROCHOT Status**:
-     - Use `sysctl machdep.xcpm` or a custom script to verify BDPROCHOT is disabled.
-     - If dual-booting Windows, use ThrottleStop to confirm BDPROCHOT is off.
    - **Test Sleep/Wake Cycle**:
      - Put the system to sleep (S3) and wake it multiple times to ensure consistent performance.
 
 ## Using VoltageShift instead of SimpleMSR
 
-If you have still witness BDPROCHOT kicking in after waking from sleep, consider using [**VoltageShift**](https://github.com/sicreative/VoltageShift) instead of `SimpleMSR.kext` to disable BDPROCHOT.
+If BDPROCHOT still kicks in after waking from sleep, consider using [**VoltageShift**](https://github.com/sicreative/VoltageShift) instead of SimpleMSR to disable BDPROCHOT after wake.
 
 ### Configuring VoltageShift
 
@@ -147,7 +147,6 @@ If you have still witness BDPROCHOT kicking in after waking from sleep, consider
 	~/Downloads/voltageshift_1.25/./voltageshift write 0x1fc 14001A
 	```
 - Automate writing this value after recovering from sleep with an automation tool like [Hammerspoon](https://www.hammerspoon.org/) using a lua script:
-
 	```lua
 	local wakeWatcher = hs.caffeinate.watcher.new(function(event)
 	    if event == hs.caffeinate.watcher.systemDidWake then
@@ -157,6 +156,12 @@ If you have still witness BDPROCHOT kicking in after waking from sleep, consider
 
 	wakeWatcher:start()
 	```
+- **Verify the Fix**:
+   - **Monitor CPU Performance**:
+     - Use Intel Power Gadget, HWMonitor, or iStat Menus to confirm CPU frequencies remain stable after waking from S3 sleep.
+     - Ensure the CPU does not drop to abnormally low frequencies (e.g., 400-800 MHz).
+   - **Test Sleep/Wake Cycle**:
+     - Put the system to sleep (S3) and wake it multiple times to ensure consistent performance.
 
 ## Additional Notes
 
@@ -166,5 +171,9 @@ If you have still witness BDPROCHOT kicking in after waking from sleep, consider
 
 ## Conclusion
 
-By adding `DisablePROCHOT.efi` and `SimpleMSR.kext` in a single configuration step, followed by rebooting and resetting NVRAM, Hackintosh systems can maintain stable CPU performance after S3 sleep. This lightweight and broadly compatible solution addresses BDPROCHOT-related throttling across various hardware configurations.
+By adding `DisablePROCHOT.efi` and `SimpleMSR.kext` in a single configuration step, followed by rebooting and resetting NVRAM, Hackintosh systems can maintain stable CPU performance after S3 sleep. This lightweight and broadly compatible solution for Intel-based Systems addresses BDPROCHOT-related throttling across various hardware configurations.
 
+## Credits and Thanks
+- [arter97](https://github.com/arter97) for DisablePROCHOT and SimpleMSR
+- [sicreative](https://github.com/sicreative) for VoltageShift
+- [medkintos](https://github.com/medkintos) for the instruction
