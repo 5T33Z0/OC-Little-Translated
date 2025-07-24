@@ -176,4 +176,4 @@ By adding `DisablePROCHOT.efi` and `SimpleMSR.kext` in a single configuration st
 ## Credits and Thanks
 - [arter97](https://github.com/arter97) for DisablePROCHOT and SimpleMSR
 - [sicreative](https://github.com/sicreative) for VoltageShift
-- [medkintos](https://github.com/medkintos) for the instruction
+- [medkintos](https://github.com/medkintos) for the research and instructions
