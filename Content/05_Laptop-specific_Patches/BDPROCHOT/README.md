@@ -37,23 +37,21 @@ In Hackintosh systems, particularly on laptops like the [Lenovo T490](https://gi
 
 To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using [**DisablePROCHOT.efi**](https://github.com/arter97/DisablePROCHOT) and prevent it from activating post-wake with [**SimpleMSR.kext**](https://github.com/arter97/SimpleMSR).
 
-### ⚠️ Disclaimer
+### ⚠️ Disclaimer: You Are Disabling a Safety Feature ⚠️
 
-Disabling **BDPROCHOT (Bi-Directional Processor Hot)** bypasses a built-in safety feature designed to protect your CPU from overheating and power-related issues. This modification can increase system performance in Hackintosh environments, but it also **removes a critical hardware safeguard**.
-
-Proceed **only** if:
-
-* Your cooling system is functioning reliably.
-* You have verified that BDPROCHOT is being triggered incorrectly (e.g., by faulty firmware or sensors).
-* You understand the risks involved.
-
-Potential consequences include:
-
-* Increased CPU temperatures under load
-* Reduced hardware lifespan
-* System instability or crashes
-
-Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to regularly check temperatures and system behavior. **You proceed at your own risk.**
+> [!CAUTION]
+>
+> Disabling **BDPROCHOT** removes a critical hardware protection mechanism designed to prevent your CPU and other components from overheating.
+>
+> Proceed **only if** you are certain that your system's throttling is caused by incorrect sensor readings or firmware bugs, not by actual overheating. By following this guide, you accept full responsibility for any potential hardware damage.
+>
+> **Potential Risks:**
+> 
+> * Permanently reduced hardware lifespan due to higher operating temperatures.
+> * System instability, crashes, or data loss.
+> * In a worst-case scenario, permanent damage to your CPU or motherboard.
+>
+> **You must actively monitor your system temperatures after applying this fix.** You proceed at your own risk.
 
 ### Instructions
 
