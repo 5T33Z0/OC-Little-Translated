@@ -127,43 +127,67 @@ Use monitoring tools (e.g., Intel Power Gadget, HWMonitorSMC2, iStat Menus) to r
 
 ## Using VoltageShift instead of SimpleMSR
 
-If BDPROCHOT still kicks in after waking from sleep, consider using [**VoltageShift**](https://github.com/sicreative/VoltageShift) instead of SimpleMSR to disable BDPROCHOT after wake.
+If `SimpleMSR.kext` doesn't resolve the issue after waking, **VoltageShift** offers a more direct way to control the MSR register responsible for BDPROCHOT.
 
-### Configuring VoltageShift
+### 1. Prepare VoltageShift
 
-- Download the [zip](https://github.com/sicreative/VoltageShift/blob/master/voltageshift_1.25.zip) and extract it
-- Add the VoltageShift.kext to EFI/OC/Kexts and your `config.plist`
-- Disable `SimpleMSR.kext`, if present
-- Reboot macOS
-- Run the VolatgeShift CLI tool: 
-	```bash
-	~/Downloads/voltageshift_1.25/./voltageshift read 0x1fc
-	```
-- This will return a bit sequence, for example: `000101000000000000011011`
-- Change the last bit in the Sequence to 0: `000101000000000000011010`
-- Convert the value to Hex, here: 14001A
-- Write the Value to MSR:
-	```bash
-	~/Downloads/voltageshift_1.25/./voltageshift write 0x1fc 14001A
-	```
-- Automate writing this value after recovering from sleep with an automation tool like [Hammerspoon](https://www.hammerspoon.org/) using a lua script:
-	```lua
-	local wakeWatcher = hs.caffeinate.watcher.new(function(event)
-	    if event == hs.caffeinate.watcher.systemDidWake then
-	        hs.execute("~/Downloads/voltageshift_1.25/./voltageshift write 0x1fc 14001A")
-	    end
-	end)
+*   Download the latest version from the official [VoltageShift repository](https://github.com/sicreative/VoltageShift).
+*   Add `VoltageShift.kext` to your `EFI/OC/Kexts` folder and your `config.plist`.
+*   **Disable or remove `SimpleMSR.kext`** from your `config.plist` to avoid conflicts.
+*   Reboot your system.
 
-	wakeWatcher:start()
-	```
-- **Verify the Fix**:
-   - **Monitor CPU Performance**:
-     - Use Intel Power Gadget, HWMonitor, or iStat Menus to confirm CPU frequencies remain stable after waking from S3 sleep.
-     - Ensure the CPU does not drop to abnormally low frequencies (e.g., 400-800 MHz).
-   - **Test Sleep/Wake Cycle**:
-     - Put the system to sleep (S3) and wake it multiple times to ensure consistent performance.
+### 2. Find and Modify the BDPROCHOT Value
 
-## Additional Notes
+*   Open Terminal and navigate to the extracted VoltageShift folder. For example:
+    ```bash
+    cd ~/Downloads/voltageshift
+    ```
+*   Read the current value of the `MSR_POWER_CTL` register (`0x1fc`), which controls BDPROCHOT:
+    ```bash
+    ./voltageshift read 0x1fc
+    ```
+* This command will output a long binary string. For example: `000101000000000000011011`. The setting that enables or disables BDPROCHOT is the very first bit (bit 0), which is the **rightmost digit** in the binary string:
+
+	*   If the last digit is **`1`**, BDPROCHOT is **enabled**.
+	*   If the last digit is **`0`**, BDPROCHOT is **disabled**.
+
+* In this example, BDPROCHOT is enabled because the first bit is set to `1`. To disable it, you simply change the last digit from `1` to `0`:
+
+ 	*   **Original Binary:** `000101000000000000011011`
+	*   **Modified Binary:** `000101000000000000011010` (notice the last digit changed)
+
+* Next, you must convert this modified binary string into a **hexadecimal** value, as the `write` command requires hex. You can use Hackintool or the Calculator app (View > Programmer) to do so. In this example, the original value `0x14001B` becommes `0x14001A` after flipping the first bit by subtracting one from the original value.
+
+### 3. Disable BDPROCHOT Manually
+
+Write the new, modified value back to the MSR:
+
+```bash
+# Use your modified value here. This is just an example.
+./voltageshift write 0x1fc 0x14001A
+```
+Your CPU should immediately return to full speed. Verify this with Intel Power Gadget.
+
+### 4. Automate the Fix After Wake
+
+This setting resets every time the system sleeps. To automate it, you can use a tool like [Hammerspoon](https://www.hammerspoon.org/).
+
+*   Install Hammerspoon and add the following Lua script to your configuration (located at `~/.hammerspoon/init.lua`):
+    ```lua
+    -- Automate disabling BDPROCHOT after system wake
+    local wakeWatcher = hs.caffeinate.watcher.new(function(event)
+        if event == hs.caffeinate.watcher.systemDidWake then
+            -- IMPORTANT: Update the path and value to match your system
+            hs.execute("/path/to/your/voltageshift write 0x1fc YOUR_MODIFIED_HEX_VALUE")
+        end
+    end)
+
+    wakeWatcher:start()
+    ```
+*   **Remember to replace** `/path/to/your/voltageshift` and `YOUR_MODIFIED_HEX_VALUE` with your actual file path and the hex value you calculated.
+*   Reload your Hammerspoon configuration to apply the script.
+
+## Final Notes
 
 - **Thermal Monitoring**: Disabling BDPROCHOT may increase CPU temperatures. Use HWMonitor or similar tools to ensure temperatures stay within safe limits (e.g., below 85°C under load). Clean cooling systems or adjust fan curves if necessary.
 - **Compatibility**: This solution is compatible with most Intel-based Hackintosh systems. For AMD systems, additional research may be needed, as BDPROCHOT behavior differs.
