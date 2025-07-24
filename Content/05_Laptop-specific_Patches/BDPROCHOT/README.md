@@ -154,7 +154,7 @@ If `SimpleMSR.kext` doesn't resolve the issue after waking, **VoltageShift** off
  	*   **Original Binary:** `000101000000000000011011`
 	*   **Modified Binary:** `000101000000000000011010` (notice the last digit changed)
 
-* Next, you must convert this modified binary string into a **hexadecimal** value, as the `write` command requires hex. You can use Hackintool or the Calculator app (View > Programmer) to do so. In this example, the original value `0x14001B` becommes `0x14001A` after flipping the first bit by subtracting one from the original value.
+* Next, you must convert this modified binary string into a **hexadecimal** value, as the `write` command requires hex. You can use Hackintool or the Calculator app (View > Programmer) to do so. In this example, the original value `0x14001B` becomes `0x14001A` after flipping the first bit by subtracting one from the original value.
 
 ### 3. Disable BDPROCHOT Manually
 
