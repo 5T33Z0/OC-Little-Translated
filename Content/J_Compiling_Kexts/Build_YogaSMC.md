@@ -43,12 +43,12 @@ Use the following command to build all targets in **Release** mode with a compat
 xcodebuild -project YogaSMC.xcodeproj -configuration Release -alltargets build MACOSX_DEPLOYMENT_TARGET=10.13
 ```
 
-### ✅ Output
+## Output
 
 After building, you will find the following files (among others) in the `build/Release/` folder inside the project directory:
 
 * `YogaSMC.kext` (the sensor/SMC interface) &rarr; Goes into your bootloader's kext folder
 * `YogaSMC.prefPane` (for macOS System Preferences integration) &rarr; Double-Click to install it
-* `YogaSMCNNC.app` (for touchpad/hotkey handling) &rarr; goes into your Applications folder. Start at Login
+* `YogaSMCNNC.app` (for touchpad/hotkey handling) &rarr; goes into your Applications folder. Start at Login.
 
 
