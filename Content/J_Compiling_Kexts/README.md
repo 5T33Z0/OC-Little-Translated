@@ -28,9 +28,13 @@ Below you will find links to guides to compile slimmed-down versions of kext whi
 **Filesize reduction**: From 2,8 MB to around 70 KB<br>
 **Guide**: [**Slimming BrcmPatchRAM**](/Content//J_Compiling_Kexts/Slimming_BrcmPatchRAM.md)
 
-
 ## Slimming Xcode
 You can reduce Xcode to about a fifth of its regular size by [deleting unused platforms](/Content//J_Compiling_Kexts/Slimming_Xcode_for_Kexts.md#readme)
+
+## Compiling YogaSMC
+This does not really slim the kext but rather explains how to successfully compile YogaSMC and it's component.
+
+**Guide**: [**How to Compile YogaSMC**](/Content/J_Compiling_Kexts/Build_YogaSMC.md)
 
 ## Credits
 [**dreamwhite**](https://github.com/dreamwhite) for the original IntelBluetoothFirmware and itlwm slimming guides.

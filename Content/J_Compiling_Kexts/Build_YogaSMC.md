@@ -47,8 +47,8 @@ xcodebuild -project YogaSMC.xcodeproj -configuration Release -alltargets build M
 
 After building, you will find the following files (among others) in the `build/Release/` folder inside the project directory:
 
-* `YogaSMC.kext` (the sensor/SMC interface)
-* `YogaSMC.prefPane` (for macOS System Preferences integration)
-* `YogaSMCNNC.app` (for touchpad/hotkey handling)
+* `YogaSMC.kext` (the sensor/SMC interface) &rarr; Goes into your bootloader's kext folder
+* `YogaSMC.prefPane` (for macOS System Preferences integration) &rarr; Double-Click to install it
+* `YogaSMCNNC.app` (for touchpad/hotkey handling) &rarr; goes into your Applications folder. Start at Login
 
 
