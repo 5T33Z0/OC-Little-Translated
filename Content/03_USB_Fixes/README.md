@@ -124,7 +124,7 @@ In order for USBMap kexts to work in macOS Tahoe, the `info.plist` inside the ke
 ## Method 2: Mapping USB Ports via ACPI
 Declaring USB ports is via ACPI is the "gold standard" since this method is OS-agnostic (unlike USBPort kexts, which by default only work for the SMBIOS they were defined for). It's aimed at advanced users only who are experienced in working with ACPI tables already. 
 
-You can follow [**this guide**](/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports) to map your USB Ports via ACPI.
+Check the &rarr; [**Mapping USB Ports via ACPI**](/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports) section to find out more.
 
 ## Additional Resources
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 700-series mainboards. Its `info.plist` contains about 9.300 lines of code while the original by Rehabman is from 2018 and "only" contains about 6.800!
