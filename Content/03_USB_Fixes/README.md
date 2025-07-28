@@ -115,7 +115,7 @@ This method is applicable when using [**Hackintool**](https://github.com/benbake
 > 
 > If you decide to change the SMBIOS later, you have to adjust the `model` property inside the kext's `info.plist` – otherwise the mapping won't be applied!
 > 
-> **Example**:<br> ![USBremap](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/4386daf7-fc63-480d-8922-9632425c3c57)
+> **Example**:<br> <img width="1170" height="525" alt="info" src="https://github.com/user-attachments/assets/cffaee77-f229-40ed-9f9e-614895496b6e" />
 
 ## Adjusting USBMap Kexts for macOS Tahoe Compatibility
 
