@@ -1,7 +1,7 @@
-# ACPI-Based USB Port Mapping Using an Alternate Root Hub
+# ACPI-Based USB Port Mapping with Conditional Root Hub Replacement
 
 ## Overview
-Proper USB port mapping is essential for a stable Hackintosh system running macOS, as it ensures that USB ports are correctly recognized, operate at their intended speeds, and support features like sleep and power management. The method described here, developed by **samuelnotfound**, uses ACPI to map USB ports by disabling the default USB Root Hub (`RHUB`) and creating a custom one (`XHUB`) when macOS is running.
+Proper USB port mapping is essential for a stable Hackintosh system running macOS, as it ensures that USB ports are correctly recognized, operate at their intended speeds, and support features like sleep and power management. The method described here, developed by **samuelnotfound**, uses ACPI to map USB ports by disabling the default USB Root Hub (`RHUB` or `HUBN`) and creating a custom one (`XHUB` or `HUBX`) which is used that contains all the ports that should be used when macOS is running.
 
 This guide expands on the original method by providing a detailed, beginner-friendly walkthrough of the process, including prerequisites, tools, and step-by-step instructions. The principle is straightforward: redefine USB ports in ACPI to create a custom, macOS-compatible USB map. However, the technical steps can be complex, so this guide breaks them down clearly.
 
@@ -11,10 +11,10 @@ Compared to dropping the OEM SSDT containing the USB table and replacing it with
 - **Preserves OEM SSDT Integrity**: By keeping the OEM SSDT intact and only disabling `RHUB` for macOS via `_STA`, you avoid removing critical ACPI definitions that may affect other system components, reducing the risk of boot failures or hardware conflicts.
 - **Dual-Boot Compatibility**: The `_STA` method ensures `RHUB` remains active for other operating systems (e.g., Windows, Linux), maintaining native USB functionality in dual-boot setups, whereas dropping the OEM SSDT could disrupt USB behavior in non-macOS environments.
 - **Simpler Implementation**: Disabling `RHUB` conditionally requires less extensive ACPI modifications compared to rewriting the entire USB table, making it easier to create and maintain the SSDT.
-- **Lower Risk of Errors**: Dropping an OEM SSDT requires precise identification of the correct table (e.g., via `OemTableId`) and a comprehensive replacement, which can introduce errors if other ACPI dependencies are missed. The `XUBN` method is more targeted, modifying only the USB hub behavior.
-- **Flexibility for Updates**: If the OEM firmware updates the USB table (e.g., via BIOS updates), the `XUBN` method adapts by overriding only the necessary parts, while a dropped OEM SSDT may require a complete rewrite to incorporate new firmware changes.
-- **Reduced Debugging Complexity**: If issues arise, troubleshooting is simpler with the `XUBN` method, as you’re only adjusting a small SSDT rather than debugging a full OEM table replacement, which could impact unrelated system functions.
-- **Customizability**: A custom Root Hub (`XUBN`) allows precise control over port definitions, especially for internal devices like Bluetooth, which macOS expects to be set as "Internal" (type 255).
+- **Lower Risk of Errors**: Dropping an OEM SSDT requires precise identification of the correct table (e.g., via `OemTableId`) and a comprehensive replacement, which can introduce errors if other ACPI dependencies are missed. The `XHUB` method is more targeted, modifying only the USB hub behavior.
+- **Flexibility for Updates**: If the OEM firmware updates the USB table (e.g., via BIOS updates), the `HXUB` method adapts by overriding only the necessary parts, while a dropped OEM SSDT may require a complete rewrite to incorporate new firmware changes.
+- **Reduced Debugging Complexity**: If issues arise, troubleshooting is simpler with the `HXUB` method, as you’re only adjusting a small SSDT rather than debugging a full OEM table replacement, which could impact unrelated system functions.
+- **Customizability**: A custom Root Hub (`HXUB`) allows precise control over port definitions, especially for internal devices like Bluetooth, which macOS expects to be set as "Internal" (type 255).
 
 This approach is particularly useful for systems with complex USB configurations or those affected by macOS's 15-port-per-controller limit, and it avoids reliance on kexts like `USBInjectAll` or tools like Hackintool, which may not work well for all platforms (e.g., AMD chipsets) or macOS versions post-Big Sur 11.3.
 
@@ -36,7 +36,7 @@ To implement a custom USB port map using ACPI, we follow this sequence:
 
 - **Rename the USB controller** if necessary (e.g., `XHC1` to `SHCI`), to avoid conflicts with existing port maps in macOS.
 - **Disable `RHUB` and/or `HUBN` under macOS only**: This also disables their `_UPC` methods. These hubs remain enabled under other operating systems.
-- **Add `XHUB` and/or `HUBX` as replacements**, enabled only under macOS. These act as macOS-specific substitutes for `RHUB` and `HUBN`.
+- **Add `XHUB` or `HUBX`**, enabled only under macOS. These act as macOS-specific substitutes for `RHUB` and `HUBN`.
 - **Assign original `_ADR` values to the new hubs**: `XHUB` inherits the `_ADR` of `RHUB`, and `HUBX` that of `HUBN`, ensuring correct device tree structure under macOS.
 - **Enumerate active ports and assign their original `_ADR`s**: For each active port, copy the `_ADR` from its original definition under `RHUB`/`HUBN` to the corresponding port under `XHUB`/`HUBX`.
    *Example: if `HS01` under `RHUB` has `_ADR` `0x01`, replicate that value in the new definition under `XHUB`.*
@@ -96,7 +96,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 ### Step 4: Create a Custom SSDT with Alternate Root Hub (`XHUB`/`HUBX`)
 1. **Start a New SSDT in MaciASL**:
    - In MaciASL, click `File > New` to create a new SSDT.
-   - Name it something descriptive, like `SSDT-XUBN.aml`.
+   - Name it something descriptive, like `SSDT-HXUB.aml`.
 
 2. **Define the Scope and Device**:
    - Set the scope to the USB controller (e.g., `_SB.PCI0.XHC1`).
@@ -133,7 +133,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 
      ```
 
-4. **Define Ports in `XHUB`/`XUBN`**:
+4. **Define Ports in `XHUB`/`HUBX`**:
    - For each port you want to keep (up to 15 per controller), define a device (e.g., `HS01`, `SS01`) with `_UPC` and `_PLD` methods.
    - Example for a USB 3.0 port (`SS01`):
      ```asl
