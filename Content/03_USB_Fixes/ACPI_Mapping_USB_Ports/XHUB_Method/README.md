@@ -1,5 +1,3 @@
-:construction: WORK in PROGRESS
-
 # ACPI-Based USB Port Mapping Using an Alternate Root Hub
 
 ## Overview
@@ -24,32 +22,25 @@ This approach is particularly useful for systems with complex USB configurations
 Before starting, ensure you have the following:
 
 - **A Hackintosh System**: macOS installed with a working bootloader (e.g., OpenCore or Clover).
-- **MaciASL**: A tool to edit and compile ACPI tables (download from [GitHub](https://github.com/acidanthera/MaciASL/releases)).[](https://aplus.rs/2020/usb-mapping-why/)
+- **MaciASL**: A tool to edit and compile ACPI tables (download from [GitHub](https://github.com/acidanthera/MaciASL/releases)).
 - **IORegistryExplorer**: Used to identify active USB ports and their assignments (available via Apple Developer account or Xcode additional tools).[](https://aplus.rs/2020/usb-mapping-why/)
 - **USB Devices for Testing**: A USB 2.0 device (e.g., flash drive or mouse), a USB 3.0 device, and, if applicable, a USB-C device or adapter.[](https://www.travelertechie.com/2019/02/create-ssdt-to-fix-usb-rehabmans-way.html)
-- **Basic ACPI Knowledge**: Familiarity with ACPI terms like DSDT (Differentiated System Description Table) and SSDT (Secondary System Description Table). If new to ACPI, refer to the [ACPI Specification](https://uefi.org/specifications) for background.[](https://dortania.github.io/OpenCore-Post-Install/usb/manual/manual.html)
+- **Basic ACPI Knowledge**: Familiarity with ACPI terms like DSDT (Differentiated System Description Table) and SSDT (Secondary System Description Table). If new to ACPI, refer to the [ACPI Specification](https://uefi.org/specifications) for background.
 - **EFI Partition Access**: Ability to mount and edit your EFI partition using tools like OpenCore Configurator or Clover Configurator.
 - **Backup**: Always back up your EFI folder before making changes to avoid boot issues.[](https://hackintool.com/2025/05/19/how-do-i-use-hackintool-to-map-usb-ports/)
 - **Text Editor**: For editing SSDT files (MaciASL includes one, but any code editor like Visual Studio Code works).
 
 ## Patching Principle
 
-The following steps are required to build a custom USB Port Map:
+To implement a custom USB port map using ACPI, we follow this sequence:
 
-- **Rename USB Controller** if needed, such as `XHC1` to `SHCI`.
-- **Disable `RHUB` and/or `HUBN`:**
-   * Only disabled under macOS, enabled for other OS.
-   * This also disables the `_UPC` methods of each port under `RHUB` and `HUBN`.
-- **Add `XHUB` and/or `HUBX`:**
-   * Only enabled under macOS, disabled for for other OS.
-- **Give the `_ADR` of the original hubs to the new one:**
-   * `XHUB` takes over the of `RHUB`, and `HUBX` for `HUBN` under macOS.
-   * Basically `RHUB` will be exposed under Windows, and `XHUB` will be under macOS.
-- **Enumerate active ports and assign `_ADR`:**
-   * Enumerate the active ports under these new hubs.
-   * Add `_ADR` of each active port taken from the original ports from `RHUB` and/or `XHUB`.
-   * ex. if HSO1's `_ADR` under `RHUB` is `0x01`, then take that `_ADR` and give to the re-enumerated port under the new `XHUB`.
-- **Adjust `_UPC` of Active Ports**
+- **Rename the USB controller** if necessary (e.g., `XHC1` to `SHCI`), to avoid conflicts with existing port maps in macOS.
+- **Disable `RHUB` and/or `HUBN` under macOS only**: This also disables their `_UPC` methods. These hubs remain enabled under other operating systems.
+- **Add `XHUB` and/or `HUBX` as replacements**, enabled only under macOS. These act as macOS-specific substitutes for `RHUB` and `HUBN`.
+- **Assign original `_ADR` values to the new hubs**: `XHUB` inherits the `_ADR` of `RHUB`, and `HUBX` that of `HUBN`, ensuring correct device tree structure under macOS.
+- **Enumerate active ports and assign their original `_ADR`s**: For each active port, copy the `_ADR` from its original definition under `RHUB`/`HUBN` to the corresponding port under `XHUB`/`HUBX`.
+   *Example: if `HS01` under `RHUB` has `_ADR` `0x01`, replicate that value in the new definition under `XHUB`.*
+- **Define appropriate `_UPC` values for each active port** to specify port type and usage (e.g., USB2, USB3, internal Bluetooth).
 
 ## Step-by-Step Guide
 
@@ -102,37 +93,47 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 		| **`0xFF`** | Internal (e.g, Bluetooth and Camera) |
    - You’ll modify these to define your custom ports.
 
-### Step 4: Create a Custom SSDT with Alternate Root Hub (XUBN)
+### Step 4: Create a Custom SSDT with Alternate Root Hub (`XHUB`/`HUBX`)
 1. **Start a New SSDT in MaciASL**:
    - In MaciASL, click `File > New` to create a new SSDT.
    - Name it something descriptive, like `SSDT-XUBN.aml`.
 
 2. **Define the Scope and Device**:
    - Set the scope to the USB controller (e.g., `_SB.PCI0.XHC1`).
-   - Create a new device named `XUBN` to replace `RHUB`.
+   - Create a new device named `XHUB` to replace `RHUB` or HUBX to replace `HUBN`
 
 3. **Disable the Original RHUB**:
    - Add a conditional check to disable `RHUB` when macOS is running. This is done using the `_STA` method, which returns 0x00 (disabled) if the operating system is Darwin (macOS).
-   - Example:
+   - **Example** (if your system uses `HUBN` instead of `RHUB`, disable that and use `HUBX` for the device in the Scope):
+     
      ```asl
-     Device (XHC1) {
-         Name (_STA, 0x0F) // Enable XHC1
-         Device (RHUB) {
-             Name (_STA, Zero) // Disable RHUB in macOS
-             If (LEqual (OSYS, "Darwin")) {
-                 Name (_STA, Zero)
-             } Else {
-                 Name (_STA, 0x0F)
-             }
-         }
-         Device (XUBN) {
-             Name (_ADR, Zero) // Address for custom Root Hub
-             // Port definitions go here
-         }
-     }
+		DefinitionBlock ("", "SSDT", 2, "OCL", "XHUB", 0x00000000)
+		{	
+		// References to possible USB controllers and their locations
+		External (_SB_.PCI0.EH01.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems)
+		External (_SB_.PCI0.EH02.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, second controller)
+		External (_SB_.PCI0.EHC_.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, alternate naming)
+		External (_SB_.PCI0.SHCI.XHUB, DeviceObj) // USB 3.0 Controller (macOS-compatible renamed controller)
+		External (_SB_.PCI0.XHC_.XHUB, DeviceObj) // USB 3.0 Controller (standard naming for modern systems)
+			
+		    Scope (\_SB.PCI0.XHC.RHUB)
+		    {
+		        Method (_STA, 0, NotSerialized)  // _STA: Status
+		        {
+		            If (_OSI ("Darwin"))
+		            {
+		                Return (Zero)
+		            }
+		            Else
+		            {
+		                Return (0x0F)
+		            }
+		        }
+		    }
+
      ```
 
-4. **Define Ports in XUBN**:
+4. **Define Ports in `XHUB`/`XUBN`**:
    - For each port you want to keep (up to 15 per controller), define a device (e.g., `HS01`, `SS01`) with `_UPC` and `_PLD` methods.
    - Example for a USB 3.0 port (`SS01`):
      ```asl
@@ -157,31 +158,31 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
          }
      }
      ```
-   - Repeat for each port, adjusting `_ADR` (address) and `_UPC` values based on your mapping from Step 1. Ensure internal devices like Bluetooth are set to type 255.[](https://github.com/radianttap/ryzentosh/blob/master/usb-mapping-how.md)
+   - Repeat for each port, adjusting `_ADR` (address) and `_UPC` values based on your mapping from Step 1. Ensure internal devices like Bluetooth are set to type 255.
 
 5. **Limit to 15 Ports**:
-   - If your controller has more than 15 ports, exclude unused or less critical ports (e.g., internal headers not in use). Update your table from Step 1 to reflect the final selection.[](https://dortania.github.io/OpenCore-Post-Install/usb/)
+   - If your controller has more than 15 ports, exclude unused or less critical ports (e.g., internal headers not in use). Update your table from Step 1 to reflect the final selection.
 
 ### Step 5: Compile and Save the SSDT
 1. **Check Syntax**:
-   - In MaciASL, click `Compile` to check for errors. Fix any syntax issues (e.g., missing brackets).[](https://www.travelertechie.com/2019/02/create-ssdt-to-fix-usb-rehabmans-way.html)
+   - In MaciASL, click `Compile` to check for errors. Fix any syntax issues (e.g., missing brackets).
 2. **Save as AML**:
-   - Go to `File > Save As`, select `ACPI Machine Language Binary` (.aml), and name it (e.g., `SSDT-XUBN.aml`).
+   - Go to `File > Save As`, select `ACPI Machine Language Binary` (.aml), and name it (e.g., `SSDT-XHUB.aml`).
    - Save it to your Desktop or a known location.
 
 ### Step 6: Add SSDT to Bootloader
 1. **Mount EFI Partition**:
    - Use a tool like OpenCore Configurator or Clover Configurator to mount your EFI partition.
 2. **Copy SSDT**:
-   - Place `SSDT-XUBN.aml` in `EFI/OC/ACPI` (OpenCore) or `EFI/Clover/ACPI/patched` (Clover).[](https://elitemacx86.com/threads/how-to-fix-usb-ports-on-macos.691/)
+   - Place `SSDT-HUBX.aml` in `EFI/OC/ACPI` (OpenCore) or `EFI/Clover/ACPI/patched` (Clover).
 3. **Update Config**:
    - Open your `config.plist` in a plist editor (e.g., ProperTree).
-   - Add an entry under `ACPI > Add` for `SSDT-XUBN.aml`. Set `Enabled` to `true`.[](https://dortania.github.io/OpenCore-Post-Install/usb/manual/manual.html)
+   - Add an entry under `ACPI > Add` for `SSDT-XHUB.aml`. Set `Enabled` to `true`.
    - Example for OpenCore:
      ```xml
      <dict>
          <key>Path</key>
-         <string>SSDT-XUBN.aml</string>
+         <string>SSDT-XHUB.aml</string>
          <key>Enabled</key>
          <true/>
      </dict>
@@ -191,8 +192,8 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 1. **Reboot**:
    - Save changes, reboot your Hackintosh, and ensure it boots correctly.
 2. **Test USB Ports**:
-   - Use IORegistryExplorer to verify that `XUBN` is active and `RHUB` is disabled under macOS.
-   - Plug in USB 2.0, 3.0, and internal devices to confirm they appear under `XUBN` with correct types and functionality.
+   - Use IORegistryExplorer to verify that `XHUB` is active and `RHUB` is disabled under macOS.
+   - Plug in USB 2.0, 3.0, and internal devices to confirm they appear under `XHUB` with correct types and functionality.
 3. **Troubleshoot**:
    - **Ports Not Recognized**: Check physical connections and BIOS USB settings (e.g., enable XHCI Handoff).
    - **Boot Issues**: Revert to your EFI backup and verify SSDT syntax.
@@ -202,48 +203,245 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 Below is a sample SSDT for a controller with two USB 3.0 ports and one internal Bluetooth port:
 
 ```asl
-DefinitionBlock ("", "SSDT", 2, "HACK", "XUBN", 0x00000000) {
-    External (_SB_.PCI0.XHC1, DeviceObj)
-    Scope (_SB.PCI0.XHC1) {
-        Device (RHUB) {
-            Name (_STA, Zero) // Disable RHUB in macOS
-            If (LEqual (OSYS, "Darwin")) {
-                Name (_STA, Zero)
-            } Else {
-                Name (_STA, 0x0F)
+DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
+{
+    External (_SB_.PCI0.XHC_.RHUB, DeviceObj)
+
+    Scope (\_SB.PCI0.XHC.RHUB)
+    {
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            If (_OSI ("Darwin"))
+            {
+                Return (Zero)
             }
-        }
-        Device (XUBN) {
-            Name (_ADR, Zero)
-            Device (SS01) {
-                Name (_ADR, One)
-                Method (_UPC, 0, NotSerialized) {
-                    Return (Package (0x04) { 0xFF, 0x03, Zero, Zero })
-                }
-                Method (_PLD, 0, NotSerialized) {
-                    Return (Package (0x01) { Buffer (0x10) { 0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } })
-                }
-            }
-            Device (SS02) {
-                Name (_ADR, 0x02)
-                Method (_UPC, 0, NotSerialized) {
-                    Return (Package (0x04) { 0xFF, 0x03, Zero, Zero })
-                }
-                Method (_PLD, 0, NotSerialized) {
-                    Return (Package (0x01) { Buffer (0x10) { 0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } })
-                }
-            }
-            Device (HS03) {
-                Name (_ADR, 0x03)
-                Method (_UPC, 0, NotSerialized) {
-                    Return (Package (0x04) { 0xFF, 0xFF, Zero, Zero }) // Internal (Bluetooth)
-                }
-                Method (_PLD, 0, NotSerialized) {
-                    Return (Package (0x01) { Buffer (0x10) { 0x82, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } })
-                }
+            Else
+            {
+                Return (0x0F)
             }
         }
     }
+
+    Device (\_SB.PCI0.XHC.XHUB)
+    {
+        Name (_ADR, Zero)  // _ADR: Address
+        Device (HS02)
+        {
+            Name (_ADR, 0x02)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS03)
+        {
+            Name (_ADR, 0x03)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04) // Internal Bluetooth
+                {
+                    0xFF, 
+                    0xFF, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS03)
+        {
+            Name (_ADR, 0x13)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS04)
+        {
+            Name (_ADR, 0x14)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS05)
+        {
+            Name (_ADR, 0x15)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS07)
+        {
+            Name (_ADR, 0x17)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS09)
+        {
+            Name (_ADR, 0x19)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (SS10)
+        {
+            Name (_ADR, 0x1A)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    0x03, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+     }
+   }
 }
 ```
 
