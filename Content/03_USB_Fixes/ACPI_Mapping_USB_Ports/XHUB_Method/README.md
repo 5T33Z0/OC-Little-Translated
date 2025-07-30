@@ -133,7 +133,26 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 
      ```
 
-4. **Define Ports in `XHUB`/`HUBX`**:
+4. Define a new Root Hub Device for macOS:
+
+	```	asl
+    Device (\_SB.PCI0.XHC.XHUB) // Adjust PCI path and device name according to your DSDT
+    {
+        Name (_ADR, Zero)  // _ADR: Address
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            If (_OSI ("Darwin"))
+            {
+                Return (0x0F) // Enable custom XHUB under macOS
+            }
+            Else
+            {
+                Return (Zero) // Disable custom XHUB for other OSes
+            }
+        }
+	```
+
+5. **Define Ports in `XHUB`/`HUBX`**:
    - For each port you want to keep (up to 15 per controller), define a device (e.g., `HS01`, `SS01`) with `_UPC` and `_PLD` methods.
    - Example for a USB 3.0 port (`SS01`):
      ```asl
@@ -160,7 +179,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
      ```
    - Repeat for each port, adjusting `_ADR` (address) and `_UPC` values based on your mapping from Step 1. Ensure internal devices like Bluetooth are set to type 255.
 
-5. **Limit to 15 Ports**:
+6. **Limit to 15 Ports**:
    - If your controller has more than 15 ports, exclude unused or less critical ports (e.g., internal headers not in use). Update your table from Step 1 to reflect the final selection.
 
 ### Step 5: Compile and Save the SSDT
@@ -225,6 +244,18 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
     Device (\_SB.PCI0.XHC.XHUB)
     {
         Name (_ADR, Zero)  // _ADR: Address
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            If (_OSI ("Darwin"))
+            {
+                Return (0x0F) // Enable custom XHUB under macOS
+            }
+            Else
+            {
+                Return (Zero) // Disable custom XHUB for other OSes
+            }
+        }
+        
         Device (HS02)
         {
             Name (_ADR, 0x02)  // _ADR: Address
