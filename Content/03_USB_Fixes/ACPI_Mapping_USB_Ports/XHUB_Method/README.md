@@ -6,7 +6,7 @@ Proper USB port mapping is essential for a stable Hackintosh system running macO
 This guide expands on the original method by providing a detailed, beginner-friendly walkthrough of the process, including prerequisites, tools, and step-by-step instructions. The principle is straightforward: redefine USB ports in ACPI to create a custom, macOS-compatible USB map. However, the technical steps can be complex, so this guide breaks them down clearly.
 
 ## Advantages
-Compared to dropping the OEM SSDT containing the USB table and replacing it with a custom one (as explaibed [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports/Replace_SSDT/README.md)), the alternate Root Hub (`XHUB`) method with conditional `_STA` disabling offers several benefits:
+Compared to dropping the OEM SSDT containing the USB table and replacing it with a custom one (as explained [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports/Replace_SSDT/README.md)), the alternate Root Hub (`XHUB`) method with conditional `_STA` disabling offers several benefits:
 
 - **Preserves OEM SSDT Integrity**: By keeping the OEM SSDT intact and only disabling `RHUB` for macOS via `_STA`, you avoid removing critical ACPI definitions that may affect other system components, reducing the risk of boot failures or hardware conflicts.
 - **Dual-Boot Compatibility**: The `_STA` method ensures `RHUB` remains active for other operating systems (e.g., Windows, Linux), maintaining native USB functionality in dual-boot setups, whereas dropping the OEM SSDT could disrupt USB behavior in non-macOS environments.
