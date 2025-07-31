@@ -88,8 +88,8 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 		| **`0x06`** | USB 3 `Micro-AB`                     |
 		| **`0x07`** | USB 3 `Power-B`                      |
 		| **`0x08`** | USB Type `C` (USB 2 only)            |
-		| **`0x09`** | USB Type `C` (with Switch)           |
-		| **`0x0A`** | USB Type `C` (w/o Switch)            |
+		| **`0x09`** | USB 3 Type `C` (with Switch)           |
+		| **`0x0A`** | USB 3 Type `C` (w/o Switch)            |
 		| **`0xFF`** | Internal (e.g, Bluetooth and Camera) |
    - You’ll modify these to define your custom ports.
 
@@ -109,7 +109,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
      ```asl
 		DefinitionBlock ("", "SSDT", 2, "OCL", "XHUB", 0x00000000)
 		{	
-		// References to possible USB controllers and their locations
+		// References to possible USB controllers and their locations (use the one(s) suitable to your system)
 		External (_SB_.PCI0.EH01.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems)
 		External (_SB_.PCI0.EH02.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, second controller)
 		External (_SB_.PCI0.EHC_.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, alternate naming)
@@ -154,15 +154,15 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 	```
 
 5. **Define Ports in `XHUB`/`HUBX`**:
-   - For each port you want to keep (up to 15 per controller), define a device (e.g., `HS01`, `SS01`) with `_UPC` and `_PLD` methods.
-   - Example for a USB 3.0 port (`SS01`):
+   - For each port you want to keep (up to 15 per controller), define a device (e.g., `HS01` (USB 2), `SS01` (USB 3), etc.) with `_UPC` and `_PLD` methods.
+   - Example for a USB 2.0 port (`HS01`):
      ```asl
-     Device (SS01) {
-         Name (_ADR, One) // Address for SS01
+     Device (HS01) {
+         Name (_ADR, One) // Address for HS01
          Method (_UPC, 0, NotSerialized) {
              Return (Package (0x04) {
                  0xFF, // Connectable
-                 0x03, // USB 3.0 Type-A
+                 Zero, // USB 2.0 Type-A
                  Zero,
                  Zero
              })
@@ -178,7 +178,53 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
          }
      }
      ```
-   - Repeat for each port, adjusting `_ADR` (address) and `_UPC` values based on your mapping from Step 1. Ensure internal devices like Bluetooth are set to type 255.
+   - Example for an internal USB 2.0 port (`HS07`):
+     ```asl
+     Device (HS07) {
+         Name (_ADR, One) // Address for HS07
+         Method (_UPC, 0, NotSerialized) {
+             Return (Package (0x04) {
+                 0xFF, // Connectable
+                 0xFF, // Internal USB 2.0 connector
+                 Zero,
+                 Zero
+             })
+         }
+         Method (_PLD, 0, NotSerialized) {
+             Return (Package (0x01) {
+                 Buffer (0x10) {
+                     // Physical location data (example)
+                     0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                 }
+             })
+         }
+     }
+     ```
+	- Example for a USB 3.0 port (`SS01`):
+	     ```asl
+	     Device (SS01) {
+	         Name (_ADR, One) // Address for SS01
+	         Method (_UPC, 0, NotSerialized) {
+	             Return (Package (0x04) {
+	                 0xFF, // Connectable
+	                 0x03, // USB 3.0 Type-A
+	                 Zero,
+	                 Zero
+	             })
+	         }
+	         Method (_PLD, 0, NotSerialized) {
+	             Return (Package (0x01) {
+	                 Buffer (0x10) {
+	                     // Physical location data (example)
+	                     0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	                 }
+	             })
+	         }
+	     }
+	     ```
+   - Repeat for each port, adjusting `_ADR` (address) and `_UPC` accordingly. Ensure internal devices like Bluetooth are set to type 255.
 
 6. **Limit to 15 Ports**:
    - If your controller has more than 15 ports, exclude unused or less critical ports (e.g., internal headers not in use). Update your table from Step 1 to reflect the final selection.
@@ -220,10 +266,15 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
    - **Port Limit Exceeded**: Ensure no more than 15 ports are defined per controller.
  
 ## Example SSDT
-Below is a sample SSDT for a controller with two USB 3.0 ports and one internal Bluetooth port:
+Below, you will find the code for the `SSDT-XHUB.aml` I am using on my desktop system, containing 15 mapped USB Ports (USB 2 and USB 3 and a USB Type C port with switch):
+
+![](/Users/5t33z0/Desktop/Ports.png)
+
+<details>
+<summary><strong>Code:</strong> (click to reveal)</summary>
 
 ```asl
-DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "OCL", "XHUB", 0x00000000)
 {
     External (_SB_.PCI0.XHC_.RHUB, DeviceObj)
 
@@ -249,14 +300,14 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
         {
             If (_OSI ("Darwin"))
             {
-                Return (0x0F) // Enable custom XHUB under macOS
+                Return (0x0F)
             }
             Else
             {
-                Return (Zero) // Disable custom XHUB for other OSes
+                Return (Zero)
             }
         }
-        
+
         Device (HS02)
         {
             Name (_ADR, 0x02)  // _ADR: Address
@@ -265,7 +316,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
                 Return (Package (0x04)
                 {
                     0xFF, 
-                    0x03, 
+                    Zero, 
                     Zero, 
                     Zero
                 })
@@ -289,10 +340,199 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
             Name (_ADR, 0x03)  // _ADR: Address
             Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
             {
-                Return (Package (0x04) // Internal Bluetooth
+                Return (Package (0x04)
                 {
                     0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS04)
+        {
+            Name (_ADR, 0x04)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
                     0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS05)
+        {
+            Name (_ADR, 0x05)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS07)
+        {
+            Name (_ADR, 0x07)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS09)
+        {
+            Name (_ADR, 0x09)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS10)
+        {
+            Name (_ADR, 0x0A)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS11)
+        {
+            Name (_ADR, 0x0B)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
+                    Zero, 
+                    Zero
+                })
+            }
+
+            Method (_PLD, 0, NotSerialized)  // _PLD: Physical Location of Device
+            {
+                Return (Package (0x01)
+                {
+                    Buffer (0x10)
+                    {
+                        /* 0000 */  0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // ........
+                        /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // ........
+                    }
+                })
+            }
+        }
+
+        Device (HS13)
+        {
+            Name (_ADR, 0x0D)  // _ADR: Address
+            Method (_UPC, 0, NotSerialized)  // _UPC: USB Port Capabilities
+            {
+                Return (Package (0x04)
+                {
+                    0xFF, 
+                    Zero, 
                     Zero, 
                     Zero
                 })
@@ -373,7 +613,7 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
                 Return (Package (0x04)
                 {
                     0xFF, 
-                    0x03, 
+                    0x09, // USB 3 Type C (with Switch)
                     Zero, 
                     Zero
                 })
@@ -472,10 +712,10 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
                 })
             }
         }
-     }
-   }
+    }
 }
 ```
+</details>
 
 ## Tips and Best Practices
 - **Document Your Ports**: Keep a detailed map of physical-to-logical port assignments for future reference.
