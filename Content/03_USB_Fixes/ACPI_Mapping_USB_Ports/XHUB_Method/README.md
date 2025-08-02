@@ -81,7 +81,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 		| :--------: | ------------------------------------ |
 		| **`0X00`** | USB Type `A`                         |
 		| **`0x01`** | USB `Mini-AB`                        |
-		| **`0x02`** | USB Smart Card                       |
+		| **`0x02`** | ExpressCard                         |
 		| **`0x03`** | USB 3 Standard Type `A`              |
 		| **`0x04`** | USB 3 Standard Type `B`              |
 		| **`0x05`** | USB 3 `Micro-B`                      |
@@ -90,6 +90,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 		| **`0x08`** | Type C connector - HS only           |
 		| **`0x09`** | Type C connector - HS and SS with Switch |
 		| **`0x0A`** | Type C connector - HS and SS without Switch |
+		|**`0x0B` - `0xFE`** | Reserved |
 		| **`0xFF`** | Internal (e.g, Bluetooth and Camera) |
    - You’ll modify these to define your custom ports.
 
