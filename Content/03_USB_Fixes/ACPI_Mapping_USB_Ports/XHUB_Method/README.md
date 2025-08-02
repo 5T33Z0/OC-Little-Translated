@@ -179,37 +179,37 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
          }
      }
      ```
-   - Example for an internal USB 2.0 port (`HS07`):
-     ```asl
-     Device (HS07) {
-         Name (_ADR, One) // Address for HS07
-         Method (_UPC, 0, NotSerialized) {
-             Return (Package (0x04) {
-                 0xFF, // Connectable
-                 0xFF, // Internal USB 2.0 connector
-                 Zero,
-                 Zero
-             })
-         }
-         Method (_PLD, 0, NotSerialized) {
-             Return (Package (0x01) {
-                 Buffer (0x10) {
-                     // Physical location data (example)
-                     0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                 }
-             })
-         }
-     }
-     ```
 	- Example for a USB 3.0 port (`SS01`):
+		```asl
+		 Device (SS01) {
+			 Name (_ADR, 0x11) // Address for SS01
+			 Method (_UPC, 0, NotSerialized) {
+				 Return (Package (0x04) {
+					 0xFF, // Connectable
+					 0x03, // USB 3.0 Type-A
+					 Zero,
+					 Zero
+				 })
+			 }
+			 Method (_PLD, 0, NotSerialized) {
+				 Return (Package (0x01) {
+					 Buffer (0x10) {
+						 // Physical location data (example)
+						 0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+						 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+					 }
+				 })
+			 }
+		 }
+		 ```
+	- Example for an internal USB 2.0 port (`HS07`):
 	     ```asl
-	     Device (SS01) {
-	         Name (_ADR, One) // Address for SS01
+	     Device (HS07) {
+	         Name (_ADR, 0x07) // Address for HS07
 	         Method (_UPC, 0, NotSerialized) {
 	             Return (Package (0x04) {
 	                 0xFF, // Connectable
-	                 0x03, // USB 3.0 Type-A
+	                 0xFF, // Internal USB 2.0 connector
 	                 Zero,
 	                 Zero
 	             })
@@ -224,10 +224,10 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 	             })
 	         }
 	     }
-	     ```
-   - Repeat for each port, adjusting `_ADR` (address) and `_UPC` accordingly. Ensure internal devices like Bluetooth are set to type 255.
+		```
+	- Repeat for each port, adjusting `_ADR` (address) and `_UPC` accordingly. Ensure internal devices like Bluetooth are set to type 255.
 
-6. **Limit to 15 Ports**:
+7. **Limit to 15 Ports**:
    - If your controller has more than 15 ports, exclude unused or less critical ports (e.g., internal headers not in use). Update your table from Step 1 to reflect the final selection.
 
 ### Step 5: Compile and Save the SSDT
