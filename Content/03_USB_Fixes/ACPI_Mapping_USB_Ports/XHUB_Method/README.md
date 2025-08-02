@@ -87,9 +87,9 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 		| **`0x05`** | USB 3 `Micro-B`                      |
 		| **`0x06`** | USB 3 `Micro-AB`                     |
 		| **`0x07`** | USB 3 `Power-B`                      |
-		| **`0x08`** | USB Type `C` (USB 2 only)            |
-		| **`0x09`** | USB 3 Type `C` (with Switch)           |
-		| **`0x0A`** | USB 3 Type `C` (w/o Switch)            |
+		| **`0x08`** | Type C connector - HS only           |
+		| **`0x09`** | Type C connector - HS and SS with Switch |
+		| **`0x0A`** | Type C connector - HS and SS without Switch |
 		| **`0xFF`** | Internal (e.g, Bluetooth and Camera) |
    - You’ll modify these to define your custom ports.
 
