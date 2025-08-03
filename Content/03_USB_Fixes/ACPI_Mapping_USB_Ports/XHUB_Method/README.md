@@ -95,9 +95,9 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
    - The `RHUB` section lists ports (e.g., `HS01`, `SS01`) with their `_UPC` (USB Port Capabilities) and `_PLD` (Physical Location of Device) methods. `_UPC` defines port availability and type, while `_PLD` describes physical location.
 
 3. **Understand `_UPC` Parameters**:
-   - The `_UPC` method returns a package with four values:
-     - **Port Availability**: 0xFF (connectable) or 0x00 (not connectable).
-     - **Port Type**: Common types include:
+   - The `_UPC` method returns a package with four values, the first two are relevant to us:<br>![alt text](Packages.png)
+     - **Port Availability**: `0xFF` (connectable) or `0x00` (not connectable).
+     - **Port Type**:
       	|   Value    | Port Type                            |
 		| :--------: | ------------------------------------ |
 		| **`0X00`** | USB Type `A`                         |
@@ -823,10 +823,12 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "XHUB", 0x00000000)
 ## Tips and Best Practices
 - **Document Your Ports**: Keep a detailed map of physical-to-logical port assignments for future reference.
 - **Test Incrementally**: Add a few ports at a time to your SSDT and test to avoid overwhelming errors.
+- **Use the template**. If you have a newer PC, you can use SSDT-XHUB.dsl as a template to map your system's ports. If you are using an older system which uses  EHCI or OHCI controllers, that use the SSDT_USBMAP_Template.dsl instead
 - **Check BIOS Settings**: Ensure USB ports are enabled and XHCI Handoff is set to "Enabled" in BIOS.
 - **Avoid USBInjectAll**: This kext is outdated and can cause conflicts. Use only if necessary for initial port discovery.
 - **Use Descriptive Names**: In `_PLD`, include comments or names (e.g., "Front USB 3.0") for maintainability.
 - **Consult ACPI Specs**: Refer to the ACPI 6.3 specification (section 9.14) for detailed `_UPC` and `_PLD` parameters.
+
 
 ## Troubleshooting Common Issues
 - **Ports Not Showing**: Verify ACPI path in IORegistryExplorer and ensure the SSDT is loaded in `config.plist`.
