@@ -128,30 +128,30 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
    - Add a conditional check to disable `RHUB` when macOS is running. This is done using the `_STA` method, which returns 0x00 (disabled) if the operating system is Darwin (macOS).
    - **Example** (if your system uses `HUBN` instead of `RHUB`, disable that and use `HUBX` for the device in the Scope):
      
-     ```asl
-		DefinitionBlock ("", "SSDT", 2, "OCL", "XHUB", 0x00000000)
-		{	
-		// References to possible USB controllers and their locations (use the one(s) suitable to your system)
-		External (_SB_.PCI0.EH01.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems)
-		External (_SB_.PCI0.EH02.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, second controller)
-		External (_SB_.PCI0.EHC_.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, alternate naming)
-		External (_SB_.PCI0.SHCI.XHUB, DeviceObj) // USB 3.0 Controller (macOS-compatible renamed controller)
-		External (_SB_.PCI0.XHC_.XHUB, DeviceObj) // USB 3.0 Controller (standard naming for modern systems)
-			
-		    Scope (\_SB.PCI0.XHC.RHUB)
-		    {
-		        Method (_STA, 0, NotSerialized)  // _STA: Status
-		        {
-		            If (_OSI ("Darwin"))
-		            {
-		                Return (Zero)
-		            }
-		            Else
-		            {
-		                Return (0x0F)
-		            }
-		        }
-		    }
+        ```asl
+        DefinitionBlock ("", "SSDT", 2, "OCL", "XHUB", 0x00000000)
+        {	
+        // References to possible USB controllers and their locations (use the one(s) suitable to your system)
+        External (_SB_.PCI0.EH01.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems)
+        External (_SB_.PCI0.EH02.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, second controller)
+        External (_SB_.PCI0.EHC_.HUBX, DeviceObj) // USB 2.0 Controller (Pre-Haswell systems, alternate naming)
+        External (_SB_.PCI0.SHCI.XHUB, DeviceObj) // USB 3.0 Controller (macOS-compatible renamed controller)
+        External (_SB_.PCI0.XHC_.XHUB, DeviceObj) // USB 3.0 Controller (standard naming for modern systems)
+            
+            Scope (\_SB.PCI0.XHC.RHUB)
+            {
+                Method (_STA, 0, NotSerialized)  // _STA: Status
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Return (Zero)
+                    }
+                    Else
+                    {
+                        Return (0x0F)
+                    }
+                }
+            }
         …
      ```
 
