@@ -290,7 +290,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
 ## Example SSDT
 Below, you will find the code for the `SSDT-XHUB.aml` I am using on my desktop system, containing 15 mapped USB Ports (USB 2 and USB 3 and a USB Type C port with switch):
 
-![alt text](Hackntool_ports-1.png)
+<img width="713" height="773" alt="Hackntool_ports" src="https://github.com/user-attachments/assets/c5939d54-fb12-4287-bd2b-e7bb0f65ae0d" />
 
 <details>
 <summary><strong>Code:</strong> (click to reveal)</summary>
