@@ -95,7 +95,7 @@ Certain USB controllers needs to be renamed in order to avoid conflict with Appl
    - The `RHUB` section lists ports (e.g., `HS01`, `SS01`) with their `_UPC` (USB Port Capabilities) and `_PLD` (Physical Location of Device) methods. `_UPC` defines port availability and type, while `_PLD` describes physical location.
 
 3. **Understand `_UPC` Parameters**:
-   - The `_UPC` method returns a package with four values, the first two are relevant to us:<br>![alt text](Packages.png)
+   - The `_UPC` method returns a package with four values, the first two are relevant to us:<br><img width="495" height="151" alt="Packages" src="https://github.com/user-attachments/assets/4ddd5381-744b-43f9-9404-84bd04f2cb26" />
      - **Port Availability**: `0xFF` (connectable) or `0x00` (not connectable).
      - **Port Type**:
       	|   Value    | Port Type                            |
