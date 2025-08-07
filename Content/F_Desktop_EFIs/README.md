@@ -27,6 +27,10 @@
 ## About
 This section contains generic OpenCore configs for Intel systems based on the work of **Gabriel Luchina** who created EFI folders following the instructions of Dortania's OpenCore install guide. I took his concept of base configs, modified and improved it so they work out of the box (hopefully). Nevertheless, it's crucial to understand that these configs serve only as a starting point for your system to get up and running with OpenCore.
 
+> [!TIP]
+>
+> The method described here is deprecated. For a more streamlined and up-to-date approach for creating an OpenCore EFI, use **OpCore Simplify** instead: [OpCore-Simplify GitHub](https://github.com/lzhoang2801/OpCore-Simplify).
+
 ## New approach: generating EFIs from `config.plist`
 Instead of downloading pre-configured and possibly outdated OpenCore EFI folders from the internet, you can use OpenCore Auxiliary Tools ([**OCAT**](https://github.com/ic005k/OCAuxiliaryTools#readme)) to generate the whole EFI folder based on the a config.plist alone. This way, you always have the latest version of OpenCore, the config, kexts and drivers.
 
