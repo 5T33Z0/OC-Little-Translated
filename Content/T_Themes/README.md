@@ -22,4 +22,9 @@ This sections features 3rd party OpenCanopy themes for OpenCore's Boot Menu. And
 |![](https://github.com/e-tho/nordic-opencanopy/blob/main/preview/theme-screenshot.png?raw=true)
 |[**Download and Instructions**](https://github.com/e-tho/nordic-opencanopy)
 
+|Golden Gate Extended v2 by [HJabbour](https://github.com/HJebbour/GoldenGateExt-OpenCore-Theme)
+|:-----------------------------| 
+|![](https://raw.githubusercontent.com/HJebbour/GoldenGateExt-OpenCore-Theme/refs/heads/main/Docs/GoldenGateExt-1.png)
+|[**Download and Instructions**](https://github.com/HJebbour/GoldenGateExt-OpenCore-Theme/releases)
+
 **TBC…**
