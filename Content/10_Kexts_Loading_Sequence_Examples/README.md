@@ -241,7 +241,7 @@ This is how a possible sequence of kexts for a Laptop might look. In this exampl
 &rarr; Please follow the dedicated guide in the [OCLP-Wintel section](/Content/14_OCLP_Wintel/Enable_Features/WiFi_Sonoma.md) to (re-)enable WiFi and Bluetooth for Intel and Broadcom cards in macOS Sonoma and newer.
 
 ### Example 11: CPUFriend
-You can use **CPUFried.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
+You can use **CPUFriend.kext** and a Data Injector kext to modify the CPU Frequency Vectors used by macOS. 
 
 By default, the frequency vectors stored in the selected SMBIOS are used to handle CPU Power Management. If your Hackintosh uses the same CPU model as the one used in the corresponding Mac model of the selected SMBIOS, you don't need to use this kext. But if the CPU used in your system doesn't match one of the CPUs defined in the selected SMBIOS of the corresponding Mac model (i.e. if your CPU is better or worse than the one used in the Mac), you should optimize the CPU Power Management so your CPU is working optimally in macOS.
 
