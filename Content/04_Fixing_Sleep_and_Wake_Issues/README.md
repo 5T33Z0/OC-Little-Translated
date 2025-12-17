@@ -2,7 +2,7 @@
 
 This section contains fixes for resolving common issues related to Sleep, Wake and Hibernation occurring especially on but not limited to Laptops. The following areas are covered:
 
-## [`PTSWAKTTS`](/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix/README.md): Comprehensive Sleep and Wake fix
+## [`PTSWAKTTS`](/Content/04_Fixing_Sleep_and_Wake_Issues/PTSWAK_Sleep_and_Wake_Fix/README.md): Comprehensive Sleep and Wake fix
 
 This SSDT is the center piece for fixing most sleep and wake issues and is used in conjunction with other patches in this section. It consists of binary renames and an ACPI Hotfix (SSDT).
 
@@ -16,23 +16,23 @@ This SSDT is the center piece for fixing most sleep and wake issues and is used 
 > 
 > ***SSDT-PTSWAKTTS.aml*** has to be loaded prior to some of the other Hotpatches in this section. Details about each patch are provided in the `README` of the corresponding fix.
 
-## Fixing [`PNP0C0E Sleep`](/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method/README.md)
+## Fixing [`PNP0C0E Sleep`](/Content/04_Fixing_Sleep_and_Wake_Issues/PNP0C0E_Sleep_Correction_Method/README.md)
 
 This patch is required if pressing the Power or Sleep button causes an instant reset or shutdown. In order for this to work, it must be used in conjunction with ***SSDT-PTSWAKTTS***.
 
-## Fixing instant wake issues: [`0D/6D Patch`](/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/README.md)
+## Fixing instant wake issues: [`0D/6D Patch`](/Content/04_Fixing_Sleep_and_Wake_Issues/060D_Instant_Wake_Fix/README.md)
 
 This patch is for fixing instant wake issues, where the system instantly wakes up which after entering sleep. This is usually caused by components/devices prohibiting the system to enter sleep/hibernation state.
 
-## Fixing [`AOAC Sleep`](/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/README.md)
+## Fixing [`AOAC Sleep`](/Content/04_Fixing_Sleep_and_Wake_Issues/Fixing_AOAC_Machines/README.md)
 
 These patches are used for fixing sleep and standby issues on more recent Laptops utilizing **Always on always connected** (`AOAC`) technology.
 
-## Enabling and Configuring [Hibernation](/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes/README.md)
+## Enabling and Configuring [Hibernation](/Content/04_Fixing_Sleep_and_Wake_Issues/Changing_Hibernation_Modes/README.md)
 
 Guide for enabling/fixing Hibernation on Hackintosh systems.
 
-## Configuring [`ASPM`](/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode/README.md)
+## Configuring [`ASPM`](/Content/04_Fixing_Sleep_and_Wake_Issues/Setting_ASPM_Operating_Mode/README.md)
 
 **ASPM** (Active State Power Management), is a power link management scheme supported at system level. Under ASPM management, **PCI devices** attempt to enter power saving mode when they are idle. You can modify the Active Power State of peripherals like Bluetooth/WiFi or other devices if they interrupt sleep.
 
