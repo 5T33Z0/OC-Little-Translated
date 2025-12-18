@@ -233,7 +233,7 @@ Find out what's causing the wake by entering this in terminal:
 If your wake issues are caused by USB devices *only*, you could try [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) intsead. It's combination of a kext and an SSDT. It has been reported as working on PCs at least. I doubt it'll work on Laptops but you could try your luck.
 
 ### Using a patched `DSDT`
-The following apporaches require injecting a patched `DSDT` file which is not recommended for reaasons I won't go ito detail about here.
+The following approaches require injecting a patched `DSDT` file which is not recommended for reasons I won't go into details about here.
 
 #### Changing `_PRW` to specific return values
 This approach (which also requires patching the `DSDT`) changes the power resource values for all occurrences of `_PRW` to the same values (`0x09`, `0x04`) instead of deleting the whole `_PRW` method. The guide can be found [**here**](https://github.com/grvsh02/A-guide-to-completely-fix-sleep-wake-issues-on-hackintosh-laptops).
