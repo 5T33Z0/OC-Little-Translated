@@ -31,9 +31,9 @@ A single physical USB 3 connector (typically the blue one) supports two distinct
 | USB 1.0/1.1 | 1996 | 1.5 Mbps <br>12 Mbps | USB 1.0/1.1 | Low-Speed <br>Full-Speed | UHCI/OHCI | Dropped from macOS Ventura+. Critical for legacy keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support). |
 | USB 2.0     | 2000 | 480 Mbps       | USB 2.0     | High-Speed     | EHCI       | Requires USB port-mapping (via Kext or ACPI) for macOS compatibility. Backward compatible with USB 1.x. |
 ||
-| USB 3.0     | 2008 | 5 Gbps         | USB 3.2 Gen 1x1 | USB 5Gbps | XHCI       | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 2.0. |
-| USB 3.1     | 2013 | 10 Gbps        | USB 3.2 Gen 2x1 | USB 10Gbps | XHCI       | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 3.2 Gen 1x1 and USB 2.0. |
-| USB 3.2     | 2017 | 20 Gbps        | USB 3.2 Gen 2x2 | USB 20Gbps | XHCI       | Requires USB-C port and cable. Port-mapping and patched Thunderbolt controller may be needed for full functionality. Backward compatible with lower USB versions. |
+| USB 3.0     | 2008 | 5 Gbps         | USB 3.2 SuperSpeed Gen. 1 | USB 5Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 2.0. |
+| USB 3.1     | 2013 | 10 Gbps        | USB 3.2 SuperSpeed+ Gen. 2 | USB 10Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 3.2 Gen 1x1 and USB 2.0. |
+| USB 3.2     | 2017 | 20 Gbps        | USB 3.2 SuperSpeed+ Gen. 2x2 | USB 20Gbps | XHCI | Requires USB-C port and cable. Port-mapping and patched Thunderbolt controller may be needed for full functionality. Backward compatible with lower USB versions. |
 ||
 | USB4        | 2019 | Up to 40 Gbps  | USB4 Gen 3x2 | USB4 40Gbps | TB/PCIe    | Not natively supported in macOS. Requires Thunderbolt 3/4 or PCIe controller. Supports USB-C, backward compatible with USB 3.2 and USB 2.0. Optional tunneling for PCIe and DisplayPort. |
 | USB4v2      | 2022 | Up to 80 Gbps  | USB4 Gen 4x2 | USB4 80Gbps | TB/PCIe    | Not natively supported in macOS. Requires USB-C and specific controllers (Thunderbolt 4 or PCIe). Supports asymmetric 120 Gbps (80 Gbps one direction, 40 Gbps other). Backward compatible with USB4, USB 3.2, and USB 2.0. |
