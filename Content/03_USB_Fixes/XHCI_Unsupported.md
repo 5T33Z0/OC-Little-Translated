@@ -68,7 +68,7 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 
 ## How to use this table 
 
-1. Get your **USB XHCI Device ID** from Hackintool → PCI:<br>![](/Users/5t33z0/Desktop/xhci01.png)
+1. Get your **USB XHCI Device ID** from Hackintool → PCI:<br><img width="1385" height="488" alt="xhci01" src="https://github.com/user-attachments/assets/b9154d13-2315-4e9c-898f-6a808bdae2fb" />
 2. Take Note of the Device-ID. Omit the `0x`. 	In this example it’s `A36D` 
 3. Compare it against the **PCI ID column**
 4. If your ID is **present** →   **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
@@ -81,7 +81,7 @@ To confirm the result, open **IORegistryExplorer** and verify that your XHCI con
 
 **Example**:  
 
-![](/Users/5t33z0/Desktop/IOClassMatch.png)
+<img width="1518" height="663" alt="IOClassMatch" src="https://github.com/user-attachments/assets/9e618996-9320-49e2-b90e-c4e045c4a3c1" />
 
 In this example, we have a primary match via the device id and an IOClass match, so XHCI-Unsupported is definitely not needed.
 
@@ -97,7 +97,8 @@ The original `XHCI-unsupported.kext` by RehabMan dates back to 2018 and supports
 
 | Original XHCI-Unsupported (by [Rehabman](https://github.com/RehabMan/OS-X-USB-Inject-All)) | 
 | --------------------------
-| ![](/Users/5t33z0/Desktop/rehabman.png)  
+| <img width="573" height="112" alt="rehabman" src="https://github.com/user-attachments/assets/4512348a-373a-4043-a2b7-f0075255e31d" />
+
 
 This is the version you’ll be served when following Dortania’s OpenCore Install Guide. This version is **not helpful** for newer Intel chipsets released after 2019.
 
@@ -107,7 +108,7 @@ If you are using **Intel 400-series or newer** (2020+), use the fork by **dalian
 
 | Updated XHCI-Unsupported (by [daliansky](https://github.com/daliansky/OS-X-USB-Inject-All))
 | --------------------------
-|![](/Users/5t33z0/Desktop/daliansky.png)
+| <img width="552" height="193" alt="daliansky" src="https://github.com/user-attachments/assets/8b45760b-39bc-4382-992f-a65219a5fdbc" />
 
 > [!TIP]
 > 
