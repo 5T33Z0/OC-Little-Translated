@@ -69,10 +69,10 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 ## How to use this table 
 
 1. Get your **USB XHCI Device ID** from Hackintool → PCI:<br><img width="1385" height="488" alt="xhci01" src="https://github.com/user-attachments/assets/b9154d13-2315-4e9c-898f-6a808bdae2fb" />
-2. Take Note of the Device-ID. Omit the `0x`. 	In this example it’s `A36D` 
+2. Take Note of the Device-ID. Omit the `0x`. In this example it’s `A36D` 
 3. Compare it against the **PCI ID column**
-4. If your ID is **present** →   **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
-5. If your ID is **absent** →  Check whether `AppleUSBXHCIPCI` still attaches via ``IOPCIClassMatch = 0x0c033000` (see note below)
+4. If your ID is **present** → **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
+5. If your ID is **absent** →  Check whether `AppleUSBXHCIPCI` still attaches via `IOPCIClassMatch = 0x0c033000` (see note below)
 6. **Only if neither primary match nor class match applies** → **`XHCI-unsupported.kext` IS required**
 
 ### Optional verification (recommended)
