@@ -127,6 +127,7 @@ Declaring USB ports is via ACPI is the "gold standard" since this method is OS-a
 Check the &rarr; [**Mapping USB Ports via ACPI**](/Content/03_USB_Fixes/ACPI_Mapping_USB_Ports) section to find out more.
 
 ## Additional Resources
+- [Determining if you need XHCI-Unsupported kext](/XHCI_Unsupported.md)
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky. Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers, including 400 to 700-series mainboards. Its `info.plist` contains about 9.300 lines of code while the original by Rehabman is from 2018 and "only" contains about 6.800!
 - [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) by chriswayg. A bit outdated but informative. Just ignore the stuff about `XhciPortLimit` Quirk and blocking ports via NVRAM!
 - [**USBWakeFixup**](https://github.com/osy/USBWakeFixup) – Kext and SSDT for fixing USB Wake issues
