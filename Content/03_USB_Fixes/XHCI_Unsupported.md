@@ -25,7 +25,6 @@ If you generate an EFI using tools like **OpenCore Simplify**, the kext is often
 1. Identify the **Device ID** of your XHCI USB controller
 2. Compare it against Apple’s **native matching rules**, specifically `IOPCIPrimaryMatch`
 
-
 > [!NOTE]
 > 
 > AMD systems do **not** require `XHCI-unsupported.kext`, as AppleUSBXHCIPCI already includes explicit AMD XHCI matches.
@@ -53,7 +52,7 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 | **AppleUSBXHCILPTH**        | `8C31:8086`                                        | Intel        | Lynx Point-H               |
 | **AppleUSBXHCILPTHB**       | `8CB1:8086`                                        | Intel        | Lynx Point-HB              |
 | **AppleUSBXHCIPPT**         | `1E31:8086`                                        | Intel        | Panther Point (7-Series)   |
-| **AppleUSBXHCISPT**         | `A12F:8086`, `A2AF:8086`, `A1AF:8086`              | Intel        | Sunrise Point (100-Series) |
+| **AppleUSBXHCISPT**         | `A12F:8086`, `A2AF:8086`, `A1AF:8086`              | Intel        | Sunrise Point              |
 | **AppleUSBXHCISPTLP**       | `9D2F:8086`                                        | Intel        | Sunrise Point-LP           |
 | **AppleUSBXHCITR**          | `15E9:8086`, `15EC:8086`, `15F0:8086`, `0B27:8086` | Intel        | Titan Ridge (Thunderbolt)  |
 | **AppleUSBXHCIWPT**         | `9CB1:8086`                                        | Intel        | Wildcat Point (9-Series)   |
@@ -70,7 +69,7 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 
 1. Get your **USB XHCI Device ID** from Hackintool → PCI:<br><img width="1385" height="488" alt="xhci01" src="https://github.com/user-attachments/assets/b9154d13-2315-4e9c-898f-6a808bdae2fb" />
 2. Take Note of the Device-ID. Omit the `0x`. In this example it’s `A36D` 
-3. Compare it against the **PCI ID column**
+3. Compare it against the **PCI ID column** (Press CMD+F and enter it in your Browser’s search field)
 4. If your ID is **present** → **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
 5. If your ID is **absent** →  Check whether `AppleUSBXHCIPCI` still attaches via `IOPCIClassMatch = 0x0c033000` (see note below)
 6. **Only if neither primary match nor class match applies** → **`XHCI-unsupported.kext` IS required**
