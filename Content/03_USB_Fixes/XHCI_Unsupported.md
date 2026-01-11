@@ -53,7 +53,7 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 | **AppleUSBXHCILPTH**        | `8C31:8086`                                        | Intel        | Lynx Point-H               |
 | **AppleUSBXHCILPTHB**       | `8CB1:8086`                                        | Intel        | Lynx Point-HB              |
 | **AppleUSBXHCIPPT**         | `1E31:8086`                                        | Intel        | Panther Point (7-Series)   |
-| **AppleUSBXHCISPT**         | `A12F:8086`, `A2AF:8086`, `A1AF:8086`              | Intel        | Sunrise Point              |
+| **AppleUSBXHCISPT**         | `A12F:8086`, `A2AF:8086`, `A1AF:8086`              | Intel        | Sunrise Point (100-Series) |
 | **AppleUSBXHCISPTLP**       | `9D2F:8086`                                        | Intel        | Sunrise Point-LP           |
 | **AppleUSBXHCITR**          | `15E9:8086`, `15EC:8086`, `15F0:8086`, `0B27:8086` | Intel        | Titan Ridge (Thunderbolt)  |
 | **AppleUSBXHCIWPT**         | `9CB1:8086`                                        | Intel        | Wildcat Point (9-Series)   |
