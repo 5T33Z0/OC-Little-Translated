@@ -17,7 +17,7 @@ Comprehensive guide for resolving USB issues in macOS/Hackintosh systems, includ
      - Using Hackintool
 
 3. [**Method 2: Mapping USB Ports via ACPI**](/Content/03_USB_Fixes/03_method2_acpi.md)
-   - OS-agnostic ACPI-based USP port mapping (advanced users)
+   - OS-agnostic ACPI-based USB port mapping (advanced users)
 
 4. [**macOS Tahoe Compatibility**](/Content/03_USB_Fixes/04_tahoe_compatibility.md)
    - Adjusting USBMap kexts for macOS Tahoe
