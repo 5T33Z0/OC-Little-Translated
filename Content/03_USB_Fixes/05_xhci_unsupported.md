@@ -94,8 +94,8 @@ If you determined that you USB 3 is not working and that neither the Device-ID i
 
 The original `XHCI-unsupported.kext` by RehabMan dates back to 2018 and supports Intel chipsets available at the time (9-Series, X99, 200-/X299- and early 300-Series), as can be seen in its `Info.plist`. 
 
-| Original XHCI-Unsupported (by [Rehabman](https://github.com/RehabMan/OS-X-USB-Inject-All)) | 
-| --------------------------
+| Original XHCI-Unsupported (by [Rehabman](https://github.com/RehabMan/OS-X-USB-Inject-All)): | 
+| :--------------------------
 | <img width="573" height="112" alt="rehabman" src="https://github.com/user-attachments/assets/4512348a-373a-4043-a2b7-f0075255e31d" />
 
 
@@ -105,8 +105,8 @@ This is the version you’ll be served when following Dortania’s OpenCore Inst
 
 If you are using **Intel 400-series or newer** (2020+), use the fork by **daliansky**, which adds support for newer chipsets, including 700-series:
 
-| Updated XHCI-Unsupported (by [daliansky](https://github.com/daliansky/OS-X-USB-Inject-All))
-| --------------------------
+| Updated XHCI-Unsupported (by [daliansky](https://github.com/daliansky/OS-X-USB-Inject-All)):
+| :--------------------------
 | <img width="552" height="193" alt="daliansky" src="https://github.com/user-attachments/assets/8b45760b-39bc-4382-992f-a65219a5fdbc" />
 
 > [!TIP]
