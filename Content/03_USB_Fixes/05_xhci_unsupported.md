@@ -116,3 +116,5 @@ If you are using **Intel 400-series or newer** (2020+), use the fork by **dalian
 ## Final takeaway
 
 Do **not** rely on EFI generators or default templates. The only correct way to decide whether `XHCI-unsupported.kext` is needed is to check **AppleUSBXHCIPCI’s matching rules**. If Apple already matches your controller, the kext is unnecessary — and should not be used.
+
+[← Previous: Tahoe Compatibility](04_tahoe_compatibility.md) | [Back to Overview](./README.md) | [Next: Additional Resources →](06_resources.md)
