@@ -44,10 +44,10 @@ Before starting, ensure you have the following:
 
 - **A Hackintosh System**: macOS installed with a working bootloader (e.g., OpenCore or Clover).
 - **MaciASL**: A tool to edit and compile ACPI tables (download from [GitHub](https://github.com/acidanthera/MaciASL/releases)).
-- **IORegistryExplorer**: Used to identify active USB ports and their assignments (available via Apple Developer account or Xcode additional tools).[](https://aplus.rs/2020/usb-mapping-why/)
+- **[**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases)**: Used to identify active USB ports and their assignments (available via Apple Developer account or Xcode additional tools).[](https://aplus.rs/2020/usb-mapping-why/)
 - **USB Devices for Testing**: A USB 2.0 device (e.g., flash drive or mouse), a USB 3.0 device, and, if applicable, a USB-C device or adapter.[](https://www.travelertechie.com/2019/02/create-ssdt-to-fix-usb-rehabmans-way.html)
 - **Basic ACPI Knowledge**: Familiarity with ACPI terms like DSDT (Differentiated System Description Table) and SSDT (Secondary System Description Table). If new to ACPI, refer to the [ACPI Specification](https://uefi.org/specifications) for background.
-- **EFI Partition Access**: Ability to mount and edit your EFI partition using tools like OpenCore Auxiliary Tools or Clover Configurator.
+- **EFI Partition Access**: Ability to mount and edit your EFI partition using tools like [**OpenCore Auxiliary Tools**](https://github.com/ic005k/OCAuxiliaryTools).
 - **Backup**: Always back up your EFI folder before making changes to avoid boot issues.[](https://hackintool.com/2025/05/19/how-do-i-use-hackintool-to-map-usb-ports/)
 - **Text Editor**: For editing SSDT files (MaciASL includes one, but any code editor like Visual Studio Code works).
 
