@@ -1,8 +1,8 @@
 # OC-Little Translated: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.5-success.svg)](https://github.com/acidanthera/OpenCorePkg)
-![macOS](https://img.shields.io/badge/Supported_macOS:-≤26b3-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-25.07.13-blueviolet.svg)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.7-success.svg)](https://github.com/acidanthera/OpenCorePkg)
+![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.3-white.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.01.14-blueviolet.svg)
 
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
@@ -14,10 +14,9 @@
 
 ### 📌 Disclaimer
 
-1. **🚫 Not an Installation Guide**
+1. **🚫 Not an Installation or Configuration Guide**
    
-   This is *not* a macOS installation guide. For setting up macOS, use the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/).
-   OC-Little focuses on **post-install tuning** and **hardware enablement**.
+   This is *not* a macOS installation nor OC Configuration guide. For setting up OpenCore for macOS usage on a Wintel System, use the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/).  OC-Little focuses primarily on **post-install tuning** and **hardware enablement**.
 
 3. **✅ ACPI-Compliant Methods Only**
 
