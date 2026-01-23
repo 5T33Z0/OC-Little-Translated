@@ -109,7 +109,7 @@ When Apple released macOS Ventura, they removed the actual `ACPI_SMC_PlatformPlu
 So when switching to macOS Ventura, you either have to:
 
 - Re-enable ACPI CPU Power Management (**recommended**) or
-- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) (not recommended)
+- [**Force-enable XCPM**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/Enabling_XCPM_on_Ivy_Bridge_CPUs) (Ivy Bridge only) (not recommended)
 
 In order to re-enable and use ACPI CPU Power Management in macOS Ventura and newer, you have to do the following:
 
