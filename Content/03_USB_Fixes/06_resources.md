@@ -11,7 +11,7 @@
 
 ### XHCIUnsupported kext
 - Included in [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky &rarr; Click on „Source Code (zip)" to get it
-- Or use the [**copy**](/Content/03_USB_Fixes/kext/XHCI-unsupported.kext_0.9.2.zip) in my repo
+- Or use the [**copy**](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/Content/03_USB_Fixes/kext/XHCI-unsupported.kext_0.9.2.zip) in my repo
 
 ## Guides and Documentation
 
