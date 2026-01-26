@@ -7,6 +7,7 @@
   - Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers
   - Includes support for 400 to 700-series mainboards
   - Contains approximately 9,300 lines of code (vs. 6,800 in the original 2018 version by Rehabman)
+  - Contains `XHCIUnsupported.kext` (Download "Source Code (zip)" tp get it)
 
 ### XHCI Support
 - [**Determining if you need XHCI-Unsupported kext**](/Content/03_USB_Fixes/05_xhci_unsupported.md)
