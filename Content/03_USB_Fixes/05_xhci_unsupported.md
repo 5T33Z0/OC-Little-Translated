@@ -67,12 +67,13 @@ The table below is **derived directly from `IOPCIPrimaryMatch` entries** in `IOK
 
 ## How to use this table 
 
-1. Get your **USB XHCI Device ID** from Hackintool → PCI:<br><img width="1385" height="488" alt="xhci01" src="https://github.com/user-attachments/assets/b9154d13-2315-4e9c-898f-6a808bdae2fb" />
-2. Take Note of the Device-ID. Omit the `0x`. In this example it’s `A36D` 
-3. Compare it against the **PCI ID column** (Press CMD+F and enter it in your Browser’s search field)
-4. If your ID is **present** → **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
-5. If your ID is **absent** →  Check whether `AppleUSBXHCIPCI` still attaches via `IOPCIClassMatch = 0x0c033000` (see note below)
-6. **Only if neither primary match nor class match applies** → **`XHCI-unsupported.kext` IS required**
+1. Run [**Hackintool**](https://github.com/benbaker76/Hackintool/releases)
+2. Clich on the "PCIe" Tab and find the Device-ID of the USB Controller:<br><img width="1385" height="488" alt="xhci01" src="https://github.com/user-attachments/assets/b9154d13-2315-4e9c-898f-6a808bdae2fb" />
+3. Take Note of the Device-ID. Omit the leading `0x`. In this example it’s `A36D` 
+4. Compare it against the **PCI ID column** of the IOPCIPrimaryMatch table above (Press CMD+F and enter it in your Browser’s search field)
+5. If your ID is **present** → **AppleUSBXHCIPCI will attach → `XHCI-unsupported.kext` is NOT needed** 
+6. If your ID is **absent** →  Check whether `AppleUSBXHCIPCI` still attaches via `IOPCIClassMatch = 0x0c033000` (see note below)
+7. **Only if neither primary match nor class match applies** → **`XHCI-unsupported.kext` IS required**
 
 ### Optional verification (recommended)
 
