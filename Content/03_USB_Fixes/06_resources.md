@@ -9,15 +9,16 @@
   - Contains approximately 9,300 lines of code (vs. 6,800 in the original 2018 version by Rehabman)
   - Contains `XHCIUnsupported.kext` (Download "Source Code (zip)" tp get it)
 
-### XHCI Support
-- [**Determining if you need XHCI-Unsupported kext**](/Content/03_USB_Fixes/05_xhci_unsupported.md)
+### XHCIUnsupported kext
+- Included in [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky &rarr; Click on „Source Code (zip)" to get it
+- Or use the [**copy**](/Content/03_USB_Fixes/kext/XHCI-unsupported.kext_0.9.2.zip) in my repo
 
 ## Guides and Documentation
 
-### Port Mapping Guides
+### USB Port Mapping Guides
 - [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) by chriswayg
   - Comprehensive visual guide for USB port mapping
-  - Note: Some information about `XhciPortLimit` Quirk and blocking ports via NVRAM may be outdated
+  - **Note**: Some information about `XhciPortLimit` Quirk and blocking ports via NVRAM may be outdated
 
 ## Specialized Kexts and Fixes
 
