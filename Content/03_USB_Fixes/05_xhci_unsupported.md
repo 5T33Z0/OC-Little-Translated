@@ -16,7 +16,7 @@
 
 ## About
 
-`XHCI-unsupported.kext` is a **codeless** kext that enables macOS to recognize and use certain **Intel xHCI USB controllers** that are **not matched natively** by Apple’s USB driver, primarily to allow USB port mapping to work on those systems.
+`XHCI-unsupported.kext` is a **codeless** kext that enables macOS to recognize and use certain **Intel XHCI USB controllers** that are **not matched natively** by Apple’s USB driver, primarily to allow USB port mapping to work on those systems.
 
 The question is: *when* exactly do you need it?
 
