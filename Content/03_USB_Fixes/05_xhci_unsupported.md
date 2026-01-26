@@ -89,7 +89,7 @@ In this example, we have a primary match via the device id and an IOClass match,
 
 ## Which `XHCI-Unsupported.kext` to use?
 
-If you determined that you USB 3 is not working and that neither the Device-ID is supported by macOS nor attaching to the XHCI Controller via  IOClass is working, you need `XHCI-Unsupported.kext`. But which one? There are 2 versions.
+If you determined that USB 3.x is not working and that neither the Device-ID is supported by macOS nor attaching to the XHCI Controller via IOClass is working, you need `XHCI-Unsupported.kext`. But which one? There are 2 variants, the original kext by Rehabman and a fork by daliansky.
 
 ###  `XHCI-Unsupported.kext` by Rehabman
 
