@@ -45,9 +45,9 @@ This section contains a small collection of useful configuration tips for OpenCo
 
 ### Troubleshooting Workflow
 
-The activity diagram below provides a quick-start guide for troubleshooting your OpenCore EFI and config if it does not boot.
+The activity diagram below provides a quick fix for troubleshooting the most common issues with OpenCore configs. For extensive troubleshooting please refer to Dortania's [Troubleshooting Guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents).
 
-<img width="878" height="1128" alt="OC_Workflow" src="https://github.com/user-attachments/assets/ac1967ea-70b1-4ad3-8611-af37950f89d8" /><br>
+<img width="897" height="1135" alt="OC_Noboot_quickfix" src="https://github.com/user-attachments/assets/baf4398a-73a6-4486-aada-ff01f40f263b" />
 
 Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following settings:
 
@@ -57,8 +57,6 @@ Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the fo
 - `UEFI/APFS/MinDate` = -1
 - `UEF/APFS/MinVersion` = -1
 - Compare the structure of `UEFI/Drivers` with `sample.plist` from the OpenCore Package (format changed in OC 0.7.3).
-
-For extensive troubleshooting please refer to Dortania's [Troubleshooting Guide](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#table-of-contents).
 
 ### `MinDate`/`MinVersion` settings for the APFS driver
 OpenCore introduced a new security feature in version 0.7.2 which prohibits the APFS driver from loading if it doesn't comply to a specific Date (`MinDate`) and Version and (`MinVersion`) in the  `UEFI/APFS` section.
