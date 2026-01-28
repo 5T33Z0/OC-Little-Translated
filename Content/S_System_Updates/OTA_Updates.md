@@ -58,7 +58,7 @@ The solution depends on whether you want to use **Secure Boot** and whether your
 
 > [!TIP]
 > 
-> Check the [restrict_events_path](/Content/S_System_Updates/configs/restrict_events_path.plist) plist file for reference.
+> Check the [Restrict_Events_path](/Content/S_System_Updates/configs/restrict_events_path.plist) plist file for reference.
 
 ## **Flowchart: Paths to Enabling OTA Updates**
 
