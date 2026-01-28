@@ -39,22 +39,38 @@ The solution depends on whether you want to use **Secure Boot** and whether your
 
 ## **Scenario 2: Root-Patched Hackintosh / Unsupported SMBIOS**
 
-This scenario is the de fecto default for the majority of Hackintosh users – especially for those who rely on root patches by OCLP to get iGPUs and legacy WiFi/&BT cards working in newer versions of macOS. For those user who want to run macOS Tahoe, applying root patches simply is a must just to get audio working.
+This scenario is the de facto default for the majority of Hackintosh users – especially for those who rely on root patches by OCLP to get iGPUs and legacy WiFi/&BT cards working in newer versions of macOS. For those user who want to run macOS Tahoe, applying root patches simply is a must just to get audio working.
 
-### Problem
+### Problem 
 
-* Root patches (OCLP) or unsupported/spoofed SMBIOSes break the Signed System Volume (SSV).
-* Secure Boot (`SecureBootModel: Default`) will block OTA updates and may prevent boot.
+1. **Root patches (OCLP) break the Signed System Volume (SSV)**
 
-### Solution
+   * Modifications to the system volume or kernel required for legacy hardware support or other patches invalidate the SSV, causing OTA updates to fail.
 
-1. **Disable Secure Boot**: Set `SecureBootModel: Disabled` in OpenCore.
-2. **Use RestrictEvents.kext + `revpatch=sbvmm` boot argument**: Bypasses kernel checks that prevent OTA updates on patched systems.
-3. **Apply board-ID skip**:
+2. **Unsupported or spoofed SMBIOS**
+
+   * Using a Mac model that macOS doesn’t officially support, or applying a board-ID skip, triggers macOS checks that prevent OTA updates.
+
+Combined, these conditions block normal OTA updates and require specific bypasses (RestrictEvents.kext + `revpatch=sbvmm`, board-ID skip, SecureBootModel disabled) to succeed.
+
+### **Solution**
+
+1. **Add [board-ID skip](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L268) to your config.plist**
+
    * Lets macOS accept your unsupported SMBIOS without switching models.
    * Works with OCLP to patch the booter early and bypass installer model checks.
-4. **Apply OCLP root patches**: Enable legacy hardware support if needed.
-5. **Apply standard Hackintosh kexts**: Lilu, WhateverGreen, VirtualSMC, etc.
+
+2. **Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) with the boot argument `revpatch=sbvmm`**
+
+   * Enables the `VMM-x86_64` board-ID, making macOS think it is running in a virtual machine.
+   * Allows OTA updates on unsupported Mac models (macOS 11.3+).
+   * Lets you keep the “native” SMBIOS for your CPU, improving CPU and GPU power management compared to using a different, supported SMBIOS.
+
+3. **Disable Secure Boot**
+
+   * Set `Misc/SecureBootModel` to `Disabled` in your config.plist.
+
+4. **Optional**: Apply OCLP root patches to enable legacy hardware support if needed.
 
 ✅ Result: OTA updates succeed, Secure Boot is disabled, and SMBIOS switching is no longer required. iBridged is not applicable in this scenario.
 
