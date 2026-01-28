@@ -45,9 +45,9 @@ This section contains a small collection of useful configuration tips for OpenCo
 
 ### Troubleshooting Workflow
 
-The schematic below shows you how to approach troubleshooting your hhackintosh, if it does not boot.
+The activity diagram below provides a quick-start guide for troubleshooting your OpenCore EFI and config if it does not boot.
 
-![OpenCore Troubleshooting](https://user-images.githubusercontent.com/76865553/135234918-2d0ce665-9037-4dd6-b0f4-e2b54c081160.png)
+<img width="878" height="1128" alt="OC_Workflow" src="https://github.com/user-attachments/assets/ac1967ea-70b1-4ad3-8611-af37950f89d8" /><br>
 
 Besides checking the obvious (like Booter, Kernel and UEFI Quirks), check the following settings:
 
