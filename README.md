@@ -46,7 +46,7 @@
 * 🎮 [Fixing Graphics (iGPU/dGPU)](/Content/11_Graphics/README.md)
 * 🔌 [Fixing USB](/Content/03_USB_Fixes/README.md)
 * 😴 [Fixing Sleep & Wake](/Content/04_Fixing_Sleep_and_Wake_Issues/README.md)
-* 🔄 [Fixing System Updates](/Content/S_System_Updates/README.md)
+* 🔄 [Fixing OTA System Updates](/Content/S_System_Updates/OTA_Updates.md)
 * 🖱️ [Fixing issues with peripherals](/Content/13_Peripherals/README.md)
 * 🧮 [Fixing RAM Speed Reporting](/Content/15_RAM/README.md)
 * 🔋 [CMOS-Related Fixes](/Content/06_CMOS-related_Fixes/README.md)
