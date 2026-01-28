@@ -39,6 +39,8 @@ The solution depends on whether you want to use **Secure Boot** and whether your
 
 ## **Scenario 2: Root-Patched Hackintosh / Unsupported SMBIOS**
 
+This scenario is the de fecto default for the majority of Hackintosh users – especially for those who rely on root patches by OCLP to get iGPUs and legacy WiFi/&BT cards working in newer versions of macOS. For those user who want to run macOS Tahoe, applying root patches simply is a must just to get audio working.
+
 ### Problem
 
 * Root patches (OCLP) or unsupported/spoofed SMBIOSes break the Signed System Volume (SSV).
