@@ -1,68 +1,75 @@
-# Workaround for installing OTA System Updates on disk volumes with broken seals
+# Enabling macOS OTA Updates on Hackintoshes
 
-## Cause
-If you apply root patches to macOS with OpenCore Legacy Patcher (or other tools that install files on the system volume), this breaks the security seal of the volume.
+## **Introduction**
 
-You can check the status of the seal by entering the following command in Terminal:
+A recent Hackintosh development has opened up a new path for enabling OTA updates on macOS 14.4 and later. The **iBridged.kext** ([GitHub link](https://github.com/Carnations-Botanica/iBridged)) allows Hackintosh users to bypass the T2/BridgeOS coprocessor check that normally blocks OTA updates when Secure Boot is enabled.
 
-```shell
-diskutil apfs list
-```
-Here's the output of the APFS volume in my iMac that I applied root patches to with OCLP:
+This new approach provides a simpler and more reliable method for keeping your Hackintosh up to date, particularly for systems that don’t require root patches or SMBIOS spoofing. Combined with the known methods like RestrictEvents.kext and board-ID skip, it completes the toolkit for safely applying OTA updates across a variety of Hackintosh configurations.
 
-```
- +-> Volume disk1s6
-        ---------------------------------------------------
-        APFS Volume Disk (Role):   disk1s6 (System)
-        Name:                      Big Sur (Case-insensitive)
-        Mount Point:               Not Mounted
-        Capacity Consumed:         15152431104 B (15.2 GB)
-        Sealed:                    Broken
-        FileVault:                 No
-        |
-        Snapshot:                  -----------------
-        Snapshot Disk:             disk1s6s1
-        Snapshot Mount Point:      /
-        Snapshot Sealed:           Broken
-```
+## **Overview**
 
-As you can see, status of the `Snapshot Sealed` is `Broken`.
+There are two main OTA update scenarios:
 
-## Effect
-Once a snapshot is broken, incremental (or delta) updates will no longer work. Instead, every time a System Update is available, the full macOS Installer is downloaded instead (approx. 13 GB), which takes a long time, causes a lot of traffic and requires more energy which in return is bad for the environment.
+1. **Vanilla Hackintosh (no root patches applied)**
+2. **Root-patched Hackintosh / unsupported SMBIOS**
 
-## Workaround
-So to prevent that the full installer is downloaded every time, you can do the following:
+The solution depends on whether you want to use **Secure Boot** and whether your Hackintosh requires **low-level system patches.
 
-- Run the OpenCore Legacy Patcher
-- Click on "Post-Install Root Patch"
-- Next, select `Revert Root Patches`: <br> ![revert](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/e5f9c409-7aad-4511-b1bc-e20466908913)
-- Once reverting the patches is done, reboot. All the patches will be gone but the Snapshot seal will be intact again:
-	```
-	+-> Volume disk1s6
-        	---------------------------------------------------
-        	APFS Volume Disk (Role):   disk1s6 (System)
-        	Name:                      Big Sur (Case-insensitive)
-        	Mount Point:               Not Mounted
-        	Capacity Consumed:         15152431104 B (15.2 GB)
-        	Sealed:                    Broken
-        	FileVault:                 No
-        	|
-        	Snapshot:                  -----------------
-        	Snapshot Disk:             disk1s6s1
-        	Snapshot Mount Point:      /
-        	Snapshot Sealed:           Yes
-	```
-- If you check for updates now, the size of the update should be significantly smaller – usually between 1 to 2 GB.
+## **Scenario 1: Vanilla Hackintosh (no root patches applied)**
 
-> [!WARNING]
+### Problem
+
+* macOS checks for Apple’s T2/BridgeOS coprocessor during OTA updates.
+* With Secure Boot enabled (`SecureBootModel: Default`), OTA will fail if the coprocessor is missing.
+
+### Solution
+
+1. **Enable Secure Boot**: Set `SecureBootModel: Default` in your OpenCore `config.plist`.
+2. **Install iBridged.kext**: This Lilu-based plugin injects the required `apple-coprocessor-version` property, satisfying macOS Secure Boot checks.
+3. **Use a supported SMBIOS**: Choose a Mac model that matches your macOS version.
+4. **Apply standard Hackintosh kexts**: Lilu, WhateverGreen, VirtualSMC, etc.
+
+✅ Result: OTA updates work while maintaining Secure Boot protections.
+
+> [!TIP]
 > 
-> - This workaround only works on systems with 4th Gen Intel and newer CPUs. On Ivy Bridge and older, the update fails during the preparation phase! (&rarr; [Screenshot](https://github.com/5T33Z0/OC-Little-Translated/blob/main/S_System_Updates/Pics/SysUpd_Fail.png))
-> - This workaround cannot be utilized if your system requires post-install patches for *both* Wi-Fi and Ethernet, because then you cannot access the internet to download updates!
+> Check the [iBridged_path](/Content/S_System_Updates/configs/ibridged_path.plist) plist file for reference.
 
-## Notes
-- Depending on the root patches your system need to be able to run macOS Ventura or newer, booting might only be possible in Safe Mode. To do so, hold <kbd>Shift</kbd> and press <kbd>Enter</kbd> in OpenCore's Boot Picker.
-- To fix issues with System Update Notifications not showing at all, check [this article](https://github.com/5T33Z0/OC-Little-Translated/tree/main/S_System_Updates)
+---
 
-## Credits
-Thanks to Cyberdevs from Insanelymac for his [explanations](https://www.insanelymac.com/forum/topic/356881-pre-release-macos-sonoma/page/61/#comment-2809998)
+## **Scenario 2: Root-Patched Hackintosh / Unsupported SMBIOS**
+
+### Problem
+
+* Root patches (OCLP) or unsupported/spoofed SMBIOSes break the Signed System Volume (SSV).
+* Secure Boot (`SecureBootModel: Default`) will block OTA updates and may prevent boot.
+
+### Solution
+
+1. **Disable Secure Boot**: Set `SecureBootModel: Disabled` in OpenCore.
+2. **Use RestrictEvents.kext + `revpatch=sbvmm` boot argument**: Bypasses kernel checks that prevent OTA updates on patched systems.
+3. **Apply board-ID skip**:
+   * Lets macOS accept your unsupported SMBIOS without switching models.
+   * Works with OCLP to patch the booter early and bypass installer model checks.
+4. **Apply OCLP root patches**: Enable legacy hardware support if needed.
+5. **Apply standard Hackintosh kexts**: Lilu, WhateverGreen, VirtualSMC, etc.
+
+✅ Result: OTA updates succeed, Secure Boot is disabled, and SMBIOS switching is no longer required. iBridged is not applicable in this scenario.
+
+> [!TIP]
+> 
+> Check the [restrict_events_path](/Content/S_System_Updates/configs/restrict_events_path.plist) plist file for reference.
+
+## **Flowchart: Paths to Enabling OTA Updates**
+
+The flowchart below helps you to identify which configuration path is the correct one for your system.
+
+![](/Users/5t33z0/Desktop/OTA.png)
+
+## **Key Takeaways**
+
+* **iBridged** is only required when Secure Boot is enabled on a vanilla system.
+* **Root patches / unsupported SMBIOS** require disabling Secure Boot; iBridged will not help.
+* **Board-ID skip** and RestrictEvents kext allow OTA updates without switching SMBIOS models.
+* Always have backups before applying OTA updates, especially when root patches are involved.
+
