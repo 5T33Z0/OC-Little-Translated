@@ -64,7 +64,7 @@ The solution depends on whether you want to use **Secure Boot** and whether your
 
 The flowchart below helps you to identify which configuration path is the correct one for your system.
 
-![](/Users/5t33z0/Desktop/OTA.png)
+<img width="1168" height="662" alt="OTA" src="https://github.com/user-attachments/assets/94ad649f-9c63-4e19-a71b-c7c62bda8d48" />
 
 ## **Key Takeaways**
 
