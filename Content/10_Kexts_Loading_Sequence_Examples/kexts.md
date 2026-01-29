@@ -14,6 +14,18 @@
 |                             | [**NootedRed**](https://github.com/ChefKissInc/NootedRed) | AMD Vega iGPU support kext |
 |                             | [**WhateverGreen**](https://github.com/acidanthera/WhateverGreen) |  Various patches necessary for certain ATI/AMD/Intel/Nvidia GPUs   
 | **Audio**                   | [**AppleALC**](https://github.com/acidanthera/AppleALC)                            | Native macOS HD audio for not officially supported codecs | 
+||[**VoodooHDA**](https://github.com/chris1111/VoodooHDA-Tahoe)| AppleHDA replacement for macOS Tahoe 
+| **Ethernet**                | AppleIGB (&rarr; Use IntelMausiEthernet instead!) | Provides support for Intel's IGB Ethernet controllers |
+|                             | [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) | Provides support for Intel 2.5G NICs (I-225/I-226)   |
+|                             | [**AtherosE2200Ethernet**](https://github.com/Mieze/AtherosE2200Ethernet) | Provides support for Atheros E2200 family |
+|                             | [**CatalinaBCM5701Ethernet**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet)               | Provides support for Broadcom BCM57XX Ethernet series|
+|                             | [**HoRNDIS**](https://github.com/jwise/HoRNDIS)                             | Use the USB tethering mode of the Android phone to access the Internet | 
+|                             | [**IntelMausiEthernet**](https://github.com/Mieze/IntelMausiEthernet) | LAN driver for various Intel 1 Gbit NICS, supports AppleVTD                   
+|                             | [**LucyRTL8125Ethernet**](https://github.com/Mieze/LucyRTL8125Ethernet)                 | Provides support for Realtek RTL8125 family           |
+|                             | [**NullEthernet**](https://github.com/RehabMan/OS-X-Null-Ethernet) | Creates a Null Ethernet when no supported network hardware is present | 
+|                             | [**RealtekRTL8100**](https://github.com/Mieze/RealtekRTL8100)                      | Provides support for Realtek RTL8100 family           |
+|                             | [**RealtekRTL8111**](https://github.com/Mieze/RTL8111_driver_for_OS_X)                      | Provides support for Realtek RTL8111/8168 family      |
+||[**SimpleRTK5**](https://github.com/laobamac/SimpleRTK5) | Realtek RTL8126 5G PCIe Ethernet card driver
 | **Wi-Fi**                   | [**AirportBrcmFixup**](https://github.com/acidanthera/AirportBrcmFixup) | Patches required for non-native Airport Broadcom Wi-Fi cards  |
 |                             | [**AirportItlwm**](https://github.com/OpenIntelWireless/itlwm)                        | Intel Wi-Fi drivers support the native macOS Wi-Fi interface | 
 |                             | [**IO80211FamilyLegacy**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)                 | Enable legacy native Apple Wireless adapters         |
@@ -21,16 +33,6 @@
 |                             | [**itlwm**](https://github.com/OpenIntelWireless/itlwm) | Intel Wi-Fi drivers. Spoofs as Ethernet and connects to Wi-Fi via Heliport 
 |**Bluetooth**                | [**BrcmPatchRAM**](https://github.com/acidanthera/BrcmPatchRAM) <br> Contains: <ul><li>BlueToolFixup (macOS 12+)<li>BrcmBluetoothInjector <li> BrcmBluetoothInjectorLegacy <li> BrcmFirmwareData <li> BrcmFirmwareRepo <li> BrcmPatchRAM (macOS ≤ 10.10)<li> BrcmPatchRAM2 (macOS 10.11-10.14.)<li> BrcmPatchRAM3 (macOS 10.15)|  Collection of kexts for enabling RAMUSB-based Broadcom Bluetooth cards in various versions of macOS ([**config instructions**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/10_Kexts_Loading_Sequence_Examples/README.md#example-7-broadcom-wifi-and-bluetooth)),| 
 |                             | [**IntelBluetoothFirmware**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) <br> Contains:<ul><li>IntelBluetoothFirmware<li>IntelBluetoothInjector<li>IntelBTPatcher| Uploads firmware to enable Intel Bluetooth support ([**config instructions**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/10_Kexts_Loading_Sequence_Examples#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware))  
-| **Ethernet**                | AppleIGB (&rarr; Use IntelMausiEthernet instead!) | Provides support for Intel's IGB Ethernet controllers |
-|                             | [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) | Provides support for Intel 2.5G NICs (I-225/I-226)   |
-|                             | [**AtherosE2200Ethernet**](https://github.com/Mieze/AtherosE2200Ethernet) | Provides support for Atheros E2200 family |
-|                             | [**CatalinaBCM5701Ethernet**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Ethernet)               | Provides support for Broadcom BCM57XX Ethernet series|
-|                             | [**HoRNDIS**](https://github.com/jwise/HoRNDIS)                             | Use the USB tethering mode of the Android phone to access the Internet | 
-|                             | [**IntelMausiEthernet**](https://github.com/CloverHackyColor/IntelMausiEthernet) | LAN driver for various Intel 1 Gbit NICS                   
-|                             | [**LucyRTL8125Ethernet**](https://github.com/Mieze/LucyRTL8125Ethernet)                 | Provides support for Realtek RTL8125 family           |
-|                             | [**NullEthernet**](https://github.com/RehabMan/OS-X-Null-Ethernet) | Creates a Null Ethernet when no supported network hardware is present | 
-|                             | [**RealtekRTL8100**](https://github.com/Mieze/RealtekRTL8100)                      | Provides support for Realtek RTL8100 family           |
-|                             | [**RealtekRTL8111**](https://github.com/Mieze/RTL8111_driver_for_OS_X)                      | Provides support for Realtek RTL8111/8168 family      |
 | **USB**                     | [**GenericUSBXHCI**](https://github.com/RehabMan/OS-X-Generic-USB3)                      | Fixes USB 3.0 issues found on some Ryzen APU-based systems. |
 |                             | [**XHCI-unsupported**](https://github.com/RehabMan/OS-X-Generic-USB3)                    | Enables USB 3.0 support for unsupported xHCI controllers 
 | **Input** (HID)             | [**AlpsHID**](https://github.com/blankmac/AlpsHID)                             | Brings native multitouch support to the Alps I2C touchpads. | No    |
