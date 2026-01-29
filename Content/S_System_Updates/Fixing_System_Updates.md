@@ -22,15 +22,15 @@ Re-installing (graphics) drivers onto the system partition breaks the security s
 
 ## Fix
 1. Remove `-no_compat_check` boot-arg (if present)
-2. Add the [**Booter Patches**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L268) from OCLPs config and enable them.
-3. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer. This also allows using the "native" SMBIOS for the used CPU which improves CPU and GPU power management.
+2. Add the [**Skip Board-ID Check**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L243) from OCLPs config and enable it.
+3. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer. This also allows using the "native" SMBIOS for the used CPU which improves CPU and GPU power management while macOS identifies itself to the update servers as running in a virtual machine.
 
-Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variables. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
+Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
 
 ![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
 
 ## Limitations
-Since this fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+), you can't use it in macOS Catalina and older. This can be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](/Content/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.). Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
+Since this fix utilizes virtualization capabilities only supported by macOS Big Sur 11.3 and newer (XNU Kernel 20.4.0+), you can't utilize it in macOS Catalina or older. This can be worked around by temporarily switching to a supported SMBIOS (&rarr; check the [**SMBIOS Compatibilty Chart**](/Content/E_Compatibility_Charts/SMBIOS_Compat_Short.pdf) to find one) and disconnecting the system from the internet before installing macOS (otherwise you have to generate new serials, etc.). Once macOS 11.3 or newer is installed, the board-id spoof is working and you can revert back to the SMBIOS best suited for your CPU.
 
 ### What about Clover?
 This fix also works in Clover but it requires a slightly different approach, since Clover cannot apply OpenCore's Booter patches needed for the board-id skip. Therefore you need `-no_compat_check` to boot macOS with an unsupported Board-id – otherwise you will be greeted with the "forbidden" sign instead of the Apple logo. Installing macOS still requires a supported SMBIOS, though.
