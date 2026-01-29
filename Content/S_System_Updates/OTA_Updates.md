@@ -25,7 +25,6 @@ Traditionally, this limitation was addressed using **RestrictEvents.kext**, whic
 | --------- |------- | :-----------: | :--------------------------: | ----- |
 | **Intel Macs with T2** | MacBookPro15,x<br>MacBookPro16,x<br>MacBookAir8,x / 9,1<br>iMac19,x / 20,2<br>iMacPro1,1<br>Macmini8,1<br>MacPro7,1 | Yes | **Yes** | Requires iBridged (vanilla) or RestrictEvents + `revpatch=sbvmm` (patched systems)|
 | **Intel Macs without T2 (pre-2018)** | MacBookPro14,x and earlier<br>iMac18,x and earlier<br>Macmini7,1 and earlier | No | No | Not affected by T2 checks, but often unsupported by newer macOS  | 
-| **Apple Silicon Macs** | MacBookPro17,1<br>MacBookPro18,x<br>MacBookAir10,x<br>MacStudio1,x<br>MacPro8,1 | N/A (integrated Secure Enclave) | No| Not usable on Hackintosh systems |
 
 ---
 
