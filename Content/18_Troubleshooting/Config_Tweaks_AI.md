@@ -64,7 +64,7 @@ This USB drive serves as a fallback boot medium in case something goes wrong.
 
 * Launch OCAT again
 * Mount your ESP
-* Navigate to `EFI/OC/`
+* Navigate to `EFI/`
 
 The debug boot log will be stored as a text file using the following naming scheme:
 
