@@ -10,7 +10,7 @@ Such an approach exists in the form of the OpenCore **DEBUG** boot log. Compared
 
 This is where AI becomes useful. It excels at processing large amounts of structured text and identifying patterns and logical relationships. By feeding debug boot logs into an AI model and asking targeted questions, it becomes possible to reason about which quirks are actively used and which are effectively redundant.
 
-Applying this approach to one system allowed me to safely disable several quirks—such as `ProvideCustomSlide`, `EnableSafeModeSlide`, `RebuildAppleMemoryMap`, and `DevirtualiseMmio`—as well as multiple MMIO whitelist entries, without affecting stability. On another system AI identified that the CPU and amount of cores was not detected correctly. After enabling `ProvideCrrentCPpuInfo` this issue was resolved.
+Applying this approach to one system allowed me to safely disable several quirks – such as `ProvideCustomSlide`, `EnableSafeModeSlide`, `RebuildAppleMemoryMap`, and `DevirtualiseMmio` (long with MMIO Whitelist entries), without affecting stability. On another system, the LLM identified that the CPU and amount of cores was not detected correctly. After enabling `ProvideCrrentCPpuInfo` this issue was resolved.
 
 ## Scope & Assumptions
 
