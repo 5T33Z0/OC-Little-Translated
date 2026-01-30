@@ -85,7 +85,6 @@
 
 ## 🍏 macOS Topics
 
-* 💻 [Terminal Commands](/Terminal_Commands.md#readme)
 * 📊 [macOS Compatibility Charts](/Content/E_Compatibility_Charts/README.md)
 * 💿 [Multi-macOS USB Installer](/Content/U_USB_Multi_installer/README.md)
 * 💻 [macOS Virtualization](/Content/V_Virtualization/README.md)
@@ -104,7 +103,7 @@
 * 🧃 [Utilities & Resources](/Content/C_Utilities_and_Resources/README.md)
 
 ## Troubleshooting and Config Optimization
-
+* 💻 [List of helpful Terminal Commands](/Terminal_Commands.md#readme)
 * 🖥️ [AI-Assisted OpenCore Bootlog Analysis & Config Optimization](/Content/18_Troubleshooting/Config_Tweaks_AI.md)
 * 📄 [Converting Spindumps to Text for Further Analysis](/Content/18_Troubleshooting/Converting_Spindumps.md)
 * 🐛 [Debugging with SysReport](/Content/K_Debugging/README.md)
