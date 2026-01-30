@@ -100,6 +100,8 @@ Once optimization is complete, revert OpenCore back to the **RELEASE** build.
 * Update OpenCore files and drivers
 * Save and reboot
 
+---
+
 ## Addendum: When *Not* to Optimize
 
 Optimization is not always the correct goal. Avoid or postpone quirk reduction in the following situations:
