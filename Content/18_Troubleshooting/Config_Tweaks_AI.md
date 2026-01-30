@@ -12,7 +12,7 @@ This is where AI becomes useful. It excels at processing large amounts of struct
 
 Applying this approach to one system allowed me to safely disable several quirks – such as `ProvideCustomSlide`, `EnableSafeModeSlide`, `RebuildAppleMemoryMap`, and `DevirtualiseMmio` (long with MMIO Whitelist entries), without affecting stability. On another system, the LLM identified that the CPU and amount of cores was not detected correctly. After enabling `ProvideCrrentCPpuInfo` this issue was resolved.
 
-Here's a real-life example of discussing the bootlog with ChatGPT: https://chatgpt.com/share/697c8d54-1138-8012-a15c-f5af08bcef2c 
+Here's a real-life example of [discussing the OC debug bootlog with ChatGPT](https://chatgpt.com/share/697c8d54-1138-8012-a15c-f5af08bcef2c). 
 
 ## Scope & Assumptions
 
