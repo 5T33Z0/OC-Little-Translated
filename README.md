@@ -105,7 +105,7 @@
 
 ## Troubleshooting and Config Optimization
 
-* 🖥️ [AI-Assisted OpenCore Bootlog Analysis & Config Optimization](//Content/18_Troubleshooting/Config_Tweaks_AI.md)
+* 🖥️ [AI-Assisted OpenCore Bootlog Analysis & Config Optimization](/Content/18_Troubleshooting/Config_Tweaks_AI.md)
 * 📄 [Converting Spindumps to Text for Further Analysis](/Content/18_Troubleshooting/Converting_Spindumps.md)
 
 ## 📈 Repo Stats
