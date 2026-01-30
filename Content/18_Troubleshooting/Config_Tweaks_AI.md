@@ -21,7 +21,7 @@ This guide is intended for **systems that are already booting macOS successfully
 1. The system already boots macOS reliably under OpenCore (desktop or laptop).
 2. Users can access and edit the EFI partition (`config.plist`) and restore a backup if needed.
 3. Users can perform basic validation tests: cold boots, warm reboots, sleep/wake cycles, and NVRAM resets.
-4. AI-assisted analysis complements – but does not replace – user judgment. Any recommendations should be validated individually.
+4. AI-assisted analysis complements – but does not replace – user judgment. Any recommendations should be validated **_individually_**.
 
 **Limitations:**
 
