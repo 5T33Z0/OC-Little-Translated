@@ -130,7 +130,7 @@ It’s exciting to see tools like [**OCAT**](https://github.com/ic005k/QtOpenCor
 
 > [!TIP]
 > 
-> With OCAT you can switch back and forth between the RELEASE and DEBUG version easily. Check the [OCAT Tips & Trick](/Content/D_Updating_OpenCore/OCAT_Bonus.md) section for more details.
+> With OCAT you can switch back and forth between the RELEASE and DEBUG version easily. Check the [OCAT Tips & Tricks](/Content/D_Updating_OpenCore/OCAT_Bonus.md) section for more details.
 
 ## NOTES
 - When setting-up your config for the very first time, you should create an OC Snapshot with [ProperTree](https://github.com/corpnewt/ProperTree) prior to deployment. Because it does a better job of detecting kext dependencies and organizing nested kexts which can prevent possible boot errors later.
