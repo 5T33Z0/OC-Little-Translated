@@ -148,22 +148,30 @@ Alternatively, you can click on "Import" to open a downloaded `.zip` containing 
 
 ## Switching between Release and Debug builds
 
-To switch from the RELEASE to the DEBUG version of OpenCore, do the following:
+To switch from the RELEASE to the DEBUG version of OpenCore to produce a proper OC bootlog, do the following:
 
-- In OCAT, select "Edit > OpenCore DEBUG" from the menu bar (set checkmark)
-- Mount your EFI and open your `config.plist`
-- Backup your current EFI Folder on a FAT32 formatted USB flash drive!
-- Set `Misc/Debug/Target` to: `67`
-- Update OpenCore files and Drivers
-- Save and reboot
+* In OCAT, select **Edit → OpenCore DEBUG** from the menu bar (indicated by a checkmark)
+* Navigate to `Misc → Debug`
+  * Enable `AppleDebug`
+  * Enable `ApplePanic`
+  * Set `Misc/Debug/Target` to `67`
+* Click **Upgrade OpenCore and kexts**
+* In the next dialog:
+  * Select **Get OpenCore**
+  * Once the files are downloaded, click **Start Sync**
+* Save `config.plist` and reboot
 
 To revert back to the RELEASE build:
 
-- In OCAT, select "Edit > OpenCore DEBUG" again, to uncheck it
-- Mount your EFI and open your `config.plist`
-- Disable logging (change `Misc/Debug/Target` to `3`)
-- Update OpenCore files and Drivers
-- Save and reboot
+* Select **Edit → OpenCore DEBUG** again to **disable** it
+* Mount your ESP and open `config.plist`
+* Navigate to `Misc → Debug`
+  * Disable `AppleDebug`
+  * Disable `ApplePanic`
+  * Set `Misc/Debug/Target` to `0`
+* Click **Upgrade OpenCore and kexts**
+* Update OpenCore files and drivers
+* Save and reboot
 
 ## Adding kext URLs to OCAT
 
