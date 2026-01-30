@@ -78,9 +78,10 @@
 
 ### 🛠️ OpenCore Auxiliary Tools (OCAT)
 
-* 🔄 [Updating OpenCore with OCAT](/Content/D_Updating_OpenCore/README.md)
-* 🚫 [Switching to NO\_ACPI Build](/Content/O_OC_NO_ACPI/README.md)
+* 🔄 [Updating OpenCore with OCAT](/Content/D_Updating_OpenCore/Updating_OC.md)
+* 💡 [OCAT Tips & Tricks](/Content/D_Updating_OpenCore/OCAT_Bonus.md)
 * 🧰 [Generating EFIs with OCAT](/Content/F_Desktop_EFIs/README.md)
+* 🚫 [Switching to NO\_ACPI Build](/Content/O_OC_NO_ACPI/README.md)
 
 ## 🍏 macOS Topics
 
