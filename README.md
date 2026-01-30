@@ -100,14 +100,14 @@
 * 🧼 [Using OCLP on Wintel PCs](/Content/14_OCLP_Wintel/README.md)
 * 🧰 [Generating EFIs with OpCore Simplify](/Content/P_OpCore_Simplify/README.md)
 * 🎧 [Creating a custom AppleALC Layout-ID](/Content/L_ALC_Layout-ID/README.md)
-* 🐛 [Debugging with SysReport](/Content/K_Debugging/README.md)
 * 🔀 [Using Clover & OpenCore Together](/Content/R_BootloaderChooser/README.md)
 * 🧃 [Utilities & Resources](/Content/C_Utilities_and_Resources/README.md)
 
 ## Troubleshooting and Config Optimization
 
 * 🖥️ [AI-Assisted OpenCore Bootlog Analysis & Config Optimization](/Content/18_Troubleshooting/Config_Tweaks_AI.md)
-* 📄 [Converting Spindumps to Text for Further Analysis](/Content/18_Troubleshooting/Converting_Spindumps.md)
+* 📄 [Converting Spindumps to Text for Further Analysis](/Content/18_Troubleshooting/Converting_Spindumps.md
+* 🐛 [Debugging with SysReport](/Content/K_Debugging/README.md)
 
 ## 📈 Repo Stats
 
