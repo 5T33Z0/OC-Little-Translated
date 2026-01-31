@@ -1,5 +1,7 @@
 # ACPI Device IDs
 
+ACPI (Advanced Configuration and Power Interface) Device IDs are standardized identifiers used by operating systems to *detect*, *classify*, and *manage* hardware components. Each device exposes a Plug and Play (PnP) ID that allows the OS to associate the hardware with the appropriate driver and power management policies. The following table lists common ACPI Plug and Play IDs along with their corresponding device descriptions, providing a reference for identifying system components at the firmware and OS level.
+
 Plug and Play ID | Description
 -----------------|------------
 `PNP0C08` | **ACPI**. Not declared in ACPI as a device. This ID is used by OSPM for the hardware resources consumed by the ACPI fixed register spaces, and the operation regions used by AML code. It represents the core ACPI hardware itself.
