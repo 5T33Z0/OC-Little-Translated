@@ -52,7 +52,7 @@ OCAT does not contain all the links to kext repos. You can tell if a link to a r
 	```
 6. Save the file
 
-The next time you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). [Kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain grey!
+The next time you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). [Kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain highlighted in grey!
 
 ## Refreshing the OCAT Database
 

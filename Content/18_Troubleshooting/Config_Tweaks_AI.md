@@ -10,7 +10,9 @@ Such an approach exists in the form of the OpenCore **DEBUG** boot log. Compared
 
 This is where AI becomes useful. It excels at processing large amounts of structured text and identifying patterns and logical relationships. By feeding debug boot logs into an AI model and asking targeted questions, it becomes possible to reason about which quirks are actively used and which are effectively redundant.
 
-Applying this approach to one system allowed me to safely disable several quirks—such as `ProvideCustomSlide`, `EnableSafeModeSlide`, `RebuildAppleMemoryMap`, and `DevirtualiseMmio`—as well as multiple MMIO whitelist entries, without affecting stability.
+Applying this approach to one system allowed me to safely disable several quirks – such as `ProvideCustomSlide`, `EnableSafeModeSlide`, `RebuildAppleMemoryMap`, and `DevirtualiseMmio` (long with MMIO Whitelist entries), without affecting stability. On another system, the LLM identified that the CPU and amount of cores was not detected correctly. After enabling `ProvideCrrentCPpuInfo` this issue was resolved.
+
+Here's a real-life example of [discussing the OC debug bootlog with ChatGPT](https://chatgpt.com/share/697c8d54-1138-8012-a15c-f5af08bcef2c). 
 
 ## Scope & Assumptions
 
@@ -21,7 +23,7 @@ This guide is intended for **systems that are already booting macOS successfully
 1. The system already boots macOS reliably under OpenCore (desktop or laptop).
 2. Users can access and edit the EFI partition (`config.plist`) and restore a backup if needed.
 3. Users can perform basic validation tests: cold boots, warm reboots, sleep/wake cycles, and NVRAM resets.
-4. AI-assisted analysis complements—but does not replace—user judgment. Any recommendations should be validated individually.
+4. AI-assisted analysis complements – but does not replace – user judgment. Any recommendations should be validated **_individually_**.
 
 **Limitations:**
 
@@ -62,7 +64,7 @@ This USB drive serves as a fallback boot medium in case something goes wrong.
 
 * Launch OCAT again
 * Mount your ESP
-* Navigate to `EFI/OC/`
+* Navigate to `EFI/`
 
 The debug boot log will be stored as a text file using the following naming scheme:
 
@@ -99,6 +101,8 @@ Once optimization is complete, revert OpenCore back to the **RELEASE** build.
 * Click **Upgrade OpenCore and kexts**
 * Update OpenCore files and drivers
 * Save and reboot
+
+---
 
 ## Addendum: When *Not* to Optimize
 

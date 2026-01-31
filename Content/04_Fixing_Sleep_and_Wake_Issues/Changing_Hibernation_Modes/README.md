@@ -262,7 +262,7 @@ The system uses four distinct timers to manage power state transitions:
 2. **"Autopoweroff" path**:
    - S0 (awake) → S3 (sleep) → [autopoweroffdelay] → writes hibernation image → chipset sleep state
 
-Here's a visualization of how these timers working:
+Here's a visualization of how these timers work:
 
 ![hibernate-timeline](https://github.com/user-attachments/assets/568a0716-ae1a-42c4-9b82-10e357d310f7)
 
