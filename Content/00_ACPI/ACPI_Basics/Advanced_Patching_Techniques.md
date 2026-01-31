@@ -1,4 +1,4 @@
-# Advanced Patching Techniques
+# Advanced ACPI Patching Techniques
 
 ## Really hacky Binary Rename patches
 A usual application of binary renames is to disable a `Device` or `Method` in the `DSDT` so macOS doesn't recognize it, so we can either modify or replace it via an SSDT. But besides that you can also use binary renames in rather unconventional ways to enable or disable devices by literally manipulating section(s) of the `DSDT` in such a way that only desired parts of the code is executed.
@@ -331,3 +331,5 @@ Method (_STA, 0, NotSerialized)
 The original `_STA` method contains other operations besides setting the conditional device status enable bit so that's why this approach cna't be applied in this case.
 
 **Risk**: `XM01` may not be recovered when OC boots other systems.
+
+[←**Back to TOC**](../README.md)

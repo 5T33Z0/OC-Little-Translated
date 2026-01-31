@@ -586,3 +586,5 @@ Typically, SSDT patches are targeted at the machine's ACPI (either the DSDT or o
 - Original [**ASL Guide**](https://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1) by suhetao
 - ACPI [**Specifications**](https://uefi.org/specifications) by uefi.org
 - ASL Tutorial by acpica.org ([**PDF**](https://acpica.org/sites/acpica/files/asl_tutorial_v20190625.pdf)). Good starting point if you want to get into fixing your `DSDT` with `SSDT` hotpatches.
+
+[←**Back to ACPI Basics**](./README.md) | [**Next: Advanced ACPI Patching Techniques →**](Advanced_Patching_Techniques.md)
