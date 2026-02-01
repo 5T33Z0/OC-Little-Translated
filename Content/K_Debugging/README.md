@@ -61,15 +61,6 @@ To create a complete CODEC dump:
 	```
 3. Transfer `CodecDump.zip` to macOS and rename `card0-codec#0.txt` to `codec_dump.txt`. 
 
-This dump is crucial for developers or advanced users creating custom audio layouts.
-
-#### Dumping the Audio CODEC
-1. Once Linux is up and running, open Terminal and enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
-2. Store the generated `CodecDump.zip` on a medium (HDD, other USB stick, E-Mail, Cloud) which you can access later from within macOS. You cannot store it on the Ventoy USB stick itself unfortunately, since it's formatted in ExFat which can't be accessed by Linux without additional measures.
-3. Reboot into macOS
-4. Extract `CodecDump.zip` to the Desktop
-5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
-
 ### CPU
 
 `CPUInfo.txt` contains:
