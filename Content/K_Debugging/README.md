@@ -26,7 +26,7 @@ To generate a `SysReport`, you **must** use the Debug version of OpenCore and ha
 1. Download and extract the Debug EFI.zip.
 2. Copy the EFI folder to a FAT32-formatted USB flash drive.
 3. Boot your system from the flash drive.
-4. The dumping process starts automatically:<br>![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
+4. The dumping process starts automatically:<br>![OCDBG](https://github.com/user-attachments/assets/5a5b0ff6-c3bb-470b-b1de-0c2eda8ad165)
 5. After reaching the OpenCore boot picker, remove the flash drive and reboot. The system dumps are stored on the USB drive.
 
 ## Understanding the dumped files
