@@ -87,6 +87,25 @@ opencore-YYYY-MM-DD-HHMMSS.txt
 * Submit the next boot log for analysis
 * Repeat until no further issues or optimizations are identified
 
+## Search terms for analyzing the OC boot log manually
+
+Here's a concise table of common expressions/terms to search for in an OpenCore boot log, grouped by purpose. This is designed for quick diagnostics and spotting issues or confirmations.
+
+| Category | Expressions / Terms | What to Look For |
+| -------- |-------------------- |----------------- |
+| **Boot flow & ACPI**           | `OC:`, `ACPI`, `SSDT`, `Failed to load table`, `Skipping add ACPI`                                   | Confirm which tables are loaded, which are skipped, and any injection issues     |
+| **CPU / Power Management**     | `AppleACPICPU`, `CPU PM`, `PLUG`, `CST`, `P-States`, `EIST`                                          | Check CPU detection, power management, and correct P-State/CPU PM initialization |
+| **Memory / MMIO**              | `DevirtualiseMmio`, `Mmio`, `RebuildAppleMemoryMap`, `SetupVirtualMap`, `runtime area`, `allocation` | Spot memory map issues, runtime allocation failures, or unnecessary MMIO quirks  |
+| **Graphics / GOP**             | `GOP`, `Framebuffer`, `UIScale`, `Current FB`, `TextRenderer`, `Graphics`                            | Verify framebuffer setup, resolution, and any fallback to text mode              |
+| **NVRAM**                      | `Setting NVRAM`, `Deleting NVRAM`, `boot-args`, `csr-active-config`, `prev-lang:kbd`                 | Ensure variables are written, persistent, and no redundant deletion occurs       |
+| **Drivers / Kexts**            | `HfsPlus.efi`, `OpenRuntime.efi`, `ResetNvramEntry.efi`, `Driver loaded`                             | Check that essential drivers load and optional ones are not failing              |
+| **VT-d / AppleVTD**            | `DMAR`, `AppleVTD`, `DisableIoMapper`, `IOMapper`                                                    | Confirm VT-d table parsing and correct AppleVTD functionality                    |
+| **Picker / GUI**               | `OpenCanopy`, `GoldenGate`, `Theme`, `Failed to load image`                                          | Detect UI rendering issues or missing assets                                     |
+| **Errors / Warnings / Panics** | `Error`, `Failed`, `Skipped`, `Panic`, `Unsupported`, `Missing`                                      | Critical problems or things that may affect stability                            |
+| **Sleep / RTC / Power**        | `RTC`, `Sleep`, `Wake`, `PowerState`                                                                 | Optional: check power transitions for potential issues                           |
+| **SMBIOS / Platform info**     | `SMBIOS`, `iMac`, `PlatformInfo`, `ROM`                                                              | Validate correct SMBIOS injection and MAC/ROM settings                           |
+
+
 ## Wrapping Up: Reverting OpenCore to the Release Build
 
 Once optimization is complete, revert OpenCore back to the **RELEASE** build.
