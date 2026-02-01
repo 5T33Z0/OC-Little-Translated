@@ -38,7 +38,7 @@ The ACPI folder contains all firmware tables (DSDT, SSDTs, etc.) that macOS read
 * You can identify missing devices or features that need custom [**SSDTs**](/Content/01_Adding_missing_Devices_and_enabling_Features#readme).
 * Debug ACPI errors and verify patch effectiveness.
 
-**More:** [Debug ACPI Tables](/Content/00_ACPI/ACPI_Debugging)
+**More:** [ACPI Debugging](/Content/00_ACPI/ACPI_Debugging)
 
 > [!TIP]
 > 
