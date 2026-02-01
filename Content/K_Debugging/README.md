@@ -1,51 +1,67 @@
-# Debugging
-This chapter covers the OpenCore's `SysReport` feature which can be used to gather useful information about the system.
+# Using OpenCore's `SysReport` feature for debugging
 
-## Using OpenCore's `SysReport` feature
-With the "Debug" version of OpenCore you can generate dumps of ACPI tables, the Audio CODEC, CPU details, SMBIOS and PCI devices, located in a "SysReport" folder inside the EFI partition:
+## Overview
+
+OpenCore’s `SysReport` feature is a powerful tool for Hackintosh users and developers. It allows you to generate detailed system dumps—including ACPI tables, Audio CODECs, CPU details, SMBIOS data, and PCI device information – directly from your EFI partition. These dumps are invaluable for troubleshooting boot issues, debugging hardware compatibility, and configuring macOS correctly on non-Apple hardware.
+
+When enabled, `SysReport` stores these files in a `SysReport` folder inside the EFI partition:
 
 ![SysReport](https://user-images.githubusercontent.com/76865553/168154869-30725020-0247-4e9f-95fc-e27d733b9ef6.png)
 
-In order to do so, you have to enable the `SysReport` feature in the config.plist. After rebooting the files will be available.
+The primary goal of `SysReport` is to provide a complete snapshot of your system’s hardware and firmware environment. This snapshot allows you to:
 
-### Preparation and dumping process
-Normally, you would need an already working config and the Debug version of OpenCore to do this. But the guys from Utopia-Team have prepared a generic, pre-build [**Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) which can do it *without* a working config. It contains all necessary files and settings required to create a `SysReport`.
+1. **Identify missing ACPI patches and SSDTs** required to make macOS recognize all devices.
+2. **Verify CPU detection and configuration** (e.g., cores, threads, speedstaps, AppleProcessorType).
+3. **Inspect PCI devices** for proper device IDs, paths, and potential conflicts.
+4. **Examine audio hardware** to create AppleALC Layout-IDs or troubleshoot sound issues.
+5. **Provide developers with SMBIOS and firmware data** for debugging and testing.
 
-1. Download the EFI.zip and extract it
-2. Copy the EFI folder to a FAT32 formatted flash drive
-3. Reboot your system from the flash drive
-4. The dumping process will begin: 
-![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
+Essentially, `SysReport` removes the guesswork by giving you a detailed hardware profile without relying on macOS to boot fully.
 
-Once you reach OpenCore's boot picker, you can remove the flash drive and reset the system. The files are stored on the flash drive now and you can check them out.
+## Preparation and dumping process
+To generate a `SysReport`, you **must** use the Debug version of OpenCore and have the `SysReport` feature enabled in the `config.plist`. Typically, this also requires an existing working configuration. However, the Utopia-Team provides a pre-built [**OpenCore Debug EFI**](https://github.com/utopia-team/opencore-debug/releases) that can create a `SysReport` *without* a working config.
 
-## About the dumped files
+**Steps**:
+
+1. Download and extract the Debug EFI.zip.
+2. Copy the EFI folder to a FAT32-formatted USB flash drive.
+3. Boot your system from the flash drive.
+4. The dumping process starts automatically:<br>![Dumping Process](https://user-images.githubusercontent.com/46293832/168248420-128f8d51-30fd-49b6-87e1-7ef95e92abf7.jpg)
+5. After reaching the OpenCore boot picker, remove the flash drive and reboot. The system dumps are stored on the USB drive.
+
+## Understanding the dumped files
+
 ### ACPI
-With `SysReport` enabled, ACPI tables will be dumped which then can be further analyzed to see which [**SSDTs**](/Content/01_Adding_missing_Devices_and_enabling_Features#readme) you might have to add in order to enable or add additional features.
 
-**NOTE**: When it comes to obtaining ACPI easily, Clover is the better option since it can do this from the GUI without having a working config (simply press F11 and the tables will be dumped to the USB flash drive).
+The ACPI folder contains all firmware tables (DSDT, SSDTs, etc.) that macOS reads. By analyzing these:
 
-#### Debugging ACPI Tables
-See Section &rarr; [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_About_ACPI/ACPI_Debugging#readme)
+* You can identify missing devices or features that need custom [**SSDTs**](/Content/01_Adding_missing_Devices_and_enabling_Features#readme).
+* Debug ACPI errors and verify patch effectiveness.
+
+**More:** [Debug ACPI Tables](/Content/00_ACPI/ACPI_Debugging)
+
+> [!TIP]
+> 
+>  Clover can dump ACPI tables from the GUI, making it easier for some users.
 
 ### Audio
-With `SysReport` and the `AudioDxe.efi` driver enabled, OpenCore will create an Audio CODEC dump. Unfortunately, Codec dumps created with OpenCore/Clover can't be used to generate a Codec schematic which is a priceless asset when [creating Layout-IDs for AppleALC](/Content//L_ALC_Layout-ID) since it shows all the Nodes, Connectors and routings, etc:
+
+With `AudioDxe.efi` driver enabled, OpenCore dumps the system’s Audio CODEC. While OpenCore and Clover dumps are helpful for basic troubleshooting, they do not provide detailed node-level schematics needed for AppleALC Layout-ID creation which are a priceless asset when [creating Layout-IDs for AppleALC](/Content//L_ALC_Layout-ID) since they show all the Nodes, Connectors and Routings, etc:
 
 ![codec_dump txt](https://user-images.githubusercontent.com/76865553/168449513-290186d6-3ada-4689-a438-eb268ffb18ad.svg)
 
 Therefore, you need to create the CODEC dump in Linux.
 
-#### Preparing a USB flash drive for running Linux from an ISO
-Users who already have Linux installed can skip this!
+To create a complete CODEC dump:
 
-1. Get a USB 3.0 flash drive (at least 8 GB or more)
-2. In Windows, download [**Ventoy**](https://www.ventoy.net/en/download.html) and follow the [**Instructions**](https://www.ventoy.net/en/doc_start.html) to prepare your USB flash drive. It's pretty straight forward.
-3. Next, Download an ISO of a Linux distribution of your choice, e.g. [**Ubuntu**](https://ubuntu.com/download/desktop)
-4. Copy the ISO to your newly created Ventoy stick
-5. Reboot from the flash drive
-6. In the Ventoy Menu, select the Linux ISO and hit enter
-7. From the GNU Grub, select "Try or Install Linux"
-8. Once Ubuntu has reached the Desktop environment, select "Try Ubuntu"
+1. Boot a Linux ISO (e.g., Ubuntu) via a USB prepared with [Ventoy](https://www.ventoy.net/en/download.html).
+2. In Linux, open Terminal and run:
+	```bash
+	cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
+	```
+3. Transfer `CodecDump.zip` to macOS and rename `card0-codec#0.txt` to `codec_dump.txt`. 
+
+This dump is crucial for developers or advanced users creating custom audio layouts.
 
 #### Dumping the Audio CODEC
 1. Once Linux is up and running, open Terminal and enter: `cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump`
@@ -55,20 +71,25 @@ Users who already have Linux installed can skip this!
 5. Rename `card0-codec#0.txt` located in the "CodecDump" folder to `codec_dump.txt`
 
 ### CPU
-In the CPU folder you'll find `CPUInfo.txt`, which contains all sorts of details about the CPU in use: Name, Frequency, Cores, Threads, Number of Speedstaps, AppleProcessorType (might be interesting if it's not detected correctly by macOS), etc.
+
+`CPUInfo.txt` contains:
+
+* CPU name, frequency, cores, threads
+* Speedstep/Power management info
+* AppleProcessorType (useful for detection issues)
+
+This allows precise CPU configuration and troubleshooting.
 
 ### PCI
-Besides analyzing ACPI tales such as the `DSDT`, the `PCIInfo.txt` located in the `PCI` folder includes useful information about hardware components which can help to figure out which additional kext sor SSDTs you may need. Although Hackintool shows a list of some PCI devices, the PCIInfo.txt shows all. The example below is from my Lenovo T530 Laptop.
+`PCIInfo.txt` lists all PCI devices, including those not detected by macOS or Hackintool. Using [PCILookup](https://github.com/utopia-team/PCILookup), you can convert raw PCI info into a readable format with device names, IDs, and paths.
 
-<details>
-<summary><strong>Hackintool lists 16 devices:</strong> (click to reveal)</summary>
+**The example below is from my Lenovo T530 Laptop**:
 
-![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png)
-</details>
-<details>
-<summary><strong>While PCIInfo contains 18:</strong></summary>
+<details> <summary><strong>Hackintool lists 16 devices:</strong> (click to reveal)</summary> ![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png) </details>
 
-```asl
+<details><summary><strong>While PCIInfo contains 18:</strong> (click to reveal)</summary>
+
+```txt
 1. Vendor ID: 0x8086, Device ID: 0x1E26, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
    DevicePath: PciRoot(0x0)/Pci(0x1D,0x0)
 2. Vendor ID: 0x8086, Device ID: 0x1E2D, RevisionID: 0x04, ClassCode: 0x0C0320, SubsystemVendorID: 0x17AA, SubsystemID: 0x21F6,
@@ -121,7 +142,7 @@ With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup)
 <details>
 <summary><strong>The resulting output is much easier to read and also includes device names:</strong></summary>
 
-```asl
+```txt
 1: 7 Series/C216 Chipset Family USB Enhanced Host Controller #1
 	Vendor ID: 8086
 	Device ID: 1e26
@@ -199,11 +220,25 @@ With the python script [**PCILookup**](https://github.com/utopia-team/PCILookup)
 
 As you can see, devices 12 and 18 don't have a known/valid Vendor ID (`ffff`). That's the reason why they're not listed by Hackintool. So as far analyzing PCI is concerned you are better off using Hackintool, if the system is already up and running.
 
-**NOTE**: Device-IDs of PCIInfo and Hackintool will differ whether you spoof Device-IDs via DeviceProperties or via ACPI, to make a component work in macOS (iGPUs, dGPUS, SATA Controller or LAN Adapters come to mind).
+>[!NOTE]
+>
+> Device-IDs of PCIInfo and Hackintool will differ whether you spoof Device-IDs via DeviceProperties or ACPI, to make a component work in macOS (iGPUs, dGPUS, SATA Controller or LAN Adapters come to mind).
  
 ### SMBIOS
-This folder contains some .bins from the used system. Might be interesting for developers.
 
-## CREDITS
+This folder contains `.bin` files representing system firmware and SMBIOS data. Developers can use this for testing configurations or emulating hardware.
+
+## Summary
+
+OpenCore’s `SysReport` is an essential tool for:
+
+* Debugging ACPI and device issues
+* Troubleshooting audio and CPU problems
+* Inspecting PCI devices and hardware compatibility
+* Providing detailed system info for developers
+
+By generating these dumps, you gain a clear, hardware-level picture of your Hackintosh, allowing precise fixes without relying on trial and error.
+
+## Credits
 - dreamwhite for PCILookup
-- utopia-team for Debug EFI
+- utopia-team for OpenCore Debug EFI
