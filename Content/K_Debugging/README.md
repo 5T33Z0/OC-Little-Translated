@@ -76,7 +76,11 @@ This allows precise CPU configuration and troubleshooting.
 
 **The example below is from my Lenovo T530 Laptop**:
 
-<details> <summary><strong>Hackintool lists 16 devices:</strong> (click to reveal)</summary> ![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png) </details>
+<details> <summary><strong>Hackintool lists 16 devices:</strong> (click to reveal)</summary> 
+	
+![Hackintool](https://user-images.githubusercontent.com/76865553/168154904-febf908f-f0b1-41e0-94eb-cb13585c5bc9.png) 
+
+</details>
 
 <details><summary><strong>While PCIInfo contains 18:</strong> (click to reveal)</summary>
 
