@@ -28,10 +28,10 @@ In the case shown above, the spindump was related to a shutdown stall. To invest
 	/Library/Logs/DiagnosticReports/shutdown_stall_2026-01-30-011710_T490-von-5T33Z0.shutdownStall
 	```
 
-6. Open **Terminal** and run the following command (insert the path to the spindum at `<path_to_your_file>`):
+6. Open **Terminal** and run the following command (insert the file name in `<your_spindump_file>`):
 
 	```
-	sudo spindump -i <path_to_your_file> -o ~/Desktop/shutdown_stall_report.txt
+	sudo spindump -i Library/Logs/DiagnosticReports/<your_spindump_file> -o ~/Desktop/shutdown_stall_report.txt
 	```
 
 **Example of a complete command:**
