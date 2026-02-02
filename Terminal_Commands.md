@@ -92,6 +92,12 @@ Collection of `Defaults` commands For modifying macOS default settings/behavior.
 
 **https://macos-defaults.com/**
 
+```shell
+defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+```
+
+Forces macOS to use the AMD GPU for hardware-accelerated video decoding and encoding.
+
 ### Power Management
 Collection of `PMSET` commands to adjust Powwer Management (Standby, Sleep, Hibernation, etc.)
 
