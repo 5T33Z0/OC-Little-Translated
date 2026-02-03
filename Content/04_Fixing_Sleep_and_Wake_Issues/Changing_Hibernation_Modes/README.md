@@ -311,18 +311,25 @@ Here's a visualization of how these timers work:
     ls -lO /private/var/vm/sleepimage
     ```
     
-    The default output should be: 
+    The default output should contain permissions to read and write: 
     
     ```bash
     -rw------  1 root  wheel  <size> <date> /private/var/vm/sleepimage
     ```
   
-    If the file is write-read-only, you can use the following commands to restore the default value:
+    If the file is read-only, it would look like this:
+
+    ```bash
+    -r--------  1 root  wheel  <size> <date> /private/var/vm/sleepimage
+    ```
+
+    If it's read-only, enter the following commands to restore the read and write privileges:
 
     ```bash
     sudo chmod 600 /private/var/vm/sleepimage
     sudo chown root:wheel /private/var/vm/sleepimage
     ```
+
 2. Next, you need to set short timer values to test hibernation:
 
     ```bash
