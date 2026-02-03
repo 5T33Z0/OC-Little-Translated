@@ -107,17 +107,22 @@ For hibernation to work successfully on Hackintoshes, there are a few prerequisi
   Some Intel laptops require a patch to fix black screen issues after waking from hibernation. This patch can be found in `sample.plist` (included with OpenCore) under **`UEFI/ReservedMemory`** (e.g., *"Fix black screen on wake from hibernation for Lenovo ThinkPad T490"*).  
 
 - **Blocking RTC Writes:**  
-  Prevent write operations to RTC memory regions `0x80`-`0xAB` (and possibly `0xB0`-`0xB4`). For details, refer to [**RTCMemoryFixup**](https://github.com/acidanthera/RTCMemoryFixup).  
+  Prevent write operations to RTC memory regions. Blocking RTC writes prevents hibernation data from being stored in RTC memory. To do so, you may have to address possible RTC as well as NVRAM issues:
+   - Add **RTCMemoryFixup.kext** and block sectors `0x80`-`0xAB` (and possibly `0xB0`-`0xB4`)
 
-  - Blocking these RTC writes prevents hibernation data from being stored in RTC. Instead, OpenCore should read hibernation data from **NVRAM** (`Misc/Boot/HibernateMode` = `Auto` or `NVRAM`).  
-  - This requires **HibernationFixup.kext**, ensuring that hibernation data is correctly redirected to NVRAM.  
+- **Redirecting RTC Writes to NVRAM**    
+	- Instead of writing hibernation data to RTC memory, OpenCore should read hibernation data from **NVRAM** (&rarr; change `Misc/Boot/HibernateMode` = `Auto` or `NVRAM`). 
+	- This may require **HibernationFixup.kext** to ensure that hibernation data is correctly redirected from `IOHibernateRTCVariables` to NVRAM when entering Hibernation. 
+
+- **Disable RTC Memory checksum** (optional):  
+  Enable Kernel Quirk `DisableRtcChecksum` in config.plist. This fixes EFI error `0x1F` (RTC checksum conflict) causing kernel panics on wake. if you receive a "RTC memory checksum bad" error on screen after waking from Hibernation (after `autopoweroff`). But if the system's working state won't be restored correctly, you still haven't fixed hibernation. On my Lenovo Laptop, the "RTC memory checksum bad" disappeared after enabling this quirk, but the system still would freeze shortly after restoring the sleepimage, showing a scrambled desktop wallpaper.
 
 - **Skip Boot Picker on Wake:**  
   Set **`Misc/Boot/HibernationSkipsPicker`** to `true` in `config.plist`. This prevents booting into another OS after waking from hibernation, which could disrupt the hibernated system state.  
-  - **Important:** Avoid making BIOS/UEFI changes while the system is in hibernation, as this can cause unpredictable issues.  
 
-- **Disable RTC Memory checksum** (optional):  
-  Enable Kernel Quirk `DisableRtcChecksum` if you receive a "RTC memory checksum bad" error after waking from Hibernation (after `autopoweroff`). But if the system's working state won't be restored correctly, you still haven't fixed hibernation. For example: on my Lenovo T490, the "RTC memory checksum bad" disappeared after enabling this quirk, but the system would freeze shortly after restoring it from the sleepimage, showing a scrambled desktop wallpaper.
+> [!CAUTION]
+> 
+> Avoid changing UEFI Settings while the system is in hibernation, as this can cause unpredictable issues.  
 
 ### Required Kexts
 
