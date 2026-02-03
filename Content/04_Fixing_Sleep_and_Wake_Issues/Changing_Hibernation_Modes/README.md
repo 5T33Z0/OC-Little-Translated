@@ -151,7 +151,7 @@ To enable hibernatemode 0, enter in Terminal:
 sudo pmset -a hibernatemode 0
 ```
 
-If you have issues with sleep, run the following commands in Terminal:
+If you have still issues with sleep afterwards, run the following commands in Terminal:
 
 ```bash
 sudo pmset hibernatemode 0
@@ -160,7 +160,11 @@ sudo touch /var/vm/sleepimage
 sudo chflags uchg /var/vm/sleepimage
 ```
 
-This will delete the sleepimage and create a new, write-protected one.
+This will delete the current sleepimage and creates a new, write-protected, read-only one.
+
+> [!CAUTION]
+>
+> If you want to switch to a different hibernatemode later, you must write-enable the sleepimage again! Otherwise the other modes will never ever work!
 
 ### hibernatemode 3: Suspend to disk and RAM
 Default on portables. Hibernation mode 3 will transition from `S3` to `S4` depending on the timeout and battery thresholds set in `pmset` (mor on this laster).  The system will store a copy of memory to persistent storage (the disk), and will power memory during sleep. The system will wake from memory, unless a power loss forces it to restore from hibernate image.
