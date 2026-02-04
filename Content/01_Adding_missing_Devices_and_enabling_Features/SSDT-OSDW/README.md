@@ -126,4 +126,4 @@ By adopting this approach:
 This method represents best practice for OpenCore ACPI configurations and is recommended for anyone maintaining a multi-SSDT Hackintosh setup.
 
 ## Credits
-@[BenBender](https://github.com/benbender/x1c6-hackintosh). I saw this the first time in his EFI
+@[BenBender](https://github.com/benbender/x1c6-hackintosh). I saw this the first time in his EFI.
