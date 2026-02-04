@@ -40,7 +40,7 @@ Here, every SSDT that needs macOS-specific logic repeats `_OSI("Darwin")`. Over 
 We create a dedicated SSDT called `SSDT-OSDW.aml` containing:
 
 ```asl
-DefinitionBlock ("", "SSDT", 2, "OC", "OSDW", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "OCLT", "OSDW", 0x00000000)
 {
     Method (OSDW, 0, NotSerialized)
     {
