@@ -112,6 +112,21 @@ Method (_PTS, 1, NotSerialized)
 
 Additionally, users may notice indirect performance improvements, such as faster shutdowns or snappier system responsiveness, because devices and features not relevant to macOS are properly gated and do not introduce unnecessary ACPI execution.
 
+### Comparison OSWD vs old _OSI Method
+
+| Aspect | OSDW Method | Old _OSI Method |
+|--------|-------------|-----------------|
+| **Code Duplication** | None | High |
+| **Execution Speed** | Faster | Slower |
+| **Maintainability** | Excellent | Poor |
+| **Debugging** | Simple | Complex |
+| **Safety** | Defensive checks | Assumes _OSI exists |
+| **File Sizes** | Smaller | Larger |
+| **Organization** | Modular | Scattered |
+| **Performance** | Optimized | Overhead |
+| **Future-proof** | Easy to update | Tedious |
+| **Reliability** | Higher | Lower |
+
 ---
 
 ## Summary
