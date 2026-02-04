@@ -62,7 +62,7 @@ DefinitionBlock ("", "SSDT", 2, "OC", "OSDW", 0x00000000)
 * Calls `_OSI("Darwin")`
 * Returns `One` if macOS, `Zero` otherwise
 
-This helper is global, reusable, and avoids modifying `_OSI` itself.
+This helper is *global*, *reusable*, and *avoids modifying `_OSI` itself*.
 
 ---
 
@@ -91,7 +91,7 @@ Method (_PTS, 1, NotSerialized)
 
 * Removes repeated `_OSI("Darwin")` calls
 * Consolidates OS detection
-* Ensures consistent behavior across all SSDTs
+* Ensures consistent behavior across *all* SSDTs
 * Keeps leaf methods (EXT1, EXT2, EXT3…) clean and generic
 
 ---
