@@ -110,6 +110,8 @@ Method (_PTS, 1, NotSerialized)
 * **Scalability**: Easy to extend for multi-OS logic in the future
 * **Clarity**: Centralized documentation and naming (`OSDW` → “OS = Darwin”)
 
+Additionally, users may notice indirect performance improvements, such as faster shutdowns or snappier system responsiveness, because devices and features not relevant to macOS are properly gated and do not introduce unnecessary ACPI execution.
+
 ---
 
 ## Summary
