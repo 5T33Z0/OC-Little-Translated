@@ -1,12 +1,7 @@
 # Centralizing macOS Detection in ACPI: Using a Shared `OSDW` Helper Method
 
 ## About
-
-In Hackintosh and OpenCore setups, multiple SSDTs often include OS-specific logic. Traditionally, many tables check for macOS using repeated calls to `_OSI("Darwin")`. While functional, this approach leads to duplicated logic, maintenance overhead, and potential inconsistencies.
-
-A clean, scalable alternative is to centralize macOS detection in a single **helper method**, which all other SSDTs can reference. This article demonstrates that approach and the benefits it brings.
-
----
+In Hackintosh and OpenCore setups, multiple SSDTs often include OS-specific logic. Traditionally, many tables check for macOS using repeated calls to `_OSI("Darwin")`. While functional, this approach leads to duplicated logic, increased maintenance overhead, and potential inconsistencies. `SSDT-OSDW` provides a centralized method (`OSDW()`) for detecting macOS (Darwin) at the ACPI level. Instead of embedding `_OSI("Darwin")` checks in every SSDT, all macOS-specific logic references this single method. This keeps ACPI patches clean, modular, and easier to maintain. It is particularly useful when applying SSDTs that add missing devices or enable macOS-only features, ensuring these patches are evaluated only under macOS and do not affect Windows or Linux. If the detection logic ever needs adjustment, it can be modified in one place, and all dependent SSDTs automatically inherit the change.
 
 ## The Problem: Repeated `_OSI("Darwin")` Checks
 
@@ -62,7 +57,11 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "OSDW", 0x00000000)
 * Calls `_OSI("Darwin")`
 * Returns `One` if macOS, `Zero` otherwise
 
-This helper is *global*, *reusable*, and *avoids modifying `_OSI` itself*.
+|Working Principle of `SSDT-ODSW`|
+|---------|
+|<img width="1536" height="1024" alt="SSDT-OSDW" src="https://github.com/user-attachments/assets/c1f32f2f-4e14-4037-b9b1-8b21f7ed4878" />|
+|**Figure 1:** Centralized macOS detection using `SSDT-OSDW`. All SSDTs reference the shared helper, keeping ACPI patches modular and maintainable.|
+
 
 ---
 
