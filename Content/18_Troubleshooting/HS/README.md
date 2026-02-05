@@ -49,7 +49,7 @@ for thefile in $(
 done
 ```
 
-**Credit**: [**insanelymac.com**](https://www.insanelymac.com/forum/topic/358185-is-there-an-opencore-fix-for-this-apfs-issue/?do=findComment&comment=2814230)
+**Credits**: [**joevt**](https://www.insanelymac.com/forum/topic/358185-is-there-an-opencore-fix-for-this-apfs-issue/?do=findComment&comment=2814230)
 
 ## Interpreting the Output
 
