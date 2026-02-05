@@ -31,7 +31,7 @@ In the case shown above, the spindump was related to a shutdown stall. To invest
 6. Open **Terminal** and run the following command (insert the file name in `<your_spindump_file>`):
 
 	```
-	sudo spindump -i Library/Logs/DiagnosticReports/<your_spindump_file> -o ~/Desktop/shutdown_stall_report.txt
+	sudo spindump -i /Library/Logs/DiagnosticReports/<your_spindump_file> -o ~/Desktop/shutdown_stall_report.txt
 	```
 
 **Example of a complete command:**
