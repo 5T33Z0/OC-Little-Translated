@@ -28,26 +28,25 @@ If High Sierra has overwritten the metadata, the file will incorrectly report ma
 ## Mounting Preboot Volumes and Enumerating `SystemVersion.plist` Files
 
 1. Download the `DiskUtil.sh` script. Leave it there.
-
 2. Execute the following command in Terminal:
 
-```bash
-source "~/Downloads/DiskUtil.sh"
-mountPrebootPartitions
-
-IFS=$'\n'
-for thefile in $(
-    {
-        find /Volumes/Preboot*/*/System/Library/CoreServices/SystemVersion.plist
-        find /System/Volumes/Preboot*/*/System/Library/CoreServices/SystemVersion.plist
-    } 2> /dev/null
-); do
-    theuuid="$(perl -pE "s|.*/([-0-9A-F]{36}).*|\1|" <<< "$thefile")"
-    diskutil info "${theuuid}" | perl -nE 'if (/Volume Name:\s+(.*)/) { print $1 . "\n" }'
-    echo "$thefile"
-    plutil -p "$thefile"
-done
-```
+	```bash
+	source "~/Downloads/DiskUtil.sh"
+	mountPrebootPartitions
+	
+	IFS=$'\n'
+	for thefile in $(
+	    {
+	        find /Volumes/Preboot*/*/System/Library/CoreServices/SystemVersion.plist
+	        find /System/Volumes/Preboot*/*/System/Library/CoreServices/SystemVersion.plist
+	    } 2> /dev/null
+	); do
+	    theuuid="$(perl -pE "s|.*/([-0-9A-F]{36}).*|\1|" <<< "$thefile")"
+	    diskutil info "${theuuid}" | perl -nE 'if (/Volume Name:\s+(.*)/) { print $1 . "\n" }'
+	    echo "$thefile"
+	    plutil -p "$thefile"
+	done
+	```
 
 **Credits**: [**joevt**](https://www.insanelymac.com/forum/topic/358185-is-there-an-opencore-fix-for-this-apfs-issue/?do=findComment&comment=2814230)
 
