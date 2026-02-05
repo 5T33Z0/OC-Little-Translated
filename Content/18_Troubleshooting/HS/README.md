@@ -1,4 +1,4 @@
-# Checking if macOS High Sierra Modified the Preboot Partitions of APFS Containers
+# # Fixing APFS Preboot Volumes Corrupted by macOS High Sierra
 
 ## About
 
@@ -15,7 +15,7 @@ Each APFS container contains a hidden Preboot volume that stores boot-related me
 If High Sierra alters these Preboot entries, newer macOS installations may:
 
 * Appear as **Data volumes** instead of proper system entries in OpenCore
-* Won't boot at all (indicated by "Prohibited" sign) sign)
+* Won't boot at all (indicated by "Prohibited" sign)
 
 Even if newer macOS versions still boot, corrupted Preboot metadata can cause subtle and persistent issues.
 
@@ -25,10 +25,14 @@ The most reliable way to verify whether High Sierra modified any Preboot volume 
 
 If High Sierra has overwritten the metadata, the file will incorrectly report macOS version **10.13.x** for volumes that actually belong to newer macOS releases.
 
-## Mounting Preboot Volumes and Enumerating SystemVersion.plist Files
+## Mounting Preboot Volumes and Enumerating `SystemVersion.plist` Files
+
+1. Download the `DiskUtil.sh` script. Leave it there.
+
+2. Execute the following command in Terminal:
 
 ```bash
-source "/Volumes/Apps/File Utilities/diskutil pdisk fdisk gpt/DiskUtil.sh"
+source "~/Downloads/DiskUtil.sh"
 mountPrebootPartitions
 
 IFS=$'\n'
@@ -45,7 +49,7 @@ for thefile in $(
 done
 ```
 
-**Source**: [**insanelymac.com**](https://www.insanelymac.com/forum/topic/358185-is-there-an-opencore-fix-for-this-apfs-issue/?do=findComment&comment=2814230)
+**Credit**: [**insanelymac.com**](https://www.insanelymac.com/forum/topic/358185-is-there-an-opencore-fix-for-this-apfs-issue/?do=findComment&comment=2814230)
 
 ## Interpreting the Output
 
@@ -55,7 +59,7 @@ If any Preboot entry shows:
 "ProductVersion" => "10.13.6"
 ```
 
-for a volume that belongs to a newer macOS installation, then High Sierra has modified that Preboot partition.
+for a volume that belongs to a *newer* macOS installation, then High Sierra has modified that Preboot partition – and then you have a problem!
 
 ## Fix / Recovery
 
@@ -67,7 +71,7 @@ Add the following boot argument in OpenCore:
 -no_compat_check
 ```
 
-This allows the affected macOS version to boot. Then you can reinstall macOS or fix the PreBoot Volume. Don't forget to remove/disable the `-no_compat_check` boot-arg afterwards!
+This allows the affected macOS version to boot. Then you can reinstall macOS or fix the Preboot Volume. Don't forget to remove/disable the `-no_compat_check` boot-arg afterwards!
 
 ### Option 2 — Proper Fix (Recommended)
 
