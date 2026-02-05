@@ -92,11 +92,20 @@ Collection of `Defaults` commands For modifying macOS default settings/behavior.
 
 **https://macos-defaults.com/**
 
+Disable Liquid Glass in macOS Tahoe
+
 ```shell
-defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+defaults write -g com.apple.SwiftUI.DisableSolarium -bool YES
 ```
 
-Forces macOS to use the AMD GPU for hardware-accelerated video decoding and encoding.
+Force-Enables AMD GPU for DRM video encoding/decoding instead of Intel iGPU
+
+```shell
+defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean YES
+defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean YES
+defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean YES 
+```
 
 ### Power Management
 Collection of `PMSET` commands to adjust Powwer Management (Standby, Sleep, Hibernation, etc.)
