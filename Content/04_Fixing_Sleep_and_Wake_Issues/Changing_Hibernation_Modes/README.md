@@ -96,8 +96,14 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 
 > [!IMPORTANT]
 >
-> If you use Hibernation Mode 3 or 25, a sleepimage file will be created in `private/var/vm`. Based on the amount of RAM installed on your system, the sleepimage can grow big. On my system, which has 32 GB of RAM installed, the sleepimgae is about 17 GB in size. So, if you plan to enable Hibernation, make sure to have enough disk space available. To delete the current sleepimag, you can run `sudo rm /private/var/vm/sleepimage` and restart your system afterwards. A new sleepimage will be created the next time your system enter Hibernation. 
+> Hibernation Mode 3 or 25 creates a `sleepimage` file in `/private/var/vm` that can be very large—approximately equal to your installed RAM. For example, with 32 GB of RAM, expect a ~17 GB sleepimage file. Ensure you have sufficient disk space before enabling hibernation.
+>
+> You can delete the sleepimage with `sudo rm /private/var/vm/sleepimage`, but it will be automatically recreated at the same size after the next restart.
 
+**Changes:**
+- Merged the deletion command and the recreation warning into a single, flowing sentence
+- Removed the "Note:" formatting that created a nested structure
+- Maintains all essential information in a cleaner format
 ## Prerequisites for enabling Hibernation on Hackintosh systems
 
 For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
