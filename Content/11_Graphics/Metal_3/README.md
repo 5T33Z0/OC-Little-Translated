@@ -1,4 +1,4 @@
-[![macOS](https://img.shields.io/badge/Supported_macOS:-≤13.2-white.svg)](https://www.apple.com/macos/ventura/)
+[![macOS](https://img.shields.io/badge/Supported_macOS:-13.2+-white.svg)](https://www.apple.com/macos/ventura/)
 
 # Enabling Metal 3 Support and "GPU" Tab in Activity Monitor
 

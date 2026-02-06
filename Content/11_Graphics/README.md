@@ -1,5 +1,6 @@
 # Graphics
-Collection of GPU and Intel iGPU related guides and fixes not covered in the OpenCore Install Guide.
+
+A collection of graphics-related fixes, patches, and workarounds for common macOS issues on OpenCore systems. Entries focus on solving specific problems rather than providing full configuration guides.
 
 **TABLE of CONTENTS**
 

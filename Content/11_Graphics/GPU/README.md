@@ -1,6 +1,6 @@
 # GPU Support in macOS
 
-In general, please refer to Dortania's [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/) if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
+In general, refer to Dortania's [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/) if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
 
 ## AMD GPU Cards Support
 - [**AMD Compatibility Chart**](/Content/11_Graphics/GPU/AMD_GPU_Compatbility.md)
