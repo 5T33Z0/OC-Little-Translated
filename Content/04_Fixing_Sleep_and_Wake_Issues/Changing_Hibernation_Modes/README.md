@@ -100,10 +100,6 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 >
 > You can delete the sleepimage with `sudo rm /private/var/vm/sleepimage`, but it will be automatically recreated at the same size after the next restart.
 
-**Changes:**
-- Merged the deletion command and the recreation warning into a single, flowing sentence
-- Removed the "Note:" formatting that created a nested structure
-- Maintains all essential information in a cleaner format
 ## Prerequisites for enabling Hibernation on Hackintosh systems
 
 For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
