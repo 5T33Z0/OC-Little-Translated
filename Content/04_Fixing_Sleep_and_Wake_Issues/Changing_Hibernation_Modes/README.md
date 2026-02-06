@@ -94,6 +94,10 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
    - Wake-up is **slow**, since RAM must be restored from disk.
    - Used when **battery is critically low**.
 
+> [!IMPORTANT]
+>
+> If you use Hibernation Mode 3 or 25, a sleepimage file will be created in `private/var/vm`. Based on the amount of RAM installed on your system, the sleepimage can grow big. On my system, which has 32 GB of RAM installed, the sleepimgae is about 17 GB in size. So, if you plan to enable Hibernation, make sure to have enough disk space available. To delete the current sleepimag, you can run `sudo rm /private/var/vm/sleepimage` and restart your system afterwards. A new sleepimage will be created the next time your system enter Hibernation. 
+
 ## Prerequisites for enabling Hibernation on Hackintosh systems
 
 For hibernation to work successfully on Hackintoshes, there are a few prerequisites that *must* be met first:
