@@ -96,7 +96,7 @@ macOS (Lion and newer) supports three different modes of hibernation: `hibernate
 
 > [!IMPORTANT]
 >
-> Hibernation Mode 3 or 25 creates a `sleepimage` file in `/private/var/vm` that can be very large—approximately equal to your installed RAM. For example, with 32 GB of RAM, expect a ~17 GB sleepimage file. Ensure you have sufficient disk space before enabling hibernation.
+> Hibernation Modes 3 and 25 create a `sleepimage` file in `/private/var/vm` that can be very large—approximately equal to your installed RAM. For example, with 32 GB of RAM, expect a ~17 GB sleepimage file. Ensure you have sufficient disk space before enabling hibernation.
 >
 > You can delete the sleepimage with `sudo rm /private/var/vm/sleepimage`, but it will be automatically recreated at the same size after the next restart.
 
