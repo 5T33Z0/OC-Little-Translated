@@ -50,7 +50,7 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 
 > [!TIP]
 >
-> If you are using an SMBIOS of a T2 Model and your system does not require Boot Patches, you can use iBridged kext instead or RestrictEvent kext ([More details](/Content/S_System_Updates/OTA_Updates.md))
+> If you're using an SMBIOS from a T2 model and your system doesn't require root patching with OpenCore Legacy Patcher, you can use the iBridged kext instead of RestrictEvents ([More details](/Content/S_System_Updates/OTA_Updates.md)). However, this scenario is unlikely since macOS Tahoe requires root patches just to re-enable audio.
 
 Normally, macOS wouldn't be able to receive System Update Notifications (and therefore wouldn't be able to download OTA System Updates) under the following conditions:
 
