@@ -48,6 +48,10 @@ Although installing macOS on systems with an unsupported SMBIOS was possible lon
 	- iMacPro1,1 (`J137`)
 	- MacPro7,1 (`J160`)
 
+> [!TIP]
+>
+> If you are using an SMBIOS of a T2 Model and your system does not require Boot Patches, you can use iBridged kext instead or RestrictEvent kext ([More details](/Content/S_System_Updates/OTA_Updates.md))
+
 Normally, macOS wouldn't be able to receive System Update Notifications (and therefore wouldn't be able to download OTA System Updates) under the following conditions:
 
 1. Using a [`csr-active-config` bitmask](/Content/B_OC_Calculators/SIP_Flags_Explained.md) containing the flags "Allow Apple Internal" and "Allow unauthenticated Root" to lower `System Integrity Protection` (SIP). Lowering SIP is mandatory for [applying root-patches with OCLP](https://dortania.github.io/OpenCore-Legacy-Patcher/PATCHEXPLAIN.html#on-disk-patches) to the system volume to re-enable legacy hardware since it cannot be enabled by injecting settings and kexts via OpenCore alone alone. But if these 2 SIP flags are active, you won't receive System Update Notifications any longer. Since re-installing files on the system partition also breaks its security seal, `SecureBootModel` has to be disabled in order to boot the system afterwards.
