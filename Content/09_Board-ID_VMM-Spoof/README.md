@@ -67,7 +67,7 @@ In conclusion: in order to be able to boot the system with the designated SMBIOS
 - Add [**`RestrictEvent.kext`**](https://github.com/acidanthera/RestrictEvents/releases) 1.1.3 or newer to your `EFI/OC/Kext` folder and `config.plist`
 - Delete `-no_compat_check` boot-arg (if present)
 - Add `revpatch=sbvmm` to boot-args or as as an NVRAM variable: <br> ![revpatch](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a1ee759c-ced4-4669-97b4-9be8833fe57b)
-- Optional (but recommended): Under `PlatformInfo/Generic`, pick the designated [SMBIOS](/Content/14_OCLP_Wintel/CPU_to_SMBIOS.md) and generate new serials, etc (with OCAT or GenSMBIOS for example) 
+- Optional (but recommended): Under `PlatformInfo/Generic`, pick the designated [SMBIOS](/Content/14_OCLP_Wintel/CPU_to_SMBIOS.md) for your CPU and generate new serials, etc (with OCAT or GenSMBIOS for example) 
 - Save your config and reboot.
 - Install macOS 12 or newer.
 
