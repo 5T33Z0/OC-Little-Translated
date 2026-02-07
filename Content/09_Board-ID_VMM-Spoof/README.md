@@ -1,19 +1,7 @@
 # Using unsupported Board-IDs with macOS 11.3 to 26
 
-**TABLE of CONTENTS**
-
-- [Explanation](#explanation)
-- [System Requirements](#system-requirements)
-- [Use Cases](#use-cases)
-- [Instructions](#instructions)
-- [Proof](#proof)
-- [Notes](#notes)
-- [Credits](#credits)
-
----
-
-## Explanation
-**OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of Booter and Kernel patches which utilize macOS'es virtualization capabilities (VMM) introduced in Big Sur to trick macOS into "believing" that it's running inside a Virtual Machine:
+## Introduction
+**OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of Booter and Kernel patches that allow using unsupported/dropped SMBIOSes in newer versions of macOS while still being able to receive OTA system updates. This is achieved in two stages: first, the board id check is skipped and in the 2nd stage, kernel patches are applied that report a special board-id to Apples update servers that indicate, that the system is running inside a Virtual Machine:
 
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
 >
@@ -21,11 +9,11 @@
 
 **Source**: [**OCLP issue 543**](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/543)
 
-This construct allows installing and receiving OTA system updates for macOS 11.3 and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to install OpenCore and macOS on legacy Macs, these patches can be utilized on Hackintoshes as well while using the "native", designated SMBIOS for a given CPU family which improves CPU and GPU Power Management - especially on Laptops. I am successfully using this spoof on my [Lenovo T530 ThinkPad](https://github.com/5T33Z0/Lenovo-T530-Hackinosh-OpenCore) for running macOS Sonoma.
+This construct allows installing and receiving OTA system updates for macOS 11.3 and newer on otherwise unsupported Board-IDs/CPUs. Although OCLP's primary aim is to install OpenCore and macOS on legacy Macs, these patches can be utilized on Hackintoshes as well while using the "native", designated SMBIOS for a given CPU family which improves CPU and GPU Power Management - especially on Laptops.
 
 Although installing macOS on systems with an unsupported SMBIOS was possible long before these patches existed (via boot-arg `-no_compat_check`), receiving OTA system updates is impossible if this boot-arg is active.
 
-> [!CAUTION]
+> [!IMPORTANT]
 >
 > - With the release of `RestrictEvents.kext` v1.1.3, the Kernel Patches were implemented into the kext itself, so adding them is no longer necessary. If your `config.plist` still contains these [Kernel Patches](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L2163-L2282), please disable/delete them! 
 > - Prior to the release of `RestrictEvents.kext`, the kernel patches had negative effects on Bluetooth since enabling the VMM Board-ID skipped loading firmware of Bluetooth devices. This has been resolved now (&rarr; [more details](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)).
