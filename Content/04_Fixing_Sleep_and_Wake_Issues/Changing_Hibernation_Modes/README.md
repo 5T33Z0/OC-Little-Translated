@@ -337,6 +337,7 @@ Here's a visualization of how these timers work:
     If it's read-only, enter the following commands to restore the read and write privileges:
 
     ```bash
+	sudo chflags nouchg /private/var/vm/sleepimage
     sudo chmod 600 /private/var/vm/sleepimage
     sudo chown root:wheel /private/var/vm/sleepimage
     ```
