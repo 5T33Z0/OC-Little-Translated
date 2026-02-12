@@ -58,6 +58,9 @@ log show --style syslog | fgrep "Wake reason"
 
 # Check hibernation settings
 pmset -g
+
+# Check Assertions – displays a summary of power assertions. Assertions may prevent system sleep or display sleep. Available 10.6 and later.
+pmset −g assertions 
 ```
 
 ### Delete Error Logs
