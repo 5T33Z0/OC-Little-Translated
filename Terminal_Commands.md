@@ -1,213 +1,84 @@
-# Terminal Commands
+# macOS Terminal Commands
 
-## A-Z Index of macOS (bash) Commands
+## Essential System Information
 
-**https://ss64.com/mac/**
-
-## macOS Look and Feel
-
-### Defaults
-
-Collection of `Defaults` commands For modifying macOS default settings/behavior.
-
-**https://macos-defaults.com/**
-
-Disable Liquid Glass in macOS Tahoe
-
-```shell
-defaults write -g com.apple.SwiftUI.DisableSolarium -bool YES
-```
-
-Force-Enables AMD GPU for DRM video encoding/decoding instead of Intel iGPU
-
-```shell
-defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
-defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean YES
-defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean YES
-defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean YES 
-```
-
-### Power Management
-Collection of `PMSET` commands to adjust Powwer Management (Standby, Sleep, Hibernation, etc.)
-
-**https://www.dssw.co.uk/reference/pmset.html**
-
-#### Check Hibernation Settings
-`pmset -g`
-
-#### Checking Reasons for Wake
-
-```shell
-pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
-```
-
-Alternative Command (searches in syslog instead):
-
-```shell
-log show --style syslog | fgrep "Wake reason"
-```
-
-#### Disable Power Management Scheduler
-Fixes high CPU usage for `Powerd` service in macOS Ventura beta 4
-
-```shell
-sudo pmset schedule cancelall
-```
-
-### Disable Notification Center
-
-- Disable:
-
-	```shell
-	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-	```
-	
-- Re-Enable:
-
-	```shell
-	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-	```	
-
-### Enable Key Repeating
-
-```shell
-defaults write -g ApplePressAndHoldEnabled -bool false
-```
-
-### Add "GPU" Tab to Activity Monitor
-
-```shell
-defaults write com.apple.ActivityMonitor ShowGPUTab -bool true
-```
-
-### macOS Info
-
-#### Display macOS Version and Build Number
-
+### Display macOS Version and Build
 ```shell
 sw_vers
 ```
-#### Display Darwin Kernel Version
 
+### Display Darwin Kernel Version
 ```shell
 uname -r
 ```
 
 ### Display Model Identifier (SMBIOS)
-
 ```shell
 system_profiler SPHardwareDataType | grep 'Model Identifier'
 ```
+
+### Show CPU Information
+```shell
+# CPU Brand
+sysctl machdep.cpu.brand_string
+
+# CPU Vendor
+sysctl -a | grep machdep.cpu.vendor
+
+# CPU Features
+sysctl -a | grep machdep.cpu.features
+
+# Bus and CPU Frequency
+sysctl -a | grep freq
+```
+
 ---
 
-## System Behavior
+## Critical Troubleshooting
 
-### Disable Gatekeeper
-
+### View System Logs
 ```shell
-sudo spctl --master-disable
+# Show log of last boot
+log show --last boot
+
+# Search for specific terms in boot log
+log show --last boot | grep "your search term"
+
+# Example: Search for ACPI issues
+log show --last boot | grep "ACPI"
 ```
 
-> [!IMPORTANT]
->
-> In macOS Sequoia, disabling Gatekeeper requires you to confirm the changes in System Settings &rarr; Gatekeeper &rarr; select "Allow apps from 'Everywhere'"
-
-### Disable DMG verification
-
--  Disable Disk Image verification:
-
-	```shell
-	defaults write com.apple.frameworks.diskimages skip-verify TRUE
-	```
--  To Re-enable: 
-
-	```shell
-	defaults write com.apple.frameworks.diskimages skip-verify FALSE
-	``` 
-
-### Change Update Seed to Developer (≤ macOS 12 only)
-
-1. Unenroll from current seed:
-
-	```shell
-	sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
-	```
-2. Change seed:
-
-	```
-	sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
-	```
-
-> [!NOTE]
-> 
-> In macOS 13+, [switching update seeds via seedutil is no longer supported](https://nwstrauss.com/posts/2023-05-18-seedutil-beta-programs/). Instead, registering your system in Apples [beta program](https://beta.apple.com/) via Apple-ID is required. After that you can switch the updated seed in system sttings. 
-
-### Reset all Privacy Settings
-Brings back all the window pop-ups that ask for granting pernission to access periferals like microphones, webcams, etc.
-
+### Check Wake/Sleep Issues
 ```shell
-tccutil reset All
-```
----
+# Check reasons for wake/sleep
+pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
 
-## Finder-related
+# Alternative (searches syslog)
+log show --style syslog | fgrep "Wake reason"
 
-### Show User Library in macOS 11 and newer
-
-```shell
-setfile -a v ~/Library
-chflags nohidden ~/Library
+# Check hibernation settings
+pmset -g
 ```
 
-### Show all Files and Folders in Finder
-
-- Show: 
-
-	```shell
-	defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
-	```
-- Hide:
-
-	```shell
-	defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
-	```
-
-> [!NOTE] 
-> 
-> Alternatively, simply use this Keyboard Shortcut: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
-
-### Rebuilding Launch Services
-You can use this to fix the “Open with…” sub-menu (if it contains entries from apps that are no onger installed, etc.)  
-
+### Delete Error Logs
 ```shell
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+sudo rm -rf /Library/Logs/DiagnosticReports/*
 ```
 
-### Add "Quit" option to Finder menu
+### Kext Management
 
 ```shell
-defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
+# Find loaded kexts (excluding Apple's)
+kextstat | grep -v com.apple
+
+# Rebuild kext cache (macOS 11+)
+sudo kextcache -U /
+
+# Rebuild kext cache (macOS 10.15 or older)
+sudo kextcache -i /
 ```
 
-### Disable `.DS_Store` file creation on network storages
-
-- Disable:
-
-	```shell
-	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-	```
-
-- Re-enable:
-
-	```shell
-	defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
-	```
----
-
-## Application-related
-
-### Fixing codesign issues
-
+### Fix Application Code Signing Issues
 Run line by line:
 
 ```shell
@@ -217,377 +88,376 @@ sudo xattr -d -r com.apple.quarantine <drag the app here>
 sudo chmod +x <drag the app here>
 ```
 
-## Filesystem-related
+---
 
-### Rebuilding the Spotlight Index
+## System Security & Permissions
 
-- System-wide: 
-	
-	```shell
-	sudo mdutil -a -i off
-	sudo mdutil -a -i on
-	```
-
-- For a specific volume:
-
-	```shell
-	sudo mdutil -i off /Volumes/Your Volume Name
-	sudo mdutil -i on /Volumes/Your Volume Name
-	```
-
-### Checking if the APFS volume snapshots is intact
-
+### System Integrity Protection (SIP)
 ```shell
-diskutil apfs list
+# Check SIP status
+csrutil status
+
+# Check active csr-active-config
+nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
+```
+
+### Apple Secure Boot Status
+```shell
+nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy
+```
+**Results:**
+
+- `%00` = No Security
+- `%01` = Medium Security
+- `%02` = Full Security
+
+### Gatekeeper Management
+```shell
+# Disable Gatekeeper
+sudo spctl --master-disable
 ```
 
 > [!NOTE]
 > 
-> If you apply root patches with OCLP, the status of the entry `Snapshot sealed` seal will change from `Yes` to `Broken`. But if you revert the root patches with OCLP *prior* to updating macOS, the seal will become intact again. And if the snapshot is sealed, incremental (or delta) OTA updates are available again so System Update won't download the complete installer!
+> In macOS Sequoia+, you have to also confirm the changes in System Settings → Gatekeeper → "Allow apps from 'Everywhere'"
 
-### Update the PreBoot Volume (APFS volumes only)
+### Privacy Settings
+```shell
+# Reset all privacy settings (brings back permission pop-ups)
+tccutil reset All
+```
 
+### Disable Library Validation (Temporary)
+```shell
+sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
+```
+> [!NOTE]
+> 
+> Requires a kernel patch to make persistent
+
+---
+
+## Finder & File System
+
+### Show Hidden Files and Folders
+
+**Keyboard Shortcut:** 
+
+<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
+
+**Terminal Commands:**
+```shell
+# Show all files
+defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder
+
+# Hide files again
+defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
+```
+
+### Show User Library (macOS 11+)
+```shell
+setfile -a v ~/Library
+chflags nohidden ~/Library
+```
+
+### Add "Quit" Option to Finder Menu
+```shell
+defaults write com.apple.finder "QuitMenuItem" -bool "true" && killall Finder
+```
+
+### Disable .DS_Store on Network Storage
+```shell
+# Disable
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Re-enable
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
+```
+
+### Rebuild Launch Services
+Fixes "Open with…" menu issues:
+```shell
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+```
+
+### Rebuild Spotlight Index
+```shell
+# System-wide
+sudo mdutil -a -i off
+sudo mdutil -a -i on
+
+# Specific volume
+sudo mdutil -i off /Volumes/Your Volume Name
+sudo mdutil -i on /Volumes/Your Volume Name
+```
+
+---
+
+## APFS & Storage Management
+
+### Check APFS Volume Snapshots
+```shell
+diskutil apfs list
+```
+> [!NOTE]
+> 
+> `Snapshot sealed: Yes` means incremental OTA updates are available
+
+### Update PreBoot Volume
 ```shell
 sudo diskutil apfs updatePreboot /
 ```
 
-### Disable Library Validation
-
-```shell
-sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
-```
-
-> [!NOTE]
->
-> This change is only temporary. Requires a Kernel Patch to make it persistant.
-
-### Rebuild DYLD and XPC caches (macOS 10.15 or older only)
-
-```shell
-sudo update_dyld_shared_cache -force
-sudo /usr/libexec/xpchelper --rebuild-cache
-```
-
-### Create new snapshot (macOS 11+ only)
-
+### Create New Snapshot (macOS 11+)
 In Recovery, enter:
-
 ```shell
 csrutil authenticated-root disable
 bless --folder /Volumes/x/System/Library/CoreServices --bootefi --create-snapshot
-``` 
+```
 **x** = name of your macOS Volume
 
-## Enabling/Disabling Features
-
-### Enable Sidecar
-
+### Disable DMG Verification
 ```shell
-defaults write com.apple.sidecar.display AllowAllDevices -bool true
-defaults write com.apple.sidecar.display hasShownPref -bool true
+# Disable
+defaults write com.apple.frameworks.diskimages skip-verify TRUE
+
+# Re-enable
+defaults write com.apple.frameworks.diskimages skip-verify FALSE
 ```
 
-> [!NOTE]
-> 
-> Requires Intel CPU with on-board graphics and is limited to specific SMBIOSes. It’s easier to enable it via [**FeatureUnlock.kext**](https://github.com/acidanthera/FeatureUnlock)!
-
-### Disable Logging
-
-```shell
-sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist
-```
-
-### Disable/Delete Metal Support
-
-```shell
-sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no
-sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no
-```
-or:
-
-```shell
-sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal
-sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
-```
-[**Source**](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
-
-### Prohibit macOS from mastering iDevices
-
-```shell
-defaults write com.apple.iTunesHelper ignore-devices -bool YES
-defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
-defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
-defaults write -g ignore-devices -bool true
-```
-**Source**: [**Apple-Knowledge**](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
-
-### Change default state of Bluetooth (on/off)
-
-&rarr; Check this [guide](https://mogutan.wordpress.com/2018/07/24/switch-bluetooth-setting-from-command-line-on-macos/) for instructions.
+---
 
 ## Networking
 
-### List MAC Addresses of Network Adapters
-
+### List Network Adapters and MAC Addresses
 ```shell
 networksetup -listallhardwareports
 ```
 
-### Delete Network .plists
+### Disable IPv6 (Recommended for Security)
+```shell
+# List all network services
+sudo networksetup -listallnetworkservices
 
+# Disable IPv6
+sudo networksetup -setv6off Ethernet
+sudo networksetup -setv6off Wi-Fi
+
+# Re-enable IPv6
+sudo networksetup -setv6automatic Wi-Fi
+sudo networksetup -setv6automatic Ethernet
+```
+
+### Delete Network Configuration
 ```shell
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
 sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 ```
 
-### Disable TPC/IPv6 Protocol
+---
 
-You really should disable IPv6 for security reasons, if you don't need it!
+## Performance & Power Management
 
-List all Network devices:
-
-```shell
-sudo networksetup -listallnetworkservices 
-```
-Disable IPv6 for the following interfaces:
+### Power Management Commands
+**Reference:** https://www.dssw.co.uk/reference/pmset.html
 
 ```shell
-sudo networksetup -setv6off Ethernet
-sudo networksetup -setv6off Wi-Fi
-```
-To re-enable:
+# Check hibernation settings
+pmset -g
 
+# Disable power management scheduler (fixes high CPU usage for powerd)
+sudo pmset schedule cancelall
+```
+
+### Rebuild System Caches (macOS 10.15 or older)
 ```shell
-sudo networksetup -setv6automatic Wi-Fi
-sudo networksetup -setv6automatic Ethernet
+sudo update_dyld_shared_cache -force
+sudo /usr/libexec/xpchelper --rebuild-cache
 ```
-
-## CPU-related
-
-### Show CPU Vendor
-
-```shell
-sysctl -a | grep machdep.cpu.vendor
-```
-
-### Show CPU Model
-Doesn't really tell you much
-
-```shell
-sysctl -a | grep machdep.cpu.model
-```
-
-### Show CPU Brand String
-
-```shell
-sysctl machdep.cpu.brand_string
-```
-
-### List CPU features
-
-```shell
-sysctl -a | grep machdep.cpu.features
-```
-
-### Display Bus and CPU Frequency
-
-```shell
-sysctl -a | grep freq
-```
-
-### List supported CPU instructions
-
-```shell
-sysctl -a | grep machdep.cpu.leaf7_features
-```
-
-### Get CPU details from IO Registry
-
-```shell
-ioreg -rxn "CPU0@0"
-```
-
-> [!NOTE]
-> 
-> Text in quotation marks = CPU name as defined in ACPI. On Intel CPUs it can also be "PR00@0", "P000@0" or "C000@0". Check `SSDT-PLUG`/`SSDT-PM` to find the correct name.
 
 ---
 
-## Keyboard Shortcuts
+## User Interface Customization
 
-### Collection of Keyboard Shortcuts
-
-[**Mac Keyboard Shortcuts**](https://support.apple.com/en-us/HT201236)
-
-### Show hidden Files and Folders in Finder
-
-<kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> (Command+Shift+Dot)
-
-### Disable Press and Hold for Keyboard Keys (requires reboot)
-
+### Activity Monitor
 ```shell
+# Add "GPU" tab
+defaults write com.apple.ActivityMonitor ShowGPUTab -bool true
+```
+
+### Keyboard Settings
+```shell
+# Enable key repeating (disable press and hold)
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 
-### Accessing Terminal in macOS Setup-Assistant
-
-<kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>T</kbd> (Command+Option+Control+T)
-
----
-
-## Linux
-
-### Generate Audio Codec Dump (in Linux)
-
+### Notification Center
 ```shell
-cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
+# Disable
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+
+# Re-enable
+launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 ```
 
-### Search for firmware used by devices
-
+### Disable Liquid Glass (macOS Tahoe)
 ```shell
-sudo dmesg|grep -i firmware
+defaults write -g com.apple.SwiftUI.DisableSolarium -bool YES
 ```
 
 ---
 
-## Troubleshooting
+## Hackintosh-Specific Commands
 
-### Show log of last boot
-
-```shell
-log show --last boot
-```
-
-### Delete Logs
-
-I had an issue where an error screen was shown repeatedly after rebooting which would not go away:
-
-```shell
-sudo rm -rf /Library/Logs/DiagnosticReports/*
-```
-
-### Search for terms in last boot log
-
-```shell
-log show --last boot | grep "your search term"
-```
-**Example**: `log show --last boot | grep "ACPI"`
-
-### Check OpenCore version
-
+### Check OpenCore Version
 ```shell
 nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
-### Display currently used Board-ID
-
+### Display Currently Used Board-ID
 ```shell
 ioreg -l | grep -i board-id
 ```
-or
-
+Or:
 ```shell
-`var_ID=$(ioreg -p IODeviceTree -r -n / -d 1 | grep board-id);var_ID=${var_ID##*<\"};var_ID=${var_ID%%\">};echo $var_ID`
+var_ID=$(ioreg -p IODeviceTree -r -n / -d 1 | grep board-id);var_ID=${var_ID##*<\"};var_ID=${var_ID%%\">};echo $var_ID
 ```
 
-### Checking Reasons for Wake
-
-```shell
-pmset -g log | grep -e "Sleep.*due to" -e "Wake.*due to"
-```
-
-Alternative Command (searches in syslog instead):
-
-```shell
-log show --style syslog | fgrep "Wake reason"
-```
-
-### Check currently active `csr-active-config`
-
-```shell
-nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:csr-active-config
-```
-
-### Check the status of System Integrity Protection (SIP)
-
-```shell
-csrutil status
-```
-
-### Install Command Line Developer Tools
-
-```shell
-xcode-select --install
-```
-
-### Kext-related
-
-#### Find loaded Kexts (excluding those from Apple)
-
-```shell
-kextstat | grep -v com.apple
-```
-
-#### Rebuild Kext Cache (macOS 11+)
-
-```shell
-sudo kextcache -U /
-```
-
-#### Rebuild Kext Cache (macOS 10.15 or older)
-
-```shell
-sudo kextcache -i /
-```
-
-### Check status of Apple Secure Boot
-
-1. In Terminal, enter:</br>
-`nvram 94b73556-2197-4702-82a8-3e1337dafbfb:AppleSecureBootPolicy` 
-2. Check the Results:
-	-  if `%00` = No Security
-	-  if `%01` = Medium Security
-	-  if `%02` = Full Security
-
-> [!NOTE]
->
-> To achieve full securiity `02` additional measures are required.
-
-### Make .command files executable
-
-`chmod +x` (drag file in terminal, hit enter)
-
-### Finding USB Controller Renames
-
+### Find USB Controller Renames
 ```shell
 ioreg -l -p IOService -w0 | grep -i EHC1
 ioreg -l -p IOService -w0 | grep -i EHC2
 ioreg -l -p IOService -w0 | grep -i XHC1
 ioreg -l -p IOService -w0 | grep -i XHCI
 ```
-### Verifying if SMBus is working
 
+### Verify SMBus is Working
 ```shell
 kextstat | grep -E "AppleSMBusController|AppleSMBusPCI"
 ```
+> **Note:** Should return `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`
 
-> [!NOTE]
-> 
-> The search should return two matches: `com.apple.driver.AppleSMBusController` and `com.apple.driver.AppleSMBusPCI`. On modern Laptops, only AppleSMBusController may return in the search results!
-
-### ACPI-related
-#### Debug ACPI Tables
-
+### Get CPU Details from IO Registry
 ```shell
-log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"
+ioreg -rxn "CPU0@0"
 ```
+> **Note:** CPU name varies (can be "PR00@0", "P000@0", or "C000@0"). Check SSDT-PLUG/SSDT-PM
 
-#### List ACPI Errors
-
+### ACPI Debugging
 ```shell
+# Debug ACPI tables
+log show --predicate "processID == 0" --start $(date "+%Y-%m-%d") --debug | grep "ACPI"
+
+# List ACPI errors
 log show --last boot | grep AppleACPIPlatform
+
+# Save ACPI errors to desktop log
 log show --last boot | grep AppleACPIPlatform > ~/Desktop/Log_"$(date '+%Y-%m-%d_%H-%M-%S')".log
 ```
 
-The 2nd Command saves a log on the desktop.
+---
+
+## Advanced Features
+
+### Enable Sidecar
+```shell
+defaults write com.apple.sidecar.display AllowAllDevices -bool true
+defaults write com.apple.sidecar.display hasShownPref -bool true
+```
+> **Note:** Easier to enable via [FeatureUnlock.kext](https://github.com/acidanthera/FeatureUnlock)
+
+### Force AMD GPU for DRM Video
+```shell
+defaults write com.apple.AppleGVA gvaForceAMDKE -boolean yes
+defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -boolean YES
+defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -boolean YES
+defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -boolean YES
+```
+
+### Disable/Delete Metal Support
+```shell
+sudo defaults write /Library/Preferences/com.apple.CoreDisplay useMetal -boolean no
+sudo defaults write /Library/Preferences/com.apple.CoreDisplay useIOP -boolean no
+```
+Or delete:
+```shell
+sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useMetal
+sudo defaults delete /Library/Preferences/com.apple.CoreDisplay useIOP
+```
+**Source:** [NvidiaGraphicsFixup](https://github.com/lvs1974/NvidiaGraphicsFixup/releases)
+
+---
+
+## Special Features & Utilities
+
+### Disable Logging
+```shell
+sudo rm /System/Library/LaunchDaemons/com.apple.syslogd.plist
+```
+
+### Prevent macOS from Managing iDevices
+```shell
+defaults write com.apple.iTunesHelper ignore-devices -bool YES
+defaults write com.apple.AMPDeviceDiscoveryAgent ignore-devices 1
+defaults write com.apple.AMPDeviceDiscoveryAgent reveal-devices 0
+defaults write -g ignore-devices -bool true
+```
+**Source:** [Apple-Knowledge](https://github.com/hack-different/apple-knowledge/blob/main/_docs/USB_Modes.md)
+
+### Make .command Files Executable
+```shell
+chmod +x <drag file here>
+```
+
+### Install Command Line Developer Tools
+```shell
+xcode-select --install
+```
+
+---
+
+## Beta & Update Management
+
+### Change Update Seed to Developer (≤ macOS 12)
+```shell
+# Unenroll from current seed
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
+
+# Enroll in developer seed
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+```
+> **Note:** In macOS 13+, use [Apple's beta program](https://beta.apple.com/) instead
+
+---
+
+## Useful Keyboard Shortcuts
+
+### Essential Shortcuts
+- **Show hidden files in Finder:** <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd>
+- **Access Terminal in Setup Assistant:** <kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>T</kbd>
+
+### Complete Reference
+[Mac Keyboard Shortcuts](https://support.apple.com/en-us/HT201236)
+
+---
+
+## Linux Commands (for Hackintosh Users)
+
+### Generate Audio Codec Dump
+```shell
+cd ~/Desktop && mkdir CodecDump && for c in /proc/asound/card*/codec#*; do f="${c/\/*card/card}"; cat "$c" > CodecDump/${f//\//-}.txt; done && zip -r CodecDump.zip CodecDump
+```
+
+### Search for Firmware Used by Devices
+```shell
+sudo dmesg|grep -i firmware
+```
+
+---
+
+## Quick Reference Links
+
+- **macOS Commands A-Z Index:** https://ss64.com/mac/
+- **macOS Defaults Database:** https://macos-defaults.com/
+- **PMSET Reference:** https://www.dssw.co.uk/reference/pmset.html
+- **Bluetooth Management Guide:** https://mogutan.wordpress.com/2018/07/24/switch-bluetooth-setting-from-command-line-on-macos/
