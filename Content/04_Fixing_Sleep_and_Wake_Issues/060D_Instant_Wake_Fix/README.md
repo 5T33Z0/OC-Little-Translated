@@ -75,13 +75,27 @@ Previously, a lot of binary renames were necessary to fix instant-wake issues, w
 ## Diversity of `_PRW` and the corresponding patch method
 Your `DSDT` may contain code like this:
 
-```asl 
+```asl
+Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+{
+	Return (GPRW) /* External reference */
+	0x0D, /* possibly 0x6D */
+	0x03, /* possibly 0x04 */
+}
+…
+```
+
+or this:
+
+```asl
+
  Name (_PRW, Package (0x02)
     {
         0x0D, /* possibly 0x6D */
         0x03, /* possibly 0x04 */
         ...
     })
+…
 ```
 For these packages, the 2nd byte needs to return `0x00`, so the system doesn't wake instantly. We can use `SSDT-GPRW`/`SSDT-UPRW` or `SSDT-PRW0` to do so. Which one to use depends on the methods present in your `DSDT`:
 
