@@ -3,6 +3,10 @@
 ## Overview
 Comprehensive guide for resolving USB issues in macOS/Hackintosh systems, including port mapping, compatibility fixes, and troubleshooting.
 
+> [!IMPORTANT]
+>
+> When mapping USB ports in macOS Tahoe, you need to use OpenCore v1.0.7 or newer to make the `XhciPortLimit` quirk work!
+
 ## Contents
 
 1. [**Technical Background**](/Content/03_USB_Fixes/01_technical_background.md)
