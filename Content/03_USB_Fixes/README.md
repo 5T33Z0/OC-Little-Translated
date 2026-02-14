@@ -3,6 +3,10 @@
 ## Overview
 Comprehensive guide for resolving USB issues in macOS/Hackintosh systems, including port mapping, compatibility fixes, and troubleshooting.
 
+> [!IMPORTANT]
+>
+> The XhciPortLimit Quirk is currently (OC v 1.0.7) not working in macOS Tahoe so you best use an older vesion of macOS for mapping USB Ports.
+
 ## Contents
 
 1. [**Technical Background**](/Content/03_USB_Fixes/01_technical_background.md)
