@@ -3,9 +3,9 @@
 ## Overview
 **AppleVTD** is macOS’s implementation of Intel’s VT-d (Virtualization Technology for Directed I/O), enabling direct memory access (DMA) for specific hardware features. Enabling AppleVTD is often necessary for:
 
-- **GPU Passthrough**: Passing a GPU to a virtual machine (e.g., QEMU/KVM or VMware for macOS or other OSes).
+- **Networking**: Support for modern Wi-Fi cards and multi-gigabit NICs (2.5 Gbps+) such as Intel I225-V on Gigabyte boards or third-party adapters (e.g., Fenvi, Aquantia), which depend on DMA.
 - **Thunderbolt/USB Hotplug**: Enhancing support for Thunderbolt devices or USB hotplug functionality.
-- **Networking**: Supporting modern NICs (2.5 Gbps+) and WiFi cards, such as Intel I225-V on Gigabyte boards or third-party cards (e.g., Fenvi, Aquantia), which rely on DMA.
+- **GPU Passthrough**: Passing a GPU to a virtual machine (e.g., QEMU/KVM or VMware for macOS or other OSes).
 
 This guide outlines the prerequisites, steps to enable AppleVTD, and the optional use of SSDT-DMAC to address potential issues.
 
