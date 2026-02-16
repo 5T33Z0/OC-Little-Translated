@@ -1,9 +1,11 @@
 # Automated SSDT Generation with SSDTTime
 
-The python script **SSDTTime** can generate the following SSDTs by analyzing your system's `DSDT.aml`:
+**SSDTTime** is a Python-based ACPI analysis and hotpatch generation tool that parses a system’s extracted **DSDT** and produces commonly required SSDTs for running macOS on non-Apple hardware. It automates detection of missing or incompatible ACPI devices and generates minimal, system-specific hotpatch tables instead of relying on generic prebuilt SSDTs. 
 
-SSDT | Description
-:---: |---------
+**It can geneate the following tables**
+
+| SSDT   | Description | 
+| :----: | ----------- |
 [***SSDT-HPET***](/Content/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET)/README.md) | Patches out IRQ conflicts. Symptom: No Audio. Usually only required on older Intel chipsets (pre Skylake).
 [***SSDT-EC***](/Content/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md) | OS-aware fake EC for Desktops and Laptops
 [***SSDT-USBX***](/Content/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md) | Adds USB power properties for Skylake and newer SMBIOS
@@ -35,5 +37,6 @@ SSDT | Description
 8. Save and Reboot.
 
 > [!NOTE]
+> 
 > - The Windows and Linux version of SSDTTime can also dump your system's `DSDT` which is not possible under macOS (for good reasons).
 > - If you are using [**OpenCore Auxiliary Tools**](https://github.com/ic005k/QtOpenCoreConfig/releases) for editing your config, you can drag files into the respective sections of the App to add them to the EFI/OC folder (.aml, .kext, .efi) and `config.plist`. Alternatively, you can just copy SSDTs, Kexts, Drivers and Tools to the corresponding sections of EFI/OC and the config.plist will be updated automatically to reflect the changes since **OCAT** monitors the EFI folder.
