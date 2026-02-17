@@ -52,6 +52,8 @@ Follow these steps to configure your Hackintosh for AppleVTD:
    - Example of successful activation:
      ![AppleVTD in IORegistryExplorer](https://user-images.githubusercontent.com/76865553/173662447-02328900-46a3-445f-aa39-205a8eecdff8.png)
 
+---
+
 ## Optional: Using SSDT-DMAC
 If `AppleVTD` is not present in the IO Registry after completing the above steps, your system may lack a DMAC (DMA Controller) definition in its ACPI tables. The **SSDT-DMAC** can address this issue.
 
