@@ -25,16 +25,16 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-DTGP**](Method_DTGP)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
 [**SSDT-EC/-USBX**](Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
 [**SSDT-GPIO**](OCI2C-GPIO_Patch)|Enables GPIO device.|–
-[**SSDT-HPET**](IRQ_and_Timer_Fix_(SSDT-HPET))| Fixes IRQ conflicts. Required for on-board sound to work.|–
-[**SSDT-I225V**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
-[**SSDT-HV-…**](/Content/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...)/README.md)|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
-[**SSDT-IMEI**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI)/README.md)|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
-[**SSDT-LAN**](/Content/01_Adding_missing_Devices_and_enabling_Features/Fake_Ethernet_Controller_(LAN)/README.md)|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
-[**SSDT-NAVI**](/Content/11_Graphics/GPU/AMD_Navi/README.md)|Enables AMD Navi GPUs in macOS|–
-[**SSDT-PLUG**](/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG)/README.md)| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
-[**SSDT-PM**](/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management/CPU_Power_Management_(Legacy)/README.md)|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
-[**SSDT-PMCR**](/Content/01_Adding_missing_Devices_and_enabling_Features/PMCR_Support_(SSDT-PMCR)/README.md)|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
-[**SSDT-PNLF**](/Content/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/README.md)|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
+[**SSDT-HPET**](IRQ_and_Timer_Fix_(SSDT-HPET)) | Fixes IRQ conflicts. Required for on-board sound to work.| –
+[**SSDT-I225V**](Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
+[**SSDT-HV-…**](Enabling_Hyper-V_(SSDT-HV-...))|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
+[**SSDT-IMEI**](Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
+[**SSDT-LAN**](Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
+[**SSDT-NAVI**](/Content/11_Graphics/GPU/AMD_Navi/)|Enables AMD Navi GPUs in macOS|–
+[**SSDT-PLUG**](CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG))| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
+[**SSDT-PM**](CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
+[**SSDT-PMCR**](PMCR_Support_(SSDT-PMCR))|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
+[**SSDT-PNLF**](/Brightness_Controls_(SSDT-PNLF)/README.md)|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
 [**SSDT-PWRB/SLPB**](/Content/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB_SSDT-SLPB)/README.md)|Adds Power and Sleep Button Devices if missing (for Laptops primarily).|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
 [**SSDT-RTC0**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)/README.md) </br>[**SSDT-RTC0-RANGE**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac-methods/manual-hedt.html#seeing-if-you-need-ssdt-rtc0-range)|Adds a fake Real Time Clock. Required for (real) 300-series mainboards (RTCO) and X299 (RTC0-Range) only! Also included in OpenCorePkg.|`PNP0B00`
 [**SSDT-SBUS-MCHC**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_and_Memory_Controller_(SSDT-SBUS-MCHC)README.md)|Fixes System Management Bus and Memory Controller in macOS. Also included in OpenCorePkg.|`0x001F0003` or</br> `0x001F0004`
