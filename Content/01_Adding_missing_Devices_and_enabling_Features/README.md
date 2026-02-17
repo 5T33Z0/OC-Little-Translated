@@ -27,7 +27,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-GPIO**](OCI2C-GPIO_Patch)|Enables GPIO device.|–
 [**SSDT-HPET**](IRQ_and_Timer_Fix_(SSDT-HPET)) | Fixes IRQ conflicts. Required for on-board sound to work.| –
 [**SSDT-I225V**](Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
-[**SSDT-HV-…**](Enabling_Hyper-V_(SSDT-HV-...))|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
+[**SSDT-HV-…**](Enabling_Hyper-V_(SSDT-HV-.../README.md))|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
 [**SSDT-IMEI**](Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
 [**SSDT-LAN**](Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-NAVI**](/Content/11_Graphics/GPU/AMD_Navi/)|Enables AMD Navi GPUs in macOS|–
