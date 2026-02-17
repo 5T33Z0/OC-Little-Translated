@@ -34,7 +34,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-PLUG**](CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG))| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
 [**SSDT-PM**](CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
 [**SSDT-PMCR**](PMCR_Support_(SSDT-PMCR))|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
-[**SSDT-PNLF**](/Brightness_Controls_(SSDT-PNLF)/README.md)|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
+[**SSDT-PNLF**](/Brightness_Controls_(SSDT-PNLF/))|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
 [**SSDT-PWRB/SLPB**](/Content/01_Adding_missing_Devices_and_enabling_Features/Power_and_Sleep_Button_(SSDT-PWRB_SSDT-SLPB)/README.md)|Adds Power and Sleep Button Devices if missing (for Laptops primarily).|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
 [**SSDT-RTC0**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-RTC0)/README.md) </br>[**SSDT-RTC0-RANGE**](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac-methods/manual-hedt.html#seeing-if-you-need-ssdt-rtc0-range)|Adds a fake Real Time Clock. Required for (real) 300-series mainboards (RTCO) and X299 (RTC0-Range) only! Also included in OpenCorePkg.|`PNP0B00`
 [**SSDT-SBUS-MCHC**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Management_Bus_and_Memory_Controller_(SSDT-SBUS-MCHC)README.md)|Fixes System Management Bus and Memory Controller in macOS. Also included in OpenCorePkg.|`0x001F0003` or</br> `0x001F0004`
