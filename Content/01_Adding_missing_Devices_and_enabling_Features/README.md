@@ -25,7 +25,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-DTGP**](Method_DTGP/README.md)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
 [**SSDT-EC/-USBX**](Embedded_Controller_(SSDT-EC)/README.md)|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
 [**SSDT-GPIO**](OCI2C-GPIO_Patch)|Enables GPIO device.|–
-[**SSDT-HPET**](/Content/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET)/README.md)| Fixes IRQ conflicts. Required for on-board sound to work.|–
+[**SSDT-HPET**](IRQ_and_Timer_Fix_(SSDT-HPET))| Fixes IRQ conflicts. Required for on-board sound to work.|–
 [**SSDT-I225V**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
 [**SSDT-HV-…**](/Content/01_Adding_missing_Devices_and_enabling_Features/Enabling_Hyper-V_(SSDT-HV-...)/README.md)|Set of SSDTs to enable Hyper-V in macOS. Requires additional Kext and binary renames. Also included in OpenCorePkg.|–
 [**SSDT-IMEI**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_MEI_(SSDT-IMEI)/README.md)|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
