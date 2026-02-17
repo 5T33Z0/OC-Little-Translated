@@ -90,7 +90,6 @@ If `AppleVTD` is not present in the IO Registry after completing the above steps
 
 ## Notes
 - **Redundancy**: If your motherboard’s ACPI tables already define a DMAC device, SSDT-DMAC is unnecessary.
-- **Safety**: SSDT-DMAC is safe to use, as it only modifies ACPI tables for macOS and is ignored by other operating systems.
-- **OpenCore Resources**: Refer to the [OC-Little-Translated GitHub](https://github.com/5T33Z0/OC-Little-Translated) for additional ACPI and AppleVTD guidance.
+- **Safety**: `SSDT-DMAC` is safe to use, as it only modifies ACPI tables for macOS and is ignored by other operating systems.
 
 By following this guide, you should be able to enable AppleVTD for GPU passthrough, Thunderbolt/USB hotplug, or advanced networking in your Hackintosh setup.
