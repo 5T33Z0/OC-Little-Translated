@@ -31,6 +31,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-IMEI**](Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
 [**SSDT-LAN**](Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-NAVI**](/Content/11_Graphics/GPU/AMD_Navi/)|Enables AMD Navi GPUs in macOS|–
+[**SSDT-OSDW**](SSDT-OSDW) | Cleaner and faster implementation of OSI checks for presence of Darwin Kernel. | –
 [**SSDT-PLUG**](CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG))| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
 [**SSDT-PM**](CPU_Power_Management/CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
 [**SSDT-PMCR**](PMCR_Support_(SSDT-PMCR))|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
