@@ -32,7 +32,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-LAN**](Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
 [**SSDT-NAVI**](/Content/11_Graphics/GPU/AMD_Navi/)|Enables AMD Navi GPUs in macOS|–
 [**SSDT-PLUG**](CPU_Power_Management/CPU_Power_Management_(SSDT-PLUG))| Enables XNU CPU power management (XCPM) for Intel CPUs (only required up to macOS 11). Also included in OpenCorePkg.|–
-[**SSDT-PM**](CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
+[**SSDT-PM**](CPU_Power_Management/CPU_Power_Management_(Legacy))|CPU Power Management for legacy Intel CPUs (1st to 3rd Gen).| –
 [**SSDT-PMCR**](PMCR_Support_(SSDT-PMCR))|Adds Apple exclusive `PCMR` Device to ACPI (required for 300-series only). Also included in OpenCorePkg.|`PMCR` or</br> `APP9876`
 [**SSDT-PNLF**](Brightness_Controls_(SSDT-PNLF))|Adds Backlight Control for Laptop Screens. Also included in OpenCorePkg.|–
 [**SSDT-PWRB/SLPB**](Power_and_Sleep_Button_(SSDT-PWRB_SSDT-SLPB))|Adds Power and Sleep Button Devices if missing (for Laptops primarily).|`PNP0C0C`(Power), `PNP0C0E`(Sleep)
