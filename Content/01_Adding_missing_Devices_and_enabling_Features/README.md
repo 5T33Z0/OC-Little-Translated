@@ -155,7 +155,7 @@ The SSDTs listed below are considered cosmetic and non-functional – they are n
 |:----:|-------------|:-------------------:|
 [**SSDT-AC**](/Content/01_Adding_missing_Devices_and_enabling_Features/AC_Adapter_(SSDT-AC)/README.md)|Attaches AC Adapter Device to `AppleACPIACAdapter` Service in I/O Registry. No longer needed since `VirtualSMC` and `SMCBatteryManager` handle this nowadays.|`ACPI0003`
 [**SSDT-ARTC**](/Content/01_Adding_missing_Devices_and_enabling_Features/Fake_Apple_RTC_(SSDT-ARTC)/README.md)|Adds fake `ARTC` Device (Apple Realtime Clock) to IOReg. For Intel Core 9th Gen and newer. Uses the same `_HID` as `AWAC`.| `ACPI000E` 
-[**SSDT-DMAC**](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)/README.md)|Adds fake DMA Controller to the device tree.|`PNP0200` or</br> `DMAC`
+[**SSDT-DMAC**](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)/README.md)|Adds fake DMA Controller to the device tree. Might be helpful when trying to [activate AppleVTD](/Content/20_AppleVTD) |`PNP0200` or</br> `DMAC`
 [**SSDT-FWHD**](/Content/01_Adding_missing_Devices_and_enabling_Features/Fake_Firmware_Hub_(SSDT-FWHD)/README.md)|Adds fake Firmware Hub Device (`FWHD`) to IOReg. Used by almost every Intel-based Mac.|`INT0800`
 [**SSDT-MEM2**](/Content/01_Adding_missing_Devices_and_enabling_Features/SSDT-MEM2/README.md)|Adds `MEM2` Device to the iGPU (for 4th to 7th Gen Intel Core CPUs)|`PNP0C01`
 [**SSDT-PPMC**](/Content/01_Adding_missing_Devices_and_enabling_Features/Platform_Power_Management_(SSDT-PPMC)/README.md)| Adds fake Platform Power Management Controller to I/O Registry (100/200-series chipsets only).|`0x001F0002` or</br> `Device (PPMC)`
