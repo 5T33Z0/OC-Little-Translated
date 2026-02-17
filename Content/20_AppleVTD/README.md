@@ -1,4 +1,4 @@
-# Guide: Enabling `AppleVTD`
+# How to enable `AppleVTD`
 
 ## Overview
 **AppleVTD** is macOS’s implementation of Intel’s VT-d (Virtualization Technology for Directed I/O), enabling direct memory access (DMA) for specific hardware features. Enabling AppleVTD is often necessary for:
@@ -91,5 +91,3 @@ If `AppleVTD` is not present in the IO Registry after completing the above steps
 ## Notes
 - **Redundancy**: If your motherboard’s ACPI tables already define a DMAC device, SSDT-DMAC is unnecessary.
 - **Safety**: `SSDT-DMAC` is safe to use, as it only modifies ACPI tables for macOS and is ignored by other operating systems.
-
-By following this guide, you should be able to enable AppleVTD for GPU passthrough, Thunderbolt/USB hotplug, or advanced networking in your Hackintosh setup.
