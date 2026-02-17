@@ -18,12 +18,12 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 
 |SSDT|Description|Search term(s) in DSDT 
 |:----:|-------------|:-------------------:|
-[**SSDT-ALS0/ALSD**](/Content/01_Adding_missing_Devices_and_enabling_Features/Ambient_Light_Sensor_(SSDT-ALS0)/README.md)|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD). Also included in OpenCorePkg.|`ACPI0008`
-[**SSDT-AWAC**](/Content/01_Adding_missing_Devices_and_enabling_Features/System_Clock_(SSDT-AWAC)/README.md)|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer. Also included in OpenCorePkg.|`Device (AWAC)` or `ACPI000E`
+[**SSDT-ALS0/ALSD**](Ambient_Light_Sensor_(SSDT-ALS0)/README.md)|Adds a fake Ambient Light Sensor (SSDT-ALS0) or enables an existing one in macOS (SSDT-ALSD). Also included in OpenCorePkg.|`ACPI0008`
+[**SSDT-AWAC**](System_Clock_(SSDT-AWAC)/README.md)|Disables AWAC system clock for macOS and force-enables RTC instead. For 300-series chipsets and newer. Also included in OpenCorePkg.|`Device (AWAC)` or `ACPI000E`
 [**SSDT-BRG0**](/Content/11_Graphics/GPU/GPU_undetected/README.md)|For enabling undetected AMD GPUs sitting behind an intermediate PCI bridge without an ACPI device name assigned to it. Also included in OpenCorePkg.| –
-[**SSDT-Darwin**](/Content/01_Adding_missing_Devices_and_enabling_Features/SSDT-Darwin/README.md)|Enhances the `_OSI` method to allow for macOS version detection. Allows injecting different properties for devices for different versions of macOS.
-[**SSDT-DTGP**](/Content/01_Adding_missing_Devices_and_enabling_Features/Method_DTGP/README.md)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
-[**SSDT-EC/-USBX**](/Content/01_Adding_missing_Devices_and_enabling_Features/Embedded_Controller_(SSDT-EC)/README.md)|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
+[**SSDT-Darwin**](SSDT-Darwin/README.md)|Enhances the `_OSI` method to allow for macOS version detection. Allows injecting different properties for devices for different versions of macOS.
+[**SSDT-DTGP**](Method_DTGP/README.md)|Adds `DTPG` method. Only required when the method is addressed but not contained in the SSDT itself.|–
+[**SSDT-EC/-USBX**](Embedded_Controller_(SSDT-EC)/README.md)|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
 [**SSDT-GPIO**](/Content/01_Adding_missing_Devices_and_enabling_Features/OCI2C-GPIO_Patch/README.md)|Enables GPIO device.|–
 [**SSDT-HPET**](/Content/01_Adding_missing_Devices_and_enabling_Features/IRQ_and_Timer_Fix_(SSDT-HPET)/README.md)| Fixes IRQ conflicts. Required for on-board sound to work.|–
 [**SSDT-I225V**](/Content/01_Adding_missing_Devices_and_enabling_Features/Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
