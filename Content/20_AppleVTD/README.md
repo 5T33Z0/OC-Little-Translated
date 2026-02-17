@@ -56,7 +56,7 @@ Follow these steps to configure your Hackintosh for AppleVTD:
 If `AppleVTD` is not present in the IO Registry after completing the above steps, your system may lack a DMAC (DMA Controller) definition in its ACPI tables. The **SSDT-DMAC** can address this issue.
 
 ### Role of SSDT-DMAC
-- **Purpose**: SSDT-DMAC injects a fake DMAC device into the ACPI tables, which macOS may expect for AppleVTD initialization.
+- **Purpose**: [**SSDT-DMAC**](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)) injects a fake DMAC device into the ACPI tables, which macOS may expect for AppleVTD initialization.
 - **Cosmetic Nature**: In most cases, AppleVTD works without SSDT-DMAC. However, some motherboards (e.g., older Intel chipsets or Gigabyte boards) require this fake device to ensure macOS can access all memory regions for AppleVTD.
 - **Limitations**: SSDT-DMAC does not directly enable AppleVTD or interact with physical hardware. It only satisfies macOS’s ACPI requirements.
 
