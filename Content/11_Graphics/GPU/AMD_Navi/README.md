@@ -11,7 +11,7 @@
 
 ## Option 1: using `NootRX.kext`
 
-There's a new kext out called [**NootRX**](https://chefkissinc.github.io/nootrx) to enable unsupported AMD Navi GPUs (Navi 21, 22 and 23) in macOS 11 and newer (check the [**compatibility list**](https://chefkissinc.github.io/nootrx#gpu-compatibility) to find out if your GPU is supprted).
+There's a new kext out called [**NootRX**](https://chefkiss.dev/applehax/nootrx/) to enable unsupported AMD Navi GPUs (Navi 21, 22 and 23) in macOS 11 and newer (check the [**compatibility list**](https://chefkissinc.github.io/nootrx#gpu-compatibility) to find out if your GPU is supprted).
 
 **Instructions**:
 
