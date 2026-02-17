@@ -68,8 +68,8 @@ If `AppleVTD` is not present in the IO Registry after completing the above steps
 
 ### Steps to Implement SSDT-DMAC
 1. **Obtain SSDT-DMAC**:
-   - Download [SSDT-DMAC.aml](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)) file.
-2. **Add to OpenCore**:
+   - Download [SSDT-DMAC.aml](/Content/01_Adding_missing_Devices_and_enabling_Features/DMA_Controller_(SSDT-DMAC)/SSDT-DMAC.aml)
+2. **Add it to OpenCore**:
    - Place SSDT-DMAC in your OpenCore `ACPI` folder.
    - Add it to `config.plist` under `ACPI > Add`.
 3. **Reboot and Verify**:
