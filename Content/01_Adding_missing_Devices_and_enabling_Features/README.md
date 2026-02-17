@@ -7,7 +7,7 @@ Listed below, you will find two categories of ACPI hotfixes: essential (or funct
 The hotfixes have to be placed in `EFI/OC/ACPI` and added to the `config.plist` (under `ACPI/Add`). OpenCore accepts files with `.aml` and `.bin` extension.
 
 ### More Details
-&rarr; For a deeper understanding about SSDTs, fake devices, property injection, obtaining ACPI tables from your system, etc., check the [**Additional Info**](_Additional_Info/README.md) section!
+&rarr; For a deeper understanding about SSDTs, fake devices, property injection, obtaining ACPI tables from your system, etc., check the [**Additional Info**](_Additional_Info) section!
 
 ## Automated SSDT generation
 
