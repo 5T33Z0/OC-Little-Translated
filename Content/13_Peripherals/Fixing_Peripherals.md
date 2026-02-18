@@ -34,7 +34,7 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics, Cameras and other Peropherals again!
 
-> [TIP]
+> [!TIP]
 >
 > If the app in question does not ask for permissions again after adding AMFIPass, you may have to [reset app permissions manually](Reset_App_Permissions.md)
 
