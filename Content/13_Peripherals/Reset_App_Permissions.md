@@ -1,6 +1,6 @@
 # How to Reset App Permissions on macOS
 
-When an app asks for access to your camera, microphone, or screen and you accidentally click "Don't Allow," it can be frustrating — macOS won't ask again automatically. Fortunately, there's a simple Terminal command that lets you reset these permissions so the app will prompt you again.
+When an app asks for access to your camera, microphone, or screen and you accidentally click "Don't Allow," or you are not beiing asked all due to AMFI-issues, it can be frustrating — macOS won't ask again automatically. Fortunately, there's a simple Terminal command that lets you reset these permissions so the app will prompt you again.
 
 ## The `tccutil` Command
 
