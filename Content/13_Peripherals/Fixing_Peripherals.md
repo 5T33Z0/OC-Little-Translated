@@ -26,7 +26,8 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 - Open your config.plist
 - Add the kext to Kernel/Add manually or create a new OC Snapshot in ProperTree
 - **Optional**: Adjust `MinKernel` to the kernel version which would require AMFI to be disabled in order to boot. For example: `20.0.0` for Big Sur, `21.0.0` for Monterey, `22.0.0` for Ventura, etc.
-- Delete boot-arg `amfi_get_out_of_my_way=0x1` or `AMFI=0x80` (if present)
+- Delete boot-arg `amfi_get_out_of_my_way=0x1` or/and `AMFI=0x80` (if present)
+- Add boot-arg `amfipassbeta` if you are running macOS Tahoe.
 - Save your config and reboot
 
 **Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
