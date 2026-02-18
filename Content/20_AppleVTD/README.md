@@ -1,6 +1,6 @@
 # How to enable `AppleVTD`
 
-## Overview
+## About
 **AppleVTD** is macOS’s implementation of Intel’s VT-d (Virtualization Technology for Directed I/O), enabling direct memory access (DMA) for specific hardware features. Enabling AppleVTD is often necessary for:
 
 - **Networking**: Support for modern Wi-Fi cards and multi-gigabit NICs (2.5 Gbps+) such as Intel I225-V on Gigabyte boards or third-party adapters (e.g., Fenvi, Aquantia), which depend on DMA.
@@ -20,7 +20,7 @@ To enable AppleVTD, ensure the following conditions are met:
 3. **OpenCore Bootloader**:
    - Use OpenCore for ACPI table modifications and kernel quirks configuration.
 4. **Tools for Verification**:
-   - Install **IORegistryExplorer** or **Hackintool** to check for `AppleVTD` in the IO Registry after configuration.
+   - Install **IORegistryExplorer** to check for `AppleVTD` in the IO Registry after configuration.
 
 ## Steps to Enable AppleVTD
 Follow these steps to configure your Hackintosh for AppleVTD:
