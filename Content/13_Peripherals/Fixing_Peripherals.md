@@ -9,7 +9,9 @@
 	- No Video: Webcam won't turn on in 3rd party conferencing apps like Zoom, Microsoft Teams, Skype, etc. 
 - **Wireless Mice**:
 	- Pairing Logitech Wireless Mice via Logitech Unifying Software might not be possible. If the mouse can also be paired via BT, then it's not an issue.
-
+- Internal Microphones;
+	- Can't be accessed/not available by 3rd Party Apps.
+ 
 ## Cause
 - Prompts for granting permissions to 3rd party apps don't pop-up if Apple Mobile File Integrity (AMFI) is disabled. 
 
@@ -30,11 +32,11 @@ The beta version of OpenCore Legacy patcher 0.6.7 introduced a new Kext called `
 - Add boot-arg `amfipassbeta` if you are running macOS Tahoe.
 - Save your config and reboot
 
-**Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics and Cameras again!
+**Voilà**: Now, you can boot with AMFI enabled and grant 3rd party apps access to Mics, Cameras and other Peropherals again!
 
-> [!NOTE]
+> [TIP]
 >
-> You might still need `AMFI=0x80` before re-applying root patches after installing system updates
+> If the app in question does not ask for permissions again after adding AMFIPass, you may have to [reset app permissions manually](Reset_App_Permissions.md)
 
 ### Solution 2: Re-enable SIP (not always possible)
 
