@@ -12,7 +12,7 @@
 ---
 
 ## About
-MMIO stands for Memory-Mapped Input/Output. It's a method to perform I/O processes between the CPU and peripheral devices of a computer. The memory and registers of the I/O devices are mapped to (and associated with) address values. 
+**MMIO** stands for **Memory-Mapped Input/Output**. It's a method to perform I/O processes between the CPU and peripheral devices of a computer. The memory and registers of the I/O devices are mapped to (and associated with) address values. 
 
 MMIO whitelist is a security feature that controls access to certain memory addresses in a computer system, allowing access only to specific processes or devices that have been explicitly granted permission and denying access to all others.
 
@@ -27,14 +27,16 @@ Switch OpenCore from the RELEASE to the DEBUG version using OCAT:
 
 - In OCAT, select "Edit > OpenCore DEBUG" from the menu bar (set checkmark)
 - Mount your EFI and open your `config.plist`
-- Backup your current EFI Folder on a FAT32 formatted USB flash drive!
-- In `config.plist`, change the following:
-	- Enable `DevirtualiseMmio` (in `Booter/Quirks`)
-	- Set `Misc/Debug/Target` to: `67`
-- Update OpenCore files and Drivers
+- Enable Booter/Quirks &rarr; `DevirtualiseMmio`
+- Change `Misc/Debug/Target` to: `67`
+- Update OpenCore files and Drivers to the Debug version of OpenCore
 - Save and reboot
 
 The Bootlog will be stored in the `EFI` folder as a .txt file (even if boot fails)
+
+>[!IMPORTANT]
+>
+> Backup your current EFI Folder on a FAT32 formatted USB flash drive before you begin!
 
 ### 2. Analyzing the bootlog
 - Mount the EFI 
@@ -45,7 +47,7 @@ The Bootlog will be stored in the `EFI` folder as a .txt file (even if boot fail
 	`MMIO devirt 0xF80F8000 (0x1 pages, 0x8000000000000001) skip 0` </br>
 	`MMIO devirt 0xFED1C000 (0x4 pages, 0x8000000000000001) skip 0`
 
-> [!NOTE]
+> [!TIP]
 > 
 > Alternatively, you could use Corpnewt's [**MmioDevirt**](https://github.com/corpnewt/MmioDevirt) script to analyze the log and generate the MMIO Whitelist. In this case you can skip step 3 so you only have to copy the `MmioWhitelist` Array to your config.plist, save and reboot. Done.
 
