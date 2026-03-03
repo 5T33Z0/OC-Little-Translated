@@ -1,6 +1,7 @@
 # Other Stuff
 A lose collection of links to guides, fixes, news and blog articles. Feel free to submit links.
 
+- [Ad-Blocking with Little Snitch](https://snitcher.dannorth.net/)
 - [Apple Silicon Guide](https://github.com/mikeroyal/Apple-Silicon-Guide)
 - [Apple M1 CPU Microarchitecture](https://dougallj.github.io/applecpu/firestorm.html) 
 - [Features removed from macOS Ventura](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)
