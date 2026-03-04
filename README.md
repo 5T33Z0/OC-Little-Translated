@@ -10,7 +10,7 @@
 
 ## 🧰 Introduction
 
-**OC-Little Translated** is a collection of ACPI hotpatches, binary renames, and guides for OpenCore, translated from [Daliansky's OC-Little](https://github.com/daliansky/OC-little). It complements Dortania's OpenCore Guides and covers topics like ACPI basics, device enabling, USB mapping, graphics fixes, and more. While tailored for OpenCore, most SSDTs and techniques are applicable to Clover as well.
+**OC-Little Translated** is a collection of ACPI hotpatches, binary renames, and guides for OpenCore, translated from [Daliansky's OC-Little](https://github.com/daliansky/OC-little) but expanded to reflect the latest developments of the Hackintosh scene. It complements Dortania's OpenCore Guides and covers topics like ACPI basics, device enabling, USB mapping, graphics fixes, and more. While tailored for OpenCore, most SSDTs and techniques are applicable to Clover bootloader as well.
 
 ### 📌 Disclaimer
 
