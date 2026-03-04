@@ -17,10 +17,13 @@ You can try this method if the common injection methods do not work. It requires
 - Add `ACPIBacklight.kext` to kext folder and config
 - Save `config.plist` and reboot.
 
-**NOTE**: ACPIBacklight kext is deprecated and has been replaced by IntelBacklight kext since macOS 10.11: https://github.com/RehabMan/OS-X-Intel-Backlight
+> [!NOTE]
+>
+> **ACPIBacklight.kext** is deprecated and has been replaced by [**IntelBacklight.kext**](https://github.com/RehabMan/OS-X-Intel-Backlight) since macOS 10.11!
 
 ### Example
-![](https://github.com/5T33Z0/OC-Little-Translated/blob/main/01_Adding_missing_Devices_and_enabling_Features/Brightness_Controls_(SSDT-PNLF)/ACPI_Brightness_Patch/Example.jpg?raw=true.jpg)
+
+![](Example.jpg)
 
 ## Notes and Credits
 - [**Guide by Rehabman**](https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/)
