@@ -28,6 +28,9 @@ sysctl -a | grep machdep.cpu.vendor
 # CPU Features
 sysctl -a | grep machdep.cpu.features
 
+# CPU Features (displayed as list)
+sysctl -n machdep.cpu.features | tr ' ' '\n'
+
 # Bus and CPU Frequency
 sysctl -a | grep freq
 ```
