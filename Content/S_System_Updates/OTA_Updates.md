@@ -14,9 +14,13 @@ Starting with macOS 14.4, Apple tightened OTA update validation by enforcing har
 
 On real Intel Macs, this coprocessor is always present. On Hackintosh systems, it is not, which causes OTA updates to fail despite otherwise valid configurations.
 
-Traditionally, this limitation was addressed using **RestrictEvents.kext**, which works around the checks by making macOS and Apple’s update services treat the system as running inside a virtual machine. This approach remains necessary for **root-patched systems** or **unsupported SMBIOS configurations**.
+Traditionally, this limitation was addressed using a combination of a Booter Patch (board-id skip), **RestrictEvents.kext** and NVRAM Parameters that enable specific kernel patches to activate a specific board-id, which makes Apple’s update services "believe" that macOS is running inside a virtual machine so that macOS Updates provided anyway. This approach remains necessary for **root-patched systems** or **unsupported SMBIOS configurations**. 
 
 **iBridged** introduces an alternative path for **fully vanilla systems** by simulating the expected coprocessor interface directly, allowing OTA updates to proceed without virtualization-based workarounds.
+
+>[!TIP]
+>
+> If you are using RestrictEvents and the revpatch=sbvmm bootarg but OTA updates stopped working after macOS 14.3.1, check your config.plits – it might miss the [board-id skip](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L243) Booter Patch!
 
 ---
 
