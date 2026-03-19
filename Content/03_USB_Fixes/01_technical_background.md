@@ -24,7 +24,7 @@ A single physical USB 3 connector (typically the blue one) supports two distinct
 
 > [!NOTE]
 >
-> 1. **Naming Conventions**: The USB-IF simplified naming in 2019, emphasizing performance-based marketing names (e.g., USB 5Gbps, USB 10Gbps) over version numbers to reduce confusion. The "Current Name" reflects technical designations (e.g., USB 3.2 Gen 1x1), while "Marketing Name" uses the consumer-friendly speed-based names.
+> 1. **Naming Conventions**: The [USB Implementers Forum (USB-IF)](https://www.usb.org/about) simplified naming in 2019, emphasizing performance-based marketing names (e.g., USB 5Gbps, USB 10Gbps) over version numbers to reduce confusion. The "Current Name" reflects technical designations (e.g., USB 3.2 Gen 1x1), while "Marketing Name" uses the consumer-friendly speed-based names.
 > 2. **USB4 and USB4v2**: USB4 Gen 3x2 (40 Gbps) and USB4 Gen 4x2 (80 Gbps) are clarified with their technical names. USB4v2 introduces asymmetric bandwidth (up to 120 Gbps in one direction), but 80 Gbps is the standard bidirectional rate.
 > 3. **Controllers**: USB4 and USB4v2 rely on Thunderbolt/PCIe controllers, with USB4 requiring Thunderbolt 3/4 compatibility for full features. XHCI remains standard for USB 3.x.
 > 4. **macOS Support**: USB4 and USB4v2 lack native macOS support, requiring specific hardware and drivers.
