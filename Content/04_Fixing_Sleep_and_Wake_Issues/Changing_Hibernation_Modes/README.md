@@ -425,7 +425,8 @@ Here's a list of **`pmset`** paramters and their meanings:
 Setting       | Description | Value |
 -------------:|-------------|:-------:|
 `displaysleep`| Display sleep timer; replaces `dim` argument in 10.4.| Minutes, or 0 to disable 
-`disksleep`   | Disk spindown timer; replaces `spindown` argument in 10.4.| Minutes, or `0` to disable 
+`disksleep`   | Disk spindown timer; replaces `spindown` argument in 10.4.| Minutes, or `0` to disable
+`gpuswitch`   | Use `sudo pmset -a gpuswitch n` to control GPU switching behavior depending on the power source. Possible values for `n` are: <ul><li> `0` enables the dedicated GPU on both AC power and battery <li> `1` uses the dedicated GPU only when plugged in, and switches to the integrated GPU on battery <li> `2` forces the integrated GPU on both AC power and battery</ul> 
 `sleep`       | System sleep timer.| Minutes, or `0` to disable 
 `womp`        | Wake on Ethernet magic packet. Same as "Wake for network access" in the Energy Saver preferences. | `0`/`1`
 `ring`        | Wake on modem ring.| `0`/`1`
