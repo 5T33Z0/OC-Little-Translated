@@ -16,3 +16,4 @@ A lose collection of links to guides, fixes, news and blog articles. Feel free t
 - [BIOS extraction and modification guide](https://github.com/dreamwhite/bios-extraction-guide/blob/master/README.md#unlock-cfg-lock)
 - [Xcode Releases](https://xcodereleases.com/?scope=release)
 - [Remove Deleted Apps from Background Login Items](https://droidwin.com/remove-deleted-apps-from-background-login-items-in-ventura/)
+- [Old Mac Software Archive](https://www.macintoshrepository.org/)
