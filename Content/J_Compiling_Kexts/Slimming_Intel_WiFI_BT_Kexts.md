@@ -2,6 +2,10 @@
 
 The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be reduced drastically by about a factor of 10 by deleting all the unnecessary firmwares for other Wi-Fi cards except the one for your WiFi/BT Card.
 
+> [!TIP]
+> 
+> If you're looking for a convenient way to compile the latest release of the Inel WiFi and Bluetooth kext, I suggest you check out Chris1111's [Intel Wi-Fi Kextbuilder](https://github.com/chris1111/Wifi-Intel-KextsBuilder)
+
 > [!NOTE]
 > 
 > The screenshots in this guide show firmware files used by the Intel AC-9560 Wifi/BT card.
