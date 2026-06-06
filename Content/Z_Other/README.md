@@ -20,6 +20,7 @@ A curated collection of guides, fixes, tools, and articles. Feel free to submit 
 * [Enabling VoodooHDA in Big Sur 11.3+](https://www.insanelymac.com/forum/topic/314406-voodoohda-299/?do=findComment&comment=2756841)
 * [How to Modify "About This Mac"](https://www.idownloadblog.com/2017/01/13/how-to-modify-about-this-mac-hackintosh/)
 * [Remove Deleted Apps from Background Login Items (Ventura)](https://droidwin.com/remove-deleted-apps-from-background-login-items-in-ventura/)
+* [Performance Tuning the Network Stack on macOS Sequoia 15.6](https://rolande.wordpress.com/2025/08/07/performance-tuning-the-network-stack-on-macos-sequoia-15-6/)
 
 ## 🧪 Virtualization & Emulation
 
