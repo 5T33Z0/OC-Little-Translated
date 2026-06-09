@@ -4,7 +4,7 @@ Booting Linux from OpenCore's Bootpicker has become a lot easier, since OpenCore
 
 ## Enabling Linux support in OpenCore
 
-1. Add the following Drivers to `/EFI/OC/Drivers` and your config.plist:
+1. Add the following Drivers to `/EFI/OC/Drivers` and your config.plist and ensure that `LoadEarly` is set to `false`:
 	- `OpenLinuxBoot.efi` (included in the [**OpenCore Package**](https://github.com/acidanthera/OpenCorePkg))
 	- `btrfs_x64.efi` and/or
 	- `ext4_x64.efi` based on the file system the chosen Linux Distribution uses (both included in [**OC Binary Data.zip**](https://github.com/acidanthera/OcBinaryData/archive/refs/heads/master.zip))
