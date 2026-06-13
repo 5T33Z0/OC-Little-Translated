@@ -59,9 +59,9 @@ The `7F` is included in the Find pattern purely to narrow the match — it is no
 > Before adding this patch, run the following command in Terminal:
 > 
 > ```bash
->    sysctl machdep.xcpm
+> sysctl machdep.xcpm
 > ```
-> Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output. If the multiplier is locked at 15 (which means 15x100 Mhz) but you know your CPU can clock higher.
+> Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output. If the multiplier is set to 15 (which means 15 x 100 Mhz = 1.5 GHz) but you know your CPU can clock higher, then add and enable the patch. Otherwise don't!
 
 ### Verifying Patch 1
 
