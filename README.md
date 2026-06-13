@@ -18,7 +18,7 @@
    
    This is *not* a macOS installation nor OC Configuration guide. For setting up OpenCore for macOS usage on a Wintel System, use the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/).  OC-Little focuses primarily on **post-install tuning** and **hardware enablement**.
 
-3. **✅ ACPI-Compliant Methods Only**
+2. **✅ ACPI-Compliant Methods Only**
 
    This project avoids DSDT patching and other invasive mods. It adheres to the philosophy of a **clean, vanilla Hackintosh** using only **ACPI hotpatching**.
    For more on this philosophy, see [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870).
