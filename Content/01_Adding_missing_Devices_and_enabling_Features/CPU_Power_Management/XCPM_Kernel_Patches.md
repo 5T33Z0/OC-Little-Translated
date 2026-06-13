@@ -12,7 +12,7 @@ The goal of this document is to evaluate whether these claims are reproducible o
 
 ## Referenced Patches
 
-### CPU Ratio Extension Patch
+### Patch 1: CPU Ratio Extension
 
 ```xml
 <dict>
@@ -53,7 +53,7 @@ The `7F` is included in the Find pattern purely to narrow the match — it is no
 
 ---
 
-### Power Limit Bypass Patch
+### Patch 2: Power Limit Bypass
 
 ```xml
 <dict>
