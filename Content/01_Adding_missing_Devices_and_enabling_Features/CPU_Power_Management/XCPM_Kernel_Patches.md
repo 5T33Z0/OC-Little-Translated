@@ -27,10 +27,6 @@ The relevant code in the XNU kernel is a two-instruction sequence:
 7F xx       jg  <offset>     ; jump past throttle path if above limit
 ```
 
-> [!NOTE]
-> 
-> **Where the InsanelyMac thread gets it wrong:** The thread describes the 4-byte find sequence `83 F8 0F 7F` as the single instruction `cmp eax, 0x7F0F`. This is not possible. Opcode `83` encodes arithmetic with a *sign-extended byte immediate* — exactly one byte operand. So `83 F8 0F` = `cmp eax, 0x0F`, full stop. The `7F` that follows is a separate `jg rel8` instruction. The prose explanation is wrong; the patch bytes themselves are correct.
-
 The patch changes only the immediate operand of the `cmp`:
 
 ```nasm
@@ -39,6 +35,10 @@ The patch changes only the immediate operand of the `cmp`:
 ```
 
 The `7F` is included in the Find pattern purely to narrow the match — it is not modified.
+
+> [!NOTE]
+> 
+> **Where the InsanelyMac thread gets it wrong:** The thread describes the 4-byte find sequence `83 F8 0F 7F` as the single instruction `cmp eax, 0x7F0F`. This is not possible. Opcode `83` encodes arithmetic with a *sign-extended byte immediate* — exactly one byte operand. So `83 F8 0F` = `cmp eax, 0x0F`, full stop. The `7F` that follows is a separate `jg rel8` instruction. The prose explanation is wrong; the patch bytes themselves are correct.
 
 ### config.plist entry
 
