@@ -88,7 +88,9 @@ This patch modifies the conditional branch responsible for entering the throttli
 
 ---
 
-## Claim Under Investigation
+## Test
+
+### Claim Under Investigation
 
 The forum discussion suggests:
 
@@ -98,7 +100,7 @@ The forum discussion suggests:
 
 ---
 
-## Test System
+### Test System
 
 * CPU: Intel Core i7-9700T (Coffee Lake Refresh)
 * macOS: modern XCPM-based Intel configuration
@@ -106,7 +108,7 @@ The forum discussion suggests:
 
 ---
 
-## Methodology
+### Methodology
 
 An A/B test was performed:
 
@@ -115,7 +117,7 @@ An A/B test was performed:
 3. CPU behavior compared under identical conditions
 4. Synthetic load applied to force turbo scaling
 
-### Monitoring tools:
+#### Monitoring tools:
 
 ```bash
 sysctl machdep.xcpm.hard_plimit_max_100mhz_ratio
@@ -124,9 +126,9 @@ sudo powermetrics --samplers cpu_power
 
 ---
 
-## Observations
+### Observations
 
-### Reported CPU Ratio Limit
+#### Reported CPU Ratio Limit
 
 ```text
 machdep.xcpm.hard_plimit_max_100mhz_ratio: 43
@@ -138,7 +140,7 @@ machdep.xcpm.hard_plimit_max_100mhz_ratio: 43
 
 ---
 
-### Runtime Behavior
+#### Runtime Behavior
 
 * Turbo behavior remained unchanged between configurations
 * Maximum observed frequency: ~4.3 GHz
@@ -174,11 +176,7 @@ Therefore, the claim that macOS enforces a universal `0x0F` CPU ratio limit is n
 
 ## Final Note
 
-Results may vary depending on CPU generation, macOS version, and system configuration. This document reflects empirical testing on a specific Coffee Lake system and should be interpreted accordingly.
-
-If CPU power management (frequency scaling, turbo multipliers, or power limits) is not functioning correctly on a given system, these patches may be considered as a troubleshooting measure to restore expected behavior in legacy or misconfigured setups.
-
-However, if CPU frequency scaling and turbo boost are already operating as expected, applying these patches is unnecessary and may have no measurable effect.
+Results may vary depending on CPU generation, macOS version, and system configuration. This document reflects empirical testing on a specific Coffee Lake system and should be interpreted accordingly. If CPU power management (frequency scaling, turbo multipliers, or power limits) is not functioning correctly on a given system, these patches may be considered as a troubleshooting measure to restore expected behavior in legacy or misconfigured setups. However, if CPU frequency scaling and turbo boost are already operating as expected, applying these patches is unnecessary and may have no measurable effect.
 
 It is recommended to verify CPU behavior before applying any modifications using tools such as:
 
@@ -186,4 +184,3 @@ It is recommended to verify CPU behavior before applying any modifications using
 sysctl machdep.xcpm.hard_plimit_max_100mhz_ratio
 sudo powermetrics --samplers cpu_power
 ```
-
