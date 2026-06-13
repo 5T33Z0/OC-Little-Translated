@@ -4,11 +4,11 @@
 
 Two kernel patches for XCPM circulate in the community currently, most notably documented in [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/361989-universal-xcpm-patches-for-all-intel-cpus/). They target the XNU kernel binary directly — not ACPI tables — and are applied via `Kernel → Patch` in `config.plist`, the same way as any other OpenCore kernel patch.
 
-**The patches work.** However, the technical explanation given in the thread for Patch 1 contains a factual error in its x86 instruction decoding. The corrected explanation is given below.
+**These patches might work.** However, the technical explanation given in the thread for Patch 1 contains a factual error in its x86 instruction decoding. The corrected explanation is given below.
 
 > [!NOTE]
 > 
-> These are optional fine-tuning patches. If your CPU runs at expected frequencies under load and you have no confirmed software throttling, you don't need them. Start with a proper XCPM setup (correct SMBIOS, `SSDT-PLUG`, relevant quirks) before reaching for kernel patches.
+> These are optional fine-tuning patches. If your CPU runs at expected frequencies under load and you have no confirmed software throttling, you don't need them. Start with a proper XCPM setup (correct SMBIOS, `SSDT-PLUG`, relevant quirks) before reaching for kernel patches. 
 
 ---
 
@@ -54,15 +54,20 @@ The `7F` is included in the Find pattern purely to narrow the match — it is no
 | MaxKernel | *(leave empty)* |
 | Enabled | `true` |
 
+> [!IMPORTANT]
+>
+> Before adding this patch, run the following command in Terminal:
+> 
+> ```bash
+>    sysctl machdep.xcpm
+> ```
+> Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output. If the multiplier is locked at 15 (which means 15x100 Mhz) but you know your CPU can clock higher.
+
 ### Verifying Patch 1
 
-The most direct check is to inspect the P-state ratio table XCPM has built for your CPU. Run the following in Terminal:
-
-```bash
-sysctl machdep.xcpm
-```
-
-If the patch is active, the highest ratio in the output should reflect your CPU's actual turbo multiplier rather than being capped at 15. Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output.
+1. After adding the patch, reboot
+2. Run `sysctl machdep.xcpm` in Terminal again
+3. If the patch is works, the highest ratio in the output should reflect your CPU's actual turbo multiplier rather than being capped at 15. Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output.
 
 ---
 
@@ -93,6 +98,7 @@ EB xx    jmp <offset>    ; always jump — throttle path never taken
 | Alder Lake / Raptor Lake (12th/13th Gen) | `7410` | `EB10` |
 
 > [!NOTE]
+> 
 > **On the "universal" claim:** Despite the InsanelyMac thread's title, this patch is not universal — the correct bytes differ per CPU generation, as the thread itself acknowledges further down. Use the row for your CPU family only.
 
 ### config.plist entry (Alder/Raptor Lake example)
