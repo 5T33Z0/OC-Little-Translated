@@ -59,12 +59,10 @@ The `7F` is included in the Find pattern purely to narrow the match — it is no
 The most direct check is to inspect the P-state ratio table XCPM has built for your CPU. Run the following in Terminal:
 
 ```bash
-sysctl machdep.xcpm.cpu_ratios
+sysctl machdep.xcpm
 ```
 
-If the patch is active, the highest ratio in the output should reflect your CPU's actual turbo multiplier rather than being capped at 15. You can also check `X86PlatformPlugin` in **IORegistryExplorer** — look at the `IOPPFTable` or `IOPStateArray` entries for the same information.
-
-To confirm the patch was even found by OpenCore, enable verbose boot (`-v` boot-arg) and check the boot log output. A line reporting `0 replacements` for this patch means the byte sequence was not found in your kernel version and the patch did nothing.
+If the patch is active, the highest ratio in the output should reflect your CPU's actual turbo multiplier rather than being capped at 15. Look for `machdep.xcpm.hard_plimit_max_100mhz_ratio:` in the Temrinal output.
 
 ---
 
