@@ -27,6 +27,8 @@ The relevant code in the XNU kernel is a two-instruction sequence:
 7F xx       jg  <offset>     ; jump past throttle path if above limit
 ```
 
+> [!NOTE]
+>
 > **Where the InsanelyMac thread gets it wrong:** The thread describes the 4-byte find sequence `83 F8 0F 7F` as the single instruction `cmp eax, 0x7F0F`. This is not possible. Opcode `83` encodes arithmetic with a *sign-extended byte immediate* — exactly one byte operand. So `83 F8 0F` = `cmp eax, 0x0F`, full stop. The `7F` that follows is a separate `jg rel8` instruction. The prose explanation is wrong; the patch bytes themselves are correct.
 
 The patch changes only the immediate operand of the `cmp`:
@@ -80,6 +82,8 @@ EB xx    jmp <offset>    ; always jump — throttle path never taken
 | Comet Lake / Rocket Lake (10th/11th Gen) | `7411` | `EB11` |
 | Alder Lake / Raptor Lake (12th/13th Gen) | `7410` | `EB10` |
 
+> [!NOTE]
+>
 > **On the "universal" claim:** Despite the InsanelyMac thread's title, this patch is not universal — the correct bytes differ per CPU generation, as the thread itself acknowledges further down. Use the row for your CPU family only.
 
 ### config.plist entry (Alder/Raptor Lake example)
@@ -96,6 +100,8 @@ EB xx    jmp <offset>    ; always jump — throttle path never taken
 | MaxKernel | *(leave empty)* |
 | Enabled | `true` |
 
+> [!NOTE]
+> 
 > ⚠️ Set `Count` to `1` for both patches. The 2-byte find pattern for Patch 2 is short enough that false matches elsewhere in the kernel binary are a real possibility without this constraint.
 
 ---
