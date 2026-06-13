@@ -2,7 +2,7 @@
 
 ## About
 
-Two kernel patches for XCPM circulate  in the community currently, most notably documented in [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/361989-universal-xcpm-patches-for-all-intel-cpus/). They target the XNU kernel binary directly — not ACPI tables — and are applied via `Kernel → Patch` in `config.plist`, the same way as any other OpenCore kernel patch.
+Two kernel patches for XCPM circulate in the community currently, most notably documented in [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/361989-universal-xcpm-patches-for-all-intel-cpus/). They target the XNU kernel binary directly — not ACPI tables — and are applied via `Kernel → Patch` in `config.plist`, the same way as any other OpenCore kernel patch.
 
 **The patches work.** However, the technical explanation given in the thread for Patch 1 contains a factual error in its x86 instruction decoding. The corrected explanation is given below.
 
@@ -28,7 +28,7 @@ The relevant code in the XNU kernel is a two-instruction sequence:
 ```
 
 > [!NOTE]
->
+> 
 > **Where the InsanelyMac thread gets it wrong:** The thread describes the 4-byte find sequence `83 F8 0F 7F` as the single instruction `cmp eax, 0x7F0F`. This is not possible. Opcode `83` encodes arithmetic with a *sign-extended byte immediate* — exactly one byte operand. So `83 F8 0F` = `cmp eax, 0x0F`, full stop. The `7F` that follows is a separate `jg rel8` instruction. The prose explanation is wrong; the patch bytes themselves are correct.
 
 The patch changes only the immediate operand of the `cmp`:
@@ -53,6 +53,18 @@ The `7F` is included in the Find pattern purely to narrow the match — it is no
 | MinKernel | *(leave empty)* |
 | MaxKernel | *(leave empty)* |
 | Enabled | `true` |
+
+### Verifying Patch 1
+
+The most direct check is to inspect the P-state ratio table XCPM has built for your CPU. Run the following in Terminal:
+
+```bash
+sysctl machdep.xcpm.cpu_ratios
+```
+
+If the patch is active, the highest ratio in the output should reflect your CPU's actual turbo multiplier rather than being capped at 15. You can also check `X86PlatformPlugin` in **IORegistryExplorer** — look at the `IOPPFTable` or `IOPStateArray` entries for the same information.
+
+To confirm the patch was even found by OpenCore, enable verbose boot (`-v` boot-arg) and check the boot log output. A line reporting `0 replacements` for this patch means the byte sequence was not found in your kernel version and the patch did nothing.
 
 ---
 
@@ -83,7 +95,6 @@ EB xx    jmp <offset>    ; always jump — throttle path never taken
 | Alder Lake / Raptor Lake (12th/13th Gen) | `7410` | `EB10` |
 
 > [!NOTE]
->
 > **On the "universal" claim:** Despite the InsanelyMac thread's title, this patch is not universal — the correct bytes differ per CPU generation, as the thread itself acknowledges further down. Use the row for your CPU family only.
 
 ### config.plist entry (Alder/Raptor Lake example)
@@ -100,9 +111,24 @@ EB xx    jmp <offset>    ; always jump — throttle path never taken
 | MaxKernel | *(leave empty)* |
 | Enabled | `true` |
 
-> [!NOTE]
+> [!CAUTION]
 > 
-> ⚠️ Set `Count` to `1` for both patches. The 2-byte find pattern for Patch 2 is short enough that false matches elsewhere in the kernel binary are a real possibility without this constraint.
+> Set `Count` to `1` for both patches. The 2-byte find pattern for Patch 2 is short enough that false matches elsewhere in the kernel binary are a real possibility without this constraint.
+
+### Verifying Patch 2
+
+The effect of this patch shows up under sustained load, not at idle. Run a multi-core workload (Cinebench multi-core, or simply `yes > /dev/null &` repeated across all cores) and monitor package power and clock speed in real time using **HWMonitorSMC2** or **Intel Power Gadget** (if available for your macOS version).
+
+Without the patch, you should see the CPU boost briefly then drop back toward its TDP-constrained sustained frequency. With the patch active, sustained clocks should remain higher — limited only by thermals and VRM, not by the software PL1 ceiling.
+
+You can also read the current package power limit directly:
+
+```bash
+sysctl machdep.xcpm.hard_plimit_max_100mhz_ratio
+sysctl machdep.xcpm.soft_plimit_max_100mhz_ratio
+```
+
+If the patch is working, these values should no longer be pulling the CPU down during load. Note that the MSR itself (`MSR_PKG_POWER_LIMIT`) is not changed by this patch — it bypasses the code that acts on it, so the register may still show a limit while the CPU ignores it in practice.
 
 ---
 
