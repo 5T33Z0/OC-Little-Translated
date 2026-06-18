@@ -247,8 +247,8 @@ This script will install the `MacHyperVFramebuffer.kext` to "Library/Extensions"
 The VM should feel a bit more responsive after rebooting.
 
 ## 6. Limitations
-
-I couldn't get the graphics acceleration via Intel iGPU fully working, since iGPU and GPU passthrough isn't fully implemented into Hyper-V.
+- **iGPU/GPU Passthrough**: I couldn't get the graphics acceleration via Intel iGPU fully working, since iGPU and GPU passthrough isn't fully implemented into Hyper-V.
+- **Audio**: I couldn't get Audio working although I added the AppleALC.kext and necessary DeviceProperties (PCI-Path and Layout-ID).
 
 ## Credits and additional resources
 - Acidanthera for [MacHyperVSupport](https://github.com/acidanthera/MacHyperVSupport)
