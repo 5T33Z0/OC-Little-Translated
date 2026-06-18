@@ -23,6 +23,8 @@
 ## About
 Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utilizes resources from other repos dedicated to macOS virtualization in order to automate the precess to some degree by using PowerShell to build a preconfigured OpenCore EFI System Partition and downloading files required for macOS online recovery.
 
+---
+
 ## 1. System Requirements
 - **CPU**: 64-bit Intel CPU with support for [virtualization technology](https://www.intel.com/content/www/us/en/support/articles/000005486/processors.html)
 - **Mainboard** with UEFI support
@@ -36,6 +38,8 @@ Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utili
 > [!NOTE]
 > 
 > This guide focusses on Intel machines primarily. If you want to virtualize macOS with AMD systems, you need to modify the OpenCore config [more details](https://github.com/Qonfused/OSX-Hyper-V#amd)
+
+---
 
 ## 2. Enabling Hyper-V
 
@@ -167,6 +171,8 @@ Next, we need to incorporate the `EFI.vhdx` into the macOS VM, so macOS boots of
 >
 > Make sure to "Eject" the EFI disk prior to starting the macOS VM. Otherwise you get an error message because the disk is not accessible from within the VM!
 
+---
+
 ## 4. Booting and installing macOS
 Now that the VM is prepared, we can test it. Booting macOS Recovery is most likely not going to work out of the box, but as long as OpenCore is booting you are half way there.
 
@@ -195,6 +201,8 @@ From now on, the VM will reboot a couple of times to finish the installation. On
 > If booting macOS Recovery fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "EFI" disk to access the OC folder and config.plist. 
 > 
 > If you have an already working OC folder for your system, you probably "only" have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidanthera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
+
+---
 
 ## 5. Post-Install
 
@@ -244,9 +252,13 @@ This script will install the `MacHyperVFramebuffer.kext` to "Library/Extensions"
 
 The VM should feel a bit more responsive after rebooting.
 
+---
+
 ## 6. Limitations
 - **iGPU/GPU Passthrough**: I couldn't get the graphics acceleration via Intel iGPU fully working, since iGPU and GPU passthrough isn't fully implemented into Hyper-V.
 - **Audio**: I couldn't get Audio working although I added the AppleALC.kext and necessary DeviceProperties (PCI-Path and Layout-ID).
+
+---
 
 ## Credits and additional resources
 - Acidanthera for [MacHyperVSupport](https://github.com/acidanthera/MacHyperVSupport)
