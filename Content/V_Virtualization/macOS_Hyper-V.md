@@ -1,7 +1,5 @@
 # Virtualizing macOS in Windows Hyper-V
 
-:construction: Work in progress
-
 **TABLE of CONTENTS**
 
 - [About](#about)
