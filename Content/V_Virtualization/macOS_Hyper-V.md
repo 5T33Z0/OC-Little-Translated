@@ -204,7 +204,7 @@ The following steps need to be executed withing the running macOS VM.
 
 ### 5.1 Disable Gatekeeper
 
-&rarr; Follow these[Instructions](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Guides/Disable_Gatekeeper.md) to disable Gatekeeper in macOS Sequoia and newer. This is necessary in order to run post-install scrips and tools like 3rd party apps.
+&rarr; Follow these [Instructions](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Guides/Disable_Gatekeeper.md) to disable Gatekeeper in macOS Sequoia and newer. This is necessary in order to run post-install scrips and tools like 3rd party apps.
 
 ### 5.2 Copying EFI content to the internal ESP
 - Open Finder
