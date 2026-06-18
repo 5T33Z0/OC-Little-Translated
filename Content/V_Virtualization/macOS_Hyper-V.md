@@ -152,13 +152,13 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 
 Next, we need to incorporate the `EFI.vhdx` into the macOS VM, so macOS boots off it
 
-- Copy the `EFI.vhdx` from `~/Downloads/OSX-Hyper-V-main/dist` to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br>![VMsLocation](macOS_hyper-V_05.PNG)
+- Copy the `EFI.vhdx` from `~/Downloads/OSX-Hyper-V-main/dist` to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br><img width="699" height="109" alt="macOS_hyper-V_05" src="https://github.com/user-attachments/assets/ba0debcb-b5b8-45ee-8e8a-78a2abd6c5a1" />
 - Back in Hyper-V Manger, right-click the macOS VM and select "Settings…"
-- Click on "Security" and disable Secure Boot:<br>![alt text](Security.PNG)
+- Click on "Security" and disable Secure Boot:<br><img width="1083" height="1029" alt="Security" src="https://github.com/user-attachments/assets/30afdae0-feda-45f9-b64b-1155b5f72efe" />
 - Next, select "SCSI-Controller"
-- Select "Hard Drive and click add to "connect" an additional virtual disk:<br>![Add EFI](<Screenshot 2026-06-17 235313.PNG.jpg>)
-- Select "Virtual hard disk", click "Browse", navigate to the `EFI.vhxd`, select it and click "Open" to add it:<br>![AddEFI](image.png)
-- Next, click on "Firmware" and move the `EFI.vhdx` to the top of the list, followed by the `macOS.vhdx`. Move the network adapter to the end of the list:<br>! ![Boot Order](Settings_Bootorder.png)
+- Select "Hard Drive and click add to "connect" an additional virtual disk:<br><img width="1083" height="1029" alt="Add_Disk" src="https://github.com/user-attachments/assets/56bfd324-477e-4d33-93b7-0cd3073bd721" />
+- Select "Virtual hard disk", click "Browse", navigate to the `EFI.vhxd`, select it and click "Open" to add it:<br><img width="542" height="515" alt="image" src="https://github.com/user-attachments/assets/e1d58e62-8aa4-49a5-b687-a21abdadba8a" />
+- Next, click on "Firmware" and move the `EFI.vhdx` to the top of the list, followed by the `macOS.vhdx`. Move the network adapter to the end of the list:<br><img width="542" height="515" alt="Settings_Bootorder" src="https://github.com/user-attachments/assets/e1f0444e-dbad-4676-adb3-776464d956bb" />
 - Finally, adjust the following Settings:
   - **Processor**: Assign more than 1 virtual processors if possible (ideally 4 or more)
   - **Integration Services**: Enable "Guest Services"
@@ -174,10 +174,10 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 
 - Back in Hyper-V, double-click on the `macOS` VM to connect to it
 - This opens a new Window. Click **"Start"** to boot the VM. 
-- In the OpenCore Boot Menu, select "EFI (dmg)" with the arrow keys and press <kbd>Enter</kbd> to start the macOS Recovery: <br> ![alt text](Boot_01.PNG)
+- In the OpenCore Boot Menu, select "EFI (dmg)" with the arrow keys and press <kbd>Enter</kbd> to start the macOS Recovery: <br> <img width="314" height="186" alt="Boot_01" src="https://github.com/user-attachments/assets/96bf3a1a-9823-463e-895c-bba6e0297fe2" />
 - Depending on your system specs, it might take about 30 seconds to a minute to reach the installer GUI
-- From the Recovery Menu, select "Disk Utility" and click "Continue":<br>![alt text](Install_01_1.png)
-- Select "Msft Virtual Disk Media" and click on "Erase": <br>![alt text](Format_02.PNG)
+- From the Recovery Menu, select "Disk Utility" and click "Continue":<br><img width="769" height="647" alt="Install_01_1" src="https://github.com/user-attachments/assets/30128a73-1f50-4d4d-ab2c-567ddb631c80" />
+- Select "Msft Virtual Disk Media" and click on "Erase": <br><img width="769" height="647" alt="Format_02" src="https://github.com/user-attachments/assets/a43e37bb-f2b9-4279-be40-26fd14aa1b6a" />
 - Adjust the following:
   - **Name**: up to you
   - **Format**: `APFS`
@@ -187,7 +187,8 @@ Now that the VM is prepared, we can test it. Booting macOS Recovery is most like
 - Back in the Recovery Menu, select "Reinstall macOS" and click "Continue" (2x)
 - Agree to the SLA (click "Agree" 2x)
 - Select the macOS Disk and click "Continue"
-- This will start downloading macOS from Apple's Servers. Depending on your internet connection, this might take a while:<br>![alt text](Install_04.png)
+- This will start downloading macOS from Apple's Servers. Depending on your internet connection, this might take a while:<br><img width="769" height="647" alt="Install_04" src="https://github.com/user-attachments/assets/05d8493b-e04c-43a6-8d38-271f0ac28eb9" />
+
 
 From now on, the VM will reboot a couple of times to finish the installation. Once it's done, you will be greeted by macOS' Setup-Assistant to create a local User Account, select your preferred language, etc.
 
