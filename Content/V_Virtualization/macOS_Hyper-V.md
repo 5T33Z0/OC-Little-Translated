@@ -21,14 +21,16 @@
 
 ---
 ## About
-Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utilizes resources from other repos dedicated to macOS virtualization in order to automate the precess to some degree by using PowerShell to build a preconfigured OpenCore EFI System Partition and downloading files required for macOS online recovery.
+Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utilizes resources from other repos dedicated to macOS virtualization in order to automate the process to some degree by using PowerShell to build a preconfigured OpenCore EFI System Partition and downloading files required for macOS online recovery.
+
+**Tested on**: macOS Sequoia.
 
 ---
 
 ## 1. System Requirements
 - **CPU**: 64-bit Intel CPU with support for [virtualization technology](https://www.intel.com/content/www/us/en/support/articles/000005486/processors.html)
 - **Mainboard** with UEFI support
-- **RAM**: At least 16 GB or more (minimum requirement for current macOS versions is 8 GB; plus whatever is needed for running Windows, the Hypervisor and Hyper-V)
+- **RAM**: 16 GB or more (minimum requirement for current macOS versions is 8 GB; plus whatever is needed for running Windows, the Hypervisor and Hyper-V)
 - **Windows Requirements**: 
   - **Client**: Windows 10 *Professional* v1809 or newer (non-pro versions don't support Hyper-V) 
   - **Server**: Windows Server 2019 or newer (OpenRuntime.efi doesn't work properly on previous versions)
@@ -72,7 +74,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 ### 3.1 Creating the EFI System Partition (`EFI.vhdx`)
 1. Download the latest Release of [OSX-Hyper-V](https://github.com/Qonfused/OSX-Hyper-V/releases) and unzip it
 2. Run PowerShell as Administrator
-3. Change the Execution Policy in order to be able to execute scrips:
+3. Change the Execution Policy in order to be able to execute scripts:
 	```powershell
   	Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
   	```
@@ -102,7 +104,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 ### 3.2 Downloading the macOS Recovery Image
 
 1. Run PowerShell as Administrator
-2. Change the Execution Policy in order to be able to execute scrips:
+2. Change the Execution Policy in order to be able to execute scripts:
 	```powershell
   	Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
   	```
@@ -120,7 +122,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 
 1. In Explorer, double-click the `EFI.vhdx` to mount it
 2. Copy the `com.apple.recovery.boot` folder containing the `BaseSystem.chunklist` and `BaseSystem.dmg` onto the virtual EFI disk
-- Right-click the "EFI" disk in Windows Explorer and select "Eject" to unmount it.
+3. Right-click the "EFI" disk in Windows Explorer and select "Eject" to unmount it.
 
 ### 3.4 Creating the macOS VM
 
@@ -155,11 +157,11 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 Next, we need to incorporate the `EFI.vhdx` into the macOS VM, so macOS boots off it
 
 - Copy the `EFI.vhdx` from `~/Downloads/OSX-Hyper-V-main/dist` to the "Virtual Hard Disks" folder (in my case it's located at `C:\VMs\macOS\Virtual Hard Disks`):<br><img width="699" height="109" alt="macOS_hyper-V_05" src="https://github.com/user-attachments/assets/ba0debcb-b5b8-45ee-8e8a-78a2abd6c5a1" />
-- Back in Hyper-V Manger, right-click the macOS VM and select "Settings…"
+- Back in Hyper-V Manager, right-click the macOS VM and select "Settings…"
 - Click on "Security" and disable Secure Boot:<br><img width="1083" height="1029" alt="Security" src="https://github.com/user-attachments/assets/30afdae0-feda-45f9-b64b-1155b5f72efe" />
 - Next, select "SCSI-Controller"
 - Select "Hard Drive and click add to "connect" an additional virtual disk:<br><img width="1083" height="1029" alt="Add_Disk" src="https://github.com/user-attachments/assets/56bfd324-477e-4d33-93b7-0cd3073bd721" />
-- Select "Virtual hard disk", click "Browse", navigate to the `EFI.vhxd`, select it and click "Open" to add it:<br><img width="542" height="515" alt="image" src="https://github.com/user-attachments/assets/e1d58e62-8aa4-49a5-b687-a21abdadba8a" />
+- Select "Virtual hard disk", click "Browse", navigate to the `EFI.vhdx`, select it and click "Open" to add it:<br><img width="542" height="515" alt="image" src="https://github.com/user-attachments/assets/e1d58e62-8aa4-49a5-b687-a21abdadba8a" />
 - Next, click on "Firmware" and move the `EFI.vhdx` to the top of the list, followed by the `macOS.vhdx`. Move the network adapter to the end of the list:<br><img width="542" height="515" alt="Settings_Bootorder" src="https://github.com/user-attachments/assets/e1f0444e-dbad-4676-adb3-776464d956bb" />
 - Finally, adjust the following Settings:
   - **Processor**: Assign more than 1 virtual processors if possible (ideally 4 or more)
@@ -201,16 +203,18 @@ From now on, the VM will reboot a couple of times to finish the installation. On
 > If booting macOS Recovery fails, you will have to adjust the OpenCore EFI and config to match your system's requirements (Settings, Kexts, Drivers, etc). In this case shutdown the VM, mount the virtual "EFI" disk to access the OC folder and config.plist. 
 > 
 > If you have an already working OC folder for your system, you probably "only" have to add the Hyper-V related SSDTs, Kexts and Settings to your existing configuration. Check Acidanthera's [**Mac Hyper-V Support**](https://github.com/acidanthera/MacHyperVSupport) repo for more details.
+>
+> For further troubleshooting, refer to the [OpenCore Post-Install guide](https://dortania.github.io/OpenCore-Post-Install/) or to [Qonfused's OSX-Hyper-V repo](https://github.com/Qonfused/OSX-Hyper-V), which the OpenCore EFI and scripts in this guide are based on.
 
 ---
 
 ## 5. Post-Install
 
-The following steps need to be executed withing the running macOS VM.
+The following steps need to be executed within the running macOS VM.
 
 ### 5.1 Disable Gatekeeper
 
-&rarr; Follow these [Instructions](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Guides/Disable_Gatekeeper.md) to disable Gatekeeper in macOS Sequoia and newer. This is necessary in order to run post-install scrips and tools like 3rd party apps.
+&rarr; Follow these [Instructions](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Guides/Disable_Gatekeeper.md) to disable Gatekeeper in macOS Sequoia and newer. This is necessary in order to run post-install scripts and tools like 3rd party apps.
 
 ### 5.2 Copying EFI content to the internal ESP
 - Open Finder
