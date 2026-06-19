@@ -85,7 +85,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
  	**Note**: Adjust path accordingly when using a newer release 
 5. Run the build script: 
 	```powershell
-  	.\build.ps1
+  	powershell -ExecutionPolicy Bypass -File ".\build.ps1"
   	```
 	This will create a new `dist/` directory containing the OpenCore `EFI` folder and a `dist/Scripts/` directory containing scripts for creating and configuring the virtual machine.
 6. Next, navigate to the /dist/scripts folder
