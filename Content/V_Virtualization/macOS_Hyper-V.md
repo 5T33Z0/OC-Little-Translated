@@ -110,9 +110,9 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
   	```
 	The `EFI.vhdx` will be located in the `dist` folder.
 
-> [!IMPORTANT]
+> [!CAUTION]
 >
-> Once the `EFI.vhdx` is created, Windows explorer wants to format it. Cancel this!
+> While the `EFI.vhdx` is created, Windows explorer wants to format it. Press "Cancel" in the pop-up.
 
 ### 3.3 Creating the macOS VM
 
