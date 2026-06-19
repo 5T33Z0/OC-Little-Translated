@@ -80,8 +80,9 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
   	```
 4. Next, navigate to the scripts folder:
 	```powershell
-	cd ~/Downloads/OSX-Hyper-V-main/scripts
+	cd ~/Downloads/EFI-0.4.0-64-bit-RELEASE/scripts
   	```
+ 	**Note**: Adjust path accordingly when using a newer release 
 5. Run the build script: 
 	```powershell
   	.\build.ps1
