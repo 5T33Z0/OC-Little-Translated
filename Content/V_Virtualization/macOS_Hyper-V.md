@@ -115,7 +115,7 @@ Next, we build the virtual Disk with the EFI System Partition containing OpenCor
 1. Run PowerShell as Administrator
 2. Change the Execution Policy in order to be able to execute scripts:
 	```powershell
-  	Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+  	Set-ExecutionPolicy RemoteSigned
   	```
 3. Navigate to the Scripts Folder again:
 	```powershell
