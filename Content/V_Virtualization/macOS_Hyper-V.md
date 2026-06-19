@@ -72,7 +72,7 @@ Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utili
 The VM for running macOS in Hyper-V requires two virtual disks: one with EFI System Partition containing the OpenCore Bootloader as well as the macOS Recovery. The other one is for the actual macOS Installation.
 
 ### 3.1 Creating the EFI System Partition (`EFI.vhdx`)
-1. Download the latest Release of [OSX-Hyper-V](https://github.com/Qonfused/OSX-Hyper-V/releases) and unzip it
+1. Download [OSX-Hyper-V](https://github.com/Qonfused/OSX-Hyper-V/archive/refs/heads/main.zip) and unzip it
 2. Run PowerShell as Administrator
 3. Change the Execution Policy in order to be able to execute scripts:
 	```powershell
@@ -80,7 +80,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
   	```
 4. Next, navigate to the scripts folder:
 	```powershell
-	cd ~/Downloads/EFI-0.4.0-64-bit-RELEASE/scripts
+	cd ~/Downloads/OSX-Hyper-V-main/scripts
   	```
  	**Note**: Adjust path accordingly when using a newer release 
 5. Run the build script: 
