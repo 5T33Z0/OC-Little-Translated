@@ -7,10 +7,9 @@
 - [2. Enabling Hyper-V](#2-enabling-hyper-v)
 - [3. Building the macOS VM](#3-building-the-macos-vm)
 	- [3.1 Building OpenCore](#31-building-opencore)
-	- [3.2 Downloading the macOS Recovery Files](#32-downloading-the-macos-recovery-files)
-	- [3.3 Creating the EFI System Partition (`EFI.vhdx`)](#33-creating-the-efi-system-partition-efivhdx)
-	- [3.4 Creating the macOS VM](#34-creating-the-macos-vm)
-	- [3.5 Adding the `EFI.vhdx` to the macOS VM](#35-adding-the-efivhdx-to-the-macos-vm)
+	- [3.2 Downloading the macOS Recovery Files](#32-downloading-the-macos-recovery-files-and-creating-the-efi-system-partition-efivhdx)
+	- [3.3 Creating the macOS VM](#33-creating-the-macos-vm)
+	- [3.4 Adding the `EFI.vhdx` to the macOS VM](#34-adding-the-efivhdx-to-the-macos-vm)
 - [4. Booting and installing macOS](#4-booting-and-installing-macos)
 - [5. Post-Install](#5-post-install)
 	- [5.1 Disable Gatekeeper](#51-disable-gatekeeper)
@@ -93,7 +92,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 > - This will build the OpenCore EFI folder for use with Hyper-V. It will be located under `dist/`, alongside a `dist/Scripts/` directory containing scripts for creating and configuring the virtual machine.
 > - If the script fails to run or errors occur, download the latest pre-build OpenCore EFI [Release](https://github.com/Qonfused/OSX-Hyper-V/releases). Unzip the file, rename the whole folder to `dist`, move it into the `OSX-Hyper-V-main` folder and continue with the guide.
 
-### 3.2 Downloading the macOS Recovery Files
+### 3.2 Downloading the macOS Recovery Files and creating the EFI System Partition (`EFI.vhdx`)
 
 1. Run PowerShell as Administrator
 2. Navigate to the dist/scripts directory:
@@ -105,11 +104,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
    powershell -ExecutionPolicy Bypass -File "./create-macos-recovery.ps1"
    ```
    :bulb: Press `A` if asked if you want to execute the script. The files will be located in the `dist` folder as `com.apple.recovery.boot`
-
-### 3.3 Creating the EFI System Partition (`EFI.vhdx`)
-Next, we build the virtual Disk with the EFI System Partition containing OpenCore and the macOS Recovery Files.
-
-1. Run the next script to build the `EFI.vhdx`:
+4. Netx, run the script to build the `EFI.vhdx`:
 	```powershell
 	powershell -ExecutionPolicy Bypass -File ".\convert-efi-disk.ps1"
   	```
@@ -119,7 +114,7 @@ Next, we build the virtual Disk with the EFI System Partition containing OpenCor
 >
 > Once the `EFI.vhdx` is created, Windows explorer wants to format it. Cancel this!
 
-### 3.4 Creating the macOS VM
+### 3.3 Creating the macOS VM
 
 1. Launch "Hyper-V Manager" via Cortana Search.
 2. In the right sidebar, click on "Connect to Server" and select "Local Machine" 
@@ -147,7 +142,7 @@ Next, we build the virtual Disk with the EFI System Partition containing OpenCor
 >
 > Alternatively, you can create the macOS VM with PowerShell by running the `create-virtual-machine.ps1` script located in the `Downloads\OSX-Hyper-V-main\dist\Scripts` directory.
 
-### 3.5 Adding the `EFI.vhdx` to the macOS VM
+### 3.4 Adding the `EFI.vhdx` to the macOS VM
 
 Next, we need to incorporate the `EFI.vhdx` into the macOS VM, so macOS boots off it
 
