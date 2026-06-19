@@ -96,15 +96,11 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 ### 3.2 Downloading the macOS Recovery Files
 
 1. Run PowerShell as Administrator
-2. Change the Execution Policy in order to be able to execute scripts:
-	```powershell
-  	Set-ExecutionPolicy RemoteSigned
-  	```
-3. Navigate to the Scripts Folder again:
+2. Navigate to the dist/scripts directory:
 	```powershell
 	cd ~/Downloads/OSX-Hyper-V-main/dist/scripts
 	```
-4. Run the script to create the macOS Recovery partition:
+3. Run the script to create the macOS Recovery partition:
    ```powershell
    powershell -ExecutionPolicy Bypass -File "./create-macos-recovery.ps1"
    ```
@@ -113,11 +109,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 ### 3.3 Creating the EFI System Partition (`EFI.vhdx`)
 Next, we build the virtual Disk with the EFI System Partition containing OpenCore and the macOS Recovery Files.
 
-1. Next, navigate to the `/dist/scripts` folder:
-	```powershell
-	cd ../dist/scripts
-	```
-2. Run the next script to build the `EFI.vhdx`:
+1. Run the next script to build the `EFI.vhdx`:
 	```powershell
 	powershell -ExecutionPolicy Bypass -File ".\convert-efi-disk.ps1"
   	```
