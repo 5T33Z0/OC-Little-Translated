@@ -122,7 +122,7 @@ The `EFI.vhdx` will be located in the `dist` folder.
 4. The **"New Virtual Machine Wizard"** starts
 5. Click "Next"
 6. **"Specify Name and Location"**. Enter a name and a location to store the VM in. In this example, I chose "macOS" as name and `C:\VMs\` as location:<br> ![03](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/042cf9fd-a888-4338-8bb8-ca7a5e9cd2c4)
-  💡 Tick "Store the virtual machine in a different location" (&rarr;creates sub-folders for *each* VM for better organization)
+	💡 Tick "Store the virtual machine in a different location" (&rarr; creates sub-folders for *each* VM for better organization)
 7. Click "Next"
 8. **Specify Generation**: select `Generation 2` (= UEFI, 64-bit only) and click **"Next"**: <br> ![04](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/497e5467-3968-4ca3-a506-ed288f252236)
 9. **Assign Memory**:<br> ![05](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/67cbe54e-4eff-4be3-9293-e0a54a697745)
