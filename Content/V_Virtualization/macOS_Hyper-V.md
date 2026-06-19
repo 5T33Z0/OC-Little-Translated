@@ -6,11 +6,12 @@
 - [1. System Requirements](#1-system-requirements)
 - [2. Enabling Hyper-V](#2-enabling-hyper-v)
 - [3. Building the macOS VM](#3-building-the-macos-vm)
-	- [3.1 Creating the EFI System Partition (`EFI.vhdx`)](#31-creating-the-efi-system-partition-efivhdx)
-	- [3.2 Downloading the macOS Recovery Image](#32-downloading-the-macos-recovery-image)
-	- [3.3 Adding the macOS Recovery Image to `EFI.vhdx`](#33-adding-the-macos-recovery-image-to-efivhdx)
-	- [3.4 Creating the macOS VM](#34-creating-the-macos-vm)
-	- [3.5 Adding the `EFI.vhdx` to the macOS VM](#35-adding-the-efivhdx-to-the-macos-vm)
+	- [3.1 Building OpenCore](#31-building-opencore)
+	- [3.2 Creating the EFI System Partition (`EFI.vhdx`)](#32-creating-the-efi-system-partition-efivhdx)
+	- [3.3 Downloading the macOS Recovery Image](#33-downloading-the-macos-recovery-image)
+	- [3.4 Adding the macOS Recovery Image to `EFI.vhdx`](#34-adding-the-macos-recovery-image-to-efivhdx)
+	- [3.5 Creating the macOS VM](#35-creating-the-macos-vm)
+	- [3.6 Adding the `EFI.vhdx` to the macOS VM](#36-adding-the-efivhdx-to-the-macos-vm)
 - [4. Booting and installing macOS](#4-booting-and-installing-macos)
 - [5. Post-Install](#5-post-install)
 	- [5.1 Disable Gatekeeper](#51-disable-gatekeeper)
@@ -20,6 +21,7 @@
 - [Credits and additional resources](#credits-and-additional-resources)
 
 ---
+
 ## About
 Guide for running macOS as a Virtual Machine inside of Windows Hyper-V. It utilizes resources from other repos dedicated to macOS virtualization in order to automate the process to some degree by using PowerShell to build a preconfigured OpenCore EFI System Partition and downloading files required for macOS online recovery.
 
