@@ -104,15 +104,15 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
    powershell -ExecutionPolicy Bypass -File "./create-macos-recovery.ps1"
    ```
    :bulb: Press `A` if asked if you want to execute the script. The files will be located in the `dist` folder as `com.apple.recovery.boot`
-4. Netx, run the script to build the `EFI.vhdx`:
+4. Next, run the script to build the `EFI.vhdx`:
 	```powershell
 	powershell -ExecutionPolicy Bypass -File ".\convert-efi-disk.ps1"
   	```
-	The `EFI.vhdx` will be located in the `dist` folder.
+The `EFI.vhdx` will be located in the `dist` folder.
 
 > [!CAUTION]
 >
-> While the `EFI.vhdx` is created, Windows explorer wants to format it. Press "Cancel" in the pop-up.
+> While the `EFI.vhdx` is created, Windows explorer will want to format it. Press "Cancel" in the pop-up.
 
 ### 3.3 Creating the macOS VM
 
