@@ -1,6 +1,4 @@
 # UUP Dump Configuration Files
-
-# Creating a bloatfree Windows 10/11 ISO
 This folder contains my custom **UUP Dump** configuration files for creating a clean and minimal **Windows 10 and Windows 11** installation ISO as explained here: [Creating a bloatfree Windows 10/11 ISO](../Bloatfree_Win.md)
 
 The goal is to remove unnecessary pre-installed applications while preserving system stability, compatibility, Windows Update functionality, and essential administrative tools.
@@ -85,7 +83,7 @@ Core Windows components, security features, and system functionality remain inta
 
 ## Usage
 
-1. Download a UUP Dump package for the desired Windows 10 or Windows 11 build.
+1. Download a UUP Dump package from https://uupdump.net/ for the desired Windows 10 or Windows 11 build.
 2. Replace the original `ConvertConfig.ini` and `CustomAppsList.txt` files with the versions from this repository.
 3. Run the UUP Dump conversion script (`uup_download_windows.cmd` or the appropriate script for your platform).
 4. Wait for the download, conversion, and ISO creation process to complete.
@@ -98,6 +96,32 @@ Core Windows components, security features, and system functionality remain inta
 * Some applications depend on the Microsoft Store. If the Store is removed, those applications may need to be installed or updated manually.
 * Keeping **App Installer** allows the use of `winget` even without the Microsoft Store.
 * The exact list of available applications may differ between Windows 10 and Windows 11 builds.
+
+---
+
+## Legality
+
+These configuration files do **not** contain any Microsoft Windows files, binaries, or proprietary content. They only provide configuration settings for the **UUP Dump** conversion process and define which optional Microsoft Store applications are included in the generated installation image.
+
+Using these files is generally legal to share and modify, as they are plain text configuration files.
+
+However:
+
+* The resulting Windows ISO contains Microsoft software and is subject to the **Microsoft Software License Terms**.
+* A valid Windows license may be required to activate and use Windows legally.
+* Redistribution of a generated Windows ISO may be restricted by Microsoft's licensing terms.
+* Users are responsible for ensuring they comply with all applicable Microsoft licenses and local laws.
+
+This repository is **not affiliated with, endorsed by, or supported by Microsoft or UUP Dump**.
+
+---
+
+A simple rule of thumb:
+
+* ✅ Sharing `ConvertConfig.ini` and `CustomAppsList.txt` → generally fine
+* ✅ Building a personal Windows ISO from Microsoft-provided update packages → generally accepted for personal use
+* ⚠️ Sharing the generated ISO publicly → may violate Microsoft's licensing terms
+
 
 ---
 
