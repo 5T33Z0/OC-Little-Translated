@@ -43,7 +43,8 @@ So instead of downloading and manipulating the default Windows ISO (prior to ins
 
 > [!TIP]
 >
-> If you want multimedia support, you should definitely uncomment the entries in the "Media Codecs" section of `CustomApps.txt`!
+> - If you want multimedia support, you should definitely uncomment the entries in the "Media Codecs" section of `CustomApps.txt`!
+> - Pre-Configured Config and CustomAppsList files can be found in the [UUPDump_Config](UUPDUmp_Config) section
 
 ## Troubleshooting
 
