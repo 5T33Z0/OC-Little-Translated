@@ -10,7 +10,7 @@
 - [**Enabling Trim in Windows**](/Content/I_Windows/Enable_Trim_Win.md)
 
 ## Bootloader-related
-- [**Accessing the ESP Partition from within Windows**](/Content/I_Windows/Accessing_ESP_Windows.md#accessing-esp-partition-from-within-windows)
+- [**Accessing the EFI System Partition (ESP) from within Windows**](/Content/I_Windows/Accessing_ESP_Windows.md#accessing-esp-partition-from-within-windows)
 - [**Adding a custom Windows entry to the OpenCore Boot Menu**](/Content/I_Windows/Custom_Entries.md)
 - [**Restoring `Windows` bootloader folder from within macOS**](/Content/I_Windows/Restore_Microsoftt_Bootloader.md)
 - [**Prohibiting SMBIOS Injection into Windows**](/Content/I_Windows/SMBIOS_Windows.md)
