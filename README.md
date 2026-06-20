@@ -90,7 +90,7 @@
 
 ## 🪟 Other OSes
 
-* 🪟 [Windows-Specific Fixes](/Content/I_Windows/README.md)
+* 🪟 [Windows-Specific Guides and Fixes](/Content/I_Windows/)
 * 🐧 [Adding Linux Boot Entries](/Content/G_Linux/README.md)
 
 ## 🧪 Special Topics
