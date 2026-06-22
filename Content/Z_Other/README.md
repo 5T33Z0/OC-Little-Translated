@@ -37,6 +37,10 @@ A curated collection of guides, fixes, tools, and articles. Feel free to submit 
 * [Xcode Releases](https://xcodereleases.com/?scope=release)
 * [Creating and Restoring Disk Images on macOS (dd)](https://radugin.com/posts/2025-05-04/disk-image-with-dd-on-macos/)
 
+## 💻 Coding in macOS
+
+- [Cocoa with Love](https://cocoawithlove.com/)
+
 ## 📦 Archives & Legacy Software
 
 * [Old Mac Software Archive](https://www.macintoshrepository.org/)
