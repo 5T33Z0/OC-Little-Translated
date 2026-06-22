@@ -37,7 +37,7 @@ Understanding the mechanics here is essential. Most guides only describe *how to
 
 ### What DevirtualiseMmio does
 
-When `DevirtualiseMmio` is enabled, OpenCore processes every MMIO region found in the firmware memory map and removes it from the reserved list, making that memory available to macOS. Each processed region appears in the debug boot log like this:
+When `DevirtualiseMmio` is enabled, OpenCore processes every MMIO region found in the firmware memory map and removes its **EFI runtime virtual address mapping**, making that memory available to macOS. Each processed region appears in the debug boot log like this:
 
 ```
 OCABC: MMIO devirt 0xFEC00000 (0x1 pages, 0x8000000000000001) skip 0
@@ -50,8 +50,8 @@ The fields are:
 | `0xFEC00000` | Base address of the MMIO region |
 | `0x1 pages` | Size in 4 KB pages (1 page = 4 KB) |
 | `0x800000000000...` | EFI memory type and attribute flags |
-| `skip 0` | Region **was** devirtualised (reclaimed) |
-| `skip 1` | Region was **skipped** (left as-is) |
+| `skip 0` | Region **was** devirtualised (mapping removed, memory reclaimed) |
+| `skip 1` | Region was **skipped** (mapping preserved, memory not reclaimed) |
 
 At the end of this pass, OpenCore reports the result:
 
@@ -61,24 +61,28 @@ OCABC: Only 74/256 slide values are usable!
 OCABC: Valid slides - 0-29, 136-179
 ```
 
-The `saved` figure is the total memory reclaimed from MMIO regions. The slide count tells you how many valid KASLR positions macOS has to work with.
+The `saved` figure is the total memory reclaimed. The slide count tells you how many valid KASLR positions macOS has to work with.
 
 ### What the MmioWhitelist actually does
 
-The `MmioWhitelist` is an **exclusion list**. Entries you enable are *excluded from devirtualisation* — OpenCore leaves them in the firmware's reserved state and does not reclaim them.
+The MmioWhitelist is an **exclusion list**. Entries you enable are excluded from devirtualisation — their EFI runtime virtual address mapping is preserved. According to the OpenCore documentation:
 
-This means the relationship is the **opposite** of what many people assume:
+> *"This means that the firmware will be able to directly communicate with this memory region during operating system functioning, because the region this value is in will be assigned a virtual address."*
+
+In other words, you whitelist a region when your UEFI firmware's runtime services genuinely need to keep accessing that hardware after macOS takes control. The two most common candidates on systems that require this are `0xFEC00000` (IOAPIC) and `0xFEE00000` (Local APIC), where some firmware implementations rely on runtime access to these registers.
+
+The practical consequence of whitelisting is reduced available memory for macOS, which directly reduces the number of valid KASLR slide values:
 
 | Entry state | Effect on the region | Effect on slide count |
 |---|---|---|
-| `Enabled: false` | Region **is** devirtualised (`skip 0`) | More memory reclaimed → more slides |
-| `Enabled: true` | Region is **not** devirtualised (`skip 1`) | Less memory reclaimed → fewer slides |
+| `Enabled: false` | Region **is** devirtualised (`skip 0`) — mapping removed | More memory reclaimed → more slides |
+| `Enabled: true` | Region is **not** devirtualised (`skip 1`) — mapping preserved | Less memory reclaimed → fewer slides |
 
 ### The critical misconception
 
-The name "whitelist" implies that you are *allowing* something. In reality you are *protecting* a region from being touched by OpenCore. You whitelist a region when devirtualising it causes a problem — not to improve performance or increase slides.
+The name "whitelist" implies that you are *allowing* something beneficial. In reality you are *protecting* a region's firmware mapping from being removed by OpenCore. You whitelist a region only when your firmware's runtime services need it — not to improve boot performance or increase slide values.
 
-**Enabling entries in the MmioWhitelist will reduce your usable slide count.** On most systems this is harmless if only small regions are whitelisted. But on some systems, enabling the wrong entries will reduce slides to the point where macOS cannot boot at all.
+**Enabling entries in the MmioWhitelist will always reduce your usable slide count.** On most systems this is acceptable if only small regions are whitelisted. But enabling the wrong entries — particularly large regions or those actively used by an iGPU — can reduce slides to the point where macOS cannot boot at all.
 
 ### Reading the boot log
 
@@ -100,7 +104,7 @@ All 6 regions have `skip 0` — all devirtualised. 278 MB reclaimed. 74 usable s
 
 ### Real-world example
 
-On the same Z490 system, three entries (`0xFEC00000`, `0xFEE00000`, `0xFF000000`) were enabled in the MmioWhitelist to test the common advice of whitelisting APIC and firmware ROM regions. The result on the next boot:
+On the same Z490 system, three entries (`0xFEC00000`, `0xFEE00000`, `0xFF000000`) were enabled in the MmioWhitelist to test the commonly given advice of whitelisting the APIC and firmware ROM regions. The result on the next boot:
 
 ```
 OCABC: MMIO devirt 0xE0000000 (0x10000 pages, 0x800000000000100D) skip 0
@@ -114,13 +118,11 @@ OCABC: Only 58/256 slide values are usable!
 OCABC: Valid slides - 0-21, 136-171
 ```
 
-The three whitelisted regions now show `skip 1`. Memory reclaimed dropped from 278,668 KB to 262,276 KB. Usable slides dropped from 74 to 58. The whitelist made things strictly worse on this board.
+The three whitelisted regions now show `skip 1`. Memory reclaimed dropped from 278,668 KB to 262,276 KB. Usable slides dropped from 74 to 58. The whitelist made things strictly worse — the firmware on this board does not need runtime access to those regions, so preserving their mappings only costs memory without any benefit.
 
-Testing the remaining three entries (`0xE0000000`, `0xFC000000`, `0xFE000000`) produced a prohibitory sign — macOS would not boot at all. On this Z490 system with an active iGPU, `0xE0000000` is the Intel UHD 630 framebuffer region, which macOS requires devirtualised to initialise the GPU. Whitelisting it meant macOS lost access to memory it needs before it can even reach the kernel.
+Testing the remaining three entries (`0xE0000000`, `0xFC000000`, `0xFE000000`) produced a prohibitory sign — macOS would not boot at all. On this Z490 system with an active iGPU, `0xE0000000` is the Intel UHD 630 framebuffer region. Stripping its virtual mapping (devirtualising) is exactly what macOS needs — whitelisting it instead meant macOS lost access to memory it requires to initialise the GPU before the kernel even loads.
 
-**Conclusion for this system:** all 6 regions must remain devirtualised. The MmioWhitelist should stay empty (all entries `Enabled: false`). This is the correct outcome for many modern Intel systems.
-
----
+**Conclusion for this system:** all 6 regions must remain devirtualised. The MmioWhitelist should stay empty (all entries `Enabled: false`). This is the correct and expected outcome for many modern Intel systems where the firmware does not require runtime MMIO access post-handoff.
 
 ## Who needs this
 
@@ -137,8 +139,9 @@ It is generally not needed on Coffee Lake (Z370/Z390) and older Intel platforms 
 
 ## Instructions
 
-> [!IMPORTANT]
-> Back up your EFI folder to a FAT32 USB drive before making changes. If a wrong whitelist entry prevents booting, you will need to boot Windows or another OS to restore your config.
+> [!CAUTION]
+> 
+> Back up your EFI folder to a FAT32 USB drive _before_ making changes. If a wrong whitelist entry prevents booting, you will need to boot Windows or another OS to restore your config.
 
 ### Step 1: Enable DevirtualiseMmio and switch to DEBUG OpenCore
 
