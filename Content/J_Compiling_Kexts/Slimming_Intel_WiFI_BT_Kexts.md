@@ -6,11 +6,12 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > 
 > If you're just looking for a convenient way to compile the latest release of the Inel WiFi and Bluetooth kexts, I suggest you check out Chris1111's [Intel Wi-Fi Kextbuilder](https://github.com/chris1111/Wifi-Intel-KextsBuilder). The kexts built with it won't be slimmed but they will contain the latest codebase.
 
+## Preparations
+
 > [!NOTE]
 > 
 > The screenshots in this guide show firmware files used by the Intel AC-9560 Wifi/BT card.
 
-## Preparations
 
 ### Identifying the used firmwares
 #### Wi-Fi Firmware
@@ -47,41 +48,43 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - Boot from the Ventoy USB stick
 > - Select the Linux distro
 > - Run Linux in live mode, don't install it
-> - Once you reach the desktop, run Terminal
-> - Enter `sudo dmesg | grep ibt`
+> - Once you reach the desktop, run Terminal and enter:
+>	```bash
+> 	sudo dmesg | grep ibt
+> 	```
 > - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
 I also found a list Intel Wi-Fi/BT Cards and the Firmware files associated with them. Some are listed in the table below:
 
-| Card                              | Firmware File(s)                                                                 |
-|-----------------------------------|---------------------------------------------------------------------------------|
-| Intel Wireless 8260 (Bluetooth)   | intel/ibt-11-5.ddc, intel/ibt-11-5.sfi                                           |
-| Intel Wireless 8265 (Bluetooth)   | intel/ibt-12-16.ddc, intel/ibt-12-16.sfi                                        |
-| Intel Wireless 9460/9650 (var 0 rev 1) (Bluetooth) | intel/ibt-17-0-1.ddc, intel/ibt-17-0-1.sfi                     |
-| Intel Wireless 9460/9650 (var 16 rev 1) (Bluetooth) | intel/ibt-17-16-1.ddc, intel/ibt-17-16-1.sfi                 |
-| Intel Wireless 3160 (B6) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.0.1.2d.d.bseq                             |
-| Intel Wireless 3160 (B4) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.0.2.3.d.bseq                             |
-| Intel Wireless 7260 (B5) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.80.1.2d.d.bseq                           |
-| Intel Wireless 7260 (B3) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq                           |
-| Intel Wireless 7260 (Bluetooth)   | intel/ibt-hw-37.7.bseq                                                         |
-| Intel Wireless 7265 (C0) (Bluetooth) | intel/ibt-hw-37.8.10-fw-1.10.2.27.d.bseq                           |
-| Intel Wireless 7265 (D0) (Bluetooth) | intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq                           |
-| Intel Wireless 7265 (D1) (Bluetooth) | intel/ibt-hw-37.8.10-fw-22.50.19.14.f.bseq                         |
-| Intel Wireless 7265 (Bluetooth)   | intel/ibt-hw-37.8.bseq                                                         |
-| Intel Wireless 100                | iwlwifi-100-5.ucode                                                            |
-| Intel Wireless 105                | iwlwifi-105-6.ucode                                                            |
-| Intel Wireless 135                | iwlwifi-135-6.ucode                                                            |
-| Intel Wireless 1000               | iwlwifi-1000-5.ucode                                                           |
-| Intel Wireless 2200               | iwlwifi-2000-6.ucode                                                           |
-| Intel Wireless 2230               | iwlwifi-2030-6.ucode                                                           |
-| Intel Wireless 3160               | iwlwifi-3160-9.ucode, iwlwifi-3160-17.ucode                                    |
-| Intel Wireless 3168               | iwlwifi-3168-22.ucode, iwlwifi-3168-29.ucode                                   |
-| Intel Wireless 3945               | iwlwifi-3945-2.ucode                                                           |
+| Card                              | Firmware File(s) 
+|-----------------------------------|---------------------------
+| Intel Wireless 8260 (Bluetooth)   | intel/ibt-11-5.ddc, intel/ibt-11-5.sfi 
+| Intel Wireless 8265 (Bluetooth)   | intel/ibt-12-16.ddc, intel/ibt-12-16.sfi
+| Intel Wireless 9460/9650 (var 0 rev 1) (Bluetooth) | intel/ibt-17-0-1.ddc, intel/ibt-17-0-1.sfi
+| Intel Wireless 9460/9650 (var 16 rev 1) (Bluetooth) | intel/ibt-17-16-1.ddc, intel/ibt-17-16-1.sfi
+| Intel Wireless 3160 (B6) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.0.1.2d.d.bseq
+| Intel Wireless 3160 (B4) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.0.2.3.d.bseq
+| Intel Wireless 7260 (B5) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.80.1.2d.d.bseq
+| Intel Wireless 7260 (B3) (Bluetooth) | intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq
+| Intel Wireless 7260 (Bluetooth)   | intel/ibt-hw-37.7.bseq
+| Intel Wireless 7265 (C0) (Bluetooth) | intel/ibt-hw-37.8.10-fw-1.10.2.27.d.bseq
+| Intel Wireless 7265 (D0) (Bluetooth) | intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq
+| Intel Wireless 7265 (D1) (Bluetooth) | intel/ibt-hw-37.8.10-fw-22.50.19.14.f.bseq
+| Intel Wireless 7265 (Bluetooth)   | intel/ibt-hw-37.8.bseq
+| Intel Wireless 100                | iwlwifi-100-5.ucode
+| Intel Wireless 105                | iwlwifi-105-6.ucode
+| Intel Wireless 135                | iwlwifi-135-6.ucode
+| Intel Wireless 1000               | iwlwifi-1000-5.ucode
+| Intel Wireless 2200               | iwlwifi-2000-6.ucode
+| Intel Wireless 2230               | iwlwifi-2030-6.ucode
+| Intel Wireless 3160               | iwlwifi-3160-9.ucode, iwlwifi-3160-17.ucode
+| Intel Wireless 3168               | iwlwifi-3168-22.ucode, iwlwifi-3168-29.ucode
+| Intel Wireless 3945               | iwlwifi-3945-2.ucode
 
 For the complete list, check: [https://packages.debian.org/bullseye/firmware-iwlwifi](https://packages.debian.org/bullseye/firmware-iwlwifi)
 
-### Install Xcode
+### Installing Xcode
 - Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release)
 - Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
 
@@ -123,7 +126,7 @@ For the complete list, check: [https://packages.debian.org/bullseye/firmware-iwl
 ### Compiling `AirportItlwm` and `Itlwm`
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build itlwm as well as AirportItlwm kexts for all versions of macOS:
 
-```
+```bash
 # navigate to the itlwm folder (if it is not your working directory already)
 cd ~/Downloads/itlwm-master
 
@@ -142,7 +145,7 @@ Once building the kexts is completed they will be located under `~/Downloads/itl
 
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build the IntelBluetoothFirmware kext:
 
-```
+```bash
 # Navigate to the IntelBluetoothFirmware folder (if it is not your working directory already)
 cd ~/Downloads/IntelBluetoothFirmware-master
 
