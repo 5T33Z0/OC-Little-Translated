@@ -4,7 +4,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 
 > [!TIP]
 > 
-> If you're looking for a convenient way to compile the latest release of the Inel WiFi and Bluetooth kext, I suggest you check out Chris1111's [Intel Wi-Fi Kextbuilder](https://github.com/chris1111/Wifi-Intel-KextsBuilder)
+> If you're just looking for a convenient way to compile the latest release of the Inel WiFi and Bluetooth kexts, I suggest you check out Chris1111's [Intel Wi-Fi Kextbuilder](https://github.com/chris1111/Wifi-Intel-KextsBuilder). The kexts built with it won't be slimmed but they will contain the latest codebase.
 
 > [!NOTE]
 > 
