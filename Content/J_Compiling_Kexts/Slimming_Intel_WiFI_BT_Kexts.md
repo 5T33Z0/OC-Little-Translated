@@ -30,7 +30,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 
 > [!TIP]
 > 
-> If the field `fw_name` is empty, you need to add `DebugEnhancer.kext` to EFI/OC/Kexts and your config.plist and reboot. Next, do the following to find your device's Bluetooth firmware:
+> If the field `fw_name` is empty, you need to add [`DebugEnhancer.kext`](https://github.com/acidanthera/DebugEnhancer) to `EFI/OC/Kexts` and your `config.plist` and reboot. Next, do the following to find your device's Bluetooth firmware:
 >
 > - Once you reach the desktop, run Terminal
 > - Enter `sudo dmesg | grep ibt`
