@@ -52,7 +52,7 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 > - This will show you the used BT Firmware files ("ibt…"):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 > - Take note of the two files, reboot into macOS and continue with the guide
 
-I also found a list of some of the Intel Wi-Fi/BT Cards and the Firmware files associated with them:
+I also found a list Intel Wi-Fi/BT Cards and the Firmware files associated with them. Some are listed in the table below:
 
 | Card                              | Firmware File(s)                                                                 |
 |-----------------------------------|---------------------------------------------------------------------------------|
@@ -79,7 +79,7 @@ I also found a list of some of the Intel Wi-Fi/BT Cards and the Firmware files a
 | Intel Wireless 3168               | iwlwifi-3168-22.ucode, iwlwifi-3168-29.ucode                                   |
 | Intel Wireless 3945               | iwlwifi-3945-2.ucode                                                           |
 
-**Source**: https://packages.debian.org/bullseye/firmware-iwlwifi
+For the complete list, check: [https://packages.debian.org/bullseye/firmware-iwlwifi](https://packages.debian.org/bullseye/firmware-iwlwifi)
 
 ### Install Xcode
 - Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release)
