@@ -1,17 +1,24 @@
 # How to compile slimmed `AirportItlwm`, `itlwm` and `IntelBluetoothFirmware` kexts for Intel Wi-Fi/BT Cards
 
-The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be reduced drastically by about a factor of 10 by deleting all the unnecessary firmwares for other Wi-Fi cards except the one for your WiFi/BT Card.
+## About
+
+The size of the Intel Wi-Fi and Bluetooth firmware kexts can be reduced significantly by removing unnecessary firmware files. The resulting kexts contain only the firmware required by your Intel Wi-Fi/Bluetooth card, reducing their size by roughly a factor of ten.
+
+> [!IMPORTANT]
+>
+> Slimming the firmware is entirely optional. It only reduces the size of the kexts and **does not** improve performance or compatibility. If you remove the wrong firmware file(s), your Wi-Fi or Bluetooth device will fail to initialize.
 
 > [!TIP]
-> 
-> If you're just looking for a convenient way to compile the latest release of the Inel WiFi and Bluetooth kexts, I suggest you check out Chris1111's [Intel Wi-Fi Kextbuilder](https://github.com/chris1111/Wifi-Intel-KextsBuilder). The kexts built with it won't be slimmed but they will contain the latest codebase.
+>
+> If you only want to compile the latest versions of the Intel Wi-Fi and Bluetooth kexts without slimming them down, consider using Chris1111's [**Intel Wi-Fi KextsBuilder**](https://github.com/chris1111/Wifi-Intel-KextsBuilder). It automatically downloads and builds the latest versions of the kexts.
+
+---
 
 ## Preparations
 
 > [!NOTE]
 > 
 > The screenshots in this guide show firmware files used by the Intel AC-9560 Wifi/BT card.
-
 
 ### Identifying the used firmwares
 #### Wi-Fi Firmware
@@ -21,7 +28,50 @@ The size of the Intel Wireless and BluetoothFirmare kexts for Intel Cards can be
 
 > [!NOTE]
 >
-> Identifying the Wi-Fi firmware does not work when using `Itlwm.kext`, so you must use `AirportItlwm.kext`!
+> The firmware identifier is only exposed when using `AirportItlwm.kext`. If you are currently using `itlwm.kext`, this won't work. In this case, use the table below to find the wireless firmware file(s) used by your Wi-FI/BT card.
+
+<details>
+<summary><strong>Intel Wi-Fi adapters and firmware files</strong></summary><br>
+
+| Intel Wi-Fi Adapter(s)           | Firmware file(s)                                             |
+| -------------------------------- | ------------------------------------------------------------ |
+| Centrino Wireless-N 1000         | `iwlwifi-1000-*.ucode`                                       |
+| Centrino Wireless-N 1030         | `iwlwifi-1000-*.ucode`                                       |
+| Centrino Wireless-N 105          | `iwlwifi-105-*.ucode`                                        |
+| Centrino Wireless-N 130          | `iwlwifi-100-*.ucode`                                        |
+| Centrino Wireless-N 135          | `iwlwifi-135-*.ucode`                                        |
+| Centrino Wireless-N 2200         | `iwlwifi-2000-*.ucode`                                       |
+| Centrino Wireless-N 2230         | `iwlwifi-2030-*.ucode`                                       |
+| Centrino Advanced-N 6200         | `iwlwifi-6000-*.ucode`                                       |
+| Centrino Ultimate-N 6300         | `iwlwifi-6000-*.ucode`                                       |
+| Centrino Advanced-N 6230         | `iwlwifi-6000g2a-*.ucode`                                    |
+| Centrino Advanced-N 6235         | `iwlwifi-6000g2b-*.ucode`                                    |
+| Centrino Wireless-N + WiMAX 6150 | `iwlwifi-6150-*.ucode`                                       |
+| Dual Band Wireless-N 7260        | `iwlwifi-7260-*.ucode`                                       |
+| Dual Band Wireless-AC 7260       | `iwlwifi-7260-*.ucode`                                       |
+| Dual Band Wireless-AC 7265       | `iwlwifi-7265-*.ucode`                                       |
+| Dual Band Wireless-AC 3160       | `iwlwifi-3160-*.ucode`                                       |
+| Dual Band Wireless-AC 3165       | `iwlwifi-7265D-*.ucode`                                      |
+| Dual Band Wireless-AC 3168       | `iwlwifi-3168-*.ucode`                                       |
+| Dual Band Wireless-AC 8260       | `iwlwifi-8000C-*.ucode`                                      |
+| Dual Band Wireless-AC 8265       | `iwlwifi-8265-*.ucode`                                       |
+| Dual Band Wireless-AC 8275       | `iwlwifi-8265-*.ucode`                                       |
+| Wireless-AC 9260                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
+| Wireless-AC 9461                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
+| Wireless-AC 9462                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
+| Wireless-AC 9560                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
+| Wi-Fi 6 AX200                    | `iwlwifi-cc-a0-*.ucode`                                      |
+| Killer AX1650                    | `iwlwifi-cc-a0-*.ucode`                                      |
+| Wi-Fi 6 AX201                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
+| Wi-Fi 6 AX101                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
+| Killer AX1650i                   | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
+| Killer AX1675                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
+| Wi-Fi 6 AX210                    | `iwlwifi-ty-a0-gf-a0-*.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm`   |
+| Killer AX1675x                   | `iwlwifi-ty-a0-gf-a0-*.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm`   |
+| Wi-Fi 6E AX211                   | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
+| Killer AX1690 series             | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
+
+</details>
 
 ### Bluetooth Firmware
 
