@@ -32,7 +32,7 @@ Run this command after each keypress to capture a snapshot of the kernel log:
 sudo dmesg | grep "ApplePS2Keyboard"
 ```
 
-For a continuously updating view that refreshes every 2 seconds (adjust to your needs), use this polling loop instead:
+For a continuously updating view that refreshes every 2 seconds (adjust to your needs), use this polling loop instead (thanks to [Poveii](https://github.com/Poveii)):
 
 ```bash
 while true; do clear; sudo dmesg | grep "ApplePS2Keyboard"; sleep 2; done
@@ -177,5 +177,4 @@ This results in `F13` being used for Screenshots:<br>
 
 - Thanks to Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping).
 - Thanks to Acidanthera for maintaining [VoodooPS2](https://github.com/acidanthera/VoodooPS2).
-- Thanks to @Poveii for discovering a workaround for logging scan codes on macOS Big Sur and newer.
 - If you want to create custom keyboard shortcuts, you can also try [Karabiner Elements](https://github.com/pqrs-org/Karabiner-Elements).
