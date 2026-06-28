@@ -57,7 +57,7 @@ If BrightnessKeys doesn't work out of the box, check the "[special cases](https:
 
 > [!NOTE]
 > 
-> Some ASUS and Dell Laptops require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`, so that the Brightness shortcut keys work. Please refer to the [ASUS Machine Special Patch](/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](/Brand-specific_Patches/Dell_Special_Patch) for instructions.
+> Some ASUS and Dell Laptops require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`, so that the Brightness shortcut keys work. Please refer to the [ASUS Machine Special Patch](05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch/README.md) and [Dell Machine Special Patch](05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch/README.md) for instructions.
 
 ## Requirements and Preparations
 
