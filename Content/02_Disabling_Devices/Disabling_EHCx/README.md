@@ -4,10 +4,10 @@
 
 - [About](#about)
 - [Use cases](#use-cases)
-- [System Requirements](#system-requirements)
-- [Patch](#patch)
 - [Technical Background: `EHCI` and `XHCI`](#technical-background-ehci-and-xhci)
   - [USB Specs](#usb-specs)
+- [System Requirements](#system-requirements)
+- [Patch](#patch)
 - [Notes](#notes)
 
 ---
@@ -21,18 +21,6 @@ SSDTs for disabling `EHC1` and `EHC2` USB 2.0 Controllers used in 1st to 5th Gen
 
 - The DSDT contains `EHC1` and/or `EHC2` controllers but the machine does not have the associated hardware.
 - The DSDT contains `EHC1` and/or `EHC2`, the actual hardware controllers exist but no ports are mapped to it (externally or internally).
-
-## System Requirements
-
-- Machines prior to Skylake: if you cannot enable `XHCI Mode`in BIOS and the conditions of the **use cases** are met, use the patches listed below.
-- For 7th Gen Intel Core or newer with macOS 10.11 or higher (if `EHC1`/`EHC2` is present in the DSDT)
-- ***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF*** cannot be used together.
-- The patch adds `_INI` method under `Scope (\)`, if it clashes with `_INI` methods of other patches, the contents of `_INI` should be merged.
-
-## Patch
-- ***SSDT-EHC1_OFF***: Disables `EHC1`.
-- ***SSDT-EHC2_OFF***: Disables `EHC2`.
-- ***SSDT-EHCx_OFF***: Combined patch of ***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF***.
 
 ## Technical Background: `EHCI` and `XHCI`
 
@@ -55,6 +43,18 @@ USB 4        | 40 Gbps | PCIe | –
 > [!NOTE]
 > 
 > Instead of USB 3.1 Gen 2 and USB 4, Apple uses Thunderbolt 3 and 4 which utilize the PCIe protocol to achieve these high transfer rates.
+
+## System Requirements
+
+- Machines prior to Skylake: if you cannot enable `XHCI Mode`in BIOS and the conditions of the **use cases** are met, use the patches listed below.
+- For 7th Gen Intel Core or newer with macOS 10.11 or higher (if `EHC1`/`EHC2` is present in the DSDT)
+- ***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF*** cannot be used together.
+- The patch adds `_INI` method under `Scope (\)`, if it clashes with `_INI` methods of other patches, the contents of `_INI` should be merged.
+
+## Patch
+- ***SSDT-EHC1_OFF***: Disables `EHC1`.
+- ***SSDT-EHC2_OFF***: Disables `EHC2`.
+- ***SSDT-EHCx_OFF***: Combined patch of ***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF***.
 
 ## Notes
 - If your system is a pre 6th Gen Laptop and supports a docking station which offers additional USB 2 and USB 3 ports, it's most likely that both `EHCI` controllers are used on your machine so don't disable them!
