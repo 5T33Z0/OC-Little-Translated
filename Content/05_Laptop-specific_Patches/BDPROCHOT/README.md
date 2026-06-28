@@ -26,7 +26,7 @@ This guide outlines a general fix for performance issues caused by the Bi-Direct
 
 In Hackintosh systems, particularly on laptops like the [Lenovo T490](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore/issues/44), BDPROCHOT can be triggered inappropriately due to firmware, power management, or kext-related issues, leading to significant performance degradation, especially after waking from S3 sleep. This results in the laptop becoming super-sluggish and unresponsive. You can verify this behavior by:
 
-- **Checking CPU Frequency**: Use Intel Power Gadget to monitor CPU frequency. If BDPROCHOT is active, the CPU frequency will be locked at or near the base frequency (e.g., 400-800 MHz).
+- **Checking CPU Frequency**: Use [**Intel Power Gadget**](https://intel-power-gadget.macupdate.com/) to monitor CPU frequency. If BDPROCHOT is active, the CPU frequency will be locked at or near the base frequency (e.g., 400-800 MHz).
 - **YogaSMC Profile Switching**: If using YogaSMC, the mode may switch to "Lap" after waking, indicating a low-power state triggered by BDPROCHOT to reduce heat dissipation.
 - **General Symptoms**:
   - Sluggish performance post-wake, with slow application launches and lagging multitasking.
