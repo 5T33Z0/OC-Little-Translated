@@ -82,7 +82,7 @@ A keystroke will generate 2 scan codes, **PS/2 Scan Code** and **ADB Scan Code**
 - Enter `/Volumes/EFI/EFI/OC/Kexts/VoodooPS2Controller.kext/Contents/PlugIns/VoodooPS2Keyboard.kext/Contents/Info.plist`
 - Open the `Info.plist` with a Plist Editor
 - Navigate to `IOKitPersonalities\Platform Profile\Default`
-- Change `LogScanCodes` from `0` to **`1`** (once you're done, change it back to **`0`** again!)
+- Change `LogScanCodes` from `0` to **`1`** (once you're done, change it back to **`0`** again!):<br><img width="733" height="575" alt="LogScanCode" src="https://github.com/user-attachments/assets/76d90ba1-173a-4df1-aa24-3c2f29bc551d" />
 - Save the file
 - Reboot
 - On **macOS 10.15 or older**: open **Console.app** and search for `ApplePS2Keyboard`
