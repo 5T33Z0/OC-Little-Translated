@@ -4,7 +4,7 @@
 
 - [About](#about)
   - [Logging Scan Codes on macOS Big Sur and newer](#logging-scan-codes-on-macos-big-sur-and-newer)
-  - [Update \[September 30, 2020\]:](#update-september-30-2020)
+  - [Brightness Shortcut Keys (VoodooPS2Controller 2.x and newer)](#brightness-shortcut-keys-voodoops2controller-2x-and-newer)
 - [Requirements and Preparations](#requirements-and-preparations)
   - [About PS/2 and ADB Scan Codes](#about-ps2-and-adb-scan-codes)
   - [Enabling keyboard scan codes](#enabling-keyboard-scan-codes)
@@ -44,19 +44,20 @@ Here's a video demo showing the polling loop in action:
 
 https://github.com/user-attachments/assets/34395b5f-dddf-41ec-b525-25ea47f388a4
 
-### Update [September 30, 2020]:
+### Brightness Shortcut Keys (VoodooPS2Controller 2.x and newer)
 
-- **VoodooPS2Controller** now separates the brightness shortcut keys part from the standalone driver **BrightnessKeys** kext
-- It provides the methods `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`. So the previous brightness shortcut patches are no longer needed and should be disabled.
+Since VoodooPS2Controller version 2.x, brightness key handling is managed by the standalone [**BrightnessKeys**](https://github.com/acidanthera/BrightnessKeys) kext. Previous SSDT-based brightness shortcut patches are no longer needed and should be disabled if present.
 
-If the **BrightnessKeys** kext does not work initially, please refer to the "[special cases](https://github.com/acidanthera/BrightnessKeys#special-cases)" section. If that doesn't fix it, assign 2 keys mapped to `F14`, `F15` for the shortcut keys to adjust brightness. Required kexts:
+If BrightnessKeys doesn't work out of the box, check the "[special cases](https://github.com/acidanthera/BrightnessKeys#special-cases)" section first. If that doesn't help, manually map 2 keys to `F14` and `F15` instead.
+
+**Required kexts**:
 
 - [**VoodooPS2Controller.kext**](https://github.com/acidanthera/VoodooPS2)
 - [**BrightnessKeys.kext**](https://github.com/acidanthera/BrightnessKeys)
 
 > [!NOTE]
 > 
-> Some ASUS and Dell Laptops require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`, so that the Brightness shortcut keys work. Please refer to the [ASUS Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Brand-specific_Patches/Dell_Special_Patch) for instructions.
+> Some ASUS and Dell Laptops require `SSDT-OCWork-xxx` to enable `Notify (GFX0, 0x86)` and `Notify (GFX0, 0x87)`, so that the Brightness shortcut keys work. Please refer to the [ASUS Machine Special Patch](/Brand-specific_Patches/ASUS_Special_Patch) and [Dell Machine Special Patch](/Brand-specific_Patches/Dell_Special_Patch) for instructions.
 
 ## Requirements and Preparations
 
