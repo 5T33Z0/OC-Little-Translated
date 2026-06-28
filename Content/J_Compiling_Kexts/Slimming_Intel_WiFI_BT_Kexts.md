@@ -91,9 +91,9 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 ### Identifying the used Bluetooth Firmware
 
-![](/Users/5t33z0/Downloads/Identify_IntelFirmware.png)
+The diagram below shows the decision path for identifying the Bluetooth firmware used by your Intel card.
 
-This workflow shows the decision path for identifying the Bluetooth firmware used by your Intel card.
+<img width="1536" height="1024" alt="Identify_IntelFirmware" src="https://github.com/user-attachments/assets/30a7f842-b441-4545-b363-9f970e487514" />
 
 1. **Check IORegistryExplorer (primary method)**
 
