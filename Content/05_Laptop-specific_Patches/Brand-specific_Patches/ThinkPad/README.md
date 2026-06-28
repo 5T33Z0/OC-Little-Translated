@@ -11,17 +11,13 @@ This issue is often not clearly visible as the kernel-ringbuffer (`msgbuf`) is, 
 This fix consists of 2 components: a binary rename that changes `HWAC` to `XWAC` form the EC and then redefines it in `SSDT-HWAC`. It splits the original `HWAC` frield from 16 bit into two 8 bit fields (`WAC0` & `WAC1`) and hands them over to macOS to fix all accesses to the Embedded Cnntroller's `HWAC` field at once. For any other Operating System `HWAC` is used to ensure full compliance with ACPI
 
 **Technical Background**:
-> Later releases of `AppleACPIPlatform` are unable to correctly access fields within the EC (Embedded Controller). […] `DSDT` must be changed to comply with the limitations of Apple's `AppleACPIPlatform`. 
-> In particular, any fields in the EC larger than 8-bit, must be changed to be accessed 8-bits at one time. This includes 16, 32, 64, and larger fields.
-> 
-> - [**How to patch DSDT for working battery status**](https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/) by Rehabman
+
+Later releases of `AppleACPIPlatform` are unable to correctly access fields within the EC (Embedded Controller). […] `DSDT` must be changed to comply with the limitations of Apple's `AppleACPIPlatform`. In particular, any fields in the EC larger than 8-bit, must be changed to be accessed 8-bits at one time. This includes 16, 32, 64, and larger fields. For referenace, see &rarr; [**How to patch DSDT for working battery status**](https://www.tonymacx86.com/threads/guide-how-to-patch-dsdt-for-working-battery-status.116102/) by Rehabman.
 
 ## Do I need this fix?
-With the release of [**`ECEnabler.kext`**](https://github.com/1Revenger1/ECEnabler/releases) in 2021, which enables reading Embedded Controller fields over 1 byte long in macOS, this fix might be obsolete. 
+With the release of [**`ECEnabler.kext`**](https://github.com/1Revenger1/ECEnabler/releases) in 2021, which enables reading Embedded Controller fields over 1 byte long in macOS, this fix might be obsolete. With `ECEnabler`, most (not all) ThinkPads no longer require any Battery Patches since their main purpose was to split battery-related EC fields from 16 bit into 2 8 bit chunks, so macOS could read the data. Since the HWAC fix works the same it's most likely not required as well.
 
-Because with ECEnabler, most (not all) ThinkPads no longer require any Battery Patches since their main purpose was to split battery-related EC fields from 16 bit into 2x8 bit so macOS could read the data. Since the HWAC fix works the same it's most likely not required as well.
-
-But if you don't use this kext to fix the EC in macOS and `HWAC` is present in your system's `DSDT` and it's not covered by your battery fix already, you should add it.
+But if you don't use this kext to fix the EC in macOS and `HWAC` is present in your system's `DSDT`, and it's not covered by your battery fix already, you should add it.
 
 ## Instructions
 
