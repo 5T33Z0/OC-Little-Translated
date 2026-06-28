@@ -2,24 +2,26 @@
 
 **TABLE of CONTENTS**
 
-- [Description](#description)
-  * [Update \[September 30, 2020\]:](#update-september-30-2020)
+- [About](#about)
+  - [Logging Scan Codes on macOS Big Sur and newer](#logging-scan-codes-on-macos-big-sur-and-newer)
+  - [Update \[September 30, 2020\]:](#update-september-30-2020)
 - [Requirements and Preparations](#requirements-and-preparations)
-  * [About PS/2 and ADB Scan Codes](#about-ps2-and-adb-scan-codes)
-  * [Enabling keyboard scan codes](#enabling-keyboard-scan-codes)
-    + [Method 1: Using Terminal](#method-1-using-terminal)
-    + [Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)](#method-2-enabling-log-scan-codes-in-voodoops2keyboardkext-recommended)
+  - [About PS/2 and ADB Scan Codes](#about-ps2-and-adb-scan-codes)
+  - [Enabling keyboard scan codes](#enabling-keyboard-scan-codes)
+    - [Method 1: Using Terminal](#method-1-using-terminal)
+    - [Method 2: Enabling Log Scan Codes in `VoodooPS2Keyboard.kext` (recommended)](#method-2-enabling-log-scan-codes-in-voodoops2keyboardkext-recommended)
 - [Key mapping principle](#key-mapping-principle)
-  * [PS2 Scan Code to PS2 Scan Code](#ps2-scan-code-to-ps2-scan-code)
-  * [PS2 Scan Code to ADB Scan Code](#ps2-scan-code-to-adb-scan-code)
+    - [PS2 Scan Code to PS2 Scan Code](#ps2-scan-code-to-ps2-scan-code)
+    - [PS2 Scan Code to ADB Scan Code](#ps2-scan-code-to-adb-scan-code)
 - [Credits and Resources](#credits-and-resources)
 
 ---
 
-## Description
+## About
 Keyboard keys can be re-mapped for triggering different keys than the ones that are actually pressed. Function keys like `F2` can be re-mapped to triggering `F10`, for example. But beware that *only* keys that can capture **PS2 Scan Code** under macOS can be re-mapped! An in-depth example from a Lenovo ThinkPad utilizing this technique and [ACPI Debugging](https://github.com/5T33Z0/OC-Little-Translated/tree/main/00_ACPI/ACPI_Debugging) can be found [here](https://github.com/5T33Z0/OC-Little-Translated/blob/main/05_Laptop-specific_Patches/Fixing_Keyboard_Mappings_and_Brightness_Keys/Customizing_ThinkPad_Keyboard_Shortcuts.md).
 
 > [!CAUTION]
+> 
 > Logging Keyboard Scan Codes via **Console.app** no longer works on macOS Big Sur and newer ([1](https://github.com/acidanthera/bugtracker/issues/872), [2](https://github.com/daliansky/OC-little/issues/46), [3](https://github.com/5T33Z0/OC-Little-Translated/issues/92#issuecomment-1848874053)). Use the Terminal commands below instead.
 
 ### Logging Scan Codes on macOS Big Sur and newer
@@ -38,7 +40,7 @@ while true; do clear; sudo dmesg | grep "ApplePS2Keyboard"; sleep 2; done
 
 Press `Ctrl+C` to stop. Note that `sudo dmesg -w` (live streaming) is not supported on macOS.
 
-Here's a video demo showing in action:
+Here's a video demo showing the polling loop in action:
 
 https://github.com/user-attachments/assets/34395b5f-dddf-41ec-b525-25ea47f388a4
 
@@ -173,6 +175,7 @@ This results in `F13` being used for Screenshots:<br>
 
 ## Credits and Resources
 
-- Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping)
-- If you want to create custom keyboard shortcuts, you can try [Karabiner Elements](https://github.com/pqrs-org/Karabiner-Elements)
-- Thanks to @Poveii for coming up with the workaround to use Scan Codes in newer versions of macOS
+- Thanks to Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping).
+- Thanks to Acidanthera for maintaining [VoodooPS2](https://github.com/acidanthera/VoodooPS2).
+- Thanks to @Poveii for discovering a workaround for logging scan codes on macOS Big Sur and newer.
+- If you want to create custom keyboard shortcuts, you can also try [Karabiner Elements](https://github.com/pqrs-org/Karabiner-Elements).
