@@ -3,7 +3,7 @@
 **TABLE of CONTENTS**
 
 - [About](#about)
-	- [SSDTs vs. `DeviceProperties` – some considerations](#ssdts-vs-deviceproperties--some-considerations)
+- [Using SSDTs vs. `DeviceProperties` – some considerations](#using-ssdts-vs-deviceproperties--some-considerations)
 - [Method 1: Using AMD Radeon Patches by mattystonnie](#method-1-using-amd-radeon-patches-by-mattystonnie)
 - [Method 2a: Selecting specific AMD Framebuffers via `DeviceProperties`](#method-2a-selecting-specific-amd-framebuffers-via-deviceproperties)
 	- [Finding the PCIe path](#finding-the-pcie-path)
@@ -27,7 +27,7 @@ This chapter contains 2 methods for improving the performance of AMD Radeon Grap
 > 
 > According to Whatevergreen's [**Radeon FAQs**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md), using named framebuffers is not recommended: "Named framebuffers (Baladi, Futomaki, Lotus, etc.), enabled by Clover's GPU injection or any other methods should never ever be used. This way of GPU injection is a common mistake, preventing automatic configuration of various important GPU parameters. This will inavoidably lead to borked GPU functioning in quite a number of cases."
 
-### SSDTs vs. `DeviceProperties` – some considerations
+## Using SSDTs vs. `DeviceProperties` – some considerations
 - Combining methods 1 and 2 can be problematic *if* the SSDT also injects values for the same device properties as the config.plist.
 - At best, the value(s) injected via the SSDT would be overwritten by the one(s) defined by `DeviceProperties` in the config.plist.
 - In the worst case, you could inject conflicting settings.

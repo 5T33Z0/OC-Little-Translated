@@ -1,4 +1,4 @@
-# # Fixing APFS Preboot Volumes Corrupted by macOS High Sierra
+# Fixing APFS Preboot Volumes Corrupted by macOS High Sierra
 
 ## About
 
