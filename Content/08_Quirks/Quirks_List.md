@@ -9,8 +9,7 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel Skylake X/W and Cascade Lake X/W (ASUS HEDT)](#intel-skylake-xw-and-cascade-lake-xw-asus-hedt)
 		- [Intel Haswell-E, Broadwell-E, Sandy Bridge-E and Ivy Bridge-E (HEDT)](#intel-haswell-e-broadwell-e-sandy-bridge-e-and-ivy-bridge-e-hedt)
 	- [Intel Core i5/i7/i9](#intel-core-i5i7i9)
-		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop)
-		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop)
+		- [Intel 11th Gen and Newer](#intel-11th-gen-and-newer)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-dektopmobilenuc)
 		- [Intel 8th and 9th Gen Coffee Lake (Desktop)](#intel-8th-and-9th-gen-coffee-lake-desktop)
 		- [Intel 9th Gen Coffee Lake (Z390 Chipset)](#intel-9th-gen-coffee-lake-z390-chipset)
@@ -31,8 +30,8 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel Sandy Bridge-E and Ivy Bridge-E (HEDT)](#intel-sandy-bridge-e-and-ivy-bridge-e-hedt)
 		- [Intel Sandy Bridge-E and Ivy Bridge-E (HP HEDT)](#intel-sandy-bridge-e-and-ivy-bridge-e-hp-hedt)
 	- [Intel Core i5/i7/i9](#intel-core-i5i7i9-1)
-		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop-1)
-		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop-1)
+		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop)
+		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop)
 		- [Intel 11th Gen Rocket Lake (Dektop/Mobile/Nuc)](#intel-11th-gen-rocket-lake-dektopmobilenuc)
 		- [Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)](#intel-10th-gen-comet-lake-dektopmobilenuc)
 		- [Intel 10th Gen Comet Lake (Dell/Sony VAIO)](#intel-10th-gen-comet-lake-dellsony-vaio)
@@ -56,12 +55,12 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 		- [Intel Skylake X/W, Cascade Lake X/W, Broadwell-E, Haswell-E, Ivy Bridge-E and Sandy Bridge-E  (High End Desktop)](#intel-skylake-xw-cascade-lake-xw-broadwell-e-haswell-e-ivy-bridge-e-and-sandy-bridge-e--high-end-desktop)
 		- [Intel Skylake X/W, Cascade Lake X/W, Broadwell-E, Haswell-E, Ivy Bridge-E and Sandy Bridge-E  (HP High End Desktop)](#intel-skylake-xw-cascade-lake-xw-broadwell-e-haswell-e-ivy-bridge-e-and-sandy-bridge-e--hp-high-end-desktop)
 	- [Intel Core i5/i7/i9](#intel-core-i5i7i9-2)
-		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop-2)
-		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop-2)
+		- [Intel 13th Gen Raptor Lake (Desktop)](#intel-13th-gen-raptor-lake-desktop-1)
+		- [Intel 12th Gen Alder Lake (Desktop)](#intel-12th-gen-alder-lake-desktop-1)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-dektop)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-mobilenuc)
 		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Desktop)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-desktop)
-		- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-mobilenuc)
+	- [Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Mobile/NUC)](#intel-10th-gen-comet-lake-and-11th-gen-rocket-lake-hp-mobilenuc)
 		- [Intel 8th and 9th Gen Coffee Lake (Desktop)](#intel-8th-and-9th-gen-coffee-lake-desktop-1)
 		- [Intel 8th and 9th Gen Coffee Lake (HP Desktop)](#intel-8th-and-9th-gen-coffee-lake-hp-desktop)
 		- [Intel 8th and 9th Gen Coffee Lake (Mobile/NUC)](#intel-8th-and-9th-gen-coffee-lake-mobilenuc-1)
@@ -113,26 +112,14 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 
 ### Intel Core i5/i7/i9
 
-#### Intel 13th Gen Raptor Lake (Desktop)
-- AvoidRuntimeDefrag
-- DevirtualiseMmio
-- EnableSafeModeSlide
-- ProvideCustomSlide 
-- SetupVirtualMap
-- RebuildAppleMemoryMap
-- SyncRuntimePermissions
-- ProvideMaxSlide: 0
+#### Intel 11th Gen and Newer
 
-#### Intel 12th Gen Alder Lake (Desktop)
-- AvoidRuntimeDefrag
-- DevirtualiseMmio
-- EnableSafeModeSlide
-- ProtectUefiServices
-- ProvideCustomSlide 
-- SetupVirtualMap
-- RebuildAppleMemoryMap
-- SyncRuntimePermissions
-- ProvideMaxSlide: 0
+&rarr; Same as Comet Lake but requires additional CPU-ID Spoof to boot!
+
+- Kernel > Emulate
+	- **Cpuid1Data**: 55060A00000000000000000000000000
+	- **Cpuid1Mask**: FFFFFFFF000000000000000000000000
+	- **MinKernel**: 20.0.0
 
 #### Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 - AvoidRuntimeDefrag
