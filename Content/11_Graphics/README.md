@@ -1,6 +1,6 @@
 # Graphics
 
-A collection of graphics-related fixes, patches, and workarounds for common macOS issues on OpenCore systems. Entries focus on solving specific problems rather than providing full configuration guides.
+A collection of graphics-related fixes, patches, and workarounds for common issues when running macOS on Wintel Systems. Entries focus on solving specific problems rather than providing full configuration guides.
 
 **TABLE of CONTENTS**
 
