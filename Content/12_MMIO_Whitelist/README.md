@@ -33,7 +33,6 @@ The problem: macOS uses **KASLR** (Kernel Address Space Layout Randomization) to
 >
 > For more details about the macOS boot process, Memory Mapping, KASLR Slides and OpenCore's role in the boot chain, [read this](/Boot_KASLR_Slides.md).
 
-
 ---
 
 ## How `DevirtualiseMmio` and the `MmioWhitelist` actually work
