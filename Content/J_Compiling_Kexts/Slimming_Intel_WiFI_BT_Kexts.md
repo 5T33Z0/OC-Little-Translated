@@ -1,25 +1,28 @@
-# How to compile slimmed `AirportItlwm`, `itlwm` and `IntelBluetoothFirmware` kexts for Intel Wi-Fi/BT Cards
+# Compiling Slimmed `AirportItlwm`, `itlwm` and `IntelBluetoothFirmware` Kexts
 
 **TABLE of CONTENTS**
 
 - [About](#about)
-- [Preparations](#preparations)
-  - [Identifying the used Wi-Fi Firmware](#identifying-the-used-wi-fi-firmware)
-  - [Identifying the used Bluetooth Firmware](#identifying-the-used-bluetooth-firmware)
-  - [Installing Xcode](#installing-xcode)
-  - [Preparing the `itlwm` source code](#preparing-the-itlwm-source-code)
-  - [Preparing the `IntelBluetoothFirmware` source code](#preparing-the-intelbluetoothfirmware-source-code)
-- [Compiling the kexts](#compiling-the-kexts)
-  - [Compiling `AirportItlwm` and `Itlwm`](#compiling-airportitlwm-and-itlwm)
-  - [Compiling `InteBluetothFirmware`](#compiling-intebluetothfirmware)
-- [Testing](#testing)
+- [1. Identify the used firmware](#1-identify-the-used-firmware)
+  - [1.1 Identify Your Wi-Fi Firmware](#11-identify-your-wi-fi-firmware)
+  - [1.2 Identify Your Bluetooth Firmware](#12-identify-your-bluetooth-firmware)
+- [3. Prepare the Source Code](#3-prepare-the-source-code)
+  - [3.1 Prepare the `itlwm` source code](#31-prepare-the-itlwm-source-code)
+  - [3.2 Prepare the `IntelBluetoothFirmware` source code](#32-prepare-the-intelbluetoothfirmware-source-code)
+- [4. Compile the kexts](#4-compile-the-kexts)
+  - [4.1 Install Xcode](#41-install-xcode)
+  - [4.2 Compile `AirportItlwm` and `Itlwm`](#42-compile-airportitlwm-and-itlwm)
+  - [4.3 Compile `InteBluetothFirmware`](#43-compile-intebluetothfirmware)
+- [5. Test](#5-test)
 - [Credits](#credits)
 
 ---
 
 ## About
 
-The size of the Intel Wi-Fi and Bluetooth firmware kexts can be reduced significantly by removing unnecessary firmware files. The resulting kexts contain only the firmware required by your Intel Wi-Fi/Bluetooth card, reducing their size by roughly a factor of ten. If you only want to compile the latest versions of the Intel Wi-Fi and Bluetooth kexts without slimming them down, consider using Chris1111's [**Intel Wi-Fi KextsBuilder**](https://github.com/chris1111/Wifi-Intel-KextsBuilder). It automatically downloads and builds the latest versions of the kexts.
+The size of the Intel Wi-Fi and Bluetooth firmware kexts can be reduced significantly by removing unnecessary firmware. The resulting kexts contain only the firmware files required by your Intel Wi-Fi/Bluetooth card, reducing their size by up to 16x depending on the used model.
+
+If you only want to compile the latest versions of the Intel Wi-Fi and Bluetooth kexts without slimming them down, consider using Chris1111's [**Intel Wi-Fi KextsBuilder**](https://github.com/chris1111/Wifi-Intel-KextsBuilder). It automatically downloads and builds the latest versions of the kexts.
 
 > [!IMPORTANT]
 >
@@ -27,15 +30,15 @@ The size of the Intel Wi-Fi and Bluetooth firmware kexts can be reduced signific
 
 ---
 
-## Preparations
+## 1. Identify the used firmware
 
-To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and **IntelBluetoothFirmware** for your Intel Wi-Fi/Bluetooth card, you first need to identify the firmware files required by your hardware. Once identified, you can remove all unused firmware files from the source code before compiling the kexts.
+To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and **IntelBluetoothFirmware** for your Intel Wi-Fi/Bluetooth card, you first need to identify the firmware files required by your hardware. Once identified, remove all unused firmware files from the source code before compiling the kexts.
 
 > [!NOTE]
 > 
 > The screenshots in this guide use the firmware files required by an **Intel AC 9560** Wi-Fi/Bluetooth card. If you have a different Intel card, use the firmware files corresponding to your model instead.
 
-### Identifying the used Wi-Fi Firmware
+### 1.1 Identify Your Wi-Fi Firmware
 - Run [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer/releases)
 - If you are using `AirportItlwm.kext`, search for `Airport`
 - Take note of the entry for `IOModel` ("iwm-…"):<br>![Airport](https://github.com/user-attachments/assets/53c10e65-cf57-495a-af53-55862480a9d6)
@@ -89,7 +92,7 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 ---
 
-### Identifying the used Bluetooth Firmware
+### 1.2 Identify Your Bluetooth Firmware
 
 The diagram below shows the decision path for identifying the Bluetooth firmware used by your Intel card.
 
@@ -176,11 +179,9 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 
 ---
 
-### Installing Xcode
-- Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release)
-- Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
+## 3. Prepare the Source Code
 
-### Preparing the `itlwm` source code
+### 3.1 Prepare the `itlwm` source code
 - Download [**itlwm**](https://github.com/OpenIntelWireless/itlwm) source code (click on "Code" and select "Download zip")
 - Unzip the file – "itlwm-master" folder will be created
 - Run Terminal
@@ -201,7 +202,7 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 >
 > Instead of deleting unnecessary firmware files manually, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`. So before using it, you have to adjust the name of the firmware to match the one required by your card: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
 
-### Preparing the `IntelBluetoothFirmware` source code
+### 3.2 Prepare the `IntelBluetoothFirmware` source code
 - Download [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) source code (click on "Code" and select "Download zip")
 - Unzip the file – "IntelBluetoothFirmware-master" folder will be created
 - Run Terminal and enter:
@@ -213,14 +214,18 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 	git clone https://github.com/acidanthera/MacKernelSDK
 	```
 - Leave the Terminal window open for later use
-- Download the DEBUG version of [Lilu](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the IntelBluetoothFirmware-master folder
+- Download the DEBUG version of [**Lilu**](https://github.com/acidanthera/Lilu/releases), extract it and place the kext in the IntelBluetoothFirmware-master folder
 - In Finder, navigate to `~/Downloads/IntelBluetoothFirmware-master/IntelBluetoothFirmware/fw`
 - In the `fw` folder delete all the firmware files except the two: `ibt-….ddc` and `ibt-….sfi` files for your card
 - If present, also delete `FwBinary.cpp` from `/IntelBluetoothFirmware-MASTER/IntelBluetoothFirmware`
 
-## Compiling the kexts
+## 4. Compile the kexts
 
-### Compiling `AirportItlwm` and `Itlwm`
+### 4.1 Install Xcode
+- Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release) and extract it.
+- Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
+
+### 4.2 Compile `AirportItlwm` and `Itlwm`
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build itlwm as well as AirportItlwm kexts for all versions of macOS:
 
 ```bash
@@ -238,7 +243,7 @@ xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk m
 ```
 Once building the kexts is completed they will be located under `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
 
-### Compiling `InteBluetothFirmware`
+### 4.3 Compile `InteBluetothFirmware`
 
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build the IntelBluetoothFirmware kext:
 
@@ -253,10 +258,10 @@ The compiled kexts will be located under `~/Downloads/IntelBluetoothFirmwar-mast
 
 ---
 
-## Testing
-- Copy the newly compiled kexts to `EFI/OC/Kexts`, replacing the existing ones
+## 5. Test
+- Copy the newly compiled kexts to `EFI/OC/Kexts`, replacing existing ones
 - Reboot
-- Check if WiFi and Bluetooth are still working. If not, you probably used an incorrect firmware.
+- Check if WiFi and Bluetooth are still working. If not, you probably used an incorrect firmware  — revert to the prebuilt kexts from the OpenIntelWireless repo.
 
 > [!IMPORTANT]
 > 
