@@ -14,9 +14,10 @@ As fas as Hackintoshing is concerned, the following Ethernet kexts support **App
 - [**IntelLucy**](https://github.com/Mieze/IntelLucy)
 - [**IntelMausiEthernet**](https://github.com/Mieze/IntelMausiEthernet/releases) (v2.5.5d0, recently updated to support AppleVTD)
 
-Currently nor supporting **AppleVTD**:
+Currently not supporting **AppleVTD**:
 
 - [**IntelMausi**](https://github.com/acidanthera/IntelMausi)
   
 ## Enabling AppleVTD
-- Hardware Requirements: 
+
+&rarr; See [How to enable AppleVTD](/Content/20_AppleVTD/)
