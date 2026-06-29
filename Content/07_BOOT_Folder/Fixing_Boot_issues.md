@@ -73,7 +73,9 @@ EFI/Boot/bootx64.efi
 
 If the `Boot` folder does not exist, create it.
 
-> Important: `bootx64.efi` is the UEFI fallback loader. Firmware and Windows both trust it.
+> [!IMPORTANT]
+> 
+> `bootx64.efi` is the UEFI fallback loader. Firmware and Windows both trust it.
 
 ---
 
