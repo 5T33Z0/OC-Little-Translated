@@ -6,14 +6,14 @@
 - [1. Identify the used firmware](#1-identify-the-used-firmware)
   - [1.1 Identify Your Wi-Fi Firmware](#11-identify-your-wi-fi-firmware)
   - [1.2 Identify Your Bluetooth Firmware](#12-identify-your-bluetooth-firmware)
-- [3. Prepare the Source Code](#3-prepare-the-source-code)
-  - [3.1 Prepare the `itlwm` source code](#31-prepare-the-itlwm-source-code)
-  - [3.2 Prepare the `IntelBluetoothFirmware` source code](#32-prepare-the-intelbluetoothfirmware-source-code)
-- [4. Compile the kexts](#4-compile-the-kexts)
-  - [4.1 Install Xcode](#41-install-xcode)
-  - [4.2 Compile `AirportItlwm` and `Itlwm`](#42-compile-airportitlwm-and-itlwm)
-  - [4.3 Compile `InteBluetothFirmware`](#43-compile-intebluetothfirmware)
-- [5. Test](#5-test)
+- [2. Prepare the Source Code](#2-prepare-the-source-code)
+  - [2.1 Prepare the `itlwm` source code](#21-prepare-the-itlwm-source-code)
+  - [2.2 Prepare the `IntelBluetoothFirmware` source code](#22-prepare-the-intelbluetoothfirmware-source-code)
+- [3. Compile the kexts](#3-compile-the-kexts)
+  - [3.1 Install Xcode](#31-install-xcode)
+  - [3.2 Compile `AirportItlwm` and `Itlwm`](#32-compile-airportitlwm-and-itlwm)
+  - [3.3 Compile `InteBluetothFirmware`](#33-compile-intebluetothfirmware)
+- [4. Test](#4-test)
 - [Credits](#credits)
 
 ---
@@ -43,7 +43,7 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 - If you are using `AirportItlwm.kext`, search for `Airport`
 - Take note of the entry for `IOModel` ("iwm-…"):<br>![Airport](https://github.com/user-attachments/assets/53c10e65-cf57-495a-af53-55862480a9d6)
 
-> [!NOTE]
+> [!IMPORTANT]
 >
 > The firmware identifier is only exposed when using `AirportItlwm.kext`. If you are currently using `itlwm.kext`, this won't work. In this case, use the table below to find the wireless firmware file(s) used by your Wi-FI/BT card.
 
@@ -90,8 +90,6 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 </details>
 
----
-
 ### 1.2 Identify Your Bluetooth Firmware
 
 The diagram below shows the decision path for identifying the Bluetooth firmware used by your Intel card.
@@ -103,12 +101,10 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
    * Open **IORegistryExplorer**
    * Navigate to `IntelBluetoothFirmware`
    * Look for the property `fw_name`
-   * If `fw_name` is present → **use the listed firmware files and stop here**
-      **Example**:<br>
-      ![btfirmware](https://github.com/user-attachments/assets/d2395b61-7a11-4494-97ec-439c26de2962)
-
+   * If `fw_name` is present → **use the listed firmware files and [Compile the kexts](#3-compile-the-kexts)**
+     
 2. **If `fw_name` is missing**
-
+   * The `fw_name` field might be empty:<br> ![btfirmware](https://github.com/user-attachments/assets/d2395b61-7a11-4494-97ec-439c26de2962)
    * Check whether your Intel Wi-Fi/Bluetooth card is listed in the firmware mapping table below
    * If it is listed → use the corresponding firmware files
 
@@ -179,9 +175,9 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 
 ---
 
-## 3. Prepare the Source Code
+## 2. Prepare the Source Code
 
-### 3.1 Prepare the `itlwm` source code
+### 2.1 Prepare the `itlwm` source code
 - Download [**itlwm**](https://github.com/OpenIntelWireless/itlwm) source code (click on "Code" and select "Download zip")
 - Unzip the file – "itlwm-master" folder will be created
 - Run Terminal
@@ -202,7 +198,7 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 >
 > Instead of deleting unnecessary firmware files manually, you can also use Terminal to do this. The following command deletes all firmwares _except_ the one specified under `-name 'iwm…'`. So before using it, you have to adjust the name of the firmware to match the one required by your card: `find itlwm/firmware/ -type f ! -name 'iwm-7265-*' -delete`
 
-### 3.2 Prepare the `IntelBluetoothFirmware` source code
+### 2.2 Prepare the `IntelBluetoothFirmware` source code
 - Download [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) source code (click on "Code" and select "Download zip")
 - Unzip the file – "IntelBluetoothFirmware-master" folder will be created
 - Run Terminal and enter:
@@ -219,46 +215,52 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 - In the `fw` folder delete all the firmware files except the two: `ibt-….ddc` and `ibt-….sfi` files for your card
 - If present, also delete `FwBinary.cpp` from `/IntelBluetoothFirmware-MASTER/IntelBluetoothFirmware`
 
-## 4. Compile the kexts
+---
 
-### 4.1 Install Xcode
+## 3. Compile the kexts
+
+### 3.1 Install Xcode
 - Download the correct version of [**Xcode**](https://xcodereleases.com/?scope=release) and extract it.
 - Move the Xcode app to the "Programs" folder – otherwise compiling might fail.
 
-### 4.2 Compile `AirportItlwm` and `Itlwm`
+### 3.2 Compile `AirportItlwm` and `Itlwm`
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build itlwm as well as AirportItlwm kexts for all versions of macOS:
 
-```bash
-# navigate to the itlwm folder (if it is not your working directory already)
-cd ~/Downloads/itlwm-master
-
-# remove generated firmware
-rm include/FwBinary.cpp
-
-# generate firmware
-xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx
-
-# building the kexts
- xcodebuild -alltargets -configuration Release
-```
+- Navigate to the itlwm folder (if it is not your working directory already):
+  ```bash
+  cd ~/Downloads/itlwm-master
+  ```
+- Remove generated firmware (if present):
+  ```bash
+  rm include/FwBinary.cpp
+  ```
+- Generate Firmware:
+  ```bash
+  xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx
+  ```
+- Build the kexts:
+  ```bash
+  xcodebuild -alltargets -configuration Release
+  ```
 Once building the kexts is completed they will be located under `~/Downloads/itlwm-master/itlwm/build/Release`:<br>![kexts](https://github.com/user-attachments/assets/719630a7-54db-4c3e-b214-770dd24302a3)
 
-### 4.3 Compile `InteBluetothFirmware`
+### 3.3 Compile `InteBluetothFirmware`
 
 Enter the following commands (the lines without `#`) in Terminal and execute them one by one to build the IntelBluetoothFirmware kext:
 
-```bash
-# Navigate to the IntelBluetoothFirmware folder (if it is not your working directory already)
-cd ~/Downloads/IntelBluetoothFirmware-master
-
-# build the kext
-xcodebuild -alltargets -configuration Release
-```
+- Navigate to the IntelBluetoothFirmware folder:
+  ```bash
+  cd ~/Downloads/IntelBluetoothFirmware-master
+  ```
+- Build the kexts:
+  ```bash
+  xcodebuild -alltargets -configuration Release
+  ```
 The compiled kexts will be located under `~/Downloads/IntelBluetoothFirmwar-master/build/Release`:<br>![itlbtfw](https://github.com/user-attachments/assets/c9be468e-11fa-475e-9fb8-c7d7b3a348e2)
 
 ---
 
-## 5. Test
+## 4. Test
 - Copy the newly compiled kexts to `EFI/OC/Kexts`, replacing existing ones
 - Reboot
 - Check if WiFi and Bluetooth are still working. If not, you probably used an incorrect firmware  — revert to the prebuilt kexts from the OpenIntelWireless repo.
