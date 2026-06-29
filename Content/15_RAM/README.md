@@ -1,6 +1,6 @@
 # Fixing falsely reported RAM speed in macOS
 
-**INDEX**
+**TABLE of CONTENTS**
 
 - [About](#about)
 - [Fix](#fix)
@@ -187,6 +187,10 @@ Using Linux is recommended because the command used under Windows doesn't show t
 4. Enable `CustomMemory` (disabling it ignores the whole `Memory` section)
 5. Enter the relevant data you gathered earlier and ensure it follows OpenCore's standards: ![CstmMem](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b40dd4e2-aca6-454f-86bd-75ab8faf78c6)
 6. Save your config and reboot
+
+> [!CAUTION]
+>
+> If you plan to share your OpenCore Config/EFI Folder online with other users, you should delete these entries since they will cause issues on on other systems if they don't use RAM with the same specs!
 
 ## Verify
 - Run System Profiler
