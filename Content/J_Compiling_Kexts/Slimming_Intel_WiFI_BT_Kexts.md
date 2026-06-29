@@ -94,7 +94,7 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 The diagram below shows the decision path for identifying the Bluetooth firmware used by your Intel card.
 
-<img width="1536" height="1024" alt="Identify_IntelFirmware" src="https://github.com/user-attachments/assets/30a7f842-b441-4545-b363-9f970e487514" />
+<img width="1536" height="1024" alt="identifyitlbtfw" src="https://github.com/user-attachments/assets/e770b9b8-eb16-40e3-b4c5-e18180dd5e6f" />
 
 1. **Check IORegistryExplorer (primary method)**
 
