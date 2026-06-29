@@ -1,5 +1,7 @@
 # CMOS Reset Fix
 
+**TABLE of CONTENTS**
+
 - [About](#about)
 - [Method 1: Using a Kext and a Kernel Patch](#method-1-using-a-kext-and-a-kernel-patch)
 - [Method 2: Fixing the Real Time Clock via SSDT](#method-2-fixing-the-real-time-clock-via-ssdt)
@@ -87,9 +89,8 @@ This approach uses an SSDT hotfix to solve the CMOS reset issue. It adds a fake 
 ## NOTES
 - The device name and path in the patch must match the one used in your system's `DSDT`.
 - If the `RTC` of your systems is disabled by for some reason, a fake RTC is required for it to work properly. In the case that a **"Boot self-test error"** occurs, remove the interrupt from the SSDT:
-  ```asl
+    ```asl
     IRQNoFlags () /* delete this line */
         {8} /* Delete this line */
-  ```
-
+    ```
 **Thanks** @Chic Cheung, @Noctis for all your hard work!
