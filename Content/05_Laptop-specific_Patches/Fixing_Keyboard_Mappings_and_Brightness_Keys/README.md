@@ -152,7 +152,6 @@ You can use either of the following mapping methods:
 }
 ...
 ```
-
 > [!NOTE]
 >
 > - The PCI path of the Keyboard used in the example SSDT is `_SB.PCI0.LPCB.PS2K`. Make sure the path(s) used in the SSDT match the ones used in your `DSDT`.
@@ -160,22 +159,21 @@ You can use either of the following mapping methods:
 > - The variable `RMCF` is used in the patch. If `RMCF` is also used for other **keyboard patches**, both must be merged. See ***SSDT-RMCF-PS2Map-dell***.
 > - ***SSDT-RMCF-MouseAsTrackpad*** is used to force-enable the touchpad settings option.
 > - In **VoodooPS2Controller**, the PS2 Scan Code corresponding to the `PrtSc` button is `e037`. You could map this key to `F13` and bind `F13` to the screenshot function in System Settings:
->
->	```
->	...
->	"Custom ADB Map", Package()
->	{
->   	Package(){},
->    	"e037=64", // PrtSc -> F13
->	}
->	...
->	```
+>   ```
+>	  ...
+>	  "Custom ADB Map", Package()
+>	  {
+>     	Package(){},
+>    	  "e037=64", // PrtSc -> F13
+>	  }
+>	  ...
+>	  ```
+> - This results in `F13` being used for Screenshots:<br>[![f13](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)
 
-This results in `F13` being used for Screenshots:<br>
-[![f13](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)](https://user-images.githubusercontent.com/76865553/147818301-4e4be0ee-dda3-46cb-9c2f-e06d9b041523.jpg)
 
 ## Credits and Resources
 
 - Thanks to Rehabman for [ioio](https://github.com/RehabMan/OS-X-ioio) utility and [Custom Keyboard Mapping Guide](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller/wiki/How-to-Use-Custom-Keyboard-Mapping).
 - Thanks to Acidanthera for maintaining [VoodooPS2](https://github.com/acidanthera/VoodooPS2).
 - If you want to create custom keyboard shortcuts, you can also try [Karabiner Elements](https://github.com/pqrs-org/Karabiner-Elements).
+
