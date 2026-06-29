@@ -1,11 +1,11 @@
 # System Monitoring on Hackintosh: VirtualSMC vs. FakeSMC Plugins
 
-**INDEX**
+**TABLE of CONTENTS**
 
 - [Introduction](#introduction)
 - [Option 1: VirtualSMC](#option-1-virtualsmc)
   - [Official VirtualSMC Sensor Plugins](#official-virtualsmc-sensor-plugins)
-  - [3rd Party Sensor Plugins](#3rd-party-sensor-plugins)
+  - [3rd Party Sensor Plugins and Tools](#3rd-party-sensor-plugins-and-tools)
 - [Option 2: FakeSMC3](#option-2-fakesmc3)
   - [Included Plugins](#included-plugins)
 - [Compatible Monitoring Tools](#compatible-monitoring-tools)
@@ -44,14 +44,14 @@ Plugin | Purpose | macOS
 
 These plugins are loaded in addition to `VirtualSMC.kext` and must be enabled in `config.plist`.
 
-### 3rd Party Sensor Plugins
+### 3rd Party Sensor Plugins and Tools
 
 In addition to the official plugins for VirtualSMC by Acidanthera, several community-developed sensor extensions provide support for AMD CPUs, Radeon GPUs, and other hardware not covered by the core project. These kexts typically require **Lilu.kext** and **VirtualSMC.kext** to function properly.
 
 Plugin | Description | macOS
 -------|-------------|-------
-[**SMCAMDProcessor.kext**](https://github.com/trulyspinach/SMCAMDProcessor) | Temperature monitoring for AMD Ryzen and Threadripper CPUs | 10.13+
-[**SMCRadeonSensorss**](https://github.com/ChefKissInc/SMCRadeonSensors) | AMD GPU temperature monitoring on macOS. No commercial use. | 10.14+
+[**SMCAMDProcessor.kext**](https://github.com/trulyspinach/SMCAMDProcessor) | Temperature monitoring for AMD Ryzen and Threadripper CPUs.| 10.13+
+[**SMCRadeonSensors**](https://github.com/ChefKissInc/SMCRadeonSensors) | AMD GPU temperature monitoring on macOS. No commercial use. | 10.14+
 
 > [!NOTE]
 > 
@@ -87,9 +87,10 @@ Plugin | Purpose
 
 | Tool | Freeware | Compatible with Hackintosh | Description|
 | ---- | :------: | :------------------------: | ---------- |
+[**AMD Power Gadget**](https://github.com/trulyspinach/SMCAMDProcessor/releases) | Yes |✅ (AMD only) |Great app for monitoring and adjusting AMD CPU Management | 10.13+
+| [**Intel Power Gadget**](https://www.techspot.com/downloads/7172-intel-power-gadget.html) | Yes      | ✅ (Intel only)             | Intel's official tool for real-time power and thermal data; installs a kext that can also be read by HWMonitorSMC2 (select in app settings). Only compatible up to 10th Gen Intel Core CPUs (Comet Lake) |
 | [**HWMonitorSMC2**](https://github.com/CloverHackyColor/HWMonitorSMC2)                    | Yes      | ✅                          | Free and open-source system monitor that supports both VirtualSMC and FakeSMC plugins                                                                                                                    |
 | [**iStat Menus**](https://bjango.com/mac/istatmenus/)                                     | No       | ✅                          | Commercial app with advanced monitoring features for macOS (works with SMC plugins)                                                                                                                      |
-| [**Intel Power Gadget**](https://www.techspot.com/downloads/7172-intel-power-gadget.html) | Yes      | ✅ (Intel only)             | Intel's official tool for real-time power and thermal data; installs a kext that can also be read by HWMonitorSMC2 (select in app settings). Only compatible up to 10th Gen Intel Core CPUs (Comet Lake) |
 | [**Macs Fan Control**](https://crystalidea.com/macs-fan-control)                          | Yes      | ❌                          | Not compatible with Hackintosh systems; requires a real SMC device                                                                                                                                       |
 | System Report *(in macOS)*                                                            | Yes      | ✅                          | Built-in macOS utility that shows SMC and sensor information under "Power" and "Hardware" sections                                                                                                       |
 
@@ -103,7 +104,8 @@ Need dGPU temperature monitoring | FakeSMC3 (experimental support)
 Minimal setup without Lilu | FakeSMC3
 Full Acidanthera compatibility | VirtualSMC
 
-> \[!IMPORTANT]
+> [!IMPORTANT]
+> 
 > **Do not mix** VirtualSMC and FakeSMC. Only one SMC emulator should be used at a time.
 
 ## Example Directory Structures
