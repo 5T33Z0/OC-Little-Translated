@@ -1,6 +1,6 @@
 # Fixing issues with peripherals
 
-- **Affected OS**: macOS with support for Apple Mobile File Integrity (Sierra and newer).
+**Affected OS**: macOS with support for **Apple Mobile File Integrity** (Sierra and newer).
 
 ## Affected Devices and Symptoms
 - **Webcams**:
@@ -9,11 +9,11 @@
 	- No Video: Webcam won't turn on in 3rd party conferencing apps like Zoom, Microsoft Teams, Skype, etc. 
 - **Wireless Mice**:
 	- Pairing Logitech Wireless Mice via Logitech Unifying Software might not be possible. If the mouse can also be paired via BT, then it's not an issue.
-- Internal Microphones;
+- **Internal Microphones**:
 	- Can't be accessed/not available by 3rd Party Apps.
  
 ## Cause
-- Prompts for granting permissions to 3rd party apps don't pop-up if Apple Mobile File Integrity (AMFI) is disabled. 
+Prompts for granting permissions to 3rd party apps don't pop-up if **Apple Mobile File Integrity** (AMFI) is disabled. 
 
 ## Solutions
 Since disabling AMFI requires System Integrity Protection (SIP) to be disabled in the first place, re-enabling SIP can be a solution. Below you will find 4 different solutions for fixing this issue…
