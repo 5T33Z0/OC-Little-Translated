@@ -1,33 +1,31 @@
 # OC-Little Translated: ACPI Hotpatch Samples and Guides for OpenCore
 
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.8-success.svg)](https://github.com/acidanthera/OpenCorePkg)
-![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.5-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.06.22-blueviolet.svg)
+![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.5x-white.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.06.29-blueviolet.svg)
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ---
 
 ## 🧰 Introduction
-
-**OC-Little Translated** is a collection of ACPI hotpatches, binary renames, and guides for OpenCore, translated from [Daliansky's OC-Little](https://github.com/daliansky/OC-little) but expanded to reflect the latest developments of the Hackintosh scene. It complements Dortania's OpenCore Guides and covers topics like ACPI basics, device enabling, USB mapping, graphics fixes, and more. While tailored for OpenCore, most SSDTs and techniques are applicable to Clover bootloader as well.
+**OC-Little Translated** started as a translated adaptation of [Daliansky's OC-Little](https://github.com/daliansky/OC-little) but has since grown far beyond its origins into an independently expanded reference. What began as a translation project now covers substantially more ground than the original — with new chapters, a complete Appendix (A–Z), rewritten sections, and ongoing additions reflecting the latest developments in the Hackintosh scene. It complements Dortania's OpenCore Guides and covers topics like ACPI basics, device enabling, USB mapping, graphics fixes, and more. While tailored for OpenCore, most SSDTs and techniques are applicable to Clover bootloader as well.
 
 ### 📌 Disclaimer
-
 1. **🚫 Not an Installation or Configuration Guide**
    
    This is *not* a macOS installation nor OC Configuration guide. For setting up OpenCore for macOS usage on a Wintel System, use the [**OpenCore Install Guide**](https://dortania.github.io/OpenCore-Install-Guide/).  OC-Little focuses primarily on **post-install tuning** and **hardware enablement**.
-
 2. **✅ ACPI-Compliant Methods Only**
-
    This project avoids DSDT patching and other invasive mods. It adheres to the philosophy of a **clean, vanilla Hackintosh** using only **ACPI hotpatching**.
    For more on this philosophy, see [this InsanelyMac thread](https://www.insanelymac.com/forum/topic/352881-when-is-rebaseregions-necessary/#comment-2790870).
 
-### 🌍 About the Translation
-
+### 🌍 About the Translation and Expansion
 - **Translation Process**: Uses AI-based tools (DeepL, Google Translate) with manual copyediting for accuracy.
 - **Restructuring**: Organized the repo into logical sections based on issue types, components, and methods.
-- **Improvements**: Rewritten confusing sections (e.g., ACPI, USB Port Mapping), added missing descriptions, and included new content (e.g., USB Port Mapping via ACPI, Chapters 7–14, and the Appendix).
-- **Accuracy Note**: As the translator does not speak Chinese, minor inaccuracies may exist.
+- **Expansion**: Extended well beyond the original scope — added Chapters 7–20 and a full Appendix A–Z, none of which exist in Daliansky's original repo.
+- **Improvements**: Rewritten confusing sections (e.g., ACPI, USB Port Mapping), added missing descriptions, and included new content such as USB Port Mapping via ACPI.
+- **Accuracy Note**: As the translator does not speak Chinese, minor inaccuracies in the translated portions may exist.
+
+---
 
 ## 🔧 Core Configuration & Patching
 
