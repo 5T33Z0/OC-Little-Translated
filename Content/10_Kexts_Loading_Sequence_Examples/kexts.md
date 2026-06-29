@@ -1,5 +1,7 @@
 # Kexts
 
+Listed below are well-known kexts required when running macOS on non-Apple Hardware.
+
 | Category               | Kext Name                                                                                                                                                         | Description                                                       |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
 | **Required**           | [**Lilu**](https://github.com/acidanthera/Lilu)                                                                                                                   | For arbitrary kext, library, and program patching                 |
@@ -14,7 +16,7 @@
 |                             | [**NootedRed**](https://github.com/ChefKissInc/NootedRed) | AMD Vega iGPU support kext |
 |                             | [**WhateverGreen**](https://github.com/acidanthera/WhateverGreen) |  Various patches necessary for certain ATI/AMD/Intel/Nvidia GPUs   
 | **Audio**                   | [**AppleALC**](https://github.com/acidanthera/AppleALC)                            | Native macOS HD audio for not officially supported codecs | 
-||[**VoodooHDA**](https://github.com/chris1111/VoodooHDA-Tahoe)| AppleHDA replacement for macOS Tahoe 
+|                             | [**VoodooHDA-Tahoe**](https://github.com/chris1111/VoodooHDA-Tahoe)| AppleHDA replacement for macOS Tahoe. Doesn't require root patching with OCLP. Leave AppleALC enabled when using this. 
 | **Ethernet**                | AppleIGB (&rarr; Use IntelMausiEthernet instead!) | Provides support for Intel's IGB Ethernet controllers |
 |                             | [**AppleIGC**](https://github.com/SongXiaoXi/AppleIGC) | Provides support for Intel 2.5G NICs (I-225/I-226)   |
 |                             | [**AtherosE2200Ethernet**](https://github.com/Mieze/AtherosE2200Ethernet) | Provides support for Atheros E2200 family |
@@ -25,7 +27,7 @@
 |                             | [**NullEthernet**](https://github.com/RehabMan/OS-X-Null-Ethernet) | Creates a Null Ethernet when no supported network hardware is present | 
 |                             | [**RealtekRTL8100**](https://github.com/Mieze/RealtekRTL8100)                      | Provides support for Realtek RTL8100 family           |
 |                             | [**RealtekRTL8111**](https://github.com/Mieze/RTL8111_driver_for_OS_X)                      | Provides support for Realtek RTL8111/8168 family      |
-||[**SimpleRTK5**](https://github.com/laobamac/SimpleRTK5) | Realtek RTL8126 5G PCIe Ethernet card driver
+|                             | [**SimpleRTK5**](https://github.com/laobamac/SimpleRTK5) | Realtek RTL8126 5G PCIe Ethernet card driver
 | **Wi-Fi**                   | [**AirportBrcmFixup**](https://github.com/acidanthera/AirportBrcmFixup) | Patches required for non-native Airport Broadcom Wi-Fi cards  |
 |                             | [**AirportItlwm**](https://github.com/OpenIntelWireless/itlwm)                        | Intel Wi-Fi drivers support the native macOS Wi-Fi interface | 
 |                             | [**IO80211FamilyLegacy**](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)                 | Enable legacy native Apple Wireless adapters         |
