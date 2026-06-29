@@ -99,9 +99,10 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 1. **Check IORegistryExplorer (primary method)**
 
    * Open **IORegistryExplorer**
-   * Navigate to `IntelBluetoothFirmware`
+   * Search for "firmware"
+   * This should bring `IntelBluetoothFirmware` entry in focus
    * Look for the property `fw_name`
-   * If `fw_name` is present → **use the listed firmware files and [Compile the kexts](#3-compile-the-kexts)**
+   * If `fw_name` is present → **use the listed firmware and continue with section &rarr; [Compile the kexts](#3-compile-the-kexts)**
      
 2. **If `fw_name` is missing**
    * The `fw_name` field might be empty:<br> ![btfirmware](https://github.com/user-attachments/assets/d2395b61-7a11-4494-97ec-439c26de2962)
