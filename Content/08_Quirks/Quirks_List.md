@@ -190,9 +190,11 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 #### AMD Ryzen (17h)
 - AvoidRuntimeDefrag
 - EnableSafeModeSlide
+- ProvideCustomSlide
 - RebuildAppleMemoryMap
 - SetupVirtualMap
 - SyncRuntimePermissions
+- ProvideMaxSlide: 0
 
 #### AMD Threadripper TRx 40 (19h)
 - AvoidRuntimeDefrag
@@ -209,7 +211,7 @@ Collection of Booter, Kernel and UEFI Quirks for AMD and Intel CPUs.
 - ProvideCustomSlide
 - RebuildAppleMemoryMap
 - SetupVirtualMap
-- MaxSlide: 0
+- ProvideMaxSlide: 0
 
 ## Kernel Quirks
 
@@ -291,7 +293,7 @@ Usupported CPU. Requires Comet Lake CPU-ID
 - PowerTimeoutKernelPanic
 - SetApfsTrimTimeout: -1
 - ProvideCurrentCpuInfo
-- XhciPortLimit (up to macOS Catalina only)
+- XhciPortLimit (for USB port mapping only — disable after creating a custom USB port map)
 
 #### Intel 12th Gen Alder Lake (Desktop)
 Usupported CPU. Requires Fake CPU-ID
@@ -302,9 +304,9 @@ Usupported CPU. Requires Fake CPU-ID
 	- **MinKernel**: 20.0.0
 - AppleXcpmCfgLock (only required if CFG Lock can't be disabled in BIOS)
 - CustomSMBIOSGuid
-- DisableLinkedJettison
-- ExtentBTFeatureFlags (optional)
-- ForceAqquantiaEthernet (optional, only req. for 10 Gbit Ethernet)
+- DisableLinkeditJettison
+- ExtendBTFeatureFlags (optional)
+- ForceAquantiaEthernet (optional, only req. for 10 Gbit Ethernet)
 - PanicNoKextDump
 - PowerTimeoutKernelPanic
 - ProvideCurrentCpuInfo
@@ -319,7 +321,7 @@ Usupported CPU. Requires Fake CPU-ID
 - AppleXcpmCfgLock
 - DisableIoMapper
 - DisableLinkeditJettison
-- DisableRtcChecksum
+- DisableRtcChecksum (only required on boards that reset CMOS after each boot, e.g. certain Gigabyte and ASRock models)
 - PanicNoKextDump
 - PowerTimeoutKernelPanic
 - SetApfsTrimTimeout: -1
@@ -332,7 +334,7 @@ Usupported CPU. Requires Fake CPU-ID
 - PanicNoKextDump
 - PowerTimeoutKernelPanic
 - SetApfsTrimTimeout: -1
-- XhciPortLimit (up to macOS Catalina only)
+- XhciPortLimit
 
 #### Intel 10th Gen Comet Lake (Dell/Sony VAIO)
 - AppleXcpmCfgLock
@@ -481,7 +483,7 @@ Usupported CPU. Requires Fake CPU-ID
 **NOTES**
 
 - `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS 
-- `XhciPortLimit`: Disable for macOS 11.3 and newer – create a custom USB Port Map instead!
+- `XhciPortLimit`: Re-enabled in OpenCore 0.9.3+. Enable temporarily for USB port mapping, then disable once you have a custom USB port map with 15 ports or fewer per controller.
 - AMD CPUs require `Kernel` > `Emulate`: `DummyPowerManagement`
 - AMD CPUs also require additional [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to run macOS.
 
@@ -566,10 +568,12 @@ Usupported CPU. Requires Fake CPU-ID
 
 #### Intel 4th Gen Haswell (Desktop)
 - IgnoreInvalidFlexRatio
+- RequestBootVarRouting
 - ResizeGpuBars: -1
 
 #### Intel 4th Gen Haswell (HP Desktop)
 - IgnoreInvalidFlexRatio
+- RequestBootVarRouting
 - ResizeGpuBars: -1
 - UnblockFsConnect
 
