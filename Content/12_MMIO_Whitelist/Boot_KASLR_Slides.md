@@ -2,6 +2,8 @@
 
 This document explains what happens between pressing the power button and macOS handing control to the login screen — with a focus on the memory-related concepts that matter for OpenCore configuration, particularly `slide` values, `ProvideCustomSlide`, and `DevirtualiseMmio`.
 
+---
+
 **TABLE of CONTENTS**
 
 - [The UEFI Boot Process](#the-uefi-boot-process)

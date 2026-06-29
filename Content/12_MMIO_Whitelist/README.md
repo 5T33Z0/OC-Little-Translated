@@ -2,8 +2,8 @@
 
 **TABLE of CONTENTS**
 
-- [About MMIO and DevirtualiseMmio](#about-mmio-and-devirtualisemmio)
-- [How DevirtualiseMmio and the MmioWhitelist actually work](#how-devirtualisemmio-and-the-mmiowhitelist-actually-work)
+- [About MMIO and `DevirtualiseMmio`](#about-mmio-and-devirtualisemmio)
+- [How `DevirtualiseMmio` and the `MmioWhitelist` actually work](#how-devirtualisemmio-and-the-mmiowhitelist-actually-work)
   - [What DevirtualiseMmio does](#what-devirtualisemmio-does)
   - [What the MmioWhitelist actually does](#what-the-mmiowhitelist-actually-does)
   - [The critical misconception](#the-critical-misconception)
@@ -11,17 +11,17 @@
   - [Real-world example](#real-world-example)
 - [Who needs this](#who-needs-this)
 - [Instructions](#instructions)
-  - [Step 1: Enable DevirtualiseMmio and switch to DEBUG OpenCore](#step-1-enable-devirtualisemmio-and-switch-to-debug-opencore)
+  - [Step 1: Enable `DevirtualiseMmio` and switch to DEBUG OpenCore](#step-1-enable-devirtualisemmio-and-switch-to-debug-opencore)
   - [Step 2: Capture the boot log](#step-2-capture-the-boot-log)
-  - [Step 3: Generate the MmioWhitelist entries](#step-3-generate-the-mmiowhitelist-entries)
-  - [Step 4: Add entries to config.plist](#step-4-add-entries-to-configplist)
+  - [Step 3: Generate the `MmioWhitelist` entries](#step-3-generate-the-mmiowhitelist-entries)
+  - [Step 4: Add entries to `config.plist`](#step-4-add-entries-to-configplist)
   - [Step 5: Test and tune](#step-5-test-and-tune)
   - [Step 6: Clean up](#step-6-clean-up)
 - [Troubleshooting](#troubleshooting)
 
 ---
 
-## About MMIO and DevirtualiseMmio
+## About MMIO and `DevirtualiseMmio`
 
 MMIO stands for **Memory-Mapped Input/Output**. It is the method by which a CPU communicates with hardware peripherals — device registers and buffers are mapped into the system's address space rather than accessed via separate I/O ports. At boot time, the UEFI firmware reserves blocks of the physical address space for these devices, marking them as MMIO regions in the memory map.
 
@@ -29,9 +29,14 @@ The problem: macOS uses **KASLR** (Kernel Address Space Layout Randomization) to
 
 `DevirtualiseMmio` is the OpenCore quirk that addresses this. It scans the firmware's MMIO regions and **reclaims** them as usable RAM during the OpenCore boot process, increasing the number of valid slide values macOS can choose from.
 
+> [!TIP]
+>
+> For more details about the macOS boot process, Memory Mapping, KASLR Slides and OpenCore's role in the boot chain, [read this](/Boot_KASLR_Slides.md).
+
+
 ---
 
-## How DevirtualiseMmio and the MmioWhitelist actually work
+## How `DevirtualiseMmio` and the `MmioWhitelist` actually work
 
 Understanding the mechanics here is essential. Most guides only describe *how to set this up*, which leads to a common and frustrating mistake.
 
@@ -143,7 +148,7 @@ It is generally not needed on Coffee Lake (Z370/Z390) and older Intel platforms 
 > 
 > Back up your EFI folder to a FAT32 USB drive _before_ making changes. If a wrong whitelist entry prevents booting, you will need to boot Windows or another OS to restore your config.
 
-### Step 1: Enable DevirtualiseMmio and switch to DEBUG OpenCore
+### Step 1: Enable `DevirtualiseMmio` and switch to DEBUG OpenCore
 
 1. In your `config.plist`, set `Booter → Quirks → DevirtualiseMmio` to `true`
 2. Enable debug logging:
@@ -165,7 +170,7 @@ ls /Volumes/EFI/
 
 Copy the log file to your Desktop or another convenient location.
 
-### Step 3: Generate the MmioWhitelist entries
+### Step 3: Generate the `MmioWhitelist` entries
 
 Use [corpnewt's MmioDevirt script](https://github.com/corpnewt/MmioDevirt) to analyse the log and generate ready-to-paste plist entries:
 
@@ -206,7 +211,7 @@ Alternatively, you can identify the regions manually by searching the boot log f
 OCABC: MMIO devirt 0x
 ```
 
-### Step 4: Add entries to config.plist
+### Step 4: Add entries to `config.plist`
 
 Copy the generated array into your `config.plist` under `Booter → MmioWhitelist`. Leave all entries disabled (`<false/>`). Save the config.
 
