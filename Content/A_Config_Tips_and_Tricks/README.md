@@ -76,9 +76,9 @@ The new default values `0`and `0` is for macOS Big Sur. So if you're running an 
 
 **Source**: [Acidanthera](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Acidanthera/Library/OcApfsLib.h)
 
-> [!IMPORTANT]
+> [!TIP]
 >
-> For security concerns, you should change these values according to the version of macOS you are using.
+> If security is a considerations, leave the values at `0` (default). For maximum compatibility, set them to `-1`.
 
 ## I. Updating config.plist and fixing errors
 
@@ -131,6 +131,7 @@ You should deactivate the single user mode for security reasons, because it can 
    - `FF030000` (for High Sierra)
    - `EF070000` (for Mojave/Catalina)
    - `03080000` (for Big Sur and newer. Allows root patching with OCLP)
+   - `030A0000` (for Big Sur with an NVIDIA Kepler GPU. Required for applying root patches with OCLP)
    - `EF0F0000` (for Big Sur and newer. Disables even more security features. Not recommended.)
 
    **NOTES**

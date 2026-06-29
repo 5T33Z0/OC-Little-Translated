@@ -20,11 +20,11 @@ prev-lang:kbd
 
 Layout | String | Data (HEX)
 -------|--------|------
-Russian (default)| ru-RU:252 |72752D52553A323532
 English (American)| en-US:0| 656e2d55533a30
-Spanish (ISO)| es:87 | 65733A3837
 German (De)| de-DE:3 | 64652D44453A33
+Spanish (ISO)| es:87 | 65733A3837
 French (PC)| fr:60 | 66723A3630
 Italian | it:4 | 69743A34
+Russian (default)| ru-RU:252 |72752D52553A323532
 
 **More Layouts**: [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt) (need to be converted to HEX)

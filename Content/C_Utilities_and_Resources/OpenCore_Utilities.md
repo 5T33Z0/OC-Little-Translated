@@ -3,12 +3,13 @@ The OpenCore package contains lot of additional utilities to set-up, configure a
 
 Utility | Description
 -------:|------------
-**acdtinfo** | Lists Kexts by Acidanthera and if they are installed or not.
-**ACPIe** | For debugging ACPI tables (cf. Chpt. 4.5: "Patch Properties").
-**CreateVault** | For creating a secure vault (cf. Chpt. 8.5: "Security Properties").
-**disklabel** | Tool for changing the disk label displayed in BootPicker (cf. Chpts. 8.3 and 11.4).
+**acdtinfo** | Lists known Acidanthera kexts and reports whether each is currently installed on the system, along with version number, release date, and build type (RELEASE/DEBUG). Useful for quickly auditing which Acidanthera kexts are present without opening Finder or a kext manager.
+**ACPIe** | For debugging ACPI tables (cf. Chpt. 4.5: "Patch Properties"). Searches a compiled ACPI table file (.aml) for a specified byte pattern or value, with an optional argument to limit the number of matches returned. Useful for locating specific opcodes, device names, or data values within binary ACPI tables without needing to fully decompile them.
+**`BaseTools`** | A subset of EDK II BaseTools bundled for convenience: `EfiRom` (for creating UEFI option ROM images) and `GenFfs` (for packaging files into the Firmware File System format). Primarily used when working with EnableGop vBIOS insertion or building custom UEFI firmware components.
+**`CreateVault`** | Shell script (`create_vault.sh`) that generates the cryptographic vault for OpenCore's Vault security feature. Hashes all files in the OC directory and produces `vault.plist` and a corresponding RSA-2048 signature, which is then embedded into `OpenCore.efi` to prevent unauthorized modification of the EFI.
+**`disklabel`** | Generates `.disk_label` and `.disk_label_2x` image files used by OpenCore's boot picker to display custom volume labels. Takes a text string and renders it into the bitmap format Apple's boot UI expects, matching the style used on real Mac boot selectors (cf. Chpts. 8.3 and 11.4).
 [**EnableGop**](https://github.com/acidanthera/OpenCorePkg/tree/master/Staging/EnableGop)| Provides standalone GOP driver for EFI era Mac Pro and iMac.
-**FindSerialPort** | Script to find PCIe serial ports and their paths (cf. Chpt. 8.6.1: "Serial Custom Properties").
+**FindSerialPort** | Helper script that scans for available serial ports on the system and reports their I/O base addresses. Used when configuring OpenCore's `Misc > Serial` section for debug logging output over a physical or virtual COM port (cf. Chpt. 8.6.1: "Serial Custom Properties").
 **icnspack** |Tool for generating `.icns` files for items displayed in BootPicker (cf. Chpt. 11.4: "OpenCanopy").
 **kpdescribe** | Tool to print the stack trace from an OS X kernel panic diagnostic report, along with as much symbol translation as your mach_kernel version provides (cf. Chpt. 8.4: "Debug Properties").
 **LegacyBoot** | Tools for [**setting up OpenCore on legacy/Non-UEFI systems**](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/mac-install.md#legacy-setup) (32 and 64 bit).

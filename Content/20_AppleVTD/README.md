@@ -54,7 +54,7 @@ Follow these steps to configure your Hackintosh for AppleVTD:
 
 ---
 
-## Optional: Using SSDT-DMAC
+## Optional: Using `SSDT-DMAC`
 If `AppleVTD` is not present in the IO Registry after completing the above steps, your system may lack a DMAC (DMA Controller) definition in its ACPI tables. The **SSDT-DMAC** can address this issue.
 
 ### Role of SSDT-DMAC
