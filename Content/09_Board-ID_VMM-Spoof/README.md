@@ -1,7 +1,7 @@
 # Using unsupported Board-IDs with macOS 11.3 to 26
 
 ## Introduction
-**OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of Booter and Kernel patches that allow using unsupported/dropped SMBIOSes in newer versions of macOS while still being able to receive OTA system updates. This is achieved in two stages: first, the board id check is skipped and in the 2nd stage, kernel patches are applied that report a special board-id to Apples update servers that indicate, that the system is running inside a Virtual Machine:
+**OpenCore Legacy Patcher** (OCLP) 0.3.2 introduced a set of Booter and Kernel patches that allow using unsupported/dropped SMBIOSes in newer versions of macOS while still being able to receive OTA system updates. This is achieved in two stages: first, the board-id check is skipped and in the 2nd stage, kernel patches are applied that report a special board-id to Apples update servers that indicate, that the system is running inside a Virtual Machine:
 
 > Parrotgeek1's VMM patch set would force `kern.hv_vmm_present` to always return `True`. With hv_vmm_present returning True, both **`OSInstallerSetupInternal`** and **`SoftwareUpdateCore`** will set the **`VMM-x86_64`** board-id while the rest of the OS will continue with the original ID.
 >
