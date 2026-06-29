@@ -163,16 +163,13 @@ The diagram below shows the decision path for identifying the Bluetooth firmware
 
 4. **If firmware is still not shown**
 
-   * Boot a **Linux Live system**
+   * Boot into a **Linux Live system** (I like to use a USB flash drive created with [**Ventoy**](https://www.ventoy.net/en/index.html) to boot directly form a Linux ISO)
    * Run:
      ```bash
      sudo dmesg | grep ibt
      ```
-   * Extract firmware filenames from kernel output
+   * Output (example):<br>![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
    * Use those files for your kext build
-      
-      **Example**:<br>
-      ![linux](https://github.com/user-attachments/assets/d8fc5324-e1f1-438c-8902-b4c0c8d09ef0)
 
 ---
 
