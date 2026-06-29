@@ -1,5 +1,7 @@
 # Enabling AMD Navi GPUs in macOS
 
+**TABLE of CONTENTS**
+
 - [Option 1: using `NootRX.kext`](#option-1-using-nootrxkext)
 - [Option 2: Using `SSDT-NAVI.aml`](#option-2-using-ssdt-naviaml)
   - [Code](#code)
@@ -28,6 +30,8 @@ Enjoy!
 > [!IMPORTANT]
 >  
 > Curently NootRX cannot be used in recovery or during upgrades due to a misdetection causing a stall at the last stage. For now, have it enabled only *after* installing/updating macOS.
+
+---
 
 ## Option 2: Using `SSDT-NAVI.aml`
 
@@ -157,13 +161,13 @@ Scope (\_SB)
 ```
 ### Enabling RX 6900XT Cards
 
-- Cards RX 6900XT from XTXH (device-id: `0x73AF`) is supported with WhateverGreen and spoofing the device-id: use `0x73BF`
+- The RX 6900XT by XTXH (device-id: `0x73AF`) is supported with WhateverGreen when spoofing the device-id: `0x73BF`
 - If your RX 6900XT is unsupported, you can follow [this guide](https://github.com/TylerLyczak/Unsupported-6900XT-Hackintosh-Fix) to enable it in macOS.
 
 ## AMD and DRM
 When using SMBIOS **MacPro7,1** or **iMacPro1,1**, you don't need WhateverGreen and the `agdpmod=pikera` boot-arg. 
 
-This also redirects Quick-Sync Video and Background rendering to the GPU which would otherwise be handled by the iGPU. This can also help to resolves issues with DRM on macOS 11+ as explained in [**WhateverGreen's FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md#drm-compatibility-on-macos-11). For more in-depth explanations about the `unfairgva` boot-arg and how to use it, [**check this post**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/).
+This also redirects Intel Quick-Sync Video (IQSV) and Background rendering to the GPU which would otherwise be handled by the iGPU. This can also help to resolves issues with DRM on macOS 11+ as explained in [**WhateverGreen's FAQ**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md#drm-compatibility-on-macos-11). For more in-depth explanations about the `unfairgva` boot-arg and how to use it, [**check this post**](https://www.insanelymac.com/forum/topic/351752-amd-gpu-unfairgva-drm-sidecar-featureunlock-and-gb5-compute-help/).
 
 ## Credits & Resources
 - **Acidanthera** for `Lilu.kext` and `WhateverGreen.kext`
