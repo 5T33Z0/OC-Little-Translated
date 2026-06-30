@@ -57,7 +57,7 @@ Use this section to quickly identify the correct setup for your system.
 
 * Your system is fully vanilla
 * You use a supported, T2-era Intel SMBIOS
-* You con't need the Boord-ID skip Booter Patch for booting macOS
+* You don't need the Boord-ID check skip Booter Patch for booting macOS
 * You want Secure Boot and SIP enabled
 
 ### Use **RestrictEvents** if:
