@@ -14,7 +14,7 @@
 - [5. Post-Install](#5-post-install)
 	- [5.1 Disable Gatekeeper](#51-disable-gatekeeper)
 	- [5.2 Copying EFI content to the internal ESP](#52-copying-efi-content-to-the-internal-esp)
-	- [5.3 Applying Post-Install Script](#53-applying-post-install-script)
+	- [5.3 Applying Post-Install Scripts](#53-applying-post-install-scripts)
 - [6. Limitations](#6-limitations)
 - [Credits and additional resources](#credits-and-additional-resources)
 
@@ -229,7 +229,7 @@ The following steps need to be executed within the running macOS VM.
 
 You can now boot macOS without the `EFI.vhdx` disk.
 
-### 5.3 Applying Post-Install Script
+### 5.3 Applying Post-Install Scripts
 This script will install the `MacHyperVFramebuffer.kext` to `Library/Extensions` which provides enhanced graphics support (resolution switching and hardware cursor) for macOS. Additionally, it installs some files to `Library/ApplicationSupport/MacHyperVSupport` and `Library/LaunchDaemons`.
 
 - Start the macOS VM 
@@ -237,11 +237,15 @@ This script will install the `MacHyperVFramebuffer.kext` to `Library/Extensions`
 - Mount the EFI
 - Open Terminal (located in: Application/Utilities)
 - Run the post-Install Script. Enter:
-	```bash
+	```shell
 	sudo sh /volumes/EFI/Scripts/post-install.sh
 	```
-- During install, you will receive a pop-up to allow the new extension to load.
-- Once the installation is completed, reboot the macOS VM
+- During install, you will receive a pop-up to allow the new extension to load. Open System Settings and click "Allow".
+- Next, run the second script. It will apply a lot of `defaults` Settings to optimize boot, updates, Disk I/O, Networking and graphics:
+  ```shell
+	sudo sh /volumes/EFI/Scripts/optimize-vm.sh
+  ```
+- Reboot the macOS VM once the script has ran through the process.
 
 The VM should feel a bit more responsive after rebooting.
 
