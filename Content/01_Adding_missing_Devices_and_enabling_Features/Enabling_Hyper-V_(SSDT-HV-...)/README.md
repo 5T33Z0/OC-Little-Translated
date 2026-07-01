@@ -32,3 +32,7 @@ Additionally, you need this kext:
 ## Instructions
 
 → Please follow the detailed OpenCore Configuration instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) repo.
+
+> [!TIP]
+> 
+> For instructions on how to setup and run macOS inside Hyper-V check my in-depth guide [**macOS in Hyper-V**](Content/V_Virtualization/macOS_Hyper-V.md)
