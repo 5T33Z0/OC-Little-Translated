@@ -90,7 +90,7 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 
 This will build the OpenCore EFI folder for use with Hyper-V. It will be located under `dist/`, alongside a `dist/Scripts/` directory containing scripts for creating and configuring the virtual machine.
 
-> [!CATION]
+> [!CAUTION]
 >
 > If the script fails to run or errors occur, download the latest pre-build OpenCore EFI [Release](https://github.com/Qonfused/OSX-Hyper-V/releases). Unzip the file, rename the whole folder to `dist`, move it into the `OSX-Hyper-V-main` folder and continue with the guide.
 
