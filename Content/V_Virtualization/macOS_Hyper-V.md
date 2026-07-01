@@ -247,7 +247,7 @@ The VM should feel a bit more responsive after rebooting.
 
 > [!NOTE]
 >
-> Alternatively, you can download and run the `MacHyperVSupportTools-x.x.x-Release.mpkg` instaler avaiable at  https://github.com/acidanthera/MacHyperVSupport/releases instead. This will install Guest Service, Shutdown and Time Synchronization Daemons (but not the MacHyperVFramebuffer.kext).
+> Alternatively, you can download and run the `MacHyperVSupportTools-x.x.x-Release.mpkg` installer from [**MacHyperVSupport/releases**](https://github.com/acidanthera/MacHyperVSupport/releases) instead. This will install Guest Service, Shutdown and Time Synchronization Daemons (but not the `MacHyperVFramebuffer.kext`).
 
 ---
 
