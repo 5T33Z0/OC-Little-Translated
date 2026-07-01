@@ -230,7 +230,7 @@ The following steps need to be executed within the running macOS VM.
 You can now boot macOS without the `EFI.vhdx` disk.
 
 ### 5.3 Applying Post-Install Script
-This script will install the `MacHyperVFramebuffer.kext` to "Library/Extensions" which provides enhanced graphics support (resolution switching and hardware cursor) for macOS. Additionally, it installs some files to `Library/ApplicationSupport/MacHyperVSupport` and `LibraryLaunchDaemons`.
+This script will install the `MacHyperVFramebuffer.kext` to `Library/Extensions` which provides enhanced graphics support (resolution switching and hardware cursor) for macOS. Additionally, it installs some files to `Library/ApplicationSupport/MacHyperVSupport` and `Library/LaunchDaemons`.
 
 - Start the macOS VM 
 - Run OCAuxiliary Tools
@@ -244,6 +244,10 @@ This script will install the `MacHyperVFramebuffer.kext` to "Library/Extensions"
 - Once the installation is completed, reboot the macOS VM
 
 The VM should feel a bit more responsive after rebooting.
+
+> [!NOTE]
+>
+> Alternatively, you can download and run the `MacHyperVSupportTools-x.x.x-Release.mpkg` instaler avaiable at  https://github.com/acidanthera/MacHyperVSupport/releases instead. This will install Guest Service, Shutdown and Time Synchronization Daemons (but not the MacHyperVFramebuffer.kext).
 
 ---
 
