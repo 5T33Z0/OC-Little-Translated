@@ -87,10 +87,12 @@ The VM for running macOS in Hyper-V requires two virtual disks: one with EFI Sys
 	```powershell
   	powershell -ExecutionPolicy Bypass -File ".\build.ps1"
   	```
-> [!NOTE]
+
+This will build the OpenCore EFI folder for use with Hyper-V. It will be located under `dist/`, alongside a `dist/Scripts/` directory containing scripts for creating and configuring the virtual machine.
+
+> [!CATION]
 >
-> - This will build the OpenCore EFI folder for use with Hyper-V. It will be located under `dist/`, alongside a `dist/Scripts/` directory containing scripts for creating and configuring the virtual machine.
-> - If the script fails to run or errors occur, download the latest pre-build OpenCore EFI [Release](https://github.com/Qonfused/OSX-Hyper-V/releases). Unzip the file, rename the whole folder to `dist`, move it into the `OSX-Hyper-V-main` folder and continue with the guide.
+> If the script fails to run or errors occur, download the latest pre-build OpenCore EFI [Release](https://github.com/Qonfused/OSX-Hyper-V/releases). Unzip the file, rename the whole folder to `dist`, move it into the `OSX-Hyper-V-main` folder and continue with the guide.
 
 ### 3.2 Downloading the macOS Recovery Files and creating the EFI System Partition (`EFI.vhdx`)
 
