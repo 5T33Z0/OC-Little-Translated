@@ -1,4 +1,4 @@
-# Preparing an OpenCore EFI for Use with Microsoft Hyper-V
+# SSDTs for using OpenCore Inside Microsoft Hyper-V
 
 ## About Hyper-V
 
@@ -6,30 +6,24 @@
 >
 > **Source**: [Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/)
 
-> [!NOTE]
+> [!CAUTION]
 > 
-> This guide does **not** enable Hyper-V support on a Mac or Hackintosh running macOS as the host OS. It configures an OpenCore EFI for a **macOS guest VM** running under Hyper-V on a Windows host. All files below go into the EFI partition of the macOS VM's virtual disk – not the EFI of the physical machine.
+> These SSDTs apply to a **macOS guest VM** running under Hyper-V on a Windows host — not to a Mac or Hackintosh running macOS as the host OS. They belong in the OpenCore EFI on the VM's virtual disk.
 
-## Required Files
+## Required SSDTs
 
-You need the following SSDTs (included in the OpenCore Package under `Docs/AcpiSamples`). Check the .dsl version of these tables for additional comments and instructions.
+All SSDTs listed below are included in the OpenCore package under `Docs/AcpiSamples`. Check the `.dsl` source of each table for additional comments and load-order notes.
 
 | File | Purpose |
 |---|---|
 | **SSDT-HV-DEV.aml** | Disables unsupported devices under macOS. |
-| **SSDT-HV-DEV-WS2022.aml** | Disables additional virtual devices incompatible with macOS. Required on Windows 11, Windows Server 2022 and newer. |
 | **SSDT-HV-PLUG.aml** | Enables VMPlatformPlugin on Big Sur and newer. Must be loaded **after** `SSDT-HV-DEV.aml`. |
 | **SSDT-HV-VMBUS.aml** | Enables ACPI node identification. |
+| **SSDT-HV-DEV-WS2022.aml** | Disables additional virtual devices incompatible with macOS. Required on Windows 11, Windows Server 2022, and newer. |
 
-Additionally, you need this kext:
+**Additionally, you need this kext**:
 
 - **MacHyperVSupport.kext** → Download it [here](https://github.com/acidanthera/MacHyperVSupport/releases)
-
-> [!CAUTION]
-> 
-> These SSDTs and the kext must be placed in the OpenCore EFI on the **virtual disk of the macOS VM**, configured via `config.plist` inside that VM's EFI — not on the Hyper-V host's boot drive.
-
-## Instructions
 
 → Please follow the detailed OpenCore Configuration instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) repo.
 
