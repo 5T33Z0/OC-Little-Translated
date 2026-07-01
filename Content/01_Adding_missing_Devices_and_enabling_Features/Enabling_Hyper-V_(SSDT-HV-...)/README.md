@@ -35,4 +35,4 @@ Additionally, you need this kext:
 
 > [!TIP]
 > 
-> For instructions on how to setup and run macOS inside Hyper-V check my in-depth guide [**macOS in Hyper-V**](Content/V_Virtualization/macOS_Hyper-V.md)
+> For instructions on how to setup and run macOS inside Hyper-V check my in-depth guide [**macOS in Hyper-V**](/Content/V_Virtualization/macOS_Hyper-V.md)
