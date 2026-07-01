@@ -2,7 +2,7 @@
 
 ## About Hyper-V
 
-> Hyper-V enables running virtualized computer systems on top of a physical host. These virtualized systems can be used and managed just as if they were physical computer systems, however they exist in virtualized and isolated environment. Special software called a hypervisor manages access between the virtual systems and the physical hardware resources. Virtualization enables quick deployment of computer systems, a way to quickly restore systems to a previously known good state, and the ability to migrate systems between physical hosts.
+> Hyper-V enables running virtualized computer systems on top of a physical host. These virtualized systems can be used and managed just as if they were physical computer systems, however they exist in virtualized and isolated environment. Special software called a hypervisor manages access between the virtual systems and the physical hardware resources. Virtualization enables quick deployment of computer systems, a way to quickly restore systems to a previously known good state, and the ability to migrate systems between physical hosts. 
 >
 > **Source**: [Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/)
 
@@ -25,7 +25,9 @@ All SSDTs listed below are included in the OpenCore package under `Docs/AcpiSamp
 
 - **MacHyperVSupport.kext** → Download it [here](https://github.com/acidanthera/MacHyperVSupport/releases)
 
-→ Please follow the detailed OpenCore Configuration instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) repo.
+> [!NOTE]
+>
+> The latest release also includes an installer package (`MacHyperVSupportTools-x.x.x-Release.mpkg.zip`) for the userspace integration daemons (file copy, shutdown, time sync). Run this once macOS has booted inside the VM. → Please follow the detailed OpenCore Configuration instructions on Acidanthera's [**MacHyperVSupport**](https://github.com/acidanthera/MacHyperVSupport) repo.
 
 > [!TIP]
 > 
