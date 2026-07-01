@@ -1,4 +1,4 @@
-# Virtualizing macOS in Windows Hyper-V
+# Virtualizing macOS in Microsoft Hyper-V
 
 **TABLE of CONTENTS**
 
