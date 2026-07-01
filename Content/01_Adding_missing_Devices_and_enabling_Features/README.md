@@ -26,7 +26,7 @@ Listed below are SSDTs which add or enable devices and features in macOS. Use th
 [**SSDT-EC/-USBX**](Embedded_Controller_(SSDT-EC))|Adds a fake Embedded Controller (SSDT-EC) and enables USB Power Management (SSDT-EC-USBX). Also included in OpenCorePkg.|`PNP0C09`
 [**SSDT-GPIO**](OCI2C-GPIO_Patch)|Enables GPIO device.|–
 [**SSDT-HPET**](IRQ_and_Timer_Fix_(SSDT-HPET)) | Fixes IRQ conflicts. Required for on-board sound to work.| –
-[**SSDT-HV-…**](Enabling_Hyper-V_(SSDT-HV-...)/README.md)|Set of SSDTs to required for running macOS virtual machines inside Microsoft Hyper-V. Requires additional Kext and configuration. Also included in OpenCorePkg.|–
+[**SSDT-HV-…**](Enabling_Hyper-V_(SSDT-HV-...)/README.md)|Set of SSDTs required for running macOS virtual machines in Microsoft Hyper-V. Requires additional Kext and configuration. Also included in OpenCorePkg.|–
 [**SSDT-I225V**](Intel_I225-V_Fix_(SSDT-I225V))|Fixes Intel I225-V Ethernet Controller on Gigabyte Boards.|–
 [**SSDT-IMEI**](Intel_MEI_(SSDT-IMEI))|Adds Intel Management Engine Interface to ACPI. Required for Intel iGPU acceleration on older Platforms. Also included in OpenCorePkg.|`0x00160000`
 [**SSDT-LAN**](Fake_Ethernet_Controller_(LAN))|Adds a fake Ethernet controller if the included controller isn't supported natively.|–
