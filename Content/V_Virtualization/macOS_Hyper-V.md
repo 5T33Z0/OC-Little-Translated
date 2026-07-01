@@ -218,10 +218,10 @@ The following steps need to be executed within the running macOS VM.
 - Drag the App to the Desktop
 - Run it
 - Click Edit &rarr; MountESP
-- Select disk0s1 EFI and click "Mount"
+- Select `disk0s1 EFI` and click "Mount"
 - Enter your macOS Password (the one you set during install)
-- In Finder, select the EFI Partition from the Internal Disk
-- Drag and Drop the EFI, Script and Tools folder into it.
+- In Finder, navigate to the Desktop
+- Drag and Drop the EFI, Script and Tools folder into the EFI Partition it.
 - Shutdown macOS
 - In the VM Window, Select "File"  &rarr; "Settings"
 - Under "SCSI Controller", select the "EFI" Hard Drive and click the "Remove" button, since we no longer need it.
