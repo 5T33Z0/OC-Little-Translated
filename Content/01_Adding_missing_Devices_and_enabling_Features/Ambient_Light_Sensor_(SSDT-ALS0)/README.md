@@ -1,13 +1,5 @@
 # Enabling an Ambient Light Sensor (`ALSD`) or adding a fake one (`ALS0`)
 
-- [Overview](#overview)
-- [Usage](#usage)
-  - [Case 1: Ambient Light Sensor device interface exists](#case-1-ambient-light-sensor-device-interface-exists)
-  - [Case 2: No Ambient Light Sensor device interface exists](#case-2-no-ambient-light-sensor-device-interface-exists)
-- [NOTES](#notes)
-
----
-
 ## Overview
 Starting with macOS Catalina, Laptops either require a fake ambient light sensor device (`ALS0`) or if the Laptop has one, `ALSD` needs to be enabled for macOS for storing the current brightness/auto-brightness level. Otherwise, the brightness returns to maximum after each reboot.
 
