@@ -1,6 +1,6 @@
 # OCAT Tips & Tricks
 
-<img width="924" height="654" alt="Bildschirmfoto 2026-07-03 um 14 18 53" src="https://github.com/user-attachments/assets/045b565c-a5d2-4c84-a445-697deb94042c" />
+<img width="924" height="486" alt="Bildschirmfoto 2026-07-03 um 14 18 53" src="https://github.com/user-attachments/assets/0e668127-4324-44f8-a0c7-2433749cf57e" />
 
 ## About
 
