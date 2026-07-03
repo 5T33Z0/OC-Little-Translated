@@ -1,5 +1,7 @@
 # OCAT Tips & Tricks
 
+<img width="924" height="654" alt="Bildschirmfoto 2026-07-03 um 14 18 53" src="https://github.com/user-attachments/assets/045b565c-a5d2-4c84-a445-697deb94042c" />
+
 ## About
 
 This section highlights useful additional features of **OpenCore Auxiliary Tools (OCAT)**. If you only need instructions for updating OpenCore, drivers, and kexts, [**follow this guide**](Content/D_Updating_OpenCore/Updating_OC.md) instead.
