@@ -6,6 +6,8 @@
 
 This section highlights useful additional features of **OpenCore Auxiliary Tools (OCAT)**. If you only need instructions for updating OpenCore, drivers, and kexts, [**follow this guide**](Content/D_Updating_OpenCore/Updating_OC.md) instead.
 
+---
+
 ## Switching between Release and Debug builds
 
 To switch from the RELEASE to the DEBUG version of OpenCore to produce a proper OC bootlog, do the following:
@@ -33,6 +35,8 @@ To revert back to the RELEASE build:
 * Update OpenCore files and drivers
 * Save and reboot
 
+---
+
 ## Adding kext URLs to OCAT
 
 OCAT does not contain all the links to kext repos. You can tell if a link to a repo is missing by a grey box in front of a kext. In order to fetch updates for these kexts, you have to add links to the corresponding repos to `KextURL.txt`. You can do this manually from within the app, but it's a bit tedious. So we will edit the text file directly.
@@ -58,6 +62,8 @@ OCAT does not contain all the links to kext repos. You can tell if a link to a r
 
 The next time you check for kext updates in OCAT, the color of the squares in front of kexts you added will no longer be grey (not found) but either red (outdated) or green (up to date). [Kexts from the OCLP repo](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts) can't be fetched automatically, so they will remain highlighted in grey!
 
+---
+
 ## Refreshing the OCAT Database
 
 If you want to reset OCATs preferences and its Database (after an update for example), do the folling:
@@ -72,8 +78,10 @@ If you want to reset OCATs preferences and its Database (after an update for exa
 	- In `Dev` Mode: select either "Get OpenCore" (or import a zip file of the latest build)
 - Once the download has finished, the latest files will be integrated into the database so you can continue using OCAT as usual.
 
+---
+
 ## Shortcomings of OCAT
-As useful as OCAT is, it has some shortcomings. The ones that come to mind are database issues, downloading drivers from OcBinaryData and copying the hidden files `.contentFlavour` and `.contentVisibility` which were added in OC 0.8.8 into the EFI/OC/Boot folder.
+As useful as OCAT is, it has some shortcomings. The ones that come to mind are database issues, downloading drivers from OcBinaryData and copying the hidden files `.contentFlavour` and `.contentVisibility` which were added in OC 0.8.8 into the `EFI/OC/Boot` folder.
 
 ### Fixing "Development/Debug version database does not exist" error
 
