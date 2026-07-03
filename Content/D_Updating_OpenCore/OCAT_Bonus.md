@@ -43,11 +43,13 @@ OCAT does not contain all the links to kext repos. You can tell if a link to a r
 	```
 	~/.config/OCAuxiliaryTools/
 	```
-4. Open `KextUrl.txt` with TextEdit
+4. Open `KextUrl.txt` with TextEdit – if it does not exist, create it.
 5. Add the following entries (examples):
 	```text
-	AdvancedMap.kext | https://github.com/narcyzzo/AdvancedMap
+	AdvancedMap.kext | https://github.com/notjosh/AdvancedMap
+	AppleIGC.kext | https://github.com/SongXiaoXi/AppleIGC
 	AMFIPass.kext | https://github.com/bluppus20/AMFIPass
+	iBridged.kext | https://github.com/Carnations-Botanica/iBridged
 	IntelMausiEthernet.kext | https://github.com/Mieze/IntelMausiEthernet
 	```
 6. Save the file
