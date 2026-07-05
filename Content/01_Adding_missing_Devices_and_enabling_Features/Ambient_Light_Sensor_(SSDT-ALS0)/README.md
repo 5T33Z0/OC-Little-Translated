@@ -15,7 +15,10 @@ There are two possible cases:
 
 **INSTRUCTIONS**:
 
-- In the `DSDT`, search for `ACPI0008`
+- In the `DSDT`, search for
+  ```
+  ACPI0008
+  ```
 - If the device – usually named `ALSD` – exists, follow the instruction for "Case 1"
 - If it doesn't exist, follow the instructions for "Case 2".
 
