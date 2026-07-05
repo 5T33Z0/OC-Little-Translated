@@ -1,12 +1,14 @@
 # Technical Background
 
-> **Update** (2023-06-12): `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur and newer. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
-
 ## Understanding the USB Port Limit
 
 In macOS, the system imposes a strict limit of 15 available USB ports. This restriction poses a challenge for modern motherboards equipped with XHCI (Extensible Host Controller Interface) controllers, which can support up to 26 ports per controller. When USB ports are not properly mapped in macOS, both internal and external USB devices may default to USB 2.0 speeds or fail to function entirely. This issue extends to devices like Bluetooth, which operates as a "wireless" USB 2.0 connection and requires an internally assigned USB 2.0 port. Similarly, built-in laptop cameras depend on correct port mapping to work as intended.
 
 A single physical USB 3 connector (typically the blue one) supports two distinct USB protocols, requiring two port assignments: "HS" (High Speed) for USB 2.0 and "SS" (Super Speed) for USB 3.0. Given macOS's 15-port limit, this effectively means you can map only seven USB 3.0 ports—each supporting both USB 2.0 and USB 3.0 protocols—plus one additional port for either HS or SS, and that's the maximum. Notably, macOS does not support USB 3.2 via the USB protocol; Apple relies on Thunderbolt for higher-speed connections instead. As a result, hackintosh users must carefully select and map their desired ports to ensure optimal functionality.
+
+> [!IMPORTANT]
+>
+> `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur and newer. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
 
 ## USB Specs
 
