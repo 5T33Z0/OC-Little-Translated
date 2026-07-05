@@ -32,13 +32,11 @@
   - Generic XHCI driver for controllers not supported by Apple's `AppleUSBXHCIPCI`
   - Originally by Zenith432, maintained by RehabMan
   - Use as a last resort only — has known limitations on macOS 11+ (USB mass storage and composite devices may not work correctly)
-  - See [XHCI Unsupported](05_xhci_unsupported.md) for when to use this vs. `XHCI-unsupported.kext`
 
 ### AMD Ryzen Systems
 - [**GUX-RyzenXHCIFix**](https://github.com/RattletraPM/GUX-RyzenXHCIFix)
   - Fork of `GenericUSBXHCI.kext` for fixing a boot-hang during XHCI initialization on some Ryzen APU-based hackintoshes (primarily Picasso/Renoir) running macOS 11.0+
   - Not a general USB fix — only relevant if the system hangs during XHCI init at boot
-  - See [XHCI Unsupported](05_xhci_unsupported.md) for details
 
 ## Advanced Topics
 
