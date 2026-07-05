@@ -28,7 +28,9 @@ Comprehensive guide for resolving USB issues in macOS/Hackintosh systems, includ
  
 5. [**USB 3.0: determining if you need `XHCI-unsupported.kext`**](/Content/03_USB_Fixes/05_xhci_unsupported.md)
 
-6. [**Additional Resources**](/Content/03_USB_Fixes/05_resources.md)
+6. About [**GenericUSBXHCI.kext**](Content/03_USB_Fixes/06_GenericUSBXHCI.md) and GUX-RyzenXHCIFix
+
+7. [**Additional Resources**](/Content/03_USB_Fixes/07_resources.md)
    - Useful tools and kexts
    - External guides and documentation
 

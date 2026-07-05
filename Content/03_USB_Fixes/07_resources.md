@@ -54,4 +54,4 @@ For additional help and community support:
 
 ---
 
-[← Previous: XHCI Unsupported](05_xhci_unsupported.md) | [Back to Overview](./README.md)
+[← Previous: GenericUSBXHCI](06_GenericUSBXHCI.md) | [Back to Overview](./README.md)

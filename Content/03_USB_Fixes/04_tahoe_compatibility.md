@@ -31,4 +31,4 @@ This guide covers compatibility adjustments for:
 
 ---
 
-[← Previous: Method 2 - ACPI](03_method2_acpi.md) | [Back to Overview](./README.md) | [Next: XHCI →](05_xhci_unsupported.md)
+[← Previous: Method 2 - ACPI](03_method2_acpi.md) | [Back to Overview](./README.md) | [Next: XHCI Unsupported →](05_xhci_unsupported.md)

@@ -1,4 +1,4 @@
-# GenericUSBXHCI and GUX-RyzenXHCIFix
+# About GenericUSBXHCI and GUX-RyzenXHCIFix
 
 ## Overview
 
@@ -43,3 +43,5 @@ The fork works by forcing GUX to exit its initialization routines early — whic
 
 - **GenericUSBXHCI.kext**: Zenith432 (original), RehabMan (maintenance)
 - **GUX-RyzenXHCIFix**: RattletraPM
+
+[← Previous: XHCI Unsupported](05_xhci_unsupported.md) | [Back to Overview](./README.md) | [Next: Additional Resources →](07_resources.md)
