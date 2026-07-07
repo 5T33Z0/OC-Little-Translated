@@ -238,7 +238,7 @@ The official tool ships with every OpenCorePkg release under `Utilities/disklabe
    sudo /path/to/disklabel -e "Bazzite" .disk_label .disk_label_2x
    ```
 
-Spaces in label names are fine. Re-running the command overwrites existing files.
+Spaces in label names are fine. Re-running the command overwrites existing files. Once the files are added the Disk Label will be applied. In this example the "EFI" Label of the Aurora install is replaced by "Aurora": <br> <img width="632" height="290" alt="07081808" src="https://github.com/user-attachments/assets/5c8e1d7f-f83e-47ee-8ed7-f40cff71d278" />
 
 **Full usage reference:**
 
