@@ -92,7 +92,7 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 > [!TIP]
 > 
-> For additional information about the naming scheme of Intel Wireless and Bluetooth Firmware files check [Understanding Intel Wireless Firmware Names](/Understanding_Intel_Wireless_Firmware_Names.md).
+> For additional information about the naming scheme of Intel Wireless and Bluetooth Firmware files check [Understanding Intel Wireless Firmware Names](/Content/J_Compiling_Kexts/Understanding_Intel_Wireless_Firmware_Names.md).
 
 ### 1.2 Identify Your Bluetooth Firmware
 
