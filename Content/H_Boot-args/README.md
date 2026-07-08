@@ -3,7 +3,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
-
+- [macOS Performance](#macos-performance)
 - [Debugging](#debugging)
 - [Network-specific boot arguments](#network-specific-boot-arguments)
 - [Other useful boot arguments](#other-useful-boot-arguments)
@@ -37,6 +37,11 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 - [Credits](#credits)
 
 </details>
+
+## macOS Performance
+|Boot-arg | Description|
+|:-------:|-----------|
+serverperfmode=1 | Performance mode changes the system parameters of your Mac. These changes take better advantage of your hardware for demanding server applications. ([More Info](https://gist.github.com/davidalger/a3afa2410a40ce6ae59d4e6a3b18e5c7))
 
 ## Debugging
 
