@@ -3,6 +3,7 @@ Incomplete list of commonly used (and rather uncommon) boot-args and device prop
 
 <details>
 <summary><b>TABLE of CONTENTS</b> (Click to reveal)</summary><br>
+
 - [macOS Performance](#macos-performance)
 - [Debugging](#debugging)
 - [Network-specific boot arguments](#network-specific-boot-arguments)
