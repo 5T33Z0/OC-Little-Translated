@@ -14,7 +14,7 @@
   - [3.2 Compile `AirportItlwm` and `Itlwm`](#32-compile-airportitlwm-and-itlwm)
   - [3.3 Compile `InteBluetothFirmware`](#33-compile-intebluetothfirmware)
 - [4. Test](#4-test)
-- [Credits](#credits)
+- [Credits and Resources](#credits-and-resources)
 
 ---
 
@@ -274,6 +274,7 @@ The compiled kexts will be located under `~/Downloads/IntelBluetoothFirmwar-mast
 
 ---
 
-## Credits
+## Credits and Resources
 - Original Guide by [dreamwhite](https://github.com/dreamwhite)
-- Intel WiFi/BT Firmware from Linux: [https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git) 
+- Intel WiFi/BT Firmware from Linux: [https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/linux-firmware.git)
+- Linux Wireless Documentation for Intel WiFi: [https://wireless.docs.kernel.org/en/latest/en/users/drivers/iwlwifi.html](https://wireless.docs.kernel.org/en/latest/en/users/drivers/iwlwifi.html)
