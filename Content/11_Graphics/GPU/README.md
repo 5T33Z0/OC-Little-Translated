@@ -1,45 +1,67 @@
 # GPU Support in macOS
 
-In general, refer to Dortania's [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/) if you want to know if your GPU is compatible or if you want/need to buy one for hackintoshing.
+For a comprehensive overview of hardware compatibility, always refer to Dortania's [**GPU Buyer's Guide**](https://dortania.github.io/GPU-Buyers-Guide/).
 
-## AMD GPU Cards Support
-- [**AMD Compatibility Chart**](/Content/11_Graphics/GPU/AMD_GPU_Compatbility.md)
-- [**Enabling (Big) Navi Cards**](/Content/11_Graphics/GPU/AMD_Navi)
-- [**Enabling AMD Vega 56/64 Cards**](/Content/11_Graphics/GPU/AMD_Vega)
-- [**AMD Radeon Tweaks**](/Content/11_Graphics/GPU/AMD_Radeon_Tweaks)
-- [**Enabling undetected AMD GPUs**](/Content/11_Graphics/GPU/GPU_undetected)
-- [**RadeonSensor**](https://github.com/NootInc/RadeonSensor) – Kexts and App for monitoring the teperature of AMD GPUs
-- [**GPU BAR Size in OpenCore**](/Content/main/11_Graphics/GPU/GPU-BAR_Size)
-- [**Legacy AMD Cards and macOS**](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300)
+## Intel Graphics (iGPU)
+For configuration and troubleshooting of Intel on-board graphics:
 
-## NVIDIA GPU Support †
-It's complicated… well, actually it isn't: just don't buy them! ;)
+- [**Intel iGPU Fixes & Patching**](/Content/11_Graphics/iGPU)
 
-Although NVIDIA Cards ***were*** officially supported up to macOS High Sierra, you can no longer install Nvidia Web Drivers since [Nvidia revoked the certificates](https://twitter.com/khronokernel/status/1532545973372588033) shortly after Khronokernel figured out how to enable Nvidia Web Drivers in macOS Monterey. I don't know if this also affects previously installed Web Drivers (I guess you have to stay offline to not lose the Certs), but at this stage my advice would be to just move on and switch to AMD.
+---
 
-Even though Kepler Cards are supported up to macOS Big Sur, it's not worth investing in them simply because these old NVIDIA cards start dying. This year alone, my GTX 760 which I had for 4 years died basically doing nothing. The replacement GTX 760 died a month later (while the prices for these old cards are still increasing). So do yourself a favor and don't even bother buying one of these old cards.
+## AMD Graphics
 
-And before someone asks: no, current NVIDIA Cards don't work for Hackintoshes. Here's a list of [(un)supported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
+### Integrated Graphics (APU)
+Support for AMD processors with integrated Vega graphics via NootedRed:
 
-To install **NVIDIA Web Drivers** with OpenCore Legacy Patcher on macOS Big Sur and newer, [follow this guide](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/).
+- [**AMD APU Support Overview**](/Content/11_Graphics/APU)
 
-### Nvidia support via OpenCore Legacy Patcher (OCLP)
-GPUs that worked with Nvidia's Web Drivers in High Sierra should work with OCLP. Currently tested GPUs:
+### Discrete Graphics (dGPU)
+Support for dedicated AMD Radeon cards:
 
-- GTX 650 (Kepler – GK104)
-- GTX 650 TI Boost (Kepler – GK106)
-- GT 710 (Kepler - GK107)
-- Quadro K620 (Maxwell - GM107)
-- GTX 860M (Maxwell - GM107)
-- GT 1030 (Pascal - GP107)
-- GTX 1050Ti (Pascal - GP107)
+- [**AMD GPU Compatibility Chart**](/Content/11_Graphics/GPU/AMD_GPU_Compatbility.md) — Reference for supported models.
+- [**Enabling (Big) Navi Cards**](/Content/11_Graphics/GPU/AMD_Navi) — RX 5000 and 6000 series.
+- [**Enabling AMD Vega 56/64 Cards**](/Content/11_Graphics/GPU/AMD_Vega) — Specific fixes for GCN 5 cards.
+- [**Enabling Undetected AMD GPUs**](/Content/11_Graphics/GPU/GPU_undetected) — Fixing "Black Screen" or non-recognition issues.
+- [**Legacy AMD Cards (ATI/Radeon)**](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) — Archive for ATI 4000 through AMD 300 series.
 
-**Source**: [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/993)
+### AMD Utilities & Optimization
 
-### Installing NVIDIA Webdrivers in Big Sur and newer
+- [**SMCAMDProcessor**](https://github.com/trulyspinach/SMCAMDProcessor) – AMD CPU Power Management kext for AMD Zen processorst. Includes AMD Power Gadget
+- [**RadeonSensor**](https://github.com/NootInc/RadeonSensor) — Temperature monitoring for AMD GPUs.
+- [**AMD Radeon Tweaks**](/Content/11_Graphics/GPU/AMD_Radeon_Tweaks) — Performance and power tuning.
+- [**GPU BAR Size in OpenCore**](/Content/main/11_Graphics/GPU/GPU-BAR_Size) — Resizable BAR configurations.
 
-- Using [OpenCore Legacy Patcher](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/) to install Webdrivers on Big Sur and Monterey.
+---
 
-## Intel on-board Graphics
+## NVIDIA Graphics
 
-For fixing current issues, see Chapter &rarr; [Intel iGPU Fixes](/Content/11_Graphics/iGPU)
+### Modern NVIDIA GPUs (Unsupported)
+NVIDIA Turing (RTX 20xx), Ampere (RTX 30xx), and Ada Lovelace (RTX 40xx) cards **do not work** in any version of macOS because no drivers exist. 
+- [List of Unsupported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
+
+### Legacy & Web Driver Support (via OCLP)
+While official NVIDIA support ended with High Sierra (Web Drivers) and Big Sur (Native Kepler support), community tools like **OpenCore Legacy Patcher (OCLP)** allow for continued functionality in newer macOS versions. This is necessary because:
+
+*   **Native Kepler Support:** Support for GTX 6xx/7xx cards was removed in macOS Monterey.
+*   **Web Driver Revocation:** In 2022, certificates were revoked, making standard Web Driver installation impossible on modern macOS without OCLP's root patching.
+
+#### Verified Models for OCLP Root Patching
+The following GPUs that functioned with Web Drivers in High Sierra are generally compatible with OCLP patching in modern macOS:
+
+*   **GTX 650** (Kepler – GK104)
+*   **GTX 650 TI Boost** (Kepler – GK106)
+*   **GT 710** (Kepler - GK107)
+*   **Quadro K620** (Maxwell - GM107)
+*   **GTX 860M** (Maxwell - GM107)
+*   **GT 1030** (Pascal - GP107)
+*   **GTX 1050Ti** (Pascal - GP107)
+
+**Source:** [OCLP GitHub](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/993) | [Installation Guide](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/)
+
+## Troubleshooting & Notes
+
+*   **Legacy Hardware:** Native Kepler support (GTX 600/700 series) was dropped in macOS Monterey. These cards now require root patching with OCLP to enable graphics acceleration.
+*   **Hardware Fatigue:** Be cautious when buying older NVIDIA cards (like the GTX 760). Due to their age, these cards have a high failure rate in modern systems.
+*   **Web Driver Certificates:** Note that Nvidia Web Driver certificates were revoked by Nvidia in 2022; patching via OCLP is the only reliable way to bypass this on modern macOS versions.
+
