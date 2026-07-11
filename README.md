@@ -2,7 +2,7 @@
 
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.8-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 ![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.5x-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.07.01-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.07.11-blueviolet.svg)
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ---
@@ -40,7 +40,7 @@
 ### 🛠️ System Fixes
 
 * :computer: [Fixing CPU Power Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
-* 🎮 [Fixing Graphics (iGPU/dGPU)](/Content/11_Graphics/README.md)
+* 🎮 [Fixing Graphics (iGPU/dGPU/APU)](/Content/11_Graphics/README.md)
 * 🔌 [Fixing USB](/Content/03_USB_Fixes/README.md)
 * 😴 [Fixing Sleep & Wake](/Content/04_Fixing_Sleep_and_Wake_Issues/README.md)
 * 🔄 [Fixing OTA System Updates](/Content/S_System_Updates/OTA_Updates.md)
