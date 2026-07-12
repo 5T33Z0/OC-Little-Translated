@@ -162,7 +162,6 @@ defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder
 
 ### Show User Library (macOS 11+)
 ```shell
-setfile -a v ~/Library
 chflags nohidden ~/Library
 ```
 
