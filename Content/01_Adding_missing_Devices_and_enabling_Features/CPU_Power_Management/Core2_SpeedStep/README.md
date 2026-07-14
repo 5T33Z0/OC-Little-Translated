@@ -89,7 +89,7 @@ Monitoring P-states requires an SMC kext with sensor-reporting plugins, plus a m
 
 > [!CAUTION]
 > 
-> `SMCProcessor.kext` (VirtualSMC) does not report CPU clock speeds tp HWMonitorSMC2. So, if you don't have the category "Core Frequencies" displayed in HWMonitorSMC2, test with **FakeSMC3 + IntelCPUMonitor.kext** first to confirm SpeedStep itself is working, then switch back to VirtualSMC for daily use once confirmed — VirtualSMC's monitoring gap doesn't affect SpeedStep's actual function, only whether you can see it working.
+> `SMCProcessor.kext` (VirtualSMC) does not report CPU clock speeds tp HWMonitorSMC2. For this you would need to install Intel Power Gadget and allow HWMonitorSMC2 to use its data. But unfortunately, Intel Power Gadget is only compatible with 2nd to 10th Gen Intel Core i CPUs. So, if you don't have the category "Core Frequencies" displayed in HWMonitorSMC2, test with **FakeSMC3 + IntelCPUMonitor.kext** first to confirm SpeedStep itself is working, then switch back to VirtualSMC for daily use once confirmed — VirtualSMC's monitoring gap doesn't affect SpeedStep's actual function, only whether you can see it working.
 
 ## Credits
 
