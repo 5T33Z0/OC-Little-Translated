@@ -44,6 +44,7 @@ Let the Clover bootloader generate the tables (no manual value-hunting required)
 2. Confirm SpeedStep is working correctly under Clover first.
 3. Open [MaciASL](https://github.com/acidanthera/MaciASL) → **Files → New from ACPI** → open the Clover-generated `CpuPm`/`CpuCst` tables and save them: <br>![Extracting tables in MaciASL](https://github.com/AppleBreak1/EP45-UD3P-Customac/assets/97265013/ad076779-5f39-473b-93c9-f517ab3378e0)
 4. Add these tables to your OpenCore EFI and `config.plist` — done.
+5. Reboot and verify functionality (&rarr; See Step 4)
 
 ### Option B — Hand-Build Tables via the "Vanilla SpeedStep" Method
 
