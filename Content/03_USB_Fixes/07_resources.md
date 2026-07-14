@@ -10,8 +10,7 @@
 
 ### Kexts
 #### USBToolBox Kexts
-- [USBToolBox kexts](https://github.com/USBToolBox/kext)
-- Consist of two kexts:
+- [USBToolBox kexts](https://github.com/USBToolBox/kext) consist of two kexts:
   - `USBToolBox.kext` – The main kext.
   - `UTBDefault.kext` – A codeless kext that attaches USBToolBox to all PCIe USB controllers. `UTBDefault.kext` is intended for use **before** creating a USB port map, allowing all ports to function (provided the port limit is not enforced). It is **not required** if you create your port map from the beginning (for example, using the Windows [USBToolBox](https://github.com/USBToolBox/tool) application) and should be removed once a custom port map is in use.
 
