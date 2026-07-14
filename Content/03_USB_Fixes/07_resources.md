@@ -25,6 +25,9 @@
 - Included in [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky &rarr; Click on „Source Code (zip)" to get it
 - Or use the [**copy**](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/Content/03_USB_Fixes/kext/XHCI-unsupported.kext_0.9.2.zip) in my repo
 
+#### GenericUSBXHCI kext
+- [GenericUSBXHCI.kext](https://github.com/RehabMan/OS-X-Generic-USB3) by Rehabman. Legacy USB 3.0 driver for unsupported third-party xHCI controllers on OS X 10.8–10.11. Generally not required on macOS 10.12 or newer, where native USB support and proper port mapping should be used instead.
+
 ## Guides and Documentation
 
 ### USB Port Mapping Guides
