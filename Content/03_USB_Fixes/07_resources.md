@@ -2,6 +2,12 @@
 
 ## Essential Tools and Kexts
 
+### Utilities
+- [USBMap](https://github.com/corpnewt/USBMap) – Python script for mapping USB ports in macOS and creating a custom injector kext in macOS. 
+- [**Hackintool**](https://github.com/benbaker76/Hackintool) - App with various helpful tools for Hackintoshing. Automatically discovers and categorizes USB ports to create compliant port maps in macOS.
+- [USB Toolbox](https://github.com/USBToolBox/tool) – Windows App for building a custom USB Port Map.
+- [**WhatCable**](https://github.com/darrylmorley/whatcable) – macOS menu bar utility that displays the capabilities of connected USB-C cables (USB data rate, charging, DisplayPort Alt Mode, Thunderbolt support, etc.).
+
 ### USBInjectAll Kext
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky
   - Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers
@@ -51,6 +57,8 @@ For additional help and community support:
 - Check the [Hackintosh subreddit](https://www.reddit.com/r/hackintosh/)
 - Visit the [Dortania Discord](https://discord.gg/dortania)
 - Browse [tonymacx86 forums](https://www.tonymacx86.com/)
+
+
 
 ---
 
