@@ -67,29 +67,37 @@ The native `CpuPm`/`CpuCst` tables must not coexist with your modified ones.
 
 ## Step 4: Verify SpeedStep Is Working
 
-Monitoring P-states requires an SMC kext with sensor-reporting plugins, plus a monitoring app to display the readings — without both, there's no way to confirm SpeedStep is actually active, only that it's configured correctly on paper.
+To verify that SpeedStep is active, you must use a sensor suite capable of reading the CPU's internal registers. On legacy systems (like Core 2 Duo/Quad), standard Apple-style monitoring does not report frequencies, so you must use **FakeSMC** and its plugins to "expose" these values to macOS.
 
 **Required Files:**
 
 - **Kexts:**
-  - [**FakeSMC3**](https://github.com/CloverHackyColor/FakeSMC3_with_plugins) + **IntelCPUMonitor.kext** (Clover users), or
-  - [**VirtualSMC**](https://github.com/acidanthera/VirtualSMC) + **SMCProcessor.kext** (OpenCore users)
+  - [**FakeSMC3**](https://github.com/CloverHackyColor/FakeSMC3_with_plugins) — The core SMC emulator.
+  - **IntelCPUMonitor.kext** — (Included with FakeSMC3) The specific plugin required to report CPU frequencies and multipliers.
 - **Apps:**
-  - [**HWMonitorSMC2**](https://github.com/CloverHackyColor/HWMonitorSMC2) — for monitoring
-  - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) — for inspecting I/O registry nodes on macOS
+  - [**HWMonitorSMC2**](https://github.com/CloverHackyColor/HWMonitorSMC2) — The GUI tool to display the sensor data.
+  - [**IORegistryExplorer**](https://github.com/utopia-team/IORegistryExplorer) — For inspecting the internal power management nodes.
 
 **INSTRUCTIONS:**
 
-1. Since FakeSMC/VirtualSMC is a necessity to boot macOS on non-Apple hardware, this assumes you already have one installed and enabled. Add/enable the sensor plugin required for your bootloader and config.plist (**IntelCPUMonitor.kext** for FakeSMC3, or **SMCProcessor.kext** for VirtualSMC).
-2. Download and install **HWMonitorSMC2**.
-3. Start the app.
-4. Confirm that defined P-states are being reported and actively used: <br>![HWMonitor showing active P-states](https://github.com/AppleBreak1/EP45-UD3P-Customac/assets/97265013/64fb33ca-a7bd-4dd5-bc9f-82be1de45b11)
-5. Next, Run **IORegistryExplorer**.
-6. Confirm the power-management nodes are populated as expected:<br> ![IORegistryExplorer power management nodes](https://github.com/AppleBreak1/EP45-UD3P-Customac/assets/97265013/0ba3c796-7cac-4239-8a9c-229abff01951)
+1. **Install FakeSMC:** Replace VirtualSMC (if present) with **FakeSMC3.kext** and **IntelCPUMonitor.kext** in your EFI/OC/Kexts folder. Ensure they are enabled in your `config.plist`.
+2. Save your `config.plist` and reboot
+3. **Launch HWMonitorSMC2:** Open the application and look for the **"Core Frequencies"** or **"Multipliers"** section.
+4. **Confirm Scaling:** Watch the frequencies while the system is idle, then perform a task (like opening a browser). You should see the frequencies and multipliers jump up and down dynamically. If they are "stuck" at one speed, SpeedStep is not working.   
+	***Example of active P-States:***
+      ![HWMonitor showing active P-states](https://github.com/AppleBreak1/EP45-UD3P-Customac/assets/97265013/64fb33ca-a7bd-4dd5-bc9f-82be1de45b11)
+4. Run **IORegistryExplorer** and search for `AppleACPICPU`. Confirm the power-management nodes are populated under each CPU core. This indicates that macOS has successfully attached its power management driver to your processor.  
+	***Example of healthy nodes:***
+      ![IORegistryExplorer power management nodes](https://github.com/AppleBreak1/EP45-UD3P-Customac/assets/97265013/0ba3c796-7cac-4239-8a9c-229abff01951)
 
-> [!CAUTION]
+> [!TIP]
+> **For OpenCore Users (Switching back to VirtualSMC):**
+>
+> While `FakeSMC` is superior for sensor reporting on *legacy* hardware, many OpenCore users prefer `VirtualSMC` for its modern codebase and closer emulation of real Mac hardware.
 > 
-> `SMCProcessor.kext` (VirtualSMC) does not report CPU clock speeds tp HWMonitorSMC2. For this you would need to install Intel Power Gadget and allow HWMonitorSMC2 to use its data. But unfortunately, Intel Power Gadget is only compatible with 2nd to 10th Gen Intel Core i CPUs. So, if you don't have the category "Core Frequencies" displayed in HWMonitorSMC2, test with **FakeSMC3 + IntelCPUMonitor.kext** first to confirm SpeedStep itself is working, then switch back to VirtualSMC for daily use once confirmed — VirtualSMC's monitoring gap doesn't affect SpeedStep's actual function, only whether you can see it working.
+> Once you have used the steps above to **confirm** that your frequency scaling is working correctly, you can switch back to VirtualSMC for daily use. Note that after switching back, your "Core Frequencies" in HWMonitorSMC2 will likely disappear or show as 0Hz. This is normal; as long as you verified the scaling with FakeSMC and the nodes are present in IORegistryExplorer, SpeedStep is still working in the background. 
+> 
+> **To switch back:** Replace `FakeSMC.kext` and `IntelCPUMonitor.kext` with `VirtualSMC.kext` and `SMCProcessor.kext` in your config.plist and EFI folder.
 
 ## Credits
 
