@@ -3,19 +3,26 @@
 ## Essential Tools and Kexts
 
 ### Utilities
-- [USBMap](https://github.com/corpnewt/USBMap) – Python script for mapping USB ports in macOS and creating a custom injector kext in macOS. 
-- [**Hackintool**](https://github.com/benbaker76/Hackintool) - App with various helpful tools for Hackintoshing. Automatically discovers and categorizes USB ports to create compliant port maps in macOS.
-- [USB Toolbox](https://github.com/USBToolBox/tool) – Windows App for building a custom USB Port Map.
-- [**WhatCable**](https://github.com/darrylmorley/whatcable) – macOS menu bar utility that displays the capabilities of connected USB-C cables (USB data rate, charging, DisplayPort Alt Mode, Thunderbolt support, etc.).
+- [USBMap](https://github.com/corpnewt/USBMap) – Python script for mapping USB ports in macOS and creating a custom injector kext.
+- [Hackintool](https://github.com/benbaker76/Hackintool) – Utility with various Hackintosh tools, including automatic USB port discovery and generation of compliant USB port maps.
+- [USBToolBox](https://github.com/USBToolBox/tool) – Windows application for creating custom USB port maps.
+- [WhatCable](https://github.com/darrylmorley/whatcable) – macOS menu bar utility that displays the capabilities of connected USB-C cables, including USB data rate, charging, DisplayPort Alt Mode, and Thunderbolt support.
 
-### USBInjectAll Kext
+### Kexts
+#### USBToolBox Kexts
+- [USBToolBox kexts](https://github.com/USBToolBox/kext)
+- Consist of two kexts:
+  - `USBToolBox.kext` – The main kext.
+  - `UTBDefault.kext` – A codeless kext that attaches USBToolBox to all PCIe USB controllers. `UTBDefault.kext` is intended for use **before** creating a USB port map, allowing all ports to function (provided the port limit is not enforced). It is **not required** if you create your port map from the beginning (for example, using the Windows [USBToolBox](https://github.com/USBToolBox/tool) application) and should be removed once a custom port map is in use.
+
+#### USBInjectAll Kext
 - [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky
   - Updated version with IOKit Personalities for the latest SMBIOSes and USB Controllers
   - Includes support for 400 to 700-series mainboards
   - Contains approximately 9,300 lines of code (vs. 6,800 in the original 2018 version by Rehabman)
   - Contains `XHCIUnsupported.kext` (Download "Source Code (zip)" tp get it)
 
-### XHCIUnsupported kext
+#### XHCIUnsupported kext
 - Included in [**USBInjectAll.kext**](https://github.com/daliansky/OS-X-USB-Inject-All/releases) by daliansky &rarr; Click on „Source Code (zip)" to get it
 - Or use the [**copy**](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/Content/03_USB_Fixes/kext/XHCI-unsupported.kext_0.9.2.zip) in my repo
 
