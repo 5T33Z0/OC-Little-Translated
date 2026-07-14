@@ -31,9 +31,11 @@
 ## Guides and Documentation
 
 ### USB Port Mapping Guides
-- [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) by chriswayg
-  - Comprehensive visual guide for USB port mapping
-  - **Note**: Some information about `XhciPortLimit` Quirk and blocking ports via NVRAM may be outdated
+- [**Hackintool Port Mapping Guide**](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/step-by-step/install-postinstall/usb-port-mapping) – Comprehensive visual guide for USB port mapping by chriswayg
+
+> [!NOTE]
+>
+> Some information about `XhciPortLimit` Quirk and blocking ports via NVRAM may be outdated
 
 ## Specialized Kexts and Fixes
 
