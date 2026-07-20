@@ -8,6 +8,7 @@ The essential tools nearly every Hackintosh build will need, regardless of hardw
 |---|---|
 | [**OpenCore Bootloader**](https://github.com/acidanthera/OpenCorePkg/releases) | The boot manager itself. |
 | [**OpenCore Auxiliary Tools (OCAT)**](https://github.com/ic005k/QtOpenCoreConfig) | Edit and maintain your `config.plist`. Also mounts the EFI, generates SMBIOS data, updates OpenCore, Drivers, Kexts and validates/updates the config. |
+|[**Python**](https://www.python.org/downloads/) | Necessary for running the python-based tools in this list
 | [**ProperTree**](https://github.com/corpnewt/ProperTree) | Lightweight alternative to OCAT for editing `config.plist` by hand. Its Snapshot feature (Cmd/Ctrl+R) scans your EFI's ACPI, Drivers, Kexts, and Tools folders and syncs the config entries to match, adding missing ones and flagging orphans. |
 | [**MountEFI**](https://github.com/corpnewt/MountEFI) | Mount the EFI partition. *(Not needed if using OCAT.)* |
 | [**gibMacOS**](https://github.com/corpnewt/gibMacOS) | Download macOS installers directly from Apple. |
@@ -121,9 +122,6 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**OpenCore Legacy Patcher**](https://github.com/dortania/OpenCore-Legacy-Patcher) – OCLP can install NVIDIA and Intel Graphics Drivers removed from macOS 12 and newer as well as re-enable previously working WiFi/BT cards.
 - ~~[**GeForce Kepler Patcher**](https://github.com/chris1111/Geforce-Kepler-patcher) – Brings back NVIDIA GeForce Drivers for Kepler Cards in macOS 12 and newer.~~ Superseeded by OCLP
 - ~~[**Intel HD 4000 Patcher**](https://github.com/chris1111/Patch-HD4000-Monterey) – For installing Intel HD 4000 iGPU drivers which have been removed from macOS 12 and newer.~~ Superseeded by OCLP
-
-### Cross-Platform
-- [**Python Installer**](https://www.python.org/downloads/) – Necessary for running the python-based tools in this list
 
 ### Windows-side Hardware Utilities
 Tools run from Windows for diagnosing hardware and preparing installers.
