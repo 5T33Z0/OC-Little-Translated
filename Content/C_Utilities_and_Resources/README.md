@@ -124,12 +124,8 @@ Tools for patching macOS in Post-Install so it can run on eol/legacy systems.
 - [**WIMUtil**](https://github.com/memstechtips/WIMUtil) – Easy to us tool for debloating Windows 10/11 isos.
 
 ### Web-based applications
-- [**Sanity Checker**](https://sanitychecker.ocutils.me/) – The popular tool for checking the consistency of OpenCore configs online has returned!
 - [**OpenCore ScanPolicy Generator**](https://oc-scanpolicy.vercel.app/)
-- [**AnyPlist**](https://www.anyplist.com/#/) – Online Plist Editor
 - [**OpenCore ExposeSensitiveData Generator**](https://dreamwhite-oc-esd.vercel.app/)
-- [**Clover Cloud Editor**](https://cloudclovereditor.altervista.org/cce/cce/index.php) – Although the name implies otherwise, this is for editing OpenCore Configs online.
-- [**OpenCore Configurator Online**](https://galada.gitee.io/opencoreconfiguratoronline/) – Compatible with OC ≤ 0.8.0
 - [**Big <> Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html)
 - [**Base64 Decoder/Encoder**](https://www.base64decode.org/)
 - [**HackinDROM**](https://hackindrom.zapto.org/) – Online-Tool for generating an SSDT for getting non-Apple Thunderbolt Controllers to work in macOS.
