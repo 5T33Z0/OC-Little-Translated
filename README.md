@@ -107,11 +107,11 @@
 
 ## 📈 Repo Stats
 
-<a href="https://star-history.com/#5T33Z0/OC-Little-Translated&Date">
+<a href="https://star-history.dera.page/#5T33Z0/OC-Little-Translated&type=Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=5T33Z0/OC-Little-Translated&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
+   <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=5T33Z0/OC-Little-Translated&type=Date" />
  </picture>
 </a>
 
