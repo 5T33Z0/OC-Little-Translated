@@ -52,6 +52,28 @@ Follow these steps to configure your Hackintosh for AppleVTD:
    - Example of successful activation:
      ![AppleVTD in IORegistryExplorer](https://user-images.githubusercontent.com/76865553/173662447-02328900-46a3-445f-aa39-205a8eecdff8.png)
 
+## Additional Settings
+
+On some platforms (Z370/Z390/Z490) with more than 16 GB of RAM and the iGPU enabled, Ethernet, Wi-Fi, and Thunderbolt devices may stop working in macOS 13.3+ when AppleVTD (VT-d/IOMMU) is active and the native DMAR table contains one or more Reserved Memory Regions. After some [research](https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.316533/page-3726#post-2365883), CaseySJ developed a [patch](https://github.com/CaseySJ/Ventura-AppleVTD-Patch) to address the issue. This patch was later implemented in OpenCore as the `DisableIoMapperMapping` kernel quirk.
+
+### `DisableIoMapperMapping` Quirk
+
+The quirk prevents macOS from mapping PCI bridge device memory through the IOMMU while leaving AppleVTD enabled, avoiding the problematic memory mapping introduced in Ventura 13.3. It replaces the original `IOPCIFamily` binary patch and should therefore be used instead of it with OpenCore 0.9.2 or newer.
+
+**You may need this quirk if all or most of the following apply:**
+
+- **Z370/Z390/Z490** platform
+- **macOS 13.3 or later**
+- **AppleVTD (VT-d/IOMMU) is enabled**
+- **More than 16 GB of RAM**
+- **iGPU is enabled**
+- **Native DMAR table contains Reserved Memory Regions**
+- **Ethernet, Wi-Fi, or Thunderbolt devices stops working after upgrading**
+
+> [!NOTE]
+>
+> `DisableIoMapperMapping` does not eliminate the need for a modified DMAR table. The native DMAR must either contain no Reserved Memory Regions or be replaced with an `SSDT-DMAR.aml` from which the affected regions have been removed.
+
 ---
 
 ## Optional: Using `SSDT-DMAC`
