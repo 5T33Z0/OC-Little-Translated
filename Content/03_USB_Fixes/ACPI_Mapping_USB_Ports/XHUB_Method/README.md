@@ -55,7 +55,7 @@ Before starting, ensure you have the following:
 
 To implement a custom USB port map using ACPI, we follow this sequence:
 
-- **Rename the USB controller** if necessary (e.g., `XHC1` to `SHCI`), to avoid conflicts with existing port maps in macOS.
+- **Rename the USB controller** if necessary (e.g., `XHC1` to `SHCI`), to avoid conflicts with existing port maps in macOS. (&rarr; check [OpenCore Post-Install Guide](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) for details)
 - **Disable `RHUB` and/or `HUBN` under macOS only**: This also disables their `_UPC` methods. These hubs remain enabled under other operating systems.
 - **Add `XHUB` or `HUBX`**, enabled only under macOS. These act as macOS-specific substitutes for `RHUB` and `HUBN`.
 - **Assign original `_ADR` values to the new hubs**: `XHUB` inherits the `_ADR` of `RHUB`, and `HUBX` that of `HUBN`, ensuring correct device tree structure under macOS.
