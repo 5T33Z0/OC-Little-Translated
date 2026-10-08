@@ -68,7 +68,7 @@ The quirk prevents macOS from mapping PCI bridge device memory through the IOMMU
 - **More than 16 GB of RAM**
 - **iGPU is enabled**
 - **Native DMAR table contains Reserved Memory Regions**
-- **Ethernet, Wi-Fi, or Thunderbolt devices stops working after upgrading**
+- **Ethernet, Wi-Fi, or Thunderbolt devices stop working after upgrading to macOS 13.3 or newer**
 
 > [!NOTE]
 >
