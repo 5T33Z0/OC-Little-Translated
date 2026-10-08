@@ -65,9 +65,9 @@ To implement a custom USB port map using ACPI, we follow this sequence:
 
 ## Step-by-Step Guide
 
-### Step 1: Renaming USB Controllers (if required)
+### Step 1: Renaming USB Controllers (if necessary)
 
-Certain USB controllers needs to be renamed in order to avoid conflict with Apple's own USB maps. Refer to the Dortania's [OpenCore Install Guide](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) and rename USB Controllers as needed.
+Certain USB controllers need to be renamed in order to avoid conflicts with Apple's own USB maps. Refer to the Dortania's [OpenCore Post-Install Guide](https://dortania.github.io/OpenCore-Post-Install/usb/system-preparation.html) to verify, if renaming USB Controllers is mecessary.
 
 ### Step 2: Understand Your USB Controllers
 1. **Open IORegistryExplorer**:
