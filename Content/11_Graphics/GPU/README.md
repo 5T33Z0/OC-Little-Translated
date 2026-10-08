@@ -37,27 +37,36 @@ Support for dedicated AMD Radeon cards:
 ## NVIDIA Graphics
 
 ### Modern NVIDIA GPUs (Unsupported)
-NVIDIA Turing (RTX 20xx), Ampere (RTX 30xx), and Ada Lovelace (RTX 40xx) cards **do not work** in any version of macOS because no drivers exist. 
-- [List of Unsupported NVIDIA GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
+
+NVIDIA Turing (RTX 20xx), Ampere (RTX 30xx), Ada Lovelace (RTX 40xx), and Blackwell (RTX 50xx) cards **do not have native macOS support** because Apple does not provide drivers for these architectures.
+
+However, the new community-developed [NullMoth NVIDIA Driver](https://github.com/nullmoth/nvidia-macos-driver) provides **third-party Metal support** for selected modern NVIDIA GPUs. This is **not an NVIDIA Web Driver** and is unrelated to the legacy Web Driver support described below.
+
+- [**List of Unsupported NVIDIA GPUs**](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
+- [**NullMoth NVIDIA Driver**](https://github.com/nullmoth/nvidia-macos-driver) — third-party Metal driver for modern NVIDIA GPUs.
 
 ### Legacy & Web Driver Support (via OCLP)
+
 While official NVIDIA support ended with High Sierra (Web Drivers) and Big Sur (Native Kepler support), community tools like **OpenCore Legacy Patcher (OCLP)** allow for continued functionality in newer macOS versions. This is necessary because:
 
-*   **Native Kepler Support:** Support for GTX 6xx/7xx cards was removed in macOS Monterey.
-*   **Web Driver Revocation:** In 2022, certificates were revoked, making standard Web Driver installation impossible on modern macOS without OCLP's root patching.
+- **Native Kepler Support:** Support for GTX 6xx/7xx cards was removed in macOS Monterey.
+- **Web Driver Revocation:** In 2022, certificates were revoked, making standard Web Driver installation impossible on modern macOS without OCLP's root patching.
 
 #### Verified Models for OCLP Root Patching
+
 The following GPUs that functioned with Web Drivers in High Sierra are generally compatible with OCLP patching in modern macOS:
 
-*   **GTX 650** (Kepler – GK104)
-*   **GTX 650 TI Boost** (Kepler – GK106)
-*   **GT 710** (Kepler - GK107)
-*   **Quadro K620** (Maxwell - GM107)
-*   **GTX 860M** (Maxwell - GM107)
-*   **GT 1030** (Pascal - GP107)
-*   **GTX 1050Ti** (Pascal - GP107)
+- **GTX 650** (Kepler – GK104)
+- **GTX 650 TI Boost** (Kepler – GK106)
+- **GT 710** (Kepler - GK107)
+- **Quadro K620** (Maxwell - GM107)
+- **GTX 860M** (Maxwell - GM107)
+- **GT 1030** (Pascal - GP107)
+- **GTX 1050Ti** (Pascal - GP107)
 
 **Source:** [OCLP GitHub](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/993) | [Installation Guide](https://elitemacx86.com/threads/how-to-enable-nvidia-webdrivers-on-macos-big-sur-and-monterey.926/)
+
+---
 
 ## Troubleshooting & Notes
 
