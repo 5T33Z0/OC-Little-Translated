@@ -40,7 +40,13 @@ Support for dedicated AMD Radeon cards:
 
 NVIDIA Turing (RTX 20xx), Ampere (RTX 30xx), Ada Lovelace (RTX 40xx), and Blackwell (RTX 50xx) cards **do not have native macOS support** because Apple does not provide drivers for these architectures.
 
-However, the new community-developed [NullMoth NVIDIA Driver](https://github.com/nullmoth/nvidia-macos-driver) provides **third-party Metal support** for selected modern NVIDIA GPUs. This is **not an NVIDIA Web Driver** and is unrelated to the legacy Web Driver support described below.
+However, the new community-developed [NullMoth NVIDIA Driver](https://github.com/nullmoth/nvidia-macos-driver) provides **Metal 3 support** for selected modern NVIDIA GPUs.
+
+**Screenshot**:
+
+![](/Users/5t33z0/Desktop/RTX5060_metal.jpg)
+
+ This is **not an NVIDIA Web Driver** and is unrelated to the legacy Web Driver support described below.
 
 - [**List of Unsupported NVIDIA GPUs**](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html#unsupported-nvidia-gpus).
 - [**NullMoth NVIDIA Driver**](https://github.com/nullmoth/nvidia-macos-driver) — third-party Metal driver for modern NVIDIA GPUs.
