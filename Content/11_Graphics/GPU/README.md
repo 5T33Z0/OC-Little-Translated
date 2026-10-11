@@ -44,7 +44,7 @@ However, the new community-developed [NullMoth NVIDIA Driver](https://github.com
 
 **Screenshot**:
 
-![](/Users/5t33z0/Desktop/RTX5060_metal.jpg)
+<img width="1542" height="1007" alt="RTX5060_metal" src="https://github.com/user-attachments/assets/7aa58a79-18c9-4986-a5c0-2e397c8fea35" />
 
  This is **not an NVIDIA Web Driver** and is unrelated to the legacy Web Driver support described below.
 
