@@ -1,8 +1,8 @@
 # OC-Little Translated: ACPI Hotpatch Samples and Guides for OpenCore
 
-[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.8-success.svg)](https://github.com/acidanthera/OpenCorePkg)
+[![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.9-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 ![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.x-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.08-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.12-blueviolet.svg)
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ---
