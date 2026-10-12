@@ -203,9 +203,9 @@ If you have multiple macOS versions installed, you can add the corresponding `Ai
 4. Extract the archives and rename the kexts to distinguish between versions. I usually append an underscore followed by the macOS version, e.g., `AirportItlwm_Sonoma.kext`. **Do not use spaces in the filenames.**
 5. Add all renamed kexts to `EFI/OC/Kexts` and create a corresponding entry for each one in `config.plist`.
 6. Disable `itlwm.kext` if it is present. Do not load `itlwm.kext` and `AirportItlwm.kext` simultaneously.
-7. Configure the `MinKernel` and `MaxKernel` values for each kext so that it loads only on the macOS versions it supports. Use the screenshot below as a reference.<br> ![AirportItlwm MinKernel and MaxKernel configuration](https://github.com/user-attachments/assets/c505f572-e8ca-4f21-bf84-c42b8a9a7c4f)
-
-8. Save `config.plist` and verify that Wi-Fi works in each installed macOS version.
+7. Configure the `MinKernel` and `MaxKernel` values for each kext so that it loads only on the macOS versions it supports. Use the screenshot below as a reference.
+   ![AirportItlwm MinKernel and MaxKernel configuration](https://github.com/user-attachments/assets/c505f572-e8ca-4f21-bf84-c42b8a9a7c4f)
+9. Save `config.plist` and verify that Wi-Fi works in each installed macOS version.
 
 > [!IMPORTANT]
 >
