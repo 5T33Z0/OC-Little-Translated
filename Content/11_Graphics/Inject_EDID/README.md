@@ -21,7 +21,7 @@ EDID stands for **Extended Display Identification Data**. It's a 128 byte value 
 
 ### Getting the tools
 
-- Download the [tools](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/11_Graphics/Inject_EDID/Tools_backup.7z) and extract them
+- Download the [tools](https://github.com/5T33Z0/OC-Little-Translated/raw/refs/heads/main/Content/11_Graphics/Inject_EDID/Tools_backup.7z) and extract them
 - It contains 2 apps: DarwinDumper and FixEDID
 - Continue with the guide
 
