@@ -2,7 +2,7 @@
 
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.9-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 ![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.x-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.12-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.16-blueviolet.svg)
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ---
@@ -32,10 +32,10 @@
 ### 📄 ACPI & Devices
 
 * 🧠 [ACPI Basics and Guides](/Content/00_ACPI/README.md)
-* ➕ [Adding Missing Devices (SSDTs)](/Content/01_Adding_missing_Devices_and_enabling_Features/README.md)
+* ➕ [Adding Missing Devices and enabling Features](/Content/01_Adding_missing_Devices_and_enabling_Features/README.md)
 * ➖ [Disabling Devices](/Content/02_Disabling_Devices/README.md)
 * 🧩 [Populating the MMIO Whitelist](/Content/12_MMIO_Whitelist/README.md)
-* 🧷 [Merging SSDTs into one table](Content/00_ACPI/SSDT-ALL)
+* 🧷 [Merging single SSDTs into one table](Content/00_ACPI/SSDT-ALL)
 
 ### 🛠️ System Fixes
 
