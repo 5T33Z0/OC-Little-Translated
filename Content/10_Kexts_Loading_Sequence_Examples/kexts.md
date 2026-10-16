@@ -2,6 +2,11 @@
 
 Listed below are well-known kexts required when running macOS on non-Apple Hardware.
 
+> [!TIP]
+>
+> For alternative repos with forks kexts and tools that extend compatibility, fix long-standing issues, or add features missing from the original, I create a [Alternative Repositories](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/docs/Forks.md) – 
+
+
 | Category               | Kext Name                                                                                                                                                         | Description                                                       |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
 | **Required**           | [**Lilu**](https://github.com/acidanthera/Lilu)                                                                                                                   | For arbitrary kext, library, and program patching                 |
