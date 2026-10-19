@@ -19,6 +19,7 @@ Support for AMD processors with integrated Vega graphics via NootedRed:
 ### Discrete Graphics (dGPU)
 Support for dedicated AMD Radeon cards:
 
+- [**Cobalt64**](https://cobalt64.com/check) – Dedicated AMD GPU Driver for macOS supporting RDNA 3 (RX 7000 Series) and RDNA 4 (RX 9000 Series). Currently in Defelopment ([Github](https://github.com/Almosst-DEV/Cobalt64))
 - [**AMD GPU Compatibility Chart**](/Content/11_Graphics/GPU/AMD_GPU_Compatbility.md) — Reference for supported models.
 - [**Enabling (Big) Navi Cards**](/Content/11_Graphics/GPU/AMD_Navi) — RX 5000 and 6000 series.
 - [**Enabling AMD Vega 56/64 Cards**](/Content/11_Graphics/GPU/AMD_Vega) — Specific fixes for GCN 5 cards.
