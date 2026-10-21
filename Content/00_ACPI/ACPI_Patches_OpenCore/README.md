@@ -13,10 +13,6 @@ Unlike Clover's traditional OS-dependent ACPI patching approach, OpenCore applie
 
 For more details about how ACPI is handled by OpenCore, refer to the official [**OpenCore Reference Manual**](https://dortania.github.io/docs/release/Configuration.html#introduction1).
 
-> [!NOTE]
-> 
-> The `RebaseRegions` and `SyncTableIds` quirks are special cases. They are processed after the other ACPI changes because they operate on the final ACPI table configuration.
-
 ## ACPI quirks integrated into OpenCore
 
 OpenCore provides several built-in ACPI quirks to work around firmware issues by modifying specific ACPI tables or their contents. They are configured in the `ACPI -> Quirks` section of the `config.plist`.
@@ -39,5 +35,6 @@ For more information about ACPI tables, refer to the official [**ACPI specificat
 > These quirks are workarounds, not general-purpose optimizations. Leave them disabled unless your hardware or a specific compatibility issue requires them. ACPI changes made by OpenCore can affect other operating systems as well.
 
 ## Credits
-- Acidanthera for OpenCore and its [**Reference Manual**](https://dortania.github.io/docs/latest/Configuration.html)
-- [**ACPI Specifications**](https://uefi.org/specifications) by UEFI.org
+
+- Acidanthera for OpenCore and its [**Reference Manual**](https://dortania.github.io/docs/latest/Configuration.html).
+- [**ACPI Specifications**](https://uefi.org/specifications) by UEFI.org.
