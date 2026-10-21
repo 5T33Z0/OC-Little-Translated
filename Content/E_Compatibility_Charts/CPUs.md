@@ -1,17 +1,17 @@
-# CPU Family Codenames for Hackintosh
+# Intel & AMD CPU Families for Hackintosh
 
 A quick reference to Intel and AMD CPU codenames relevant to Hackintosh compatibility, OpenCore configuration, kernel patches, and hardware-specific driver development.
 
 > [!IMPORTANT] 
 > 
-> CPU compatibility does not guarantee graphics acceleration. Integrated graphics, power management, audio, and other platform devices must be evaluated separately. See the [Dortania OpenCore Install Guide — Hardware Limitations](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html).
+> CPU compatibility does not guarantee graphics acceleration. Integrated graphics, power management, audio, and other platform devices must be evaluated separately. See &rarr; [**Dortania OpenCore Install Guide — Hardware Limitations**](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html).
 
 ## 🟦 Intel
 
 Intel CPUs have the strongest native macOS compatibility because Apple shipped Macs using Intel processors. For modern Hackintosh builds, Coffee Lake and Comet Lake are particularly relevant reference platforms.
 
 | Codename | Architecture /<br>Generation | Example CPUs | macOS Support (without using [**OCLP**](https://github.com/5T33Z0/OCLP4Hackintosh)) |
-| --- | ---: | ---: | --- |
+| ---: | ---: | ---: | --- |
 | Lynnfield, Nehalem, etc. | Core i, 1st Gen | i7-870, i7-980X | OS X 10.5 – macOS 12 Monterey* |
 | Sandy Bridge | 2nd Gen | i7-2600K | OS X 10.6 – macOS 12 Monterey |
 | Ivy Bridge | 3rd Gen | i7-3770K | OS X 10.7 – macOS 11 Big Sur |
@@ -38,7 +38,7 @@ Intel CPUs have the strongest native macOS compatibility because Apple shipped M
 > - Pre-Haswell CPUs lack AVX2, which is required by macOS Ventura and newer without additional workarounds.
 > - *Exact support depends on the CPU model and iGPU. Nehalem/Westmere systems have additional CPU and graphics limitations; Ice Lake support is model-specific.*
 
-**Reference**: [Dortania — macOS Limits](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html), [Dortania — Intel GPU Buyers Guide](https://github.com/dortania/GPU-Buyers-Guide/blob/master/modern-gpus/intel-gpu.md).
+**Reference**: [**Dortania — macOS Limits**](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html), [Dortania — Intel GPU Buyers Guide](https://github.com/dortania/GPU-Buyers-Guide/blob/master/modern-gpus/intel-gpu.md).
 
 ---
 
@@ -49,7 +49,7 @@ AMD Ryzen Hackintosh systems generally require AMD-specific kernel patches. Desk
 ### Desktop CPUs and APUs
 
 | Codename | Architecture | Example CPUs | Hackintosh relevance |
-| --- | --- | --- | --- |
+| ---: | ---: | ---: | --- |
 | Bulldozer / Piledriver | AMD Family 15h | FX-8350 | Legacy AMD kernel-patch territory |
 | Zen / Summit Ridge | Zen 1 | Ryzen 7 1800X | Early Ryzen Hackintosh platform |
 | Zen+ / Pinnacle Ridge | Zen+ | Ryzen 7 2700X | AMD kernel patches required |
@@ -67,7 +67,7 @@ AMD Ryzen Hackintosh systems generally require AMD-specific kernel patches. Desk
 These codenames are particularly useful when researching laptop-specific components such as integrated graphics, audio controllers, Wi-Fi, and power management.
 
 | Codename | Architecture | Example processors | Hackintosh relevance |
-| --- | --- | --- | --- |
+| ---: | ---: | ---: | --- |
 | Raven Ridge | Zen, Vega | Ryzen 5 2500U | Early Ryzen mobile APUs |
 | Picasso | Zen+, Vega | Ryzen 5 3500U | Older AMD laptop platform |
 | Renoir | Zen 2, Vega | Ryzen 7 4800U | Relevant to AMD ACP audio-driver research |
