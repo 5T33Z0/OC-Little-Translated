@@ -4,6 +4,8 @@
 > 
 > **Disclaimer**: I am not a developer. Therefore, my knowledge of ACPI and ASL is rather limited. Although I try my best to communicate the required changes necessary to make USB work in macOS, I cannot guarantee that it will work for everybody – and I cannot and will not fix your SSDTs!
 
+---
+
 **TABLE of CONTENTS**
 
 - [Background](#background)
@@ -36,6 +38,8 @@
 	- [Assigning Physical Location of Device (`_PLD`)](#assigning-physical-location-of-device-_pld)
 - [Wrapping up and testing](#wrapping-up-and-testing)
 - [Credits](#credits)
+
+---
 
 ## Background
 Although the `XHCIPortLimit` Quirk which lifts the USB port count limit from 15 to 26 ports per USB controller under macOS was fixed in OpenCore 0.9.3, it is recommended to only enable it temporarily for creating a custom USB port injector kext with tools like `Hackintool` or `USBMap`: 

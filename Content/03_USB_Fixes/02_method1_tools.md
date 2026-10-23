@@ -1,6 +1,6 @@
-# Method 1: Mapping USB Ports with Tools
+# Method 1: USB Port Mapping with a Kext
 
-This method uses tools to create a codeless kext containing an info.plist with the desired USB port mapping which is injected into macOS during boot.
+This method uses tools to create a codeless kext containing an `info.plist` with the desired USB port mapping which is injected into macOS during boot.
 
 > [!CAUTION]
 >

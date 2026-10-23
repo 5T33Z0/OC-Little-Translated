@@ -1,41 +1,107 @@
-# Technical Background
+# Introduction to USB Port Mapping
+
+USB port mapping is an essential step when configuring macOS on non-Apple hardware. It ensures that macOS correctly identifies the available USB ports, uses the appropriate transfer speeds, and handles internal and external USB devices reliably.
+
+This chapter introduces the concepts behind USB port mapping, explains the limitations imposed by macOS, and outlines the available mapping methods. The following documents cover the tools and procedures required to create and implement a port map.
+
+## Why USB Port Mapping Is Necessary
+
+Unlike Windows, macOS does not automatically discover and configure every USB port on arbitrary PC hardware. It relies on the USB controllers and port topology presented to it by the platform firmware and its own drivers. On a Hackintosh, the selected SMBIOS and ACPI configuration help define the hardware environment macOS expects.
+
+As a result, some physical ports may not work correctly, USB 3 devices may fall back to USB 2 speeds, or internal USB devices may stop functioning as expected.
+
+USB port mapping explicitly defines which ports macOS should expose under the relevant USB controller, ensuring that the configuration matches the actual hardware and stays within macOS's port limit.
+
+**Correct mapping helps ensure that**:
+
+- USB 2 and USB 3 devices operate at their intended speeds.
+- All required physical ports remain functional.
+- Internal USB devices, such as Bluetooth modules and built-in webcams, are assigned correctly.
+- USB devices behave reliably across reboots and sleep/wake cycles.
+- The configuration stays within macOS's USB port limit.
 
 ## Understanding the USB Port Limit
 
-In macOS, the system imposes a strict limit of 15 available USB ports. This restriction poses a challenge for modern motherboards equipped with XHCI (Extensible Host Controller Interface) controllers, which can support up to 26 ports per controller. When USB ports are not properly mapped in macOS, both internal and external USB devices may default to USB 2.0 speeds or fail to function entirely. This issue extends to devices like Bluetooth, which operates as a "wireless" USB 2.0 connection and requires an internally assigned USB 2.0 port. Similarly, built-in laptop cameras depend on correct port mapping to work as intended.
+macOS imposes a limit of **15 USB ports per USB controller** in the relevant USB port-mapping architecture. Modern XHCI controllers can expose more ports than this, so a motherboard may have more ports available than macOS can use without a proper configuration.
 
-A single physical USB 3 connector (typically the blue one) supports two distinct USB protocols, requiring two port assignments: "HS" (High Speed) for USB 2.0 and "SS" (Super Speed) for USB 3.0. Given macOS's 15-port limit, this effectively means you can map only seven USB 3.0 ports—each supporting both USB 2.0 and USB 3.0 protocols—plus one additional port for either HS or SS, and that's the maximum. Notably, macOS does not support USB 3.2 via the USB protocol; Apple relies on Thunderbolt for higher-speed connections instead. As a result, hackintosh users must carefully select and map their desired ports to ensure optimal functionality.
+The limit applies to the logical ports exposed to macOS, not simply to the number of physical USB connectors on the motherboard.
+
+### Physical connectors vs. logical ports
+
+A physical USB 3 connector generally provides two logical port entries:
+
+- **HS (High-Speed):** Handles USB 2.0 and slower USB devices.
+- **SS (SuperSpeed):** Handles USB 3.x devices.
+
+For example, connecting a USB 2 device to a USB 3 connector uses its HS path, while connecting a USB 3 device uses its SS path. Both entries count toward the 15-port limit, even though they share one physical connector.
+
+This is why a motherboard with eight USB 3 connectors can require 16 logical port entries before accounting for any additional USB 2-only connectors or internal devices.
+
+A port map must therefore prioritize the ports that are actually needed. Unused ports can be excluded to keep the configuration within the limit.
 
 > [!IMPORTANT]
->
-> `XhciPortLimit` Quirk is working again since OpenCore 0.9.3 (commit [d52fc46](https://github.com/acidanthera/OpenCorePkg/commit/d52fc46ba650ce1afe00c354331a0657a533ef18)) for macOS Big Sur and newer. Generating a USB port injector kext or mapping ports via ACPI is still highly recommended!
+> The `XhciPortLimit` quirk is not a substitute for a proper port map. Although its behavior has varied across macOS releases and OpenCore versions, it should not be relied upon as a permanent solution. A correctly configured USB port map is the recommended approach.
 
-## USB Specs
+## USB Controllers, Protocols and Speeds
 
-| USB Version | Year | Signaling Rate | Current Name | Marketing Name | Controller | Notes |
-|:-----------:|:----:|:--------------:|:------------:|:--------------:|:----------:|:-----|
-| USB 1.0/1.1 | 1996 | 1.5 Mbps <br>12 Mbps | USB 1.0/1.1 | Low-Speed <br>Full-Speed | UHCI/OHCI | Dropped from macOS Ventura+. Critical for legacy keyboards and mice. [Workaround](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#usb-1-1-ohci-uhci-support). |
-| USB 2.0     | 2000 | 480 Mbps       | USB 2.0     | High-Speed     | EHCI       | Requires USB port-mapping (via Kext or ACPI) for macOS compatibility. Backward compatible with USB 1.x. |
-||
-| USB 3.0     | 2008 | 5 Gbps         | USB 3.2 SuperSpeed Gen. 1 | USB 5Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 2.0. |
-| USB 3.1     | 2013 | 10 Gbps        | USB 3.2 SuperSpeed+ Gen. 2 | USB 10Gbps | XHCI | Requires USB port-mapping (via Kext or ACPI). Backward compatible with USB 3.2 Gen 1x1 and USB 2.0. |
-| USB 3.2     | 2017 | 20 Gbps        | USB 3.2 SuperSpeed+ Gen. 2x2 | USB 20Gbps | XHCI | Requires USB-C port and cable. Port-mapping and patched Thunderbolt controller may be needed for full functionality. Backward compatible with lower USB versions. |
-||
-| USB4        | 2019 | Up to 40 Gbps  | USB4 Gen 3x2 | USB4 40Gbps | TB/PCIe    | Not natively supported in macOS. Requires Thunderbolt 3/4 or PCIe controller. Supports USB-C, backward compatible with USB 3.2 and USB 2.0. Optional tunneling for PCIe and DisplayPort. |
-| USB4v2      | 2022 | Up to 80 Gbps  | USB4 Gen 4x2 | USB4 80Gbps | TB/PCIe    | Not natively supported in macOS. Requires USB-C and specific controllers (Thunderbolt 4 or PCIe). Supports asymmetric 120 Gbps (80 Gbps one direction, 40 Gbps other). Backward compatible with USB4, USB 3.2, and USB 2.0. |
+Before mapping ports, it helps to understand three related but distinct concepts:
+
+- **USB controller:** The hardware that manages USB communication.
+- **USB protocol and speed:** The communication standard and data rate supported by a device and its connection.
+- **USB port:** A connection exposed by a controller to which a device can be attached.
+
+The controller determines which ports are available to macOS, while the protocol and speed determine how connected devices communicate.
+
+### USB controller types
+
+Most modern Intel-based Hackintosh systems use XHCI controllers. Older hardware may also use UHCI, OHCI or EHCI controllers.
+
+| Controller | Protocol support | macOS support | Relevance to port mapping |
+|---|---|---|---|
+| UHCI | USB 1.0/1.1 — Low-Speed and Full-Speed | Legacy support; USB 1.1 controller support was removed in macOS Ventura 13 | Primarily relevant to older hardware |
+| OHCI | USB 1.0/1.1 — Low-Speed and Full-Speed | Legacy support; USB 1.1 controller support was removed in macOS Ventura 13 | Primarily relevant to older hardware |
+| EHCI | USB 2.0 — High-Speed; slower devices may use companion controllers or hubs | Supported on compatible hardware | Common on older systems |
+| XHCI | USB 1.1, USB 2.0 and USB 3.x, depending on implementation | Supported on compatible hardware | The primary focus of modern USB port mapping |
+| VHCI | Virtual USB; capabilities depend on implementation | Implementation-dependent | Generally outside the scope of physical motherboard port mapping |
+| USB4 host router | USB4 transport and protocol tunneling | Depends on hardware and macOS support | A separate architecture; not a replacement for ordinary XHCI port mapping |
+
+For most modern Hackintosh systems, the important controller is **XHCI**. A single XHCI controller can expose both USB 2 and USB 3 logical ports.
+
+Controller names such as `XHC`, `XHC0` or `XHCI` are commonly found in ACPI tables and IORegistry. The actual controller and port topology should be verified on the target system rather than inferred from the motherboard's physical connectors alone.
+
+### USB protocols and transfer speeds
+
+| USB generation | Maximum signaling rate | Common controller | Notes |
+|---|---:|---|---|
+| USB 1.0/1.1 | 1.5 / 12 Mbps | UHCI / OHCI | Legacy Low-Speed and Full-Speed devices |
+| USB 2.0 | 480 Mbps | EHCI / XHCI | High-Speed devices; also supports slower USB 1.x devices |
+| USB 3.0 / USB 3.2 Gen 1 | 5 Gbps | XHCI | SuperSpeed |
+| USB 3.1 / USB 3.2 Gen 2 | 10 Gbps | XHCI | SuperSpeedPlus |
+| USB 3.2 Gen 2x2 | 20 Gbps | XHCI, where supported | Requires compatible hardware, connection and cable |
+| USB4 | Up to 40 Gbps in common implementations | USB4 host router and related controller architecture | Supports tunneling of USB and other protocols |
+| USB4 Version 2.0 | Up to 80 Gbps, with an optional asymmetric 120 Gbps mode | Compatible USB4 host router | Requires supporting hardware and connections |
+
+The USB generation alone does not guarantee a particular speed. The controller, device, port, cable and connection mode must all support the required capability.
 
 > [!NOTE]
->
-> 1. **Naming Conventions**: The [USB Implementers Forum (USB-IF)](https://www.usb.org/about) simplified naming in 2019, emphasizing performance-based marketing names (e.g., USB 5Gbps, USB 10Gbps) over version numbers to reduce confusion. The "Current Name" reflects technical designations (e.g., USB 3.2 Gen 1x1), while "Marketing Name" uses the consumer-friendly speed-based names.
-> 2. **USB4 and USB4v2**: USB4 Gen 3x2 (40 Gbps) and USB4 Gen 4x2 (80 Gbps) are clarified with their technical names. USB4v2 introduces asymmetric bandwidth (up to 120 Gbps in one direction), but 80 Gbps is the standard bidirectional rate.
-> 3. **Controllers**: USB4 and USB4v2 rely on Thunderbolt/PCIe controllers, with USB4 requiring Thunderbolt 3/4 compatibility for full features. XHCI remains standard for USB 3.x.
-> 4. **macOS Support**: USB4 and USB4v2 lack native macOS support, requiring specific hardware and drivers.
-> 5. **Backward Compatibility**: All versions maintain backward compatibility, but performance is limited to the lowest common denominator of connected devices, cables, and ports.
-
-## Removing the USB port limit and mapping USB ports
-
-The workaround is to lift the USB port limit and use additional tools to generate a codeless kext containing a USB Port map with 15 ports of your choice. Prior to macOS Catalina, you could use the `XhciPortLimit` quirk to enable all 26 ports and you were good. Since macOS Catalina, you need to map USB ports, so your peripherals work correctly. There are two methods to do this.
+> USB4 and Thunderbolt involve additional controller and tunneling architectures. They are not simply higher-speed XHCI ports, and their functionality should be evaluated separately from conventional USB 2/3 port mapping.
 
 ---
 
-[← Back to Overview](./README.md) | [Next: Method 1 - Tools →](02_method1_tools.md)
+## Choosing a USB Port Mapping Method
+
+There are two principal approaches to USB port mapping on macOS. Both methods serve the same fundamental purpose: exposing the intended ports to macOS within the applicable limits. Neither eliminates the need to identify the correct controller and verify the actual port topology:
+
+### USB port mapping with a kext
+
+A USB port-mapping kext, typically generated with a dedicated mapping tool, defines the ports that macOS should expose through the relevant USB controller. This is a widely used approach and is suitable for many Hackintosh configurations. However, the mapping is associated with the relevant controller and USB configuration, and USB maps commonly depend on the selected SMBIOS.
+
+### ACPI-based USB port mapping
+
+An ACPI-based port map declares the relevant USB ports in an SSDT, allowing the port definitions to be provided through ACPI rather than a dedicated USB port-mapping kext. This approach can be useful when you want to keep the mapping in ACPI and avoid tying the port map to a particular SMBIOS in the same way as a conventional kext-based map.
+
+The following documents explain how to identify the available ports, choose a mapping method, and implement and verify the resulting configuration.
+
+---
+
+[← Back to Overview](./README.md) | [Next: Method 1 – Kext →](02_method1_tools.md)
