@@ -288,7 +288,7 @@ Certain USB controllers need to be renamed in order to avoid conflicts with Appl
    - **Port Limit Exceeded**: Ensure no more than 15 ports are defined per controller.
  
 ## Example SSDT
-Below, you will find the code for the `SSDT-XHUB.aml` I am using on my desktop system, containing 15 mapped USB Ports (USB 2 and USB 3 and a USB Type C port with switch):
+Below, you will find the code for the `SSDT-XHUB.aml` I am using it on my desktop system. 15 ports are mapped (USB 2 and USB 3 and a USB Type C port with switch):
 
 <img width="713" height="773" alt="Hackntool_ports" src="https://github.com/user-attachments/assets/c5939d54-fb12-4287-bd2b-e7bb0f65ae0d" />
 
