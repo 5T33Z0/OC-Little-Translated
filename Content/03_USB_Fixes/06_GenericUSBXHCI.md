@@ -2,7 +2,7 @@
 
 ## Overview
 
-[**GenericUSBXHCI.kext**](https://github.com/RehabMan/OS-X-Generic-USB3) (GUX) is a generic XHCI driver for USB controllers that are not supported by Apple's built-in `AppleUSBXHCIPCI` driver. It was originally written by Zenith432 and later maintained by RehabMan.
+[**`GenericUSBXHCI.kext`**](https://github.com/RehabMan/OS-X-Generic-USB3) (GUX) is a generic XHCI driver for USB controllers that are not supported by Apple's built-in `AppleUSBXHCIPCI` driver. It was originally written by Zenith432 and later maintained by RehabMan.
 
 Unlike [`XHCI-unsupported.kext`](05_xhci_unsupported.md), which is a codeless kext that only adds PCI ID entries so that `AppleUSBXHCIPCI` can attach to an otherwise-ignored controller, GUX replaces Apple's XHCI driver entirely for any controller it attaches to. This makes it significantly more invasive and limits its usefulness on modern macOS.
 
