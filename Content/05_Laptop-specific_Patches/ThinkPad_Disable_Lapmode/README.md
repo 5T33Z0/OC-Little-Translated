@@ -284,9 +284,9 @@ watch -n 0.5 cat /sys/devices/platform/thinkpad_acpi/dytc_lapmode
 
 For optimal performance on 8th–10th Gen Intel ThinkPads, these three tools work in tandem in chronological boot order:
 
-1. **`DisableProchot.efi`** (UEFI) prevents boot-time hardware clock locks (400–800 MHz).
+1. [**`DisableProchot.efi`**](https://github.com/arter97/DisablePROCHOT) (UEFI) prevents boot-time hardware clock locks (400–800 MHz).
 2. **`SSDT-NO-LAP`** (ACPI) permanently removes the 15W motion/lapmode ceiling at the firmware layer for all booted OSes.
-3. **`SimpleMSR.kext`** (Kernel) keeps BD-PROCHOT disabled after macOS sleep and unlocks full PL1/PL2 package power targets.
+3. [**`SimpleMSR.kext`**](https://github.com/Kethen/SimpleMSR) (Kernel) keeps BD-PROCHOT disabled after macOS sleep and unlocks full PL1/PL2 package power targets.
 
 ---
 
