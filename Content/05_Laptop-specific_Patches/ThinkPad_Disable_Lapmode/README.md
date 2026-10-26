@@ -31,7 +31,7 @@
 
 Modern Lenovo ThinkPads (primarily 8th to 11th Gen Intel Core series, including T480/T490/T14 Gen 1, X1 Carbon Gen 6–9, and P-series laptops) implement proprietary thermal management known as **DYTC (Dynamic Thermal Control)** within the Embedded Controller ACPI device (`\_SB.PCI0.LPCB.EC.HKEY`).
 
-To comply with safety standards for skin contact temperatures, these machines incorporate an accelerometer / motion sensor to detect whether the laptop is sitting on a flat surface or resting on a user's lap. This subsystem is called **Cool-on-Lap (CQL)** or **Lapmode**.
+To comply with safety standards for skin contact temperatures, these machines incorporate an accelerometer / motion sensor to detect whether the laptop is sitting on a flat surface or resting on a user's lap. This subsystem is called Cool and Quiet on Lap (CQL), commonly referred to in the community as Cool-on-Lap or **Lapmode**.
 
 ### The Problem
 * When motion or tilt is detected, the EC sets **Bit 17** (`DYTC_GET_LAPMODE_BIT` = `0x00020000`) in its status output.
