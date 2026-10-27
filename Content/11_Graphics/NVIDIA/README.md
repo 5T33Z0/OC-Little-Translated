@@ -1,41 +1,4 @@
-# GPU Support in macOS
-
-For a comprehensive overview of hardware compatibility, always refer to Dortania's [**GPU Buyer's Guide**](https://dortania.github.io/GPU-Buyers-Guide/).
-
-## Intel Graphics (iGPU)
-For configuration and troubleshooting of Intel on-board graphics:
-
-- [**Intel iGPU Fixes & Patching**](/Content/11_Graphics/iGPU)
-
----
-
-## AMD Graphics
-
-### Integrated Graphics (APU)
-Support for AMD processors with integrated Vega graphics via NootedRed:
-
-- [**AMD APU Support Overview**](/Content/11_Graphics/APU)
-
-### Discrete Graphics (dGPU)
-Support for dedicated AMD Radeon cards:
-
-- [**Cobalt64**](https://cobalt64.com/check) – Dedicated AMD GPU Driver for macOS supporting RDNA 3 (RX 7000 Series) and RDNA 4 (RX 9000 Series). Currently in Defelopment ([Github](https://github.com/Almosst-DEV/Cobalt64))
-- [**AMD GPU Compatibility Chart**](/Content/11_Graphics/GPU/AMD_GPU_Compatbility.md) — Reference for supported models.
-- [**Enabling (Big) Navi Cards**](/Content/11_Graphics/GPU/AMD_Navi) — RX 5000 and 6000 series.
-- [**Enabling AMD Vega 56/64 Cards**](/Content/11_Graphics/GPU/AMD_Vega) — Specific fixes for GCN 5 cards.
-- [**Enabling Undetected AMD GPUs**](/Content/11_Graphics/GPU/GPU_undetected) — Fixing "Black Screen" or non-recognition issues.
-- [**Legacy AMD Cards (ATI/Radeon)**](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) — Archive for ATI 4000 through AMD 300 series.
-
-### AMD Utilities & Optimization
-
-- [**SMCAMDProcessor**](https://github.com/trulyspinach/SMCAMDProcessor) – AMD CPU Power Management kext for AMD Zen processorst. Includes AMD Power Gadget
-- [**RadeonSensor**](https://github.com/NootInc/RadeonSensor) — Temperature monitoring for AMD GPUs.
-- [**AMD Radeon Tweaks**](/Content/11_Graphics/GPU/AMD_Radeon_Tweaks) — Performance and power tuning.
-- [**GPU BAR Size in OpenCore**](/Content/main/11_Graphics/GPU/GPU-BAR_Size) — Resizable BAR configurations.
-
----
-
-## NVIDIA Graphics
+## NVIDIA Graphics in macOS
 
 ### Modern NVIDIA GPUs (Unsupported)
 

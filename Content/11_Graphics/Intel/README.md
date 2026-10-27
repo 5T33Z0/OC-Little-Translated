@@ -1,9 +1,6 @@
-# iGPU Fixes
+# Intel iGPU Support
 
 An incomplete collection of iGPU-related fixes and optimizations. For general configuration, refer to the [OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/). For in-depth patching walkthroughs, see Dortania's [Intel iGPU Patching Guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/).
-
-## AMD iGPU Fixes
-- [**Enabling AMD Vega iGPUs**](/Content/11_Graphics/iGPU/AMD) (Ryzen-based laptops and APUs)
 
 ## Intel iGPU Fixes
 
