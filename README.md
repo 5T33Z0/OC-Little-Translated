@@ -2,7 +2,7 @@
 
 [![OpenCore Version](https://img.shields.io/badge/Supported_OpenCore_Version:-≤1.0.9-success.svg)](https://github.com/acidanthera/OpenCorePkg)
 ![macOS](https://img.shields.io/badge/Supported_macOS:-≤26.x-white.svg)
-![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.21-blueviolet.svg)
+![Last Update](https://img.shields.io/badge/Last_Update_\(yy/mm/dd\):-26.10.27-blueviolet.svg)
 ![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
 
 ---
@@ -36,12 +36,12 @@
 * ➕ [Adding Missing Devices and enabling Features](/Content/01_Adding_missing_Devices_and_enabling_Features/README.md)
 * ➖ [Disabling Devices](/Content/02_Disabling_Devices/README.md)
 * 🧩 [Populating the MMIO Whitelist](/Content/12_MMIO_Whitelist/README.md)
-* 🧷 [Merging single SSDTs into one table](Content/00_ACPI/SSDT-ALL)
+* 🧷 [Merging single SSDTs into one table](/Content/00_ACPI/SSDT-ALL)
 
 ### 🛠️ System Fixes
 
 * 🖥️ [Fixing CPU Power Management](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
-* 🎮 [Fixing Graphics (iGPU/dGPU/APU)](/Content/11_Graphics/README.md)
+* 🎮 [Fixing Graphics (AMD, Intel, NVIDIA)](/Content/11_Graphics/README.md)
 * 🔌 [Fixing USB](/Content/03_USB_Fixes/README.md)
 * 😴 [Fixing Sleep & Wake](/Content/04_Fixing_Sleep_and_Wake_Issues/README.md)
 * 🔄 [Fixing OTA System Updates](/Content/S_System_Updates/OTA_Updates.md)
@@ -53,7 +53,7 @@
 ### 💻 Laptop-Specific
 
 * 💻 [Laptop Patches (Battery, FN keys, etc.)](/Content/05_Laptop-specific_Patches/README.md)
-* 🖥️ [Modifying Framebuffer Patch for detecting External Displays](/Content/11_Graphics/iGPU/Framebuffer_Patching)
+* 🖥️ [Modifying Framebuffer Patch for detecting External Displays](/Content/11_Graphics/Intel/Framebuffer_Patching/README.md)
 
 ## ⚙️ Boot & Kexts
 * ⚙️ [Boot-Args Explained](/Content/H_Boot-args/README.md)
@@ -83,7 +83,7 @@
 ## 🍏 macOS Topics
 
 * 📊 [macOS Compatibility Charts](/Content/E_Compatibility_Charts/README.md)
-* 💡 [CPU Support (Intel/AMD)](Content/E_Compatibility_Charts/CPU_Family_Codenames.md)
+* 💡 [CPU Support (Intel/AMD)](/Content/E_Compatibility_Charts/CPU_Family_Codenames.md)
 * 💿 [Multi-macOS USB Installer](/Content/U_USB_Multi_installer/README.md)
 * 💻 [macOS Virtualization](/Content/V_Virtualization/README.md)
 
