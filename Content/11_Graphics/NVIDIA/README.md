@@ -13,12 +13,12 @@ Today, running NVIDIA graphics on modern macOS (Big Sur and newer) relies on two
 
 ## NVIDIA GPU Support Matrix (macOS 11+)
 
-| Architecture | Example GPUs | macOS 11 (Big Sur) | macOS 12 (Monterey) | macOS 13+ (Ventura, Sonoma, Sequoia) | Requirements & Method |
+| Architecture | Example GPUs | macOS 11 (Big Sur) | macOS 12 (Monterey) | macOS 13 to 26 (Ventura – Tahoe) | Requirements & Method |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | **Kepler** | GTX 650–780 Ti, GT 710/730 *(GK104/GK107/GK208)* | **Native** | **OCLP** | **OCLP** | • Native in macOS 11.<br>• Requires OCLP root patch for macOS 12+.<br>• Metal 2 support. |
 | **Maxwell** | GTX 750 / 750 Ti, GTX 950–980 Ti, Titan X *(GM107/GM20x)* | **OCLP** | **OCLP** | ❌ **Unsupported** | • Legacy Web Driver re-injection via OCLP.<br>• macOS 13+ dropped required frameworks (no Metal backend). |
 | **Pascal** | GT 1030, GTX 1050–1080 Ti, Titan Xp *(GP10x)* | **OCLP** | **OCLP** | ❌ **Unsupported** | • Legacy Web Driver re-injection via OCLP.<br>• macOS 13+ dropped required frameworks (no Metal backend). |
-| **Turing** | GTX 16xx, RTX 2060–2080 Ti, Titan RTX | ❌ | ❌ | 🧪 **Experimental** | • [nvidia-macos-driver](https://github.com/nullmoth/nvidia-macos-driver) (NullMoth).<br>• Requires reduced security / SIP adjustments.<br>• Metal 3 translation layer. |
+| **Turing** | GTX 16xx, RTX 2060–2080 Ti, Titan RTX | ❌ | ❌ | 🧪 **Experimental** | • [nvidia-macos-driver](https://github.com/nullmoth/nvidia-macos-driver) (NullMoth, **not OCLP**).<br>• Requires reduced security / SIP adjustments.<br>• Metal 3 translation layer. |
 | **Ampere** | RTX 3050–3090 Ti | ❌ | ❌ | 🧪 **Experimental** | • Same as Turing. |
 | **Ada Lovelace** | RTX 4060–4090 | ❌ | ❌ | 🧪 **Experimental** | • Same as Turing. |
 | **Blackwell** | RTX 5060–5090 | ❌ | ❌ | 🧪 **Experimental** | • Same as Turing. |
