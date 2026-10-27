@@ -1,16 +1,18 @@
 /*
  * Disables Cool-on-Lap (CQL) / Lapmode throttling on Lenovo ThinkPads
+ * Targeted exclusively at non-macOS operating systems (Linux / Windows).
+ * Passes calls unmodified to macOS so ReYogaSMC can report genuine sensor status.
+ *
  * Requires DSDT rename: DYTC -> XYTC
  *
- * NOTE: 
- * Verify the ACPI path to 'HKEY' in your original DSDT (search for "Device (HKEY)" or "Method (DYTC").
+ * NOTE: Verify the ACPI path to 'HKEY' in your original DSDT (search for "Device (HKEY)" or "Method (DYTC").
+ * 
  * Common path variations:
+ *
  * - \_SB.PCI0.LPCB.EC.HKEY  (Standard Intel 8th-10th Gen: T480, T490, X1C6-8, etc.)
  * - \_SB.PC00.LPCB.EC.HKEY  (Intel 11th Gen+: T14 Gen 2, etc. using PC00 root bridge)
  * - \_SB.PCI0.LPCB.HKEY     (Some models where HKEY is located directly under LPCB)
  * - \_SB.PCI0.LPC0.EC0.HKEY (Alternative controller naming)
- *
- * If your path differs, adjust all references below accordingly before compiling!
  */
 
 DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
@@ -27,14 +29,18 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
             // Call original renamed method
             Local0 = \_SB.PCI0.LPCB.EC.HKEY.XYTC (Arg0)
 
-            // Check if query command: DYTC_CMD_GET (0x0002)
-            Local1 = (Arg0 & 0x01FF)
-
-            If (Local1 == 0x02)
+            // Only mask Bit 17 if NOT running macOS (Darwin)
+            If (!_OSI ("Darwin"))
             {
-                // Mask out Bit 17 (DYTC_GET_LAPMODE_BIT = 0x00020000)
-                // Ensures lapmode always reports 0 (desk mode) to the OS
-                Local0 &= ~0x00020000
+                // Check if query command: DYTC_CMD_GET (0x0002)
+                Local1 = (Arg0 & 0x01FF)
+
+                If (Local1 == 0x02)
+                {
+                    // Mask out Bit 17 (DYTC_GET_LAPMODE_BIT = 0x00020000)
+                    // Ensures lapmode always reports 0 (desk mode) to Linux/Windows
+                    Local0 &= ~0x00020000
+                }
             }
 
             Return (Local0)
@@ -42,7 +48,6 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
     }
 
     // Dedicated initialization device to execute EC CQL reset at boot
-    // Avoids colliding with HKEY's existing _INI method
     Scope (\_SB)
     {
         Device (DLAP)
@@ -51,7 +56,16 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
 
             Method (_STA, 0, NotSerialized)
             {
-                Return (0x0F) // Present, Enabled, Functioning, Show in UI
+                If (_OSI ("Darwin"))
+                {
+                    // Completely disable this device in macOS
+                    Return (Zero)
+                }
+                Else
+                {
+                    // Enable in Linux and Windows
+                    Return (0x0F)
+                }
             }
 
             Method (_INI, 0, NotSerialized)
