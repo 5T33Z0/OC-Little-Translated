@@ -7,7 +7,7 @@ An incomplete collection of iGPU-related fixes and optimizations. For general co
 ### Fundamentals & General Patching
 - [**Intel Display Pipeline Fundamentals**](/Content/11_Graphics/iGPU/Framebuffer_Patching/Technical_Background.md) — Understanding Pipes, BusIDs, and architecture logic.
 - [**iGPU Framebuffer List**](/Content/11_Graphics/iGPU/iGPU_DeviceProperties.md) — A reference of common IDs across generations.
-- [**Fake ig-platform-id**](/Content/11_Graphics/iGPU/Fake_ig-platform-id.md) — How to force-enable graphics when native IDs are unsupported.
+- [**Fake ig-platform-id**](/Content/11_Graphics/iGPU/Inject_Fake_IG-Platform-ID) — How to force-enable graphics when native IDs are unsupported.
 - [**Activity Monitor & Metal 3 Support**](/Content/11_Graphics/Metal_3) — Enabling the "GPU" tab, hardware acceleration, and Metal 3 in macOS 13+.
 
 ### Generation-Specific Solutions

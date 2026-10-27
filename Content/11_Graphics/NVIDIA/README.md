@@ -7,6 +7,7 @@ Today, running NVIDIA graphics on modern macOS (Big Sur and newer) relies on two
 2. **Modern GPUs (Turing, Ampere, Ada Lovelace, Blackwell):** Enabled via experimental translation drivers such as [NullMoth's nvidia-macos-driver](https://github.com/nullmoth/nvidia-macos-driver) targeting Metal 3.
 
 > [!NOTE]
+> 
 > Older OS versions (Mojave and Catalina) relied on standalone patchers by dosdude1, whereas OpenCore Legacy Patcher focuses on **macOS Big Sur (11) and newer**. Earlier architectures (Tesla, Fermi) are considered obsolete and omitted here.
 
 ---
@@ -54,9 +55,7 @@ NVIDIA Web Drivers originally developed for macOS High Sierra (10.13.6) can be i
 ### Laptops with Optimus
 On dual-GPU laptops (Intel iGPU + NVIDIA dGPU), the discrete NVIDIA card is typically wired through NVIDIA Optimus, which cannot be switched dynamically in macOS. These cards must be disabled via ACPI to save battery and prevent sleep/wake issues.
 
-👉 For legacy patching and laptop disabling guides, see:
-* [**Kepler in macOS 12+ (OCLP)**](/Content/11_Graphics/NVIDIA/Legacy/Kepler/README.md)
-* [**Disabling Unsupported Laptop GPUs (SSDT-dGPU-Off)**](/Content/11_Graphics/NVIDIA/Legacy/Disabling_unsupported_GPUs/README.md)
+👉 See: [**Disabling Unsupported GPUs**](/Content/11_Graphics/Unsupported_GPU_Disable/README.md)
 
 > [!TIP]
 > 

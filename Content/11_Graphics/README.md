@@ -4,7 +4,7 @@ A collection of graphics-related fixes, patches, and workarounds for common issu
 
 **TABLE of CONTENTS**
 
-- [**AMD**](/Content/11_Graphics/AMD/README.md)
+- 🟥 [**AMD**](/Content/11_Graphics/AMD/README.md)
 	- **APU (Laptops & Desktop APUs)**
 		- [Enabling AMD Vega iGPUs (NootedRed)](/Content/11_Graphics/AMD/APU/README.md)
 	- **GPU (Discrete Graphics)**
@@ -17,7 +17,7 @@ A collection of graphics-related fixes, patches, and workarounds for common issu
 		- [Disabling audio over HDMI/DisplayPort (AppleGFXHDA)](/Content/11_Graphics/AMD/GPU/Disabling_AppleGFXHDA/README.md)
 		- [Legacy AMD Cards and macOS](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000 to 7000 and AMD 200/300. Wayback-Machine Link)
 
-- [**Intel**](/Content/11_Graphics/Intel/README.md)
+- 🟦 [**Intel**](/Content/11_Graphics/Intel/README.md)
 	- [Intel Framebuffer Patching (Laptop)](/Content/11_Graphics/Intel/Framebuffer_Patching/README.md)
 	- [iGPU Framebuffers List](/Content/11_Graphics/Intel/iGPU_DeviceProperties.md)
 	- [Injecting EDID to fix display issues](/Content/11_Graphics/Intel/Inject_EDID/README.md)
@@ -30,10 +30,9 @@ A collection of graphics-related fixes, patches, and workarounds for common issu
 	- [Disabling audio over HDMI/DisplayPort](/Content/11_Graphics/Intel/iGPU_disable_audio_over_HDMI-DP.md)
 	- [Enabling Firefox Hardware Acceleration](/Content/11_Graphics/Intel/Enable_Firefox_Hardware-Acceleration.md)
 
-- [**NVIDIA**](/Content/11_Graphics/NVIDIA/README.md)
-	- **RTX**
-		- [Modern NVIDIA RTX Support (Experimental Translation Drivers)](/Content/11_Graphics/NVIDIA/RTX/README.md)
-    - **Legacy**
-		- [Disabling unsupported GPUs (Optimus / SSDT-dGPU-Off)](/Content/11_Graphics/NVIDIA/Legacy/Disabling_unsupported_GPUs/README.md)
-		- [Kepler GPUs in macOS 12+ (OCLP)](/Content/11_Graphics/NVIDIA/Legacy/Kepler/README.md)
+- 🟩 [**NVIDIA**](/Content/11_Graphics/NVIDIA/README.md)
+	- [NVIDIA GPU Support Matrix (macOS 11 to 26)](/Content/11_Graphics/NVIDIA/README.md#nvidia-gpu-support-matrix-macos-11)
+	- [Modern NVIDIA RTX Support (Experimental Translation Drivers)](/Content/11_Graphics/NVIDIA/RTX/README.md)
 
+- **General GPU Fixes**
+	- [Disabling Unsupported GPUs](/Content/11_Graphics/Unsupported_GPU_Disable/README.md)
