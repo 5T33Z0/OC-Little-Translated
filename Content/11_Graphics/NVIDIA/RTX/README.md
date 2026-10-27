@@ -17,7 +17,7 @@ Enter the **NullMoth NVIDIA Driver** project: an open-source, community-develope
 Unlike legacy NVIDIA Web Drivers, the NullMoth driver stack does not rely on Apple’s deprecated OpenGL or legacy display stacks. Instead, it implements a modern translation-layer architecture:
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph UserSpace ["User Space (macOS)"]
         App["macOS Applications & WindowServer"]
         Metal["Apple Metal 3 Framework"]
