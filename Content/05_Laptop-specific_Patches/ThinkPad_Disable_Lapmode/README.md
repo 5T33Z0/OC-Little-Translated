@@ -26,18 +26,17 @@
 
 ---
 
-
 ## 1. About & Context
 
 Modern Lenovo ThinkPads (primarily 8th to 11th Gen Intel Core series, including T480/T490/T14 Gen 1, X1 Carbon Gen 6–9, and P-series laptops) implement proprietary thermal management known as **DYTC (Dynamic Thermal Control)** within the Embedded Controller ACPI device (`\_SB.PCI0.LPCB.EC.HKEY`).
 
-To comply with safety standards for skin contact temperatures, these machines incorporate an accelerometer / motion sensor to detect whether the laptop is sitting on a flat surface or resting on a user's lap. This subsystem is called Cool and Quiet on Lap (CQL), commonly referred to in the community as Cool-on-Lap or **Lapmode**.
+To comply with safety standards for skin contact temperatures, these machines incorporate an accelerometer / motion sensor to detect whether the laptop is sitting on a flat surface or resting on a user's lap. This subsystem is called **Cool and Quiet on Lap (CQL)**, commonly referred to in the community as **Cool-on-Lap** or **Lapmode**.
 
 ### The Problem
 * When motion or tilt is detected, the EC sets **Bit 17** (`DYTC_GET_LAPMODE_BIT` = `0x00020000`) in its status output.
 * In **Linux**, the kernel driver `thinkpad_acpi` reads this bit and exposes `/sys/devices/platform/thinkpad_acpi/dytc_lapmode = 1`. User-space daemons (`power-profiles-daemon`, `systemd`) immediately throttle the CPU Package Power Limit (PL1) down to **11W–15W**, severely degrading performance even when temperatures are low.
 * In **Windows**, the Lenovo Intelligent Cooling driver throttles the machine identically.
-* In **macOS**, the operating system does not have a native DYTC driver and therefore does not enforce motion throttling. However, because OpenCore patches ACPI globally, injecting this SSDT prevents lapmode throttling when dual-booting Linux or Windows without interfering with macOS power management (`X86PlatformPlugin`) or profile switchers (`ReYogaSMC`).
+* In **macOS**, the operating system does not have a native DYTC driver and therefore does not enforce motion throttling. However, because OpenCore patches ACPI globally, injecting this SSDT prevents lapmode throttling when dual-booting Linux or Windows while passing telemetry untouched to macOS so tools like **`ReYogaSMC`** can accurately read and display real hardware sensor states.
 
 ### Lapmode vs. BD-PROCHOT
 It is critical not to confuse **DYTC Lapmode** with the infamous ThinkPad **BD-PROCHOT** bug – a common point of confusion in the community (e.g., [Issue #44 on my T490 OpenCore EFI Repo](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore/issues/44)). While both cause severe performance drops, they operate on completely different hardware layers and require separate fixes:
@@ -48,7 +47,7 @@ It is critical not to confuse **DYTC Lapmode** with the infamous ThinkPad **BD-P
 
 2. **BD-PROCHOT (MSR / Hardware Level):**  
    Bi-Directional Processor Hot. A hardware flag asserted via MSR `0x1FC`—often misfired by the EC after sleep/wake cycles, under GPU load, or when using certain USB-C chargers. It hard-locks the CPU multiplier down to **400 MHz – 800 MHz** regardless of actual temperatures.  
-   * **Solution:** Cleared during UEFI boot via `DisableProchot.efi` and re-applied after macOS sleep via `SimpleMSR.kext`.
+   * **Solution:** Cleared during UEFI boot via [**`DisableProchot.efi`**](https://github.com/arter97/DisablePROCHOT) and re-applied after macOS sleep via [**`SimpleMSR.kext`**](https://github.com/arter97/SimpleMSR). For instructions on how to configure this, follow my guide on [**Fixing Performance Issues After Wake from S3 Sleep Caused by BD-PROCHOT**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/05_Laptop-specific_Patches/BDPROCHOT).
 
 These two fixes do not replace one another; they **complement** each other. `DisableProchot.efi` and `SimpleMSR.kext` ensure the CPU never gets clamped to 800 MHz, while this SSDT ensures your sustained boost targets (25W+) remain intact when the laptop is moved, tilted, or used off-desk.
 
@@ -58,6 +57,7 @@ Lenovo published [documentation](https://web.archive.org/web/20190926163900if_/h
 ---
 
 > [!WARNING]
+> 
 > ### Safety & Thermal Disclaimer
 >
 > Lenovo's **Cool-on-Lap (CQL)** mechanism is an intentional safety feature designed to comply with international consumer electronics standards (**IEC/UL 62368-1**) governing skin-contact temperatures on portable devices.
@@ -86,7 +86,7 @@ To fully resolve Lenovo's multi-layered throttling bottlenecks, we must address 
 | Component | Layer | Target OS | What it does |
 | :--- | :--- | :--- | :--- |
 | **1. `DisableProchot.efi`** | **UEFI Boot** | All OSes | Clears the `BD-PROCHOT` bit at the earliest possible stage to prevent the machine from booting with the CPU locked at **400 MHz – 800 MHz**. |
-| **2. `SSDT-NO-LAP` + Rename** | **ACPI Firmware** | All OSes (primarily Linux & Windows) | Permanently blinds the OS to the accelerometer, preventing the 5–30 minute **11W–15W TDP cap** when picking up, tilting, or using the laptop off-desk. |
+| **2. `SSDT-NO-LAP` + Rename** | **ACPI Firmware** | Linux & Windows | Permanently blinds the OS to the accelerometer, preventing the 5–30 minute **11W–15W TDP cap** when picking up, tilting, or using the laptop off-desk. Passes calls unmodified in macOS. |
 | **3. `SimpleMSR.kext`** | **macOS Kernel** | macOS | **1.** Re-clears `BD-PROCHOT` after S3 sleep/wake cycles.<br> **2.** Writes custom sustained power targets (PL1/PL2 to MSR `0x610`) so macOS can draw 25W–35W instead of defaulting to low wattage. |
 
 ### The ACPI Lapmode Implementation
@@ -94,12 +94,13 @@ To fully resolve Lenovo's multi-layered throttling bottlenecks, we must address 
 While `DisableProchot.efi` and `SimpleMSR.kext` manage the CPU registers, **`SSDT-NO-LAP`** neutralizes the accelerometer-induced TDP wall at the firmware level through a three-stage ACPI approach:
 
 1. **DSDT Rename:** The factory ACPI method `DYTC` in the DSDT is renamed to `XYTC` via OpenCore, freeing up the namespace for an override without triggering collisions.
-2. **SSDT Query Mask:** The replacement `DYTC` method intercepts status queries (`DYTC_CMD_GET` = `0x02`) and masks out Bit 17 (`Local0 &= ~0x00020000`). The operating system is permanently told that the machine is resting on a desk (`0`).
-3. **Firmware Reset at Boot:** A dedicated initialization device (`DLAP`) executes `XYTC (0x000F1001)` on boot, setting the EC's internal `VCQL` (Valid Cool-on-Lap) flag to `0` and instructing the firmware state machine to deactivate autonomous CQL throttling.
+2. **SSDT Query Mask (Non-Darwin Only):** The replacement `DYTC` method intercepts status queries (`DYTC_CMD_GET` = `0x02`). If running under Linux or Windows (`!_OSI ("Darwin")`), it masks out Bit 17 (`Local0 &= ~0x00020000`) so the OS is permanently told that the machine is resting on a desk (`0`). When booting macOS, this masking is bypassed so `DYTC` output reaches macOS completely unfiltered.
+3. **Firmware Reset at Boot (Non-Darwin Only):** A dedicated initialization device (`DLAP`) executes `XYTC (0x000F1001)` on boot under Linux and Windows, setting the EC's internal `VCQL` (Valid Cool-on-Lap) flag to `0` and commanding the firmware state machine to disable autonomous CQL throttling. In macOS, `DLAP._STA` returns `Zero`, disabling the device and leaving hardware states untouched.
 
 > [!NOTE]
+> 
 > **YogaSMC / ReYogaSMC Compatibility:**  
-> Setting performance profiles (Quiet, Balanced, Performance) in macOS via `ReYogaSMC.kext` or `YogaSMC.kext` uses command codes other than `0x02`. These commands pass through completely unmodified to the original `XYTC` method. This patch is **100% compatible** with ReYogaSMC.
+> `ReYogaSMC.kext` does not enforce lapmode throttling; it merely reads the lap/desk sensor state from the EC and reports it to the macOS UI. Because `SSDT-NO-LAP` bypasses masking under `_OSI ("Darwin")`, ReYogaSMC receives genuine, unfiltered hardware telemetry, and all performance profile commands (Quiet, Balanced, Performance) continue to pass through unmodified.
 
 ---
 
@@ -170,6 +171,9 @@ Save and compile the following DSL code to `SSDT-NO-LAP.aml` using **MaciASL**:
 ```asl
 /*
  * Disables Cool-on-Lap (CQL) / Lapmode throttling on Lenovo ThinkPads
+ * Targeted exclusively at non-macOS operating systems (Linux / Windows).
+ * Passes calls unmodified to macOS so ReYogaSMC can report genuine sensor status.
+ *
  * Requires DSDT rename: DYTC -> XYTC
  *
  * NOTE: 
@@ -197,14 +201,18 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
             // Call original renamed method
             Local0 = \_SB.PCI0.LPCB.EC.HKEY.XYTC (Arg0)
 
-            // Check if query command: DYTC_CMD_GET (0x0002)
-            Local1 = (Arg0 & 0x01FF)
-
-            If (Local1 == 0x02)
+            // Only mask Bit 17 if NOT running macOS (Darwin)
+            If (!_OSI ("Darwin"))
             {
-                // Mask out Bit 17 (DYTC_GET_LAPMODE_BIT = 0x00020000)
-                // Ensures lapmode always reports 0 (desk mode) to the OS
-                Local0 &= ~0x00020000
+                // Check if query command: DYTC_CMD_GET (0x0002)
+                Local1 = (Arg0 & 0x01FF)
+
+                If (Local1 == 0x02)
+                {
+                    // Mask out Bit 17 (DYTC_GET_LAPMODE_BIT = 0x00020000)
+                    // Ensures lapmode always reports 0 (desk mode) to Linux/Windows
+                    Local0 &= ~0x00020000
+                }
             }
 
             Return (Local0)
@@ -212,7 +220,6 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
     }
 
     // Dedicated initialization device to execute EC CQL reset at boot
-    // Avoids colliding with HKEY's existing _INI method
     Scope (\_SB)
     {
         Device (DLAP)
@@ -221,7 +228,16 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
 
             Method (_STA, 0, NotSerialized)
             {
-                Return (0x0F) // Present, Enabled, Functioning, Show in UI
+                If (_OSI ("Darwin"))
+                {
+                    // Disable this device completely in macOS
+                    Return (Zero)
+                }
+                Else
+                {
+                    // Enable in Linux and Windows
+                    Return (0x0F)
+                }
             }
 
             Method (_INI, 0, NotSerialized)
@@ -264,11 +280,18 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
 ## 6. Verification
 
 ### In macOS
-Open Terminal and run:
-```bash
-ioreg -p IODeviceTree -n DLAP
-```
-* **Result:** You should see `DLAP@0` with class `IOACPIPlatformDevice` and state `registered, matched`. This confirms that the table loaded cleanly and the boot initialization method ran.
+Since `DLAP._STA` intentionally returns `Zero` under Darwin, `DLAP` will not attach a platform driver in macOS. To confirm that the table was injected and that `DYTC` is resolving properly:
+
+1. Open Terminal and verify the table was loaded:
+   ```bash
+   ioreg -l -p IODeviceTree | grep "NO-LAP"
+   ```
+   * **Result:** You should see matching table references, confirming OpenCore injected `SSDT-NO-LAP.aml`.
+2. Check that `HKEY` has access to the replacement method:
+   ```bash
+   ioreg -l -p IODeviceTree | grep -E "XYTC|DYTC"
+   ```
+3. If using **ReYogaSMC**, open its menu bar monitor: the lap/desk status will continue to accurately reflect real hardware sensor movements.
 
 ### In Linux
 Open a terminal and run:
@@ -284,9 +307,9 @@ watch -n 0.5 cat /sys/devices/platform/thinkpad_acpi/dytc_lapmode
 
 For optimal performance on 8th–10th Gen Intel ThinkPads, these three tools work in tandem in chronological boot order:
 
-1. [**`DisableProchot.efi`**](/Content/05_Laptop-specific_Patches/BDPROCHOT) (UEFI) prevents boot-time hardware clock locks (400–800 MHz).
-2. **`SSDT-NO-LAP`** (ACPI) permanently removes the 15W motion/lapmode ceiling at the firmware layer for all booted OSes.
-3. [**`SimpleMSR.kext`**](/Content/05_Laptop-specific_Patches/BDPROCHOT) (Kernel) keeps BD-PROCHOT disabled after macOS sleep and unlocks full PL1/PL2 package power targets.
+1. **`DisableProchot.efi`** (UEFI) prevents boot-time hardware clock locks (400–800 MHz).
+2. **`SSDT-NO-LAP`** (ACPI) permanently removes the 15W motion/lapmode ceiling at the firmware layer for Linux & Windows while leaving macOS telemetry unmodified.
+3. **`SimpleMSR.kext`** (Kernel) keeps BD-PROCHOT disabled after macOS sleep and unlocks full PL1/PL2 package power targets.
 
 ---
 
@@ -300,7 +323,7 @@ For optimal performance on 8th–10th Gen Intel ThinkPads, these three tools wor
 ## 9. Resources
 
 ### Research & References
-* [virgilhem / linux-patches (`thinkpad-acpi-disable-lapmode.patch`)](https://github.com/virgilhem/linux-patches/blob/main/thinkpad-acpi-disable-lapmode.patch) – The original Linux kernel patch that inspired this ACPI implementation.
+* [virgilhem / linux-patches (`thinkpad-acpi-disable-lapmode.patch`)](https://github.com/virgilhem/linux-patches/blob/main/thinkpad-acpi-disable-lapmode.patch) – Source of the ACPI command codes, Bit 17 mask, and firmware reset hex value (`0x000F1001`) used in `SSDT-NO-LAP`.
 * [sylvainfaivre / ThinkPad CPU Throttling on Linux Gist](https://gist.github.com/sylvainfaivre/512fe8c171582caca3cabaed023188b4) – Community documentation and discussion detailing ThinkPad thermal throttling, DYTC behavior, and `acpi_call` workarounds.
 * [Lenovo Whitepaper: Linux Thermal Throttling (PDF via WebArchive)](https://web.archive.org/web/20190926163900if_/https://forums.lenovo.com/lnv/attachments/lnv/Special_Interest_Linux/13642/1/Linux%20Thermal%20throttling.pdf) – Official Lenovo forum statement by Mark Pearson explaining DPTF, the DYTC interface, and the Cool-on-Lap baseline implementation.
 
