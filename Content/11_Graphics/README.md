@@ -31,8 +31,9 @@ A collection of graphics-related fixes, patches, and workarounds for common issu
 	- [Enabling Firefox Hardware Acceleration](/Content/11_Graphics/Intel/Enable_Firefox_Hardware-Acceleration.md)
 
 - [**NVIDIA**](/Content/11_Graphics/NVIDIA/README.md)
-	- **Legacy**
-		- [Disabling unsupported GPUs (Optimus / SSDT-dGPU-Off)](/Content/11_Graphics/NVIDIA/Legacy/Disabling_unsupported_GPUs/README.md)
-		- [Kepler GPUs in macOS 12+ (OCLP)](/Content/11_Graphics/NVIDIA/Legacy/Kepler/README.md)
 	- **RTX**
 		- [Modern NVIDIA RTX Support (Experimental Translation Drivers)](/Content/11_Graphics/NVIDIA/RTX/README.md)
+    - **Legacy**
+		- [Disabling unsupported GPUs (Optimus / SSDT-dGPU-Off)](/Content/11_Graphics/NVIDIA/Legacy/Disabling_unsupported_GPUs/README.md)
+		- [Kepler GPUs in macOS 12+ (OCLP)](/Content/11_Graphics/NVIDIA/Legacy/Kepler/README.md)
+
