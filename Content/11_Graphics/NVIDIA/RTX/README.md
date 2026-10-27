@@ -17,8 +17,12 @@ Enter the **NullMoth NVIDIA Driver** project: an open-source, community-develope
 Unlike legacy NVIDIA Web Drivers, the NullMoth driver stack does not rely on Apple’s deprecated OpenGL or legacy display stacks. Instead, it implements a modern translation-layer architecture:
 
 ```mermaid
+---
+title: "NullMoth NVIDIA Driver Architecture & Translation Stack"
+---
 flowchart LR
     subgraph UserSpace ["User Space (macOS)"]
+        direction LR
         App["macOS Applications & WindowServer"]
         Metal["Apple Metal 3 Framework"]
         Translator["Shader Translator (AIR ➔ SPIR-V Engine)"]
@@ -30,6 +34,7 @@ flowchart LR
     end
 
     subgraph HardwareLevel ["Hardware & Firmware"]
+        direction LR
         GSP["NVIDIA GSP Firmware (On-Chip RISC-V Core)"]
         GPU["NVIDIA GPU Hardware (Turing · Ampere · Ada · Blackwell)"]
     end
