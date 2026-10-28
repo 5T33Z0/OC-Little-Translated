@@ -15,9 +15,9 @@ An incomplete collection of iGPU-related fixes and optimizations for Intel graph
 - [**Disabling HDMI/DisplayPort Audio**](/Content/11_Graphics/Intel/iGPU_disable_audio_over_HDMI-DP.md) — Troubleshooting digital audio output conflicts on Intel graphics.
 
 ### Generation-Specific Solutions
+- [**WhateverXe**](https://github.com/b00t0x/WhateverXe) + [**WhateverXe-Graphics**](https://github.com/b00t0x/WhateverXe-Graphics) – Experimental graphics acceleration for selected Intel Xe-LP iGPUs, targeting **Tiger Lake** and **Alder Lake-N / Twin Lake**. Requires the WhateverXe Lilu plugin, the companion graphics-driver package, Lilu, a modified AMFIPass build, and specific system security settings. Check the repositories for supported GPU IDs, macOS compatibility, and installation instructions.
 - [**Skylake Graphics in macOS Ventura+**](/Content/11_Graphics/Intel/Skylake_Spoofing_macOS13/README.md) — Spoofing Gen 6 iGPUs as Kaby Lake for continued support in macOS 13 through 26.
 - [**Comet Lake & 500-Series Issues**](/Content/11_Graphics/Intel/Cometlake_Z590/README.md) — Fixes for 10th Gen iGPU display glitches on Z590, H570, and B560 motherboards.
-- [**Iris Xe (Gen 12) Development**](https://www.insanelymac.com/forum/topic/358305-80-solved-iris-xe-igpu-on-tiger-lake-successfully-loaded-icllp-frambuffer-and-vram-also-recognizes-1536mb-however-some-issues/?do=findComment&comment=2819650) — Information on community efforts and the NootedBlue project.
 
 ### Optimization, Features & Firmware
 - [**Activity Monitor & Metal 3 Support**](/Content/11_Graphics/Intel/Metal_3/README.md) — Enabling the "GPU" tab, hardware acceleration, and Metal 3 in macOS 13+.
