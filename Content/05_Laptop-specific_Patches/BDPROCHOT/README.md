@@ -6,7 +6,8 @@ This guide outlines a general fix for performance issues caused by the Bi-Direct
 
 > [!NOTE]
 > 
-> **For Lenovo ThinkPad Users:**  
+> **For Lenovo ThinkPad Users:**
+> 
 > On ThinkPads (such as the T480, T490, and X1 Carbon series), BD-PROCHOT is frequently conflated with **DYTC Lap Mode (Cool-on-Lap)**. While BD-PROCHOT locks CPU clock speeds to **400–800 MHz**, Lap Mode caps the power limit (PL1) to **11W–15W**. See [BD-PROCHOT vs. DYTC Lapmode](#bd-prochot-vs-dytc-lapmode) below for details.
 
 ---
