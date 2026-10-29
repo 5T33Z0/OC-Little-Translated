@@ -1,68 +1,35 @@
-# AMD APU Graphics Support in macOS
+# AMD Graphics Support in macOS
 
-AMD APU (Accelerated Processing Unit) graphics refer to the integrated GPU cores found within AMD Ryzen and A-series processors. By design, AMD integrated graphics were never supported by macOS, as Apple used Intel CPUs exclusively between 2006 and 2020 before transitioning to their own ARM-based Apple Silicon chips. However, with the development of the **NootedRed** project, many Vega-based APUs now feature Metal acceleration. This article covers the implementation and current constraints of this setup.
+AMD graphics hardware forms the backbone of macOS acceleration on Hackintosh systems due to long-standing native driver support from Apple. While Apple supported discrete architectures up to **RDNA 2 (Navi 21/23)**, the community has expanded this ecosystem to include **Ryzen APUs** as well as experimental bring-up drivers for **RDNA 3 and RDNA 4**.
 
-## Hardware & OS Compatibility
+## APU Support
+For AMD Ryzen laptops, mini-PCs, and desktop APUs:
 
-Before starting, ensure your hardware falls within the supported generation.
+* [**AMD APU Setup Guide (NootedRed)**](/Content/11_Graphics/AMD/APU/README.md) — Prerequisites, BIOS settings, boot-args, and limitations for Vega-based APUs.
 
-* **Supported Architectures:** Raven Ridge, Picasso, Renoir, Lucienne, Cezanne, and Barcelo.
-* **Supported macOS Versions:** macOS Big Sur (11.x) to macOS Tahoe (26.x).
-* **System Requirement:** Must be a **UEFI-based** motherboard. Legacy BIOS is not supported.
+## GPU Support
+For dedicated PCIe AMD graphics cards (Polaris, Vega, Navi):
 
-**External Reference:** 
+* [**General info**](/Content/11_Graphics/AMD/GPU/README.md)
+* [**AMD Discrete GPU Compatibility Reference**](/Content/11_Graphics/AMD/GPU/AMD_GPU_Compatibility.md)
+* [**Enabling AMD Navi & Big Navi Cards**](/Content/11_Graphics/AMD/GPU/AMD_Navi/README.md)
+* [**Enabling AMD Vega 56/64 Cards**](/Content/11_Graphics/AMD/GPU/AMD_Vega/README.md)
+* [**Eneabling Undetected AMD GPUs (`SSDT-BRG0`)**](/Content/11_Graphics/AMD/GPU/GPU_undetected/README.md)
+* [**AMD Radeon Tweaks & PowerPlay Tables**](/Content/11_Graphics/AMD/GPU/AMD_Radeon_Tweaks/README.md)
+* [**GPU BAR Size in OpenCore**](/Content/11_Graphics/AMD/GPU/GPU-BAR_Size/README.md)
+* [**Disabling HDMI/DisplayPort Audio (`AppleGFXHDA`)**](/Content/11_Graphics/AMD/GPU/Disabling_AppleGFXHDA/README.md)
+* [**Legacy AMD Cards & macOS**](https://web.archive.org/web/20170814210930/http://www.rampagedev.com/guides/graphic-cards-injection/) (ATI 4000–7000 and AMD 200/300)
 
-## Known Limitations
+---
 
-While NootedRed provides graphical acceleration, users should be aware of the following functional gaps at this stage of development:
+## 🛠️ Community & Next-Gen AMD Drivers
 
-*   **Graphics API:** Only supports APUs compatible with Metal 2 and Metal 3.
-*   **Hardware Codecs:** H.264 and H.265 (HEVC) hardware encoding/decoding are not supported. This results in higher CPU usage during video playback and editing.
-*   **Digital Audio:** DP/HDMI Audio is currently not supported.
-*   **Analog Video:** VGA output is not supported.
-*   **Power Management:** Sleep/Wake functionality is currently broken.
-*   **DRM:** Hardware-based DRM (Netflix, Apple TV+) does not function on iGPUs.
+Beyond Apple's vanilla drivers, open-source community projects have introduced custom drivers and translation stacks to expand AMD hardware compatibility:
 
-## Essential Kexts & Conflicts
-
-The implementation relies on `NootedRed.kext`. Note the strict conflict rules:
-
-| Kext | Requirement | Description |
-| :--- | :--- | :--- |
-| **Lilu.kext** | **Mandatory** | Required for patching the kernel. |
-| **NootedRed.kext** | **Mandatory** | The primary driver for AMD Vega iGPUs. |
-| **WhateverGreen.kext** | **Must Remove** | **Conflict!** NootedRed and WhateverGreen cannot be used together. |
-
-> [!CAUTION]
-> 
-> You **must** remove or disable `WhateverGreen.kext` in your `config.plist`. Keeping both will lead to a Kernel Panic (KP) on boot.
-
-## BIOS Settings
-
-To ensure the APU has enough memory to initialize the framebuffers:
-
-1.  **UMA Framebuffer Size:** Set to **2GB** (Minimum 512MB).
-2.  **CSM:** Disabled.
-3.  **Above 4G Decoding:** Enabled.
-
-## OpenCore Configuration (config.plist)
-
-### ACPI Patches
-
-*   **SSDT-GPU-DISABLE.aml:** If your laptop has a discrete Nvidia or AMD GPU that is unsupported, use this to disable it and save battery.
-*   **SSDT-PNLF.aml:** Required for brightness control on laptop screens. Use the version compatible with AMD/NootedRed.
-
-### DeviceProperties
-For most desktop APUs, no specific entries are required as NootedRed handles discovery. For laptops, you may still need to inject `backlight-lamp-type` if the screen remains dark.
-
-### Boot Arguments
-Add these to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args` as needed:
-
-*   `-nrdall` (Forces NootedRed to attempt loading on all GPUs).
-*   `-nrdnoade` (Disables AMD Device Enabler; used if the system hangs during GPU initialization).
-*   `-nrd_no_vram_pm` (Disables VRAM power management to prevent certain crashes).
-
-## Additional Resources
-* [**Official NootedRed GitHub Repository**](https://github.com/NootInc/NootedRed)
-* [**AMD APU Compatibility List for macOS**](https://elitemacx86.com/threads/amd-apu-compatibility-list-for-macos.1157/)
-* [**How to Enable AMD Integrated Graphics (APU) on macOS**](https://elitemacx86.com/threads/how-to-enable-amd-integrated-graphics-apu-on-macos-clover-opencore.1156/)
+| Driver / Kext | Status | Architecture / Hardware | Description |
+| :--- | :---: | :--- | :--- |
+| [**Cobalt64**](https://github.com/Almosst-DEV/Cobalt64) | 🧪 Preview | **RDNA 4** *(Navi 48 / RX 9070 XT)* | Experimental native macOS GPU acceleration using a custom kernel driver and Mesa RADV Vulkan translation for Metal. Currently in preview. |
+| [**AMD RDNA 3 Driver**](https://github.com/luuumi-dev/amd-rdna3-macos-driver) | 🚧 WIP | **RDNA 3** *(Navi 3x / RX 7000)* | Work-in-progress driver for AMD RDNA 3 GPUs aiming to establish Metal acceleration in macOS. |
+| [**NootedRed**](https://github.com/ChefKissInc/NootedRed) | 🟢 Active | **Vega APUs** *(GCN 5)* | Patches Apple drivers to enable acceleration on Raven Ridge, Picasso, Renoir, Lucienne, Cezanne, and Barcelo APUs (macOS 11 to 26). |
+| [**CarrizoRed**](https://github.com/CL0utM4N/CarrizoRed) | 🧪 Experimental | **GCN 3 APUs** *(GFX8)* | Experimental graphics support for older AMD GCN 3 APUs (Carrizo, Bristol Ridge, Stoney Ridge). |
+| [**KaberiRed**](https://github.com/CL0utM4N/KaberiRed) | 🧪 Experimental | **GCN 2 APUs** *(Bonaire)* | Adapts Apple GCN 2 drivers for older AMD Kabini, Mullins, and Kaveri APUs. |
