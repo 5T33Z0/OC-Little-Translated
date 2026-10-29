@@ -59,22 +59,37 @@ It is critical not to confuse **BD-PROCHOT** with **Lenovo DYTC Lapmode (Cool-on
 
 ## Solution: Disabling BDPROCHOT
 
-To address BDPROCHOT-related performance issues, disable BDPROCHOT at boot using [**DisablePROCHOT.efi**](https://github.com/arter97/DisablePROCHOT) and prevent it from reactivating post-wake using [**SimpleMSR.kext**](https://github.com/arter97/SimpleMSR).
+This fix consists of **two stages** to prevent BD PROCHOT from causing performance issues:
+
+1. **At boot — [**DisablePROCHOT.efi**](https://github.com/arter97/DisablePROCHOT):** Disables BD PROCHOT during the boot process.
+2. **After sleep/wake — [**SimpleMSR.kext**](https://github.com/arter97/SimpleMSR):** Reapplies the configured MSR values when macOS resumes from sleep, preventing BD PROCHOT from being re-enabled after wake.
+
+### SimpleMSR.kext
+
+- **Source:** [arter97/SimpleMSR](https://github.com/arter97/SimpleMSR)
+- **Configuration:** MSR values are hardcoded in `SimpleMSR/SimpleMSR.hpp`; there is no runtime configuration in `config.plist`.
+- **Build:** The original project and its prebuilt binaries are old. Build the kext from the fork's source rather than relying on an old prebuilt binary.
+- **OpenCore:** Add the resulting `SimpleMSR.kext` under `Kernel → Add` and enable it.
+
+The source includes an `MSR_POWER_CTL` (`0x1FC`) entry with a value of `0`. Verify that this entry is present in the source before building.
+
+**Note:** SimpleMSR writes MSR values directly. Use only the configuration required for this fix; do not add unrelated MSR writes without understanding their effects.
 
 ### ⚠️ Disclaimer: You Are Disabling a Safety Feature ⚠️
 
 > [!CAUTION]
-> 
-> Disabling **BDPROCHOT** removes an external hardware protection mechanism designed to allow the power supply, VRMs, or EC to throttle your CPU.
 >
-> Proceed **only if** you are certain that your system's throttling is caused by incorrect sensor readings or firmware bugs, not by actual overheating. By following this guide, you accept full responsibility for any potential hardware damage.
+> Disabling **BD PROCHOT** removes an external hardware protection mechanism designed to allow the power supply, VRMs, or EC to throttle your CPU.
 >
-> **Potential Risks:**
-> * Permanently reduced hardware lifespan due to higher operating temperatures.
-> * System instability, crashes, or data loss.
-> * In worst-case scenarios, permanent damage to your CPU or motherboard.
+> Proceed **only if** you have established that your system's throttling is caused by incorrect sensor readings or a firmware bug, rather than actual overheating or power-delivery problems. You accept responsibility for any potential hardware damage.
 >
-> **Note:** Disabling BD-PROCHOT does **not** disable internal CPU thermal limits (TJMax / core thermal shutdown routines). The silicon will still protect itself from dangerous core temperatures. However, you must actively monitor system temperatures after applying this fix. You proceed at your own risk.
+> **Potential risks:**
+> - Reduced hardware lifespan due to higher operating temperatures.
+> - System instability, crashes, or data loss.
+> - Potential damage to the CPU or motherboard.
+>
+> **Note:** Disabling BD PROCHOT does **not** disable the CPU's internal thermal protections, such as TJMax-related throttling and thermal shutdown. However, you must actively monitor system temperatures after applying this fix. Proceed at your own risk.
+
 
 ---
 
