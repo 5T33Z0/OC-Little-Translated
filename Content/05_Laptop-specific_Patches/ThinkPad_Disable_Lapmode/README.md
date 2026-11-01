@@ -100,6 +100,7 @@ While `DisableProchot.efi` and `SimpleMSR.kext` manage the CPU registers, **`SSD
 > [!NOTE]
 > 
 > **YogaSMC / ReYogaSMC Compatibility:**  
+> 
 > `ReYogaSMC.kext` does not enforce lapmode throttling; it merely reads the lap/desk sensor state from the EC and reports it to the macOS UI. Because `SSDT-NO-LAP` bypasses masking under `_OSI ("Darwin")`, ReYogaSMC receives genuine, unfiltered hardware telemetry, and all performance profile commands (Quiet, Balanced, Performance) continue to pass through unmodified.
 
 ---
@@ -252,6 +253,10 @@ DefinitionBlock ("", "SSDT", 2, "OCLT", "NO-LAP", 0x00001000)
     }
 }
 ```
+
+> [!NOTE]
+> 
+> This section also contains `SSDT-NO-LAP-ALL.dsl` to disable Lapmode system-wide. Pick whatever works best for your use case.
 
 ---
 
