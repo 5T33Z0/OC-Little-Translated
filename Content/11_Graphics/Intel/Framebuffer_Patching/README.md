@@ -108,6 +108,12 @@ This is the tl;dr version of what we are going to do basically:
 - [**Big to Little Endian Converter**](https://www.save-editor.com/tools/wse_hex.html) to convert Framebuffers from Big Endian to Little Endian and vice versa
 - **Optional**: [**OCToolbox**](https://github.com/webfalter/OCToolBox) – includes calculators for Framebuffer and Connector flags (can also reverse checksums into the included flags) 
 
+> [!TIP]
+>
+> I recently vibe-coded a tool called [vbt2fbpatch](https://github.com/5T33Z0/vbt2fbpatch/tree/main) that automatically generates Intel iGPU framebuffer patches by analyzing your machine's own VBT firmware data (connectors, bus IDs, and display pipes). It cross-references the extracted information with WhateverGreen's Intel® HD Graphics FAQs to identify the appropriate framebuffer properties, device-ID spoofs, and platform-specific quirks.
+>
+> This can serve as a useful starting point for identifying the correct connector configurations and generating a tailored framebuffer patch for your system, potentially saving you a lot of time compared to figuring out the correct settings manually.
+
 ---
 
 ## 2. Test your current configuration
