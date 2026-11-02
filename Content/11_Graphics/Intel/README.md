@@ -6,9 +6,9 @@ An incomplete collection of iGPU-related fixes and optimizations for Intel graph
 
 ### Fundamentals & Framebuffer Patching
 - [**Intel Framebuffer Patching Guide for Laptops**](/Content/11_Graphics/Intel/Framebuffer_Patching/README.md) — Comprehensive guide to connector patching, flags, and bus IDs when using a Laptop.
+- [**Force-enabling graphics with a fake ig-platform-id**](/Content/11_Graphics/Intel/Inject_Fake_IG-Platform-ID/README.md) — How to force-enable graphics when native IDs are unsupported.
 - [**Intel Display Pipeline Fundamentals**](/Content/11_Graphics/Intel/Framebuffer_Patching/Technical_Background.md) — Understanding Pipes, BusIDs, and architecture logic.
 - [**iGPU Framebuffer List**](/Content/11_Graphics/Intel/iGPU_DeviceProperties.md) — Reference list of common IDs and properties across Intel generations.
-- [**Force-enabling graphics with a fake ig-platform-id**](/Content/11_Graphics/Intel/Inject_Fake_IG-Platform-ID/README.md) — How to force-enable graphics when native IDs are unsupported.
 
 ### Display Connectivity & Audio Fixes
 - [**Injecting EDID to fix display issues**](/Content/11_Graphics/Intel/Inject_EDID/README.md) — Injecting `AAPL00,override-no-connect` to fix black screens, sleep wake, or missing resolutions.
@@ -28,7 +28,8 @@ An incomplete collection of iGPU-related fixes and optimizations for Intel graph
 ---
 
 ## Resources & Documentation
-
+- **Automated Framebuffer Patch generation**:
+	- [**vbt2fbpatch**](https://github.com/5T33Z0/vbt2fbpatch/tree/main) – Python Script I vibe-coded for generating Intel iGPU framebuffer patches based on your machine's own firmware data and Whatevergreen's Intel® HD Graphics FAQs.
 - **Pre-made Patches:**
     - [**Desktop EFIs Section**](/Content/F_Desktop_EFIs/README.md) — Includes `DeviceProperties` for most Intel desktop generations.
     - [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/Laptop_Configs) — Source for interchangeable `DeviceProperties` compatible with OpenCore.
