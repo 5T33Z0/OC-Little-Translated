@@ -28,11 +28,14 @@ An incomplete collection of iGPU-related fixes and optimizations for Intel graph
 ---
 
 ## Resources & Documentation
-- **Automated Framebuffer Patch generation**:
-	- [**vbt2fbpatch**](https://github.com/5T33Z0/vbt2fbpatch/tree/main) – Python Script I vibe-coded for generating Intel iGPU framebuffer patches based on your machine's own firmware data and Whatevergreen's Intel® HD Graphics FAQs.
+- **Tools for Intel Framebuffer Patching**:
+	- [**vbt2fbpatch**](https://github.com/5T33Z0/vbt2fbpatch/tree/main) – A Python script I vibe-coded to automatically generate Intel iGPU framebuffer patches by analyzing your machine's own VBT firmware data (connectors, bus IDs, and display pipes) and cross-referencing the findings with WhateverGreen's Intel® HD Graphics FAQs to determine the required framebuffer properties, device-ID spoofs, and platform-specific quirks.
+	- [**Hackintool**](https://github.com/benbaker76/Hackintool) – GUI-based tool for manually inspecting, configuring, and generating Intel iGPU framebuffer patches, including connector mapping and framebuffer property editing.
+
 - **Pre-made Patches:**
     - [**Desktop EFIs Section**](/Content/F_Desktop_EFIs/README.md) — Includes `DeviceProperties` for most Intel desktop generations.
     - [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/Laptop_Configs) — Source for interchangeable `DeviceProperties` compatible with OpenCore.
+
 - **Deep Technical Specs:**
     - [**DVMT/StolenMem Explained**](https://osxlatitude.com/forums/topic/17804-dvmtstolenmemfbmemcursormem-why-do-we-patch-these-for-broadwell-and-later/) — Why memory patching is required for Broadwell and newer.
     - [**Intel iGPU OpRegion Specs**](https://01.org/sites/default/files/documentation/acpi_igd_opregion_spec_0.pdf) (**PDF**) — Official ACPI IGD OpRegion documentation.
