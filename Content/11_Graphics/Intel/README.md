@@ -34,7 +34,7 @@ An incomplete collection of iGPU-related fixes and optimizations for Intel graph
 
 - **Pre-made Patches:**
     - [**Desktop EFIs Section**](/Content/F_Desktop_EFIs/README.md) — Includes `DeviceProperties` for most Intel desktop generations.
-    - [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/Laptop_Configs) — Source for interchangeable `DeviceProperties` compatible with OpenCore.
+    - [**Clover Laptop Configs**](https://github.com/5T33Z0/Clover-Crate/tree/main/EFIs_and_Configs) — Source for interchangeable `DeviceProperties` compatible with OpenCore.
 
 - **Deep Technical Specs:**
     - [**DVMT/StolenMem Explained**](https://osxlatitude.com/forums/topic/17804-dvmtstolenmemfbmemcursormem-why-do-we-patch-these-for-broadwell-and-later/) — Why memory patching is required for Broadwell and newer.
