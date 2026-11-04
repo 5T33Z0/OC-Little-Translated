@@ -4,7 +4,7 @@ Listed below, you find available/known Framebuffer and Connector flags and their
 
 These flags can be combined to calculate a bitmask for the device properties `framebuffer-flags` and `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.) to modify/adjust an existing Framebuffer patch.
 
-If you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/B_OC_Calculators)). 
+If you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/B_OC_Calculators)). 
 
 ## Framebuffer Flags
 > Flags for device property `framebuffer-flags`
