@@ -3,7 +3,7 @@ This section contains a collection of guides with laptop-specific patches for en
 
 **TABLE of CONTENTS**
 
-- [**Adjusting Framebuffer Patches for connecting an external display**](/Content/11_Graphics/iGPU/Framebuffer_Patching/README.md)
+- [**Adjusting Framebuffer Patches for connecting an external display**](/Content/11_Graphics/Intel/Framebuffer_Patching)
 - [**Enabling TrackPad support on Laptops**](/Content/05_Laptop-specific_Patches/Trackpad_Patches/README.md)
 	- I2C TrackPad Patches
 	- ThinkPad Click and TrackPad Patches
