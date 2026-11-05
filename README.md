@@ -5,6 +5,8 @@
 [![GitHub Stars](https://img.shields.io/github/stars/5T33Z0/OC-Little-Translated?style=for-the-badge&logo=github)](https://github.com/5T33Z0/XHUB-Mapper)
 [![Last Update](https://img.shields.io/github/last-commit/5T33Z0/OC-Little-Translated?label=Last%20Update&style=for-the-badge)](https://github.com/5T33Z0/OC-Little-Translated/commits/main)
 
+![maciasl](https://user-images.githubusercontent.com/76865553/179583184-5efe6546-9f3a-4899-bdc1-5e9ec5a2927e.png)
+
 ---
 
 ## 🧰 Introduction
