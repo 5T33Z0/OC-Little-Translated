@@ -22,7 +22,7 @@ Re-installing (graphics) drivers onto the system partition breaks the security s
 
 ## Fix
 1. Remove `-no_compat_check` boot-arg (if present)
-2. Add the [**Skip Board-ID Check**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L214-L243) from OCLPs config and enable it.
+2. Add the [**Skip Board-ID Check**](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Config/config.plist#L220-L243) from OCLPs config and enable it.
 3. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) combined with boot-arg `revpatch=sbvmm` which enables the `VMM-x86_64` board-id, allowing OTA updates for unsupported models on macOS 11.3 and newer. This also allows using the "native" SMBIOS for the used CPU which improves CPU and GPU power management while macOS identifies itself to the update servers as running in a virtual machine.
 
 Instead of the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:
