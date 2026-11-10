@@ -15,7 +15,6 @@
 	- [Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)](#example-5-voodoops2--voodoormi--voodoosmbus-laptop)
 	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
-	- [Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
 	- [Example 8b: Using Multiple Versions of AirportItlwm](#example-8b-using-multiple-versions-of-airportitlwmkext-across-different-macos-versions) 
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
@@ -189,7 +188,7 @@ I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.B
 
 This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
 
-### Example 8b: Using Multiple Versions of `AirportItlwm.kext` Across Different macOS Versions
+### Example 8: Using `AirportItlwm.kext` across different macOS Versions
 
 Two kexts are available for enabling Wi-Fi on Intel wireless cards: `itlwm.kext` and `AirportItlwm.kext`. Unlike `itlwm.kext`, which uses the same build across supported macOS versions, `AirportItlwm.kext` requires a version-specific build. Builds are available for macOS High Sierra through macOS Tahoe.
 
@@ -211,7 +210,7 @@ If you have multiple macOS versions installed, you can add the corresponding `Ai
 >
 > - **Configure `MinKernel` and `MaxKernel` correctly.** These values prevent incompatible builds from loading on the wrong macOS version. Incorrect settings may prevent Wi-Fi from working and can cause kernel issues if incompatible kexts are loaded.
 > - **Renaming kexts affects update detection.** Tools such as OCAT may no longer automatically recognize or update renamed kexts. You will need to manage updates manually.
-> - **Sequoia and Tahoe compatibility:** Before October 2026, enabling `AirportItlwm.kext` on macOS Sequoia and Tahoe required additional configuration and OCLP root patches. Since then, a [fork of itlwm](https://github.com/laobamac/itlwm/releases) has introduced native support for these macOS versions. See [Enabling AirportItlwm in macOS Sequoia/Tahoe](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/Enable_Features/AirportItllwm_Sequoia.md) for details.
+> - **Sequoia and Tahoe compatibility:** Before October 2026, enabling `AirportItlwm.kext` on macOS Sequoia and Tahoe required additional configuration and OCLP root patches. Since then, a [fork of itlwm](https://github.com/laobamac/itlwm/releases) has introduced native support for these macOS versions. See [Enabling AirportItlwm in macOS Sequoia/Tahoe](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/docs/Guides/Enable_Features/WiFi/AirportItllwm_Sequoia.md) for details.
 
 ---
 
