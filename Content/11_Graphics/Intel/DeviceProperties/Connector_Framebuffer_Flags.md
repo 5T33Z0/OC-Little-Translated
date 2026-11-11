@@ -1,10 +1,48 @@
-# Intel Framebuffer and Connector Flags
+# Intel iGPU Connector and Framebuffer Flags
 
 Listed below, you find available/known Framebuffer and Connector flags and their Hex values for Intel iGPU framebuffers. These are the same flags located in Hackintool's "Patch" section. 
 
 These flags can be combined to calculate a bitmask for the device properties `framebuffer-flags` and `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.) to modify/adjust an existing Framebuffer patch.
 
 If you select any of these flags in Hackintool and click on "Generate Patch, Hackintool does the calculation and Endianness conversion automatically. When doing this manually, the values have to be summed-up and converted to Little Endian before adding the bitmask to the config.plist (see &rarr; [**OC Calculators**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/Content/B_OC_Calculators)). 
+
+## Connector Flags
+> Flags for device property `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.).
+
+Connector flags can serve various purposes and provide configuration options for display connectors. Here are some common functions that connector flags can perform:
+
+- Specify display connection types: Connector flags can indicate the type of display connection being used, such as LVDS (Low-Voltage Differential Signaling), HDMI (High-Definition Multimedia Interface), DisplayPort, DVI (Digital Visual Interface), etc. These flags help the system identify and configure the appropriate settings for the specific connection type.
+- Enable/disable display features: Certain flags might enable or disable features like audio support, HDCP (High-bandwidth Digital Content Protection), deep color support, or specific display modes.
+- Define display characteristics: Connector flags can define various display characteristics, such as resolution, refresh rate, color depth, color space, and other parameters that determine the visual output on the display.
+- Configure power and signal requirements: Flags may control power management settings, signal detection thresholds, or other parameters related to power and signal requirements for the display connection.
+- Optimize display performance: Some flags can be used to optimize the display performance, such as reducing latency, enabling specific display timing settings, or fine-tuning the communication between the graphics card and the display.
+
+Listed below, you find the available/known connector flags for Intel framebuffers in macOS. They might not provide all of the mentioned functions.
+
+`#`|Name                         | Description | Hex Value
+:-:|-----------------------------|-------------|----------:
+1 | **`CNAlterAppertureRequirements`** | Lets apperture memory to be not required | 0x1
+2 | **`CNUnknownFlag_2`** | N/A | 0x2
+3 | **`CNUnknownFlag_4`** | N/A| 0x4
+4 | **`CNConnectorAlwaysConnected`** |Normally set for LVDS displays (i.e. built-in displays)|0x8
+5 | **`CNUnknownFlag_10`**| N/A |0x10
+6 | **`CNUnknownFlag_20`**| N/A |0x20
+7 | **`CNDisableBlitTranslationTable`** | Disable blit translation table? | 0x40
+8 | **`CNUseMiscIoPowerWell`** | Activates MISC IO power well (SKL_DISP_PW_MISC_IO) |0x80
+9 | **`CNUsePowerWell2`** | Activates Power Well 2 usage (SKL_PW_CTL_IDX_PW_2). May help with HDMI audio configuration issues (cf. [Issue #1189](https://github.com/acidanthera/bugtracker/issues/1189))|0x100
+10 | **`CNUnknownFlag_200`** |N/A|0x200
+11 | **`CNUnknownFlag_400`** |N/A|0x400
+12 | **`CNIncreaseLaneCount`** |Sets fAvailableLaneCount to 30 instead of 20 when specified|0x800
+13 | **`CNUnknownFlag_1000`** |N/A|0x1000
+14 | **`CNUnknownFlag_2000`** |N/A|0x2000
+15 | **`CNUnknownFlag_4000`** |N/A|0x4000
+16 | **`CNUnknownFlag_8000`** |N/A|0x8000
+
+For reference: in Hackintool, these flags are located here:
+
+![connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a71fc439-8518-45e0-90bd-8b7cab55bde4)
+
+**SOURCE**: [**IntelFramebuffer.bt**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/IntelFramebuffer.bt)
 
 ## Framebuffer Flags
 > Flags for device property `framebuffer-flags`
@@ -44,40 +82,3 @@ For reference: in Hackintool, these flags are located here:
 
 ![fb_flags](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/b5dfa501-4751-4de8-8781-e2ea9ff31d63)
 
-## Connector Flags
-> Flags for device property `framebuffer-conx-flags` (`x` = number of controller **con0**, **con1**, **con2**, etc.).
-
-Connector flags can serve various purposes and provide configuration options for display connectors. Here are some common functions that connector flags can perform:
-
-- Specify display connection types: Connector flags can indicate the type of display connection being used, such as LVDS (Low-Voltage Differential Signaling), HDMI (High-Definition Multimedia Interface), DisplayPort, DVI (Digital Visual Interface), etc. These flags help the system identify and configure the appropriate settings for the specific connection type.
-- Enable/disable display features: Certain flags might enable or disable features like audio support, HDCP (High-bandwidth Digital Content Protection), deep color support, or specific display modes.
-- Define display characteristics: Connector flags can define various display characteristics, such as resolution, refresh rate, color depth, color space, and other parameters that determine the visual output on the display.
-- Configure power and signal requirements: Flags may control power management settings, signal detection thresholds, or other parameters related to power and signal requirements for the display connection.
-- Optimize display performance: Some flags can be used to optimize the display performance, such as reducing latency, enabling specific display timing settings, or fine-tuning the communication between the graphics card and the display.
-
-Listed below, you find the available/known connector flags for Intel framebuffers in macOS. They might not provide all of the mentioned functions.
-
-`#`|Name                         | Description | Hex Value
-:-:|-----------------------------|-------------|----------:
-1 | **`CNAlterAppertureRequirements`** | Lets apperture memory to be not required | 0x1
-2 | **`CNUnknownFlag_2`** | N/A | 0x2
-3 | **`CNUnknownFlag_4`** | N/A| 0x4
-4 | **`CNConnectorAlwaysConnected`** |Normally set for LVDS displays (i.e. built-in displays)|0x8
-5 | **`CNUnknownFlag_10`**| N/A |0x10
-6 | **`CNUnknownFlag_20`**| N/A |0x20
-7 | **`CNDisableBlitTranslationTable`** | Disable blit translation table? | 0x40
-8 | **`CNUseMiscIoPowerWell`** | Activates MISC IO power well (SKL_DISP_PW_MISC_IO) |0x80
-9 | **`CNUsePowerWell2`** | Activates Power Well 2 usage (SKL_PW_CTL_IDX_PW_2). May help with HDMI audio configuration issues (cf. [Issue #1189](https://github.com/acidanthera/bugtracker/issues/1189))|0x100
-10 | **`CNUnknownFlag_200`** |N/A|0x200
-11 | **`CNUnknownFlag_400`** |N/A|0x400
-12 | **`CNIncreaseLaneCount`** |Sets fAvailableLaneCount to 30 instead of 20 when specified|0x800
-13 | **`CNUnknownFlag_1000`** |N/A|0x1000
-14 | **`CNUnknownFlag_2000`** |N/A|0x2000
-15 | **`CNUnknownFlag_4000`** |N/A|0x4000
-16 | **`CNUnknownFlag_8000`** |N/A|0x8000
-
-For reference: in Hackintool, these flags are located here:
-
-![connectors](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/a71fc439-8518-45e0-90bd-8b7cab55bde4)
-
-**SOURCE**: [**IntelFramebuffer.bt**](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/IntelFramebuffer.bt)

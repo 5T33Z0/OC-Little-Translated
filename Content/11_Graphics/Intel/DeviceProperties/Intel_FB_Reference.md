@@ -1,4 +1,4 @@
-# Intel Framebuffer Patching Reference Guide
+# Intel Graphics Framebuffer Reference
 
 Based on Info extracted from: [https://github.com/acidanthera/WhateverGreen/blob/master/Manual/IntelFramebuffer.bt](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/IntelFramebuffer.bt)
 
