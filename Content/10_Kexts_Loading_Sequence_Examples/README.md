@@ -7,7 +7,7 @@
 - [Lilu and VirtualSMC first?](#lilu-and-virtualsmc-first)
 - [Utilizing `MinKernel` and `MaxKernel` settings](#utilizing-minkernel-and-maxkernel-settings)
 	- [Kernel Support Table](#kernel-support-table)
-- [Examples](#examples)
+- [Kext Order Examples](#kext-order-examples)
 	- [Example 1: Mandatory kexts (Minimal Requirements)](#example-1-mandatory-kexts-minimal-requirements)
 	- [Example 2: ApplePS2SmartTouchPad + Plugins (Laptop)](#example-2-appleps2smarttouchpad--plugins-laptop)
 	- [Example 3: VoodooPS2 + TrackPad (Laptop)](#example-3-voodoops2--trackpad-laptop)
@@ -15,12 +15,16 @@
 	- [Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)](#example-5-voodoops2--voodoormi--voodoosmbus-laptop)
 	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
-	- [Example 8b: Using Multiple Versions of AirportItlwm](#example-8b-using-multiple-versions-of-airportitlwmkext-across-different-macos-versions) 
+	- [Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
+	- [Example 8b: Using `AirportItlwm.kext` across different macOS Versions](#example-8b-using-airportitlwmkext-across-different-macos-versions)
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Re-Enabling legacy Broadcom and Intel WiFi/BT Cards in macOS 14+](#example-10-re-enabling-legacy-broadcom-and-intel-wifibt-cards-in-macos-14)
 	- [Example 11: CPUFriend](#example-11-cpufriend)
+- [Troubleshooting](#troubleshooting)
+	- [Fixing issues with AirportBrcmFixup generating a lot of crash reports](#fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
 - [Notes and Credits](#notes-and-credits)
+
 
 ---
 
@@ -111,7 +115,7 @@ OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  | "
 
 ---
 
-## Examples
+## Kext Order Examples
 ### Example 1: Mandatory kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)</br>
 Any additional kexts must be placed after the mandatory kexts.
@@ -183,18 +187,21 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 > 
 > Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected by Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
 
-#### Fixing issues with AirportBrcmFixup generating a lot of crash reports
-I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
+### Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
+![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
 
-This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
+> [!NOTE]
+> 
+> - For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
+> - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
 
-### Example 8: Using `AirportItlwm.kext` across different macOS Versions
+### Example 8b: Using `AirportItlwm.kext` across different macOS Versions
 
 Two kexts are available for enabling Wi-Fi on Intel wireless cards: `itlwm.kext` and `AirportItlwm.kext`. Unlike `itlwm.kext`, which uses the same build across supported macOS versions, `AirportItlwm.kext` requires a version-specific build. Builds are available for macOS High Sierra through macOS Tahoe.
 
 If you have multiple macOS versions installed, you can add the corresponding `AirportItlwm.kext` builds to your EFI folder and configure OpenCore to load only the appropriate build for each macOS version. The screenshot below shows the available builds and their corresponding `MinKernel` and `MaxKernel` settings.
 
-#### Instructions
+**Instructions**
 
 1. Go to the [OpenIntelWireless/itlwm Releases](https://github.com/OpenIntelWireless/itlwm/releases) page.
 2. Expand the **Assets** section of the relevant release.
@@ -250,6 +257,12 @@ By default, the frequency vectors stored in the selected SMBIOS are used to hand
 > [!NOTE]
 > 
 > For more info about CPU Power Management, please refer to &rarr; [**Enabling CPU Power Management**](/Content/01_Adding_missing_Devices_and_enabling_Features/CPU_Power_Management)
+
+## Troubleshooting
+### Fixing issues with AirportBrcmFixup generating a lot of crash reports
+I've noticed recently that a lot of crash reports for `com.apple.drive.Airport.Brcm4360.0` and `com.apple.iokit.IO80211Family` are being generated (located under /Library/Logs/CrashReporter/CoreCapture) although my WiFi card is working great in terms of connectivity and speed.
+
+This issue is related to Smart Connect, a feature of WiFi routers which support 2,4 gHz and 5 gHz basebands to make the WiFi card switch between the two automatically depending on the signal quality. Turning off Smart Connect in the router resolves this issue.
 
 ## Notes and Credits
 - :warning: The plists included in this section ARE NOT for use with any system. They are only examples for demonstrating the order of the kexts listed in "Kernel/Add" section!
