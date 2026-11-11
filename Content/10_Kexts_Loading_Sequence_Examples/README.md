@@ -15,8 +15,8 @@
 	- [Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)](#example-5-voodoops2--voodoormi--voodoosmbus-laptop)
 	- [Example 6: VoodooPS2 + VoodooRMI + VoodooI2C (Laptop)](#example-6-voodoops2--voodoormi--voodooi2c-laptop)
 	- [Example 7: Broadcom WiFi and Bluetooth](#example-7-broadcom-wifi-and-bluetooth)
-	- [Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)](#example-8a-intel-wifi-airportitlwm-and-bluetooth-intelbluetoothfirmware)
-	- [Example 8b: Using `AirportItlwm.kext` across different macOS Versions](#example-8b-using-airportitlwmkext-across-different-macos-versions)
+	- [Example 8a: Intel WiFi (Itlwm and AirportItlwm)](#example-8a-intel-wifi-itlwm-and-airportitlwm)
+	- [Example 8b: Intel Bluetooth (IntelBluetoothFirmware)](#example-8b-intel-bluetooth-intelbluetoothfirmware)
 	- [Example 9a: Possible Desktop Kext Sequence](#example-9a-possible-desktop-kext-sequence)
 	- [Example 9b: Possible Laptop Kext Sequence](#example-9b-possible-laptop-kext-sequence)
 	- [Example 10: Re-Enabling legacy Broadcom and Intel WiFi/BT Cards in macOS 14+](#example-10-re-enabling-legacy-broadcom-and-intel-wifibt-cards-in-macos-14)
@@ -78,10 +78,10 @@ It's basically the same feature Clover provides, just a lot smarter: instead of 
 
 ### Kernel Support Table
 
-The following table contains the Kernel version ranges for OSX 10.4 up to macOS 15. 
+The following table contains the Kernel version ranges for OSX 10.4 up to macOS 26. 
 
-|OS X/macOS Version (Name) | MinKernel | MaxKernel| Architecture
-|-------------------------:|:---------:|:--------:|:-----------:
+|OS X/macOS Version (Name) | `MinKernel` | `MaxKernel`| Architecture
+|-------------------------:|:-----------:|:----------:|:-----------:
 macOS 26 (Tahoe)           | 25.0.0    | -        | Intel (64-bit)</br>Apple Silicon (ARM)
 macOS 15 (Sequoia)         | 24.0.0    | 24.99.99 | "
 macOS 14 (Sonoma)          | 23.0.0    | 23.99.99 | "
@@ -106,25 +106,30 @@ OS X 10.4 (Tiger)          | 8.0.0     | 8.99.99  | "
 
 > [!NOTE]
 >
-> Since Hackintoshing will end with macOS Tahoe, there's no need to set `MaxKernel` for it.
+> Since Hackintoshing will probably end with macOS Tahoe, there's no need to set `MaxKernel` for it.
 
 > [!TIP]
 >
-> - To check, which Kernel your macOS version is using, either enter `uname -r` in Terminal or look it up in "System Profiler" under "Software". 
-> - Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a single version of macOS which used a Kernel greater than `X.9.9`.
+> - To check which Kernel your macOS version is using, either enter `uname -r` in Terminal or look it up in "System Profiler" under "Software". 
+> - Although `MaxKernel` can go up to `X.99.99`, using `X.9.9` is sufficient in most cases. So far, there hasn't been a single version of macOS which had a Kernel greater than `X.9.9`.
 
 ---
 
 ## Kext Order Examples
+
 ### Example 1: Mandatory kexts (Minimal Requirements)
 ![config01](https://user-images.githubusercontent.com/76865553/140840864-e7596685-d2bf-426d-af92-4f23fa01f18a.png)</br>
 Any additional kexts must be placed after the mandatory kexts.
+
 ### Example 2: ApplePS2SmartTouchPad + Plugins (Laptop)
 ![Config2](https://user-images.githubusercontent.com/76865553/140813746-3d3ab6aa-949a-4b91-8c9b-c3dcd0fef77d.png)
+
 ### Example 3: VoodooPS2 + TrackPad (Laptop)
 ![config3](https://user-images.githubusercontent.com/76865553/140813775-eb6ff60f-9ec3-4c9b-a768-f5e5a9e6868e.png)
+
 ### Example 4: VoodooPS2 + I2C (Laptop)
 ![config4](https://user-images.githubusercontent.com/76865553/140813798-a403f299-e85d-4fed-90f7-bea045384db5.png)
+
 ### Example 5: VoodooPS2 + VoodooRMI + VoodooSMBus (Laptop)
 For Synaptics TrackPads which are controlled via SMBus, the kext order is:
 
@@ -187,19 +192,15 @@ When using Broadcom WiFi/Bluetooth cards that are not natively supported by macO
 > 
 > Don't add `BrcmFirmwareRepo.kext` to `EFI/OC/Kexts`! It cannot be injected by Boot Managers. It needs to be *installed* in `/System/Library/Extensions` (/Library/Extensions on 10.11 and later). In this case, `BrcmFirmwareData.kext`is not required. You can use [**Kext-Droplet**](https://github.com/chris1111/Kext-Droplet-macOS) to install kext in the system library directly.
 
-### Example 8a: Intel WiFi (AirportItlwm) and Bluetooth (IntelBluetoothFIrmware)
-![IntelBT](https://user-images.githubusercontent.com/76865553/196041542-9f6943dc-b500-408e-8d61-f15a6082d5f7.png)
+### Example 8a: Intel WiFi (Itlwm and AirportItlwm)
 
-> [!NOTE]
-> 
-> - For Intel WiFi, there are actually 2 kexts available that can be used: `Itlwm.kext` and `AirportItlwm.kext`. Both have different Pros and Cons, so which one to use depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html))
-> - For using Intel Bluetooth in macOS Monterey and newer, [**read this**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer).
+![AirportItlwm MinKernel and MaxKernel configuration](https://github.com/user-attachments/assets/c505f572-e8ca-4f21-bf84-c42b8a9a7c4f)
 
-### Example 8b: Using `AirportItlwm.kext` across different macOS Versions
+Two kexts are available for enabling WiFi on Intel wireless cards: `itlwm.kext` and `AirportItlwm.kext`. Both have different pros and cons, so the choice depends on personal preference ([**find out more**](https://openintelwireless.github.io/itlwm/FAQ.html)).
 
-Two kexts are available for enabling Wi-Fi on Intel wireless cards: `itlwm.kext` and `AirportItlwm.kext`. Unlike `itlwm.kext`, which uses the same build across supported macOS versions, `AirportItlwm.kext` requires a version-specific build. Builds are available for macOS High Sierra through macOS Tahoe.
+Unlike `itlwm.kext`, which uses the same build across supported macOS versions, `AirportItlwm.kext` requires a version-specific build. Official builds are available for macOS High Sierra through Sonoma.
 
-If you have multiple macOS versions installed, you can add the corresponding `AirportItlwm.kext` builds to your EFI folder and configure OpenCore to load only the appropriate build for each macOS version. The screenshot below shows the available builds and their corresponding `MinKernel` and `MaxKernel` settings.
+If you have multiple macOS versions installed, you can add the corresponding `AirportItlwm.kext` builds to your EFI folder and configure OpenCore to load only the appropriate build for each macOS version.
 
 **Instructions**
 
@@ -210,14 +211,23 @@ If you have multiple macOS versions installed, you can add the corresponding `Ai
 5. Add all renamed kexts to `EFI/OC/Kexts` and create a corresponding entry for each one in `config.plist`.
 6. Disable `itlwm.kext` if it is present. Do not load `itlwm.kext` and `AirportItlwm.kext` simultaneously.
 7. Configure the `MinKernel` and `MaxKernel` values for each kext so that it loads only on the macOS versions it supports. Use the screenshot below as a reference.
-   ![AirportItlwm MinKernel and MaxKernel configuration](https://github.com/user-attachments/assets/c505f572-e8ca-4f21-bf84-c42b8a9a7c4f)
-9. Save `config.plist` and verify that Wi-Fi works in each installed macOS version.
+8. Save `config.plist` and verify that WiFi works in each installed macOS version.
 
 > [!IMPORTANT]
 >
-> - **Configure `MinKernel` and `MaxKernel` correctly.** These values prevent incompatible builds from loading on the wrong macOS version. Incorrect settings may prevent Wi-Fi from working and can cause kernel issues if incompatible kexts are loaded.
+> - **Configure `MinKernel` and `MaxKernel` correctly.** These values prevent incompatible builds from loading on the wrong macOS version. Incorrect settings may prevent WiFi from working and can cause kernel issues if incompatible kexts are loaded.
 > - **Renaming kexts affects update detection.** Tools such as OCAT may no longer automatically recognize or update renamed kexts. You will need to manage updates manually.
-> - **Sequoia and Tahoe compatibility:** Before October 2026, enabling `AirportItlwm.kext` on macOS Sequoia and Tahoe required additional configuration and OCLP root patches. Since then, a [fork of itlwm](https://github.com/laobamac/itlwm/releases) has introduced native support for these macOS versions. See [Enabling AirportItlwm in macOS Sequoia/Tahoe](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/docs/Guides/Enable_Features/WiFi/AirportItllwm_Sequoia.md) for details.
+> - **macOS Sequoia and Tahoe:** For these macOS versions, use the [**Laobamac/itlwm fork**](https://github.com/laobamac/itlwm/releases), which provides an updated `AirportItlwm.kext` without requiring OCLP root patches or the injection of older kexts. See [**Enabling AirportItlwm in macOS Sequoia/Tahoe**](https://github.com/5T33Z0/OCLP4Hackintosh/blob/main/docs/Guides/Enable_Features/WiFi/AirportItllwm_Sequoia.md) for detailed instructions.
+
+### Example 8b: Intel Bluetooth (IntelBluetoothFirmware)
+
+![](/Users/5t33z0/Desktop/IntelBTFirmware.png)
+
+For Intel Bluetooth, the [**IntelBluetoothFirmware**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) project provides the necessary kexts to enable Bluetooth functionality in macOS.
+
+For macOS Monterey and newer, additional steps are required to get Intel Bluetooth working correctly. These include changes to the kext configuration and firmware handling.
+
+See the official [**IntelBluetoothFirmware FAQ**](https://openintelwireless.github.io/IntelBluetoothFirmware/FAQ.html#what-additional-steps-should-i-do-to-make-bluetooth-work-on-macos-monterey-and-newer) for the required configuration and installation instructions.
 
 ---
 
