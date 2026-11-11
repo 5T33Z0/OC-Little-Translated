@@ -25,7 +25,6 @@
 	- [Fixing issues with AirportBrcmFixup generating a lot of crash reports](#fixing-issues-with-airportbrcmfixup-generating-a-lot-of-crash-reports)
 - [Notes and Credits](#notes-and-credits)
 
-
 ---
 
 ## About
@@ -221,7 +220,7 @@ If you have multiple macOS versions installed, you can add the corresponding `Ai
 
 ### Example 8b: Intel Bluetooth (IntelBluetoothFirmware)
 
-![](/Users/5t33z0/Desktop/IntelBTFirmware.png)
+<img width="1356" height="91" alt="IntelBTFirmware" src="https://github.com/user-attachments/assets/eb41dc4e-29fe-4153-97c6-aaeecc78d579" />
 
 For Intel Bluetooth, the [**IntelBluetoothFirmware**](https://github.com/OpenIntelWireless/IntelBluetoothFirmware) project provides the necessary kexts to enable Bluetooth functionality in macOS.
 
