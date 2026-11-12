@@ -169,7 +169,7 @@ This is a common scenario, especially for users relying on **OCLP root patches**
 
 > [!TIP]
 >
-> Instead of using the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:<br>![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
+> Instead of using the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:<br><img width="731" height="257" alt="sbvmm" src="https://github.com/user-attachments/assets/f154421a-bd86-4162-8e81-48c6027a7748" />
 
 ---
 
