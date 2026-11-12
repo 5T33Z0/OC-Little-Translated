@@ -159,25 +159,17 @@ This is a common scenario, especially for users relying on **OCLP root patches**
 
 #### Solution
 
-1. Add **board-ID skip**.
-   - Allows using the native SMBIOS without switching models.
-   - Works with OCLP to bypass installer model checks early.
-
-2. Add **RestrictEvents.kext** with `revpatch=sbvmm`.
-   - Enables the `VMM-x86_64` board ID.
-   - Makes macOS treat the system as virtualized.
-   - Enables OTA updates on macOS 11.3+.
-
+1. Add the **Skip Board-ID Check** Booter Patch to your config.plist (you can copy it from the [**Restrict_Events_path.plist**](/Content/S_System_Updates/configs/restrict_events_path.plist))
+2. Add [**RestrictEvents.kext**](https://github.com/acidanthera/RestrictEvents) to `OC/EFI/Kexts` and `config.plist` 
 3. Set `Misc/SecureBootModel` to `Disabled`.
-
-4. Apply OCLP root patches if required.
-
-**Result:** OTA updates can work through the workaround, with Secure Boot disabled. SMBIOS switching is no longer required.
-
-iBridged is **not applicable** in this scenario.
+4. Remove the `-no_compat_check` boot-arg (if present)
+5. Add boot-arg `revpatch=sbvmm` (&rarr; [Additional Info](/Content/09_Board-ID_VMM-Spoof))
+6. Save and reboot
+7. Check for System Updates
 
 > [!TIP]
-> See the reference configuration: [`Restrict_Events_path.plist`](/Content/S_System_Updates/configs/restrict_events_path.plist)
+>
+> Instead of using the `revpatch=sbvmm` boot-arg, you can also use an NVRAM variable. Make sure to also add an entry for `revpatch` to the `NVRAM/Delete` section as well, so new/different values can be written to it:<br>![NVRAM_parms](https://github.com/5T33Z0/OC-Little-Translated/assets/76865553/2a6466eb-97b5-4548-943b-caf10e65351b)
 
 ---
 
