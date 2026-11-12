@@ -118,7 +118,7 @@ Use this section to quickly identify the correct setup for your system.
 
 The following flowchart helps with the decision-making:
 
-![](https://github.com/user-attachments/assets/94ad649f-9c63-4e19-a71b-c7c62bda8d48)
+<img width="1725" height="808" alt="OTA_Updates" src="https://github.com/user-attachments/assets/e496f0e8-7730-43b5-a722-d55acae8b110" />
 
 ---
 
