@@ -49,7 +49,9 @@ Here's a screenshot from my system which uses an 10th Gen i9 CPU with a Intel UH
 	- Correct `device-id` for used CPU (optional)
 - **SMBIOS** that utilizes the iGPU (so no **iMacPro1,1** or **MacPro**)
 
-**NOTE**: The "GPU" Tab only appears if your system has *both* an iGPU and a dedicated GPU. If it only has one or the other, use a [**defaults-write command**](#5-shortcut-using-a-defaults-write-command) to enable it instead.
+>[!NOTE]
+>
+> The "GPU" Tab only appears if your system has *both* an iGPU and a dedicated GPU. If it only has one or the other, use a [**defaults-write command**](#5-shortcut-using-a-defaults-write-command) to enable it instead.
  
 ### Required Software and Resources
 - [**Hackintool**](https://github.com/headkaze/Hackintool) to obtain DeviceProperties, specifically `AAPL,slot-name`
@@ -75,7 +77,9 @@ Keep in mind that the byte order (or "Endianness") of Framebuffers and Device-ID
 	- If Metal 3 is available for either iGPU or dGPU, you don't need a fix
 	- If Metal 3 is not available for either iGPU/dGPU, it means that your dGPU does not support Metal 3 and it is not enabled for the iGPU either. Follow the guide to add `enable-metal` to the `DeviceProperties` of your iGPU (works on Intel (U)HD 630 only).
 
-**NOTE**: The Metal capabilities of dGPUs are limited by the used hardware. AMD GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
+> [!NOTE]
+>
+> The Metal capabilities of dGPUs are limited by the used hardware. AMD GPUs of the Polaris family (RX 500 series) only support Metal 1 and 2, while GPUs of the Navi 10 (RX 5000 series) and Navi 20 (RX 6000 series) family also support Metal 3.
 
 ## 2b. Check presence of "GPU" tab (optional)
 - Run Activity Monitor (located under Programs/Utilities)
@@ -149,7 +153,9 @@ To disable it, enter
 defaults write com.apple.ActivityMonitor ShowGPUTab -bool false
 ```
 
-**NOTE**: You still may have to fix your DeviceProperties to get proper Hardware Acceleration and Metal 3 support in macOS Ventura, though.
+> [!NOTE]
+>
+> You still may have to fix your DeviceProperties to get proper Hardware Acceleration and Metal 3 support in macOS Ventura, though.
 
 ## Credits and Resources
 - FirstCustomac for his [post](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2788030) showing the correlation of `AAPL,slot-name` and the "GPU" Tab in Activity Monitor
