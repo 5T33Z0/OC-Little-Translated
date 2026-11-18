@@ -48,6 +48,8 @@ Only 3 properties are required to make the "GPU" tab show up. A 4th one corrects
 | **dGPU** (PCI path varies) | `AAPL,slot-name` | String | `internal@…`, see [section 3](#3-obtaining-aaplslot-name-for-igpu-and-dgpu) |
 | **iGPU** (optional) | `device-id` | Data | Correct ID for your CPU, so that the iGPU is named correctly |
 
+In my test, it wasn't even necessary to add an `AAPL,ig-platform-id` to the iGPU properties:
+
 ![DevProps3](https://user-images.githubusercontent.com/76865553/178031340-50b48d34-6d54-424d-a972-493b9bcb4a88.png)
 
 If your dGPU doesn't support Metal 3 (Polaris and older), also add the following key to the iGPU to enable Metal 3 on it (Intel (U)HD 630 only):
