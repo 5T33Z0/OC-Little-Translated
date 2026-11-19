@@ -49,43 +49,33 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 
 **Intel Wi-Fi adapters and associated firmware files**:
 
-| Intel Wi-Fi Adapter(s)           | Firmware file(s)                                             |
-| -------------------------------- | ------------------------------------------------------------ |
-| Centrino Wireless-N 1000         | `iwlwifi-1000-*.ucode`                                       |
-| Centrino Wireless-N 1030         | `iwlwifi-1000-*.ucode`                                       |
-| Centrino Wireless-N 105          | `iwlwifi-105-*.ucode`                                        |
-| Centrino Wireless-N 130          | `iwlwifi-100-*.ucode`                                        |
-| Centrino Wireless-N 135          | `iwlwifi-135-*.ucode`                                        |
-| Centrino Wireless-N 2200         | `iwlwifi-2000-*.ucode`                                       |
-| Centrino Wireless-N 2230         | `iwlwifi-2030-*.ucode`                                       |
-| Centrino Advanced-N 6200         | `iwlwifi-6000-*.ucode`                                       |
-| Centrino Ultimate-N 6300         | `iwlwifi-6000-*.ucode`                                       |
-| Centrino Advanced-N 6230         | `iwlwifi-6000g2a-*.ucode`                                    |
-| Centrino Advanced-N 6235         | `iwlwifi-6000g2b-*.ucode`                                    |
-| Centrino Wireless-N + WiMAX 6150 | `iwlwifi-6150-*.ucode`                                       |
-| Dual Band Wireless-N 7260        | `iwlwifi-7260-*.ucode`                                       |
-| Dual Band Wireless-AC 7260       | `iwlwifi-7260-*.ucode`                                       |
-| Dual Band Wireless-AC 7265       | `iwlwifi-7265-*.ucode`                                       |
-| Dual Band Wireless-AC 3160       | `iwlwifi-3160-*.ucode`                                       |
-| Dual Band Wireless-AC 3165       | `iwlwifi-7265D-*.ucode`                                      |
-| Dual Band Wireless-AC 3168       | `iwlwifi-3168-*.ucode`                                       |
-| Dual Band Wireless-AC 8260       | `iwlwifi-8000C-*.ucode`                                      |
-| Dual Band Wireless-AC 8265       | `iwlwifi-8265-*.ucode`                                       |
-| Dual Band Wireless-AC 8275       | `iwlwifi-8265-*.ucode`                                       |
-| Wireless-AC 9260                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
-| Wireless-AC 9461                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
-| Wireless-AC 9462                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
-| Wireless-AC 9560                 | `iwlwifi-9000-pu-b0-jf-b0-*.ucode`                           |
-| Wi-Fi 6 AX200                    | `iwlwifi-cc-a0-*.ucode`                                      |
-| Killer AX1650                    | `iwlwifi-cc-a0-*.ucode`                                      |
-| Wi-Fi 6 AX201                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
-| Wi-Fi 6 AX101                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
-| Killer AX1650i                   | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
-| Killer AX1675                    | `iwlwifi-QuZ-a0-hr-b0-*.ucode` + `iwlwifi-QuZ-a0-hr-b0.pnvm` |
-| Wi-Fi 6 AX210                    | `iwlwifi-ty-a0-gf-a0-*.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm`   |
-| Killer AX1675x                   | `iwlwifi-ty-a0-gf-a0-*.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm`   |
-| Wi-Fi 6E AX211                   | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
-| Killer AX1690 series             | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
+| Intel Wi-Fi Adapter(s) | Firmware file(s) |
+| --- | --- |
+| Centrino Wireless-N 1000 | `iwn-1000` |
+| Centrino Wireless-N 1030 | `iwn-6030` |
+| Centrino Wireless-N 105 | `iwn-105` |
+| Centrino Wireless-N 135 | `iwn-135` |
+| Centrino Wireless-N 2200 | `iwn-2000` |
+| Centrino Wireless-N 2230 | `iwn-2030` |
+| Centrino Advanced-N 6200 | `iwn-6000` |
+| Centrino Ultimate-N 6300 | `iwn-6000` |
+| Centrino Advanced-N 6230 | `iwn-6030` |
+| Centrino Advanced-N 6235 | `iwn-6030` |
+| Centrino Wireless-N + WiMAX 6150 | `iwn-6050` |
+| Dual Band Wireless-N 7260 | `iwm-7260-17` |
+| Dual Band Wireless-AC 7260 | `iwm-7260-17` |
+| Dual Band Wireless-AC 7265 | `iwm-7265-17` |
+| Dual Band Wireless-AC 3160 | `iwm-3160-17` |
+| Dual Band Wireless-AC 3168 | `iwm-3168-29` |
+| Dual Band Wireless-AC 8260 | `iwm-8000C-36` |
+| Dual Band Wireless-AC 8265 | `iwm-8265-36` |
+| Dual Band Wireless-AC 8275 | `iwm-8265-36` |
+| Wireless-AC 9260 | `iwm-9260-46` |
+| Wireless-AC 9461 / 9462 / 9560 | `iwm-9000-46` |
+| Wi-Fi 6 AX200, Killer AX1650 (s/x) | `iwlwifi-cc-a0-68.ucode` |
+| Wi-Fi 6 AX201, AX101, Killer AX1650i, Killer AX1675 (i/w) | `iwlwifi-QuZ-a0-hr-b0-68.ucode` |
+| Wi-Fi 6 AX210, Killer AX1675x | `iwlwifi-ty-a0-gf-a0-68.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm` |
+| Wi-Fi 6E AX211, Killer AX1690 series | `iwlwifi-so-a0-gf-a0-68.ucode` + `iwlwifi-so-a0-gf-a0.pnvm` |
 
 > [!TIP]
 > 
