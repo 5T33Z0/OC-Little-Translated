@@ -47,8 +47,7 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 >
 > The firmware identifier is only exposed when using `AirportItlwm.kext`. If you are currently using `itlwm.kext`, this won't work. In this case, use the table below to find the wireless firmware file(s) used by your Wi-FI/BT card.
 
-<details>
-<summary><strong>Intel Wi-Fi adapters and firmware files</strong> (Click to reveal)</summary><br>
+**Intel Wi-Fi adapters and associated firmware files**:
 
 | Intel Wi-Fi Adapter(s)           | Firmware file(s)                                             |
 | -------------------------------- | ------------------------------------------------------------ |
@@ -87,8 +86,6 @@ To build slimmed-down, tailor-made versions of **AirportItlwm**, **Itlwm**, and 
 | Killer AX1675x                   | `iwlwifi-ty-a0-gf-a0-*.ucode` + `iwlwifi-ty-a0-gf-a0.pnvm`   |
 | Wi-Fi 6E AX211                   | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
 | Killer AX1690 series             | `iwlwifi-so-a0-gf4-a0-*.ucode` + `iwlwifi-so-a0-gf4-a0.pnvm` |
-
-</details>
 
 > [!TIP]
 > 
