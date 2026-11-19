@@ -93,9 +93,20 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 **SOURCE**: [Insanelymac](https://www.insanelymac.com/forum/topic/351969-pre-release-macos-ventura/?do=findComment&comment=2786122)
 
-> [!NOTE]
-> 
-> The Framebuffers listed above have been removed from macOS Sonoma, so this setting no longer has any effect.
+> [!IMPORTANT]
+>
+> The framebuffers listed above have been removed from macOS Sonoma onward, so these settings no longer have any effect. They were stored as `IOKitPersonalities` in the `Info.plist` inside `/System/Library/Extensions/AMD9500Controller.kext`.
+>
+> In macOS Sequoia, the remaining `IOKitPersonalities` are no longer GPU framebuffer personalities, but AMD controller configuration personalities:
+>
+> | Personality | Notable configuration |
+> | --- | --- |
+> | `ATY,Florin` | Power tuning, HEVC disabled, AGDC |
+> | `ATY,Forrahue` | Scanout, TCON, AGDC, Falcon SMC |
+> | `ATY,Palena` | Framebuffer control flags, power tuning, HEVC disabled |
+> | `ATY,Sinu` | Scanout, TCON, power tuning, HEVC disabled |
+> | `ATY,Tolten` | Scanout, TCON, extensive clock tuning |
+> | `ATY,Yelcho` | Scanout, TCON, Falcon SMC |
 
 ## Method 2b: Using PowerPlay Tables
 With this method, you can inject all sorts of parameters into macOS to optimize the performance of your card such as: Power Limits, Clock Speeds, Fan Control and more without having to flash a modified vBIOS on your card. Combined with selecting specific AMD Framebuffers via the `@0,name` property, this is probably the best solution to optimize the performance of your AMD card under macOS.
