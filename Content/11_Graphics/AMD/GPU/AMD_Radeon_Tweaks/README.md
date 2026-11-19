@@ -95,11 +95,11 @@ With this method, you don't need Whatevergreen and DRM works when using SMBIOS `
 
 > [!IMPORTANT]
 >
-> The framebuffers listed above have been removed from macOS Sonoma onward, so these settings no longer have any effect. They were stored as `IOKitPersonalities` in the `Info.plist` inside `/System/Library/Extensions/AMD9500Controller.kext`.
+> The framebuffers listed above have been removed from macOS Sonoma onward, so injecting these framebuffer names no longer has any effect. The legacy framebuffer configurations were stored in the `Info.plist` inside `/System/Library/Extensions/AMD9500Controller.kext`, under `IOKitPersonalities`.
 >
-> In macOS Sequoia, the remaining `IOKitPersonalities` are no longer GPU framebuffer personalities, but AMD controller configuration personalities:
+> In macOS Sequoia, the remaining entries under the root-level `Controller` dictionary are no longer GPU framebuffer personalities. Instead, they contain AMD controller configuration parameters related to power management, clock tuning and display-controller functionality:
 >
-> | Personality | Notable configuration |
+> | Configuration | Notable contents |
 > | --- | --- |
 > | `ATY,Florin` | Power tuning, HEVC disabled, AGDC |
 > | `ATY,Forrahue` | Scanout, TCON, AGDC, Falcon SMC |
