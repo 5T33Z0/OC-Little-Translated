@@ -13,11 +13,13 @@ The stock itlwm kexts embed firmware for every supported Intel Wi-Fi card (about
 3. Copies the source tree to an isolated working directory, so your original checkout stays untouched.
 4. Deletes all firmware files you did not select. `iwlwifi-*.ucode` and the matching `.pnvm` file are kept together.
 5. Generates the firmware data with the project's `fw_gen` target and checks that it contains exactly the selected files.
-6. Builds the selected targets with `xcodebuild` (Release) and saves them to `Builds/`.
+6. Builds the selected targets with `xcodebuild` (Release), deletes the `.dSYM` debug-symbol folders that Xcode leaves next to the kexts, and saves the kexts to `Builds/`.
 
 It automates the manual steps of the [Slimming Intel Wi-Fi/BT Kexts](https://github.com/5T33Z0/OC-Little-Translated/blob/main/Content/J_Compiling_Kexts/Slimming_Intel_WiFI_BT_Kexts.md) guide for the Wi-Fi kexts.
 
-> **Note:** Slimming only reduces the kext size. It does not improve performance or compatibility. If you keep the wrong firmware, Wi-Fi will not initialize.
+> [!NOTE]
+> 
+> Slimming only reduces the kext size. It does not improve performance or compatibility. If you keep the wrong firmware, Wi-Fi will not initialize.
 
 ## Requirements
 
@@ -39,6 +41,7 @@ itlwm/
 ├── itlwm/firmware/        <- firmware files the script slims down
 ├── MacKernelSDK/          <- downloaded by the script if missing
 ├── build-itlwm-slim.py    <- this script
+├── build-itlwm-slim.command <- double-click launcher
 └── ...
 ```
 
@@ -66,11 +69,26 @@ Before running the script, find out which firmware your card uses:
 
 The script shows card hints for some firmware, but treat them as hints and verify.
 
+> [!NOTE]
+> 
 > **AX201 cards:** depending on the chip stepping, an AX201 may need `iwlwifi-Qu-b0-hr-b0` or `iwlwifi-Qu-c0-hr-b0` instead of `iwlwifi-QuZ-a0-hr-b0`. If Wi-Fi does not come up, rebuild with several candidates selected.
 
 ## Usage
 
-Run the script from the itlwm root:
+**Double-click:** put `build-itlwm-slim.command` next to `build-itlwm-slim.py` and double-click it. It opens Terminal, starts the script, and keeps the window open at the end so you can read the result.
+
+If macOS refuses to open it:
+
+- **"No permission" / nothing happens:** the executable flag was lost (common after a download or ZIP). Run once in Terminal:
+  ```sh
+  chmod +x build-itlwm-slim.command
+  ```
+- **"cannot be opened because it is from an unidentified developer":** right-click the file, choose **Open**, then confirm. Or remove the quarantine flag:
+  ```sh
+  xattr -d com.apple.quarantine build-itlwm-slim.command
+  ```
+
+**Terminal:** run the script from the itlwm root:
 
 ```sh
 python3 build-itlwm-slim.py
@@ -91,14 +109,14 @@ python3 build-itlwm-slim.py --latest-sdk
 3. **Choose whether to keep the slimmed working directory** after the build.
 4. **Confirm** to start slimming and compiling.
 
-The `AirportItlwm-*` targets are the native Wi-Fi interface for the matching macOS version. `itlwm` is the standalone kext and needs the [HeliPort](https://github.com/OpenIntelWireless/HeliPort) app to connect to networks.
+The `AirportItlwm-*` targets are the native Wi-Fi interface for the matching macOS version. `itlwm` is the standalone kext and needs the [**HeliPort**](https://github.com/joshcalvert47/HeliPort) app to connect to networks.
 
 ## Output
 
 | Item | Location |
 | --- | --- |
 | Finished kexts | `Builds/AirportItlwm-<macOS>-<firmware>.kext` and `Builds/itlwm-<firmware>.kext` (inside the itlwm root) |
-| Working copy | `../itlwm-Slimmed` (next to the itlwm folder; removed afterwards unless you chose to keep it) |
+| Working copy | `../itlwm-Slimmed` (next to the itlwm folder; removed afterwards unless you chose to keep it). Its `build/Release` folder holds the raw build output without `.dSYM` folders. |
 
 If an output already exists, the script asks before replacing it. With more than two firmware groups selected, the file name uses the first group plus a count (e.g. `iwm-9000-46+2more`).
 
@@ -112,4 +130,5 @@ Copy the kext to `EFI/OC/Kexts`, replacing the existing one, and reboot. If Wi-F
 - If `MacKernelSDK` exists but is incomplete, the script aborts and asks you to delete it, so it never overwrites a folder it does not recognize.
 - Your source checkout is never modified; all slimming happens in the copy.
 - Targets are built with `ARCHS=x86_64` and `CODE_SIGNING_ALLOWED=NO`.
+- `.dSYM` folders are deleted after each build. They are never part of the kexts in `Builds/`, so this only keeps the working copy small.
 - Bluetooth firmware is not handled: this repo does not contain `IntelBluetoothFirmware`.

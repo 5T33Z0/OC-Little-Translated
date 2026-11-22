@@ -451,6 +451,17 @@ def generate_firmware(expected_count):
               f"expected {expected_count}.")
 
 
+def remove_dsyms():
+    """Delete the *.dSYM bundles xcodebuild leaves next to the built kexts."""
+    removed = 0
+    for dsym in list((OUTPUT / "build").rglob("*.dSYM")):
+        if dsym.is_dir():
+            shutil.rmtree(dsym)
+            removed += 1
+    if removed:
+        print(f"Removed {removed} dSYM bundle(s)")
+
+
 def build_target(target):
     run(
         f"Building {target}...",
@@ -469,6 +480,8 @@ def build_target(target):
     kext = kext_location(target)
     if not kext.is_dir():
         abort(f"Build completed but expected kext was not found: {kext}")
+
+    remove_dsyms()
     return kext
 
 
