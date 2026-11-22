@@ -5,6 +5,7 @@ Builds itlwm / AirportItlwm kexts that only contain the firmware needed by
 your Intel Wi-Fi card, from an isolated copy of an itlwm source checkout.
 """
 
+import argparse
 import re
 import shutil
 import subprocess
@@ -18,6 +19,10 @@ BUILDS = ROOT / "Builds"
 PROJECT = "itlwm.xcodeproj"
 FIRMWARE_SUBDIR = Path("itlwm") / "firmware"
 FWBINARY = Path("include") / "FwBinary.cpp"
+
+SDK_URL = "https://github.com/acidanthera/MacKernelSDK.git"
+# Commit the fork's README/CI builds with (macOS Sequoia/Tahoe).
+SDK_COMMIT = "3f750085caa17ec3a7880f11c11bf4f48cd6a164"
 
 # Card hints (taken from the OC-Little-Translated slimming guide and the
 # device tables in the itlwm source). They are only hints: always verify
@@ -312,10 +317,61 @@ def preflight():
         abort("xcodebuild not found. Install Xcode and its command line tools.")
     if not (ROOT / PROJECT).exists():
         abort("Run this script from the itlwm repository root.")
-    if not (ROOT / "MacKernelSDK").exists():
-        abort("MacKernelSDK missing. Clone it into the itlwm root.")
     if not (ROOT / FIRMWARE_SUBDIR).is_dir():
         abort(f"Firmware folder missing: {ROOT / FIRMWARE_SUBDIR}")
+
+
+def git(args, cwd=None, capture=False):
+    try:
+        result = subprocess.run(
+            ["git", *args], cwd=cwd, capture_output=capture, text=True
+        )
+    except FileNotFoundError:
+        abort("git not found. Install the Xcode command line tools "
+              "(xcode-select --install).")
+    if result.returncode != 0:
+        detail = f"\n{result.stderr.strip()}" if capture and result.stderr else ""
+        abort(f"git {' '.join(args)} failed "
+              f"(exit code {result.returncode}).{detail}")
+    return result
+
+
+def sdk_complete(sdk):
+    return (
+        (sdk / "Headers").is_dir()
+        and (sdk / "Library" / "x86_64" / "libkmod.a").is_file()
+    )
+
+
+def ensure_sdk(latest=False):
+    """Clone MacKernelSDK into <root>/MacKernelSDK and pin it to SDK_COMMIT.
+
+    With latest=True an existing or freshly cloned SDK is used as is.
+    """
+    sdk = ROOT / "MacKernelSDK"
+
+    if not sdk_complete(sdk):
+        if sdk.exists() and any(sdk.iterdir()):
+            abort(f"{sdk} exists but looks incomplete. "
+                  "Delete it and run the script again.")
+        print(f"\nMacKernelSDK not found. Cloning {SDK_URL} ...")
+        git(["clone", SDK_URL, str(sdk)])
+        if not sdk_complete(sdk):
+            abort("MacKernelSDK was cloned but looks incomplete.")
+
+    if latest:
+        print("Using MacKernelSDK as is (--latest-sdk).")
+        return
+
+    if not (sdk / ".git").exists():
+        print("MacKernelSDK is not a Git checkout; cannot verify its version.")
+        return
+
+    head = git(["rev-parse", "HEAD"], cwd=sdk, capture=True).stdout.strip()
+    if head != SDK_COMMIT:
+        print(f"\nChecking out pinned MacKernelSDK commit {SDK_COMMIT[:10]} "
+              "(the commit the fork's README builds with) ...")
+        git(["checkout", "-q", "--detach", SDK_COMMIT], cwd=sdk, capture=True)
 
 
 def prepare():
@@ -417,7 +473,18 @@ def build_target(target):
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Build itlwm / AirportItlwm kexts with only the "
+                    "firmware you need."
+    )
+    parser.add_argument(
+        "--latest-sdk", action="store_true",
+        help="use MacKernelSDK as is instead of the pinned commit",
+    )
+    args = parser.parse_args()
+
     preflight()
+    ensure_sdk(latest=args.latest_sdk)
     version, commit = source_version()
 
     print("\n==========================================")

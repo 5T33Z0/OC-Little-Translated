@@ -25,9 +25,9 @@ It automates the manual steps of the [Slimming Intel Wi-Fi/BT Kexts](https://git
 - **Python 3.9 or newer** (no third-party packages needed)
 - **Xcode** (including the command line tools, so `xcodebuild` works)
 - **itlwm source** from [laobamac/itlwm](https://github.com/laobamac/itlwm) (git clone or source ZIP)
-- **MacKernelSDK**, cloned into the itlwm root
+- **git** (included with the Xcode command line tools), used to download MacKernelSDK
 
-Lilu is **not** required: this fork's Xcode project does not reference it.
+MacKernelSDK is **downloaded automatically** by the script (see below). Lilu is **not** required: this fork's Xcode project does not reference it.
 
 ## Setup
 
@@ -37,7 +37,7 @@ Your itlwm root should look like this:
 itlwm/
 ├── itlwm.xcodeproj
 ├── itlwm/firmware/        <- firmware files the script slims down
-├── MacKernelSDK/          <- required
+├── MacKernelSDK/          <- downloaded by the script if missing
 ├── build-itlwm-slim.py    <- this script
 └── ...
 ```
@@ -49,14 +49,11 @@ itlwm/
    cd itlwm
    ```
 
-2. **Add MacKernelSDK** and check out the commit the fork's README specifies for macOS Sequoia/Tahoe builds:
-
-   ```sh
-   git clone https://github.com/acidanthera/MacKernelSDK.git
-   cd MacKernelSDK
-   git checkout 3f750085caa17ec3a7880f11c11bf4f48cd6a164
-   cd ..
-   ```
+2. **MacKernelSDK** needs no manual step. On startup the script clones
+   [acidanthera/MacKernelSDK](https://github.com/acidanthera/MacKernelSDK) into the itlwm root if it is missing,
+   and checks out the commit the fork's README builds with (`3f750085caa1…`) if it is on a different one.
+   An existing, complete `MacKernelSDK` folder is reused. If it is a Git checkout on another commit, it is switched to the pinned one.
+   To use the SDK as it is, start the script with `--latest-sdk` (see Usage).
 
 3. **Copy the script** `build-itlwm-slim.py` into the itlwm root.
 
@@ -77,6 +74,12 @@ Run the script from the itlwm root:
 
 ```sh
 python3 build-itlwm-slim.py
+```
+
+Use `--latest-sdk` to skip the commit pinning and use MacKernelSDK as it is (a missing SDK is still cloned):
+
+```sh
+python3 build-itlwm-slim.py --latest-sdk
 ```
 
 1. **Select firmware**
@@ -105,7 +108,8 @@ Copy the kext to `EFI/OC/Kexts`, replacing the existing one, and reboot. If Wi-F
 
 ## Notes
 
-- Run the script from the itlwm root. It aborts if `itlwm.xcodeproj`, `MacKernelSDK`, or the firmware folder is missing.
+- Run the script from the itlwm root. It aborts if `itlwm.xcodeproj` or the firmware folder is missing.
+- If `MacKernelSDK` exists but is incomplete, the script aborts and asks you to delete it, so it never overwrites a folder it does not recognize.
 - Your source checkout is never modified; all slimming happens in the copy.
 - Targets are built with `ARCHS=x86_64` and `CODE_SIGNING_ALLOWED=NO`.
 - Bluetooth firmware is not handled: this repo does not contain `IntelBluetoothFirmware`.
