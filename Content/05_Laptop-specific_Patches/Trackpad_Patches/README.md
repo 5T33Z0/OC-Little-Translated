@@ -23,6 +23,7 @@
 	- [1. Checking the I2C Controller for Compatibility](#1-checking-the-i2c-controller-for-compatibility)
 	- [2. Detecting the control protocol of the Touchpad (PS/2, SMBUS or I2C):](#2-detecting-the-control-protocol-of-the-touchpad-ps2-smbus-or-i2c)
 	- [3. Finding the operating mode of the I2C Controller (macOS)](#3-finding-the-operating-mode-of-the-i2c-controller-macos)
+		- [Alternative: APIC interrupts above 0x2F (VoodooI2C\_APIC)](#alternative-apic-interrupts-above-0x2f-voodooi2c_apic)
 	- [4. Enabling a Touchpad's GPIO Pin](#4-enabling-a-touchpads-gpio-pin)
 - [Resources and Credits](#resources-and-credits)
 	- [Documentation and Support](#documentation-and-support)
@@ -199,16 +200,16 @@ The **VoodooI2C** kext supports three operating modes:
 2. **GPIO** interrupt mode and 
 3. **Polling** mode 
 
-These modes have their own characteristics:
+**These modes have their own characteristics**:
 
 - **APIC** and **GPIO** are **hardware-driven** interrupt modes, while **polling** is **software-driven** only.
-- **APIC interrupt mode**: IC2 controllers which support APIC mode don't need to be modified and work perfectly fine with the `VooodooI2C.kext` alone. Unfortunately, only a few I2C controllers (less than 10%) support this mode. Whether or not your Touchpad can use this mode depends on the used **APIC Pin** (not ACPI!). More on that later…
+- **APIC interrupt mode**: I2C controllers which support APIC mode don't need to be modified and work perfectly fine with the `VoodooI2C.kext` alone. Unfortunately, only a few I2C controllers (less than 10%) support this mode. Whether or not your Touchpad can use this mode depends on the used **APIC Pin** (not ACPI!). Upstream VoodooI2C only accepts pins ≤ `0x2F`. With the [**VoodooI2C_APIC**](https://github.com/amane1234/VoodooI2C_APIC) fork, pins above `0x2F` can be used as well (see [Alternative: APIC interrupts above 0x2F](#alternative-apic-interrupts-above-0x2f-voodooi2c_apic)). More on that later…
 - **GPIO interrupt mode**: support is relatively complete, but the amount of modifications required to enable the **GPIO Pin** is usually relatively high, requires more resources but is still preferred over the software-based Polling Mode.
 - **Polling Mode**: Polling requires more system resources (such as CPU and RAM), doesn't work as well, but it is more applicable than the interrupt modes. You can think of it as the "safe boot" mode of VoodooI2C. As such, it is a suitable mode for installing macOS before enabling GPIO mode. If you wish to run VoodooI2C in polling mode, you do not need to apply any GPIO patches. It is also suitable for people who have Skylake or newer machines with buggy GPIO implementation (such as various ASUS Notebooks). 
 
 Which of these modes can be used depends on the Controller, the control method defined in the `DSDT` and by the driver that is used. At present, `VoodooI2CHID` is the only driver that supports GPIO and Polling mode at the same time.
 
-**TL;DR**: you have 3 choices, one of which is practically non-existing, one which is complicated to implement and one you have to settle with if you don't have the know-how nor the patience to enable GPIO mode.
+**TL;DR**: you have 3 choices, one of which is rarely available (APIC, unless you use the fork for pins above `0x2F`), one which is complicated to implement (GPIO) and one you have to settle with if you don't have the know-how nor the patience to enable GPIO mode (Polling).
 
 ### Required Tools
 - [**Hackintool**](https://github.com/headkaze/Hackintool/releases) – for checking if your system has a compatible I2C Controller
@@ -234,15 +235,16 @@ graph LR
     O ---> Q["NO </br>(Skylake+)"]--> N{"Interrupt assignable</br> manually? (SSDT)"}-.->F(YES)-.->|Use|R
     N-->S(NO)-->|Use|T(Polling Mode)-->|Install|L
     G --> |Install|H(VoodooPS2Controller)
-```    
+```
+
 > [!NOTE]
 > 
-> - The dotted line represents a topic seldom touched in regards to enabling APIC interrupt mode for I2C Touchpads.
+> - Dotted lines represent topics seldom touched in regards to enabling interrupt modes for I2C Touchpads.
 > - [**Larger version**](/Content/05_Laptop-specific_Patches/Trackpad_Patches/I2C_Workflow.jpg) (top down view)
 
 > [!TIP]
 > 
-> If your Laptop uses APIC interrupts above `0x2F`, you can try [**VoodooI2C_APIC**](https://github.com/amane1234/VoodooI2C_APIC) kext instead (Released november 2026).
+> If your Laptop uses APIC interrupts above `0x2F` and GPIO pinning doesn't work (e.g. because the BIOS locks the GPIO pad), see the [**VoodooI2C_APIC fork**](#alternative-apic-interrupts-above-0x2f-voodooi2c_apic) in Step 3.
 
 ## Instructions
 
@@ -286,7 +288,29 @@ graph LR
 - Run **IORegistryExploer**
 - Search for `IOInterruptSpecifiers`:</br>![Ioreg01](https://user-images.githubusercontent.com/76865553/185639493-f9705634-9cb2-42f0-9031-d463533fca47.png)
 	- If its value is less or equal  `2F` (≤47), then you're blessed because the Touchpad supports **APIC Interrupt** mode: install VoodooI2C.kext (and additional plugin kexts, as needed) and you'r done.
-	- If the value is >`2F` (>47), we need to redirect the APIC Interrupt to a GPIO Interrupt to use GPIO Mode Instead. This technique is called GPIO Pinning.
+	- If the value is >`2F` (>47), upstream VoodooI2C can't use APIC mode. You have two options:
+		1. Redirect the APIC Interrupt to a GPIO Interrupt to use GPIO Mode instead (GPIO Pinning, see Step 4).
+		2. If GPIO pinning fails (e.g. the pad is locked by the BIOS), use the [**VoodooI2C_APIC fork**](#alternative-apic-interrupts-above-0x2f-voodooi2c_apic) described below.
+
+#### Alternative: APIC interrupts above 0x2F (VoodooI2C_APIC)
+The fork [**VoodooI2C_APIC**](https://github.com/amane1234/VoodooI2C_APIC) removes the `0x2F` limit, so APIC mode can also be used with higher pins.
+
+**When to consider it:**
+
+- Your APIC pin is >`0x2F` **and**
+- GPIO pinning doesn't work, e.g. because the BIOS locks the touchpad's GPIO pad and routes it directly to the IOxAPIC (typical symptoms: GPIO mode causes interrupt storms while idle and a stuttering cursor, while Polling works smoothly).
+
+**Differences to the standard method:**
+
+- It replaces the upstream `VoodooI2C.kext` and includes a patched `VoodooI2CHID`. Don't mix it with upstream kexts, otherwise the `0x2F` limit (and Polling) comes back.
+- There are no prebuilt releases, so you have to build it yourself (macOS + Xcode). See the repo's README.
+- The device's `_CRS` must return the APIC resource (usually `SBFI`) instead of the GPIO one (`SBFG`). This requires an ACPI rename (`_CRS` → `XCRS`) plus an SSDT (example in the repo's README). Don't override the firmware's GPIO/mode variables (`GPDI`, `GPLI`, `TPDM`, `TPLM`).
+
+**Verify:** `ioreg -lw0 | grep '"Interrupt Mode"'` should report `"APIC"` for each device.
+
+> [!WARNING]
+> 
+> Third-party fork, tested on a single machine so far (Dell, Comet Lake-U, Alps HID Touchpad). If the BIOS didn't route the pad to the IOxAPIC, registration can succeed but no interrupts arrive and the device stays dead. There is no automatic fallback to Polling.
 
 ### 4. Enabling a Touchpad's GPIO Pin
 In order to use Touchpads with incompatible APIC Pins on macOS, we need to use SSDT Hotfixes to enable GPIO mode. The patching principle can be found in the chapter &rarr; [**I2C-TPXX Patch Method**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/05_Laptop-specific_Patches/Trackpad_Patches/I2C_TrackPad_Patches). 
