@@ -229,6 +229,7 @@ graph LR
     C --> |"Figure out supported Operating Mode:</br> 1. APIC, 2. GPIO or 3. Polling"|J{Check APIC Pin}
     J --> K["If value is </br>≤2F (≤47)"]------->|Use| D(APIC Interrupt Mode)-->|Install|L[VoodooI2C and </br>Satellite kexts]
     J --> M("If value is</br> >2F (>47)")-->O{"GPIO Pin </br>available? </br>(SSDT)"}
+    M -.->|Alternative| V(VoodooI2C_APIC)-->|Install|W["VoodooI2C_APIC kexts</br>github.com/amane1234/VoodooI2C_APIC"]
     O --> P["YES</br>(pre Skylake)"]---->|Use|R(GPIO Mode)-->|Install|L
     O ---> Q["NO </br>(Skylake+)"]--> N{"Interrupt assignable</br> manually? (SSDT)"}-.->F(YES)-.->|Use|R
     N-->S(NO)-->|Use|T(Polling Mode)-->|Install|L
