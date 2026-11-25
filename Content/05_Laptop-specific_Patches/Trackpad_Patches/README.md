@@ -234,10 +234,14 @@ graph LR
     N-->S(NO)-->|Use|T(Polling Mode)-->|Install|L
     G --> |Install|H(VoodooPS2Controller)
 ```    
-**NOTES**: 
+> [!NOTE]
+> 
+> - The dotted line represents a topic seldom touched in regards to enabling APIC interrupt mode for I2C Touchpads.
+> - [**Larger version**](/Content/05_Laptop-specific_Patches/Trackpad_Patches/I2C_Workflow.jpg) (top down view)
 
-- The dotted line represents a topic seldom touched in regards to enabling APIC interrupt mode for I2C Touchpads.
-- [**Larger version**](/Content/05_Laptop-specific_Patches/Trackpad_Patches/I2C_Workflow.jpg) (top down view)
+> [!TIP]
+> 
+> If your Laptop uses APIC interrupts above `0x2F`, you can try [**VoodooI2C_APIC**](https://github.com/amane1234/VoodooI2C_APIC) instead.   
 
 ## Instructions
 
