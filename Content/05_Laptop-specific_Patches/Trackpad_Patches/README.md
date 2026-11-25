@@ -222,7 +222,7 @@ Which of these modes can be used depends on the Controller, the control method d
 The schematic below outlines the general approach and decision making for enabling I2C Touchpads without going into details. It might help you to not get lost.
 
 ```mermaid
-graph LR
+graph TD
     A[Touchpad] ---> B{"Control</br> Method?"}
     B -->|IF| C(("I2C Protocol</br>(Haswell+)"))
     B -->|IF| G(("PS/2 Protocol</br>(≤ Ivy Bridge)"))
