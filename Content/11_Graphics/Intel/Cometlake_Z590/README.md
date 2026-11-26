@@ -4,7 +4,9 @@
 
 As you may or may not know, 400- and 500-series mainboards are compatible with both Intel Comet Lake (10th gen Intel Core) and Rocket Lake (11th gen) CPUs. But when combining 10th Gen Intel Core CPUs with the newer 500-series mainboards, this causes issues with the UHD 630 iGPU in macOS.
 
-**NOTE**: Rocket Lake's Intel UHD 750 iGPU is not supported by macOS! So don't combine an 11th gen Intel Core CPU with a 400-series mainboard!
+> [!IMPORTANT]
+> 
+> Rocket Lake's Intel UHD 750 iGPU is not supported by macOS! So don't combine an 11th gen Intel Core CPU with a 400-series mainboard!
 
 ## Issues
 
